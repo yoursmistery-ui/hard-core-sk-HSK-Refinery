@@ -1,0 +1,108 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<ModMetaData>
+	<name>HSK 工业与科研大修</name>
+	<author>Ratkin Patch</author>
+	<packageId>ratkinpatch.HSKIndustrialResearchOverhaul</packageId>
+	<description>工业与科研大修整合(2026-08-27 由 hsk工业大修 + 科技蓝图与逆向工程HSK 合并;蓝图门控已书籍化 v4):
+
+一、三级陶瓷工业(原 hsk工业大修):
+1. 三级陶瓷:
+   - 普通陶瓷 = HSK 原有 Ceramics(配方从电熔炼台迁至玻璃制造台);
+   - 高级陶瓷(原美狐陶瓷)= 普通陶瓷本体 + 5 金属加工,数值上调,供高档装备使用;
+   - 军用陶瓷(原美狐军用级陶瓷)= 玻璃制造台生产,数值维持。
+2. 玻璃制造台(GlassworkTable)整合三级陶瓷配方,作为陶瓷工业核心工台。
+3. 工具工业体系(原 鼠族HSK拓展):
+   - 5 个工具科研节点(中世纪工具 I/II/III + 工业工具 I/II);
+   - 鼠族工具(斧/剁肉刀/草叉/锄头/小锤/剪刀/冲击钻/液压钳/电焊枪)与 STL 工具属性、CE 适配、锻造台工作速度;
+   - 基础工具(手斧/矿镐/手锤/镰刀/扫把/锄头/大锤/扳手/骨锯/原版匕首)的科研挂钩与统一锻造台。
+
+二、蓝图门控科研·书籍化(原 科技蓝图与逆向工程HSK, v4 全部书籍化):
+1. 蓝图书(书籍化): 门控科技的解锁道具全部改为「书」(原版 Book 体系)——放书架、阅读、读后保留、带"已读"标记。中世纪为"图纸书"(1 本/系列),工业及以后为"蓝图"(太空 2 本、极致 3 本、超凡 4 本/系列)。
+2. 研读 = 科研工作: 小人按"研究"优先级自动研读蓝图书(非休闲阅读,不吃娱乐值),加智力经验,受科研速度与智力水平加成;耗时随档位递增(中世纪 2 分钟 ~ 超凡 6 分钟,受加成缩短)。
+3. 系列解锁: 同一科技的系列书每本只需读一次(第二次读无效果);集齐全部卷册后该科技解锁,可从 0 开始研究(不做中间科研值)。
+4. 门禁: 未集齐系列时该科技不可开始研究(CanStartNow 门控);科研树(ResearchTreeSK)节点角标显示"已读 x/N",集齐变绿。
+5. 获取: 商人(按时代加权,含鼠族王国)、RimQuest 任务奖励、Go Explore 世界探索、Cybranian Events 随机事件、物品贮藏任务均可产出蓝图书。
+
+三、工业补丁内容(2026-08-27 自 HSK修复整合 迁入, 补丁 A1-A5 号, 与陶瓷/工具/蓝图互补):
+1. 熔炼体系(A1): 熔炼扩展(全部武器/弹药/武器箱/武器部件可熔炼,木质武器可熔炼) + 熔炼工作自动换工具(SmeltingSpeed)。注: 30% 材料返还/弹药单批上限逻辑仍在 HSK修复整合 的 HSKFixPack.dll, DLL 全局生效。
+2. 工业建筑与能量(A2): 地热发电机 5000W→10000W 且可紧挨建设、核裂变电池 4000→10000Wd、金属提炼厂(ElectricSmelter)占地 5×2→3×1、电解精炼厂(ElectrolyticRefinery)补回金属提炼厂设施加成(+75% 速度,最多 3 台)与工具柜加成、存储建筑加强(sbz 冰箱/SK 货栈)。
+3. 工具数值补强(A3): 多功能工具 TFJ_Tool_Multitool 数值强化 + 大锤工具化 + 手锤/大锤/扳手/骨锯属性补强 + SmeltingSpeed StatPart 挂载 + 生存工具通用补强(手斧/矿镐/镰刀/扫把/锄头/刀)。
+4. 配方与工作台归位(A4): 锻造台配方重分配(黑火药枪械/弹药/大炮挂铁匠工坊) + 锻造厂(Finery)木板适配 + 混凝土搅拌机钢筋混凝土配方 + 工作台配方归位 + 人类装备归位电动缝纫台 + 删除铸币配方 + 金银木锭转换 + 自密封紧固件配方/价值修正。
+5. 纳米科技配方(A5): 纳米科技框架产物 3→15、碳纳米管配方改回 HSK 原版(聚合物25+焦炭25+橡胶15→碳12, 研究 Oil_Industry_C6)。
+6. 金鼠族缝纫台太空档(A6): 金鸢尾兰缝纫台(OA_RK_Tailor)整体迁入本 mod 并升级为太空时代生产建筑(前置 Apparel_D1、科技档 Spacer, 与先进纺织工作台 HyperTailoringBench 同档), 专属承载「鼠族+金鼠族」全部太空/极致时代服装与装甲(严格互斥, 从先进纺织台/鼠族裁缝台摘除); 金鼠族太空时代之前的衣物改挂鼠族电动/手动裁缝台, 人类装备不受影响。
+
+四、蓝图经济 v4.1(2026-08-27): 电力工程I 回归蓝图书门禁(单卷, 贴图取 MO 图纸卷轴); 全体系蓝图书定价=1000×1.5^(档位-1)(t1=1000/t2=1500/t3=2250/t4=3375/t5=5063); 蓝图学者商队(RK_TraderKind_BlueprintScholar, 挂原版异邦人+鼠族Rakinia商队表)按商人科技档位卖蓝图、单轮补货20%概率携带, 并回购玩家手中多余蓝图书(tradeTag=Blueprint); 蓝图书标签带〔已读/未读〕〔已解锁/未解锁〕状态标记; 已研读的蓝图书市价折价50%(StatPart)。 事件迁移: 游学者遗落蓝图(按时代掉未解锁蓝图)+稀有巨兽路过(象群/白熊, MO GenericWandersIn 无依赖移植)。(早期 MO 图纸门禁复刻 SchematicGateHSK 已退役归档, 源码保留于 Source_SchematicGateHSK。)
+
+五、中世纪建筑移植(2026-08-27): 从 MO 纯原版类 def 零改动逻辑移植——乡村结构 19 项(乡村门/原木栅门/大门/石板门/木门框/加固原木大门/双格门×3/原木墙/帐篷墙/木栅栏/射孔栅栏/都铎墙/城堡墙(炸药4倍·钝击2倍弱点)/射孔城堡墙/原木柱/皇家金柱/隔断柱; 原移植的拒马桩因与原版尖刺陷阱 TrapSpike 重复已删除) + 娱乐 3 项(骰子杯/塔罗桌/战棋桌,原版 Gaming_Cerebral, JoyGiver+JobDef 同迁); defName 前缀 Rustic_, 材料 RawWood→Woody/WoodLog、Clay→SoftClay、Linen→Cloth; 不新增科研, 门禁规则=单格门与木门框无门槛(同原版门)、复杂门/木墙/柱挂 ComplexFurniture、都铎墙与城堡墙(射孔版经继承)挂 Stonecutting; 建筑师二级菜单新增「乡村结构」「棋牌桌游」子分类。
+
+六、废墟搜刮与探索链(2026-08-28, MO 机制复刻·零 MO DLL): 自研 Building_LootableHSK(继承原版棺木, 搜刮即开箱)承接 10 类可搜刮容器(废弃木桶/封口麻袋/板条箱/杂货架/武器架/书堆/骸骨堆/铠甲像/军用补给箱/古代圣物柜), 容器可直接产出本 mod 蓝图书(按 1~5 档投放、优先未读卷册); 事件「废墟遗栈」在地图边缘刷 3~6 件容器; 探秘桌 + 信鸽站/信使台/探险家档案柜/古基座/古球 构成扫描链, 链接件数 1/5/9 解锁 1/2/3 级线索, 消耗残页情报后直接生成任务(原版土匪营地/藏宝处任务脚本 + 冷却与越扫越深各一次, 全事件驱动零 tick); 3 套自绘 KCSG 废墟布局经 GenStepDef.linkWithSite 注入原版 BanditCamp 与 ItemStash 站点, 因此守卫/点数/奖励全部沿用原版与 RimQuest, 废墟内摆的正是上述容器 → 形成"接任务→打进去→搜刮→定向获取蓝图书"闭环。
+
+七、中世纪内容大批移植(2026-08-28): 乡村装饰与艺术(雕塑/半身像/台座/横幅/喷泉/招牌/隔断/桌面摆件/战利品装饰等)、皇家家具与皇家都铎床、贵族椅、吧台、书籍家具(改挂原版书架基类)、地形地板 64 项(夯土/乡村木地板/石砖 6 纹×6 材质/陶瓷砖 4 纹, 不含依赖 MO 类的犁地)、类型专用储物与中世纪商人 8 类(全部只用原版 StockGenerator, 补丁 71 按存在性门控挂载原版与 HSK 友好派系, 含蓝图书回购)、开局剧本 2、战士/老兵特性 2、老世界人与沙漠两种风格文化、传说书; 矿井 3×3 与采矿点 + 14 条采掘配方 + 6 档宝石(新建 RK_Gems 材质类别, 价值梯度 3.95→16.65)。宝石暴击与矿井虫灾依赖 MO DLL 暂未实现。
+
+八、丝绸链与纸张链(2026-08-28): 丝绸 = 蚕种 + 稻草在蚕匾架缫出生丝, 生丝 4 → 丝绸 1 挂在 **HSK 现有纺织机 TableLoom**(与 HSK 纺织融合, 不新建第二套纺织台); 纸张 = 木头在沤浆池成纸浆, 纸浆在造纸台压成纸张, 纸张在抄写台誊写为传说书与专著; 抄写台补上此前无宿主的抄写系 4 件链接件(晾纸架/羽毛笔墨水台/参考书堆/纸堆, 原版 Facility +4% 工作台速度); 皇家家具与都铎床原降级为 Cloth 的丝绸造价已回接真实丝绸; 全链纯原版工作台与配方, 不依赖 Processor Framework(启用 PF 后可另补自动化机器)。
+
+九、石化工业线(2026-08-29 v3 精简, 全手搓·只借贴图): 把 Rimefeller 采油/燃油 + Vile 化学品接成从原油到基础化工单体/纤维/材料的产业链。
+1. 常减压蒸馏塔: 8 档账单(10→80 原油桶/批)按 50/30/20 产出化合燃料/天然气/沥青; 内置炼油油泥累积槽(低频累积, 槽满 25 份自动挂起全部账单停机, 用清理按钮倒成油泥物品)。
+2. 三烯二苯不新建装置: Vile MS 的 Petrochemical_Patch 已把 Rimefeller 8 座精炼厂产物改写为 乙烯/焦炭/丁二烯/苯/二甲苯/丙烯/合成纤维/HM纤维, 直接沿用; 超织物走 SynthreadRefiner→HMFibers→MakeDyneema。深度裂解厂/精馏塔/催化重整/氨合成塔/中性胺合成塔/原油裂解炼油厂 7 座旧装置与其配方、储罐、物品、3 个科研节点全部删除。
+3. 合成氨/中性胺精炼厂(本 mod clone 2 座, 直接用 Rimefeller 现成贴图): 因 Vile 改造抽掉了这两条工业来源, 补回两台精炼厂, 机制沿用 Rimefeller.CompRefinery(化合燃料管道进料 → 相邻卸货湾出料), 开关走资源控制台的原生精炼账单, 不写门控 DLL。
+4. 卸货湾适配: CompRefinery 按 defName 硬找 RefineryLoadingBay, 故沿用该建筑并补两件事 —— 存储过滤器扩到 Vile 新产物(焦炭/丁二烯/二甲苯/丙烯/合成纤维/HM纤维), 出料口视觉换成 Vanilla Chemfuel Expanded 的漏斗图。
+5. 储罐与管网: 沥青/天然气/氨三座立式罐(以 Refuelable 模拟液体罐, 沥青罐容量 2500); 天然气管网挂石化工业 I、氨气管网挂石化工业 III, 管段整图复用 Vanilla Helixien Gas Expanded 的连通图集并按介质分色(天然气绿/氨琥珀), 阀门与出料口取 VChemfuelE 现成图(红铜/深铜), 出料口把气以罐装形态落地供无管道工位。
+6. 污染统一并入: 炼油油泥属性照抄原版毒废包(可禁止/受击放毒气/缓慢溶解污染地面/影响好感), 归污染物分类; 原「污染统一」mod 整体并入本 mod —— 核废料转废料包配方(挂 Rimatomics 机加台, Def 级 MayRequire 门控)、防毒面具与 HSK 呼吸面罩补 0.35 辐射抗性(xpath 存在性门控)、沥青路面地面(沥青×2/格, 归自然地板)。
+7. 科研: 本线独立三档链 石化工业 I·常减压蒸馏 → II·管道精炼 → III·连续合成, 全 Industrial 档挂 Craft_SK 第 28 行 X=9~11, 入口前置只有 Oil_Industry_C2 + Electricity, 不再借挂 Rimefeller 的 Oil_Industry_C3~C6。
+8. 供水: 装置一律接通卫生(Dubs Bad Hygiene)供水管网, 各带 500 L 内置水箱(未装卫生自动跳过); 卫生自带的燃气锅炉改烧本线天然气。
+
+十、珠宝首饰与 Processor Framework 融合(2026-08-28): 珠宝台(RK_JewelryBench, 原版工作台)与 14 件项链/戒指(锈迹 Rustic_ 前缀, MO 贴图移植)归入 HSK「辅助建筑」(Accessories) 一级分类与「珠宝首饰」二级菜单; 乡村装饰/艺术件全套改挂辅助建筑。直接融合 [SYR] Processor Framework(内置 ProcessorFramework.dll, 不再单独依赖 PF 本体——请勿再安装, 重复安装会因同名 def 报错)。⚠ 该融合版 ProcessorFramework.dll 的 ProcessDef.thingDef 字段类型与 MO 机器 ProcessDef 定义不兼容(反序列化抛 InvalidOperationException 致整 def 不加载), 故原先移植的丝绸床/造纸压机 2 座自动机及对应 ProcessDef 已于 2026-08-29 彻底移除(纺纱机 Rustic_ClothSpinner 亦已删, 棉毛→布回归 HSK 纺织机主链); 丝绸/纸张产线一律走 §八 手动工作台与配方。若要恢复 PF 自动机, 需将 PF.dll 的 ProcessDef.thingDef/BonusOutput.thingDef 字段类型改回 ThingDef 
+
+十一、发电机多燃料与需水可见化(2026-08-30): ①燃煤发电机可烧燃料=煤+木炭+焦煤+泥炭(Vile Buildings_Patch.xml 的 fuelFilter 整体替换顶掉了原版 Peat, 由 HSK修复整合 49 号补丁补回 Peat 并显式列出 Charcoal; Coal 分类成员含 Charcoal 本已可烧); ②NeedsWater 需水组件可见化(用户反馈「发电装置没有需要接水管这个功能」): BlueprintUnlockHSK.dll 三处增强 —— 巡检文字补「未连接水管: 需水井/水泵与铜管管网供水」(反射读 DubsBadHygiene.CompPipe.pipeNetRef 判管网接入)、选中建筑时置 DBH CompWaterStorage.DrawOverlay=true 复用其自带水位条、WorkingNow 补 CompRefuelable.HasFuel 判定使无燃料不空耗水。重新编译。</description>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Core SK</displayName>
+			<downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+		</li>
+		<li>
+			<packageId>Solaris.RatkinRaceMod</packageId>
+			<displayName>RatkinRaceHSK</displayName>
+		    <downloadUrl>https://rimworld.example/Solaris.RatkinRaceMod</downloadUrl>
+			</li>
+			<li>
+			<packageId>adaptive.storage.framework</packageId>
+			<displayName>Adaptive Storage Framework</displayName>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>skyarkhangel.HSK</li>
+		<li>skyarkhangel.HSK.Core</li>
+		<li>skyarkhangel.HSK.DLC</li>
+		<li>Solaris.RatkinRaceMod</li>
+		<li>local.ratkin.clothesweapons</li>
+		<li>local.ratkin.goldenhsk</li>
+		<li>skyarkhangel.SurvivalToolsLite</li>
+		<li>CETeam.CombatExtended</li>
+		<li>vanillaexpanded.skills</li>
+		<li>saucypigeon.pawnbadge</li>
+		<li>qwerty19106.researchtreesk</li>
+		<li>vitech.metallurgy</li>
+		<li>vitech.materialsscience</li>
+		<li>Dubwise.Rimefeller</li>
+		<li>Dubwise.DubsBadHygiene</li>
+		<li>ViTech.MedievalOverhaul</li>
+		<li>sbz.NeatStorageFridge</li>
+		<li>local.hsk.questoverhaul</li>
+		<li>Albion.GoExplore</li>
+		<li>DimonSever000.Events.Specific</li>
+		<li>DimonSever000.ModIndicator.Specific</li>
+		<li>Ludeon.RimWorld.Odyssey</li>
+		<li>Ludeon.RimWorld.Biotech</li>
+			<li>adaptive.storage.framework</li>
+	</loadAfter>
+</ModMetaData>

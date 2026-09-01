@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <DamageDef>
+        <defName>OAGene_IceStab</defName>
+        <label>冰晶刺伤</label>
+        <workerClass>DamageWorker_Stab</workerClass>
+        <externalViolence>true</externalViolence>
+        <deathMessage>{0} 被冰晶刺死了。</deathMessage>
+        <hediff>OAGene_IceStab</hediff>
+        <hediffSolid>Crack</hediffSolid>
+        <impactSoundType>Slice</impactSoundType>
+        <armorCategory>Sharp</armorCategory>
+        <stabChanceOfForcedInternal>0.6</stabChanceOfForcedInternal>
+        <overkillPctToDestroyPart>0.4~1.0</overkillPctToDestroyPart>
+    </DamageDef>
+
+    <HediffDef ParentName="InjuryBase">
+        <defName>OAGene_IceStab</defName>
+        <label>冰晶刺伤</label>
+        <labelNoun>冰晶刺伤伤口</labelNoun>
+        <description>冰晶刺伤伤口</description>
+        <comps>
+            <li Class="HediffCompProperties_TendDuration">
+                <labelTendedWell>已包扎</labelTendedWell>
+                <labelTendedWellInner>已缝合</labelTendedWellInner>
+                <labelSolidTendedWell>已简单固定</labelSolidTendedWell>
+            </li>
+            <li Class="HediffCompProperties_Infecter">
+                <infectionChance>0.15</infectionChance>
+            </li>
+            <li Class="HediffCompProperties_GetsPermanent">
+                <permanentLabel>冰晶刺伤疤痕</permanentLabel>
+            </li>
+        </comps>
+        <injuryProps>
+            <painPerSeverity>0.0125</painPerSeverity>
+            <averagePainPerSeverityPermanent>0.00625</averagePainPerSeverityPermanent>
+            <bleedRate>0.06</bleedRate>
+            <canMerge>false</canMerge>
+            <destroyedLabel>Cut off</destroyedLabel>
+            <destroyedOutLabel>Cut out</destroyedOutLabel>
+        </injuryProps>
+    </HediffDef>
+
+</Defs>

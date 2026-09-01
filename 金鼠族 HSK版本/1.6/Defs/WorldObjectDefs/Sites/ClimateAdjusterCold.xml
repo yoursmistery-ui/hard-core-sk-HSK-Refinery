@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <SitePartDef MayRequire="Ludeon.RimWorld.Royalty" ParentName="ConditionCauserSitePartBase">
+        <defName>OAGene_ClimateAdjusterCold</defName>
+        <label>温控据点</label>
+        <description>一个恶意降低温度的气候调节器。</description>
+        <conditionCauserDef>ClimateAdjuster</conditionCauserDef>
+        <workerClass>OberoniaAureaGene.Snowstorm.SitePartWorker_ConditionCauser_ClimateAdjusterCold</workerClass>
+        <activeThreatDisturbanceFactor>0.4</activeThreatDisturbanceFactor>
+        <tags Inherit="false">
+            <li>OAGene_ClimateAdjuster</li>
+        </tags>
+    </SitePartDef>
+
+    <GenStepDef MayRequire="Ludeon.RimWorld.Royalty" ParentName="ConditionCauserGenStepBase">
+        <defName>OAGene_ClimateAdjuster</defName>
+        <linkWithSite>OAGene_ClimateAdjusterCold</linkWithSite>
+    </GenStepDef>
+
+</Defs>

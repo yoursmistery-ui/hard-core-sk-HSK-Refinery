@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<PawnKindDef Name="RKExoticTrader" ParentName="RKExoticBase">
+		<defName>RatkinExoticTrader</defName>
+		<label>Moustate trader</label>
+		<trader>true</trader>
+		<isFighter>false</isFighter>
+		<itemQuality>Good</itemQuality>
+		<combatPower>45</combatPower>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>MoustateNoble</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>OnSkin</apparelLayer>
+				<requiredTag>RK_ExoticNoble</requiredTag>
+			</li>
+			<li>
+				<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>RK_ExoticNoble</requiredTag>
+			</li>
+		</specificApparelRequirements>
+		<gearHealthRange>
+			<min>0.9</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>2300</min>
+			<max>3500</max>
+		</apparelMoney>
+		<apparelTags>
+			<li>RK_ExoticNoble</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier1</li>
+		</apparelTags>
+		<weaponMoney>
+			<min>500</min>
+			<max>2000</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticTrader</li>
+		</weaponTags>
+		<apparelAllowHeadgearChance>0.8</apparelAllowHeadgearChance>
+		<inventoryOptions>
+			<skipChance>0</skipChance>
+			<subOptionsChooseOne>
+				<li>
+					<thingDef>MedicineHerbal</thingDef>
+					<countRange>4~10</countRange>
+				</li>
+				<li>
+					<thingDef>Silver</thingDef>
+					<countRange>200~666</countRange>
+				</li>
+			</subOptionsChooseOne>
+		</inventoryOptions>
+		<skills>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+
+	<PawnKindDef ParentName="RKExoticTrader">
+		<defName>RatkinExoticRareTrader</defName>
+		<label>Moustate rarity</label>
+		<inventoryOptions>
+			<skipChance>0</skipChance>
+			<subOptionsTakeAll>
+				<li>
+					<thingDef>RK_CanJuan</thingDef>
+					<countRange>1~4</countRange>
+				</li>
+				<li>
+					<thingDef>MedicineHerbal</thingDef>
+					<countRange>2~6</countRange>
+				</li>
+				<li>
+					<thingDef>Jade</thingDef>
+					<countRange>3~16</countRange>
+				</li>
+				<li>
+					<thingDef>Silver</thingDef>
+					<countRange>75~457</countRange>
+				</li>
+			</subOptionsTakeAll>
+		</inventoryOptions>
+	</PawnKindDef>
+
+
+	<PawnKindDef ParentName="RKExoticBase">
+		<defName>RatkinExoticMercenaryBoss</defName>
+		<label>Moustate mercenary boss</label>
+		<trader>true</trader>
+		<isFighter>true</isFighter>
+		<itemQuality>Good</itemQuality>
+		<combatPower>100</combatPower>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateMilitia</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateNoble</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.9</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>800</min>
+			<max>3500</max>
+		</apparelMoney>
+		<apparelTags>
+			<li>RK_ExoticNoble</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier1</li>
+		</apparelTags>
+		<weaponMoney>
+			<min>500</min>
+			<max>2000</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+		<inventoryOptions>
+			<skipChance>0.2</skipChance>
+			<subOptionsChooseOne>
+				<li>
+					<thingDef>Jade</thingDef>
+					<countRange>5~20</countRange>
+				</li>
+				<li>
+					<thingDef>Silver</thingDef>
+					<countRange>120~500</countRange>
+				</li>
+			</subOptionsChooseOne>
+		</inventoryOptions>
+		<skills>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+			<li>Violent</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+
+</Defs>

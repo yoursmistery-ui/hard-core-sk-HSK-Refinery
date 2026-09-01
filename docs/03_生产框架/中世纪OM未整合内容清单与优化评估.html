@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中世纪OM 未整合内容清单与优化评估</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2328; --muted:#57606a;
+    --line:#d8dee4; --accent:#2f6feb; --head:#0d2440; --headink:#eaf1fb;
+    --done:#1a7f37; --part:#b58105; --todo:#0969da; --no:#6e7781;
+    --donebg:#dafbe1; --partbg:#fff8c5; --todobg:#ddf4ff; --nobg:#eceff1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,#0d2440,#1c3d63);color:var(--headink);
+    border-radius:16px;padding:28px 32px;margin-bottom:24px;box-shadow:0 8px 24px rgba(13,36,64,.18);}
+  header.page h1{margin:0 0 10px;font-size:26px;letter-spacing:.5px;}
+  header.page p{margin:4px 0;color:#c9d8ee;font-size:13.5px;}
+  header.page .src{opacity:.85}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px;}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .b-done{color:var(--done);background:var(--donebg);}
+  .b-part{color:var(--part);background:var(--partbg);}
+  .b-todo{color:var(--todo);background:var(--todobg);}
+  .b-no{color:var(--no);background:var(--nobg);}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .d-done{background:var(--done)} .d-part{background:var(--part)} .d-todo{background:var(--todo)} .d-no{background:var(--no)}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:22px;font-size:13.5px;}
+  nav.toc b{color:var(--head)} nav.toc a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block;padding:2px 0;}
+  nav.toc a:hover{text-decoration:underline}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 26px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  h2{font-size:20px;color:var(--head);border-left:5px solid var(--accent);padding-left:12px;margin:22px 0 6px;scroll-margin-top:16px;}
+  h3{font-size:16px;color:#243b53;margin:20px 0 6px;}
+  p.lead{margin:6px 0 14px;color:var(--muted);}
+  .statline{margin:6px 0 12px;}
+  table{width:100%;border-collapse:collapse;margin:12px 0 8px;font-size:13.5px;background:#fff;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f0f3f7;color:#243b53;font-weight:700;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  code{background:#eef1f4;padding:1px 6px;border-radius:5px;font-size:12.5px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;color:#b8336a;}
+  ul{margin:8px 0;padding-left:22px;} li{margin:4px 0;}
+  blockquote{margin:12px 0;padding:10px 16px;background:#f2f7ff;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;color:#243b53;font-size:13.5px;}
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;}
+  .p-low{background:#dafbe1;color:#1a7f37}.p-mid{background:#fff8c5;color:#9a6700}.p-high{background:#ffebe9;color:#cf2220}
+  .tier{border-radius:12px;padding:14px 18px;margin:12px 0;border:1px solid var(--line);}
+  .t1{background:#f2fbf4;border-color:#b7ebc6}.t2{background:#fffdf2;border-color:#f2e3ad}.t3{background:#fff5f4;border-color:#f3c9c5}
+  .tname{font-weight:800;font-size:15px;margin-bottom:4px;}
+  footer{color:var(--muted);font-size:12.5px;margin-top:24px;padding-top:14px;border-top:1px dashed var(--line);}
+  @media (max-width:680px){th,td{padding:6px;font-size:12.5px}header.page{padding:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>Medieval Overhaul(中世纪OM)未整合内容清单与优化评估</h1>
+  <p>生成日期 2026-08-27 · 目标: 盘点 MO 中<b>尚未整合进本环境</b>(HSK工业科研大修 / 鼠族HSK拓展等)的内容,标注 HSK/Vile/CE 冲突点与适配难度。</p>
+  <p class="src">数据源: <code style="color:#cfe0f5;background:rgba(255,255,255,.12)">中世纪大修内容梳理.md</code> + <code style="color:#cfe0f5;background:rgba(255,255,255,.12)">阅读体系专项.md</code> + 实读工作区/部署 Mods 目录。</p>
+  <p>覆盖范围(用户确认): <b>排除生产材料链</b>(已由 HSK+Vile's MS 上位替代),其余板块全纳入盘点。</p>
+  <div class="legend">
+    <span class="badge b-done"><span class="dot d-done"></span>✅ 已整合</span>
+    <span class="badge b-part"><span class="dot d-part"></span>🟡 部分</span>
+    <span class="badge b-todo"><span class="dot d-todo"></span>⬜ 未整合</span>
+    <span class="badge b-no"><span class="dot d-no"></span>⛔ 不整合(上位替代/放弃)</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <b>速览:</b>
+  <a href="#s0">0 已整合基线</a>
+  <a href="#s1">1 材料链⛔</a>
+  <a href="#s2">2 生产设施</a>
+  <a href="#s3">3 建筑家具</a>
+  <a href="#s4">4 武器</a>
+  <a href="#s5">5 防具</a>
+  <a href="#s6">6 盾牌魔法</a>
+  <a href="#s7">7 生物</a>
+  <a href="#s8">8 派系世界</a>
+  <a href="#s9">9 酒水炼金</a>
+  <a href="#s10">10 书籍研究</a>
+  <a href="#s11">11 心情特性</a>
+  <a href="#s12">12 DLL</a>
+  <a href="#s16">16 采矿</a>
+  <a href="#sug">三档建议</a>
+</nav>
+
+<section class="card">
+  <h2 style="border-left-color:var(--done)">⚠️ 首要结论:采矿实际未落地</h2>
+  <p>按你怀疑的方向核查:<b>不是没同步,而是根本没实现。</b>工作区与部署 <code>Mods</code> 两边都没有 MO 的矿井建筑(<code>DankPyon_MineShaft</code>/挖掘点/挖土点/<code>DankPyon_Mining</code> 研究);§16 的「材料映射终版」仍停在方案层。唯一带「矿」字的是第三方 <code>Minerals</code>(zacharyfoster.minerals,即"菜市场"),那是原版采矿 mod,并非 MO 移植。故 MO 这套「无限产出矿井」实为 <span class="badge b-todo" style="padding:1px 8px">⬜ 未整合</span>。</p>
+</section>
+
+<section class="card" id="s0">
+  <h2>0. 已整合基线(盘点参照)</h2>
+  <table>
+    <tr><th style="width:20%">板块</th><th style="width:26%">落地位置</th><th>说明</th></tr>
+    <tr><td>科研·蓝图门控 <span class="badge b-done" style="padding:1px 7px">✅</span></td><td>HSK工业科研大修(BlueprintUnlockHSK)</td><td>MO「图纸门禁」思想转成自研蓝图门控(书籍化),覆盖中世纪→超凡各档,不引入 MO DLL。</td></tr>
+    <tr><td>阅读·书籍化 <span class="badge b-done" style="padding:1px 7px">✅</span></td><td>HSK工业科研大修(BlueprintBooks)</td><td>蓝图书=原版 Book 体系,研读=科研工作;MO Tale/Treatise(娱乐/技能书)<b>未</b>单独移植(见 §10)。</td></tr>
+    <tr><td>采矿/矿井 <span class="badge b-todo" style="padding:1px 7px">⬜</span></td><td><b>未落地</b></td><td>双向核查均无 MO 矿井/采掘材料表;§16 方案态。详见 §16。</td></tr>
+    <tr><td>三级陶瓷 / 工具工业 / 工业补丁 A1–A5 <span class="badge b-done" style="padding:1px 7px">✅</span></td><td>HSK工业科研大修</td><td>与 MO 无关的本环境自研内容,列此仅说明现状。</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s1">
+  <h2>1. 材料链 <span class="badge b-no">⛔ 按约定排除</span></h2>
+  <p class="lead">MO 原木→木板、生皮→皮革、纤维→布、矿石→金属(钢/秘银劫持)全部由 HSK + Vile's MS 上位替代,不整合。仅登记随 §7/§9/§16 联动的可选回收项:</p>
+  <ul>
+    <li><b>怪物炼金素材</b>(Schrat树心/Unhold巨骨/Lindwurm龙鳞血等,统一 <code>DankPyon_AlchemyIngredients</code>)— 是否回收取决于要不要 §7/§9。</li>
+    <li><b>顶级毛皮/新布 stuff</b>(Daer皮/Rox羊毛/Lindwurm龙鳞/Rox皮、丝绸)— 低优先,可只加 stuff 不引加工链。</li>
+    <li><b>宝石 stuff</b>(黄水晶→红宝石 6 档,建材+珠宝)— 若要矿井(§16)则一并带回。</li>
+  </ul>
+</section>
+
+<section class="card" id="s2">
+  <h2>2. 生产设施与配方 <span class="badge b-no">⛔ 多数</span> <span class="badge b-todo">⬜ 少量独特设施</span></h2>
+  <p class="lead">MO 自动加工机几乎都处理"材料",随 §1 排除。以下是非材料、HSK/Vile 无对应的可选设施:</p>
+  <table>
+    <tr><th style="width:26%">设施</th><th style="width:8%">状态</th><th>冲突点</th><th style="width:14%">难度</th></tr>
+    <tr><td>风车/水车 WindMill/WaterMill</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>依赖 Processor + MO DLL;HSK 有 WatermillGenerator(发电向),机制不同</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>窑 Kiln(黏土→砖)</td><td><span class="badge b-part" style="padding:1px 6px">🟡</span></td><td>HSK/Vile 已有砖/陶瓷产线;MO 窑偏中世纪审美</td><td><span class="pill p-low">低</span></td></tr>
+    <tr><td>坩埚 + 两段式炼金</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>绑 §9 药物;依赖 Processor + MO DLL</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>造纸压机 / 抄写台 / 纸浆链</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>HSK 无 Paper 体系;蓝图书走原版 Book 则不一定需要纸</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>制冰模具 + 冰窖(无电保鲜)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>HSK 用电冷;MO 冰链为无电中世纪保鲜,需 CompMeltable/CompIceBoxFill</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>养蜂场 Apiary</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>与 Vile's Sow Farm 系或重叠;依赖 Comp_ThingProducer</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>烟熏房/干燥架/奶酪压机/泔水锅</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>食品加工链,HSK 有 kitchens/营养膏;多为风味扩展</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>信鸽站/信使台/探险家工作台</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>绑 §8 任务;依赖 CompQuestFinder + GameComponent</td><td><span class="pill p-high">高</span></td></tr>
+  </table>
+</section>
+
+<section class="card" id="s3">
+  <h2>3. 建筑与家具 <span class="badge b-todo">⬜ 整块未整合 · 体量最大之一</span></h2>
+  <p class="lead">现状: 家具走 HSK 原版 + 鼠族家具拓展;MO 乡村/皇家家具、专用储具、地形均未移植。</p>
+  <table>
+    <tr><th style="width:30%">子类</th><th style="width:7%">状态</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>结构墙/门(都铎墙/城堡墙/射孔版)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>城堡墙"炸药4×/钝击2×"为原版 statWork 无 DLL;须并入二级菜单</td><td><span class="pill p-low">低-中</span></td></tr>
+    <tr><td>储物(专用储具/货架/武器架,4堆/格)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>MO 用 ShelfBase+maxItemsInCell;与 sbz NeatStorageFridge / Reel 存储思路重叠,需定主方案</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>温度/火源(柴堆/壁炉/蜡烛/油灯)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>HSK 有供暖/照明链;MO 偏无电中世纪</td><td><span class="pill p-low">低</span></td></tr>
+    <tr><td>生产辅助设施(链接加成件)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>需配 §2 设施才有意义</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>娱乐(骰子杯/塔罗/战棋桌/床/桌椅)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>快乐屋物件,纯原版 Building,无 DLL,<b>最易移植</b></td><td><span class="pill p-low">低</span></td></tr>
+    <tr><td>装饰/艺术(雕塑/横幅/喷泉/招牌)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>纯审美,无依赖</td><td><span class="pill p-low">低</span></td></tr>
+    <tr><td>皇家家具(镶金饰丝,不依赖 Royalty)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>需并入科技 + 二级菜单</td><td><span class="pill p-low">低-中</span></td></tr>
+    <tr><td>废墟/藏身处/可搜刮战利品</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td><b>依赖 MO DLL</b>(Building_Lootable+开箱出老鼠);藏身处绑 §8 世界站点</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>防御工事(蝎弩炮/床弩/投石机/连发弩炮)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>四级攻城武器+消耗弹药+JobDriver_ManTurret 补丁;<b>CE 需大改</b></td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>地形地板(夯土/都铎石砖/陶瓷砖/犁土)</td><td><span class="badge b-todo" style="padding:1px 6px">⬜</span></td><td>HSK 已有大量地板档;MO 陶瓷砖(5000工时/Beauty+4)可作天花板补录</td><td><span class="pill p-low">低</span></td></tr>
+  </table>
+  <blockquote>最值得优先决策的一块: 纯娱乐/装饰/墙门/地板 = 低成本高回报(基本无 DLL/CE);废墟搜刮/攻城武器 = 高成本。建议"先无依赖审美件 → 后机制件"。</blockquote>
+</section>
+
+<section class="card" id="s4">
+  <h2>4. 武器体系 <span class="badge b-todo">⬜ 未整合 · CE 需全量改写</span></h2>
+  <p class="lead">现状武器为鼠族HSK拓展 147 件 + HSK/Vile 原版;MO 中世纪近战/远程未移植。</p>
+  <ul>
+    <li><b>近战</b>(剑/斧/锤/锤矛/矛/长柄 6类×单手/双手 + 名武器遗物): MO 全为<b>原版 Tool 类、无 CE 补丁</b> → 须逐个转 <code>CombatExtended.ToolCE</code> + Bulk/MeleeCounterParryBonus/weaponTags(<code>Inherit="false"</code>);双手无 <code>CE_TwoHandedWeapon</code> tag。</li>
+    <li><b>远程</b>(猎弓/战弓/弩/重弩/手炮): MO 用 <code>defaultProjectile</code> 固定投射物 → CE 改 <code>Verb_ShootCE</code> + <code>AmmoUser</code> + 映射 CE 弹种;手炮 burst3。</li>
+    <li><b>名武器/遗物</b>: <code>Comp_RandomName</code>(DLL),战利品专属。<b>手雷/投掷</b>: 绑 §9 + §6。</li>
+  </ul>
+  <table>
+    <tr><th style="width:22%">维度</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>近战 CE 化</td><td>40+ 武器全量 ToolCE,armorPenetration 0.2–0.5 换算 mm 基准</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>远程 CE 化</td><td>固定弹→消耗弹药改造,弹种映射</td><td><span class="pill p-high">中-高</span></td></tr>
+    <tr><td>配方挂载</td><td>MO 靠补丁注入铁砧;本环境无 MO 铁砧,须挂 HSK 锻造台</td><td><span class="pill p-mid">中</span></td></tr>
+  </table>
+  <blockquote>须按 CE 铁律(AGENTS.md §7)全量重写,不是搬 xml。结合现有 147 件定位考虑取舍(是否只要特色名武器/长柄)。</blockquote>
+</section>
+
+<section class="card" id="s5">
+  <h2>5. 防具体系 <span class="badge b-todo">⬜ 未整合</span></h2>
+  <ul>
+    <li>MO 分档 = <b>stuffCategories + 层(layer)+ StuffEffectMultiplierArmor(mult)</b> 组合,含自定义层 InnerHelmet/Hood/ShellAttachment/LegShell/NecklaceLayer/Ring1Layer。</li>
+    <li><b>CE 冲突</b>: 护甲值须 Replace <code>ArmorRating_Sharp/Blunt</code> → CE mm 值;名甲/林龙鳞甲是固定值非 mult。</li>
+    <li><b>鼠族体型</b>: 新衣着层在鼠族 bodyPartGroups 覆盖需验证。</li>
+    <li>珠宝(项链/戒指层,纯财富社交): 低依赖,可单拎。</li>
+  </ul>
+  <table>
+    <tr><th style="width:22%">维度</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>盔甲 CE mm 化</td><td>mult 体系 vs CE mm 护甲换算</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>自定义装备层</td><td>鼠族 AlienPartGroup 覆盖需验证</td><td><span class="pill p-high">中-高</span></td></tr>
+    <tr><td>珠宝/附件</td><td>纯原版 comp,易移植</td><td><span class="pill p-low">低</span></td></tr>
+  </table>
+</section>
+
+<section class="card" id="s6">
+  <h2>6. 盾牌与魔法/特殊装备 <span class="badge b-todo">⬜ 未整合 · 机制冲突最大</span></h2>
+  <ul>
+    <li><b>盾牌</b>: MO 走 VEF <code>Apparel_Shield</code>(穿 LeftHand),与 <b>CE CompShield 完全不兼容</b>。6+4 种盾要用须整套改写为 CE 盾牌。</li>
+    <li><b>魔法戒指</b>(空间/急速/治疗/研究/眩晕免疫): 战利品专属,靠 hediff 授予,依赖 MO DLL 类。</li>
+    <li><b>护甲附件</b>: 自愈盾/减伤25%衬垫/免疫 hediff,依赖 DLL comp。</li>
+  </ul>
+  <blockquote>纯战利品向内容,与硬核 CE 方向不契合,<b>建议 ⛔ 或仅做静态装饰盾牌</b>。</blockquote>
+</section>
+
+<section class="card" id="s7">
+  <h2>7. 生物体系 <span class="badge b-todo">⬜ 未整合</span></h2>
+  <table>
+    <tr><th style="width:22%">维度</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>普通家畜/野生可驯(恐猪/恐狼/鬣狗/Daer/Rox)</td><td>多为原版 Animal 扩展,需接 CE(动物武器/护甲)</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>怪物(狮鹫/Alp/食尸鬼/哥雷姆/Schrat/巨魔/Unhold/蛛网怪/Lindwurm)</td><td><b>MO DLL 专属行为</b>(沉睡/分裂/再生/整吞/酸血/产蛋/束缚网)+ 新伤害 + 掉落 §1.5 炼金素材</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>黑森林群系 DarkForest</td><td>绑世界/地形/植物/疾病周期</td><td><span class="pill p-high">高</span></td></tr>
+  </table>
+</section>
+
+<section class="card" id="s8">
+  <h2>8. 派系与世界内容 <span class="badge b-todo">⬜ 未整合 · 系统性最重</span></h2>
+  <p>四大贵族 + 强盗 + 邪教影派 + 森林怪物等 10 派系、可围城据点、藏身处世界站点、8 类结构布局、3 开局剧本、商人/任务/事件、<b>中世纪围城 AI(RaidStrategyWorker_MedievalSiege + LordJob)</b>、稀有巨兽路过/哥雷姆陨石/矿井虫灾事件。</p>
+  <blockquote>全依赖 MO DLL + 世界地图 InsetFinder/站点定义,且需与 HSK 派系/事件体系共存。<b>除非决定整套引入 MO 战役玩法,否则建议 ⛔</b>。这是"要玩法 vs 要装备"的战略分界点。</blockquote>
+</section>
+
+<section class="card" id="s9">
+  <h2>9. 酒水/药物/炼金体系 <span class="badge b-todo">⬜ 未整合 · 理念契合但依赖重</span></h2>
+  <table>
+    <tr><th style="width:22%">维度</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>酒(艾尔/苹果酒/蜂蜜酒/葡萄酒+品质熟成)</td><td>依赖发酵桶(Processor)+改写原版 Brewing;HSK 已有 Alcohol/Brewing 链 → 需定主链</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>两段式炼金药物(止痛/活力丸/知识药水/奇迹/星尘/卢希克斯等)</td><td>依赖坩埚 + 草药萃取 + §1.5 怪物资材 + MO DLL(CompUseEffect_KnowledgePotion)</td><td><span class="pill p-high">高</span></td></tr>
+    <tr><td>中毒累积系统 DankPyon_Intoxication</td><td>慢性 Hediff,规律用药饮酒累积 → 与 HSK 硬核契合,但需自写 hediff/衰减逻辑</td><td><span class="pill p-mid">中</span></td></tr>
+  </table>
+  <blockquote>知识药水(直接提技能)与蓝图书「研读加经验」思路重叠,注意别双轨。</blockquote>
+</section>
+
+<section class="card" id="s10">
+  <h2>10. 书籍与研究体系 <span class="badge b-part">🟡 部分已整合</span></h2>
+  <ul>
+    <li><span class="badge b-done" style="padding:1px 7px">✅</span> <b>图纸门禁</b> → 已转成蓝图门控书籍化(基线 §0)。</li>
+    <li><span class="badge b-todo" style="padding:1px 7px">⬜</span> <b>传说书 Tale(娱乐)/ 专著 Treatise(12 技能书)</b> → MO 原版 Book 可无 DLL 移植,但专著需 Paper(环境无纸)且 BookWithAuthor/CompProperties_DefinableBook/RecipeWorker_MakeSkillBook 在 MO DLL;技能经验改用原版 <code>BookOutcomeProperties_GainSkillExp</code>。注意别与蓝图书研读抢智力经验上限。<b>《书籍拓展HSK》(Vanilla Books Expanded)已提供一套技能书线 → 先看它够不够用再决定要不要 MO Tale/Treatise。</b></li>
+    <li><span class="badge b-part" style="padding:1px 7px">🟡</span> <b>研究节点</b>: MO 的 19 个原版研究改动 + MO tab 已被 HSK 科技树(489 节点)重排取代;MO 特有研究(炼金/钢/秘银/焦油/火药/战弓/攻城等)在 HSK 里大多有对应档 → 若 §4/§9 要用其产物,需确认对应节点已在树里(多数已在)。</li>
+  </ul>
+</section>
+
+<section class="card" id="s11">
+  <h2>11. 心情/特性/Hediff/文化 <span class="badge b-todo">⬜ 多为可选风味</span></h2>
+  <p>品质心情(吃奶酪喝葡萄酒)、食物记忆、战士/老兵 2 特性、林龙酸/眩晕/Alp睡眠/免疫类 hediff、食物增益三档、中毒累积(随 §9)。文化 2 风格无新 memes/precepts。<b>除特性与中毒度外多为碎片,建议随 §3/§7/§9 顺带,不单独立项。</b></p>
+</section>
+
+<section class="card" id="s12">
+  <h2>12. DLL 机制 &amp; 13. 兼容子模块 <span class="badge b-no">⛔</span></h2>
+  <ul>
+    <li><b>§12 DLL</b>: MO 全部机制在 <code>MedievalOverhaul.dll</code>(64 Harmony 补丁 + 一堆 Comp/GameComponent)。本环境策略 = <b>不引 MO DLL</b>,需要哪个机制就用自研替代(如蓝图门控→BlueprintUnlockHSK)。凡"依赖 MO DLL"的项,整合成本都是"重写等价物"而非"搬运"——这是全表难度普遍偏高的根因。</li>
+    <li><b>§13 兼容子模块</b>: MO 的 25 项 LoadFolders 兼容针对 MO 自身内容,不搬主体即无适配对象。唯一相关: <code>酒馆工具整合HSK/.../Compat_MedievalOverhaul.xml</code> 已存在 MO 兼容补丁,整合决策时注意别与之重复。</li>
+    <li><b>§15 汉化</b>: 凡整合进来的 def,须按 AGENTS.md §4 用 DefInjected <code>&lt;LanguageData&gt;</code>(根节点 <code>&lt;LanguageData&gt;</code>、defName 作节点名)补中文。</li>
+  </ul>
+</section>
+
+<section class="card" id="s16">
+  <h2>16. 矿井/采掘 <span class="badge b-todo">⬜ 方案已定 · 实现未落地</span></h2>
+  <p class="lead">§16 材料映射终版: 矿井=无限产出建筑,产物 6 种(煤 / 磁铁矿→Vile Titanomagnetite / 盐 / 黏土→SoftClay / 铜矿→Copper / 6 宝石),移除火药焦油金银铁矿。依赖研究 <code>DankPyon_Mining</code>(须换挂 HSK Mining 链)+ WorkGiver + <b>暴击/虫灾 comp 在 MO DLL(须移除或自研)</b>。</p>
+  <table>
+    <tr><th style="width:28%">维度</th><th>冲突点</th><th style="width:12%">难度</th></tr>
+    <tr><td>矿井建筑 + 采掘配方</td><td>无限产物 vs HSK 矿脉/Minerals 定位</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>研究台六档门槛</td><td>须补 SK AdvancedResearchExtension(AGENTS.md §6)</td><td><span class="pill p-mid">中</span></td></tr>
+    <tr><td>暴击宝石 / 虫灾</td><td>依赖 MO DLL,须自研</td><td><span class="pill p-high">中-高</span></td></tr>
+    <tr><td>CE 适配</td><td>挖掘工具(镐类)已在工具链,注意别重复</td><td><span class="pill p-low">低</span></td></tr>
+  </table>
+  <blockquote>如果你确实要采矿,<b>建议作为第一个独立小项目落地</b>(范围比武器/防具小,材料映射已想清楚)。</blockquote>
+</section>
+
+<section class="card" id="sug">
+  <h2 style="border-left-color:var(--accent)">附. 优化推进建议(决策速览)</h2>
+  <div class="tier t1">
+    <div class="tname">第一档 · 低成本高回报(基本无 DLL / 无 CE 冲突)</div>
+    §3 娱乐家具 / 装饰 / 墙门 / 特色地板;§10 传说书 Tale(娱乐书);§6 静态装饰盾(纯展示)。
+  </div>
+  <div class="tier t2">
+    <div class="tname">第二档 · 中成本(需处理机制但范围可控)</div>
+    §16 矿井采掘(方案已定);§3 储物专用具;§9 中毒度系统 + 酒类;§2 无电保鲜冰链 / 造纸抄写。
+  </div>
+  <div class="tier t3">
+    <div class="tname">第三档 · 高成本(依赖 MO DLL 或需整套 CE 重写)</div>
+    §4 武器 / §5 防具 / §6 机制盾与魔法;§7 怪物;§8 派系世界围城;§2 信鸽探险任务。除非决定引入 MO 战役玩法,否则建议缓做或放弃。
+  </div>
+  <blockquote>战略提示: MO 三大价值块是"生产链 / 装备武器 / 战役玩法"。生产链你已用 HSK+Vile 替代;剩下真正拉开体验差异的是 <b>§4/§5 装备武器(高 CE 成本)</b> 与 <b>§8 战役玩法(整套 MO 战役)</b>——这两块是"要不要把 MO 当玩法前置"的根本抉择,其余(家具/装饰/风味)可零散捡。</blockquote>
+</section>
+
+<footer>
+  本文档只做"缺什么 + 难在哪 + 值不值得"的盘点评估;实际整合改动以游戏内实测为准,落地遵循 AGENTS.md §3(补丁)/§4(汉化)/§6(研究台六档)/§7(CE)/§8(二级菜单)。
+  纯参考文档,仅存工作区,不纳入游戏 Mods、无需双目录同步。
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="sbzDisplayShelfBase" ParentName="AdaptiveStorageBase" Abstract="True">
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>50</pathCost>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Mass>20</Mass>
+			<WorkToBuild>2500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<size>(2,1)</size>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsNeatStorage</li>
+		</thingCategories>
+		<uiIconOffset>(0, 0.1)</uiIconOffset>
+	</ThingDef>
+	
+	<ThingDef Name="sbzSmallDisplayShelfBase" ParentName="AdaptiveStorageBase" Abstract="True">
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>50</pathCost>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>10</Mass>
+			<WorkToBuild>1250</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsNeatStorage</li>
+		</thingCategories>
+		<uiIconOffset>(0, 0.1)</uiIconOffset>
+	</ThingDef>	
+
+	<!--open shelf-->
+
+	<!--2-tier display shelf-->
+
+	<!--display shelf-->
+
+	<!--small display shelf-->
+
+	<!--tall display shelf-->
+
+	<!--narrow tall display shelf-->
+
+	<!--hanger shelf-->
+
+	<!--narrow hanger shelf-->
+
+	<!--display cabinet-->
+    <AdaptiveStorage.GraphicsDef>
+		<defName>sbz_DisplayCabinetASF</defName>
+		<targetDef>sbz_DisplayCabinet</targetDef>
+        <graphics>
+            <li>
+                <graphicData>
+                    <texPath>Things/Building/Storage/DisplayCabinet/sbz_DisplayCabinet</texPath>
+                    <graphicClass>Graphic_Multi</graphicClass>
+                    <drawSize>(4,4)</drawSize>
+					<drawRotated>false</drawRotated>
+                </graphicData>
+				<graphicDatas>
+					<li>
+						<texPath>Things/Building/Storage/DisplayCabinet/sbz_DisplayCabinetLayer</texPath>
+						<graphicClass>Graphic_Multi</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>(4,4)</drawSize>
+						<drawRotated>false</drawRotated>
+						<renderQueue>2950</renderQueue>
+						<altitudeLayer>ItemImportant</altitudeLayer>
+						<drawOffset>(0,1.2,0)</drawOffset>
+					</li>
+				</graphicDatas>
+            </li>
+        </graphics>
+		<showContainedItems>true</showContainedItems>
+		<itemGraphics>
+			<columns>
+				<c0>
+					<rows>
+						<r0>
+							<stackBehaviour>Stack</stackBehaviour>
+							<stackOffset>(0.1595,0,0)</stackOffset>
+							<stackOffsetEast>(0,-0.02,0.2)</stackOffsetEast>
+							<stackOffsetWest>(0,-0.02,0.2)</stackOffsetWest>
+							<stackOffsetNorth>(0,0,0)</stackOffsetNorth>
+							<drawOffset>(0.06,0,0.4)</drawOffset>
+							<drawOffsetEast>(-0.01,0.1,0.45)</drawOffsetEast>
+							<drawOffsetWest>(0.01,0.1,0.45)</drawOffsetWest>
+							<drawOffsetNorth>(0,0,1000)</drawOffsetNorth>
+							<drawScale>0.9</drawScale>
+							<rotation>0</rotation>
+						</r0>
+					</rows>
+				</c0>
+				<c1>
+					<rows>
+						<r0>
+							<stackBehaviour>Stack</stackBehaviour>
+							<stackOffset>(0.1595,0,0)</stackOffset>
+							<stackOffsetEast>(0,-0.02,0)</stackOffsetEast>
+							<stackOffsetWest>(0,-0.02,0)</stackOffsetWest>
+							<stackOffsetNorth>(0,0,0)</stackOffsetNorth>
+							<drawOffset>(-0.302,0.05,0.4)</drawOffset>
+							<drawOffsetEast>(0,0,1000)</drawOffsetEast>
+							<drawOffsetWest>(0,0,1000)</drawOffsetWest>
+							<drawOffsetNorth>(0,0,1000)</drawOffsetNorth>
+							<drawScale>0.9</drawScale>
+							<rotation>0</rotation>
+						</r0>
+					</rows>
+				</c1>
+			</columns>
+		</itemGraphics>
+	</AdaptiveStorage.GraphicsDef>
+
+	<ThingDef ParentName="sbzDisplayShelfBase">
+		<defName>sbz_DisplayCabinet</defName>
+		<label>display cabinet</label>
+		<description>A display cabinet that can store up to 8 items of various kinds.</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/DisplayCabinet/sbz_DisplayCabinet</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<drawRotated>false</drawRotated>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Storage/DisplayCabinet/sbz_DisplayCabinetUI</uiIconPath>
+		<uiIconScale>1.6</uiIconScale>		
+		<rotatable>true</rotatable>
+		<costStuffCount>30</costStuffCount>
+		<uiOrder>1060</uiOrder>
+		<staticSunShadowHeight>0.4</staticSunShadowHeight>
+		<building>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<maxItemsInCell>4</maxItemsInCell>
+			<fixedStorageSettings>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories>
+						<li>Foods</li>
+						<li>Manufactured</li>
+						<li>ResourcesRaw</li>
+						<li>Items</li>
+						<li>Weapons</li>
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Preferred</priority>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+			<paintable>true</paintable>
+		</building>
+	</ThingDef>
+
+	<!--narrow display cabinet-->
+
+</Defs>

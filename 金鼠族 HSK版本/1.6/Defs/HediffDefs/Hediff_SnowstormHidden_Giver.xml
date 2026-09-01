@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <HediffDef ParentName="OAGene_Hediff_WeatherGiverBase">
+        <defName>OAGene_Hediff_SnowstormHidden</defName>
+        <label>暴风雪</label>
+        <description>用于实现暴风雪机制的隐藏状态</description>
+        <hediffClass>OberoniaAureaGene.Snowstorm.Hediff_SnowExtremePlayerHidden</hediffClass>
+        <stages>
+            <li>
+                <label>隐藏</label>
+                <becomeVisible>false</becomeVisible>
+                <hediffGivers>
+                    <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowstormHidden">
+                        <hediff>OAGene_Hediff_SnowstormDepress</hediff>                        <!-- 不写报错，实际无作用 -->
+                        <hediffs>                            <!-- 调整为共用冷却 -->
+                            <li>OAGene_Hediff_SnowstormDepress</li>
+                            <li>OAGene_Hediff_UnderDark</li>
+                            <li>OAGene_Hediff_SnowstormOblivious</li>
+                            <li>OAGene_Hediff_SnowstormInsomnia</li>
+                            <li>OAGene_Hediff_SnowstormAngry</li>
+                        </hediffs>
+                        <mtbDays>4</mtbDays>
+                    </li>
+                </hediffGivers>
+            </li>
+        </stages>
+        <comps Inherit="False">
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>500</disappearsAfterTicks>
+                <showRemainingTime>false</showRemainingTime>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef Name="OAGene_Hediff_SnowstormHiddenGiverBase" Abstract="True">
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>true</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <duplicationAllowed>false</duplicationAllowed>
+        <maxSeverity>1.0</maxSeverity>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_DisappearAfterSnowstorm">
+                <checkInterval>2500</checkInterval>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef ParentName="OAGene_Hediff_SnowstormHiddenGiverBase">
+        <defName>OAGene_Hediff_SnowstormDepress</defName>
+        <label>暴风雪的压抑</label>
+        <description>用于实现暴风雪压抑的隐藏状态</description>
+        <stages>
+            <li>
+                <label>隐藏</label>
+                <becomeVisible>false</becomeVisible>
+            </li>
+        </stages>
+        <comps>
+            <li Class="HediffCompProperties_ThoughtSetter">
+                <thought>OAGene_Thought_SnowstormDepress</thought>
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_LetterOnAdd">
+                <letterDef>NegativeEvent</letterDef>
+                <letterLabel>暴风雪的压抑</letterLabel>
+                <letterText>沉重的黑云和呼啸的风声让{PAWN_nameDef}几乎喘不过气来，这场暴风雪已经成为了{PAWN_nameDef}心中挥之不去的阴影。</letterText>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef ParentName="OAGene_Hediff_SnowstormHiddenGiverBase">
+        <defName>OAGene_Hediff_UnderDark</defName>
+        <label>The darkness beyond the horizon</label>
+        <description>This person's spirit was crushed by the endless darkness outside. Now he yearns for light and refuses to step into darkness.</description>
+        <stages>
+            <li>
+                <enablesNeeds>
+                    <li>OAGene_SnowstoemGlow</li>
+                </enablesNeeds>
+            </li>
+        </stages>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_UnderDark">
+                <mtbHours>12</mtbHours>
+                <threshPercent>0.1</threshPercent>
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_LetterOnAdd">
+                <letterDef>NegativeEvent</letterDef>
+                <letterLabel>不见天日的黑暗</letterLabel>
+                <letterText>屋外那无穷无尽的黑暗压垮了{PAWN_nameDef}的精神。{PAWN_pronoun}现在渴求着光亮，不愿踏进黑暗半步。</letterText>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef ParentName="OAGene_Hediff_SnowstormHiddenGiverBase">
+        <defName>OAGene_Hediff_SnowstormInsomnia</defName>
+        <label>Restless insomnia</label>
+        <description>The fear of blizzards leads to severe anxiety, which can keep people mentally tense and eventually evolve into symptoms of insomnia. \n\nIf you can maintain a good mood, it will alleviate the symptoms to some extent.</description>
+        <hediffClass>OberoniaAureaGene.Snowstorm.Hediff_SnowstormInsomnia</hediffClass>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_LetterOnAdd">
+                <letterDef>NegativeEvent</letterDef>
+                <letterLabel>不安的失眠</letterLabel>
+                <letterText>由于时刻担心睡着时被暴风雪所掩埋，因此恐惧与不安开始弥漫在{PAWN_nameDef}的心中，这令{PAWN_pronoun}昼夜难安。</letterText>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef ParentName="OAGene_Hediff_SnowstormHiddenGiverBase">
+        <defName>OAGene_Hediff_SnowstormOblivious</defName>
+        <label>selfless</label>
+        <description>A special psychological state that occurs to resist stress and fear, which can cause people to temporarily ignore social interactions and fully devote themselves to specific tasks。</description>
+        <isBad>false</isBad>
+        <stages>
+            <li>
+                <statOffsets>
+                    <GlobalLearningFactor>1.0</GlobalLearningFactor>
+                </statOffsets>
+                <statFactors>
+                    <JoyFallRateFactor>0.25</JoyFallRateFactor>
+                    <SocialImpact>0.25</SocialImpact>
+                </statFactors>
+            </li>
+        </stages>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_SnowstormOblivious">
+                <removeHediffs>
+                    <li>OAGene_Hediff_SnowstormDepress</li>
+                    <li>OAGene_Hediff_UnderDark</li>
+                    <li>OAGene_Hediff_SnowstormInsomnia</li>
+                    <li>OAGene_Hediff_SnowstormAngry</li>
+                </removeHediffs>
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_LetterOnAdd">
+                <letterDef>NeutralEvent</letterDef>
+                <letterLabel>忘我</letterLabel>
+                <letterText>为了令自己摆脱对暴风雪的恐惧，{PAWN_nameDef}决定把精力更多的关注于自己所热爱的事情。</letterText>
+            </li>
+        </comps>
+    </HediffDef>
+
+    <HediffDef ParentName="OAGene_Hediff_SnowstormHiddenGiverBase">
+        <defName>OAGene_Hediff_SnowstormAngry</defName>
+        <label>Irrational anger</label>
+        <description>The suppressed fear in the heart has evolved into irrational anger, and only solitude can alleviate this emotional breakdown. Otherwise, this irrational anger will turn into insults and attacks against others.</description>
+        <stages>
+            <li>
+                <statFactors>
+                    <SocialImpact>0.50</SocialImpact>
+                </statFactors>
+            </li>
+        </stages>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_LetterOnAdd">
+                <letterDef>NegativeEvent</letterDef>
+                <letterLabel>不理性的愤怒</letterLabel>
+                <letterText>{PAWN_nameDef}压抑的恐惧演变成了不理性的愤怒，现在的他迫切的需要一个人的独处。</letterText>
+            </li>
+            <li Class="HediffCompProperties_ThoughtSetter">
+                <thought>OAGene_Hediff_SnowstormAngry</thought>                <!-- 常驻心情 -->
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_SnowstormAngry">
+                <stormSleepAngryThought>OAGene_Thought_StormSleepAngry</stormSleepAngryThought>                <!-- 睡眠心情 -->
+            </li>
+        </comps>
+    </HediffDef>
+
+</Defs>

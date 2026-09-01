@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <HediffDef>
+        <defName>OAGene_Hediff_ExperienceSnowstorm</defName>
+        <label>经历暴风雪</label>
+        <description>这个人已经经历过了一次，或者数次暴风雪，这让他在面对风雪上有了更多的经验。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <duplicationAllowed>false</duplicationAllowed>
+        <alwaysAllowMothball>true</alwaysAllowMothball>
+        <alwaysAllowMothballCached>true</alwaysAllowMothballCached>
+        <stages>
+            <li>
+                <becomeVisible>false</becomeVisible>
+                <statOffsets>
+                    <ComfyTemperatureMin>-1</ComfyTemperatureMin>
+                </statOffsets>
+            </li>
+        </stages>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_ExperienceSnowstorm" />
+        </comps>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>OAGene_Hediff_HopeForSurvival</defName>
+        <label>Hope for survival</label>
+        <description>The hope of survival inspires the body to operate at maximum efficiency, which enables survivors to exert far more physical fitness than usual in a short period of time.</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <duplicationAllowed>false</duplicationAllowed>
+        <alwaysAllowMothball>true</alwaysAllowMothball>
+        <alwaysAllowMothballCached>true</alwaysAllowMothballCached>
+        <stages>
+            <li>
+                <statOffsets>
+                    <ComfyTemperatureMin>-30</ComfyTemperatureMin>
+                </statOffsets>
+                <capMods>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <offset>0.30</offset>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+        <comps>
+            <li Class="HediffCompProperties_Disappears">
+                <disappearsAfterTicks>10000</disappearsAfterTicks>                <!-- 4小时 -->
+                <showRemainingTime>true</showRemainingTime>
+                <canUseDecimalsShortForm>true</canUseDecimalsShortForm>
+            </li>
+            <!-- li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_HopeForSurvival"/ -->
+        </comps>
+    </HediffDef>
+
+</Defs>

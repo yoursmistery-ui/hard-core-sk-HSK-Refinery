@@ -1,0 +1,21 @@
+﻿<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Ideology</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+		<operations>
+		<li Class="PatchOperationAdd">
+			<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+			<value>
+			<li>SD_IndustrialColumn</li>
+			<li>SD_StoneColumn</li>
+			<li>SD_WoodColumn</li>
+			</value>
+		</li>
+		</operations>
+	</match>
+	</Operation>
+
+</Patch>

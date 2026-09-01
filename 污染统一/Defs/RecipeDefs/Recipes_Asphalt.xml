@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 沥青焚烧回收：在电焚化炉中高温焚烧沥青，烧尽重质烃类后
+	     残余的矿质残渣压实即为混凝土原料。 -->
+	<RecipeDef>
+		<defName>Process_Asphalt_To_Concrete</defName>
+		<label>焚烧沥青制混凝土</label>
+		<description>将堆积的沥青投入焚化炉高温焚烧，烧尽重质烃类后，残余矿质残渣经压实即可回收为混凝土。</description>
+		<jobString>正在焚烧沥青。</jobString>
+		<workAmount>180</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Cremate</effectWorking>
+		<soundWorking>Recipe_Cremate</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Asphalt</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Asphalt</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<ConcreteResource>3</ConcreteResource>
+		</products>
+	</RecipeDef>
+
+</Defs>

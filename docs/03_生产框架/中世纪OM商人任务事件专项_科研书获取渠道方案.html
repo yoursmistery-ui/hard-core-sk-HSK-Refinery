@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中世纪OM 商人/任务/事件专项 — 科研书获取渠道整合方案</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2328; --muted:#57606a;
+    --line:#d8dee4; --accent:#2f6feb; --head:#0d2440; --headink:#eaf1fb;
+    --done:#1a7f37; --part:#b58105; --todo:#0969da; --no:#6e7781;
+    --donebg:#dafbe1; --partbg:#fff8c5; --todobg:#ddf4ff; --nobg:#eceff1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,#123a2b,#1e5c40);color:#e7f5ee;
+    border-radius:16px;padding:28px 32px;margin-bottom:24px;box-shadow:0 8px 24px rgba(18,58,43,.22);}
+  header.page h1{margin:0 0 10px;font-size:25px;letter-spacing:.5px;}
+  header.page p{margin:4px 0;color:#cfe8da;font-size:13.5px;}
+  code{background:#eef1f4;padding:1px 6px;border-radius:5px;font-size:12.5px;font-family:"SFMono-Regular",Consolas,monospace;color:#b8336a;}
+  header.page code{background:rgba(255,255,255,.14);color:#fdeff2;}
+  .verdict{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .vchip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 14px;font-size:13px;}
+  .vchip b{color:#fff}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 26px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  h2{font-size:20px;color:var(--head);border-left:5px solid var(--accent);padding-left:12px;margin:22px 0 6px;scroll-margin-top:16px;}
+  h3{font-size:16px;color:#243b53;margin:20px 0 6px;}
+  p.lead{margin:6px 0 14px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;margin:12px 0 8px;font-size:13.5px;background:#fff;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f0f3f7;color:#243b53;font-weight:700;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  ul{margin:8px 0;padding-left:22px;} li{margin:4px 0;}
+  blockquote{margin:12px 0;padding:10px 16px;background:#f2f7ff;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;color:#243b53;font-size:13.5px;}
+  .warn{background:#fff5f4;border-left-color:#cf2220;}
+  .badge{display:inline-block;font-weight:700;font-size:12px;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+  .b-ok{color:var(--done);background:var(--donebg)} .b-gap{color:#cf2220;background:#ffebe9}
+  .b-todo{color:var(--todo);background:var(--todobg)} .b-no{color:var(--no);background:var(--nobg)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;}
+  .p-low{background:#dafbe1;color:#1a7f37}.p-mid{background:#fff8c5;color:#9a6700}.p-high{background:#ffebe9;color:#cf2220}
+  .phase{border-radius:14px;padding:4px 22px 18px;margin:16px 0;border:1px solid var(--line);scroll-margin-top:16px;}
+  .ph1{background:#f2fbf4;border-color:#b7ebc6}.ph2{background:#f2f7ff;border-color:#b6d7fb}.ph3{background:#fffdf2;border-color:#f2e3ad}.ph4{background:#f7f6f5;border-color:#ddd}
+  .pname{font-weight:800;font-size:16.5px;margin:14px 0 4px;color:var(--head);}
+  .ptime{font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:2px;}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:22px;font-size:13.5px;}
+  nav.toc b{color:var(--head)} nav.toc a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block;padding:2px 0;}
+  nav.toc a:hover{text-decoration:underline}
+  pre.flow{background:#0d2440;color:#dcebff;border-radius:12px;padding:16px 18px;font-size:12.5px;line-height:1.6;overflow-x:auto;font-family:"SFMono-Regular",Consolas,monospace;}
+  footer{color:var(--muted);font-size:12.5px;margin-top:24px;padding-top:14px;border-top:1px dashed var(--line);}
+  @media (max-width:680px){th,td{padding:6px;font-size:12.5px}header.page{padding:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>中世纪OM · 商人/任务/事件专项</h1>
+  <p>科研书(蓝图书)获取渠道整合方案 · 2026-08-27 · MO 未整合盘点 §8 深化专项</p>
+  <p>目标: 吸收 MO「商人/任务/事件」的获取渠道设计,强化蓝图书获取玩法;<b>不搬 MO 本体、不引 MO DLL、不依赖 VEF</b>。</p>
+  <div class="verdict">
+    <div class="vchip"><b>发现①</b> 你游戏里没有 MO 本体 —— ModsConfig 的 <code>vitech.medievaloverhaul</code> 实为「HMC Vile's Pre-Industrial Overhaul」(撞名 packageId)</div>
+    <div class="vchip"><b>发现②(08-27 晚修正)</b> VEF Core <b>已装且激活</b>——1.6 工坊 mod 从 workshop 目录直接加载, 首查只扫 Mods 目录导致误报; KCSG/VEF QuestNode 可用, 卡点只剩 MO DLL 与未勾选的 MO 本体</div>
+    <div class="vchip"><b>结论</b> 你的获取渠道全是"被动"(买/碰运气);MO 藏宝图链=「主动探索」支柱,正是缺的那条腿</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <b>目录:</b>
+  <a href="#s0">0 环境硬约束</a>
+  <a href="#s1">1 MO获取侧拆解</a>
+  <a href="#s2">2 现状对照</a>
+  <a href="#p1">P1 学者商人</a>
+  <a href="#p2">P2 藏宝图链</a>
+  <a href="#p3">P3 废墟任务</a>
+  <a href="#p4">P4 缓做放弃</a>
+  <a href="#s5">5 铁律提醒</a>
+</nav>
+
+<section class="card" id="s0">
+  <h2>0. 环境硬约束(核查结论,影响一切方案)</h2>
+  <table>
+    <tr><th style="width:16%">项</th><th>实测结论</th></tr>
+    <tr><td>MO 本体</td><td><span class="badge b-gap">未启用</span> <code>ModsConfig.xml</code> 的 <code>vitech.medievaloverhaul</code> 实际对应 <code>HMC Vile's Pre-Industrial Overhaul</code>(Vile 复用同名 packageId),非 DankPyon MO。其 Defs 无任何 <code>DankPyon_</code> 前缀。</td></tr>
+    <tr><td>VEF Core</td><td><span class="badge b-ok">已装且激活</span>(08-27 晚二次核实) 工坊 <code>content\294100\2023507013</code> 直接加载, Unified 导出含 VEF 类引用 169 处; KCSG/VEF QuestNode 可用。首查误报因只扫了 Mods 目录。</td></tr>
+    <tr><td>直接后果</td><td>MO DLL 类(Building_QuestScanner / Building_Lootable / GameComponent_QuestFinder / IncidentWorker_* / RaidStrategyWorker_MedievalSiege)与 MO 派系/生物 def 不可用(MO 已订阅未勾选, Unified 仅 4 处 MayRequire 残留); <b>VEF 系(KCSG/QuestNode/SymbolDef)可用</b>。</td></tr>
+    <tr><td>可用替代</td><td>纯原版 QuestScriptDef + <b>原版</b> <code>QuestNode_GetFaction</code> + 原版 SitePart(<code>ItemStash</code>/<code>BanditCamp</code>/Manhunters)+ 原版战利池(<code>MapGen_AncientComplexRoomLoot_Default</code>、考古 Artifacts)+ 你的 <code>ThingSetMaker_BlueprintReward</code>/<code>StockGenerator_BlueprintTrader</code>(可扩展)+ DLC 宠幸(Royalty/Ideology/Biotech/Odyssey 全启用)。</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s1">
+  <h2>1. MO「获取侧」全拆解(workshop 副本实读)</h2>
+
+  <h3>1.1 商人侧 —— 纯 XML,可直接参考</h3>
+  <p class="lead">5 个 TraderKindDef(Base/Caravan_Medieval/Caravan_Alchemy/Caravan_Soren/Visitor),挂四大贵族派系。学者商队实测:</p>
+  <table>
+    <tr><th style="width:34%">stockGenerator</th><th style="width:24%">标签/对象</th><th style="width:12%">countRange</th><th>备注</th></tr>
+    <tr><td><code>StockGenerator_MarketValue</code></td><td><code>DankPyon_Schematic</code> 图纸</td><td><b>1~5</b></td><td>高价值稀有</td></tr>
+    <tr><td><code>StockGenerator_MarketValue</code></td><td><code>DankPyon_Treatise</code> 专著</td><td>2~5</td><td></td></tr>
+    <tr><td><code>StockGenerator_MarketValue</code></td><td><code>DankPyon_Tale</code> 传说书</td><td>3~5</td><td></td></tr>
+    <tr><td><code>StockGenerator_MarketValue</code></td><td><code>DankPyon_Book</code> 泛书籍</td><td>1~3</td><td></td></tr>
+    <tr><td><code>StockGenerator_SingleDef</code></td><td><code>DankPyon_Paper</code></td><td>50~250</td><td></td></tr>
+    <tr><td><code>StockGenerator_BuyTradeTag</code> ×4</td><td>上述四类<b>全回购</b></td><td>—</td><td>玩家倒卖/换书回路</td></tr>
+  </table>
+  <blockquote>机制要点: 全部走 tradeTag + 市场价值抽档,<b>零 DLL</b>。你的蓝图书挂一个 <code>RK_BlueprintBook</code> tradeTag 即可同法复用。</blockquote>
+
+  <h3>1.2 任务侧 —— 脚本可抄结构,内容全卡死</h3>
+  <table>
+    <tr><th style="width:30%">任务</th><th style="width:30%">生成方式(实测)</th><th>依赖链(不可用部分标红思路)</th></tr>
+    <tr><td>小废墟清剿 <code>OpportunitySite_SmallRuin</code></td><td>自动 weight 1.5,minPoints 350,4~8 天过期</td><td>SitePart → <b>VEF QuestNode_GetFaction</b> → <b>KCSG 结构布局</b>(废墟预置 Lootable 架/箱/藏宝图/书)→ 奖励=钱+好感+宠幸+<b>营地战利品 addCampLootReward</b></td></tr>
+    <tr><td>中废墟 / 蛇窟清剿</td><td>同上,points 递增</td><td>同上 + <b>MO 怪物</b>(蛇/龙)</td></tr>
+    <tr><td>邪教 1/2/3 级</td><td><b>weight=0 不自动生成</b>;知识之书 CultBook 道具触发(祭坛×5→宝珠×9)</td><td><b>MO 派系 + DLL 扫描链</b></td></tr>
+    <tr><td>Alp 月蚀</td><td>xml 已注释停用</td><td>—</td></tr>
+  </table>
+  <blockquote>脚本本体是<b>标准原版 QuestNode_Sequence 编排,结构可抄</b>;卡点在地图生成(KCSG)与守卫(VEF/MO 派系)。「任务给钱、站点内 loot 给书」= 双层奖励设计,值得吸收。</blockquote>
+
+  <h3>1.3 藏宝图 → 探索工作台链 —— 最有价值的「主动获取」设计</h3>
+  <pre class="flow">[获取线索]  废墟Lootable架/箱/碎纸堆 + 强盗掉落 + 商人
+      ↓     DankPyon_TornNote_Hideout(可堆3,150银)
+[解码]      探索工作台(3×3,Building_QuestScanner,DLL)
+      ↓     链接件升级: 档案柜(可存9图)/古基座/古球/信鸽站 → 0/1/5/9 件解锁 1~3 级
+[生成]      GameComponent_QuestFinder 长距离扫描 → 世界地图三级藏身处
+      ↓
+[收获]      藏身处=储物建筑Lootable变体 → 搜出 三级知识书/图纸/大量物资</pre>
+
+  <h3>1.4 事件侧 —— 与书无关,整体放弃</h3>
+  <p>稀有巨兽路过 ×4(baseChance 0.7 / minRefireDays 30)、哥雷姆陨石(≥500 点)、矿井虫灾、中世纪围城 RaidStrategy —— workerClass 全在 MO DLL 且引用 MO 生物/派系。<b>你的 Cybranian 陨石/老人注入点已承担同类职能。</b></p>
+</section>
+
+<section class="card" id="s2">
+  <h2>2. 现状对照:你的蓝图书获取渠道(BlueprintUnlockHSK v3.1)</h2>
+  <table>
+    <tr><th style="width:14%">渠道</th><th style="width:43%">现状</th><th>vs MO 的差距</th></tr>
+    <tr><td>商人卖书 <span class="badge b-ok">✅</span></td><td>7 类 TraderKindDef 内联 <code>StockGenerator_BlueprintTrader</code>(原版 Outlander/部落/轨道 + 鼠族王国;按派系 techLevel 分档,中世纪/工业卖全套但稀有,太空/极致约半数)</td><td>无「学者商人」专精人设;缺书类<b>回购</b>回路</td></tr>
+    <tr><td>任务奖励 <span class="badge b-ok">✅</span></td><td><code>ThingSetMaker_BlueprintReward</code> 注入 <code>Reward_ItemsStandard</code>(weight 0.5)+ DLL 注入物品贮藏藏宝处</td><td>无「清剿→站点实物 loot」第二层;书是<b>附带奖励</b>不是<b>目标物</b></td></tr>
+    <tr><td>世界探索 <span class="badge b-ok">✅</span></td><td>GoExplore Harmony 注入</td><td>无「线索→定向解锁」链</td></tr>
+    <tr><td>随机事件 <span class="badge b-ok">✅</span></td><td>Cybranian AlliesGift 25% + 陨石 + 老人注入</td><td>—</td></tr>
+    <tr><td>玩法结构 <span class="badge b-gap">⚠️</span></td><td colspan="2"><b>全部被动</b>(刷商人/碰运气)。MO 藏宝图链 = 「主动探索」支柱,正是你缺的那条腿 → 本方案核心。</td></tr>
+  </table>
+</section>
+
+<section class="card">
+  <h2>3~4. 分阶段落地(全部不引 MO DLL / 不依赖 VEF)</h2>
+
+  <div class="phase ph1" id="p1">
+    <div class="pname">P1 · 学者商人 + 书市回购 <span class="ptime">纯 XML · ~0.5 天 · 立即可做</span></div>
+    <ul>
+      <li>新建 1~2 个 TraderKindDef(「流浪学者」「古籍商」),挂<b>原版 Outlander 友好派系</b>(不动派系体系);stockGenerators 直接复用现成 <code>BlueprintUnlockHSK.StockGenerator_BlueprintTrader</code>(自动按档)+ 基础件。</li>
+      <li>蓝图书 ThingDef 补 tradeTag <code>RK_BlueprintBook</code> → 商人加 <code>StockGenerator_MarketValue</code> + <code>StockGenerator_BuyTradeTag</code>,实现<b>回购倒卖</b>(仿 MO 四层标签)。</li>
+      <li>平衡抄 MO 实测: 图纸 1~5 / 专著 2~5 / 传说 3~5 本每商队。</li>
+      <li>风险: 与现有 7 类注入叠加书供应过量 → <code>StockGenerator_BlueprintTrader</code> 已有"已读集合"过滤,学者商人<b>权重调高、数量收紧</b>即可。</li>
+    </ul>
+    <div>难度: <span class="pill p-low">低</span>(纯补丁+Defs,无 DLL 改动)</div>
+  </div>
+
+  <div class="phase ph2" id="p2">
+    <div class="pname">P2 · 藏宝图 → 定向挖宝链(核心玩法支柱) <span class="ptime">自研 DLL 扩展 · ~3-5 天</span></div>
+    <ul>
+      <li>① 新物品「藏宝图残片」<code>RK_TreasureMapFragment</code>(XML,可堆叠)。投放: 并入 <code>ThingSetMaker_BlueprintReward</code> 同池(任务/贮藏掉)+ 学者商人偶售。</li>
+      <li>② <code>BlueprintUnlockHSK.dll</code> 扩展 <code>CompUseEffect_UseMap</code>: 消耗残片 1/3/5 张 → 生成<b>原版 SitePart 组合</b>世界站点(ItemStash 埋箱 + 守卫)+ 任务信。</li>
+      <li>③ 站点地图生成用<b>原版 GenStep</b>(不碰 KCSG): 抄原版 ItemStash 埋箱逻辑,箱内 ThingSetMaker 换成 <code>ThingSetMaker_BlueprintReward</code> 的"按档位/系列必出"参数化版本(小改造)。</li>
+      <li>④ 可选「探秘桌」: 普通 WorkTable + bill「解读藏宝图」(消耗残片+工时),<b>用原版配方框架替代 MO 的 QuestScanner DLL</b>;MO 的链接件 0/1/5/9 分级建议砍掉(性价比低)。</li>
+      <li>验收: 三档残片站点、奖励必含对应档位书、与 RimQuest 并存、清档实测。</li>
+    </ul>
+    <div>难度: <span class="pill p-mid">中</span>(DLL 扩展 + 站点生成,全部走已有 BlueprintUnlockHSK 工程)</div>
+  </div>
+
+  <div class="phase ph3" id="p3">
+    <div class="pname">P3 · 「废墟清剿」原版化任务脚本 <span class="ptime">纯 XML + P2 产物 · ~2-3 天</span></div>
+    <ul>
+      <li>抄 MO <code>Script_SmallRuin</code> 节点编排,<b>换血不可用节点</b>: VEF QuestNode → 原版 <code>QuestNode_GetFaction</code>;SitePart → 原版 ItemStash/轻量自建;KCSG 结构 → 不生成建筑,站点埋箱+守卫队。</li>
+      <li>双层奖励仿 MO: <code>QuestNode_GiveRewards</code>(钱/好感/宠幸)+ 站点实物=蓝图书/残片(P2 SetMaker)。</li>
+      <li>参数直抄 MO: weight 0.8~1.5、minPoints 350、4~8 天过期。</li>
+      <li>与 RimQuest 无冲突面(标准生成器自然叠加)。</li>
+    </ul>
+    <div>难度: <span class="pill p-mid">中</span>(QuestScriptDef 编排调试,无新代码)</div>
+  </div>
+
+  <div class="phase ph4" id="p4">
+    <div class="pname">P4 · 明确缓做 / 放弃</div>
+    <table>
+      <tr><th style="width:32%">项</th><th>原因</th><th style="width:26%">处置</th></tr>
+      <tr><td>邪教三级 CultBook 收集链(祭坛×5→宝珠×9)</td><td>卡 MO 派系 + DLL 扫描 + 26 向布局</td><td>🅿 缓: P2 跑顺后可把"宝珠"换成"残片"变体重做</td></tr>
+      <tr><td>中世纪围城 RaidStrategy</td><td>MO DLL 攻城 AI,CE 下另需适配</td><td><span class="badge b-no">⛔</span>(CE/HSK 已有袭击体系)</td></tr>
+      <tr><td>巨兽路过/哥雷姆陨石/虫灾事件</td><td>卡 MO 生物(§7)+ DLL worker</td><td><span class="badge b-no">⛔</span>(Cybranian 已覆盖随机书源)</td></tr>
+      <tr><td>Base_Medieval 等 MO 派系商人</td><td>卡四大贵族派系(§8 整体)</td><td><span class="badge b-no">⛔</span>(P1 学者商人替代其职能)</td></tr>
+    </table>
+  </div>
+
+  <blockquote><b>执行顺序</b>: P1(半天见效)→ P2(核心支柱)→ P3(玩法闭环)。三段做完 = MO 获取侧三条腿(商人/任务/主动探索)全部吸收,零 MO DLL、零 VEF,全部收在 <code>HSK工业科研大修</code> 一个 mod 内。</blockquote>
+</section>
+
+<section class="card" id="s5">
+  <h2>5. 落地铁律提醒</h2>
+  <ul>
+    <li>补丁一律 xpath 存在性门控(AGENTS.md §3,1.6 Operation 级 MayRequire 失效);新 TraderKindDef/SitePartDef 放<b>本 mod 自己的 Defs</b>,不打别人补丁。</li>
+    <li>「探秘桌」若挂科研前置,按 §6 六档补 SK <code>AdvancedResearchExtension</code> 硬门槛。</li>
+    <li>新 Def 补 DefInjected <code>&lt;LanguageData&gt;</code>(§4);DLL 改动守性能铁律(§9)——扫描/站点生成走<b>事件驱动</b>,不轮询。</li>
+    <li>工作区改完<b>立刻双目录同步</b>(§1);DLL 重编译走 <code>build.ps1</code>;改补丁先跑 <code>_tmp/patch_simulator.py</code>。</li>
+  </ul>
+</section>
+
+<footer>
+  数据源: MO 1.6.2.2 workshop 副本(<code>...\294100\3219596926\1.6\</code>)实读 + HSK工业科研大修 Patches/Source 实读 + 部署 Mods/ModsConfig 核查。数值以游戏内实测为准。
+</footer>
+
+</div>
+</body>
+</html>

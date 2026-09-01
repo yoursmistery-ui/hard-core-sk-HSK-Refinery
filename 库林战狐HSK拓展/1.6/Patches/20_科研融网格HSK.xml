@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 库林战狐 科研融入主网格 + 六档门槛 + 错位链(工业淬炼→升空)。D2 用户再定调:
+       入口三根(ApparelT1/Flower/Turret)前置挂 HSK 石化工业末端 RK_Petro_Refining(Industrial)→"石化毕业后才解锁库林科技";
+       工业段=SimpleResearchBench+设施LabTerminal, Spacer段=HiTechResearchBench+设施MultiAnalyzer(禁把设施写进 requiredResearchBuilding);
+       Turret 由 Medieval 抬 Industrial 防越级;坐标 Unified 占格探测落 75~84 空行,(X,Y) 全局唯一零撞车,X 按依赖深度工业左→太空右。
+       2026-08-30: X 右移到全部外部前置列右侧,清 ResearchTreeSK "not positioned right" 告警——
+       石化链当日右移一格(RK_Petro_Refining 10→11),故入口基数取 12:
+       Flower/ApparelT1/Turret=12(>RK_Petro_Refining 11), CombatT2/ApparelT2=13, CombatT3/ApparelT3=14,
+       Mechtech=15(>BasicMechtech 12), ApparelT4=16(>Fabrication 8), CombatT4=19(>ChargedShot 18);
+       下游 CataphractArmor(24,39) 仍在 ApparelT4 右侧,不回刷告警。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]/researchViewY</xpath>
+    <value><researchViewY>75</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]/prerequisites</xpath>
+    <value><li>RK_Petro_Refining</li></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]/researchViewY</xpath>
+    <value><researchViewY>76</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]</xpath>
+    <value><prerequisites>
+      <li>RK_Petro_Refining</li>
+    </prerequisites></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]/researchViewY</xpath>
+    <value><researchViewY>77</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]/techLevel</xpath>
+    <value><techLevel>Industrial</techLevel></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]/prerequisites</xpath>
+    <value><li>RK_Petro_Refining</li></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT2"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT2"]/researchViewX</xpath>
+    <value><researchViewX>13</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT2"]/researchViewY</xpath>
+    <value><researchViewY>78</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT2"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT2"]/researchViewX</xpath>
+    <value><researchViewX>13</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT2"]/researchViewY</xpath>
+    <value><researchViewY>79</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT3"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT3"]/researchViewX</xpath>
+    <value><researchViewX>14</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT3"]/researchViewY</xpath>
+    <value><researchViewY>80</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT3"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT3"]/researchViewX</xpath>
+    <value><researchViewX>14</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT3"]/researchViewY</xpath>
+    <value><researchViewY>81</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Mechtech"]</xpath>
+    <value>
+      <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>MultiAnalyzer</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Mechtech"]/researchViewX</xpath>
+    <value><researchViewX>15</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Mechtech"]/researchViewY</xpath>
+    <value><researchViewY>82</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT4"]</xpath>
+    <value>
+      <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>MultiAnalyzer</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT4"]/researchViewX</xpath>
+    <value><researchViewX>19</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT4"]/researchViewY</xpath>
+    <value><researchViewY>83</researchViewY></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT4"]</xpath>
+    <value>
+      <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>MultiAnalyzer</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT4"]/researchViewX</xpath>
+    <value><researchViewX>16</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT4"]/researchViewY</xpath>
+    <value><researchViewY>84</researchViewY></value>
+  </Operation>
+  <!-- 链尾→太空末位: Kurin_ApparelT4 顶配装甲复刻 成为 HSK 太空末位顶配 CataphractArmor(Ultra,终端) 的前置(MayRequire 门控,库林缺失自动降级) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="CataphractArmor"]/prerequisites</xpath>
+    <value>
+      <li MayRequire="Seioch.Kurin.HAR">Kurin_ApparelT4</li>
+    </value>
+  </Operation>
+</Patch>

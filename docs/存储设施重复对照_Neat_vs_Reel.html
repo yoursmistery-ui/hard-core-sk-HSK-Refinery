@@ -1,0 +1,523 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>存储设施定位重复对照 · Neat Storage vs Reel</title><style>
+body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+margin:0;padding:28px 32px;background:#FAFAF8;color:#1F1F1D;line-height:1.6}
+h1{font-size:19px;font-weight:500;margin:0 0 4px}
+.sub{color:#6B6B66;font-size:13px;margin:0 0 22px}
+.cards{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.card{background:#F1EFE8;border-radius:10px;padding:12px 18px;min-width:110px}
+.card .l{font-size:12px;color:#6B6B66}.card .n{font-size:23px;font-weight:500;margin-top:2px}
+.sec{margin:26px 0 10px;font-size:15px;font-weight:500;padding-bottom:6px;border-bottom:1px solid #E3E1D8}
+table{border-collapse:collapse;width:100%;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;margin-bottom:8px}
+th{background:#F1EFE8;text-align:left;padding:8px 10px;font-weight:500;font-size:12px;color:#444441;white-space:nowrap}
+td{padding:7px 10px;border-top:1px solid #EDEBE4;vertical-align:top}
+tr.neat td:first-child{border-left:3px solid #7F77DD}
+tr.reel td:first-child{border-left:3px solid #1D9E75}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;white-space:nowrap}
+.tag.neat{background:#EEEDFE;color:#534AB7}
+.tag.reel{background:#E1F5EE;color:#0F6E56}
+.bar{display:inline-block;height:7px;border-radius:3px;vertical-align:middle;margin-right:6px}
+.bar.n{background:#7F77DD}.bar.r{background:#1D9E75}
+.dup{background:#FCEBEB !important;color:#A32D2D;font-size:11px;padding:1px 7px;border-radius:20px;white-space:nowrap}
+.ok{background:#E1F5EE;color:#0F6E56;font-size:11px;padding:1px 7px;border-radius:20px;white-space:nowrap}
+.mono{font-family:Consolas,monospace;font-size:12px;color:#5F5E5A}
+.note{background:#FFF;border:1px solid #E3E1D8;border-left:3px solid #BA7517;border-radius:8px;padding:12px 16px;font-size:13px;margin:16px 0}
+ul{margin:8px 0 8px 20px;padding:0}li{margin:3px 0}
+
+</style></head><body>
+<h1>存储设施定位重复对照</h1>
+<p class="sub">[sbz] Neat Storage (本地化, 工坊 3416243474) &nbsp;vs&nbsp; Reel存储HSK适配 &nbsp;·&nbsp; 容量 = 每格堆叠数 × 占格数</p>
+<div class="cards">
+<div class="card"><div class="l">Neat Storage</div><div class="n">27</div></div>
+<div class="card"><div class="l">Reel 适配</div><div class="n">20</div></div>
+<div class="card"><div class="l">定位重复组</div><div class="n">3</div></div>
+<div class="card"><div class="l">Neat 重复项</div><div class="n">22</div></div>
+<div class="card"><div class="l">Neat 独有</div><div class="n">5</div></div>
+</div>
+<div class="note"><b>怎么读这张表</b><ul><li><b>重复</b> = 同一用途区间内，两边都提供了建筑（尺寸可不同）。</li><li>Neat 全部走<b>原版科技</b>（ComplexFurniture=中世纪 / Smithing / Machining=工业），Reel 走 <b>HSK Storage 线</b>（Storage_B1→D1）——解锁节奏不同步，这是重复感的第二大来源。</li><li>容量差距悬殊：Neat 每格 1~6，Reel 每格 9~27。同尺寸下 Reel 通常是 Neat 的 2~4 倍。</li></ul></div>
+<div class="sec">通用 <span class="dup">重复</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>tall crate</td>
+<td class="mono">sbz_TallCrate</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>6</td><td><b>24</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>large crate</td>
+<td class="mono">sbz_Crate</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>6</td><td><b>24</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>Pallet</td>
+<td class="mono">sbz_Pallet</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>6</td><td><b>24</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>crate</td>
+<td class="mono">sbz_MidCrate</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>half pallet</td>
+<td class="mono">sbz_HalfPallet</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>small crate</td>
+<td class="mono">sbz_SmallCrate</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>mini pallet</td>
+<td class="mono">sbz_MiniPallet</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>货运集装箱</td>
+<td class="mono">ReelStorageCargoContainer</td>
+<td>2×4 <span class="mono">(8格)</span></td>
+<td>16</td><td><b>128</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C2</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>太空集装箱组</td>
+<td class="mono">ReelStorageSpacerContainerStack</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>27</td><td><b>108</b></td>
+<td><span class="bar r" style="width:90px"></span></td>
+<td class="mono">Storage_D1</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>大型金属货箱</td>
+<td class="mono">ReelStorageLargeMetalCrate</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>16</td><td><b>64</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C2</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>桶装托盘</td>
+<td class="mono">ReelStorageBarrelPallet</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>16</td><td><b>64</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C2, BiofuelRefining</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>大型太空集装箱</td>
+<td class="mono">ReelStorageLargeSpacerContainer</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>27</td><td><b>54</b></td>
+<td><span class="bar r" style="width:90px"></span></td>
+<td class="mono">Storage_D1</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>大型木箱</td>
+<td class="mono">ReelStorageNewLargeWoodCrate</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>11</td><td><b>44</b></td>
+<td><span class="bar r" style="width:36px"></span></td>
+<td class="mono">Storage_B2</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>小型太空集装箱</td>
+<td class="mono">ReelStorageSpacerContainer</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>27</td><td><b>27</b></td>
+<td><span class="bar r" style="width:90px"></span></td>
+<td class="mono">Storage_D1</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>工业货架</td>
+<td class="mono">ReelNewIndustrialShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>11</td><td><b>22</b></td>
+<td><span class="bar r" style="width:36px"></span></td>
+<td class="mono">Storage_B2</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>金属货箱</td>
+<td class="mono">ReelStorageMetalCrate</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>16</td><td><b>16</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C1</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>板条木箱</td>
+<td class="mono">ReelStorageNewWoodCrate</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>11</td><td><b>11</b></td>
+<td><span class="bar r" style="width:36px"></span></td>
+<td class="mono">Storage_B2</td>
+</tr>
+</tbody></table>
+<div class="sec">通用展示 <span class="dup">重复</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>open shelf</td>
+<td class="mono">sbz_OpenShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>2-tier display shelf</td>
+<td class="mono">sbz_TwoTierDisplayShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>tall display shelf</td>
+<td class="mono">sbz_TallDisplayShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>display cabinet</td>
+<td class="mono">sbz_DisplayCabinet</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>4</td><td><b>8</b></td>
+<td><span class="bar n" style="width:13px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>display shelf</td>
+<td class="mono">sbz_DisplayShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>3</td><td><b>6</b></td>
+<td><span class="bar n" style="width:10px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>narrow tall display shelf</td>
+<td class="mono">sbz_NarrowTallDisplayShelf</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>Safe</td>
+<td class="mono">sbz_Safe</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Machining</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>Drum</td>
+<td class="mono">sbz_Drum</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Machining</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>narrow display cabinet</td>
+<td class="mono">sbz_NarrowDisplayCabinet</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>4</td><td><b>4</b></td>
+<td><span class="bar n" style="width:13px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>small display shelf</td>
+<td class="mono">sbz_SmallDisplayShelf</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>3</td><td><b>3</b></td>
+<td><span class="bar n" style="width:10px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>display case</td>
+<td class="mono">sbz_DisplayTable</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>1</td><td><b>1</b></td>
+<td><span class="bar n" style="width:3px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>round pedestal</td>
+<td class="mono">sbz_RoundPedestal</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>1</td><td><b>1</b></td>
+<td><span class="bar n" style="width:3px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>医疗冷藏柜</td>
+<td class="mono">ReelStorageNewMedicineCabinet</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>16</td><td><b>32</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C1, MedicineProduction</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>储物桶</td>
+<td class="mono">ReelStorageNewBarrel</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>11</td><td><b>11</b></td>
+<td><span class="bar r" style="width:36px"></span></td>
+<td class="mono">Storage_B1</td>
+</tr>
+</tbody></table>
+<div class="sec">武器 <span class="dup">重复</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>horizontal weapon rack</td>
+<td class="mono">sbz_HorizontalWeaponRack</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Machining</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>vertical weapon rack</td>
+<td class="mono">sbz_VerticalWeaponRack</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Machining</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>weapon rack</td>
+<td class="mono">sbz_WeaponRack</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>3</td><td><b>6</b></td>
+<td><span class="bar n" style="width:10px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>立式武器架</td>
+<td class="mono">ReelStorageVerticalWeaponRack</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>16</td><td><b>64</b></td>
+<td><span class="bar r" style="width:53px"></span></td>
+<td class="mono">Storage_C4</td>
+</tr>
+</tbody></table>
+<div class="sec">衣物 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>hanger shelf</td>
+<td class="mono">sbz_WideHangerShelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>4</td><td><b>8</b></td>
+<td><span class="bar n" style="width:13px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>narrow hanger shelf</td>
+<td class="mono">sbz_HangerShelf</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>4</td><td><b>4</b></td>
+<td><span class="bar n" style="width:13px"></span></td>
+<td class="mono">ComplexFurniture</td>
+</tr>
+</tbody></table>
+<div class="sec">武器/衣物 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>太空储物柜</td>
+<td class="mono">ReelStorageSpacerLocker</td>
+<td>3×1 <span class="mono">(3格)</span></td>
+<td>27</td><td><b>81</b></td>
+<td><span class="bar r" style="width:90px"></span></td>
+<td class="mono">Storage_D1</td>
+</tr>
+</tbody></table>
+<div class="sec">纺织 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>textile rack</td>
+<td class="mono">sbz_TextileRack</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>6</td><td><b>6</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Smithing</td>
+</tr>
+</tbody></table>
+<div class="sec">书籍 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>储物书架</td>
+<td class="mono">ReelStorageBookshelf</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>11</td><td><b>22</b></td>
+<td><span class="bar r" style="width:36px"></span></td>
+<td class="mono">Storage_B2</td>
+</tr>
+</tbody></table>
+<div class="sec">食物(冷藏) <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>冷藏冰箱</td>
+<td class="mono">ReelStorageNewFridge</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>12</td><td><b>24</b></td>
+<td><span class="bar r" style="width:40px"></span></td>
+<td class="mono">Storage_C3, AirConditioning</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>厨房小冰箱</td>
+<td class="mono">ReelStorageFridge</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>9</td><td><b>9</b></td>
+<td><span class="bar r" style="width:30px"></span></td>
+<td class="mono">Storage_C3, AirConditioning</td>
+</tr>
+</tbody></table>
+<div class="sec">医疗(冷藏) <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>冷藏卡车</td>
+<td class="mono">JDS_RefrigeratedBoxTrucks</td>
+<td>5×3 <span class="mono">(15格)</span></td>
+<td>20</td><td><b>300</b></td>
+<td><span class="bar r" style="width:66px"></span></td>
+<td class="mono">Storage_D1, AirConditioning</td>
+</tr>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>卧式冰柜</td>
+<td class="mono">JDS_IceBox</td>
+<td>2×2 <span class="mono">(4格)</span></td>
+<td>12</td><td><b>48</b></td>
+<td><span class="bar r" style="width:40px"></span></td>
+<td class="mono">Storage_C3, AirConditioning</td>
+</tr>
+</tbody></table>
+<div class="sec">尸体 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>corpse dump spot</td>
+<td class="mono">sbz_CorpseSpot</td>
+<td>1×1 <span class="mono">(1格)</span></td>
+<td>12</td><td><b>12</b></td>
+<td><span class="bar n" style="width:40px"></span></td>
+<td class="mono">—</td>
+</tr>
+</tbody></table>
+<div class="sec">尸体/生肉 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="neat">
+<td><span class="tag neat">Neat</span></td>
+<td>meat hook</td>
+<td class="mono">sbz_MeatHook</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>6</td><td><b>12</b></td>
+<td><span class="bar n" style="width:20px"></span></td>
+<td class="mono">Smithing</td>
+</tr>
+</tbody></table>
+<div class="sec">废料/矿石 <span class="ok">单边独有</span></div>
+<table><thead><tr><th>来源</th><th>建筑</th><th>defName</th><th>尺寸</th><th>每格</th><th>总量</th><th>容量</th><th>解锁科技</th></tr></thead><tbody>
+<tr class="reel">
+<td><span class="tag reel">Reel</span></td>
+<td>工业废料箱</td>
+<td class="mono">ReelStorageSkip</td>
+<td>2×1 <span class="mono">(2格)</span></td>
+<td>22</td><td><b>44</b></td>
+<td><span class="bar r" style="width:73px"></span></td>
+<td class="mono">Storage_C2, Smithing</td>
+</tr>
+</tbody></table>
+<div class="sec">同尺寸正面对决（Neat vs 最接近的 Reel）</div>
+<table><thead><tr><th>用途</th><th>Neat 建筑</th><th>尺寸</th><th>Neat 总量</th><th>Reel 建筑</th><th>尺寸</th><th>Reel 总量</th><th>倍差</th></tr></thead><tbody>
+<tr><td>通用展示</td><td>display case</td><td>1×1</td><td><b>1</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#A32D2D;font-weight:500">11.0×</td></tr>
+<tr><td>通用展示</td><td>round pedestal</td><td>1×1</td><td><b>1</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#A32D2D;font-weight:500">11.0×</td></tr>
+<tr><td>武器</td><td>weapon rack</td><td>2×1</td><td><b>6</b></td><td>立式武器架</td><td>2×2</td><td><b>64</b></td><td style="color:#A32D2D;font-weight:500">10.7×</td></tr>
+<tr><td>通用展示</td><td>display shelf</td><td>2×1</td><td><b>6</b></td><td>医疗冷藏柜</td><td>2×1</td><td><b>32</b></td><td style="color:#A32D2D;font-weight:500">5.3×</td></tr>
+<tr><td>武器</td><td>horizontal weapon rack</td><td>2×1</td><td><b>12</b></td><td>立式武器架</td><td>2×2</td><td><b>64</b></td><td style="color:#A32D2D;font-weight:500">5.3×</td></tr>
+<tr><td>武器</td><td>vertical weapon rack</td><td>2×1</td><td><b>12</b></td><td>立式武器架</td><td>2×2</td><td><b>64</b></td><td style="color:#A32D2D;font-weight:500">5.3×</td></tr>
+<tr><td>通用</td><td>tall crate</td><td>2×2</td><td><b>24</b></td><td>太空集装箱组</td><td>2×2</td><td><b>108</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>large crate</td><td>2×2</td><td><b>24</b></td><td>太空集装箱组</td><td>2×2</td><td><b>108</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>crate</td><td>2×1</td><td><b>12</b></td><td>大型太空集装箱</td><td>2×1</td><td><b>54</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>small crate</td><td>1×1</td><td><b>6</b></td><td>小型太空集装箱</td><td>1×1</td><td><b>27</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>Pallet</td><td>2×2</td><td><b>24</b></td><td>太空集装箱组</td><td>2×2</td><td><b>108</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>mini pallet</td><td>1×1</td><td><b>6</b></td><td>小型太空集装箱</td><td>1×1</td><td><b>27</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用</td><td>half pallet</td><td>2×1</td><td><b>12</b></td><td>大型太空集装箱</td><td>2×1</td><td><b>54</b></td><td style="color:#A32D2D;font-weight:500">4.5×</td></tr>
+<tr><td>通用展示</td><td>display cabinet</td><td>2×1</td><td><b>8</b></td><td>医疗冷藏柜</td><td>2×1</td><td><b>32</b></td><td style="color:#A32D2D;font-weight:500">4.0×</td></tr>
+<tr><td>通用展示</td><td>small display shelf</td><td>1×1</td><td><b>3</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#A32D2D;font-weight:500">3.7×</td></tr>
+<tr><td>通用展示</td><td>narrow display cabinet</td><td>1×1</td><td><b>4</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#854F0B;font-weight:500">2.8×</td></tr>
+<tr><td>通用展示</td><td>open shelf</td><td>2×1</td><td><b>12</b></td><td>医疗冷藏柜</td><td>2×1</td><td><b>32</b></td><td style="color:#854F0B;font-weight:500">2.7×</td></tr>
+<tr><td>通用展示</td><td>2-tier display shelf</td><td>2×1</td><td><b>12</b></td><td>医疗冷藏柜</td><td>2×1</td><td><b>32</b></td><td style="color:#854F0B;font-weight:500">2.7×</td></tr>
+<tr><td>通用展示</td><td>tall display shelf</td><td>2×1</td><td><b>12</b></td><td>医疗冷藏柜</td><td>2×1</td><td><b>32</b></td><td style="color:#854F0B;font-weight:500">2.7×</td></tr>
+<tr><td>通用展示</td><td>narrow tall display shelf</td><td>1×1</td><td><b>6</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#854F0B;font-weight:500">1.8×</td></tr>
+<tr><td>通用展示</td><td>Safe</td><td>1×1</td><td><b>6</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#854F0B;font-weight:500">1.8×</td></tr>
+<tr><td>通用展示</td><td>Drum</td><td>1×1</td><td><b>6</b></td><td>储物桶</td><td>1×1</td><td><b>11</b></td><td style="color:#854F0B;font-weight:500">1.8×</td></tr>
+</tbody></table>
+<div class="note"><b>Neat 内部自身重复</b>（同规格不同外观，非与 Reel 重复）<ul><li>2×2 / 每格6 / 总24：<span class="mono">sbz_TallCrate</span>、<span class="mono">sbz_Crate</span>、<span class="mono">sbz_Pallet</span> —— 三选一即可</li><li>2×1 / 每格6 / 总12：<span class="mono">sbz_MidCrate</span>、<span class="mono">sbz_HalfPallet</span></li><li>1×1 / 每格6 / 总6：<span class="mono">sbz_SmallCrate</span>、<span class="mono">sbz_MiniPallet</span></li><li>2×1 / 每格6 / 总12（武器）：<span class="mono">sbz_HorizontalWeaponRack</span>、<span class="mono">sbz_VerticalWeaponRack</span></li></ul></div>
+</body></html>

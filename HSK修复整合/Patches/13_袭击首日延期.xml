@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 袭击首日延期(2026-08-31): 机械体/虫族在 RaidHelperWealthTech.cs 的科技档上限补丁里豁免
+       (事件型敌人不受玩家科技进程约束),作为交换,其首次袭击时间大幅延后:
+         Mechanoid(原版,earliestRaidDays=45)→ 320
+         Insect(原版虫族基因系,FactionDef 无该字段,默认0)→ 补 480
+         Insectoid(Core_SK 虫巢,15)→ 480 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Mechanoid"]/earliestRaidDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Mechanoid"]/earliestRaidDays</xpath>
+      <value>
+        <earliestRaidDays>320</earliestRaidDays>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Insect"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Insect"]</xpath>
+      <value>
+        <earliestRaidDays>480</earliestRaidDays>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Insectoid"]/earliestRaidDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Insectoid"]/earliestRaidDays</xpath>
+      <value>
+        <earliestRaidDays>480</earliestRaidDays>
+      </value>
+    </match>
+  </Operation>
+</Patch>

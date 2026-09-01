@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 工具整合·第三段: 删除镐斧/冗余鼠族工具+锤子进化链+工具科研前置(挂新研究节点/统一工作台)+JE贴图+STL数值补强(TFJ/近战工具/StatDef/WorkGiver)。按原 93→A3 顺序拼接。 -->
+    <!-- ───────── 来源: 93_工具删除镐斧.xml ───────── -->
+<!-- 删除镐斧 TFJ_Tool_Paxe(冗余工具,用户要求 2026-08-21):
+         1) 删除 ThingDef 本体;
+         2) 修正 STL 剧本补丁(Expedition/Crashlanded)中引用的 Paxe 起始物品,
+            替换为 手斧+矿镐 组合(保持砍树/采矿功能)。
+         旧存档引用 Paxe 会报错,用户已确认可接受。 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Paxe"]</xpath>
+    </Operation>
+
+    <!-- Expedition: 3 Paxe → 2 手斧 + 1 矿镐 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ScenarioDef[defName="Expedition"]/scenario/parts/li[thingDef="TFJ_Tool_Paxe"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ScenarioDef[defName="Expedition"]/scenario/parts</xpath>
+        <value>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>TFJ_Tool_Woodcutting_Handaxe</thingDef>
+                <stuff>Steel</stuff>
+                <count>2</count>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>TFJ_Tool_Mining_Pickaxe</thingDef>
+                <stuff>Steel</stuff>
+                <count>1</count>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Crashlanded: 2 Paxe → 1 手斧 + 1 矿镐 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ScenarioDef[defName="Crashlanded"]/scenario/parts/li[thingDef="TFJ_Tool_Paxe"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ScenarioDef[defName="Crashlanded"]/scenario/parts</xpath>
+        <value>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>TFJ_Tool_Woodcutting_Handaxe</thingDef>
+                <stuff>Steel</stuff>
+                <count>1</count>
+            </li>
+            <li Class="ScenPart_StartingThing_Defined">
+                <def>StartingThing_Defined</def>
+                <thingDef>TFJ_Tool_Mining_Pickaxe</thingDef>
+                <stuff>Steel</stuff>
+                <count>1</count>
+            </li>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 94_工具删除鼠族工具.xml ───────── -->
+<!-- 删除鼠族矿镐 RK_Pickaxe 与鼠族匕首 RK_Dagger;工具去"鼠族"前缀(用户要求 2026-08-21):
+         1) 删除 ThingDef 本体:
+            - RK_Pickaxe(鼠族矿镐)与鹤嘴锄 TFJ_Tool_Mining_Pickaxe 合二为一,只留鹤嘴锄;
+            - RK_Dagger(鼠族匕首)整体删除;
+         2) 删除对应配方 RKHSKFix_Make_RK_Pickaxe / RKHSKFix_Make_RK_Dagger;
+         3) 清理鼠族(Ratkin)与外部种族(Rabbie/Horan) weaponList 里的引用;
+         4) RK_ExileFaction 流亡开局场景的起始匕首 → 替换为鼠族钉头锤 RK_Mace;
+         5) 鼠族剪刀 RK_Scissors 英文 label 去"鼠族"前缀(中文由汉化覆盖);
+         6) 鼠族工业工具 RK_ImpactDrill/RK_HydraulicPliers/RK_WeldingTorch label 去"鼠族"前缀。
+         旧存档引用会报错,用户已确认可接受。
+         注: 鼠族钉头锤 RK_Mace 属武器独立序列,保留不动。 -->
+
+    <!-- 1) ThingDef 本体 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]</xpath>
+    </Operation>
+
+    <!-- 2) 配方 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]</xpath>
+    </Operation>
+
+    <!-- 3a) 鼠族 weaponList 引用(HSK_Generated 已整体替换 Ratkin def,weaponList 路径一致) -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/weaponList/li[.="RK_Dagger"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/weaponList/li[.="RK_Pickaxe"]</xpath>
+    </Operation>
+
+    <!-- 3b) 外部种族 weaponList 引用(仅当对应种族 mod 已装且 li 存在时删除) -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Rabbie"]/alienRace/raceRestriction/weaponList/li[.="RK_Dagger"]</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Rabbie"]/alienRace/raceRestriction/weaponList/li[.="RK_Dagger"]</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Horan"]/alienRace/raceRestriction/weaponList/li[.="RK_Dagger"]</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Horan"]/alienRace/raceRestriction/weaponList/li[.="RK_Dagger"]</xpath>
+        </match>
+    </Operation>
+
+    <!-- 4) RK_ExileFaction 流亡开局场景(RatkinBackStoryExpandedHSK,可能未启用): 起始匕首 → 鼠族钉头锤 RK_Mace
+         (条件保护: 仅当场景存在时替换,避免 Failed to find a node) -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ScenarioDef[defName="RK_ExileFaction"]/scenario/parts/li[thingDef="RK_Dagger"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ScenarioDef[defName="RK_ExileFaction"]/scenario/parts/li[thingDef="RK_Dagger"]/thingDef</xpath>
+            <value>
+                <thingDef>RK_Mace</thingDef>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- 5) 鼠族剪刀 RK_Scissors 英文 label 去"鼠族"前缀(中文显示由汉化 Tools_Names.xml 覆盖为"剪刀") -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]/label</xpath>
+        <value>
+            <label>Scissors</label>
+        </value>
+    </Operation>
+
+    <!-- 6) 鼠族工业工具英文 label 去"鼠族"前缀(中文由汉化 Tools_Names.xml 覆盖: 冲击钻/液压钳/电焊枪) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]/label</xpath>
+        <value>
+            <label>Impact Drill</label>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]/label</xpath>
+        <value>
+            <label>Hydraulic Pliers</label>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]/label</xpath>
+        <value>
+            <label>Welding Torch</label>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 95_锤子进化链.xml ───────── -->
+<!-- 锤子进化链(用户要求 2026-08-21): 手锤 → 小锤 → 大锤,三锤属性递进。
+         1) 鼠族锤 RK_Weapon_Maul 改名为 小锤(Small Hammer);
+         2) 大锤 MeleeWeapon_Sledgehammer 单手化(移除 HitechMelee2H,补 CE_OneHandedWeapon,
+            使无 CE 时也是单手,与全部工具单手化一致);
+         3) 大锤 STL 属性补 SmithingSpeed 1.6(锤子应能锻造),形成
+            手锤(建造/锻造 1.2) < 小锤(1.3) < 大锤(建造 1.8/锻造 1.6) 的递进。 -->
+
+    <!-- 1) 小锤改名 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/label</xpath>
+        <value>
+            <label>Small Hammer</label>
+        </value>
+    </Operation>
+
+    <!-- 2) 大锤单手化 -->
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/weaponTags/li[text()="HitechMelee2H"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/weaponTags</xpath>
+        <value>
+            <li>CE_OneHandedWeapon</li>
+        </value>
+    </Operation>
+
+    <!-- 3) 大锤 STL 属性补锻造 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <SmithingSpeed>1.6</SmithingSpeed>
+            <SmeltingSpeed>1.5</SmeltingSpeed>
+            <GeneralLaborSpeed>1.2</GeneralLaborSpeed>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 97_工具科研前置.xml ───────── -->
+<!-- 工具科研前置挂钩(用户要求 2026-08-21):
+         所有工具按层级挂到 5 个新科研节点,并统一锻造台:
+         中世纪(工具I/II,2026-08-27 工具III 并入工具II) → 铁匠工坊 FueledSmithy;
+         工业(工业工具I/II) → 电锻造 ElectricSmithy。
+         覆盖 HSK 基础工具(ThingDef recipeMaker)、鼠族工具(显式 RecipeDef)、
+         原版工业工具(继承 WeaponIndustrialBase 的 recipeMaker)。
+         多功能工具 TFJ_Tool_Multitool 保持原样(Electronics_D1 / ElectricSmithy)。
+         2026-08-21 修订: 鼠族矿镐/鼠族匕首 已整体删除(见 Tools_DeleteRatkinTools.xml),
+         对应挂钩移除;鼠族钉头锤 RK_Mace 属武器独立序列(Smithing),不再挂钩工具;
+         原版匕首 MeleeWeapon_Knife 由 工业工具I 移至 中世纪工具I。 -->
+
+    <!-- ==================== 中世纪工具 I: HSK 基础工具 → FueledSmithy ==================== -->
+
+    <!-- 手斧 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Woodcutting_Handaxe"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Woodcutting_Handaxe"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Woodcutting_Handaxe"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 矿镐 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Mining_Pickaxe"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Mining_Pickaxe"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Mining_Pickaxe"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 手锤 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Building_Hammer"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Building_Hammer"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Building_Hammer"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 镰刀 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Sickle"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Sickle"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Sickle"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 扫把 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Broom"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Broom"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Broom"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 锄头 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Hoe"]/recipeMaker/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Hoe"]/recipeMaker/recipeUsers/li[text()="CraftingSpot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Hoe"]/recipeMaker/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- ==================== 中世纪工具 II: 鼠族基础工具 → FueledSmithy ==================== -->
+
+    <!-- 鼠族斧头(复数 researchPrerequisites) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/researchPrerequisites</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/recipeUsers/li[text()="RK_FueledSmithy"]</xpath>
+        <value><li>FueledSmithy</li></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 鼠族剁肉刀 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/recipeUsers/li[text()="RK_FueledSmithy"]</xpath>
+        <value><li>FueledSmithy</li></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 鼠族草叉 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/recipeUsers/li[text()="RK_FueledSmithy"]</xpath>
+        <value><li>FueledSmithy</li></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 鼠族锄头(复数 researchPrerequisites) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/researchPrerequisites</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/recipeUsers/li[text()="RK_FueledSmithy"]</xpath>
+        <value><li>FueledSmithy</li></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 小锤(鼠族锤 RK_Weapon_Maul) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/recipeUsers/li[text()="RK_FueledSmithy"]</xpath>
+        <value><li>FueledSmithy</li></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- 鼠族钉头锤(RK_Mace)为武器,独立武器序列(Smithing),不挂钩工具科技,保持原配方 -->
+
+    <!-- ==================== 中世纪工具 II(并入原 工具III 的剪刀): 专业工具 → FueledSmithy ==================== -->
+
+    <!-- 鼠族剪刀(原 FueledSmithy+ElectricSmithy → 仅 FueledSmithy;2026-08-27 前置由 工具III 改为 工具II) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Scissors"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Scissors"]/recipeUsers/li[text()="ElectricSmithy"]</xpath>
+    </Operation>
+
+    <!-- ==================== 工业工具 I: 原版工业工具 → ElectricSmithy ==================== -->
+
+    <!-- 大锤(继承 WeaponIndustrialBase 的 recipeMaker,补科研前置) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]</xpath>
+        <value>
+            <recipeMaker Inherit="True">
+                <researchPrerequisite>RKHSK_Tools_Industrial1</researchPrerequisite>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+    <!-- 扳手 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Monkeywrench"]</xpath>
+        <value>
+            <recipeMaker Inherit="True">
+                <researchPrerequisite>RKHSK_Tools_Industrial1</researchPrerequisite>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+    <!-- 骨锯 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Bonesaw"]</xpath>
+        <value>
+            <recipeMaker Inherit="True">
+                <researchPrerequisite>RKHSK_Tools_Industrial1</researchPrerequisite>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+    <!-- 小刀/原版匕首(继承 WeaponIndustrialBase 的 recipeMaker,补科研前置;recipeUsers 已为 ElectricSmithy)
+         2026-08-21 修订: 原版匕首由 工业工具I 移至 中世纪工具I 解锁 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Knife"]</xpath>
+        <value>
+            <recipeMaker Inherit="True">
+                <researchPrerequisite>RKHSK_Tools_Medieval1</researchPrerequisite>
+            </recipeMaker>
+        </value>
+    </Operation>
+
+    <!-- ==================== 工业工具 II: 鼠族工业工具 → ElectricSmithy ==================== -->
+
+    <!-- 冲击钻 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_ImpactDrill"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Industrial2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_ImpactDrill"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+        <value><li>ElectricSmithy</li></value>
+    </Operation>
+
+    <!-- 液压钳 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HydraulicPliers"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Industrial2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HydraulicPliers"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+        <value><li>ElectricSmithy</li></value>
+    </Operation>
+
+    <!-- 电焊枪 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_WeldingTorch"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>RKHSK_Tools_Industrial2</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_WeldingTorch"]/recipeUsers/li[text()="RK_ElectricSmithy"]</xpath>
+        <value><li>ElectricSmithy</li></value>
+    </Operation>
+    <!-- ───────── 来源: 98_工具JE贴图.xml ───────── -->
+<!-- 工具贴图替换为 JE 贴图(用户指定 2026-08-21):
+         剪刀 RK_Scissors → Shears, 电焊枪 RK_WeldingTorch → Welder, 骨锯 MeleeWeapon_Bonesaw → Bonesaw。
+         贴图来自本 mod Textures/Things/JobEffects/Tools/(与 JobEffects 动画共用,不增加贴图数量)。
+         三张 JE 贴图与原工具贴图同为 256x256,替换安全。 -->
+    <!-- 2026-08-28 撤销剪刀的 JE Shears 重定向: 用户改用自制钢款贴图 Weapon/RK_Scissors.png。
+         (原 2026-08-21 指示借用酒馆 Shears 木柄图,现按需求还原为自带图。) -->
+
+    <!-- 电焊枪 texPath JE 替换已撤(2026-08-28 用户要求还原为 Weapon/RK_WeldingTorch,当时误显示酒馆 welder 精灵) -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="MeleeWeapon_Bonesaw"]/graphicData/texPath</xpath>
+        <value>
+            <texPath>Things/JobEffects/Tools/Bonesaw</texPath>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: A3_工具数值补强.xml ───────── -->
+<!-- ============================================================
+         A3_工具数值补强.xml  (2026-08-27 自 HSK修复整合 05_工具.xml 迁入)
+         多功能工具数值强化 + 大锤工具化 + 工具属性补强 + StatPart 挂载 + 生存工具通用补强。
+         ============================================================ -->
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Multitool"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/defaultSurvivalToolAssignmentTags</xpath>
+    <value>
+        <li>Cook</li>
+    </value>
+</Operation>
+
+    <!-- 来源: 50_大锤工具化.xml -->
+<Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/thingCategories/li[text()="HeavyMelee"]</xpath>
+</Operation>
+    
+<Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/thingCategories/li[text()="BluntMelee"]</xpath>
+</Operation>
+
+    <!-- 53_工具属性补强(手锤/大锤/扳手) -->
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Building_Hammer"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <baseWorkStatFactors>
+            <ConstructionSpeed>1.2</ConstructionSpeed>
+            <SmithingSpeed>1.2</SmithingSpeed>
+            <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+            <SmeltingSpeed>1.2</SmeltingSpeed>
+        </baseWorkStatFactors>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Sledgehammer"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <baseWorkStatFactors>
+            <ConstructionSpeed>1.8</ConstructionSpeed>
+            <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+            <SmeltingSpeed>1.3</SmeltingSpeed>
+        </baseWorkStatFactors>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Monkeywrench"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <baseWorkStatFactors>
+            <SmithingSpeed>1.4</SmithingSpeed>
+            <ConstructionSpeed>1.4</ConstructionSpeed>
+            <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+            <SmeltingSpeed>1.2</SmeltingSpeed>
+        </baseWorkStatFactors>
+    </value>
+</Operation>
+
+    
+    <!-- 53+09 合并: TFJ_Tool_Multitool baseWorkStatFactors(09 的追加并入 53 的替换,并集) -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="TFJ_Tool_Multitool"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <baseWorkStatFactors>
+                <TreeFellingSpeed>1.3</TreeFellingSpeed>
+                <MiningSpeed>1.3</MiningSpeed>
+                <MiningYieldDigging>1.1</MiningYieldDigging>
+                <ConstructionSpeed>1.3</ConstructionSpeed>
+                <PlantHarvestingSpeed>1.3</PlantHarvestingSpeed>
+                <PlantWorkSpeed>1.2</PlantWorkSpeed>
+                <SmithingSpeed>1.3</SmithingSpeed>
+                <MedicalOperationSpeed>1.1</MedicalOperationSpeed>
+                <MedicalSurgerySuccessChance>1</MedicalSurgerySuccessChance>
+                <PruningSpeed MayRequire="ludeon.rimworld.ideology">1.5</PruningSpeed>
+                <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+                <TailoringSpeed>1.3</TailoringSpeed>
+                <ButcheryFleshSpeed>1.2</ButcheryFleshSpeed>
+                <ButcheryMechanoidSpeed>1.15</ButcheryMechanoidSpeed>
+                <SmeltingSpeed>1.2</SmeltingSpeed>
+                <AnimalGatherSpeed>1.2</AnimalGatherSpeed>
+                <CookSpeed>1.15</CookSpeed>
+                <DrugCookingSpeed>1.1</DrugCookingSpeed>
+                <ElectronicCraftingSpeed>1.2</ElectronicCraftingSpeed>
+                <DeepDrillingSpeed>1.2</DeepDrillingSpeed>
+            </baseWorkStatFactors>
+        </value>
+    </Operation>
+    <!-- 54_工具属性StatPart挂载(普通段) -->
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="SmeltingSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="GeneralLaborSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="StonecuttingSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="TailoringSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="ElectronicCraftingSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="MiningYield"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/StatDef[defName="AnimalGatherSpeed"]</xpath>
+    <value>
+        <parts>
+            <li Class="SurvivalToolsLite.StatPart_SurvivalTool">
+                <noToolStatFactor>1</noToolStatFactor>
+                <noToolStatFactorHardcore>1</noToolStatFactorHardcore>
+            </li>
+        </parts>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/WorkGiverDef[defName="Milk"]</xpath>
+    <value>
+        <li Class="SurvivalToolsLite.WorkGiverExtension">
+            <requiredStats>
+                <li>AnimalGatherSpeed</li>
+            </requiredStats>
+        </li>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/WorkGiverDef[defName="Shear"]</xpath>
+    <value>
+        <li Class="SurvivalToolsLite.WorkGiverExtension">
+            <requiredStats>
+                <li>AnimalGatherSpeed</li>
+            </requiredStats>
+        </li>
+    </value>
+</Operation>
+
+    
+
+    <!-- 来源: 65_生存工具全面补强通用.xml -->
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Woodcutting_Handaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/PlantHarvestingSpeed</xpath>
+    <value>
+        <PlantHarvestingSpeed>1.0</PlantHarvestingSpeed>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Woodcutting_Handaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Mining_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MiningYieldDigging</xpath>
+    <value>
+        <MiningYieldDigging>1.05</MiningYieldDigging>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Mining_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <DeepDrillingSpeed>1.1</DeepDrillingSpeed>
+        <MiningYield>1.05</MiningYield>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Building_Hammer"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <StonecuttingSpeed>1.1</StonecuttingSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Sickle"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <PruningSpeed MayRequire="ludeon.rimworld.ideology">1.1</PruningSpeed>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Broom"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/CleaningSpeed</xpath>
+    <value>
+        <CleaningSpeed>1.3</CleaningSpeed>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Broom"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Hoe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <PlantHarvestingSpeed>1.05</PlantHarvestingSpeed>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+
+    
+
+    
+
+    
+
+
+    
+
+    
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Knife"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MedicalOperationSpeed</xpath>
+    <value>
+        <MedicalOperationSpeed>1.0</MedicalOperationSpeed>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Knife"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MedicalSurgerySuccessChance</xpath>
+    <value>
+        <MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Knife"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/ThingDef[defName="MeleeWeapon_Bonesaw"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+    <value>
+        <ButcheryFleshSpeed>1.2</ButcheryFleshSpeed>
+        <ButcheryFleshEfficiency>1.1</ButcheryFleshEfficiency>
+        <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+    </value>
+</Operation>
+</Patch>

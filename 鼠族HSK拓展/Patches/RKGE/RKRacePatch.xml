@@ -1,0 +1,31 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<Patch>
+	<!-- RKGE 种族接入(HSK 基因体系适配版 2026-08-21) -->
+	<!-- HSK 的 Ratkin 用 xenotypeList 白名单 + raceGenes 基础基因机制,无 whiteXenotypeList;
+	     本补丁把 RKGE 的 3 个异种(鼠人/实验白鼠/田鼠)追加进 xenotypeList,
+	     并保留 HSK 原有的 5 个异种(RK_XenoType_Ratkin/Sanguophage/Hussar/Genie/Starjack) -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/xenotypeList</xpath>
+		<value>
+			<li>Ratkin_Squirrel</li>
+			<li>Ratkin_Hamster</li>
+			<li>Ratkin_LabRat</li>
+			
+			<li>Ratkin_Vole</li>
+		</value>
+	</Operation>
+
+	<!-- 白发年龄范围(HSK 有 alienPartGenerator 节点,存在性已验) -->
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/generalSettings/alienPartGenerator</xpath>
+				<order>Prepend</order>
+				<value>
+					<oldHairAgeRange>60~95</oldHairAgeRange>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

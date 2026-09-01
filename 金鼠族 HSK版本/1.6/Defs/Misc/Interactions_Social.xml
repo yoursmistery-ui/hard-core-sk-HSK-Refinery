@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <!-- 生日祝福 -->
+    <InteractionDef>
+        <defName>OARK_BirthdayWishes</defName>
+        <label>birthday wishes</label>
+        <workerClass>OberoniaAurea.InteractionWorker_BirthdayWishes</workerClass>
+        <symbol>Ui/BrithDayTell</symbol>
+        <logRulesInitiator>
+            <rulesStrings>
+
+                <!-- INITIATOR_nameDef: 祝福者 , RECIPIENT_nameDef: 寿星 -->
+                <li>r_logentry->[INITIATOR_nameDef] [preposition] [RECIPIENT_nameDef] [complimented]。</li>
+				 <li>r_logentry->[INITIATOR_nameDef] [xinqing] [preposition] [RECIPIENT_nameDef] [complimented]。</li>
+				<li>r_logentry->[INITIATOR_nameDef] 为 [RECIPIENT_nameDef] [complimentedB]。</li>
+				<li>xinqing->真诚的</li>
+                <li>xinqing->热切的</li>
+				<li>xinqing->真挚的</li>
+				<li>xinqing->诚恳的</li>
+				<li>xinqing->充满活力的</li>
+				<li>xinqing->朝气的</li>
+                <li>preposition->祈祷</li>
+                <li>preposition->祝贺</li>
+				<li>preposition->祝福</li>
+                <li>preposition->庆祝</li>
+                <li>complimented->生日祝福</li>
+                <li>complimented->生日快乐</li>
+				<li>complimentedB->庆祝生日</li>
+                <li>complimentedB->祝福</li>
+				<li>complimentedB->祝福未来</li>
+                <li>complimentedB->祈祷</li>
+                <!--li MayRequire="Ludeon.RimWorld.Anomaly">complimented->金色魔方的祝福</li--><!--明日处理-->
+            </rulesStrings>
+        </logRulesInitiator>
+    </InteractionDef>
+
+</Defs>

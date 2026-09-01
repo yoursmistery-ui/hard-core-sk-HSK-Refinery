@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 阶段A·废料互通：将 Rimatomics 核废料转换为原版废料包，
+	     使其能接入原版废料分解器/污树处理链统一消纳。 -->
+	<RecipeDef>
+		<defName>Process_NuclearWaste_To_Wastepack</defName>
+		<label>核废料转换为废料包</label>
+		<description>将辐射性核废料稀释封装为常规废料包，使其能进入原版废料处理链消纳。每次转换需谨慎操作。</description>
+		<jobString>正在封装核废料。</jobString>
+		<workAmount>600</workAmount>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<workSkill>Crafting</workSkill>
+		<workSkillLearnFactor>0.5</workSkillLearnFactor>
+		<effectWorking>ConstructMetal</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>NuclearWaste</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>NuclearWaste</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Wastepack>2</Wastepack>
+		</products>
+		<recipeUsers>
+			<li>TableRimatomicsMachining</li>
+		</recipeUsers>
+	</RecipeDef>
+
+</Defs>

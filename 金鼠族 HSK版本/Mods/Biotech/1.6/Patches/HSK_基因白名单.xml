@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · Biotech 基因白名单补充(2026-08-20)
+        背景: RatkinRaceHSK 本次更新新增 Ratkin_XenotypeGeneration_Patch.xml,
+              给 Ratkin 种族配置 onlyHaveRaceRestrictedGenesEndo=true +
+              whiteGeneListEndo(12 个鼠族基础基因白名单)。
+        影响: 金鼠族 Ratkin_OA 异种型(inheritable, endogene)的 13 个特色基因
+              (免疫弱/灵能迟钝/行动缓慢/乐观/低温适应/低睡眠/貌美/发色等)
+              不在白名单内,会被 HAR 的 endogene 限制过滤掉。
+        处理: 将金鼠族 Ratkin_OA 的基因追加到 whiteGeneListEndo(白名单),
+              保证金鼠族小人保留派系特色基因。
+        加载顺序: 本补丁位于 RatkinRaceHSK 新基因补丁之后(依赖关系),whiteGeneListEndo
+              节点已存在,Add 生效。
+        ===================================================================== -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/whiteGeneListEndo</xpath>
+        <value>
+            <li>Immunity_Weak</li>
+            <li>PsychicAbility_Dull</li>
+            <li>MoveSpeed_Slow</li>
+            <li>Mood_Optimist</li>
+            <li>MinTemp_SmallDecrease</li>
+            <li>LowSleep</li>
+            <li>Beauty_Pretty</li>
+            <li>Hair_Gray</li>
+            <li>Hair_Blonde</li>
+            <li>Hair_LightOrange</li>
+            <li>Hair_LightBlue</li>
+            <li>Hair_LightTeal</li>
+            <li>Hair_Grayless</li>
+        </value>
+    </Operation>
+
+</Patch>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 冰柜与冰块链(2026-08-29 · 第二批波次 4 配套)
+     ⚠ 实现方式已按用户指示改为**照抄 [sbz] Fridge 的路子**(统一到 Adaptive Storage Framework),
+        不再自造 HeatPusher 制冷:
+          · 制冷  = AdaptiveStorage.Extension 的 <temperature>(coolingOffset / coolingMin)
+                    与 sbz_Fridge、Reel 冷藏柜同一套机制, 行为一致、UI 一致。
+          · 开关  = 该扩展原生支持 <requiresFuel>true</requiresFuel>:
+                    只要建筑带 CompProperties_Refuelable, 就"有燃料才制冷, 无燃料自动停"。
+                    这里燃料 = 冰块 RK_IceBlock, 于是"冰化完了就不制冷"由 ASF 自己完成, 零自研。
+          · 差异  = 我们比冰箱多一件: 冰块消耗速度随室温变化(天越热化得越快),
+                    这是 ASF 没有的, 由自研 CompIceChestHSK 动态改写 fuelConsumptionRate 实现。
+        → 结论: 制冷/开关全部交给 ASF 与 Refuelable, 自研 comp 只剩"随室温调消耗"一件事。
+     冰块过期: 双重 —— ①装进冰柜作为燃料被消耗(fuelConsumptionRate);
+                        ②冰块本身 CompProperties_Rottable 20 天腐坏, 囤着也会烂。
+     研究: Temperature_control_B1(中世纪温度控制II, 用户拍板冰柜走中世纪档)。 -->
+
+	<!--==================== 冰块 ====================-->
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>RK_IceBlock</defName>
+		<label>冰块</label>
+		<description>从封冻的湖面凿下来的一整块冰。塞进冰柜底层慢慢化开, 能撑过一整个夏天——中世纪没有电, 这就是全部的冷藏手段。囤着不管的话, 它自己也会化成一摊水。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/RK_IceBlock/RK_IceBlock</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>(0.9,0.9)</drawSize>
+		</graphicData>
+		<soundDrop>ChunkRock_Drop</soundDrop>
+		<soundInteract>ChunkRock_Interact</soundInteract>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<MarketValue>1.2</MarketValue>
+			<Mass>0.6</Mass>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<thingCategories>
+			<li>ResourcesRaw</li>
+		</thingCategories>
+		<tradeTags>
+			<li>ResourceRaw</li>
+		</tradeTags>
+		<comps>
+			<!-- ② 冰块自身会腐坏(20 天), 囤积有上限 -->
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>20</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<useHitPoints>false</useHitPoints>
+		<alwaysHaulable>true</alwaysHaulable>
+		<rotatable>false</rotatable>
+		<pathCost>14</pathCost>
+		<drawGUIOverlay>true</drawGUIOverlay>
+	</ThingDef>
+
+	<!--==================== 冰柜(ASF 冷藏储物) ====================-->
+
+	<ThingDef ParentName="AdaptiveStorageBase">
+		<defName>Rustic_IceChest</defName>
+		<label>冰柜</label>
+		<description>一只双层隔热的木柜: 底层塞冰, 上层存粮。冰在里头慢慢化开, 天越热化得越快; 冰一化完, 柜子就只是一只普通木箱了。中世纪人家靠它把肉和菜留过夏天。</description>
+		<fillPercent>0.5</fillPercent>
+		<rotatable>true</rotatable>
+		<defaultPlacingRot>North</defaultPlacingRot>
+		<size>(2,1)</size>
+		<graphicData>
+			<texPath>Things/Building/Misc/IceChest</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,3)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Misc/IceChest_south</uiIconPath>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Flammability>1</Flammability>
+		</statBases>
+		<costList>
+			<Straw>40</Straw>
+			<WroughtIron>10</WroughtIron>
+		</costList>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<designationCategory>Temperature</designationCategory>
+		<researchPrerequisites>
+			<li>Temperature_control_B1</li>
+		</researchPrerequisites>
+		<thingCategories>
+			<li>BuildingsNeatStorage</li>
+		</thingCategories>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<building>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<maxItemsInCell>4</maxItemsInCell>
+			<fixedStorageSettings>
+				<filter>
+					<categories>
+						<li>Foods</li>
+						<li>PlantMatter</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Normal</priority>
+			</defaultStorageSettings>
+		</building>
+		<comps>
+			<!-- 燃料槽 = 冰。ASF 的 requiresFuel 会在无冰时自动停止制冷, 无需自研开关 -->
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>0.6</fuelConsumptionRate>
+				<fuelCapacity>20.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>RK_IceBlock</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+			</li>
+			<!-- 自研: 只做 ASF 没有的那一件事 —— 消耗速率随室温升高 -->
+			<li Class="BlueprintUnlockHSK.CompProperties_IceChestHSK">
+				<baseConsumptionRate>0.6</baseConsumptionRate>
+				<meltPerDegreePerDay>0.35</meltPerDegreePerDay>
+				<baseMeltTemp>0</baseMeltTemp>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="AdaptiveStorage.Extension">
+				<temperature>
+					<coolingOffset>100</coolingOffset>
+					<coolingMin>-10</coolingMin>
+					<!-- 有燃料才制冷: 冰化完即停, 由 ASF 原生处理 -->
+					<requiresFuel>true</requiresFuel>
+					<!-- 中世纪冰柜不耗电; 显式关掉以免将来误加电源 comp 时被要求通电 -->
+					<requiresPower>false</requiresPower>
+				</temperature>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!--==================== 采冰配方(挂采矿点) ====================-->
+
+	<RecipeDef ParentName="RK_MiningSpotBase">
+		<defName>RK_Mine_Ice</defName>
+		<label>凿取冰块</label>
+		<description>在封冻的水面上凿下一块块冰。天越冷冰越厚实, 凿起来也越省力——但凿回来之后, 它总归是要化的。</description>
+		<jobString>凿取冰块。</jobString>
+		<workAmount>1200</workAmount>
+		<workSpeedStat>MiningSpeed</workSpeedStat>
+		<workSkill>Mining</workSkill>
+		<products>
+			<RK_IceBlock>12</RK_IceBlock>
+		</products>
+		<ingredients />
+		<fixedIngredientFilter />
+		<researchPrerequisite>Temperature_control_B1</researchPrerequisite>
+	</RecipeDef>
+
+</Defs>

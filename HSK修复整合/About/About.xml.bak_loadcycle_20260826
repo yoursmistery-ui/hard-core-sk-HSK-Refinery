@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>HSK 修复整合(大型补丁)</name>
+    <author>local</author>
+    <packageId>local.hskfixpack</packageId>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <modDependencies>
+        <li>
+            <packageId>zetrith.prepatcher</packageId>
+            <displayName>Prepatcher</displayName>
+            <steamWorkshopUrl>steam://url/CommunityFilePage/2934420800</steamWorkshopUrl>
+            <downloadUrl>https://github.com/Zetrith/Prepatcher/releases/latest</downloadUrl>
+        </li>
+        <li>
+            <packageId>ViTech.MedievalOverhaul</packageId>
+            <displayName>HMC Vile's Pre-Industrial</displayName>
+            <downloadUrl>https://github.com/xenomacabre/VilesMods</downloadUrl>
+        </li>
+        <li>
+            <packageId>vitech.metallurgy</packageId>
+            <displayName>Vile's Metallurgy</displayName>
+            <downloadUrl>https://github.com/xenomacabre/VilesMods</downloadUrl>
+        </li>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+            <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+        </li>
+        <li>
+            <packageId>skyarkhangel.HSK</packageId>
+            <displayName>Core SK</displayName>
+            <downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+        </li>
+        <li>
+            <packageId>skyarkhangel.SurvivalToolsLite</packageId>
+            <displayName>Survival Tools Lite (STL)</displayName>
+        </li>
+        <li>
+            <packageId>ceteam.combatextended</packageId>
+            <displayName>Combat Extended</displayName>
+            <downloadUrl>https://github.com/CombatExtended-Continued/CombatExtended</downloadUrl>
+        </li>
+        <li>
+            <packageId>Solaris.RatkinRaceMod</packageId>
+            <displayName>NewRatkinPlus (RatkinRaceHSK)</displayName>
+            <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</steamWorkshopUrl>
+        </li>
+        <li>
+            <packageId>DimonSever000.ModIndicator.Specific</packageId>
+            <displayName>HSK Autosort and Mod Assistant</displayName>
+        </li>
+    </modDependencies>
+    <loadAfter>
+        <li>brrainz.harmony</li>
+        <li>zetrith.prepatcher</li>
+        <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+        <li>skyarkhangel.survivaltoolslite</li>
+        <li>skyarkhangel.HSK</li>
+        <li>skyarkhangel.HSK.Core</li>
+        <li>skyarkhangel.HSK.DLC</li>
+        <li>zacharyfoster.minerals</li>
+        <li>Dubwise.DubsBadHygiene</li>
+        <li>Dubwise.Rimefeller</li>
+        <li>dubwise.rimatomics</li>
+        <li>vitech.metallurgy</li>
+        <li>ViTech.HCSKWood</li>
+        <li>ViTech.MedievalOverhaul</li>
+        <li>vitech.materialsscience</li>
+        <li>vitech.leathertanning</li>
+        <li>ceteam.combatextended</li>
+        <li>Solaris.RatkinRaceMod</li>
+        <li>solarweb.stratum</li>
+        <li>ogliss.thewhitecrayon.quarry</li>
+        <li>rooboid.paintings.ex</li>
+        <li>Nals.DynamicPortraits</li>
+        <li>CrashM.ColorCodedMoodBar.11</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+        <li>Haplo.Miscellaneous.Robots</li>
+        <li>local.ratkin.clothesweapons</li>
+        <li>qwerty19106.researchtreesk</li>
+        <li>Sandy.RPGStyleInventory.avilmask.Revamped</li>
+        <li>sbz.NeatStorageFridge</li>
+        <li>hsk.core.chs</li>
+        <li>hsk.mod.chs</li>
+        <li>SR.ModRimworld.FactionalWarContinued</li>
+	    </loadAfter>
+    <loadBefore>
+        <li>vanillaexpanded.vanillatraitsexpanded</li>
+        <li>local.hsktavernintegration</li>
+        <li>local.imperialcoin</li>
+    </loadBefore>
+    <description>
+HSK 修复整合(大型补丁,2026-08-09): 由 7 个独立小 mod 合并而成 —— MVCF 警告修复、HSK 地板材质分组、HSK 科技前置修复、HSK 熔炼扩展、Facility Crash Fix、Dynamic Portraits 兼容修复、Vile前工业锻造台适配。
+
+1. MVCF 警告修复: 消除 MVCF(Multi Verb Combat Framework)与 Combat Extended 的 verb 同步日志警告([MVCF] Not found: CombatExtended.Verb_MeleeAttackCE / Verb_ShootCE),纯日志修复;
+2. 射程环修复: 修复 Core SK 围攻 AI 放置超长射程(如 220)火炮蓝图时原版 DrawRadiusRing 报错不画环的问题,超上限时按原版算法分批绘制;
+3. 制造主导材料修复: 对 RKHSK 系列配方,制造时强制选择匹配配方材质槽(金属)的材料作为主导材料,木板/零部件不再参与产物材质;
+4. HSK 科技前置修复: 金属加工 II(Metals_C1)前置改为 电力;建筑材料 II(Concrete_C2)前置改为 建筑材料 I + 电力,不再被 Vile 中世纪冶金链卡住;
+5. HSK 地板材质分组: 给 Core SK 各地板材质系列(约 290 个 TerrainDef)添加 designatorDropdown,同类型不同材质折叠成一个建造按钮;
+6. 地板下拉库存显示(新增): 点击分组按钮后的材质子菜单中,每个选项显示仓库内对应材料库存数量,并按充足程度着色(灰=0 / 黄=不足 / 绿=够 / 蓝=富余);
+7. HSK 熔炼扩展: 熔炼武器(SmeltWeapon)覆盖全部武器(2026-08-10 分类改顶层 Weapons,并移除 AllowNonSmeltableWeapons 强制禁用 —— 木棍棒/弓/弩/枪械等全部进入清单;弹药/炮塔从清单排除;三处过滤追加 21 件武器硬白名单,防运行时识别异常);2026-08-12 用户要求「熔炼武器添加特化武器」: 奥德赛特化武器(WeaponsUnique,13 件 _Unique)加入熔炼清单,硬白名单追加 13 件(MayRequire=Ludeon.RimWorld.Odyssey 门控);熔炼产物统一为「制造材料 30% 返还」(2026-08-10 用户要求,HSKFixPack.dll 前缀替换 Thing.SmeltProducts: 所有制造材料一律返还 30%,不再跳过零部件/木头,也不再逐件配 smeltProducts;无制造材料的矿渣等保留 smeltProducts 兜底);新增 熔炼弹药(数量动态 1-100 发/批,整堆投入,按整批返还 30% 制造材料——每发材料×发数×30%,2026-08-11 由 SmeltProducts30Fix 按堆叠乘算)、熔炼武器箱(钢铁×80 + 普通零部件×5 + 塑钢×5 + 电子元件×3)、熔炼武器部件(钢铁×10,仅电弧熔炉/电熔炼器);
+8. Facility Crash Fix: 修复辅助设施建造放置预览空引用刷屏(Core SK 建筑)、VEF 命名空间兼容(Prepatcher 重写)、空 description 导致的 ConfigErrors 崩溃(ignoreConfigErrors);附「仅禁止生育」(Biotech 启用时怀孕概率归零,儿童内容保持原版);
+9. Dynamic Portraits 兼容修复: 与 CM Color Coded Mood Bar 同时启用时让出绘制权,修复 Dynamic Portraits 配置不生效的冲突。
+10. Vile前工业锻造台适配: HMC Vile's Pre-Industrial 的中世纪武器装备配方一律只挂中世纪工作台(铁匠工坊/手工加工台/皮革工作台),去掉电动铁匠工坊/电动纺织台/重型武器车床/机械加工台等电动台;含黑火药枪械 8 条、黑火药弹药基类、大炮木箱 5 条、中世纪远程武器/护甲基类、盾牌/斗篷、加农炮部件与 CE 弹药注入标签清理。
+11. 多功能工具科技后移: HSK 多功能工具(TFJ_Tool_Multitool)解锁科技由 电子学 II(Electronics_D1)后移到 零部件 III(Components_D3)。
+12. 多功能工具数值强化(2026-08-10 用户要求): 太空时代多功能工具(TFJ_Tool_Multitool)在 STL 原有加成上追加 缝纫+30%/屠宰+20%/机械体屠宰+15%/熔炼+20%/烹饪+15%/制药+10%/电子制造+20%/零部件制作+15%/武器制作+10%/钻井+20%/综合劳动+10%/制作品质+3%/动物采集+20%(挤奶/剪毛),并补 Cook 自动换装标签。
+13. Compulsion 精神崩溃任务游荡化(2026-08-10 用户要求): Core_SK 的 Compulsion(强迫性清洁)精神崩溃原由 SK.JobGiver_Compulsion 强制搬运,生成 HaulToCell 任务时不检查目标预订,与锯木台/搬运工冲突反复刷 "Could not reserve ..." 报错;改为崩溃期间小人只游荡、不再搬东西,报错消失。
+14. 锻造厂木板适配(2026-08-10 用户要求): Vile's Metallurgy 锻造厂(Finery)建造配方由 粗制木板(WoodLog)×100 改为 胶合板(WoodPlank)×100,与鼠族武器固定木板成本一致,不再依赖锯木台粗制木板。
+15. 读档熔炼修复(2026-08-10;2026-08-13 扩展): 修复「重复加载存档后熔炼/制作原料不足」——加载完成后自动把已生成但登记丢失的物品重新登记到 listerThings,并补登记货架/容器等 haul source 到 haulDestinationManager,读档后原料搜索不再失效(拾取放下的手动修复不再需要)。
+16. 地热发电与核裂变电池调整(2026-08-12 用户要求): 地热发电机(GeothermalGenerator)发电功率 5000W→10000W,并移除「不能离其他地热发电机/等离子设施太近」的距离限制(SK.PlaceWorker_NoNearGeothermalGenerator),可紧挨着建(仍须放在蒸汽喷泉上);核裂变电池(FissionBattery)蓄电量 4000Wd→10000Wd。描述文案同步更新。
+17. 金属提炼厂占地修复(2026-08-12 用户反馈): Vile's Materials Science 金属提炼厂(ElectricSmelter)贴图已回滚为 HSK 电动熔炼炉台桌(3×1),但占地仍为 5×2,图形四周一圈空白;现把占地改为 3×1(1 格深 × 3 格宽),与台桌贴图对齐。
+18. 聚碳酸酯图标修复(2026-08-13 用户要求): Vile's Materials Science 聚碳酸酯(Polycarbonate)图标恢复 Vile 原版(Things/Item/Material/PolycarbonateRed,Graphic_StackCount 三张堆叠贴图),覆盖 Vile mod 内本地回滚补丁 ZZ_RestoreHSKTextures 改成的合成纤维图标。
+19. 聚苯乙烯图标修复(2026-08-13 用户要求): Vile's Materials Science 聚苯乙烯(Polystyrene)图标恢复 Vile 原版(Things/Item/Chemical/Styrene,Graphic_Single 白色),覆盖 Vile mod 内本地回滚补丁 ZZ_RestoreHSKTextures 改成的乙烯图标。
+20. 电解精炼厂设施加成与提示(2026-08-13 用户要求): Vile's Materials Science 电解精炼厂(ElectrolyticRefinery)基础工作台速度仅 25%,原设计需连接 金属提炼厂(ElectricSmelter)获得 +75% 设施加成恢复满速,但该 Facility 组件在 Vile 中被注释掉、从未生效;现补回 金属提炼厂 设施加成(+75% 工作台速度,1 台最多服务 3 台精炼厂),并给电解精炼厂追加 工具柜/小工具柜 连接加成;描述补强提示「必须连接金属提炼厂」。精炼厂配方本就用冶炼速度(SmeltingSpeed),工具冶炼速度加成(鼠族锤子/电焊枪等)继续有效。
+21. 熔炼工作自动换工具(2026-08-13 用户要求): 给熔炼工作(DoBillsSmeltMetal_Hand,覆盖 熔炉/金属提炼厂/EAF/电解精炼厂/感应炉/锻铁炉/铸造厂/火坑)补 STL WorkGiverExtension.requiredStats=SmeltingSpeed,殖民者做熔炼/电解精炼时会像采矿→矿镐、建造→锤子一样自动换上冶炼速度最高的工具(鼠族锤子 1.3/大锤 1.3/电焊枪 1.2/多功能工具 1.2/钉头锤 1.2/手锤 1.2/扳手 1.2);SmeltingSpeed 的 StatPart_SurvivalTool 由鼠族 mod 48 号挂载(无工具惩罚),本补丁只补自动换工具,MayRequire=skyarkhangel.SurvivalToolsLite 门控。
+22. SeedsPlease 琥珀棕榈适配(2026-08-14,消除 "SeedsPlease :: Some Seeds were autogenerated" 警告): 给 Vanilla Ideology Expanded - Dryads 的仙馔棕榈树(VDE_AmbrosiaPalm)提供正式种子定义(Seed_VDE_AmbrosiaPalm,仙馔棕榈种子)与提取配方(25 仙馔果→3 种子),替代 SeedsPlease 自动生成;正式定义部署在 SeedsPlease/Defs_OnDemand/vanillaexpanded.ideo.dryads/(LoadOnDemand 按需加载),本补丁为条件兜底——按需定义存在则跳过、被 SeedsPlease 更新清除则自动补上,MayRequire=notfood.seedsplease,vanillaexpanded.ideo.dryads 双门控。
+24. 皮革形容词冲突修复(2026-08-14 用户反馈「所有皮革能造的产品都报 StuffCount 同名警告」): Core_SK 自带 StuffCount 检查建筑菜单允许材质里的 stuffAdjective(材质形容词,产物命名用),Vile's Hell Bent for Leather Tanning 与 Core_SK 改名的 6 件皮革形容词互相重复(embossed leather: 棕色压纹/红色压纹/黑色成品;nubuck: 黄褐色反绒/黄色反绒;upholstery leather: 牛血红/灰/波尔多红三件全同),打开地毯/家具/床等允许皮革的分类即刷警告。现给 6 件各改出唯一且与 label 一致的形容词(embossed red leather / patent leather / yellow nubuck / bordeaux・gray・oxblood upholstery leather),仅产物显示名变化、无功能影响;MayRequire=vitech.leathertanning + PatchOperationConditional 双保险。
+
+25. No Gray Eyes 灰眼睛贴图隐藏(2026-08-16 整合工坊 3223815154「No Gray Eyes」/jijiang.eyes): 基础游戏 Anomaly/Biotech 的灰眼睛渲染节点(尸傀被强制显示 + GrayEyes 基因/Anomaly 特质)指向 Things/Pawn/Humanlike/HeadAttachments/GrayEyes/Male|Female 贴图路径,本体并不提供该贴图;现以两张全透明 128×128 PNG(alpha 全 0,逐像素验证)覆盖该路径,灰眼睛不再显示。纯贴图覆盖、无补丁无 DLL;本 mod 加载序 188,后于可能提供该贴图的种族/外观 mod。原工坊 mod 未加入 ModsConfig,整合后无需订阅(订阅保留亦无害)。
+26. STL 世界生成玩家派系缺失报错修复(2026-08-17): SurvivalToolsLite 的 RightToolForJob.EquipTool 与 SurvivalToolUtility.CanUseSurvivalTools 用 pawn.Faction != Faction.OfPlayer 判断玩家派系,而 Faction.OfPlayer 在玩家派系尚未建立时会 Log.Error("Could not find player faction.") 并返回 null;新世界生成阶段(生成带科技假体的派系领袖→假体安装引发小人状态变化开始工作)玩家派系还没注册,每次生成新世界都会刷该错误。现加 Harmony 前缀,pawn.Faction 为空或非玩家派系时直接跳过原方法(CanUseSurvivalTools 直接返回 false),行为与原逻辑等价,但不再调用 Faction.OfPlayer,报错消失。
+27. VTE 失效小人引用修复(2026-08-17): Vanilla Traits Expanded 的 TraitsManager(疯狂外科医生/懦夫/大骨架等特质追踪)会在小人被丢弃/销毁后残留失效引用(开局重掷、Character Editor、BetterGC 等场景),存档时把已不存在小人的 load ID 写入,读档报 "Could not resolve reference ... Null key while loading dictionary ... madSurgeonsWithLastHarvestedTick"(纯日志刷屏,不影响读档)。现给 TraitsManager.ExposeData 加 Harmony 前缀,Saving 模式下自动清掉 Destroyed/Discarded/null 的小人引用,不再写入;旧存档残留条目会在下次读档再存档后自然清除。
+28. DBH 肥料适配(2026-08-18): Dubs Bad Hygiene 的施肥(肥田)工作 WorkGiver_PlaceFertilizer 原版硬编码只认 Biosolids(生物有机肥料,堆肥器粪便发酵),导致 Core_SK 的肥料(Fertilizer)无法用于肥田——地图上没有生物有机肥料时施肥工作直接跳过。现用两个 Harmony 前缀把「找肥料」与「是否跳过」都扩展为 生物有机肥料 或 肥料 任一存在即可,两种肥料按同一标准消耗(每格 10)、肥力效果完全相同;肥料缺失(非 HSK 环境)时自动回退原版行为,零影响。
+29. BWM 缩小物品计数修复(2026-08-18): Better Workbench Management 打开账单配置界面时,RecipeWorkerCounter_CountProducts_Detour 对「附加产品过滤」里的每个 ThingDef 直接调 map.listerThings.ThingsOfDef,而 RimWorld 1.6 的 ThingsOfDef 对 MinifiedThing(被拆解打包的家具)会打 ErrorOnce 日志("Tried to get ThingsOfDef of MinifiedThing...")且按 def 索引查不到、计数恒为 0。现给 Verse.ListerThings.ThingsOfDef 加 Harmony 前缀,遇到 MinifiedThing 改走官方推荐的 ThingsMatching(ThingRequest.ForGroup(MinifiedThing)):日志消失,附加产品计数中的缩小物品也能正确统计。
+30. Need Bar Overflow 标线钳制修复(2026-08-18): AmCh.NeedBarOverflow 开启「美观值溢出」等需求溢出后,实时值标线超过 100% 会触发原版 Need.DrawBarInstantMarkerAt 的 "Beauty drawing bar percent > 1 : 1.2" ErrorOnce 刷屏(打开需求面板即报,纯日志无实质影响)。现给该方法加 Harmony 前缀,把 pct 钳制回 [0,1]:溢出填充条(由该 mod 自己绘制)不受影响,标线超过 100% 时停在条尾(原位置超出条尾本就不可见),日志消失;未装该 mod 时原版调用方从不传 >1,本补丁零影响。
+31. 熔炼弹药返还材料固定(2026-08-18 用户要求「直接把金属条固定成钢、木板固定成红木,固定一个配方即可」): 熔炼弹药(RKHSKSmeltAmmo)的返还走 SmeltProducts30Fix 配方反推,原「类别过滤取 BaseMarketValue 最低代表物」导致金属条永远返还最便宜的熟铁(WroughtIron 0.75)而非低碳钢;现改为 —— 类别过滤的候选含 钢(Steel,低碳钢)时一律返还 Steel、含 红木板(RedWoodPlank)时一律返还 RedWoodPlank,都不含才退回最低价(HeavyBar 铜金银等不变);火药等精确材料过滤不变;返还比例仍为每发制造材料 30%(整批结算),仅代表物固定。配方中英描述同步更新。
+32. 存储建筑数值加强(2026-08-18): sbz 冰箱系列(NeatStorageFridge)每格6→10(标准),每格3→7(小型/壁挂);sbz 尸体冰箱直接提高到每格10;SK 货栈存储中世纪每格6→9,工业时代每格7→11。同时 Reel 存储 mod 整体比 HSK 基线高 2 单位/每格。
+33. 混凝土搅拌机钢筋混凝土配方(2026-08-19): 手动混凝土搅拌机(建筑材料 I)新增「制作钢筋混凝土」配方(金属条10+混凝土10→钢筋混凝土8),电动混凝土搅拌机(建筑材料 II)新增「制作钢筋混凝土」配方(金属条20+混凝土20→钢筋混凝土16);同时删除原切石桌/高级工具台上的钢筋混凝土配方,钢筋混凝土仅由两台搅拌机制作。
+34. 皮革等级分类补全(2026-08-19 用户要求「所有皮革都要有自己的分类、分类名和分类等级名称,名称带等级」;2026-08-20 修复语言目录): ①替代金属的硬皮革 Rawhide/BoiledLeather/Chitin/DragonScales(描述「used in the place of metal」)→LeathersB(B+ 级);②PVC 人造革→LeathersB(B+ 级,覆盖 Vile 官方 D+,工业时代合成革,配合原 mod 内 zzz 薰衣草贴图补丁);③奥德赛/其他动物皮革(AlphaThrumbo→LeathersA A 级,Armadillo/Hippo/Mastodon/Mink/Sealskin/KingHamster→LeathersB B 级)补分类;④高科技纤维 10 种(Rayon/Synthread/Modacrylic/Fleece/Velour/Kevlar/Hyperweave/ChitinPlating/Nomex/Micropel)→LeathersA(中文名细分 A/A+: Industrial=A,Spacer=A+);⑤已处理的不重复动: 顶级动物皮革 Core_SK 已加 LeathersA 且 label 带 (A+)、DevilstrandCloth 官方已 (A)、Leather_Waterproof 官方已 (B+)、纤维英文 label 已由 HSK 改过只加分类;⑥待改 label 的皮革补英文等级名。中文名与分类名翻译在 Languages/ChineseSimplified (简体中文)/DefInjected/ThingDef|ThingCategoryDef/皮革等级分类.xml(带（A级）等等级后缀,加载序 160 先于 HSK 汉化生效)。⚠ 2026-08-20 修复: 原语言文件误放 `Languages/ChineseSimplified/`(非标准目录名,游戏不加载),导致游戏内皮革名显示为英文等级后缀(如 armadillo leather (B))或 ai 汉化无等级名;已复制到标准目录 `ChineseSimplified (简体中文)`(工作区+部署),等级中文名生效。逐节点 Conditional 隔离,MayRequire=vitech.materialsscience/vitech.leathertanning/Solaris.RatkinRaceMod。
+35. 动物屠宰产生皮(2026-08-19 迁移,2026-08-20 重构 112 动物,3 次迭代): 所有仍直接产出成品皮革的动物改为产出 Hide_* 生皮/毛皮进入鞣制流程。2026-08-20 重构原因: ①原 70 个条目仅覆盖"显式声明 leatherDef"的动物,靠基类继承 leatherDef 的 24 种(熊/猫/狗/狐狸/野兔/狼等)因 xpath 匹配不到全部失效;②Vile 官方嵌套补丁(Odyssey/Animals_leatherType.xml,PatchOperationFindMod+Sequence)在 1.6 不生效,其 42 个映射(外星人/人类/龙/鱼/爆炸兽等)从未落地。⚠ 迭代教训(2026-08-20 游戏内实测报错): v1 用 XPath union `A | B` 同时定位 ThingDef 与 AlienRace.ThingDef_AlienRace,但 **RimWorld 1.6 不支持 xpath union**,107 个动物报 `PatchOperationAdd: Failed to find a node` + `PatchOperationConditional: Error in nomatch 分支`(Player.log);v2/v3 的 nomatch Add 到不存在的节点也会报错。**v4 最终写法**: 每动物 3 段 PatchOperationConditional,全部以"节点存在"为条件、绝无 union —— ①条件删除显式 leatherDef(不存在自动跳过);②有显式 race → Add leatherDef 到 race 下;③动物存在但无显式 race(基类继承,如猫科/犬科/狐狸)→ 外层确认 ThingDef/AlienRace 存在、内层 nomatch Add 整个 race 节点(仅含 leatherDef)到根(深度合并覆盖继承值)。按节点类型分别定位: Ratkin/Alien_Nova/Alien_Dova/Alien_Orassan/Norbal → `Defs/AlienRace.ThingDef_AlienRace`,其余 107 个 → `Defs/ThingDef`。共 336 个 Operation(112×3)。含 Human/外星人/Thrumbo/鱼等全部动物,映射与 Vile 官方一致。
+36. 删除铸币配方(2026-08-19 用户要求): 删除 Vile MS 两个"银矿/银锭无损互换"配方 —— 铸造银币(MakeCoins,银锭x10→银x100)与 熔币为锭(MeltCoins,银x10→银锭x10),两者组合 10 银可循环白赚 90,严重破坏数值体系;同步清理感应炉(InductionFurnace)、熔炉(TableFurnace)、火坑/铸造厂(FirePit/Foundry)recipes 列表中的残留引用;「帝国银币货币」mod 的 01_ImperialCoin.xml 原对 MakeCoins 的"炼银"改造(Replace label/description/products)已同步移除,避免配方删除后报 Failed to find a node。货币(SilverCoin)完全无法自产,银矿/银锭回归纯材料。
+37. 纳米科技框架与碳纳米管配方(2026-08-19 用户要求「补丁改动放 hsk 补丁包,不改原 mod」): 2026-08-18 直接改 Vile MS 配方文件的两处修改被 Steam 校验还原(纳米框架产物 15→3,碳纳米管 HSK 配方退回 Vile 原版),现整体改为补丁覆盖 —— ①组装纳米科技框架(MakeNanotechFramework)产物 3→15,label x3→x15;②合成碳纳米管(MakeCarbonNanotubes)配方改回 HSK 原版: 聚合物25+焦炭25+橡胶15→碳12(原 焦炭35+钴3+镍3→碳15),workAmount 3500→4000,soundWorking Recipe_Machining→Recipe_Smith,研究 ResearchMobileMineralSonarEnhancedScan→Oil_Industry_C6。中文显示同步在 Languages/DefInjected/RecipeDef/纳米科技框架与碳纳米管配方.xml;AI 汉化包文本(组装纳米科技结构x15/合成碳纳米管x12)保留。MayRequire=vitech.materialsscience。Vile 原文件已全部还原。
+38. Vile 贴图重构收进补丁包(2026-08-19 用户要求「贴图改动也放补丁 mod」): 原 restore.py 直接把 151 张重构 png 覆盖进 Vile MS Textures(Steam 更新即失效、且违背补丁包原则),现改为 —— 重构贴图部署在本 mod `Textures/Things/**`(151 张,后加载覆盖 Vile 同路径,含 .dds;铝土矿先例验证: 162 后加载覆盖 155),Steam 更新 Vile 不影响;Vile mod 已还原原版(153 个 `.dds.hskbak` 恢复为 `.dds`,重构 png 移出,备份 `tmp\vile_restored_png_backup\`)。restore.py 改为铺到本 mod 工作区,部署后无需再动 Vile。与 34/35 号(皮革)同属"Vile 改动迁移补丁包"。
+39. 乙烯/特氟龙 HSK 原版贴图还原(2026-08-19 用户要求「乙烯贴图也还原回来, 我指的是 hsk 原版的边缘石化的贴图; 特氟龙也是一样的, 特氟龙也有 边缘石化的版本」): 之前 Vile贴图重构把乙烯(Polymers)与特氟龙(Paraffins)按"贴图覆盖"方式铺到本 mod Textures(Things/Item/Chemical/Ethylene.png / Teflon.png),但重构源 md5 与 Vile 原版 dds 完全一致 —— 实际是把 Vile 红气瓶 / 白方框当 HSK 原版铺上去,游戏里仍是 Vile 视觉。本补丁纠正: Polymers 与 Paraffins 的 graphicData 整体改回 Core_SK 原版(Things/Item/Resource/Polymers 紫色塑料颗粒袋 / Paraffinwax 米黄石蜡块,即 HSK 石油化工 / Rimefeller 体系原版图,贴图由 Core_SK 自带),不动 label/description,只换图标。已清理 HSK修复整合 Textures/Chemical/{Ethylene,Teflon}.png 与 Vile贴图重构/贴图/ 下两个错误源 png(备份 `tmp\ethylene_teflon_texture_backup_20260819\`)。MayRequire=vitech.materialsscience + skyarkhangel.HSK,加载序 164,后于 Vile MS 155。
+40. 鼠族HSK拓展通用修复迁移(2026-08-22): 将 鼠族HSK拓展 中与鼠族/鼠族衣物无关的修复补丁整体迁入本 mod(补丁 49-66 号,均带来源注释): 弩箭木板适配(49)、大锤工具化(50)、酿酒台拆箱任意酒(51,含 AlcoholUnpackFix 逻辑并入 HSKFixPack.dll)、憎恶可屠宰(52)、工具属性补强(53)、工具属性 StatPart 挂载(54)、锯木台胶合板与乐器木板适配(55)、艺术描述语法修复(56)、心灵长枪护甲修复(57)、茅草床材质修复(58)、圣物木质材质扩充(59)、CE 零护甲 Belt 装备修复(60)、鱼类分类修复(61)、鲶鱼屠宰配方(62)、手工锯木台原木材质(63)、药草芦荟种植修复(64)、生存工具全面补强·通用(65)、资源管理分类·通用(66,含污染物分类 RK_Pollutants)。鼠族专属部分(中世纪工具补强/飞龙弹分类)保留在 鼠族HSK拓展。
+
+41. 商队投递着陆点合并(2026-08-22): 原独立 mod「商队投递着陆点」(local.tradedropspotfix)合并入本 mod,TradeDropSpotFix 逻辑并入 HSKFixPack.dll。通讯台呼叫的商人(轨道贸易船)成交后,买到的货物由投递舱从轨道抛下;原版固定投到「轨道贸易信标」附近(DropCellFinder.TradeDropSpot)。本补丁在落点判定最前面插入飞船着陆信标分支(HSKFixPack.dll 前缀补丁 DropCellFinder.TradeDropSpot): 若地图上存在已通电/未封顶的飞船着陆信标且有可用投递格,则优先投到着陆信标旁边;没有飞船着陆信标或落点不可用时,完全回退原版行为(轨道贸易信标 → 通讯台/信标 → 殖民地建筑 → 随机)。影响范围: 所有走 TradeDropSpot 的投递——通讯台交易成交的货物、可投递商队的到达与交易物品,全部优先集中到飞船着陆点。仅一个 Harmony 前缀补丁,无其它改动;未建飞船着陆信标时零影响。合并后删除原独立 mod,其 ModAssistant 标记已由 06_ModAssistant标记.xml 的 local.hskfixpack 覆盖,ModsConfig 中 local.tradedropspotfix 条目已移除。
+42. 补丁按大类合并(2026-08-22 用户要求「很多补丁重复且过时,按大类合并」): Patches/ 由 66 个补丁合并为 9 个大类文件 —— 01_科技与名字(科技前置/多功能工具科技后移/Norbal与中文名)、02_地板与材质(地板分组/皮革等级/茅草床/圣物木质/资源分类)、03_熔炼(熔炼扩展/自动换工具)、04_设施与建筑(设施崩溃/空描述抑制/地热核电池/金属提炼厂/电解精炼厂/存储建筑)、05_工具(多功能工具数值/大锤工具化/工具属性补强/StatPart挂载/生存工具通用)、06_图标(铅合金/聚碳酸酯/聚苯乙烯/乙烯特氟龙/皮革站图标)、07_配方与工作台(锻造台/木板/工作台整理/混凝土/中世纪甲/归位/枪械衣物/铸币/金银木锭/壁炉重复解锁/Vile皮革/弩箭/锯木台)、08_动物与植物(屠宰生皮/腌肉/憎恶/鱼类/药草)、09_杂项(ModAssistant/Compulsion/奥德赛/SeedsPlease/皮革形容词/老人背景/纳米框架/异种白名单/艺术描述/CE零护甲)。合并同时修复: ①00 科技前置修复与 54 StatPart 挂载的 FindMod+Sequence 嵌套改为平铺 + MayRequire(AGENTS.md 铁律,1.6 实测 FindMod+Sequence 不生效);②09 多功能工具数值与 53 工具属性补强对 TFJ_Tool_Multitool baseWorkStatFactors 的冲突(53 的 Replace 会抹掉 09 的 Add)合并为单个并集 Replace(GeneralLaborSpeed 取 1.15);③43 号重号(壁炉重复解锁修复)归入配方类。全部 1096 个 xpath 逐一核对无丢失。旧补丁备份在 _backup/HSK修复整合_Patches_20260822/。
+
+43. Vile鞣制1.6适配整合(2026-08-22 用户要求「整个鞣制适配加入到 hsk 修复整合中」): 原独立 mod「Vile鞣制1.6适配」(local.vileleathertanningfix)整体并入本 mod。其核心内容此前已由 34/35 号吸收(皮革分级 34 号用 LeathersB 覆盖原 S 级、动物屠宰生皮 35 号 112 种、中文名与奥德赛中文描述已迁入语言文件),本次补齐遗漏: ①08_动物与植物.xml 追加 28 种动物屠宰生皮映射(Alligator/AlphaThrumbo/Armadillo/Badger/BogHound/Bullfrog/Cat_Scimitar/ColossusToad/Flamingo/Gorilla/Heron/Hippo/Mastodon/Megavole/MonitorLizard/Moose/Muskox/Otter/Panda/Peacock/Penguin/Porcupine/PrairieDog/SeaTurtle/Swan/Vulture/Wolf_Great/Wolverine,按 35 号三段式 Conditional 模式,共 84 个 Operation,动物总数 112→140);②02_地板与材质.xml 补 Leather_Human 英文 label(humanoid leather (E))与 6 种奥德赛皮革英文描述(AlphaThrumbo/Armadillo/Hippo/Mastodon/Mink/Sealskin,中文描述已在语言文件,英文补丁仅影响英文界面)。分级设计保持 34 号既有方案(替代金属硬皮革→LeathersB B+ 级),不引入原 mod 的 LeathersS 分类。整合后原独立 mod 未加入 ModsConfig,无需再启用。
+44. 装饰皮革 stuffAdjective 唯一化(2026-08-22 用户反馈「StuffCount: Two or more different stuff with same name 装饰皮革门垫!」): 汉化包「1.6hsk附属mod汉化」(hsk.mod.chs)对 Vile's Hell Bent for Leather Tanning 的三件装饰皮革(Leather_UpholsteryBrown/Gray/Bordeaux)的 stuffAdjective 全设为「装饰皮革」,StuffCount 检查建筑菜单允许材质时,凡同时允许多件装饰皮革的分类(门垫/拼缝地毯/垫子床等)即报同名警告。修复: ①本 mod 语言文件 Languages/ChineseSimplified (简体中文)/DefInjected/ThingDef/皮革等级分类.xml 为三件各补唯一 stuffAdjective(牛血红/灰色/波尔多红装饰皮革,与 label 形容词一致);②加载顺序调整 —— ModsConfig 中本 mod 移到 hsk.mod.chs 之后(2026-08-22 起本 mod 加载序 194,晚于 hsk.mod.chs 193),利用 DefInjected last-write-wins 覆盖汉化包重复值;③本 About loadAfter 追加 hsk.core.chs/hsk.mod.chs 保持自动排序一致。仅产物显示名变化,无功能影响。
+    </description>
+</ModMetaData>

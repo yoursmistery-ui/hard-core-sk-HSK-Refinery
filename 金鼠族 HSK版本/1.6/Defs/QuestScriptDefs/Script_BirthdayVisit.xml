@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <QuestScriptDef ParentName="OAFrame_HospitalityRefugeeBase_Female">
+        <defName>OARK_SDBirthdayVisit</defName>
+        <rootSelectionWeight>0</rootSelectionWeight>
+        <expireDaysRange>1~3</expireDaysRange>
+        <affectedByPoints>false</affectedByPoints>
+        <randomlySelectable>false</randomlySelectable>
+        <affectedByPopulation>false</affectedByPopulation>
+        <hideInvolvedFactionsInfo>false</hideInvolvedFactionsInfo>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName->Birthday Project</li>
+				<li>questName->Birthday Gathering</li>
+				<li>questName->Uninvited Party Guest</li>
+				<li>questName->Surprise for [birthdayPawnsInfo]</li>
+				<li>questName->[adj] Birthday Visitor</li>
+				<li>questName->[adj] Birthday Visit</li>
+				<li>questName->[adj] Birthday Party</li>
+				<li>questName->[adj] Birthday Celebration</li>
+				<li>adj->Unexpected</li>
+				<li>adj->Sudden</li>
+				<li>adj->Science Department</li>
+				<li>adj->[birthdayPawnsInfo]</li>
+				<li>adj->Energetic</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionAndNameRules>
+            <rulesStrings>
+                <li>lodgersLabel->ratkin</li>
+                <li>lodgersLabelPlural->ratkins</li>
+            </rulesStrings>
+        </questDescriptionAndNameRules>
+		 <questDescriptionRules>
+            <rulesStrings>
+
+				<li>questDescription->You receive an urgent message from the Science Department of [faction_name], sent by [asker_nameDef] from the department.\n\n[asker_nameDef] tells you that during a recent collaboration between your colony and the Science Department, [birthdayPawnsInfo] joined the department's attendants in [yuanyin], forming a deep friendship.\nYesterday, while reviewing the schedule, they unexpectedly realized that [birthdayPawnsInfo]'s birthday is today. Following the traditional festival customs of Oberonia Aurea, they prepared some gifts for [birthdayPawnsInfo] at the cost of a few "reasonable experiment failures," and planned to visit your colony today. However, it seems they only remembered to submit a visit request right before setting out.\n\nIf you accept their visit request, they will arrive at your colony immediately and present some filled flower cakes as a congratulatory gift. During their stay, they will express blessings and goodwill to the birthday person, boosting their mood.</li>
+                <li>yuanyin->organizing accounting documents to deceive the Coordination Officer</li>
+                <li>yuanyin->discussing the subtle, unspoken romances within the Science Department</li>
+				<li>yuanyin->researching whether Hyacinth Research Officer's twin tails can actually be used as mining drills</li>
+				<li>yuanyin->assisting in improving and testing the Technology Department's flying trays</li>
+				<li>yuanyin->offering condolences to the Greater Forget-me-not Research Officer, whose travel plans were once again delayed due to an accident</li><!--角色扩展·大忘忧兰模组的停止-->
+				<li>yuanyin->pondering the feasibility and poisoning probability of colorful spaghetti</li>
+				<li>yuanyin->maintaining scientific equipment in the Science Department that malfunctioned due to improper use</li>
+				<li>yuanyin->making a small batch of Oberonia Aurea flower cakes and a large amount of unidentified kitchen waste</li>
+				<li>yuanyin->discussing bizarre food safety rumors circulating in the community</li>
+				<li>yuanyin->exchanging research perspectives to inspire one another</li>
+				<li>yuanyin->conducting discussions and research on anti-gravity technology</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <questContentRules>
+            <rulesStrings>
+                <li>birthdayVisitorsArriveLetterLabel->[lodgersLabelSingularOrPlural] 到达</li>
+                <li>birthdayVisitorsArriveLetterText->[asker_nameDef]和其他[lodgersLabelSingularOrPlural]前来为[birthdayPawnsInfo]送上生日礼物，她们将在你的殖民地停留半日，并在此期间为遇到的生日者传递祝福。</li>
+
+                <li>lodgersLeavingLetterLabel->[lodgersLabelSingularOrPlural] 离开</li>
+                <li>lodgersLeavingLetterText->[asker_nameDef]和其他[lodgersLabelSingularOrPlural]在完成此行的目的后准备返回了。</li>
+            </rulesStrings>
+        </questContentRules>
+        <root Class="OberoniaAurea.QuestNode_Root_SDBirthdayVisit" />
+    </QuestScriptDef>
+
+</Defs>

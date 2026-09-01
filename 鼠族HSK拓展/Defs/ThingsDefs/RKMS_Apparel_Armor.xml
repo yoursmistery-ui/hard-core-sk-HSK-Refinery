@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_FangRen</defName>
+		<label>defender uniform</label>
+		<description>The standard armor distributed to militia members responsible for guarding the settlement. It is a bit heavy for ratkin.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_FangRen</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<Steel>55</Steel>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>280</MaxHitPoints>
+			<WorkToMake>9000</WorkToMake>
+			<Mass>3.2</Mass>
+			<StuffEffectMultiplierArmor>0.25</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.2</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.45</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+			<Flammability>0.8</Flammability>
+			<EquipDelay>1.8</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>2.0</MeleeDodgeChance>
+			<MoveSpeed>0.1</MoveSpeed>
+			<MentalBreakThreshold>-0.1</MentalBreakThreshold>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_FangRen</wornGraphicPath>
+			<layers>
+				<li>OnSkin</li>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticTier2</li>
+				<li>RK_ExoticDefender</li>
+				<li>RK_ExoticSoldier</li>
+				<li>RK_ExoticLightArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_Tailoring</researchPrerequisite>
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_ExoticSimpleArmor</defName>
+		<label>Moustate simple armor</label>
+		<description>A nearly obsolete type of armor that has been largely phased out, but due to its convenient manufacturing, it still has a significant number of users.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_SimpleArmor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<Steel>25</Steel>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>65</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToMake>7000</WorkToMake>
+			<Mass>5</Mass>
+			<StuffEffectMultiplierArmor>0.25</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+			<Flammability>0.8</Flammability>
+			<EquipDelay>3</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.15</MoveSpeed>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_SimpleArmor</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticMilitia</li>
+				<li>RK_ExoticLightArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<!-- <researchPrerequisite>RK_Research_Tailoring</researchPrerequisite> -->
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>3</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_Gusoku</defName>
+		<label>ratkin Gusoku armor</label>
+		<description>A simple bulletproof and slash-resistant armor that comes with ammunition pouches and quivers.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_Gusoku</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_Tailoring</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<Steel>30</Steel>
+			<Cloth>75</Cloth>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>75</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>240</MaxHitPoints>
+			<WorkToMake>17000</WorkToMake>
+			<Mass>7</Mass>
+			<StuffEffectMultiplierArmor>0.65</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.8</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+			<Flammability>0.3</Flammability>
+			<EquipDelay>3</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>-3.0</MeleeDodgeChance>
+			<MentalBreakThreshold>-0.1</MentalBreakThreshold>
+			<MoveSpeed>-0.35</MoveSpeed>
+			<RangedCooldownFactor>-0.2</RangedCooldownFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_Gusoku</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticDefender</li>
+				<li>RK_ExoticSoldier</li>
+				<li>RK_ExoticHeavyArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_DouMaru</defName>
+		<label>SenGiTai DouMaru armor</label>
+		<description>This armor is procured by SenGiTai and is actually a combination of bulletproof vests sourced from factions with higher industrial capabilities and modifications made by the Moustate themselves. It is carefully equipped with ammunition pouches, allowing you to confidently suppress your enemies with firepower.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_DouMaru</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_FunctionalApparel</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<DevilstrandCloth>30</DevilstrandCloth>
+			<Steel>20</Steel>
+		
+				<ComponentIndustrial>4</ComponentIndustrial>
+</costList>
+		<costStuffCount>60</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToMake>20000</WorkToMake>
+			<Mass>7</Mass>
+			<StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.2</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.45</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+			<Flammability>0.3</Flammability>
+			<EquipDelay>3</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.25</MoveSpeed>
+			<RangedCooldownFactor>-0.3</RangedCooldownFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_DouMaru</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_SenGiTaiArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_DuiJinJia</defName>
+		<label>ratkin DuiJin armor</label>
+		<description>The armor of the general members of the border sentry, the hardness and protection of the armor and the cloth armor are actually the same, but because of various factors, some parts of the protection have been abandoned. This armor is often hung behind a variety of equipment to cope with the unpredictable border war.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_DuiJinJia</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>30</DevilstrandCloth>
+			<Steel>55</Steel>
+		
+				<ComponentIndustrial>4</ComponentIndustrial>
+</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToMake>29000</WorkToMake>
+			<Mass>3.2</Mass>
+			<StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.35</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.45</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+			<Flammability>0.1</Flammability>
+			<EquipDelay>1.8</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MentalBreakThreshold>-0.1</MentalBreakThreshold>
+			<PainShockThreshold>0.1</PainShockThreshold>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_DuiJinJia</wornGraphicPath>
+			<layers>
+				<li>OnSkin</li>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticTier3</li>
+				<li>RK_ExoticSoldier</li>
+				<li>RK_ExoticHeavyArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_FunctionalApparel</researchPrerequisite>
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticArmorMakeableBase">
+		<defName>RK_BuMianJia</defName>
+		<label>ratkin BuMian armor</label>
+		<description>The armor of the Ratkin's border sentry, studded with iron inserts, protected by shoulder armor and ring armor on both arms, and a heart protector on the chest; It has strong defensive capabilities without affecting the wearer's movement.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BuMianJia</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_FunctionalApparel</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<DevilstrandCloth>50</DevilstrandCloth>
+			<Steel>65</Steel>
+		
+				<ComponentIndustrial>4</ComponentIndustrial>
+</costList>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToMake>42000</WorkToMake>
+			<Mass>8.5</Mass>
+			<StuffEffectMultiplierArmor>0.4</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>1.6</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.75</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+			<Flammability>0.1</Flammability>
+			<EquipDelay>3</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MentalBreakThreshold>-0.1</MentalBreakThreshold>
+			<PainShockThreshold>0.1</PainShockThreshold>
+			<MoveSpeed>-0.35</MoveSpeed>
+		</equippedStatOffsets>
+		<apparel>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_BuMianJia</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticTier3</li>
+				<li>RK_ExoticSoldier</li>
+				<li>RK_ExoticHeavyArmor</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+</Defs>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中世纪MO整合进度盘点 明细(板块 9-13)·中世纪MO → HSK工业科研大修 整合进度盘点(2026-)</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2328; --muted:#57606a;
+    --line:#d8dee4; --accent:#2f6feb; --head:#0d2440; --headink:#eaf1fb;
+    --done:#1a7f37; --part:#b58105; --todo:#0969da; --no:#6e7781;
+    --donebg:#dafbe1; --partbg:#fff8c5; --todobg:#ddf4ff; --nobg:#eceff1;
+    --lo:#1a7f37; --mid:#b58105; --hi:#cf222e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px;}
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,#0d2440,#1c3d63);color:var(--headink);
+    border-radius:16px;padding:28px 32px;margin-bottom:22px;box-shadow:0 8px 24px rgba(13,36,64,.18);}
+  header.page h1{margin:0 0 10px;font-size:25px;letter-spacing:.4px;}
+  header.page p{margin:4px 0;color:#c9d8ee;font-size:13px;}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .b-done{color:var(--done);background:var(--donebg);}
+  .b-part{color:var(--part);background:var(--partbg);}
+  .b-todo{color:var(--todo);background:var(--todobg);}
+  .b-no{color:var(--no);background:var(--nobg);}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .d-done{background:var(--done)} .d-part{background:var(--part)} .d-todo{background:var(--todo)} .d-no{background:var(--no)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:22px 0;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  .kpi .n{font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.5px;}
+  .kpi .t{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .kpi.done .n{color:var(--done)} .kpi.part .n{color:var(--part)} .kpi.todo .n{color:var(--todo)} .kpi.no .n{color:var(--no)}
+  .kpi.rate .n{color:var(--accent)}
+  .bar{height:9px;border-radius:6px;background:#eef1f4;overflow:hidden;display:flex;margin-top:10px;}
+  .bar i{display:block;height:100%}
+  .bar .s-done{background:var(--done)} .bar .s-part{background:var(--part)} .bar .s-todo{background:var(--todo)} .bar .s-no{background:var(--no)}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 18px;margin-bottom:20px;font-size:13.5px;}
+  nav.toc b{color:var(--head)} nav.toc a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block;padding:2px 0;}
+  nav.toc a:hover{text-decoration:underline}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 26px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  h2{font-size:20px;color:var(--head);border-left:5px solid var(--accent);padding-left:12px;margin:22px 0 10px;scroll-margin-top:16px;}
+  h3{font-size:15.5px;color:#243b53;margin:24px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line);}
+  p.lead{margin:8px 0 14px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;font-size:13.2px;margin:10px 0 4px;}
+  th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left;}
+  th{background:#f0f3f7;color:#243b53;font-weight:700;}
+  tbody tr:nth-child(even){background:#fafbfc;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  td.c{text-align:center;white-space:nowrap;}
+  .st{font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;white-space:nowrap;}
+  .st-done{color:var(--done);background:var(--donebg);}
+  .st-part{color:var(--part);background:var(--partbg);}
+  .st-todo{color:var(--todo);background:var(--todobg);}
+  .st-no{color:var(--no);background:var(--nobg);}
+  .df{font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap;}
+  .d-lo{color:#fff;background:var(--lo);} .d-mid{color:#fff;background:var(--mid);} .d-hi{color:#fff;background:var(--hi);} .d-na{color:var(--muted);background:#f0f1f3;}
+  .prog{font-weight:700;color:var(--head);white-space:nowrap;}
+  ul.tight{margin:6px 0 6px 20px;padding:0;} ul.tight li{margin:3px 0;}
+  .note{background:#fff8e6;border-left:4px solid var(--part);border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0;font-size:13.3px;}
+  .fix{border:1px solid var(--line);border-left:4px solid var(--hi);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;background:#fffdfa;}
+  .fix b{color:#9b1c1c}
+  .fix .row{margin:5px 0;font-size:13.3px;}
+  .fix .k{color:var(--muted);font-weight:700;margin-right:6px;}
+  code{background:#f2f4f7;border-radius:4px;padding:1px 5px;font-size:12.4px;font-family:Consolas,Menlo,monospace;}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:26px;}
+  @media print{body{background:#fff} section.card{box-shadow:none;break-inside:avoid} header.page{background:#0d2440!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="wrap"><header class="page"><h1>中世纪MO 整合进度盘点 · 逐单元明细(板块 9-13)</h1><p>主文件(结论 / 板块进度 / 硬证据 / 问题处置 / 下一步): <a href="中世纪MO整合进度盘点.html" style="color:#9fc2f0;text-decoration:underline">中世纪MO整合进度盘点.html</a></p></header><section class="card"><h2>逐单元明细(板块 9-13)</h2><h3 id="b9">9 酒水/药物/炼金 <span style="font-weight:400;color:var(--muted);font-size:13px">— 单元 3,加权 0.0%(已整 0 / 部分 0 / 未整 3 / 不整 0)</span></h3>
+<table><thead><tr><th style="width:24%">内容单元</th><th>MO 规模</th><th>状态</th><th style="width:28%">证据 / 落地位置</th><th style="width:20%">卡点 · 依赖</th><th>难度</th></tr></thead><tbody>
+<tr><td>酒水(艾尔/苹果酒/蜂蜜酒/葡萄酒 + 品质熟成)</td><td class="c">4+ 链</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;HSK 已有 Alcohol/Brewing 链</td><td>MO 覆盖原版 Brewing → 须定主链</td><td class="c"><span class="df d-mid">中</span></td></tr>
+<tr><td>两段式炼金药物(止痛剂/活力丸/知识药水/奇迹/星尘/狂喜粉/卢希克斯/战斗灵药等 9 种)</td><td class="c">9 药</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;坩埚 + 草药萃取 + 怪物资材</td><td>CompUseEffect_KnowledgePotion 在 MO DLL</td><td class="c"><span class="df d-hi">高</span></td></tr>
+<tr><td>中毒累积系统 DankPyon_Intoxication(慢性 hediff,4 档)</td><td class="c">1 机制</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;与 HSK 硬核方向天然契合,可单拎自研</td><td>需自研 hediff 累积/衰减</td><td class="c"><span class="df d-mid">中</span></td></tr>
+</tbody></table>
+<h3 id="b10">10 书籍与研究 <span style="font-weight:400;color:var(--muted);font-size:13px">— 单元 5,加权 20.0%(已整 1 / 部分 0 / 未整 3 / 不整 1)</span></h3>
+<table><thead><tr><th style="width:24%">内容单元</th><th>MO 规模</th><th>状态</th><th style="width:28%">证据 / 落地位置</th><th style="width:20%">卡点 · 依赖</th><th>难度</th></tr></thead><tbody>
+<tr><td>图纸=研究门禁(14 项中高端研究被书锁定)</td><td class="c">14 门禁</td><td class="c"><span class="st st-done">已整合</span></td><td>✅ 自研蓝图门控体系 v4.1: 112 本蓝图书(中世纪图纸书→超凡 4 卷)+ BlueprintUnlockHSK.dll(CanStartNow 门禁/研读工作/ResearchTreeSK 角标 x/N)+ 事件/商人/贮藏/GoExplore/Cybranian 五路投放</td><td>不引 MO DLL;早期 SchematicGateHSK 复刻已退役归档</td><td class="c"><span class="df d-na">—</span></td></tr>
+<tr><td>传说书 Tale(娱乐书)</td><td class="c">1 类</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;原版 Book 可零 DLL 移植</td><td>注意与蓝图书研读抢智力经验上限</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>专著 Treatise(12 技能训练书,抄写台自制)</td><td class="c">12 书</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;需 Paper 体系(本环境无纸)+ 抄写台</td><td>BookWithAuthor/RecipeWorker_MakeSkillBook 在 MO DLL;书籍拓展HSK(Vanilla Books Expanded)已有同类技能书线,先评估是否够用</td><td class="c"><span class="df d-mid">中</span></td></tr>
+<tr><td>独特书(华丽古卷 / OnEnglish)</td><td class="c">2 书</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;战利品专属</td><td>随战利品体系</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>MO 研究树(自定义 tab + 19 个原版研究改写)</td><td class="c">19 节点</td><td class="c"><span class="st st-no">不整合</span></td><td>⛔ 已由 HSK 科技树(489 节点)+ ResearchTreeSK 重排取代</td><td>Change_ResearchProjectDef 83 Operation 与 HSK 冲突面最大</td><td class="c"><span class="df d-na">—</span></td></tr>
+</tbody></table>
+<h3 id="b11">11 心情·特性·Hediff·文化 <span style="font-weight:400;color:var(--muted);font-size:13px">— 单元 6,加权 0.0%(已整 0 / 部分 0 / 未整 5 / 不整 1)</span></h3>
+<table><thead><tr><th style="width:24%">内容单元</th><th>MO 规模</th><th>状态</th><th style="width:28%">证据 / 落地位置</th><th style="width:20%">卡点 · 依赖</th><th>难度</th></tr></thead><tbody>
+<tr><td>品质心情(吃奶酪/喝葡萄酒 7 档)</td><td class="c">7 thought</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;随 §9 酒水/食材</td><td>随 §9 决策</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>食物记忆(牛排+15 ~ 泔水饭-5)</td><td class="c">10 thought</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;随 §1/§9</td><td>随 §9 决策</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>特性(战士 / 老兵)</td><td class="c">2 trait</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;纯 XML</td><td>需并入 HSK 特性池(特性拓展modHSK)</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>Hediff(林龙酸/眩晕/Alp睡眠/免疫授予/食物增益三档)</td><td class="c">≈12 hediff</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地</td><td>HediffComp_* 全在 MO DLL</td><td class="c"><span class="df d-hi">高</span></td></tr>
+<tr><td>文化风格(老世界人 / 沙漠)</td><td class="c">2 culture</td><td class="c"><span class="st st-no">不整合</span></td><td>未落地;无新 memes/precepts,价值低</td><td>与服饰分区 tag 体系需对接</td><td class="c"><span class="df d-lo">低</span></td></tr>
+<tr><td>新伤害类型(弩炮弹/巨石/焦油/酸灼/整吞/眩晕/睡眠)</td><td class="c">≈9</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;随武器/怪物</td><td>须与 CE 伤害体系核对</td><td class="c"><span class="df d-mid">中</span></td></tr>
+</tbody></table>
+<h3 id="b12">12/13 机制与兼容 <span style="font-weight:400;color:var(--muted);font-size:13px">— 单元 3,加权 16.7%(已整 0 / 部分 1 / 未整 0 / 不整 2)</span></h3>
+<table><thead><tr><th style="width:24%">内容单元</th><th>MO 规模</th><th>状态</th><th style="width:28%">证据 / 落地位置</th><th style="width:20%">卡点 · 依赖</th><th>难度</th></tr></thead><tbody>
+<tr><td>MedievalOverhaul.dll(64 Harmony 补丁 + 一堆 Comp/GameComponent)</td><td class="c">1 dll</td><td class="c"><span class="st st-no">不整合</span></td><td>⛔ 策略性不引入;需要哪个机制就自研等价物(蓝图门控→BlueprintUnlockHSK)</td><td>这是全表难度普遍偏高的根因</td><td class="c"><span class="df d-na">—</span></td></tr>
+<tr><td>MO 兼容子模块 25 项(DBH卫浴/GiddyUp/VFE Medieval2/Vanilla 系列等)</td><td class="c">25 子包</td><td class="c"><span class="st st-no">不整合</span></td><td>⛔ 不搬 MO 主体即无适配对象;另 酒馆工具整合HSK/1.6/Patches/Compat_MedievalOverhaul.xml 仍以 MO 为可选前置(注意别与整合内容重复)</td><td>—</td><td class="c"><span class="df d-na">—</span></td></tr>
+<tr><td>汉化(简中 DefInjected + Keyed)</td><td class="c">—</td><td class="c"><span class="st st-part">部分</span></td><td>🟡 已移植内容 100% 内联中文 label/description(Buildings_Rustic_* / Incidents_EventPack / TraderKinds);蓝图书另出 English DefInjected + Keys.xml</td><td>MO 本体 Keyed 缺失与本环境无关;后续每整合一块须按 §4 补中文</td><td class="c"><span class="df d-na">—</span></td></tr>
+</tbody></table>
+<h3 id="b13">16 矿井/采掘 <span style="font-weight:400;color:var(--muted);font-size:13px">— 单元 2,加权 0.0%(已整 0 / 部分 0 / 未整 2 / 不整 0)</span></h3>
+<table><thead><tr><th style="width:24%">内容单元</th><th>MO 规模</th><th>状态</th><th style="width:28%">证据 / 落地位置</th><th style="width:20%">卡点 · 依赖</th><th>难度</th></tr></thead><tbody>
+<tr><td>矿井体系(矿井 3×3 + 挖掘点 + 挖土点 + 采掘配方)</td><td class="c">3 建筑 + 12 配方</td><td class="c"><span class="st st-todo">未整合</span></td><td>⬜ 方案已定(产物 6 种: 煤/磁铁矿/盐/软粘土/铜矿/6 宝石;移除火药焦油金银铁矿),实现未落地</td><td>须换挂 HSK Mining 链 + 研究台六档门槛 + WorkGiver</td><td class="c"><span class="df d-mid">中</span></td></tr>
+<tr><td>矿井宝石暴击 / 虫灾</td><td class="c">2 机制</td><td class="c"><span class="st st-todo">未整合</span></td><td>未落地;RecipeExtension_Mine + CompCreatesInfestations_Mine 在 MO DLL</td><td>须自研等价(RandChance 暴击可在 DLL 内做)</td><td class="c"><span class="df d-mid">中—高</span></td></tr>
+</tbody></table></section>
+</section></div></body></html>

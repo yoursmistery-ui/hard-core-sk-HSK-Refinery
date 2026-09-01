@@ -1,0 +1,10 @@
+<Patch>
+	<!-- 发电风车(RKFC_RL_Windmill_Power, 一级分类已是 Power)归入 Core_SK 的可再生能源二级分类 SubCategory_RenewablePower -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_RenewablePower"]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_RenewablePower"]/defNames</xpath>
+			<value><li>RKFC_RL_Windmill_Power</li></value>
+		</match>
+	</Operation>
+</Patch>

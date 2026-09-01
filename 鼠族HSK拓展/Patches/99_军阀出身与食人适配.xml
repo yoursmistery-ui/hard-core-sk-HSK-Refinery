@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 99_军阀出身与食人适配(Ratkin Faction+ 整合,2026-08-22) -->
+	<!-- ① 为既有鼠族出身追加「军阀士兵 / 战地牧师」出身分类(军阀 PawnKind 的 backstoryFiltersOverride 引用) -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.AlienBackstoryDef[defName = "Ratkin_WildChild" or defName = "Ratkin_LandRat" or defName = "Ratkin_Student" or defName = "Ratkin_HumanAssistant" or defName = "Ratkin_SlaveKid" or defName = "Ratkin_LaboratoryRats" or defName = "Ratkin_PettyTheft"]/spawnCategories</xpath>
+		<value>
+		  <li>RatkinSoldier_Warlord</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.AlienBackstoryDef[defName = "Ratkin_CountryKid" or defName = "Ratkin_ShepherdBoy" or defName = "Ratkin_Orphan" or defName = "Ratkin_Student" or defName = "Ratkin_Kid"]/spawnCategories</xpath>
+		<value>
+		  <li>RatkinFieldPriest</li>
+		</value>
+	</Operation>
+
+	<!-- ② 食人者特质: 吃鼠鼠蛋糕不再触发负面思想,改为专属正面思想 -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName = "Cannibal"]/degreeDatas/li[1]/disallowedThoughtsFromIngestion</xpath>
+		<value>
+			<li>
+				<thing>AC_RatkinCake</thing>
+				<thoughts>
+				  <li>AC_AteRatkinCake</li>
+				  <li>AC_AteRatkinCake_C</li>
+				</thoughts>
+            </li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName = "Cannibal"]/degreeDatas/li[1]/extraThoughtsFromIngestion</xpath>
+		<value>
+			<li>
+				<thing>AC_RatkinCake</thing>
+				<thoughtsDirect>
+				  <li>AC_AteRatkinCake_D</li>
+				</thoughtsDirect>
+            </li>
+		</value>
+	</Operation>
+
+</Patch>

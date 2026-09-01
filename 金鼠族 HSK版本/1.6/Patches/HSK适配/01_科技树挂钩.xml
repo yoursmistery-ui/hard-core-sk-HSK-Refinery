@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 01_科技树挂钩(2026-08-23 整合后精简版)
+        金鼠族研究节点已整合为 9 个(种植/食物/医疗 + 衣物 I/II/III + 武器 I/II/III),
+        全部定义、tab、坐标、前置(挂鼠族/HSK 同级科技)已直接写入
+        Defs/ResearchDefs/ResearchProjects.xml。
+        本补丁仅保留: 修复鼠族科技断链(衣物 II→III、盔甲 I/II→III 串联)。
+        加载顺序: 位于 鼠族HSK拓展(32/52/91/105 号)之后,Replace 生效。
+        ===================================================================== -->
+
+    <!-- ① 修复鼠族科技断链 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Fabrication</li>
+                <li>Ratkin_Apparel_B2A</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Apparel_D1</li>
+                <li>Ratkin_Armor_B2</li>
+            </prerequisites>
+        </value>
+    </Operation>
+
+</Patch>

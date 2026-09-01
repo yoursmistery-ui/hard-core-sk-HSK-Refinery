@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 52_制服独立科技.xml, 53_材料外观补全.xml -->
+<Patch><!-- 52_制服独立科技(2026-08-11, 用户要求):
+         鼠族衣物 II(B2A)里有一堆 xxx制服, 本补丁把制服独立成工业时代科技节点:
+         1) 新增研究节点 鼠族制服(Ratkin_Apparel_Uniform, 工业时代, 前置 鼠族衣物 III);
+         2) 7 条制服配方(作战服×2/守卫制服A·B/军用制服/军官制服/步兵制服)
+            研究前置由 鼠族衣物 II(B2A) 改挂 鼠族制服;
+         3) B2A 描述移除制服清单;
+         4) 制服材料统一为 前工业化材料: 布料/皮革 + 原始零部件,
+            移除 电子元件(ElectronicComponents)/集成电路(Electronics),
+            普通零部件(ComponentIndustrial)→原始零部件(ComponentMedieval),
+            军官/步兵制服保留金锭点缀(与贵族装同款小量固定材质)。
+         最终层补丁(52), 后于 51 号加载。 -->
+
+    <!-- ========== 1) 新增 鼠族制服 研究节点(工业时代科技) ========== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <ResearchProjectDef ParentName="IndustrialBase">
+                <defName>Ratkin_Apparel_Uniform</defName>
+                <label>鼠族制服</label>
+                <description>鼠族制服: 解锁鼠族作战服/守卫制服A·B/军用制服/军官制服/步兵制服等军用制服,前置鼠族衣物 III。</description>
+                <baseCost>500</baseCost>
+                <techLevel>Industrial</techLevel>
+                <prerequisites><li>Ratkin_Apparel_C1</li></prerequisites>
+                <researchViewX>11.00</researchViewX>
+                <researchViewY>43.00</researchViewY>
+                <tab>Apparel_SK</tab>
+            </ResearchProjectDef>
+        </value>
+    </Operation>
+
+    <!-- ========== 2) 7 条制服配方研究改挂 鼠族制服 ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniform"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniformB"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanA"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanB"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_MilUniform"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Officer"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Rifleman"]/researchPrerequisite</xpath>
+        <value><researchPrerequisite>Ratkin_Apparel_Uniform</researchPrerequisite></value>
+    </Operation>
+
+    <!-- ========== 3) B2A 描述移除制服 ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/description</xpath>
+        <value><description>鼠族衣物 II: 解锁探险家外套/单色外套/褶边连衣裙/修女礼服与头纱/软甲(棉甲)A·B/十字军长裙/冬季外袍/毛绒保暖长衣/皮革斜挎包/鼠族医疗包/厨师帽/厨师服/眼镜/科研服/纯白外套/外板甲/工作背心等中世纪基础衣物与工作服。</description></value>
+    </Operation>
+
+    <!-- ========== 4) 制服前工业化材料(布料/皮革 + 原始零部件; 移除电子元件, 普通零部件→原始零部件) ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniform"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li></stuffCategoriesToAllow></filter><count>160</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>7</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniform"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniformB"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li></stuffCategoriesToAllow></filter><count>160</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>7</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_OrderUniformB"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanA"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow></filter><count>120</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanA"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanB"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow></filter><count>160</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>6</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GuardsmanB"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_MilUniform"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow></filter><count>125</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>4</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_MilUniform"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Officer"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow></filter><count>115</count></li>
+                <li><filter><thingDefs><li>GoldBar</li></thingDefs></filter><count>2</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>4</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Officer"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow>
+                <thingDefs><li>GoldBar</li><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Rifleman"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow></filter><count>115</count></li>
+                <li><filter><thingDefs><li>GoldBar</li></thingDefs></filter><count>2</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>7</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Rifleman"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Fabric</li><li>Leathery</li></stuffCategoriesToAllow>
+                <thingDefs><li>GoldBar</li><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation><!-- 53_材料外观补全(2026-08-11, 修复启动报错):
+         Vile's Materials Science(vitech.materialsscience)的合金/复合材料 stuff 使用
+         <appearance>Panel</appearance> / <appearance>Cladding</appearance>,
+         而这两个 StuffAppearanceDef 只由 Vile's Hardcore Renovation
+         (xenomacabre.HCSKwallsandfloorsreduxeno) 定义;
+         当前 ModsConfig 未启用 Hardcore Renovation, 游戏加载时报
+         "No Verse.StuffAppearanceDef named Panel/Cladding found ..." 交叉引用错误。
+         本补丁在 Hardcore Renovation 未加载时补充这两个空标记定义(与 HR 原定义一致,
+         仅 defName, 无贴图路径), 使 VMS 材质外观交叉引用正常解析;
+         若日后启用 Hardcore Renovation, 条件不成立自动跳过, 不重复定义。 -->
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/StuffAppearanceDef[defName="Panel"]</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs</xpath>
+            <value>
+                <StuffAppearanceDef>
+                    <defName>Panel</defName>
+                </StuffAppearanceDef>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/StuffAppearanceDef[defName="Cladding"]</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs</xpath>
+            <value>
+                <StuffAppearanceDef>
+                    <defName>Cladding</defName>
+                </StuffAppearanceDef>
+            </value>
+        </nomatch>
+    </Operation></Patch>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+   <ThingDef ParentName="BedBase">
+    <defName>Miho_DroneBed</defName>
+    <label>미호 정비창</label>
+    <description>드론을 수리하거나 개조할 시 쓰이는 정비창 입니다.</description>
+    <graphicData>
+      <texPath>Things/Building/MihoDroneBed/MihoDroneBed</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+
+      <drawSize>(3.2,3.2)</drawSize>
+      <damageData>
+        <rect>(0,0.05,1,1.95)</rect>
+      </damageData>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+      <WorkToBuild>10000</WorkToBuild>
+      <Mass>100</Mass>
+	  <Beauty>-5</Beauty>
+      <BedRestEffectiveness>1.0</BedRestEffectiveness>
+      <Comfort>1.0</Comfort>
+      <ImmunityGainSpeedFactor>1.0</ImmunityGainSpeedFactor>
+	  <MedicalTendQualityOffset>0.5</MedicalTendQualityOffset>
+      <SurgerySuccessChanceFactor>2.5</SurgerySuccessChanceFactor>
+    </statBases>
+    <size>(1,2)</size>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>75</costStuffCount>
+    <costList>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <building>
+      <bed_showSleeperBody>true</bed_showSleeperBody>
+      <bed_healPerDay>25</bed_healPerDay>
+			<bed_defaultMedical>true</bed_defaultMedical>
+
+    </building>
+    <fillPercent>0.2</fillPercent>
+    <pathCost>42</pathCost>
+    <staticSunShadowHeight>0.17</staticSunShadowHeight>
+    <castEdgeShadows>True</castEdgeShadows>
+    <designationCategory>MihoBuilding</designationCategory>
+    <designationHotKey>Misc2</designationHotKey>
+    <techLevel>Industrial</techLevel>
+	<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+	<uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+  
+</Defs>

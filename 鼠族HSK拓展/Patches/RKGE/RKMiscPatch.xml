@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Patch>
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThoughtDef[defName="SleptInBedroom"]</xpath>
+				<value>
+					<nullifyingTraits>
+					</nullifyingTraits>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThoughtDef[defName="SleptInBedroom"]/nullifyingTraits</xpath>
+				<value>
+					<li>RKTrait_YunDanFengQing</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThoughtDef[defName="AteWithoutTable"]/nullifyingTraits</xpath>
+				<value>
+					<li>RKTrait_YunDanFengQing</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/TraderKindDef[defName="Base_Neolithic_Standard"]/stockGenerators</xpath>
+				<value>
+					<li Class="StockGenerator_BuyTradeTag">
+						<tag>RK_ExoticValuable</tag>
+					</li>
+					<li Class="StockGenerator_BuyTradeTag">
+						<tag>RK_Jewelry</tag>
+					</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/TraderKindDef[defName="Base_Outlander_Standard"]/stockGenerators</xpath>
+				<value>
+					<li Class="StockGenerator_BuyTradeTag">
+						<tag>RK_ExoticValuable</tag>
+					</li>
+					<li Class="StockGenerator_BuyTradeTag">
+						<tag>RK_Jewelry</tag>
+					</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	<!-- RK_Scenario_Settler 已由 HSK 移除(00_RemoveWorkshopOnly);HSK 场景 RK_Scenario 已自带 ConfigurePawnsXenotypes 部件,本操作作废 -->
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThoughtDef[defName="SleptInBedroom"]/nullifyingTraits</xpath>
+				<value>
+					<li>RKTrait_YunDanFengQing</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

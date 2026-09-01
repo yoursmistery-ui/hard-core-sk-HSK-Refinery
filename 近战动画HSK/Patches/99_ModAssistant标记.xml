@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- HSK Mod Assistant 标记: 登记进 NativeAddon, 使本 mod 被识别为 HSK 附加(消除"兼容性未知"红标)。
+         框架/内容混合类, 不挂 loadAfter HSK 链(防成环); 排序交给 About 既有 loadAfter(harmony/CE/HAR/FA 等)。 -->
+    <Operation Class="PatchOperationAdd" MayRequire="DimonSever000.ModIndicator.Specific">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+        <value>
+            <li>
+                <id>co.uk.epicguru.meleeanimation</id>
+            </li>
+        </value>
+    </Operation>
+</Patch>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 98_美狐异种人白名单(2026-08-27) -->
+    <!-- 需求: 美狐(Alien_Miho)只允许生成美狐自己的 6 个异种人,排斥原版/DLC 异种人
+         (Sanguophage/Hussar/Genie/Starjack/Dirtmole/Waster/Neanderthal/Pigskin/Impid/
+         Yttakin/Baseliner 等)。参考既有异种人白名单家族
+         (HSK修复整合/09_杂项.xml 的 Human/Nova/Dova/Norbal/Orassan/Ratkin 六族 +
+          鼠族HSK拓展/92_鼠族异种生成限制.xml 的 ①Ratkin/⑦Human/⑧Alien_Asari)。
+         美狐 1.6/Defs/Race_Miho.xml 的 raceRestriction/xenotypeList 原本已是纯美狐 6 条,
+         本补丁是最终层兜底: 显式重写该列表,防后续其它 mod 往美狐白名单塞原版异种人,
+         或在 mod 更新中被覆盖。内容(含 MayRequire 门控)与源 Defs 完全一致:
+         5 个基础美狐异种 + Odyssey 星生美狐(Xeno_CelestialMiho_Voidborn, 仅装 Odyssey 时存在)。
+
+         写法要点(遵循 AGENTS.md §3 铁律):
+         - 1.6 起 Operation 级 MayRequire 已失效 → 不用它做 mod 门控,改走 xpath 存在性门控:
+           美狐未加载时两个 Conditional 均 nomatch/match 空转,不报错。
+         - 一律顶层独立 Operation(不嵌套 FindMod+Sequence)。
+         - 分支 A: xenotypeList 已存在 → 整体 Replace(覆盖,不是追加)。
+         - 分支 B: raceRestriction 存在但无 xenotypeList 节点 → Add 创建
+           (用 [not(xenotypeList)] 保证与分支 A 互斥,避免重复节点)。 -->
+
+    <!-- A. 已有 xenotypeList → 覆盖为纯美狐 6 条 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/xenotypeList</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/xenotypeList</xpath>
+            <value>
+                <xenotypeList>
+                    <li>Xeno_CelestialMiho</li>
+                    <li>Xeno_CelestialMiho_Arctic</li>
+                    <li>Xeno_CelestialMiho_Desert</li>
+                    <li>Xeno_CelestialMiho_Highland</li>
+                    <li>Xeno_CelestialMiho_Highmate</li>
+                    <li MayRequire="Ludeon.RimWorld.Odyssey">Xeno_CelestialMiho_Voidborn</li>
+                </xenotypeList>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- B. raceRestriction 存在但 xenotypeList 缺失 → 新建 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction[not(xenotypeList)]</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction</xpath>
+            <value>
+                <xenotypeList>
+                    <li>Xeno_CelestialMiho</li>
+                    <li>Xeno_CelestialMiho_Arctic</li>
+                    <li>Xeno_CelestialMiho_Desert</li>
+                    <li>Xeno_CelestialMiho_Highland</li>
+                    <li>Xeno_CelestialMiho_Highmate</li>
+                    <li MayRequire="Ludeon.RimWorld.Odyssey">Xeno_CelestialMiho_Voidborn</li>
+                </xenotypeList>
+            </value>
+        </match>
+    </Operation>
+
+</Patch>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>鼠族家具拓展</name>
+	<author>Ratkin Patch</author>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>local.ratkin.furniture</packageId>
+	<description>
+整合 GloomyFurniture(Solaris)、GloomyDeco(Dalrae)与 Ratkin Lifestyle+(Feng Xinzi)三个老式家具/装饰包,重写为独立 mod,已针对 Hard Core SK 与鼠族文化适配。
+
+内容(127 件家具与建筑):
+- 家具(Furniture 分类): 床/椅/桌/床头柜/衣柜/书架/橱柜/储物柜/梳妆台/茶具/泰迪熊/娱乐(象棋·扑克·台球·电视)/地毯/油灯·电灯·壁灯/壁炉
+- 辅助设施(Accessories 分类): 墙体/窗墙/通风墙/围栏/门/门框/街灯/花墙/树/研究台/屠宰台/灶台/缝纫台/锻造台/篝火,以及老式装饰(水井·稻草人·邮箱·船·狗屋·树桩等)
+- 古典装饰(2026-08-16 整合 Ratkin Lifestyle+): 公告牌/木船/风车×2/干草堆·干草块/晾衣架×2/推车/稻草人/工具/十字架×2/鹅卵石/画作×8/烛台×4/酒桶堆/骑士雕像
+
+适配要点:
+- 全部家具/建筑拆分挂载到 HSK 的「家具(Furniture)」与「辅助设施(Accessories)」分类
+- 全部按物品类型挂载 HSK 科研节点(家具 I/床 II/照明 I/娱乐 I/建造 I/金属加工 I/艺术 I·II 等)
+- 建材使用 HSK 材质(原木/钢铁/普通零部件等);木质件按材质制(Woody)建造
+- 所有 Def 重命名为 RKFC_ 命名空间,彻底独立,不依赖原 mod
+
+动态件(Assemblies/RatkinFurniture.dll,本 mod 自写):
+- 木船/风车叶片/烛台火焰动画、发电风车(原版风力发电机简化版,基础 -1400W)
+- 文化风格菜单图标修复(Designator_Build.UpdateIcon 后置补丁,墙图标随 Ideo 风格替换)
+
+存储适配(可选): 古典储物家具沿用 HSK 家具标准,可与 HSK-Storage-Extensions
+(hsk.extensions.storage)与 Adaptive Storage Framework(adaptive.storage.framework)共存。
+
+注: 点唱机(需原版 Gloomylynx.dll 驱动音乐)与旧版不可建造路灯未包含。
+	</description>
+	<modDependencies>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Core SK</displayName>
+			<downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+		</li>
+		<li>
+			<packageId>Solaris.RatkinRaceMod</packageId>
+			<displayName>NewRatkinPlus (RatkinRaceHSK)</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>Ludeon.RimWorld</li>
+		<li>skyarkhangel.HSK</li>
+		<li>Solaris.RatkinRaceMod</li>
+		<li>hsk.extensions.storage</li>
+		<li>adaptive.storage.framework</li>
+		<li>DARKkai.RatkinBackStoryExpanded.HSK</li>
+		<li>DimonSever000.ModIndicator.Specific</li>
+	</loadAfter>
+</ModMetaData>

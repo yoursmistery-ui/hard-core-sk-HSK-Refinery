@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 修复鼠族背包贴图层:与斜挎包等一致,正面最下层(kuabao),避免背后穿透 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Backpack"]/apparel</xpath>
+        <value><layers><li>kuabao</li></layers></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_OutdoorBackpack"]/apparel</xpath>
+        <value><layers><li>kuabao</li></layers></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_CrossBack"]/apparel</xpath>
+        <value><layers><li>kuabao</li></layers></value>
+    </Operation>
+    <!-- 圣诞袋层级改为 kuabao(正面最下层,与其他背包一致) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_SantaSack"]/apparel/layers</xpath>
+        <value><layers><li>kuabao</li></layers></value>
+    </Operation>
+</Patch>

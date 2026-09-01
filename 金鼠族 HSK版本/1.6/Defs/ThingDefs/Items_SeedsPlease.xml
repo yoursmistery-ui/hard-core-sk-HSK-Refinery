@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- SeedsPlease 种子: 冰晶花 / 风雪晶树(2026-08-22 新增,与植物处理台提取配方联动) -->
+  <!-- 种子只能种进 HSK 水培箱(植物侧 sowTags 仅 Hydroponic);贴图沿用冰晶物品贴图 -->
+
+  <SeedsPlease.SeedDef ParentName="SeedBase" MayRequire="notfood.SeedsPlease">
+    <defName>SeedOAGeneIceCrystalFlower</defName>
+    <label>ice crystal flower seeds</label>
+    <description>Genetically engineered seeds extracted from blizzard shattered crystals. Once sown in a hydroponic basin, they will grow into ice crystal flowers in an enclosed room.</description>
+    <sources>
+      <li>OAGene_Plant_IceCrystalFlower</li>
+    </sources>
+    <graphicData>
+      <texPath>Things/Item/OAGene_IceCrystal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+  </SeedsPlease.SeedDef>
+
+  <SeedsPlease.SeedDef ParentName="SeedBase" MayRequire="notfood.SeedsPlease">
+    <defName>SeedOAGeneSnowyCrystalTree</defName>
+    <label>snowy crystal tree seeds</label>
+    <description>Genetically engineered seeds extracted from blizzard shattered crystals. Once sown in a hydroponic basin, they will grow into a snowy crystal tree.</description>
+    <sources>
+      <li>OAGene_Plant_SnowyCrystalTree</li>
+    </sources>
+    <graphicData>
+      <texPath>Things/Item/OAGene_IceCrystal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+  </SeedsPlease.SeedDef>
+
+  <!-- 原版风雪树种(OAGene_Plant_SnowyCrystalTree_Seed): C# DLL(Snowstorm_ThingDefOf)仍需此 def,
+       SymbolResolver_Hometown 归乡据点和开局会放置它。原定义随 SeedsPlease 化被删,此处恢复;
+       原专用种子贴图未随 HSK 适配保留,贴图沿用冰晶物品单帧贴图。 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>OAGene_Plant_SnowyCrystalTree_Seed</defName>
+    <label>windstorm tree species</label>
+    <description>The basic tree species used for planting snow crystal trees, whether for cooling in summer or simply for outdoor decoration, snow crystal trees are an excellent choice.\n\nIn some tribes or beliefs, this tree is considered a symbol of the god of wind and snow. It is said that when these trees merge into forests and leaves into clouds, it means that this planet will face eternal ice.</description>
+    <stackLimit>10</stackLimit>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Mass>2.0</Mass>
+      <Beauty>0</Beauty>
+      <MarketValue>700</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/OAGene_IceCrystal/OAGene_IceCrystal_a</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.1, 1.1)</drawSize>
+    </graphicData>
+    <thingCategories>
+      <li>ItemsMisc</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Plantable">
+        <plantDefToSpawn>OAGene_Plant_SnowyCrystalTree</plantDefToSpawn>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

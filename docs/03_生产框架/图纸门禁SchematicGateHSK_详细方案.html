@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图纸门禁子模块 SchematicGateHSK · 详细方案</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2328; --muted:#57606a;
+    --line:#d8dee4; --accent:#2f6feb; --head:#241a45; --headink:#ece7fa;
+    --ok:#1a7f37; --okbg:#dafbe1; --warn:#9a6700; --warnbg:#fff8c5;
+    --bad:#cf2220; --badbg:#ffebe9; --info:#0969da; --infobg:#ddf4ff; --mut:#6e7781; --mutbg:#eceff1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;line-height:1.7;font-size:15px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,#241a45,#4b2e83);color:var(--headink);border-radius:16px;padding:28px 32px;margin-bottom:24px;box-shadow:0 8px 24px rgba(36,26,69,.25);}
+  header.page h1{margin:0 0 8px;font-size:25px;letter-spacing:.5px;}
+  header.page p{margin:4px 0;color:#d6cbf2;font-size:13.5px;}
+  code{background:#eef1f4;padding:1px 6px;border-radius:5px;font-size:12.5px;font-family:"SFMono-Regular",Consolas,monospace;color:#b8336a;}
+  header.page code{background:rgba(255,255,255,.14);color:#f3edff;}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 14px;font-size:13px;}
+  .chip b{color:#fff}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:22px;font-size:13.5px;}
+  nav.toc b{color:var(--head)} nav.toc a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block;padding:2px 0;}
+  nav.toc a:hover{text-decoration:underline}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 26px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.03);scroll-margin-top:14px;}
+  h2{font-size:20px;color:var(--head);border-left:5px solid #6f42c1;padding-left:12px;margin:22px 0 6px;}
+  h3{font-size:16px;color:#3a2a63;margin:20px 0 6px;}
+  p.lead{margin:6px 0 14px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;margin:12px 0 8px;font-size:13.5px;background:#fff;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f3f0fa;color:#3a2a63;font-weight:700;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  ul{margin:8px 0;padding-left:22px;} li{margin:4px 0;}
+  ol{margin:8px 0;padding-left:22px;} ol li{margin:6px 0;}
+  blockquote{margin:12px 0;padding:10px 16px;background:#f6f2fd;border-left:4px solid #6f42c1;border-radius:0 8px 8px 0;color:#3a2a63;font-size:13.5px;}
+  .badge{display:inline-block;font-weight:700;font-size:12px;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+  .b-ok{color:var(--ok);background:var(--okbg)} .b-warn{color:var(--warn);background:var(--warnbg)}
+  .b-bad{color:var(--bad);background:var(--badbg)} .b-info{color:var(--info);background:var(--infobg)} .b-mut{color:var(--mut);background:var(--mutbg)}
+  pre.tree{background:#241a45;color:#e6ddfa;border-radius:12px;padding:16px 18px;font-size:12.5px;line-height:1.65;overflow-x:auto;font-family:"SFMono-Regular",Consolas,monospace;}
+  pre.xml{background:#0d2440;color:#dcebff;border-radius:12px;padding:14px 16px;font-size:12px;line-height:1.6;overflow-x:auto;font-family:"SFMono-Regular",Consolas,monospace;white-space:pre;}
+  .flowstep{display:flex;gap:12px;align-items:stretch;margin:10px 0;}
+  .fsnum{flex:0 0 34px;height:34px;border-radius:50%;background:#6f42c1;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .fsbody{flex:1;background:#faf8fe;border:1px solid #e2d9f3;border-radius:10px;padding:8px 14px;font-size:13.5px;}
+  footer{color:var(--muted);font-size:12.5px;margin-top:24px;padding-top:14px;border-top:1px dashed var(--line);}
+  @media (max-width:680px){th,td{padding:6px;font-size:12.5px}header.page{padding:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>图纸门禁子模块 SchematicGateHSK · 详细方案</h1>
+  <p>2026-08-27 · 归属 <code>HSK工业科研大修</code> · 独立程序集方案 —— 当日被蓝图经济 v4.1 取代(用户澄清: 蓝图用 MO 贴图即可), 保留作参考</p>
+  <p>目标: 复刻 MO(Medieval Overhaul)<code>RequiredSchematic</code> 图纸门禁体系;<b>电力工程 I(Electricity)</b>为首个门控节点,不走蓝图书集卷制。</p>
+  <div class="chips">
+    <div class="chip"><b>状态</b> <span class="badge b-bad" style="background:#cf2220;color:#fff">已回退</span> 同日蓝图经济 v4.1 取代: 电力工程I 回归蓝图书门禁(MO 卷轴贴图保留), defs/补丁/dll 已撤, 代码归档 —— 本文件留作 MO 语义反编译参考</div>
+    <div class="chip"><b>决策链</b> 蓝图tier2方案(作废回退) → 用户拍板"用MO的体系" → 反编译1:1复刻</div>
+    <div class="chip"><b>环境结论</b> MO订阅未勾选(零DankPyon def,必须复刻) · VEF实际已激活(修正首查误报)</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <b>目录:</b>
+  <a href="#s1">1 决策记录</a>
+  <a href="#s2">2 MO原版语义</a>
+  <a href="#s3">3 实现架构</a>
+  <a href="#s4">4 物品参数</a>
+  <a href="#s5">5 获取渠道</a>
+  <a href="#s6">6 验证与同步</a>
+  <a href="#s7">7 实测清单</a>
+  <a href="#s8">8 限制与扩展</a>
+  <a href="#s9">9 新增节点模板</a>
+</nav>
+
+<section class="card" id="s1">
+  <h2>1. 背景与决策记录</h2>
+  <table>
+    <tr><th style="width:11%">时间</th><th style="width:45%">决策</th><th>结果</th></tr>
+    <tr><td>08-27 上午</td><td>电力工程 I 曾按蓝图书体系做 <code>Blueprint_Electricity</code>(tier2 首卷)</td><td><span class="badge b-bad">❌ 作废回退</span> defs/中英文条目已删;MO 卷轴贴图保留复用</td></tr>
+    <tr><td>08-27 下午</td><td>环境核查: MO 本体<b>订阅未勾选</b>(游戏零 DankPyon def)→ MO DLL 类不可引用,必须复刻</td><td><span class="badge b-ok">✅ 复刻方向确立</span></td></tr>
+    <tr><td>08-27 晚</td><td>二次核查修正: <b>VEF Core 实际已激活</b>(工坊 2023507013;1.6 工坊 mod 从 workshop 目录直接加载,首查只扫 Mods 目录导致误报)</td><td><span class="badge b-ok">✅ 文档已修正</span> 本模块不依赖 VEF;后续任务链解锁 KCSG 玩法</td></tr>
+    <tr><td>08-27 晚</td><td>做成<b>独立子模块程序集</b>(用户要求),为藏宝图/废墟/炼金等后续 MO 子系统留扩展位</td><td><span class="badge b-ok">✅ SchematicGateHSK.dll</span></td></tr>
+  </table>
+</section>
+
+<section class="card" id="s2">
+  <h2>2. MO 原版语义(反编译依据)</h2>
+  <p class="lead">反编译源: <code>workshop\content\294100\3219596926\1.6\Assemblies\MedievalOverhaul.dll</code>(ilspycmd)</p>
+  <ul>
+    <li><code>RequiredSchematic : DefModExtension { ThingDef schematicDef }</code> 挂在 <code>ResearchProjectDef</code> 上。</li>
+    <li><b>CanStartNow postfix</b> → <code>PlayerHasSchematic</code>: 遍历 <code>Find.Maps</code> 殖民地建筑的 <code>Building_ResearchBench</code>,查其<b>所在房间</b> <code>uniqueContainedThings</code> 中 <code>Building_Bookcase.HeldBooks</code> 是否含目标图纸 → 无则不可开始。</li>
+    <li><b>CanBeResearchedAt postfix</b>: 同逻辑但<b>逐研究台</b>判定(该台自己房间里有没有)。</li>
+    <li>阅读侧: <code>BookOutcomeProperties_GainResearchDefinable</code> 继承原版 <code>GainResearch</code>,doer 的 <code>OnBookGenerated</code> 里 <code>values[项目]=GetBaseValue()×gainMultiplier</code>,原版 <code>OnReadingTick</code> 在读书过程中分摊科研值。</li>
+  </ul>
+  <blockquote>MO 缺陷(复刻时已修): 两补丁共用<b>静态单槽缓存</b>,跨研究台/跨图纸会串结果 → 我们改为按 schematicDef / 按 bench 的双字典缓存。</blockquote>
+</section>
+
+<section class="card" id="s3">
+  <h2>3. 实现架构</h2>
+  <pre class="tree">HSK工业科研大修/
+├─ Source_SchematicGateHSK/SchematicGateHSK.cs      ← 独立程序集(BlueprintUnlockHSK 零改动)
+├─ 1.6/Assemblies/SchematicGateHSK.dll               ← build.ps1 双程序集产出
+├─ 1.6/Defs/ThingDefs_SchematicGates.xml             ← 图纸书基类 + Schematic_Electricity
+├─ Patches/65_图纸门禁_电力工程I.xml                  ← 给 Electricity 挂 SchematicRequiredExt
+├─ Patches/66_图纸商人.xml                            ← 异域商队+鼠族王国商队 投放/回购
+├─ Textures/Things/Item/Blueprints/SchematicScroll/×7 ← 取自 MO Special/Book/SchematicScroll*
+└─ Languages/English/DefInjected/ThingDef/SchematicGates.xml   (中文直写 Defs, 从 Flattened 新约定)</pre>
+
+  <h3>3.1 数据层</h3>
+  <table>
+    <tr><th style="width:36%">类 / 字段</th><th style="width:24%">挂载位置</th><th>作用</th></tr>
+    <tr><td><code>SchematicRequiredExt { schematicDef }</code></td><td>ResearchProjectDef(补丁 Add)</td><td>声明"该科技需要此图纸就位"</td></tr>
+    <tr><td><code>SchematicBookExt { targetTech, gainMultiplier }</code></td><td>图纸书 ThingDef</td><td>阅读加哪门科技、倍率</td></tr>
+    <tr><td><code>SchematicBookProperties : BookOutcomeProperties</code></td><td>书的 comps.doers</td><td>DoerClass → SchematicBookDoer</td></tr>
+    <tr><td><code>SchematicBookDoer : ReadingOutcomeDoerGainResearch</code></td><td>—</td><td>OnBookGenerated 清随机池、锁定 values[targetTech]=基值×倍率;信息卡显示"推进【X】+书架解锁"</td></tr>
+    <tr><td><code>StockGenerator_SchematicTrader</code></td><td>商人 stockGenerators</td><td>35% 携一本随机图纸;HandlesThingDef 按 ext 识别(可回购)</td></tr>
+    <tr><td><code>SchematicDatabase.AllBookDefs()</code></td><td>—</td><td>懒加载扫描全部图纸书 def → <b>新增图纸零代码</b></td></tr>
+  </table>
+
+  <h3>3.2 门禁补丁与缓存</h3>
+  <ul>
+    <li><b>CanStartNow getter postfix</b>: 全局判定,缓存 <code>Dict&lt;schematicDef,(bool,到期tick)&gt;</code>,250 tick。</li>
+    <li><b>CanBeResearchedAt(bench,bool) postfix</b>: 逐台判定,缓存 <code>Dict&lt;bench,(def,bool,到期tick)&gt;</code> —— 修 MO 单槽串台 bug,def 变更自动失效重算。</li>
+    <li>无扩展的普通科技两次字典查即返回,零遍历零反射,符合 §9 性能铁律。</li>
+  </ul>
+
+  <h3>3.3 与蓝图书体系的边界</h3>
+  <table>
+    <tr><th style="width:14%"></th><th>蓝图书 BlueprintUnlockHSK</th><th>图纸 SchematicGateHSK</th></tr>
+    <tr><td>解锁语义</td><td>集齐系列卷册全部<b>研读</b>→解锁,书退役</td><td>图纸<b>放进研究台同房间书架</b>即可开始,常驻可反复用</td></tr>
+    <tr><td>阅读收益</td><td>只记"已读",无科研值</td><td>按原版机制<b>实时推进科研值</b>(仿 MO)</td></tr>
+    <tr><td>档位</td><td>tier1~5(权重/时长曲线)</td><td>暂不分档(池小靠 35% 稀缺),ext 预留加 tier</td></tr>
+    <tr><td>现有节点</td><td>111 本 / 43+ 科技</td><td>电力工程 I(首节点)</td></tr>
+    <tr><td>UI</td><td>ResearchTreeSK"已读 x/N"角标</td><td>无角标;描述卡提示+超链接</td></tr>
+  </table>
+
+  <h3>3.4 1.6 API 适配结论(踩坑记录)</h3>
+  <ul>
+    <li><code>CodeHyperlink</code> → <code>Verse.DefHyperlink</code>:本模块改走 XML <code>descriptionHyperlinks</code>,零代码。</li>
+    <li><code>Room.uniqueContainedThings</code> 私有 → 公开泛型 <code>ContainedThings&lt;Thing&gt;()</code>。</li>
+    <li><code>Def.Label</code> → <code>LabelCap</code>(TaggedString 隐转 string)。</li>
+    <li>PS5 反射加载 Assembly-CSharp 失败 → csc 自写 dumper + AssemblyResolve 指 Managed 目录(工具留 <code>_tmp/refdump/</code>)。</li>
+  </ul>
+</section>
+
+<section class="card" id="s4">
+  <h2>4. 物品参数(Schematic_Electricity)</h2>
+  <table>
+    <tr><th style="width:26%">字段</th><th>值(继承 SG_SchematicBookBase ← BookBase)</th></tr>
+    <tr><td>label / defName</td><td>图纸:电力工程 I / <code>Schematic_Electricity</code></td></tr>
+    <tr><td>MarketValue</td><td><b>500</b>(MO Schematic 同款价)</td></tr>
+    <tr><td>ageYearsRange</td><td>1000~2000(MO 古卷语义)</td></tr>
+    <tr><td>tradeTags</td><td>Exotic + <b>RK_Schematic</b>(回购标签)</td></tr>
+    <tr><td>thingCategories</td><td>仅 Books(<code>Inherit="False"</code>);<code>thingSetMakerTags</code> 清空 → 不进蓝图文奖励池,两体系物资隔离</td></tr>
+    <tr><td>贴图三态</td><td>铺=Graphic_Single SchematicScroll;开卷=Graphic_Multi _Open(e/n/s);书架竖立=Graphic_Multi _Vertical+顶高度偏置 —— 均取自 MO 原件</td></tr>
+    <tr><td>descriptionHyperlinks</td><td>→ Electricity(原版机制,无代码)</td></tr>
+    <tr><td>SchematicBookExt</td><td>targetTech=<b>Electricity</b>, gainMultiplier=1.0</td></tr>
+  </table>
+  <blockquote><b>门禁对象终态</b>: Electricity(电力工程 I · Industrial · 1500 · 前置 Research_table_B2 · 原生 modExtensions=SK档+ResearchTreeSK → 补丁65实机走 match 追加分支,nomatch 分支兜底已覆盖)。下游 Generators/Batteries/WatermillGenerator/AirConditioning 等全部穿过它 = 「<b>电力钥匙</b>」设计意图。</blockquote>
+</section>
+
+<section class="card" id="s5">
+  <h2>5. 获取渠道(商人)</h2>
+  <table>
+    <tr><th style="width:34%">渠道</th><th style="width:36%">方式</th><th>参数</th></tr>
+    <tr><td>原版 <code>Caravan_Outlander_Exotic</code></td><td>66号补丁 Add trader generator + BuyTradeTag</td><td>35%/商队携一本随机图纸</td></tr>
+    <tr><td>鼠族 <code>RK_TraderKind_KingdomExotic</code></td><td>同上(xpath 存在性门控)</td><td>同上</td></tr>
+    <tr><td>玩家卖出</td><td><code>StockGenerator_BuyTradeTag RK_Schematic</code></td><td>图纸可回售,防死当</td></tr>
+    <tr><td>任务/事件池</td><td>暂不注入(与蓝图文池隔离)</td><td>需要时给 ThingSetMaker 加图纸分支</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s6">
+  <h2>6. 验证与同步记录</h2>
+  <ul>
+    <li><span class="badge b-ok">编译</span> <code>build.ps1</code>(csc v4.0.30319,双程序集函数化)→ 两 DLL 无错产出。</li>
+    <li><span class="badge b-ok">补丁模拟</span> <code>_tmp/sim_schematic_6566.py</code>: 65 外层 match + 内层分支 Add OK;66 四步全 OK;断言 3/3 PASS。</li>
+    <li><span class="badge b-ok">双目录同步</span> 12 文件逐文件 SHA 核对一致(回退 Gates/EN条目、新增 Defs×1+Patches×2+EN语言×1+cs+dll×2、修订 About+build.ps1+分析文档);Assemblies 两侧仅 2 个正式 DLL,无测试残留(§5 铁律)。</li>
+    <li><span class="badge b-ok">缓存清理</span> MissileGirl <code>Unified.xml</code> 已移回收站,下次启动重导。</li>
+    <li><span class="badge b-info">文档</span> <code>科技配置/蓝图科技节点分析.md</code> 改判段更新;<code>中世纪OM商人任务事件专项</code> md+html 的 VEF 误报全部修正。</li>
+  </ul>
+</section>
+
+<section class="card" id="s7">
+  <h2>7. 游戏实测清单</h2>
+  <div class="flowstep"><div class="fsnum">1</div><div class="fsbody">启动无红字,日志无 <code>[SchematicGateHSK] patch failed</code>(双 postfix 挂载成功)。</div></div>
+  <div class="flowstep"><div class="fsnum">2</div><div class="fsbody">未放图纸:电力工程 I <b>不可开始</b>(研究卡无开始按钮),自动科研不选它。</div></div>
+  <div class="flowstep"><div class="fsnum">3</div><div class="fsbody"><code>Building_Bookcase</code> 子类书架与研究台<b>同房间</b>放图纸 → 立即可开;拆书架后 250 tick 内恢复锁定=预期缓存延迟。</div></div>
+  <div class="flowstep"><div class="fsnum">4</div><div class="fsbody">小人阅读图纸 → 电力工程 I 进度条<b>阅读中持续上涨</b>(分摊式,非一次性)。</div></div>
+  <div class="flowstep"><div class="fsnum">5</div><div class="fsbody">异域商队/鼠族王国商队到访 → 约 1/3 概率出售图纸(500 银档);可卖出回购。</div></div>
+  <div class="flowstep"><div class="fsnum">6</div><div class="fsbody">回归: 蓝图书 tier1~5 门控/角标/研读/商人全部不受影响(零改动)。</div></div>
+</section>
+
+<section class="card" id="s8">
+  <h2>8. 已知限制与扩展位</h2>
+  <table>
+    <tr><th style="width:40%">项</th><th>说明 / 处置</th></tr>
+    <tr><td>研究页无"需要图纸:X"提示行</td><td>MO 有 DrawUnlockableHyperlinks prefix;v2 可仿(纯 UI,低风险)</td></tr>
+    <tr><td>投放不分档</td><td>池小靠 35% 稀缺;<code>SchematicBookExt</code> 预留加 tier 字段接权重曲线</td></tr>
+    <tr><td>藏宝图/废墟/炼金等 MO 子系统</td><td><b>并入本程序集扩展</b>(不再新建第四个 dll);废墟玩法可用 KCSG(VEF 已激活,见专项方案修正版 P2/P3)</td></tr>
+    <tr><td>遗留待决</td><td>部署侧 07:04 六文件语言漂移(Flattened 化)方向未拍板</td></tr>
+  </table>
+</section>
+
+<section class="card" id="s9">
+  <h2>9. 新增图纸节点三步模板</h2>
+  <div class="flowstep"><div class="fsnum">①</div><div class="fsbody"><b>加书</b>(ThingDefs_SchematicGates.xml,零代码,池自动收录):</div></div>
+  <pre class="xml">&lt;ThingDef ParentName="SG_SchematicBookBase"&gt;
+    &lt;defName&gt;Schematic_XXX&lt;/defName&gt;
+    &lt;label&gt;图纸:XXX&lt;/label&gt;
+    &lt;description&gt;…放入研究台同房间书架即可解锁…&lt;/description&gt;
+    &lt;descriptionHyperlinks&gt;&lt;ResearchProjectDef&gt;目标科技&lt;/ResearchProjectDef&gt;&lt;/descriptionHyperlinks&gt;
+    &lt;modExtensions&gt;
+        &lt;li Class="SchematicGateHSK.SchematicBookExt"&gt;
+            &lt;targetTech&gt;目标科技&lt;/targetTech&gt;&lt;gainMultiplier&gt;1.0&lt;/gainMultiplier&gt;
+        &lt;/li&gt;
+    &lt;/modExtensions&gt;
+&lt;/ThingDef&gt;</pre>
+  <div class="flowstep"><div class="fsnum">②</div><div class="fsbody"><b>加门禁补丁</b>: 仿 65 号 PatchOperationConditional 双分支,给目标 <code>ResearchProjectDef</code> Add <code>SchematicRequiredExt</code>(注意补丁文件名序,勿用 1xx 编号)。</div></div>
+  <div class="flowstep"><div class="fsnum">③</div><div class="fsbody"><b>文案+验证</b>: 中英文案;跑 <code>_tmp/patch_simulator.py</code> 变体验证 → 双目录逐文件同步 hash 核对 → 游戏实测。</div></div>
+  <blockquote>调参优先级: 先调 <code>gainMultiplier</code> / 商人携带概率,<b>勿撤门禁</b>(与蓝图书同策)。</blockquote>
+</section>
+
+<footer>
+  源文档: <code>docs/03_生产框架/图纸门禁SchematicGateHSK_详细方案.md</code>(同步维护) · 反编译依据: MO 1.6.2.2 workshop 副本 · 相关: <code>中世纪OM商人任务事件专项_科研书获取渠道方案</code> / <code>科技配置/蓝图科技节点分析.md</code>
+</footer>
+
+</div>
+</body>
+</html>

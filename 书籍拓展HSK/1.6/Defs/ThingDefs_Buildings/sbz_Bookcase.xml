@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!--2-tier bookcase-->
+	<ThingDef ParentName="BookcaseBase">
+		<defName>sbz_TwoTierBookcase</defName>
+		<label>2-tier bookcase</label>
+		<description>A two-tier bookcase for storing and displaying up to twenty-four books. Books stored here will passively enhance academic work done nearby, and increase the beauty of the bookcase. The stored books will never deteriorate.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcase</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<drawOffset>(0, 0.08, 0)</drawOffset>
+		</graphicData>
+		<size>(2,1)</size>
+		<uiIconPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcase_south</uiIconPath>
+		<uiIconScale>1.6</uiIconScale>
+		<uiIconOffset>(0, 0.1)</uiIconOffset>
+		<costStuffCount>48</costStuffCount>
+		<staticSunShadowHeight>0.4</staticSunShadowHeight>
+		<statBases>
+			<MaxHitPoints>240</MaxHitPoints>
+			<Mass>16</Mass>
+			<WorkToBuild>1200</WorkToBuild>
+		</statBases>
+		<building>
+			<maxItemsInCell>12</maxItemsInCell>
+		</building>
+		<placeWorkers>
+			<li>sbz.PlaceWorker_Bookcase</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="sbz.BookcaseModExtension">
+				<north>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcaseLayer_north</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</north>
+				<east>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcaseLayer_east</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</east>
+				<south>
+					<bookOffset>(-0.8, 0.1, -0.05)</bookOffset>
+					<bookRotate>0</bookRotate>
+					<bookSpacing>(0.147, 0, 0)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<tierOffset>(0, 1.6, 0.56)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcaseLayer1_south</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcaseLayer2_south</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</south>
+				<west>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_TwoTierBookcaseLayer_west</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>				
+				</west>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="BookcaseBase">
+		<defName>sbz_NarrowTwoTierBookcase</defName>
+		<label>narrow 2-tier bookcase</label>
+		<description>A narrow two-tier bookcase for storing and displaying up to twelve books. Books stored here will passively enhance academic work done nearby, and increase the beauty of the bookcase. The stored books will never deteriorate.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcase</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<drawOffset>(0, 0.08, 0)</drawOffset>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcase_south</uiIconPath>
+		<uiIconScale>1.6</uiIconScale>
+		<uiIconOffset>(0, 0.1)</uiIconOffset>
+		<costStuffCount>24</costStuffCount>
+		<staticSunShadowHeight>0.4</staticSunShadowHeight>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Mass>8</Mass>
+			<WorkToBuild>600</WorkToBuild>
+		</statBases>
+		<building>
+			<maxItemsInCell>12</maxItemsInCell>
+		</building>
+		<placeWorkers>
+			<li>sbz.PlaceWorker_Bookcase</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="sbz.BookcaseModExtension">
+				<north>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcaseLayer_north</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</north>
+				<east>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcaseLayer_east</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</east>
+				<south>
+					<bookOffset>(-0.31, 0.1, -0.05)</bookOffset>
+					<bookRotate>0</bookRotate>
+					<bookSpacing>(0.127, 0, 0)</bookSpacing>
+					<booksPerTier>6</booksPerTier>
+					<tierOffset>(0, 1.6, 0.56)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcaseLayer1_south</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcaseLayer2_south</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>
+				</south>
+				<west>
+					<bookHide>true</bookHide>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_NarrowTwoTierBookcaseLayer_west</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 3.5, 0)</offset>
+						</li>
+					</layers>				
+				</west>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!--Bookshelf-->
+	<ThingDef ParentName="BookcaseBase">
+		<defName>sbz_Bookshelf</defName>
+		<label>bookshelf</label>
+		<description>A shelf for storing and displaying up to twelve books. Books stored here will passively enhance academic work done nearby, and increase the beauty of the bookshelf. The stored books will never deteriorate. Can also be placed on top of other buildings.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Bookcase/sbz_Bookshelf</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<costStuffCount>24</costStuffCount>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Mass>4</Mass>
+			<WorkToBuild>600</WorkToBuild>
+		</statBases>
+		<clearBuildingArea>false</clearBuildingArea>
+		<building>
+			<maxItemsInCell>6</maxItemsInCell>
+			<isEdifice>false</isEdifice>
+		</building>
+		<placeWorkers>
+			<li>sbz.PlaceWorker_Bookcase</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="sbz.BookcaseModExtension">
+				<north>
+					<bookOffset>(-0.8, 0.02, 0.18)</bookOffset>
+					<bookSpacing>(0.1465, 0, 0)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfLayer_north</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>
+				</north>
+				<east>
+					<bookOffset>(-0.15, 0, -0.6)</bookOffset>
+					<bookSpacing>(0, 0, 0.12)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<tierOffset>(-1, 0, -1)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfLayer_east</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>						
+				</east>
+				<south>
+					<bookOffset>(-0.8, 0.02, 0.10)</bookOffset>
+					<bookRotate>0</bookRotate>
+					<bookSpacing>(0.1465, 0, 0)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+				</south>
+				<west>
+					<bookOffset>(0.15, 0, -0.6)</bookOffset>
+					<bookSpacing>(0, 0, 0.12)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<tierOffset>(-1, 0, -1)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfLayer_west</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>						
+				</west>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="BookcaseBase">
+		<defName>sbz_BookshelfSmall</defName>
+		<label>small bookshelf</label>
+		<description>A small shelf for storing and displaying up to six books. Books stored here will passively enhance academic work done nearby, and increase the beauty of the bookshelf. The stored books will never deteriorate. Can also be placed on top of other buildings.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfSmall</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconScale>0.5</uiIconScale>
+		<costStuffCount>12</costStuffCount>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>2</Mass>
+			<WorkToBuild>300</WorkToBuild>
+		</statBases>
+		<clearBuildingArea>false</clearBuildingArea>
+		<building>
+			<maxItemsInCell>6</maxItemsInCell>
+			<isEdifice>false</isEdifice>
+		</building>
+		<placeWorkers>
+			<li>sbz.PlaceWorker_Bookcase</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="sbz.BookcaseModExtension">
+				<north>
+					<bookOffset>(-0.31, 0.02, 0.18)</bookOffset>
+					<bookSpacing>(0.13, 0, 0)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfSmallLayer_north</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>
+				</north>
+				<east>
+					<bookOffset>(-0.15, 0, -0.2)</bookOffset>
+					<bookSpacing>(0, 0, 0.09)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<tierOffset>(-1, 0, -1)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfSmallLayer_east</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>
+				</east>
+				<south>
+					<bookOffset>(-0.31, 0.02, 0.10)</bookOffset>
+					<bookSpacing>(0.13, 0, 0)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+				</south>
+				<west>
+					<bookOffset>(0.15, 0, -0.2)</bookOffset>
+					<bookSpacing>(0, 0, 0.09)</bookSpacing>
+					<booksPerTier>12</booksPerTier>
+					<tierOffset>(-1, 0, -1)</tierOffset>
+					<layers>
+						<li>
+							<graphic>
+								<texPath>Things/Building/Furniture/Bookcase/sbz_BookshelfSmallLayer_west</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<drawSize>(4,4)</drawSize>
+							</graphic>
+							<offset>(0, 0.6, 0)</offset>
+						</li>
+					</layers>
+				</west>
+			</li>
+		</modExtensions>
+	</ThingDef>	
+</Defs>

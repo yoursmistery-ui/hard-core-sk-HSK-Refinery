@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+<!--铁匠工坊(FueledSmithy, Vile's Metallurgy 汉化名)接受砖类(Bricks=粘土砖 ClayBrick)+天然石料(Stony),不接受金属(RuggedMetallic) (2026-08-27)。
+    门控: FueledSmithy 或其 stuffCategories 不存在时(未装 Vile's Metallurgy)整补丁跳过,不报错。
+    加载顺序: About.xml loadAfter 已含 vitech.metallurgy,保证本补丁在 FueledSmithy 定义之后执行。-->
+<Operation Class="PatchOperationConditional">
+  <xpath>Defs/ThingDef[defName="FueledSmithy"]/stuffCategories</xpath>
+  <match Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FueledSmithy"]/stuffCategories</xpath>
+    <value>
+      <stuffCategories>
+        <li>Stony</li>
+        <li>Bricks</li>
+      </stuffCategories>
+    </value>
+  </match>
+</Operation>
+</Patch>

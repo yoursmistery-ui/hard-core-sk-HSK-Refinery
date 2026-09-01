@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Pawn Badge - Fan Fork (HSK 修复版)</name>
+	<author>HSK 修复整合(基于 SaucyPigeon.PawnBadge)</author>
+	<packageId>saucypigeon.pawnbadge</packageId>
+	<url></url>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<description>本地独立版 Pawn Badge(徽章标记)Fan Fork,与工坊版同 packageId(SaucyPigeon.PawnBadge),避免重复加载。
+
+2026-08-22 补齐徽章本体: 内置原版 Defs/BadgeDefs(Skill 17 枚+ Militar 8 枚)、Textures/PawnBadge 全套图标、English+ChineseSimplified 语言。此前本地版仅含 DLL,徽章 Def 依赖工坊原版提供;工坊版卸载后徽章全部丢失(日志 "failed to find badge def"),现为真正自包含独立版,无需工坊原版。
+
+2026-08-17 改用 1.5 版官方接线方式(注入器 DLL,取代全部 XML 补丁):
+- 症状: 角色卡「徽章」按钮存在、点击有开关音效,但内容面板永远展不开。
+- 根因: 1.6 移植版 DLL 删掉了 1.5 版 Controller.EditDefs() 的运行时接线调用
+  (1.5 版 About 明言该调用就是为修复「其它 mod 对种族 ThingDef 调用 ResolveReferences
+  会移除徽章 Tab」——正是 HAR(Humanoid Alien Races)环境);纯 XML 接线在 HAR 的
+  ThingDef_AlienRace 二次解析链路下无法稳定生效。
+- 修复: 新增 Assemblies/PawnBadgeInjector.dll([StaticConstructorOnStartup],源码 Source/),
+  在全部 Def 加载/继承/HAR 解析完成后,给所有 Humanlike 种族 def 运行时补
+  CompProperties_Badge + ITab_Pawn_Badge 并调 def.ResolveReferences() 重建解析结果。
+  DefDatabase 不含抽象 def → 每个种族恰好一条,天然无重复按钮(旧去重补丁一并移除);
+  已存在小人读档时由 ThingWithComps.InitializeComps() 按 def.comps 重建组件,旧存档直接生效。
+
+历史修复(2026-08-14/15,XML 接线方案)已被注入器方案取代,补丁文件备份为 .bak_20260817。
+
+使用说明:
+- 若工坊原版 2526040241 仍在订阅中,请在本 mod 的 ModsConfig 中只保留一份 SaucyPigeon.PawnBadge(建议移出工坊原版,或在本 mod 加载列表置于工坊版之后并停用工坊版)。
+- 本版不带 0Harmony.dll(复用已安装的 Harmony)。
+- 徽章数据可安全从旧存档迁移(组件/标签结构与原版完全一致)。
+
+Credits:
+- Saucy_Pigeon, Fan Fork 原作者
+- Rangel Reale, 原版作者
+- LeninsCat, 贴图更新与 manifest 修复</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>Solaris.RatkinRaceMod</packageId>
+			<displayName>NewRatkinPlus (RatkinRaceHSK)</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>erdelf.humanoidalienraces</li>
+		<li>Solaris.RatkinRaceMod</li>
+		<li>DimonSever000.ModIndicator.Specific</li>
+	</loadAfter>
+</ModMetaData>

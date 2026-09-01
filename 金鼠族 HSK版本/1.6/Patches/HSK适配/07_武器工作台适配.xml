@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 07_武器工作台适配(2026-08-23 v2, 用户要求分级)
+        目标: 金鼠族武器按 HSK 武器台分级挂载,与鼠族产业线区分:
+              ① 锻造台 FueledSmithy + ElectricSmithy —— 中世纪/工具为主
+                 (登山杖 Mountain_Stick 系, Melee_C2/D1);
+              ② 先进武器台 AdvWeaponCraftingWorkTable —— 后工业化武器
+                 (工业步枪/霰弹/冲锋枪/重武器, Rifles_C1/Shotgun_C2/SMG_C2/Heavy_C3);
+              ③ 量子武器台 MechWeaponCraftingWorkTable —— 太空/极致时代武器
+                 (电荷 Blitz 系/不稳定电荷/极致近战, Charge_weapons_D/E/Melee_Ultra);
+              ④ 武器制造台 WeaponCraftingWorkTable(前工业): 金鼠族无前工业武器,不使用。
+        衣物: 见 Apparel_Base.xml(基类已挂 ElectricTailoringBench + HyperTailoringBench)。
+        说明: 弹药已由 CE 补丁全量映射 HSK 弹药,金鼠族不自造。
+        ===================================================================== -->
+
+    <!-- ① 锻造台(中世纪/工具): 登山杖系列 Melee_C2/D1(继承链无 recipeUsers,用 Add 覆盖) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>FueledSmithy</li>
+                <li>ElectricSmithy</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_B"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>FueledSmithy</li>
+                <li>ElectricSmithy</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_C"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>FueledSmithy</li>
+                <li>ElectricSmithy</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_D"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>FueledSmithy</li>
+                <li>ElectricSmithy</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_E"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>FueledSmithy</li>
+                <li>ElectricSmithy</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+
+    <!-- ② 先进武器台(后工业): 工业步枪/霰弹/冲锋枪/重武器 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_ProtocolRifle"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_ProtocolRifle_B"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_GouSuo"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Shotgun_A"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Shotgun_B"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Shotgun_C"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Jishu_SMG"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzAMLMG"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzAMR"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzAMR_C"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzRifle_Heavy"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzSMG_Heavy"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_AT"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>AdvWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+
+    <!-- ③ 量子武器台(太空/极致): 电荷 Blitz 系/不稳定电荷/极致近战 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_PrototypeBlitzRifle"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzRifle"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_AdvancedBlitzRifle"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzLMG"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzSMG"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzSMG_B"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_AdvancedBlitzSMG"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzSSR"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzSSR_B"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_BlitzAMR_B"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_ChargeSSR"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_UnstableChargeDriver"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_UnstableChargeThrower"]/recipeMaker/recipeUsers</xpath>
+        <value><recipeUsers><li>MechWeaponCraftingWorkTable</li></recipeUsers></value>
+    </Operation>
+
+    <!-- ③ 极致近战(Melee_Ultra): 登山杖 F/G/AA/AB -> 量子台 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_F"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>MechWeaponCraftingWorkTable</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_G"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>MechWeaponCraftingWorkTable</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_AA"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>MechWeaponCraftingWorkTable</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick_AB"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>MechWeaponCraftingWorkTable</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+
+</Patch>

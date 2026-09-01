@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="RK_ExoticApparelMakeableBase">
+		<defName>RK_SashiMono</defName>
+		<label>ratkin Sashi Mono</label>
+		<description>The square flag carried by the leader of the militia serves the purpose of boosting morale, as stated in written documentation. However, its true intention is to ensure that other ratkin do not get lost in the chaos of battle.</description>
+		<graphicData>
+			<texPath>Item_Shield/RK_SashiMono</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<WorkToMake>4500</WorkToMake>
+			<Mass>0.3</Mass>
+			<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+			<Flammability>1.1</Flammability>
+			<EquipDelay>1</EquipDelay>
+		</statBases>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_Tailoring</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>1</Crafting>
+				<Artistic>3</Artistic>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<WoodLog>5</WoodLog>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<equippedStatOffsets>
+			<SocialImpact>0.05</SocialImpact>
+			<NegotiationAbility>0.15</NegotiationAbility>
+			<MoveSpeed>0.1</MoveSpeed>
+			<PainShockThreshold>0.1</PainShockThreshold>
+		</equippedStatOffsets>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<bodyPartGroups>
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<layers>
+				<li>BackPack</li>
+			</layers>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<!-- <wornGraphicPath>dummy</wornGraphicPath> -->
+			<tags>
+				<li>RK_ExoticMiliSign</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+			<canBeDesiredForIdeo>true</canBeDesiredForIdeo>
+		</apparel>
+		<thingClass>RatkinGeneExpanded.NewShield</thingClass>
+		<comps>
+			<li Class="RatkinGeneExpanded.CompProperties_ShieldInfos">
+				<isShield>false</isShield>
+				<canUseRangedWeapon>true</canUseRangedWeapon>
+				<useStuffColor>true</useStuffColor>
+				<drawBackLocNorth>(0, 0.6, -0.2)</drawBackLocNorth>
+				<drawBackLocSouth>(0, -0.6, -0.09)</drawBackLocSouth>
+				<drawBackLocEast>(-0.15, -0.01, 0)</drawBackLocEast>
+				<drawBackLocWest>(0.15, -2, 0)</drawBackLocWest>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticApparelMakeableBase">
+		<defName>RK_ManGear</defName>
+		<label>ratkin Manatwar gear</label>
+		<description>The ammunition pouches used by Manatwars are designed to conveniently carry ammunition and other small items.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_ManGear</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>RK_Research_Tailoring</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MaxHitPoints>110</MaxHitPoints>
+			<WorkToMake>8000</WorkToMake>
+			<Mass>0.3</Mass>
+			<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.1</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<Flammability>1</Flammability>
+			<EquipDelay>1</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<CarryingCapacity>30</CarryingCapacity>
+			<RangedCooldownFactor>-0.2</RangedCooldownFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<bodyPartGroups>
+				<li>Arms</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_ManGear</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticRanger</li>
+				<li>RK_ExoticTier2</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticApparelMakeableBase">
+		<defName>RK_MRgunner</defName>
+		<label>ratkin heavy gunner ammunition bag</label>
+		<description>A large ammunition pouch carried by machine gunners or their assistants, which becomes incredibly heavy when fully loaded.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_MRgunner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<recipeMaker Inherit="false">
+			<researchPrerequisite>Ratkin_Apparel_C1</researchPrerequisite>
+		</recipeMaker>
+		<tradeTags Inherit="false">
+			<li>RK_SellableApparel</li>
+		</tradeTags>
+		<costList>
+			<DevilstrandCloth>25</DevilstrandCloth>
+		
+				<ComponentIndustrial>4</ComponentIndustrial>
+</costList>
+		<costStuffCount>90</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MaxHitPoints>260</MaxHitPoints>
+			<WorkToMake>13000</WorkToMake>
+			<Mass>1.1</Mass>
+			<EquipDelay>2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<CarryingCapacity>50</CarryingCapacity>
+			<RangedCooldownFactor>-0.45</RangedCooldownFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<bodyPartGroups>
+				<li>Arms</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_MRgunner</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticGunner</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+		<tradeability>Sellable</tradeability>
+	</ThingDef>
+
+</Defs>

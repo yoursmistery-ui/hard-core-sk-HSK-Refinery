@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 止血 Hediff -->
+  <HediffDef>
+    <defName>AutoBleedingControl</defName>
+    <label>战斗医疗系统</label>
+    <description>纳米纤维激活凝血机制，自动封闭伤口，开启修复治疗模式。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+	    <statFactors>
+          <IncomingDamageFactor>0.50</IncomingDamageFactor>
+        </statFactors>
+                <statOffsets>
+                    <InjuryHealingFactor>1</InjuryHealingFactor> <!-- 愈合因子 -->
+                </statOffsets>
+                <totalBleedFactor>0.85</totalBleedFactor>        <!-- 失血量系数 -->
+                <naturalHealingFactor>200</naturalHealingFactor> <!-- 自然愈合因子 -->
+      </li>
+    </stages>
+	 <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+  </HediffDef>
+  
+    <HediffDef>
+    <defName>gelusilingneng</defName>
+    <label>圣光祝福</label>
+    <description>鼠族修女的灵能圣光祝福，灵能之息缓缓治愈伤势</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+                <totalBleedFactor>0.95</totalBleedFactor>        <!-- 失血量系数 -->
+                <naturalHealingFactor>50</naturalHealingFactor> <!-- 自然愈合因子 -->
+      </li>
+    </stages>
+	 <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>AutoBleeding</defName>
+    <label>紧急医疗系统</label>
+    <description>应对重大受伤情况，全面开启治愈医疗。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+                <naturalHealingFactor>300</naturalHealingFactor> <!-- 自然愈合因子 -->
+      </li>
+    </stages>
+	 <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
+    <defName>Visual_enhancement</defName>
+    <label>视力增强</label>
+    <description>全景补充协议提供目标视距和焦点捕捉功能，让用户视觉精确，犀利</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>   <!-- 视觉能力 -->
+            <offset>0.20</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+    <isBad>false</isBad>
+  </HediffDef>  
+  
+  <HediffDef>
+    <defName>Breath_system</defName>
+    <label>气息辅助系统</label>
+    <description>辅助调节用户的氧气输送，调节胸腔正负压状态，稳定呼吸频率</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Breathing</capacity>  <!-- 呼吸能力 -->
+            <offset>0.4</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+
+    <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+    <isBad>false</isBad>
+  </HediffDef>
+  
+  <HediffDef>
+     <defName>Augmented_Reality</defName>
+     <label>TBMR感官增强系统</label>
+     <description>来自于无尽星芒头盔设计图的现实增强系统，全景实时计算与皮层脑波接入，不仅能够提供各种计算分析指导服务，还让人精神抖擞，意气风发</description>
+	 <defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+     <hediffClass>HediffWithComps</hediffClass>
+     <stages>
+      <li>
+	    <label>精神刺激</label>
+        <restFallFactor>0.8</restFallFactor>  <!-- 疲劳度 -->
+        <capMods>
+          <li>
+			<capacity>Consciousness</capacity>  <!-- 意识能力 -->
+            <offset>0.2</offset>
+          </li>
+		  <li>
+			<capacity>Manipulation</capacity>   <!-- 操作能力 -->
+            <offset>0.5</offset>
+          </li>
+        </capMods>
+      </li>
+     </stages>
+     <comps>
+       <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+     </comps>
+     <isBad>false</isBad>
+   </HediffDef>  
+   
+   <HediffDef>
+     <defName>xqz</defName>
+     <label>先驱电导流辅助</label>
+     <description>引用小功率电流通过芯片的辅助倒流调节，刺激脑皮层提振精神</description>
+	 <defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+     <hediffClass>HediffWithComps</hediffClass>
+     <stages>
+      <li>
+		<statFactors>
+		    <RestFallRateFactor>0.95</RestFallRateFactor>  <!-- 休息系数 -->
+		</statFactors>
+        <capMods>
+          <li>
+			<capacity>Consciousness</capacity>  <!-- 意识能力 -->
+            <offset>0.1</offset>
+          </li>
+		 </capMods>
+	  </li>
+     </stages>
+     <comps>
+       <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+     </comps>
+     <isBad>false</isBad>
+   </HediffDef>     
+   
+   <HediffDef>
+     <defName>EX</defName>
+     <label>强化外骨骼装甲</label>
+     <description>维多利亚的先锋作战方案，速度！速度！还是速度！你丫的脚底抹油都没你这么慢!菜鸟!</description>
+     <hediffClass>HediffWithComps</hediffClass>
+     <defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+     <stages>
+      <li>
+	  	<statFactors>
+          <IncomingDamageFactor>0.70</IncomingDamageFactor>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>  <!-- 移动能力 -->
+            <offset>0.1</offset>
+          </li>
+        </capMods>
+      </li>
+     </stages>
+
+     <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+     </comps>
+     <isBad>false</isBad>  
+   </HediffDef>   
+   
+     <HediffDef>
+    <defName>deep_AI</defName>
+    <label>AI分析中</label>
+    <description>你想了解这个黑漆漆的疙瘩是什么吗？分析中······成分中含有65%的黄金，建议在这里打洞</description>
+    <hediffClass>HediffWithComps</hediffClass>
+	<defaultLabelColor>(0.63,1,0.9)</defaultLabelColor>
+    <stages>
+      <li>
+                <statOffsets>
+			        <MiningYield>0.5</MiningYield>
+					<MiningSpeed>0.25</MiningSpeed>
+                </statOffsets>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_RemoveIfApparelDropped" />
+    </comps>
+    <isBad>false</isBad>
+  </HediffDef> 
+</Defs>

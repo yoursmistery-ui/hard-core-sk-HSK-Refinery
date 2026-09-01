@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 08_二级菜单归类(2026-08-25)
+        把金鼠族新增建筑归入 Core_SK 已有的 ArchitectSense 二级分类:
+          - OA_RK_Cloth_Processing / OA_RK_Cloth_Processing_B(设施, Misc)
+            → SubCategory_Facilities(生产设施)
+        子分类 designationCategory 与建筑一级分类一致, 否则不显示。
+        注: OA_RK_Tailor(缝纫台)已 2026-08-27 迁移至「HSK工业科研大修」,
+            其 SubCategory_Sewing 归类改由该 mod 的 A6 补丁处理。
+        ===================================================================== -->
+
+    <!-- ① 缝纫台 → 纺织 SubCategory_Sewing: 已迁移至「HSK工业科研大修」A6, 本处移除。 -->
+
+    <!-- ② 布料精加工设施 → 生产设施 SubCategory_Facilities -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Facilities"]</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Facilities"]/defNames</xpath>
+            <value>
+                <li>OA_RK_Cloth_Processing</li>
+                <li>OA_RK_Cloth_Processing_B</li>
+            </value>
+        </match>
+    </Operation>
+
+</Patch>

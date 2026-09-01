@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- 锻钢大锤（2026-08-30 用户点单）：在 Vile 锻造台( FueledSmithy，HSK 由 Vile's Metallurgy
+       重做)上锻打金属坯料——坩埚钢→锻造钢(RK_Met_ForgeSteelFromCrucible)与 Vile 原版
+        原 Forge Wrought Iron / Forge-Weld Steel 旁路已被 98_冶铁链统一 删除，关键字保留兼容)。副手长柄钳夹一块钢坯钉在打击点上，
+       双手大锤抡圆了砸下去：砧声 + 火星 + 落地余烬。
+       仅按配方 defName 关键字匹配(recipeNameKeywords)，其余配方(电焊枪/普通铁匠活)不受影响。文件按字母序排在 JobTools_JobEffects.xml 之前，
+       匹配优先级高于电焊枪。锤用本 mod 原版 Hammer 贴图, 工件直接引用 Vile's Metallurgy 钢坯贴图 Things/Item/Billet/Billet_A(全局贴图库, 需 Vile 在场)。 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_AnvilSledge</defName>
+    <label>anvil sledge</label>
+    <strikeSound>JE_AnvilTing</strikeSound>
+    <jobDefs>
+      <li>DoBill</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>FueledSmithy</li>
+    </workbenchDefs>
+    <recipeNameKeywords>
+      <li>ForgeSteel</li>
+      <li>ForgeWeldedSteel</li>
+      <li>WroughtIron_Forge</li>
+      <li>_Smithy</li>
+      <li>_Forge</li>
+    </recipeNameKeywords>
+    <texPath>Things/JobEffects/Tools/Hammer</texPath>
+    <handCount>2</handCount>
+    <handPosA>0.14</handPosA>
+    <handPosB>0.46</handPosB>
+    <swingStyle>Chop</swingStyle>
+    <scale>1.08</scale>
+    <reach>0.16</reach>
+    <period>0.62</period>
+    <windupAngle>70</windupAngle>
+    <followThroughAngle>18</followThroughAngle>
+    <!-- 钳夹白热坯料：prop 钉在打击点、副手握住，随挥锤全程稳定 -->
+    <propTexPath>Things/Item/Billet/Billet_A</propTexPath>
+    <propColor>(255,146,58)</propColor>  <!-- 冷灰钢坯染成黄热锻打色(HSK 本地扩展字段) -->
+    <propScale>0.34</propScale>
+    <propMode>lay</propMode>  <!-- 钢坯平放砧面, 双手抡锤只管砸 -->
+    <propFlash>true</propFlash>  <!-- 砸一下亮一下: 命中瞬间白热, 0.4s 冷却回橙红 -->
+    <!-- 打击火花 + 金属碎屑(随材料染色) + 砧边余烬 -->
+    <impactFlashFleck>YellowSparkFlash</impactFlashFleck>
+    <impactFlashScale>1.9</impactFlashScale>
+    <impactBitFleck>JE_StoneShard</impactBitFleck>
+    <impactBitCount>3</impactBitCount>
+    <impactBitSpeed>4~9</impactBitSpeed>
+    <impactBitScale>0.22~0.4</impactBitScale>
+    <impactSpread>70</impactSpread>
+    <restFleck>JE_EmberRest</restFleck>
+  </JobEffects.JobToolDef>
+
+</Defs>

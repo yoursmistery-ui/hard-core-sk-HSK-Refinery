@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="BaseMeleeWeapon_Blunt_Quality">
+        <defName>OAGene_MeleeWeapon_SnowstormCane</defName> <!-- 我觉得可以考虑加入一个近战特效 -->
+        <label>Rat Clan Wind and Snow Cane</label>
+        <description>A walking stick with complex production techniques, the alternating blue and white body of the stick is elegant and exquisite, and the snowflakes tied to the tip of the stick emit a faint chill.\n\nThis weapon will cause hypothermia to the victim when attacking.</description>
+        <possessionCount>1</possessionCount>
+        <graphicData>
+            <texPath>Things/Equipment/OAGene_MeleeWeapon_SnowstormCane</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconScale>1.2</uiIconScale>
+        <equippedAngleOffset>-20</equippedAngleOffset>
+        <statBases>
+            <WorkToMake>36000</WorkToMake>
+            <Mass>2.50</Mass>
+        </statBases>
+        <generateCommonality>0</generateCommonality>
+        <generateAllowChance>0</generateAllowChance>
+        <smeltable>false</smeltable>
+        <techLevel>Medieval</techLevel>
+        <tradeability>Sellable</tradeability>
+        <recipeMaker Inherit="False" IsNull="True"/> <!-- 屏蔽原版配方 -->
+        <weaponTags>
+            <li>OA_RK_FengXue</li>
+        </weaponTags>
+        <tradeTags>
+            <li>OA_RK_FengXue</li>
+        </tradeTags>
+        <weaponClasses>
+            <li>Melee</li>
+        </weaponClasses>
+        <tools>
+            <li>
+                <label>杖身</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>OAGene_SnowstormBlunt</li>
+                </capacities>
+                <power>36.0</power> <!-- 同下，实际上是27 -->
+                <cooldownTime>2.6</cooldownTime>
+            </li>
+            <li>
+                <label>杖头</label>
+                <labelUsedInLogging>false</labelUsedInLogging>
+                <capacities>
+                    <li>OAGene_SnowstormBlunt</li>
+                </capacities>
+                <power>29.3</power> <!-- 不知道为什么这样才会显示22 -->
+                <cooldownTime>2.0</cooldownTime>
+            </li>
+        </tools>
+    </ThingDef>
+
+    <ToolCapacityDef>
+        <defName>OAGene_SnowstormBlunt</defName>
+        <label>钝击</label>        <!--虽然风雪杖击听起来真的很酷炫但或许更加容易通用一点比较好-->
+    </ToolCapacityDef>
+
+    <ManeuverDef>
+        <defName>OAGene_SnowstormBlunt</defName>
+        <requiredCapacity>OAGene_SnowstormBlunt</requiredCapacity>
+        <verb>
+            <verbClass>Verb_MeleeAttackDamage</verbClass>
+            <meleeDamageDef>OAGene_SnowstormBlunt</meleeDamageDef>
+        </verb>
+        <logEntryDef>MeleeAttack</logEntryDef>
+        <combatLogRulesHit>Maneuver_Smash_MeleeHit</combatLogRulesHit>
+        <combatLogRulesDeflect>Maneuver_Smash_MeleeDeflect</combatLogRulesDeflect>
+        <combatLogRulesMiss>Maneuver_Smash_MeleeMiss</combatLogRulesMiss>
+        <combatLogRulesDodge>Maneuver_Smash_MeleeDodge</combatLogRulesDodge>
+    </ManeuverDef>
+
+    <DamageDef ParentName="BluntBase">
+        <defName>OAGene_SnowstormBlunt</defName>
+        <label>钝击</label>
+        <additionalHediffs>
+            <li>
+                <hediff>Hypothermia</hediff>
+                <severityPerDamageDealt>0.004</severityPerDamageDealt>
+            </li>
+        </additionalHediffs>
+    </DamageDef>
+
+</Defs>

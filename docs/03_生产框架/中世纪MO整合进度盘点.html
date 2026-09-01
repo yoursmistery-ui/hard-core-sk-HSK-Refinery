@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中世纪MO → HSK工业科研大修 整合进度盘点(2026-)</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2328; --muted:#57606a;
+    --line:#d8dee4; --accent:#2f6feb; --head:#0d2440; --headink:#eaf1fb;
+    --done:#1a7f37; --part:#b58105; --todo:#0969da; --no:#6e7781;
+    --donebg:#dafbe1; --partbg:#fff8c5; --todobg:#ddf4ff; --nobg:#eceff1;
+    --lo:#1a7f37; --mid:#b58105; --hi:#cf222e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7;font-size:15px;}
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 20px 80px;}
+  header.page{background:linear-gradient(135deg,#0d2440,#1c3d63);color:var(--headink);
+    border-radius:16px;padding:28px 32px;margin-bottom:22px;box-shadow:0 8px 24px rgba(13,36,64,.18);}
+  header.page h1{margin:0 0 10px;font-size:25px;letter-spacing:.4px;}
+  header.page p{margin:4px 0;color:#c9d8ee;font-size:13px;}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
+  .badge{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .b-done{color:var(--done);background:var(--donebg);}
+  .b-part{color:var(--part);background:var(--partbg);}
+  .b-todo{color:var(--todo);background:var(--todobg);}
+  .b-no{color:var(--no);background:var(--nobg);}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .d-done{background:var(--done)} .d-part{background:var(--part)} .d-todo{background:var(--todo)} .d-no{background:var(--no)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:22px 0;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  .kpi .n{font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.5px;}
+  .kpi .t{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .kpi.done .n{color:var(--done)} .kpi.part .n{color:var(--part)} .kpi.todo .n{color:var(--todo)} .kpi.no .n{color:var(--no)}
+  .kpi.rate .n{color:var(--accent)}
+  .bar{height:9px;border-radius:6px;background:#eef1f4;overflow:hidden;display:flex;margin-top:10px;}
+  .bar i{display:block;height:100%}
+  .bar .s-done{background:var(--done)} .bar .s-part{background:var(--part)} .bar .s-todo{background:var(--todo)} .bar .s-no{background:var(--no)}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 18px;margin-bottom:20px;font-size:13.5px;}
+  nav.toc b{color:var(--head)} nav.toc a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block;padding:2px 0;}
+  nav.toc a:hover{text-decoration:underline}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 26px 22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.03);}
+  h2{font-size:20px;color:var(--head);border-left:5px solid var(--accent);padding-left:12px;margin:22px 0 10px;scroll-margin-top:16px;}
+  h3{font-size:15.5px;color:#243b53;margin:24px 0 8px;padding-bottom:6px;border-bottom:1px dashed var(--line);}
+  p.lead{margin:8px 0 14px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;font-size:13.2px;margin:10px 0 4px;}
+  th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left;}
+  th{background:#f0f3f7;color:#243b53;font-weight:700;}
+  tbody tr:nth-child(even){background:#fafbfc;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  td.c{text-align:center;white-space:nowrap;}
+  .st{font-weight:700;font-size:12px;padding:2px 8px;border-radius:6px;white-space:nowrap;}
+  .st-done{color:var(--done);background:var(--donebg);}
+  .st-part{color:var(--part);background:var(--partbg);}
+  .st-todo{color:var(--todo);background:var(--todobg);}
+  .st-no{color:var(--no);background:var(--nobg);}
+  .df{font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap;}
+  .d-lo{color:#fff;background:var(--lo);} .d-mid{color:#fff;background:var(--mid);} .d-hi{color:#fff;background:var(--hi);} .d-na{color:var(--muted);background:#f0f1f3;}
+  .prog{font-weight:700;color:var(--head);white-space:nowrap;}
+  ul.tight{margin:6px 0 6px 20px;padding:0;} ul.tight li{margin:3px 0;}
+  .note{background:#fff8e6;border-left:4px solid var(--part);border-radius:0 8px 8px 0;padding:10px 14px;margin:14px 0;font-size:13.3px;}
+  .fix{border:1px solid var(--line);border-left:4px solid var(--hi);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;background:#fffdfa;}
+  .fix b{color:#9b1c1c}
+  .fix .row{margin:5px 0;font-size:13.3px;}
+  .fix .k{color:var(--muted);font-weight:700;margin-right:6px;}
+  code{background:#f2f4f7;border-radius:4px;padding:1px 5px;font-size:12.4px;font-family:Consolas,Menlo,monospace;}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;margin-top:26px;}
+  @media print{body{background:#fff} section.card{box-shadow:none;break-inside:avoid} header.page{background:#0d2440!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="page">
+<h1>中世纪MO(Medieval Overhaul)→ HSK工业科研大修 整合进度盘点</h1>
+<p>盘点时刻 2026-08-27 23:05 · 实测口径(工作区 Defs + 部署 Mods hash + 游戏终态 Unified.xml + 贴图解析)</p>
+<p>MO 1.6.2.2(DankPyon.Medieval.Overhaul,工坊 3219596926,当前<b>未启用</b>)→ 目标容器 <code>HSK工业科研大修</code>(ratkinpatch.HSKIndustrialResearchOverhaul)</p>
+<div class="legend">
+<span class="badge b-done"><span class="dot d-done"></span>✅ 已整合</span>
+<span class="badge b-part"><span class="dot d-part"></span>🟡 部分</span>
+<span class="badge b-todo"><span class="dot d-todo"></span>⬜ 未整合</span>
+<span class="badge b-no"><span class="dot d-no"></span>⛔ 不整合/放弃</span>
+</div>
+</header>
+<div class="cards">
+<div class="kpi rate"><div class="n">10.1%</div><div class="t">加权整合率(纯完成 7.1%)</div><div class="bar"><i class="s-done" style="width:7.1%"></i><i class="s-part" style="width:6.0%"></i><i class="s-todo" style="width:65.5%"></i><i class="s-no" style="width:21.4%"></i></div></div>
+<div class="kpi done"><div class="n">6</div><div class="t">已整合单元</div></div>
+<div class="kpi part"><div class="n">5</div><div class="t">部分整合单元</div></div>
+<div class="kpi todo"><div class="n">55</div><div class="t">未整合单元</div></div>
+<div class="kpi no"><div class="n">18</div><div class="t">不整合(已决策排除)</div></div>
+<div class="kpi"><div class="n">84</div><div class="t">MO 内容单元总数(16 板块)</div></div>
+</div>
+<nav class="toc"><b>导航 </b>
+<a href="#s1">① 结论</a><a href="#s2">② 板块进度</a><a href="#s3">③ 已落地硬证据</a><a href="#s4">④ 问题与处置</a><a href="#s5">⑤ 逐单元明细</a><a href="#s6">⑥ 下一步三档</a>
+</nav>
+<section class="card" id="s1"><h2>一、一句话结论</h2>
+<p class="lead">今天真正新增的是 <b>MO 结构/娱乐内容的直接移植</b>(23 个建筑 def + 2 个二级菜单子分类 + 111 张自带贴图,全部已在游戏终态核对生效)与 <b>蓝图经济 v4.1 的商人/事件渠道</b>(1 个蓝图学者商队 + 3 个事件)。除此之外 15 个板块状态与 07:55 版盘点一致:<b>武器、防具、盾牌与魔法、生物、派系与世界、酒水炼金、矿井 —— 仍全部未落地。</b></p>
+<div class="note">口径说明: 一个「内容单元」= 一节可独立决策的 MO 内容(例如「储物建筑」算 1 个,「墙体 7 个 def」算 1 个)。整合率只反映<b>做了多少件事</b>,不等于搬了多少 def。已决策排除项(⛔ 材料链被 HSK/Vile 上位替代、⛔ 不引 MO DLL)计入分母,便于和历史盘点同口径比较;若只看「还能做的」部分(排除 ⛔),进度为 12.9%</div>
+<h3>三类「整合」要分清</h3>
+<table><thead><tr><th>类型</th><th>含义</th><th>本次成果</th></tr></thead><tbody>
+<tr><td><b>内容直接移植</b></td><td>把 MO 的 def(纯原版类)搬进本 mod,改前缀/材料/研究映射</td><td class="c">23 建筑 def + 111 贴图 + 2 子分类 + 6 棋牌辅助 def</td></tr>
+<tr><td><b>机制自研复刻</b></td><td>只吸收 MO 的玩法思想,用自研 DLL/纯 XML 实现,不引 MO 代码</td><td class="c">蓝图门控 112 书 + BlueprintUnlockHSK.dll(22 类)+ 学者商队 + 3 事件</td></tr>
+<tr><td><b>上位替代排除</b></td><td>MO 该内容由 HSK/Vile 既有体系承担,明确不搬</td><td class="c">材料链 5 项 / MO 研究树 / MO DLL / 25 兼容子包 / 围城 AI / Lootable / 魔法戒指</td></tr>
+</tbody></table></section>
+<section class="card" id="s2"><h2>二、板块进度表</h2>
+<table><thead><tr><th>板块</th><th>单元数</th><th>已整合</th><th>部分</th><th>未整合</th><th>不整合</th><th>加权进度</th><th style="width:26%">分布</th></tr></thead><tbody>
+<tr><td>1 材料与资源</td><td class="num">7</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td class="num">5</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:28.6%"></i><i class="s-no" style="width:71.4%"></i></div></td></tr>
+<tr><td>2 生产设施与配方</td><td class="num">8</td><td class="num">0</td><td class="num">1</td><td class="num">7</td><td class="num">0</td><td class="prog">6.2%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:12.5%"></i><i class="s-todo" style="width:87.5%"></i><i class="s-no" style="width:0.0%"></i></div></td></tr>
+<tr><td>3 建筑与家具</td><td class="num">24</td><td class="num">5</td><td class="num">1</td><td class="num">15</td><td class="num">3</td><td class="prog">22.9%</td><td><div class="bar"><i class="s-done" style="width:20.8%"></i><i class="s-part" style="width:4.2%"></i><i class="s-todo" style="width:62.5%"></i><i class="s-no" style="width:12.5%"></i></div></td></tr>
+<tr><td>4 武器体系</td><td class="num">5</td><td class="num">0</td><td class="num">0</td><td class="num">5</td><td class="num">0</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:100.0%"></i><i class="s-no" style="width:0.0%"></i></div></td></tr>
+<tr><td>5 防具体系</td><td class="num">4</td><td class="num">0</td><td class="num">0</td><td class="num">4</td><td class="num">0</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:100.0%"></i><i class="s-no" style="width:0.0%"></i></div></td></tr>
+<tr><td>6 盾牌与魔法装备</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td class="num">1</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:66.7%"></i><i class="s-no" style="width:33.3%"></i></div></td></tr>
+<tr><td>7 生物体系</td><td class="num">4</td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:75.0%"></i><i class="s-no" style="width:25.0%"></i></div></td></tr>
+<tr><td>8 派系与世界</td><td class="num">10</td><td class="num">0</td><td class="num">2</td><td class="num">4</td><td class="num">4</td><td class="prog">10.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:20.0%"></i><i class="s-todo" style="width:40.0%"></i><i class="s-no" style="width:40.0%"></i></div></td></tr>
+<tr><td>9 酒水/药物/炼金</td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">3</td><td class="num">0</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:100.0%"></i><i class="s-no" style="width:0.0%"></i></div></td></tr>
+<tr><td>10 书籍与研究</td><td class="num">5</td><td class="num">1</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="prog">20.0%</td><td><div class="bar"><i class="s-done" style="width:20.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:60.0%"></i><i class="s-no" style="width:20.0%"></i></div></td></tr>
+<tr><td>11 心情·特性·Hediff·文化</td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num">5</td><td class="num">1</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:83.3%"></i><i class="s-no" style="width:16.7%"></i></div></td></tr>
+<tr><td>12/13 机制与兼容</td><td class="num">3</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">2</td><td class="prog">16.7%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:33.3%"></i><i class="s-todo" style="width:0.0%"></i><i class="s-no" style="width:66.7%"></i></div></td></tr>
+<tr><td>16 矿井/采掘</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">2</td><td class="num">0</td><td class="prog">0.0%</td><td><div class="bar"><i class="s-done" style="width:0.0%"></i><i class="s-part" style="width:0.0%"></i><i class="s-todo" style="width:100.0%"></i><i class="s-no" style="width:0.0%"></i></div></td></tr>
+<tr style="font-weight:800;background:#eef3fb"><td>合计</td><td class="num">84</td><td class="num">6</td><td class="num">5</td><td class="num">55</td><td class="num">18</td><td class="prog">10.1%</td><td><div class="bar"><i class="s-done" style="width:7.1%"></i><i class="s-part" style="width:6.0%"></i><i class="s-todo" style="width:65.5%"></i><i class="s-no" style="width:21.4%"></i></div></td></tr>
+</tbody></table>
+<p class="lead">进度最集中的两块 = <b>3 建筑与家具</b>(结构/墙/门/柱/棋牌已落地)和 <b>10 书籍与研究</b>(图纸门禁自研移植完成)。<b>4 武器、5 防具、6 盾牌魔法、7 生物、9 酒药炼金、16 矿井</b>六块加权进度为 0 —— 是「还没动」而不是「做了一半」。</p>
+</section>
+<section class="card" id="s3"><h2>三、已落地硬证据(实测核对)</h2>
+<table><thead><tr><th>项</th><th>数量</th><th>位置</th><th>终态核对</th></tr></thead><tbody>
+<tr><td>Rustic_ 乡村结构 ThingDef</td><td class="c">19(拒马桩已删)</td><td><code>HSK工业科研大修/1.6/Defs/Buildings_Rustic_Structures.xml</code></td><td>Unified.xml 全部命中(终态生效)</td></tr>
+<tr><td>Rustic_ 棋牌 ThingDef</td><td class="c">3</td><td><code>1.6/Defs/Buildings_Rustic_Joy.xml</code></td><td>Unified.xml 全部命中</td></tr>
+<tr><td>配套 JoyGiverDef / JobDef(棋牌)</td><td class="c">3 + 3</td><td><code>1.6/Defs/Buildings_Rustic_Joy.xml</code></td><td>Unified.xml 命中</td></tr>
+<tr><td>建筑师二级菜单子分类</td><td class="c">2</td><td><code>1.6/Defs/SubCategories_Rustic.xml(乡村结构/棋牌桌游)</code></td><td>Unified.xml 命中</td></tr>
+<tr><td>自带贴图(随移植拷入本 mod)</td><td class="c">111 张 Things/Building</td><td><code>HSK工业科研大修/Textures/Things/Building/**</code></td><td>57 条 texPath/uiIconPath 中 54 直接命中,余 3 为目录变体/原版图集,实际不缺图</td></tr>
+<tr><td>蓝图书(门禁体系)</td><td class="c">112 ThingDef</td><td><code>1.6/Defs/ThingDefs_BlueprintGates.xml + Languages/English/DefInjected/ThingDef/BlueprintBooks.xml</code></td><td>Unified.xml 112/112 命中</td></tr>
+<tr><td>蓝图门控 DLL</td><td class="c">22 类 / 1541 行</td><td><code>1.6/Assemblies/BlueprintUnlockHSK.dll(源 Source/BlueprintUnlockHSK.cs)</code></td><td>CanStartNow 门禁 + 研读工作 + 树角标 + 5 路投放</td></tr>
+<tr><td>事件(蓝图馈赠 + 巨兽路过)</td><td class="c">3 IncidentDef</td><td><code>1.6/Defs/Incidents_EventPack.xml</code></td><td>Unified.xml 命中;baseChance 自动入事件池</td></tr>
+<tr><td>蓝图学者商队</td><td class="c">1 TraderKindDef</td><td><code>1.6/Defs/TraderKinds_BlueprintScholar.xml + Patches/67(挂两个派系抽象基类)</code></td><td>Unified.xml 命中</td></tr>
+<tr><td>研读工作/奖励池</td><td class="c">1 JobDef + 1 WorkGiverDef + 1 ThingSetMakerDef + 1 ThingCategoryDef</td><td><code>1.6/Defs/JobDefs_RK.xml / WorkGiverDefs_RK.xml / ThingSetMakerDefs_BlueprintReward.xml / ThingDefs_Categories.xml</code></td><td>Unified.xml 命中</td></tr>
+<tr><td>双目录同步</td><td class="c">0 差异</td><td><code>工作区 ↔ Mods/HSK工业科研大修</code></td><td>全量 hash 一致;08-27 22:45 三项修复后 4 文件再次原子同步</td></tr>
+</tbody></table>
+<h3>核对细节</h3><ul class="tight">
+<li>23 个 <code>Rustic_*</code> ThingDef 在游戏终态 <code>Unified.xml</code>(08-27 21:43 导出)中 <b>23/23 命中</b>,含 3 棋牌的 <code>JoyGiverDef</code>/<code>JobDef</code> 与 2 个 <code>ArchitectSense.DesignationSubCategoryDef</code>。</li>
+<li>112 本蓝图书 <b>112/112 命中</b>;3 个 <code>RK_Incident_*</code>、<code>RK_TraderKind_BlueprintScholar</code>、<code>RK_BlueprintBooks</code> 分类、<code>BlueprintReward</code> 奖励池、<code>RK_StudyBlueprint</code> 工作 全部命中 → 移植内容确已进入运行时,不是只躺在工作区。</li>
+<li>贴图: 本 mod 自带 <code>Textures/Things/Building</code> 111 张;57 条 <code>texPath</code>/<code>uiIconPath</code> 在 187 个 Textures 根中 54 条直接命中,未命中的 3 条是目录变体(<code>LogColumn/LogColumnA-C.png</code> 的 Graphic_Random)与原版图集(<code>Linked/Wall_Blueprint_Atlas</code>、<code>Linked/Tent_Atlas</code>) —— <b>实际不缺图</b>。</li>
+<li>双目录: 工作区 <code>HSK工业科研大修</code> ↔ 部署 <code>Mods/HSK工业科研大修</code> 全量文件比对,<b>0 差异</b>(含 <code>BlueprintUnlockHSK.dll</code> hash 一致、About.xml 一致)。</li>
+<li>MO 本体状态: 未安装(<code>workshop/content/294100/</code> 已无 3219596926;ModsConfig 中 <code>vitech.medievaloverhaul</code> 实际是 HMC Vile’s Pre-Industrial 撞名)。所以所有整合都是「搬进本 mod」,不是「装前置」。</li>
+</ul></section>
+<section class="card" id="s4"><h2>四、移植质量问题与处置</h2>
+<div class="fix"><div><b>① 拒马桩进不了二级菜单 → ✅ 已删除(22:40)</b></div>
+<div class="row"><span class="k">现状</span>继承父类得 designationCategory=Security 却被写进 Structure 的子分类(按 AGENTS §8 根本不会显示);进一步核对发现它是 Building_TrapDamager,与环境中已有的原版尖刺陷阱 TrapSpike 机制重复(用户判定: 重复,删)。</div>
+<div class="row"><span class="k">处置</span>✅ 已删除该 def 并从子分类 defNames 移除(结构数 20→19);贴图暂留,将来做尖桩战壕可复用。</div></div>
+<div class="fix"><div><b>② 蓝图书只卖不回买 → ✅ 已修(22:40)</b></div>
+<div class="row"><span class="k">现状</span>复核更正: 蓝图书其实已通过抽象基类 RK_BlueprintBookBase 带 tradeTags = Exotic + Blueprint(21:50 版用单数 &lt;tradeTag&gt; 正则误判为 0);真正缺的只是商人侧没有 StockGenerator_BuyTradeTag → 只卖不回。</div>
+<div class="row"><span class="k">处置</span>✅ 已给 RK_TraderKind_BlueprintScholar 增补 StockGenerator_BuyTradeTag(tag=Blueprint),TraderKinds_BlueprintScholar.xml 已改并双目录同步。</div></div>
+<div class="fix"><div><b>③ 研究门禁映射不完整 → ✅ 已补(22:40)</b></div>
+<div class="row"><span class="k">现状</span>MO 原档把门全锁 DankPyon_RusticFurniture、墙与柱锁 Stonecutting(写在抽象基类上);移植时只显式挂了 6 个(双格门/加固大门 4 + 都铎/城堡墙 2),木墙与柱还残留空的 Inherit=false 清零节点 → 大部分开局即可建,且 About 原表述含混。</div>
+<div class="row"><span class="k">处置</span>✅ 已按 HSK 语义重映射: 单格门/木门框无门槛(同原版门)、木墙 4 + 柱 3 挂 ComplexFurniture(木制品挂采石不合理)、石墙 2(射孔版经继承)挂 Stonecutting;About 第五段改写为这套三档规则并标注拒马桩已删。</div></div>
+<div class="fix"><div><b>④ 前缀撞名 → 📝 已留档(无需改代码)</b></div>
+<div class="row"><span class="k">现状</span>Rustic_ 前缀与 Ideology DLC 的 ThingStyleDef(Rustic_Table1x2c / Rustic_Column / Rustic_SimpleHelmet / Rustic_StandingLamp 等 14 个)同前缀,但 defName 完全不同,Unified.xml 核对无覆盖、无冲突。</div>
+<div class="row"><span class="k">处置</span>留档即可;后续再移植 MO 家具时注意别顺手复用这些名字。</div></div>
+<p class="lead">①②③ 已于 08-27 22:40–22:45 全部落地并双目录同步(删拒马桩 / 加蓝图书回购 / 补研究门禁三档规则并更正 About);④ 为留档项。下一步按 <code>MO整合执行计划/00_决策与优先级.md</code> 的 P1→P5 推进。</p>
+</section>
+<section class="card" id="s5"><h2>五、逐单元明细(全量)</h2><p class="lead">按 AGENTS §1「单文件 ≤10KB」铁律拆为独立阅读版: <a href="中世纪MO整合进度盘点_明细上.html" style="color:var(--accent);font-weight:700">板块 1-3</a> · <a href="中世纪MO整合进度盘点_明细中.html" style="color:var(--accent);font-weight:700">板块 4-8</a> · <a href="中世纪MO整合进度盘点_明细下.html" style="color:var(--accent);font-weight:700">板块 9-13</a>。</p></section><section class="card" id="s6"><h2>六、下一步三档推进建议</h2>
+<h3>第一档 · 低成本高回报(零 DLL / 零 CE 冲突)</h3><ul class="tight">
+<li>§3 娱乐桌椅凳 + 床(20 def,纯原版 Furniture)</li>
+<li>§3 装饰艺术件(雕塑/喷泉/横幅/招牌,≈30 def)</li>
+<li>§3 无电照明与火源(火把/油灯/蜡烛/壁炉,≈16 def)</li>
+<li>§3 特色地板(陶瓷砖 4 纹,Beauty+4 天花板档)</li>
+<li>§10 传说书 Tale(娱乐书,原版 Book)</li>
+<li>§11 战士/老兵 2 特性(并入 HSK 特性池)</li>
+<li>✅ ①②③ 已于 08-27 22:45 修完(见第四节)</li>
+</ul>
+<h3>第二档 · 中成本(机制可控)</h3><ul class="tight">
+<li>§16 矿井采掘 —— 方案已定,建议作为第一个独立小项目落地(范围比武器/防具小)</li>
+<li>§3 储物专用储具/货架(先与 sbz NeatStorageFridge / Reel存储 定主方案)</li>
+<li>§9 中毒累积系统(自研 hediff,理念与硬核契合)+ 酒类主链决策</li>
+<li>§2 无电保鲜冰链 / 造纸抄写线(需 Processor Framework 或自研替代)</li>
+<li>§8 商人任务事件 P2/P3(藏宝图→定向挖宝 + 废墟清剿脚本,VEF KCSG 已在场)</li>
+</ul>
+<h3>第三档 · 高成本(依赖 MO DLL 或整套 CE 重写)</h3><ul class="tight">
+<li>§4 武器 CE 化(40+ 近战转 ToolCE,弓弩手炮弹药化)</li>
+<li>§5 防具 mm 护甲化 + 自定义装备层在鼠族体型的覆盖验证</li>
+<li>§6 盾牌(VEF↔CE 互斥)/ 魔法戒指 / 护甲附件</li>
+<li>§7 怪物 12 种(沉睡/分裂/再生/整吞/酸血)</li>
+<li>§8 派系 / 黑森林群系 / 藏身处 / 围城 AI</li>
+</ul>
+<h3>战略分界(需要你拍的一件事)</h3><ul class="tight">
+<li>MO 三大价值块 = 生产链 / 装备武器 / 战役玩法。生产链已用 HSK+Vile 上位替代并确认 ⛔;</li>
+<li>剩下真正拉开体验差异的是 §4/§5 装备武器(高 CE 成本)与 §8 战役玩法(整套 MO 战役)。</li>
+<li>其余(家具/装饰/风味)可按第一档零散捡完,不影响主线。</li>
+</ul>
+</section>
+<div class="note"><b>M1 进度指针(2026-08-28 01:2x)</b> · P1 首批(10 个可搜刮容器 + 自研 <code>Building_LootableHSK</code> + <code>RK_Incident_RuinCache</code> 事件 + 29 张贴图)<b>已在工作区完成并编译通过,按要求未同步部署目录</b>,因此本页 10.1% 的数字尚未计入。明细见 <code>MO整合执行计划/01_P1_战利品废墟任务蓝图链.md</code>「M1 落地记录」。</div>
+<footer>数据源: 工作区 <code>HSK工业科研大修/1.6/Defs</code> 逐文件解析 · 部署 <code>Mods</code> hash 比对 · <code>LocalLow/…/MissileGirl/Cache/Unified.xml</code>(2026-08-27 21:43)终态命中核对 · <code>docs/03_生产框架/中世纪大修内容梳理.md</code>(MO 1.6.2.2 全量底稿)</footer>
+</div>
+</body></html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 沥青铺路(v3, 2026-08-29 自 污染统一 迁入本 mod)
+       直接建造的地面(走建筑菜单, 不进工作台配方 —— 符合"能直建就不进工作台"落位法)。
+       一级分类 NaturalFloors(与原版柏油路 PavedTile 同档), 单块地面不建 designatorDropdown。
+       造价 沥青×2/格; 平整路面 pathCost 0(不拖慢通行), 难看的 -10 美观换掉泥地的脏。
+       地面无可燃性 stat, 故"不可燃"由不写 Flammability + 文案承担。 -->
+
+  <TerrainDef ParentName="FloorBase">
+    <defName>RK_AsphaltRoad</defName>
+    <label>沥青路面</label>
+    <description>压实的沥青路面。平整好走, 不怕雨涝, 也压不出泥; 缺点是黑乎乎一片, 谈不上好看, 还容易显脏。</description>
+    <texturePath>Terrain/RK_AsphaltRoad</texturePath>
+    <layerable>true</layerable>
+    <affordances><li>Light</li><li>Medium</li><li>Heavy</li><li>Walkable</li></affordances>
+    <tags><li>Floor</li></tags>
+    <drawStyleCategory>Floors</drawStyleCategory>
+    <designationCategory>NaturalFloors</designationCategory>
+    <fertility>0</fertility>
+    <constructEffect>ConstructDirt</constructEffect>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <renderPrecedence>230</renderPrecedence>
+    <pathCost>0</pathCost>
+    <pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+    <pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+    <pollutionColor>(1, 1, 1, 0.8)</pollutionColor>
+    <pollutionOverlayScale>(0.75, 0.75)</pollutionOverlayScale>
+    <statBases>
+      <WorkToBuild>250</WorkToBuild>
+      <Beauty>-10</Beauty>
+      <CleaningTimeFactor>0.6</CleaningTimeFactor>
+    </statBases>
+    <researchPrerequisites Inherit="false"><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+  </TerrainDef>
+
+  <!-- 石化工业线 · 八角沥青拼花(装饰路面, 2026-08-30 新增)
+       黑亮八角+菱形点缀拼花柏油路面, 走建筑菜单直接建造(能直建不进工作台)。
+       一级分类 NaturalFloors(与 RK_AsphaltRoad 同档), 单块地面不建 designatorDropdown。
+       造价 沥青×10/格; 平整路面 pathCost 0(不拖慢通行); 工时 600, 建造技能 8, Beauty +1。 -->
+  <TerrainDef ParentName="FloorBase">
+    <defName>RK_AsphaltOctagon</defName>
+    <label>八角沥青拼花</label>
+    <description>以沥青浇筑、压出八角与菱形点缀拼花的装饰路面。黑亮耐磨、平整好走, 讲究的几何纹路比素路面体面些; 代价是费料费工, 铺一格得反复摊压。</description>
+    <texturePath>Terrain/RK_AsphaltOct</texturePath>
+    <layerable>true</layerable>
+    <affordances><li>Light</li><li>Medium</li><li>Heavy</li><li>Walkable</li></affordances>
+    <tags><li>Floor</li></tags>
+    <drawStyleCategory>Floors</drawStyleCategory>
+    <designationCategory>NaturalFloors</designationCategory>
+    <fertility>0</fertility>
+    <constructEffect>ConstructDirt</constructEffect>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <renderPrecedence>230</renderPrecedence>
+    <pathCost>0</pathCost>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <Beauty>1</Beauty>
+      <CleaningTimeFactor>0.6</CleaningTimeFactor>
+    </statBases>
+    <costList>
+      <Asphalt>10</Asphalt>
+    </costList>
+    <researchPrerequisites Inherit="false"><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </TerrainDef>
+
+  <!-- 石化工业线 · 沥青地坪(纯起伏素面, 2026-08-30 新增)
+       平整压实的黑亮沥青地坪, 表面带细密凹凸质感、无花纹装饰。走建筑菜单直接建造。
+       与八角拼花同归「沥青」二级菜单。造价 沥青×5/格; pathCost 0; 工时 300, 建造技能 5, Beauty 0。 -->
+  <TerrainDef ParentName="FloorBase">
+    <defName>RK_AsphaltFloor</defName>
+    <label>沥青地坪</label>
+    <description>平整压实的黑亮沥青地坪, 表面带细密凹凸质感。耐磨好走、不怕雨涝也不显脏, 比粗糙素路面整洁得多; 只是没有花纹装饰, 谈不上好看。</description>
+    <texturePath>Terrain/RK_AsphaltRelief</texturePath>
+    <layerable>true</layerable>
+    <affordances><li>Light</li><li>Medium</li><li>Heavy</li><li>Walkable</li></affordances>
+    <tags><li>Floor</li></tags>
+    <drawStyleCategory>Floors</drawStyleCategory>
+    <designationCategory>NaturalFloors</designationCategory>
+    <fertility>0</fertility>
+    <constructEffect>ConstructDirt</constructEffect>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <renderPrecedence>230</renderPrecedence>
+    <pathCost>0</pathCost>
+    <statBases>
+      <WorkToBuild>300</WorkToBuild>
+      <Beauty>0</Beauty>
+      <CleaningTimeFactor>0.6</CleaningTimeFactor>
+    </statBases>
+    <costList>
+      <Asphalt>5</Asphalt>
+    </costList>
+    <researchPrerequisites Inherit="false"><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+  </TerrainDef>
+
+</Defs>

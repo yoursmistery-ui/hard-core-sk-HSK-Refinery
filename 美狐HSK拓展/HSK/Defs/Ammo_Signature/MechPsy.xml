@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- 美狐特色弹药: 灵能机械素弹(MechaniteMiho), 从 Ammo_Miho_Advanced.xml / 12GaugeCharged.xml 迁出 -->
+
+	<ThingDef Name="Base12GaugeChargedBullet" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/Charged/ChargeShot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<speed>122</speed>
+		</projectile>
+	</ThingDef>
+
+	<!-- Psy Shot -->
+
+	<ThingCategoryDef>
+		<defName>AmmoMechPsyShot</defName>
+		<label>Mechite Shot</label>
+		<parent>AmmoAdvanced</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberCharge</iconPath>
+	</ThingCategoryDef>
+
+	<CombatExtended.AmmoCategoryDef>
+		<defName>MechaniteMiho</defName>
+		<label>Mechanite (Miholic)</label>
+		<labelShort>MEC-M</labelShort>
+		<description>Mechanite enhanced munitions that are psychically charged. Capable of exotic or distruptive effects to a range of targets.</description>
+	</CombatExtended.AmmoCategoryDef>
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_MechPsyShot</defName>
+		<label>Psychic Shot</label>
+		<ammoTypes>
+			<Ammo_MechPsyShot>Bullet_MechPsyShot</Ammo_MechPsyShot>
+		</ammoTypes>
+	</CombatExtended.AmmoSetDef>
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_MechPsyRifle</defName>
+		<label>Psychic Shot</label>
+		<ammoTypes>
+			<Ammo_MechPsyShot>Bullet_MechPsyRifle</Ammo_MechPsyShot>
+		</ammoTypes>
+	</CombatExtended.AmmoSetDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+		<description>Variable use mech shot cartridge designed for advanced weapons.</description>
+		<thingCategories>
+			<li>AmmoMechPsyShot</li>
+		</thingCategories>
+		<defName>Ammo_MechPsyShot</defName>
+		<label>Mechanite Psyshot</label>
+		<graphicData>
+			<texPath>Things/Ammo/Charged/ShotgunMech</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>0.047</Mass>
+			<Bulk>0.07</Bulk>
+		</statBases>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+		</tradeTags>
+		<ammoClass>MechaniteMiho</ammoClass>
+	</ThingDef>
+
+	<ThingDef ParentName="Base12GaugeChargedBullet">
+		<defName>Bullet_MechPsyShot</defName>
+		<label>pellet</label>
+		<graphicData>
+			<texPath>Things/Projectile/MihoThunderSpear</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.75</drawSize>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>9</damageAmountBase>
+			<damageDef>Miho_MagicBombEMP</damageDef>
+			<secondaryDamage>
+				<li>
+					<def>EMP</def>
+					<amount>1</amount>
+					<chance>0.08</chance>
+				</li>
+				<li>
+					<def>Stun</def>
+					<amount>2</amount>
+					<chance>0.05</chance>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>0</armorPenetrationSharp>
+			<armorPenetrationBlunt>0</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base12GaugeChargedBullet">
+		<defName>Bullet_MechPsyRifle</defName>
+		<label>accelerated pellet</label>
+		<graphicData>
+			<texPath>Things/Projectile/MihoThunderSpear</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.92</drawSize>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<speed>150</speed>
+			<damageAmountBase>10</damageAmountBase>
+			<damageDef>Miho_MagicBombEMP</damageDef>
+			<secondaryDamage>
+				<li>
+					<def>EMP</def>
+					<amount>1</amount>
+					<chance>0.09</chance>
+				</li>
+				<li>
+					<def>Stun</def>
+					<amount>2</amount>
+					<chance>0.09</chance>
+				</li>
+			</secondaryDamage>
+			<armorPenetrationSharp>0</armorPenetrationSharp>
+			<armorPenetrationBlunt>0</armorPenetrationBlunt>
+			<pelletCount>3</pelletCount>
+			<spreadMult>0</spreadMult>
+		</projectile>
+	</ThingDef>
+
+	<RecipeDef ParentName="ChargeAmmoRecipeBase">
+		<defName>MakeAmmo_MechPsyShot</defName>
+		<label>make Mechanite Psychic shell x200</label>
+		<description>Craft 200 Mechanite Psychic shells.</description>
+		<jobString>Making Mechanite Psychic shells.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Miho_MilitaryGradeBalisticCeramics</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Miho_MilitaryGradeBalisticCeramics</li>
+				<li>Steel</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_MechPsyShot>200</Ammo_MechPsyShot>
+		</products>
+		<workAmount>21000</workAmount>
+		<researchPrerequisite>Miho_MechHack</researchPrerequisite>
+		<recipeUsers Inherit="False">
+			<li>Miho_TableMachining</li>
+		</recipeUsers>
+	</RecipeDef>
+</Defs>

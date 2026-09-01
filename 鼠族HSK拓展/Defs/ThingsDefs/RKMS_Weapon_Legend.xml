@@ -1,0 +1,618 @@
+﻿<Defs>
+	<ToolCapacityDef>
+		<defName>ChargeSlash</defName>
+		<label>充能斩击</label>
+	</ToolCapacityDef>
+	<ToolCapacityDef>
+		<defName>ChargeCleave</defName>
+		<label>充能横扫</label>
+	</ToolCapacityDef>
+	<ToolCapacityDef>
+		<defName>ChargeGroundShock</defName>
+		<label>充能地裂冲击</label>
+	</ToolCapacityDef>
+<ThingDef Name="RK_ExoticMeleeLegend" ParentName="RK_ExoticMeleeWeapon" Abstract="True">
+		<techLevel>Ultra</techLevel>
+		<smeltable>false</smeltable>
+		<weaponTags>
+			<li>RK_ExoticMeleeLegend</li>
+		</weaponTags>
+		<weaponClasses>
+			<li>Ultratech</li>
+		</weaponClasses>
+		<statBases>
+			<WorkToMake>50000</WorkToMake>
+			<Beauty>10</Beauty>
+			<MaxHitPoints>1000</MaxHitPoints>
+			<Flammability>0</Flammability>
+			<MarketValue>1000</MarketValue>
+			<SellPriceFactor>2</SellPriceFactor>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<recipeMaker Inherit="False">
+		</recipeMaker>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+		</tradeTags>
+		<tradeability>Sellable</tradeability>
+		<relicChance>3</relicChance>
+	</ThingDef><ThingDef Name="RK_ExoticRangeLegend" ParentName="RK_ExoticRangeWeaponIndustrial" Abstract="True">
+		<techLevel>Ultra</techLevel>
+		<smeltable>false</smeltable>
+		<weaponTags>
+			<li>RK_ExoticRangeLegend</li>
+		</weaponTags>
+		<weaponClasses>
+			<li>Ultratech</li>
+		</weaponClasses>
+		<statBases>
+			<WorkToMake>50000</WorkToMake>
+			<Beauty>10</Beauty>
+			<MaxHitPoints>1000</MaxHitPoints>
+			<Flammability>0</Flammability>
+			<MarketValue>4000</MarketValue>
+			<SellPriceFactor>2</SellPriceFactor>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<recipeMaker Inherit="False">
+		</recipeMaker>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+		</tradeTags>
+		<tradeability>Sellable</tradeability>
+		<relicChance>3</relicChance>
+	</ThingDef><ThingDef ParentName="RK_ExoticMeleeLegend">
+		<defName>RK_ZhuQiang</defName>
+		<label>「Golded Scarlet Spear」</label>
+		<description>"Old king take over all the arms. Now his palace cant be found."</description>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<graphicData>
+			<texPath>Item_Weapon/RK_ZhuQiang</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>70</DepletedUranium>
+			<NitinolAlloy>85</NitinolAlloy>
+		
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+</costList>
+		<weaponTags>
+			<li>RK_ExoticBattleMaster</li>
+			<li>RK_ExoticMeleeBeelzebub</li>
+			<li>RK_ExoticGoldedMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>55000</WorkToMake>
+			<Mass>6</Mass>
+				<Bulk>10</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.33</MoveSpeed>
+			<MeleeDodgeChance>8</MeleeDodgeChance>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>1</cooldownTime>
+				<armorPenetrationSharp>4.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>19</power>
+				<cooldownTime>1.2</cooldownTime>
+				<armorPenetrationSharp>6.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef><ThingDef ParentName="RK_ExoticMeleeLegend">
+		<defName>RK_QingFeng</defName>
+		<label>「Golded Indigo Sword」</label>
+		<description>"Cease your weapons, we uphold martial virtues."</description>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<graphicData>
+			<texPath>Item_Weapon/QingFeng</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<weaponTags>
+			<li>RK_ExoticBattleMaster</li>
+			<li>RK_ExoticMeleeBeelzebub</li>
+			<li>RK_ExoticGoldedMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>55000</WorkToMake>
+			<Mass>3</Mass>
+				<Bulk>6</Bulk>
+		</statBases>
+		<costList>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>100</DepletedUranium>
+			<NitinolAlloy>50</NitinolAlloy>
+		
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+</costList>
+		<equippedStatOffsets>
+			<MoveSpeed>0.42</MoveSpeed>
+			<MeleeDodgeChance>10</MeleeDodgeChance>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>35</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>11.2</armorPenetrationSharp>
+				<armorPenetrationBlunt>9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>23</power>
+				<cooldownTime>1.4</cooldownTime>
+				<armorPenetrationSharp>6.9</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<equippedAngleOffset>-120</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/QingFeng_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/QingFeng_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,-0.3,-0.2)</position>
+					<angle>150</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,0,-0.2)</position>
+					<angle>-150</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.25,-1,0.27)</position>
+					<angle>-135</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,1,0.18)</position>
+					<angle>135</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.18)</position>
+					<angle>-135</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.18)</position>
+					<angle>135</angle>
+				</westOffset>
+			</li>
+		</comps>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef><ThingDef ParentName="RK_ExoticMeleeLegend">
+		<defName>RK_YanYue</defName>
+		<label>「Golded Crescent Blade」</label>
+		<description>"King, duke, general and minister. Non of braver?"</description>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<graphicData>
+			<texPath>Item_Weapon/RK_YanYue</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<weaponTags>
+			<li>RK_ExoticBattleMaster</li>
+			<li>RK_ExoticMeleeBeelzebub</li>
+			<li>RK_ExoticGoldedMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>60000</WorkToMake>
+			<Mass>8</Mass>
+				<Bulk>12</Bulk>
+			<MarketValue>5000</MarketValue>
+		</statBases>
+		<costList>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>100</DepletedUranium>
+			<NitinolAlloy>85</NitinolAlloy>
+		
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+</costList>
+		<equippedStatOffsets>
+			<MoveSpeed>0.3</MoveSpeed>
+			<MeleeDodgeChance>6</MeleeDodgeChance>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>35</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>10.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>7.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>45</power>
+				<cooldownTime>3</cooldownTime>
+				<armorPenetrationSharp>12</armorPenetrationSharp>
+				<armorPenetrationBlunt>9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef><ThingDef ParentName="RK_ExoticMeleeLegend">
+		<defName>RK_Koutetsumaru</defName>
+		<label>「Golded Koutetsumaru」</label>
+		<description>"But the spirit of my old rival, great and illustrious, sword even kind, cut the head of the wicked, righteous indignation will never sigh."</description>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Koutetsumaru</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<weaponTags>
+			<li>RK_ExoticGoldedMelee</li>
+			<li>RK_Koutetsumaru</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>50000</WorkToMake>
+			<Mass>3</Mass>
+				<Bulk>6</Bulk>
+		</statBases>
+		<costList>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>85</DepletedUranium>
+			<NitinolAlloy>40</NitinolAlloy>
+		
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+</costList>
+		<equippedStatOffsets>
+			<MoveSpeed>0.42</MoveSpeed>
+			<MeleeDodgeChance>7</MeleeDodgeChance>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>9.6</armorPenetrationSharp>
+				<armorPenetrationBlunt>7.7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>1.4</cooldownTime>
+				<armorPenetrationSharp>8.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/RK_Koutetsumaru_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/RK_Koutetsumaru_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0.24,0,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.24,0,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,-0.3,-0.2)</position>
+					<angle>150</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,0,-0.2)</position>
+					<angle>-150</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.3,0,-0.2)</position>
+					<angle>15</angle>
+				</northOffset>
+				<eastOffset>
+					<position>(0.3,0,-0.3)</position>
+					<angle>30</angle>
+				</eastOffset>
+				<southOffset>
+					<position>(-0.33,0,-0.27)</position>
+					<angle>-15</angle>
+				</southOffset>
+				<westOffset>
+					<position>(-0.3,-0.3,-0.3)</position>
+					<angle>-30</angle>
+				</westOffset>
+			</li>
+		</comps>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef><ThingDef ParentName="RK_ExoticRangeLegend">
+		<defName>RK_LiaoYuan</defName>
+		<label>「Golded Prairie Bow」</label>
+		<description>A single spark can start a prairie fire.</description>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<weaponTags>
+			<li>RK_ExoticGoldedRanged</li>
+		</weaponTags>
+		<graphicData>
+			<texPath>Item_Weapon/RK_LiaoYuan</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Bow_Recurve</soundInteract>
+		<costList>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>70</DepletedUranium>
+			<NitinolAlloy>85</NitinolAlloy>
+		
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+</costList>
+		<statBases>
+			<WorkToMake>65000</WorkToMake>
+			<Mass>2.5</Mass>
+				<Bulk>8</Bulk>
+			<MarketValue>1500</MarketValue>
+			<AccuracyTouch>0.85</AccuracyTouch>
+			<AccuracyShort>0.9</AccuracyShort>
+			<AccuracyMedium>0.85</AccuracyMedium>
+			<AccuracyLong>0.9</AccuracyLong>
+			<RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Arrow_RK_Prairie</defaultProjectile>
+				<warmupTime>1</warmupTime>
+				<range>37.9</range>
+				<soundCast>Bow_Recurve</soundCast>
+				<!-- <aimingLineMote>Mote_HellsphereCannon_Aim</aimingLineMote> -->
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>limb</label>
+				<capacities>
+					<li>Poke</li>
+				</capacities>
+				<power>23</power>
+				<cooldownTime>1.7</cooldownTime>
+				<armorPenetrationBlunt>6.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<rotateInShelves>false</rotateInShelves>
+		<equippedAngleOffset>45</equippedAngleOffset>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef><ThingDef ParentName="RK_BaseBoltProjectile">
+		<defName>Arrow_RK_Prairie</defName>
+		<label>ShenJi bolt</label>
+		<thingClass>Meow.Projectile_BulletAdvanced</thingClass>
+		<projectile Class="Meow.PjtProps_BulletAdvanced">
+			<damageDef>ArrowHighVelocity</damageDef>
+			<damageAmountBase>20</damageAmountBase>
+			<armorPenetrationBase>0.45</armorPenetrationBase>
+			<stoppingPower>3.4</stoppingPower>
+			<speed>62</speed>
+			<alwaysFreeIntercept>true</alwaysFreeIntercept>
+			<flyOverhead>false</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>Explosion_Bomb</soundExplode>
+			<soundImpactAnticipate>Flying</soundImpactAnticipate>
+
+			<explosionRadius>1.7</explosionRadius>
+
+			<ExtraExplosionDamageDef>Bomb</ExtraExplosionDamageDef>
+			<ExtraExplosionDamageAmount>27</ExtraExplosionDamageAmount>
+			<ExtraExplosionRadius>1.7</ExtraExplosionRadius>
+			<ExtraExplosionPropagationSpeed>0.65</ExtraExplosionPropagationSpeed>
+			<ExtraExplosionChanceToStartFire>1</ExtraExplosionChanceToStartFire>
+			<ExtraExplosionArmorPenetration>0.2</ExtraExplosionArmorPenetration>
+			<ExtraExplosionSound>Explosion_Bomb</ExtraExplosionSound>
+			<ExtraExplosionDamageFalloff>true</ExtraExplosionDamageFalloff>
+		</projectile>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Rocket</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingDef><ThingDef ParentName="RK_ExoticMeleeLegend">
+		<defName>RK_PowerChargedGuanDao</defName>
+		<label>「Power Charged KwanTao」</label>
+		<description>A long-handled knife capable of firing high-energy pulses at enemies, often resulting in violent explosions... No one knows why or who made it, or how many of these dangerous weapons were actually made.
+\n"Do we really have to go that far?"</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_GuanDao</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.82</drawSize>
+		</graphicData>
+		<weaponTags>
+			<li>RK_ExoticImmortal</li>
+		</weaponTags>
+		<thingSetMakerTags>
+			<li>RewardStandardLowFreq</li>
+		</thingSetMakerTags>
+		<statBases>
+			<WorkToMake>80000</WorkToMake>
+			<Mass>12</Mass>
+				<Bulk>15</Bulk>
+			<MarketValue>5000</MarketValue>
+			<Beauty>10</Beauty>
+			<MaxHitPoints>1000</MaxHitPoints>
+			<Flammability>0</Flammability>
+			<SellPriceFactor>2</SellPriceFactor>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<equippedAngleOffset>-55</equippedAngleOffset>
+		<costList>
+			<NitinolAlloy>75</NitinolAlloy>
+			<GoldBar>5</GoldBar>
+			<DepletedUranium>150</DepletedUranium>
+			<ComponentSpacer>8</ComponentSpacer>
+		
+				<Compaste>10</Compaste>
+</costList>
+		<equippedStatOffsets>
+			<MeleeHitChance>-2</MeleeHitChance>
+			<MoveSpeed>0.2</MoveSpeed>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>charge slash</label>
+				<capacities>
+					<li>ChargeSlash</li>
+				</capacities>
+				<power>36</power>
+				<cooldownTime>2.5</cooldownTime>
+				<armorPenetrationSharp>9</armorPenetrationSharp>
+				<armorPenetrationBlunt>7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>red heat charge cleave</label>
+				<capacities>
+					<li>ChargeCleave</li>
+				</capacities>
+				<power>38</power>
+				<cooldownTime>3.3</cooldownTime>
+				<armorPenetrationSharp>9</armorPenetrationSharp>
+				<armorPenetrationBlunt>7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				<extraMeleeDamages>
+					<li>
+						<def>Flame</def>
+						<amount>10</amount>
+						<chance>1</chance>
+					</li>
+				</extraMeleeDamages>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>charge shock</label>
+				<capacities>
+					<li>ChargeGroundShock</li>
+				</capacities>
+				<power>32</power>
+				<cooldownTime>4</cooldownTime>
+				<armorPenetrationSharp>9</armorPenetrationSharp>
+				<armorPenetrationBlunt>7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				<extraMeleeDamages>
+					<li>
+						<def>Stun</def>
+						<amount>14</amount>
+						<chance>0.5</chance>
+					</li>
+				</extraMeleeDamages>
+			</li>
+			</tools>
+	
+		<recipeMaker>
+			<researchPrerequisite>Melee_Ultra</researchPrerequisite>
+		</recipeMaker></ThingDef>
+</Defs>

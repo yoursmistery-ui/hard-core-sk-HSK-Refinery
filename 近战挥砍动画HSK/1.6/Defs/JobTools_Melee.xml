@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 近战挥砍动画：复用 Show Me Your Tools 的 JobToolDef 框架。
+       jobDefs=["Attack"] → 命中近战攻击 job；ToolAnimator 会按 pawn.CurJob + job.targetA
+       自动朝敌人挥动贴图。贴图由本 mod 的 Harmony 补丁(MeleeSwing.dll)替换成
+       pawn.equipment.Primary 的当前武器图形，所以挥的是小人手上那把武器本身。
+       两个 def 同 variantGroup → 每次攻击随机二选一(挥砍 / 横扫)。 -->
+
+  <!-- 挥砍：起手高举 → 下劈(Chop) -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Melee_Chop</defName>
+    <label>近战·挥砍</label>
+    <jobDefs>
+      <li>AttackMelee</li>
+    </jobDefs>
+    <variantGroup>JE_Melee_Weapon</variantGroup>
+    <swingStyle>Chop</swingStyle>
+    <!-- 兜底贴图(仅当武器图形取不到时用于计算尺寸)；实际由补丁换成当前武器 -->
+    <texPath>Things/JobEffects/Tools/Knife</texPath>
+    <scale>0.85</scale>
+    <reach>0.34</reach>
+    <period>0.40</period>
+    <windupAngle>78</windupAngle>
+    <followThroughAngle>26</followThroughAngle>
+    <motionBlur>true</motionBlur>
+    <!-- 剑气：命中瞬间在武器尖端爆一发(静态 FleckMaker) -->
+    <impactAtTip>true</impactAtTip>
+    <impactFlashFleck>JE_Melee_SlashQi</impactFlashFleck>
+    <impactFlashScale>2.0</impactFlashScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 横扫：左右平滑摆动(Sweep) -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Melee_Sweep</defName>
+    <label>近战·横扫</label>
+    <jobDefs>
+      <li>AttackMelee</li>
+    </jobDefs>
+    <variantGroup>JE_Melee_Weapon</variantGroup>
+    <swingStyle>Sweep</swingStyle>
+    <texPath>Things/JobEffects/Tools/Knife</texPath>
+    <scale>0.85</scale>
+    <reach>0.34</reach>
+    <period>0.52</period>
+    <windupAngle>64</windupAngle>
+    <motionBlur>true</motionBlur>
+    <impactAtTip>true</impactAtTip>
+    <impactFlashFleck>JE_Melee_SlashQi</impactFlashFleck>
+    <impactFlashScale>2.0</impactFlashScale>
+  </JobEffects.JobToolDef>
+
+</Defs>

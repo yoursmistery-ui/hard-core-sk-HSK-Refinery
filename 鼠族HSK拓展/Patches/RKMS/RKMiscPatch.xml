@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- <Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="CraftingSpot"]/recipes</xpath>
+				<value>
+					<li>Disassemble_PoDao</li>
+
+				</value>
+			</li>
+		</operations>
+	</Operation> -->
+
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="RK_Muffler"]/apparel/tags</xpath>
+				<value>
+					<li>RK_DaXia</li>
+					<li>RK_ExoticMilitia</li>
+					<li>RK_ExoticWorker</li>
+					<li>RK_ExoticFarmer</li>
+					<li>RK_ExoticBeggar</li>
+					<li>RK_ExoticTier1</li>
+					<li>RK_ExoticTier2</li>
+					<li>RK_ExoticTier3</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="RK_HairCorsage"]/apparel/tags</xpath>
+				<value>
+					<li>RK_ExoticNoble</li>
+					<li>RK_ExoticTier3</li>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="RK_Sack"]/apparel/tags</xpath>
+				<value>
+					<!-- <li>RK_ExoticBeggar</li> -->
+					<li>RK_ExoticNoble</li>
+				</value>
+			</li>
+
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Ideology</li>
+		</mods>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/FactionDef[defName = "Beggars"]/basicMemberKind</xpath>
+			<value>
+				<basicMemberKind>RatkinExoticBeggar</basicMemberKind>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Ideology</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Normal</success>
+			<operations>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/PawnKindDef[defName = "Beggar"]/race</xpath>
+					<value>
+						<race>Ratkin</race>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/PawnKindDef[defName = "Beggar"]/weaponTags</xpath>
+					<value>
+						<weaponTags>
+							<li>RK_WorkerTool</li>
+							<li>RK_ExoticWorker</li>
+							<li>RK_ExoticFarmer</li>
+							<li>MedievalMeleeBasic</li>
+							<li>NeolithicMeleeBasic</li>
+						</weaponTags>
+					</value>
+				</li>
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/PawnKindDef[defName = "Beggar"]/apparelTags</xpath>
+					<value>
+						<specificApparelRequirements Inherit="False">
+							<li>
+								<bodyPartGroup>Torso</bodyPartGroup>
+								<apparelLayer>OnSkin</apparelLayer>
+								<requiredTag>RK_ExoticTier1</requiredTag>
+							</li>
+						</specificApparelRequirements>
+						<apparelTags>
+							<li>RK_ExoticWorker</li>
+							<li>RK_ExoticFarmer</li>
+							<li>RK_ExoticTier1</li>
+							<li>RK_1Tier</li>
+							<li>RK_ExoticBeggar</li>
+						</apparelTags>
+					</value>
+				</li>
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/PawnKindDef[defName="Beggar"]</xpath>
+					<value>
+						<xenotypeSet>
+							<xenotypeChances>
+								<Ratkin_Squirrel>0.6</Ratkin_Squirrel>
+								<Ratkin_Hamster>0.4</Ratkin_Hamster>
+							</xenotypeChances>
+						</xenotypeSet>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/PawnKindDef[defName="RatkinAncient"]/apparelTags</xpath>
+				<value>
+					<apparelTags>
+						<li>RK_ExoticNoble</li>
+						<li>RK_ExoticTier3</li>
+						<li>RK_ExoticTier2</li>
+						<li>RK_ExoticTier1</li>
+					</apparelTags>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

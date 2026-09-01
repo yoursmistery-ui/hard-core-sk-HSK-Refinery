@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<GeneCategoryDef>
+		<defName>Gender</defName>
+		<label>Biological Sex</label>
+		<displayPriorityInXenotype>412</displayPriorityInXenotype>
+	</GeneCategoryDef>
+
+	<GeneDef Name="MeowGenderGene" Abstract="True">
+		<displayCategory>Gender</displayCategory>
+		<exclusionTags>
+			<li>Gender</li>
+		</exclusionTags>
+		<selectionWeight>0.0</selectionWeight>
+	</GeneDef>
+
+	<GeneDef ParentName="MeowGenderGene">
+		<defName>Gender_FemaleOnly</defName>
+		<label>Female</label>
+		<description>Carriers of this gene are physically female.</description>
+		<iconPath>GeneIcons/BS_Female</iconPath>
+		<biostatCpx>0</biostatCpx>
+	</GeneDef>
+
+	<GeneDef ParentName="MeowGenderGene">
+		<defName>Gender_MaleOnly</defName>
+		<label>Male</label>
+		<description>Carriers of this gene are physically male.</description>
+		<iconPath>GeneIcons/BS_Male</iconPath>
+		<biostatCpx>0</biostatCpx>
+	</GeneDef>
+</Defs>

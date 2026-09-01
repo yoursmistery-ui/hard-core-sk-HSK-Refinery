@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+         54_太空装备归位金鼠缝纫台.xml  (2026-08-27 自 HSK工业科研大修 A6 §5 迁入)
+         鼠族「太空/极致」装备配方 recipeUsers -> 只挂 OA_RK_Tailor(金鼠缝纫台, 太空档),
+         从先进纺织台(HyperTailoringBench)/鼠族裁缝台摘除。
+         ⚠️ 迁移原因: 这些 RecipeDef 由本 mod 01/02 号补丁用 PatchOperationAdd 添加;
+            HSK工业科研大修(含 OA_RK_Tailor)在本 mod 之前加载, 其 A6 补丁看不到尚未存在的
+            这些 def, 导致 26 条 PatchOperationReplace "Failed to find a node"。
+            归位到 01/02 之后执行(文件名 54 > 02), 与 def 归属同 mod, 顺序确定。
+         稳健: 顶层 PatchOperationConditional 以 /recipeUsers 存在性门控, match=Replace;
+            def 或节点缺失时静默跳过(不报错)。
+         ===================================================================== -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_SpaceArmor"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_SpaceArmor"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_SpaceArmorHelmet"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_SpaceArmorHelmet"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_Vacsuit"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_Vacsuit"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_VacsuitChildren"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_VacsuitChildren"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_VacsuitHelmet"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_VacsuitHelmet"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_BattleSuit"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_BattleSuit"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_BattleSuitB"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_BattleSuitB"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Mask"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Mask"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_MaskB"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_MaskB"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_JD_shield"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_JD_shield"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSW"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSW"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSWWJ"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSWWJ"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSWheat"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_MKSWheat"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_BingLi"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_BingLi"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_BuDong"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_BuDong"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_DaWang"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_DaWang"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_MingWang"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_MingWang"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_ZongShi"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_RK_ZongShi"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzj"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzj"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjmz"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjmz"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjmzB"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjmzB"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjwj"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_hjzjwj"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_kydc"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_kydc"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_kydcmz"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_kydcmz"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xinpian"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xinpian"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xqzmj"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xqzmj"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xqzzj"]/recipeUsers</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_xqzzj"]/recipeUsers</xpath>
+            <value><recipeUsers><li>OA_RK_Tailor</li></recipeUsers></value>
+        </match>
+    </Operation>
+</Patch>

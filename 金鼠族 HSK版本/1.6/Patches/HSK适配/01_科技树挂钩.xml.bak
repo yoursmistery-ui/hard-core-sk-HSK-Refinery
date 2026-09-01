@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 01_科技树挂钩
+        目标: ①修复鼠族科技断链(衣物 II→III、盔甲 I/II→III 串联);
+              ②金鼠族 25 个研究节点按功能分区智能归位到对应科研 tab
+                (工业→Buildings_SK / 食物→Food_SK / 植物→Plants_SK /
+                 医疗→Medicine_SK / 武器→Weapon_SK / 服饰→Apparel_SK),
+                不再团成一团,且全部坐标经核对无冲突;
+              ③逐节点挂靠鼠族科技,形成「鼠族科技→金鼠族科技」一环套一环的完整链。
+        说明: 本文件中的电力科技节点(OA_RK_Electrical_System / _B / _C)补丁
+              仅在未安装「边缘核能」时生效(回退路径)。安装边缘核能时,
+              05_边缘核能整合.xml 会移除这些节点并整合进 Rimatomics 科研体系。
+        加载顺序: 本补丁位于 鼠族HSK拓展(32/52 号)之后,Replace/Add 生效。
+        ===================================================================== -->
+
+    <!-- ========== ① 修复鼠族科技断链 ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Fabrication</li>
+                <li>Ratkin_Apparel_B2A</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Apparel_D1</li>
+                <li>Ratkin_Armor_B2</li>
+            </prerequisites>
+        </value>
+    </Operation>
+
+    <!-- ========== ② 金鼠族研究: tab 迁移(按功能分区) ========== -->
+    <!-- 植物区 Plants_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research"]/tab</xpath>
+        <value><tab>Plants_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics_B"]/tab</xpath>
+        <value><tab>Plants_SK</tab></value>
+    </Operation>
+
+    <!-- 食物区 Food_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_B"]/tab</xpath>
+        <value><tab>Food_SK</tab></value>
+    </Operation>
+
+    <!-- 医疗区 Medicine_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_C"]/tab</xpath>
+        <value><tab>Medicine_SK</tab></value>
+    </Operation>
+
+    <!-- 工业/建筑区 Buildings_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Basic_Building"]/tab</xpath>
+        <value><tab>Buildings_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics"]/tab</xpath>
+        <value><tab>Buildings_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Ningguangnuanhui"]/tab</xpath>
+        <value><tab>Buildings_SK</tab></value>
+    </Operation>
+
+    <!-- 武器/军备区 Weapon_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_GunTurrets"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_EMP_Building"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_A"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_B"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_C"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_D"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_G"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_H"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_E"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_F"]/tab</xpath>
+        <value><tab>Weapon_SK</tab></value>
+    </Operation>
+
+    <!-- 服饰区 Apparel_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Cloth_Processing"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_A"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_B"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_C"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_D"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_E"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_F"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_G"]/tab</xpath>
+        <value><tab>Apparel_SK</tab></value>
+    </Operation>
+
+    <!-- ========== ② 金鼠族研究: 坐标重排(按功能分区,已核对无冲突) ========== -->
+    <!-- 植物区 Plants_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research"]/researchViewX</xpath>
+        <value><researchViewX>7.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research"]/researchViewY</xpath>
+        <value><researchViewY>52.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics_B"]/researchViewX</xpath>
+        <value><researchViewX>6.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics_B"]/researchViewY</xpath>
+        <value><researchViewY>54.00</researchViewY></value>
+    </Operation>
+
+    <!-- 食物区 Food_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_B"]/researchViewX</xpath>
+        <value><researchViewX>11.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_B"]/researchViewY</xpath>
+        <value><researchViewY>50.00</researchViewY></value>
+    </Operation>
+
+    <!-- 医疗区 Medicine_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_C"]/researchViewX</xpath>
+        <value><researchViewX>14.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_C"]/researchViewY</xpath>
+        <value><researchViewY>60.00</researchViewY></value>
+    </Operation>
+
+    <!-- 工业/建筑区 Buildings_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Basic_Building"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Basic_Building"]/researchViewY</xpath>
+        <value><researchViewY>18.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Constant_Temperature_Hydroponics"]/researchViewY</xpath>
+        <value><researchViewY>19.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Ningguangnuanhui"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Ningguangnuanhui"]/researchViewY</xpath>
+        <value><researchViewY>20.00</researchViewY></value>
+    </Operation>
+
+    <!-- 武器/军备区 Weapon_SK -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_A"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_A"]/researchViewY</xpath>
+        <value><researchViewY>29.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_B"]/researchViewX</xpath>
+        <value><researchViewX>11.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_B"]/researchViewY</xpath>
+        <value><researchViewY>30.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_C"]/researchViewX</xpath>
+        <value><researchViewX>11.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_C"]/researchViewY</xpath>
+        <value><researchViewY>31.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_D"]/researchViewX</xpath>
+        <value><researchViewX>12.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_D"]/researchViewY</xpath>
+        <value><researchViewY>32.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_G"]/researchViewX</xpath>
+        <value><researchViewX>15.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_G"]/researchViewY</xpath>
+        <value><researchViewY>32.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_H"]/researchViewX</xpath>
+        <value><researchViewX>16.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_H"]/researchViewY</xpath>
+        <value><researchViewY>33.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_E"]/researchViewX</xpath>
+        <value><researchViewX>18.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_E"]/researchViewY</xpath>
+        <value><researchViewY>32.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_F"]/researchViewX</xpath>
+        <value><researchViewX>18.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_F"]/researchViewY</xpath>
+        <value><researchViewY>33.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_GunTurrets"]/researchViewX</xpath>
+        <value><researchViewX>13.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_GunTurrets"]/researchViewY</xpath>
+        <value><researchViewY>35.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_EMP_Building"]/researchViewX</xpath>
+        <value><researchViewX>13.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_EMP_Building"]/researchViewY</xpath>
+        <value><researchViewY>36.00</researchViewY></value>
+    </Operation>
+
+    <!-- 服饰区 Apparel_SK(置放于 y=39~42,紧贴鼠族科技 y=43 上方) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Cloth_Processing"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Cloth_Processing"]/researchViewY</xpath>
+        <value><researchViewY>39.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_A"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_A"]/researchViewY</xpath>
+        <value><researchViewY>40.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_D"]/researchViewX</xpath>
+        <value><researchViewX>12.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_D"]/researchViewY</xpath>
+        <value><researchViewY>40.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_B"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_B"]/researchViewY</xpath>
+        <value><researchViewY>41.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_E"]/researchViewX</xpath>
+        <value><researchViewX>12.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_E"]/researchViewY</xpath>
+        <value><researchViewY>41.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_C"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_C"]/researchViewY</xpath>
+        <value><researchViewY>42.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_G"]/researchViewX</xpath>
+        <value><researchViewX>12.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_G"]/researchViewY</xpath>
+        <value><researchViewY>42.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_F"]/researchViewX</xpath>
+        <value><researchViewX>14.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_F"]/researchViewY</xpath>
+        <value><researchViewY>42.00</researchViewY></value>
+    </Operation>
+
+    <!-- ========== ③ 金鼠族研究: 前置挂靠鼠族科技 ========== -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research"]</xpath>
+        <value>
+            <prerequisites>
+                <li>Ratkin_Apparel_B1</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <!-- 电力系统: 移除冗余前置 电力工程 I(Electricity),其已通过 电池(Batteries) 间接满足 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Cloth_Processing"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Basic_Building</li>
+                <li>Ratkin_Apparel_B2A</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_A"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Cloth_Processing</li>
+                <li>NobleApparel</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_B"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Apparel_A</li>
+                <li>RoyalApparel</li>
+                <li>Ratkin_Apparel_Uniform</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_C"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Apparel_B</li>
+                <li>OA_RK_Apparel_D</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_E"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Apparel_B</li>
+                <li>OA_RK_Constant_Temperature_Hydroponics</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_G"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Apparel_C</li>
+                <li>Ratkin_Armor_D1</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_F"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Apparel_G</li>
+                <li>OA_RK_Weapon_H</li>
+                <li>Ratkin_Armor_D3</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Weapon_A"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>OA_RK_Basic_Building</li>
+                <li>Ratkin_Apparel_C1</li>
+            </prerequisites>
+        </value>
+    </Operation>
+
+    <!-- ========== ③b 金鼠族科技等级对齐 ==========
+         金鼠族节点挂靠更高档鼠族科技后,techLevel 低于其前置属链最大档,触发
+         ResearchTreeSK "has a lower techlevel than its prerequisites" 警告。
+         将 3 个受影响节点 techLevel 提升至不低于其前置闭包最大档。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research"]/techLevel</xpath>
+        <value><techLevel>Medieval</techLevel></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Oberonia_Aurea_Research_B"]/techLevel</xpath>
+        <value><techLevel>Medieval</techLevel></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="OA_RK_Apparel_F"]/techLevel</xpath>
+        <value><techLevel>Ultra</techLevel></value>
+    </Operation>
+</Patch>

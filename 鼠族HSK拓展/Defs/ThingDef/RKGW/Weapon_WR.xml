@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_WR_Camellia</defName>
+		<label>"Camellia" Light Machine Gun</label>
+		<description>The "Camellia" Light Machine Gun was invented by Colonel Camellia of the Red Rose Federation. Although it was never adopted domestically, it was instead brought to prominence by the White Rose Kingdom during the Great War.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/RK_WR_Camellia</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false">
+			<li>RK_WR_LMG</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>18000</WorkToMake>
+			<Mass>5.4</Mass>
+			<Bulk>18</Bulk>
+			<AccuracyTouch>0.35</AccuracyTouch>
+			<AccuracyShort>0.38</AccuracyShort>
+			<AccuracyMedium>0.40</AccuracyMedium>
+			<AccuracyLong>0.35</AccuracyLong>
+			<RangedWeapon_Cooldown>1.75</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>150</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<WoodLog>40</WoodLog>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_WhiteRose</defaultProjectile>
+				<warmupTime>2.5</warmupTime>
+				<range>30</range>
+				<ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+				<burstShotCount>10</burstShotCount>
+				<soundCast>RK_WR_Camellia</soundCast>
+				<soundCastTail>GunTail_Medium</soundCastTail>
+				<muzzleFlashScale>10</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+		</tools>
+	</ThingDef>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_WR_Senecio</defName>
+		<label>"Senecio" Sniper Rifle</label>
+		<description>The "Senecio" sniper rifle is a precision-enhanced variant of the "White Rose" rifle, designed for long-range accuracy.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/RK_WR_Senecio</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false">
+			<li>RK_WR_SniperRifle</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>16000</WorkToMake>
+			<Mass>2.5</Mass>
+			<Bulk>8</Bulk>
+			<AccuracyTouch>0.55</AccuracyTouch>
+			<AccuracyShort>0.75</AccuracyShort>
+			<AccuracyMedium>0.90</AccuracyMedium>
+			<AccuracyLong>0.95</AccuracyLong>
+			<RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>60</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<WoodLog>40</WoodLog>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_WhiteRose</defaultProjectile>
+				<warmupTime>1.8</warmupTime>
+				<range>50</range>
+				<soundCast>RK_WR_Senecio</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>10</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+		</tools>
+	</ThingDef>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_WR_Rush</defName>
+		<label>"Rush" Breech-Loading Q.F. Gun</label>
+		<description>A small-caliber quick-firing gun with a breech-loading design, suited for engaging observation balloons and lightly armored targets, and easy to carry.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/RK_WR_Rush</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.9</drawSize>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false">
+			<li>RK_WR_AT</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>16000</WorkToMake>
+			<Mass>8</Mass>
+			<Bulk>20</Bulk>
+			<AccuracyTouch>0.85</AccuracyTouch>
+			<AccuracyShort>0.90</AccuracyShort>
+			<AccuracyMedium>0.95</AccuracyMedium>
+			<AccuracyLong>0.75</AccuracyLong>
+			<RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<WoodLog>10</WoodLog>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Shell_Rush</defaultProjectile>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<forcedMissRadius>1.5</forcedMissRadius>
+				<warmupTime>2.0</warmupTime>
+				<range>25</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>RK_WR_Rush</soundCast>
+				<soundCastTail>GunTail_Medium</soundCastTail>
+				<muzzleFlashScale>10</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

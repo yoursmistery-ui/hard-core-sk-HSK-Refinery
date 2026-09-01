@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 给非原生可风格化的基础件补 CompProperties_Styleable,使鼠族风格 ThingStyleDef 能应用 -->
+	<!-- ⚠️ 2026-08-15: Wall/Door/TubeTelevision 改为条件式(PatchOperationConditional,已有 Styleable 则跳过)。
+	     根因: Vanilla Ideology Expanded - Memes and Structures(2636329500)的 MakingFurnitureStyleable
+	     补丁会给 Wall/Door/TubeTelevision 等加 Styleable;本补丁加载在 VIE 之后,原无条件 Add 导致
+	     同一 def 出现 2 个 CompStyleable → 存档中每件物品序列化 2 个 sourcePrecept(null 引用注册两次),
+	     读档刷 "Tried to register the same load ID twice: null, /sourcePrecept" ×1848 条。
+	     现改为与 VIE 同款条件写法: 已有 Styleable 则跳过, 未装 VIE 时仍能正常添加。 -->
+	<Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Ideology">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="Wall"]/comps/li[@Class="CompProperties_Styleable"]</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Wall"]/comps</xpath>
+			<value><li Class="CompProperties_Styleable" /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Ideology">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="Door"]/comps/li[@Class="CompProperties_Styleable"]</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Door"]</xpath>
+			<value><comps><li Class="CompProperties_Forbiddable"><allowNonPlayer>true</allowNonPlayer></li><li Class="CompProperties_Styleable" /></comps></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+		<xpath>Defs/ThingDef[defName="PokerTable"]</xpath>
+		<value><comps><li><compClass>CompQuality</compClass></li><li Class="CompProperties_Styleable" /></comps></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+		<xpath>Defs/ThingDef[defName="BilliardsTable"]</xpath>
+		<value><comps><li><compClass>CompQuality</compClass></li><li Class="CompProperties_Styleable" /></comps></value>
+	</Operation>
+	<Operation Class="PatchOperationConditional" MayRequire="Ludeon.RimWorld.Ideology">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="TubeTelevision"]/comps/li[@Class="CompProperties_Styleable"]</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="TubeTelevision"]/comps</xpath>
+			<value><li Class="CompProperties_Styleable" /></value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+		<xpath>Defs/ThingDef[defName="OpenHearth"]/comps</xpath>
+		<value><li Class="CompProperties_Styleable" /></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+		<xpath>Defs/ThingDef[defName="PrimitiveWell"]/comps</xpath>
+		<value><li Class="CompProperties_Styleable" /></value>
+	</Operation>
+</Patch>

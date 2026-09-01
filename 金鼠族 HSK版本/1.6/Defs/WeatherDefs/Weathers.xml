@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+
+    <WeatherDef>
+        <defName>OAGene_SnowExtreme</defName>
+        <label>Extreme snowstorm</label>
+        <description>Extreme snowstorm and extremely poor visibility make it unwise to go out in such weather.</description>
+        <isBad>true</isBad>
+        <preventsShuttleLaunch>true</preventsShuttleLaunch>
+        <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
+        <temperatureRange>-999~-0.5</temperatureRange>
+        <rainRate>1</rainRate>
+        <snowRate>7.2</snowRate>        
+        <windSpeedOffset>1</windSpeedOffset>
+        <moveSpeedMultiplier>0.7</moveSpeedMultiplier>
+        <accuracyMultiplier>0.33</accuracyMultiplier>        
+        <favorability>VeryBad</favorability>
+        <perceivePriority>3</perceivePriority>
+
+        
+        <durationRange>150000~360000</durationRange>        
+        <commonalityRainfallFactor>
+            <points>
+                <li>(0, 0)</li>
+                <li>(300,0.5)</li>
+                <li>(1300, 1)</li>
+            </points>
+        </commonalityRainfallFactor>
+        <ambientSounds>
+            <li>Ambient_Wind_Storm</li>
+        </ambientSounds>
+        <overlayClasses>
+            
+            <li>WeatherOverlay_SnowBlizzard</li>
+        </overlayClasses>
+
+        
+        <skyColorsDay>
+            <sky>(0.8,0.8,0.8)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.7,0.7,0.7)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDay>
+        <skyColorsDusk>
+            <sky>(1,1,1)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDusk>
+        <skyColorsNightEdge>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightEdge>
+        <skyColorsNightMid>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightMid>
+
+        <eventMakers>
+            <li>
+                <averageInterval>7500</averageInterval>
+                <eventClass>OberoniaAureaGene.WeatherEvent_SnowStormBreakRoof</eventClass>
+            </li>
+        </eventMakers>
+    </WeatherDef>
+
+<WeatherDef>
+        <defName>OAGene_IceSnowExtreme</defName>
+        <label>Ice crystal blizzard</label>
+        <description>Extreme blizzards are mixed with a large amount of wind and snow crystals, which are sharp and icy. These ice crystals can make the already cold blizzard even more deadly and can also injure anyone who is not under the roof.\nIn this weather, the snow and wind crystal collector will operate at an incredible speed until it is completely filled.</description>
+        <isBad>true</isBad>
+        <preventsShuttleLaunch>true</preventsShuttleLaunch>
+        <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
+        <temperatureRange>-999~-0.5</temperatureRange>
+        <rainRate>1</rainRate>
+        <snowRate>7.2</snowRate> 
+        <windSpeedOffset>1</windSpeedOffset>
+        <moveSpeedMultiplier>0.7</moveSpeedMultiplier>
+        <accuracyMultiplier>0.33</accuracyMultiplier> 
+        <favorability>VeryBad</favorability>
+        <perceivePriority>3</perceivePriority>
+        
+        <durationRange>480000~780000</durationRange>
+        <commonalityRainfallFactor>
+            <points>
+                <li>(0, 0)</li>
+                <li>(300,0.5)</li>
+                <li>(1300, 1)</li>
+            </points>
+        </commonalityRainfallFactor>
+        <ambientSounds>
+            <li>Ambient_Wind_Storm</li>
+        </ambientSounds>
+        <overlayClasses>
+            
+            <li>WeatherOverlay_SnowBlizzard</li>
+        </overlayClasses>
+
+         
+        <skyColorsDay>
+            <sky>(0.8,0.8,0.8)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.7,0.7,0.7)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDay>
+        <skyColorsDusk>
+            <sky>(1,1,1)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDusk>
+        <skyColorsNightEdge>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightEdge>
+        <skyColorsNightMid>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightMid>
+
+        <eventMakers>
+            <li>
+                <averageInterval>1250</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_IceStormBreakRoof</eventClass>
+            </li>
+            <li>
+                <averageInterval>10000</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_SnowStormBreakDoor</eventClass>
+            </li>
+            <li>
+                <averageInterval>5000</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_IceCrystalsSpawn</eventClass>
+            </li>
+        </eventMakers>
+    </WeatherDef>
+
+
+    <WeatherDef>
+        <defName>OAGene_IceRain</defName>
+        <label>Ice crystal rain</label>
+        <description>Ice crystals appear sporadically in the form of sparse raindrops, which can cause a slight decrease in temperature and potentially injure anyone outdoors.\nIf a wind and snow crystal collector is established, it will be able to collect a certain amount of wind and snow crystals.</description>
+        <temperatureRange>-999~-0.5</temperatureRange>
+        <durationRange>60000~80000</durationRange>
+        <isBad>true</isBad>
+        <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
+        <windSpeedFactor>1.5</windSpeedFactor>
+        <favorability>VeryBad</favorability>
+        <perceivePriority>3</perceivePriority>
+        <weatherThought>SoakingWet</weatherThought>
+        <accuracyMultiplier>0.75</accuracyMultiplier>
+        <rainRate>1</rainRate>
+        <moveSpeedMultiplier>0.9</moveSpeedMultiplier>
+        <ambientSounds>
+            <li>Ambient_Wind_Fog</li>
+            <li>Ambient_Rain</li>
+        </ambientSounds>
+        <overlayClasses>
+            <li>WeatherOverlay_Fog</li>
+            <li>WeatherOverlay_Rain</li>
+        </overlayClasses>
+        <commonalityRainfallFactor>
+            <points>
+                <li>(0, 0)</li>
+                <li>(1300, 1)</li>
+            </points>
+        </commonalityRainfallFactor>
+        
+        <skyColorsDay>
+            <sky>(0.8,0.8,0.8)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.7,0.7,0.7)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDay>
+        <skyColorsDusk>
+            <sky>(1,1,1)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDusk>
+        <skyColorsNightEdge>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightEdge>
+        <skyColorsNightMid>
+            <sky>(0.35,0.40,0.45)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.5,0.5,0.5)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsNightMid>
+        <eventMakers>
+            <li>
+                <averageInterval>5000</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_IceCrystalsSpawn</eventClass>
+            </li>
+        </eventMakers>
+    </WeatherDef>
+
+    <WeatherDef>
+        <defName>OAGene_StarryNight</defName>
+        <label>Starry night</label>
+        <description>The magnificent starry and moonlit night is almost a once-in-a-century wonder on this planet.</description>
+        <temperatureRange>-999~999</temperatureRange>
+        <windSpeedFactor>0.5</windSpeedFactor>
+        <favorability>VeryGood</favorability>
+        <perceivePriority>1</perceivePriority>
+        <weatherThought>OAGene_Thought_StarryNight</weatherThought>
+        <durationRange>108000~132000</durationRange>
+        <ambientSounds>
+            <li>Ambient_Rain</li>
+        </ambientSounds>
+        <overlayClasses>
+            <li>WeatherOverlay_Fog</li>
+        </overlayClasses>
+        
+        <skyColorsDay>
+            <sky>(0.8,0.8,0.8)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.7,0.7,0.7)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDay>
+        <skyColorsDusk>
+            <sky>(1,1,1)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>0.9</saturation>
+        </skyColorsDusk>
+        <skyColorsNightEdge>
+            <sky>(0.482,0.603,0.682)</sky>
+            <shadow>(0.92,0.92,0.92)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>1.25</saturation>
+        </skyColorsNightEdge>
+        <skyColorsNightMid>
+            <sky>(0.482,0.603,0.682)</sky>
+            <shadow>(0.85, 0.85, 0.85)</shadow>
+            <overlay>(0.6,0.6,0.6)</overlay>
+            <saturation>1.25</saturation>
+        </skyColorsNightMid>
+    </WeatherDef>
+
+</Defs>

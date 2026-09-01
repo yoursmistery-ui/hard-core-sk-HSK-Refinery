@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 蓝图经济 v4.1: 给原版 MarketValue stat 挂"已研读蓝图 50% 折价" StatPart
+     (仅影响已读蓝图书实例; 未读新出货与一切普通物品不受影响) -->
+<Patch>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/StatDef[defName="MarketValue"]/parts</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/StatDef[defName="MarketValue"]/parts</xpath>
+			<value><li Class="BlueprintUnlockHSK.StatPart_BlueprintReadDiscount" /></value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/StatDef[defName="MarketValue"]</xpath>
+			<value>
+				<parts>
+					<li Class="BlueprintUnlockHSK.StatPart_BlueprintReadDiscount" />
+				</parts>
+			</value>
+		</nomatch>
+	</Operation>
+</Patch>

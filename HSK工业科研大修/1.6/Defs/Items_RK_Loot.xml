@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  P1 · M2 探索链物品(2026-08-28): 藏宝图残页
+  用途: ①探秘桌(RK_QuestFinder)扫描时消耗 ②废墟战利品容器可搜出 ③商人偶尔出售
+  对标 MO 的 DankPyon_TornNote_Hideout(堆 3 / 150 银), 但改为可堆叠线索物。
+============================================================================ -->
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>RK_TornNote</defName>
+		<label>残页情报</label>
+		<description>从废墟、尸首和缴获的物资里翻出来的碎纸片: 半张手绘地图、一段押运路线、一句看不懂的暗号。\n\n单独一张毫无价值, 攒够几张贴到探秘桌上拼合, 就能定位出一处还没被人搜刮过的藏身处。</description>
+		<graphicData>
+			<texPath>Special/TornNote/TornNote_a</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stackLimit>5</stackLimit>
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
+		<tradeTags>
+			<li>CheapGoods</li>
+		</tradeTags>
+		<statBases>
+			<MarketValue>150</MarketValue>
+			<Mass>0.02</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>0</Beauty>
+		</statBases>
+	</ThingDef>
+
+</Defs>

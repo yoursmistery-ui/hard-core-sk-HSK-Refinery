@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==========================================================================
+	     开局剧本 2 本(移植自 Medieval Overhaul 的 Scenarios_LoneWolf / Scenarios_TavernOwner)
+	     全部 ScenPart 均为原版类; 派系/物品换成本环境真实存在的 def:
+	       DankPyon_LoneWolf / DankPyon_PlayerKingdom → PlayerColony(原版玩家派系)
+	       SmokedMeat / MealRations → Pemmican; ComponentBasic → ComponentMedieval
+	       RawWood → WoodLog; IronIngot → Steel; BrokenCart → Kibble(本环境无废墟道具)
+	       开场对白原引 MO 的 Keyed 文本, 这里改用原版 ScenPart_GameStartDialog 的内联 <text>
+	     佣兵团开局依赖 KCSG 起始城堡, 本轮不做。
+	     ========================================================================== -->
+
+	<!-- ===== 独狼: 一年雇佣契约到期, 只带走银币与佩剑 ===== -->
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_Scenario_LoneWolf</defName>
+		<label>独狼</label>
+		<description>一年的服役——这就是当初的约定。\n我曾追随的领主多次想把我的剑留在他的阵营里，但一言既出，一年后我便不再宣誓效忠。\n穿过林立的丘陵，我不停地问自己：这个决定对吗？\n\n我攒下了一笔财富，可乡野盗匪横行；就算营火不出卖我，饥饿的野兽与黑暗里的怪物仍在盯着我。\n我常想，也许该让领主再次把我当剑使唤，但那样我就得交出自由。\n\n所以，取回我的银币后，我朝着没有尽头的路前进。\n也许我会有幸找到一处家园，建起大厅，召集属于自己的家丁武士。\n但长远目标太遥远了，眼下还有更要命的事。\n\n首先，我得活下去。</description>
+		<scenario>
+			<summary>单枪匹马的流浪剑客 - 独狼开局</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>PlayerColony</factionDef>
+			</playerFaction>
+			<parts>
+				<!-- 开局人数 -->
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnCount>1</pawnCount>
+					<pawnChoiceCount>8</pawnChoiceCount>
+				</li>
+				<!-- 落地方式: 步行到场 -->
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+					<method>Standing</method>
+				</li>
+				<!-- 随身物品 -->
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>500</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Pemmican</thingDef>
+					<count>30</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineHerbal</thingDef>
+					<count>20</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>ComponentMedieval</thingDef>
+					<count>10</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MeleeWeapon_LongSword</thingDef>
+					<stuff>Steel</stuff>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Bow_Short</thingDef>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Apparel_Gambeson</thingDef>
+				</li>
+				<!-- 一条狗 -->
+				<li Class="ScenPart_StartingAnimal">
+					<def>StartingAnimal</def>
+					<count>1</count>
+					<bondToRandomPlayerPawnChance>1.0</bondToRandomPlayerPawnChance>
+				</li>
+				<!-- 出生点附近散落 -->
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>WoodLog</thingDef>
+					<count>300</count>
+				</li>
+				<!-- 地图上散落 -->
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>WoodLog</thingDef>
+					<count>500</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Kibble</thingDef>
+					<count>250</count>
+				</li>
+				<!-- 开场对白 -->
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>一年的契约已经结束，你不再属于任何领主。\n手边只有几袋银币、一把旧剑和一条不肯离去的狗。\n先活下来，再谈建起大厅、召集家丁武士的事。</text>
+					<closeSound>GameStartSting</closeSound>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+	<!-- ===== 酒馆老板: 三人带着麦酒与铁料去荒野开店 ===== -->
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_Scenario_TavernOwner</defName>
+		<label>酒馆老板</label>
+		<description>城墙从不给人安全感，城市生活也一样，久了会把灵魂榨干。\n你能找到的机会都不适合你：一来体力不够，二来心肠不够硬。\n\n正是这种环境逼你离开，只带着粗料与简陋的工具去打造自己的梦想。\n你渴望在荒野里有个家，一处能收容疲惫旅人的炉火。\n无论盗贼还是英雄，都将在屋檐下歇脚。\n\n有希望就有风险，这风险你无法忽视。\n当地驻军的通报说盗匪活动正在增加，罪行节节攀升。\n再怎么细心准备，也总会有恶棍循着你的足迹跟来。\n\n但你还是跨出了那道城门。\n前方是荒野，背后是背叛，你头也不回地走下去。\n\n乐观与忧虑同时爬上你的眉头。</description>
+		<scenario>
+			<summary>三名乐观的拓荒者 - 荒野酒馆经营开局</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>PlayerColony</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnCount>3</pawnCount>
+					<pawnChoiceCount>8</pawnChoiceCount>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+					<method>Standing</method>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>500</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Pemmican</thingDef>
+					<count>50</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Beer</thingDef>
+					<count>60</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineHerbal</thingDef>
+					<count>20</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Coal</thingDef>
+					<count>50</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>ComponentMedieval</thingDef>
+					<count>30</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Bow_Short</thingDef>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MeleeWeapon_Knife</thingDef>
+					<stuff>Steel</stuff>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MeleeWeapon_Axe</thingDef>
+					<stuff>Steel</stuff>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Apparel_ChefJacket</thingDef>
+				</li>
+				<li Class="ScenPart_StartingAnimal">
+					<def>StartingAnimal</def>
+					<count>1</count>
+					<bondToRandomPlayerPawnChance>1.0</bondToRandomPlayerPawnChance>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>Steel</thingDef>
+					<count>450</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>WoodLog</thingDef>
+					<count>300</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>WoodLog</thingDef>
+					<count>500</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Kibble</thingDef>
+					<count>100</count>
+				</li>
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>你们带着铁料、木料和一桶麦酒离开城市，准备在荒野里点起一炉欢迎旅人的火。\n驻军的告示说盗匪越来越多——财富会引来恶棍。\n先把炉子生起来，再把门开给每一个风尘仆仆的客人。</text>
+					<closeSound>GameStartSting</closeSound>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+</Defs>

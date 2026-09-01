@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang=zh><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>{title}</title><style>
+:root{--bg:#1a1c20;--fg:#e6e6e6;--mut:#9aa0a6;--card:#23262b;--line:#33373d;--green:#3fb950;--amber:#d29922;--blue:#58a6ff;--purple:#bc8cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{display:flex;max-width:1180px;margin:0 auto}nav{position:sticky;top:0;align-self:flex-start;width:230px;height:100vh;overflow:auto;padding:20px 12px;border-right:1px solid var(--line)}
+nav h3{font-size:12px;color:var(--mut);letter-spacing:.1em;margin:0 0 8px}nav a{display:block;color:var(--mut);text-decoration:none;padding:5px 9px;border-radius:6px;font-size:13px}nav a:hover{background:var(--card);color:var(--fg)}
+main{flex:1;padding:24px 36px;min-width:0}h2{color:var(--blue);border-bottom:2px solid var(--line);padding-bottom:5px;margin-top:30px;font-size:20px}h3{color:var(--purple);margin-top:20px;font-size:16px}
+code{background:#0d1117;color:#79c0ff;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:13px}
+pre.chain{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto;color:#a5d6ff;font-family:Consolas,monospace;font-size:12.5px;line-height:1.5}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--card)}tr:nth-child(even) td{background:#1e2126}
+ul,ol{padding-left:22px}li{margin:4px 0}hr{border:0;border-top:1px solid var(--line);margin:22px 0}b{color:#fff}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:10px;margin-left:6px}.b-wait{background:rgba(210,153,34,.18);color:var(--amber);border:1px solid var(--amber)}.b-rec{background:rgba(63,185,80,.18);color:var(--green);border:1px solid var(--green)}
+</style></head><body><div class=wrap><nav><h3>目录导航</h3><a href="#sec1">石化工业线 · 最终流程图与可行性核对（用户定稿版）</a></nav><main><span class='badge b-wait'>方案</span> <h2 id="sec1">石化工业线 · 最终流程图与可行性核对（用户定稿版）</h2>
+<p>&gt; 这是用户整理的<b>最终工业线</b>（mermaid 图），取代此前所有迭代版本。本文档记录该图 + <b>逐节点核对它在当前启用 mod 下是否落地</b>。 &gt; 生成：2026-08-28</p>
+<hr>
+<h3 id="sec2">0. 一句话结论（重要）</h3>
+<p>你这张图的<b>化工中后段骨架 = Vanilla Chemistry Expanded（VCE）</b>——三烯三苯、各自&quot;合成物精炼厂&quot;、石化工作台→树脂/纤维/橡胶，全是它的东西。<b>但 VCE 你既没启用、也没下载</b>；截图那个 <b>VChemfuelE（<code>2792917473</code>）和燃气 VHGE 都只订阅未启用</b>。当前真正启用的只有 <b>Rimefeller + Vite&#x27;s Materials Science + 污染统一</b>。所以：整条线要成立，<b>先补 mod</b>，否则一半节点是空的。</p>
+<hr>
+<h3 id="sec2">1. 逐节点可行性核对（对照当前启用集）</h3>
+<table><thead><tr><th>流程图节点</th><th>来源 mod</th><th>现状</th></tr></thead><tbody><tr><td>地下原油→油井→石油</td><td>Rimefeller</td><td>✅ 已启用</td></tr><tr><td><b>常减压蒸馏塔</b> ★新增★</td><td>我们建（美狐高炉壳）</td><td>🆕 待建</td></tr><tr><td>化合燃料</td><td>Rimefeller</td><td>✅</td></tr><tr><td>天然气</td><td>气网（VHGE/VChemfuelE）</td><td>⚠️ 两 mod 均未启用</td></tr><tr><td>沥青</td><td>污染统一</td><td>✅（换皮）</td></tr><tr><td>石脑油 Naphtha</td><td>无</td><td>❌ 需新建物品</td></tr><tr><td>燃油/气/沥青/石脑油 <b>储罐</b></td><td>VChemfuelE 罐 / Rimefeller 罐</td><td>⚠️ Chemfuel 罐有；气/沥青/石脑油罐需建</td></tr><tr><td>燃气发电机 / 燃气锅炉</td><td>VHGE</td><td>⚠️ 未启用</td></tr><tr><td>原油裂解炼油厂→合成烯/合成酰胺/超织物</td><td>Rimefeller(Polymers/Synthread/Hyperweave)</td><td>🟡 部分，命名需对齐</td></tr><tr><td><b>三烯三苯 独立精炼厂（标&quot;已有&quot;）</b></td><td><b>Vanilla Chemistry Expanded</b></td><td>❌ <b>未装</b></td></tr><tr><td>深度裂解厂→裂解混合气</td><td>无</td><td>🆕 需建</td></tr><tr><td><b>精馏塔</b> ★新增★ → 三烯三苯</td><td>我们建</td><td>🆕（但乙烯/苯/甲苯产物缺）</td></tr><tr><td><b>催化重整装置</b> ★新增★ → BTX+氢气</td><td>我们建</td><td>🆕（氢气缺）</td></tr><tr><td>乙烯 / 苯 / 甲苯 / 氢气</td><td>VCE(乙烯/苯/甲苯)；氢气无</td><td>❌ 多数缺</td></tr><tr><td>丙烯 / 丁二烯 / 二甲苯</td><td>Vite&#x27;s MS</td><td>✅ 现成</td></tr><tr><td><b>石化工作台→合成树脂/纤维/橡胶</b></td><td><b>Vanilla Chemistry Expanded</b></td><td>❌ <b>未装</b></td></tr></tbody></table>
+<p>&gt; 核对法：<code>ModsConfig.xml</code> 里 <code>vanillaexpanded.helixiengas</code>/<code>vchemfuele</code>/<code>chemistry</code> 命中数=0；workshop 无 VCE 目录；Unified 里 <code>VHGE_</code>/<code>VCHE_</code> def 数=0。</p>
+<hr>
+<h3 id="sec2">2. 三条建议（让整条线成立）</h3>
+<ol><li><b>装 Vanilla Chemistry Expanded</b>（关键）：它给三烯三苯 + 各自精炼厂 + 石化工作台 + 树脂/纤维/橡胶——<b>你流程图右半边的&quot;已有&quot;基本都是它</b>。装了之后中后段几乎不用自建，只做&quot;接线 + 前置三座新塔&quot;。Vile 的丙烯/丁二烯/二甲苯/尼龙/扎纶与它并存互补。</li><li><b>启用 VChemfuelE（<code>2792917473</code>，你截图那个）</b>：Deepchem/Chemfuel <b>储罐（爆炸威力∝存量）+ 管道 + &quot;抽取→变物品&quot;</b> 正好是你要的&quot;存储+管道+罐子+按容量爆炸&quot;，且<b>爆炸按容量是它原生带的</b>（之前说&quot;怎么简单怎么来&quot;可升级为白嫖它的机制）。</li><li><b>启用 VHGE</b>：补燃气发电/锅炉/加热器/冷却器/燃气灶（储罐用 VChemfuelE、用气设备用 VHGE，两者都是 Vanilla Expanded 系、管网框架一致）。</li></ol>
+<p>装了这三样，剩下真正要<b>我们建</b>的只有：常减压蒸馏塔(美狐高炉壳)、精馏塔、催化重整装置、深度裂解厂、沥青出口、石脑油/沥青/天然气 物品与对应储罐、沥青换皮、把四者接进 VCE/Vile 工作台。</p>
+<hr>
+<h3 id="sec2">3. 与既有决策的差异（流程图覆盖旧版）</h3>
+<ul><li>蒸馏塔<b>主产物改为化合燃料</b>（旧版：馏分→裂解器→燃油）；石脑油/天然气/沥青降为副产。</li><li>每个产物<b>都进储罐</b>（管网化），不再只是工作台直出。</li><li>&quot;后置&quot;从我们设想的碳材料/两条芳烃配方，<b>升级成完整 深度裂解→精馏塔→三烯三苯 + 催化重整→BTX+氢 → 石化工作台→树脂/纤维/橡胶</b>（即 VCE 那一套）。</li><li>沥青仍只从蒸馏塔出、仍换皮（不变）。</li></ul>
+<hr>
+<h3 id="sec2">4. 原始 mermaid（贴进任意 mermaid 查看器渲染）</h3>
+<pre class="chain">flowchart TB
+  Crude([地下原油]) --&gt; OilWell[油井] --&gt; Oil[石油]
+  Oil --&gt; Distillation[常减压蒸馏塔 ★新增★]
+  Distillation --&gt;|主| CF[化合燃料]
+  Distillation --&gt;|副| Gas[天然气]
+  Distillation --&gt;|副| Asphalt[沥青]
+  Distillation --&gt;|副| Naphtha[石脑油]
+  CF &amp; Gas &amp; Asphalt &amp; Naphtha --&gt; 各储罐
+  Gas储罐 --&gt; GasGen[燃气发电机] &amp; GasBoiler[燃气锅炉]
+  CF储罐 --&gt; Cracker[原油裂解炼油厂] --&gt; 合成烯/合成酰胺/超织物 --&gt; 各自精炼厂(已有) --&gt; 精炼X
+  Gas储罐+沥青储罐+CF储罐+石脑油储罐 --&gt; DeepCracker[深度裂解厂] --&gt; 裂解混合气 --&gt; 精馏塔 ★新增★ --&gt; 三烯三苯
+  石脑油储罐 --&gt; 催化重整装置 ★新增★ --&gt; 苯/甲苯/二甲苯 + 副产 氢气
+  三烯三苯 --&gt; 各自精炼厂(已有) --&gt; 精炼X --&gt; 石化工作台 --&gt; 合成树脂/合成纤维/合成橡胶</pre>
+<hr>
+<h3 id="sec2">5. 待你定（决定后我更新主方案 + 开工）</h3>
+<ol><li><b>装不装 Vanilla Chemistry Expanded？</b>（不装=右半边全得手搓，强烈建议装）</li><li><b>启用 VChemfuelE + VHGE 吗？</b>（罐/管/抽取/按容量爆炸/燃气设备全靠它俩）</li><li>装了 VCE 后，<b>&quot;合成烯/合成酰胺/超织物&quot;这三条</b>用 VCE 现成还是仍走 Rimefeller 的 Polymers/Synthread/Hyperweave？（避免重造）</li><li>贴图你稍后给（VChemfuelE 等）——先定架构，贴图后补。</li></ol></main></div></body></html>

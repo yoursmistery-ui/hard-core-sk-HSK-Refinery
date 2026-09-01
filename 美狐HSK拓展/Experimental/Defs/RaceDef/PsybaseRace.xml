@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<AlienRace.ThingDef_AlienRace ParentName="MihoMihoPawn">
+		<defName>Alien_Miho_Mech_Myeongil</defName>
+		<label>명일급 싸이베이스 드론</label>
+		<description>미호 중공업의 대형 운송드론 입니다. 어마어마한 적재량 덕분에 미호의 초능력을 흉내낼 수 있는 초대형 유사 안개꽃 기관이 장착되어 있습니다.</description>
+		<alienRace>
+								<compatibility>
+				<isFlesh>false</isFlesh>
+			</compatibility>
+			<generalSettings Inherit="False">
+				<allowHumanBios>false</allowHumanBios>
+
+            <traitCount>1~1</traitCount>
+
+				<maleGenderProbability>1</maleGenderProbability>
+				
+				<immuneToAge>true</immuneToAge>
+				<humanRecipeImport>false</humanRecipeImport>
+				<canLayDown>true</canLayDown>
+				<maxDamageForSocialfight>1</maxDamageForSocialfight>
+				<immuneToXenophobia>true</immuneToXenophobia>
+				<minAgeForAdulthood>0</minAgeForAdulthood>
+
+				<factionRelations Inherit="False"/>
+				
+				<chemicalSettings Inherit="False"/>
+
+			<alienPartGenerator>
+				<borderScale>2</borderScale>
+				<atlasScale>4</atlasScale>
+				<aliencrowntypes><!--머리-->
+					<li>Blank</li>
+				</aliencrowntypes><!--머리-->
+				
+				<alienbodytypes><!--몸-->
+					<li>Thin</li>
+				</alienbodytypes><!--몸-->
+				
+				<headOffset>(0,0)</headOffset><!--머리위치-->
+				<useGenderedHeads>false</useGenderedHeads><!--성별머리-->
+				<useGenderedBodies>false</useGenderedBodies><!--성별몸-->
+				
+				<customDrawSize>(2.65,2.65)</customDrawSize><!--전체크기-->
+				<customHeadDrawSize>(1.5,1.5)</customHeadDrawSize><!--머리크기-->
+				<customPortraitDrawSize>(1.8,1.8)</customPortraitDrawSize><!--초상화크기-->
+
+				<colorChannels><!--색-->
+				<li>
+					<name>skin</name>
+					<first Class="ColorGenerator_Options">
+						<options>
+							<li>
+								<weight>1</weight>
+								<only>RGBA(1.0,1.0,1.0,1)</only>
+							</li>
+						</options>
+					</first>				
+				</li>
+				<li><!--헤어컬러-->
+					<name>hair</name>
+					<first Class="ColorGenerator_Options">
+						<options>
+							<li>
+								<weight>15</weight>
+								<only>(0,0,0)</only>
+							</li>
+						</options>
+					</first>
+				</li>
+				</colorChannels><!--색-->
+
+				<bodyAddons><!-- 몸부착물 -->
+				</bodyAddons><!-- 몸부착물 -->
+			</alienPartGenerator>
+		<validBeds>
+		  <li>Miho_DroneBed</li>
+		</validBeds>
+			</generalSettings>
+		
+			<graphicPaths Inherit="False"><!-- 텍스쳐 -->
+				<li>
+					<head>Mech/Bulgasal/</head>
+					<body>Mech/Myeongil/</body>
+                <skeleton>Miho/HeadSkull/Dessicated_Thin</skeleton>
+					<headOffsetDirectional>
+						<north>(0, -0.35)</north>
+						<east>(-0.1, -0.35)</east>
+						<south>(0, -0.35)</south>
+						<west>(0.1, -0.35)</west>
+					</headOffsetDirectional>
+				</li>
+			</graphicPaths><!-- 텍스쳐 -->
+		
+			<styleSettings Inherit="False">
+				<li>
+					<key>HairDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+					</value>
+				</li>
+				<li>
+					<key>BeardDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+					</value>
+				</li>
+				<li>
+					<key>TattooDef</key>
+					<value>
+						<hasStyle>false</hasStyle>
+					</value>
+				</li>
+			</styleSettings>
+		
+			<thoughtSettings>
+				<cannotReceiveThoughtsAtAll>false</cannotReceiveThoughtsAtAll>
+				<cannotReceiveThoughts>
+					<li>NeedFood</li>
+                    <li>Naked</li>
+                    <li>Pain</li>
+					<li>DeadMansApparel</li>
+					<li>EnvironmentCold</li>
+					<li>EnvironmentHot</li>
+				</cannotReceiveThoughts>
+			</thoughtSettings>
+			<relationSettings>
+				<relationChanceModifierChild>0</relationChanceModifierChild>
+				<relationChanceModifierExLover>0</relationChanceModifierExLover>
+				<relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+				<relationChanceModifierFiance>0</relationChanceModifierFiance>
+				<relationChanceModifierLover>0</relationChanceModifierLover>
+				<relationChanceModifierParent>0</relationChanceModifierParent>
+				<relationChanceModifierSibling>0</relationChanceModifierSibling>
+				<relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+			</relationSettings>
+			
+			<raceRestriction Inherit="False"><!-- 종족제한 -->
+				<onlyUseRaceRestrictedApparel>true</onlyUseRaceRestrictedApparel><!-- 종족옷제한설정 -->
+				<onlyUseRaceRestrictedWeapons>true</onlyUseRaceRestrictedWeapons>
+				<onlyGetRaceRestrictedTraits>true</onlyGetRaceRestrictedTraits><!-- 종족특성제한설정 -->
+				<onlyEatRaceRestrictedFood>true</onlyEatRaceRestrictedFood>
+			
+				<apparelList><!-- 옷 -->
+					<li>Miho_Apparel_MyeongilArmorTan</li>
+					
+					<li>Miho_Apparel_ShieldforDrone</li>
+					<li>Miho_Apparel_SolarpanelforDrone</li>
+
+					
+				</apparelList><!-- 옷 -->
+				
+				<whiteApparelList>
+				</whiteApparelList>
+					
+				<buildingList><!-- 건물 -->
+				</buildingList><!-- 건물 -->
+				
+				<weaponList><!-- 무기 -->				
+					
+				</weaponList><!-- 무기 -->
+				
+				<researchList><!-- 연구 -->
+				</researchList><!-- 연구 -->
+				
+				<recipeList><!-- 제작 -->
+				</recipeList><!-- 제작 -->
+				
+				<traitList><!-- 특성 -->
+					<li>MihoicDrone_Heavy</li>
+					<li>MihoicDrone_Light</li>
+					<li>MihoicDrone_Superdreadnought</li>
+					<li>MihoicDrone_GoodEnergy</li>
+				</traitList><!-- 특성 -->
+				
+				<plantList><!-- 식물 -->
+				</plantList><!-- 식물 -->
+
+				<foodList>
+					<li>MihoMechEliteGas</li>
+				</foodList>
+				
+				<whiteFoodList>
+				</whiteFoodList>
+				
+			</raceRestriction><!-- 종족제한 -->
+		</alienRace>
+    <fillPercent>0.75</fillPercent>
+
+		<statBases Inherit="False"><!-- 능력치 -->
+			<MarketValue>10000</MarketValue><!-- 가격 -->
+
+			<MoveSpeed>3.5</MoveSpeed><!-- 이속 -->
+			<Mass>100</Mass><!-- 무게 -->
+			
+			<ComfyTemperatureMax>500</ComfyTemperatureMax><!-- 편한최대온도 -->
+			<ComfyTemperatureMin>-80</ComfyTemperatureMin><!-- 편한최소온도 -->
+			
+			<RestRateMultiplier>1</RestRateMultiplier><!-- 잠 -->
+			<HungerRateMultiplier>1.5</HungerRateMultiplier><!-- 허기 -->
+			<EatingSpeed>0.5</EatingSpeed><!-- 먹는속도 -->
+
+			<CarryingCapacity>50</CarryingCapacity><!-- 운반량 -->
+			<LeatherAmount>1</LeatherAmount><!-- 가죽량 --><!-- 가죽종류 밑에 있음 -->
+			
+			<PainShockThreshold>0.99</PainShockThreshold><!-- 쓰러짐고통 -->
+			<MentalBreakThreshold>0.01</MentalBreakThreshold><!-- 정신이상임계 -->
+			<ToxicSensitivity>0</ToxicSensitivity><!-- 독성민감도 -->
+			<Flammability>0</Flammability><!-- 가연성 -->
+			
+			<MeleeDodgeChance>0.5</MeleeDodgeChance><!-- 근접회피확률 -->
+			<MeleeHitChance>1</MeleeHitChance><!-- 근접적중확률 -->
+			<AimingDelayFactor>1</AimingDelayFactor><!-- 조준속도 -->
+			<ShootingAccuracyPawn>1</ShootingAccuracyPawn><!-- 조준정확도 -->
+
+			<NegotiationAbility>0</NegotiationAbility><!-- 외교영향력 -->
+			<SellPriceFactor>1</SellPriceFactor><!-- 판매가격 -->
+			<SocialImpact>0.1</SocialImpact><!-- 사회영향력 -->
+			<TradePriceImprovement>0</TradePriceImprovement><!-- 거래가격개선 -->
+
+			<ButcheryMechanoidEfficiency>1</ButcheryMechanoidEfficiency><!-- 메카분해효율 -->
+			<ButcheryMechanoidSpeed>1</ButcheryMechanoidSpeed><!-- 메카분해속도 -->
+			<SmeltingSpeed>1</SmeltingSpeed><!-- 금속제련속도 -->
+			<GeneralLaborSpeed>1</GeneralLaborSpeed><!-- 재단속도 -->
+			<ConstructionSpeed>1</ConstructionSpeed><!-- 건설속도 -->
+
+			<ButcheryFleshEfficiency>1</ButcheryFleshEfficiency><!-- 도축효율 -->
+			<ButcheryFleshSpeed>1</ButcheryFleshSpeed><!-- 도축속도 -->
+			
+			<FoodPoisonChance>0</FoodPoisonChance><!-- 식중독확률 -->
+			<CookSpeed>1</CookSpeed><!-- 조리속도 -->
+
+			<PlantWorkSpeed>1</PlantWorkSpeed><!-- 원예 -->
+
+			<GlobalLearningFactor>0</GlobalLearningFactor><!-- 전역학습속도 -->
+			<ResearchSpeed>1</ResearchSpeed><!-- 연구속도 -->
+			
+			<MedicalTendQuality>1</MedicalTendQuality><!-- 치료품질 -->
+			<DrugSynthesisSpeed>1</DrugSynthesisSpeed><!-- 약물생산속도 -->
+			<MedicalSurgerySuccessChance>1</MedicalSurgerySuccessChance><!-- 수술성공확률 -->
+			<ImmunityGainSpeed>2000</ImmunityGainSpeed><!-- 항체속도 -->
+			
+			<MiningSpeed>0.8</MiningSpeed><!-- 채굴속도 -->
+			<MiningYield>1</MiningYield><!-- 채굴효율 -->
+
+			<ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+			<ArmorRating_Heat>2</ArmorRating_Heat>
+			<MeatAmount>0</MeatAmount>
+
+			<PsychicSensitivity>2</PsychicSensitivity>
+		</statBases><!-- 능력치 -->
+		
+		<tools Inherit="False"><!-- 육체무기 -->
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>5.5</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<extraMeleeDamages>
+					<li>
+						<def>Stun</def>
+						<amount>10</amount>
+						<chance>0.05</chance>
+					</li>
+				</extraMeleeDamages>
+			</li>
+		</tools><!-- 육체무기 -->
+
+		<race Inherit="False"><!-- 생태 -->
+			<thinkTreeMain>Humanlike</thinkTreeMain>
+			<thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+			<intelligence>Humanlike</intelligence>
+			<makesFootprints>true</makesFootprints>
+			<needsRest>false</needsRest>
+			<lifeExpectancy>1000</lifeExpectancy>
+			<leatherDef>Miho_MilitaryGradeBalisticCeramics</leatherDef>
+			<nameCategory>HumanStandard</nameCategory>
+			<hasGenders>true</hasGenders>
+			<body>MihoHexDroneBody</body>
+			<baseBodySize>30</baseBodySize> <!-- Heigh, 3m length 6m, weight 3tonne, carry weight 1050kg-->
+			<baseHealthScale>10</baseHealthScale>
+			<foodType>OmnivoreHuman</foodType>
+			<gestationPeriodDays>1000</gestationPeriodDays>
+			<fleshType>MihoMechanoidHumanlike</fleshType>
+			<bloodDef>Filth_MachineBits</bloodDef>
+			<useMeatFrom>Megaspider</useMeatFrom>
+			<meatColor>(20,120,20)</meatColor>
+			<nameGenerator>NamerMechMiho</nameGenerator>
+			<nameGeneratorFemale>NamerMechMiho</nameGeneratorFemale>
+			<deathActionWorkerClass>NoMechCorpse.DeathActionWorker_DestroyCorpse_Mech</deathActionWorkerClass>
+
+			<litterSizeCurve>
+					<points>
+						<li>(0, 100)</li>
+						<li>(1, 0)</li>
+					</points>
+			</litterSizeCurve>
+			
+			<lifeStageAges>
+			<li>
+				<def>MihoicDroneLargeAdult</def>
+				<minAge>0</minAge>
+				<soundWounded>Pawn_Mech_Termite_Wounded</soundWounded>
+				<soundDeath>Pawn_Mech_Termite_Death</soundDeath>
+			</li>
+			</lifeStageAges>
+
+			<soundMeleeHitPawn>Pawn_Mech_Termite_Wounded</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Mech_Termite_Wounded</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+			<specialShadowData>
+				<volume>(0.3, 0.8, 0.4)</volume>
+				<offset>(0,0,-0.3)</offset>
+			</specialShadowData>
+			<ageGenerationCurve>
+			<points>
+				<li>(0,0)</li>
+				<li>(1,20)</li>
+				<li>(2,100)</li>
+				<li>(3,40)</li>
+				<li>(4,20)</li>
+				<li>(5,0)</li>
+			</points>
+			</ageGenerationCurve>
+				<hediffGiverSets>
+				</hediffGiverSets>
+		</race><!-- 생태 -->
+		<damageMultipliers>
+			<li>
+				<damageDef>EMP</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+			<li>
+				<damageDef>Stun</damageDef>
+				<multiplier>0</multiplier>
+			</li>
+		</damageMultipliers>
+		<comps>
+		</comps>
+    <recipes Inherit="False">
+      <li>Miho_Drone_Anestheize</li>
+      <li>Miho_Cure_Drone_Anestheize</li>
+
+      <li>InstallDroneLeg</li>
+	  
+      <li>Install_Miho_Butterfly_Port_One</li>
+      <li>Install_Miho_Butterfly_Port_Two</li>
+      <li>Install_Miho_Butterfly_Port_Three</li>
+      <li>Install_Miho_Butterfly_Port_Four</li>
+
+      <li>Install_Miho_Heal_Port_One</li>
+      <li>Install_Miho_Heal_Port_Two</li>
+      <li>Install_Miho_Heal_Port_Three</li>
+      <li>Install_Miho_Heal_Port_Four</li>
+
+      <li>Install_Miho_Repair_Port_One</li>
+      <li>Install_Miho_Repair_Port_Two</li>
+      <li>Install_Miho_Repair_Port_Three</li>
+      <li>Install_Miho_Repair_Port_Four</li>
+
+    </recipes>
+		<modExtensions>
+			<li Class="DroneRace.MechanicalPawnProperties">
+				<noSkillLoss>true</noSkillLoss>
+				<canSocialize>false</canSocialize>
+				<colonyCaresIfDead>false</colonyCaresIfDead>
+			</li>
+		</modExtensions>
+	</AlienRace.ThingDef_AlienRace>
+
+	<PawnKindDef ParentName="BaseMihoPlayerPawnKind">
+		<defName>Alien_Miho_Mech_Myeongil_Player</defName>
+		<label>명일급 싸이베이스 드론</label>
+		<defaultFactionType>Miho_PlayerColony</defaultFactionType>
+		<isFighter>true</isFighter>
+		<combatPower>999</combatPower>
+		<race>Alien_Miho_Mech_Myeongil</race>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>Myeongil</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>		
+		<backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+		<chemicalAddictionChance>0</chemicalAddictionChance>
+		<initialWillRange>10~50</initialWillRange>
+		<initialResistanceRange>10~60</initialResistanceRange>
+	<minGenerationAge>1</minGenerationAge>
+	<maxGenerationAge>3</maxGenerationAge>
+
+	</PawnKindDef>
+
+	<AlienRace.BackstoryDef Name="MyeongilBackstory" Abstract="True">
+		<skillGains>
+			<li>
+				<defName>Melee</defName>
+				<amount>2</amount>
+			</li>
+		</skillGains>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+	</AlienRace.BackstoryDef>
+
+	<AlienRace.BackstoryDef ParentName="MyeongilBackstory">
+		<defName>Myeongil_Backstory_Adult</defName>
+		<title>명일급</title>
+		<titleShort>명일급</titleShort>
+		<baseDescription>미호 중공업의 대형 운송드론 입니다. 어마어마한 적재량 덕분에 미호의 초능력을 흉내낼 수 있는 초대형 유사 안개꽃 기관이 장착되어 있습니다.</baseDescription>
+		<spawnCategories Inherit="False">
+			<li>Myeongil</li>
+		</spawnCategories>
+		<slot>Adulthood</slot>
+		<workAllows>
+			<li>Violent</li>
+			<li>Firefighting</li>
+			
+			<li>AllWork</li>
+			<li>Commoner</li>
+			<li>ManualSkilled</li>
+			<li>ManualDumb</li>
+			<li>Hauling</li>
+		</workAllows>
+	</AlienRace.BackstoryDef>
+
+	<AlienRace.BackstoryDef ParentName="MyeongilBackstory">
+		<defName>Myeongil_Backstory_Child</defName>
+		<title>명일급</title>
+		<titleShort>명일급</titleShort>
+		<baseDescription>미호 중공업의 대형 운송드론 입니다. 어마어마한 적재량 덕분에 미호의 초능력을 흉내낼 수 있는 초대형 유사 안개꽃 기관이 장착되어 있습니다.</baseDescription>
+		<spawnCategories Inherit="False">
+			<li>Myeongil</li>
+		</spawnCategories>
+		<slot>Childhood</slot>
+		<forcedHediffs>
+		    <li>DroneLike</li>
+		    <li>Miho_ElegansDeployDrone_Hediff</li>
+
+		</forcedHediffs>
+		<workAllows>
+			<li>Violent</li>
+			<li>Firefighting</li>
+
+			<li>AllWork</li>
+			<li>Commoner</li>
+			<li>ManualSkilled</li>
+			<li>ManualDumb</li>
+			<li>Hauling</li>
+		</workAllows>
+	</AlienRace.BackstoryDef>
+	
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_ElegansDeployDrone_Hediff</defName>
+		<hediffClass>HediffWithComps</hediffClass>
+        <defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+		<description>초능력 증진기</description>
+		<label>초능력 증진기</label>
+		<!-- <labelNoun>Hediff_Wraper_FondlingVestigialShell.labelNoun</labelNoun> -->
+
+		<comps>
+			<li Class="MoharHediffs.HediffCompProperties_MultipleHediff">
+				<bodyDef>MihoHexDroneBody</bodyDef>
+				<hediffAndBodypart>
+					<li>
+						<hediff>PsychicAmplifier</hediff>
+						<bodyPart>Brain</bodyPart>
+					</li>
+				</hediffAndBodypart>
+				
+				<debug>false</debug>
+			</li>
+			
+		</comps>
+		
+	</HediffDef>
+	
+
+<ThingDef ParentName="ApparelMakeableBase">
+    <defName>Miho_Apparel_MyeongilArmorTan</defName>
+    <label>명일 장갑</label>
+    <description>명일에 장착 가능한 장갑판입니다.</description>
+    <graphicData>
+      <texPath>Mech/Myeongil/Apparel/MyeongilArmorTan</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <costStuffCount>350</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <costList>
+      <Miho_DroneArmor>12</Miho_DroneArmor>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+    <thingCategories>
+      <li>Miho_Apparel</li>
+    </thingCategories>
+    <recipeMaker>
+            <researchPrerequisite>Miho_Weapon</researchPrerequisite> 
+      <recipeUsers Inherit="false">
+        <li>Miho_Factory</li>
+      </recipeUsers>	
+    </recipeMaker>
+    <statBases>
+	  <MaxHitPoints>800</MaxHitPoints>
+	  <WorkToMake>125500</WorkToMake>
+      <Mass>100</Mass>
+      <StuffEffectMultiplierArmor>0.52</StuffEffectMultiplierArmor>
+      <ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+      <EquipDelay>15</EquipDelay>
+
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.75</MoveSpeed>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+	  	          <li>FullHead</li>
+
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+		<li>Legs</li>
+
+      </bodyPartGroups>
+      <wornGraphicPath>Mech/Myeongil/Apparel/MyeongilArmorTan</wornGraphicPath>
+			<useWornGraphicMask>true</useWornGraphicMask>
+      <layers>
+        <li>Middle</li>
+
+      </layers>
+      <tags>
+        <li>MihoSapsalArmy</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>Worker</li>
+        <li>Soldier</li>
+
+      </defaultOutfitTags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(255,255,255)</only>
+        </li>
+        <li>
+          <weight>15</weight>
+          <only>(255,255,255)</only>
+        </li>
+        <li>
+          <weight>20</weight>
+          <only>(255,255,255)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+
+
+    <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>Miho_CheckHediffMakeHediff_MyeongilMalnutrition</defName>
+		<targetRace>Alien_Miho_Mech_Myeongil</targetRace>
+		<hediffDefs>
+			<li>Malnutrition</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>DroneMalnutrition</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>200</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+
+</Defs>

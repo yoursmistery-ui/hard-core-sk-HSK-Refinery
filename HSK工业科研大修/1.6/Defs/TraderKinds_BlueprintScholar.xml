@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- 蓝图经济 v4.1: 蓝图学者商队 (挂原版异邦人+鼠族 Rakinia 的 caravanTraderKinds, 见补丁 67)
+	     按商人派系 techLevel 卖对应档蓝图书 (复用 StockGenerator_BlueprintTrader 权重曲线),
+	     sellChance=0.2 → 单轮补货 20% 概率携带蓝图。 -->
+	<TraderKindDef>
+		<defName>RK_TraderKind_BlueprintScholar</defName>
+		<label>蓝图学者商队</label>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>150~350</countRange>
+			</li>
+			<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader">
+				<sellChance>0.2</sellChance>
+			</li>
+			<!-- 回购玩家手里多余的蓝图书(标签 Blueprint 见 ThingDefs_BlueprintGates.xml 的 RK_BlueprintBookBase) -->
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Blueprint</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+</Defs>

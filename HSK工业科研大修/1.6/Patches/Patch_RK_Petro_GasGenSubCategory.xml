@@ -1,0 +1,10 @@
+<Patch>
+	<!-- 燃气发电机(RK_Petro_GasGenerator, 一级分类 Power)归入 Core_SK 的转化型能源二级分类 SubCategory_ConvectionalPower -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ConvectionalPower"]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ConvectionalPower"]/defNames</xpath>
+			<value><li>RK_Petro_GasGenerator</li></value>
+		</match>
+	</Operation>
+</Patch>

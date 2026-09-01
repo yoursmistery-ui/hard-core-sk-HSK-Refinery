@@ -1,0 +1,866 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村结构与防御建筑
+     来源: Medieval Overhaul 1.6.2.2 纯原版类 def 移植(2026-08-27), 前缀统一改为 Rustic_,
+     RawWood→Woody/WoodLog, Clay→SoftClay, Linen→Cloth, 研究 RusticFurniture→ComplexFurniture。
+-->
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_RusticDoor</defName>
+		<label>乡村门</label>
+		<description>最简朴的单格木门, 木料即可搭建。</description>
+		<statBases>
+			<WorkToBuild>850</WorkToBuild>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Door/RusticDoor_Mover</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<damageData>
+				<!--  no damage marks because they don't move with the door
+        <rect>(0,0.12,1,0.76)</rect>-->
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<uiIconPath>Things/Building/Door/RusticDoor_MenuIcon</uiIconPath>
+		<costStuffCount>25</costStuffCount>
+		<designationHotKey>Misc1</designationHotKey>
+
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Door/RusticDoor_Blueprint</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+			</blueprintGraphicData>
+		</building>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_LogGate</defName>
+		<label>原木栅门</label>
+		<description>原木拼成的院门, 比栅栏体面些。</description>
+		<statBases>
+			<WorkToBuild>1200</WorkToBuild>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Door/LogGate_Mover</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<damageData>
+				<!--  no damage marks because they don't move with the door
+        <rect>(0,0.12,1,0.76)</rect>-->
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<uiIconPath>Things/Building/Door/LogGate_MenuIcon</uiIconPath>
+		<costStuffCount>25</costStuffCount>
+		<designationHotKey>Misc1</designationHotKey>
+
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Door/LogGate_Blueprint</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+			</blueprintGraphicData>
+		</building>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_Gate</defName>
+		<label>大门</label>
+		<description>木石加固的正式大门。</description>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>1200</WorkToBuild>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Door/Gate_Mover</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<uiIconPath>Things/Building/Door/Gate_MenuIcon</uiIconPath>
+		<costStuffCount>35</costStuffCount>
+		<designationHotKey>Misc1</designationHotKey>
+	</ThingDef>
+	
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_ReinfocedLogGate</defName>
+		<label>加固原木大门</label>
+		<description>双格厚的加固木门, 开关略慢但十分坚固。</description>
+		<thingClass>Building_MultiTileDoor</thingClass>
+		<statBases>
+			<WorkToBuild>2400</WorkToBuild>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Beauty>30</Beauty>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Door/ReinforcedLogGate/ReinforcedLogGate_Mover</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Door/ReinforcedLogGate/ReinforcedLogGate_south</uiIconPath>
+		<uiIconScale>1.35</uiIconScale>
+		<useBlueprintGraphicAsGhost>true</useBlueprintGraphicAsGhost>
+		<size>(1,1)</size>
+		<rotatable>true</rotatable>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>60</costStuffCount>
+		<building>
+			<blueprintClass>Blueprint_Build</blueprintClass>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Door/ReinforcedLogGate/ReinforcedLogGate</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<shaderType>EdgeDetect</shaderType>
+				<drawSize>(2,2)</drawSize>
+			</blueprintGraphicData>
+			<doorTopGraphic>
+				<texPath>Things/Building/Door/ReinforcedLogGate/ReinforcedLogGate_Top</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<drawSize>(2,2)</drawSize>
+			</doorTopGraphic>
+			<!--doorSupportGraphic>
+				<texPath>Things/Building/OrnateDoor/OrnateDoor2x1_Support</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+				<drawSize>(3.1, 2.3)</drawSize>
+			</doorSupportGraphic-->
+		</building>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<designationHotKey>Misc3</designationHotKey>
+		<placeWorkers>
+			<li>PlaceWorker_MultiCellDoor</li>
+		</placeWorkers>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_SlabDoor</defName>
+		<label>石板门</label>
+		<description>沉重的石板闸门, 开关极慢, 也难以被破坏。</description>
+		<statBases>
+			<MaxHitPoints>680</MaxHitPoints>
+			<WorkToBuild>3000</WorkToBuild>
+			<DoorOpenSpeed>0.4</DoorOpenSpeed>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Door/SlabDoor_Mover</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+
+		<stuffCategories Inherit="False">
+			<li>Stony</li>
+		</stuffCategories>
+		<uiIconPath>Things/Building/Door/SlabDoor_MenuIcon</uiIconPath>
+		<costStuffCount>55</costStuffCount>
+		<designationHotKey>Misc1</designationHotKey>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_RusticDoor1x2c</defName>
+		<label>乡村双格门</label>
+		<description>两格宽的乡村木门, 适合厅堂与仓房。</description>
+		<thingClass>Building_MultiTileDoor</thingClass>
+		<statBases>
+			<WorkToBuild>3600</WorkToBuild>
+			<MaxHitPoints>320</MaxHitPoints>
+		</statBases>
+		<graphicData>
+		<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Mover</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<!--shaderType>CutoutComplex</shaderType-->
+		<damageData>
+			<enabled>false</enabled>
+		</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_MenuIcon_south</uiIconPath>
+		<useBlueprintGraphicAsGhost>true</useBlueprintGraphicAsGhost>
+		<size>(2, 1)</size>
+		<rotatable>true</rotatable>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<costStuffCount>75</costStuffCount>
+		<building>
+		<blueprintClass>Blueprint_Build</blueprintClass>
+		<blueprintGraphicData>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_MenuIcon</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>EdgeDetect</shaderType>
+			<drawSize>(3,2)</drawSize>
+		</blueprintGraphicData>
+		<doorTopGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Top</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorTopGraphic>
+		<doorSupportGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Support</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorSupportGraphic>
+		</building>
+		<researchPrerequisites>
+		<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<placeWorkers>
+		<li>PlaceWorker_MultiCellDoor</li>
+		</placeWorkers>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_Gate1x2c</defName>
+		<label>双格大门</label>
+		<description>两格宽的木石加固大门, 车马可通行。</description>
+		<thingClass>Building_MultiTileDoor</thingClass>
+		<statBases>
+			<WorkToBuild>3600</WorkToBuild>
+			<MaxHitPoints>500</MaxHitPoints>
+		</statBases>
+		<graphicData>
+		<texPath>Things/Building/Door/Gate1x2/Gate1x2_Mover</texPath>
+		<graphicClass>Graphic_Multi</graphicClass>
+		<!--shaderType>CutoutComplex</shaderType-->
+		<damageData>
+			<enabled>false</enabled>
+		</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Door/Gate1x2/Gate1x2_MenuIcon_south</uiIconPath>
+		<useBlueprintGraphicAsGhost>true</useBlueprintGraphicAsGhost>
+		<size>(2, 1)</size>
+		<rotatable>true</rotatable>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<costStuffCount>75</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<building>
+		<blueprintClass>Blueprint_Build</blueprintClass>
+		<blueprintGraphicData>
+			<texPath>Things/Building/Door/Gate1x2/Gate1x2_MenuIcon</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>EdgeDetect</shaderType>
+			<drawSize>(3,2)</drawSize>
+		</blueprintGraphicData>
+		<doorTopGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Top</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorTopGraphic>
+		<doorSupportGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Support</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorSupportGraphic>
+		</building>
+		<researchPrerequisites>
+		<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<placeWorkers>
+		<li>PlaceWorker_MultiCellDoor</li>
+		</placeWorkers>
+	</ThingDef>
+
+	
+<ThingDef ParentName="DoorBase">
+		<defName>Rustic_SlabDoor1x2c</defName>
+		<label>双格石板门</label>
+		<description>两格宽的石板巨门, 开合缓慢, 堡垒标配。</description>
+		<thingClass>Building_MultiTileDoor</thingClass>
+		<statBases>
+			<WorkToBuild>9000</WorkToBuild>
+			<MaxHitPoints>340</MaxHitPoints>
+			<DoorOpenSpeed>0.4</DoorOpenSpeed>
+		</statBases>
+		<graphicData>
+		<texPath>Things/Building/Door/SlabDoor1x2/SlabDoor1x2_Mover</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<!--shaderType>CutoutComplex</shaderType-->
+		<damageData>
+			<enabled>false</enabled>
+		</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Door/SlabDoor1x2/SlabDoor1x2_MenuIcon_south</uiIconPath>
+		<useBlueprintGraphicAsGhost>true</useBlueprintGraphicAsGhost>
+		<size>(2, 1)</size>
+		<rotatable>true</rotatable>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<costStuffCount>75</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Stony</li>
+		</stuffCategories>
+		<building>
+		<blueprintClass>Blueprint_Build</blueprintClass>
+		<blueprintGraphicData>
+			<texPath>Things/Building/Door/SlabDoor1x2/SlabDoor1x2_MenuIcon</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>EdgeDetect</shaderType>
+			<drawSize>(3,2)</drawSize>
+		</blueprintGraphicData>
+		<doorTopGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Top</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorTopGraphic>
+		<doorSupportGraphic>
+			<texPath>Things/Building/Door/RusticDoor1x2/RusticDoor1x2_Support</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3, 2)</drawSize>
+		</doorSupportGraphic>
+		</building>
+		<researchPrerequisites>
+		<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<placeWorkers>
+		<li>PlaceWorker_MultiCellDoor</li>
+		</placeWorkers>
+	</ThingDef>
+
+	
+<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_Frame_Log</defName>
+		<label>原木门框</label>
+		<description>包在门洞周围的装饰性原木门框。</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Door/LogFrame</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconScale>0.5</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<castEdgeShadows>false</castEdgeShadows>
+		<pathCost>0</pathCost>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>1200</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1</Flammability>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance>
+		</statBases>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<surfaceType>Item</surfaceType>
+		<designationCategory>Structure</designationCategory>
+	</ThingDef>
+
+	
+<ThingDef ParentName="Wall" Name="RusticWallBase" Abstract="True">
+		<building>
+			<isStuffableAirtight>false</isStuffableAirtight>
+		</building>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase">
+		<defName>Rustic_LogWall</defName>
+		<label>原木墙</label>
+		<description>立木排成的墙, 便宜但易燃。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/LogWall_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/LogWall_MenuIcon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<WorkToBuild>535</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>5</costStuffCount>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands>
+				<li>Rustic_RusticDoor</li>
+			</relatedBuildCommands>
+		</building>
+		<designationHotKey Inherit="False"/>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase">
+		<defName>Rustic_TentWall</defName>
+		<label>帐篷墙</label>
+		<description>布/皮绷成的帐篷式围墙, 拆除全额返还, 适合快速围蔽。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Tent</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags Inherit="False">
+				<li>Custom10</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/Tent_MenuIcon</uiIconPath>
+		<uiIconPathsStuff Inherit="False">
+			<li>
+				<appearance>Textile</appearance>
+				<iconPath>Things/Building/Linked/Tent_MenuIcon</iconPath>
+			</li>
+			<li>
+				<appearance>Hide</appearance>
+				<iconPath>Things/Building/Linked/HideTent_MenuIcon</iconPath>
+			</li>
+		</uiIconPathsStuff>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>50</WorkToBuild>
+			<Flammability>2.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>5</costStuffCount>
+		<coversFloor>false</coversFloor>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+		<building>
+			<paintable>false</paintable>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/HideTent_Blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands>
+				<li>Door</li>
+				<li>Autodoor</li>
+				<li>Rustic_RusticDoor</li>
+			</relatedBuildCommands>
+		</building>
+		<designationHotKey Inherit="False"/>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase">
+		<defName>Rustic_Palisade</defName>
+		<label>木栅栏</label>
+		<description>尖头木桩栅栏, 阻挡通行但不挡射击。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Palisade_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Basic</linkType>
+			<linkFlags>
+				<li>Custom10</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/Palisade_MenuIcon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<MaxHitPoints>450</MaxHitPoints>
+			<WorkToBuild>355</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>8</costStuffCount>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded><!-- Best affordance needed for stone -->
+		<staticSunShadowHeight>0.8</staticSunShadowHeight>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/Palisade_Blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands Inherit="False">
+				<li>Rustic_ReinfocedLogGate</li>
+				<li>Rustic_EmbPalisade</li>
+				<li>Rustic_LogGate</li>
+				<li>Rustic_Frame_Log</li>
+			</relatedBuildCommands>
+		</building>
+		<designationHotKey Inherit="False"/>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase">
+		<defName>Rustic_EmbPalisade</defName>
+		<label>射孔木栅栏</label>
+		<description>留出射击缝的木栅栏, 可隔着它开火。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/EmbPalisade_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Basic</linkType>
+			<linkFlags>
+				<li>Custom10</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/EmbPalisade_MenuIcon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<MaxHitPoints>450</MaxHitPoints>
+			<WorkToBuild>355</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>8</costStuffCount>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0.75</fillPercent>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded><!-- Best affordance needed for stone -->
+		<designationCategory>Structure</designationCategory>
+		<staticSunShadowHeight>0.8</staticSunShadowHeight>
+		<blockLight>false</blockLight>
+		<disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>	
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/EmbPalisade_Blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands Inherit="False">
+				<li>Rustic_ReinfocedLogGate</li>
+				<li>Rustic_Palisade</li>
+				<li>Rustic_LogGate</li>
+				<li>Rustic_Frame_Log</li>
+			</relatedBuildCommands>
+		</building>
+		<designationHotKey Inherit="False"/>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase">
+		<defName>Rustic_TudorWall</defName>
+		<label>都铎墙</label>
+		<description>木骨泥坯填心的乡绅墙体, 比石墙美观。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/TudorWall_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<colorTwo>(188,165,138)</colorTwo>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/TudorWall_MenuIcon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<Beauty>3</Beauty>
+			<MaxHitPoints>450</MaxHitPoints>
+			<WorkToBuild>150</WorkToBuild>
+			<Flammability>0.5</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<costList>
+			<SoftClay>3</SoftClay>
+		</costList>	
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/TudowWall_Atlas_Blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands Inherit="False">
+				<li>Rustic_RusticDoor</li>
+				<li>Rustic_SlabDoor</li>
+				<li>Rustic_Gate</li>
+			</relatedBuildCommands>
+		</building>
+		<researchPrerequisites Inherit="False">
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationHotKey Inherit="False"/>
+	</ThingDef>
+
+	
+<ThingDef ParentName="RusticWallBase" Name="Rustic_CastleWallBase">
+		<defName>Rustic_CastleWall</defName>
+		<label>城堡墙</label>
+		<description>巨石垒砌的堡垒墙, 极难摧毁——但惧怕炸药(4倍)与钝击(2倍)。</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/CastleWall</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>CornerFiller</linkType>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/CastleWall_icon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<MaxHitPoints>1000</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+			<Flammability>0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>15</costStuffCount>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded><!-- Best affordance needed for stone -->
+		<staticSunShadowHeight>1.5</staticSunShadowHeight>
+		<building>
+			<isStuffableAirtight>true</isStuffableAirtight>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/CastleWall_blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands Inherit="False">
+				<li>Rustic_CastleWallEmbrasures</li>
+				<li>Rustic_RusticDoor</li>
+				<li>Rustic_SlabDoor</li>
+				<li>Rustic_Gate</li>
+			</relatedBuildCommands>
+		</building>
+		<damageMultipliers Inherit="False">
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>4</multiplier>
+			</li>
+			<li>
+				<damageDef>Thump</damageDef>
+				<multiplier>2</multiplier>
+			</li>
+		</damageMultipliers>
+		<researchPrerequisites Inherit="False">
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<designationHotKey Inherit="False"/>
+	</ThingDef>
+  
+	
+<ThingDef ParentName="Rustic_CastleWallBase">
+		<defName>Rustic_CastleWallEmbrasures</defName>
+		<description>留出射击孔的城堡墙段。</description>
+		<label>射孔城堡墙</label>
+		<graphicData>
+			<texPath>Things/Building/Linked/CastleWallEmbrasures</texPath>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/CastleWallEmbrasures_icon</uiIconPath>
+		<uiIconPathsStuff Inherit="False"/>
+		<statBases>
+			<MaxHitPoints>800</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+		</statBases>
+		<costStuffCount>10</costStuffCount>
+		<fillPercent>0.85</fillPercent>
+		<disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
+		<building>
+			<isStuffableAirtight>false</isStuffableAirtight>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/CastleWallEmbrasures_blueprint</texPath>
+			</blueprintGraphicData>
+			<relatedBuildCommands Inherit="False">
+				<li>Rustic_CastleWall</li>
+				<li>Rustic_RusticDoor</li>
+				<li>Rustic_SlabDoor</li>
+				<li>Rustic_Gate</li>
+			</relatedBuildCommands>
+		</building>
+	</ThingDef>
+
+	
+
+
+	
+
+	
+<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_LogColumn</defName>
+		<label>原木柱</label>
+		<description>撑顶屋顶的原木立柱。</description>
+		<graphicData>
+			<drawSize>(1,1.25)</drawSize>
+			<drawOffset>(0,0,0.2)</drawOffset>
+			<texPath>Things/Building/Furniture/LogColumn</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+				<offset>(0,0,-0.23)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+
+		<designationCategory>Structure</designationCategory>
+		<uiOrder>2040</uiOrder>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.25</fillPercent>
+		<pathCost>0</pathCost>
+		<statBases>
+			<MaxHitPoints>160</MaxHitPoints>
+			<WorkToBuild>750</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<holdsRoof>true</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<rotatable>false</rotatable>
+		<fertility>0</fertility>
+		<specialDisplayRadius>6.9</specialDisplayRadius><!-- must be kept in sync with roof hold-up radius -->
+		<building>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+			<paintable>true</paintable>
+		</building>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+		</comps>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RoyalColumn</defName>
+		<label>皇家金柱</label>
+		<description>包金饰柱, 既撑屋顶也撑门面。</description>
+		<designationCategory>Structure</designationCategory>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.25</fillPercent>
+		<pathCost>0</pathCost>
+
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>7500</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>30</Beauty>
+		</statBases>
+
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<costList>
+			<GoldBar>20</GoldBar>
+		</costList>
+
+		<holdsRoof>true</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<rotatable>false</rotatable>
+		<fertility>0</fertility>
+		<specialDisplayRadius>6.9</specialDisplayRadius><!-- must be kept in sync with roof hold-up radius -->
+		<building>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+
+		<graphicData>
+			<drawSize>(1,1.25)</drawSize>
+			<drawOffset>(0,0,0.2)</drawOffset>
+			<texPath>Things/Building/Furniture/RoyalColumn</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+				<offset>(0,0,-0.23)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_DividerColumn</defName>
+		<label>隔断立柱</label>
+		<description>两格高的大隔断柱, 可撑屋顶又分房间。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/TallColumn</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconScale>0.55</uiIconScale>
+		<!--uiIconOffset>(0, 0.15)</uiIconOffset-->
+		<size>(1,1)</size>
+
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0.25</fillPercent>
+		<pathCost>0</pathCost>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<holdsRoof>true</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+    	<specialDisplayRadius>6.9</specialDisplayRadius>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationCategory>Structure</designationCategory>
+	<researchPrerequisites>
+		<li>ComplexFurniture</li>
+	</researchPrerequisites>
+	</ThingDef>
+
+	
+</Defs>

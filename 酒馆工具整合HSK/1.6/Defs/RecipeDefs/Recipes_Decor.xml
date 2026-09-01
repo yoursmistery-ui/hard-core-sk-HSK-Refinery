@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<!-- 2026-08-28 HSK 整合(酒馆 × 工业科研大修):
+	     ① 装饰台 Tav_TableDecor 已删除,本文件原 11 条 Make_Tav_* 配方(厨房装饰/奖杯/旗帜/各类地毯)随之移除。
+	        这些物件自带 costList,一律改在建筑菜单(辅助建筑 → 装饰与地毯)直接建造,不再占工作台。
+	     ② 垫料(纺织中间物)保留为工作台配方,挂 HSK 共享纺织机 TableLoom,与 RK_WeaveSilk 织绸同口径。
+	        下游消耗方:软椅/软凳/扶手椅/软床/双人软床/奖杯/装饰地毯 —— 均为建筑菜单直建。 -->
+	<RecipeDef>
+		<defName>TavMake_Padding</defName>
+		<label>制作垫料</label>
+		<description>混合各种羊毛,制成用于保暖和舒适的柔软垫料。</description>
+		<jobString>Making padding.</jobString>
+		<workSpeedStat>TailoringSpeed</workSpeedStat>
+		<effectWorking>Tailor</effectWorking>
+		<soundWorking>Recipe_Tailor</soundWorking>
+		<workAmount>900</workAmount>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<targetCountAdjustment>50</targetCountAdjustment>
+		<recipeUsers>
+			<li>TableLoom</li>
+		</recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Wools</li>
+					</categories>
+				</filter>
+				<count>50</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Wools</li>
+			</categories>
+			<disallowedThingDefs>
+				<li>TavPadding</li>
+			</disallowedThingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<TavPadding>50</TavPadding>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<researchPrerequisite>Apparel_B1</researchPrerequisite>
+		<displayPriority>0</displayPriority>
+	</RecipeDef>
+
+</Defs>

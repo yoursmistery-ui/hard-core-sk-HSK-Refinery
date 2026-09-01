@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+
+    <name>金鼠族 HSK版本</name>
+
+    <author>M.Y.G (原) / HSK 适配</author>
+
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+
+    <modIconPath IgnorelfNoMatchingField="True">Ui/OA_RK_Faction_Favor</modIconPath>
+
+    <packageId>local.ratkin.goldenhsk</packageId>
+
+    <modDependencies>
+        <li>
+            <packageId>Ludeon.RimWorld.Royalty</packageId>
+            <displayName>Royalty</displayName>
+        </li>
+
+        <li>
+            <packageId>Solaris.RatkinRaceMod</packageId>
+            <displayName>NewRatkinPlus (RatkinRaceHSK)</displayName>
+            <downloadUrl>https://rimworld.example/Solaris.RatkinRaceMod</downloadUrl>
+			</li>
+
+        <li>
+            <packageId>skyarkhangel.HSK</packageId>
+            <displayName>Core SK</displayName>
+            <downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+        </li>
+    </modDependencies>
+
+    <loadAfter>
+        <li>Solaris.RatkinRaceMod</li>
+        <li>skyarkhangel.HSK</li>
+        <li>skyarkhangel.HSK.Core</li>
+        <li>skyarkhangel.HSK.DLC</li>
+        <li>CETeam.CombatExtended</li>
+        <li>local.ratkin.clothesweapons</li>
+        <li>OARK.OberoniaAurea.Framework</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+        <li>notfood.SeedsPlease</li>
+    </loadAfter>
+
+    <description>
+【金鼠族 HSK 适配版】将 [OA]Ratkin Faction: Oberonia aurea(金鸢尾兰鼠族派系)整体整合为单个本地 mod,适配 Hardcore SK(HSK)环境。
+
+适配内容:
+1. 框架:内置 Oberonia Aurea Framework 代码与定义(未装 OARK.OberoniaAurea.Framework 时自包含可用);若单独订阅框架 mod,则自动改用外部框架(loadFolders IfModNotActive 切换)。
+2. 科技树适配:全部 28 个金鸢尾兰研究节点保留,沿用鼠族研究 tab(RK_ResearchTab_Default);所有前置(原版 Electricity/Batteries/Fabrication/HeavyTurrets/BlowbackOperation/GasOperation/NobleApparel/RoyalApparel 等)在 HSK 环境下已逐一验证存在。
+3. 材料适配:配方成本中的银(Gold/Silver)按 HSK 冶炼惯例改为 银锭(SilverBar)/金锭(GoldBar);铀/钢/零部件/合成纤维等已确认与 HSK 命名一致,无需改动。
+4. 工作台适配:枪械沿用 加工台/装配台(HSK DefOverwrite 保留),衣物挂鼠族裁缝台(RK_ElectricTailoringBench/RK_HandTailoringBench),均验证兼容。
+5. CE 适配:内置 CE 内容(贫化铀弹药集/枪械转换/炮塔转换/防具 CE 属性)经逐项核验,与 HSK+CE 16.7 完全兼容;不含依赖 D-FunctionalAmmunition Library 的 CE Patch+(该库未安装,已排除并说明)。
+
+内容(与原版一致):
+1 个新鼠族派系(特殊袭击方式与声望系统);2 种新作物;25 种新枪械;9 把近战武器;29 件配件与头饰;34 件服装与外套;23 种建筑;27 项科技;2 个文化模因;3 个基因;230 个背景故事;2 位故事叙述者。
+
+需要:鼠族本体(NewRatkinPlus / RatkinRaceHSK)、皇权 DLC;兼容 文化/生物科技/异象/奥德赛 与 CE。
+本适配版为本地整合,请勿与 workshop 原版金鸢尾兰及其前置框架(Oberonia Aurea Framework)同时启用。
+    </description>
+
+</ModMetaData>

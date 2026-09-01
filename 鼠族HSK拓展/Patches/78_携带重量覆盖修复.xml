@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 78_携带重量覆盖修复.xml, 79_鼠族专属穿戴限制.xml -->
+<Patch><!-- 78_携带重量覆盖修复(2026-08-19):
+         73_装备属性性能精简 用 PatchOperationReplace 整体替换 equippedStatOffsets 时,
+         把 01_鼠族数值配方改造 / 60_携带重量 / 04_CE适配 赋予的 CarryWeight 全部清掉了(15 件)。
+         本补丁在 73 之后 PatchOperationAdd 补回,数值取 01/60 号原值(04 号重复赋值已被 09 覆盖,以 60 为准)。
+         ⚠️ 若未来重新生成 73 号,本补丁仍需保留(Add 追加在 Replace 之后,始终生效)。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_OuterPlate"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>15</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Vest"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>15</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="hsdy"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>12</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="maorongdayi"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>12</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="nwpf"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>10</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="xiaokb"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>25</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="zsyg"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>8</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmorHelmet"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>25</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Cardigan"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>5</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Coif"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>3</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_GaurdenUniform"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>8</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Plate"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>25</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_RoyalRobe"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>10</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_WoolenHat"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>3</CarryWeight></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_WorkerWear"]/equippedStatOffsets</xpath>
+        <value><CarryWeight>15</CarryWeight></value>
+    </Operation><!-- 鼠族专属穿戴限制(2026-08-21 建立,2026-08-28 补全)
+	     机制: AlienRaces(HAR)的 raceRestriction.apparelList = 种族服饰白名单。
+	     任一衣物只要出现在某个种族的 apparelList 里,就被登记进全局 apparelRestricted 集合,
+	     此后只有白名单包含它的种族能穿(RaceRestrictionSettings.CanWear);
+	     人类/奥瑞森人(Alien_Orassan)/美狐/阿莎丽/安卓等一律穿不上,也不会被随机生成出来。
+	     金鼠族是鼠族 ThingDef 下的异种人(Ratkin_OA),与鼠族共用同一张白名单。
+	     因此本 mod 衣物只有 _Thin 贴图,不再需要为其它体型补 _Female/_Male 变体(体型适配作废)。
+	     不锁的例外:
+	       - RK_EarCostume(小鼠耳朵头饰): 本身就是给"大个子人类"戴的伪装头饰(tag NonRatkin)。
+	       - RKMS_Scroll 8 部秘籍卷轴(百工典/百株杂粮集/渡世救人集/奇石谱/饕餮经/天赋论/止戈总要/诸方博物志):
+	         属功能书籍而非衣物,贴图单一通用,人类研究者同样可用。
+	     门控: 1.6 起 Operation 级 MayRequire 失效 → 用 PatchOperationConditional 检查 apparelList 节点存在。 -->
+
+	<!-- ① 原有 59 件(逐字保留) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+
+			<li>Crusaders</li>
+			<li>Crusadershead</li>
+			<li>MKSW</li>
+			<li>MKSWWJ</li>
+			<li>MKSWheat</li>
+			<li>RA_DetectiveDress</li>
+			<li>RA_DetectiveHat</li>
+			<li>RA_PaladinArmor</li>
+			<li>RA_PaladinCoronet</li>
+			<li>RA_PaladinHood</li>
+			<li>RK_Circlet</li>
+			<li>RK_Crusader</li>
+			<li>RK_Gambeson</li>
+			<li>RK_GambesonB</li>
+			<li>RK_GuardsmanA</li>
+			<li>RK_GuardsmanB</li>
+			<li>RK_MilUniform</li>
+			<li>RK_Officer</li>
+			<li>RK_Oriental</li>
+			<li>RK_OuterPlate</li>
+			<li>RK_Rifleman</li>
+			<li>RK_Scarf</li>
+			<li>RK_Sleeves</li>
+			<li>RK_Vest</li>
+			<li>baonuanneiyi</li>
+			<li>baonuanneiyi_Child</li>
+			<li>beileimao</li>
+			<li>bjm</li>
+			<li>bjq</li>
+			<li>fangdanjunfu</li>
+			<li>fengye</li>
+			<li>fengyewaitao</li>
+			<li>gelusi</li>
+			<li>gjhpf</li>
+			<li>hjzj</li>
+			<li>hjzjmz</li>
+			<li>hjzjmzB</li>
+			<li>hjzjwj</li>
+			<li>hsdy</li>
+			<li>junfu</li>
+			<li>kamz</li>
+			<li>kamz_Child</li>
+			<li>kydc</li>
+			<li>kydcmz</li>
+			<li>maorongdayi</li>
+			<li>maorongdayi_Child</li>
+			<li>nwcq</li>
+			<li>nwcqB</li>
+			<li>nwpf</li>
+			<li>nwtg</li>
+			<li>sxpf</li>
+			<li>tybb</li>
+			<li>xiaokb</li>
+			<li>xinpian</li>
+			<li>xqzmj</li>
+			<li>xqzzj</li>
+			<li>yiliaob</li>
+			<li>yingwu</li>
+			<li>zsyg</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+			<value>
+			<!-- ② 2026-08-27 补完:鼠邦(RKMS)帽/甲/制服 + 饰品(原上游注释掉的 15 顶帽子一并锁上) -->
+			<li>RK_ShaMao</li>
+			<li>RK_ShaMaoB</li>
+			<li>RK_DouLi</li>
+			<li>RK_ExoticWarmHat</li>
+			<li>RK_ManWarmHat</li>
+			<li>RK_TraderWarmHat</li>
+			<li>RK_RegistrarHel</li>
+			<li>RK_Jinngasa</li>
+			<li>RK_ZanZi</li>
+			<li>RK_Kerchief</li>
+			<li>RK_FuJin</li>
+			<li>RK_ManCap</li>
+			<li>RK_Bergmutze</li>
+			<li>RK_TieMao</li>
+			<li>RK_LogistorHel</li>
+			<li>RK_ManatwarHelmet</li>
+			<li>RK_GaoDing</li>
+			<li>RK_ZhanLi</li>
+			<li>RK_BuMianJia</li>
+			<li>RK_DuiJinJia</li>
+			<li>RK_SchoolUniform_Child</li>
+			<!-- ③ 2026-08-27 补完:鼠邦饰品(耳环/玉佩/香囊/扳指/玉镯/长生锁/御守/金戒指) -->
+			<li>RK_Earrings</li>
+			<li>RK_HuanYuPei</li>
+			<li>RK_Sachet</li>
+			<li>RK_BanZhi</li>
+			<li>RK_YuZhuo</li>
+			<li>RK_ChangShengSuo</li>
+			<li>RK_YuShou</li>
+			<li>RK_GoldRing</li>
+			</value>
+		</match>
+	</Operation></Patch>

@@ -1,0 +1,2228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+  <ThingDef ParentName="BasicBedBase">
+		<defName>RKFC_RGK_bedSingle</defName>
+		<label>bed</label>
+		<description>A cozy mattress and sheets on a frame for resting.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_bedSingle</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
+			<damageData>
+				<rect>(0,0.05,1,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_RGK_EndTable</li>
+					<li>RKFC_RGK_EndTableWithLamp</li>
+					<li>RKFC_RGK_EndTableWithLampE</li>
+					<li>RKFC_WardrobeA</li>
+					<li>RKFC_WardrobeB</li>
+					<li>RKFC_GL_Teddy</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<statBases>
+			<MaxHitPoints>140</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+			<WorkToBuild>800</WorkToBuild>
+			<Mass>30</Mass>
+			<BedRestEffectiveness>1</BedRestEffectiveness>
+			<Comfort>0.75</Comfort>
+			</statBases>
+		<size>(1,2)</size>
+		<costStuffCount>45</costStuffCount>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay>5</bed_healPerDay>
+		</building>
+		<fillPercent>0.4</fillPercent>
+		<pathCost>60</pathCost>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc1</designationHotKey>
+		<designationCategory>Furniture</designationCategory>
+		<uiIconScale>0.90</uiIconScale>		
+	</ThingDef>
+  <ThingDef ParentName="BasicBedBase">
+		<defName>RKFC_RGK_bedSingleB</defName>
+		<label>bed2</label>
+		<description>A cozy mattress and sheets on a frame for resting.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_bedSingle2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
+			<damageData>
+				<rect>(0,0.05,1,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_RGK_EndTable</li>
+					<li>RKFC_RGK_EndTableWithLamp</li>
+					<li>RKFC_RGK_EndTableWithLampE</li>
+					<li>RKFC_WardrobeA</li>
+					<li>RKFC_WardrobeB</li>
+					<li>RKFC_GL_Teddy</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<statBases>
+			<MaxHitPoints>140</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+			<WorkToBuild>800</WorkToBuild>
+			<Mass>30</Mass>
+			<BedRestEffectiveness>1</BedRestEffectiveness>
+			<Comfort>0.75</Comfort>
+			</statBases>
+		<size>(1,2)</size>
+		<costStuffCount>45</costStuffCount>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay>5</bed_healPerDay>
+		</building>
+		<fillPercent>0.4</fillPercent>
+		<pathCost>60</pathCost>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc1</designationHotKey>
+		<designationCategory>Furniture</designationCategory>
+		<uiIconScale>0.90</uiIconScale>
+	</ThingDef>
+  <ThingDef ParentName="TableBase">
+		<defName>RKFC_RGK_EndTable</defName>
+		<label>End table</label>
+		<description>A small bedside table which makes nearby beds a little bit more comfortable. Must be placed directly adjacent to the head of the bed. Placing more than one end table near the same bed has no effect.</description>
+		<surfaceType>Item</surfaceType>
+		<uiIconScale>0.90</uiIconScale>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_EndTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+		</graphicData>
+		<statBases>
+			<SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints><WorkToBuild>1100</WorkToBuild><Mass>23</Mass><Bulk>75</Bulk><Flammability>1.0</Flammability><Beauty>10</Beauty></statBases>
+		<pathCost>60</pathCost>
+		<stuffCategories>
+			<li>Metallic</li><li>Woody</li><li>Stony</li><li>Plastic</li><li>Precious</li></stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li><compClass>CompQuality</compClass></li><li Class="CompProperties_Facility"><statOffsets><BedRestEffectiveness>0.06</BedRestEffectiveness><Comfort>0.09</Comfort><Beauty>4</Beauty></statOffsets><maxSimultaneous>1</maxSimultaneous><mustBePlacedAdjacentCardinalToBedHead>true</mustBePlacedAdjacentCardinalToBedHead></li></comps>
+		<staticSunShadowHeight>0.1</staticSunShadowHeight>
+		<castEdgeShadows>false</castEdgeShadows>
+		<designationHotKey>Misc2</designationHotKey>
+	<designationCategory>Furniture</designationCategory><researchPrerequisites><li>Beds_C2</li></researchPrerequisites><costList><ComponentIndustrial>4</ComponentIndustrial><Glass>3</Glass><ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_EndTableWithLamp</defName>
+		<label>end table</label>
+		<description>A small bedside table which makes nearby beds a little bit more comfortable. Must be placed directly adjacent to the head of the bed. Placing more than one end table near the same bed has no effect.</description>
+		<surfaceType>Item</surfaceType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGKEndTableLight</texPath>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shadowData>
+				<volume>(0.3, 0.6, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>8</Beauty>
+		</statBases>
+		<pathCost>60</pathCost>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<Steel>10</Steel>
+		</costList>
+		<costStuffCount>30</costStuffCount>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<tickerType>Normal</tickerType>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.05</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<mustBePlacedAdjacentCardinalToBedHead>true</mustBePlacedAdjacentCardinalToBedHead>
+			</li>			
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>25.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>2.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+			</comps>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<castEdgeShadows>false</castEdgeShadows>
+		<designationCategory inharit="false">Furniture</designationCategory>
+	<researchPrerequisites><li>Tables_B2</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_EndTableWithLampE</defName>
+		<label>end table</label>
+		<description>A small bedside table which makes nearby beds a little bit more comfortable. Must be placed directly adjacent to the head of the bed. Placing more than one end table near the same bed has no effect.Works as electricity.</description>
+		<surfaceType>Item</surfaceType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGKEndTableLight</texPath>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shadowData>
+				<volume>(0.3, 0.6, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>8</Beauty>
+		</statBases>
+		<pathCost>60</pathCost>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<Steel>25</Steel>
+		</costList>
+		<costStuffCount>30</costStuffCount>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<tickerType>Normal</tickerType>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>25</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.05</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<mustBePlacedAdjacentCardinalToBedHead>true</mustBePlacedAdjacentCardinalToBedHead>
+			</li>			
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>2.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+			</comps>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<castEdgeShadows>false</castEdgeShadows>
+		<designationHotKey>Misc2</designationHotKey>
+		<designationCategory>Furniture</designationCategory>
+	<researchPrerequisites><li>Tables_B2</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="RKFC_FurnitureWithQualityBase">
+		<defName>RKFC_RGK_bucketr</defName>
+		<label>RGK bucket</label>
+		<description>bucket.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_bucket</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+				<rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+				<rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+				<rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.18, 0.23, 0.18)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<costStuffCount>30</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.20</fillPercent>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<uiIconOffset>(0, -0.05)</uiIconOffset>
+		<rotatable>false</rotatable>		
+		<designationCategory>Furniture</designationCategory>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>50</MaxHitPoints> <WorkToBuild>350</WorkToBuild> <Mass>5</Mass> <Bulk>15</Bulk> <Flammability>1.0</Flammability> <Beauty>2</Beauty> <Comfort>0.3</Comfort> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li> <li>Precious</li></stuffCategories><costList><ComponentMedieval>3</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FurnitureWithQualityBase">
+		<defName>RKFC_RGK_orc</defName>
+		<label>RGK orc barrel</label>
+		<description>Just orc barrel</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_orc</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+				<rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+				<rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+				<rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.18, 0.23, 0.18)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<costStuffCount>30</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.20</fillPercent>		
+		<designationCategory>Furniture</designationCategory>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<uiIconOffset>(0, -0.05)</uiIconOffset>
+		<rotatable>false</rotatable>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>50</MaxHitPoints> <WorkToBuild>350</WorkToBuild> <Mass>5</Mass> <Bulk>15</Bulk> <Flammability>1.0</Flammability> <Beauty>2</Beauty> <Comfort>0.3</Comfort> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li> <li>Precious</li></stuffCategories><costList><ComponentMedieval>3</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FurnitureWithQualityBase">
+		<defName>RKFC_RGK_SimpleChair</defName>
+		<label>simple chair</label>
+		<description>A simple platform on which to sit. Not very comfortable, but much better than nothing. Can be used at tables, work stations, and elsewhere.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Chair2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<damageData>
+				<rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+				<rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+				<rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+				<rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<drawSize>(3,3)</drawSize>
+			<shadowData>
+				<volume>(0.18, 0.23, 0.18)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<costStuffCount>30</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.20</fillPercent>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<uiIconOffset>(0, -0.05)</uiIconOffset>
+		<rotatable>false</rotatable>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>50</MaxHitPoints> <WorkToBuild>350</WorkToBuild> <Mass>5</Mass> <Bulk>15</Bulk> <Flammability>1.0</Flammability> <Beauty>2</Beauty> <Comfort>0.3</Comfort> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li> <li>Precious</li></stuffCategories><costList><ComponentMedieval>3</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_ArtableFurnitureBase">
+		<defName>RKFC_RGK_Chair</defName>
+		<label>chair</label>
+		<description>A comfortable chair. Can be used at tables, work stations, and elsewhere.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Chair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.23, 0.26, 0.23)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<costStuffCount>65</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.35</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>90</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>16</Mass> <Bulk>41</Bulk> <Flammability>1.0</Flammability> <Beauty>6</Beauty> <Comfort>0.5</Comfort> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance></statBases><researchPrerequisites><li>Tables_B2</li></researchPrerequisites><stuffCategories><li>Fabric</li> <li>Leathery</li></stuffCategories><costList><ComponentIndustrial>6</ComponentIndustrial></costList></ThingDef>
+  <ThingDef ParentName="RKFC_ArtableFurnitureBase">
+		<defName>RKFC_GL_Bench</defName>
+		<label>bench</label>
+		<description>It's a park bench chair. Couples can't sit here.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Bench</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.3,2.3)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<costStuffCount>55</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.45</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<size>(2,1)</size>		
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>80</MaxHitPoints> <WorkToBuild>550</WorkToBuild> <Flammability>1.0</Flammability> <Beauty>5</Beauty> <Comfort>0.5</Comfort> <Bulk>25</Bulk> <Mass>11</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li> <li>Precious</li></stuffCategories><costList><ComponentMedieval>6</ComponentMedieval></costList></ThingDef>
+
+	<!-- ============ 从鼠族HSK拓展迁入: 咪咪椅子 ============ -->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RK_Seat_MimiChair</defName>
+		<label>Mimi chair</label>
+		<description>An ergonomic chair featuring cute cat-ear decorations.</description>
+		<replaceTags>
+			<li>Chair</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RK_Gaming chair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<damageData>
+				<rectN>(0,0,1,0.703125)</rectN>
+				<rectS>(0.09375,0,0.84375,1)</rectS>
+				<rectE>(0,0,0.84375,0.625)</rectE>
+				<rectW>(0.15625,0,0.84375,0.625)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.3, 0.33, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconScale>0.93</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>15</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>2</Beauty>
+			<Comfort>0.77</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<Steel>30</Steel>
+		</costList>
+		<pathCost>30</pathCost>
+		<fillPercent>0.40</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<tradeability>Sellable</tradeability>
+	</ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableA</defName>
+		<label>table (2x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_TableA2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableC</defName>
+		<label>table C (2x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_TableC2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableB</defName>
+		<label>celtic table (2x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_TableB2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableD</defName>
+		<label>celtic table (2x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_TableD2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+		<designationHotKey>Misc4</designationHotKey>
+		<designationCategory>Furniture</designationCategory>		
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableE</defName>
+		<label>celtic table (2x1)</label>
+		<graphicData>
+			<texPath>Things/Building/Table/RGK_Table2x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,1)</size>		
+		<costStuffCount>30</costStuffCount>
+		<rotatable>true</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>75</MaxHitPoints> <WorkToBuild>700</WorkToBuild> <Mass>10</Mass> <Bulk>28</Bulk> <Flammability>1.0</Flammability> <Beauty>2</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableF</defName>
+		<label>celtic table (3x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Table/RGK_Tableb3x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(3,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>true</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableG</defName>
+		<label>celtic table (2x2)</label>
+		<graphicData>
+			<texPath>Things/Building/Table/RGK_Table2x2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>		
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>100</MaxHitPoints> <WorkToBuild>900</WorkToBuild> <Mass>14</Mass> <Bulk>38</Bulk> <Flammability>1.0</Flammability> <Beauty>4</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_TableH</defName>
+		<label>celtic table (3x3)</label>
+		<graphicData>
+			<texPath>Things/Building/Table/RGK_Table3x3</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(3,3)</size>		
+		<costStuffCount>85</costStuffCount>
+		<rotatable>false</rotatable>
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>150</MaxHitPoints> <WorkToBuild>1600</WorkToBuild> <Mass>42</Mass> <Bulk>53</Bulk> <Flammability>1.0</Flammability> <Beauty>7</Beauty> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">27</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_MiniTableA</defName>
+		<label>mini table</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_MiniTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.7</uiIconScale>
+		<uiIconOffset>(0,0.1)</uiIconOffset>
+		<size>(1,1)</size>		
+		<costStuffCount>15</costStuffCount>
+		<rotatable>false</rotatable>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>65</MaxHitPoints> <WorkToBuild>500</WorkToBuild> <Flammability>1.0</Flammability> <Beauty>1</Beauty> <Bulk>14</Bulk> <Mass>5</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_TableBase">
+		<defName>RKFC_RGK_MiniTableB</defName>
+		<label>mini table</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_MiniTable2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconScale>0.7</uiIconScale>
+		<uiIconOffset>(0,0.1)</uiIconOffset>
+		<size>(1,1)</size>			
+		<costStuffCount>15</costStuffCount>
+		<rotatable>false</rotatable>
+		<designationHotKey>Misc4</designationHotKey>
+	<designationCategory>Furniture</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>65</MaxHitPoints> <WorkToBuild>500</WorkToBuild> <Flammability>1.0</Flammability> <Beauty>1</Beauty> <Bulk>14</Bulk> <Mass>5</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li> <li>Precious</li> <li>Glass</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_RKGWineRackB</defName>
+		<label>wine rack</label>
+		<description>A shelf that stores wine or alcohol.</description>
+		<thingClass>Building_Storage</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_WineRackB</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>1</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>60</costStuffCount>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<size>(1,1)</size>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
+			<maxItemsInCell>3</maxItemsInCell>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<categories>
+						<li>Alcohol</li><li>Energetics</li></categories>
+				<thingDefs><li>Beer</li></thingDefs></filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories><li>Alcohol</li><li>Energetics</li></categories>
+					<thingDefs>
+						<li>Beer</li></thingDefs>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<designationHotKey>Misc5</designationHotKey>
+		<staticSunShadowHeight>0.2</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<designationCategory>ASFstorage</designationCategory>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>60</MaxHitPoints> <Beauty>5</Beauty> <Mass>8</Mass> <WorkToBuild>1200</WorkToBuild> <Flammability>1.0</Flammability> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">2</StyleDominance></statBases><researchPrerequisites><li>Storage_C1</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>4</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_WardrobeA</defName>
+		<label>wardrobe</label>
+		<description>Stores apparel inside the cabinet like books in a bookcase. Use the storage tab for filters and priorities; open the contents tab to eject items. Not a ground-stack shelf.</description>
+		<thingClass>Building_Storage</thingClass>
+		<drawerType>RealtimeOnly</drawerType>
+		<preventDroppingThingsOn>true</preventDroppingThingsOn>
+		<deselectedSelectionBracketFactor>0.3</deselectedSelectionBracketFactor>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_DresserA</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>1</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>70</costStuffCount>
+		<size>(1,1)</size>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<storageGroupTag>GL_Wardrobe</storageGroupTag>
+			<maxItemsInCell>10</maxItemsInCell>
+			<blueprintClass>Blueprint_StorageWithRoomHighlight</blueprintClass>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>false</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories Inherit="False">
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+			</inspectorTabs>
+		<designationHotKey>Misc5</designationHotKey>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>None</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.02</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>4</maxDistance>
+			</li>
+		</comps>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>90</MaxHitPoints> <WorkToBuild>580</WorkToBuild> <Flammability>1.0</Flammability> <Beauty>1.5</Beauty> <Bulk>95</Bulk> <Mass>30</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>Storage_B4</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentIndustrial>5</ComponentIndustrial></costList></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_WardrobeB</defName>
+		<label>wardrobe</label>
+		<description>Stores apparel inside the cabinet like books in a bookcase. Use the storage tab for filters and priorities; open the contents tab to eject items. Not a ground-stack shelf.</description>
+		<thingClass>Building_Storage</thingClass>
+		<drawerType>RealtimeOnly</drawerType>
+		<preventDroppingThingsOn>true</preventDroppingThingsOn>
+		<deselectedSelectionBracketFactor>0.3</deselectedSelectionBracketFactor>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_DresserB</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>1</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>70</costStuffCount>
+		<size>(1,1)</size>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<storageGroupTag>GL_Wardrobe</storageGroupTag>
+			<maxItemsInCell>10</maxItemsInCell>
+			<blueprintClass>Blueprint_StorageWithRoomHighlight</blueprintClass>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>false</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories Inherit="False">
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+			</inspectorTabs>
+		<designationHotKey>Misc5</designationHotKey>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>None</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.02</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>4</maxDistance>
+			</li>
+		</comps>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>90</MaxHitPoints> <WorkToBuild>580</WorkToBuild> <Flammability>1.0</Flammability> <Beauty>1.5</Beauty> <Bulk>95</Bulk> <Mass>30</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>Storage_B4</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentIndustrial>5</ComponentIndustrial></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_Bookshelf</defName>
+		<label>bookshelf</label>
+		<description>Increases research speed when placed near research table. Each research bench can  use two bookshelf.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_BookBox</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>3</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<thingClass>Building_Storage</thingClass>
+		<drawerType>RealtimeOnly</drawerType>
+		<preventDroppingThingsOn>true</preventDroppingThingsOn>
+		<deselectedSelectionBracketFactor>0.3</deselectedSelectionBracketFactor>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<size>(1,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.4</fillPercent>
+		<designationCategory>Accessories</designationCategory>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<costStuffCount>25</costStuffCount>
+		<building>
+			<storageGroupTag>Bookcase</storageGroupTag>
+			<maxItemsInCell>10</maxItemsInCell>
+			<blueprintClass>Blueprint_StorageWithRoomHighlight</blueprintClass>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>false</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<categories Inherit="False">
+						<li>Books</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>Books</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<ResearchSpeedFactor>0.075</ResearchSpeedFactor>
+				</statOffsets>
+				<maxDistance>5</maxDistance>
+				<maxSimultaneous>2</maxSimultaneous>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+			<li>PlaceWorker_DrawLinesToResearchTablesInRoom</li>
+		</placeWorkers>
+		<inspectorTabs>
+			<li>ITab_ContentsBooks</li>
+		</inspectorTabs>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>None</surfaceType>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>60</MaxHitPoints> <Beauty>5</Beauty> <Mass>8</Mass> <WorkToBuild>1000</WorkToBuild> <Flammability>1.0</Flammability></statBases><researchPrerequisites><li>Storage_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>4</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_Cupboard</defName>
+		<label>cupboard</label>
+		<description>A shelf for Tableware. Increases Cook speed when placed near fueled stove table.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_Cupboard</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>3</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<thingClass>Building</thingClass>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.20)</uiIconOffset>
+		<size>(1,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.6</fillPercent>
+		<designationCategory>Accessories</designationCategory>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<costStuffCount>60</costStuffCount>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<WorkTableWorkSpeedFactor>0.10</WorkTableWorkSpeedFactor>
+				</statOffsets>
+				<maxDistance>3</maxDistance>
+				<maxSimultaneous>1</maxSimultaneous>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+	<statBases><WorkToBuild>600</WorkToBuild> <CleaningTimeFactor>1</CleaningTimeFactor> <Beauty>2</Beauty> <Mass>20</Mass></statBases><researchPrerequisites><li>Stonecutting</li> <li>Stone_floor_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>4</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_TablewareShelf</defName>
+		<label>tableware shelf</label>
+		<description>A shelf for Tableware. Increases Cook speed when placed near fueled stove table.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_TablewareShelf</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>4</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+			<drawOffsetSouth>(0,-1,0)</drawOffsetSouth>
+		</graphicData>
+		<thingClass>Building</thingClass>
+		<uiIconScale>2.2</uiIconScale>
+		<uiIconPath>Things/Building/Furniture/GL_TablewareShelf_Icon</uiIconPath>
+		<uiIconOffset>(0, 0)</uiIconOffset>
+		<size>(2,1)</size>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.1</fillPercent>
+		<designationCategory>Accessories</designationCategory>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<costStuffCount>30</costStuffCount>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<WorkTableWorkSpeedFactor>0.15</WorkTableWorkSpeedFactor>
+				</statOffsets>
+				<maxDistance>2</maxDistance>
+				<maxSimultaneous>1</maxSimultaneous>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+			</placeWorkers>
+		<building>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<isEdifice>false</isEdifice>
+		</building>
+		<clearBuildingArea>false</clearBuildingArea>
+		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <Beauty>1.5</Beauty> <MaxHitPoints>60</MaxHitPoints> <Mass>20</Mass> <WorkToBuild>380</WorkToBuild> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">1.5</StyleDominance> <Bulk>55</Bulk></statBases><researchPrerequisites><li>Storage_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>2</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FurnitureBase">
+			<defName>RKFC_RGK_Manger</defName>
+			<label>manger</label>
+			<description>It's a cask for animals. You can store food and hay.</description>
+			<thingClass>Building_Storage</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_manger</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>30</costStuffCount>
+		<size>(2,1)</size>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
+			<maxItemsInCell>2</maxItemsInCell>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories Inherit="False">
+						<li>Foods</li>
+					</categories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories/>
+					<thingDefs>
+						<li>Hay</li>
+						<li>Kibble</li>
+					</thingDefs>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<designationHotKey>Misc5</designationHotKey>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<designationCategory>ASFstorage</designationCategory>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>75</MaxHitPoints> <WorkToBuild>250</WorkToBuild> <Flammability>0</Flammability> <Beauty>-5</Beauty> <Cleanliness>-5</Cleanliness> <Mass>5</Mass></statBases><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li></stuffCategories><costList><ComponentIndustrial>1</ComponentIndustrial> <Mechanism>1</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_GL_Shelf</defName>
+		<label>shelf</label>
+		<description>A shelf for storing miscellaneous items. Items stored in this will not deteriorate, even if outside.</description>
+		<thingClass>Building_Storage</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_Shelf</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,2)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>60</costStuffCount>
+		<size>(2,1)</size>
+		<defaultPlacingRot>North</defaultPlacingRot>
+		<building>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
+			<maxItemsInCell>3</maxItemsInCell>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>Weapons</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<designationHotKey>Misc12</designationHotKey>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<designationCategory>Accessories</designationCategory>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <Beauty>1.5</Beauty> <MaxHitPoints>90</MaxHitPoints> <Mass>30</Mass> <WorkToBuild>580</WorkToBuild> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance> <Bulk>95</Bulk></statBases><researchPrerequisites><li>Storage_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>4</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_RGK_DogBowl</defName>
+		<label>bowl</label>
+		<description>It's a cask for animals. You can store food and hay.</description>
+		<thingClass>Building_Storage</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_DogBowl</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Standable</passability>
+		<fillPercent>0.0</fillPercent>
+		<costStuffCount>15</costStuffCount>
+		<size>(1,1)</size>
+		<defaultPlacingRot>North</defaultPlacingRot>
+		<building>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
+			<maxItemsInCell>3</maxItemsInCell>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>AnimalFoods</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<staticSunShadowHeight>0.1</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<designationCategory>ASFstorage</designationCategory>
+		<rotatable>false</rotatable>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>55</MaxHitPoints> <WorkToBuild>150</WorkToBuild> <Flammability>0</Flammability> <Cleanliness>-5</Cleanliness> <Mass>1</Mass></statBases><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_GL_Locker</defName>
+		<label>locker</label>
+		<description>A locker for storing miscellaneous items. Items stored in this will not deteriorate, even if outside. Also it prevents the contents from being damaged by fire.</description>
+		<thingClass>Building_Storage</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_Locker</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>		
+		<uiIconScale>0.75</uiIconScale>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.5</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<costStuffCount>60</costStuffCount>
+		<size>(1,1)</size>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<categories>
+						<li>Manufactured</li>
+						<li>Items</li>
+						<li>Weapons</li>
+						<li>Apparel</li>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<designationCategory>Accessories</designationCategory>
+	<statBases><WorkToBuild>600</WorkToBuild> <CleaningTimeFactor>1</CleaningTimeFactor> <Beauty>2</Beauty> <Mass>30</Mass></statBases><researchPrerequisites><li>Stonecutting</li> <li>Stone_floor_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>4</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Flower</defName>
+		<label>replica flower</label>
+		<description>It's a flowerpot replica. It'll be in bloom forever.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Flower</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_Flower</uiIconPath>
+		<uiIconScale>2</uiIconScale>
+		<uiIconOffset>(0,0.15)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<constructEffect>ConstructWood</constructEffect>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>15</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<costList>
+			<WoodLog>15</WoodLog>
+			<Steel>5</Steel>
+		</costList>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+	<researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Teaset</defName>
+		<label>tea set</label>
+		<description>This is a set of decorative teas. It looks like a luxury, and it's a shame to use it.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Teaset</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawRotated>false</drawRotated>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_Teaset</uiIconPath>
+		<uiIconScale>1.75</uiIconScale>
+		<rotatable>true</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<fillPercent>0.15</fillPercent>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>15</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+	<researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_Teddy</defName>
+		<label>teddy bear</label>
+		<description>It is a fluffy teddy bear.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_Teddy</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<comps>			
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.05</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>0.9</maxDistance>
+			</li>
+		</comps>
+		<uiIconScale>1.5</uiIconScale>
+		<uiIconOffset>(0,-0.05)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>10</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+	<researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_lamp</defName>
+		<label>Lamp</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <MaxHitPoints>80</MaxHitPoints> <WorkToBuild>130</WorkToBuild> <Bulk>15</Bulk> <Mass>5</Mass> <MeditationFocusStrength>0.0</MeditationFocusStrength> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><stuffCategories><li>Stony</li> <li>Metallic</li> <li>Ceramic</li> <li>Precious</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_LampM</defName>
+		<label>Lamp M</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2_Backup</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <MaxHitPoints>80</MaxHitPoints> <WorkToBuild>130</WorkToBuild> <Bulk>15</Bulk> <Mass>5</Mass> <MeditationFocusStrength>0.0</MeditationFocusStrength> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><stuffCategories><li>Stony</li> <li>Metallic</li> <li>Ceramic</li> <li>Precious</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_lampE</defName>
+		<label>Lamp E</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains. Works as electricity.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>25</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>	
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>850</WorkToBuild> <Bulk>17</Bulk> <Mass>5</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance></statBases><researchPrerequisites><li>Light_C1</li></researchPrerequisites><costList><ComponentIndustrial>3</ComponentIndustrial> <Glass>5</Glass> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_lamp_White</defName>
+		<label>Lamp(white)</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <MaxHitPoints>80</MaxHitPoints> <WorkToBuild>130</WorkToBuild> <Bulk>15</Bulk> <Mass>5</Mass> <MeditationFocusStrength>0.0</MeditationFocusStrength> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><stuffCategories><li>Stony</li> <li>Metallic</li> <li>Ceramic</li> <li>Precious</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_LampM_White</defName>
+		<label>Lamp M(white)</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2_Backup</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <MaxHitPoints>80</MaxHitPoints> <WorkToBuild>130</WorkToBuild> <Bulk>15</Bulk> <Mass>5</Mass> <MeditationFocusStrength>0.0</MeditationFocusStrength> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><stuffCategories><li>Stony</li> <li>Metallic</li> <li>Ceramic</li> <li>Precious</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_lampE_White</defName>
+		<label>Lamp E(white)</label>
+		<description>It's a small lamp. I think I can use it safely even when it rains. Works as electricity.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_lamp2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_lamp_Backup</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>25</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>	
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>850</WorkToBuild> <Bulk>17</Bulk> <Mass>5</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance></statBases><researchPrerequisites><li>Light_C1</li></researchPrerequisites><costList><ComponentIndustrial>3</ComponentIndustrial> <Glass>5</Glass> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="RKFC_WallLightBase">
+		<defName>RKFC_GL_Wall_Lamp</defName>
+		<label>wall lamp</label>
+		<tickerType>Normal</tickerType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_WallLit</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+			<drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<functionsInVacuum>false</functionsInVacuum>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<description>A light fixture designed to be mounted on a wall.</description>
+	<designationCategory>Accessories</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <WorkToBuild>80</WorkToBuild> <MaxHitPoints>150</MaxHitPoints> <Bulk>4</Bulk> <Mass>2</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>Light_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li></stuffCategories><costList><ComponentMedieval>1</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_WallLightBase">
+		<defName>RKFC_GL_Wall_LampE</defName>
+		<label>wall lamp E</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_WallLit</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+			<drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>10</basePowerConsumption>
+				<powerUpgrades>
+					<li>
+						<researchProject>ColoredLights</researchProject>
+						<factor>0.5</factor>
+					</li>
+				</powerUpgrades>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<description>A light fixture designed to be mounted on a wall.</description>
+	<designationCategory>Accessories</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>65</MaxHitPoints> <WorkToBuild>360</WorkToBuild> <Beauty>10</Beauty> <Bulk>8</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C2</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="RKFC_WallLightBase">
+		<defName>RKFC_GL_Wall_Lamp_White</defName>
+		<label>wall lamp(white)</label>
+		<tickerType>Normal</tickerType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_WallLit</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+			<drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<functionsInVacuum>false</functionsInVacuum>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<description>A light fixture designed to be mounted on a wall.</description>
+	<designationCategory>Accessories</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>0</Flammability> <WorkToBuild>80</WorkToBuild> <MaxHitPoints>150</MaxHitPoints> <Bulk>4</Bulk> <Mass>2</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance></statBases><researchPrerequisites><li>Light_B2</li></researchPrerequisites><stuffCategories><li>Metallic</li></stuffCategories><costList><ComponentMedieval>1</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="RKFC_WallLightBase">
+		<defName>RKFC_GL_Wall_LampE_White</defName>
+		<label>wall lamp E(white)</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_WallLit</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+			<drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>10</basePowerConsumption>
+				<powerUpgrades>
+					<li>
+						<researchProject>ColoredLights</researchProject>
+						<factor>0.5</factor>
+					</li>
+				</powerUpgrades>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(255,255,255,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<description>A light fixture designed to be mounted on a wall.</description>
+	<designationCategory>Accessories</designationCategory><statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>65</MaxHitPoints> <WorkToBuild>360</WorkToBuild> <Beauty>10</Beauty> <Bulk>8</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C2</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_BoundaryWood</defName>
+		<label>boundary wood</label>
+		<description>바닥의 경계를 구분짓기 위한 경계목입니다.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_BoundaryWood</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<uiIconScale>1</uiIconScale>
+		<uiIconOffset>(0,-0.35)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<fillPercent>0</fillPercent>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>1</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>	
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		
+	<researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_BoundaryStone</defName>
+		<label>boundary stone</label>
+		<description>바닥의 경계를 구분짓기 위한 경계석입니다.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_BoundaryStone</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<uiIconScale>1</uiIconScale>
+		<uiIconOffset>(0,-0.35)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<fillPercent>0</fillPercent>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>1</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>	
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		
+	<researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_BoundaryWoodCorner</defName>
+		<label>boundary wood corner</label>
+		<description>바닥의 경계를 구분짓기 위한 경계목입니다.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_BoundaryWoodCorner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<uiIconScale>1</uiIconScale>
+		<uiIconOffset>(0.3,-0.35)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<fillPercent>0</fillPercent>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>1</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>	
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	<researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_BoundaryStoneCorner</defName>
+		<label>boundary stone corner</label>
+		<description>바닥의 경계를 구분짓기 위한 경계석입니다.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_BoundaryStoneCorner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<uiIconScale>1</uiIconScale>
+		<uiIconOffset>(0.3,-0.35)</uiIconOffset>
+		<rotatable>true</rotatable>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<fillPercent>0</fillPercent>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>1</Mass>
+			<Beauty>1</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>	
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	<researchPrerequisites><li>RK_PrimitiveCrafts</li></researchPrerequisites></ThingDef>
+<ThingDef ParentName="ArtableFurnitureBase"><defName>RKFC_RGK_Dresser</defName><label>dresser</label><description>A dresser. Gives a small comfort bonus to all nearby beds. Placing more than one dresser near the same bed has no effect.</description><graphicData><texPath>Things/Building/Furniture/RGK_Dresser</texPath><graphicClass>Graphic_Multi</graphicClass><shaderType>CutoutComplex</shaderType><drawSize>(4,4)</drawSize></graphicData><statBases><SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>120</MaxHitPoints><WorkToBuild>4000</WorkToBuild><Flammability>1.0</Flammability><Beauty>6</Beauty><Bulk>75</Bulk><Mass>25</Mass></statBases><stuffCategories><li>Metallic</li><li>Woody</li><li>Plastic</li></stuffCategories><costStuffCount>70</costStuffCount><costList><Rubber>15</Rubber><Plastic>20</Plastic><ComponentIndustrial>7</ComponentIndustrial></costList><size>(2,1)</size><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><fillPercent>0.4</fillPercent><castEdgeShadows>true</castEdgeShadows><pathCost>60</pathCost><defaultPlacingRot>South</defaultPlacingRot><staticSunShadowHeight>0.1</staticSunShadowHeight><surfaceType>Item</surfaceType><canOverlapZones>false</canOverlapZones><designationHotKey>Misc1</designationHotKey><placeWorkers><li>PlaceWorker_ShowFacilitiesConnections</li></placeWorkers><comps><li><compClass>CompQuality</compClass></li><li Class="CompProperties_Art"><nameMaker>NamerArtFurniture</nameMaker><descriptionMaker>ArtDescription_Furniture</descriptionMaker><minQualityForArtistic>Excellent</minQualityForArtistic></li><li Class="CompProperties_Facility"><statOffsets><Comfort>0.05</Comfort></statOffsets><maxSimultaneous>1</maxSimultaneous><maxDistance>6</maxDistance></li><li Class="CompProperties_Styleable"/></comps><designationCategory>Furniture</designationCategory><researchPrerequisites><li>Beds_C3</li></researchPrerequisites></ThingDef><ThingDef ParentName="BasicBedBase">
+		<defName>RKFC_RGK_bedDouble</defName>
+		<label>double bed</label>
+		<description>A simple double-wide bed that fits two people.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_bedDouble</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4.05,4.05)</drawSize>
+			<damageData>
+				<rect>(0,0.05,2,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_RGK_Dresser</li>
+					<li>RKFC_RGK_EndTableWithLamp</li>
+					<li>RKFC_RGK_EndTableWithLampE</li>
+					<li>RKFC_RGK_EndTable</li>
+					<li>RKFC_WardrobeA</li>
+					<li>RKFC_WardrobeB</li>
+					<li>RKFC_GL_Teddy</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<size>(2,2)</size>
+		<costStuffCount>110</costStuffCount>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay>5</bed_healPerDay>
+		</building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<fillPercent>0.4</fillPercent>
+		<pathCost>60</pathCost>
+		<leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc1</designationHotKey>
+		<uiIconScale>0.90</uiIconScale>
+<statBases><SellPriceFactor>0.70</SellPriceFactor><Flammability>1.0</Flammability><ImmunityGainSpeedFactor>1.03</ImmunityGainSpeedFactor><SurgerySuccessChanceFactor>0.87</SurgerySuccessChanceFactor><Comfort>0.85</Comfort><MaxHitPoints>80</MaxHitPoints><Bulk>160</Bulk><Mass>65</Mass><WorkToBuild>1540</WorkToBuild><Beauty>12</Beauty><BedRestEffectiveness>0.95</BedRestEffectiveness><Cleanliness>5</Cleanliness></statBases><researchPrerequisites><li>Beds_B1</li></researchPrerequisites><designationCategory>Furniture</designationCategory></ThingDef>
+  
+
+<ThingDef ParentName="BasicBedBase">
+		<defName>RKFC_RGK_bedDoubleB</defName>
+		<label>double bed2</label>
+		<description>A Celtic double-wide bed that fits two people.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_bedDouble2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4.05,4.05)</drawSize>
+			<damageData>
+				<rect>(0,0.05,2,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_RGK_EndTableWithLamp</li>
+					<li>RKFC_RGK_EndTableWithLampE</li>
+					<li>RKFC_RGK_Dresser</li>
+					<li>RKFC_RGK_EndTable</li>
+					<li>RKFC_WardrobeA</li>
+					<li>RKFC_WardrobeB</li>
+					<li>RKFC_GL_Teddy</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<size>(2,2)</size>
+		<costStuffCount>110</costStuffCount>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay>5</bed_healPerDay>
+		</building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<fillPercent>0.4</fillPercent>
+		<pathCost>60</pathCost>
+		<leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc1</designationHotKey>
+		<uiIconScale>0.90</uiIconScale>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor><Flammability>1.0</Flammability><ImmunityGainSpeedFactor>1.03</ImmunityGainSpeedFactor><SurgerySuccessChanceFactor>0.87</SurgerySuccessChanceFactor><Comfort>0.85</Comfort><MaxHitPoints>80</MaxHitPoints><Bulk>160</Bulk><Mass>65</Mass><WorkToBuild>1540</WorkToBuild><Beauty>12</Beauty><BedRestEffectiveness>0.95</BedRestEffectiveness><Cleanliness>5</Cleanliness></statBases><researchPrerequisites><li>Beds_B1</li></researchPrerequisites><designationCategory>Furniture</designationCategory></ThingDef>
+  
+
+<ThingDef ParentName="BasicBedBase">
+		<defName>RKFC_GL_ClassyDoubleBed</defName>
+		<label>classy double bed</label>
+		<description>Elegant bed decorated with lace that fits two people. It is very comfortable and doesn't get disturbed during sleep.</description>
+		<altitudeLayer>Building</altitudeLayer>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_ClassyDoubleBed</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0,0.05,2,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_RGK_EndTableWithLamp</li>
+					<li>RKFC_RGK_EndTableWithLampE</li>
+					<li>RKFC_RGK_Dresser</li>
+					<li>RKFC_RGK_EndTable</li>
+					<li>RKFC_WardrobeA</li>
+					<li>RKFC_WardrobeB</li>
+					<li>RKFC_GL_Teddy</li>
+				</linkableFacilities>
+			</li>						
+			</comps>
+		<size>(2,2)</size>
+		<costStuffCount>110</costStuffCount>
+		<costList>
+			<DevilstrandCloth>65</DevilstrandCloth>
+		</costList>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay>5</bed_healPerDay>
+		</building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<fillPercent>0.5</fillPercent>
+		<pathCost>60</pathCost>
+		<leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc1</designationHotKey>
+		<uiIconScale>0.85</uiIconScale>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor><Flammability>1.0</Flammability><ImmunityGainSpeedFactor>1.07</ImmunityGainSpeedFactor><SurgerySuccessChanceFactor>0.97</SurgerySuccessChanceFactor><Comfort>1.25</Comfort><MaxHitPoints>80</MaxHitPoints><Bulk>165</Bulk><Mass>67</Mass><WorkToBuild>1700</WorkToBuild><Beauty>20</Beauty><BedRestEffectiveness>1.05</BedRestEffectiveness></statBases><researchPrerequisites><li>Beds_C2</li></researchPrerequisites><designationCategory>Furniture</designationCategory></ThingDef>
+  
+
+</Defs>

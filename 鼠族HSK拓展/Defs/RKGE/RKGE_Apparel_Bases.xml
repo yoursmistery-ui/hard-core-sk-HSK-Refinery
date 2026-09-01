@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!--
+		Abstract apparel base defs from the Ratkin Gene Expanded (RKGE) framework.
+		These were integrated from Ratkin Gene Expanded but the apparel-base file
+		(RKGE_Apparel.xml / RKGE_Apparel_Child.xml) was dropped during the merge,
+		which left the RKMS exotic apparel/weapon bases (RK_Exotic*) without parents.
+		Only the abstract bases are included here; the concrete items from the source
+		file depend on RK_Research_Tailoring (not present in HSK) and dedicated textures,
+		so they are intentionally omitted.
+	-->
+
+	<ThingDef Name="RKGE_ApparelBase" ParentName="RK_ApparelBase" Abstract="True">
+		<tradeTags Inherit="false">
+			<li>RK_SellableApparel</li>
+		</tradeTags>
+		<graphicData>
+			<onGroundRandomRotateAngle>0</onGroundRandomRotateAngle>
+		</graphicData>
+		<thingCategories>
+			<li>RK_Apparel</li>
+		</thingCategories>
+		<apparel Inherit="false">
+			<tags>
+				<li>RK_SellableApparel</li>
+				<li>RKGE_Apparel</li>
+			</tags>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+		</apparel>
+		<techLevel>Medieval</techLevel>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_ApparelBaseNoColor" ParentName="RKGE_ApparelBase" Abstract="True">
+		<recipeMaker>
+      <useIngredientsForColor>false</useIngredientsForColor>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_Options" Inherit="false">
+			<options>
+				<li>
+					<weight>100</weight>
+					<only>(1,1,1,1)</only>
+				</li>
+			</options>
+		</colorGenerator>
+		<comps>
+			<li>
+				<compClass>RatkinGeneExpanded.Comp_ColorWhite</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_ApparelMakeableBase" ParentName="RKGE_ApparelBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <useIngredientsForColor>true</useIngredientsForColor>
+		</recipeMaker>
+		<colorGenerator Class="ColorGenerator_StandardApparel" Inherit="false"/>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_ApparelMakeableBaseNoColor" ParentName="RKGE_ApparelBaseNoColor" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+      <useIngredientsForColor>true</useIngredientsForColor>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_HatMakeableBase" ParentName="RKGE_ApparelMakeableBase" Abstract="True">
+		<thingCategories>
+			<li>RK_Headgear</li>
+		</thingCategories>
+		<apparel>
+			<renderSkipFlags>
+				<li>None</li>
+			</renderSkipFlags>
+		</apparel>
+	</ThingDef>
+	<ThingDef Name="RKGE_HatMakeableBaseNoColor" ParentName="RKGE_ApparelMakeableBaseNoColor" Abstract="True">
+		<thingCategories>
+			<li>RK_Headgear</li>
+		</thingCategories>
+		<apparel>
+			<renderSkipFlags>
+				<li>None</li>
+			</renderSkipFlags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_HelmetMakeableBase"	ParentName="RKGE_HatMakeableBase" Abstract="True">
+		<recipeMaker>
+			<recipeUsers Inherit="false">
+				<li>RK_FueledSmithy</li>
+				<li>RK_ElectricSmithy</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+			<defaultIngredientFilter>
+				<disallowedThingDefs>
+					<li>Gold</li>
+					<li>Silver</li>
+				</disallowedThingDefs>
+			</defaultIngredientFilter>
+			<useIngredientsForColor>false</useIngredientsForColor>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_HelmetMakeableBaseNoColor"	ParentName="RKGE_HatMakeableBaseNoColor" Abstract="True">
+		<recipeMaker>
+			<recipeUsers Inherit="false">
+				<li>RK_FueledSmithy</li>
+				<li>RK_ElectricSmithy</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+			<defaultIngredientFilter>
+				<disallowedThingDefs>
+					<li>Gold</li>
+					<li>Silver</li>
+				</disallowedThingDefs>
+			</defaultIngredientFilter>
+			<useIngredientsForColor>false</useIngredientsForColor>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_ArmorMakeableBase" ParentName="RKGE_ApparelMakeableBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_FueledSmithy</li>
+				<li>RK_ElectricSmithy</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+			<defaultIngredientFilter>
+				<disallowedThingDefs>
+					<li>Gold</li>
+					<li>Silver</li>
+				</disallowedThingDefs>
+			</defaultIngredientFilter>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="RKGE_ArmorMakeableBaseNoColor" ParentName="RKGE_ApparelMakeableBaseNoColor" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_FueledSmithy</li>
+				<li>RK_ElectricSmithy</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+			<defaultIngredientFilter>
+				<disallowedThingDefs>
+					<li>Gold</li>
+					<li>Silver</li>
+				</disallowedThingDefs>
+			</defaultIngredientFilter>
+		</recipeMaker>
+	</ThingDef>
+
+	</Defs>

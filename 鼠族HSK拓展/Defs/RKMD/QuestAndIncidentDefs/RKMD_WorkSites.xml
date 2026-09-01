@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>OpportunitySite_WasteRatSite</defName>
+    <rootSelectionWeight>0</rootSelectionWeight>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <sendAvailableLetter>false</sendAvailableLetter>
+    <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">Raided_WorkSite</successHistoryEvent>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->[site_label] [detected]</li>
+        <li>detected->detected</li>
+        <li>detected->discovered</li>
+        <li>detected->nearby</li>
+        <li>detected->found</li>
+        <li>detected->identified</li>
+        <li>detected->noticed</li>
+        <li>detected->observed</li>
+        <li>detected->revealed</li>
+        <li>detected->uncovered</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->You've detected a [siteLabel] nearby controlled by [faction_name].\n\nIf you wish, you can raid the camp to collect loot and Waste rats.\nThe Waste Rat is a rare breed of the ratkin race. This is your chance to come into contact with them. [raidConsequences]\nHowever, you can also assist them in setting up a camp as a permanent base. This will require [requestedThingCount] [requestedThingDef].\n\nThe camp will pack up and move on in [timeout_duration].</li>
+        <li>raidConsequences(faction_temporary==false)->If you do, [faction_name] will become hostile if they are not already.</li>
+        <li>raidConsequences(faction_temporary==true)->Since [faction_name] is just a small, independent group, you can attack them without any broader diplomatic consequences.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="RatkinGeneExpanded.QuestNode_Root_CustomSiteNearby">
+      <factionDefs>
+        <li>Rakinia_Waster</li>
+      </factionDefs>
+      <SitePartTag>RatkinWasterSite</SitePartTag>
+      <SpawnRange>4</SpawnRange>
+      <MinSpawnDist>2</MinSpawnDist>
+      <MinPointsForSurpriseReinforcements>1000</MinPointsForSurpriseReinforcements>
+      <requestThingDef>MimiChips</requestThingDef>
+      <requestCount>10</requestCount>
+      <maxSpawnCount>2</maxSpawnCount>
+    </root>
+  </QuestScriptDef>
+
+
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>GiveQuest_WasteRatSite</defName>
+    <label>Waste rat gang</label>
+    <letterLabel>Waste rat gang</letterLabel>
+    <questScriptDef>OpportunitySite_WasteRatSite</questScriptDef>
+    <pointsScaleable>true</pointsScaleable>
+    <baseChance>1</baseChance>
+  </IncidentDef>
+
+  <SitePartDef Name="RatkinWasterSiteBase" Abstract="True">
+    <description>A work site built by another faction. It will expire in time. Until then, you can
+      raid it if you wish.</description>
+    <siteTexture>World/WorldObjects/Sites/Outpost</siteTexture>
+    <applyFactionColorToSiteTexture>true</applyFactionColorToSiteTexture>
+    <showFactionInInspectString>true</showFactionInInspectString>
+    <requiresFaction>true</requiresFaction>
+    <approachOrderString>Attack {0}</approachOrderString>
+    <approachingReportString>Attacking {0}.</approachingReportString>
+    <arrivedLetter>There is a neutral camp in this area.</arrivedLetter>
+    <arrivedLetterDef>NeutralEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>50</minThreatPoints>
+    <gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <tags>
+      <li>RatkinWasterSite</li>
+    </tags>
+  </SitePartDef>
+
+  <SitePartDef ParentName="RatkinWasterSiteBase">
+    <defName>RatkinWasterSite</defName>
+    <label>Waster rat gang</label>
+    <workerClass>RatkinGeneExpanded.SitePartWorker_RatkinCustomSite</workerClass>
+    <expandingIconTexture>Misc/RK_WasteGangicon</expandingIconTexture>
+    <selectionWeight>1</selectionWeight>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>RatkinWasterSite_Outpost</defName>
+    <linkWithSite>RatkinWasterSite</linkWithSite>
+    <order>400</order>
+    <genStep Class="GenStep_Outpost">
+      <allowGeneratingThronerooms>false</allowGeneratingThronerooms>
+      <settlementDontGeneratePawns>true</settlementDontGeneratePawns>
+      <allowGeneratingFarms>false</allowGeneratingFarms>
+      <generateLoot>false</generateLoot>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>RatkinWasterSite_Stash</defName>
+    <linkWithSite>RatkinWasterSite</linkWithSite>
+    <order>405</order>
+    <genStep Class="RatkinGeneExpanded.GenStep_CustomSiteStash">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+      <symbolName>RatkinWasterSite</symbolName>
+      <possibleStashContents>
+        <li>
+          <Chocolate>10</Chocolate>
+          <Beer>3</Beer>
+          <Meowpaw>5</Meowpaw>
+        </li>
+        <li>
+          <SmokeleafJoint>8</SmokeleafJoint>
+          <Chocolate>3</Chocolate>
+          <Meowpaw>6</Meowpaw>
+        </li>
+        <li>
+          <PsychiteTea>6</PsychiteTea>
+          <Chocolate>12</Chocolate>
+          <Meowpaw>5</Meowpaw>
+        </li>
+        <li>
+          <PsychiteTea>1</PsychiteTea>
+          <Meowpaw>2</Meowpaw>
+        </li>
+        <li>
+          <GoJuice>1</GoJuice>
+          <Meowpaw>3</Meowpaw>
+        </li>
+        <li>
+          <Flake>1</Flake>
+          <Meowpaw>2</Meowpaw>
+        </li>
+        <li>
+          <Luciferium>1</Luciferium>
+          <Meowpaw>5</Meowpaw>
+        </li>
+      </possibleStashContents>
+
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>RatkinWasterSite_Pawns</defName>
+    <linkWithSite>RatkinWasterSite</linkWithSite>
+    <order>406</order>
+    <genStep Class="RatkinGeneExpanded.GenStep_CustomSiteGenPawns" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>RatkinWasterSite_Power</defName>
+    <linkWithSite>RatkinWasterSite</linkWithSite>
+    <order>410</order>
+    <genStep Class="GenStep_Power" />
+  </GenStepDef>
+
+  <RuleDef>
+    <defName>RatkinWasterSite</defName>
+    <symbol>RatkinWasterSite</symbol>
+    <resolvers>
+      <li Class="RatkinGeneExpanded.SymbolResolver_CustomSite">
+        <minRectSize>(5, 5)</minRectSize>
+        <plantDefs> 
+          <li>Plant_Potato</li>
+          <li>Plant_Cotton</li>
+          <li>Plant_Devilstrand</li>
+        </plantDefs>
+      </li>
+    </resolvers>
+  </RuleDef>
+</Defs>

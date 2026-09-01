@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- ==================================================================
+	 51_CE服饰适配.xml — 库林战狐 服饰 CE 适配
+	 非护甲: statBases Add Bulk + WornBulk(小)。
+	 护甲(自带显式 ArmorRating_Sharp/Blunt 百分比): Replace → CE mm 值
+	 (档位参照 鼠族HSK拓展/Patches/04_CE适配.xml: 轻~5/2-12/6, 中~14/10,
+	  重甲/太空 20-32)。Kurin_Body_Armor 等为材料 stuff 护甲
+	 (StuffEffectMultiplierArmor), CE 下随材料换算, 不写显式 mm。
+	 Kurin_Shadowfox_Armor/Helmet 在本 mod 中已注释合并入 Redfox, 不处理。
+	 ================================================================== -->
+
+	<!-- ==================== Child ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Kid_Shirt"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Kid_Hat"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Kid_Sweater"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Middle(材料护甲, 仅补 Bulk) ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Middle_Body_Armor"]/statBases</xpath>
+		<value><Bulk>6</Bulk><WornBulk>6</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== OnSkin 非护甲 ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Makeshift_Dress"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Shirt"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_T_Shirt"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Hot_Pants"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_PajamasA"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_PajamasB"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_PajamasC"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_One_Piece_Dress"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Open_Back_Knit"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Open_Shoulder_Knit"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Hoodie"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Casual_Wear"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Gothic_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Nun_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Work_Jumpsuit"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Traditional_Simple_Dress"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Traditional_Fancy_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Traditional_Luxury_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Cute_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Seductive_White_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Seductive_Black_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Wedding_Dress_White"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Wedding_Dress_Black"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Luxury_Dress"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Chinese_Wedding_Dress"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Black_Dress"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Research_Clothing"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== OnSkin 护甲(显式百分比 → mm) ==================== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Armored_Gothic_Dress"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>9</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Armored_Gothic_Dress"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>7</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Armored_Gothic_Dress"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Bikini_Armor"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>12</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Bikini_Armor"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>6</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Bikini_Armor"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Military_Uniform"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>10</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Military_Uniform"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>5</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Military_Uniform"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Overhead 非护甲 ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Winter_Hat"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Summer_Hat"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Casual_Hair_Pin"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Gothic_Hair_Pin"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Bikini_Armor_Headgear"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Traditional_Hair_Pin"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Cute_Hair_Pin"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Chinese_Wedding_Headwear"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Black_Wedding_Headwear"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_White_Wedding_Headwear"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>2</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Overhead 护甲 ==================== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Goggles"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>6</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Goggles"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>3</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Goggles"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Military_Helmet"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>14</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Military_Helmet"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>10</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Military_Helmet"]/statBases</xpath>
+		<value><Bulk>4</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Helmet"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>24</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Helmet"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>12</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Helmet"]/statBases</xpath>
+		<value><Bulk>6</Bulk><WornBulk>5</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Shell 非护甲 ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Shell_Cardigan"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Shell_Duster"]/statBases</xpath>
+		<value><Bulk>5</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Shell_Winter_Padding"]/statBases</xpath>
+		<value><Bulk>5</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Traditional_Coat"]/statBases</xpath>
+		<value><Bulk>5</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+	<!-- Shell 护甲: 赤狐甲(闪世界重甲档, 参照模板 MKSW 32/31 量级) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Armor"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>32</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Armor"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>16</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Redfox_Armor"]/statBases</xpath>
+		<value><Bulk>10</Bulk><WornBulk>8</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Underwear(基类一次补 Bulk 覆盖 8 件无自有 statBases 的内衣) ==================== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="Kurin_UnderwearBase"]/statBases</xpath>
+		<value><Bulk>1</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+	<!-- 水狐甲(内衣层护甲) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Waterfox_Armor"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>5</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Waterfox_Armor"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>3</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Waterfox_Armor"]/statBases</xpath>
+		<value><Bulk>5</Bulk><WornBulk>4</WornBulk></value>
+	</Operation>
+
+	<!-- ==================== Biotech 机械师服饰 ==================== -->
+	<!-- 机械师服(纳米服档, 参照模板 hjzj 20/20) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Mechanic_Clothing"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>20</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Mechanic_Clothing"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>20</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_OnSkin_Mechanic_Clothing"]/statBases</xpath>
+		<value><Bulk>8</Bulk><WornBulk>7</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Portable_Bandwidth_Node"]/statBases</xpath>
+		<value><Bulk>3</Bulk><WornBulk>3</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Mechanic_Goggles"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>8</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Mechanic_Goggles"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>8</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Overhead_Mechanic_Goggles"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>1</WornBulk></value>
+	</Operation>
+
+</Patch>

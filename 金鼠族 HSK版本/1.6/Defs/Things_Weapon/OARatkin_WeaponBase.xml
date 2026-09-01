@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef Name="OARatkin_WeaponBase" ParentName="BaseHumanMakeableGun" Abstract="True">
+        <thingClass>ThingWithComps</thingClass>
+        <graphicData>
+            <onGroundRandomRotateAngle>20</onGroundRandomRotateAngle>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.2</drawSize>            <!-- On the ground. -->
+        </graphicData>
+        <altitudeLayer>Item</altitudeLayer>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <DeteriorationRate>2</DeteriorationRate>
+            <Flammability>0.1</Flammability>
+            <Beauty>5</Beauty>
+            <WorkToMake>60000</WorkToMake>
+            <SellPriceFactor>0.2</SellPriceFactor>
+        </statBases>
+        <useHitPoints>true</useHitPoints>
+        <tickerType>Never</tickerType>
+        <drawerType>MapMeshOnly</drawerType>
+        <drawGUIOverlay>true</drawGUIOverlay>
+        <alwaysHaulable>true</alwaysHaulable>
+        <selectable>true</selectable>
+        <equipmentType>Primary</equipmentType>
+        <category>Item</category>
+        <pathCost>12</pathCost>
+        <smeltable>true</smeltable>
+        <allowedArchonexusCount>0</allowedArchonexusCount>
+        <relicChance>0</relicChance>
+        <!-- 阻断 BaseHumanMakeableGun 链 comps 拼接(父链已含 Forbiddable/CompEquippable/Styleable/Art, 子覆盖全套防重复组件) -->
+        <comps Inherit="False">
+            <li>
+                <compClass>CompEquippable</compClass>
+            </li>
+            <li>
+                <compClass>CompQuality</compClass>
+            </li>
+            <li Class="CompProperties_Forbiddable"/>
+            <li Class="CompProperties_Styleable"></li>
+            <li Class="CompProperties_Biocodable"/>
+            <li Class="CompProperties_Art">
+                <nameMaker>NamerArtWeaponGun</nameMaker>
+                <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+                <minQualityForArtistic>Excellent</minQualityForArtistic>
+            </li>
+        </comps>
+        <inspectorTabs Inherit="False">
+            <li>ITab_Art</li>
+        </inspectorTabs>
+        <!-- 阻断 BaseMakeableGun 的 recipeMaker(recipeUsers=[TableMachining]+researchPrerequisite=Gunsmithing 会深度合并进子类配方)。
+             空 recipeUsers 使子类武器自己的 recipeUsers 独立成立, 不额外挂机械加工台。 -->
+        <recipeMaker Inherit="False">
+            <recipeUsers Inherit="False"></recipeUsers>
+        </recipeMaker>
+        <thingSetMakerTags>
+            <li>RewardStandardQualitySuper</li>
+        </thingSetMakerTags>
+        <weaponTags>
+            <li>OARatkin_Weapon</li>
+        </weaponTags>
+    </ThingDef>
+
+    <!-- 近战武器基础 -->
+    <ThingDef Name="OARatkin_MeleeWeaponBase" ParentName="RK_MeleeWeapon" Abstract="True">
+        <thingCategories Inherit="False">
+            <li>OARatkin_WeaponsMelee</li>
+        </thingCategories>
+    </ThingDef>
+
+    <!-- 远程武器基础 -->
+    <ThingDef Name="OARatkin_RangedWeaponBase" ParentName="OARatkin_WeaponBase" Abstract="True">
+        <techLevel>Spacer</techLevel>
+        <soundInteract>OA_RKSO_Interaction_RangedWeaponOn</soundInteract>
+        <weaponClasses>
+            <li>Ranged</li>
+        </weaponClasses>
+        <thingCategories Inherit="False">
+            <li>OARatkin_WeaponsRanged</li>
+        </thingCategories>
+        <tradeTags>
+            <li>WeaponRanged</li>
+        </tradeTags>
+        <tradeability>Sellable</tradeability>
+    </ThingDef>
+
+    <!-- 电荷远程武器基础 -->
+    <ThingDef Name="OARatkin_RangedChargeWeaponBase" ParentName="OARatkin_RangedWeaponBase" Abstract="True">
+        <techLevel>Ultra</techLevel>
+        <soundInteract>OA_RKSO_Interaction_ChargeRangedWeaponOn</soundInteract>
+    </ThingDef>
+
+</Defs>

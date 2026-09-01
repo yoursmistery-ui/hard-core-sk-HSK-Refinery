@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!--
+    Timed combat Hediffs use RimWorld's default initial severity of 0.5 when
+    applied directly by CompAbilityEffect_GiveHediff. Damage-applied Hediffs
+    reach severity 1 through severityPerDamageDealt. The rates below target:
+      Thunder 1h, Gaze 4h, Analysis 2h, Hawk 4h, Defence 1h,
+      Powerstrike 3h, Spiritualize 6h, Sandevistan 12h,
+      Command Charge 12h.
+  -->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Thunder_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-24</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Gaze_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-6</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Analysis_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-12</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Hawk_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-6</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Defence_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-12</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Powerstrike_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-4</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Spiritualize_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-2</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/AbilityDef[defName="Miho_Ability_Spiritualize"]/statBases/Ability_Duration</xpath>
+    <value>
+      <Ability_Duration>250</Ability_Duration>
+    </value>
+  </Operation>
+
+  <!-- Kept synchronized for compatibility if the orphaned 1.6 ability is restored. -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Sandevistan_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-1</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/HediffDef[defName="Miho_Command_Charge_Hediff"]/comps/li[@Class="HediffCompProperties_SeverityPerDay"]/severityPerDay</xpath>
+    <value>
+      <severityPerDay>-1</severityPerDay>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/AbilityDef[defName="Miho_Ability_Command_Charge"]/statBases/Ability_Duration</xpath>
+    <value>
+      <Ability_Duration>500</Ability_Duration>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- HSK supplies standalone CE recipes for these weapons. Remove the vanilla
+	     recipeMaker entries so each weapon has only one crafting route. -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[
+			defName="Miho_Weapon_RifleCQB" or
+			defName="Miho_Weapon_RifleOld" or
+			defName="Miho_Weapon_RifleDefence" or
+			defName="Miho_Weapon_RifleDefenceGrenade" or
+			defName="Miho_Weapon_RifleMachinegun" or
+			defName="Miho_Weapon_RifleGrenade" or
+			defName="Miho_Weapon_Shotgun" or
+			defName="Miho_Weapon_AutoShotgun" or
+			defName="Miho_Weapon_RiflePlasma" or
+			defName="Miho_Weapon_SniperPlasma" or
+			defName="Miho_Weapon_Pistol"
+		]/recipeMaker</xpath>
+	</Operation>
+</Patch>

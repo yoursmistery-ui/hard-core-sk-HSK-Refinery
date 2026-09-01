@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- RAE 雨披配套: Hediff + Thought -->
+
+	<!-- 来源: RAE/RAE_Apparel_Ordinary.xml -->
+<HediffDef>
+						<defName>RK_Rainproof</defName>
+						<label>Keep off the rain</label>
+						<description>Keep the rain off me.</description>
+						<defaultLabelColor>(1,0.713,0.756)</defaultLabelColor>
+						<hediffClass>HediffWithComps</hediffClass>
+						<stages>
+						</stages>
+						<comps>
+								<li Class="HediffCompProperties_RemoveIfApparelDropped" />
+						</comps>
+						<isBad>false</isBad>
+				</HediffDef>
+				
+				
+
+	<!-- 来源: RAE/RAE_Apparel_Ordinary.xml -->
+<ThoughtDef>
+						<defName>RK_NORain</defName>
+						<showBubble>true</showBubble>
+						<icon>icon/RK_Umbrella</icon>
+						<workerClass>ThoughtWorker_Hediff</workerClass>
+						<hediff>RK_Rainproof</hediff>
+						<validWhileDespawned>true</validWhileDespawned>
+						<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+						<stages>
+						  <li>
+								<label>Keep off the rain</label>
+								<description>Keep the rain off me.</description>
+								<baseMoodEffect>0</baseMoodEffect>
+						  </li>
+						</stages>
+				</ThoughtDef>
+				
+				
+				
+</Defs>

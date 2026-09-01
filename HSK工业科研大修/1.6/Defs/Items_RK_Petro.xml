@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 物品（HSK工业科研大修, 2026-08-29 v3 精简）
+       已删: 石脑油/裂解混合气/甲苯/合成烯/合成酰胺/便携气瓶(v3, 产物改由 Rimefeller 精炼厂体系承接)。
+       新增: 炼油油泥 RK_Petro_OilySludge(属性照抄原版毒废包 Wastepack)。 -->
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_NaturalGas</defName>
+    <label>天然气</label>
+    <description>常减压蒸馏与裂解产生的可燃气体，主要成分为甲烷。可作燃气发电/锅炉的燃料，也是合成氨与胺化反应的唯一原料气(本线氢气已并入天然气，两者等价通用)。压缩罐装后便于搬运，但受击会剧烈爆炸。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_NaturalGas</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>1.5</MarketValue><Mass>0.1</Mass><Flammability>1.0</Flammability><Beauty>-4</Beauty></statBases>
+    <thingCategories><li>Manufactured</li><li>RK_PetroLiquid</li></thingCategories>
+    <tradeability>Sellable</tradeability>
+    <comps><li Class="CompProperties_Explosive"><explosiveRadius>2.2</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>70</min><max>150</max></wickTicks><startWickHitPointsPercent>0.4</startWickHitPointsPercent></li></comps>
+  </ThingDef>
+
+  <!--==================== 炼油油泥(唯一污染物, 属性照抄原版毒废包 Wastepack) ====================-->
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_OilySludge</defName>
+    <label>炼油油泥</label>
+    <description>炼油装置运行中累积的重质油泥，含焦油、重金属与硫化物。会随时间缓慢溶解并污染周围地面；受击燃烧会释放毒气。若不冷冻封存，须尽快投入原子化器销毁。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <useHitPoints>true</useHitPoints>
+    <selectable>true</selectable>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>5</stackLimit>
+    <possessionCount>5</possessionCount>
+    <statBases>
+      <Beauty>-40</Beauty>
+      <MarketValue>0</MarketValue>
+      <Mass>6</Mass>
+      <Flammability>1</Flammability>
+      <DeteriorationRate>4</DeteriorationRate>
+      <Bulk>10</Bulk>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_GasOnDamage">
+        <type>ToxGas</type>
+        <damageFactor>6</damageFactor>
+        <useStackCountAsFactor>true</useStackCountAsFactor>
+      </li>
+      <li Class="CompProperties_Dissolution">
+        <dissolutionAfterDays>8</dissolutionAfterDays>
+        <dissolutinFactorIndoors>0.5</dissolutinFactorIndoors>
+        <dissolutionFactorRain>2</dissolutionFactorRain>
+      </li>
+      <li Class="CompProperties_DissolutionEffectPollution">
+        <cellsToPollutePerDissolution>6</cellsToPollutePerDissolution>
+        <tilePollutionPerDissolution>0.0005</tilePollutionPerDissolution>
+        <waterTilePollutionFactor>8</waterTilePollutionFactor>
+      </li>
+      <li>
+        <compClass>CompDissolutionEffect_Goodwill</compClass>
+      </li>
+    </comps>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <pathCost>15</pathCost>
+    <graphicData>
+      <texPath>Things/Item/Resource/RK_Petro_OilySludge</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <preventGravshipLandingOn>true</preventGravshipLandingOn>
+    <thingCategories>
+      <li>RK_Pollutants</li>
+    </thingCategories>
+    <tradeability>None</tradeability>
+    <tickerType>Normal</tickerType>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+  <ThingCategoryDef>
+    <defName>RK_PetroLiquid</defName>
+    <label>石化液体材料</label>
+    <parent>Manufactured</parent>
+  </ThingCategoryDef>
+
+  <!--==================== 沥青(原污染统一 def, 2026-08-29 并入; v3 改单桶 Graphic_Single) ====================-->
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Asphalt</defName>
+    <label>沥青</label>
+    <description>石油裂化后残留的重质沥青。粘稠、难以清理，但可直接作为沥青材料使用；投入电焚化炉焚烧后，残余矿质可压实回收为混凝土。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>100</stackLimit>
+    <selectable>true</selectable>
+    <alwaysHaulable>true</alwaysHaulable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <rotatable>false</rotatable>
+    <randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+    <useHitPoints>false</useHitPoints>
+    <graphicData>
+      <texPath>Things/Item/Resource/RK_Petro_AsphaltBarrel_single</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>2</MarketValue>
+      <Mass>1</Mass>
+      <Beauty>-20</Beauty>
+      <Cleanliness>-1</Cleanliness>
+      <Flammability>0</Flammability>
+      <SellPriceFactor>0.10</SellPriceFactor>
+    </statBases>
+    <thingCategories>
+      <li>RK_Pollutants</li>
+    </thingCategories>
+    <tradeability>None</tradeability>
+    <resourceReadoutPriority>Last</resourceReadoutPriority>
+    <tickerType>Rare</tickerType>
+    <techLevel>Industrial</techLevel>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+  </ThingDef>
+
+</Defs>

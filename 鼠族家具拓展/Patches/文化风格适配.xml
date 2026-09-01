@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 鼠族文化风格适配: 往鼠族 Floristian 风格分类加建筑外观替换(Ideology 图形风格) -->
+	<!-- ⚠️ 2026-08-14: Wall 已从文化风格移除(RKFC_Wall_Style 不再挂载)——墙的菜单图标经文化风格
+	     替换后始终异常; 鼠族墙恢复为独立物品(木墙/老式墙, 在 古典结构 菜单)。
+	     2026-08-15: PrimitiveWell 文化风格挂载(RKFC_Well_Style)已移除——古典水井恢复为独立建筑,
+	     与卫生 mod 水井等价(除贴图外功能完全一致), 不再用文化风格替换原版水井。
+	     2026-08-15: Door 文化风格挂载(RKFC_Door_Style)已移除——古典门恢复为独立物品,
+	     同材质下与原版门同属性。
+	     2026-08-15: Dresser 文化风格挂载(RKFC_Dresser_Style)已移除——古典梳妆台恢复为独立物品,
+	     与 HSK 原版化妆台属性等价, 加入衣柜二级菜单。
+	     2026-08-15: DoubleBed/RoyalBed 文化风格挂载已移除——鼠族双人床(木制×2/典雅)恢复为独立物品,
+	     等价原版双人床/爱之巢双人床, 加入古典床铺子分类。 -->
+	<!-- ⚠️ 2026-08-14 修复记录: 曾因 GL_Wall/RGK_Wall 图集缺 Wall_Atlas_Metal 导致金属墙
+	     (appearance=Metal)回退异常、菜单图标显示复杂图案; 已补生成 Metal 图集
+	     (Textures/Things/Building/Linked/GL_Wall/Wall_Atlas_Metal.png 等, 按原墙纹理样式),
+	     并补默认墙菜单图标 Things/Building/Linked/WallSmooth_MenuIcon.png, 恢复 Wall 风格挂载。 -->
+	<!-- ⚠️ 2026-08-14 二次修复: 风格化墙的菜单图标走 ThingStyleDef.UIIcon, 已为 RKFC_Wall_Style
+	     生成 GL_Wall_MenuIcon.png 并加 uiIconPath; 但原版引擎的建筑师菜单按钮图标不走风格
+	     (Designator_Build.UpdateIcon 只取 GetUIIconForStuff), 由 Assemblies/StyleIconFix.dll
+	     (Harmony 后置补丁 UpdateIcon)把菜单按钮图标也换成风格图标, 与建造后的墙外观一致。
+	     仅对定义了 uiIconPath 的风格生效(RKFC_Wall_Style), 其余家具风格无专用图标保持原样。 -->
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Ideology">
+		<xpath>Defs/StyleCategoryDef[defName="Floristian"]/thingDefStyles</xpath>
+		<value>
+			<li>
+				<thingDef>DiningChair</thingDef>
+				<styleDef>RKFC_DiningChair_Style</styleDef>
+			</li>
+			<li>
+				<thingDef>PokerTable</thingDef>
+				<styleDef>RKFC_PokerTable_Style</styleDef>
+			</li>
+			<li>
+				<thingDef>Lectern</thingDef>
+				<styleDef>RKFC_Lectern_Style</styleDef>
+			</li>
+		</value>
+	</Operation>
+</Patch>

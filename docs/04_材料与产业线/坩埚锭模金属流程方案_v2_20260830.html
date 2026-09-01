@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>坩埚·锭模金属流程方案 v2 · 2026-08-30</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#1c1f24;--mut:#6b7280;--line:#e3e6ea;--card:#fff;--ok:#1a7f4b;--okbg:#e7f6ee;--warn:#a4650a;--warnbg:#fdf3e2;--no:#a33131;--nobg:#fbeaea;--xml:#1d4ed8;--xmlbg:#e8effd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 "Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:1020px;margin:0 auto;padding:24px 18px 60px}
+h1{font-size:23px;margin:0 0 6px}h2{font-size:18px;margin:26px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;margin-left:5px;vertical-align:2px}
+.b-pend{background:var(--warnbg);color:var(--warn)}.b-ok{background:var(--okbg);color:var(--ok)}.b-no{background:var(--nobg);color:var(--no)}.b-xml{background:var(--xmlbg);color:var(--xml)}
+nav{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13px}nav a{color:var(--xml);text-decoration:none;margin-right:11px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--xml);border-radius:6px;padding:11px 14px;margin:11px 0}
+.card.warn{border-left-color:var(--warn)}.card.no{border-left-color:var(--no)}.card.ok{border-left-color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0;background:var(--card)}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{background:#eef1f5}
+code{background:#eceff3;padding:1px 4px;border-radius:4px;font-size:12.3px;font-family:Consolas,monospace}
+pre{background:#22262b;color:#e6e6e6;padding:10px 12px;border-radius:6px;font-size:12.5px;overflow-x:auto}
+ul,ol{margin:5px 0;padding-left:20px}li{margin:3px 0}.kv{color:var(--mut);font-size:13px}
+.q{background:var(--warnbg);border:1px solid #f0dcb5;border-radius:6px;padding:8px 12px;margin:6px 0}
+</style></head><body><div class="wrap">
+<h1>坩埚·锭模金属流程方案 v2 <span class="badge b-pend">方案稿 · 待拍板</span></h1>
+<div class="sub">2026-08-30 ｜ v2 按用户简化：<b>模具只保留锭模，去掉"模具做工具"</b> ｜ 上一轮实装的工具模具链<b>已回滚</b>（回滚后冷启动复验见 §6）</div>
+<nav><a href="#s0">变更记录</a><a href="#s1">新流程</a><a href="#s2">技术结论</a><a href="#s3">v1 作废项</a><a href="#s4">两槽两条路</a><a href="#s5">工位研究档</a><a href="#s6">分期/复验</a><a href="#s7">拍板</a></nav>
+
+<h2 id="s0">0 v2 变更记录</h2>
+<div class="card no">
+<ul>
+<li><b>去掉</b>：5 套工具模具 + 5 种铸件毛坯（10 个 ThingDef）、制模/浇筑/装配 15 条配方、<code>99_模具铸造三段链.xml</code>（含它删掉的 5 条 <code>Cast_*</code> 单件与批量线改造）、对应 10 张贴图</li>
+<li><b>恢复</b>：Vile 的 <code>Cast_*</code> 单件与批量线原样（补丁删除即自动恢复）；汉化补回 15 组键、批量线 30 键文案改回"产出成品工具"</li>
+<li><b>保留</b>：<code>RK_Met_Slag</code> 炉渣 + <code>98_冶铁链统一.xml</code>（链统一、三处产渣、矿渣混凝土、炉渣回炉）+ <code>RK_Met_ForgeSteelFromCrucible</code>（坩埚钢→锻钢主干边）</li>
+<li><b>理由</b>：模具+工具头+装配三段，再叠"坩埚+熔融金属+浇锭"，整条流程过长</li>
+</ul></div>
+
+<h2 id="s1">1 新流程（只到金属锭）</h2>
+<div class="card ok">
+<pre>熔炼  金属原料(矿石/粗铁/废件) + 助熔/焦炭 + 空坩埚  →  熔融坩埚[该金属] + 炉渣
+浇锭  熔融坩埚 + 锭模                              →  该金属锭 + 空坩埚(返还)
+下游  现有全部配方不变——工具/装备/组件继续吃锭</pre>
+<p>坩埚与锭模都<b>可复用</b>（配方里"消耗 1 + 返还 1"，净零、无随机）。它们的角色是<b>产能节拍与前置投入</b>：手里几个坩埚就能同时开几炉，不用引入数值池就有了"容器"手感。</p></div>
+
+<h2 id="s2">2 关键技术结论（修正 v1）</h2>
+<div class="card warn">
+<p><b>熔融金属必须"每金属一个 def"，不能用 stuff 复用同一个 def。</b>两个硬理由：</p>
+<ol>
+<li><code>RecipeDef.products</code> 的产物 def 是<b>固定列表</b>——stuff 只能改变"产物本身由什么材料构成"，不能让同一个"锭"产物按投入变成 <code>青铜锭</code>／<code>坩埚钢锭</code> 这类<b>不同 def</b></li>
+<li><code>ThingFilter</code> 没有"按 stuff 过滤"的能力，浇注配方无法写成"只吃青铜的熔融坩埚"</li>
+</ol>
+<p>→ 规模：<b>物品数 = 金属种数</b>，<b>配方数 = 金属种数 × 2</b>（熔炼 + 浇锭），外加坩埚/锭模 2 个载体与 2~3 条制模配方。首批建议 <b>7 种</b>：生铁、熟铁、泡钢、坩埚钢、锻钢、青铜、黄铜（乌兹与超级合金留后续）。合计约 7 物品 + 14 配方 + 3 载体配方，量级可控。</p></div>
+
+<h2 id="s3">3 v1 的"配方数 = 形状 × 2"作废</h2>
+<div class="card">
+<p>那是"每种形状都能用任意金属浇"前提下的算法。现在形状只剩"锭"一种，直接按金属数展开更清楚，也不需要 stuff 沿链传递。v1 里"工具头带 stuff、成品工具染色"的整段推演一并作废。</p></div>
+
+<h2 id="s4">4 "两槽容器"的两条路</h2>
+<table>
+<tr><th></th><th>纯 XML <span class="badge b-xml">推荐</span></th><th>DLL 真池（暂不做）</th></tr>
+<tr><td>金属液</td><td>熔融坩埚（每金属一 def 的实物）</td><td><code>CompMoltenPool</code> float 池 + <code>FillableBar</code></td></tr>
+<tr><td>废料</td><td>炉渣实物（已实装）+ 渣池</td><td>池内渣值，满则拨闸</td></tr>
+<tr><td>槽位</td><td>建筑旁库存 / 坩埚架（直建存储）</td><td>池容量</td></tr>
+<tr><td>代价</td><td>只写 XML</td><td>改 <code>Source/PetroInfraHSK.cs</code>（<code>NeedsWater</code>/<code>GasPort</code> 同类低频组件可仿）、重编译、性能铁律限低频；且<b>池记不了金属种类</b></td></tr>
+</table>
+
+<h2 id="s5">5 工位与研究档</h2>
+<div class="card">
+<ul>
+<li>坩埚制作：陶工台 <code>PotteryStation</code> / <code>Ceramics_A1</code>（软粘土 + 碎石或耐火料）</li>
+<li>锭模制作：陶工台 <code>Ceramics_A1</code>；原始档可另做石模 @石匠台 <code>Stonecutting</code></li>
+<li>熔炼：高炉 <code>TableFurnace</code>（铁系 <code>Metallurgy_B3</code>）／铸造厂 <code>Foundry</code>（有色 <code>Metallurgy_B4</code>）；浇锭 @<code>Foundry</code></li>
+<li>每条新配方显式 <code>researchPrerequisite</code>，同一配方不挂两台（防 <code>duplicate unlocked defs</code>／越级）</li>
+<li>⚠ <b>不要往 <code>Kiln</code> 挂普通 RecipeDef</b>：Core_SK 把它声明为 <code>UniversalFermenterSK.ThingDef_UF</code>，会逐条刷 <code>should have Class=</code> 告警（上一轮实测踩过）</li>
+</ul></div>
+
+<h2 id="s6">6 分期与回滚复验</h2>
+<div class="card">
+<ol>
+<li><b>P0</b> 封 <code>Steel</code> 捷径（<code>MakeSteelBars_Hand</code> 手锻台原始档出钢锭）——不封，整套熔炼被一条配方绕过</li>
+<li><b>P1</b> 坩埚 + 锭模 2 个载体 def + 制模配方</li>
+<li><b>P2</b> 首批 7 种熔融金属 def + 14 条配方；现有熔炼配方产物改"熔融坩埚"，新增"浇锭"</li>
+<li><b>P3</b> 原始档（石模 + 铜/青铜）与产能节拍调参　<b>P4</b> 可选 DLL 双池进度条</li>
+</ol>
+<p class="kv">回滚落地：24 个文件（3 XML + 10 贴图 × 双目录）移入 <code>_tmp/trash_mold_rollback</code>；汉化 5 份文件已回退并同步 5/5 hash 一致；残留引用扫描仅剩 <code>RK_Met_ForgeSteelFromCrucible</code>（属主干，保留）。清缓存重启复验见下方状态。</p></div>
+
+<h2 id="s7">7 待拍板</h2>
+<div class="q">Q1 首批金属种数与清单（建议 7 种，见 §2）</div>
+<div class="q">Q2 现有熔炼配方（<code>MakePigIron_Furnace</code>／<code>MakeWroughtIron_PigIron_Finery</code>／<code>MakeCrucibleSteel</code>…）<b>改成出熔融坩埚</b>（流程唯一，要动 Vile 原配方，推荐）／ 并行加一条坩埚线（不动原配方，但两条路并存会被绕过）？</div>
+<div class="q">Q3 坩埚/锭模要不要"寿命"？纯 XML 做不出无随机寿命，只能一次性或永久复用——建议永久 + 消耗返还</div>
+</div></body></html>

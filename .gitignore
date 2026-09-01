@@ -1,23 +1,29 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
-.vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-files
-*.bclicense
-*.flf
-#Test results file
-TestResults.xml
+### 鼠族 HSK 整合包 — 版本控制忽略规则 ###
+# 仓库只收录【完整 mod 文件夹】+ 项目文档(AGENTS.md / docs/)。
+# 以下为本机临时 / 参考 / 工具产物, 一律不进仓库。
+
+# —— 工作区临时与产物 ——
+/_tmp/
+/outputs/
+
+# —— 只读美术参考素材(约3.4G, 非 mod 内容, 禁止同步) ——
+/参考素材/
+
+# —— agent / 工具内部目录 ——
+/.qoder/
+/.workbuddy/
+
+# —— 根目录散落的一次性 grep / 中间文件 ——
+/ChipBoard
+
+# —— 系统垃圾 ——
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+
+# —— mod 内 Source/ 的编译中间产物(源码本身保留, 只排除构建垃圾) ——
+**/obj/
+**/.vs/
+*.user

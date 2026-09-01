@@ -1,0 +1,571 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+  <RecipeDef>
+    <defName>Miho_MeattoDust</defName>
+    <label>체내 메카나이트 골라내기</label>
+    <description>첨단 장비로 고깃속에 있는 메카나이트 결정들을 골라냅니다.</description>
+    <jobString>결정 골라내는 중.</jobString>
+    <workAmount>375</workAmount>
+    <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+    <workSkill>Cooking</workSkill>
+    <efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>MeatRaw</li>
+          </categories>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+
+    <fixedIngredientFilter>
+      <categories>
+        <li>MeatRaw</li>
+      </categories>
+      <disallowedCategories>
+        <li>PlantFoodRaw</li>
+      </disallowedCategories>
+    </fixedIngredientFilter>
+    <products>
+      <RawPosFlower_Dust>40</RawPosFlower_Dust>
+    </products>
+  </RecipeDef>
+  
+
+  
+  <RecipeDef>
+    <defName>Miho_FlowertoDust</defName>
+    <label>태양화 가루 변환.</label>
+    <description>가루를 제작합니다.</description>
+    <jobString>가루를 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>125</workAmount>
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosMoss</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawPosFlower</li>
+        <li>RawPosMoss</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <RawPosFlower_Dust>40</RawPosFlower_Dust>
+    </products>
+    <skillRequirements>
+    </skillRequirements>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Miho_TeatoTea</defName>
+    <label>태양화 차 제작.</label>
+    <description>차를 제작합니다.</description>
+    <jobString>차를 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>200</workAmount>
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+
+			
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawPosFlower</li>
+        <li>RawPosFlower_Dust</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_PositiveFlower_Tea>4</Miho_PositiveFlower_Tea>
+    </products>
+    <skillRequirements>
+    </skillRequirements>
+    <workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+
+  <RecipeDef>
+    <defName>Miho_SmoketoSmoke</defName>
+    <label>태양화 담배 제작.</label>
+    <description>담배를 제작합니다.</description>
+    <jobString>담배를 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>800</workAmount>
+    <recipeUsers>
+        <li>DrugLab</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+
+			
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SmokeleafLeaves</li>
+
+			
+          </thingDefs>
+        </filter>
+        <count>8</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+            <li>SmokeleafLeaves</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_PositiveFlower_Pipe>4</Miho_PositiveFlower_Pipe>
+    </products>
+    <skillRequirements>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Miho_ComponentIndustrial</defName>
+    <label>테크위빙</label>
+    <description>미호들의 초능력으로 테크위브을 하여 부품을 만듭니다.</description>
+    <jobString>테크위빙중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>2200</workAmount>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Cloth</li>
+            <li>Miho_Ebony_SilkCloth</li>
+
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Cloth</li>
+        <li>Miho_Ebony_SilkCloth</li>
+        <li>RawPosFlower</li>
+        <li>RawPosFlower_Dust</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </products>
+    <researchPrerequisite>Miho_BasicFactory</researchPrerequisite>
+    <skillRequirements>
+      <Intellectual>4</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>10</displayPriority>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Miho_ComponentSpacer</defName>
+    <label>고급 테크위빙</label>
+    <description>미호들의 초능력으로 테크위브을 하여 고급 부품을 만듭니다.</description>
+    <jobString>테크위빙중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>6000</workAmount>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_Ebony_SilkCloth</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_Ebony_SilkCloth</li>
+        <li>RawPosFlower</li>
+        <li>RawPosFlower_Dust</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ComponentSpacer>1</ComponentSpacer>
+    </products>
+    <researchPrerequisite>Miho_MechHack</researchPrerequisite>
+    <skillRequirements>
+      <Intellectual>10</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <displayPriority>10</displayPriority>
+  </RecipeDef>
+
+   
+  &lt;ThingDef ParentName="ResourceBase"&gt;
+    &lt;defName&gt;Miho_CeramicsPaste&lt;/defName&gt; &lt;!-- RW 1.6  Delete--&gt;
+    &lt;label&gt;미호 세라믹 반죽&lt;/label&gt;
+    &lt;description&gt;여러가지 원소들로 잘 반죽된 세라믹의 원재료 입니다.&lt;/description&gt;
+    &lt;graphicData&gt;
+      &lt;texPath&gt;Things/Items/MihoPasteCeramic/MihoCeramicPaste&lt;/texPath&gt;
+      &lt;graphicClass&gt;Graphic_Single&lt;/graphicClass&gt;
+    &lt;/graphicData&gt;
+    &lt;soundInteract&gt;Metal_Drop&lt;/soundInteract&gt;
+    &lt;soundDrop&gt;Standard_Drop&lt;/soundDrop&gt;
+    &lt;stackLimit&gt;10&lt;/stackLimit&gt;
+    &lt;healthAffectsPrice&gt;false&lt;/healthAffectsPrice&gt;
+    &lt;statBases&gt;
+      &lt;MaxHitPoints&gt;150&lt;/MaxHitPoints&gt;
+      &lt;MarketValue&gt;0.4&lt;/MarketValue&gt;
+      &lt;Mass&gt;1&lt;/Mass&gt;
+      &lt;Flammability&gt;0&lt;/Flammability&gt;
+      &lt;DeteriorationRate&gt;0&lt;/DeteriorationRate&gt;
+    &lt;/statBases&gt;
+    &lt;intricate&gt;true&lt;/intricate&gt;
+    &lt;thingCategories&gt;
+      &lt;li&gt;ResourcesRaw&lt;/li&gt;
+    &lt;/thingCategories&gt;
+    &lt;allowedArchonexusCount&gt;10&lt;/allowedArchonexusCount&gt;
+  &lt;/ThingDef&gt;
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>Miho_ExoticMatter</defName>
+    <label>이종물질</label>
+    <description>음의 질량을 가지고 있는, 변방계에서는 거의 찾아볼수 없는 희귀한 물질 입니다.</description>
+    <graphicData>
+      <texPath>Things/Items/MihoExotic/MihoExotic</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>75</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <MarketValue>156</MarketValue>
+      <Mass>0.1</Mass>
+      <Flammability>0.6</Flammability>
+      <DeteriorationRate>2.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>Miho_HeavyMechCore</defName>
+    <label>미호 대형 메카나이트 코어</label>
+    <description>미호들의 대형 메카노이드에 쓰이는 거대한 메카나이트 엔진 입니다.</description>
+    <graphicData>
+      <texPath>Things/Items/MihoMechCore/MihoMechCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <MarketValue>1400</MarketValue>
+      <Mass>15</Mass>
+      <Flammability>0.6</Flammability>
+      <DeteriorationRate>2.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+  </ThingDef>
+  
+  <ThingDef ParentName="ResourceBase">
+    <defName>Miho_HeavyRocketCore</defName>
+    <label>미호 포병 컴퓨터</label>
+    <description>다연장 로켓 메카노이드의 장전과 방열, 포격을 관장하는 컴퓨터칩 입니다.</description>
+    <graphicData>
+      <texPath>Things/Items/MihoMagma/MihoMagma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <thingSetMakerTags><li>RewardStandardCore</li></thingSetMakerTags>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>2700</MarketValue>
+      <Mass>5</Mass>
+      <Flammability>0.6</Flammability>
+      <DeteriorationRate>2.0</DeteriorationRate>
+    </statBases>
+    <intricate>true</intricate>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <allowedArchonexusCount>1</allowedArchonexusCount>
+  </ThingDef>
+  
+	<ThingDef ParentName="MealCooked">
+		<defName>Miho_InariZushi</defName>
+		<label>미호 유부초밥</label>
+		<description>여우들이 환장한다는 초밥 도시락 입니다. 대체 유부를 통해 제작되었습니다.</description>
+		<graphicData>
+			<texPath>Things/Items/MihoInariZushi</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>25</MarketValue>
+			<WorkToMake>500</WorkToMake>
+      <Nutrition>0.9</Nutrition>
+		</statBases>
+		<rotatable>false</rotatable>
+		<ingestible>
+			<preferability>MealLavish</preferability>			
+			<tasteThought>NotMihoAteInariZushi</tasteThought>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
+		</ingestible>		
+	</ThingDef>
+	
+  <RecipeDef Name="Miho_CookInariBase" ParentName="CookMealBase" Abstract="True">
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <skillRequirements>
+      <Cooking>6</Cooking>
+    </skillRequirements>
+    <researchPrerequisite>Miho_ApparelBasic</researchPrerequisite>
+    <recipeUsers>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+    </recipeUsers>
+
+	<fixedIngredientFilter>
+			<thingDefs>
+				<li>RawPosFlower</li>
+			</thingDefs>
+	</fixedIngredientFilter>
+	<defaultIngredientFilter>
+			<thingDefs>
+				<li>RawPosFlower</li>
+			</thingDefs>
+	</defaultIngredientFilter>
+  </RecipeDef>
+  
+  <RecipeDef ParentName="Miho_CookInariBase">
+    <defName>Miho_CookInari</defName>
+    <label>미호 유부초밥 제작</label>
+    <description>미호 유부초밥을 제작합니다.</description>
+    <jobString>미호 유부초밥을 제작합니다.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawPosFlower</li>
+			</thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawCorn</li>
+				<li>RawPotatoes</li>
+				<li MayRequire="vanillaexpanded.vplantse">VCE_RawPeas</li>
+                <li MayRequire="mlie.rc2.core">RC2_RawSnapPeas</li>
+			</thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawRice</li>
+				<li MayRequire="outremer.rfe">RFE_MilledRice</li>
+
+			</thingDefs>
+        </filter>
+        <count>7</count>
+      </li>
+    </ingredients>
+    <products>
+      <Miho_InariZushi>1</Miho_InariZushi>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef ParentName="Miho_CookInariBase">
+    <defName>Miho_CookInarimore</defName>
+    <label>미호 유부초밥 제작 x4</label>
+    <description>미호 유부초밥을 제작합니다.</description>
+    <jobString>미호 유부초밥을 제작합니다.</jobString>
+    <ingredients>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawPosFlower</li>
+			</thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawCorn</li>
+				<li>RawPotatoes</li>
+				<li MayRequire="vanillaexpanded.vplantse">VCE_RawPeas</li>
+                <li MayRequire="mlie.rc2.core">RC2_RawSnapPeas</li>
+			</thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+			<thingDefs>
+				<li>RawRice</li>
+				<li MayRequire="outremer.rfe">RFE_MilledRice</li>
+
+			</thingDefs>
+        </filter>
+        <count>28</count>
+      </li>
+    </ingredients>
+    <products>
+      <Miho_InariZushi>4</Miho_InariZushi>
+    </products>
+  </RecipeDef>
+  
+
+  <ThingDef ParentName="BookBase">
+    <defName>Miho_Schematic</defName>
+    <label>미호 기술 문서</label>
+    <description>미호들의 기술이 담긴 문서입니다</description>
+    <graphicData>
+      <texPath>Things/Item/Book/Schematic/Schematic</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.8</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Item/Book/Schematic/Schematic</uiIconPath>
+    <statBases>
+      <MarketValue>150</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Book">
+        <nameMaker>Namer_Schematic</nameMaker>
+        <descriptionMaker>Description_Schematic</descriptionMaker>
+        <ageYearsRange>100~200</ageYearsRange>
+        <openGraphic>
+          <texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>0.7</drawSize>
+        </openGraphic>
+        <verticalGraphic>
+          <texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <addTopAltitudeBias>true</addTopAltitudeBias>
+        </verticalGraphic>
+        <doers>
+          <li Class="BookOutcomeProperties_GainResearch">
+            <!-- 2026-08-27: 美狐 23 节点已融入 HSK 主网格页签(服装/手工/建筑/武器_SK),Miho_ResearchTab 退役。
+                 不能再按 tabs 过滤 —— ReadingOutcomeDoerGainResearch.IsValid 要求 project.tab ∈ tabs,
+                 否则一个都选不中、书籍研读无收益。改为 include 显式列举(留空 tabs 即跳过页签判定)。
+                 注:include 分支不要求 PrerequisitesCompleted,与原 tabs 行为一致;
+                 IsValid 仍要求 generalRules != null 且 baseCost>0 且 TechprintCount==0,美狐 23 节点全部满足。 -->
+            <include>
+              <Miho_ApparelBasic/>
+              <Miho_Silk/>
+              <Miho_ApparelAdvanced/>
+              <Miho_ApparelEltex/>
+              <Miho_ApparelAssassin/>
+              <Miho_ApparelSorcerees/>
+              <Miho_BasicFactory/>
+              <Miho_HeavyFactory/>
+              <Miho_MechHack/>
+              <Miho_MechCore/>
+              <Miho_Persona/>
+              <Miho_Celestial/>
+              <Miho_Drone/>
+              <Miho_GuardDrone/>
+              <Miho_LightWarDrone/>
+              <Miho_CommandDrone/>
+              <Miho_HeavyWarDrone/>
+              <Miho_HeavyWarBattery/>
+              <Miho_HeavyPlasma/>
+              <Miho_Weapon/>
+              <Miho_HeavyWeapon/>
+              <Miho_PlasmaWeapon/>
+              <Miho_VerminControlWeapon/>
+            </include>
+          </li>
+        </doers>
+      </li>
+    </comps>
+  </ThingDef>
+  
+</Defs>

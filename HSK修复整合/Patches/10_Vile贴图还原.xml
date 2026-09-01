@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  10_Vile贴图还原.xml (2026-08-27 迁移)
+  把 Vile 原 mod 本体内的自定义补丁收进 HSK修复整合(Steam 更新 Vile 不会清除本目录)。
+  来源:
+    - Vile MS Common/Patches/zzz/ZZ_RestoreHSKTextures.xml(63 项,去 Compaste——02 号已处理)
+    - Vile MS Common/Patches/zzz/zz_PVCLeather_Lavender.xml(3 项,PVC 薰衣草)
+    - Leather Tanning Patches/zz_TanningDrum_DrawSize_Fix.xml(1 项,drawSize 3,2)
+  已由本 mod 其他文件处理、不重复: Compaste(02 号)、Polymers/Paraffins(06 号,原 38 号)。
+  全部 Operation 平铺 PatchOperationReplace,MayRequire="skyarkhangel.HSK" 门控。
+  本文件 10_ 编号晚于 09_,HSK修复整合加载序 167 后于 Vile 157,天然覆盖。
+-->
+<Patch>
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Iron"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Iron</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(125,140,131)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Gold"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Gold</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Anglesite"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Anglesite</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(165,185,70)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Nickel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Nickel</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(42,208,206)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Tin"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Tin</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(210,210,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Copper"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Copper</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(160,115,45)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Aluminium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Bauxite</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,200,200)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Ilmenite"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Scheelite</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(210,105,100)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Wolframite"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Wolframite</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(230,230,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Uranium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Uranium</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(20,94,30)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="ComponentIndustrial"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Components/Component</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="ComponentAdvanced"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Components/SolidComponent</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="ComponentSpacer"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Components/AdvancedComponent</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="ComponentUltra"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Components/ComponentUltra</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Carbon"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/Carbon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(255,255,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Hexcell"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/HexCell</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Matter"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/RMatter</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="SilverBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="GoldBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,235,122)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="TinBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(220,220,220)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="NickelBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(42,208,206)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Chromium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(235,235,235)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="CopperBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(160,115,45)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Powder"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/Powder</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Plasteel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(160,178,181)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Building/Production/ElectricFurnace/TableFurnaceElectric</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,1)</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+      <volume>(2.7, 1.0, 0.85)</volume>
+      <offset>(0,0,0)</offset>
+      </shadowData>
+      <damageData>
+      <cornerTL>Damage/Corner</cornerTL>
+      <cornerTR>Damage/Corner</cornerTR>
+      <cornerBL>Damage/Corner</cornerBL>
+      <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Steel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(167,167,170)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="SteelBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(130,157,141)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AlnicoAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(210,210,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="NitinolAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(175,175,175)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="StelliteAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(125,146,178)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="FerrosiliconAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(131,137,147)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="CupronickelAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(210,140,20)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="DepletedUranium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(20,94,30)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="PobediteAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(95,95,95)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Titanium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(160,178,181)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="CarbonAlloy"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Material/Nanocomposite</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="MaxametSteel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(185,190,200)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AerMet"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(120,125,135)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Pyromet"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(170,140,130)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Nimonic"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(150,165,170)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Tennalum"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(200,205,205)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Plastic"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/Plastic</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(240,240,240)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Aerographene"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Material/Aerographene</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AluminiumBar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(190,205,190)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AnodizedAluminiumRed"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(215,90,80)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AnodizedAluminiumBlue"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(90,125,225)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Titanomagnetite"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Rutile</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(161,37,51)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Sphalerite"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Tin</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(175,135,60)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="BogIron"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Iron</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(125,90,60)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Quartz"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ores/Quartz</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(255,255,255)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="GlassBatch"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/GlassBatch</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Synthread"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/Synthread</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Kevlar"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/Kevlar</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="Yautjavium"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Material/Yautjavium/Yautjavium</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(218,230,26)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="AlphaPoly"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/APoly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="BetaPoly"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Resource/BPoly</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="CarbonSteel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(115,115,120)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThingDef[defName="SpringSteel"]/graphicData</xpath>
+    <value>
+      <graphicData>
+      <texPath>Things/Item/Ingot</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <color>(180,190,205)</color>
+      </graphicData>
+    </value>
+  </Operation>
+
+<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="PVCLeather"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Things/Item/Textile/Polyester</texPath>
+		</value>
+	</Operation>
+
+<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="PVCLeather"]/graphicData/color</xpath>
+		<value>
+			<color>(185,160,230)</color>
+		</value>
+	</Operation>
+
+<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="PVCLeather"]/stuffProps/color</xpath>
+		<value>
+			<color>(185,160,230)</color>
+		</value>
+	</Operation>
+
+<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="TanningDrum"]/graphicData/drawSize</xpath>
+		<value>
+			<drawSize>(3,2)</drawSize>
+		</value>
+	</Operation>
+
+</Patch>

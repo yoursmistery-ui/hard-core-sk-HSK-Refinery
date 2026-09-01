@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  [SYR] Processor Framework 1.6 融合搬运(2026-08-28 任务B, packageId
+  syrchalis.processor.framework → 已内置本 mod, 不要再单独安装 PF 本体!):
+  - defName 与 PF 原版保持一致(BarrelProcessor/FillProcessor/EmptyProcessor/
+    PF_Fill/PF_Empty/PF_Honk), MO 移植机器引用的
+    ProcessorFramework.CompProperties_Processor / ProcessDef 类型不受影响;
+  - 中文 label/description 内联(AGENTS §4);
+  - 2026-08-30 修订: ProcessorFramework.dll 的 [DefOf] 类仍有两个静态字段
+    ThingDef BarrelProcessor / ProcessDef Beer(仅被设置页 "Replace vanilla barrels"
+    工具按钮引用)。DefOf 自动解析按字段名到 DefDatabase 里 GetNamed, 缺 def 就在启动
+    刷红字(Failed to find ... 'BarrelProcessor' / ProcessDef named 'Beer')。
+    ∴ 补回两份**惰性占位 def**: BarrelProcessor 作纯 Thing(无 designationCategory,
+    不进建造菜单、永不被生成), Beer 作 ProcessDef(不挂到任何处理器)——
+    既满足 DLL 解析清掉红字, 又维持"酒类不做、发酵桶不进玩法"的决定;
+    丝绸床/造纸压机/纺纱机 3 座 PF 自动机与框架本体保留;
+  - 不搬 PF_Patches.xml(它会拆原版 FermentingBarrel/改 Brewery 造价,
+    与 HSK 自带酿造链冲突);
+  - 不搬 0Harmony.dll(Harmony mod 已提供, 防 AGENTS §5 同名装配冲突);
+  - ProcessorFramework.dll 已拷入 1.6/Assemblies/。
+============================================================================ -->
+
+	<!-- 惰性占位 def: 仅为满足 ProcessorFramework.dll 的 [DefOf] 静态字段解析。
+	     BarrelProcessor 作纯 Thing(不可建/不生成), Beer 不挂任何处理器。 -->
+	<ThingDef>
+		<defName>BarrelProcessor</defName>
+		<label>发酵桶(内部占位)</label>
+		<description>Processor Framework 代码引用占位定义, 已从玩法移除, 不会出现于建造菜单。</description>
+		<thingClass>Thing</thingClass>
+		<techLevel>Neolithic</techLevel>
+		<graphicData>
+			<texPath>Things/Building/Production/BarrelProcessor_north</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>10</Mass>
+		</statBases>
+	</ThingDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>Beer</defName>
+		<thingDef>Beer</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>Wort</li>
+			</thingDefs>
+		</ingredientFilter>
+		<customLabel>(停用) 啤酒</customLabel>
+	</ProcessorFramework.ProcessDef>
+
+	<JobDef>
+		<defName>FillProcessor</defName>
+		<driverClass>ProcessorFramework.JobDriver_FillProcessor</driverClass>
+		<reportString>正在装填 TargetA。</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>EmptyProcessor</defName>
+		<driverClass>ProcessorFramework.JobDriver_EmptyProcessor</driverClass>
+		<reportString>正在从 TargetA 取出产物。</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	<ReservationLayerDef>
+		<defName>PF_Fill</defName>
+	</ReservationLayerDef>
+
+	<ReservationLayerDef>
+		<defName>PF_Empty</defName>
+	</ReservationLayerDef>
+
+	<WorkGiverDef>
+		<defName>EmptyProcessor</defName>
+		<label>清空处理器</label>
+		<giverClass>ProcessorFramework.WorkGiver_EmptyProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>取出产物</verb>
+		<gerund>正在取出产物</gerund>
+		<priorityInType>20</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>FillProcessor</defName>
+		<label>装填处理器</label>
+		<giverClass>ProcessorFramework.WorkGiver_FillProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>装填</verb>
+		<gerund>正在装填</gerund>
+		<priorityInType>19</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<SoundDef>
+		<defName>PF_Honk</defName>
+		<maxSimultaneous>5</maxSimultaneous>
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>UI/DebugGoose/Honk</clipPath>
+					</li>
+				</grains>
+				<volumeRange>30~40</volumeRange>
+				<pitchRange>0.9~1.1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+</Defs>

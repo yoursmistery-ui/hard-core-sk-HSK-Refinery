@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+
+    <!-- 基因储存箱(2026-08-27 自金鼠族HSK迁移, 归入 HSK 存储分类 ASFstorage) -->
+    <ThingDef ParentName="BuildingBase">
+        <defName>OAGene_OAGeneBank</defName>
+        <label>ratkin gene bank</label>
+        <description>A secure cabinet for storing genes. Highly secure, can hold a large number of gene packs.</description>
+        <graphicData>
+            <texPath>Things/Building/Misc/OAGene_OAGeneBank</texPath>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>(1.70, 1.88)</drawSize>
+            <shadowData>
+                <volume>(1.7, 0.3, 0.85)</volume>
+            </shadowData>
+        </graphicData>
+		<rotatable>false</rotatable>
+        <castEdgeShadows>true</castEdgeShadows>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <tickerType>Rare</tickerType>
+        <passability>PassThroughOnly</passability>
+        <canOverlapZones>false</canOverlapZones>
+        <size>(2, 2)</size>
+        <statBases>
+            <MaxHitPoints>300</MaxHitPoints>
+            <WorkToBuild>12000</WorkToBuild>
+            <Mass>42</Mass>
+            <Flammability>0.5</Flammability>
+        </statBases>
+        <thingCategories>
+            <li>BuildingsProduction</li>
+        </thingCategories>
+		<inspectorTabs>
+            <li>ITab_ContentsGenepackHolder</li>
+        </inspectorTabs>
+        <costList>
+            <Plasteel>60</Plasteel>
+			<ComponentSpacer>4</ComponentSpacer>
+            <ComponentAdvanced>2</ComponentAdvanced>
+        </costList>
+        <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+        <descriptionHyperlinks>
+            <ThingDef>Genepack</ThingDef>
+            <ThingDef>GeneAssembler</ThingDef>
+            </descriptionHyperlinks>
+        <comps>
+            <li Class="CompProperties_GenepackContainer">
+                <maxCapacity>48</maxCapacity>
+            </li>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <basePowerConsumption>125</basePowerConsumption>
+            </li>
+            <li Class="CompProperties_Facility">
+                <maxSimultaneous>100</maxSimultaneous>
+                <maxDistance>12.9</maxDistance>
+                <showMaxSimultaneous>false</showMaxSimultaneous>
+            </li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>2</glowRadius>
+				<glowColor>(200,180,180,0)</glowColor>
+				<colorPickerEnabled>false</colorPickerEnabled>
+				<darklightToggle>false</darklightToggle>
+			</li>
+            <li Class="CompProperties_Flickable" />
+        </comps>
+    <designationCategory>ASFstorage</designationCategory><researchPrerequisites Inherit="False"><li>Storage_B1</li></researchPrerequisites></ThingDef>
+
+</Defs>

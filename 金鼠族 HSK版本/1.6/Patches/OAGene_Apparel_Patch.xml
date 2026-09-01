@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): OAGene_Apparel_Patch.xml, OAGene_Building_Patch.xml, OAGene_Equipment_Patch.xml, OAGene_ExtremeSnowstorm_Patch.xml, OAGene_Gene_Patch.xml, OAGene_HediffGiver_Patch.xml, OAGene_Humanlike_Patch.xml, OAGene_Misc_Patch.xml, OAGene_Ratkin_Race_Patch.xml, OAGene_SnowFaction_Patch.xml, OAGene_Thought_Patch.xml, OAGene_Trader_Patch.xml, OAGene_WorldObject_Patch.xml -->
+<Patch><Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+		<value>
+			<li>OAGene_SnowstormCloak</li>
+			<li>OAGene_SnowstormBarrette</li>
+		</value>
+	</Operation><Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef/comps[./li[compClass="CompPowerPlantSteam"]]</xpath>
+        <value>
+            <li Class="OberoniaAureaGene.Snowstorm.CompProperties_SnowstormGeothermalGenerator"/>
+        </value>
+    </Operation>
+
+    <Operation Class="OberoniaAurea_Frame.PatchOperationCheckDLC">
+        <Biotech>true</Biotech>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="ToxifierGenerator"]/comps/li[@Class="CompProperties_Power"]/compClass</xpath>
+            <value>
+                <compClass>OberoniaAureaGene.Snowstorm.CompPowerPlant_ToxifierSnowstorm</compClass>
+            </value>
+        </match>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Campfire"]/comps</xpath>
+        <value>
+            <li Class="OberoniaAureaGene.Snowstorm.CompProperties_SpecialCampfire"/>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Column"]/placeWorkers</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Column"]/placeWorkers</xpath>
+            <value>
+                <li>OberoniaAureaGene.Snowstorm.PlaceWorker_RoofProtectRadius</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Column"]</xpath>
+            <value>
+                <placeWorkers>
+                    <li>OberoniaAureaGene.Snowstorm.PlaceWorker_RoofProtectRadius</li>
+                </placeWorkers>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Column"]/drawPlaceWorkersWhileSelected</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="Column"]/drawPlaceWorkersWhileSelected</xpath>
+            <value>
+                <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Column"]</xpath>
+            <value>
+                <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="OA_RK_Zhuzi"]</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="OA_RK_Zhuzi"]</xpath>
+            <value>
+                <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+                <placeWorkers>
+                    <li>OberoniaAureaGene.Snowstorm.PlaceWorker_RoofProtectRadius</li>
+                </placeWorkers>
+            </value>
+        </match>
+    </Operation><Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/weaponList</xpath>
+		<value>
+			<li>OAGene_MeleeWeapon_SnowstormCane</li>
+		</value>
+	</Operation><Operation Class="PatchOperationReplace">
+        <xpath>Defs/GameConditionDef[defName="OAGene_ExtremeSnowstorm"]/conditionClass</xpath>
+        <value>
+            <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_ExtremeSnowstorm</conditionClass>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/IncidentDef[defName="OAGene_ExtremeSnowstorm"]/workerClass</xpath>
+        <value>
+            <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_MakeGameCondition_Snowstorm</workerClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/IncidentDef[defName="OAGene_ExtremeSnowstorm"]/durationDays</xpath>
+        <value>
+            <durationDays>8.0~14.0</durationDays>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/IncidentDef[defName="OAGene_ExtremeSnowstorm"]/category</xpath>
+        <value>
+            <category>Misc</category>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/IncidentDef[defName="OAGene_ExtremeSnowstorm"]/targetTags</xpath>
+        <value>
+            <targetTags>
+                <li>World</li>
+            </targetTags>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/WeatherDef[defName="OAGene_SnowExtreme"]/durationRange</xpath>
+        <value>
+            <durationRange>480000~840000</durationRange>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/WeatherDef[defName="OAGene_SnowExtreme"]/eventMakers</xpath>
+        <value>
+            <li>
+                <averageInterval>30000</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_SnowStormBreakDoor</eventClass>
+            </li>
+            <li>
+                <averageInterval>7500</averageInterval>
+                <eventClass>OberoniaAureaGene.Snowstorm.WeatherEvent_IceCrystalFlowerSpawn</eventClass>
+            </li>
+        </value>
+    </Operation><Operation Class="PatchOperationConditional">
+        <xpath>Defs/GeneDef[defName="TotalHealing"]/exclusionTags</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/GeneDef[defName="TotalHealing"]/exclusionTags</xpath>
+            <value>
+                <li>OAGene_PermanentInjury</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/GeneDef[defName="TotalHealing"]</xpath>
+            <value>
+                <exclusionTags>
+                    <li>OAGene_PermanentInjury</li>
+                </exclusionTags>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/GeneDef[defName="RK_Gene_PoorEyesight"]/exclusionTags</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/GeneDef[defName="RK_Gene_PoorEyesight"]/exclusionTags</xpath>
+            <value>
+                <li>OAGene_Eyesight</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/GeneDef[defName="RK_Gene_PoorEyesight"]</xpath>
+            <value>
+                <exclusionTags>
+                    <li>OAGene_Eyesight</li>
+                </exclusionTags>
+            </value>
+        </nomatch>
+    </Operation><Operation Class="PatchOperationAdd">
+        <xpath>Defs/HediffGiverSetDef[defName="OrganicStandard"]/hediffGivers</xpath>
+        <value>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowExtreme">
+                <snowExtremeHediff>OAGene_Hediff_SnowExtreme</snowExtremeHediff>
+                <coldSnowHediff>OAGene_Hediff_ColdSnow</coldSnowHediff>
+                <coldImmersionHediff>OAGene_Hediff_ColdImmersion</coldImmersionHediff>
+                <frozenWoundHediff>OAGene_Hediff_FrozenWound</frozenWoundHediff>
+                <iceStormHediff>OAGene_Hediff_IceStorm</iceStormHediff>
+                <smallBodyHediff>OAGene_Hediff_SmallBody</smallBodyHediff>
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_IceRain">
+                <hediff>OAGene_Hediff_IceRain</hediff>
+            </li>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowstormFog">
+                <hediff>OAGene_Hediff_SnowstormFog</hediff>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="OberoniaAurea_Frame.PatchOperationCheckDLC">
+        <Anomaly>true</Anomaly>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/HediffGiverSetDef[defName="Fleshbeast" or defName="AnomalyEntity"]/hediffGivers</xpath>
+            <value>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowExtreme">
+                    <snowExtremeHediff>OAGene_Hediff_SnowExtreme</snowExtremeHediff>
+                    <coldSnowHediff>OAGene_Hediff_ColdSnow</coldSnowHediff>
+                    <coldImmersionHediff>OAGene_Hediff_ColdImmersion</coldImmersionHediff>
+                    <frozenWoundHediff>OAGene_Hediff_FrozenWound</frozenWoundHediff>
+                    <iceStormHediff>OAGene_Hediff_IceStorm</iceStormHediff>
+                    <smallBodyHediff>OAGene_Hediff_SmallBody</smallBodyHediff>
+                </li>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_IceRain">
+                    <hediff>OAGene_Hediff_IceRain</hediff>
+                </li>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowstormFog">
+                    <hediff>OAGene_Hediff_SnowstormFog</hediff>
+                </li>
+            </value>
+        </match>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/HediffGiverSetDef[defName="OAGene_MechanoidGiver"]/hediffGivers</xpath>
+        <value>
+            <hediffGivers>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowExtremeMechanoid">
+                    <hediff>OAGene_Hediff_SnowExtreme</hediff>
+                    <iceStormHediff>OAGene_Hediff_IceStorm</iceStormHediff>
+                    <smallBodyHediff>OAGene_Hediff_SmallBody</smallBodyHediff>
+                </li>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_IceRain">
+                    <hediff>OAGene_Hediff_IceRain</hediff>
+                </li>
+                <li Class="OberoniaAureaGene.Snowstorm.HediffGiver_SnowstormFog">
+                    <hediff>OAGene_Hediff_SnowstormFog</hediff>
+                </li>
+            </hediffGivers>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Human"]/race/hediffGiverSets</xpath>
+        <value>
+            <li>OAGene_SnowExtremePlayerHidden</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike"]</xpath>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike" and not(race/hediffGiverSets)]/race</xpath>
+                    <value>
+                        <hediffGiverSets/>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike"]/race/hediffGiverSets</xpath>
+                    <value>
+                        <li>OAGene_SnowExtremePlayerHidden</li>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[@Name="BaseMechanoid"]/race/hediffGiverSets</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="BaseMechanoid"]/race/hediffGiverSets</xpath>
+            <value>
+                <li>OAGene_MechanoidGiver</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[@Name="BaseMechanoid"]/race</xpath>
+            <value>
+                <hediffGiverSets>
+                    <li>OAGene_MechanoidGiver</li>
+                </hediffGiverSets>
+            </value>
+        </nomatch>
+    </Operation><Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Human"]/comps</xpath>
+        <value>
+            <li Class="OberoniaAureaGene.CompProperties_PawnGeneDamageModified"/>
+        </value>
+    </Operation>
+
+    <!-- HAR 人类智力种族:Conditional 门控(FindMod+Sequence 嵌套在 1.6 不生效) -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike"]</xpath>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike" and not(comps)]</xpath>
+                    <value>
+                        <comps/>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike"]/comps</xpath>
+                    <value>
+                        <li Class="OberoniaAureaGene.CompProperties_PawnGeneDamageModified"/>
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation><Operation Class="PatchOperationAdd">
+		<xpath>Defs/WorkGiverDef[defName="DoBillsCook"]/fixedBillGiverDefs</xpath>
+		<value>
+			<li>OAGene_SnowstormCampfire</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RA_De_lovely"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RA_De_lovely"]/statBases/ComfyTemperatureMin</xpath>
+			<value>
+				<ComfyTemperatureMin>-273</ComfyTemperatureMin>
+			</value>
+		</match>
+	</Operation>
+
+
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef/comps/li[@Class="CompProperties_Power"]/compClass[text()="CompPowerPlantWind"]</xpath>
+        <value>
+            <compClass>OberoniaAureaGene.CompPowerNormalPlantWind</compClass>
+        </value>
+    </Operation>
+
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/StatDef[defName="DeteriorationRate"]/parts</xpath>
+        <value>
+            <li Class="OberoniaAureaGene.StatPart_ExtremeSnowstorm">
+                <multiplier>5</multiplier>
+                <corpseMultiplier>15</corpseMultiplier>
+            </li>
+        </value>
+    </Operation><Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.RaceSettings[defName = "RK_Race_Setting"]/universalBodyAddons</xpath>
+        <value>
+
+            <!-- 左耳-->
+            <li>
+                <drawSize>1</drawSize>
+                <path>Body/RK_EarLeft</path>
+                <inFrontOfBody>true</inFrontOfBody>
+                <colorChannel>skin</colorChannel>
+                <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+                <layerInvert>false</layerInvert>
+                <defaultOffset>Head</defaultOffset>
+                <alignWithHead>true</alignWithHead>
+                <conditions>
+                    <!-- 2026-08-22 修复: HAR universalBodyAddons 全局合并渲染到所有 AlienRace(含人类),须限定鼠族种族,否则人类长鼠耳 -->
+                    <!-- 2026-08-26 修复: 兜底默认鼠耳(Body/RK_EarLeft)只应在带金鼠族耳基因的 pawn 上渲染,否则给所有鼠族(初鼠种/松鼠等)叠加第二对耳朵 -->
+                    <Race>Ratkin</Race>
+                    <Or>
+                        <Gene>OAGene_BatRatkinEar</Gene>
+                        <Gene>OAGene_LowlandRatkinEar</Gene>
+                        <Gene>OAGene_SnowRatkinEar</Gene>
+                        <Gene>OAGene_RockRatkinEar</Gene>
+                    </Or>
+                    <BodyPart>
+                        <bodyPart>Ear</bodyPart>
+                        <bodyPartLabel>left ear</bodyPartLabel>
+                        <drawWithoutPart>false</drawWithoutPart>
+                    </BodyPart>
+                    <Posture>
+                        <drawnStanding>true</drawnStanding>
+                        <drawnLaying>true</drawnLaying>
+                        <drawnInBed>true</drawnInBed>
+                    </Posture>
+                    <RotStage>Fresh,Rotting</RotStage>
+                    <Apparel>
+                        <hiddenUnderApparelTag>
+                            <li>RK_ApparelTag_HideEar</li>
+                        </hiddenUnderApparelTag>
+                    </Apparel>
+                </conditions>
+                <extendedGraphics>
+                    <Gene For="OAGene_BatRatkinEar">                        <!-- 蝠鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_BatRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_LowlandRatkinEar">                        <!-- 低地鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_LowlandRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_SnowRatkinEar">                        <!-- 雪鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_SnowRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_RockRatkinEar">                        <!-- 岩鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_RockRatkinEarLeft</path>
+                    </Gene>
+                </extendedGraphics>
+                <offsets>
+                    <south>
+                        <offset>(-0.03,-0.35)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.01,-0.07)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.01,-0.07)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </south>
+                    <north>
+                        <offset>(0.03,-0.23)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.07,-0.19)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.07,-0.19)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </north>
+                    <east>
+                        <offset>(0.2,-0.25)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </portraitBodyTypes>
+                    </east>
+                </offsets>
+            </li>
+
+            <!-- 右耳-->
+            <li>
+                <drawSize>1</drawSize>
+                <path>Body/RK_EarRight</path>
+                <inFrontOfBody>true</inFrontOfBody>
+                <colorChannel>skin</colorChannel>
+                <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+                <layerInvert>false</layerInvert>
+                <alignWithHead>true</alignWithHead>
+                <defaultOffset>Head</defaultOffset>
+                <conditions>
+                    <!-- 2026-08-22 修复: 限定仅鼠族渲染(见左耳注释) -->
+                    <!-- 2026-08-26 修复: 兜底默认鼠耳(Body/RK_EarRight)只应在带金鼠族耳基因的 pawn 上渲染 -->
+                    <Race>Ratkin</Race>
+                    <Or>
+                        <Gene>OAGene_BatRatkinEar</Gene>
+                        <Gene>OAGene_LowlandRatkinEar</Gene>
+                        <Gene>OAGene_SnowRatkinEar</Gene>
+                        <Gene>OAGene_RockRatkinEar</Gene>
+                    </Or>
+                    <BodyPart>
+                        <bodyPart>Ear</bodyPart>
+                        <bodyPartLabel>right ear</bodyPartLabel>
+                        <drawWithoutPart>false</drawWithoutPart>
+                    </BodyPart>
+                    <Posture>
+                        <drawnStanding>true</drawnStanding>
+                        <drawnLaying>true</drawnLaying>
+                        <drawnInBed>true</drawnInBed>
+                    </Posture>
+                    <RotStage>Fresh,Rotting</RotStage>
+                    <Apparel>
+                        <hiddenUnderApparelTag>
+                            <li>RK_ApparelTag_HideEar</li>
+                        </hiddenUnderApparelTag>
+                    </Apparel>
+                </conditions>
+                <extendedGraphics>
+                    <Gene For="OAGene_BatRatkinEar">                        <!-- 蝠鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_BatRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_LowlandRatkinEar">                        <!-- 低地鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_LowlandRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_SnowRatkinEar">                        <!-- 雪鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_SnowRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_RockRatkinEar">                        <!-- 岩鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_RockRatkinEarRight</path>
+                    </Gene>
+                </extendedGraphics>
+                <offsets>
+                    <south>
+                        <offset>(0.02,-0.35)</offset>
+                        <bodyTypes>
+                            <Baby>(0.02,-0.07)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(0.02,-0.07)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </south>
+                    <north>
+                        <offset>(0.0,-0.23)</offset>
+                        <bodyTypes>
+                            <Baby>(0.04,-0.19)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(0.04,-0.19)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </north>
+                    <east>
+                        <offset>(0.2,-0.25)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </portraitBodyTypes>
+                    </east>
+                </offsets>
+            </li>
+
+        </value>
+    </Operation><Operation Class="PatchOperationAdd">
+        <xpath>/Defs/FactionDef[@Name = "RatkinFactionBase"]/pawnGroupMakers</xpath>
+        <value>
+            <li MayRequire="Ludeon.RimWorld.Ideology">
+                <kindDef>Farmers</kindDef> <!-- 农业工作站需要 -->
+                <commonality>1</commonality>
+                <options>
+                    <RatkinColonist>1</RatkinColonist>
+                </options>
+            </li>
+        </value>
+    </Operation><Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThoughtDef[defName="SleptInBarracks"]/thoughtToMake</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThoughtDef[defName="SleptInBarracks"]/thoughtToMake</xpath>
+            <value>
+                <thoughtToMake>OAGene_Suspicious</thoughtToMake>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThoughtDef[defName="SleptInBarracks"]</xpath>
+            <value>
+                <thoughtToMake>OAGene_Suspicious</thoughtToMake>
+            </value>
+        </nomatch>
+    </Operation><Operation Class="PatchOperationConditional">
+		<xpath>Defs/TraderKindDef[defName = "Caravan_Neolithic_ShamanMerchant"  or  defName = "Visitor_Neolithic_Standard"]/stockGenerators</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/TraderKindDef[defName = "Caravan_Neolithic_ShamanMerchant"  or  defName = "Visitor_Neolithic_Standard"]/stockGenerators</xpath>
+
+		<value>
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>OAGene_IceCrystal</thingDef>
+			</li>
+		</value>
+
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TraderKindDef[defName = "Caravan_Outlander_Exotic"  or  defName = "Visitor_Outlander_Standard"]/stockGenerators</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/TraderKindDef[defName = "Caravan_Outlander_Exotic"  or  defName = "Visitor_Outlander_Standard"]/stockGenerators</xpath>
+
+		<value>
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>OAGene_IceCrystal</thingDef>
+			</li>
+		</value>
+
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TraderKindDef[defName = "Orbital_Exotic"]/stockGenerators</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/TraderKindDef[defName = "Orbital_Exotic"]/stockGenerators</xpath>
+
+		<value>
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>OAGene_IceCrystal</thingDef>
+			</li>
+		</value>
+
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TraderKindDef[defName = "Base_Empire_Standard"  or defName = "Empire_Caravan_TraderGeneral" or defName = "Orbital_Empire"]/stockGenerators</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/TraderKindDef[defName = "Base_Empire_Standard"  or defName = "Empire_Caravan_TraderGeneral" or defName = "Orbital_Empire"]/stockGenerators</xpath>
+
+		<value>
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>OAGene_IceCrystal</thingDef>
+			</li>
+		</value>
+
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TraderKindDef[defName = "RK_TraderKind_KingdomBulkGoods" or defName = "RK_TraderKind_KingdomWayfarer"]/stockGenerators</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/TraderKindDef[defName = "RK_TraderKind_KingdomBulkGoods" or defName = "RK_TraderKind_KingdomWayfarer"]/stockGenerators</xpath>
+
+		<value>
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>OAGene_IceCrystal</thingDef>
+			</li>
+		</value> 
+
+		</match>
+	</Operation><Operation Class="PatchOperationAdd">
+		<xpath>Defs/WorldObjectDef[defName="Site"]/comps</xpath>
+		<value>
+			<li Class="OberoniaAureaGene.Snowstorm.WorldObjectCompProperties_SnowstormCamp"/>
+		</value>
+	</Operation></Patch>

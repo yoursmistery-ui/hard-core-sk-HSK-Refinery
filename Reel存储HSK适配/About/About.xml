@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Reel存储HSK适配</name>
+	<authors>
+		<li>WorkBuddy</li>
+	</authors>
+	<packageId>local.reelstorage.hskfix</packageId>
+	<description>Reel's Expanded Storage 的 HSK(Hardcore SK) 整合版:
+	- 16 个存储建筑(定义+贴图)整合自 Reel's Expanded Storage 与 VFE Props, 无需安装原 mod
+	- 研究科技接入 HSK Storage I~X 线
+	- 数值适度加强并中文化建筑名与描述
+	- 数值平衡(2026-08-18): 中世纪=每格11, 工业=每格13, 冰箱=每格12, 小冰箱=每格9, 均比HSK基线高2单位/格
+	- 数值平衡(2026-08-19): 太空时代存储固定=每格27(集装箱组/储物柜/大型/小型太空集装箱), 太空冰箱(冷藏卡车)=每格20
+	- 数值平衡(2026-08-19): 工业时代存储=每格16(大型金属货箱/医疗冷藏柜/金属货箱/立式武器架/废料箱/货运集装箱/桶装托盘, HSK原版14); 冷藏冰箱/冰柜=12, 小冰箱=9
+	唯一依赖: Adaptive Storage Framework</description>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<modDependencies>
+		<li>
+			<packageId>adaptive.storage.framework</packageId>
+			<displayName>Adaptive Storage Framework</displayName>
+		    <downloadUrl>https://rimworld.example/adaptive.storage.framework</downloadUrl>
+			</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Core SK</displayName>
+			<downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>adaptive.storage.framework</li>
+		<li>skyarkhangel.hsk</li>
+		<li>DimonSever000.ModIndicator.Specific</li>
+		<li>ratkinpatch.HSKIndustrialResearchOverhaul</li>
+	</loadAfter>
+</ModMetaData>

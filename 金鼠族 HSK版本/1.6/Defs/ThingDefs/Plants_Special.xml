@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="PlantBase">
+    <defName>OAGene_Plant_IceCrystalFlower</defName>
+    <label>Ice crystal flower</label>
+    <description>A flower that only blooms in extreme snowstorms. From a rigorous perspective, ice crystal flowers are not actually considered a type of plant. This type of 'plant' often has broken crystals from wind and snow as its main stem, forming ice crystal petals by condensing water vapor in the air, and ultimately blooming into various' flowers'.\n\nFragmented crystal flowers will only bloom in areas with snow cover within a certain range, and will slowly emit cold air.\nLike the Tree of Wind and Snow, the Ice Crystal Flower is also regarded as a miracle of the God of Wind and Snow by Wind and Snow believers, and has therefore gained a sacred status in some tribes.</description>
+    <thingClass>OberoniaAureaGene.Snowstorm.IceCrystalFlower</thingClass>
+    <graphicData>
+      <texPath>Things/Plant/OAGene_Plant_IceCrystalFlower</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <statBases>
+      <Beauty>8</Beauty>
+      <BeautyOutdoors>6</BeautyOutdoors>
+      <MaxHitPoints>100</MaxHitPoints>
+	  <Flammability>0</Flammability>
+    </statBases>
+    <pathCost>42</pathCost>
+    <tickerType>Long</tickerType>
+    <selectable>true</selectable>
+    <neverMultiSelect>false</neverMultiSelect>
+    <ingestible>
+      <foodType>Tree</foodType>
+      <preferability>NeverForNutrition</preferability>
+    </ingestible>
+    <plant>
+      <sowTags>
+        <li>Hydroponic</li>
+      </sowTags>
+      <growDays>7</growDays>
+      <fertilitySensitivity>0.15</fertilitySensitivity>
+      <lifespanDaysPerGrowDays>2</lifespanDaysPerGrowDays>
+      <purpose>Misc</purpose>
+      <visualSizeRange>0.9~1.4</visualSizeRange>
+      <topWindExposure>0.1</topWindExposure>
+      <allowAutoCut>false</allowAutoCut>
+      <neverBlightable>true</neverBlightable>
+      <showGrowthInInspectPane>false</showGrowthInInspectPane>
+      <harvestYield>1</harvestYield>
+      <harvestTag>Misc</harvestTag>
+      <harvestAfterGrowth>0.3</harvestAfterGrowth>
+      <harvestedThingDef>OAGene_IceCrystal</harvestedThingDef>
+    </plant>
+  </ThingDef>
+
+  <ThingDef ParentName="TreeBase">
+    <defName>OAGene_Plant_SnowyCrystalTree</defName>
+    <label>Snowy Crystal Tree</label>
+    <description>A tree species that can only survive on certain special planets, with a tall and magnificent appearance, ice crystals connecting and interlocking between branches, and can often grow up to tens of meters in height without restrictions.\nThe trunk of this tree contains a large amount of components similar to wind and snow crystals, which can cause a slight decrease in temperature in the area.\n\nIn some tribes or beliefs, this tree is considered a symbol of the god of wind and snow. It is said that when these trees merge into forests and leaves into clouds, it means that this planet will face eternal ice.</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData>
+      <texPath>Things/Plant/OAGene_Plant_SnowyCrystalTree</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.15, 0.3, 0.15)</volume>
+        <offset>(0,0,-0.38)</offset>
+      </shadowData>
+    </graphicData>
+    <tickerType>Rare</tickerType>
+    <canScatterOver>false</canScatterOver>
+    <minifiedDef IsNull="True" />
+    <statBases>
+      <Beauty>160</Beauty>
+      <BeautyOutdoors>480</BeautyOutdoors>
+      <Flammability>0</Flammability>
+      <MaxHitPoints>800</MaxHitPoints>
+    </statBases>
+    <ingestible />
+    <preventSkyfallersLandingOn>true</preventSkyfallersLandingOn>
+    <plant>
+      <growDays>80</growDays>
+      <visualSizeRange>1.2~6.75</visualSizeRange>
+      <sowMinSkill>0</sowMinSkill>
+      <sowTags>
+        <li>Hydroponic</li>
+      </sowTags>
+      <lifespanDaysPerGrowDays>0</lifespanDaysPerGrowDays>      <!-- 不知道为什么，这玩意改成0就好了 -->      <!--被迫永生（确信）-->
+      <fertilityMin>0.05</fertilityMin>
+      <fertilitySensitivity>0</fertilitySensitivity>
+      <wildClusterWeight>0</wildClusterWeight>
+      <sowWork>3200</sowWork>
+      <harvestYield>156</harvestYield>
+      <harvestedThingDef>OAGene_IceCrystal</harvestedThingDef>
+      <treeCategory>Super</treeCategory>
+      <dieIfNoSunlight>false</dieIfNoSunlight>
+      <growMinGlow>0</growMinGlow>
+      <sowResearchPrerequisites Inherit="False" />
+      <dieFromToxicFallout>false</dieFromToxicFallout>
+      <showGrowthInInspectPane>false</showGrowthInInspectPane>
+      <minSpacingBetweenSamePlant>4.9</minSpacingBetweenSamePlant>
+      <warnIfMarkedForCut>true</warnIfMarkedForCut>
+      <!--choppedThingDef>ChoppedStump_Gauranlen</choppedThingDef>
+      <smashedThingDef>SmashedStump_Gauranlen</smashedThingDef-->
+      <immatureGraphicPath>Things/Plant/OAGene_Plant_SnowyCrystalTree_B</immatureGraphicPath>
+    </plant>
+    <comps>
+      <li Class="CompProperties_SelfhealHitpoints">
+        <ticksPerHeal>2000</ticksPerHeal>
+      </li>
+      <li Class="CompProperties_TempControl">
+        <compClass>OberoniaAureaGene.Snowstorm.Comp_SnowyCrystalTree</compClass>
+        <defaultTargetTemperature>-30</defaultTargetTemperature>
+        <inspectString>调节大气温度</inspectString>
+      </li>
+    </comps>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+    </placeWorkers>
+  </ThingDef>
+
+  <!--别忘了休息好了以后把风雪树种改为通关后允许在锻造台\手工加工点解锁制作。耗费30玻璃钢与2高级零部件-->  <!--好累，先休息会x-->
+
+</Defs>

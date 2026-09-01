@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 原始取火与照明 · Neolithic 档自有科研节点(HSK工业科研大修, 2026-08-29)
+       背景: HSK 自带的 Lighting I(Light_B1) 是 Medieval 档, 原始时代没有任何照明节点,
+       故参照 MO 把「篝火 / 火把 / 大柴堆」下沉到 Neolithic, 与中世纪油灯蜡烛形成两档。
+       ParentName="PrimitiveBase"(Core_SK: techLevel Neolithic + PrimitiveResearchBench +
+       SK.AdvancedResearchExtension[Primitive,Simple,HiTech] + ResearchTreeSKModExtension + ClassicStart),
+       与 RK_Mining_Primitive / RK_Quarry_Primitive 同法。
+       坐标落 Buildings_SK 照明行 Y=9 空位 X=2(该行 X=3,4 为 Light_B1/B2 中世纪档,
+       X=8~12 为工业档); 全局跨 tab 检测 (2,9) 无占用(脚本 _tmp/scan_research_coords.py)。 -->
+
+  <ResearchProjectDef ParentName="PrimitiveBase">
+    <defName>RK_PrimitiveLighting</defName>
+    <label>原始取火与照明</label>
+    <description>钻木取火、束枝为炬。原始聚落最早学会把黑夜推开一寸——篝火可驱兽也可照明, 火把能持在手里或挂在墙上, 大柴堆能烧上一整夜。光虽微弱、热虽有限, 却让守夜与夜作成为常态, 也为后来油灯与蜡烛的精细工艺留出了门路。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>200</baseCost>
+    <researchViewX>2.00</researchViewX>
+    <researchViewY>9.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

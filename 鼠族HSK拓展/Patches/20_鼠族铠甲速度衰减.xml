@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 20_鼠族铠甲速度衰减.xml, 21_隐藏儿童衣物.xml -->
+<Patch><!-- 鼠族铠甲(原版ratkin中世纪板甲)平衡: 增加移动速度/工作速度衰减
+         目标: RK_Plate(鼠族铠甲) + RK_PlateHelmA/B/C(鼠族铠甲头盔A/B/C)
+         数值(2026-08-08 按用户要求调低): 铠甲移速 -0.20、工作速度 -0.15;
+         头盔移速 -0.10、工作速度 -0.05(比铠甲更轻)。
+         最终层补丁(20),覆盖 09 的 equippedStatOffsets,保证游戏内最终生效。 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_Plate"]/equippedStatOffsets</xpath>
+        <value>
+            <equippedStatOffsets>
+                <MoveSpeed>-0.20</MoveSpeed>
+                <MeleeParryChance>0.10</MeleeParryChance>
+                <Suppressability>-0.15</Suppressability>
+                <ToxicEnvironmentResistance>0.20</ToxicEnvironmentResistance>
+                <CarryingCapacity>25</CarryingCapacity>
+                <CarryBulk>20</CarryBulk>
+                <WorkSpeedGlobal>-0.15</WorkSpeedGlobal>
+                <IncomingDamageFactor>-0.10</IncomingDamageFactor>
+            </equippedStatOffsets>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_PlateHelmA"]/equippedStatOffsets</xpath>
+        <value>
+            <equippedStatOffsets>
+                <PainShockThreshold>0.10</PainShockThreshold>
+                <MoveSpeed>-0.10</MoveSpeed>
+                <WorkSpeedGlobal>-0.05</WorkSpeedGlobal>
+            </equippedStatOffsets>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_PlateHelmB"]/equippedStatOffsets</xpath>
+        <value>
+            <equippedStatOffsets>
+                <PainShockThreshold>0.10</PainShockThreshold>
+                <MoveSpeed>-0.10</MoveSpeed>
+                <WorkSpeedGlobal>-0.05</WorkSpeedGlobal>
+            </equippedStatOffsets>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_PlateHelmC"]/equippedStatOffsets</xpath>
+        <value>
+            <equippedStatOffsets>
+                <PainShockThreshold>0.10</PainShockThreshold>
+                <MoveSpeed>-0.10</MoveSpeed>
+                <WorkSpeedGlobal>-0.05</WorkSpeedGlobal>
+            </equippedStatOffsets>
+        </value>
+    </Operation><!-- 隐藏全部儿童版衣物(2026-08-08, 用户不玩儿童内容):
+         1) 移除 7 个儿童自定义配方:
+            02_装备整合 3 个维多利亚儿童配方
+            (RKHSKVictoria_Make_baonuanneiyi_Child / kamz_Child / maorongdayi_Child)
+            + 01_鼠族数值配方改造 4 个鼠族儿童配方
+            (RKHSKFix_Make_RK_Apparel_ChildrenCardigan / SummerDress / WinterRobe / RK_ApronSkirtChildren);
+         2) 8 件儿童装备 generateCommonality 置 0(不再在世界/商人/掉落中生成);
+         3) 自动配方已在 12_配方科技修复 中全部 IsNull 关闭,13_禁用儿童真空服 覆盖
+            RK_Apparel_VacsuitChildren,此处不再重复处理。
+         涉及装备: RK_ApronSkirtChildren、RK_Apparel_VacsuitChildren、
+         RK_Apparel_ChildrenWinterRobe / SummerDress / Cardigan、
+         baonuanneiyi_Child、kamz_Child、maorongdayi_Child。 -->
+
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_baonuanneiyi_Child"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_kamz_Child"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_maorongdayi_Child"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_ChildrenCardigan"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_ChildrenSummerDress"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_ChildrenWinterRobe"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_ApronSkirtChildren"]</xpath>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_ApronSkirtChildren"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="RK_ApronSkirtChildren"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="RK_ApronSkirtChildren"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenWinterRobe"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenWinterRobe"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenWinterRobe"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenSummerDress"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenSummerDress"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenSummerDress"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenCardigan"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenCardigan"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="RK_Apparel_ChildrenCardigan"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="baonuanneiyi_Child"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="baonuanneiyi_Child"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="baonuanneiyi_Child"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="kamz_Child"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="kamz_Child"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="kamz_Child"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="maorongdayi_Child"]/generateCommonality</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="maorongdayi_Child"]/generateCommonality</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="maorongdayi_Child"]</xpath>
+            <value><generateCommonality>0</generateCommonality></value>
+        </nomatch>
+    </Operation></Patch>

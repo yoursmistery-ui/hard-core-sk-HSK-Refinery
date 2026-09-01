@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 由 _tmp/gen_faction_spawn.py 生成. 为可生成定居点的NPC派系赋予气候偏好曲线,
+       BOTR 的 SettlementSuitability 会据此加权/门控家园选址 -> 各派系向偏好气候带聚集.
+       未列出的(玩家/隐藏/动物/机甲/移动crew/已有曲线)保持随机兜底. -->
+  <Operation Class="PatchOperationSequence">
+    <operations>
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/ARCTIC] Rakinia_SnowRatkin -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_SnowRatkin"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_SnowRatkin"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(-20, 1.0)</li>
+        <li>(-8, 0.4)</li>
+        <li>(2, 0.1)</li>
+        <li>(12, 0.05)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/COLD] TribeRough -->
+    <xpath>/Defs/FactionDef[defName="TribeRough"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeRough"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.2)</li>
+        <li>(-24, 1.0)</li>
+        <li>(-8, 1.0)</li>
+        <li>(4, 0.25)</li>
+        <li>(14, 0.08)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/COLD] TribeRoughNeanderthal -->
+    <xpath>/Defs/FactionDef[defName="TribeRoughNeanderthal"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeRoughNeanderthal"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.2)</li>
+        <li>(-24, 1.0)</li>
+        <li>(-8, 1.0)</li>
+        <li>(4, 0.25)</li>
+        <li>(14, 0.08)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/COLD] AsariHunters -->
+    <xpath>/Defs/FactionDef[defName="AsariHunters"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="AsariHunters"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.2)</li>
+        <li>(-24, 1.0)</li>
+        <li>(-8, 1.0)</li>
+        <li>(4, 0.25)</li>
+        <li>(14, 0.08)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/COLD] PirateYttakin -->
+    <xpath>/Defs/FactionDef[defName="PirateYttakin"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="PirateYttakin"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.2)</li>
+        <li>(-24, 1.0)</li>
+        <li>(-8, 1.0)</li>
+        <li>(4, 0.25)</li>
+        <li>(14, 0.08)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/COLD] NorbalTribe -->
+    <xpath>/Defs/FactionDef[defName="NorbalTribe"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="NorbalTribe"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.2)</li>
+        <li>(-24, 1.0)</li>
+        <li>(-8, 1.0)</li>
+        <li>(4, 0.25)</li>
+        <li>(14, 0.08)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] OutlanderCivil -->
+    <xpath>/Defs/FactionDef[defName="OutlanderCivil"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="OutlanderCivil"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] MedievalKingdom -->
+    <xpath>/Defs/FactionDef[defName="MedievalKingdom"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="MedievalKingdom"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Empire -->
+    <xpath>/Defs/FactionDef[defName="Empire"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Empire"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Rakinia -->
+    <xpath>/Defs/FactionDef[defName="Rakinia"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Rakinia_CentralAlliance -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_CentralAlliance"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_CentralAlliance"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Rakinia_WhiteRoseKingdom -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_WhiteRoseKingdom"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_WhiteRoseKingdom"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] OA_RK_Faction -->
+    <xpath>/Defs/FactionDef[defName="OA_RK_Faction"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="OA_RK_Faction"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Miho_Faction_Megacorp -->
+    <xpath>/Defs/FactionDef[defName="Miho_Faction_Megacorp"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Miho_Faction_Megacorp"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] ImperialLegion -->
+    <xpath>/Defs/FactionDef[defName="ImperialLegion"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="ImperialLegion"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] TribeCivil -->
+    <xpath>/Defs/FactionDef[defName="TribeCivil"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeCivil"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Orassan -->
+    <xpath>/Defs/FactionDef[defName="Orassan"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Orassan"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] ChjAndroidEnclave -->
+    <xpath>/Defs/FactionDef[defName="ChjAndroidEnclave"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="ChjAndroidEnclave"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] NovaAlliance -->
+    <xpath>/Defs/FactionDef[defName="NovaAlliance"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="NovaAlliance"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TEMPERATE] Orion -->
+    <xpath>/Defs/FactionDef[defName="Orion"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Orion"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-14, 0.2)</li>
+        <li>(-2, 0.75)</li>
+        <li>(8, 1.0)</li>
+        <li>(16, 0.6)</li>
+        <li>(28, 0.12)</li>
+        <li>(45, 0.05)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/ARID] PirateWaster -->
+    <xpath>/Defs/FactionDef[defName="PirateWaster"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="PirateWaster"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-4, 0.08)</li>
+        <li>(6, 0.35)</li>
+        <li>(16, 1.0)</li>
+        <li>(28, 1.0)</li>
+        <li>(45, 0.5)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/ARID] NuclearColonySurvivor -->
+    <xpath>/Defs/FactionDef[defName="NuclearColonySurvivor"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="NuclearColonySurvivor"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-4, 0.08)</li>
+        <li>(6, 0.35)</li>
+        <li>(16, 1.0)</li>
+        <li>(28, 1.0)</li>
+        <li>(45, 0.5)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/ARID] TribeSavageImpid -->
+    <xpath>/Defs/FactionDef[defName="TribeSavageImpid"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeSavageImpid"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-4, 0.08)</li>
+        <li>(6, 0.35)</li>
+        <li>(16, 1.0)</li>
+        <li>(28, 1.0)</li>
+        <li>(45, 0.5)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/ARID] OutlanderRoughPig -->
+    <xpath>/Defs/FactionDef[defName="OutlanderRoughPig"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="OutlanderRoughPig"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-4, 0.08)</li>
+        <li>(6, 0.35)</li>
+        <li>(16, 1.0)</li>
+        <li>(28, 1.0)</li>
+        <li>(45, 0.5)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TROPICAL] Rakinia_Exotic -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_Exotic"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_Exotic"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-2, 0.08)</li>
+        <li>(8, 0.55)</li>
+        <li>(18, 1.0)</li>
+        <li>(32, 1.0)</li>
+        <li>(45, 0.4)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TROPICAL] Rakinia_ExoticBandit -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_ExoticBandit"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_ExoticBandit"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-2, 0.08)</li>
+        <li>(8, 0.55)</li>
+        <li>(18, 1.0)</li>
+        <li>(32, 1.0)</li>
+        <li>(45, 0.4)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TROPICAL] CannibalPirate -->
+    <xpath>/Defs/FactionDef[defName="CannibalPirate"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="CannibalPirate"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-2, 0.08)</li>
+        <li>(8, 0.55)</li>
+        <li>(18, 1.0)</li>
+        <li>(32, 1.0)</li>
+        <li>(45, 0.4)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/TROPICAL] TribeCannibal -->
+    <xpath>/Defs/FactionDef[defName="TribeCannibal"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeCannibal"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 0.05)</li>
+        <li>(-2, 0.08)</li>
+        <li>(8, 0.55)</li>
+        <li>(18, 1.0)</li>
+        <li>(32, 1.0)</li>
+        <li>(45, 0.4)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Brotherhood -->
+    <xpath>/Defs/FactionDef[defName="Brotherhood"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Brotherhood"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Syndicate -->
+    <xpath>/Defs/FactionDef[defName="Syndicate"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Syndicate"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Sectarian -->
+    <xpath>/Defs/FactionDef[defName="Sectarian"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Sectarian"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] TradersGuild -->
+    <xpath>/Defs/FactionDef[defName="TradersGuild"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TradersGuild"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Pirate -->
+    <xpath>/Defs/FactionDef[defName="Pirate"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Pirate"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] OutlanderRough -->
+    <xpath>/Defs/FactionDef[defName="OutlanderRough"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="OutlanderRough"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] TribeSavage -->
+    <xpath>/Defs/FactionDef[defName="TribeSavage"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="TribeSavage"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Miho_Faction_Supremacist -->
+    <xpath>/Defs/FactionDef[defName="Miho_Faction_Supremacist"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Miho_Faction_Supremacist"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] Rakinia_Warlord -->
+    <xpath>/Defs/FactionDef[defName="Rakinia_Warlord"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="Rakinia_Warlord"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+
+  <li Class="PatchOperationConditional">
+    <!-- [生成偏好/GENERALIST] OrassanEvil -->
+    <xpath>/Defs/FactionDef[defName="OrassanEvil"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/FactionDef[defName="OrassanEvil"]</xpath>
+      <value>
+        <minSettlementTemperatureChanceCurve>
+      <points>
+        <li>(-45, 1.0)</li>
+        <li>(0, 1.0)</li>
+        <li>(20, 1.0)</li>
+        <li>(45, 1.0)</li>
+      </points>
+    </minSettlementTemperatureChanceCurve>
+      </value>
+    </match>
+  </li>
+    </operations>
+  </Operation>
+</Patch>

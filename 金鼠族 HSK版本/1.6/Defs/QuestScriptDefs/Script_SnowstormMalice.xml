@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <QuestScriptDef>
+        <defName>OAGene_SnowstormRaidSource</defName>
+        <autoAccept>true</autoAccept>
+        <defaultHidden>false</defaultHidden>
+        <isRootSpecial>true</isRootSpecial>
+        <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">Raided_BanditCamp</successHistoryEvent>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName->[snowstorm]中的[bandit]</li>
+                <li>snowstorm->暴风雪</li>
+                <li>snowstorm->冰雪</li>
+                <li>snowstorm->严寒</li>
+                <li>bandit->袭击营地</li>
+                <li>bandit->劫掠据点</li>
+                <li>bandit->海盗前哨</li>
+                <li>bandit->海盗哨站</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+                <li>questDescription->一伙习惯于在暴风雪中劫掠的海盗们在[map_definite]附近建立了一个哨站，他们将会在暴风雪中定期的对你发动袭击，直到风雪消退后他们便会暂时放弃。[sitePartsDescription]\n\n哨站将在9天后撤离，你可以忍耐直到哨站撤离，亦或者派一个远行队穿越暴风雪去摧毁它。</li>
+                <li>sitePartsDescription->(*Threat)一块被[enemiesCount]名敌人防守的军事集结区(/Threat)，他们每[mtbDays]就会对你发起袭击。</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <root Class="QuestNode_Sequence">
+            <nodes>
+                <li Class="QuestNode_Set">
+                    <name>siteDistRange</name>
+                    <value>1~10</value>
+                </li>
+                <li Class="QuestNode_SubScript">
+                    <def>Util_AdjustPointsForDistantFight</def>
+                </li>
+                <li Class="QuestNode_GetMap" />
+
+                <li Class="OberoniaAureaGene.Snowstorm.QuestNode_GetSnowstormRaidFaction">
+                    <storeAs>siteFaction</storeAs>
+                </li>
+
+                <li Class="QuestNode_GetSiteTile">
+                    <storeAs>siteTile</storeAs>
+                    <preferCloserTiles>true</preferCloserTiles>
+                    <clampRangeBySiteParts>true</clampRangeBySiteParts>
+                    <sitePartDefs>OAGene_SnowstormRaidSource</sitePartDefs>
+                </li>
+
+                <li Class="QuestNode_GetDefaultSitePartsParams">
+                    <tile>$siteTile</tile>
+                    <faction>$siteFaction</faction>
+                    <sitePartDefs>OAGene_SnowstormRaidSource</sitePartDefs>
+                    <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+                </li>
+
+                <li Class="QuestNode_GetSiteThreatPoints">
+                    <storeAs>sitePoints</storeAs>
+                    <sitePartsParams>$sitePartsParams</sitePartsParams>
+                </li>
+
+                <li Class="QuestNode_SubScript">
+                    <def>Util_GenerateSite</def>
+                </li>
+
+                <li Class="QuestNode_SpawnWorldObjects">
+                    <worldObjects>$site</worldObjects>
+                </li>
+
+                <li Class="QuestNode_WorldObjectTimeout">
+                    <worldObject>$site</worldObject>
+                    <isQuestTimeout>true</isQuestTimeout>
+                    <delayTicks>$(roundToTicksRough(9 * 60000))</delayTicks>
+                    <inSignalDisable>site.MapGenerated</inSignalDisable>
+                    <destroyOnCleanup>true</destroyOnCleanup>
+                    <node Class="QuestNode_End">
+                        <outcome>Success</outcome>
+                    </node>
+                </li>
+
+                <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+                <li Class="QuestNode_Signal">
+                    <inSignal>site.Destroyed</inSignal>
+                    <node Class="QuestNode_End">
+                        <outcome>Success</outcome>
+                    </node>
+                </li>
+
+                <li Class="QuestNode_Signal">
+                    <inSignal>site.AllEnemiesDefeated</inSignal>
+                    <node Class="QuestNode_Sequence">
+                        <nodes>
+                            <li Class="QuestNode_Letter">
+                                <label TKey="LetterLabelSuccess">哨站已摧毁</label>
+                                <letterDef>PositiveEvent</letterDef>
+                                <text TKey="LetterTextSuccess">你摧毁了哨站，这鼓舞了[map_definite]!</text>
+                            </li>
+                            <li Class="QuestNode_Notify_PlayerRaidedSomeone">
+                                <getRaidersFromMapParent>$site</getRaidersFromMapParent>
+                            </li>
+                            <li Class="QuestNode_End">
+                                <outcome>Success</outcome>
+                            </li>
+                        </nodes>
+                    </node>
+                </li>
+            </nodes>
+        </root>
+    </QuestScriptDef>
+
+    <QuestScriptDef>
+        <defName>OAGene_SnowstormClimateAdjuster</defName>
+        <autoAccept>true</autoAccept>
+        <defaultHidden>false</defaultHidden>
+        <isRootSpecial>true</isRootSpecial>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName->[snowstorm]中的[climate]</li>
+                <li>snowstorm->暴风雪</li>
+                <li>snowstorm->风雪</li>
+                <li>snowstorm->冰雪</li>
+                <li>snowstorm->严寒</li>
+                <li>climate->温控据点</li>
+                <li>climate->干扰据点</li>
+                <li>climate->低温哨站</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+                <li>questDescription->一伙习惯于在风雪中劫掠的海盗们在[map_definite]附近建立了一个温控哨站，以方便日后对你的殖民地进行劫掠。[sitePartsDescription]\n\n哨站将一直保留，直到你派一个远行队在那里攻击和摧毁它。</li>
+                <li>sitePartsDescription->一台可以将温度调整[temperatureOffset]的(*Threat)气候调节器(/Threat)。</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <root Class="QuestNode_Sequence">
+            <nodes>
+
+                <li Class="QuestNode_Set">
+                    <name>siteDistRange</name>
+                    <value>1~10</value>
+                </li>
+                <li Class="QuestNode_SubScript">
+                    <def>Util_AdjustPointsForDistantFight</def>
+                </li>
+                <li Class="QuestNode_GetMap" />
+
+                <li Class="OberoniaAurea_Frame.QuestNode_GetFaction">
+                    <storeAs>siteFaction</storeAs>
+                    <allowNeutral>false</allowNeutral>
+                    <allowAlly>false</allowAlly>
+                    <allowEnemy>true</allowEnemy>
+                    <allowPermanentEnemy>true</allowPermanentEnemy>
+                </li>
+
+                <li Class="QuestNode_GetSiteTile">
+                    <storeAs>siteTile</storeAs>
+                    <preferCloserTiles>true</preferCloserTiles>
+                    <clampRangeBySiteParts>true</clampRangeBySiteParts>
+                    <sitePartDefs>OAGene_ClimateAdjusterCold</sitePartDefs>
+                </li>
+
+                <li Class="QuestNode_GetDefaultSitePartsParams">
+                    <tile>$siteTile</tile>
+                    <faction>$siteFaction</faction>
+                    <sitePartDefs>OAGene_ClimateAdjusterCold</sitePartDefs>
+                    <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+                </li>
+
+                <li Class="QuestNode_GetSiteThreatPoints">
+                    <storeAs>sitePoints</storeAs>
+                    <sitePartsParams>$sitePartsParams</sitePartsParams>
+                </li>
+
+                <li Class="QuestNode_SubScript">
+                    <def>Util_GenerateSite</def>
+                </li>
+
+                <li Class="QuestNode_SpawnWorldObjects">
+                    <worldObjects>$site</worldObjects>
+                </li>
+
+                <!-- If we enter and leave, the map is destroyed. Fail the quest. -->
+                <li Class="QuestNode_Signal">
+                    <inSignal>conditionCauser.Destroyed</inSignal>
+                    <node Class="QuestNode_Sequence">
+                        <nodes>
+                            <li Class="QuestNode_Letter">
+                                <label TKey="LetterLabelSuccess">[problemCauserLabel]已摧毁</label>
+                                <letterDef>PositiveEvent</letterDef>
+                                <text TKey="LetterTextSuccess">你摧毁了[problemCauserLabel]，这鼓舞了[map_definite]!</text>
+                            </li>
+                            <li Class="QuestNode_Notify_PlayerRaidedSomeone">
+                                <getRaidersFromMapParent>$site</getRaidersFromMapParent>
+                            </li>
+                            <li Class="QuestNode_End">
+                                <outcome>Success</outcome>
+                            </li>
+                        </nodes>
+                    </node>
+                </li>
+            </nodes>
+        </root>
+    </QuestScriptDef>
+
+</Defs>

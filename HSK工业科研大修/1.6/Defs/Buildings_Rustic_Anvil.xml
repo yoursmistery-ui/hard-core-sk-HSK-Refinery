@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 锻铁砧摆件(波次6, 2026-08-29): MO DankPyon_Anvil 的装饰化移植(用户拍板"做成摆件放辅助建筑")。
+     不做工作台: HSK 锻造走 HSK 自己的台子; 保留 MO 造价(金属 50)与 medieval 观感。
+     材质 Metallic → 本环境 Steel/铜等均可; 建造后可搬运(minified)。 -->
+	<ThingDef ParentName="FurnitureBase">
+		<defName>Rustic_Anvil</defName>
+		<label>锻铁砧</label>
+		<description>铁匠铺的重型方砧, 砧面被经年的锤击磨得发亮。如今已无人在此锻打兵器, 只作为旧日手艺的纪念立在角落。</description>
+		<graphicData>
+			<texPath>Things/Building/Production/Anvil/Anvil</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.1,1.1)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Production/Anvil/Anvil_south</uiIconPath>
+		<rotatable>true</rotatable>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<statBases>
+			<WorkToBuild>2000</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Mass>30</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>Impassable</passability>
+		<fillPercent>0.5</fillPercent>
+		<disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
+		<techLevel>Medieval</techLevel>
+		<researchPrerequisites>
+			<li>Smithing</li>
+		</researchPrerequisites>
+	</ThingDef>
+</Defs>

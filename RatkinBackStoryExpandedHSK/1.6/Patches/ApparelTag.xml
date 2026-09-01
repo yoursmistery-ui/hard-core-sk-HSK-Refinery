@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- HSK 适配版：原 1.6 下为 .txt 后缀（RimWorld 不加载），已改回 .xml；
+     并将 PatchOperationFindMod 嵌套写法改为 MayRequire 门控直接 Operation -->
+<Patch>
+  <Operation Class="PatchOperationAdd" MayRequire="Solaris.RatkinRaceMod">
+    <xpath>Defs/ThingDef[defName="RK_MaskB"]/apparel/tags</xpath>
+    <value>
+      <li>RK_SSK</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd" MayRequire="Solaris.RatkinRaceMod">
+    <xpath>Defs/ThingDef[defName="RK_OrderUniform"]/apparel</xpath>
+    <value>
+      <tags>
+        <li>RK_SSK</li>
+      </tags>
+    </value>
+  </Operation>
+</Patch>

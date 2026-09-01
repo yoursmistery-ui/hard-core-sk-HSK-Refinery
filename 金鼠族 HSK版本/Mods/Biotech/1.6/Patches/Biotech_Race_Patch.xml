@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): Biotech_Race_Patch.xml, Biotech_Xeno_Patch.xml -->
+<Patch><!-- 金鼠族 HSK 适配(2026-08-20):
+	     RatkinRaceHSK 的 HSK_Generated 整体替换了 Ratkin 种族 def,
+	     其 raceRestriction 无 whiteXenotypeList 节点(原版 NewRatkinPlus 有)。
+	     原版 PatchOperationAdd 直接定位 whiteXenotypeList 会在 HSK 环境报错
+	     (Failed to find a node)。改为条件化:
+	       - 有 whiteXenotypeList(原版环境)→ 加白名单
+	       - 无(HSK 环境)→ 追加到 xenotypeList(允许异种型清单) -->
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/whiteXenotypeList</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/whiteXenotypeList</xpath>
+			<value>
+				<li>Ratkin_OA</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/xenotypeList</xpath>
+			<value>
+				<li>Ratkin_OA</li>
+			</value>
+		</nomatch>
+	</Operation><Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[OA]Ratkin Gene Expand</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/FactionDef[defName="OA_RK_Faction"]</xpath>
+					<value>
+						<xenotypeSet Inherit="False">
+							<xenotypeChances>
+								<Ratkin_OA>0.982</Ratkin_OA>
+								<RK_XenoType_Ratkin>0.006</RK_XenoType_Ratkin>
+								<OAGene_WhiteRatkin>0.004</OAGene_WhiteRatkin>
+								<OAGene_TravelRatkin>0.002</OAGene_TravelRatkin>
+								<!--OAGene_BatRatkin>0.001</OAGene_BatRatkin-->
+								<OAGene_LowlandRatkin>0.002</OAGene_LowlandRatkin>
+								<OAGene_BiochemicalRatkinI>0.001</OAGene_BiochemicalRatkinI>
+								<OAGene_BiochemicalRatkinII>0.001</OAGene_BiochemicalRatkinII>
+								<OAGene_BiochemicalRatkinIII>0.001</OAGene_BiochemicalRatkinIII>
+								<OAGene_BiochemicalRatkinIV>0.001</OAGene_BiochemicalRatkinIV>
+							</xenotypeChances>
+						</xenotypeSet>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/PawnKindDef[@Name="OA_RK_BasePawn"]</xpath>
+					<value>
+						<xenotypeSet Inherit="False">
+							<xenotypeChances>
+								<Ratkin_OA>0.981</Ratkin_OA>
+								<RK_XenoType_Ratkin>0.006</RK_XenoType_Ratkin>
+								<OAGene_WhiteRatkin>0.004</OAGene_WhiteRatkin>
+								<OAGene_TravelRatkin>0.002</OAGene_TravelRatkin>
+								<!--OAGene_BatRatkin>0.001</OAGene_BatRatkin-->
+								<OAGene_LowlandRatkin>0.002</OAGene_LowlandRatkin>
+								<OAGene_BiochemicalRatkinI>0.001</OAGene_BiochemicalRatkinI>
+								<OAGene_BiochemicalRatkinII>0.001</OAGene_BiochemicalRatkinII>
+								<OAGene_BiochemicalRatkinIII>0.001</OAGene_BiochemicalRatkinIII>
+								<OAGene_BiochemicalRatkinIV>0.001</OAGene_BiochemicalRatkinIV>
+							</xenotypeChances>
+						</xenotypeSet>
+					</value>
+				</li>
+			</operations>
+		</match>
+		<nomatch Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/FactionDef[defName="OA_RK_Faction"]</xpath>
+					<value>
+						<xenotypeSet Inherit="False">
+							<xenotypeChances>
+								<Ratkin_OA>999</Ratkin_OA>
+							</xenotypeChances>
+						</xenotypeSet>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/PawnKindDef[@Name="OA_RK_BasePawn"]</xpath>
+					<value>
+						<xenotypeSet Inherit="False">
+							<xenotypeChances>
+								<Ratkin_OA>1</Ratkin_OA>
+							</xenotypeChances>
+						</xenotypeSet>
+					</value>
+				</li>
+			</operations>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[defName="OA_RK_PlayerFaction"]</xpath>
+		<value>
+			<xenotypeSet Inherit="False">
+				<xenotypeChances>
+					<Ratkin_OA>999</Ratkin_OA>
+				</xenotypeChances>
+			</xenotypeSet>
+		</value>
+	</Operation></Patch>

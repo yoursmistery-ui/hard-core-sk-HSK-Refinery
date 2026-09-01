@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 卫生(Dubs Bad Hygiene)燃气锅炉改烧天然气（2026-08-28）
+       DBH 的 GasBoiler 名义"燃气锅炉"实际烧化合燃料, 与石化工业线重复且抢燃油。改成本线产物 RK_Petro_NaturalGas,
+       并把解锁挂到石化工业 I(否则开局就有一台烧不存在燃料的锅炉)。
+       门控: 1.6 起 Operation 级 MayRequire 失效 → 一律用 xpath 存在性门控(未装卫生时 GasBoiler 节点不存在, match 跳过)。
+       本 mod About 已 loadAfter Dubwise.DubsBadHygiene, 保证补丁执行时 DBH def 已入树。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GasBoiler"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[text()="Chemfuel"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="GasBoiler"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[text()="Chemfuel"]</xpath>
+      <value>
+        <li>RK_Petro_NaturalGas</li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GasBoiler"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GasBoiler"]/researchPrerequisites</xpath>
+      <value>
+        <li>RK_Petro_AtmosphericDistillation</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

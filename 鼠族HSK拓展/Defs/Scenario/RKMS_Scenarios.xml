@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_ScenarioExotic</defName>
+		<label>Unexpected exile</label>
+		<description>On your way to the new settlement, you and your ratkin companions were ambushed by local pirates. Most of your comrades either became slaves or were killed on the spot. Unexpectedly, a sudden storm struck, with lightning setting the pirate camp ablaze. The pirate leaders and a few lackeys turned into charred skeletons. Once the chaos subsided, the remaining pirates, realizing they were outnumbered, fled overnight.\n You and a few willing companions decided to scavenge the pirate camp, gathering supplies and relics of the deceased. With limited provisions, you ultimately made the decision to find a place to settle down on your journey.</description>
+		<scenario>
+			<summary>A group of displaced refugees, can they find stability in the harsh wilderness?</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_PlayerExoticFaction</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnCount>4</pawnCount>
+					<pawnChoiceCount>10</pawnChoiceCount>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+					<method>Standing</method>
+				</li>
+				<li Class="ScenPart_SetNeedLevel">
+					<def>SetNeedLevel</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<need>Rest</need>
+					<levelRange>0.18~0.4</levelRange>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>279</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MealSurvivalPack</thingDef>
+					<count>28</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_BirdShot</thingDef>
+					<quality>Good</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_LianzhuRifle</thingDef>
+					<quality>Normal</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineIndustrial</thingDef>
+					<count>6</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineHerbal</thingDef>
+					<count>10</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>ComponentIndustrial</thingDef>
+					<count>37</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>Steel</thingDef>
+					<count>533</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_ExoticChopper</thingDef>
+					<count>2</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>WoodLog</thingDef>
+					<count>300</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Steel</thingDef>
+					<count>223</count>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_ScenarioTradeRoad</defName>
+		<label>Rat Federation Trade Road</label>
+		<description>The Rat Federation (Moustate) lives by trade and peace. As a caravan convoy guard sworn to protect the trade road, you must keep this lifeblood open across the borders of ratkin powers, sell your rare goods to the Oberonia Aurea Empire, and survive the greed of outlaws and warlords with the least bloodshed.</description>
+		<scenario>
+			<summary>A peace-loving convoy guard protects the Rat Federation trade road across the borders of warring ratkin powers.</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_PlayerExoticFaction</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>商人会为了一枚银币跨越整个大陆，而我们誓死守卫着这条连接鼠邦与四方的商路。军阀的贪婪、亡命徒的刀刃、以及那颗悬在银河尽头的金色鸢尾——所有的目光都汇聚于此。愿商路常青。</text>
+					<closeSound>GameStartSting</closeSound>
+				</li>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnCount>4</pawnCount>
+					<pawnChoiceCount>10</pawnChoiceCount>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+					<method>Standing</method>
+				</li>
+				<li Class="ScenPart_SetNeedLevel">
+					<def>SetNeedLevel</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<need>Rest</need>
+					<levelRange>0.5~0.75</levelRange>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>420</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MealSurvivalPack</thingDef>
+					<count>30</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_LandDeed</thingDef>
+					<count>2</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_Antique</thingDef>
+					<count>3</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_BirdShot</thingDef>
+					<quality>Good</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_LianzhuRifle</thingDef>
+					<quality>Good</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineIndustrial</thingDef>
+					<count>12</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MedicineHerbal</thingDef>
+					<count>15</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>ComponentIndustrial</thingDef>
+					<count>45</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_ExoticChopper</thingDef>
+					<count>2</count>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>Steel</thingDef>
+					<count>450</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsNearPlayerStart">
+					<def>ScatterThingsNearPlayerStart</def>
+					<thingDef>WoodLog</thingDef>
+					<count>280</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
+					<project>Ratkin_Apparel_B1</project>
+				</li>
+				<li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
+					<project>Electricity</project>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+	<!-- <ScenarioDef>
+		<defName>Scenario_Alchemist</defName>
+		<label>无面传奇</label>
+		<description>以一名鼠邦无面传奇开局</description>
+		<scenario>
+			<summary>万物皆虚 万事皆允</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_PlayerExoticFaction</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+					<def>ConfigurePawnsKindDefs</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+					<kindCounts>
+						<li>
+							<requiredAtStart>True</requiredAtStart>
+							<kindDef>RatkinExoticFacelessLegend</kindDef>
+						</li>
+					</kindCounts>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+					<method>Standing</method>
+				</li>
+				<li Class="ScenPart_PawnFilter_Age">
+					<def>PawnFilter_Age</def>
+					<allowedAgeRange>23~27</allowedAgeRange>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef> -->
+</Defs>

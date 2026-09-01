@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文化服饰偏好系统 全量方案 v1</title>
+<style>
+  :root{
+    --bg:#f7f7f8; --card:#ffffff; --ink:#1f2328; --muted:#6b7280;
+    --line:#e5e7eb; --accent:#2563eb;
+    --g-bg:#dcfce7; --g-fg:#166534; --y-bg:#fef9c3; --y-fg:#854d0e; --r-bg:#fee2e2; --r-fg:#991b1b; --b-bg:#dbeafe; --b-fg:#1e40af;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",Roboto,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+  header{border-bottom:2px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+  h1{font-size:26px;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;vertical-align:middle}
+  .b-green{background:var(--g-bg);color:var(--g-fg)} .b-yellow{background:var(--y-bg);color:var(--y-fg)}
+  .b-red{background:var(--r-bg);color:var(--r-fg)} .b-blue{background:var(--b-bg);color:var(--b-fg)}
+  nav{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:24px;font-size:14px}
+  nav a{color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap;display:inline-block}
+  nav a:hover{text-decoration:underline}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:20px}
+  h2{font-size:19px;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:15px;margin:16px 0 8px;color:#374151}
+  p,li{font-size:14.5px}
+  code{background:#f1f3f5;padding:1px 5px;border-radius:4px;font-family:"SFMono-Regular",Consolas,monospace;font-size:12.5px;color:#b91c1c}
+  pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:8px;overflow:auto;font-size:12.5px;line-height:1.5}
+  pre code{background:none;color:inherit;padding:0}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f3f4f6;font-weight:600}
+  tbody tr:nth-child(even){background:#fafafa}
+  .tag{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:4px;padding:0 6px;font-size:12px;margin:1px 2px;font-family:monospace}
+  blockquote{margin:0 0 14px;padding:10px 16px;background:#fffbeb;border-left:4px solid #f59e0b;border-radius:0 8px 8px 0;color:#78350f;font-size:14px}
+  .z{color:#166534;font-weight:600}
+  ul{padding-left:22px}
+  .foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>鼠族 + 美狐 文化服饰偏好系统 <span class="badge b-green">v1 已完工 · 待游戏内验证</span></h1>
+  <div class="sub">2026-08-27 · 让 5 文化圈的穿衣有<b>明确分区</b>与<b>派系偏好</b>，花样克制、允许跨文化重复、不碰基础衣物 def 本体</div>
+</header>
+
+<nav>
+  <a href="#s0">§0 机制地基</a>
+  <a href="#s1">§1 派系tag缺口</a>
+  <a href="#s2">§2 八分区体系</a>
+  <a href="#s3">§3 文化×分区矩阵</a>
+  <a href="#s4">§4 补丁结构</a>
+  <a href="#s5">§5 落地步骤</a>
+  <a href="#s6">§6 风险</a>
+  <a href="#s7">§7 决策记录</a>
+</nav>
+
+<section id="s0">
+  <h2>§0 机制地基 <span class="badge b-green">已反编译验证</span></h2>
+  <p>"决定 pawn 穿哪件"最终由这条加权链控制：</p>
+  <pre><code>候选衣物(按 bodyPartGroup + tag 匹配过滤)
+   → TryRandomElementByWeight(pa =&gt; pa.Commonality)
+        → ThingStuffPair.Commonality
+            = thingDef.commonality × thingDef.<b>generateCommonality</b> × stuff.commonality</code></pre>
+  <p><code>Verse/ThingStuffPair.cs:44</code> 证实 <code>num *= thing.generateCommonality;</code>。<b>给每件衣服设 <code>generateCommonality</code> 即可精确控制同池出现比例</b>——无需风格类目、无需补 Styleable comp、无需新贴图。</p>
+  <h3>三条可叠加的挂载路径</h3>
+  <table><thead><tr><th>路径</th><th>载体</th><th>粒度</th><th>适用</th></tr></thead><tbody>
+    <tr><td>A 职位服装<span class="badge b-blue" style="margin-left:6px">现用</span></td><td><code>PreceptDef[IdeoRole_*].roleApparelRequirements</code> + <code>allowedFactionCategoryTags</code> + <code>requiredTags/Defs</code></td><td>派系tag + 职位</td><td>军阀/骑士/美狐 NPC</td></tr>
+    <tr><td>B pawnKind 池</td><td><code>PawnKindDef.apparel</code>(<code>RequiredTag</code>/<code>AlternateTagChoices{tag,chance}</code>)</td><td>兵种/职业</td><td>玩家开局兵、各职业鼠</td></tr>
+    <tr><td>C 权重底座<span class="badge b-green" style="margin-left:6px">核心</span></td><td>每件 <code>ThingDef.generateCommonality</code></td><td>全局</td><td>所有路径共用偏好底座</td></tr>
+  </tbody></table>
+  <blockquote><b>关键区别：</b> <code>requiredDefs/requiredTags</code> 只<b>圈定候选池</b>；真正的偏好比例靠每件 def 的 <code>generateCommonality</code> 决定。这正是"xx 族偏好 xx 衣"的实现点。</blockquote>
+  <h3>现状 <span class="badge b-yellow">见 服饰分区盘点.csv</span></h3>
+  <ul>
+    <li>去重 <b>347 件</b>服饰：鼠族 212 / 金鼠族 77 / 美狐 57 / 原版文化拓展 1。</li>
+    <li><b>315 件已有 tag</b>，32 件无 tag（不补永不进池）。</li>
+    <li><b>仅 43 件显式设 <code>generateCommonality</code></b>（多 1、少 0.1），其余 300+ 吃默认值 <code>1</code>（非 100）。权重体系基本空白。</li>
+    <li>已有池标签丰富但<b>全是文化/层级/职业维度，无"身体分区"维度</b>。<span class="tag">RK_Knight</span><span class="tag">RK_ExoticTier1-3</span><span class="tag">MihoMilitia</span><span class="tag">MihoRoyal</span><span class="tag">RoyalTier2-7</span></li>
+  </ul>
+</section>
+
+<section id="s1">
+  <h2>§1 派系 categoryTag 现状与缺口 <span class="badge b-yellow">需补文化tag</span></h2>
+  <table><thead><tr><th>派系</th><th>categoryTag</th><th>allowedCultures</th><th>问题</th></tr></thead><tbody>
+    <tr><td>WhiteRose / CentralAlliance</td><td><code>RatkinStory</code></td><td>Virtuard</td><td>与军阀混用同tag，分不出偏好</td></tr>
+    <tr><td>Exotic / ExoticBandit</td><td><span class="badge b-red">无</span></td><td>—</td><td>路径A完全无法命中</td></tr>
+    <tr><td>Warlord</td><td><span class="badge b-red">无</span></td><td>—</td><td>同上</td></tr>
+    <tr><td>OA_RK_Faction</td><td><code>OA_RK_Faction</code></td><td>GoldenIris</td><td>OK，独立tag</td></tr>
+    <tr><td>Miho Megacorp / Supremacist</td><td><code>Mihoic</code></td><td>MihoCultures</td><td>共用一tag，内部区分不了</td></tr>
+    <tr><td>Player 派系(鼠/美狐)</td><td><span class="badge b-red">无</span></td><td>—</td><td>靠路径B兜底</td></tr>
+  </tbody></table>
+  <p>设计：每个文化一套独占 <code>StyleTag</code>，路径A 的 <code>allowedFactionCategoryTags</code> 只认这些。</p>
+  <pre><code>Culture_KnightKingdom  ← WhiteRose / CentralAlliance / Caravan
+Culture_Exotic         ← Exotic / ExoticBandit / ExoticAncient / PlayerExotic
+Culture_Warlord        ← Warlord
+Culture_GoldenIris     ← OA_RK_Faction（沿用）
+Culture_Miho           ← Megacorp / Supremacist / PlayerColony</code></pre>
+</section>
+
+<section id="s2">
+  <h2>§2 八分区 tag 体系 <span class="badge b-green">本次核心</span></h2>
+  <p>每件入选服饰打一个 <code>Zone_*</code> 分区tag，与现有文化/层级 tag <b>并存</b>（一件可多tag）。分区=衣柜抽屉，文化偏好在抽屉里挑。</p>
+  <table><thead><tr><th>分区 tag</th><th>含义</th><th>引擎层</th><th>bodyPartGroup</th></tr></thead><tbody>
+    <tr><td class="z"><code>Zone_Underwear</code></td><td>内衣/贴身</td><td>Miho_Under / OnSkin(Full)</td><td>Torso,Legs,Neck</td></tr>
+    <tr><td class="z"><code>Zone_Base</code></td><td>常服(衬衫/制服/袍)</td><td>OnSkin</td><td>Torso,Arms,Legs,Neck,Shoulders</td></tr>
+    <tr><td class="z"><code>Zone_Armor</code></td><td>护甲</td><td>Middle / Shell</td><td>Torso,Arms,Shoulders,Legs</td></tr>
+    <tr><td class="z"><code>Zone_Coat</code></td><td>大衣/外套</td><td>Shell / OuterClothing / Belt</td><td>Torso,Arms,Shoulders,Neck</td></tr>
+    <tr><td class="z"><code>Zone_Head</code></td><td>头饰</td><td>Overhead</td><td>UpperHead,FullHead</td></tr>
+    <tr><td class="z"><code>Zone_Face</code></td><td>面饰(眼镜/口罩/面纱)</td><td>EyeCover / Miho_Special</td><td>Eyes,Mouth,Teeth</td></tr>
+    <tr><td class="z"><code>Zone_Accessory</code></td><td>配饰(勋章/绶带/挎包/腰包)</td><td>Belt/kuabao/yaodai/Amulet/Ring/Wrist</td><td>Waist,Neck,Shoulders,Hands</td></tr>
+    <tr><td class="z"><code>Zone_Back</code></td><td>背具(背包/斗篷背挂)</td><td>BackPack / InnerCoat</td><td>Shoulders,Back</td></tr>
+  </tbody></table>
+  <p><b>允许重复：</b>同一件 <span class="tag">RK_MedalHonor</span> 可同时是 <code>Zone_Accessory</code> + 多文化池 tag。<code>Zone_</code> 前缀避免与现有 <code>RK_*</code>/<code>Royal*</code>/<code>Miho*</code> 冲突。</p>
+</section>
+
+<section id="s3">
+  <h2>§3 文化 × 分区 偏好矩阵</h2>
+  <p>每文化每分区放 1 主导 + 1-2 次要，数值=相对权重（主导1.5 / 次要0.7 / 稀有0.2 起步）。</p>
+  <table><thead><tr><th>文化</th><th>Zone_Head 偏好</th><th>Zone_Base 偏好</th><th>Zone_Coat 偏好</th><th>风格一句话</th></tr></thead><tbody>
+    <tr><td>骑士王国</td><td>KnightHelmet <b>1.5</b> / Crown 0.3</td><td>KnightTunic 1.0</td><td>Cloak <b>1.2</b> / Mantle 0.4</td><td>正装+纹章斗篷</td></tr>
+    <tr><td>异邦</td><td>Turban/Fez <b>1.5</b> / StrawHat 0.6</td><td>SilkRobe <b>1.2</b></td><td>长披风 1.0</td><td>异域织物</td></tr>
+    <tr><td>军阀</td><td>Cap/Helmet <b>1.4</b></td><td>制式军服 <b>1.3</b></td><td>野战大衣 1.1</td><td>实用硬朗</td></tr>
+    <tr><td>金鸢尾兰</td><td>礼冠 <b>1.3</b></td><td>礼服 <b>1.4</b></td><td>披风 0.6</td><td>宫廷礼仪</td></tr>
+    <tr><td>美狐</td><td>耳饰帽 <b>1.3</b> / 巫女头饰 0.5</td><td>和服/巫女服 <b>1.3</b></td><td>冬外套 1.0</td><td>和风</td></tr>
+  </tbody></table>
+  <blockquote>缺贴图新款式的分区（如美狐无大衣本体）→ 该格留空或<b>借用鼠族同层 def</b>，靠 tag 允许跨文化复用。</blockquote>
+</section>
+
+<section id="s4">
+  <h2>§4 权重实现补丁结构 <span class="badge b-yellow">纯XML</span></h2>
+  <ol>
+    <li><code>04_分区标签注入.xml</code> — 每件服饰 <code>Conditional</code>(判 <code>apparel/tags</code>) → 存在 <code>Add li Zone_xxx</code> / 不存在 <code>Add tags块</code>。脚本生成。</li>
+    <li><code>05_服饰偏好权重.xml</code> — 每件按 §3 设 <code>generateCommonality</code>，<code>Replace</code>(有节点)/<code>Add</code>(无节点) 条件门控。</li>
+    <li>改 <code>03_文化职位适配.xml</code> — <code>requiredDefs</code> 硬名单 → <code>requiredTags: Zone_* + Culture_*</code>，职位"抽屉里挑一件"，比例交给权重；allowedFactionCategoryTags 换新文化tag。</li>
+    <li><code>98_美狐职位服饰接入.xml</code>（美狐mod）— 现 0 引用，新建：Miho 路径A + 补 Miho 服饰 Zone tag。</li>
+  </ol>
+  <p>全部：顶层独立 Operation、xpath 存在性门控（1.6 无 Operation 级 MayRequire）、改完过 <code>_tmp/patch_simulator.py</code>。</p>
+</section>
+
+<section id="s5">
+  <h2>§5 落地步骤 <span class="badge b-green">2026-08-27 完工</span></h2>
+  <table><thead><tr><th>#</th><th>动作</th><th>状态</th></tr></thead><tbody>
+    <tr><td>1</td><td>全服饰盘点 CSV(347 件+proposedZone 预判,交互版审阅)</td><td><span class="badge b-green">完成</span></td></tr>
+    <tr><td>2</td><td><b>42_分区标签注入</b>(346 op,三 mod 各一份,run_zone_sim 0 失败,双目录 hash 一致)</td><td><span class="badge b-green">已部署</span> <span class="badge b-yellow">游戏内日志待验</span></td></tr>
+    <tr><td>3</td><td><b>43_服饰偏好权重</b>(165 op;档位 常见1.3/标准1.15/精英0.6/典礼0.3;刻意值不覆盖;美狐不参与)</td><td><span class="badge b-green">已部署</span></td></tr>
+    <tr><td>4</td><td><b>44_文化接线修正</b>:categoryTag 改道弃用,走 pawnKind apparelTags 白名单分池;仅补 RatkinExoticRevolutionist 断线;03 不替换</td><td><span class="badge b-green">已部署</span></td></tr>
+    <tr><td>5</td><td>美狐接入 = 免做(Miho kind 原生 requiredTag+layer+alternateTagChoices 槽位制,只经 42 补 Zone tag 统一维度)</td><td><span class="badge b-green">完成</span></td></tr>
+    <tr><td>6</td><td>游戏内验证:启动日志无报错 + 观察异邦/美狐着装分布</td><td><span class="badge b-red">待启动</span></td></tr>
+  </tbody></table>
+  <p><b>再生成</b>: 改 <code>服饰分区盘点.csv</code> 或 <code>_tmp/gen_zone_patch.py</code> 规则表 → <code>gen_zone_patch.py</code> → <code>run_zone_sim.py</code> → <code>deploy_zone.py</code>。</p>
+</section>
+
+<section id="s6">
+  <h2>§6 风险与边界 <span class="badge b-red">动手前必读</span></h2>
+  <ul>
+    <li><b>categoryTag 复用风险</b>：<code>RatkinStory</code> 等被外交/生成引用；categoryTag 单值不可追加。→ 复用现有 tag + <code>anyMemeRequired</code>/pawnKind 区分，确需换 tag 时逐派系评估。</li>
+    <li><b><code>generateCommonality</code> 是全局的</b>：改高一件 = 对所有引用它的池都变常见。"A族常见 B族稀有同款" <b>必须靠不同 Culture tag 隔离池</b>，不能只靠权重。</li>
+    <li><b>无 tag 的 32 件</b>：确认是否故意排除。</li>
+    <li><b>CE 数值</b>：本方案纯改分配不碰 §7 CE，但美狐职位引用注意 CE。</li>
+    <li><b>双目录同步</b>：每步立即工作区↔部署 Mods 逐文件同步 + hash 核对。</li>
+  </ul>
+</section>
+
+<section id="s7">
+  <h2>§7 决策记录 <span class="badge b-green">已定案 2026-08-27</span></h2>
+  <ol>
+    <li><b>tag 隔离池 + 池内权重</b>（弃全局简化版）：派系差异由 pawnKind 池标签白名单/职位 requiredDefs 圈定，<code>generateCommonality</code> 只做池内梯度；典礼件 0.3 压低领袖池王冠频率属预期多样化。</li>
+    <li><b>不替换 03 的 requiredDefs</b>：v5 三池 AND 结构实测稳定，权重直接作用于既有池内选择，零回归风险；Zone tag 留作后续槽位化/UI 分类维度。</li>
+    <li><b>美狐不重造、icon 沿用、弃 StyleCategoryDef 路线</b>：Miho kind 原生 requiredTag+layer+alternateTagChoices 槽位制已满足"分区+偏好"；不产新图不建新文化。</li>
+  </ol>
+</section>
+
+<div class="foot">千问办公 · 鼠族HSK拓展 · 文化服饰偏好系统方案 v1 · 配套 <code>服饰分区盘点.csv</code></div>
+</div>
+</body>
+</html>

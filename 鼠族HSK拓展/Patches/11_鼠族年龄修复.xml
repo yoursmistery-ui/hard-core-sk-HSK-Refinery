@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 修复鼠族年龄生成 300 次失败:
+         Character Editor(Biotech)请求 12.1~13 岁,而 HSK_Generated 覆盖后的鼠族年龄曲线
+         在 12.5~14 区间概率为 0(连 13~14 也被清零,原版 RatkinRaceHSK 该区间有 122~130 的质量)。
+         这里把 12.51~14 区间补回概率质量,并保留 HSK 其余曲线形状。
+         注意: Ratkin 的 def 节点元素名是 AlienRace.ThingDef_AlienRace(不是 ThingDef)。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race/ageGenerationCurve/points</xpath>
+        <value>
+            <points>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(0,0)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(0.001,0)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(8,86)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(12.5,0)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(12.51,60)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(13,60)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(13.001,100)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(13.999,100)</li>
+                <li>(14,100)</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech">(14.001,30)</li>
+                <li>(18,50)</li>
+                <li>(23,100)</li>
+                <li>(30,20)</li>
+                <li>(60,3)</li>
+                <li>(70,0)</li>
+            </points>
+        </value>
+    </Operation>
+</Patch>

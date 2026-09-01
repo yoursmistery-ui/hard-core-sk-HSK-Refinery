@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="UnfinishedBase">
+		<defName>UnfinishedJewelry</defName>
+		<label>unfinished jewelry</label>
+		<description>A jewelry being made, who knows what it will look like in the future?</description>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Flammability>1</Flammability>
+		</statBases>
+		<graphicData>
+			<texPath>Misc/Item_UnfinishedJewelry</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<comps>
+			<!-- <li>
+				<compClass>CompColorable</compClass>
+			</li> -->
+		</comps>
+	</ThingDef>
+
+	<ThingCategoryDef>
+		<defName>Meow_Jewelry</defName>
+		<label>jewelry</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+
+	<ThingCategoryDef>
+		<defName>Meow_Ring</defName>
+		<label>ring</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+	<ThingCategoryDef>
+		<defName>Meow_Amulet</defName>
+		<label>amulet</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+	<ThingCategoryDef>
+		<defName>Meow_Bracelet</defName>
+		<label>bracelet</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+
+
+	<ThingDef Name="Meow_JewelryBase" Abstract="True">
+		<thingClass>Apparel</thingClass>
+		<category>Item</category>
+		<drawerType>MapMeshOnly</drawerType>
+		<selectable>True</selectable>
+		<pathCost>1</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<techLevel>Medieval</techLevel>
+		<graphicData>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToMake>20000</WorkToMake>
+			<Mass>0.01</Mass>
+			<EquipDelay>0.1</EquipDelay>
+			<Flammability>1</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<Beauty>3</Beauty>
+			<SellPriceFactor>1.2</SellPriceFactor>
+		</statBases>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<burnableByRecipe>true</burnableByRecipe>
+		<smeltable>true</smeltable>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+		</comps>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_FueledSmithy</li>
+				<li>RK_ElectricSmithy</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedJewelry</unfinishedThingDef>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+				<Artistic>3</Artistic>
+			</skillRequirements>
+		</recipeMaker>
+		<thingCategories>
+			<li>Meow_Jewelry</li>
+		</thingCategories>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+			<li>Meow_Jewelry</li>
+		</tradeTags>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfDamaged>false</careIfDamaged>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<scoreOffset>1</scoreOffset>
+			<wearPerDay>0</wearPerDay>
+			<tags>
+				<li>Meow_Jewelry</li>
+			</tags>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+		</apparel>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+
+	<ThingDef Name="Meow_AmuletBase" ParentName="Meow_JewelryBase" Abstract="True">
+		<thingCategories>
+			<li>Meow_Amulet</li>
+		</thingCategories>
+		<tradeTags>
+			<li>Meow_Amulet</li>
+		</tradeTags>
+		<apparel>
+			<tags>
+				<li>Meow_Amulet</li>
+			</tags>
+			<layers>
+				<li>Amulet</li>
+			</layers>
+			<bodyPartGroups>
+				<li>Neck</li>
+			</bodyPartGroups>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef Name="Meow_RingBase" ParentName="Meow_JewelryBase" Abstract="True">
+		<thingCategories>
+			<li>Meow_Ring</li>
+		</thingCategories>
+		<tradeTags>
+			<li>Meow_Ring</li>
+		</tradeTags>
+		<apparel>
+			<tags>
+				<li>Meow_Ring</li>
+			</tags>
+			<layers>
+				<li>Ring</li>
+			</layers>
+			<bodyPartGroups>
+				<li>Hands</li>
+			</bodyPartGroups>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef Name="Meow_BraceletBase" ParentName="Meow_JewelryBase" Abstract="True">
+		<thingCategories>
+			<li>Meow_Bracelet</li>
+		</thingCategories>
+		<tradeTags>
+			<li>Meow_Bracelet</li>
+		</tradeTags>
+		<apparel>
+			<tags>
+				<li>Meow_Bracelet</li>
+			</tags>
+			<layers>
+				<li>Wrist</li>
+			</layers>
+			<bodyPartGroups>
+				<li>Hands</li>
+			</bodyPartGroups>
+		</apparel>
+	</ThingDef>
+</Defs>

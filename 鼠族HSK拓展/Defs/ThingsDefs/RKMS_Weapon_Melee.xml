@@ -1,0 +1,1213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+	<ThingDef Name="RK_ExoticLongMeleeWeapon"
+		ParentName="RK_ExoticMeleeWeapon" Abstract="True">
+		<techLevel>Medieval</techLevel>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<comps>
+			<li Class="RatkinGeneExpanded.CompProperties_WeaponDrawExt">
+				<invertNorth>false</invertNorth>
+				<invertEast>false</invertEast>
+				<invertSouth>false</invertSouth>
+				<invertWest>false</invertWest>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- RK_Dao -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_Dao</defName>
+		<label>blade (Dao)</label>
+		<description>A saber used by some exotic ratkin factions ,which said to be based on a farming tool.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Dao</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>17000</WorkToMake>
+			<Mass>1.3</Mass>
+				<Bulk>4</Bulk>
+		</statBases>
+		<costList>
+			<Steel>15</Steel>
+			<WoodLog>35</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<costStuffCount>55</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<equippedStatOffsets>
+			<PlantWorkSpeed>0.05</PlantWorkSpeed>
+			<!-- <PlantHarvestYield>0.05</PlantHarvestYield> -->
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>17</power>
+				<cooldownTime>2.2</cooldownTime>
+				<armorPenetrationSharp>5.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>23</power>
+				<cooldownTime>2.3</cooldownTime>
+				<armorPenetrationSharp>6.9</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/RK_Dao_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/RK_Dao_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,-0.3,-0.2)</position>
+					<angle>150</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,0,-0.2)</position>
+					<angle>-150</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.3,0,-0.2)</position>
+					<angle>15</angle>
+				</northOffset>
+				<eastOffset>
+					<position>(0.3,0,-0.3)</position>
+					<angle>30</angle>
+				</eastOffset>
+				<southOffset>
+					<position>(-0.33,0,-0.27)</position>
+					<angle>-15</angle>
+				</southOffset>
+				<westOffset>
+					<position>(-0.3,-0.3,-0.3)</position>
+					<angle>-30</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<!-- RK_KotetsuKazuzou -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_KotetsuKazuzou</defName>
+		<label>Kotetsu Kazuzou</label>
+		<description>The mass-produced swords modeled after Kotetsu-maru have been manufactured. While they are not as durable as the ceremonial blades, they are extensively equipped by the members of the SenGiTai due to their ease of production.</description>
+		<graphicData>
+			<texPath>Item_Weapon/KotetsuKazuzou</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_MeleeSengitaiTier2</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>14000</WorkToMake>
+			<Mass>1.3</Mass>
+				<Bulk>4</Bulk>
+		</statBases>
+		<costList>
+			<Steel>15</Steel>
+			<WoodLog>30</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<costStuffCount>45</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>2.2</cooldownTime>
+				<armorPenetrationSharp>5.8</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>21</power>
+				<cooldownTime>2.5</cooldownTime>
+				<armorPenetrationSharp>6.3</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker Inherit="False">
+			<researchPrerequisite>Smithing</researchPrerequisite>
+		</recipeMaker>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/KotetsuKazuzou_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/KotetsuKazuzou_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0.24,0,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.24,0,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,-0.3,-0.2)</position>
+					<angle>150</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,0,-0.2)</position>
+					<angle>-150</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.3,0,-0.2)</position>
+					<angle>15</angle>
+				</northOffset>
+				<eastOffset>
+					<position>(0.3,0,-0.3)</position>
+					<angle>30</angle>
+				</eastOffset>
+				<southOffset>
+					<position>(-0.33,0,-0.27)</position>
+					<angle>-15</angle>
+				</southOffset>
+				<westOffset>
+					<position>(-0.3,-0.3,-0.3)</position>
+					<angle>-30</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- RK_Jian -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_Jian</defName>
+		<label>exotic sword (Jian)</label>
+		<description>This is a sincere creation by a master swordsmith. While it may not have the chopping power of a sword, it compensates with its agility. It takes several years of practice to wield this item effectively.</description>
+		<graphicData>
+			<texPath>Item_Weapon/Jian</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticSoldierLeader</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>28000</WorkToMake>
+			<Mass>2.5</Mass>
+				<Bulk>5</Bulk>
+		</statBases>
+		<costList>
+			<GoldBar>1</GoldBar>
+			<WoodLog>35</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<costStuffCount>75</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<equippedStatOffsets>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.05</NegotiationAbility>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>26</power>
+				<cooldownTime>2.1</cooldownTime>
+				<armorPenetrationSharp>8.3</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>LongBlades</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>-25</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/Jian_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/Jian_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.2,0,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,-0.3,-0.2)</position>
+					<angle>150</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,0,-0.2)</position>
+					<angle>-150</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.3,0,0.1)</position>
+					<angle>-75</angle>
+				</northOffset>
+				<eastOffset>
+					<position>(0.3,0,-0.15)</position>
+					<angle>-20</angle>
+				</eastOffset>
+				<southOffset>
+					<position>(-0.3,0.3,0.08)</position>
+					<angle>75</angle>
+				</southOffset>
+				<westOffset>
+					<position>(-0.3,-0.3,-0.15)</position>
+					<angle>20</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- RK_ShuTouDao -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_ShuTouDao</defName>
+		<label>mousehead shape blade (ShuTouDao)</label>
+		<description>A very scary looking two-handed knife, the hollow that seems to be the shape of the head of the rat.</description>
+		<graphicData>
+			<texPath>Item_Weapon/ShuTouDao</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_MeleeExoticTier3</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>25000</WorkToMake>
+			<Mass>5</Mass>
+				<Bulk>6</Bulk>
+		</statBases>
+		<costStuffCount>130</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<GoldBar>3</GoldBar>
+			<WoodLog>40</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<equippedStatOffsets>
+			<MeleeHitChance>-1</MeleeHitChance>
+			<MeleeDodgeChance>3</MeleeDodgeChance>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>28</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>8.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>38</power>
+				<cooldownTime>3</cooldownTime>
+				<armorPenetrationSharp>11.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>8.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>LongBlades</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>7</Crafting>
+				<Artistic>3</Artistic>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>-120</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<northOffset>
+					<position>(0.25,-1,0.35)</position>
+					<angle>-135</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,1,0.25)</position>
+					<angle>135</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.25)</position>
+					<angle>-135</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.25)</position>
+					<angle>135</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_Sheath">
+				<fullGraphicData>
+					<texPath>Item_Weapon/ShuTouDao_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+				</fullGraphicData>
+				<drawPosition>Back</drawPosition>
+				<northOffset>
+					<position>(0,0.5,0)</position>
+					<angle>20</angle>
+				</northOffset>
+				<southOffset>
+					<position>(0,-0.5,0.1)</position>
+					<angle>60</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(-0.25,-0.3,0.1)</position>
+					<angle>50</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0.25,0.3,0.1)</position>
+					<angle>-50</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- RK_Shuo -->
+	<ThingDef ParentName="RK_ExoticLongMeleeWeapon">
+		<defName>RK_Shuo</defName>
+		<label>ratkin horseLance (Shuo)</label>
+		<description>A long spear with a very long double blade, used by some regional ratkin cultures in mounted warfare.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Shuo</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticDefender</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<costStuffCount>60</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<WoodLog>80</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>21000</WorkToMake>
+			<Mass>5</Mass>
+				<Bulk>9</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.03</MoveSpeed>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>23</power>
+				<cooldownTime>2.2</cooldownTime>
+				<armorPenetrationSharp>7.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>2.8</cooldownTime>
+				<armorPenetrationSharp>7.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>26</power>
+				<cooldownTime>3</cooldownTime>
+				<armorPenetrationSharp>7.8</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.8</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- RK_Qiang -->
+	<ThingDef ParentName="RK_ExoticLongMeleeWeapon">
+		<defName>RK_Qiang</defName>
+		<label>Moustate spear (Qiang)</label>
+		<description>The first weapon most militia members receive from their training instructors is this item. While it is quick to learn how to use, mastering the art takes several decades of dedication.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Qiang</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticDefender</li>
+			<li>RK_MeleeExoticTier1</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<costStuffCount>25</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<WoodLog>80</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>11000</WorkToMake>
+			<Mass>4</Mass>
+				<Bulk>8</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.03</MoveSpeed>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>1.7</cooldownTime>
+				<armorPenetrationSharp>4.8</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>19</power>
+				<cooldownTime>2.3</cooldownTime>
+				<armorPenetrationSharp>6.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>2.4</cooldownTime>
+				<armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>3</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- RK_Zhang -->
+	<ThingDef ParentName="RK_ExoticLongMeleeWeapon">
+		<defName>RK_Zhang</defName>
+		<label>ratkin long staff (Zhang))</label>
+		<description>A non-lethal weapon used to discipline unruly mice. Very robust.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Zhang</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticDefender</li>
+			<li>RK_MeleeExoticTier1</li>
+		</weaponTags>
+		<costList>
+			<WoodLog>55</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<costStuffCount>35</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<statBases>
+			<WorkToMake>8000</WorkToMake>
+			<Mass>4</Mass>
+				<Bulk>8</Bulk>
+		</statBases>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>Head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>23</power>
+				<cooldownTime>2.7</cooldownTime>
+				<armorPenetrationBlunt>8</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>13</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>1.8</cooldownTime>
+				<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- RK_DaDao -->
+	<ThingDef ParentName="RK_ExoticLongMeleeWeapon">
+		<defName>RK_DaDao</defName>
+		<label>ratkin long-handled broadsword (DaDao)</label>
+		<description>The long-handled broadsword, suitable for both mounted and close-quarters combat.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_DaDao</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticDefender</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<costStuffCount>75</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<WoodLog>70</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>21000</WorkToMake>
+			<Mass>5</Mass>
+				<Bulk>9</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.03</MoveSpeed>
+			<MeleeHitChance>-1</MeleeHitChance>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>2.7</cooldownTime>
+				<armorPenetrationSharp>9</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.8</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>37</power>
+				<cooldownTime>3</cooldownTime>
+				<armorPenetrationSharp>11.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>8.3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- RK_ExoticChopper -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_ExoticChopper</defName>
+		<label>exotic chopper</label>
+		<description>You'll need it when you're chopping wood, and you'll need it when you meet the wrong people.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Chopper</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticWorker</li>
+			<li>RK_ExoticFarmer</li>
+			<li>RK_MeleeExoticTier1</li>
+		</weaponTags>
+		<costList>
+			<WoodLog>30</WoodLog>
+			<Steel>35</Steel>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>5000</WorkToMake>
+			<Mass>1.6</Mass>
+				<Bulk>4</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<PlantWorkSpeed>0.05</PlantWorkSpeed>
+			<PlantHarvestYield>0.05</PlantHarvestYield>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-20</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>1.8</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.2</cooldownTime>
+				<armorPenetrationSharp>4.8</armorPenetrationSharp>
+				<armorPenetrationBlunt>3.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>1</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- RK_PoDao -->
+	<ThingDef ParentName="RK_ExoticLongMeleeWeapon">
+		<defName>RK_PoDao</defName>
+		<label>Moustate stinger (PoDao)</label>
+		<description>A long-handled weapon improvised with a chopper and the available bamboo, which can be removed when not in use.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Stinger</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_MeleeExoticTier1</li>
+		</weaponTags>
+		<costList>
+			<RK_ExoticChopper>1</RK_ExoticChopper>
+			<WoodLog>10</WoodLog>
+		
+				<ComponentMedieval>1</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>20</WorkToMake>
+			<Mass>5</Mass>
+				<Bulk>9</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.03</MoveSpeed>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>2.8</cooldownTime>
+				<armorPenetrationSharp>7.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>27</power>
+				<cooldownTime>3</cooldownTime>
+				<armorPenetrationSharp>8.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.1</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.6</cooldownTime>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<recipeUsers Inherit="false">
+				<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>0</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+
+	<!-- RK_ExoticChopper -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_SuanPan</defName>
+		<label>ratkin abacus</label>
+		<description>An ancient computing tool, of course, his metal frame hit people is quite painful.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_SuanPan</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticXiucai</li>
+			<li>RK_ExoticTrader</li>
+		</weaponTags>
+		<costList>
+			<WoodLog>30</WoodLog>
+			<Steel>25</Steel>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<statBases>
+			<WorkToMake>7500</WorkToMake>
+			<Mass>2</Mass>
+				<Bulk>5</Bulk>
+		</statBases>
+		<equippedStatOffsets>
+			<ResearchSpeed>0.15</ResearchSpeed>
+			<DrugCookingSpeed>0.05</DrugCookingSpeed>
+			<DrugSynthesisSpeed>0.05</DrugSynthesisSpeed>
+			<NegotiationAbility>0.05</NegotiationAbility>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-20</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>1.8</cooldownTime>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>corner</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.2</cooldownTime>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<recipeUsers>
+				<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>3</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+	</ThingDef>
+
+
+	<!-- RK_BianDan -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_BianDan</defName>
+		<label>ratkin shoulder pole</label>
+		<description>A prop used to carry goods, of course, it is no less useful for beating people.</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_BianDan</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_MeleeExoticTier1</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>1800</WorkToMake>
+			<Mass>3</Mass>
+				<Bulk>6</Bulk>
+		</statBases>
+		<costList>
+			<WoodLog>50</WoodLog>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<equippedStatOffsets>
+			<CarryingCapacity>50</CarryingCapacity>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>Head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.7</cooldownTime>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/RK_BianDan_Sheath</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>Cutout</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/RK_BianDan_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>Cutout</shaderType>
+					<drawSize>1.5</drawSize>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0,0.6,-0.2)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(0,0.6,-0.2)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,0.6,-0.03)</position>
+					<angle>0</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,-0.6,-0.03)</position>
+					<angle>0</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<!-- RK_San -->
+	<ThingDef ParentName="RK_ExoticMeleeWeapon">
+		<defName>RK_San</defName>
+		<label>ratkin umbrella</label>
+		<description>Rat umbrella: "Blue sky and other misty rain"\n"And I was waiting for you...".</description>
+		<graphicData>
+			<texPath>Item_Weapon/RK_San</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags>
+			<li>RK_ExoticXiucai</li>
+			<li>RK_ExoticTrader</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>5800</WorkToMake>
+			<Mass>1.2</Mass>
+				<Bulk>4</Bulk>
+		</statBases>
+		<costList>
+			<WoodLog>35</WoodLog>
+			<Cloth>50</Cloth>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<equippedStatOffsets>
+			<SocialImpact>0.15</SocialImpact>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>Head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.7</cooldownTime>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>Point</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>19</power>
+				<cooldownTime>2.9</cooldownTime>
+				<armorPenetrationBlunt>6.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<comps>
+			<li Class="SYS.CompProperties_Sheath">
+				<sheathOnlyGraphicData>
+					<texPath>Item_Weapon/RK_San_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>Cutout</shaderType>
+				</sheathOnlyGraphicData>
+				<fullGraphicData>
+					<texPath>Item_Weapon/RK_San_Full</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>Cutout</shaderType>
+					<drawSize>1.5</drawSize>
+				</fullGraphicData>
+				<drawPosition>Side</drawPosition>
+				<northOffset>
+					<position>(0,0.7,0)</position>
+					<angle>0</angle>
+				</northOffset>
+				<southOffset>
+					<position>(0,0.7,0)</position>
+					<angle>0</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0,0.6,0)</position>
+					<angle>0</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(0,-0.6,0)</position>
+					<angle>0</angle>
+				</westOffset>
+			</li>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

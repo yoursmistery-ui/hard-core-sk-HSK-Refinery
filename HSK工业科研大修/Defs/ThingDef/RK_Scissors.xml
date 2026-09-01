@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 鼠族剪刀(2026-08-09): 裁缝工具,锻造台打造;缝纫速度加成由 35 号补丁经 SurvivalToolsLite 提供。
+         贴图: Textures/Weapon/RK_Scissors.png(程序化绘制)。 -->
+    <ThingDef ParentName="RK_MeleeWeapon">
+        <defName>RK_Scissors</defName>
+        <label>鼠族剪刀</label>
+        <description>裁缝用剪刀,也能应急近战。由锻造台打造,能显著提升缝纫速度。</description>
+        <graphicData>
+            <texPath>Weapon/RK_Scissors</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <uiIconScale>1.25</uiIconScale>
+        <techLevel>Medieval</techLevel>
+        <weaponTags Inherit="false">
+            <li>RK_MeleeWeapon_Short</li>
+            <li>RK_LightWeapon</li>
+            <li>RK_WeaponTag_OneHand</li>
+        </weaponTags>
+        <statBases>
+            <WorkToMake>1500</WorkToMake>
+            <Mass>0.3</Mass>
+        </statBases>
+        <equippedAngleOffset>0</equippedAngleOffset>
+        <costStuffCount>10</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <tools>
+            <li>
+                <label>blade</label>
+                <capacities>
+                    <li>Cut</li>
+                </capacities>
+                <power>8</power>
+                <cooldownTime>1</cooldownTime>
+            </li>
+        </tools>
+        <comps>
+            <li Class="NewRatkin.CompProperties_WeaponGripType">
+                <gripTypes>
+                    <li>OneHand</li>
+                </gripTypes>
+            </li>
+        </comps>
+        <recipeMaker Inherit="False" IsNull="True" />
+    </ThingDef>
+</Defs>

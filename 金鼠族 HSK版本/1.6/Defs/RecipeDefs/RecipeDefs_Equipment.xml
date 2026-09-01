@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <RecipeDef Name="OAGene_MakeWeaponRequireFinishStory" Abstract="True">
+        <workerClass>OberoniaAureaGene.Snowstorm.RecipeWorker_RequireFinishStory</workerClass>
+        <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+        <workSkill>Crafting</workSkill>
+        <effectWorking>Smith</effectWorking>
+        <soundWorking>Recipe_Smith</soundWorking>
+        <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+        <recipeUsers>
+            <li>ElectricSmithy</li>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef Name="OAGene_MakeWeaponRequireFinishStory_Stuff" ParentName="OAGene_MakeWeaponRequireFinishStory" Abstract="True">
+        <defaultIngredientFilter>
+            <categories>
+                <li>Root</li>
+            </categories>
+            <disallowedThingDefs>
+                <li>Silver</li>
+                <li>Gold</li>
+                <li>WoodLog</li>
+            </disallowedThingDefs>
+        </defaultIngredientFilter>
+        <productHasIngredientStuff>true</productHasIngredientStuff>
+    </RecipeDef>
+
+    <RecipeDef ParentName="OAGene_MakeWeaponRequireFinishStory">
+        <defName>OAGene_Make_SnowstormCane</defName>
+        <label>制作风雪手杖</label>
+        <workAmount>36000</workAmount>
+        <productHasIngredientStuff>false</productHasIngredientStuff>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>OAGene_IceCrystal</li>
+                    </thingDefs>
+                </filter>
+                <count>100</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Silver</li>
+                    </thingDefs>
+                </filter>
+                <count>75</count>
+            </li>
+        
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>30</count>
+            </li></ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>OAGene_IceCrystal</li>
+                <li>Silver</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <OAGene_MeleeWeapon_SnowstormCane>1</OAGene_MeleeWeapon_SnowstormCane>
+        </products>
+        <skillRequirements>
+            <Crafting>10</Crafting>
+        </skillRequirements>
+        <researchPrerequisite>Smithing</researchPrerequisite>
+        <displayPriority>400</displayPriority>
+    </RecipeDef>
+	
+</Defs>

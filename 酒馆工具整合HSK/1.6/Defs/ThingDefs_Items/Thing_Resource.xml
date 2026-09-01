@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="ResourceBase" Name="TavWoolBase" Abstract="True">
+	<stackLimit>100</stackLimit>
+	<statBases>
+		<MaxHitPoints>90</MaxHitPoints>
+		<MarketValue>1.8</MarketValue>
+		<Mass>0.028</Mass>
+		<Flammability>0.4</Flammability>
+		<DeteriorationRate>3.4</DeteriorationRate>
+		<StuffPower_Armor_Sharp>0.36</StuffPower_Armor_Sharp>
+		<StuffPower_Armor_Blunt>0.00</StuffPower_Armor_Blunt>
+		<StuffPower_Armor_Heat>1.10</StuffPower_Armor_Heat>
+	</statBases>
+	<burnableByRecipe>true</burnableByRecipe>
+	<healthAffectsPrice>false</healthAffectsPrice>
+	<minRewardCount>30</minRewardCount>
+	<stuffProps>
+		<commonality>0.12</commonality>
+		<statFactors>
+		<Flammability>1.7</Flammability>
+		<Beauty>1.5</Beauty>
+		</statFactors>
+		<categories>
+		<li>Fabric</li>
+		</categories>
+		<canSuggestUseDefaultStuff>true</canSuggestUseDefaultStuff>
+	</stuffProps>
+	<thingCategories>
+		<li>Wools</li>
+	</thingCategories>
+	<graphicData>
+		<texPath>Things/Item/Resource/TavPadding</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+	</graphicData>
+	<allowedArchonexusCount>80</allowedArchonexusCount>
+	</ThingDef>
+	
+	<ThingDef ParentName="TavWoolBase">
+	<defName>TavPadding</defName>
+	<label>垫料</label>
+	<description>由混合羊毛纤维制成的柔软致密垫料。用于制作软垫家具和保暖衣物。</description>
+	<graphicData>
+		<color>(120,110,100)</color>
+	</graphicData>
+	<statBases>
+		<StuffPower_Insulation_Cold>15</StuffPower_Insulation_Cold>
+		<StuffPower_Insulation_Heat>6</StuffPower_Insulation_Heat>
+	</statBases>
+	<stuffProps>
+		<color>(120,110,100)</color>
+		<commonality>0.030</commonality>
+	</stuffProps>
+	</ThingDef>
+
+<!-- TavTallow(尸蜡) 已于 2026-08-29 删除, 油脂统一用 Core_SK 的 Tallow(标签同为"油脂");
+     原蜡烛成本/燃料与配方产物已改指 Tallow, 见 Recipes_HomeFood 与 TallowAsFuel 补丁。 -->
+
+</Defs>

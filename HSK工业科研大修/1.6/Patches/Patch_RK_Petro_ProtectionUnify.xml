@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 污染统一并入(2026-08-29, 原 ratkinpatch.PollutionUnify/Patch_B_ProtectionUnify.xml):
+     让"只防毒"的装备同时具备辐射抗性, 补齐环境危害互通断点 —— 任意危害可被同一抗性栈抵御。
+     已带双抗性的 HSK 化学防护服 / Rimatomics 防辐射服不动。
+     v3 修正: 原补丁是无门控 PatchOperationAdd + 前导 / 的 xpath。按项目铁律改为
+     顶层 PatchOperationConditional 存在性门控(1.6 起 Operation 级 MayRequire 已失效):
+       外层 = Radiation StatDef 存在(未装 Rimatomics 则整块跳过, 防未知 stat 报错)
+       内层 = 目标 apparel 的 equippedStatOffsets 存在(防毒面具属 Biotech DLC, 未装即跳过) -->
+<Patch>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="Radiation"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- 原版 Biotech 防毒面具: 0.8 毒抗 + 新增 0.35 辐射抗 -->
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Apparel_GasMask"]/equippedStatOffsets</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Apparel_GasMask"]/equippedStatOffsets</xpath>
+            <value><Radiation>-0.35</Radiation></value>
+          </match>
+        </li>
+
+        <!-- HSK 呼吸面罩: 0.6 毒抗 + 新增 0.35 辐射抗 -->
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Apparel_Respirator"]/equippedStatOffsets</xpath>
+          <match Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Apparel_Respirator"]/equippedStatOffsets</xpath>
+            <value><Radiation>-0.35</Radiation></value>
+          </match>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

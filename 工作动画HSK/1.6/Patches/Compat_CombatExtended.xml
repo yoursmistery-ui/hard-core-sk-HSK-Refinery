@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): Compat_CombatExtended.xml, Compat_GoldenRatkin.xml, Compat_HSK.xml, Compat_MedievalOverhaul.xml, Compat_RatkinFurniture.xml, Compat_StonebornCuisine.xml, Compat_VFEProduction.xml, Compat_Vile.xml -->
+<Patch><!-- ============================================================================
+       Compatibility: Combat Extended (CETeam.CombatExtended)
+       Adds an animated "reloading press" tool for ammo work at CE's ammo/reloading
+       bench. Gated behind PatchOperationFindMod so it only registers when CE is
+       loaded — without CE the def never exists and never clutters the settings list.
+
+       NOTE: authored WITHOUT CE installed on this machine, so the exact bench defName
+       could not be verified at runtime. workbenchDefs below lists CE's likely ammo /
+       reloading bench defNames; the tool only animates at a bench whose def matches.
+       If it doesn't trigger with CE active, confirm the bench's defName and update
+       this list.
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Combat Extended</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+        <JobEffects.JobToolDef>
+          <defName>JE_Tool_CE_ReloadPress</defName>
+          <handCount>1</handCount>
+          <handPosA>0.30</handPosA>
+          <jobDefs>
+            <li>DoBill</li>
+          </jobDefs>
+          <workbenchDefs>
+            <li>AmmoBench</li>
+            <li>CE_AmmoBench</li>
+            <li>ReloadingBench</li>
+            <li>CE_ReloadingBench</li>
+            <li>TableMachiningCE</li>
+          </workbenchDefs>
+          <texPath>Things/JobEffects/Tools/ReloadPress</texPath>
+          <!-- Crank: the press head is planted on the die and the lever handle is worked
+               around it, then snaps back to re-grip — reads as pulling a reloading press. -->
+          <swingStyle>Crank</swingStyle>
+          <scale>1.0</scale>
+          <reach>0.18</reach>
+          <period>0.9</period>
+          <windupAngle>70</windupAngle>
+          <strikeSound>JE_MetalTink</strikeSound>
+          <impactBitFleck>JE_StoneShard</impactBitFleck>
+          <impactBitCount>2</impactBitCount>
+          <impactBitSpeed>2~5</impactBitSpeed>
+          <impactBitScale>0.3~0.5</impactBitScale>
+          <impactSpread>60</impactSpread>
+        </JobEffects.JobToolDef>
+      </value>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: 金鼠族 HSK版本 (Oberonia Aurea — the golden ratkin, fxz.ratkinfaction)
+       Maps the golden ratkin mod's worker-operated production benches to the matching
+       animated tool by appending their defNames to existing tools' <workbenchDefs>.
+
+       Gated on /Defs/ThingDef[defName="OA_RK_Tailor"] (the golden ratkin sewing bench,
+       which no other mod defines) instead of PatchOperationFindMod — an xpath existence
+       gate is the definitive guard and is inert when the mod isn't loaded.
+
+       Bench -> tool:
+         tailoring   OA_RK_Tailor -> sewing needle (quick stabbing stitches)
+         cooking     OAGene_SnowstormCampfire / OA_OberoniaCakeProducter -> spoon
+                     (cook stir + steam; both are served by the DoBillsCook workgiver)
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="OA_RK_Tailor"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- ===== Golden ratkin sewing bench: needle ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+          <value>
+            <li>OA_RK_Tailor</li>
+          </value>
+        </li>
+
+        <!-- ===== Cooking: spoon (stir + steam) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>OAGene_SnowstormCampfire</li>
+            <li>OA_OberoniaCakeProducter</li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: HSK / Core_SK (skyarkhangel.HSK)
+       Maps the HSK-era worker-operated production benches to the matching animated tool by
+       appending their defNames to existing tools' <workbenchDefs>. All of these benches are
+       Building_WorkTable driven by the standard DoBill job via HSK's own WorkGiverDefs
+       (WorkGivers_SK.xml), so the same hand-tool that fits the vanilla bench fits the HSK one.
+
+       Gated on /Defs/ThingDef[defName="TableKitchen"] (the HSK kitchen table, which the
+       vanilla game never defines) instead of PatchOperationFindMod — FindMod+Sequence is
+       unreliable in 1.6, and an xpath existence gate is the definitive guard.
+
+       IMPORTANT: only DoBill tools (which already carry a workbenchDefs whitelist) are
+       extended here. A non-DoBill tool (Bonesaw=ExtractSkull, Trowel=Sow/PlantSeed/Replant,
+       Shell=RearmTurret, Shovel=FillIn) has NO workbenchDefs node and adding one would gate
+       its existing jobs behind a bench whitelist, killing that animation — so sawmills and
+       the salt mine are deliberately NOT mapped (no suitable DoBill tool exists yet).
+
+       The tavern mod's own kitchen benches (Tav_Oven / Tav_KitchenButch) are also folded in
+       here — they were removed from JobTools_JobEffects.xml so ALL non-vanilla bench mappings
+       live in this one patch.
+
+       Bench -> tool:
+         cooking      TableKitchen / TableGrill / ElectricStove_Pro / TableOven / ElectricOven /
+                      Canningstove / soylenttable / CandyTable / TableCoffee / GrindStone /
+                      MillElectric / OpenHearth / Tav_Oven -> spoon (cook stir + steam)
+         butchering   TableKitchen (its ButcherCorpseFlesh bill) / Tav_KitchenButch -> cleaver chop
+         brewing      ElectricBrewery -> brewing paddle (spoon stir)
+         furnaces     TableFurnace / Kiln / GlassworkTable -> smelt rod hover + embers
+         concrete     ConcreteMixer / EConcreteMixer -> spoon stir (mixing slurry)
+         chem/drugs   TableChemlab / meditable (herb/adv medicine) -> drug-lab pour flask
+         leather      LeatherworkerTable / TableLoom / HandMendingWorkbench / TableMending /
+                      HyperTailoringBench -> needle
+         prosthetics  TableBasicProsthetic / TableSynthetics / TableBionics /
+                      TablePrimitiveProsthetic / UpgradingStation -> metal chisel
+         weapons      WeaponCraftingWorkTable / AdvWeaponCraftingWorkTable /
+                      MechWeaponCraftingWorkTable / HeavyArmsBench -> metal chisel
+         electronics  TableElectronics / AdvToolBench / RobAssem / Matterfab -> metal chisel
+         ammunition   TableHeavyAmmunition -> metal chisel (ammo manufacture = metalwork)
+         stonecut     TableStonecutterNeolithic -> bench chisel + mallet
+
+       Skipped on purpose — these HSK benches are AUTOMATIC processors with no continuous
+       "working" toil for a colonist to animate over (the pawn only hauls ingredients in):
+       UniversalFermenter / DryingRack / CheeseVat / CheeseBasin / SK_Windmill / JerkyRack /
+       ElectricDryingRack / FungiponicsBasin / EAF / MatterConverter.
+       (EAF / MatterConverter are SK.Building_AnimatedWorktable — HSK's own built-in
+       animation. OpenHearth is NOT one of those: it is a worker-operated SK_WorkTableFueled
+       cooking bench and IS mapped to the spoon above.)
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="TableKitchen"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- ===== Cooking / milling / concrete: spoon (stir + steam) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>Tav_Oven</li>
+            <li>TableKitchen</li>
+            <li>TableGrill</li>
+            <li>ElectricStove_Pro</li>
+            <li>TableOven</li>
+            <li>ElectricOven</li>
+            <li>Canningstove</li>
+            <li>soylenttable</li>
+            <li>CandyTable</li>
+            <li>TableCoffee</li>
+            <li>GrindStone</li>
+            <li>MillElectric</li>
+            <li>OpenHearth</li>
+            <li>ConcreteMixer</li>
+            <li>EConcreteMixer</li>
+          </value>
+        </li>
+
+        <!-- ===== Butchering: cleaver chop (TableKitchen carries ButcherCorpseFlesh) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]/workbenchDefs</xpath>
+          <value>
+            <li>Tav_KitchenButch</li>
+            <li>TableKitchen</li>
+          </value>
+        </li>
+
+        <!-- ===== Brewing: paddle (spoon stir) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BrewSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>ElectricBrewery</li>
+          </value>
+        </li>
+
+        <!-- ===== Furnaces / kiln / glassworks: smelt rod (hover + embers) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]/workbenchDefs</xpath>
+          <value>
+            <li>TableFurnace</li>
+            <li>Kiln</li>
+            <li>GlassworkTable</li>
+          </value>
+        </li>
+
+        <!-- ===== Chem lab / medicine: pour flask ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_DrugSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>TableChemlab</li>
+            <li>meditable</li>
+          </value>
+        </li>
+
+        <!-- ===== Leather / loom / mending / hyper tailoring: needle ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+          <value>
+            <li>LeatherworkerTable</li>
+            <li>TableLoom</li>
+            <li>HandMendingWorkbench</li>
+            <li>TableMending</li>
+            <li>HyperTailoringBench</li>
+          </value>
+        </li>
+
+        <!-- ===== Electronics / advanced fab / quantum fabricator / prosthetics / weapons / ammo: metal chisel ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>TableElectronics</li>
+            <li>AdvToolBench</li>
+            <li>RobAssem</li>
+            <li>Matterfab</li>
+            <li>TableHeavyAmmunition</li>
+            <li>TableBasicProsthetic</li>
+            <li>TableSynthetics</li>
+            <li>TableBionics</li>
+            <li>TablePrimitiveProsthetic</li>
+            <li>UpgradingStation</li>
+            <li>WeaponCraftingWorkTable</li>
+            <li>AdvWeaponCraftingWorkTable</li>
+            <li>MechWeaponCraftingWorkTable</li>
+            <li>HeavyArmsBench</li>
+          </value>
+        </li>
+
+        <!-- ===== Neolithic stonecutting: bench chisel + mallet ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>TableStonecutterNeolithic</li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: Medieval Overhaul (DankPyon.Medieval.Overhaul)
+       Maps MO's workbenches to the right animated tool. All ops are gated behind
+       PatchOperationFindMod so nothing touches our defs when MO isn't loaded.
+
+       Two parts:
+         1) Append MO bench defNames to existing tools' <workbenchDefs>.
+         2) Add a handful of MO-only JobToolDefs that reuse existing sprites for
+            benches with no good existing match (timber sawing, bench mining,
+            digging spot, book scribing). These only exist when MO is active, so
+            they won't clutter the per-tool settings list without MO.
+
+       Skipped on purpose (no sensible swinging hand-tool): well, water spot,
+       spinning wheel, apiary, slop/ragout/fondue pots (auto-processors),
+       cleaning bench. Research bench/spot already work — the Notepad tool keys
+       off the vanilla Research job, not the bench def.
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Medieval Overhaul</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- ===== Existing tools: extend <workbenchDefs> ===== -->
+
+        <!-- Cooking: stir with rising steam. Ovens, grill, soup pot, the
+             millstone (grain/sugar grinding is a Cooking-skill bill), and the
+             rustic hearth (cooks meals over the fire). -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_StoneOven</li>
+            <li>DankPyon_StoneOvenLarge</li>
+            <li>DankPyon_Grill</li>
+            <li>DankPyon_StewPot</li>
+            <li>DankPyon_Millstone</li>
+            <li>DankPyon_RusticHearth</li>
+          </value>
+        </li>
+
+        <!-- Butchering: cleaver chop, meat bits. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_ButchersBlock</li>
+          </value>
+        </li>
+
+        <!-- Stonecutting: bench chisel, stone shards. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_StonecuttingSpot</li>
+          </value>
+        </li>
+
+        <!-- Smithing (anvil + general workbench): no patch needed — JE_Tool_SmithHammer is
+             now MO-only and ships with DankPyon_Anvil / DankPyon_Workbench baked into its
+             <workbenchDefs> in the base defs (plain strings, inert without MO). -->
+
+        <!-- Smelting: glowing rod. Furnace (smelt ore/scrap, make charcoal/tar). -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_Furnace</li>
+          </value>
+        </li>
+
+        <!-- Alchemy: drug stir rod with chemical fumes. Alchemy bench plus the
+             herb table (grinding herbs/ingredients — apothecary grind motion). -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_DrugSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_AlchemyBench</li>
+            <li>DankPyon_HerbTable</li>
+          </value>
+        </li>
+
+        <!-- Jewelry: fine metal chisel, sparks. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_JewelryBench</li>
+          </value>
+        </li>
+
+        <!-- Mending: sewing needle (mend apparel/weapon/armor). MO mending uses its OWN job
+             (DankPyon_DoBillMending via WorkGiver_DoMending), NOT vanilla DoBill, so the bench
+             mapping below is not enough on its own — the needle must also list that job. Its
+             targetA is the mending bench, so the workbenchDefs filter still scopes it to the
+             MendingBench. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+          <value>
+            <li>DankPyon_MendingBench</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/jobDefs</xpath>
+          <value>
+            <li>DankPyon_DoBillMending</li>
+          </value>
+        </li>
+
+        <!-- ===== New MO-only tools (reuse existing sprites) ===== -->
+
+        <!-- Timber sawing: table saw & trestle turn raw wood into timber. Reuse
+             the axe sprite as a hatchet hewing wood; throws wood chips. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_TimberAxe</defName>
+              <idleScale>0.62</idleScale>
+              <handPosA>0.16</handPosA>
+              <handPosB>0.38</handPosB>
+              <flipHead>true</flipHead>
+              <headInterval>0.8</headInterval>
+              <headScale>0.49</headScale>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_SawTable</li>
+                <li>DankPyon_Trestle</li>
+              </workbenchDefs>
+              <texPath>Things/JobEffects/Tools/Axe</texPath>
+              <swingStyle>Chop</swingStyle>
+              <scale>1.15</scale>
+              <reach>0.14</reach>
+              <period>0.5</period>
+              <!-- Lock the chop onto the recipe's saw-stroke sound (Recipe_MakeWoodPlanks_Hand,
+                   used by both SawTable and Trestle): one axe chop per saw stroke instead of
+                   a free-running clock that drifts out of sync with the work. -->
+              <syncToBenchSound>true</syncToBenchSound>
+              <windupAngle>64</windupAngle>
+              <followThroughAngle>18</followThroughAngle>
+              <impactBitFleck>JE_WoodChip</impactBitFleck>
+              <impactBitCount>4</impactBitCount>
+              <impactBitSpeed>5~11</impactBitSpeed>
+              <impactBitScale>0.385~0.665</impactBitScale>
+              <impactSpread>55</impactSpread>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Bench mining: mining spot & mine shaft produce stone/ore via bills.
+             Reuse the pickaxe sprite; material-tinted stone shards. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_BenchPick</defName>
+              <idleScale>0.65</idleScale>
+              <handPosA>0.15</handPosA>
+              <handPosB>0.38</handPosB>
+              <flipHead>true</flipHead>
+              <headInterval>0.7</headInterval>
+              <headScale>0.49</headScale>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_MiningSpot</li>
+                <li>DankPyon_MineShaft</li>
+              </workbenchDefs>
+              <texPath>Things/JobEffects/Tools/Pickaxe</texPath>
+              <swingStyle>Chop</swingStyle>
+              <scale>1.15</scale>
+              <reach>0.14</reach>
+              <period>0.46</period>
+              <windupAngle>64</windupAngle>
+              <followThroughAngle>18</followThroughAngle>
+              <strikeSound>PickHit</strikeSound>
+              <impactBitFleck>JE_StoneShard</impactBitFleck>
+              <impactBitCount>5</impactBitCount>
+              <impactBitSpeed>6~14</impactBitSpeed>
+              <impactBitScale>0.385~0.665</impactBitScale>
+              <impactSpread>60</impactSpread>
+              <impactDustFleck>DustPuff</impactDustFleck>
+              <impactFlashFleck>SparkFlash</impactFlashFleck>
+              <impactFlashScale>2.24</impactFlashScale>
+              <!-- stone shards keep the original JE_StoneShard colour; no ChipPale tint or ground litter -->
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Digging spot: dirt/sand/clay gathered via bills. Reuse the shovel
+             sprite; soil clods. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_BenchShovel</defName>
+              <idleScale>0.68</idleScale>
+              <handPosA>0.16</handPosA>
+              <handPosB>0.38</handPosB>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_DiggingSpot</li>
+              </workbenchDefs>
+              <texPath>Things/JobEffects/Tools/Shovel</texPath>
+              <swingStyle>Dig</swingStyle>
+              <scale>1.1</scale>
+              <reach>0.14</reach>
+              <period>0.75</period>
+              <windupAngle>55</windupAngle>
+              <stabDistance>0.22</stabDistance>
+              <impactBitFleck>JE_SoilClod</impactBitFleck>
+              <impactBitCount>5</impactBitCount>
+              <impactBitSpeed>3~7</impactBitSpeed>
+              <impactBitScale>0.35~0.65</impactBitScale>
+              <impactSpread>80</impactSpread>
+              <impactDustFleck>DustPuff</impactDustFleck>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Book scribe table: writing books. Composing reads as the same head-scratch
+             "thinking" pose as research, with idea lightbulbs popping overhead — no quill or
+             paper prop is drawn (Scratch never draws a sprite). -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_Quill</defName>
+              <handCount>1</handCount>
+              <handPosA>0.5</handPosA>
+              <headFleck>JE_Lightbulb</headFleck>
+              <headInterval>2.8</headInterval>
+              <headScale>0.7</headScale>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_Book_ScribeTable</li>
+              </workbenchDefs>
+              <swingStyle>Scratch</swingStyle>
+              <scale>0.8</scale>
+              <reach>0.14</reach>
+              <period>7</period>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Spinning wheel: drop spindle. Spinning wool/flax into thread & cloth at the dedicated
+             spinning-wheel building (the spin recipes also run at the vanilla tailoring benches,
+             which share the bench with tailoring — those keep the needle; only the dedicated
+             SpinningWheel maps to the spindle). A slow continuous twirl works the fiber; no
+             impact/debris — the motion alone reads as spinning. Medieval-appropriate. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_Spindle</defName>
+              <handCount>1</handCount>
+              <handPosA>0.34</handPosA>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_SpinningWheel</li>
+              </workbenchDefs>
+              <texPath>Things/JobEffects/Tools/Spindle</texPath>
+              <swingStyle>Stir</swingStyle>
+              <scale>0.7</scale>
+              <reach>0.14</reach>
+              <period>2.6</period>
+              <windupAngle>8</windupAngle>
+              <stirRadius>0.09</stirRadius>
+              <idleScale>0.72</idleScale>
+              <idleAngle>150</idleAngle>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Tanning rack: hide scraper / fleshing knife. Scraping flesh & hair off a stretched
+             hide — a one-handed draw-scrape while the off hand presses the hide flat (braceOffHand),
+             throwing a few small scraps. Medieval-appropriate. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_HideScraper</defName>
+              <handCount>1</handCount>
+              <handPosA>0.22</handPosA>
+              <braceOffHand>true</braceOffHand>
+              <jobDefs>
+                <li>DoBill</li>
+              </jobDefs>
+              <workbenchDefs>
+                <li>DankPyon_TanningRack</li>
+              </workbenchDefs>
+              <texPath>Things/JobEffects/Tools/HideScraper</texPath>
+              <swingStyle>Sweep</swingStyle>
+              <scale>0.9</scale>
+              <reach>0.14</reach>
+              <period>0.6</period>
+              <windupAngle>24</windupAngle>
+              <impactBitFleck>JE_SoilClod</impactBitFleck>
+              <impactBitCount>2</impactBitCount>
+              <impactBitSpeed>2~5</impactBitSpeed>
+              <impactBitScale>0.25~0.45</impactBitScale>
+              <impactSpread>90</impactSpread>
+              <idleScale>0.72</idleScale>
+              <idleAngle>150</idleAngle>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+        <!-- Plowing soil: field hoe. MO's "plow soil" (Growing-skill FinishFrame on the
+             DankPyon_PlowedSoil TerrainDef) otherwise matches NO tool, because every material
+             build tool excludes terrain frames. buildTerrainDefs claims exactly that build — a
+             two-handed chop into the earth flinging soil clods. Medieval-appropriate. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <JobEffects.JobToolDef>
+              <defName>JE_Tool_MO_Hoe</defName>
+              <handCount>2</handCount>
+              <handPosA>0.16</handPosA>
+              <handPosB>0.38</handPosB>
+              <flipHead>true</flipHead>
+              <jobDefs>
+                <li>FinishFrame</li>
+              </jobDefs>
+              <buildTerrainDefs>
+                <li>DankPyon_PlowedSoil</li>
+              </buildTerrainDefs>
+              <texPath>Things/JobEffects/Tools/Hoe</texPath>
+              <swingStyle>Chop</swingStyle>
+              <scale>1.15</scale>
+              <reach>0.2</reach>
+              <period>0.72</period>
+              <windupAngle>58</windupAngle>
+              <followThroughAngle>16</followThroughAngle>
+              <strikeSound>JE_ShovelScoop</strikeSound>
+              <impactBitFleck>JE_SoilClod</impactBitFleck>
+              <impactBitCount>5</impactBitCount>
+              <impactBitSpeed>3~7</impactBitSpeed>
+              <impactBitScale>0.35~0.65</impactBitScale>
+              <impactSpread>80</impactSpread>
+              <impactDustFleck>DustPuff</impactDustFleck>
+              <restFleck>JE_ChipRest</restFleck>
+              <idleScale>0.64</idleScale>
+            </JobEffects.JobToolDef>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: 鼠族家具拓展 (local.ratkinfurniture / fxz.ratkinfaction)
+       Maps the ratkin furniture mod's worker-operated production benches to the matching
+       animated tool by appending their defNames to existing tools' <workbenchDefs>. These
+       benches are Building_WorkTable driven by the standard DoBill job (they carry their
+       own <recipes> — or inherit them from the mod's BenchBase — and Core_SK's generic
+       DoBill workgiver serves them), so the same hand-tool that fits the vanilla bench
+       fits the ratkin one.
+
+       Gated on /Defs/ThingDef[defName="RKFC_GL_TableButcher"] (a ratkin-furniture-only
+       bench the vanilla/HSK never define) instead of PatchOperationFindMod — an xpath
+       existence gate is the definitive guard and is inert when the mod isn't loaded.
+
+       Bench -> tool:
+         cooking     RKFC_GL_Bonfire / RKFC_GL_ElectricStove / RKFC_RGK_FueledStove
+                     -> spoon (cook stir + steam)
+         butchering  RKFC_GL_TableButcher -> cleaver chop
+         smithing    RKFC_GL_ElectricSmithy / RKFC_GL_FueledSmithy
+                     -> bench welder + mask (= vanilla smithies)
+         workbench   RK_HandMsWorkbench / RK_ElectricMsWorkbench
+                     -> sewing needle (the workbench serves the tailoring/apparel line)
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="RKFC_GL_TableButcher"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- ===== Cooking: spoon (stir + steam) ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>RKFC_GL_Bonfire</li>
+            <li>RKFC_GL_ElectricStove</li>
+            <li>RKFC_RGK_FueledStove</li>
+          </value>
+        </li>
+
+        <!-- ===== Butchering: cleaver chop ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]/workbenchDefs</xpath>
+          <value>
+            <li>RKFC_GL_TableButcher</li>
+          </value>
+        </li>
+
+        <!-- ===== Smithing: bench welder + mask ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchWelder"]/workbenchDefs</xpath>
+          <value>
+            <li>RKFC_GL_ElectricSmithy</li>
+            <li>RKFC_GL_FueledSmithy</li>
+          </value>
+        </li>
+
+        <!-- ===== Workbench (tailoring/apparel line): sewing needle ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+          <value>
+            <li>RK_HandMsWorkbench</li>
+            <li>RK_ElectricMsWorkbench</li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: Stoneborn - Cuisine (det.sbcuisine)
+       Maps the mod's two worker-operated cooking benches to the cooking spoon (stir +
+       rising steam) by appending them to JE_Tool_Spoon's <workbenchDefs>. Gated behind
+       PatchOperationFindMod (matched on the mod's display NAME), so nothing touches our
+       defs when the mod isn't loaded.
+
+       Worker benches (Building_WorkTable, Cooking-skill DoBill recipes):
+         SC_HotGrill  (hot grill)         -> grilling skewers & rockburgers
+         SC_PrepTable (preparation bench) -> preparing dough / fresh cheese
+
+       Skipped on purpose — every other Stoneborn building is an AUTOMATIC processor with
+       no continuous "working" toil for a colonist to animate over (the pawn only hauls
+       ingredients in): dwarven kiln, portable pot, archotech microwave (PipeSystem
+       AdvancedResourceProcessor), curing rack (Processor Framework), and the insectiary
+       (a passive jelly spawner).
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Stoneborn - Cuisine</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+      <value>
+        <li>SC_HotGrill</li>
+        <li>SC_PrepTable</li>
+      </value>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: Vanilla Furniture Expanded - Production (VanillaExpanded.VFEProduction)
+       Maps VFE-P's "large"/electric/fueled workbenches to the matching animated tool by
+       appending their defNames to existing tools' <workbenchDefs>. Every op is gated behind
+       PatchOperationFindMod (matched on the mod's display NAME — PatchOperationFindMod uses
+       ModLister.HasActiveModWithName), so nothing touches our defs when VFE-P isn't loaded.
+
+       These benches are all Building_WorkTable(_HeatPush) that inherit the vanilla recipe set
+       via VEF's RecipeInheritanceExtension, so the same hand-tool that fits the vanilla bench
+       fits the VFE-P one. No new JobToolDefs or sprites are needed — pure workbenchDefs appends.
+
+       Bench -> tool:
+         large stove                  -> spoon (cook stir + steam)
+         large tailoring table        -> sewing needle
+         large machining table        -> metalworking chisel
+         assembly (component) bench   -> metalworking chisel (= vanilla FabricationBench)
+         large electric smithy        -> bench welder + mask
+         electric butcher             -> cleaver chop
+         electric drug lab            -> drug-lab pour flask
+         fueled smelter               -> glowing smelt rod
+         electric stonecutter's table -> bench chisel + mallet
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Furniture Expanded - Production</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- Cooking: large stove. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableStoveLarge</li>
+          </value>
+        </li>
+
+        <!-- Tailoring: large tailoring table. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableTailorLarge</li>
+          </value>
+        </li>
+
+        <!-- Machining / fabrication: large machining table + assembly (component) bench. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableMachiningLarge</li>
+            <li>VFE_ComponentFabricationBench</li>
+          </value>
+        </li>
+
+        <!-- Smithing: large electric smithy (bench welder + mask, like the vanilla smithies). -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchWelder"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableSmithyLarge</li>
+          </value>
+        </li>
+
+        <!-- Butchering: electric butcher. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableButcherElectric</li>
+          </value>
+        </li>
+
+        <!-- Drugs: electric drug lab. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_DrugSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableDrugLabElectric</li>
+          </value>
+        </li>
+
+        <!-- Smelting: fueled smelter. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_FueledSmelter</li>
+          </value>
+        </li>
+
+        <!-- Stonecutting: electric stonecutter's table. -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>VFE_TableStonecutterElectric</li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation><!-- ============================================================================
+       Compatibility: Vile's Materials Science / Metallurgy / Hell Bent for Leather
+       Tanning (vitech.materialsscience / vitech.metallurgy / vitech.leathertanning)
+       Maps Vile's worker-operated production benches to the matching animated tool by
+       appending their defNames to existing tools' <workbenchDefs>. All of these benches
+       are SK_WorkTable-driven DoBill tables (worked via Core_SK's own WorkGiverDefs —
+       DoBillsSmeltMetal_Hand / DoBillsTableChemlab / DoBillsTanningDrum / etc.), so the
+       same hand-tool that fits the vanilla/HSK bench fits the Vile one.
+
+       Gated on /Defs/ThingDef[defName="ChemistryLab"] (a Vile-Materials-Science bench the
+       vanilla/HSK never define) instead of PatchOperationFindMod — an xpath existence gate
+       is the definitive guard and is inert when Vile's Materials Science isn't loaded.
+       The Metallurgy / Leather-Tanning benches ride the same gate: they are only ever
+       played in a colony that has Materials Science enabled too, and if a bench def is
+       absent its name is simply an inert string in the list.
+
+       Bench -> tool:
+         smelting/refining  ElectrolyticRefinery / InductionFurnace / Bloomery / Foundry /
+                            FirePit -> smelt rod (hover + embers)
+         chemistry          ChemistryLab -> drug-lab pour flask (chem mixing)
+         leather tanning    BriningStation / DyeingStation / TanningDrum -> drug-lab pour
+                            flask (brine/dye/tan liquor work)
+         deep-frying        Fryer -> spoon (cook stir + steam)
+         pottery            PotteryStation -> bench chisel + mallet (hand-thrown clay)
+         ore crushing       StampMill -> metal chisel (crushing/milling ore)
+
+       Skipped on purpose — no suitable DoBill tool exists for these (a non-DoBill tool's
+       workbenchDefs would gate its own job away, see Compat_HSK.xml):
+         ChoppingBlock / LogSplittingSpot (firewood/planks — the saw is a non-DoBill tool)
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="ChemistryLab"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- ===== Smelting / refining: smelt rod ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]/workbenchDefs</xpath>
+          <value>
+            <li>ElectrolyticRefinery</li>
+            <li>InductionFurnace</li>
+            <li>Bloomery</li>
+            <li>Foundry</li>
+            <li>FirePit</li>
+          </value>
+        </li>
+
+        <!-- ===== Chemistry: pour flask ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_DrugSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>ChemistryLab</li>
+          </value>
+        </li>
+
+        <!-- ===== Leather tanning (brine / dye / tan): pour flask ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_DrugSpoon"]/workbenchDefs</xpath>
+          <value>
+            <li>BriningStation</li>
+            <li>DyeingStation</li>
+            <li>TanningDrum</li>
+          </value>
+        </li>
+
+        <!-- ===== Deep-frying: spoon ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+          <value>
+            <li>Fryer</li>
+          </value>
+        </li>
+
+        <!-- ===== Pottery: bench chisel + mallet ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>PotteryStation</li>
+          </value>
+        </li>
+
+        <!-- ===== Ore crushing: metal chisel ===== -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]/workbenchDefs</xpath>
+          <value>
+            <li>StampMill</li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation></Patch>

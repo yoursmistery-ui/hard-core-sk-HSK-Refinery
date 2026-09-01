@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 使 AFU 发型在所有 HSK 种族文化中可选: 给每个目标文化的 styleItemTags 追加 AFU_Style 标签。
+       1.6 Operation 级 MayRequire 已失效, 故用 PatchOperationConditional 的 xpath 存在性门控, 目标 mod 缺失时空转不报错。 -->
+  <!-- RK_Culture_Virtuard (来自 Solaris.RatkinRaceMod) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="RK_Culture_Virtuard"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="RK_Culture_Virtuard"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- RatkiniaTraditionCulture_Warlord (来自 local.ratkin.clothesweapons) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="RatkiniaTraditionCulture_Warlord"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="RatkiniaTraditionCulture_Warlord"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- RatkiniaExoticCulture (来自 local.ratkin.clothesweapons) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="RatkiniaExoticCulture"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="RatkiniaExoticCulture"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- OA_RK_RatkiniaTraditionCulture (来自 local.ratkin.goldenhsk) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="OA_RK_RatkiniaTraditionCulture"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="OA_RK_RatkiniaTraditionCulture"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- MihoCultures (来自 miho.fortifiedoutremer) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="MihoCultures"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="MihoCultures"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- AsariCulture (来自 skyarkhangel.asarirace) : 存在则注入 AFU_Style, 缺失则该 mod 未启用 -> 空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="AsariCulture"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="AsariCulture"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+  <!-- Aolarian (来自 库林战狐, 平替 Asari) : 存在则注入 AFU_Style, 缺失则空转不报错 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/CultureDef[defName="Aolarian"]/styleItemTags</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/CultureDef[defName="Aolarian"]/styleItemTags</xpath>
+      <value>
+        <li>
+          <tag>AFU_Style</tag>
+          <baseWeight>1</baseWeight>
+          <weightFactor>1</weightFactor>
+        </li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

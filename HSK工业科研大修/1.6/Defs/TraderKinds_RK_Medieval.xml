@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==========================================================================
+	     中世纪商人 8 类(移植自 Medieval Overhaul 的 TraderKinds_*, 只借人设与数量/稀有度)
+	     铁律: ①不引 MO 的 DLL/def → 所有 thingDef/categoryDef/tradeTag 均为原版或 Core_SK/HSK 现有 def
+	           ②StockGenerator 全部原版类(实测 MO 也只用了原版类)
+	           ③挂载见 Patches/71_中世纪商队挂载.xml
+	     MO→本环境 商品替换: DankPyon_ComponentBasic→ComponentMedieval, IronIngot→Iron,
+	       RawWood→WoodLog, Linen→Cloth, IceBlock→Salt, Mindwort/Poppy/Fleawort→MedicineHerbal,
+	       Paper→(无对应, 改卖书), MealBread→MealSimple, MealRations→MealSurvivalPack/Pemmican,
+	       Necklaces/Rings/Loot 标签→Artifact/ExoticMisc/Jade, TornNote_Hideout→删除(MO 任务道具)
+	     ========================================================================== -->
+
+	<!-- ===== 1. 中世纪据点商(据点常驻大商栈; 仿 DankPyon_Base_Medieval_Standard) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_MedievalHold</defName>
+		<label>中世纪据点商栈</label>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>800~3000</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentMedieval</thingDef>
+				<countRange>20~70</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>StoneBlocks</categoryDef>
+				<thingDefCountRange>2~3</thingDefCountRange>
+				<totalPriceRange>400~800</totalPriceRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Iron</thingDef>
+				<countRange>500~800</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>WoodLog</thingDef>
+				<countRange>500~600</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Hay</thingDef>
+				<countRange>250~400</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>400~600</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Gold</thingDef>
+				<countRange>100~200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Salt</thingDef>
+				<countRange>100~300</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Chocolate</thingDef>
+				<countRange>-30~70</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineHerbal</thingDef>
+				<countRange>25~70</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Textiles</categoryDef>
+				<thingDefCountRange>1~2</thingDefCountRange>
+				<totalPriceRange>400~800</totalPriceRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>ResourcesRaw</categoryDef>
+				<thingDefCountRange>2~4</thingDefCountRange>
+				<totalPriceRange>400~800</totalPriceRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>FoodRaw</categoryDef>
+				<excludedCategories>
+					<li>EggsFertilized</li>
+				</excludedCategories>
+				<thingDefCountRange>2~4</thingDefCountRange>
+				<totalPriceRange>400~800</totalPriceRange>
+			</li>
+			<!-- 牲畜(卖家畜/宠物, 回购珍稀与战斗兽) -->
+			<li Class="StockGenerator_Animals">
+				<tradeTagsSell>
+					<li>AnimalFarm</li>
+					<li>AnimalPet</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalUncommon</li>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>2~4</kindCountRange>
+				<countRange>3~8</countRange>
+				<createMatingPair>
+					<li>AnimalFarm</li>
+				</createMatingPair>
+			</li>
+			<!-- 奴隶(受人口意图约束) -->
+			<li Class="StockGenerator_Slaves">
+				<respectPopulationIntent>true</respectPopulationIntent>
+				<countRange>-1~2</countRange>
+			</li>
+			<!-- 衣物/护甲/武器 -->
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>BasicClothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>7~7</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Clothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>3~3</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Armor</tradeTag>
+				<countRange>5~5</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>WeaponRanged</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>-1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>WeaponsMelee</categoryDef>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<thingDefCountRange>3~5</thingDefCountRange>
+				<countRange>2~3</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>Artifact</tradeTag>
+				<thingDefCountRange>1~3</thingDefCountRange>
+				<countRange>1~1</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Apparel</categoryDef>
+				<thingDefCountRange>3~6</thingDefCountRange>
+				<countRange>1~10</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Art</tradeTag>
+				<countRange>5~10</countRange>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Kibble</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>ExoticMisc</tag></li>
+			<li Class="StockGenerator_BuyExpensiveSimple"/>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 2. 中世纪访客(据点门口随机小贩; 仿 DankPyon_Visitor_Medieval_Standard) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_MedievalVisitor</defName>
+		<label>中世纪行脚访客</label>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>50~250</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentMedieval</thingDef>
+				<countRange>2~5</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Pemmican</thingDef>
+				<countRange>60~120</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineHerbal</thingDef>
+				<countRange>1~6</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>WeaponRanged</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>-1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>WeaponsMelee</categoryDef>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>0~1</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>BasicClothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>7~7</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Clothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>3~3</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Armor</tradeTag>
+				<countRange>5~5</countRange>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Cloth</li>
+					<li>Chocolate</li>
+				</thingDefs>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 3. 杂货批发商(仿 DankPyon_Caravan_Medieval_BulkGoodsMerchant, commonality 3) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_BulkGoods</defName>
+		<label>杂货批发商队</label>
+		<commonality>3</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentMedieval</thingDef>
+				<countRange>20~40</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Hay</thingDef>
+				<countRange>350~1000</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Kibble</thingDef>
+				<countRange>150~450</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>WoodLog</thingDef>
+				<countRange>100~450</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>100~400</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Iron</thingDef>
+				<countRange>100~200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>SoftClay</thingDef>
+				<countRange>100~400</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Salt</thingDef>
+				<countRange>30~60</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineHerbal</thingDef>
+				<countRange>0~24</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<maxWildness>0.70</maxWildness>
+				<tradeTagsSell>
+					<li>AnimalFarm</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>2~6</kindCountRange>
+				<countRange>4~8</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Drugs</categoryDef>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Textiles</categoryDef>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuySingleDef"><thingDef>Coal</thingDef></li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>ExoticMisc</tag></li>
+			<li Class="StockGenerator_BuyExpensiveSimple"/>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 4. 艺术赞助人(仿 ArtPatron, commonality 1 = 稀有) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_ArtPatron</defName>
+		<label>艺术赞助人</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Gold</thingDef>
+				<countRange>50~120</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Jade</thingDef>
+				<countRange>30~90</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>Artifact</tradeTag>
+				<thingDefCountRange>2~4</thingDefCountRange>
+				<countRange>1~1</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<checkTemperature>false</checkTemperature>
+				<tradeTagsSell>
+					<li>AnimalUncommon</li>
+					<li>AnimalFighter</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>1~2</kindCountRange>
+				<countRange>1~2</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Art</tradeTag>
+				<countRange>5~10</countRange>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Chocolate</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>ExoticMisc</tag></li>
+			<li Class="StockGenerator_BuyExpensiveSimple"/>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 5. 甲匠(仿 Armorsmith, commonality 2) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_Armorsmith</defName>
+		<label>巡回甲匠</label>
+		<commonality>2</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Iron</thingDef>
+				<countRange>120~260</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentMedieval</thingDef>
+				<countRange>6~14</countRange>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>MedievalArmor_Gambeson</li>
+					<li>MedievalArmor_Hauberk</li>
+					<li>MedievalArmor_NasalHelmet</li>
+					<li>MedievalArmor_PlateArmor</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>BasicClothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>7~7</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Clothing</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>3~3</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Armor</tradeTag>
+				<countRange>5~5</countRange>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuySingleDef"><thingDef>SoftClay</thingDef></li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 6. 武器匠(仿 Weaponsmith, commonality 2) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_Weaponsmith</defName>
+		<label>巡回武器匠</label>
+		<commonality>2</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MealSimple</thingDef>
+				<countRange>10~20</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>WeaponRanged</tradeTag>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<countRange>-1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>WeaponsMelee</categoryDef>
+				<maxTechLevelGenerate>Medieval</maxTechLevelGenerate>
+				<thingDefCountRange>4~4</thingDefCountRange>
+				<countRange>2~3</countRange>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>MeleeWeapon_LongSword</li>
+					<li>MeleeWeapon_Axe</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineHerbal</thingDef>
+				<countRange>10~40</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<tradeTagsSell>
+					<li>AnimalFighter</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>1~2</kindCountRange>
+				<countRange>1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Drugs</categoryDef>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuySingleDef"><thingDef>Iron</thingDef></li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 7. 废墟拾荒商(仿 RuinsMerchant, commonality 1 = 稀有) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_RuinScavenger</defName>
+		<label>废墟拾荒商</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MealSurvivalPack</thingDef>
+				<countRange>5~15</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Pemmican</thingDef>
+				<countRange>5~15</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineHerbal</thingDef>
+				<countRange>0~24</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<maxWildness>0.70</maxWildness>
+				<tradeTagsSell>
+					<li>AnimalExotic</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>2~6</kindCountRange>
+				<countRange>4~8</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>Artifact</tradeTag>
+				<thingDefCountRange>1~4</thingDefCountRange>
+				<countRange>1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>ExoticMisc</tradeTag>
+				<thingDefCountRange>1~4</thingDefCountRange>
+				<countRange>1~2</countRange>
+			</li>
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Urn</li>
+					<li>SculptureSmall</li>
+					<li>Jade</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentIndustrial</thingDef>
+				<countRange>2~8</countRange>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>ExoticMisc</tag></li>
+			<li Class="StockGenerator_BuyExpensiveSimple"/>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<!-- ===== 8. 流浪学者(仿 Scholar; 卖书 + 本 mod 蓝图书商 + 回购蓝图) ===== -->
+	<TraderKindDef>
+		<defName>RK_Trader_WanderingScholar</defName>
+		<label>流浪学者</label>
+		<commonality>2</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>750~1200</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentMedieval</thingDef>
+				<countRange>2~3</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Dye</thingDef>
+				<countRange>50~250</countRange>
+			</li>
+			<!-- 书本(本环境无 MO 的 Book/Schematic/Treatise/Tale 标签, 直接列原版与本 mod 的书) -->
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Novel</li>
+					<li>TextBook</li>
+					<li>Schematic</li>
+					<li>RK_Book_Tale_Medieval</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Book</tradeTag>
+				<countRange>2~5</countRange>
+			</li>
+			<!-- 本 mod 自研: 蓝图书(单轮补货 15% 概率携带) -->
+			<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader">
+				<sellChance>0.15</sellChance>
+			</li>
+			<!-- 回购 -->
+			<li Class="StockGenerator_BuyTradeTag"><tag>Blueprint</tag></li>
+			<li Class="StockGenerator_BuyTradeTag"><tag>Book</tag></li>
+		</stockGenerators>
+	</TraderKindDef>
+
+</Defs>

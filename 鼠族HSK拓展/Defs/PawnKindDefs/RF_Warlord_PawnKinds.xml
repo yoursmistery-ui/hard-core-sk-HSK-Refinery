@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs> 
+	<PawnKindDef Name="RKBasePawnKind_Warlord" ParentName="RKBasePawnKind" Abstract="True">
+		<defaultFactionType>Rakinia_Warlord</defaultFactionType>
+		<!-- 2026-08-22: 军阀兵种显式指定鼠族异种人池(含鼠人/实验白鼠/废土鼠/田鼠),
+		     不依赖 RKBasePawnKind 继承,确保军阀部队生成鼠族异种人。 -->
+		<xenotypeSet Inherit="False">
+			<xenotypeChances>
+				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.88</RK_XenoType_Ratkin>
+				<Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
+				<Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
+				<Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
+				<Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
+				<Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+			</xenotypeChances>
+		</xenotypeSet>
+	</PawnKindDef>	
+	
+	<PawnKindDef Name="RKCombatantBase_Warlord" ParentName="RKBasePawnKind_Warlord" Abstract="true">
+		<isFighter>true</isFighter>	
+	</PawnKindDef>	
+	
+	<!-- 贵族 -->
+	<PawnKindDef ParentName="RKBasePawnKind_Warlord">
+		<defName>RatkinWarlord</defName>
+		<label>ratkin warlord</label>
+		<combatPower>35</combatPower>
+		<isFighter>true</isFighter>
+		<maxPerGroup>1</maxPerGroup>
+		<factionLeader>true</factionLeader>
+		<initialResistanceRange>60~100</initialResistanceRange>
+		<initialWillRange>5~10</initialWillRange>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>RatkinNoble</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<itemQuality>Excellent</itemQuality>
+		<apparelMoney>
+			<min>2000</min>
+			<max>3500</max>
+		</apparelMoney>
+		<apparelTags>
+			<li>RK_Noble</li>
+			<li>RK_WWII</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+		<weaponMoney>
+			<min>1800</min>
+			<max>3000</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_Combatant</li>
+			<li>RK_Shotgun</li>
+			<li>RK_3TierWeapon</li>
+			<li>RK_Rifle</li>
+		</weaponTags>
+		<inventoryOptions>
+			<skipChance>0</skipChance>
+			<subOptionsChooseOne>
+				<li>
+					<choiceChance>95</choiceChance>
+					<thingDef>Silver</thingDef>
+					<countRange>
+						<min>300</min>
+						<max>800</max>
+					</countRange>
+				</li>
+				<li>
+					<choiceChance>5</choiceChance>
+					<thingDef>Gold</thingDef>
+					<countRange>
+						<min>100</min>
+						<max>200</max>
+					</countRange>
+				</li>
+			</subOptionsChooseOne>
+		</inventoryOptions>
+		<trader>false</trader>
+	</PawnKindDef>
+	
+	<PawnKindDef ParentName="RKBasePawnKind_Warlord">
+		<defName>RatkinBattlefieldPriest</defName>
+		<label>ratkin field Priest</label>
+		<isFighter>false</isFighter>
+		<combatPower>65</combatPower>
+		<factionLeader>false</factionLeader>
+		<minGenerationAge>21</minGenerationAge>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>RatkinFieldPriest</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelMoney>
+			<min>2500</min>
+			<max>4000</max>
+		</apparelMoney>
+		<apparelTags>
+			<li>RK_Priest</li>
+			<li>RK_Temp</li>
+		</apparelTags>
+		<apparelRequired>
+			<li>RK_SistersVeil</li>
+		</apparelRequired>		
+		<abilities>
+		  <li>RK_PrayerService</li>
+		</abilities>
+	</PawnKindDef>
+
+	<!-- 士兵 -->
+	<PawnKindDef ParentName="RKCombatantBase_Warlord">
+		<defName>RatkinCombatantWarlord</defName>
+		<label>ratkin combatant</label>
+		<combatPower>90</combatPower>
+		<isFighter>true</isFighter>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>RatkinSoldier_Warlord</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<itemQuality>Good</itemQuality>
+		<gearHealthRange>
+			<min>0.4</min>
+			<max>0.9</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>2500</min>
+			<max>5000</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1800</min>
+			<max>3000</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_Combatant</li>
+			<li>RK_Shotgun</li>
+			<li>RK_3TierWeapon</li>
+			<li>RK_Rifle</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_WWII</li>
+		</apparelTags>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<requiredTag>RK_WWII</requiredTag>
+			</li>
+			<li>
+				<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>RK_WWII</requiredTag>
+			</li>
+		</specificApparelRequirements>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>6~10</range>
+			</li>
+		</skills>	
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+	</PawnKindDef>	
+	
+	<PawnKindDef ParentName="RKCombatantBase_Warlord">
+		<defName>RatkinDefenderWarlord</defName>
+		<label>ratkin defender</label>
+		<combatPower>85</combatPower>
+		<isFighter>true</isFighter>
+		<minGenerationAge>21</minGenerationAge>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>RatkinSoldier_Warlord</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<itemQuality>Good</itemQuality>
+		<apparelRequired>
+			<li>RK_GaurdenUniform</li>
+			<li>RK_WoodenShield</li>
+		</apparelRequired>
+		<gearHealthRange>
+			<min>0.6</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>6500</min>
+			<max>8000</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>2000</min>
+			<max>3500</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_Defender</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_LightArmor</li>
+			<li>RK_WWII</li>
+		</apparelTags>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>RK_WWII</requiredTag>
+			</li>
+		</specificApparelRequirements>
+		<apparelAllowHeadgearChance>100</apparelAllowHeadgearChance>				
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>8~12</range>
+			</li>
+		</skills>	
+	</PawnKindDef>	
+
+	
+
+
+
+
+
+</Defs>

@@ -1,0 +1,168 @@
+# HSK 参考文档合集导航
+
+> 本导航汇总 AGENTS.md 中散落引用的所有"基础参考文档",按主题归类,作为**后续查询的统一入口**。
+> 每当要动手改某类内容,先按"§一 必查文档"读对应文档,再动手——这是 AGENTS.md 反复强调的铁律。
+>
+> **⚠️ 项目全局详录**: 所有踩坑语境/补丁职责/CE适配细节/研究终态等冗长记录已集中到 **`docs/维护详录_鼠族HSK拓展.md`**(AGENTS.md 仅精炼索引)。查历史语境先去那里。
+> 
+> **范围说明**: 本 `docs/` 合集为**纯参考文档,仅存于工作区,不纳入游戏 Mods 目录、无需双目录同步**(它们不是游戏内容)。游戏内容(mod defs/补丁)仍按 AGENTS.md 的"双目录铁律"同步到部署目录。
+
+---
+
+## 一、必查文档(改对应内容前必须先读)
+
+| 触发操作 | 必读文档 | 说明 |
+|---|---|---|
+| 新增/修改/挂接**科研节点**、配方加 `researchPrerequisite`、挪研究台、改前置链、避让坐标撞车 | **`01_科研体系/科研节点总览.md`** | 516 节点全量,含 defName/坐标/前置/来源 mod;严禁凭记忆臆造(曾撞车 Food_B4/Apparel) |
+| 新增/修改**弹药**(CE 弹种、AmmoSet、thingCategories) | **`06_弹药/HSK弹药清单.csv`** | 三类弹药清单(自创/鼠族自带/复用原版),改前核对避免重复定义 |
+| 新增/修改**材料或配方原料**、接 Vile 产业链、查"某物料由谁产/被谁用" | **`04_材料与产业线/HSK与Vile工业材料产业线总览.md`** | 物料总表+ Vile 产业线+ HSK×Vile 交叉引用+建筑索引 |
+| 改**二级菜单**(建筑师子分类、designationCategory 归属) | **`02_建筑与二级菜单/二级菜单说明.md`** | 机制/写法模板/踩坑 |
+
+---
+
+## 二、分类文档清单
+
+### 1. 科研体系 `01_科研体系/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `科研节点总览.md` | 全量 516 科研节点,按 Tab 分组,每节点带中文名/档位/成本/坐标/研究台/前置/来源 mod;开头附 Tab 与来源 mod 汇总 | 任何涉及科研节点的操作(见§一) | **自动生成**(`_tmp/gen_research_doc.py` 从 `Unified.xml`) |
+| `美狐融入HSK科技树归属表.md` / `.html` | 美狐 23 节点融入 HSK 主网格的终态总表:节点→页签(服装/手工/建筑/武器_SK)→坐标→前置→techLevel→研究台门槛;附 NodesSK vs NodesOther 选型理由、前置挂接依据、18 项校验清单 | 改美狐科技节点,或要把第三方独立页签融入 HSK 科技树时 | 手写+脚本(`_tmp/gen_miho_integration_doc.py`)。⚠ 上游 Core_SK/ResearchTreeSK 升级后须重跑 `_tmp/miho_layout_probe.py` + `miho_layout_design.py` 复核坐标撞车 |
+
+### 2. 建筑 / 二级菜单 `02_建筑与二级菜单/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `二级菜单说明.md` | ArchitectSense 子分类机制、写法模板、结构建筑也要建子分类、酒馆家具/辅助/生产/结构子分类实例 | 新增建筑要挂二级菜单、改 designationCategory 归属 | 手写 |
+| `提示词_配方工作台整理.md` | 新会话接手"配方/工作台整理"任务的提示词模板(粘贴即用) | 启动新一轮配方/工作台整理工作时 | 手写(任务提示词) |
+
+### 3. 生产框架 `03_生产框架/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `ProcessorFramework框架梳理.md` | [SYR] PF 框架:ProcessDef 字段规范、CompProcessor 工作流、多因子调速、品质/副产物、UI、性能评估、7 子模块适配矩阵 | 要新增"自动批处理"加工建筑/工艺时照抄规范 | 手写 |
+| `中世纪大修内容梳理.md` | 中世纪大修 19 种自动加工机、与 PF 的三种接入示范、二级菜单归类 | 接入/改写 MO 加工机、理解 HSK 生产链基座 | 手写 |
+| `中世纪大修阅读体系专项.md` | MO 书籍三型(传说书/专著/图纸书)、图纸门禁 RequiredSchematic、研究书架/抄写台/讲台、篇幅配方、与 HSK工业科研大修蓝图体系的关系 | 整合 MO 阅读/书籍/图纸门禁内容时 | 手写 |
+| `中世纪OM未整合内容清单与优化评估.md` | MO 全部内容(排除已被 HSK+Vile 上位替代的生产材料链)的**已整合/部分/未整合**盘点,逐板块标 HSK/Vile/CE 冲突点与适配难度,附三档优化推进建议;确认采矿/矿井实际未落地(附 `.html` 阅读版)。⚠️ 本文 §3 建筑家具、§8 商人事件的「未整合」结论已被下一行 08-27 21:50 实测盘点**覆盖**(乡村结构 20 + 棋牌 3 已移植) | 规划下一步要整合 MO 哪些内容、判断整合成本时 | 手写(盘点评估) |
+| `中世纪MO整合进度盘点.md`(+`.html`) | **最新进度口径(08-27 23:05 实测)**: 84 个 MO 内容单元 → 已整 6 / 部分 5 / 未整 55 / 不整 18,加权整合率 10.1%;含板块进度表、已落地硬证据(19 个 `Rustic_` 结构 + 3 棋牌 + 112 蓝图书 + 3 事件 + 学者商队在 `Unified.xml` 终态全命中、111 贴图解析、双目录 0 差异)、四条移植质量问题的**处置记录**(拒马桩与原版 `TrapSpike` 重复→已删 / 蓝图书补 `BuyTradeTag` 回购 / 研究门禁按「无门槛·ComplexFurniture·Stonecutting」三档重映射并更正 About / `Rustic_` 与 Ideology 撞名前缀留档)、三档下一步。⚠️ 按 AGENTS §1「单文件 ≤10KB」铁律,逐单元明细拆为 `中世纪MO整合进度盘点_明细上/中/下.md`(+同名 `.html`) | 问「整合到哪了、还剩多少」、验收移植质量时 | 脚本生成(`_tmp/gen_mo_progress.py`+`_tmp/split_mo_docs.py`) |
+| `MO整合执行计划/00_决策与优先级.md` | **用户对 MO 各板块的逐项拍板归档**(做什么/不做什么/优先级)+ 待修四项的落地口径 + P1~P5 阶段划分 + 跨阶段公共约定(前缀、材料映射主表、门禁、汉化、贴图、验证、10KB 文档体量) | 动 MO 整合任何一块之前**必读** | 手写(决策) |
+| `MO整合执行计划/01_P1_战利品废墟任务蓝图链.md` | **优先级第一、整个工程最核心**: MO `Building_Lootable`(131 def)反编译语义、废墟/藏身处/KCSG 30 套布局 785 符号的取舍、三级解锁判定链、4 个任务脚本、信鸽/信使/探秘桌扫描链;自研 `LootableHSK`+`QuestFinderHSK` 类清单、6 个新 Defs 文件规划、**与 112 本蓝图书的四个融合接入点**、M1-M3 里程碑 | 开工 P1 时 | 手写(实施方案) |
+| `MO整合执行计划/02_P2_生产设施与Processor依赖.md` | PF(Continued)事实(packageId / 无需 VEF / `CompProperties_Processor`+`ProcessDef`)+ 六座机器逐座判定(哪几座只需删 MO 附加 comp)+ 铁砧/珠宝台/棚架/抄写台处理建议 + 与 HSK 纺织材料主链的四条融合决策(丝绸/纸/砖/纺纱) | 做 §2 生产设施时 | 手写(实施方案) |
+| `MO整合执行计划/03_P3_家具装饰地板储物.md` | 装饰/战利品装饰/书籍家具/皇家家具/皇家床/吧台/贵族椅/照明火源/储物/≈62 地形/14 件珠宝的**实测数量与 MO 源文件**、与 Reel 存储的差集结论(类型专用过滤堆叠=真缺口)、材料映射表(Silk/Paper/宝石 HSK 侧不存在)、三批交付切法与验收 | 做 §3 家具装饰时 | 手写(实施方案) |
+| `MO整合执行计划/04_P4_商人剧本生物特性文化.md` | MO 8 类商人**全用原版 StockGenerator**的实测结论与本地化改法、3 剧本可行性、生物精选清单(除 Mimic 全为原版 Animal)+产物映射 Vile、特性改名调值去重、老世界人/沙漠**风格向文化**落地(接服饰分区体系)、hediff 可搬/必砍、§10 书籍阅读针对性补法 | 做 §8/§7/§11/§10 时 | 手写(实施方案) |
+| `MO整合执行计划/05_P5_矿井与宝石方案.md` | **把散在 §16 的矿井方案拉成可开工单**: 2 座建筑 + 8 条采掘配方 + 6 档宝石 stuff(HSK 仅有 Jade,余 5 档自建)+ 研究挂载与六档门槛 + 必须自研的暴击/虫灾 + 「一期纯 XML、二期补 DLL」降级路径与验收 | 做 §16/§1 宝石时 | 手写(实施方案) |
+| `MO整合执行计划/06_P1-M2落地记录与本轮进度.md` | **本轮(08-28)实做清单**: M1 容器+M2 探索链(探秘桌/信鸽站/信使台/档案柜/古基座/古球/残页 + 3 套 KCSG 废墟注入原版 BanditCamp/ItemStash)+ P3 装饰/皇家/书籍家具/64 地形 + P4 商人 8 类与挂载补丁 71/剧本/特性/文化/传说书 + P5 矿井与 6 档宝石;合计约 **240 个新 def、470 张贴图**,**全部仅在工作区未同步**;含 1.6 新坑清单(AbsTicksGame→GenTicks.TicksAbs、defaultDesc、Gizmo.disabled 为 protected、ThingComp 用 PostExposeData、Bone/Book/Wall_BlocksGranite/CutGreenhouse 非本环境 def)与同步前待验清单 | 同步前验收、查本轮改了什么 | 手写(进度记录) |
+| `MO整合执行计划/07_P2落地记录_PF内置与珠宝台.md` | **P2 已落地**: [SYR] Processor Framework **内置进本 mod**(ProcessorFramework.dll 79KB 入 1.6/Assemblies、Defs/Languages/贴图搬运、defName 保持原样、未搬会冲突的 PF_Patches;**约束:不要再单独安装 PF 本体**)+ 6 座机器(烟熏房/丝绸床/造纸机/窑/工业纺纱机/发酵桶模板,逐座列 defName·流程·研究·剥掉的 MO 类)+ 珠宝台 `RK_JewelryBench` 与 14 件珠宝首饰(HSK「辅助建筑」真实 defName=**Accessories**,装饰件 12 处已改挂并保证一级/二级分类一致)+ 全 mod 材料线统一(Iron 是铁矿石必须改 WroughtIron、零部件分档、矿井配木板)+ **UI 铁律:stuffable 建筑必须写 uiIconPath,否则点选每帧 NRE 表现为"一点就卡死"** + 待游戏内验证 6 项 | 做生产机器/珠宝/辅助建筑、排查点选卡死时 | 手写(进度记录) |
+| `MO整合执行计划/08_原始下沉波次_丝绸书籍家具.md` | **08-28 原始/中世纪各下沉一点**: 丝绸 `RK_Silk` 重写为 Vile 布料 TIER2.5 奢华天然布(休息1.3/双面隔热/易燃)+ 生产线(蚕匾架·养蚕·织绸·PF丝绸床)从 Fabrication 下移到新建中世纪 `RK_Sericulture`; 书籍 `VBE_Writing` 降 Neolithic(原始书写, 链条 书写→印刷→印刷机清洁); 鼠族家具 15 件纯木/石通用件(桌·界碑·茶具)下沉新建 `RK_PrimitiveCrafts`+ComplexFurniture 前置链补丁。含坐标去重/验收/8文件同步 | 做原始档扩充、丝绸档位、书籍/家具下沉时 | 手写(进度记录) |
+| `中世纪OM商人任务事件专项_科研书获取渠道方案.md`(+`.html`) | §8 深化: MO 商人/任务/藏宝图链/事件实读拆解 + BlueprintUnlockHSK 现有渠道对照;**环境定论(08-27 修正)= MO 订阅未勾选(须复刻)、VEF Core 已激活(工坊目录加载,KCSG/VEF QuestNode 可用)**;P1 学者商人→P2 藏宝图挖宝链→P3 废墟清剿(可走 KCSG)三阶段方案 | 做蓝图书获取渠道(商人/任务/探索)整合时**必读** | 手写(方案) |
+| `图纸门禁SchematicGateHSK_详细方案.md`(+`.html`) | 独立程序集 SchematicGateHSK 实施书: MO RequiredSchematic 反编译语义(书架+研究台同房间门禁/逐台判定/阅读加分摊科研值)、数据层字段表、缓存 bug 修复点、与蓝图书体系边界对照、商人投放参数、验证与同步记录、游戏实测 6 步清单、**新增图纸节点三步模板(零代码)** | 给新科技加图纸门禁、排查图纸不生效、或扩展 MO 子系统进本程序集时 | 手写(实施方案) |
+| `蓝图书籍化改造方案_v3.md` | **实施蓝图(可直接开工)**: 蓝图/图纸书全部书籍化(BookBase)、系列拆分 43节点→111本(I/II/III)、读完保留+已读标记+集齐解锁、科研工作式阅读(2min+tier递增)、删存储池/GUI、MO获取机制(商队/废墟/书架/GoExplore)、原版 Book/JobDriver/Doer 接口反编译结论、C#5 编译约束、执行 checklist | 执行 HSK工业科研大修 蓝图书籍化改造时**必读** | 手写(终版) |
+| `HSK体系工作台造价总表.md` | 全体系 **141 个制造/加工工作台 + 研究台**(2026-08-28 酒馆装饰台已删,垫料迁 TableLoom)(HSK 本体 62、原版 Core 20、Biotech 3、CE 2、Vile's 系列 22、鼠族系/美狐/金鼠族/酒館/家具拓展等)清单,含中文名(取自官方汉化)、通用材料造价+材质类别、固定部件清单、工时(tick/秒)、科研前置;附研究台六档速查。凡 `recipeUsers` 引用/自带 `recipes`/工作台类 `thingClass` 且可建造者全部收录 | 查某工作台造价、规划建筑摆放、核对 HSK/Vile 生产台全貌时 | **自动生成**(`_tmp/extract_workbenches.py`+`build_cn_maps.py`+`gen_bench_doc.py`,从 `Unified.xml`+`1.6HSK核心汉化`) |
+| `石化工业线_自建架构总纲.md`(+`.html`) | **【08-28 更正定调·对齐真实终态·取代"手搓半部VCE"误判】** 实测(实时 Unified + 汉化标签)发现**三烯三苯骨架已在**=你把 Rimefeller 精炼厂群+Vile 化学品**改名复用**(`Polymers`=乙烯/`Sulphates`=苯/`Xylene`=二甲苯/`Propylene`=丙烯/`Butadiene`=丁二烯/`SyntheticAmmonia`=氨/`NeutroamineRefiner`=丁二烯精炼厂/`ChemistryLab`=化学工作站),下游塑料/纤维/橡胶消耗端一大片已在→**不装VCE也非从零手搓**;真正要新建=缺物(**甲苯/氢气/胺类/石脑油/裂解混合气/天然气/合成烯/合成酰胺**)+★新增★建筑(**L1常减压蒸馏塔·L2储罐管网罐子·L3燃气发电锅炉·L5深度裂解厂·L6精馏塔·L7催化重整·L8氨合成塔+胺化反应器·L9石化工作台**);**氮化学改路线**(08-28精简定:胺类=中性胺不单造;氨删ChemistryLab煤/焦炭路只从氨合成塔;中性胺只从"中性胺合成塔"=胺化反应器、删天然路;氨/中性胺去精炼改Chemfuel式罐体+抽取;改前全扫引用);含 已存在骨架映射表/新建清单/复用框架(PipeSystem+Explosive)边界/落地顺序/氢气已并入天然气(本文氢相关清单作废)/**精馏塔改挂来源与无机物转化器冲突风险**/4处待定。**核对铁律:只用实时 `Cache/Unified.xml`,勿用 `Cache_bak_*` 过期备份** | 做石化工业线、判断哪些已在/哪些新建/中性胺改路线时**必读** | 手写(总纲) |
+| `石化工业线_贴图生成提示词.md`(+`.html`) | **贴图出图清单(08-28)**:把自建架构缺的贴图整理成"描述+可复制提示词"——通用风格前缀(建筑BASE/物品BASE/储罐沿用罐体家族风格)+ **建筑9项**(精馏塔/催化重整/氨合成塔/中性胺合成塔/深度裂解厂/燃气锅炉/石化工作台/石脑油罐/氢气罐,含建议占地格数与英文SUBJECT)+ **物品7项**(甲苯/石脑油/裂解混合气/合成烯/合成酰胺/天然气罐子等; 氢气项已随氢并气删除)+ 可省复用清单(乙烯丙烯等物品图/燃油罐/沥青借MUM换皮)+ 出图规格(每格128px·顶视透明PNG·储罐立式1×2卧式2×1·命名我落地统一);管道泵阀优先复用Rimefeller | 生成石化工业线缺的贴图时**照此逐条出图** | 手写(提示词) |
+| `石化工业线一体化方案_最终流程图与可行性.md`(+`.html`) | **【08-28 用户定稿流程图·可行性核对;其"装VCE/启用VHGE·VChemfuelE"建议已被上表"自建架构总纲"取代→改全手搓】** 保留价值:用户最终 mermaid 流程图原文 + 逐节点"哪个 mod 提供/当前装没装"的实测核对(VCE未装/VHGE·VChemfuelE订阅未启用/仅Rimefeller+Vite's MS+污染统一启用)+ 与旧版差异(蒸馏塔主产改燃油/全产物入罐/后置升级为三烯三苯体系) | 查最终流程图原文、核对各节点 mod 归属时 | 手写(流程图+可行性) |
+| `石化工业线一体化方案_边缘石化x美狐双台x沥青锚点.md`(+`.html`) | **⚠️已被上表"最终流程图与可行性"取代(骨架/后置已改)**;保留价值:常减压蒸馏塔走Rimefeller`CompRefinery`机制、沥青出口复刻`RefineryLoadingBay`、5档+/-分配表(输入固定40原油·每档馏+4气+2润-2沥-4)、天然气罐子+`CompProperties_Explosive`固定爆炸、VHGE改名"天然气"补译、loadbay无遮罩改色须重着色png、高炉`Experimental/`未加载须迁1.6 等**落地细节仍有效**。子文档→天然气体系 / 产物贴图明细 | 查蒸馏塔/沥青出口/天然气罐的具体改法时 | 手写(方案·部分失效) |
+| `石化工业线一体化方案_天然气体系.md`(+`.html`) | 天然气子系统详案(**决策已定稿**): **VHGE(`2877699803`)已含全套燃气公用设施**(气泉+泵/储气罐/管道/阀/发电机/加热器/冷却器/燃气灶/燃气冶炼·锻造·精炼·焚化,全gate `VHGE_GasExtraction`研究、仅英文需补译);`VHGE_Helixien`是管网燃料不可堆叠→**新建可搬运`Petro_GasCanister`天然气罐子(仿Rimefeller`OilBarrel`)作离网便携补充**;**气源定稿=蒸馏塔产气入网(小DLL comp注Helixien网,仿石油/给排水:必须接管道+储气罐,不接/无消纳→气放空扔掉;VHGE只有气泉DeepExtractor无设备产气组件)**;**危险定稿=不做泄露事件、罐子/储罐被击毁→固定大爆炸+堆叠连锁(挂`CompProperties_Explosive`·Flame+大半径+引信,纯XML 0DLL)**;VHGE全套改名"天然气"+补译中文;泄露事件落地时排查关闭 | 做天然气罐子/管网/燃气发电发热烧水/罐子爆炸时 | 手写(子方案) |
+| `石化工业线一体化方案_产物贴图明细.md`(+`.html`) | 逐档配方草案表(T0-T2+天然气+回收,后置T4/T5标暂缓)、产物清单+**贴图本地工坊来源**(沥青借MUM CarbonFiber_a/b/c、天然气罐子借VHGE气瓶图、**润滑油Lubricant/丙烯丁二烯/石油焦Coke/气凝胶石墨烯Aerographene/高模量纤维HMFibers 全Vile现成def直接复用**、燃气设备VHGE现成只需改名)、依赖挂载注意(高炉迁移/陶瓷产品defName不动/Rimefeller保守版不碰代码/爆炸参数实测/研究六档/补丁门控)、mod归属建议(是否新建"石化工业线整合"mod承载罐子+爆炸+注气小DLL) | 查具体配方数值与贴图出处时 | 手写(外挂明细) |
+| `石化工业线_全流程框架.md`(+`.html`) | **【08-28 终态落地框架·当前实现总览】** 全链路(上游→蒸馏→储罐/气网→能源→路线A/B/C/D→三烯三苯→工作台→终端)+ 三条复用/自建铁则(**精炼层保持 Rimefeller 原版连续精炼厂、不做bill精炼、不新增"精炼X"中间物**;**胺链维持铁律=中性胺、去精炼**;**美狐两建筑改色上岗:高炉→常减压蒸馏塔换皮、天界熔炉→新建原油裂解炼油厂 bill 台**)+ 复用边界表(谁给什么勿重造:Rimefeller/Vile/污染统一/自建)+ 通用双介质气管网(分线/泵阀/气瓶/氨原生ToxGas毒; 08-28 二轮氢已并入天然气=等价通用, 氢物品/氢罐/氢管泵阀删除, DLL Norm() 保老存档)+ 断水停机 + 自有五档研究链 + 现状(902/902双目录一致)+贴图落地(储罐 Graphic_Multi 四向/物品/沥青桶堆叠)与游戏内8步冷启动验证清单。**取代上表若干旧方案的过时结论** | 接手/复查石化工业线全貌、判断某环节归属、或继续 Stage3 时**必读** | 手写(框架终览) |
+| `石化线精简方案_v3施工图.md`(+`.html`) | **石化线当前实现口径(08-29 完工·取代 08-28 一体化方案系列)**: v2→v3 十条决策收敛表、终态全链路、**14 项施工完成表**(蒸馏塔 8 档 bill / `CompWasteAccumulator` 油泥槽 / 两台 clone 精炼厂 / 卸货湾扩过滤器+换皮 / 管网改挂与两个出料口 / 铺路 / 核废料配方 / 防护统一 / GasCylinder 死路清理 / 双目录同步)、**三处改判**(ProcessorFramework.dll 是 About 声明的内置框架不属"同名单残留"→保留;`CompRefinery` 按 defName 硬找 `RefineryLoadingBay`→出料口不能自建;产物走 `TryPlaceThing(Direct)` 不经过滤器→扩过滤器只为"认领")、**两处按机制收敛**(TerrainDef 无 moveSpeed 且负 pathCost 破坏 A*→pathCost 0;管网按介质拆挂 I/III)、验证记录与游戏内待验 5 项 | 动石化线任何东西前**必读**;排查油泥/精炼厂不出料时 | 手写(施工图·完工) |
+| `石化线精简方案_v3_贴图素材.md`(+`.html`) | 管道/阀门/进出料口贴图**已定稿落位表**: 来源 VHGE(2877699803)+VChemfuelE(2792917473) 本地 workshop 定位、逐张贴地源图→落地路径→处理方式(整图复用+只染有色像素, NG 绿 / NH3 琥珀分色)、四个开放问题的定稿(只换贴图不自建 bay/储罐不换皮/三燃料塔不纳入)、已取未挂载素材及原因(flickable 无自动换图机制)、死图归档位置 65+56 张 | 换/补石化贴图、判断该复制还是跨 mod 引用时 | 手写(素材落位) |
+| `石化线精简方案_v3_污染统一整合清单.md` | `污染统一`(ratkinpatch.PollutionUnify)整并入本 mod 的**并入/不搬/重复**三张表(核废料配方、防护统一补丁、铺路贴图、`CompAsphaltProducer` 死代码判定),及停用侧处置(该 mod 已从 ModsConfig 移除) | 复查污染统一迁移是否有漏项时 | 手写(迁移清单) |
+| `石化线精简方案_v3_清除清单.md`(+`.html`) | **v3 彻底化收尾的对账文档**: 清除(def 17 净删 + v2 全 31 项精确边界 grep 0 命中 + 1 补丁 + 7 处 GasCylinder 源码死路 −7.1KB + 68 张死贴图 + mod 根杂项 + PollutionUnify loadAfter)、改造(管网改挂/子分类纠错/RemoveOldRoutes 重写/卸货湾扩过滤器+换皮/油泥槽补全含 PostDestroy 洒污/GasExplosive 死代码接线)、**10 项验证矩阵全绿**(XML 0 失败·悬空引用 0·ParentName 0·Class=0·缺图 0·石化汉化键 0·补丁模拟 0 失败·DLL 类型复核·双目录 1297↔1297 差异 0)、**6 条明确保留的风险**、**Player.log 冷启动 13 条关键字定位表** | 复查本轮清了什么/还留什么坑、下次启动排错时**先查这份** | 手写(清除清单) |
+
+### 4. 材料与产业线 `04_材料与产业线/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `HSK与Vile工业材料产业线总览.md` | 物料总表(646)按类型分组、Vile 专属产业线(配方+原料+建筑+研究)、HSK 配方消耗 Vile 物料交叉引用、136 生产建筑索引、核心链路速查 | 查物料来源/去向、HSK 对 Vile 依赖、产业线全貌 | **自动生成**(`_tmp/gen_material_doc.py` 从 `Unified.xml`+汉化包) |
+| `金属贴图总览/index.html`(+39 页,含 `a0_能力档阶梯.html` 两页 +`assets/`499 张预览图) | **HSK×Vile 金属与工程材料卡片册(87 项)**:按 HSK `Metallic/*Bar` 分类树判定,分组为 **金属与合金(可塑材料) 36 / 金属矿石·精料 12 / 冶金中间物 5 / 工程材料·聚合物与复合 12 / 贵重品·提纯料(不作材质) 21 / 石料对照 1**(原 88 项,黑曜石归一后删掉自制 `RKGem_Onyx`)。**每卡第一行是「能干什么」块**:能力档徽标 + 可塑成品件数按用途拆分(家具建筑/防具/穿戴件/近战工具/远程武器)+ 用途来源类别 + 与塑料·钢的集合差(做不了什么、钢做不了它能做什么)。**能力档 = 集合包含判定**(拿 `stuffProps/categories` 反查全库可选材质成品,看能否**完全覆盖**基准材料集合)→ `C4 超钢级` 6 · `C3 代钢级` 25 · `C2+ 强化工程级` 8 · `C2 塑料级` 86 · `C1 窄用途` 48 · `C0 不可塑形` 55;**新增 `V 贵重品·不作材质` 20 项**:HSK 自己用 `Extracted/Metals/PRS` 装宝石·化石·未炼金银·翡翠、用 `Metallic/RARBar` 装提纯金属与焊料,这些**本来就不是拿去打装备的**(材质覆盖 0~2 件),用户口径要求把它们与化石/粗糙宝石并成一个体系,故从阶梯摘出单列(纯镍 Ni 覆盖仅 2 件重型机甲结构 → V;翡翠例外,石质覆盖 299 件仍留在 C1)。工程材料组**按档自上而下排**,每档前挂整行档说明;阶梯判定与逐档名单见 `a0_能力档阶梯.html`(含 V 档说明)。每卡**贴图按改动链逐段出图**(扫到 90 处针对金属 `graphicData` 的补丁操作 → 56 项多段链):①起点=该 def 自己 mod 的 Defs 写的 `texPath/color` ②中间段=被哪个 mod 的哪个补丁换成什么(**紫框=Vile 专用图**)③绿框=生效终态;**链路定论**:Vile 本体给自己金属写专用图并覆盖 HSK 通用锭图 → Vile 自带 `zzz/ZZ_RestoreHSKTextures.xml` 把 HSK 图恢复回来、你把它搬进 `HSK修复整合/Patches/10_Vile贴图还原.xml`(位次 221 > Vile 153)→ **这批金属生效的就是 HSK 通用锭图 + `color` 染色,Vile 专用图只是中间段**。「生效」按 `ModsConfig.xml` 加载序取最后提供者,历史段取最低序(原作者那份),每段按自己的染色单独渲染。科技档**与《材料六档分类》共用一个口径源**(`classify4.py` 为准,本册 `select.py` 只引用不再自推,两册零不一致):def 自带 36,其余按「产出研究档 → 产出工作台档 → 消耗它的配方研究档」逐级推导;**工业档拆两档**=石化工业·后期 7 项 / 电力工业·前期 22 项(全册 原始 9 · 中世纪 18 · 电力 22 · 石化 7 · 太空 17 · 极致 4 · 未标注 10)。另含来源 mod 与源文件名、本地补丁×N/上游补丁×N(悬浮看补丁名)、护甲·利钝·价值·质量·Bulk、stuff 与 HSK 分类、产自配方(工作台中文名)、被消耗数 | 查某金属有没有贴图、Vile 原图长什么样、属哪档科技;**挑材料时先看能力档**:能不能顶替钢、做不了哪类;想知道某样东西是不是「拿去做装备的料」看 V 档 | **自动生成**(`_tmp/metals_doc/`:`dump_cache3`(自动取最新 Cache)→`build_tex_index`+`cn_labels`+`loadorder`→`classify4`→`capability`→`select`→`find_tex_patches`+`tex_preview2`+`tex_chain`→`scan_def_index`+`scan_vanilla`→`gen_html`;核对 `linkcheck2.py`+`check_books.py`:两册共 57 页、内链锚点图片 0 坏、全部 ≤10KB、87/87 卡片、499 张引用图 0 缺文件;数据快照=实时 `MissileGirl/Cache/Unified.xml`(带每 def 的 `path`,已随宝石换贴图与黑曜石归一重跑),冷启动复核 `Player.log`:`Config error` 0、无 `RKGem_Onyx` 悬空引用) |
+| `材料六档分类/index.html`(+16 页 +`assets/`126 张缩略图) | **全体系材料 × 六档 × 家族矩阵册**(纳入 248 项 stuff 材料与金属链物料,展开 126 项)。**本册的 `classify4.py` 是科技档与家族的唯一口径源,《金属贴图总览》引用它不再自推**。六档=原始 25 / 中世纪 17 / **电力时代(电力工业·前期) 34** / **石化时代(石化工业·后期) 12** / 太空 24 / 极致 4(+未标注 10)。七家族=**F1 锻造金属·合金 34 / F2 辅助金属·原料线 48(矿石·精料·粉料·冶铁中间物·炉渣)/ F3 石化·塑料与聚合物 7 / F4 石化·合成纤维与织物 8 / F5 硅酸盐·玻璃 4 / F6 硅酸盐·陶瓷 4 / F7 贵重品·宝石与提纯料 21**(另册只给计数不进明细:生物基 木 17 / 皮 46 / 织物 20、石材·砖·混凝土 14、其它化学品与辅料 34,共 131 项)。**F7 按 HSK 官方体系合并**:`PRS` 贵重品(宝石·化石·未炼金银·翡翠)+ `RK_Gems` + `RARBar` 中材质覆盖≤2 的提纯金属与焊料(纯铬/纯钴/纯镍/纯钨/钒/锰/钼/锌/焊锡/纯银) —— 用户口径:纯镍这类「不是材料不行,是它压根不属于材质体系」,与化石、粗糙宝石同列;能力档标 `V 不作材质`,不上 C 档阶梯。**每条行首先给「能力档」徽标**(与金属册同一把尺子:反查全库 1920 件可选材质成品〔含建筑/家具,其中物品 894 件〕,看该材料成品集合能整档覆盖到哪一档基准 塑料444/钢935/塑钢980;V 档材料除外),后接 家具建筑N·防具N·近战工具N… 实际件数与护甲/利钝/价值/质量;判定与逐档名单见 <a href="04_材料与产业线/金属贴图总览/a0_能力档阶梯.html">金属册附注·能力档阶梯</a>,defName 直接跳金属册看贴图链。**档位判定四级**:def 自带 → 产出配方研究档 → 产出工作台档 → **消耗它的最早配方研究档**(第四级已从「可用途物品最低档」改掉,旧口径会把石材类一律误降到原始);**工业拆两档**判据=研究节点含 `Oil_Industry_*`/Petrochemistry/蒸馏·裂解·合成、或产出配方**吃的原料**属石化物、或材料本体即塑料·合成纤维(`Plastic`/`HF` 类),否则算电力工业。**两条已落地的定档**:`WroughtIron 熟铁 = 原始`(98 号补丁第六节 `techLevel=Neolithic`,已在新缓存原生生效);**黑曜石归一**=删自制 `RKGem_Onyx`,珠宝两条配方与矿井采掘暴击改吃原版 `Obsidian`(`Data/Odyssey`),成品「缟玛瑙」统一改名「黑曜石」(defName `Rustic_*_Onyx` 保留不断引用),并补 `Obsidian`/`MineableObsidian`/`ObsidianDeposits` 三条汉化;另注:宝石 def 已被换贴图工作改名(黄玉/紫水晶,texPath 指向 `Topaz`/`Amethyst`) | 规划「这一档能用什么材料打装备/防具」、给配方或文化挑材料档位、判断某材料该归电力还是石化、分辨某物是材质还是贵重品/提纯料 | **自动生成**(`_tmp/metals_doc/`:`dump_cache3`→`classify4.py`→`capability.py`→`build_class_previews`→`gen_class.py`;核对 `linkcheck2.py`+`check_books.py`:两册共 57 页、内链锚点图片 0 坏、全部 ≤10KB;改完冷启动 `Player.log` 零报错) |
+| `Vile贴图还原流程.md` | Vile's Materials Science / Hell Bent for Leather 贴图还原手册(151 张贴图重放脚本 `Vile贴图重构/restore.py`),Steam 更新后触发 | Vile 模组更新后需重贴图 | 手写 |
+| `TFC冶铁链深化方案_20260830.md` (+同名 html) | 在 Vile 既有冶铁链上深化:炉衬耗材进度条(`CompRefuelable`+`drawFuelGaugeInMap` 纯 XML)、矿渣多产物闭环、高炉温度(`HeatPusherAdvanced`)、耐火砖 `costList` 门禁、钢体系归一四招;含"不做耐久/不做结瘤"论证与反编译核实字段 | 动冶铁/炼钢/耐火/矿渣任何内容前;**当前待拍板未实装** | 手写 |
+| `TFC冶铁链统一改造清单_20260830.md` (+同名 html) | 终态配方核对表(读 `Unified.xml`)+四条乱点(熟铁三入口/坩埚钢→锻钢边不存在/手锻台出钢锭捷径/`CastIron` 在 `CastBar` 被 41 配方吃)+四步改造(删双轨、炉渣多产物、矿渣混凝土、封 Steel 捷径)+TFC 可搬机制 6 条(热处理树/选矿碾磨/头柄装配/燃料门禁/铁砧焊剂/一次性陶模) | 执行冶铁链统一/加炉渣下游/动 Steel 捷径前 | 手写；**Step1-3 已实装**(98号补丁 + `RK_Met_Slag`/`RK_Met_ForgeSteelFromCrucible`/`RK_Met_MixSlagConcrete*`/`RK_Met_ReSmeltSlag`，冷启动 0 新增红字)，Step4 待做。⚠`CastIron` def 不可删(被 `disallowedThingDefs` 引用)，只摘 `CastBar` |
+| `TFC模具铸造三段链_20260830.md` (+同名 html，含子页 `模具贴图对照/index.html` + `assets/` 37 张预览) | 制模@陶工台(`Ceramics_A1`)→浇筑@铸造厂(`Metallurgy_B4`，出毛坯+炉渣)→装配锻打@铁匠工坊(`RKHSK_Tools_Medieval2`)，覆盖手斧/矿镐/手锤/镰刀/锄头；10 物品+15 配方+99号补丁(删 5 条一步出成品的 `Cast_*`、批量线改出毛坯)；TFFH 素材 32x→64x 最近邻 10 张。对照页=16 套模具"空模/金属填充/成品"三列并排，标已接 5 套与待拍板 11 套候选挂载 | 加模具/铸造/锻打类内容、或要给生产建筑挂新配方前(**⚠`Kiln` 被 Core_SK 声明为 `UniversalFermenterSK.ThingDef_UF`，挂普通 RecipeDef 会刷 `should have Class=` 告警，须改挂 `PotteryStation`**)；挑下一批模具接哪个 def 时看对照页 | 手写；**已于同日回滚**(用户改方案：模具只做锭、不做工具；24 个文件移出双目录，`Cast_*` 恢复，汉化 45 键回退；回滚后冷启动 18243 ops / 0 failed，无残留引用)。§3 的 **Kiln=`UniversalFermenterSK.ThingDef_UF`** 坑与对照页 linkcheck 方法仍有效 |
+
+| `熔汤容器化生产流程方案_20260830.md` (+同名 html) | 把"冶炼厂=一个容器两槽(金属液/废料)"落地的两条路：**A 纯 XML** 用 stuffable 舀包 `RK_Met_Ladle` 承载金属液(stuff 沿 熔炉→浇筑→装配 自动传递，配方数从 形状×金属 压回 形状×2)；**B DLL** 双 float 池(仿 `PetroInfraHSK` 的 `NeedsWater`/`GasPort` 低频组件，但池记不了金属种类→按金属分槽会爆)。含模具三档(石模/陶模/铁模，铁模用"消耗+返还"零随机复用)、CSV 驱动生成器(`_tmp/met_line_data/molds.csv`→`met_line_gen.py`+`met_line_check.py`)、P0~P5 分期(P0 必须先封 `Steel` 捷径)、风险边界(只让工具头/武器头走熔汤，别把 1759 配方全卷进来) | 决定冶铁/工具/装备生产流程要不要整体容器化时；**已被 v2 取代**(用户简化：去掉工具模具) | 手写(方案稿·作废)
+| `坩埚锭模金属流程方案_v2_20260830.md` (+同名 html) | 简化后的现行方案：**熔炼(原料+助熔/焦炭+空坩埚 → 熔融坩埚+炉渣) → 浇锭(熔融坩埚+锭模 → 该金属锭+坩埚返还)**，下游工具/装备配方一律不变。关键结论：**熔融金属必须每金属一个 def**(products 的 def 固定、ThingFilter 不能按 stuff 过滤)，故 物品数=金属种数、配方数=金属种数×2，首批建议 7 种；坩埚/锭模用"消耗+返还"实现零随机复用，兼作产能节拍 | 实装坩埚/锭模/熔融金属链、或再议"两槽容器"前 | 手写(**方案稿·未实装**，待 Q1 金属清单 / Q2 是否改造现有熔炼配方 / Q3 要不要寿命 拍板) |
+
+### 5. 文化 / 服饰 / 异种人 `05_文化服饰异种/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `RatkinIdeologyPlus文化适配调研.md` | Ratkin Ideology+ / RAE 服饰整合调研,27 件 RAE 服饰归属方案 | 改文化职位/服饰职位池、RAE 整合时 | 手写 |
+| `鼠族科技树拆分方案.md` | 鼠族衣物/装备科技树按品类拆为独立节点(每节点 8-10 件)的方案稿 | 再调衣物科技树结构时 | 手写(方案稿) |
+| `鼠族异种人白名单整理.md` | 异种人白名单(xenotypeList / whiteGeneListEndo)三层梳理+可直接复制的 XML 最终态;§7 记美狐(Alien_Miho)白名单 | 改异种人生成限制/基因白名单时(鼠族/人类/阿莎丽/美狐) | 手写 |
+| `RKGE基因异种盘点.html` | RKGE 基因/异种盘点(HTML) | 查基因/异种明细 | 自动生成 |
+| `RKGE社区mod基因拓展全清单.html` | RKGE 社区 mod 基因拓展全清单(HTML) | 查社区 mod 基因扩展 | 自动生成 |
+| `文化服饰偏好系统方案.md` / `.html` | 鼠族+美狐文化服饰偏好全量方案:反编译验证 generateCommonality 加权链、8 分区 Zone tag 体系、文化×分区偏好矩阵、补丁结构(04分区标签/05权重/改03/美狐98)、风险与两点待拍板 | 重写文化职位服饰/派系穿衣偏好/分区归属时 | 手写(方案稿) |
+| `服饰分区盘点.csv` | 全 347 件服饰 defName/所属mod/label/层/bodyPartGroups/现有tags/现有generateCommonality+**proposedZone预判分区**去重清单(UTF-8 BOM) | 定每件衣物分区归属、查权重现状时 | 脚本生成 |
+| `服饰分区盘点.html` | 上表交互审阅版:按分区/模块筛选、搜索、点表头排序、待复核项高亮 | 核对 347 件分区归属时(推荐用它) | 脚本生成 |
+| `派系与文化总盘点.md` / `.html` | **Unified.xml 最终态全量盘点**:77 具体派系(另 ~17 抽象基类)+22 文化。§二 原版/DLC 基础派系表;§三 按来源 mod 分组的派系详情卡(Core_SK/鼠族HSK/美狐/金鼠族/RatkinRaceHSK/Vile/Asari 等,含科技色签、允许文化、异种池 Σ 与智人种占比、悬空/DLC门控/强制单一异种标记、商队/模因/图标);§四 文化总表+文化详情卡(styleItemTags+被引用数);§五 派系↔文化关联矩阵(行列均中文名)。**全表中文名/首领称谓/成员称呼/描述/异种池名均取自游戏内汉化包 DefInjected(77 派系+22 文化+32 异种全覆盖),缺汉化回退 def 原生中文,英文/韩文原生 label 作括注对照** | 查"游戏里有哪些派系/文化、谁允许哪些文化、异种池构成"时 | 脚本生成(数据 `extract_factions.py`+汉化抽取 `overlay_fields.py`/`overlay_xeno.py`+成文 `gen_faction_doc.py`/`gen_faction_html.py`;源 `Mods/Unified.xml` + `**/DefInjected/`) |
+| `../特性拓展modHSK/设计/获取特性机制-规则设计.md` / `.html` | 动态获取特性引擎(HSKTraitExt v2)规则总纲:开局2年门/入队1年/个人1~1.5年随机冷却/按人口年度配额/单人容量五重判定链;**★根因修正**=旧表把互斥正负特性挂同一行为计数器导致"熬夜越多越易得早起鸟", v2 改为一个计数器只对应一条因果 | 改 `特性拓展modHSK/Source/*` 或 `表/规则-生活习惯特性.csv` 前 | 手写(v2 定案 2026-08-27) |
+
+### 6. 弹药 `06_弹药/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `HSK弹药清单.csv` | 三类弹药:①本 mod 自创 CE 弹药 ②RatkinRaceHSK 自带 ③复用 CE 原版弹种;含档位/归属 | 改/新增任何弹药(见§一) | 人工盘点(2026-08-25),需手动更新 |
+| `特色弹药清单.md` | **弹药复用铁律口径**:现役特色弹药仅美狐 MechaniteMiho(Ammo_Signature/MechPsy.xml);08-31 清理的美狐/鼠族自创弹药删除清单 + 全部武器弹种映射表 + 验证记录 | 给任何 mod 的武器适配弹药、或查"某武器现在用什么弹"时 | 手写定案(2026-08-31) |
+
+### 6b. 种族整合 `06_种族整合/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `库林Kurin_HSK整合方案.md` / `.html` | 新种族 mod `Seioch.Kurin.HAR`(狐系 HAR,工坊 2326430787)整合进 HSK 的方案+**实装进度**,**定位(08-29 二次改定)=「阿丽莎」`skyarkhangel.asarirace`(AsariRace·Spacer·母系)的同生态位新增/双种族并存**(用户改选保留阿丽莎"风味更足",**非平替**):①决策点已定(并存/科技上移Spacer/派系并列+权重降0.35防刷屏/委托清剿已建护送求援待base/删裁缝台)②1.6 实物已原生③阿丽莎五维对照(阿丽莎轻量无装备,Kurin 重量自带 65 服饰/武器/10 科研)④**Kurin 新增清单**(委托/发布者/特产包/Aolarian 白名单全增量,**Asari 挂载点一律不动**)⑤实装状态:本地化/科研三段错位(入口RK_Petro_Refining→链尾顶CataphractArmor)/派系Spacer+权重降0.35/删台并HSK纺织台/清剿委托/CE(50_/51_)✅全落地,冷启动逐步修净4类红字(子服饰dup·Hwacha forcedMiss·weaponMoney·12件both-researchPrerequisite→21_ Inherit=False屏蔽)+删可选Odyssey包(Gagarin双注册),双目录0差异·ModsConfig合规单条;**§七"待开游戏验证清单"V1-V5挂起等用户排期(冷启动复扫/双狐世界生成/CE数值平衡/护送求援猎杀待dump base/Odyssey回收),按用户指示不擅自重启抢Player.log** | 维护 Kurin 整合或续做 §七 真机验证项时 | 手写+实装(已完成·待开游戏验证) |
+
+### 7. 排查记录 `07_排查记录/`
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `VSE角色信息页空白问题排查结论_20260825.md` | Assemblies 残留同名 dll → 角色信息页空白/GUI 滚动栈泄漏;Mono.Cecil patch 栈平衡等 | 出现"某 mod 在场才 GUI 泄漏/角色页空白"时第一查 | 手写复盘 |
+| `Player.log冷启动排查_石化线v3_20260829.md` / `.html` | 石化线 v3 冷启动 Player.log 逐条甄别 + **代理两轮真机冷启动闭环自验证**(自启 RimWorld→等主菜单→重扫→修→再启):§七关键字全核(WasteAccumulator/贴图/OnGUI/越级/重名 **均 0**=v3 清白);修 7 类本地真错误(A 液体托盘悬空研究`RK_Petro_Polymerization`→Synthesis、B RKHSKFix 去木板 22 失败节点 Conditional 门控、C 金鼠族`targetFuelLevelMax`、D 盔甲架 uiIconPath 误置 graphicData→def NRE 丢弃[归位后 R2 归零坐实]、E 储罐缺 tickerType[+卧式/中性胺罐幻影=陈旧 Cache/Unified.xml→清缓存]、F 燃气管 blueprintGraphicData、G ProcessDefs_Rustic 与融合版 PF.dll `ProcessDef.thingDef:ActiveProcess` 类型不兼容→**彻底删除死机器+ProcessDef(不留兼容层)**、**H 壁炉火焰漏 `CompProperties_FireOverlay`**、**I PF.dll 05:17 Cecil 把 `Verse.Thing::def` MemberRef 签名改成本地 ActiveProcess→开小人面板 OnGUI MissingFieldException/卡死,回退 pre-mod 干净版 `3e24319`**。**收敛曲线 5→7→0→0→0(R0–R5 五轮真机)**,终态仅剩第三方(vitech/JewelryBench)+慢性噪音。附各轮时间戳/行数 | 重启后再遇同类红字、判断"红字是 v3 引入/存量/缓存幻影/缓存清后才暴露"、接手 ProcessDef-DLL 修复前 | 手写 + 脚本(`_tmp/gate_woodplank.py`、`_tmp/sync_logfix_20260829.py`) |
+| `修复增量包_PF壁炉_20260829.md` | post-1935 交付:全量 hash diff 定净变更 2 文件(PF.dll 回退 + 壁炉 RKFC_JoyTemp.xml);`Fix_Increment_...` 一键包(apply_fix.bat 探测 Mods+备份+copy+OK/FAIL+pause,纯 copy 无 7z)+zip+Downloads;**cmd 中文路径坑**(源中文字面量吞相邻 ASCII、`copy <中文> >nul` 静默不复制→全 ASCII 源+运行时枚举 files\+copy 不重定向+后置 if errorlevel);全量 2155 归档/分卷;旧 1935 隔离 | 复用/维护一键修复包、再遇中文路径批处理、发增量给用户时 | 手写 |
+| `鼠族家具壁炉火焰偏移与小人卡住修复_20260829.md` / `.html` | `鼠族家具拓展` `RKFC_RGK_Fireplace` 火焰偏移:反编译 `Graphic_Flicker.DrawWorker` 定论火焰中心本就落炉膛口(继承 south `drawOffsetSouth(0,-1,0)`),真因昨日补的 `fireSize1.4` 过大溢出基座→缩到 0.9+offset(0,0.1,0),PIL 前视合成图验证。"小人卡住"另报=疑似 `ProcessorFramework` 每帧 OnGUI 异常(JIT MissingFieldException)打断输入,**另派 PF 任务处理**;本任务一度误诊改 passability→PassThroughOnly,经新线索**已全部回退**(教训:卡住先查 Player.log GUI 异常再查寻路)。直接改 def 无补丁冲突,lxml+双目录 md5 过;冷启动已强杀重启验证通过(仅慢性噪音,无壁炉/RKFC/FireOverlay def-load 异常) | 再遇建筑火焰/贴图特效偏移、判断"偏移是尺寸还是位置"、"小人卡住"归因(GUI 异常 vs 堵路) | 手写 + 脚本(`_tmp/fp_firebox_centroid.py`、`_tmp/fp_preview.py`) |
+| `HSK更新记录_20260825.md` | HSK 整合包 2026-08-25 更新内容记录 | 追溯某次改动/定位回归 | 手写 |
+| `HSK更新记录_20260828.md` | HSK+Vile 8/27 差分包落地:派系异种池精简/`useFactionXenotypes=false` 下沉/LED 顶灯拆档/烟雾免疫扩展;92 号 ② 选择器双头失效修复(人类池误伤);全新 mod `科技差距贸易溢价` 接入 | 追溯 08-28 改动、回滚、再遇上游异种池变更 | 手写 + 脚本(`_tmp/diffcheck_0828.py`、`_tmp/sim92_chain.py`) |
+| `HSK更新记录_20260828早.md` | 8/28 早间差分包落地:CE 整包行尾归一(仅 dll+中文 4999 键为真变更)、Core_SK 仅 `Kiln` 去 `ITab_Bills` + 渔场 `externalTicking` + dll 重编译;Prepatcher 目标串仍在的核对、CE 中文零本地独有键判定 | 回滚本次更新、再遇"差分包看似全量"的行尾假差异 | 手写 + 脚本(`_tmp/hsk_diff_20260828.py`、`hsk_ce_keydiff.py`、`hsk_verify_20260828.py`) |
+| `HSK更新记录_20260830.md` | 8/30 **全仓库快照**落地(HSK `d6c6664` + `Viles_20260830`):174 覆盖/72 新增/1 跟进上游删除/2 跳过,波及 42 mod。真变更=**停用 `Misc`+`Processing` 两个 WorkTypeDef**、虫群突袭 AI(`InsectoidSwarm`)、Stratum 0.12.21(+3 太阳能屋顶 def)、CE 新增 SOS2 兼容目录(本机无 SOS2 不激活)、`DoBillsCremate` 重挂 `Kiln`、Amuse Bouche 6 def 迁给 Core_SK 提供、ModLister 映射表删 2 条(含 `vr.missilegirl`)、Faster raids 新增鼠族曲线补丁(`earliestRaidDays 96`)。**冲突结论:更新前后两份 Unified.xml 按 mod 分组比对,136 组本地 mod 的 defName 集合逐组零变化**,仅 Core_SK/Stratum/AmuseBouche 三组上游侧变动;本地唯一必修=删 `1.6HSK核心汉化` 悬空的 `Misc.*`/`Processing.*` 20 行汉化键(已双目录同步)。汉化**键级归属**:30 个含中文变更的 mod → 29 个 SAFE(部署端独有键=0,包版只补齐被注释掉的键)、`BackUpPower` RISK(部署端多 6 键+15 处文案更好)→ 跳过覆盖。冷启动:9 类故障签名 0、错误签名差集新增 0 类、`check_order2` flagged 0、`cycle2` 环 0(附 `_tmp/loadorder/find_cycle.py` 因 CFG 路径写错把未启用/工坊副本算进来的假阳环教训)。遗留:`BlueprintUnlockHSK.BlueprintUnlockInit` Harmony 崩**属更新前既有**,非本次引入 | 回滚 8/30、上游再停工作类型、整目录覆盖 in-mod 中文前的归属判法、"红字是不是上游更新带来的"归因 | 手写 + 脚本(`_tmp/upstream_20260830/` 全链可重跑) |
+| `mod整合调查记录.md` | 各 mod 整合调查(来源、冲突、适配)流水 | 接入新 mod / 查历史整合决策 | 手写 |
+| `全量漏译排查与补译_20260827.md` / `.html` | 简体中文漏译全量排查:LoadFolders 加载根真实语义、Unified 缓存不可作"已译"判据、DefInjected 类型目录名规则、本轮修复(金鼠族 941 键重定位 / 美狐根 Languages 失效 / 150 条新译 / AFU 发型起名)+ 1094 条嵌套待办 | 再做补译、查"汉化为何没生效"、接手 nested backlog 前 | 手写 + 脚本(`_tmp/transl_scan/` 全链可重跑) |
+| `../outputs/HSK补丁合并整理方案_20260828.html` | 跨 mod 补丁全量盘点(25 mod/410 文件/6800 op)+ 重复四来源(美狐 1.5 死目录、酒馆根死标记、46_/99_/1xx 冲突、链式重做);**Phase 1 已落地**:28 组相邻同主题段合并(90→28 文件,鼠族 78→57/金鼠族 51→25/酒馆 21→11/工业大修 20→14)+ 死补丁隔离,三重验证(逐字拼接/op 序列等价/双目录 md5);Phase 2 跨 mod 归并结论=配方交集仅 1 条,收益低待定向;**Phase 3 语义去重已落地 234/294 个冗余 op**(规则=同 xpath 被后续无条件 Replace/Remove 完全抹平;逐文件差分模拟闸门: 终态 def 零差异+无新增 miss;回退 4 文件 60 op,根因=早期 Add 造节点供条件性 op 判 match/nomatch,静态不可证;`46_板甲头盔材料丰富.xml` 8 op 全冗余已删文件) | 查补丁文件职责与合并映射、接手 Phase 2/3、再遇"补丁重复"疑问时 | 手写 + 脚本(`_tmp/patch_merge_20260828/` 全链可重跑) |
+
+### 8. 铁律(从 AGENTS.md 抽取的查询型规则) `08_铁律/`
+| 文件 | 内容要点 | 何时查阅 |
+|---|---|---|
+| `补丁编写铁律.md` | xpath 陷阱、1xx 编号陷阱、Operation 级 MayRequire 失效、FindMod+Sequence 禁用、关自动配方、ResearchTreeSK 重复解锁、Harmony 重载歧义、VSE patch 栈平衡 | 写任何 PatchOperation / Harmony 补丁前 |
+| `CE适配铁律.md` | 近战 ToolCE、远程弹药流程、装备 CE 负重/护甲 mm 值、反编译定位法 | 做 CE 近战/远程/护甲适配前 |
+| `汉化与贴图铁律.md` | 汉化文件夹后缀、DefInjected 根节点 `<LanguageData>`、About 未转义 tag、贴图四方向 | 做汉化/贴图补全前 |
+| `研究台档位机制.md` | 六档研究台、requiredResearchBuilding + SK 扩展硬门槛、设施写法 | 给科技节点挂研究台要求前 |
+| `HSK标记与依赖规范.md` | HSK 标记运行时判定、三步加标记、loadBefore 用 packageId、EndMod 组 | 新建本地 mod / 写 About.xml 依赖前 |
+| `性能铁律.md` | 降频/事件驱动/短路/缓存/禁每 tick 遍历、DLL 自查清单 | 写高频 tick 逻辑前 |
+| `异种人耳尾渲染机制.md` | 机制A(Biotech renderNodeProperties) vs 机制B(HAR GeneFor)、贴图 `_west` 补全、基因分组 | 改异种人耳/尾渲染、补贴图前 |
+
+### 9. 任务体系 `09_任务体系/`
+| 文件 | 内容要点 | 何时查阅 |
+|---|---|---|
+| `环世界任务体系总盘点.md` / `.html` | **双视图任务树**:§1 按投递机制建树(叙事者随机/事件/主动/世界探索据点+结局),§2 按派系交叉重排(金鸢尾兰/鼠族系/交战派系/美狐/无派系设施/原版DLC);含金鼠族"暗杀"=PunishmentExecutor 定位、Cybranian赛博朋克(18事件仅2任务)·GoExplore·Minerals 归类、MO未启用仅列原型、NaturalRandomQuestChooser 刷新门槛、event mod≠任务mod 口诀、Kingfisher 假任务mod 排除 | 盘点"游戏里有哪些委托/任务能刷",或加新任务源前对齐投递机制 |
+| `../HSK任务拓展_施工方案.md` / `.html` | 新建 mod **`HSK任务拓展`** 的施工方案:整合两工坊框架 mod(RimQuest `Mlie.RimQuest` 任务板 + Simple Warrants `pb3n.SimpleWarrants` 通缉)+ 按全77派系铺族色委托 + 搬工业大修 `Sites_RK_Ruins.xml`。⚠**先拍"框架依赖(A) vs 真合并(B)"**——B 会破坏工业大修 `loadAfter Mlie.RimQuest` 依赖边且丢上游自动更新,推荐 A;含新 mod 骨架(packageId/加载位/HSK标记/封面归属:你给的图属"剧本与派系大修"、任务mod需另配)、合并清单(Patches重命名/LoadFolders留1.6/SimpleWarrants需补译)、分阶段逐族任务、验证同步、3点待确认 | 建 `HSK任务拓展` 前必读、拍板 A/B |
+
+### 10. 开局剧本
+| 文件 | 内容要点 | 何时查阅 | 性质 |
+|---|---|---|---|
+| `开局剧本总览.md` / `.html` | **当前加载配置下全部 37 个可选开局剧本(ScenarioDef)总表**,按来源 mod 分 9 组(原版/DLC 8、Core_SK 8、Vile 2、Androids 3、Asari 1、鼠族系 6、金鼠族 4、工业大修自研 2、美狐 3);每行含中文名(取自汉化包 `DefInjected/ScenarioDef`)、defName、开局人数、抵达方式、一句话简介 | 查"能选哪些开局/某剧本开局条件/来源 mod",或新增·改剧本前对齐现状 | 脚本生成(`_tmp/extract_scenarios.py`+`extract_scen_zh.py`+`gen_scenario_doc.py`,数据源 `MissileGirl/Cache/Unified.xml`;改 mod 后重跑刷新) |
+| `开局剧本整合修正方案.md` / `.html` | 按**四要素自洽**(内容↔派系↔文化↔科技档)体检 37 剧本的分层整改方案(初版,取舍已被下一份扩大取代):排除"越级=刻意/SeedDef 非缺失"两类假问题;T1自研5/T2上游TruePilum门控/T3特有登记/T4原版保持;逐条经 `_tmp/check_scenarios.py` 核过 | 追溯初版取舍 | 手写(方案·历史) |
+| `任务及派系大修_完整方案.md` / `.html` | **扩大版终态方案**:覆盖全 37 剧本 + 各族玩家派系,目标"各具特色"。四要素判定 + 各族开局格局(人类补 Medieval 边疆/污鼠街头线/雪鼠极寒线/金鸢尾/美狐;诺曼猫人军团行会安卓阿丽莎保持);**"派系大修"主线**=逐族把母国↔玩家加进 teomeimf 的 `permanentEnemyToEveryoneExcept` 中立(王国已做3个,扩到异域鼠邦/金鸢尾/美狐/雪鼠,流亡·逃亡保持敌对);新建 3 个玩家 FactionDef(人类中世纪·骑士/雪鼠·极寒/污鼠玩家);悬空 `TruePilum` 门控;⚠汉化层坑(label/desc 被 DefInjected 命中会盖回 def)。承载容器=新 mod `任务及派系大修`(packageId `local.hsk.questfactionoverhaul`,加载位内容mod末尾·hskfixpack之前,迁入 11_鼠族王国开局中立.xml);含落地顺序+4 点待拍板。经 `_tmp/scen_brief.py` 核过 | 拍板要不要建 mod/铺到哪族、动手前读 | 手写(方案·待拍板) |
+| `开局剧本逐族改造清单.md` / `.html` | 上方案的**逐剧本附表**:需改动 15 个(改挂/新建/门控/中立/文案 分色签)+ 母国中立逐组清单 + 保持 22;汇总 新建派系3/改挂6/门控1/中立11/文案若干/保持22 | 落地逐条改剧本时对照 | 手写(附表) |
+| `09_任务体系/任务大修HSK_悬赏公告牌.md` | 悬赏公告牌实装记录:公告牌 `RKFC_RL_Board` 挂 `QuestBoardHSK` comp + `Dialog_BountyBoard`(复用 `Warrant.Draw` 详情卡,接受即生成原版任务);net48 构建坑、SimpleWarrants public API 速查、RimThemesLite 适配法(全原版 Widgets+ColoredText 标准色)、并行会话冲突处置 | 动悬赏/任务 UI 前必读 |
+
+> 以上 `08_铁律/` 各文档均标注其在 AGENTS.md 的对应章节,AGENTS.md 仍保留完整原文作为 agent 记忆。
+
+---
+
+## 三、自动生成文档的刷新方式
+
+| 文档 | 刷新脚本 | 数据源 | 命令 |
+|---|---|---|---|
+| `01_科研体系/科研节点总览.md` | `_tmp/gen_research_doc.py` | `RimWorld\Mods\Unified.xml` | 改完补丁后重跑 |
+| `04_材料与产业线/HSK与Vile工业材料产业线总览.md` | `_tmp/gen_material_doc.py` | `Unified.xml`(编码已修)+ `AI汉化包_DefInjected_20260823` | 改完补丁/物料后重跑 |
+
+> 两份文档均由全量合并 XML 生成,**改完补丁务必重跑对应脚本**,否则文档与游戏实际态脱节。
+
+---
+
+## 四、使用纪律(一句话)
+
+> 先查本文档§一必查项 → 按 `08_铁律/` 对应规则写补丁 → 跑对应生成脚本刷新文档 → 游戏内实测。
+> (游戏内容 mod 仍按 AGENTS.md 双目录铁律同步到部署;本 `docs/` 合集仅工作区参考,无需同步。)

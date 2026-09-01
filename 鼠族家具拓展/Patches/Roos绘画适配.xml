@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ================================================================
+	      Roos Painting Expansion 适配(2026-08-17)
+	      目标: 鼠族家具拓展的 8 幅老式鼠族画(RKFC_RL_Paint_*)
+	            由 Roos 画架(RBPEaselPainting)绘制产出, 不再直接建造。
+
+	      改动:
+	      1. 新增 8 条 RecipeDef, recipeUsers = RBPEaselPainting(Roos 画架),
+	         材料跟随 Roos 绘画体系: Cloth(画布)10 + PaintingSupplies(绘画用品, HSK)1
+	         + WoodLog(画框, 保留鼠族画原木料特色)35;
+	         研究 Art_B1(与画架一致), 产出未完成品 RBPUnfinishedPainting,
+	         完成后得到对应鼠族画(带品质, 需安装到墙上)。
+	      2. 移除 8 幅画的 designationCategory → 从建造菜单消失, 只能画架绘制+安装。
+	      3. 把 8 幅画加入 Roos InterpretArt 观赏 JoyGiver, 并补 building.joyKind=Art,
+	         使鼠族画与 Roos 画一样可被小人观赏(Art 娱乐)。
+
+	      全部 Operation 带 MayRequire="Rooboid.Paintings.Ex":
+	      未装 Roos 时补丁整体不应用, 鼠族画维持原样(可直接建造)。
+	      配方/汉化: 配方 label 为英文, 中文注入
+	      Languages/ChineseSimplified/DefInjected/RecipeDef/Roos绘画适配.xml。
+	      注意: Art_B1/PaintingSupplies 为 HSK(Core_SK)def, 本环境必存在。
+	      注意: 画作产出后为物品形态, 需用「安装」指令挂到墙上
+	      (与原版雕像/Roos 画一致, 挂墙校验走 Placeworker_AttachedToWall)。
+	      注意: 已存在的存档中已建造的画不受影响, 只是无法再新建。
+	      注意: RKFC_RL_Paint 下拉组(DesignatorDropdownGroupDef)保留, 无害。
+	      注意: 画的建造配方由原 ThingDef 隐式生成, 移除 designationCategory
+	      后自动消失, 无需额外关配方。
+	       ================================================================ -->
+
+	<!-- ========== 1. 新增 8 条绘制配方(挂 Roos 画架) ========== -->
+	<Operation Class="PatchOperationAdd" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs</xpath>
+		<value>
+			<!-- 戴珍珠耳环的小鼠 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Earring</defName>
+				<label>paint the ratkin painting "A Ratkin with a Pearl Earring"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Earring>1</RKFC_RL_Paint_Earring>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 撑伞的女人 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Umbrella</defName>
+				<label>paint the ratkin painting "Woman with a Parasol"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Umbrella>1</RKFC_RL_Paint_Umbrella>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 呐喊 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Shout</defName>
+				<label>paint the ratkin painting "Shout"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Shout>1</RKFC_RL_Paint_Shout>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 云端的旅行者 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Traveler</defName>
+				<label>paint the ratkin painting "The Wanderer above the Sea of Fog"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Traveler>1</RKFC_RL_Paint_Traveler>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 自画像 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_VanGogh</defName>
+				<label>paint the ratkin painting "Self-Portrait"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_VanGogh>1</RKFC_RL_Paint_VanGogh>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 蒙娜丽莎的微笑 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_MonaLisa</defName>
+				<label>paint the ratkin painting "Mona Lisa Smile"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_MonaLisa>1</RKFC_RL_Paint_MonaLisa>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 圣鼠贞德 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Joan</defName>
+				<label>paint the ratkin painting "Joan of Arc"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Joan>1</RKFC_RL_Paint_Joan>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+			<!-- 创世纪 -->
+			<RecipeDef>
+				<defName>RKFC_RL_Make_Paint_Genesis</defName>
+				<label>paint the ratkin painting "Genesis"</label>
+				<description>Paint a ratkin-style classical painting at an easel.</description>
+				<jobString>Painting a ratkin masterpiece.</jobString>
+				<workAmount>18000</workAmount>
+				<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+				<workSkill>Artistic</workSkill>
+				<skillRequirements>
+					<Artistic>8</Artistic>
+				</skillRequirements>
+				<effectWorking>Paint</effectWorking>
+				<soundWorking>RBPPainting_Work</soundWorking>
+				<unfinishedThingDef>RBPUnfinishedPainting</unfinishedThingDef>
+				<ingredients>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>Cloth</li>
+							</thingDefs>
+						</filter>
+						<count>10</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>PaintingSupplies</li>
+							</thingDefs>
+						</filter>
+						<count>1</count>
+					</li>
+					<li>
+						<filter>
+							<thingDefs>
+								<li>WoodLog</li>
+							</thingDefs>
+						</filter>
+						<count>35</count>
+					</li>
+				</ingredients>
+				<fixedIngredientFilter>
+					<thingDefs>
+						<li>Cloth</li>
+						<li>PaintingSupplies</li>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fixedIngredientFilter>
+				<products>
+					<RKFC_RL_Paint_Genesis>1</RKFC_RL_Paint_Genesis>
+				</products>
+				<recipeUsers>
+					<li>RBPEaselPainting</li>
+				</recipeUsers>
+				<researchPrerequisite>Art_B1</researchPrerequisite>
+			</RecipeDef>
+		</value>
+	</Operation>
+
+	<!-- ========== 2. 移除 8 幅画的建造菜单入口(designationCategory) ========== -->
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Earring"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Umbrella"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Shout"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Traveler"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_VanGogh"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_MonaLisa"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Joan"]/designationCategory</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[defName="RKFC_RL_Paint_Genesis"]/designationCategory</xpath>
+	</Operation>
+	<!-- 2b. 基类显式置空 designationCategory:
+	     子类字面的 Accessories 移除后, 继承链上层 RKFC_FurnitureBase 的 Furniture 会冒出来
+	     (Unified.xml 实测: 移除后画仍显示 designationCategory=Furniture, 仍可建造)。
+	     在抽象基类(用 @Name, 非 defName)上 Add IsNull 覆盖, 8 幅画继承后不可直接建造。 -->
+	<Operation Class="PatchOperationAdd" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[@Name="RKFC_RL_PaintBase"]</xpath>
+		<value>
+			<designationCategory IsNull="True"/>
+		</value>
+	</Operation>
+
+	<!-- ========== 3. 观赏适配: 8 幅画加入 Roos InterpretArt JoyGiver ========== -->
+	<Operation Class="PatchOperationAdd" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/JoyGiverDef[defName="InterpretArt"]/thingDefs</xpath>
+		<value>
+			<li>RKFC_RL_Paint_Earring</li>
+			<li>RKFC_RL_Paint_Umbrella</li>
+			<li>RKFC_RL_Paint_Shout</li>
+			<li>RKFC_RL_Paint_Traveler</li>
+			<li>RKFC_RL_Paint_VanGogh</li>
+			<li>RKFC_RL_Paint_MonaLisa</li>
+			<li>RKFC_RL_Paint_Joan</li>
+			<li>RKFC_RL_Paint_Genesis</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 4. 观赏适配: 画作基类补 building.joyKind=Art(同 Roos 画) ==========
+	     ⚠️ 注意1: PatchOperation 的 XPath 只作用于字面 XML 树(Inherit 之前),
+	     8 幅画的 <building> 节点定义在抽象基类 RKFC_RL_PaintBase 中, 子类无显式节点,
+	     故必须加在基类上, 8 幅画经 ParentName 继承。
+	     ⚠️ 注意2: 抽象基类用 Name 属性而非 defName, xpath 必须写 @Name。 -->
+	<Operation Class="PatchOperationAdd" MayRequire="Rooboid.Paintings.Ex">
+		<xpath>Defs/ThingDef[@Name="RKFC_RL_PaintBase"]/building</xpath>
+		<value>
+			<joyKind>Art</joyKind>
+		</value>
+	</Operation>
+</Patch>

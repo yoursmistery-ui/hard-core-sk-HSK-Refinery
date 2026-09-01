@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ============================================================================
+  研读蓝图书 JobDef (书籍化 v4, D6 科研工作)
+  ============================================================================
+  与原版 JobDefOf.Reading (joy 活动) 的区别:
+    - 科研工作类型由 WorkGiverDef (WorkGiverDefs_RK.xml) 声明 workType=Research: 不吃 joy, 由 WorkGiver_StudyBlueprint 发起
+    - ⚠ JobDef 无 workType 字段, 勿写 <workType> (反序列化报 NRE, 整个 def 加载失败)
+    - 无 joyDuration; 耗时 = JobDriver_StudyBlueprint.ComputeStudyTicks (tier 档位)
+  ============================================================================ -->
+<Defs>
+	<JobDef>
+		<defName>RK_StudyBlueprint</defName>
+		<driverClass>BlueprintUnlockHSK.JobDriver_StudyBlueprint</driverClass>
+		<reportString>studying TargetA.</reportString>
+		<alwaysShowWeapon>false</alwaysShowWeapon>
+		<suspendable>true</suspendable>
+		<casualInterruptible>true</casualInterruptible>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+</Defs>

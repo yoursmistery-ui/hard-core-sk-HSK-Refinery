@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- 装饰台 Tav_TableDecor 已于 2026-08-28 移除(用户另作他用, 需要时从 _tmp/backup_20260828_tav_textile 取回):
+	     其原 11 条工作台配方删除, 对应物件走建筑菜单直建; 垫料配方 TavMake_Padding 迁 HSK 纺织机 TableLoom。
+	     本 mod 生产台 = TableLoom 的{垫料 + HSK 织绸 RK_WeaveSilk} + 下面的烤箱/屠宰台。 -->
+<ThingDef ParentName="BenchBase">
+		<defName>Tav_Oven</defName>
+		<label>酒馆烤箱</label>
+		<description>任何酒馆的核心。这台烤箱让空气中弥漫着烤肉和新鲜面包的香气——吸引着旅人和殖民者齐聚餐桌。</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+		<texPath>Things/Building/Production/TavernOven</texPath>
+		<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		<drawSize>(5,3)</drawSize>
+		<damageData>
+			<cornerTL>Damage/Corner</cornerTL>
+			<cornerTR>Damage/Corner</cornerTR>
+			<cornerBL>Damage/Corner</cornerBL>
+			<cornerBR>Damage/Corner</cornerBR>
+		</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>40</costStuffCount>
+			<costList>
+				<WoodLog>80</WoodLog>
+			</costList>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<!-- SK.CompFueled 每帧跑温度/燃烧模型, 缺省 tickerType=Never 不跳动, 必须显式 Normal -->
+		<tickerType>Normal</tickerType>
+		<statBases>
+		<WorkToBuild>3000</WorkToBuild>
+		<MaxHitPoints>180</MaxHitPoints>
+		<Flammability>1.0</Flammability>
+		<Cleanliness>0</Cleanliness>
+		</statBases>
+		<size>(3,1)</size>
+		<designationCategory Inherit="False">Production</designationCategory>
+		<uiOrder>2520</uiOrder>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<inspectorTabs>
+		<li>ITab_Bills</li>
+		<li>SK.ITab_Fuel</li>
+		</inspectorTabs>
+		<!-- 2026-08-29 定性为 HSK 石头烤箱 TableOven 的等价物(烘焙台, 非灶台): 配方继承 TableOven
+		     (融糖/烘咖啡豆/饼干/面包/蓝莓派), 本 mod 自带食谱(玉米面团/肉饭/糊/面包/饭团/熬脂)仍挂 Tav_Oven。
+		     SK.CompFueled 绑定燃料(无燃料停工, 有账单才耗料;
+		     CompHeatPusherAdvanced 自带门控只在 Burning 时发热), 燃料=木柴类/木炭/煤/引火物/油脂 容量30。 -->
+		<comps>
+		<li Class="CompProperties_Flickable" />
+		<li Class="CompProperties_AffectedByFacilities">
+			<linkableFacilities>
+			<li>Tav_Kitchen</li>
+			<li>Tav_KitchenShelfs</li>
+			<li>Tav_KitchenCloset</li>
+			</linkableFacilities>
+		</li>
+		<li Class="SK.CompProperties_HeatPusherAdvanced">
+			<compClass>SK.CompHeatPusherAdvanced</compClass>
+			<heatPerSecond>17</heatPerSecond>
+			<heatPushMaxTemperature>25</heatPushMaxTemperature>
+		</li>
+		<li Class="CompProperties_Glower">
+			<glowRadius>3</glowRadius>
+			<glowColor>(217,112,33,0)</glowColor>
+		</li>
+		<li Class="SK.CompFueled_Properties">
+			<operatingTemp>300</operatingTemp>
+			<fireDrawOffset>(0,0,0)</fireDrawOffset>
+			<smokeDrawOffset>(0,0,0.1)</smokeDrawOffset>
+			<fuelDrawOffset>(0,0,0.01)</fuelDrawOffset>
+			<fuelDrawScale>0.7</fuelDrawScale>
+			<fuelCapacity>30</fuelCapacity>
+			<burnFuelMultiplier>0.9</burnFuelMultiplier>
+			<effectOnWeather>true</effectOnWeather>
+			<smokeEnabled>true</smokeEnabled>
+			<smokeDensity>1</smokeDensity>
+			<fuelFilter>
+				<thingDefs>
+					<li>Charcoal</li>
+					<li>Coal</li>
+					<li>Kindling</li>
+					<li>Tallow</li>
+				</thingDefs>
+				<categories>
+					<li>Wooden</li>
+				</categories>
+			</fuelFilter>
+		</li>
+		</comps>
+		<building>
+		<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<!-- isMealSource=原版炉灶标记: 算殖民食物源(消"缺少食物源"警报)。
+			     workTableRoomRole=Kitchen 已删: 厨房角色每台炉灶计 28 分, 餐厅每张餐桌计 12 分,
+			     酒馆大厅餐桌多, 餐厅分恒压厨房分, 留着只会永远吃"不在厨房"x0.7。 -->
+			<isMealSource>true</isMealSource>
+		</building>
+		<!-- stuffable 建筑必须 uiIconPath(铁律§5), 指向实际存在的平铺方向贴图 -->
+		<uiIconPath>UI/TavernOven</uiIconPath>
+		<researchPrerequisites>
+		<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<placeWorkers>
+		<li>PlaceWorker_ShowFacilitiesConnections</li>
+		<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="VEF.Buildings.RecipeInheritanceExtension">
+				<inheritRecipesFrom>
+					<li>TableOven</li>
+				</inheritRecipesFrom>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="BenchBase">
+		<defName>Tav_KitchenButch</defName>
+		<label>屠宰台</label>
+		<description>内置式厨房台面,用于切割肉类和尸体。不会影响厨房的清洁度。</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+		<texPath>Things/Building/Production/TavMeatTable</texPath>
+		<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		<drawSize>(2.46,1.5)</drawSize>
+		<damageData>
+			<cornerTL>Damage/Corner</cornerTL>
+			<cornerTR>Damage/Corner</cornerTR>
+			<cornerBL>Damage/Corner</cornerBL>
+			<cornerBR>Damage/Corner</cornerBR>
+		</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+			<costList>
+				<WoodLog>50</WoodLog>
+			</costList>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+		<WorkToBuild>3000</WorkToBuild>
+		<MaxHitPoints>180</MaxHitPoints>
+		<Flammability>1.0</Flammability>
+		<Cleanliness>0</Cleanliness>
+		</statBases>
+		<size>(2,1)</size>
+		<designationCategory Inherit="False">Production</designationCategory>
+		<uiOrder>2520</uiOrder>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<inspectorTabs>
+		<li>ITab_Bills</li>
+		</inspectorTabs>
+		<comps>
+				<li Class="VEF.Buildings.CompProperties_RandomBuildingGraphic">
+					<randomGraphics>
+						<li>Things/Building/Production/TavMeatTable</li>
+						<li>Things/Building/Production/TavMeatTableB</li>
+					</randomGraphics>
+			<startAsRandom>false</startAsRandom> 
+				</li>
+		<li Class="CompProperties_AffectedByFacilities">
+			<linkableFacilities>
+			<li>Tav_Kitchen</li>
+			<li>Tav_KitchenShelfs</li>
+			<li>Tav_KitchenCloset</li>
+			</linkableFacilities>
+		</li>
+		</comps>
+		<building>
+		<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<!-- 原版 TableButcher 即无房间角色惩罚(空 workTableRoomRole), 原贴的 Kitchen x0.7 已删(2026-08-29 排查) -->
+		</building>
+		<researchPrerequisites>
+		<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<placeWorkers>
+		<li>PlaceWorker_ShowFacilitiesConnections</li>
+		<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<modExtensions>
+			<li Class="VEF.Buildings.RecipeInheritanceExtension">
+				<inheritRecipesFrom>
+					<li>TableButcher</li>
+				</inheritRecipesFrom>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

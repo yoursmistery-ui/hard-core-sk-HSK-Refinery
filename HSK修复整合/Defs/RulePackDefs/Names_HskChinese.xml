@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+HSK修复整合 - 中文人名规则包(2026-08-21)
+
+背景: 全球所有派系/种族的人名由文化 CultureDef.pawnNameMaker 里的英文规则包
+      (RatkinKingdom / CorunanEN / SophianEN / Norbal / Orassan / Asari / Legion) 程序生成, 全部是英文。
+本文件为一次性中文名基础设施:
+  1) HskCnPersonName       通用中文人名(姓+名, 空格分隔, 两 token -> First+Last, 昵称留空,
+                             避开了「单 token 昵称触发全球唯一性」的新世界崩溃, 空间约 姓N x 名M)。
+  2) HskCnPersonNameFemale 女性中文名(使用女性名池)。
+两台 root 规则均为 r_name, 与 vanilla/HSK 各文化 pawnNameMaker 的入口一致。
+用法: 47_人名中文化.xml 将这 8 个文化/人名的 pawnNameMaker(及 Female) 统一改指向本包。
+-->
+<Defs>
+
+	<!-- 姓氏池：普通单字姓 + 少量复姓，组合空间约 137 x N -->
+	<!-- 字库分散在下面两个 RulePackDef 里各自列出，避免共享 token 造成的依赖纠缠 -->
+
+	<!-- 通用中文人名（中/男通用） -->
+	<RulePackDef>
+		<defName>HskCnPersonName</defName>
+		<label>sk chinese names</label>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name->[ZhSurname] [ZhGiven]</li>
+				<li>ZhSurname->王</li><li>ZhSurname->李</li><li>ZhSurname->张</li><li>ZhSurname->刘</li>
+				<li>ZhSurname->陈</li><li>ZhSurname->杨</li><li>ZhSurname->黄</li><li>ZhSurname->赵</li>
+				<li>ZhSurname->周</li><li>ZhSurname->吴</li><li>ZhSurname->徐</li><li>ZhSurname->孙</li>
+				<li>ZhSurname->马</li><li>ZhSurname->朱</li><li>ZhSurname->胡</li><li>ZhSurname->郭</li>
+				<li>ZhSurname->何</li><li>ZhSurname->林</li><li>ZhSurname->罗</li><li>ZhSurname->郑</li>
+				<li>ZhSurname->梁</li><li>ZhSurname->谢</li><li>ZhSurname->宋</li><li>ZhSurname->唐</li>
+				<li>ZhSurname->许</li><li>ZhSurname->韩</li><li>ZhSurname->冯</li><li>ZhSurname->邓</li>
+				<li>ZhSurname->曹</li><li>ZhSurname->彭</li><li>ZhSurname->曾</li><li>ZhSurname->萧</li>
+				<li>ZhSurname->田</li><li>ZhSurname->董</li><li>ZhSurname->袁</li><li>ZhSurname->潘</li>
+				<li>ZhSurname->于</li><li>ZhSurname->蒋</li><li>ZhSurname->蔡</li><li>ZhSurname->余</li>
+				<li>ZhSurname->杜</li><li>ZhSurname->叶</li><li>ZhSurname->程</li><li>ZhSurname->魏</li>
+				<li>ZhSurname->苏</li><li>ZhSurname->吕</li><li>ZhSurname->丁</li><li>ZhSurname->任</li>
+				<li>ZhSurname->沈</li><li>ZhSurname->姚</li><li>ZhSurname->卢</li><li>ZhSurname->姜</li>
+				<li>ZhSurname->崔</li><li>ZhSurname->钟</li><li>ZhSurname->谭</li><li>ZhSurname->陆</li>
+				<li>ZhSurname->汪</li><li>ZhSurname->范</li><li>ZhSurname->金</li><li>ZhSurname->石</li>
+				<li>ZhSurname->廖</li><li>ZhSurname->贾</li><li>ZhSurname->夏</li><li>ZhSurname->韦</li>
+				<li>ZhSurname->傅</li><li>ZhSurname->方</li><li>ZhSurname->白</li><li>ZhSurname->邹</li>
+				<li>ZhSurname->孟</li><li>ZhSurname->熊</li><li>ZhSurname->秦</li><li>ZhSurname->邱</li>
+				<li>ZhSurname->江</li><li>ZhSurname->尹</li><li>ZhSurname->薛</li><li>ZhSurname->阎</li>
+				<li>ZhSurname->段</li><li>ZhSurname->雷</li><li>ZhSurname->侯</li><li>ZhSurname->龙</li>
+				<li>ZhSurname->史</li><li>ZhSurname->陶</li><li>ZhSurname->黎</li><li>ZhSurname->贺</li>
+				<li>ZhSurname->顾</li><li>ZhSurname->毛</li><li>ZhSurname->郝</li><li>ZhSurname->龚</li>
+				<li>ZhSurname->邵</li><li>ZhSurname->万</li><li>ZhSurname->钱</li><li>ZhSurname->严</li>
+				<li>ZhSurname->覃</li><li>ZhSurname->武</li><li>ZhSurname->戴</li><li>ZhSurname->莫</li>
+				<li>ZhSurname->孔</li><li>ZhSurname->向</li><li>ZhSurname->汤</li><li>ZhSurname->伍</li>
+				<li>ZhSurname->常</li><li>ZhSurname->康</li><li>ZhSurname->陆</li><li>ZhSurname->温</li>
+				<li>ZhSurname->欧阳</li><li>ZhSurname->司马</li><li>ZhSurname->上官</li><li>ZhSurname->东方</li>
+				<li>ZhSurname->南宫</li><li>ZhSurname->独孤</li><li>ZhSurname->慕容</li><li>ZhSurname->轩辕</li>
+				<li>ZhSurname->尉迟</li>
+				<!-- 通用两字名池 -->
+				<li>ZhGiven->建国</li><li>ZhGiven->志强</li><li>ZhGiven->文博</li><li>ZhGiven->宇轩</li>
+				<li>ZhGiven->浩然</li><li>ZhGiven->睿哲</li><li>ZhGiven->俊驰</li><li>ZhGiven->子墨</li>
+				<li>ZhGiven->明轩</li><li>ZhGiven->泽洋</li><li>ZhGiven->亦辰</li><li>ZhGiven->凯瑞</li>
+				<li>ZhGiven->嘉言</li><li>ZhGiven->景行</li><li>ZhGiven->星河</li><li>ZhGiven->北辰</li>
+				<li>ZhGiven->长风</li><li>ZhGiven->远航</li><li>ZhGiven->望舒</li><li>ZhGiven->听澜</li>
+				<li>ZhGiven->惊蛰</li><li>ZhGiven->流云</li><li>ZhGiven->鹤鸣</li><li>ZhGiven->归鸿</li>
+				<li>ZhGiven->青梧</li><li>ZhGiven->石破天</li><li>ZhGiven->念青</li><li>ZhGiven->慕白</li>
+				<li>ZhGiven->凌霜</li><li>ZhGiven->承影</li><li>ZhGiven->逐浪</li><li>ZhGiven->破空</li>
+				<li>ZhGiven->云帆</li><li>ZhGiven->沧海</li><li>ZhGiven->孤月</li><li>ZhGiven->寒江</li>
+				<li>ZhGiven->晚舟</li><li>ZhGiven->苍梧</li><li>ZhGiven->燕然</li><li>ZhGiven->铁衣</li>
+				<li>ZhGiven->厉风</li><li>ZhGiven->断鸿</li><li>ZhGiven->磐石</li><li>ZhGiven->坚城</li>
+				<li>ZhGiven->镇岳</li><li>ZhGiven->赫连</li><li>ZhGiven->霍达</li><li>ZhGiven->卫青</li>
+				<li>ZhGiven->子龙</li><li>ZhGiven->云长</li><li>ZhGiven->孟起</li><li>ZhGiven->伯符</li>
+				<li>ZhGiven->仲谋</li><li>ZhGiven->景略</li><li>ZhGiven->修远</li><li>ZhGiven->行健</li>
+				<li>ZhGiven->守拙</li><li>ZhGiven->明德</li><li>ZhGiven->至诚</li><li>ZhGiven->峻茂</li>
+				<li>ZhGiven->嘉木</li><li>ZhGiven->乔松</li><li>ZhGiven->白榆</li><li>ZhGiven->翠微</li>
+				<li>ZhGiven->清源</li><li>ZhGiven->沧海</li><li>ZhGiven->昆仑</li><li>ZhGiven->泰岳</li>
+				<li>ZhGiven->云泽</li><li>ZhGiven->晴川</li><li>ZhGiven->雨眠</li><li>ZhGiven->深蓝</li>
+				<li>ZhGiven->星野</li><li>ZhGiven->晴空</li><li>ZhGiven->白鹭</li><li>ZhGiven->远屿</li>
+				<li>ZhGiven->临川</li><li>ZhGiven->江离</li><li>ZhGiven->杜若</li><li>ZhGiven->若木</li>
+				<li>ZhGiven->扶摇</li><li>ZhGiven->扶苏</li><li>ZhGiven->子桑</li><li>ZhGiven->兰泽</li>
+				<li>ZhGiven->秋水</li><li>ZhGiven->清晖</li><li>ZhGiven->望舒</li><li>ZhGiven->白芷</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<!-- 女性中文名（姓氏同通用，名取偏女性化） -->
+	<RulePackDef>
+		<defName>HskCnPersonNameFemale</defName>
+		<label>sk chinese female names</label>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name->[ZhSurname] [ZhGivenF]</li>
+				<li>ZhSurname->王</li><li>ZhSurname->李</li><li>ZhSurname->张</li><li>ZhSurname->刘</li>
+				<li>ZhSurname->陈</li><li>ZhSurname->杨</li><li>ZhSurname->黄</li><li>ZhSurname->赵</li>
+				<li>ZhSurname->周</li><li>ZhSurname->吴</li><li>ZhSurname->徐</li><li>ZhSurname->孙</li>
+				<li>ZhSurname->林</li><li>ZhSurname->郑</li><li>ZhSurname->何</li><li>ZhSurname->罗</li>
+				<li>ZhSurname->梁</li><li>ZhSurname->谢</li><li>ZhSurname->宋</li><li>ZhSurname->唐</li>
+				<li>ZhSurname->许</li><li>ZhSurname->韩</li><li>ZhSurname->冯</li><li>ZhSurname->邓</li>
+				<li>ZhSurname->曹</li><li>ZhSurname->彭</li><li>ZhSurname->董</li><li>ZhSurname->袁</li>
+				<li>ZhSurname->叶</li><li>ZhSurname->苏</li><li>ZhSurname->杜</li><li>ZhSurname->沈</li>
+				<li>ZhSurname->姚</li><li>ZhSurname->汪</li><li>ZhSurname->范</li><li>ZhSurname->金</li>
+				<li>ZhSurname->白</li><li>ZhSurname->欧阳</li><li>ZhSurname->上官</li><li>ZhSurname->南宫</li>
+				<!-- 女性名池 -->
+				<li>ZhGivenF->婉清</li><li>ZhGivenF->语嫣</li><li>ZhGivenF->静姝</li><li>ZhGivenF->若曦</li>
+				<li>ZhGivenF->梦琪</li><li>ZhGivenF->雅韵</li><li>ZhGivenF->慧心</li><li>ZhGivenF->文静</li>
+				<li>ZhGivenF->思源</li><li>ZhGivenF->芷若</li><li>ZhGivenF->凌薇</li><li>ZhGivenF->水清</li>
+				<li>ZhGivenF->月明</li><li>ZhGivenF->云锦</li><li>ZhGivenF->雪柔</li><li>ZhGivenF->夜幕</li>
+				<li>ZhGivenF->采薇</li><li>ZhGivenF->楚楚</li><li>ZhGivenF->云英</li><li>ZhGivenF->织梦</li>
+				<li>ZhGivenF->含章</li><li>ZhGivenF->淑仪</li><li>ZhGivenF->昭华</li><li>ZhGivenF->意映</li>
+				<li>ZhGivenF->兰芷</li><li>ZhGivenF->芳华</li><li>ZhGivenF->琼姿</li><li>ZhGivenF->紫薇</li>
+				<li>ZhGivenF->青黛</li><li>ZhGivenF->若兰</li><li>ZhGivenF->锦瑟</li><li>ZhGivenF->凝香</li>
+				<li>ZhGivenF->晓凤</li><li>ZhGivenF->云霞</li><li>ZhGivenF->春涧</li><li>ZhGivenF->秋晚</li>
+				<li>ZhGivenF->星阑</li><li>ZhGivenF->月希</li><li>ZhGivenF->竹影</li><li>ZhGivenF->梅芳</li>
+				<li>ZhGivenF->兰舟</li><li>ZhGivenF->琼琚</li><li>ZhGivenF->灵犀</li><li>ZhGivenF->青禾</li>
+				<li>ZhGivenF->听雨</li><li>ZhGivenF->望月</li><li>ZhGivenF->流萤</li><li>ZhGivenF->疏影</li>
+				<li>ZhGivenF->雪见</li><li>ZhGivenF->云裳</li><li>ZhGivenF->如烟</li><li>ZhGivenF->镜平</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+</Defs>

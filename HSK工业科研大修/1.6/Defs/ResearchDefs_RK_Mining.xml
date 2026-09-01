@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 原始采矿 / 原始采石 · Neolithic 档自有科研节点(HSK工业科研大修, 2026-08-28)
+       目的: 原始时代科技太稀疏, 参照 MO 把采掘内容下沉到 Neolithic。
+       ParentName="PrimitiveBase"(Core_SK: techLevel Neolithic + PrimitiveResearchBench +
+       SK.AdvancedResearchExtension[Primitive,Simple,HiTech] + ResearchTreeSKModExtension + ClassicStart),
+       与同行 Mining 链档位一致不产生越级。坐标落在 Craft_SK 行 Y=24 的空位 X=1~2
+       (该行仅 X=3,4,5(Medieval)、7,8,12,13(Industrial)、18-23(Robotics) 被占)。 -->
+
+  <ResearchProjectDef ParentName="PrimitiveBase">
+    <defName>RK_Mining_Primitive</defName>
+    <label>原始采矿</label>
+    <description>在岩石地面上搭一处简易采掘点, 徒手游离于岩层间挖取盐、沙与碎石。虽无工具效率减半, 却是原始时代最早探明地下资源的门路。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>200</baseCost>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>24.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PrimitiveBase">
+    <defName>RK_Quarry_Primitive</defName>
+    <label>原始采石</label>
+    <description>学会在采掘点按脚下地面的岩种徒手凿取石料, 碎岩成块供早期建筑与石器使用。所出岩种随采掘点所在岩层而定。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>300</baseCost>
+    <prerequisites>
+      <li>RK_Mining_Primitive</li>
+    </prerequisites>
+    <researchViewX>2.00</researchViewX>
+    <researchViewY>24.00</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- 中世纪采石场 · Medieval 档(2026-08-30, 体系化收编批2)
+       档位定案: 大修 RK 链=原始档, Quarry 三采石场=中世纪档。
+       链: RK_Mining_Primitive → Mining_B1(94 号已挂前置) → 本节点 → QRY_Quarry/MediQuarry/MiniQuarry(96 号补丁挂入)。
+       ParentName="MedievalBase"(Core_SK: techLevel Medieval + SimpleResearchBench + SK 扩展 + ResearchTreeSKModExtension)。
+       坐标 Craft_SK 行 Y=24 的 X=6(该行 X=3,4,5 为 Medieval 档已占, 7,8,12,13 为 Industrial, X6 为下一空位)。 -->
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Quarry_Medieval</defName>
+    <label>采石场</label>
+    <description>开辟一处正式的采石场, 以规模化手段从岩层中成批凿取石料与矿物。较之原始的徒手采掘, 产量与效率都不可同日而语。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>500</baseCost>
+    <prerequisites>
+      <li>Mining_B1</li>
+    </prerequisites>
+    <researchViewX>6.00</researchViewX>
+    <researchViewY>24.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

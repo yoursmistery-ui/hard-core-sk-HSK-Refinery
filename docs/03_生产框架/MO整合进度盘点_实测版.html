@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MO 整合进度盘点 · 实测版（2026-08-28）</title>
+<style>
+:root{--bg:#0f1115;--fg:#e6e8ee;--mut:#9aa3b2;--card:#171b22;--line:#262c37;--ok:#3fb950;--warn:#d29922;--info:#58a6ff;--lux:#c9a1ff;--gray:#6e7681;--dim:#30363d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 "Segoe UI",system-ui,sans-serif;padding:28px 18px}
+.wrap{max-width:980px;margin:0 auto}h1{font-size:23px;margin:0 0 4px}.sub{color:var(--mut);margin-bottom:18px;font-size:14px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}nav a{color:var(--info);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:4px 10px;border-radius:20px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 16px}
+h2{font-size:17px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+h3{font-size:14px;margin:14px 0 6px;color:var(--mut)}
+.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;color:#0b0e13}
+.b-ok{background:var(--ok)}.b-warn{background:var(--warn)}.b-info{background:var(--info)}.b-lux{background:var(--lux)}.b-gray{background:var(--gray);color:#e6e8ee}
+ul{margin:6px 0 0;padding-left:20px}li{margin:3px 0}
+code{background:#0b0e13;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px;color:#ffd9a0}
+table{width:100%;border-collapse:collapse;margin:10px 0 2px;font-size:13.5px}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}th{color:var(--mut);font-weight:600}
+.foot{color:var(--mut);font-size:12.5px;margin-top:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:6px}
+.card{background:#11151c;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card .k{font-size:12.5px;color:var(--mut)}.card .v{font-size:26px;font-weight:600;line-height:1.3}
+.v-ok{color:var(--ok)}.v-warn{color:var(--warn)}.v-gray{color:var(--gray)}.v-info{color:var(--info)}
+.bar{display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--dim)}
+.seg-ok{background:#1a7f37}.seg-warn{background:var(--warn)}.seg-gray{background:var(--gray)}.seg-dim{background:#21262d}
+table.prog td{padding:5px 8px}
+td .pct{font-variant-numeric:tabular-nums;color:var(--fg);font-weight:600}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:8px 0 2px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.warn-box{border-left:3px solid var(--warn);padding-left:12px;margin:8px 0}
+.ok-box{border-left:3px solid var(--ok);padding-left:12px;margin:8px 0}
+</style></head><body><div class="wrap">
+<h1>MO → HSK工业科研大修 整合进度盘点（实测版）</h1>
+<div class="sub">2026-08-28 23:5x · 口径：<b>代码扫描实测</b>，非文档自述。扫描脚本 <code>_tmp/scan_mo_landed.py</code>，结果 <code>_tmp/mo_landed_defs.json</code>。</div>
+<nav><a href="#sum">总览</a><a href="#prog">板块进度</a><a href="#done">已落地清单</a><a href="#todo">还欠什么</a><a href="#diff">文档与代码不符</a><a href="#next">下一步</a></nav>
+
+<section id="sum">
+<h2>总览 <span class="badge b-ok">加权 35%</span><span class="badge b-info">旧基线 10.1%</span></h2>
+<div class="cards">
+<div class="card"><div class="k">加权整合率</div><div class="v">35%</div></div>
+<div class="card"><div class="k">已整合</div><div class="v v-ok">23</div></div>
+<div class="card"><div class="k">部分完成</div><div class="v v-warn">13</div></div>
+<div class="card"><div class="k">未整合</div><div class="v v-gray">30</div></div>
+<div class="card"><div class="k">决策排除</div><div class="v v-gray">18</div></div>
+<div class="card"><div class="k">扫描 def 总数</div><div class="v v-info">596</div></div>
+</div>
+<div class="legend"><span><i style="background:#1a7f37"></i>已整合</span><span><i style="background:#d29922"></i>部分</span><span><i style="background:#6e7681"></i>未整合</span><span><i style="background:#21262d"></i>决策排除</span></div>
+<p><b>剔除你明确不做的 18 项后</b>，真正该做的 66 项里：做完 23（35%）、半成品 13（20%）、<b>完全没动 30（45%）</b>。</p>
+<div class="ok-box">加权 =（已整合 + 0.5×部分）/ 单元数，与 08-27 旧盘点同口径，可直接比较：10.1% → 35.1%。</div>
+<div class="foot">596 def 中：<code>Rustic_</code> 151 + <code>RK_</code> 67 + <code>RKGem_</code> 6 = <b>224 个属 MO 移植</b>；其余 142 个是自研（蓝图书 112 本 + SchematicBook_ + 石化 Petro + 穿梭机 + 机械师船），不计入 MO。</div>
+</section>
+
+<section id="prog">
+<h2>板块进度</h2>
+<table class="prog">
+<tr><th>板块</th><th>构成（已/部/未/排）</th><th style="width:44%">分布</th><th>加权</th></tr>
+<tr><td>16 矿井·采掘</td><td>2 / 0 / 0 / 0</td><td><div class="bar" style="width:8%"><div class="seg-ok" style="width:100%"></div></div></td><td class="pct">100%</td></tr>
+<tr><td>3 建筑与家具</td><td>11 / 6 / 4 / 3</td><td><div class="bar" style="width:100%"><div class="seg-ok" style="width:45.8%"></div><div class="seg-warn" style="width:25%"></div><div class="seg-gray" style="width:16.7%"></div><div class="seg-dim" style="width:12.5%"></div></div></td><td class="pct">58%</td></tr>
+<tr><td>10 书籍与研究</td><td>2 / 1 / 1 / 1</td><td><div class="bar" style="width:21%"><div class="seg-ok" style="width:40%"></div><div class="seg-warn" style="width:20%"></div><div class="seg-gray" style="width:20%"></div><div class="seg-dim" style="width:20%"></div></div></td><td class="pct">50%</td></tr>
+<tr><td>2 生产设施</td><td>2 / 2 / 4 / 0</td><td><div class="bar" style="width:33%"><div class="seg-ok" style="width:25%"></div><div class="seg-warn" style="width:25%"></div><div class="seg-gray" style="width:50%"></div></div></td><td class="pct">38%</td></tr>
+<tr><td>8 派系与世界</td><td>2 / 3 / 1 / 4</td><td><div class="bar" style="width:42%"><div class="seg-ok" style="width:20%"></div><div class="seg-warn" style="width:30%"></div><div class="seg-gray" style="width:10%"></div><div class="seg-dim" style="width:40%"></div></div></td><td class="pct">35%</td></tr>
+<tr><td>11 心情·特性·文化</td><td>2 / 0 / 3 / 1</td><td><div class="bar" style="width:25%"><div class="seg-ok" style="width:33.3%"></div><div class="seg-gray" style="width:50%"></div><div class="seg-dim" style="width:16.7%"></div></div></td><td class="pct">33%</td></tr>
+<tr><td>5 防具体系</td><td>1 / 0 / 3 / 0</td><td><div class="bar" style="width:17%"><div class="seg-ok" style="width:25%"></div><div class="seg-gray" style="width:75%"></div></div></td><td class="pct">25%</td></tr>
+<tr><td>12/13 机制与兼容</td><td>0 / 1 / 0 / 2</td><td><div class="bar" style="width:12.5%"><div class="seg-warn" style="width:33.3%"></div><div class="seg-dim" style="width:66.7%"></div></div></td><td class="pct">17%</td></tr>
+<tr><td>1 材料与资源</td><td>1 / 0 / 1 / 5</td><td><div class="bar" style="width:29%"><div class="seg-ok" style="width:14.3%"></div><div class="seg-gray" style="width:14.3%"></div><div class="seg-dim" style="width:71.4%"></div></div></td><td class="pct">14%</td></tr>
+<tr><td>4 武器体系</td><td>0 / 0 / 5 / 0</td><td><div class="bar" style="width:21%"><div class="seg-gray" style="width:100%"></div></div></td><td class="pct">0%</td></tr>
+<tr><td>6 盾牌与魔法</td><td>0 / 0 / 2 / 1</td><td><div class="bar" style="width:12.5%"><div class="seg-gray" style="width:66.7%"></div><div class="seg-dim" style="width:33.3%"></div></div></td><td class="pct">0%</td></tr>
+<tr><td>7 生物体系</td><td>0 / 0 / 3 / 1</td><td><div class="bar" style="width:17%"><div class="seg-gray" style="width:75%"></div><div class="seg-dim" style="width:25%"></div></div></td><td class="pct">0%</td></tr>
+<tr><td>9 酒水·药物·炼金</td><td>0 / 0 / 3 / 0</td><td><div class="bar" style="width:12.5%"><div class="seg-gray" style="width:100%"></div></div></td><td class="pct">0%</td></tr>
+</table>
+<div class="foot">条宽 = 该板块单元数 ÷ 24（最大板块），段长 = 该状态占比。武器/盾牌/生物/酒水四块全空，其中武器与酒水属你已拍板「不做」，实际欠账主要是<b>生物</b>。</div>
+</section>
+
+<section id="done">
+<h2>已落地清单 <span class="badge b-ok">23 单元全完成</span></h2>
+<h3>16 矿井与宝石（2/2 · 100%）</h3>
+<ul>
+<li><code>RK_MineShaft</code> 矿井 3×3 + <code>RK_MiningSpot</code> 采矿点（挖掘点按决策不做）</li>
+<li>10 条采掘配方（<code>RK_Mine_Clay/Coal/Copper/Lead/Salt/Stone</code> + <code>RK_MineSpot_*</code> 4 条）</li>
+<li>宝石 6 档 <code>RKGem_Citrine/Amber/Onyx/Emerald/Sapphire/Ruby</code> + 新建材质类别 <code>RK_Gems</code></li>
+<li>宝石暴击：自研 <code>Source/MiningCritHSK.cs</code>（postfix 挂 <code>GenRecipe.MakeRecipeProducts</code>，显式 8 参数类型避重载歧义）</li>
+<li>矿井虫灾：直接用 Core_SK 自家 <code>CompProperties_CreatesInfestations</code>，未复刻 MO 的 DLL comp</li>
+</ul>
+<h3>3 建筑与家具（11/24）</h3>
+<ul>
+<li>乡村结构 19 项（门 5 + 双格门 4 + 墙 7 + 柱 3，拒马桩已删）</li>
+<li>乡村装饰与艺术 81 def（雕塑/半身像/台座/横幅 12 种/喷泉/招牌 12 种/桌面摆件/隔断）</li>
+<li>战利品装饰（金银圣杯/碗/宝石骷髅/古籍）</li>
+<li>书籍家具 6 件（改挂原版 <code>BookcaseBase</code>/<code>ShelfBase</code>）</li>
+<li>皇家家具 10 件 + 皇家都铎床 + 贵族椅 + 吧台</li>
+<li>可搜刮容器 10 类 + 自研 <code>Building_LootableHSK</code>（<code>Source/LootableHSK.cs</code>）</li>
+<li>地形地板 64 项（夯土/乡村木地板/石砖 6 纹×6 材质/陶瓷砖 4 纹）</li>
+<li>KCSG 废墟 3 套（19 SymbolDef + 3 StructureLayoutDef + 3 GenStepDef）—— <b>在 <code>任务大修HSK</code>，不在本 mod</b></li>
+</ul>
+<h3>10 书籍与研究（2/5）</h3>
+<ul>
+<li>图纸门禁：112 本蓝图书 + <code>BlueprintUnlockHSK.dll</code>（CanStartNow 门禁/研读工作/ResearchTreeSK 角标/五路投放）</li>
+<li>传说书 <code>RK_Book_Tale_Medieval</code> + 专著抄写配方 <code>RK_CopyTextBook</code></li>
+</ul>
+<h3>2 生产设施（2/8）</h3>
+<ul>
+<li>PF 自动机 3 座：<code>Rustic_SilkBed</code> / <code>Rustic_PaperPress_PF</code> / <code>Rustic_ClothSpinner</code>（+ PF 原生 <code>BarrelProcessor</code> 模板，processes 留空）</li>
+<li>探索链：<code>RK_QuestFinder</code> 探秘桌 + <code>RK_BirdPost</code> 信鸽站 + <code>RK_MessengerPost</code> 信使台 + <code>RK_ArchiveCabinet</code> + <code>RK_OldPedestal</code> + <code>RK_AncientOrb</code>，自研 <code>QuestFinderHSK.cs</code></li>
+<li>丝绸链（<code>RK_Silkworm</code>→<code>RK_RawSilk</code>→<code>RK_Silk</code>，挂 HSK 现有 <code>TableLoom</code>）+ 纸张链（<code>RK_PaperPulp</code>→<code>RK_Paper</code>）+ 抄写 4 件链接件</li>
+</ul>
+<h3>8 派系与世界（2/10）</h3>
+<ul>
+<li>商人 8 类全齐：<code>RK_Trader_Armorsmith/ArtPatron/BulkGoods/MedievalHold/MedievalVisitor/RuinScavenger/WanderingScholar/Weaponsmith</code></li>
+<li>巨兽路过事件 2（<code>RK_Incident_ElephantsWander</code>/<code>PolarBearWanders</code>，用原版 pawnKind 替代 MO 怪物）</li>
+</ul>
+<h3>5 防具（1/4）· 11 心情特性文化（2/6）· 1 材料（1/7）</h3>
+<ul>
+<li>珠宝：2 个 <code>ApparelLayerDef</code>（<code>Rustic_NecklaceLayer</code>/<code>RingLayer</code>）+ 项链戒指 14 件 + <code>RK_JewelryBench</code> 珠宝台 + 14 条配方</li>
+<li>特性 2：<code>RK_Warrior</code>/<code>RK_Veteran</code>；文化 2：<code>RK_Culture_OldWorlder</code>/<code>Desert</code>（CultureDef + StyleCategoryDef + ThingStyleDef）</li>
+<li>宝石 stuff 6 档（见矿井板块）</li>
+</ul>
+</section>
+
+<section id="todo">
+<h2>还欠什么 <span class="badge b-warn">30 未动 + 13 半成品</span></h2>
+<h3>你拍板「要」但完全没做的</h3>
+<table><tr><th>项</th><th>所属</th><th>证据（扫描结果）</th></tr>
+<tr><td>铁砧、棚架</td><td>§2 生产设施</td><td>全库零命中，决策表里你写了「要」</td></tr>
+<tr><td>中世纪储物系列</td><td>§3 建筑</td><td>决策「对照 Reel 查缺针对性补」→ 目前仅书架类，<code>Storage/Chest</code> 零命中</td></tr>
+<tr><td>温度与火源 1–2 个</td><td>§3 建筑</td><td><code>Hearth/Fireplace/Stove</code> 零命中；照明只有火盆 <code>Rustic_Brazier</code> 2 件</td></tr>
+<tr><td>堵塞门 / 废矿井 / 地窖 / 藏身处站点</td><td>§3 建筑</td><td>KCSG 只做了 3 套废墟布局，这 4 类未做</td></tr>
+<tr><td>战利品装饰的文化适配</td><td>§3 建筑</td><td>装饰件本体在，但 <code>dominantStyleCategory</code> 与 MO modExtensions 已剥离，适配未补</td></tr>
+<tr><td>生物（驯养 4 / 野生 6 / 怪物 12）</td><td>§7 生物</td><td><b>PawnKindDef 数量为 0</b>，一个没做。决策「加几个独特的」</td></tr>
+<tr><td>邪教三级收集链 / 蛇窟清剿</td><td>§8 任务</td><td>任务大修HSK 里是「族色委托」系列，非 MO 任务链</td></tr>
+<tr><td>心情 / Hediff / 新伤害类型</td><td>§11</td><td><code>ThoughtDef</code>/<code>HediffDef</code>/<code>DamageDef</code> 全为 0</td></tr>
+</table>
+<h3>半成品（部分完成）</h3>
+<ul>
+<li><b>Processor 自动机</b>：MO 原 19 座，实际只移植 3 座（砖窑已删、烟熏房决策不做）</li>
+<li><b>手动工作台</b>：MO 原约 15 座，实际只有抄写台/珠宝台/沤浆池/造纸台/蚕匾架 5 座</li>
+<li><b>娱乐桌 / 椅凳 / 床</b>：按决策只做吧台、贵族椅、皇家床 —— <b>这三项决策已达成</b>，仅 MO 全量未移植</li>
+<li><b>无电照明</b>：只有火盆 2 件，火把/油灯/蜡烛/路灯未做</li>
+<li><b>生产辅助链接件</b>：MO 原 14 件，只做了抄写 4 件</li>
+<li><b>世界结构布局</b>：8 类里只做了废墟 3 套；<b>开局剧本</b>：3 个里做了 2 个</li>
+<li><b>专著</b>：只有 1 条 <code>RK_CopyTextBook</code> 配方，非 MO 的 12 技能书体系</li>
+<li><b>汉化</b>：已移植内容 100% 内联中文，但界面串 DefInjected 未随新内容同步补齐</li>
+</ul>
+<h3>已拍板不做（18 项，无需补）</h3>
+<ul>
+<li>§1 金属/木材/皮革/布料/食材链（HSK + Vile 上位替代，5 项）</li>
+<li>§3 桥梯楼（MO 自身停用）、藏身处世界站点（改注原版站点）、攻城武器</li>
+<li>§6 魔法戒指；§7 派系兵种变体</li>
+<li>§8 四大贵族派系、敌对隐藏派系、哥雷姆陨石、中世纪围城 AI（4 项）</li>
+<li>§10 MO 研究树（已被 HSK 489 节点取代）</li>
+<li>§12/13 <code>MedievalOverhaul.dll</code> 本体与 25 个兼容子模块（策略性不引）</li>
+</ul>
+</section>
+
+<section id="diff">
+<h2>三处文档与代码不符 <span class="badge b-warn">已核处 1 项</span></h2>
+<div class="ok-box"><b>① 砖窑 <code>Rustic_Kiln</code> —— 已按你的决定「确认删除」。</b>它只存在于备份 <code>_tmp/backup_20260828_mining_primitive/Buildings_Rustic_Processors.xml</code>（326 行），当前文件 238 行已删。About 第十段已由「丝绸床/造纸压机/砖窑/纺纱机 4 座」改为「3 座」并注明砖窑不移植，XML 解析通过、双目录 hash 一致。</div>
+<div class="warn-box"><b>② 烟熏房 <code>Rustic_Smoker</code> —— 全库零命中，从未落地。</b><code>07_P2落地记录</code> 称做了 6 座机器，实际 Processor 只有 3 座。About 第十段早已写明「烟熏房按 08-28 决定不移植」，属 07 文档过期，建议后续订正该文档。</div>
+<div class="warn-box"><b>③ KCSG 废墟描述错位。</b>About 第六段把「3 套自绘 KCSG 废墟」写成工业大修的内容，实际落在 <code>任务大修HSK/1.6/Defs/Sites_RK_Ruins.xml</code>（19 SymbolDef + 3 StructureLayoutDef + 3 GenStepDef）。功能完整可用，但描述与归属不一致，建议改 About 或把文件搬回本 mod。</div>
+<div class="foot">复核方法备忘：扫描 def 不能用正则抓 <code>&lt;defName&gt;</code> 判类型 —— 主流写法是 <code>&lt;ThingDef&gt;</code> 子元素 <code>&lt;defName&gt;</code>，正则会漏掉约 90%。应用 ET 遍历 <code>Defs</code> 根子元素取 tag + defName/Name。</div>
+</section>
+
+<section id="next">
+<h2>下一步建议（按性价比排序）</h2>
+<ol>
+<li><b>订正过期文档</b>（零风险）：07 落地记录的「6 座机器」改 3 座、About 第六段的 KCSG 归属、把 <code>中世纪MO整合进度盘点.md</code> 基线从 10.1% 更新到 35.1%。</li>
+<li><b>补 §3 储物与火源</b>（低风险·见效快）：纯原版类零 DLL，先与 Reel 存储定主方案，补 1–2 个火源。</li>
+<li><b>补 §8 任务链</b>（你原定优先级第一）：邪教三级收集链 + 蛇窟清剿，需 QuestScriptDef + KCSG，零 MO DLL 可行。</li>
+<li><b>补 §7 生物</b>：挑几个独特性强的做，适配 Vile 材料体系，注意 CE 动物武器/护甲适配。</li>
+<li><b>战利品装饰文化适配</b>：把剥离的 <code>dominantStyleCategory</code> 接回本环境风格体系。</li>
+</ol>
+<div class="foot">本文件由代码扫描生成，与 <code>docs/03_生产框架/MO整合执行计划/*</code> 及 <code>中世纪MO整合进度盘点*.md</code> 配套使用。实际改动以游戏内实测为准。</div>
+</section>
+</div></body></html>

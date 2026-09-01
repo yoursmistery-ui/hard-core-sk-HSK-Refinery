@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 89_研究引用修复 (2026-08-22)
+         RK_Research_* 研究节点已在 HSK 适配中全部删除(AGENTS.md: 研究线已改为 Ratkin_Apparel_*/Armor_*),
+         但 RKMS(鼠邦)与原 RK 装备的 recipeMaker 自动配方仍引用旧研究名,启动报:
+           "Could not resolve cross-reference: No Verse.ResearchProjectDef named RK_Research_Tailoring/FunctionalApparel/RatkinEngineering"
+         修复: ① recipeMaker 研究前置映射到 HSK 现行研究线(基础裁缝→B1, 功能性服装→C1)
+               ② 3 把枪械(RK_ExoticPistol/RK_ExoticLMG/RK_WallGun)recipeMaker researchPrerequisites
+                  删除已不存在的 RK_Research_RatkinEngineering(GasOperation/PrecisionRifling 前置已足够) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[recipeMaker/researchPrerequisite="RK_Research_Tailoring"]/recipeMaker/researchPrerequisite</xpath>
+        <value>
+            <researchPrerequisite>Ratkin_Apparel_B1</researchPrerequisite>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[recipeMaker/researchPrerequisite="RK_Research_FunctionalApparel"]/recipeMaker/researchPrerequisite</xpath>
+        <value>
+            <researchPrerequisite>Ratkin_Apparel_C1</researchPrerequisite>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="RK_ExoticPistol"]/recipeMaker/researchPrerequisites/li[text()="RK_Research_RatkinEngineering"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="RK_ExoticLMG"]/recipeMaker/researchPrerequisites/li[text()="RK_Research_RatkinEngineering"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="RK_WallGun"]/recipeMaker/researchPrerequisites/li[text()="RK_Research_RatkinEngineering"]</xpath>
+    </Operation>
+</Patch>

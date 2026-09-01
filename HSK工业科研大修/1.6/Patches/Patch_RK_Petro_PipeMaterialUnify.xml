@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  管道材料统一 · 卫生(上下水/污水) + 空调风管 + 石化(油/气)管道本体,一律改为固定消耗 HSK 现成 `Pipe` 部件(钻杆/管件)。
+  取消原可填充材质 stuffCategories + costStuffCount,做到"同一种管道材料"统一标准。
+  范围仅"管道本体",阀门/气泵/出料口不动(用户 2026-09-01 决定)。
+  hidden 变体(sewagePipeHidden / airPipeHidden)从父 def 继承,改父即覆盖,不重复列。
+  门控: 顶层 PatchOperationConditional 检查各 def 自身 costStuffCount 是否存在(DBH/Rimefeller 未装则该 def 不存在→no-op,不报错)。
+  自建石化气管(RK_Petro_GasPipe_NG/Ammonia/Asphalt)在本 mod Defs 内直接改,不走补丁。
+-->
+<Patch>
+
+  <!-- 卫生: 上下水/污水管 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="sewagePipeStuff"]/costStuffCount</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="sewagePipeStuff"]/stuffCategories</xpath></li>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="sewagePipeStuff"]/costStuffCount</xpath></li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="sewagePipeStuff"]</xpath>
+          <value><costList><Pipe>2</Pipe></costList></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- 卫生: 空调风管 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="airPipe"]/costStuffCount</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="airPipe"]/stuffCategories</xpath></li>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="airPipe"]/costStuffCount</xpath></li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="airPipe"]</xpath>
+          <value><costList><Pipe>2</Pipe></costList></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- 石化: 原油管线 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OilPipeline"]/costStuffCount</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="OilPipeline"]/stuffCategories</xpath></li>
+        <li Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="OilPipeline"]/costStuffCount</xpath></li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="OilPipeline"]</xpath>
+          <value><costList><Pipe>4</Pipe></costList></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

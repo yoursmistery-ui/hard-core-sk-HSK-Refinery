@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <RecipeDef Name="OAGene_MakeApparelRequireFinishStory" Abstract="True">
+        <workerClass>OberoniaAureaGene.Snowstorm.RecipeWorker_RequireFinishStory</workerClass>
+        <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+        <workSkill>Crafting</workSkill>
+        <effectWorking>Tailor</effectWorking>
+        <soundWorking>Recipe_Tailor</soundWorking>
+        <requiredGiverWorkType>Tailoring</requiredGiverWorkType>
+        <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+        <recipeUsers>
+            <li>RK_ElectricTailoringBench</li>
+            <li>RK_HandTailoringBench</li>
+            <li>OA_RK_Tailor</li>
+        </recipeUsers>
+    </RecipeDef>
+
+    <RecipeDef ParentName="OAGene_MakeApparelRequireFinishStory">
+        <defName>OAGene_Make_SnowstormCloak</defName>
+        <label>制作风雪斗篷</label>
+        <workAmount>2400</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Fabric</li>
+                        <li>Leathery</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>30</count>
+            </li>
+        
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>DevilstrandCloth</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li></ingredients>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>Fabric</li>
+                <li>Leathery</li>
+            </stuffCategoriesToAllow>
+        </fixedIngredientFilter>
+        <productHasIngredientStuff>true</productHasIngredientStuff> <!-- 产物有原料属性，例如：布XX，超织物XX -->        <!--帮大忙了.JPG，奖励赛博摸摸(,,´•ω•)ノ"(´っω•｀。)-->
+        <products>
+            <OAGene_SnowstormCloak>1</OAGene_SnowstormCloak>
+        </products>
+    </RecipeDef>
+
+    <RecipeDef ParentName="OAGene_MakeApparelRequireFinishStory">
+        <defName>OAGene_Make_SnowstormBarrette</defName>
+        <label>制作风雪发饰</label>
+        <workAmount>12000</workAmount>
+        <unfinishedThingDef Inherit="False" IsNull="True"/>
+        <productHasIngredientStuff>false</productHasIngredientStuff>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>OAGene_IceCrystal</li>
+                    </thingDefs>
+                </filter>
+                <count>25</count>
+            </li>
+        
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Gold</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li></ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>OAGene_IceCrystal</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <OAGene_SnowstormBarrette>1</OAGene_SnowstormBarrette>
+        </products>
+    </RecipeDef>
+
+</Defs>

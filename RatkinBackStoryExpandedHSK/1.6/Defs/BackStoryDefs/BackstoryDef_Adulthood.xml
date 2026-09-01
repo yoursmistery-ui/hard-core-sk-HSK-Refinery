@@ -1,0 +1,4621 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <!-- 阶级代码：1=贵族/上层资产 2=中产 3=小资/半无产 4=无产 5=奴隶 6=修女 7=军人阶级 -->
+
+	<!--  -->
+	<!--AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_</defName>
+		<title>Ratkin </title>
+		<titleShort></titleShort>
+		<description></description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting></Shooting>
+			<Melee></Melee>
+			<Crafting></Crafting>
+			<Construction></Construction>
+			<Plants></Plants>
+			<Animals></Animals>
+			<Cooking></Cooking>
+			<Mining></Mining>
+			<Intellectual></Intellectual>
+			<Social></Social>
+			<Artistic></Artistic>
+			<Medicine></Medicine>
+		</skillGains>
+		<workDisables>
+			<li></li>
+			<li></li>
+			<li></li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree=""></defName>
+				<chance></chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinPriest</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinKnight</li>
+			<li>RatkinKnightCommander</li>
+			<li>RatkinDemoman</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+			<li>RKSniper</li>
+			<li>RKSSK</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef-->
+
+    <!-- 1鼠族发电工4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PowerGenerator</defName>
+		<title>Ratkin Power Generator</title>
+		<titleShort>Power Generator</titleShort>
+		<description>[PAWN_nameDef] used to be a power generator in the Rakinia who generates electricity for the city by running on a hamster wheel every day. However, after the new power generation technology became popular, [PAWN_nameDef] lost [PAWN_possessive] job.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Mining>1</Mining>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">SpeedOffset</defName>
+				<chance>80</chance>
+			</li>
+			<li>
+				<defName Degree="2">SpeedOffset</defName>
+				<chance>40</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+    <!-- 2鼠族入殓师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Mortician</defName>
+		<title>Ratkin Mortician</title>
+		<titleShort>Mortician</titleShort>
+		<description>[PAWN_nameDef]'s main job is to give [PAWN_possessive] dead compatriots a decent farewell ceremony, and because of [PAWN_possessive] profession, [PAWN_pronoun] is often shunned by the other Ratkins. [PAWN_nameDef] has become numb to death due to the long exposure to the departed, but [PAWN_pronoun] is also good at make-up, which brings a bit of color to this rim world.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>3</Artistic>
+			<Crafting>1</Crafting>
+			<Medicine>2</Medicine>
+			<Social>-2</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">NaturalMood</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+    <!-- 3鼠族乡村警察3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CountryPolice</defName>
+		<title>Ratkin Country Police</title>
+		<titleShort>Country Police</titleShort>
+		<description>[PAWN_nameDef] works at a country police station, but since there's really not much police work for [PAWN_objective] to handle in a place like the countryside, [PAWN_nameDef] simply grows vegetables in the police station's backyard to pass the time and subsidize some of [PAWN_possessive] living expenses.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Plants>3</Plants>
+			<Social>1</Social>
+			<Cooking>1</Cooking>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 4鼠族边境检查官3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_BorderInspector</defName>
+		<title>Ratkin Border Inspector</title>
+		<titleShort>Border Inspector</titleShort>
+		<description>After [PAWN_nameDef] graduated from law school, [PAWN_pronoun] got a job working as a border inspector at customs, which sounds grand, but [PAWN_possessive] main job is to tell if the people going through customs are actually ratkins or not by pulling their ears and tails.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>4</Melee>
+			<Social>3</Social>
+		</skillGains>
+        <workDisables>
+			<li>Cooking</li>
+			<li>Constructing</li>
+            <li>Cleaning</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">SpeedOffset</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 5鼠族特勤骑士7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SpecialServiceKnight</defName>
+		<title>Ratkin Special Service Knight</title>
+		<titleShort>Special Service Knight</titleShort>
+		<description>[PAWN_nameDef] stood out after joining the army with [PAWN_possessive] extremely outstanding abilities, and was sent to the human mercenary corps to undergo several years of rigorous training and combat trials after going through layers of selection. After returning home, [PAWN_nameDef] was incorporated into the Special Service Knights (SSK), a top-notch special forces unit that takes orders only from the Crown, which is more controllable than the Demon Legion, specializing in carrying out a variety of black operations missions for the benefit of the Crown.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>10</Melee>
+			<Shooting>10</Shooting>
+			<Social>-4</Social>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Cleaning</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="1">ShootingAccuracy</defName>
+				<chance>65</chance>
+			</li>
+			<li>
+				<defName>Nimble</defName>
+				<chance>65</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 6鼠族胸甲骑兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Cuirassier</defName>
+		<title>Ratkin Cuirassier</title>
+		<titleShort>Cuirassier</titleShort>
+		<description>[PAWN_nameDef] trained as a cavalryman in the army and became an honorable cuirassier, but because there is a great shortage of horse mounts in the kingdom, [PAWN_pronoun] mostly needs to ride king hamster in combat.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>5</Melee>
+			<Shooting>3</Shooting>
+			<Animals>3</Animals>
+		</skillGains>
+        <workDisables>
+			<li>Cleaning</li>
+			<li>Constructing</li>
+            <li>Mining</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 7鼠族预备役士兵4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Reservist</defName>
+		<title>Ratkin Reservist</title>
+		<titleShort>Reservist</titleShort>
+		<description>[PAWN_nameDef] is a member of the kingdom's large reserve force, which farms, raises livestock, and trains near [PAWN_possessive] garrison in times of peace, and then assembles in situ to head to the front lines when war breaks out.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Shooting>2</Shooting>
+			<Plants>3</Plants>
+			<Animals>2</Animals>
+			<Construction>3</Construction>
+			<Crafting>2</Crafting>
+		</skillGains>
+        <workDisables>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 8鼠族司法警察3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_JudicialPolice</defName>
+		<title>Ratkin Judicial Police</title>
+		<titleShort>Judicial Police</titleShort>
+		<description>[PAWN_nameDef] used to be a judicial police officer with quite a sense of justice, never fearing threats from evil forces. Even though [PAWN_pronoun] was forced into exile because [PAWN_pronoun] touched the interests of some nobles in [PAWN_possessive] investigative actions. However, [PAWN_nameDef] never let go of that justice in [PAWN_possessive] heart.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>4</Melee>
+			<Shooting>2</Shooting>
+			<Social>4</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Nerves</defName>
+				<chance>90</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 9鼠族皇家宪兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RoyalGendarmerie</defName>
+		<title>Ratkin Royal Gendarmerie</title>
+		<titleShort>Royal Gendarmerie</titleShort>
+		<description>[PAWN_nameDef] was selected for the Royal Gendarmerie due to [PAWN_possessive] outstanding appearance, which allowed [PAWN_objective] to wear gorgeous uniform every day to maintain law and order in the capital of the kingdom, but a trumped up accusation from a noble forced [PAWN_objective] to take off [PAWN_possessive] uniform and leave the capital to serve at the border.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>4</Melee>
+			<Shooting>3</Shooting>
+			<Social>3</Social>
+		</skillGains>
+        <workDisables>
+			<li>Hauling</li>
+			<li>Cleaning</li>
+            <li>Mining</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Beauty</defName>
+				<chance>80</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 10鼠族公派留学生2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_OfficialExchangeStudent</defName>
+		<title>Ratkin Official Exchange Student</title>
+		<titleShort>Official Exchange Student</titleShort>
+		<description>[PAWN_nameDef] was sent by the Royal University to study in a human city. After getting to know the human society, [PAWN_nameDef] became very interested in all aspects of the human race, and was motivated to bring [PAWN_possessive] knowledge from the human college back to the kingdom and put it into practice.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>6</Intellectual>
+			<Social>5</Social>
+			<Artistic>3</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>Cleaning</li>
+			<li>Constructing</li>
+            <li>Mining</li>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>FastLearner</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName>GreatMemory</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 11鼠族狙击教官7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>RatkinSniperInstructor</defName>
+		<title>Ratkin Sniper Instructor</title>
+		<titleShort>Sniper Instructor</titleShort>
+		<description>[PAWN_nameDef] was an excellent sniper in the Marksman Battalion, and has made great achievements for the kingdom. After retiring from the army, [PAWN_nameDef] accepted an appointment as an instructor at the Royal War College in order to teach [PAWN_possessive] excellent shooting skills to more ratkin soldiers.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>11</Shooting>
+			<Melee>4</Melee>
+			<Social>-5</Social>
+		</skillGains>
+        <workDisables>
+			<li>Cleaning</li>
+			<li>Artistic</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">ShootingAccuracy</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 12鼠族游侠4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Chivalrous</defName>
+		<title>Ratkin Chivalrous</title>
+		<titleShort>Chivalrous</titleShort>
+		<description>[PAWN_nameDef] has been on the prowl since [PAWN_pronoun] fled the town where [PAWN_pronoun] used to live, [PAWN_pronoun] wanders from colonies to colonies, earning some money to live on by doing odd jobs for the residents or dealing with threats, from time to time [PAWN_pronoun] will also go on a chivalrous's errand to help those in need. From an onlooker's perspective, it seems that [PAWN_nameDef] is always searching for something, but what exactly [PAWN_pronoun] is searching for, only [PAWN_nameDef] [PAWN_objective]self knows.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Crafting>3</Crafting>
+			<Medicine>2</Medicine>
+			<Cooking>2</Cooking>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Brawler</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 13鼠族导演2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Director</defName>
+		<title>Ratkin Director</title>
+		<titleShort>Director</titleShort>
+		<description>Step by step, [PAWN_nameDef] has climbed from an amateur writer to the point of being a well-known director throughout the kingdom, the romance movies and adventures movies made by [PAWN_nameDef] that have boxed in at the national box office, and also gain a huge group of fans. There has even been a huge rush to catch up on Ratkin movies after some of [PAWN_nameDef]'s work was brought to the other races' nations.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>8</Artistic>
+			<Crafting>4</Crafting>
+			<Social>5</Social>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+            <li>ManualDumb</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 14鼠族民兵4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Militia</defName>
+		<title>Ratkin Militia</title>
+		<titleShort>Militia</titleShort>
+		<description>[PAWN_nameDef] is a militia, in remote areas where there is no military force or police presence, such militias are the backbone of local defense and policing. If war breaks out, [PAWN_nameDef] will be drafted and integrated into the front line, along with militias from all over the kingdom.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Shooting>3</Shooting>
+			<Plants>3</Plants>
+			<Crafting>2</Crafting>
+			<Construction>2</Construction>
+			<Mining>1</Mining>
+			<Cooking>1</Cooking>
+			<Social>-2</Social>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RatkinExile</li>
+			<li>RatkinEscaper</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 15鼠族水手4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Sailor</defName>
+		<title>Ratkin Sailor</title>
+		<titleShort>Sailor</titleShort>
+		<description>[PAWN_nameDef] spends years sailing around with [PAWN_possessive] ship, and has experienced everything from the tranquil inner lakes to the monstrous waves of the sea. At every port, [PAWN_nameDef] heads to the tavern for a drink, and when [PAWN_pronoun] is not drinking, [PAWN_pronoun] regales the local children with colorful stories of the voyage.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Social>3</Social>
+			<Construction>1</Construction>
+			<Crafting>1</Crafting>
+		</skillGains>
+        <workDisables>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">NaturalMood</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="1">DrugDesire</defName>
+				<chance>60</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 16鼠族外勤间谍3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_FieldSpy</defName>
+		<title>Ratkin Field Spy</title>
+		<titleShort>Field Spy</titleShort>
+		<description>[PAWN_nameDef] was heavily trained in intelligence gathering, and after being classified as a field spy was sent to spy on ratkin embassies abroad. While the ratkin's distinctive physical features make [PAWN_objective] unlikely to be able to conduct direct infiltration activities, the Ratkin's endearing appearance gives [PAWN_objective] a special advantages for obtaining information.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>6</Social>
+			<Melee>3</Melee>
+			<Crafting>1</Crafting>
+			<Artistic>3</Artistic>
+			<Shooting>2</Shooting>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+            <li>Constructing</li>
+			<li>Mining</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Beauty</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 17鼠族探险家3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Explorer</defName>
+		<title>Ratkin Explorer</title>
+		<titleShort>Explorer</titleShort>
+		<description>After [PAWN_nameDef] left the endless paperwork of the Royal Bureau of Exploration and Mapping, [PAWN_pronoun] used [PAWN_possessive] savings to buy a full set of exploration gear and set off on [PAWN_possessive] long-dreamed-of adventure, traveling the vast territories both within and outside of the kingdom, meticulously exploring and documenting everything [PAWN_pronoun] saw to build up material for the book [PAWN_pronoun] would write upon [PAWN_possessive] return from [PAWN_possessive] adventures.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>1</Melee>
+			<Intellectual>4</Intellectual>
+			<Social>3</Social>
+			<Cooking>1</Cooking>
+			<Crafting>1</Crafting>
+			<Medicine>1</Medicine>
+			<Mining>1</Mining>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 18鼠族公务员3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Functionary</defName>
+		<title>Ratkin Functionary</title>
+		<titleShort>Functionary</titleShort>
+		<description>[PAWN_nameDef] has worked hard since graduating from school to join the royal functionary. Despite having to deal with endless paperwork in the office every day, [PAWN_nameDef] is very happy with [PAWN_possessive] job, after all, such a well-paid and prestigious job is quite hard to come by.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Cooking>1</Cooking>
+			<Artistic>1</Artistic>
+			<Social>4</Social>
+			<Intellectual>4</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>ManualDumb</li>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 19鼠族城市工人4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CityWorker</defName>
+		<title>Ratkin City Worker</title>
+		<titleShort>City Worker</titleShort>
+		<description>[PAWN_nameDef] has traveled from the countryside to an up-and-coming industrial city to become a member of the huge factories that travel through the spewing black smoke everyday. Despite the fact that [PAWN_pronoun] needs to work long hours every day in very poor conditions, and has to live in a crowded cluster of buildings after work, and the wages [PAWN_pronoun] gets make it hard to save money. [PAWN_nameDef] still works hard every day - after all, [PAWN_pronoun] still has a family to support.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>4</Crafting>
+			<Construction>4</Construction>
+			<Artistic>-3</Artistic>
+			<Social>-3</Social>
+		</skillGains>
+        <workDisables>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 20鼠族银行经理1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_BankManager</defName>
+		<title>Ratkin Bank Manager</title>
+		<titleShort>Bank Manager</titleShort>
+		<description>With [PAWN_possessive] experience working in a human city, [PAWN_nameDef] was quickly promoted to branch manager of a ratkin private bank. This job allowed [PAWN_objective] to save up a large sum of money and have a carefree good time, but this was instantly shattered with the sudden bankruptcy and liquidation of the bank brought on by the financial crisis, and [PAWN_nameDef] was left penniless.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>5</Social>
+			<Intellectual>2</Intellectual>
+			<Artistic>2</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-2">NaturalMood</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 21鼠族筑墙者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_WallBuilder</defName>
+		<title>Ratkin Wall Builder</title>
+		<titleShort>Wall Builder</titleShort>
+		<description>[PAWN_nameDef] started working as a wall builder after [PAWN_pronoun] was discharged from the Corps of Engineers, building everything from typical residential fences to city walls with ease. After a few years of work, [PAWN_nameDef] became involved in a huge project: building a great wall on the border of the kingdom, in order to keep all the enemies outside the wall.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Construction>7</Construction>
+			<Mining>2</Mining>
+			<Intellectual>-3</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 22鼠族舞者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Dancer</defName>
+		<title>Ratkin Dancer</title>
+		<titleShort>Dancer</titleShort>
+		<description>[PAWN_nameDef] received long training in dance from a young age, and joined an itinerant performance troupe that traveled around the kingdom after finished [PAWN_possessive] study. When the troupe was forced to disband due to financial problems, [PAWN_nameDef] settled in a border trading city and specialized in performing dance in taverns to support [PAWN_objective]self.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>5</Artistic>
+			<Social>3</Social>
+		</skillGains>
+        <workDisables>
+            <li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Beauty</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+			<li>RatkinEscaper</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 23鼠族契约劳工4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_IndenturedLabor</defName>
+		<title>Ratkin Indentured Labor</title>
+		<titleShort>Indentured Labor</titleShort>
+		<description>In order to make a living, [PAWN_nameDef] signs a contract with a joint ratkin-human labor company that sends [PAWN_objective] to work in a human country. The job isn't a good one, and the pay is quite low, but when [PAWN_nameDef] tries to quit, [PAWN_pronoun] realizes [PAWN_pronoun] contracted a debt that [PAWN_pronoun]'ll never be able to pay off in [PAWN_possessive] lifetime, so in one dark and windy night, [PAWN_pronoun] scales the fence and quietly escapes.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Construction>3</Construction>
+			<Crafting>2</Crafting>
+			<Plants>2</Plants>
+			<Animals>2</Animals>
+			<Mining>3</Mining>
+			<Intellectual>-5</Intellectual>
+			<Social>-3</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>SlowLearner</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Caring</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 24鼠族御医2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RoyalDoctor</defName>
+		<title>Ratkin Royal Doctor</title>
+		<titleShort>Royal Doctor</titleShort>
+		<description>[PAWN_nameDef] was one of the best at the Royal Medical School, and was later sent to a human country for several years of further study. When [PAWN_pronoun] returned from [PAWN_possessive] studies, [PAWN_pronoun] was quickly incorporated into the Royal Doctor team, providing medical care to members of the royal family and other nobles. But after a failed attempt to heal a noble's child, [PAWN_nameDef] was convicted and exiled to the frontier.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Medicine>11</Medicine>
+			<Intellectual>5</Intellectual>
+			<Social>1</Social>
+			<Shooting>-4</Shooting>
+			<Melee>-4</Melee>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Neurotic</defName>
+				<chance>85</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 25鼠族私家侦探3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PrivateDetective</defName>
+		<title>Ratkin Private Detective</title>
+		<titleShort>Private Detective</titleShort>
+		<description>[PAWN_nameDef] worked in the criminal investigation department of the Royal Gendarmerie for many years, and opened a private detective agency on [PAWN_possessive] own after [PAWN_pronoun] resigned and left the capital. With keen observation and strong logical analysis, [PAWN_nameDef] has won the praise of customers, the agency's situation is also flourishing.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Shooting>3</Shooting>
+			<Social>5</Social>
+			<Intellectual>1</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>Cleaning</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Industriousness</defName>
+				<chance>60</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 26鼠族占卜师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Diviner</defName>
+		<title>Ratkin Diviner</title>
+		<titleShort>Diviner</titleShort>
+		<description>[PAWN_nameDef] discovered [PAWN_possessive] psycasts abilities at an early age, and [PAWN_pronoun] set up a small store in the city as a divination service. Through a variety of divination methods such as crystal balls or tarot cards, [PAWN_nameDef] solves problems and answers questions for a wide variety of clients, and also sells some of [PAWN_possessive] homemade psychic items. However, [PAWN_pronoun] does not usually use these methods for [PAWN_possessive] own divination.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>5</Social>
+			<Crafting>2</Crafting>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">PsychicSensitivity</defName>
+
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 27鼠族心灵战斗术士7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PsycastsBattleWarlock</defName>
+		<title>Ratkin Psycasts Battle Warlock</title>
+		<titleShort>Psycasts Battle Warlock</titleShort>
+		<description>After [PAWN_nameDef]'s extremely strong psycasts abilities were discovered by the Royal Recruiting Corps, [PAWN_pronoun] was taken to the Royal War College to receive intensive psycasts training. After completing [PAWN_possessive] training, [PAWN_nameDef] was incorporated into a special unit that specializes in fighting through [PAWN_possessive] psycasts abilities, using [PAWN_possessive] psycasts abilities to aid other special forces in combat.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Medicine>4</Medicine>
+			<Melee>5</Melee>
+			<Shooting>4</Shooting>
+		</skillGains>
+        <workDisables>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">PsychicSensitivity</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 28鼠族监视者3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RatkinWatcher</defName>
+		<title>Ratkin Watcher</title>
+		<titleShort>Watcher</titleShort>
+		<description>[PAWN_nameDef]'s training in intelligence gathering and counter-surveillance has led [PAWN_objective] to a job spying on the rich and powerful within the kingdom, and as a watcher, [PAWN_nameDef] often hangs out in upper class society to keep tabs on the private activities of celebrities, recording them and organizing them to provide to the ratkin security agencies for later use.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>5</Social>
+			<Shooting>1</Shooting>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 29鼠族押运官3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Escorter</defName>
+		<title>Ratkin Escorter</title>
+		<titleShort>Escorter</titleShort>
+		<description>As a royal escort officer, [PAWN_nameDef] specializes in escorting all kinds of important documents or materials for the royal family or the key departments of the kingdom, and naturally earns a lot of money. However, in a pirate raid, the transportation team [PAWN_nameDef] was responsible for was completely defeated, a large number of escorter died, and the goods [PAWN_pronoun] was responsible for were also snatched by pirates, in order to avoid punishment, [PAWN_pronoun] had to run away on the spot.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>4</Shooting>
+			<Social>3</Social>
+			<Melee>4</Melee>
+		</skillGains>
+        <workDisables>
+			<li>Mining</li>
+			<li>Cleaning</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 30鼠族工程兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_MilitaryEngineer</defName>
+		<title>Ratkin Military Engineer</title>
+		<titleShort>Military Engineer</titleShort>
+		<description>[PAWN_nameDef] was recruited from the ranks of the miners for [PAWN_possessive] skillful and quick digging ability, and was integrated into the ratkin military engineer corps. In addition to the simple tasks of building fortifications and digging trenches, [PAWN_nameDef] is also required to perform a special task, which is to drive a drill rig to dig tunnels under enemy positions for special forces to infiltrate or carry out underground blasting.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Mining>8</Mining>
+			<Melee>2</Melee>
+			<Crafting>4</Crafting>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Industriousness</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 31鼠族庄园领主1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ManorLord</defName>
+		<title>Ratkin Manor Lord</title>
+		<titleShort>Manor Lord</titleShort>
+		<description>[PAWN_nameDef] was once the manor lord of an estate, and despite being the lowest tier of the Ratkin aristocracy, [PAWN_pronoun] was able to easily own large tracts of land and serfs, and enjoy a privileged life. But in a war, [PAWN_nameDef]'s estate was caught in the crossfire and [PAWN_pronoun] lost everything [PAWN_pronoun] once owned and had to leave [PAWN_possessive] home.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>4</Artistic>
+			<Social>4</Social>
+			<Intellectual>1</Intellectual>
+			<Shooting>2</Shooting>
+		</skillGains>
+        <workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 32鼠族农奴4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Serf</defName>
+		<title>Ratkin Serf</title>
+		<titleShort>Serf</titleShort>
+		<description>[PAWN_nameDef] is one of the hundreds of serfs under the name of a noble, [PAWN_pronoun] doesn't have [PAWN_possessive] own land and saves up money to pay for rent and redemption fees by doing various jobs in the noble's fiefdom. But in one year, an extremely rare more than one-phase cold spell swept through [PAWN_possessive] region, leaving the land [PAWN_nameDef] was responsible for with no harvest. Since [PAWN_pronoun] was unable to pay back the losses, [PAWN_pronoun] had to flee the fiefdom in the night and began to roam the free lands.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Plants>3</Plants>
+			<Mining>1</Mining>
+			<Animals>1</Animals>
+			<Crafting>1</Crafting>
+			<Construction>1</Construction>
+			<Cooking>1</Cooking>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>SlowLearner</defName>
+				<chance>80</chance>
+			</li>
+		</forcedTraitsChance>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 33鼠族穿梭机机组成员3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ShuttleCrewMember</defName>
+		<title>Ratkin Shuttle Crew Member</title>
+		<titleShort>Shuttle Crew Member</titleShort>
+		<description>Despite graduating from the College of Engineering, [PAWN_nameDef] was given the job to pilot a shuttle. After a few months of engineering maintenance training and piloting in human cities, [PAWN_nameDef] returned to the kingdom and served on the Royal Shuttle Crew. The job actually required little effort, so [PAWN_pronoun] spent most of [PAWN_possessive] time learning about engineering and maintaining the shuttles.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Crafting>4</Crafting>
+			<Intellectual>3</Intellectual>
+			<Shooting>3</Shooting>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 34鼠族观星者3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Stargazer</defName>
+		<title>Ratkin Stargazer</title>
+		<titleShort>Stargazer</titleShort>
+		<description>[PAWN_nameDef] is an avid stargazer, and paid a high price for an astronomical telescope to do so. During a nighttime stargazing session, [PAWN_pronoun] witnessed a ship disintegrate and crash near the planet's orbit, and three escape pods were ejected from the shattered hull and landed not far from [PAWN_possessive] farm. After making contact with these space refugees, [PAWN_nameDef] develops a dream of going into space exploration.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>3</Crafting>
+			<Intellectual>3</Intellectual>
+			<Social>2</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 35鼠族飞行员7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Pilot</defName>
+		<title>Ratkin Pilot</title>
+		<titleShort>Pilot</titleShort>
+		<description>[PAWN_nameDef] is a ratkin pilot who spends a lot of time flying wooden biplanes on missions such as transportation, reconnaissance, and close support; it's a well-paying job that doesn't have a lot of hours, so [PAWN_nameDef] occasionally flies the plane around the neighborhood on [PAWN_possessive] own, with a fancy name for it: "Work on [PAWN_possessive] flying skills! ".</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>4</Shooting>
+			<Intellectual>3</Intellectual>
+			<Social>3</Social>
+			<Crafting>3</Crafting>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 36鼠族飞艇艇员7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AirshipCrew</defName>
+		<title>Ratkin Airship Crew</title>
+		<titleShort>Airship Crew</titleShort>
+		<description>[PAWN_nameDef] was a crew member on a combat dirigible airship, responsible for assisting in the operation and maintenance of the various machinery on the airship to control its flight. During a battle, due to the overly violent maneuvers of the airship and the recoil from the ship's guns, [PAWN_nameDef] accidentally fell out of the airship. Fortunately, [PAWN_pronoun] was carrying a parachute, but fearing that [PAWN_pronoun] would be seen as a deserter, [PAWN_pronoun] went into hiding incognito.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Shooting>2</Shooting>
+			<Crafting>4</Crafting>
+			<Construction>3</Construction>
+		</skillGains>
+        <workDisables>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 37鼠族空输7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Paratrooper</defName>
+		<title>Ratkin Paratrooper</title>
+		<titleShort>Paratrooper</titleShort>
+		<description>[PAWN_nameDef] was a former ratkin paratrooper, usually taking part in combat aboard airships or planes. Troops of their kind usually jump into enemy bases by parachuting in, or gang-jumping in airship operations. [PAWN_nameDef] had a strong sense of honor for [PAWN_possessive] job until [PAWN_pronoun] was captured by the enemy after a failed gang-jumping battle.Though [PAWN_pronoun] managed to escape, the loss of [PAWN_possessive] honor prevented [PAWN_objective] from returning to [PAWN_possessive] unit.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Shooting>6</Shooting>
+			<Crafting>1</Crafting>
+		</skillGains>
+        <workDisables>
+			<li>Mining</li>
+			<li>PlantWork</li>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 38鼠族垦荒囚犯5 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PrisoneroftheRatkinReclamationCorps</defName>
+		<title>Prisoner of the Ratkin Reclamation Corps</title>
+		<titleShort>Prisoner of Reclamation Corps</titleShort>
+		<description>[PAWN_nameDef] was an extremely ordinary member of the kingdom, but after being arrested and imprisoned for an unintentional crime, [PAWN_nameDef] was given two choices, either to spend decades in prison or join the reclamation corps, leaving behind everything [PAWN_pronoun] had in the past to pioneer the terra nullius of the continent and dedicate [PAWN_objective]self to the kingdom. [PAWN_nameDef] had to choose the latter option, and has since turned away from [PAWN_possessive] past life and set off for the frontiers of the kingdom.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Plants>3</Plants>
+			<Mining>2</Mining>
+			<Crafting>3</Crafting>
+			<Animals>1</Animals>
+			<Medicine>1</Medicine>
+			<Shooting>1</Shooting>
+			<Cooking>1</Cooking>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Ascetic</defName>
+				<chance>80</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 39鼠族贵族军官1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NobleMilitaryOfficer</defName>
+		<title>Ratkin Noble Military Officer</title>
+		<titleShort>Noble Military Officer</titleShort>
+		<description>Born into a military family, [PAWN_nameDef] grew up in a life of pampering, and in [PAWN_possessive] adulthood had no trouble getting into the Royal War College to study, and upon graduation was directly integrated into the Reserve Officers' Corps. But it is on the battlefield that [PAWN_nameDef]'s skill less and weakness presents, and [PAWN_possessive] hasty gesture of fleeing the front line is met with secret shame by the other officers and soldiers.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>2</Shooting>
+			<Melee>3</Melee>
+			<Social>5</Social>
+			<Artistic>2</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Wimp</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 40鼠族贵族议员1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NobleCouncillor</defName>
+		<title>Ratkin Noble Councillor</title>
+		<titleShort>Noble Councillor</titleShort>
+		<description>[PAWN_nameDef] is a councillor on the Kingdom's Council, but given that the Kingdom's Council is largely made up of members from the upper class and serves no substantive function, [PAWN_nameDef]'s main daily work consists of attending various social events or making harmless remarks at meetings.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>7</Social>
+			<Artistic>5</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 41鼠族赤脚医生4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_BarefootDoctor</defName>
+		<title>Ratkin Barefoot Doctor</title>
+		<titleShort>Barefoot Doctor</titleShort>
+		<description>[PAWN_nameDef] is a barefoot doctor who travels between villages and towns, [PAWN_pronoun] grows or picks herbs to make medicines on [PAWN_possessive] own, and whenever [PAWN_pronoun] visits a settlement, [PAWN_pronoun] provides medical care to the locals at a very low price. Although it is very limited in what [PAWN_nameDef] can do and earns next to nothing, [PAWN_pronoun] still derives a great deal of satisfaction from this work. [PAWN_nameDef] even decide to write a brochure to help other barefoot doctors on medical services.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Medicine>4</Medicine>
+			<Plants>4</Plants>
+			<Crafting>3</Crafting>
+			<Cooking>3</Cooking>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 42鼠族保守军官1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ConservativeOfficer</defName>
+		<title>Ratkin Conservative Officer</title>
+		<titleShort>Conservative Officer</titleShort>
+		<description>[PAWN_nameDef] is a representative of the conservative wing of the ratkin army. Like [PAWN_possessive] fellow officers, [PAWN_pronoun] likes to emphasize the importance of heavily armored knights, the range and accuracy of their weapons, and defensive positional warfare, and does [PAWN_possessive] best to oppose anyone who doesn't conform to their concept of warfare. [PAWN_nameDef]'s most recent book is “On the Combat Strategies of Heavily Armored Knights in Conditions of Nuclear War”</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>7</Melee>
+			<Shooting>5</Shooting>
+			<Social>4</Social>
+			<Intellectual>-1</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinKnightCommander</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 43鼠族音乐家2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Musician</defName>
+		<title>Ratkin Musician</title>
+		<titleShort>Musician</titleShort>
+		<description>[PAWN_nameDef] was once a professional musician employed by the nobility, but because of the ripple effects of [PAWN_possessive] employer's defeat in a political battle, [PAWN_pronoun] has to embark on a wandering journey.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>8</Artistic>
+			<Social>3</Social>
+		</skillGains>
+        <workDisables>
+			<li>Cooking</li>
+			<li>Mining</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 44鼠族乡村修女6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CountrySister</defName>
+		<title>Ratkin Country Sister</title>
+		<titleShort>Country Sister</titleShort>
+		<description>[PAWN_nameDef] is always traveling from one border village to another, spreading their faith to pray for the herdsmen, and as a sister [PAWN_pronoun] also knows how to heal the sick and injured and brew sweet strawberry beer.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>3</Social>
+			<Cooking>4</Cooking>
+			<Medicine>3</Medicine>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinPriest</li>
+			<!--<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 45鼠族禁卫军士兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ImperialGuardLegionSoldier</defName>
+		<title>Ratkin Imperial Guard Legion Soldier</title>
+		<titleShort>Imperial Guard Legion Soldier</titleShort>
+		<description>The Imperial Guard Legion, which [PAWN_nameDef] is a member of, is the sword in the hands of the monarch, and while [PAWN_pronoun] crossed through hundreds of blood-soaked battles, even though one by one [PAWN_possessive] comrades have fallen in the endless battles, [PAWN_nameDef] will carry that mission to live in the rim world.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>7</Melee>
+			<Shooting>6</Shooting>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Nerves</defName>
+				<chance>85</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 46鼠族义贼8 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RighteousThief</defName>
+		<title>Ratkin Righteous Thief</title>
+		<titleShort>Righteous Thief</titleShort>
+		<description>[PAWN_nameDef] was once a notorious thief who specialized in robbing the rich ratkins, and when the guards asked the other ratkin about [PAWN_possessive] whereabouts, everyone would either be vague or give the guards the wrong direction as [PAWN_nameDef] would always give the stolen items to the poor ratkins, but finally one day [PAWN_pronoun] was caught after all.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>2</Shooting>
+			<Melee>4</Melee>
+			<Social>4</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-1">ShootingAccuracy</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 47鼠族剑术教师2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SwordsmanshipTeacher</defName>
+		<title>Ratkin Swordsmanship Teacher</title>
+		<titleShort>Swordsmanship Teacher</titleShort>
+		<description>[PAWN_nameDef] is a skilled noble teacher in the Ratkin Kingdom, who is mainly responsible for instructing trainee knights or children of nobles in swordsmanship, and teaching them about chivalry such as helping others. In fact, not only the nobles, [PAWN_nameDef] sometimes goes to teach the poor ratkin children so that they can protect themselves as well.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>9</Melee>
+			<Social>7</Social>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Brawler</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinKnightCommander</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 48鼠族随军修女6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SisteroftheRatkinArmy</defName>
+		<title>Sister of the Ratkin Army</title>
+		<titleShort>Sister of the Army</titleShort>
+		<description>[PAWN_nameDef] is a sister of the ratkin army who has been recruited to provide healing and prayer services to the soldiers, and as such is highly respected by the soldiers, [PAWN_possessive] experience with the army has given [PAWN_nameDef] a glimpse into the deepest and darkest side of the kingdom, and [PAWN_pronoun] has been secretly providing humanitarian support to various areas of the uprising.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Medicine>4</Medicine>
+			<Social>4</Social>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<!--<li>RatkinServant</li>-->
+			<li>RatkinPriest</li>
+			<!--<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 49鼠族宫廷画师2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CourtPainter</defName>
+		<title>Ratkin Court Painter</title>
+		<titleShort>Court Painter</titleShort>
+		<description>[PAWN_nameDef] is a talented painter who specialized in decorative paintings or portraits for nobles or the rich and powerful after completing [PAWN_possessive] studies at the workshop of a famous master. As [PAWN_nameDef]'s reputation grows, [PAWN_pronoun] is eventually given the opportunity to walk into the royal palace and specialize in creating art for members of the royal family. However, a small mistake in a portrait of a royal member caused [PAWN_objective] to be expelled from the palace.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>9</Artistic>
+			<Social>3</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 50鼠族堕落骑士3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_FallenKnight</defName>
+		<title>Ratkin Fallen Knight</title>
+		<titleShort>Fallen Knight</titleShort>
+		<description>[PAWN_nameDef] was once a formidable knight in the knighthood until [PAWN_pronoun] was expelled from the knighthood after being caught over-administering addictive substances. [PAWN_nameDef] still presents [PAWN_objective]self as a knight and spends [PAWN_possessive] days hanging out in taverns bragging about [PAWN_possessive] glorious past to a few ratkins of a tender age, though most other ratkins choose to ignore [PAWN_objective].</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Intellectual>-3</Intellectual>
+			<Social>1</Social>
+		</skillGains>
+        <workDisables>
+			<li>Caring</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">DrugDesire</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 51鼠族督战员7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_MilitaryInspector</defName>
+		<title>Ratkin Military Inspector</title>
+		<titleShort>Military Inspector</titleShort>
+		<description>After surviving an unknown number of battles, [PAWN_nameDef] has finally been promoted from platoon cannon fodder, and can now oversee the fighting of frontline soldiers from behind the lines. For the ratkin army, which relies extensively on conscripts and serfs, supervisors like [PAWN_nameDef] are significant in stabilizing these irregular fighters.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>1</Melee>
+			<Shooting>2</Shooting>
+			<Crafting>-1</Crafting>
+			<Social>1</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 52鼠族修女长6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SuperiorSister</defName>
+		<title>Ratkin Superior Sister</title>
+		<titleShort>Superior Sister</titleShort>
+		<description>[PAWN_nameDef] was promoted from an ordinary village sister to superior sister, responsible for managing the affairs of an entire diocese's monasteries. Despite [PAWN_possessive] elevated status, [PAWN_nameDef] still retains [PAWN_possessive] previous gentle and kind demeanor, and has always been personally involved in daily prayer services and charitable relief activities, earning [PAWN_objective] the love of the general ratkin population.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Cooking>4</Cooking>
+			<Crafting>4</Crafting>
+			<Social>5</Social>
+			<Intellectual>3</Intellectual>
+			<Plants>3</Plants>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinPriest</li>
+			<!--<li>RatkinNoble</li>
+			<li>RatkinNonViolence</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 53鼠族业余小说家3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AmateurNovelist</defName>
+		<title>Ratkin Amateur Novelist</title>
+		<titleShort>Amateur Novelist</titleShort>
+		<description>Regardless of any previous dreams or regrets, [PAWN_nameDef] eventually comes to terms with [PAWN_possessive] mediocrity and is silent as [PAWN_pronoun] helps cook in the restaurant owned by [PAWN_possessive] parents. In [PAWN_possessive] spare time [PAWN_nameDef] also picks up a pen and paper and writes [PAWN_possessive] fantasies into novels, and from time to time [PAWN_pronoun] also draws a few illustrations for [PAWN_possessive] novels - though not as well as professional artists.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Artistic>4</Artistic>
+			<Mining>-3</Mining>
+			<Cooking>6</Cooking>
+			<Social>-2</Social>
+			<Plants>-2</Plants>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 54鼠族酒馆店长3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_TavernManager</defName>
+		<title>Ratkin Tavern Manager</title>
+		<titleShort>Tavern Manager</titleShort>
+		<description>[PAWN_nameDef] runs a tavern where all sorts of ratkins come to eat, drink or simply get in touch, including some sneaky ratkins engaged in unsavory activities, there is also some guards who come here to celebrate and buy drunks, and the rest are more of a variety of ordinary ratkins or drunks who like to take credit. But [PAWN_nameDef]'s tavern had been peaceful, as [PAWN_pronoun] had the cheapest home-brewed strawberry ale on the premises and free chopped nuts to taste.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Cooking>5</Cooking>
+			<Social>5</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>GreatMemory</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 55鼠族奸商2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Profiteer</defName>
+		<title>Ratkin Profiteer</title>
+		<titleShort>Profiteer</titleShort>
+		<description>[PAWN_nameDef] travels between the human world and the Ratkin Kingdom for years, buying cheap goods produced by humans in bulk, and then selling them in the Ratkin Kingdom using [PAWN_possessive] fancy words. With the huge price difference, [PAWN_nameDef] has amassed a huge fortune, but is also envied by [PAWN_possessive] peers.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>-4</Melee>
+			<Social>9</Social>
+			<Intellectual>6</Intellectual>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>TooSmart</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 56鼠族精神病8 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Psychopath</defName>
+		<title>Ratkin Psychopath</title>
+		<titleShort>Psychopath</titleShort>
+		<description>Unsure of what happened, [PAWN_nameDef] spent several days in a coma in a dimly lit alleyway until a Good Samaritan rushed [PAWN_objective] to the hospital and saved [PAWN_possessive] life. When [PAWN_pronoun] wakes up, [PAWN_nameDef] says things like "those skinning monsters will skin me alive!" and "they've got ratkin skins sewn all over them!", and starts learning combat and survival techniques all the time, ready to run for [PAWN_possessive] life, while everyone around [PAWN_objective] thinks [PAWN_pronoun]'s crazy.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>5</Melee>
+			<Shooting>5</Shooting>
+			<Medicine>5</Medicine>
+			<Cooking>2</Cooking>
+			<Construction>1</Construction>
+			<Plants>3</Plants>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="1">Neurotic</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 57鼠族恶魔教官7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_DemonInstructor</defName>
+		<title>Ratkin Demon Instructor</title>
+		<titleShort>Demon Instructor</titleShort>
+		<description>Ratkin demons as a destructive weapon of war that can have the opposite effect of its intended purpose if not controlled, [PAWN_nameDef] exists to pre-train ratkin demons, using violence and blood to establish [PAWN_possessive] authority over these crazed compatriots so that [PAWN_pronoun] can better command them in wartime. Over the course of [PAWN_possessive] long and brutal career as an instructor, [PAWN_nameDef]'s inside changes.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>7</Melee>
+			<Shooting>3</Shooting>
+			<Social>5</Social>
+		</skillGains>
+        <workDisables>
+			<li>Caring</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Psychopath</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 58鼠族生物老姐3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Biologist</defName>
+		<title>Ratkin Biologist</title>
+		<titleShort>Biologist</titleShort>
+		<description>[PAWN_nameDef] had the honor of studying bioengineering at an aristocratic institute of higher learning, and after graduation, a well-paying but confidentiality-demanding job came [PAWN_possessive] way. At first [PAWN_nameDef] was just handling some simple animal remains for mutation traits and genetic samples, but then [PAWN_pronoun] came into contact with more and more bizarre biological debris, until one day [PAWN_nameDef] realized that there was a whole ratkin's tail among the remains [PAWN_pronoun] was handling, which caused [PAWN_objective] to be extremely frightened and escaped from the institute in the night.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>5</Crafting>
+			<Medicine>6</Medicine>
+			<Intellectual>7</Intellectual>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>85</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 59鼠族拓荒者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Pathfinder</defName>
+		<title>Ratkin Pathfinder</title>
+		<titleShort>Pathfinder</titleShort>
+		<description>[PAWN_nameDef] joins the ratkin pathfinder team with dreams of advancement, but [PAWN_pronoun] soon realizes that facing the evil pirates and the harsh environment isn't as simple as it seems. After a few years of trials and tribulations, [PAWN_nameDef] not only knows how to fight the harsh natural environment, but also how to take back [PAWN_possessive] own life from the hands of the evils.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>4</Melee>
+			<Shooting>4</Shooting>
+			<Plants>4</Plants>
+			<Animals>4</Animals>
+			<Construction>2</Construction>
+			<Medicine>2</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 60鼠族糖果屋店长3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CandyHouseManager</defName>
+		<title>Ratkin Candy House Manager</title>
+		<titleShort>Candy House Manager</titleShort>
+		<description>[PAWN_nameDef] runs a very popular ratkin candy house, which has a huge variety of delicious and tasty candies for the ratkins to enjoy, at prices so low that even a serf can save up a little money to have a good time. Of course, if customers ask for the "hidden formula", [PAWN_nameDef] will also quietly sell a little bit of the kingdom's prohibited substance, but [PAWN_nameDef] will never take these addictive substances.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Cooking>5</Cooking>
+			<Social>5</Social>
+			<Intellectual>3</Intellectual>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">DrugDesire</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 61鼠族拾荒者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Scavenger</defName>
+		<title>Ratkin Scavenger</title>
+		<titleShort>Scavenger</titleShort>
+		<description>[PAWN_nameDef] was a local firefighter before the war and was displaced when the war resulted in the destruction of the fire station. [PAWN_nameDef] has been through various emergency life-saving training that have allowed [PAWN_objective] to carry a lot of things.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Medicine>3</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 62鼠族复仇者8 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Avenger</defName>
+		<title>Ratkin Avenger</title>
+		<titleShort>Avenger</titleShort>
+		<description>[PAWN_nameDef] has traveled far for vengeance, and is reluctant to reveal more about it than the fact that [PAWN_pronoun] was once wanted by the Ratkin Kingdom. But instead of the joy that comes with success in vengeance, the endless confusion, emptiness, and pain of past memories have forced [PAWN_nameDef] to rely on daily immersion in the fleeting pleasures of addictive substances to paralyze [PAWN_objective]self.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Shooting>4</Shooting>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">DrugDesire</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-1">NaturalMood</defName>
+				<chance>80</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 63鼠族私塾老师2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PrivateTutor</defName>
+		<title>Ratkin Private Tutor</title>
+		<titleShort>Private Tutor</titleShort>
+		<description>[PAWN_nameDef] is a very respected private tutor in the Ratkin Kingdom, [PAWN_pronoun] has taught many children from famous families and has a great number of outstanding students under [PAWN_possessive] name, so [PAWN_nameDef] maintain a huge amount of social capital.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>8</Social>
+			<Intellectual>9</Intellectual>
+			<Artistic>5</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Industriousness</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 64鼠族豌豆修女6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PeaSister</defName>
+		<title>Ratkin Pea Sister</title>
+		<titleShort>Pea Sister</titleShort>
+		<description>[PAWN_nameDef] is a sister in charge of the vegetable plot in a border monastery, and [PAWN_pronoun] needs to grow all kinds of crops to provide food for the monastery and its affiliated orphanages and soup kitchens. [PAWN_nameDef] grows a large number of peas in the plot, which is very suitable for staple food. [PAWN_nameDef] also spends [PAWN_possessive] free time observing and researching the shapes of different peas, or crossbreeding them, as if there is a great secret hidden in the peas, which is very puzzling to others.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Plants>5</Plants>
+			<Intellectual>4</Intellectual>
+			<Cooking>3</Cooking>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<!--<li>RatkinServant</li>-->
+			<li>RatkinPriest</li>
+			<!--<li>RatkinNonViolence</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 65鼠族时装裁缝2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_FashionTailor</defName>
+		<title>Ratkin Fashion Tailor</title>
+		<titleShort>Fashion Tailor</titleShort>
+		<description>[PAWN_nameDef] runs a private custom clothing store in the kingdom capital, where [PAWN_pronoun] squeezes [PAWN_possessive]self on a rotating daily basis to create hand-sewn, expensive garment one after another for [PAWN_possessive] clients. [PAWN_nameDef]'s unimaginable ability to creatively design clothing has amazed people, and almost all of the famous ratkins have customized their clothing from [PAWN_objective], which has made [PAWN_nameDef]'s business and fame bigger and bigger.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>9</Crafting>
+			<Artistic>8</Artistic>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 66鼠族奥德彪4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_DeliveryWorker</defName>
+		<title>Ratkin Delivery Worker</title>
+		<titleShort>Delivery Worker</titleShort>
+		<description>[PAWN_nameDef] has a wooden bike and has taken up a job delivering goods between towns and villages. [PAWN_nameDef] has to ride [PAWN_possessive] bike on muddy dirt roads that are often in disrepair to transport heavy loads, but despite the fact that the work is very hard and doesn't make much money, [PAWN_pronoun] is hopeful for the future and dreams of buying a motorcycle to make the job easier in the future.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Crafting>3</Crafting>
+			<Social>3</Social>
+		</skillGains>
+        <workDisables>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">SpeedOffset</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 67鼠族继母1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Stepmother</defName>
+		<title>Ratkin Stepmother</title>
+		<titleShort>Stepmother</titleShort>
+		<description>[PAWN_nameDef] is a beautiful noble ratkin who becomes the second wife of a wealthy merchant after the death of the merchant's original wife, only to be banished when [PAWN_possessive] affair with the merchant's son is revealed.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>6</Social>
+			<Artistic>2</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Beauty</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 68鼠族侦察兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Scout</defName>
+		<title>Ratkin Scout</title>
+		<titleShort>Scout</titleShort>
+		<description>[PAWN_nameDef] is agile and good at hiding [PAWN_objective]self, so [PAWN_pronoun] has been deployed to the ratkin scout battalion, specializing in covertly approaching the enemy to carry out reconnaissance missions or infiltration and sabotage. With [PAWN_possessive] long experience in scouting and fighting, [PAWN_nameDef] has also honed [PAWN_possessive] marksmanship, but [PAWN_pronoun] is also more accustomed to carrying out missions in a slow and steady manner, so as not to lose [PAWN_possessive] battle.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>9</Shooting>
+			<Melee>3</Melee>
+			<Social>-3</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">ShootingAccuracy</defName>
+				<chance>70</chance>
+			</li>
+			<li>
+				<defName Degree="-1">SpeedOffset</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 69鼠族铸剑师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SwordMaker</defName>
+		<title>Ratkin Sword Maker</title>
+		<titleShort>Sword Maker</titleShort>
+		<description>[PAWN_nameDef] is a moderately famous sword maker in the Ratkin Kingdom, but [PAWN_pronoun] is usually quiet and doesn't like to communicate with other Ratkins. [PAWN_nameDef] not only forge weapons but also mines the ores [PAWN_objective]self. [PAWN_nameDef] usually delivers [PAWN_possessive] products to individual customers, and sometimes the army will order weapons from [PAWN_objective] as well.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>7</Crafting>
+			<Melee>3</Melee>
+			<Mining>4</Mining>
+		</skillGains>
+        <workDisables>
+			<li>Social</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 70鼠族潜伏修女6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_InfiltratorSister</defName>
+		<title>Ratkin Infiltrator Sister</title>
+		<titleShort>Infiltrator Sister</titleShort>
+		<description>[PAWN_nameDef] is ostensibly a sister accompanying the army, but is actually a spy lurking in the kingdom's army. With the influence of the monastery, [PAWN_pronoun] hides [PAWN_possessive] identity well and brings hope of victory to the oppressed people. "The rain of bullets in the sky has never quenched our anger."</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Medicine>4</Medicine>
+			<Social>5</Social>
+		</skillGains>
+        <workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinPriest</li>
+			<!--<li>RatkinNonViolence</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 71鼠族机械工程师2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_MechanicalEngineer</defName>
+		<title>Ratkin Mechanical Engineer</title>
+		<titleShort>Mechanical Engineer</titleShort>
+		<description>[PAWN_nameDef] is a mechanical engineer who specializes in researching and maintaining drilling rigs for the tunnel commando unit. [PAWN_nameDef] was a gifted child and was selected from the countryside to be sent to the royal engineers for training in a mentor-apprentice model of education. [PAWN_nameDef] has a great deal of experience in the fields of mechanical engineering and mining, but with a high self-esteem, [PAWN_pronoun] refuses to work in the fields like [PAWN_possessive] fellow townspeople.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>5</Crafting>
+			<Mining>6</Mining>
+			<Intellectual>6</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 72鼠族保镖3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Bodyguard</defName>
+		<title>Ratkin Bodyguard</title>
+		<titleShort>Bodyguard</titleShort>
+		<description>[PAWN_nameDef] is the personal bodyguard of a rich ratkin merchant, [PAWN_pronoun] has saved the merchant's life from assassins many times with [PAWN_possessive] precise marksmanship and athletic stance practiced in the police force. During an assassination attempt, [PAWN_nameDef] sacrificed [PAWN_possessive] life to take a fatal bullet for the merchant, but fortunately [PAWN_possessive] own life was unharmed, which enabled [PAWN_objective] to gain the merchant's great trust and betroth one of her children to [PAWN_objective].</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>5</Melee>
+			<Shooting>6</Shooting>
+			<Intellectual>1</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 73鼠族修车技工2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Mechanic</defName>
+		<title>Ratkin Mechanic</title>
+		<titleShort>Mechanic</titleShort>
+		<description>[PAWN_nameDef] studied various aspects of computers at another colony, and upon [PAWN_possessive] return, [PAWN_pronoun] was assigned to manage the computer room at the royal library. In addition to using the skills [PAWN_pronoun] learned at the colony, such as programming and data analysis, to serve the kingdom, [PAWN_nameDef]'s another main job is to keep replacing the computers and servers with fresh potatoes, which is important because most of the Ratkin's produced computers and servers are based on potatoes.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>7</Crafting>
+			<Social>4</Social>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 74鼠族计算机工程师2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ComputerEngineer</defName>
+		<title>Ratkin Computer Engineer</title>
+		<titleShort>Computer Engineer</titleShort>
+		<description>[PAWN_nameDef] studied various aspects of computers at another colony, and upon [PAWN_possessive] return, [PAWN_pronoun] was assigned to manage the computer room at the royal library. In addition to using the skills [PAWN_pronoun] learned at the colony, such as programming and data analysis, to serve the kingdom, [PAWN_nameDef]'s another main job is to keep replacing the computers and servers with fresh potatoes, which is important because most of the Ratkin's produced computers and servers are based on potatoes.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>8</Intellectual>
+			<Crafting>3</Crafting>
+			<Plants>3</Plants>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Industriousness</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 75鼠族私酒贩子3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Bootlegger</defName>
+		<title>Ratkin Bootlegger</title>
+		<titleShort>Bootlegger</titleShort>
+		<description>[PAWN_nameDef] opened a workshop to process bootleg liquor without a license, [PAWN_pronoun] not only knows how to bargain with others for more profits, but also knows how to use [PAWN_possessive] tongue to maneuver around the guards who are checking [PAWN_objective] out. However, paper can't hold fire, and [PAWN_nameDef] had to start running away after it came to light.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>5</Social>
+			<Crafting>3</Crafting>
+			<Plants>1</Plants>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 76鼠族制革工匠3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_TanneryArtisan</defName>
+		<title>Ratkin Tannery Artisan</title>
+		<titleShort>Tannery Artisan</titleShort>
+		<description>[PAWN_nameDef] specializes in handling animal fur and skins and processing them into a wide variety of leather goods, and [PAWN_possessive] skill and craftsmanship have brought many people to [PAWN_nameDef] for customized products. In addition to acquiring pelts from other hunters, [PAWN_nameDef] occasionally brings [PAWN_possessive] own shotgun to obtain resources.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Shooting>4</Shooting>
+			<Crafting>6</Crafting>
+			<Artistic>4</Artistic>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 77鼠族淘金者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_GoldDigger</defName>
+		<title>Ratkin Gold Digger</title>
+		<titleShort>Gold Digger</titleShort>
+		<description>[PAWN_nameDef] once followed the crowd and went to a remote valley to dig for gold with the dream of getting rich overnight. Although it wasn't hard to find some broken gold, under the influence of the local merchant's rhetoric, taxes from the kingdom, and the inflation of the local gold price, [PAWN_nameDef] found that [PAWN_pronoun] couldn't save much money at all. After a few years of panning, [PAWN_nameDef] is still broke, and rather than go back to [PAWN_possessive] hometown, [PAWN_pronoun] uses the skills [PAWN_pronoun] learned and the money [PAWN_pronoun] saved to open a small restaurant in the gold mining town.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>3</Crafting>
+			<Cooking>3</Cooking>
+			<Plants>2</Plants>
+			<Mining>3</Mining>
+			<Intellectual>-2</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+			<li>Caring</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 78鼠族海女4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SeaMaiden</defName>
+		<title>Ratkin Sea Maiden</title>
+		<titleShort>Sea Maiden</titleShort>
+		<description>[PAWN_nameDef] is good at swimming and keeping [PAWN_possessive] breath closed for long periods of time, which allows [PAWN_objective] to move underwater for long periods of time without the help of diving tools. [PAWN_nameDef] therefore often dives in offshore areas, going to the bottom of the sea to collect seafood such as oysters, sea urchins, kelp, etc., and if [PAWN_pronoun] is lucky enough, [PAWN_pronoun]'ll also be able to pick up a few pearls. The long hours of diving have built up [PAWN_nameDef]'s body and lung capacity, making [PAWN_objective] stronger than the average person.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>3</Crafting>
+			<Plants>2</Plants>
+			<Animals>2</Animals>
+			<Mining>2</Mining>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Tough</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 79鼠族战奴5 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_WarSlave</defName>
+		<title>Ratkin War Slave</title>
+		<titleShort>War Slave</titleShort>
+		<description>[PAWN_nameDef] was chosen from amongst the slaves for [PAWN_possessive] combat experience, and was organized into the war slave squad which performs dangerous combat missions. Despite being promised freedom after completing fifty missions, this is essentially impossible given the nature of their battles. After a harrowing raid in which only [PAWN_nameDef] survived, [PAWN_pronoun] escaped this eventual death by killing all of the guardians supervising the battle.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>10</Melee>
+			<Shooting>3</Shooting>
+			<Medicine>2</Medicine>
+			<Social>-8</Social>
+		</skillGains>
+        <workDisables>
+			<li>Artistic</li>
+            <li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Bloodlust</defName>
+				<chance>70</chance>
+			</li>
+			<li>
+				<defName>Nimble</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 80鼠族伐木工4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Lumberjack</defName>
+		<title>Ratkin Lumberjack</title>
+		<titleShort>Lumberjack</titleShort>
+		<description>As one of the most important industries in the Ratkin Kingdom, [PAWN_nameDef] is one of the thousands of lumberjacks who work in the forests. Despite having only simple tools such as hand saws, axes, and their own teeth, [PAWN_nameDef] and [PAWN_possessive] companions are still able to quickly cut down large trees and process them into suitable lumber. But as an ordinary employee, [PAWN_nameDef]'s hard work doesn't earn [PAWN_objective] much money, just like any other ratkin who does ordinary work.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Crafting>6</Crafting>
+			<Plants>4</Plants>
+			<Social>-4</Social>
+			<Intellectual>-4</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 81鼠族没落贵族1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_DeclineNoble</defName>
+		<title>Ratkin Decline Noble</title>
+		<titleShort>Decline Noble</titleShort>
+		<description>[PAWN_nameDef]'s family once had a large fiefdom and fortune, but as time went on, it all dwindled and fell away. Tired of the same old routine on the small fiefdom, [PAWN_nameDef] took the armor and swords left behind by [PAWN_possessive] ancestors and enlisted in the Knighthood, ready to make [PAWN_possessive] mark in the conquers and fights of the world.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>6</Melee>
+			<Artistic>5</Artistic>
+			<Social>5</Social>
+			<Medicine>2</Medicine>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+            <li>Constructing</li>
+			<li>Mining</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Brawler</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinKnight</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinKnightCommander</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 82鼠族贵族管家3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NobleButler</defName>
+		<title>Ratkin Noble Butler</title>
+		<titleShort>Noble Butler</titleShort>
+		<description>[PAWN_nameDef] used to be a senior butler under a noble, commanding several hundred attendants up and down the noble's residence, keeping the noble's family and estate in good order, and was quite trusted by [PAWN_possessive] master. But after the noble died and her descendants inherited the title, [PAWN_nameDef] was hunted down because [PAWN_pronoun] knew too much and was suspected by the new master, and had to flee to the border area to hide.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>8</Social>
+			<Intellectual>4</Intellectual>
+			<Artistic>4</Artistic>
+			<Crafting>2</Crafting>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Industriousness</defName>
+				<chance>95</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 83鼠族社会学家3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Sociologist</defName>
+		<title>Ratkin Sociologist</title>
+		<titleShort>Sociologist</titleShort>
+		<description>[PAWN_nameDef] learned a lot about sociology through self-study and side-trips during [PAWN_possessive] time living in the human city, and [PAWN_pronoun] was very interested in the subject, but the indifference to sociology within the Ratkin Kingdom buried [PAWN_possessive] knowledge, so [PAWN_pronoun] could only grudgingly find a lowest-ranking civil servant's job to utilize [PAWN_possessive] sociological knowledge to a limited extent.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>5</Intellectual>
+			<Social>5</Social>
+			<Plants>-3</Plants>
+			<Animals>-3</Animals>
+			<Construction>-3</Construction>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 84鼠族假美食评论家4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_FakeFoodCritic</defName>
+		<title>Ratkin Fake Food Critic</title>
+		<titleShort>Fake Food Critic</titleShort>
+		<description>Although [PAWN_nameDef] lives in the slums, but [PAWN_pronoun] has a lot of ideas in [PAWN_possessive] head. Sometimes [PAWN_nameDef] will wear a set of gorgeous formal dress, a serious into a variety of luxury restaurants, and then inadvertently reveal [PAWN_possessive] identity as a "food critic", using the opportunity to whore a bunch of delicacies. Although it is a matter of time before someone finds out, since the food has been eaten, [PAWN_nameDef] does not care about what will happens next.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Social>7</Social>
+			<Intellectual>3</Intellectual>
+			<Plants>-5</Plants>
+			<Animals>-5</Animals>
+			<Crafting>-3</Crafting>
+			<Melee>1</Melee>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 85鼠族制枪工匠3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Gunmaker</defName>
+		<title>Ratkin Gunmaker</title>
+		<titleShort>Gunmaker</titleShort>
+		<description>[PAWN_nameDef] worked in the logistics department of the army and opened a gunmaking workshop on the outskirts of town after [PAWN_possessive] retirement. With a pair of skillful hands, [PAWN_pronoun] was able to easily handcraft various gun parts and provide customers with gun repair or manufacturing services. Within a short time, [PAWN_nameDef] became a well-known gunmaker, attracting many customers ranging from military and nobles, to hunters and traders.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>8</Crafting>
+			<Mining>3</Mining>
+			<Shooting>5</Shooting>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 86鼠族炼油工3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Refiner</defName>
+		<title>Ratkin Refiner</title>
+		<titleShort>Refiner</titleShort>
+		<description>[PAWN_nameDef] travels across the kingdom's borders all year round, importing all sorts of garbage from other factions and separating the recyclable parts from it - such as plastics - to be used in the traditional methods of oil refining. This is a lucrative business for the Ratkin Kingdom, which lacks the ability to produce fuel, so by refining and selling this indigenous fuel, [PAWN_nameDef] has obtain a great amount of money and has been able to grow [PAWN_possessive] business, but [PAWN_possessive] unprotected exposure to hazardous environments has caused [PAWN_nameDef] to suffer from a chronic illness.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>5</Crafting>
+			<Construction>5</Construction>
+			<Intellectual>3</Intellectual>
+		</skillGains>
+        <workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Immunity</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+
+
+	<!-- 第一次补充 -->
+
+	<!--  -->
+	<!--AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_</defName>
+		<title>Ratkin </title>
+		<titleShort></titleShort>
+		<description></description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting></Shooting>
+			<Melee></Melee>
+			<Crafting></Crafting>
+			<Construction></Construction>
+			<Plants></Plants>
+			<Animals></Animals>
+			<Cooking></Cooking>
+			<Mining></Mining>
+			<Intellectual></Intellectual>
+			<Social></Social>
+			<Artistic></Artistic>
+			<Medicine></Medicine>
+		</skillGains>
+		<workDisables>
+			<li></li>
+			<li></li>
+			<li></li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree=""></defName>
+				<chance></chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinServant</li>
+			<li>RatkinPriest</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinKnight</li>
+			<li>RatkinKnightCommander</li>
+			<li>RatkinDemoman</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+			<li>RKSniper</li>
+			<li>RKSSK</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef-->
+
+
+
+    <!-- 87鼠族SCAV4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SCAV</defName>
+		<title>Ratkin SCAV</title>
+		<titleShort>SCAV</titleShort>
+		<description>[PAWN_nameDef] travels across the kingdom's borders all year round, importing all sorts of garbage from other factions and separating the recyclable parts from it - such as plastics - to be used in the traditional methods of oil refining. This is a lucrative business for the Ratkin Kingdom, which lacks the ability to produce fuel, so by refining and selling this indigenous fuel, [PAWN_nameDef] has obtain a great amount of money and has been able to grow [PAWN_possessive] business, but [PAWN_possessive] unprotected exposure to hazardous environments has caused [PAWN_nameDef] to suffer from a chronic illness.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>3</Shooting>
+			<Melee>4</Melee>
+			<Crafting>3</Crafting>
+			<Intellectual>2</Intellectual>
+			<Social>2</Social>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Nimble</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 88异常研究员3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AnomalyResearcher</defName>
+		<title>Ratkin Anomaly Researcher</title>
+		<titleShort>Anomaly Researcher</titleShort>
+		<description>[PAWN_nameDef] joined a mysterious organization known as the Royal Anomaly Institute after graduating from college, and it was here that [PAWN_pronoun] was first exposed to the horrific truths of the world that were unknown to [PAWN_objective]. Although the researchers are usually well protected by the guards, all kinds of anomalies beyond [PAWN_nameDef]'s ability to accept and the enormous pressure brought by the high-pressure and secretive working environment constantly shocked [PAWN_possessive] fragile nerves, and eventually [PAWN_possessive] mind become worse and worse.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>-1</Crafting>
+			<Intellectual>6</Intellectual>
+			<Social>-3</Social>
+			<Medicine>4</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>66</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 89异常勘察员4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AnomalySurveyor</defName>
+		<title>Ratkin Anomaly Surveyor</title>
+		<titleShort>Anomaly Surveyor</titleShort>
+		<description>[PAWN_nameDef]'s past is nothing special compared to that of most ordinary Ratkins, until [PAWN_pronoun] is given an unprecedented well-paying job called "Anomaly Surveyor", [PAWN_nameDef] simply feels that [PAWN_possessive] talent has been discovered. However, after a few weeks of enjoying the favorable salaries, [PAWN_pronoun] realizes that there is a conspiracy behind the job, when  [PAWN_nameDef] became the only survivor of a "survey" mission......</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Crafting>1</Crafting>
+			<Construction>-2</Construction>
+			<Plants>-2</Plants>
+			<Animals>-3</Animals>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+			<li>Social</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 90异常特工7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AnomalyInvestigateAgent</defName>
+		<title>Ratkin Anomaly Investigate Agent</title>
+		<titleShort>Anomaly Investigate Agent</titleShort>
+		<description>[PAWN_nameDef] was recruited to join the Royal Anomaly Institute after being discharged from the military. After undergoing rigorous training, [PAWN_pronoun] is usually in charge of conducting field investigations or protecting other researchers on missions. Despite the lingering threat of strange anomalies, [PAWN_nameDef]'s iron will can't be broken, and [PAWN_possessive] compassion for the innocent always leaves a glimmer of hope for the surviving "surveyors" when they are confronted.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>5</Shooting>
+			<Melee>6</Melee>
+			<Crafting>2</Crafting>
+			<Construction>1</Construction>
+			<Intellectual>-3</Intellectual>
+			<Social>-1</Social>
+			<Artistic>-7</Artistic>
+			<Medicine>3</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Nerves</defName>
+				<chance>30</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 91孤儿院护工4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_OrphanageCaretaker</defName>
+		<title>Ratkin Orphanage Caretaker</title>
+		<titleShort>Orphanage Caretaker</titleShort>
+		<description>[PAWN_nameDef] was once an orphan, and in [PAWN_possessive] adulthood, [PAWN_pronoun] gave up the opportunity for something better and returned to work as a caretaker at the orphanage that had raised [PAWN_objective] throughout [PAWN_possessive] childhood. Despite the hardships of life, [PAWN_nameDef] finds it worthwhile to think of bringing a home-like warmth to these children.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>1</Crafting>
+			<Construction>1</Construction>
+			<Plants>3</Plants>
+			<Animals>1</Animals>
+			<Cooking>4</Cooking>
+			<Mining>-2</Mining>
+			<Intellectual>-1</Intellectual>
+			<Social>4</Social>
+			<Artistic>1</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 92狱卒7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Jailer</defName>
+		<title>Ratkin Jailer</title>
+		<titleShort>Jailer</titleShort>
+		<description>[PAWN_nameDef] works as a jailer at a royal prison, guarding sentenced resistance force prisoners. Although as a jailer [PAWN_pronoun] is not supposed to have much unnecessary contact with the prisoners, and should always keep [PAWN_possessive] ferocity towards them. But [PAWN_nameDef] has developed an interest in the exchanges and stories from the mouths of the resistance force prisoners, and even privately obtains stories and manuscripts from the prisoners in the mountains and forests.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>4</Shooting>
+			<Melee>5</Melee>
+			<Crafting>2</Crafting>
+			<Construction>1</Construction>
+			<Social>2</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 93护林员4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ForestKeeper</defName>
+		<title>Ratkin Forest Keeper</title>
+		<titleShort>Forest Keeper</titleShort>
+		<description>[PAWN_nameDef] works in the forests of a national nature reserve, where [PAWN_pronoun] spends [PAWN_possessive] days patrolling the reserve to prevent tree felling and animal poaching. At other times, [PAWN_nameDef] enjoys [PAWN_possessive] solitary and peaceful life in a cabin with a fire tower.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>1</Shooting>
+			<Melee>1</Melee>
+			<Crafting>1</Crafting>
+			<Construction>1</Construction>
+			<Plants>1</Plants>
+			<Animals>1</Animals>
+			<Cooking>1</Cooking>
+			<Mining>1</Mining>
+			<Intellectual>1</Intellectual>
+			<Social>1</Social>
+			<Artistic>1</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 94皇家动物管理员3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RoyalPetKeeper</defName>
+		<title>Ratkin Royal Pet Keeper</title>
+		<titleShort>Royal Pet Keeper</titleShort>
+		<description>[PAWN_nameDef] is in charge of taking care of pets owned by royalty at a palace, a job that can be very simple for [PAWN_nameDef], who was a former veteran of extensive animal care - just don't make any mistakes that hurt the pets, or [PAWN_pronoun] will end up like some previous unlucky guy in the past.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Plants>2</Plants>
+			<Animals>7</Animals>
+			<Cooking>2</Cooking>
+			<Social>4</Social>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Violent</li>
+			<li>Constructing</li>
+			<li>Mining</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 95走私犯3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Smuggler</defName>
+		<title>Ratkin Smuggler</title>
+		<titleShort>Smuggler</titleShort>
+		<description>[PAWN_nameDef] is a savvy smuggler active along the kingdom's borderline, sometimes crossing the line under the cover of night, sometimes dressing as a commoner and going straight through customs to smuggle all sorts of rare items from overseas back into the kingdom. [PAWN_nameDef]'s smuggling skills has improved and have brought [PAWN_objective] large fortunes, and, at least up until now, have not attracted the attention of the kingdom's customs.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Cooking>-3</Cooking>
+			<Mining>3</Mining>
+			<Intellectual>3</Intellectual>
+			<Social>4</Social>
+		</skillGains>
+		<workDisables>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">DrugDesire</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 96香水技师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Perfumer</defName>
+		<title>Ratkin Perfumer</title>
+		<titleShort>Perfumer</titleShort>
+		<description>[PAWN_nameDef] has an extraordinary sense of smell, which allows [PAWN_objective] to easily distinguish between many different scents, and thus [PAWN_pronoun] can create high-quality perfumes with a variety of scent levels, which attracts a large number of customers to come to [PAWN_objective]. As [PAWN_possessive] business grows more and more prosperous, [PAWN_nameDef] has even moved [PAWN_possessive] perfume workshop to the capital.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>6</Crafting>
+			<Intellectual>2</Intellectual>
+			<Social>4</Social>
+			<Artistic>5</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>Cooking</li>
+			<li>Constructing</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 97隐士4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Hermit</defName>
+		<title>Ratkin Hermit</title>
+		<titleShort>Hermit</titleShort>
+		<description>Boredom with the mundane world and the failures of [PAWN_possessive] personal life prompted [PAWN_nameDef] to give up everything [PAWN_pronoun] owned in the past and instead move into the ruins of a village in the jungle, where [PAWN_pronoun] became self-sufficient by cultivating [PAWN_possessive] own derelict farmland and hunting animals, and began a life of seclusion away from the larger society.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>1</Shooting>
+			<Crafting>2</Crafting>
+			<Construction>3</Construction>
+			<Plants>1</Plants>
+			<Animals>1</Animals>
+			<Cooking>3</Cooking>
+			<Social>-4</Social>
+			<Artistic>-4</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li MayRequire="Ludeon.RimWorld.Biotech">
+				<defName>Recluse</defName>
+				<chance>40</chance>
+			</li>
+			<li>
+				<defName>Ascetic</defName>
+				<chance>40</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 98考古学家2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Archaeologist</defName>
+		<title>Ratkin Archaeologist</title>
+		<titleShort>Archaeologist</titleShort>
+		<description>With a wealth of theoretical and historical knowledge, [PAWN_nameDef] has led a number of expeditions and preservation projects for the Kingdom's historical sites, and is well known in the academic field. But it was during an expedition to the remains of an unknown civilization that [PAWN_nameDef] discovered that some of the planet's ancient existence was actually far beyond [PAWN_possessive] comprehension......</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>2</Crafting>
+			<Construction>2</Construction>
+			<Cooking>2</Cooking>
+			<Intellectual>5</Intellectual>
+			<Social>3</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 99村庄守卫4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_VillageGuard</defName>
+		<title>Ratkin Village Guard</title>
+		<titleShort>Village Guard</titleShort>
+		<description>The village where [PAWN_nameDef] lives is located in the middle of a wasteland and uninhabited wilderness, and  always surrounded by mist. But there are all kinds of unseen and terrifying threats in the mysterious misty wilderness. [PAWN_nameDef], a former soldier in the army, has to join the other young villagers in guarding the village from a post on the wall at nightfall.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>4</Shooting>
+			<Melee>4</Melee>
+			<Crafting>1</Crafting>
+			<Construction>3</Construction>
+			<Cooking>1</Cooking>
+			<Mining>4</Mining>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+			<li>Artistic</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 100化学武器操作员7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ChemicalWeaponsManipulator</defName>
+		<title>Ratkin Chemical Weapons Manipulator</title>
+		<titleShort>Chemical Weapons Manipulator</titleShort>
+		<description>As one of the key weapons of the Ratkin army, chemical weapons are widely used in large-scale battlefields, as well as in a variety of confined pit environments. [PAWN_nameDef] had never imagined that [PAWN_possessive] specialty: chemical engineering, would be used in such a way. But the advantage of the job is that [PAWN_pronoun] only has to stay in the rear, instead of wearing a gas mask and charging into battle.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>2</Shooting>
+			<Melee>3</Melee>
+			<Crafting>7</Crafting>
+			<Construction>3</Construction>
+			<Plants>-2</Plants>
+			<Animals>-2</Animals>
+			<Cooking>-5</Cooking>
+			<Mining>2</Mining>
+			<Intellectual>1</Intellectual>
+			<Medicine>3</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">DrugDesire</defName>
+				<chance>60</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinDemoman</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinSubject</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 101私烟贩子3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CigaretteDealer</defName>
+		<title>Ratkin Cigarette Dealer</title>
+		<titleShort>Cigarette Dealer</titleShort>
+		<description>Generally speaking, private made cigarettes are not illegal in the Ratkin Kingdom, but they are uncompetitive with the products of the large tobacco companies. However, the trait doesn't apply to [PAWN_nameDef]'s cigarettes, after all, the big companies wouldn't dare to add smokeleaf or psychoid to their products, which is why [PAWN_nameDef]'s cigarettes always need to be sold covertly, while easily fetching a high price.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>6</Crafting>
+			<Plants>5</Plants>
+			<Medicine>3</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Mining</li>
+			<li>Cooking</li>
+			<li>Cleaning</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">DrugDesire</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 102高级异常研究员2 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SeniorAnomalyResearcher</defName>
+		<title>Ratkin Senior Anomaly Researcher</title>
+		<titleShort>Senior Anomaly Researcher</titleShort>
+		<description>The long time of anomaly research have not severely affected [PAWN_nameDef]'s mind, but instead have greatly satisfied [PAWN_possessive] desire for knowledge, making [PAWN_nameDef] stand out from [PAWN_possessive] peers and earning [PAWN_objective] an early promotion to Senior Researcher. In order to conduct more in-depth research, [PAWN_nameDef] has sacrificed more surveyors to obtain data, which has led to [PAWN_possessive] appalling reputation.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>-5</Shooting>
+			<Melee>-5</Melee>
+			<Plants>1</Plants>
+			<Animals>1</Animals>
+			<Mining>-10</Mining>
+			<Intellectual>14</Intellectual>
+			<Social>4</Social>
+			<Medicine>8</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Cooking</li>
+			<li>Artistic</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Industriousness</defName>
+				<chance>65</chance>
+			</li>
+			<li>
+				<defName>FastLearner</defName>
+				<chance>90</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 103反乱猎人教官7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_RatkinHunterInstructor</defName>
+		<title>Ratkin Ratkin-Hunter Instructor</title>
+		<titleShort>Ratkin-Hunter Instructor</titleShort>
+		<description>As a veteran Ratkin-Hunter, [PAWN_nameDef] has a wealth of experience in counterinsurgency and counter-guerrilla warfare. Years of fighting with the resistance force have sharpened [PAWN_possessive] will, but they have also damaged [PAWN_possessive] body. Now [PAWN_nameDef] has chosen to take a backseat to train the new force for the Ratkin-Hunter organization.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>9</Shooting>
+			<Melee>8</Melee>
+			<Medicine>4</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+			<li>Artistic</li>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">ShootingAccuracy</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 104疯子4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Lunatic</defName>
+		<title>Ratkin Lunatic</title>
+		<titleShort>Lunatic</titleShort>
+		<description>[PAWN_nameDef] used to have a plain and ordinary life, until one day, [PAWN_pronoun] heyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyheyhey</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		</skillGains>
+		<workDisables>
+			<li>AllWork</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 105苍蝇馆子老板4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_BistroOwner</defName>
+		<title>Ratkin Bistro Owner</title>
+		<titleShort>Bistro Owner</titleShort>
+		<description>[PAWN_nameDef] owns a very small bistro in the crowded old city center. Although it is a cramped restaurant with bad environment, the authentic Ratkin hometown food attracts many Ratkin workers who have migrated to the city from the countryside. When it's time to eat, a large number of diners fill [PAWN_possessive] bistro, and the open-air tables and chairs set out on the road and the waiters coming and going all emphasize the hidden deliciousness of [PAWN_nameDef]'s restaurant.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>-5</Shooting>
+			<Melee>1</Melee>
+			<Crafting>1</Crafting>
+			<Construction>1</Construction>
+			<Plants>3</Plants>
+			<Animals>3</Animals>
+			<Cooking>6</Cooking>
+			<Mining>-4</Mining>
+			<Intellectual>-2</Intellectual>
+			<Social>2</Social>
+			<Artistic>-3</Artistic>
+			<Medicine>-3</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 106染坊工人4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_DyeingWorker</defName>
+		<title>Ratkin Dyeing Worker</title>
+		<titleShort>Dyeing Worker</titleShort>
+		<description>[PAWN_nameDef] works in a large dye house, where [PAWN_pronoun] is responsible for dyeing fabrics in a variety of bright and colorful colors. The colorful fabrics hanging in the dye house look great from the outside, but for [PAWN_nameDef], this is not something [PAWN_pronoun] can do with [PAWN_possessive] meager income. [PAWN_nameDef] can hardly afford to buy a new piece of clothing made from newly dyed cloth, except for [PAWN_possessive] old dye-stained apron.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>4</Crafting>
+			<Plants>2</Plants>
+			<Artistic>4</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>Caring</li>
+			<li>Animals</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 107护士3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Nurse</defName>
+		<title>Ratkin Nurse</title>
+		<titleShort>Nurse</titleShort>
+		<description>[PAWN_nameDef] works in a regular hospital. Considering that most of these hospitals are private and charge high fees in the Ratkin Kingdom, the patients who can come in are at least middle class or above, so [PAWN_nameDef] is trained rigorously when [PAWN_pronoun] joins to make sure that [PAWN_pronoun] can provide the patients with quality service that matches their status. However, when [PAWN_pronoun] is on a leave, [PAWN_nameDef] also sneaks out to the slums to provide what [PAWN_pronoun] can to the poor who can't afford to go to the doctor.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>2</Intellectual>
+			<Social>6</Social>
+			<Medicine>5</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Hunting</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>80</chance>
+			</li>
+			<li>
+				<defName Degree="1">NaturalMood</defName>
+				<chance>20</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinPriest</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 108宝石工匠3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Gemsmith</defName>
+		<title>Ratkin Gemsmith</title>
+		<titleShort>Gemsmith</titleShort>
+		<description>[PAWN_nameDef] apprenticed as a jeweler, learning to process and design jewelry. [PAWN_pronoun] is now a highly skilled gemsmith, bringing even the smallest of scraps to life in cleverly designed artifacts. [PAWN_nameDef] also enjoys going down to the mines or riverbanks to find the raw materials for the artifacts [PAWN_pronoun] is working on.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>7</Crafting>
+			<Artistic>8</Artistic>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">Industriousness</defName>
+				<chance>55</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 109夜市商贩4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NightMarketVendor</defName>
+		<title>Ratkin Night Market Vendor</title>
+		<titleShort>Night Market Vendor</titleShort>
+		<description>[PAWN_nameDef] has suffered from insomnia since [PAWN_pronoun] was a child, [PAWN_pronoun] was sleepy during the day and energetic at night, but now the problem has been solved. [PAWN_nameDef] has contracted a stall in the night market, mainly cooking various snacks for customers to make a living. Now [PAWN_pronoun] is living a good life, [PAWN_possessive] excellent cooking skills have gained [PAWN_objective] enough customers, and [PAWN_possessive] working around the clock has also solved [PAWN_possessive] insomnia problem.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>-3</Crafting>
+			<Construction>-4</Construction>
+			<Plants>3</Plants>
+			<Animals>2</Animals>
+			<Cooking>4</Cooking>
+			<Social>-2</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>NightOwl</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 110甜品耗子4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_DessertChef</defName>
+		<title>Ratkin Dessert Chef</title>
+		<titleShort>Dessert Chef</titleShort>
+		<description>[PAWN_nameDef] started [PAWN_possessive] career as a pastry chef apprentice, and after years of hard work, [PAWN_pronoun] finally owns a dessert cart of [PAWN_possessive] own. [PAWN_nameDef] works early and late every day to provide a wide variety of seasonal desserts and beverages for customers, and has gained a lot of regular customers. But one day, [PAWN_pronoun] was informed that there was a problem in the business license, and therefore [PAWN_pronoun] was issued a huge fine, and even the cart was taken away from [PAWN_objective]. Despite such a setback, [PAWN_nameDef] still did not give up and was ready to start all over again to continue [PAWN_possessive] dream.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Cooking>6</Cooking>
+			<Intellectual>-4</Intellectual>
+			<Social>-3</Social>
+			<Artistic>3</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">NaturalMood</defName>
+				<chance>60</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 111流浪民4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Wanderer</defName>
+		<title>Ratkin Wanderer</title>
+		<titleShort>Wanderer</titleShort>
+		<description>[PAWN_nameDef] has begun to forget why [PAWN_pronoun] embarked on the journey, perhaps because [PAWN_pronoun] owes a loan [PAWN_pronoun] can't pay back, or because [PAWN_pronoun] offended a big shot and was forced to go into hiding. Fortunately, [PAWN_pronoun] still has the warmth of family and friends to keep [PAWN_objective] company as [PAWN_pronoun] and the entire tribe of wanderers continue on to their next destination.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Crafting>2</Crafting>
+			<Construction>1</Construction>
+			<Animals>1</Animals>
+			<Cooking>2</Cooking>
+			<Intellectual></Intellectual>
+			<Social>-3</Social>
+			<Artistic>-1</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Ascetic</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 112战壕突击兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_TrenchAssaulter</defName>
+		<title>Ratkin Trench Assaulter</title>
+		<titleShort>Trench Assaulter</titleShort>
+		<description>Brutal combat in trenches and pits is the main chord of the Ratkin wars, [PAWN_nameDef], as a member of the Trench Vanguard Squad, has been involved in countless bloody trench battles, which not only sharpened [PAWN_possessive] combat skills, but also inadvertently strengthened [PAWN_possessive] mind, making [PAWN_nameDef] even more brutal and bloodthirsty, and even crazy.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>9</Melee>
+			<Artistic>1</Artistic>
+			<Medicine>4</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>ManualSkilled</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Brawler</defName>
+				<chance>90</chance>
+			</li>
+			<li>
+				<defName>Tough</defName>
+				<chance>15</chance>
+			</li>
+			<li>
+				<defName>Bloodlust</defName>
+				<chance>80</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinDemoman</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinViolence</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 113税务官3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_TaxCollector</defName>
+		<title>Ratkin Tax Collector</title>
+		<titleShort>Tax Collector</titleShort>
+		<description>Being a math-savvy Ratkin with a good family background, [PAWN_nameDef] was able to get a job at the Royal Tax Office, where [PAWN_pronoun] was in charge of tallying and reviewing all types of taxes. Unfortunately, [PAWN_nameDef] is a bit dull, and after insisting on re-examining a certain noble's taxes, [PAWN_pronoun] was dismissed as a resistance force sympathizer for stepping in the door with [PAWN_possessive] left foot first.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>7</Intellectual>
+			<Social>-8</Social>
+			<Artistic>4</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Abrasive</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinSubject</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 114律师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Lawyer</defName>
+		<title>Ratkin Lawyer</title>
+		<titleShort>Lawyer</titleShort>
+		<description>[PAWN_nameDef] is a lawyer who specializes in providing legal services to a variety of clients who can afford to pay high legal fees. However, when been outside of the courtroom, [PAWN_nameDef] is sometimes more of a go-between, taking on the business of negotiating and communicating between [PAWN_possessive] clients and their partners or competitors in order to solve problems outside of the law.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>5</Intellectual>
+			<Social>10</Social>
+			<Artistic>3</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>ManualSkilled</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">SpeedOffset</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 115穷诗人4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PoorPoet</defName>
+		<title>Ratkin Poor Poet</title>
+		<titleShort>Poor Poet</titleShort>
+		<description>[PAWN_nameDef], a lover of poetry and song, is obsessed with literature and writes what [PAWN_pronoun] considers to be beautiful works. Unfortunately, there are only a handful of Ratkin people in the slums who can appreciate [PAWN_nameDef]'s works, and [PAWN_possessive] works are always obscurity outside of the slums, so [PAWN_nameDef] can only dream of fame and fortune while working odd jobs to make ends meet.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>-2</Crafting>
+			<Construction>-5</Construction>
+			<Cooking>-4</Cooking>
+			<Mining>-6</Mining>
+			<Social>-1</Social>
+			<Artistic>5</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>TorturedArtist</defName>
+				<chance>70</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 116帮派成员4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_GangMember</defName>
+		<title>Ratkin Gang Member</title>
+		<titleShort>Gang Member</titleShort>
+		<description>As a member of an urban gang, [PAWN_nameDef] has long been accustomed to spending [PAWN_possessive] days collecting protection money, engaging in street fights, smuggling and selling contraband, [PAWN_pronoun] even gloats over the horrified stares of bystanders. But during one of the fights, [PAWN_pronoun] sees an innocent child who has been shot and wounded, and the fear and tears on the child's face make [PAWN_nameDef] wonder what is the meaning for [PAWN_objective] as a gang member.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>4</Shooting>
+			<Melee>4</Melee>
+			<Construction>1</Construction>
+			<Cooking>1</Cooking>
+			<Medicine>3</Medicine>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="-1">ShootingAccuracy</defName>
+				<chance>65</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 117黑市商人3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_BlackMarketeer</defName>
+		<title>Ratkin Black Marketeer</title>
+		<titleShort>Black Marketeer</titleShort>
+		<description>Inhabiting the intricacies of the slums, [PAWN_nameDef] runs a small black market store that specializes in covertly peddling all kinds of contraband, from moonshine and psychoid leaves products, to machine guns and black intelligence, [PAWN_nameDef]'s fearlessness allows [PAWN_objective] to sell whatever [PAWN_pronoun] can get to [PAWN_possessive] hands on for a tidy profit.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Intellectual>3</Intellectual>
+			<Social>7</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Greedy</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 118监工4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_LaborSupervisor</defName>
+		<title>Ratkin Labor Supervisor</title>
+		<titleShort>Labor Supervisor</titleShort>
+		<description>[PAWN_nameDef]'s long career in the factory has made [PAWN_objective] a more conniving and deceitful person, and the factory leaders have noticed the and promoted [PAWN_objective] to the position of assembly line supervisor. not only is [PAWN_nameDef]'s payment a little higher than before, but [PAWN_pronoun] can also earn extra rewards for exposing workers' laziness, which has made [PAWN_objective] even meaner and more insidious.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>4</Crafting>
+			<Construction>4</Construction>
+			<Intellectual>2</Intellectual>
+			<Social>8</Social>
+		</skillGains>
+		<workDisables>
+			<li>Artistic</li>
+			<li>Caring</li>
+			<li>PlantWork</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Jealous</defName>
+				<chance>99</chance>
+			</li>
+			<li>
+				<defName Degree="-2">Industriousness</defName>
+				<chance>45</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 119火车司机4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_TrainDriver</defName>
+		<title>Ratkin Train Driver</title>
+		<titleShort>Train Driver</titleShort>
+		<description>After [PAWN_nameDef] learned to drive a train from the old train driver, [PAWN_pronoun] became a member of the "always on the go" profession. [PAWN_pronoun] will drive the train in the vast land of Ratkin kingdom constantly, through the railroad to transport goods and passengers through out the country.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Crafting>4</Crafting>
+			<Cooking>2</Cooking>
+			<Mining>2</Mining>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>NightOwl</defName>
+				<chance>30</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 120渔民4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Fisherman</defName>
+		<title>Ratkin Fisherman</title>
+		<titleShort>Fisherman</titleShort>
+		<description>[PAWN_nameDef] inherited [PAWN_possessive] parents' fishing boat when [PAWN_pronoun] was old enough, and continued to float on rivers and seas with [PAWN_possessive] new family, relying on the sale of [PAWN_possessive] catch for a living. Despite being disliked by those on shore for always smelling like fish, [PAWN_nameDef] continued to maintain this lifestyle, after all, [PAWN_pronoun] didn't have many other options.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>2</Crafting>
+			<Animals>6</Animals>
+			<Cooking>4</Cooking>
+			<Social>-10</Social>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+			<li>PlantWork</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">Industriousness</defName>
+				<chance>35</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 121空军陆战队7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_AirMarine</defName>
+		<title>Ratkin Air Marine</title>
+		<titleShort>Air Marine</titleShort>
+		<description>[PAWN_nameDef] is a Air Marine based on a combat airship and has received systematic training in aerial combat. Most of the time, [PAWN_nameDef] is responsible for guarding key areas of the airships; when the time is right, [PAWN_pronoun] will join [PAWN_possessive] teammates and jump onto enemy airships to capture them or sabotage them from the inside.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>8</Shooting>
+			<Melee>8</Melee>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+			<li>PlantWork</li>
+			<li>Animals</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="1">ShootingAccuracy</defName>
+				<chance>75</chance>
+			</li>
+			<li>
+				<defName Degree="2">SpeedOffset</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RKGrenadier</li>
+			<li>RKSSK</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+
+	<!--新-->
+	<!-- 122变态贵族1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PervertedAristocrats</defName>
+		<title>Ratkin Perverted Aristocrats</title>
+		<titleShort>Perverted Aristocrats</titleShort>
+		<description>[PAWN_nameDef] was notorious for his prodigal behavior when he was a teenager. [PAWN_nameDef] used whips, cucumbers, ropes, candles, syringes, and the like to "train" his servants, or switched with them to do the same thing. Later [PAWN_nameDef] was sent to a mental institution in the capital by a relative, where [PAWN_nameDef] wrote a novel about a few aristocrats in a manor house, which was a tale of extreme debauchery.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Construction>-2</Construction>
+			<Plants>-2</Plants>
+			<Intellectual>5</Intellectual>
+			<Social>3</Social>
+			<Artistic>6</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>ManualDumb</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Masochist</defName>
+				<chance>88</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<!--<li>RatkinPriest</li>-->
+			<li>RatkinMerchant</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinKnight</li>
+			<li>RatkinKnightCommander</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 123传教士6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Missionary</defName>
+		<title>Ratkin Missionary</title>
+		<titleShort>Missionary</titleShort>
+		<description>[PAWN_nameDef] is a nun in the Kingdom Church. [PAWN_nameDef] was disappointed with the corrupt church, but could do nothing about it. Until one day [PAWN_nameDef] met a human who told [PAWN_nameDef] what another cleric did when faced with a similar situation. From there [PAWN_nameDef] left the church and traveled around spreading the gospel, adding his own understanding to it.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>2</Shooting>
+			<Melee>2</Melee>
+			<Plants>2</Plants>
+			<Cooking>2</Cooking>
+			<Intellectual>2</Intellectual>
+			<Social>3</Social>
+			<Medicine>2</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Kind</defName>
+				<chance>90</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<!--<li>RatkinServant</li>-->
+			<li>RatkinPriest</li>
+			<!--<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinSubject</li>
+			<li>RatkinExile</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 124车夫4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CartDriver</defName>
+		<title>Ratkin Cart Driver</title>
+		<titleShort>Cart Driver</titleShort>
+		<description>Before the death of his elders, [PAWN_nameDef] only had a hamster king and a small cart with him. In order to make a living, he took up the job of a cart driver, and drove the cart from town to town every day, helping the other ratkins to deliver various goods. Once [PAWN_nameDef] was captured by a warlord with his cart, but [PAWN_nameDef] escaped when the other side relaxed their surveillance and took a few hamster kings with him.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>2</Crafting>
+			<Social>1</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 125逃难者4-->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Refugee</defName>
+		<title>Ratkin Refugee</title>
+		<titleShort>Refugee</titleShort>
+		<description>[PAWN_nameDef]'s life was supposed to be as uneventful and comfortable as any other ratkin, but a sudden disaster struck, destroying the homeland. Friends and family of [PAWN_nameDef] all perished, leaving [PAWN_nameDef] with nothing but the need to embark on a journey of refuge. Along the way, [PAWN_nameDef] narrowly escaped death several times, honing [PAWN_nameDef]'s will and abilities. Yet, [PAWN_nameDef] no longer wishes to wander, seeking only a place to call home.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>1</Crafting>
+			<Cooking>2</Cooking>
+			<Intellectual>-2</Intellectual>
+			<Artistic>-1</Artistic>
+			<Medicine>1</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 126贵族修女6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NoblePriest</defName>
+		<title>Ratkin Noble Priest</title>
+		<titleShort>Noble Priest</titleShort>
+		<description>[PAWN_nameDef] was born into a noble family of the ratkin, receiving the finest education. However, due to the unqualified education of her mother coupled with stringent expectations, [PAWN_nameDef] endured extreme pressure. Left unattended, she quickly developed a drinking problem, and eventually, the combination of stress and alcohol led her to become a psychological deviant. As a result, she was ultimately assigned the role of a nun.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Intellectual>3</Intellectual>
+			<Artistic>1</Artistic>
+		</skillGains>
+		<workDisables>
+			<li>Crafting</li>
+			<li>PlantWork</li>
+		</workDisables>
+		<forcedTraitsChance>
+			<li>
+				<defName>Psychopath</defName>
+				<chance>90</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinPriest</li>
+			<!--<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>-->
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 127修女抄写员6 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_PriestScribe</defName>
+		<title>Ratkin Priest Scribe</title>
+		<titleShort>Priest Scribe</titleShort>
+		<description>The monastery that [PAWN_nameDef] is a part of is not as prestigious as the larger monasteries in the capital, but it has a long history, and there are claims that the monastery was founded before the Ratkin Kingdom. Unlike their counterparts in other orders, [PAWN_nameDef], in addition to their daily pujas, they also manage and duplicate the mountains of materials in the monastery's basement, though the significance of many of these materials has long been unknown. [PAWN_nameDef] became enamored with one of these drawings, spending many hours copying, decorating and gilding every line of it.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>1</Intellectual>
+			<Artistic>3</Artistic>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinPriest</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 128偷猎者4 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Poacher</defName>
+		<title>Ratkin Poacher</title>
+		<titleShort>Poacher</titleShort>
+		<description>In the Ratkin kingdom, it is forbidden for commoners to hunt certain animals, and the privilege of consuming their meat is reserved exclusively for the nobility. However, some Ratkin desire to "experience" the lifestyle of the nobles, creating a demand that drives a market. [PAWN_nameDef] is one such poacher who regularly smuggles the meat obtained through illegal hunting to clients. To avoid detection by the authorities, [PAWN_nameDef] has learned how to carry heavy loads silently and has taken up long-term residence in the wild, living in companionship with the prey and nature.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>2</Shooting>
+			<Plants>-1</Plants>
+			<Animals>1</Animals>
+			<Cooking>1</Cooking>
+			<Intellectual>-1</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 129替身3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_StandIn</defName>
+		<title>Ratkin Stand-In</title>
+		<titleShort>Stand-In</titleShort>
+		<description>[PAWN_nameDef] comes from humble origins, but due to a striking resemblance to a certain noble ratkin, [PAWN_nameDef] was chosen to serve as a stand-in for the noble, taking their place in public engagements. The job terrifies [PAWN_nameDef], as the noble is known for eccentric behavior and heavy drinking. However, the generous compensation and the inability to refuse have left [PAWN_nameDef] no choice but to continue fulfilling the duties of the stand-in with great trepidation.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>-1</Shooting>
+			<Melee>-2</Melee>
+			<Social>2</Social>
+			<Artistic>2</Artistic>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinPriest</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 130受虐狂3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Masochist</defName>
+		<title>Ratkin Masochist</title>
+		<titleShort>Masochist</titleShort>
+		<description>[PAWN_nameDef]' s life was smooth and boring, until one day he accidentally knocked on his foot and felt such severe pain for the first time in the life of a ratkin. However, [PAWN_nameDef] thought that the pain just now was memorable, and since then he began to look for various ways to relieve it, and gradually became a "pervert" in the eyes of other ratkins, but [PAWN_nameDef] didn't care about it.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>2</Intellectual>
+			<Artistic>4</Artistic>
+			<Medicine>-2</Medicine>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Masochist</defName>
+				<chance>99</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 131罪犯5 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Criminal</defName>
+		<title>Ratkin Criminal</title>
+		<titleShort>Criminal</titleShort>
+		<description>Ratkins called "criminals" in the kingdom are usually vicious, and [PAWN_nameDef] is one of them. In childhood, they planted a frame-up, teenagers set fire to the garden, and young people killed their brothers, but it was not until adulthood that [PAWN_nameDef] was arrested and sentenced, and soon escaped from prison, And [PAWN_nameDef] did it for no bitter reason, just for fun.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>1</Shooting>
+			<Melee>4</Melee>
+			<Social>-3</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Psychopath</defName>
+				<chance>90</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDemoman</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 132侦察兵7 -->
+	<!--AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_ScoutB</defName>
+		<title>Ratkin Scout</title>
+		<titleShort>Scout</titleShort>
+		<description>Because of its petite and concealed figure, scouts are common arms in all the major forces of the ratkin. They usually have the best equipment, but that doesn't mean it's a good job. [PAWN_nameDef] is a scout who has been scouting in the front and even behind enemy lines for a long time. [PAWN_nameDef] doesn't crave meritorious service, but only hopes to survive every mission.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>4</Shooting>
+			<Melee>-2</Melee>
+			<Social>2</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+			<li>RKSniper</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef-->
+
+	<!-- 133巨兽驾驶员7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_WarBehemothDriverA</defName>
+		<title>Ratkin War Behemoth Driver</title>
+		<titleShort>War Behemoth Driver</titleShort>
+		<description>Char 2C is a formidable presence in front of any forces. The war behemoth represented by this name is a proof of the strength of the kingdom. No one is not afraid in front of the fortress with steel tracks carrying cannons and several machine guns. [PAWN_nameDef] is the driver of this steel fortress. The size of 2C leads to the need for multiple drivers to drive. The drivers are responsible for different duties, but the common thing is that driving this war behemoth is a glorious and reassuring thing.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>4</Crafting>
+			<Intellectual>5</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 134巨兽驾驶员飞艇7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_WarBehemothDriverB</defName>
+		<title>Ratkin War Behemoth Driver</title>
+		<titleShort>War Behemoth Driver</titleShort>
+		<description>[PAWN_nameDef] dreamed of becoming a pilot and flying freely in the air with a biplane, but when he grew up, [PAWN_nameDef] was diagnosed with airsickness. He could only realize his wish in another way-to become a famous Led Zeppelin pilot in the royal army and steer in the air like a boat, which was not as free and flexible as an airplane, but the airship's powerful force, stable navigation and great oppression brought to the enemy Still let [PAWN_nameDef] fall in love with this position quickly.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>5</Crafting>
+			<Intellectual>4</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinEliteDefender</li>
+			<li>RatkinViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 135理发师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Barber</defName>
+		<title>Ratkin Barber</title>
+		<titleShort>Barber</titleShort>
+		<description>As a barber, [PAWN_nameDef] is skilled and hard-working, and ratkins can get satisfactory fine-tuned hairstyles here, so [PAWN_nameDef]' s barber shop is very popular. One shortcoming is that [PAWN_nameDef] is good at fine-tuning but not good at innovation, which also leads to more and more cases of ratkin same their hair.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>3</Crafting>
+			<Artistic>1</Artistic>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 136美耳师3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_EarBeautician</defName>
+		<title>Ratkin Ear Beautician</title>
+		<titleShort>Ear Beautician</titleShort>
+		<description>Ears are aesthetic hard currency among ratkins, and it is popular to have big and round ears everywhere. [PAWN_nameDef] is an ear beautician, and it is his duty to repair the ears of ratkins with ear injuries, to reshape their ears, and to make artificial ears to wear for rats who have lost their ears for some reason.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>3</Crafting>
+			<Medicine>2</Medicine>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 137起名家3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_NamingExpert</defName>
+		<title>Ratkin Naming Expert</title>
+		<titleShort>Naming Expert</titleShort>
+		<description>The flowers in the name of the ratkin can be both surnames and first names. However, there are not many kinds of flowers in the kingdom, so it happens from time to time that the ratkin has the same name. [PAWN_nameDef] is a down-and-out scholar. In order to make a living, he began to help other newborn ratkin to name themselves with his own botanical knowledge. rare flower name with a beautiful implication made [PAWN_nameDef] very popular.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>2</Intellectual>
+			<Social>2</Social>
+			<Artistic>1</Artistic>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinGuardener</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 138奶酪师傅3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_CheeseChef</defName>
+		<title>Ratkin Cheese Chef</title>
+		<titleShort>Cheese Chef</titleShort>
+		<description>[PAWN_nameDef] is a cheese maker in the kingdom. He loves this job very much and makes every cheese carefully. Therefore, the cheese shop in [PAWN_nameDef] is more popular because of its good quality and taste.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>1</Crafting>
+			<Cooking>3</Cooking>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 139工业贵族1 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_IndustrialNoble</defName>
+		<title>Ratkin Industrial Noble</title>
+		<titleShort>Industrial Noble</titleShort>
+		<description>As a noble, [PAWN_nameDef] was appointed by the Prince Regent to establish an industrial system for defence against foreign enemies in the past, and spent decades working with other nobles to complete the initial industrialisation. However, due to the rule that industry only serves the nobility, they were unable to make a profit and became dissatisfied, until the Kingdom's concessions after the Rebellion allowed [PAWN_nameDef], who was already in a position of power, to finally enjoy the fruits of his construction.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>6</Intellectual>
+			<Social>8</Social>
+		</skillGains>
+		<workDisables>
+			<li>ManualSkilled</li>
+			<li>Violent</li>
+		</workDisables>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinNoble</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinNonViolence</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 140走私者b3 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SmugglerB</defName>
+		<title>Ratkin SmugglerB</title>
+		<titleShort>SmugglerB</titleShort>
+		<description>Before the establishment of the Warlord [PAWN_nameDef] obtained industrial goods essential to the population from industrial nobles and sold them at high prices on the black market and split the profits, but small-scale smuggling did not satisfy the nobles. With the establishment of the Warlord, [PAWN_nameDef] turned to sourcing inexpensive substitutes from outside sources and selling them to the inhabitants of the realm at below market prices.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Intellectual>2</Intellectual>
+			<Social>2</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinServant</li>
+			<li>RatkinMerchant</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinThief</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinNonViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 141传令兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_Messenger</defName>
+		<title>Ratkin Messenger</title>
+		<titleShort>Messenger</titleShort>
+		<description>In the Ratkin, messengers have the difficult task of delivering critical orders and information, a role that is both dangerous and critical, where the successful delivery of an order could turn the tide of battle, but few survive. [PAWN_nameDef] is a messenger who races against death on the battlefield, eager to deliver potentially game-changing information, numb to the inevitable threat of death or enjoying the thrill of being on the edge of it.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+		    <Shooting>1</Shooting>
+			<Melee>1</Melee>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>Bloodlust</defName>
+				<chance>65</chance>
+			</li>
+			<li>
+				<defName>Tough</defName>
+				<chance>85</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<!-- 142通讯兵7 -->
+	<AlienRace.AlienBackstoryDef ParentName="BaseRatkinBackStory">
+		<defName>Ratkin_SignalCorp</defName>
+		<title>Ratkin Signal Corp</title>
+		<titleShort>Signal Corp</titleShort>
+		<description>[PAWN_nameDef] is a communications trooper who operates radio equipment to send and receive commands. However, radio signals are easily jammed and intercepted, which means that the issuance of many instructions still requires messengers to complete.</description>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+		<slot>Adulthood</slot>
+		<skillGains>
+			<Crafting>2</Crafting>
+			<Intellectual>2</Intellectual>
+		</skillGains>
+		<spawnCategories>
+			<li>RatkinStory</li>
+			<li>RatkinCombatant</li>
+			<li>RatkinDefender</li>
+			<li>RatkinSoldier</li>
+			<li>RatkinMurderer</li>
+			<li>RatkinVagabond</li>
+			<li>RatkinViolence</li>
+			<li>RatkinExile</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+</Defs>

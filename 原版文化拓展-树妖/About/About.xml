@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Vanilla Ideology Expanded - Dryads (HSK 本地改造版)</name>
+	<author>Oskar Potocki, Sarg Bjornson, Taranchuk, Reann Shepard (HSK 本地改造版)</author>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<modIconPath IgnoreIfNoMatchingField="True">UI/VELogo</modIconPath>
+	<packageId>VanillaExpanded.Ideo.Dryads</packageId>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
+			<downloadUrl>https://github.com/Vanilla-Expanded/VanillaExpandedFramework</downloadUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Ideology</packageId>
+			<displayName>Ideology</displayName>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Hardcore SK</displayName>
+		    <downloadUrl>https://rimworld.example/skyarkhangel.HSK</downloadUrl>
+			</li>
+		<li>
+			<packageId>DimonSever000.ModIndicator.Specific</packageId>
+			<displayName>HSK Autosort and Mod Assistant</displayName>
+		    <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+			</li>
+	</modDependencies>
+	<loadAfter>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>VanillaExpanded.VMemesE</li>
+		<li>skyarkhangel.HSK</li>
+		<li>skyarkhangel.HSK.Core</li>
+		<li>skyarkhangel.HSK.DLC</li>
+		<li>Solaris.RatkinRaceMod</li>
+		<li>RatkinRaceHSK</li>
+		<li>DimonSever000.ModIndicator.Specific</li>
+	</loadAfter>
+	<description>Vanilla Ideology Expanded - Dryads 本地改造版(HSK 适配)。
+
+本版在原 mod 基础上:
+- 转为本地 mod 并纳入 HSK 体系:声明依赖 Harmony / Vanilla Expanded Framework / Ideology / Hardcore SK,loadAfter VIE 迷因与建筑、HSK 及鼠族系 mod;Patches/101 由 Mod Assistant 注入 NativeAddon 标记(1.6 起以 Conditional 门控)。
+- CE 战斗适配(CombatExtended.HSK):①10 种觉醒树妖近战工具全部转 CombatExtended.ToolCE,并补 RacePropertiesExtensionCE 与近战暴击/招架/闪避基准(以官方 CE 树妖基线线性外推);②两个吐酸树妖(未觉醒/觉醒)verb 转 CE(Verb_ShootCE + VerbPropertiesCE),弹体 VDE_AcidBolt 转 ProjectilePropertiesCE,AP 由原版百分比换算为 2mm(Heat);③未觉醒石掘者与觉醒树皮的原版 % 护甲按 CE 官方树皮档换算为 10/15mm,觉醒树皮另加 CE ArmorDurability 耐久(450,可再生)。
+- 动物远程攻击由 VEF 内置 MVCF 提供(RangedAnimals 特性),本环境经 VEF 加载,无需独立 MVCF。
+- 产出物(WoodLog/MedicineHerbal/Neutroamine/RawBerries/Ambrosia)与布料 Gaubric 均为 HSK 存在 def,数值量级与 HSK 布料带一致,未做经济性改动。
+
+原版说明:本 mod 扩展 Ideology DLC 的 Gauranlen 树妖选择,新增填补空白职能的树妖类型并升级既有树妖,使整套树妖系统可成为殖民地的核心生产力。安装 Anima Theme 时新树妖会自动套用 Anima 风格换肤。</description>
+</ModMetaData>

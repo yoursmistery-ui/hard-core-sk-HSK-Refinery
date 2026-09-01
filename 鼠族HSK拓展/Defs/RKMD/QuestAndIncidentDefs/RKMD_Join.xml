@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <IncidentDef>
+    <defName>WasteRatWandererJoin</defName>
+    <label>Waste Rat wanderer join</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>IncidentWorker_GiveQuest</workerClass>
+    <questScriptDef>WasteRatWandererJoins</questScriptDef>
+    <baseChance>0.3</baseChance>
+    <populationEffect>IncreaseEasy</populationEffect>
+  </IncidentDef>
+
+  
+  <QuestScriptDef>
+    <defName>WasteRatWandererJoins</defName>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <isRootSpecial>true</isRootSpecial>
+    <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityFulfilled_WandererJoins</successHistoryEvent>
+    <failedOrExpiredHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityRefused_WandererJoins</failedOrExpiredHistoryEvent>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Wanderer joins</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="RatkinGeneExpanded.QuestNode_Root_WandererJoin_WalkIn">
+      <pawnKind>RatkinWaster</pawnKind>
+      <fromFaction>Rakinia_Waster</fromFaction>
+    </root>
+  </QuestScriptDef>
+</Defs>

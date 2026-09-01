@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+	<!-- RK_ZhuQiang -->
+	<ThingDef ParentName="BaseWeapon">
+		<defName>RK_GongFu</defName>
+		<label>「Kong Fu」</label>
+		<description>Everybody is Kung fu fighting,
+Your mind becomes fast as lightning.</description>
+		<techLevel>Neolithic</techLevel>
+		<smeltable>false</smeltable>
+		<useHitPoints>False</useHitPoints>
+		<uiIconPath>Item_Weapon/RK_GongFu</uiIconPath>
+		<uiIconScale>1.0</uiIconScale>
+		<thingCategories>
+			<li>WeaponsMelee</li>
+		</thingCategories>
+		<weaponClasses>
+			<li>Melee</li>
+		</weaponClasses>
+		<burnableByRecipe>false</burnableByRecipe>
+		<relicChance>0</relicChance>
+		<destroyOnDrop>true</destroyOnDrop>
+		<statBases>
+			<MaxHitPoints>99</MaxHitPoints>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+			<Beauty>0</Beauty>
+			<SellPriceFactor>0</SellPriceFactor>
+			<MarketValue>5000</MarketValue>
+			<Mass>0</Mass>
+		</statBases>
+		<graphicData>
+			<texPath>Item_Weapon/RK_GongFu</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+			<onGroundRandomRotateAngle>0</onGroundRandomRotateAngle>
+		</graphicData>
+		<weaponTags>
+			<li>RK_ExoticBattleMaster</li>
+			<li>RK_ExoticGongFu</li>
+		</weaponTags>
+		<equippedStatOffsets>
+			<MoveSpeed>1</MoveSpeed>
+			<MeleeDodgeChance>40</MeleeDodgeChance>
+			<MeleeHitChance>5</MeleeHitChance>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>fist</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>9</power>
+				<cooldownTime>0.4</cooldownTime>
+				<armorPenetrationBlunt>3.1</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Hands</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>palm</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>13</power>
+				<cooldownTime>0.5</cooldownTime>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Hands</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>claw</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>0.5</cooldownTime>
+				<armorPenetrationBlunt>4.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Hands</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>elbow</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>0.6</cooldownTime>
+				<armorPenetrationBlunt>5.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Arms</linkedBodyPartsGroup>
+				<extraMeleeDamages>
+					<li>
+						<def>Stun</def>
+						<amount>9</amount>
+						<chance>0.5</chance>
+					</li>
+				</extraMeleeDamages>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>finger</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>0.6</cooldownTime>
+				<armorPenetrationSharp>4.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Hands</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>foot</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>22</power>
+				<cooldownTime>0.9</cooldownTime>
+				<armorPenetrationBlunt>7.7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Feet</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>knee</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>17</power>
+				<cooldownTime>0.8</cooldownTime>
+				<armorPenetrationBlunt>5.9</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Feet</linkedBodyPartsGroup>
+				<extraMeleeDamages>
+					<li>
+						<def>Stun</def>
+						<amount>9</amount>
+						<chance>0.5</chance>
+					</li>
+				</extraMeleeDamages>
+			</li>
+			</tools>
+
+		<comps>
+			<li Class="RatkinGeneExpanded.CompProperties_FixedEquip" />
+
+		</comps>
+		<tradeability>None</tradeability>
+	
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+		</recipeMaker>
+		<costList>
+				<ComponentMedieval>2</ComponentMedieval>
+		</costList></ThingDef>
+
+
+</Defs>

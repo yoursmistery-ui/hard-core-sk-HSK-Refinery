@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- =====================================================================
+      本补丁职责(两件事)
+      ─────────────────────────────────────────────────────────────
+      A. 研究台门槛:按 HSK 六档给 23 个节点补齐 requiredResearchBuilding + SK.AdvancedResearchExtension。
+      B. 融入主网格:给每个节点追加 ResearchTreeSK.ResearchTreeSKModExtension,使其成为 NodesSK
+         成员、按 1.6 源 defs 里手工落位的坐标显示在对应 HSK 页签里(页签/坐标/前置链改在
+         1.6/Defs/ResearchProjectDefs/Research.xml,本补丁只管 HSK 侧扩展)。
+
+      ── A 的根因(2026-08-27 反编译定位)──
+      ① 10 个节点完全没有 requiredResearchBuilding。
+         原版 ResearchProjectDef.CanBeResearchedAt 首行:
+             if (requiredResearchBuilding != null && bench.def != requiredResearchBuilding) return false;
+         空值直接放行 → 任意研究台都能研究,绕过 HSK 六档门槛(与 鼠族HSK拓展/99_研究台门槛修复.xml
+         修的 Fabrication 同一类缺陷)。
+
+      ② **Miho_Celestial 曾被本补丁上一版改成 requiredResearchBuilding=LabStation —— LabStation 不是研究台。**
+         Core_SK/Defs/ThingDefs_Buildings/Buildings_Misc_Research.xml:
+             LabStation / LabTerminal → thingClass = SK.Building_Lamp, ParentName = FacilitiesBase(设施)
+         全环境只有 PrimitiveResearchBench / SimpleResearchBench / HiTechResearchBench 是
+         thingClass=Building_ResearchBench。于是 CanBeResearchedAt 对任何研究台恒 false,
+         ResearchTreeSK 的 Node.PlayerHasAnyAppropriateResearchBench 也恒 false
+         (requiredResearchBuilding != null → 走 Research.PlayerHasAnyAppropriateResearchBench)
+         → 该节点"没有任何研究台可以点击"。
+         极致档正确写法(对照 Core_SK HitechLabStationBase)= 研究台 HiTechResearchBench + 设施 LabStation。
+
+      ③ 其余节点只有 requiredResearchBuilding、没有 SK.AdvancedResearchExtension。
+         Core_SK 的 Patch_ResearchProjectDef_CanBeResearchedAt Postfix:
+             if (__result || !HasModExtension<AdvancedResearchExtension>()) return;
+             // 仅能把 false 救成 true,不会反向拒绝
+         所以缺扩展不报错,但可接受研究台集合与 Core_SK 基类不一致
+         (MedievalBase/IndustrialBase 允许 基础研究台 或 高级研究台)。本补丁统一显式声明。
+
+      ── B 的根因:为什么这次**必须**加 ResearchTreeSKModExtension ──
+      ResearchTreeSK.PopulateNodes 把节点分成两堆:
+          NodesSK    = 有 ResearchTreeSKModExtension → 保留 XML 坐标,进主网格,按页签分层显示
+          NodesOther = 没有 → X/Y 置 -1,由 OrderAndPlaceOtherNodes 按"前置深度"自动排布,
+                        整堆追加在整张表最下方(TabOtherYRanges),页签只当分组标签用
+      美狐 23 节点原先是全环境**唯一**的 NodesOther 组 → 整条线被沉到科技树最底、脱离档位列,
+      这就是"孤零零挂在最底页签"的成因。要真正融入,只能进 NodesSK。
+
+      代价与对策:PopulateNodes 的坐标查重 (X,Y) **不分页签**,撞车即
+      Log.Error("HardcoreSK research ... have the same position")。
+      → 坐标不手填,由 _tmp/miho_layout_design.py 从 Unified.xml 读出全部 494 个 NodesSK 占格后求解,
+        并校验:前置存在 / 拓扑无环 / techLevel 不低于前置 / X 大于所有前置 / X 不小于档位左界 /
+        (X,Y) 全局唯一。落位行刻意选 Apparel_SK 带尾的 Y=47(全局空行)、Weapon_SK 的 Y=38、
+        Buildings_SK 的 Y=27~28、Craft_SK 的 Y=18~20。
+      ⚠ Core_SK / ResearchTreeSK 升级后须重跑该脚本复核撞车(它会重读 Cache/Unified.xml)。
+
+      ── 档位对照 Core_SK/Defs/ResearchProjectDefs/Research_Abstract.xml ──
+          MedievalBase         = Simple + 无设施          + ext[Simple,HiTech]
+          IndustrialBase       = Simple + 设施 LabTerminal + ext[Simple,HiTech]
+          HitechBase           = HiTech + 设施 LabTerminal + ext[HiTech]
+          HitechMultiBase      = HiTech + 设施 MultiAnalyzer + ext[HiTech]
+          HitechLabStationBase = HiTech + 设施 LabStation   + ext[HiTech]
+      设施一律走原版 requiredResearchFacilities(LabTerminal / MultiAnalyzer / LabStation)。
+      ===================================================================== -->
+
+  <!-- ==================== 一、中世纪档(原缺研究台) ==================== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_ApparelBasic"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Silk"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <!-- ==================== 二、前工业档(原缺研究台) → 基础研究台 + 研究终端 ==================== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_ApparelAdvanced"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_BasicFactory"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_HeavyFactory"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Weapon"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_HeavyWeapon"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_VerminControlWeapon"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Drone"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_GuardDrone"]</xpath>
+    <value>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <!-- ==================== 三、极致档硬伤修复: Miho_Celestial ==================== -->
+  <!-- 研究台从"设施 LabStation"改回真正的高级研究台 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Celestial"]/requiredResearchBuilding</xpath>
+    <value>
+      <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    </value>
+  </Operation>
+  <!-- LabStation 回归为设施: 追加到已有 requiredResearchFacilities(保留 MultiAnalyzer) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Celestial"]/requiredResearchFacilities</xpath>
+    <value>
+      <li>LabStation</li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Celestial"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <!-- ==================== 四、太空档(已有 HiTechResearchBench,补显式门槛列表) ====================
+       维持原有 requiredResearchFacilities 不变,只补 AdvancedResearchExtension,不额外加难度。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_MechHack"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_MechCore"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_Persona"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_CommandDrone"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_HeavyWarDrone"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_HeavyWarBattery"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_HeavyPlasma"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_PlasmaWeapon"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_ApparelEltex"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_ApparelAssassin"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_ApparelSorcerees"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <!-- ==================== 五、工业档但走高级研究台: Miho_LightWarDrone ==================== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Miho_LightWarDrone"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+</Patch>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        99_研究台门槛修复 (2026-08-24)
+        问题: Core_SK_CoreModule 的 AutoGenPatches/ResearchProjectDefs/Research_Apparel.xml
+              用 SK.PatchOperationReplaceExtended 整体改写 Fabrication 节点时,
+              在 value 里写了 <requiredResearchBuilding/> 空标签,把原版该字段
+              (HiTechResearchBench) 清空 → 原版 ResearchProjectDef.CanBeResearchedAt
+              对空值视为"任意研究台皆可",且 Core_SK 的
+              SK.Patch_ResearchProjectDef_CanBeResearchedAt Postfix 首行
+              if(__result) return 直接放行 → 服装制造 III(Apparel production III)
+              不再需要研究台,只要研究终端 LabTerminal 在场即可研究
+              (其它科技都因研究台门槛灰显,唯独它能点击)。
+        修复: 恢复 requiredResearchBuilding=SimpleResearchBench(基础研究台),
+              与它的 ParentName=SK.IndustrialBaseDummy(=IndustrialBase,前工业档) 一致。
+              SK.AdvancedResearchExtension.requiredResearchBuildings 继承自
+              IndustrialBase 已含 [SimpleResearchBench, HiTechResearchBench],
+              故 基础/高级研究台 + 研究终端(LabTerminal) 均可研究,无需改动扩展。
+        加载顺序: 本 mod 位于 Core_SK* 之后,Replace 覆盖 ReplaceExtended 结果。
+        ===================================================================== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Fabrication"]/requiredResearchBuilding</xpath>
+        <value>
+            <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+        </value>
+    </Operation>
+</Patch>

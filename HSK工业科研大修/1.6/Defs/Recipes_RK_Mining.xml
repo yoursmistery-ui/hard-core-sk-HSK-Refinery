@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ===== 矿井采掘配方(移植自 MO Recipes_MineShaft,删除 MO DLL 宝石暴击 modExtensions,二期需自研;
+		       火药/焦油/银矿/金矿/MO 铁矿石按定稿不移植;CutGreenhouse 特效本环境不存在,统一用 CutStone)
+		     统一强度: 每种资源合并为单条 x5(工时按单件折算,与旧批量档持平);石材合并为单条 x1,产物随脚下地面岩种动态决定(见 MiningCritHSK.dll)。 ===== -->
+
+	<RecipeDef Name="RK_MineShaftBase" Abstract="True">
+		<label>采掘</label>
+		<description>深入地下采掘资源。</description>
+		<workSpeedStat>MiningSpeed</workSpeedStat>
+		<workSkill>Mining</workSkill>
+		<workSkillLearnFactor>0.50</workSkillLearnFactor>
+		<effectWorking>CutStone</effectWorking>
+		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<recipeUsers>
+			<li>RK_MineShaft</li>
+		</recipeUsers>
+		<modExtensions>
+			<!-- 宝石暴击(MO RecipeExtension_Mine 等价): 每 600 工时 1% 概率额外掉 1~3 个宝石,
+			     概率按配方工时折算(批量配方更容易出), 由 BlueprintUnlockHSK 的
+			     GenRecipe.MakeRecipeProducts postfix 实现(Source/MiningCritHSK.cs) -->
+			<li Class="BlueprintUnlockHSK.MineCritProperties">
+				<critChance>0.01</critChance>
+				<workPerRoll>600</workPerRoll>
+				<critCountMin>1</critCountMin>
+				<critCountMax>3</critCountMax>
+				<critThings>
+					<li>RKGem_Citrine</li>
+					<li>RKGem_Amber</li>
+					<li>Obsidian</li>
+					<li>RKGem_Emerald</li>
+					<li>RKGem_Sapphire</li>
+					<li>RKGem_Ruby</li>
+				</critThings>
+				<letterLabel>岩层里有闪光</letterLabel>
+				<letterText>这次采掘在碎石里露出了晶体——挖到了宝石。</letterText>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Coal</defName>
+		<label>采掘煤 x5</label>
+		<jobString>采掘 5 块煤。</jobString>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<Coal>5</Coal>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Lead</defName>
+		<label>采掘方铅矿 x5</label>
+		<jobString>采掘 5 份方铅矿。</jobString>
+		<workAmount>4500</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<Anglesite>5</Anglesite>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Copper</defName>
+		<label>采掘铜矿石 x5</label>
+		<jobString>采掘 5 份铜矿石。</jobString>
+		<workAmount>3500</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<Copper>5</Copper>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Salt</defName>
+		<label>采掘盐 x5</label>
+		<jobString>采掘 5 份盐。</jobString>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<Salt>5</Salt>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Clay</defName>
+		<label>采掘软黏土 x5</label>
+		<jobString>采掘 5 份软黏土。</jobString>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<SoftClay>5</SoftClay>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<!-- 石材: 合并为单条 x1,产物 Chunk<岩种> 由建筑所在格地形(RoughXxxFloor)在运行时决定,
+	     无法识别的地形回落 fallback(CrushedStone)。products 里的 ChunkSandstone 仅占位,会被 postfix 替换。
+	     实现见 Source/MiningCritHSK.cs 的 Patch_MineStoneByTerrain。 -->
+	<RecipeDef ParentName="RK_MineShaftBase">
+		<defName>RK_Mine_Stone</defName>
+		<label>采掘石料</label>
+		<jobString>按脚下地面的岩种采掘石料。</jobString>
+		<workAmount>2400</workAmount>
+		<products>
+			<ChunkSandstone>1</ChunkSandstone>
+		</products>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+		<modExtensions>
+			<!-- 石材产物随脚下地面岩种动态决定; 继承自 base 的宝石暴击扩展一并生效(采石也掉宝石) -->
+			<li Class="BlueprintUnlockHSK.MineStoneByTerrainProperties">
+				<fallback>CrushedStone</fallback>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+
+	<!-- ===== 采掘点慢速子集(0.5x 工速,盐/碎石/沙子 x5,挂 RK_Mining_Primitive;另含原始采石 RK_MineSpot_Stone 挂 RK_Quarry_Primitive;不再产出煤) ===== -->
+	<RecipeDef Name="RK_MiningSpotBase" Abstract="True">
+		<label>徒手采掘</label>
+		<description>在采掘点徒手采掘资源。</description>
+		<workSpeedStat>MiningSpeed</workSpeedStat>
+		<workSkill>Mining</workSkill>
+		<workSkillLearnFactor>0.25</workSkillLearnFactor>
+		<effectWorking>CutStone</effectWorking>
+		<soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+		<recipeUsers>
+			<li>RK_MiningSpot</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MiningSpotBase">
+		<defName>RK_MineSpot_Salt</defName>
+		<label>挖取盐 x5</label>
+		<jobString>挖取 5 份盐。</jobString>
+		<workAmount>600</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<Salt>5</Salt>
+		</products>
+		<researchPrerequisites>
+			<li>RK_Mining_Primitive</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MiningSpotBase">
+		<defName>RK_MineSpot_Rubble</defName>
+		<label>挖去碎石 x5</label>
+		<jobString>挖去 5 份碎石。</jobString>
+		<workAmount>600</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<CrushedStone>5</CrushedStone>
+		</products>
+		<researchPrerequisites>
+			<li>RK_Mining_Primitive</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<RecipeDef ParentName="RK_MiningSpotBase">
+		<defName>RK_MineSpot_Sand</defName>
+		<label>挖去沙子 x5</label>
+		<jobString>挖去 5 份沙子。</jobString>
+		<workAmount>600</workAmount>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<products>
+			<SandResource>5</SandResource>
+		</products>
+		<researchPrerequisites>
+			<li>RK_Mining_Primitive</li>
+		</researchPrerequisites>
+	</RecipeDef>
+
+	<!-- 原始采石: 挂采掘点(0.5x), 产物 Chunk<岩种> 随脚下地面岩种由 postfix 动态决定
+	     (同矿井石材机制, 复用 BlueprintUnlockHSK.MineStoneByTerrainProperties; 不含宝石暴击)。
+	     products 的 ChunkSandstone 仅占位, 无法识别岩种时回落 CrushedStone。挂 RK_Quarry_Primitive。 -->
+	<RecipeDef ParentName="RK_MiningSpotBase">
+		<defName>RK_MineSpot_Stone</defName>
+		<label>徒手采石</label>
+		<jobString>按脚下地面的岩种凿取石料。</jobString>
+		<workAmount>2800</workAmount>
+		<products>
+			<ChunkSandstone>1</ChunkSandstone>
+		</products>
+		<researchPrerequisites>
+			<li>RK_Quarry_Primitive</li>
+		</researchPrerequisites>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.MineStoneByTerrainProperties">
+				<fallback>CrushedStone</fallback>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+
+</Defs>

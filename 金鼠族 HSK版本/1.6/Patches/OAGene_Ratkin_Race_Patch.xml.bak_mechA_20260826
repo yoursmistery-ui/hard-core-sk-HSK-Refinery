@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.RaceSettings[defName = "RK_Race_Setting"]/universalBodyAddons</xpath>
+        <value>
+
+            <!-- 左耳-->
+            <li>
+                <drawSize>1</drawSize>
+                <path>Body/RK_EarLeft</path>
+                <inFrontOfBody>true</inFrontOfBody>
+                <colorChannel>skin</colorChannel>
+                <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+                <layerInvert>false</layerInvert>
+                <defaultOffset>Head</defaultOffset>
+                <alignWithHead>true</alignWithHead>
+                <conditions>
+                    <!-- 2026-08-22 修复: HAR universalBodyAddons 全局合并渲染到所有 AlienRace(含人类),须限定鼠族种族,否则人类长鼠耳 -->
+                    <Race>Ratkin</Race>
+                    <BodyPart>
+                        <bodyPart>Ear</bodyPart>
+                        <bodyPartLabel>left ear</bodyPartLabel>
+                        <drawWithoutPart>false</drawWithoutPart>
+                    </BodyPart>
+                    <Posture>
+                        <drawnStanding>true</drawnStanding>
+                        <drawnLaying>true</drawnLaying>
+                        <drawnInBed>true</drawnInBed>
+                    </Posture>
+                    <RotStage>Fresh,Rotting</RotStage>
+                    <Apparel>
+                        <hiddenUnderApparelTag>
+                            <li>RK_ApparelTag_HideEar</li>
+                        </hiddenUnderApparelTag>
+                    </Apparel>
+                </conditions>
+                <extendedGraphics>
+                    <Gene For="OAGene_BatRatkinEar">                        <!-- 蝠鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_BatRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_LowlandRatkinEar">                        <!-- 低地鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_LowlandRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_SnowRatkinEar">                        <!-- 雪鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_SnowRatkinEarLeft</path>
+                    </Gene>
+                    <Gene For="OAGene_RockRatkinEar">                        <!-- 岩鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_RockRatkinEarLeft</path>
+                    </Gene>
+                </extendedGraphics>
+                <offsets>
+                    <south>
+                        <offset>(-0.03,-0.35)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.01,-0.07)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.01,-0.07)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </south>
+                    <north>
+                        <offset>(0.03,-0.23)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.07,-0.19)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.07,-0.19)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </north>
+                    <east>
+                        <offset>(0.2,-0.25)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </portraitBodyTypes>
+                    </east>
+                </offsets>
+            </li>
+
+            <!-- 右耳-->
+            <li>
+                <drawSize>1</drawSize>
+                <path>Body/RK_EarRight</path>
+                <inFrontOfBody>true</inFrontOfBody>
+                <colorChannel>skin</colorChannel>
+                <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+                <layerInvert>false</layerInvert>
+                <alignWithHead>true</alignWithHead>
+                <defaultOffset>Head</defaultOffset>
+                <conditions>
+                    <!-- 2026-08-22 修复: 限定仅鼠族渲染(见左耳注释) -->
+                    <Race>Ratkin</Race>
+                    <BodyPart>
+                        <bodyPart>Ear</bodyPart>
+                        <bodyPartLabel>right ear</bodyPartLabel>
+                        <drawWithoutPart>false</drawWithoutPart>
+                    </BodyPart>
+                    <Posture>
+                        <drawnStanding>true</drawnStanding>
+                        <drawnLaying>true</drawnLaying>
+                        <drawnInBed>true</drawnInBed>
+                    </Posture>
+                    <RotStage>Fresh,Rotting</RotStage>
+                    <Apparel>
+                        <hiddenUnderApparelTag>
+                            <li>RK_ApparelTag_HideEar</li>
+                        </hiddenUnderApparelTag>
+                    </Apparel>
+                </conditions>
+                <extendedGraphics>
+                    <Gene For="OAGene_BatRatkinEar">                        <!-- 蝠鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_BatRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_LowlandRatkinEar">                        <!-- 低地鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_LowlandRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_SnowRatkinEar">                        <!-- 雪鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_SnowRatkinEarRight</path>
+                    </Gene>
+                    <Gene For="OAGene_RockRatkinEar">                        <!-- 岩鼠 -->
+                        <path>Things/Ratkin/BodyAddon/OARK_RockRatkinEarRight</path>
+                    </Gene>
+                </extendedGraphics>
+                <offsets>
+                    <south>
+                        <offset>(0.02,-0.35)</offset>
+                        <bodyTypes>
+                            <Baby>(0.02,-0.07)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(0.02,-0.07)</Baby>
+                            <Child>(0.01,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </south>
+                    <north>
+                        <offset>(0.0,-0.23)</offset>
+                        <bodyTypes>
+                            <Baby>(0.04,-0.19)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(0.04,-0.19)</Baby>
+                            <Child>(0,-0.02)</Child>
+                        </portraitBodyTypes>
+                    </north>
+                    <east>
+                        <offset>(0.2,-0.25)</offset>
+                        <bodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </bodyTypes>
+                        <portraitBodyTypes>
+                            <Baby>(-0.1,-0.1)</Baby>
+                            <Child>(-0.05,-0.04)</Child>
+                        </portraitBodyTypes>
+                    </east>
+                </offsets>
+            </li>
+
+        </value>
+    </Operation>
+
+</Patch>

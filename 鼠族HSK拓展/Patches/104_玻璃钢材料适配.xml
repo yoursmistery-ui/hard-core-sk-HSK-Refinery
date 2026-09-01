@@ -1,0 +1,1740 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 商人库存: 玻璃钢(Plasteel,太空死材料) / 铀矿(HSK原矿) -> 可用强固金属 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/TraderKindDef[defName="RK_TraderKind_Standard"]/stockGenerators/li/thingDef[text()="Plasteel"]</xpath>
+		<value><thingDef>Titanium</thingDef></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/TraderKindDef[defName="RK_TraderKind_Standard"]/stockGenerators/li/thingDef[text()="Uranium"]</xpath>
+		<value><thingDef>DepletedUranium</thingDef></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/TraderKindDef[defName="RK_TraderKind_KingdomExotic"]/stockGenerators/li/thingDef[text()="Plasteel"]</xpath>
+		<value><thingDef>Titanium</thingDef></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/TraderKindDef[defName="RK_TraderKind_WanderingTrader"]/stockGenerators/li/thingDef[text()="Plasteel"]</xpath>
+		<value><thingDef>Titanium</thingDef></value>
+	</Operation>
+	<!-- 自动生成: 玻璃钢(Plasteel)/铀矿 -> 强固金属. 目标 67 个 def. -->
+	<!-- MKSW: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MKSW"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MKSW"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>200</NitinolAlloy>
+				<ComponentIndustrial>30</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>150</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MKSW"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>200</NitinolAlloy>
+				<ComponentIndustrial>30</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>150</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- MKSWWJ: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MKSWWJ"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MKSWWJ"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>200</NitinolAlloy>
+				<ComponentIndustrial>20</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>15</ComponentSpacer>
+				<GoldBar>20</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MKSWWJ"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>200</NitinolAlloy>
+				<ComponentIndustrial>20</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>15</ComponentSpacer>
+				<GoldBar>20</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- MKSWheat: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MKSWheat"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MKSWheat"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>100</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>150</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MKSWheat"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>100</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>150</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Apparel_SpaceArmor: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmor"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmor"]/costList</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>6</ComponentSpacer>
+				<NitinolAlloy>120</NitinolAlloy>
+				<DepletedUranium>50</DepletedUranium>
+				<Steel>100</Steel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmor"]</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>6</ComponentSpacer>
+				<NitinolAlloy>120</NitinolAlloy>
+				<DepletedUranium>50</DepletedUranium>
+				<Steel>100</Steel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Apparel_SpaceArmorHelmet: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmorHelmet"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmorHelmet"]/costList</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>1</ComponentSpacer>
+				<NitinolAlloy>50</NitinolAlloy>
+				<Steel>50</Steel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmorHelmet"]</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>1</ComponentSpacer>
+				<NitinolAlloy>50</NitinolAlloy>
+				<Steel>50</Steel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Apparel_Vacsuit: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Apparel_Vacsuit"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_Vacsuit"]/costList</xpath>
+			<value>
+				<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				<Steel>90</Steel>
+				<NitinolAlloy>20</NitinolAlloy>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_Vacsuit"]</xpath>
+			<value>
+				<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				<Steel>90</Steel>
+				<NitinolAlloy>20</NitinolAlloy>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Apparel_VacsuitChildren: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]/costList</xpath>
+			<value>
+				<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				<Steel>45</Steel>
+				<NitinolAlloy>10</NitinolAlloy>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Apparel_VacsuitChildren"]</xpath>
+			<value>
+				<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				<Steel>45</Steel>
+				<NitinolAlloy>10</NitinolAlloy>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_BFR: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_BFR"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_BFR"]/costList</xpath>
+			<value>
+				<costList>
+				<Titanium>100</Titanium>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				<Weapon_Parts>6</Weapon_Parts>
+				<ComponentSpacer>5</ComponentSpacer>
+				<AdvSniper_Component>1</AdvSniper_Component>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_BFR"]</xpath>
+			<value>
+				<costList>
+				<Titanium>100</Titanium>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				<Weapon_Parts>6</Weapon_Parts>
+				<ComponentSpacer>5</ComponentSpacer>
+				<AdvSniper_Component>1</AdvSniper_Component>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Backpack: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Backpack"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Backpack"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Backpack"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_BattleSuit: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_BattleSuit"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_BattleSuit"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<Titanium>100</Titanium>
+				<ComponentSpacer>3</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_BattleSuit"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<Titanium>100</Titanium>
+				<ComponentSpacer>3</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_BattleSuitB: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_BattleSuitB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_BattleSuitB"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<Titanium>100</Titanium>
+				<ComponentSpacer>3</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_BattleSuitB"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<Titanium>100</Titanium>
+				<ComponentSpacer>3</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_BingLi: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_BingLi"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_BingLi"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<DevilstrandCloth>100</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_BingLi"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<DevilstrandCloth>100</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_BuDong: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_BuDong"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_BuDong"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>275</NitinolAlloy>
+				<Cloth>100</Cloth>
+				<DevilstrandCloth>300</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_BuDong"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>275</NitinolAlloy>
+				<Cloth>100</Cloth>
+				<DevilstrandCloth>300</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Circlet: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Circlet"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Circlet"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>40</WootzSteel>
+				<ComponentSpacer>2</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Circlet"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>40</WootzSteel>
+				<ComponentSpacer>2</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_CrossBack: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_CrossBack"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_CrossBack"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>5</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_CrossBack"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>5</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_DaWang: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_DaWang"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_DaWang"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<Cloth>100</Cloth>
+				<DevilstrandCloth>300</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_DaWang"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<Cloth>100</Cloth>
+				<DevilstrandCloth>300</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_EmpBomb: tech=? -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_EmpBomb"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_EmpBomb"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>60</NitinolAlloy>
+				<ComponentIndustrial>6</ComponentIndustrial>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_EmpBomb"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>60</NitinolAlloy>
+				<ComponentIndustrial>6</ComponentIndustrial>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_ExoticPistol: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_ExoticPistol"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_ExoticPistol"]/costList</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Steel>50</Steel>
+				<Titanium>25</Titanium>
+				<GoldBar>2</GoldBar>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_ExoticPistol"]</xpath>
+			<value>
+				<costList>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Steel>50</Steel>
+				<Titanium>25</Titanium>
+				<GoldBar>2</GoldBar>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_ExplorerWear: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_ExplorerWear"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_ExplorerWear"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>15</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_ExplorerWear"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>15</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_GambesonB: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_GambesonB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_GambesonB"]/costList</xpath>
+			<value>
+				<costList>
+				<Cloth>60</Cloth>
+				<WootzSteel>25</WootzSteel>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_GambesonB"]</xpath>
+			<value>
+				<costList>
+				<Cloth>60</Cloth>
+				<WootzSteel>25</WootzSteel>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_GaoDing: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_GaoDing"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_GaoDing"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>25</DevilstrandCloth>
+				<WootzSteel>25</WootzSteel>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_GaoDing"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>25</DevilstrandCloth>
+				<WootzSteel>25</WootzSteel>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_GaurdenUniform: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_GaurdenUniform"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_GaurdenUniform"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>35</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_GaurdenUniform"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>35</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_GuardsmanA: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_GuardsmanA"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_GuardsmanA"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Steel>40</Steel>
+				<ComponentIndustrial>2</ComponentIndustrial>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_GuardsmanA"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Steel>40</Steel>
+				<ComponentIndustrial>2</ComponentIndustrial>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_GuardsmanB: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_GuardsmanB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_GuardsmanB"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Steel>60</Steel>
+				<ComponentIndustrial>2</ComponentIndustrial>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_GuardsmanB"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Steel>60</Steel>
+				<ComponentIndustrial>2</ComponentIndustrial>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_HeavyLance: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_HeavyLance"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_HeavyLance"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>35</WootzSteel>
+				<WoodPlank>20</WoodPlank>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_HeavyLance"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>35</WootzSteel>
+				<WoodPlank>20</WoodPlank>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_HeavyShield: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_HeavyShield"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_HeavyShield"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>60</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_HeavyShield"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>60</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Koutetsumaru: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Koutetsumaru"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Koutetsumaru"]/costList</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>85</DepletedUranium>
+				<NitinolAlloy>40</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Koutetsumaru"]</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>85</DepletedUranium>
+				<NitinolAlloy>40</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_LiaoYuan: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_LiaoYuan"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_LiaoYuan"]/costList</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>70</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_LiaoYuan"]</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>70</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_LightLance: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_LightLance"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_LightLance"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_LightLance"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Mask: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Mask"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Mask"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<ReinforcedGlass>10</ReinforcedGlass>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Titanium>20</Titanium>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Mask"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<ReinforcedGlass>10</ReinforcedGlass>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Titanium>20</Titanium>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_MaskB: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_MaskB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_MaskB"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<ReinforcedGlass>10</ReinforcedGlass>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Titanium>20</Titanium>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_MaskB"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<ReinforcedGlass>10</ReinforcedGlass>
+				<ComponentSpacer>2</ComponentSpacer>
+				<Titanium>20</Titanium>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_MingWang: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_MingWang"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_MingWang"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>175</NitinolAlloy>
+				<Cloth>50</Cloth>
+				<DevilstrandCloth>200</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_MingWang"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>175</NitinolAlloy>
+				<Cloth>50</Cloth>
+				<DevilstrandCloth>200</DevilstrandCloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_OrderUniform: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_OrderUniform"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_OrderUniform"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>40</WootzSteel>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_OrderUniform"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>40</WootzSteel>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_OrderUniformB: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_OrderUniformB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_OrderUniformB"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>40</WootzSteel>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_OrderUniformB"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>40</WootzSteel>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_OutdoorBackpack: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_OutdoorBackpack"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_OutdoorBackpack"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_OutdoorBackpack"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_OuterPlate: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_OuterPlate"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_OuterPlate"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_OuterPlate"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Plate: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Plate"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Plate"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>60</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Plate"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>60</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_PlateHelmA: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_PlateHelmA"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmA"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmA"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_PlateHelmB: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_PlateHelmB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmB"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmB"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_PlateHelmC: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_PlateHelmC"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmC"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_PlateHelmC"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_PowerChargedGuanDao: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_PowerChargedGuanDao"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_PowerChargedGuanDao"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>150</DepletedUranium>
+				<ComponentSpacer>8</ComponentSpacer>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_PowerChargedGuanDao"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>75</NitinolAlloy>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>150</DepletedUranium>
+				<ComponentSpacer>8</ComponentSpacer>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_PrototypePulseRifle: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_PrototypePulseRifle"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_PrototypePulseRifle"]/costList</xpath>
+			<value>
+				<costList>
+				<Titanium>80</Titanium>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Weapon_Parts>4</Weapon_Parts>
+				<ComponentSpacer>3</ComponentSpacer>
+				<AdvSniper_Component>1</AdvSniper_Component>
+				<Charged_Component>1</Charged_Component>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_PrototypePulseRifle"]</xpath>
+			<value>
+				<costList>
+				<Titanium>80</Titanium>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Weapon_Parts>4</Weapon_Parts>
+				<ComponentSpacer>3</ComponentSpacer>
+				<AdvSniper_Component>1</AdvSniper_Component>
+				<Charged_Component>1</Charged_Component>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_QingFeng: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_QingFeng"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_QingFeng"]/costList</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>100</DepletedUranium>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_QingFeng"]</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>100</DepletedUranium>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_RoyalCrown: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_RoyalCrown"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_RoyalCrown"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_RoyalCrown"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>25</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_Sack: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Sack"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_Sack"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Sack"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_SafetyTether: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_SafetyTether"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_SafetyTether"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>10</NitinolAlloy>
+				<ComponentIndustrial>1</ComponentIndustrial>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Cloth>60</Cloth>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_SafetyTether"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>10</NitinolAlloy>
+				<ComponentIndustrial>1</ComponentIndustrial>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<Cloth>60</Cloth>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_SantaSack: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_SantaSack"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_SantaSack"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				<DevilstrandCloth>5</DevilstrandCloth>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_SantaSack"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>10</WootzSteel>
+				<DevilstrandCloth>5</DevilstrandCloth>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_ShenJiNu: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_ShenJiNu"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_ShenJiNu"]/costList</xpath>
+			<value>
+				<costList>
+				<Steel>35</Steel>
+				<Titanium>40</Titanium>
+				<Chemfuel>180</Chemfuel>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_ShenJiNu"]</xpath>
+			<value>
+				<costList>
+				<Steel>35</Steel>
+				<Titanium>40</Titanium>
+				<Chemfuel>180</Chemfuel>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_SistersDerss: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_SistersDerss"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_SistersDerss"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_SistersDerss"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>35</DevilstrandCloth>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_SistersVeil: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_SistersVeil"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_SistersVeil"]/costList</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_SistersVeil"]</xpath>
+			<value>
+				<costList>
+				<DevilstrandCloth>20</DevilstrandCloth>
+				<WootzSteel>10</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_TowerShield: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_TowerShield"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_TowerShield"]/costList</xpath>
+			<value>
+				<costList>
+				<Steel>70</Steel>
+				<WootzSteel>30</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_TowerShield"]</xpath>
+			<value>
+				<costList>
+				<Steel>70</Steel>
+				<WootzSteel>30</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_TwoHanded: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_TwoHanded"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_TwoHanded"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				<SilverBar>15</SilverBar>
+				<WoodPlank>35</WoodPlank>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_TwoHanded"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				<SilverBar>15</SilverBar>
+				<WoodPlank>35</WoodPlank>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_WallGun: tech=Industrial -> Titanium/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_WallGun"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_WallGun"]/costList</xpath>
+			<value>
+				<costList>
+				<Steel>100</Steel>
+				<DepletedUranium>30</DepletedUranium>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_WallGun"]</xpath>
+			<value>
+				<costList>
+				<Steel>100</Steel>
+				<DepletedUranium>30</DepletedUranium>
+				<ComponentIndustrial>8</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_WhiteCoat: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_WhiteCoat"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_WhiteCoat"]/costList</xpath>
+			<value>
+				<costList>
+				<Leather_Thrumbo>85</Leather_Thrumbo>
+				<DevilstrandCloth>45</DevilstrandCloth>
+				<Cloth>20</Cloth>
+				<WootzSteel>15</WootzSteel>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_WhiteCoat"]</xpath>
+			<value>
+				<costList>
+				<Leather_Thrumbo>85</Leather_Thrumbo>
+				<DevilstrandCloth>45</DevilstrandCloth>
+				<Cloth>20</Cloth>
+				<WootzSteel>15</WootzSteel>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_WoodenShield: tech=Medieval -> WootzSteel/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_WoodenShield"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_WoodenShield"]/costList</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_WoodenShield"]</xpath>
+			<value>
+				<costList>
+				<WootzSteel>20</WootzSteel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_YanYue: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_YanYue"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_YanYue"]/costList</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>100</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_YanYue"]</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>100</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_ZhuQiang: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_ZhuQiang"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_ZhuQiang"]/costList</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>70</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_ZhuQiang"]</xpath>
+			<value>
+				<costList>
+				<GoldBar>5</GoldBar>
+				<DepletedUranium>70</DepletedUranium>
+				<NitinolAlloy>85</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- RK_ZongShi: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_ZongShi"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RK_ZongShi"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>30</NitinolAlloy>
+				<Cloth>200</Cloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_ZongShi"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>30</NitinolAlloy>
+				<Cloth>200</Cloth>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Compaste>10</Compaste>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- gfzd: tech=Ultra -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="gfzd"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="gfzd"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>100</NitinolAlloy>
+				<ComponentIndustrial>30</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<DepletedUranium>40</DepletedUranium>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>10</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="gfzd"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>100</NitinolAlloy>
+				<ComponentIndustrial>30</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<DepletedUranium>40</DepletedUranium>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>10</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- hjzj: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="hjzj"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="hjzj"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>210</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="hjzj"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>210</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- hjzjmz: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="hjzjmz"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="hjzjmz"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="hjzjmz"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- hjzjmzB: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="hjzjmzB"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="hjzjmzB"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="hjzjmzB"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>50</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>40</ComponentSpacer>
+				<GoldBar>100</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- hjzjwj: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="hjzjwj"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="hjzjwj"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>50</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>20</GoldBar>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="hjzjwj"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>50</Chemfuel>
+				<ComponentSpacer>20</ComponentSpacer>
+				<GoldBar>20</GoldBar>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- kydc: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="kydc"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="kydc"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>100</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Chemfuel>20</Chemfuel>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="kydc"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>100</NitinolAlloy>
+				<ComponentIndustrial>5</ComponentIndustrial>
+				<Chemfuel>20</Chemfuel>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- kydcmz: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="kydcmz"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="kydcmz"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>10</Chemfuel>
+				<ComponentSpacer>5</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="kydcmz"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>50</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>10</Chemfuel>
+				<ComponentSpacer>5</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- xqzmj: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="xqzmj"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="xqzmj"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>10</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="xqzmj"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>10</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- xqzzj: tech=Spacer -> NitinolAlloy/DepletedUranium -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="xqzzj"]/costList</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="xqzzj"]/costList</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>10</ComponentSpacer>
+				</costList>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="xqzzj"]</xpath>
+			<value>
+				<costList>
+				<NitinolAlloy>300</NitinolAlloy>
+				<ComponentIndustrial>15</ComponentIndustrial>
+				<Chemfuel>100</Chemfuel>
+				<ComponentSpacer>10</ComponentSpacer>
+				</costList>
+			</value>
+		</nomatch>
+	</Operation>
+
+</Patch>

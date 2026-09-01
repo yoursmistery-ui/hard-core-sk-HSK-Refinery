@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============ 75_资源管理分类·鼠族弹药 (2026-08-19, 2026-08-22 拆分) ============
+         原 75 号补丁的鼠族弹药部分(通用资源分类 Wastepack/FecalSludge/lifesupport/
+         LivingFrost/LivingFire/ArtificialBone/PsychicAmplifier/ThrumboHorn 已迁往
+         HSK修复整合 66 号)。
+         铳枪飞龙弹(RK_Ammo_WyvernFire): Manufactured → Ammo(弹药,CE 分类,
+         MayRequire=CE 门控;未装 CE 时保持 Manufactured,不报错)。
+         ⚠️ 写法: value 必须带 Inherit="false"。
+         RK_Ammo_WyvernFire 定义于 RatkinRaceHSK(thingCategories Inherit="false"
+         仅 [Manufactured]),其基类 MakeableShellBase 继承原版 Shell 基类,
+         基类自带 thingCategories=[MortarShells](原版 Core 分类,汉化"81mm迫击炮弹",
+         parent=Manufactured)。此前 Replace 未带 Inherit="false",深度合并后
+         thingCategories=[MortarShells, Ammo],飞龙弹同时出现在"制成品>81mm迫击炮弹"
+         与 CE 弹药分类下(Unified.xml 实测)。加回 Inherit="false" 阻断基类合并。
+         最终层补丁,后于 Core_SK / CombatExtended 加载。 -->
+    <Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+        <xpath>Defs/ThingDef[defName="RK_Ammo_WyvernFire"]/thingCategories</xpath>
+        <value>
+            <thingCategories Inherit="false">
+                <li>Ammo</li>
+            </thingCategories>
+        </value>
+    </Operation>
+</Patch>

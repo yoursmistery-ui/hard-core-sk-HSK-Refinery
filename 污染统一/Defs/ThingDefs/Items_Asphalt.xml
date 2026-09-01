@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- 沥青：石化裂化装置的惰性重质副产物。可直接作为沥青材料使用，
+	     投入电焚化炉高温焚烧后，残余矿质可回收为混凝土。 -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>Asphalt</defName>
+		<label>沥青</label>
+		<description>石油裂化后残留的重质沥青。粘稠、难以清理，但可直接作为沥青材料使用；投入电焚化炉焚烧后，残余矿质可压实回收为混凝土。</description>
+		<thingClass>ThingWithComps</thingClass>
+		<category>Item</category>
+		<altitudeLayer>Item</altitudeLayer>
+		<stackLimit>100</stackLimit>
+		<selectable>true</selectable>
+		<alwaysHaulable>true</alwaysHaulable>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<rotatable>false</rotatable>
+		<randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+		<useHitPoints>false</useHitPoints>
+		<graphicData>
+			<texPath>Things/Item/Resource/Asphalt</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>2</MarketValue>
+			<Mass>1</Mass>
+			<Beauty>-20</Beauty>
+			<Cleanliness>-1</Cleanliness>
+			<Flammability>0</Flammability>
+			<SellPriceFactor>0.10</SellPriceFactor>
+		</statBases>
+		<thingCategories>
+			<!-- 归入「污染物」分类(HSK修复整合 RK_Pollutants,Items 根下),与有毒垃圾 Wastepack 同级 -->
+			<li>RK_Pollutants</li>
+		</thingCategories>
+		<tradeability>None</tradeability>
+		<resourceReadoutPriority>Last</resourceReadoutPriority>
+		<tickerType>Rare</tickerType>
+		<techLevel>Industrial</techLevel>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	</ThingDef>
+
+</Defs>

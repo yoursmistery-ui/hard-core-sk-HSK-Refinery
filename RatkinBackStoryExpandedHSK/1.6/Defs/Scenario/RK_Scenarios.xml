@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 鼠族奴隶逃生者开局 -->
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_EscapeFaction</defName>
+		<label>Ratkin Escaper</label>
+		<description>When you were a child, space pirates raided your village and took you captive on their ship. For the past several years, you have been abused as a sex slave without any ratkin rights, but the brutal conditions have not dulled your will to escapre.\n\nAs the ship entered the orbit around a habitable planet, you managed to sabotage the ship's oxygen supply and start a fire. Before the ship exploded, you managed to enter an escape pod and crash-landed into this unknown rimworld.</description>
+		<scenario>
+			<summary>The story of the forced landing of the space pirate's ratkin sex slave.</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_EscapeFaction</factionDef>
+			</playerFaction>
+            <parts>
+			  <li Class="ScenPart_GameStartDialog">
+                  <def>GameStartDialog</def>
+                  <text>The loud bang of the martyred space pirate ship behind you also represents the end of your life of slavery and abuse, and now this rimworld gives you a brand new chance to rewrite your life.</text>
+                  <closeSound>GameStartSting</closeSound>
+              </li>
+              <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+				  <def>ConfigurePawnsKindDefs</def>
+				  <pawnChoiceCount>1</pawnChoiceCount>
+				  <leftBehindPawnKind>RatkinEscaper</leftBehindPawnKind>
+                    <kindCounts>
+                      <li>
+                        <kindDef>RatkinEscaper</kindDef>
+                        <count>1</count>
+                        <requiredAtStart>true</requiredAtStart>
+                      </li>
+                    </kindCounts>
+			  </li>
+			  <li Class="ScenPart_PlayerPawnsArriveMethod">
+				  <def>PlayerPawnsArriveMethod</def>
+				  <method>DropPods</method>
+			  </li>
+			  <li Class="ScenPart_ForcedHediff">
+				  <def>ForcedHediff</def>
+				  <chance>1</chance>
+				  <context>PlayerStarter</context>
+				  <hideOffMap>True</hideOffMap>
+				  <hediff>AlcoholAddiction</hediff>
+				  <severityRange>0.36~0.46</severityRange>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>MealSurvivalPack</thingDef>
+				  <count>3</count>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>MedicineIndustrial</thingDef>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>MeleeWeapon_Knife</thingDef>
+				  <stuff>DepletedUranium</stuff>
+				  <quality>Awful</quality>
+			  </li>
+			  <li Class="ScenPart_ScatterThingsAnywhere">
+				  <def>ScatterThingsAnywhere</def>
+			      <thingDef>ShipChunk</thingDef>
+				  <count>8</count>
+			  </li>
+			  <li Class="ScenPart_ScatterThingsAnywhere">
+				  <def>ScatterThingsAnywhere</def>
+			      <thingDef>ChunkSlagSteel</thingDef>
+				  <count>75</count>
+			  </li>
+			  <li Class="ScenPart_ForcedHediff">
+				  <def>ForcedHediff</def>
+				  <chance>1</chance>
+				  <context>PlayerStarter</context>
+				  <hediff>Malnutrition</hediff>
+				  <severityRange>0.26~0.46</severityRange>
+			  </li>
+			  <li Class="ScenPart_Naked">
+				  <def>Naked</def>
+				  <chance>1</chance>
+				  <context>PlayerStarter</context>
+			  </li>
+			  <li Class="ScenPart_NoPossessions">
+                  <def>NoPossessions</def>
+              </li>
+			  <li Class="ScenPart_PawnFilter_Age">
+				  <def>PawnFilter_Age</def>
+				  <allowedAgeRange>15~19</allowedAgeRange>
+			  </li>
+		    </parts>
+        </scenario>
+	</ScenarioDef>
+
+
+    <!--鼠族敌对流亡者开局-->
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_ExileFaction</defName>
+		<label>No Way but Exile</label>
+		<description>What were you forced to leave your hometown? Taxes? Natural disasters? Slavery? But none of that matters, what matters is that you came together and chose to leave from the kingdom to begin a career in exile. Despite the scarcity of supplies, the hope for a new life never lacks.\n\nHowever, the Kingdom will not take this seemingly insignificant rebellion lightly, and for the foreseeable future, the long swords of the Counterinsurgency Hunters and Guardians will strike unmercifully at this small fledgling community and re-establish the Kingdom's authority in this area. In order to protect this hard-won new life, you must be prepared for it.</description>
+		<scenario>
+			<summary>The story of the ratkins, who were forced to leave their homeland and live in exile for a variety of reasons.</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_ExileFaction</factionDef>
+			</playerFaction>
+            <parts>
+			  <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+				  <def>ConfigurePawnsKindDefs</def>
+				  <pawnChoiceCount>8</pawnChoiceCount>
+				  <leftBehindPawnKind>RatkinExile</leftBehindPawnKind>
+                  <kindCounts>
+                      <li>
+                        <kindDef>RatkinExile</kindDef>
+                        <count>5</count>
+                        <requiredAtStart>true</requiredAtStart>
+                      </li>
+                  </kindCounts>
+			  </li>
+			  <li Class="ScenPart_PlayerPawnsArriveMethod">
+				  <def>PlayerPawnsArriveMethod</def>
+			  </li>
+			  <li Class="ScenPart_ForcedHediff">
+				  <def>ForcedHediff</def>
+				  <chance>1</chance>
+				  <context>PlayerStarter</context>
+				  <hediff>Malnutrition</hediff>
+				  <severityRange>0.36~0.61</severityRange>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>Silver</thingDef>
+				  <count>10</count>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>Pemmican</thingDef>
+				  <count>300</count>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>MedicineHerbal</thingDef>
+				  <count>15</count>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>WoodLog</thingDef>
+				  <count>100</count>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>RK_Crossbow</thingDef>
+				  <quality>Poor</quality>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>RK_Dagger</thingDef>
+				  <stuff>Steel</stuff>
+				  <quality>Poor</quality>
+			  </li>
+			  <li Class="ScenPart_StartingThing_Defined">
+				  <def>StartingThing_Defined</def>
+				  <thingDef>RK_Cleaver</thingDef>
+				  <stuff>Steel</stuff>
+				  <quality>Poor</quality>
+			  </li>
+			  <li Class="ScenPart_StartingAnimal">
+				  <def>StartingAnimal</def>
+				  <animalKind>Ratkin_KingHamster</animalKind>
+			      <count>2</count>
+				  <bondToRandomPlayerPawnChance>1</bondToRandomPlayerPawnChance>
+			  </li>
+			  <li Class="ScenPart_ScatterThingsNearPlayerStart">
+				  <def>ScatterThingsNearPlayerStart</def>
+				  <thingDef>WoodLog</thingDef>
+				  <count>300</count>
+				  <allowRoofed>True</allowRoofed>
+			  </li>
+			  <li Class="ScenPart_GameStartDialog">
+				  <def>GameStartDialog</def>
+				  <text>The pain of the past is behind us, and the new hope rises from the distant horizon, it is possible to build a new community despite the harsh conditions. But we must be ever vigilant, the sword of the kingdom still hangs over us.</text>
+				  <closeSound>GameStartSting</closeSound>
+			  </li>
+			   <li Class="VEF.Factions.ScenPart_ForcedFactionGoodwill" MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">
+				  <factionDef>Rakinia</factionDef>
+				  <alwaysHostile>True</alwaysHostile>
+				  <affectStartingGoodwill>True</affectStartingGoodwill>
+				  <startingGoodwillRange>-45~8</startingGoodwillRange>
+				  <affectNaturalGoodwill>True</affectNaturalGoodwill>
+				  <naturalGoodwillRange>53~54</naturalGoodwillRange>
+				  <def>VFEC_ForcedFactionGoodwill</def>
+		       </li>
+			<li Class="ScenPart_CreateIncident">
+				<def>CreateIncident</def>
+				<incident>RatkinTunnel_Guerrilla</incident>
+				<intervalDays>30</intervalDays>
+				<minDays>10</minDays>
+				<maxDays>30</maxDays>
+				<repeat>True</repeat>
+			</li>
+			<li Class="ScenPart_CreateIncident">
+				<def>CreateIncident</def>
+				<incident>RK_Incident_VagabondJoin</incident>
+				<intervalDays>6</intervalDays>
+				<maxDays>10</maxDays>
+			</li>
+			<!-- Starting research -->
+            <li Class="ScenPart_StartingResearch">
+                <def>StartingResearch</def>
+                <project>Pemmican</project>
+            </li>
+			<li Class="ScenPart_StartingResearch">
+                <def>StartingResearch</def>
+                <project>ComplexFurniture</project>
+            </li>
+			<li Class="ScenPart_StartingResearch">
+                <def>StartingResearch</def>
+                <project>ComplexClothing</project>
+            </li>
+			<li Class="ScenPart_StartingResearch">
+                <def>StartingResearch</def>
+                <project>Stonecutting</project>
+            </li>
+		</parts>
+        </scenario>
+	</ScenarioDef>
+
+</Defs>

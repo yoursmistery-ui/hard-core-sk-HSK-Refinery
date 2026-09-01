@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 04_UF发酵器适配
+        目标: HSK 的 BiofuelRefinery 已被 Universal Fermenter 扩展为 ThingDef_UF,
+              挂其上的 RecipeDef 必须声明 Class="UniversalFermenterSK.RecipeDef_UF",
+              否则报 "should have Class=... because this recipe uses by ThingDef_UF
+              BiofuelRefinery" 错误。
+              金鼠族纤维合成(OA_RK_Make_Hecheng)唯一挂 BiofuelRefinery,补上类声明。
+        ===================================================================== -->
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>Defs/RecipeDef[defName="OA_RK_Make_Hecheng"]</xpath>
+        <attribute>Class</attribute>
+        <value>UniversalFermenterSK.RecipeDef_UF</value>
+    </Operation>
+</Patch>

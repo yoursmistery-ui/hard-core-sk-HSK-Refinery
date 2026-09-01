@@ -1,0 +1,649 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+    <!-- 工具整合·第二段: 配方去木板/无抽奖材质改造+生存工具全面补强(baseWorkStatFactors)+液压钳冶炼+CE/单手武器标签+锻造台工作速度。按原 50→62 顺序拼接。 -->
+    <!-- ───────── 来源: 50_工具去木板.xml ───────── -->
+<!--工具配方去木板(2026-08-26 自 鼠族HSK拓展 50 号拆出): 工具配方移除木板并补钢铁/零部件补偿。-->
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+        <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath></match>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/ingredients/li[filter/thingDefs/li[normalize-space(.)="WoodPlank"]]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/fixedIngredientFilter/thingDefs/li[normalize-space(.)="WoodPlank" or normalize-space(.)="AcaciaPlank" or normalize-space(.)="BambooPlank" or normalize-space(.)="BirchPlank" or normalize-space(.)="CecropiaPlank" or normalize-space(.)="CypressPlank" or normalize-space(.)="DragonwoodPlank" or normalize-space(.)="MangrovePlank" or normalize-space(.)="MaplePlank" or normalize-space(.)="OakPlank" or normalize-space(.)="PinePlank" or normalize-space(.)="PoplarPlank" or normalize-space(.)="RedWoodPlank" or normalize-space(.)="TeakPlank" or normalize-space(.)="WillowPlank"]</xpath>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+                    <li>Steel</li>
+                    <li>ComponentMedieval</li>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 51_工具无抽奖材质改造.xml ───────── -->
+<!--工具配方无抽奖材质改造(2026-08-26 自 鼠族HSK拓展 51 号拆出): 矿镐/匕首材质槽合并(随配方迁入,最终由 94 号删除)。钉头锤 Mace 部分留在原 mod。-->
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>70</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>65</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow></filter><count>35</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow></filter><count>55</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>70</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>5</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HydraulicPliers"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>90</count></li>
+                <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>4</count></li>
+                <li><filter><thingDefs><li>ElectronicComponents</li></thingDefs></filter><count>2</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HydraulicPliers"]</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentIndustrial</li><li>ElectronicComponents</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_ImpactDrill"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>100</count></li>
+                <li><filter><thingDefs><li>Carbon</li></thingDefs></filter><count>3</count></li>
+                <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>4</count></li>
+                <li><filter><thingDefs><li>ElectronicComponents</li></thingDefs></filter><count>2</count></li>
+                <li><filter><thingDefs><li>Electronics</li></thingDefs></filter><count>2</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_ImpactDrill"]</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>Carbon</li><li>ComponentIndustrial</li><li>ElectronicComponents</li><li>Electronics</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>90</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>6</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Scissors"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>20</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>2</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Scissors"]</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow></filter><count>85</count></li>
+                <li><filter><thingDefs><li>ComponentMedieval</li></thingDefs></filter><count>4</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>StrongMetallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentMedieval</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_WeldingTorch"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li><filter><stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow></filter><count>85</count></li>
+                <li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>3</count></li>
+                <li><filter><thingDefs><li>ElectronicComponents</li></thingDefs></filter><count>2</count></li>
+            </ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_WeldingTorch"]</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow><li>Metallic</li></stuffCategoriesToAllow>
+                <thingDefs><li>ComponentIndustrial</li><li>ElectronicComponents</li></thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 56_生存工具全面补强.xml ───────── -->
+<!-- 生存工具全面补强·鼠族部分(2026-08-11 用户要求,2026-08-22 拆分):
+         原 56 号补丁的鼠族中世纪工具部分(通用 TFJ_*/MeleeWeapon_* 部分已迁往
+         HSK修复整合 65 号)。参照多功能工具 TFJ_Tool_Multitool(09+47 号已强化,
+         约 20 项属性)的属性池,给鼠族中世纪工具逐件补强——
+         每件只补/调几条与本职高度相关的属性,数值按科技档分级:
+         中世纪工具(Medieval)主职提到 1.3~1.4;已经够强的工具不动:
+         鼠族锤子 RK_Weapon_Maul(27 号已全 1.15+)、剪刀 RK_Scissors(35 号 9 项)、
+         冲击钻 RK_ImpactDrill(36 号采矿 1.5)、液压钳 RK_HydraulicPliers(37 号 7 项)、
+         电焊枪 RK_WeldingTorch(45 号 7 项)。
+         写法: 已有属性用 PatchOperationReplace 单点替换(避免 Add 产生重复键),
+         新属性用 PatchOperationAdd 追加;全部 MayRequire=skyarkhangel.SurvivalToolsLite 门控
+         (未装 STL 时工具只是普通武器,本补丁整体跳过)。
+         ⚠️ 只使用已挂 StatPart_SurvivalTool 的属性(STL 原生 + 48 号补挂),避免写了不生效。 -->
+
+    <!-- ===================== 中世纪工具(SurvivalToolsMedieval,鼠族) ===================== -->
+
+    <!-- 剁肉刀 RK_Cleaver: 27 号抄的是 STL 剃刀模板(全 ≤1.0 还带医疗惩罚),
+         对齐原版剁肉刀 MeleeWeapon_Cleaver(屠宰 1.3/1.2/烹饪 1.15),医疗惩罚解除 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <baseWorkStatFactors>
+                <CookSpeed>1.15</CookSpeed>
+                <ButcheryFleshSpeed>1.3</ButcheryFleshSpeed>
+                <ButcheryFleshEfficiency>1.2</ButcheryFleshEfficiency>
+                <MedicalOperationSpeed>1.0</MedicalOperationSpeed>
+                <MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>
+                <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+            </baseWorkStatFactors>
+        </value>
+    </Operation>
+
+    <!-- 矿镐 RK_Pickaxe: 中世纪采矿工具,主职提到 1.3,深钻 1.15,补产量/综合劳动 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MiningSpeed</xpath>
+        <value>
+            <MiningSpeed>1.3</MiningSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MiningYieldDigging</xpath>
+        <value>
+            <MiningYieldDigging>1.05</MiningYieldDigging>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/DeepDrillingSpeed</xpath>
+        <value>
+            <DeepDrillingSpeed>1.15</DeepDrillingSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <MiningYield>1.05</MiningYield>
+            <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+        </value>
+    </Operation>
+
+    <!-- 斧头 RK_Axe: 伐木提到 1.4(与 STL 伐木斧持平),砍作物惩罚减半,补修剪 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/TreeFellingSpeed</xpath>
+        <value>
+            <TreeFellingSpeed>1.4</TreeFellingSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/PlantHarvestingSpeed</xpath>
+        <value>
+            <PlantHarvestingSpeed>0.9</PlantHarvestingSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <PruningSpeed MayRequire="ludeon.rimworld.ideology">1.2</PruningSpeed>
+            <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+        </value>
+    </Operation>
+
+    <!-- 锄头 RK_Hockey: 种植略提,补根茎收获 + 简单工作 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/PlantWorkSpeed</xpath>
+        <value>
+            <PlantWorkSpeed>1.35</PlantWorkSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <PlantHarvestingSpeed>1.05</PlantHarvestingSpeed>
+            <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+        </value>
+    </Operation>
+
+    <!-- 草叉 RK_Fork: 收获提到 1.3(与镰刀持平),种植略提,补简单工作 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/PlantHarvestingSpeed</xpath>
+        <value>
+            <PlantHarvestingSpeed>1.3</PlantHarvestingSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/PlantWorkSpeed</xpath>
+        <value>
+            <PlantWorkSpeed>1.15</PlantWorkSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+        </value>
+    </Operation>
+
+    <!-- 匕首 RK_Dagger: 主职提到 1.2/1.15,医疗惩罚解除,补简单工作 -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/CookSpeed</xpath>
+        <value>
+            <CookSpeed>1.2</CookSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/ButcheryFleshSpeed</xpath>
+        <value>
+            <ButcheryFleshSpeed>1.2</ButcheryFleshSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/ButcheryFleshEfficiency</xpath>
+        <value>
+            <ButcheryFleshEfficiency>1.15</ButcheryFleshEfficiency>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MedicalOperationSpeed</xpath>
+        <value>
+            <MedicalOperationSpeed>1.0</MedicalOperationSpeed>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/MedicalSurgerySuccessChance</xpath>
+        <value>
+            <MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+        <value>
+            <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+        </value>
+    </Operation>
+
+    <!-- 2026-08-26 迁移注: 钉头锤 RK_Mace 属武器序列(96_钉头锤恢复武器.xml 撤销其工具化,
+         该补丁留在 鼠族HSK拓展 原 mod),此处不再对其做工具补强。 -->
+    <!-- ───────── 来源: 58_液压钳冶炼适配.xml ───────── -->
+<!-- 58_液压钳冶炼适配(2026-08-13 用户反馈「Simple Sidearms + STL 下做电解精炼不自动换液压钳」):
+         原因排查(反编译 STL 核实): STL 的自动换工具(RightToolForJob.EquipTool,
+         CE 环境走 recipe.workSpeedStat 路径)只从殖民者携带的工具里挑
+         SurvivalToolProperties.baseWorkStatFactors 包含「当前工作对应属性」的工具,
+         取该属性值最高者换上。电解精炼/熔炼配方 workSpeedStat=SmeltingSpeed(冶炼速度),
+         而 37 号给液压钳的 7 项加成是 锻造/建造/零部件制作/电子制造/武器制作/
+         综合劳动/制作品质,没有 SmeltingSpeed → 液压钳永远不会被 STL 选中,
+         这不是 Simple Sidearms 拦截(SS 只管战斗副武器;其自动工具机制只覆盖
+         Fieldwork/MiscWork 工作,不覆盖熔炼)。会正常换上的是带冶炼速度的工具:
+         鼠族锤子 1.3 / 大锤 1.3 / 电焊枪 1.2 / 钉头锤 1.2 / 手锤 1.2 / 扳手 1.2 /
+         多功能工具 1.2。
+         本补丁给液压钳补 SmeltingSpeed 1.2(与其他熔炼工具同档;若殖民者同时携带
+         锤子 1.3 与液压钳 1.2,STL 仍选更高的锤子),做电解精炼/熔炼时自动换上液压钳,
+         与其他设施(采矿→矿镐、建造→锤子)行为一致。
+         写法: PatchOperationConditional + nomatch Add(已存在则不重复添加),
+         MayRequire=skyarkhangel.SurvivalToolsLite 门控(未装 STL 时跳过,零风险)。
+         SmeltingSpeed 的 StatPart_SurvivalTool 由 48 号挂载(noToolStatFactor=1),
+         装备即生效。最终层补丁(58),后于 37/48/56 号加载。 -->
+    <Operation Class="PatchOperationConditional" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors/SmeltingSpeed</xpath>
+        <nomatch Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+            <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]/baseWorkStatFactors</xpath>
+            <value>
+                <SmeltingSpeed>1.2</SmeltingSpeed>
+            </value>
+        </nomatch>
+    </Operation>
+    <!-- ───────── 来源: 59_工具CE单手武器.xml ───────── -->
+<!-- 59_工具CE单手武器(2026-08-13 用户要求):
+         让所有 SurvivalToolsLite 工具在 Combat Extended 中都能与盾牌共存,
+         同时保持工具本质不变(不改成普通武器)。
+
+         CE 的 StatWorker_OneHandedness / CE_Utility.IsTwoHandedWeapon
+         只检查 ThingDef.weaponTags 是否包含 CE_OneHandedWeapon;
+         加这个 tag 后,这些工具会被 CE 判定为单手武器,可和盾牌同时装备。
+
+         依据游戏最终导出 Unified.xml 扫描:
+         全部 28 件 thingClass=SurvivalToolsLite.SurvivalTool 中,
+         已有 18 件自带 CE_OneHandedWeapon(鼠族匕首/钉头锤/锤子、
+         Core_SK 基本工具、生存小刀/骨锯/扳手/剁肉刀等)。
+         下面 10 件仍缺该 tag,统一补上;其余不重复添加,避免重复 li。
+         仅当 CE 与 SurvivalToolsLite 同时加载时应用(保持“工具本质”的前提)。
+    -->
+
+    <Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended,skyarkhangel.SurvivalToolsLite">
+        <xpath>
+            Defs/ThingDef[
+                defName="RK_Axe"
+                or defName="RK_Cleaver"
+                or defName="RK_Hockey"
+                or defName="RK_Fork"
+                or defName="RK_Pickaxe"
+                or defName="RK_Scissors"
+                or defName="RK_ImpactDrill"
+                or defName="RK_HydraulicPliers"
+                or defName="RK_WeldingTorch"
+                or defName="MeleeWeapon_Sledgehammer"
+            ]/weaponTags
+        </xpath>
+        <value>
+            <li>CE_OneHandedWeapon</li>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 61_工具单手武器.xml ───────── -->
+<!-- 61_工具单手武器(2026-08-13 用户要求「把所有的工具改为单手武器,全部」):
+	     59 号只补了 CE 的 CE_OneHandedWeapon 标签(CE 与盾牌共存),但鼠族本体的握持系统
+	     NewRatkin.CompProperties_WeaponGripType 仍把斧头 RK_Axe / 锄头 RK_Hockey / 矿镐 RK_Pickaxe
+	     标为 TwoHand(双手),导致它们不能与鼠族盾牌(重盾/木盾/能量力盾等,allowedGripTypes=OneHand/Special)共存。
+	     本补丁:
+	     1) 把这三件的握持类型 TwoHand → OneHand;
+	     2) 把它们的 weaponTags 由 RK_WeaponTag_TwoHand* → RK_WeaponTag_OneHand*;
+	     3) 给原本无握持 comp 的匕首 RK_Dagger / 草叉 RK_Fork 补上 OneHand 握持(其余工具
+	        RK_Cleaver/RK_Mace/RK_Weapon_Maul 已是 OneHand,4 件新工具由 Defs 直接补齐)。
+	     本补丁不依赖 CE/STL(握持系统来自 NewRatkin.dll,始终存在),故不加 MayRequire。-->
+
+	<!-- ===================== 斧头 / 锄头 / 矿镐: TwoHand → OneHand ===================== -->
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RK_Axe" or defName="RK_Hockey" or defName="RK_Pickaxe"]/comps/li[@Class="NewRatkin.CompProperties_WeaponGripType"]/gripTypes/li[normalize-space(.)="TwoHand"]</xpath>
+		<value>
+			<li>OneHand</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RK_Axe" or defName="RK_Hockey" or defName="RK_Pickaxe"]/weaponTags/li[normalize-space(.)="RK_WeaponTag_TwoHand"]</xpath>
+		<value>
+			<li>RK_WeaponTag_OneHand</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RK_Axe" or defName="RK_Hockey" or defName="RK_Pickaxe"]/weaponTags/li[normalize-space(.)="RK_WeaponTag_TwoHandMelee"]</xpath>
+		<value>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</value>
+	</Operation>
+
+	<!-- ===================== 匕首: 补 OneHand 握持(HSK_Generated 已显式设置 comps) ===================== -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_Dagger"]/comps</xpath>
+		<value>
+			<li Class="NewRatkin.CompProperties_WeaponGripType">
+				<gripTypes>
+					<li>OneHand</li>
+				</gripTypes>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ===================== 草叉: 补 OneHand 握持(HSK_Generated 已删除其 comps,需条件补) ===================== -->
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Fork"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Fork"]/comps</xpath>
+			<value>
+				<li Class="NewRatkin.CompProperties_WeaponGripType">
+					<gripTypes>
+						<li>OneHand</li>
+					</gripTypes>
+				</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Fork"]</xpath>
+			<value>
+				<comps>
+					<li Class="NewRatkin.CompProperties_WeaponGripType">
+						<gripTypes>
+							<li>OneHand</li>
+						</gripTypes>
+					</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+    <!-- ───────── 来源: 62_工具锻造台工作速度.xml ───────── -->
+<!--工具配方工作速度统一 SmithingSpeed(2026-08-26 自 鼠族HSK拓展 62 号拆出);武器/装甲配方部分留在原 mod。-->
+<Operation Class="PatchOperationReplace"><xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe" or defName="RKHSKFix_Make_RK_Cleaver" or defName="RKHSKFix_Make_RK_Dagger" or defName="RKHSKFix_Make_RK_Fork" or defName="RKHSKFix_Make_RK_Hockey" or defName="RKHSKFix_Make_RK_HydraulicPliers" or defName="RKHSKFix_Make_RK_ImpactDrill" or defName="RKHSKFix_Make_RK_Pickaxe" or defName="RKHSKFix_Make_RK_Weapon_Maul" or defName="RKHSKFix_Make_RK_WeldingTorch"]/workSpeedStat</xpath><value><workSpeedStat>SmithingSpeed</workSpeedStat></value></Operation>
+</Patch>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <SitePartDef ParentName="Outpost">
+        <defName>OAGene_SnowstormCamp</defName>
+        <label>风雪据点</label>
+        <description>一个由一群旅行者们建立的临时避难据点。</description>
+        <siteTexture>World/OAGene_SnowstormCamp</siteTexture>
+        <expandingIconTexture>World/OAGene_SnowstormCamp</expandingIconTexture>
+        <workerClass>OberoniaAureaGene.Snowstorm.SitePartWorker_SnowstormCamp</workerClass>
+        <selectionWeight>0</selectionWeight>
+        <requiresFaction>true</requiresFaction>
+        <approachOrderString>袭击 {0}</approachOrderString>
+        <approachingReportString>袭击 {0}</approachingReportString>
+        <arrivedLetter>你们得到了消息，一批旅行者们在你们附近建立了一个临时的御寒庇护所，也许你们可以去拜访他们。</arrivedLetter>
+        <tags Inherit="False">
+            <li>OAGene_SnowstormCamp</li>
+        </tags>
+        <excludesTags>
+            <li>ItemStash</li>
+            <li>ItemStashQuestThreat</li>
+            <li>DownedRefugeeQuestThreat</li>
+            <li>PrisonerRescueQuestThreat</li>
+            <li>QuestActiveThreatDefense</li>
+            <li>QuestActiveThreatDefenseNoHidden</li>
+            <li>MineralScannerPreciousLumpThreat</li>
+            <li>QuestConditionCauser</li>
+            <li>MechClusterForceNoConditionCauser</li>
+        </excludesTags>
+    </SitePartDef>
+
+    <GenStepDef>
+        <defName>OAGene_SnowstormCampOutpost</defName>
+        <linkWithSite>OAGene_SnowstormCamp</linkWithSite>
+        <order>450</order>
+        <genStep Class="GenStep_Outpost">
+            <settlementDontGeneratePawns>true</settlementDontGeneratePawns>
+            <allowGeneratingFarms>false</allowGeneratingFarms>
+        </genStep>
+    </GenStepDef>
+
+    <GenStepDef>
+        <defName>OAGene_SnowstormCampPower</defName>
+        <linkWithSite>OAGene_SnowstormCamp</linkWithSite>
+        <order>451</order>
+        <genStep Class="GenStep_Power" />
+    </GenStepDef>
+
+    <GenStepDef>
+        <defName>OAGene_Site_SnowstormCamp</defName>
+        <linkWithSite>OAGene_SnowstormCamp</linkWithSite>
+        <order>455</order>
+        <genStep Class="GenStep_WorkSiteStash">
+            <count>1</count>
+            <nearMapCenter>true</nearMapCenter>
+            <symbolName>oagene_Site_SnowstormCamp</symbolName>
+        </genStep>
+    </GenStepDef>
+
+    <GenStepDef>
+        <defName>OAGene_Site_SnowstormCampPawns</defName>
+        <linkWithSite>OAGene_SnowstormCamp</linkWithSite>
+        <order>456</order>
+        <genStep Class="OberoniaAureaGene.Snowstorm.GenStep_SnowstormCampPawns" />
+    </GenStepDef>
+
+    <RuleDef>
+        <defName>OAGene_Site_SnowstormCamp</defName>
+        <symbol>oagene_Site_SnowstormCamp</symbol>
+        <resolvers>
+            <li Class="OberoniaAureaGene.Snowstorm.SymbolResolver_Site_SnowstormCamp">
+                <minRectSize>(9, 9)</minRectSize>
+            </li>
+        </resolvers>
+    </RuleDef>
+
+</Defs>

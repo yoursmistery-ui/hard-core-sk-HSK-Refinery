@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang=zh><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>{title}</title><style>
+:root{--bg:#1a1c20;--fg:#e6e6e6;--mut:#9aa0a6;--card:#23262b;--line:#33373d;--green:#3fb950;--amber:#d29922;--blue:#58a6ff;--purple:#bc8cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{display:flex;max-width:1180px;margin:0 auto}nav{position:sticky;top:0;align-self:flex-start;width:230px;height:100vh;overflow:auto;padding:20px 12px;border-right:1px solid var(--line)}
+nav h3{font-size:12px;color:var(--mut);letter-spacing:.1em;margin:0 0 8px}nav a{display:block;color:var(--mut);text-decoration:none;padding:5px 9px;border-radius:6px;font-size:13px}nav a:hover{background:var(--card);color:var(--fg)}
+main{flex:1;padding:24px 36px;min-width:0}h2{color:var(--blue);border-bottom:2px solid var(--line);padding-bottom:5px;margin-top:30px;font-size:20px}h3{color:var(--purple);margin-top:20px;font-size:16px}
+code{background:#0d1117;color:#79c0ff;padding:1px 5px;border-radius:4px;font-family:Consolas,monospace;font-size:13px}
+pre.chain{background:#0d1117;border:1px solid var(--line);border-radius:8px;padding:14px;overflow:auto;color:#a5d6ff;font-family:Consolas,monospace;font-size:12.5px;line-height:1.5}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--card)}tr:nth-child(even) td{background:#1e2126}
+ul,ol{padding-left:22px}li{margin:4px 0}hr{border:0;border-top:1px solid var(--line);margin:22px 0}b{color:#fff}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 8px;border-radius:10px;margin-left:6px}.b-wait{background:rgba(210,153,34,.18);color:var(--amber);border:1px solid var(--amber)}.b-rec{background:rgba(63,185,80,.18);color:var(--green);border:1px solid var(--green)}
+</style></head><body><div class=wrap><nav><h3>目录导航</h3><a href="#sec1">石化工业线一体化方案 · 常减压蒸馏 × 天然气体系 × 边缘石化裂解</a></nav><main><span class='badge b-wait'>方案</span> <h2 id="sec1">石化工业线一体化方案 · 常减压蒸馏 × 天然气体系 × 边缘石化裂解</h2>
+<p>&gt; 状态：<b>待拍板</b>。按你新流程重构，<b>后置碳化体系暂缓</b>（你没概念、先不做），重心放<b>前段＋天然气体系</b>。 &gt; 子文档：天然气体系详案 → <code>石化工业线一体化方案_天然气体系.md</code>；产物/配方/贴图明细 → <code>石化工业线一体化方案_产物贴图明细.md</code>。 &gt; 生成：2026-08-28</p>
+<hr>
+<h3 id="sec2">0. 一条线总览（后置已摘除）</h3>
+<pre class="chain">油井(Rimefeller) → 石油 CrudeOil
+   ▼  ①【常减压蒸馏塔】= 美狐高炉改(走 Rimefeller 精炼台机制,5 档 +/-),旁挂【沥青出口】卸沥青
+   ├── 直馏馏分 ─► ②边缘石化裂解器 CrudeCracker(Rimefeller 原样) → 化合燃料 + 轻烯烃
+   ├── 副产 天然气 ─► 【天然气体系】发电/发热/烧水/存储/管道/燃气台 + 会炸的天然气罐子
+   ├── 副产 润滑油 Lubricant(Vile 现成) ─► 机械减磨/HSK 配方
+   └── 副产 沥青 Asphalt(污染统一·换皮) ─► 经沥青出口卸货/焚烧制混凝土(兜底)
+   （③后置=【芳烃重整台】天界熔炉改：燃油/沥青→丁二烯/二甲苯/苯系 → Vile 尼龙/橡胶/塑料，见 §6）</pre>
+<ul><li><b>沥青</b>：不新增、不改属性，只借工坊 <code>3734307960</code>〔More Useful Materials〕碳纤维卷轴图换皮；由<b>蒸馏塔</b>产、<b>沥青出口</b>卸。</li><li><b>转化比例＝沥青阀门</b>（§2）：裂解越深沥青越少、气/焦越多，符合真实炼油。</li></ul>
+<hr>
+<h3 id="sec2">1. 现状（实测）</h3>
+<table><thead><tr><th>层</th><th>素材</th><th>出处</th></tr></thead><tbody><tr><td>采掘/裂解</td><td><code>OilWell</code>/<code>CrudeCracker</code>/<code>ResourceConsole</code>/各 <code>*Refiner</code>、<code>OilBarrel</code>(原油桶)</td><td>Rimefeller_SK</td></tr><tr><td>蒸馏塔壳</td><td><b><code>Miho_ShaftFurnace</code>(美狐高炉)</b> 只在 <code>Experimental/</code>，<b>1.6 未加载</b>，5×5 炉体四向贴图</td><td>美狐 mod</td></tr><tr><td>副产-润滑油</td><td><code>Lubricant</code> <b>Vile 现成</b></td><td>Vile&#x27;s MS</td></tr><tr><td>副产-烯烃</td><td><code>Propylene</code>/<code>Butadiene</code>/<code>Xylene</code> Vile 现成</td><td>Vile&#x27;s MS</td></tr><tr><td>后置芳烃</td><td><code>Butadiene</code>(丁二烯)/<code>Xylene</code>(二甲苯) Vile 现成且被 <code>MakeNylon</code>/<code>MakeZylon</code> 消费；<b>无 苯/甲苯</b></td><td>Vile&#x27;s MS</td></tr><tr><td>天然气体系</td><td>VHGE 全套燃气设备(见子文档)，<code>VHGE_GasExtraction</code>，仅英文</td><td><code>2877699803</code></td></tr><tr><td>爆炸/卸货模板</td><td>Rimefeller <code>CompExplosiveTank</code>、<code>RefineryLoadingBay</code>(<code>AdaptiveStorage</code>)</td><td>Rimefeller_SK</td></tr><tr><td>沥青</td><td><code>Asphalt</code> 体系完整</td><td>污染统一</td></tr></tbody></table>
+<p><b>坑</b>：① 高炉不加载→先迁 1.6；② VHGE 螺旋气是<b>管网燃料不可堆叠</b>→罐子要新建；③ Rimefeller 进料/裂解是代码驱动→保守版不碰。</p>
+<hr>
+<h3 id="sec2">2. 常减压蒸馏塔（美狐高炉改）+ 裂解/转化比例</h3>
+<ol><li><b>迁+改身份</b>：<code>Experimental/…/MihoShaftFurnace.xml</code> 建筑 def 迁进 <code>美狐HSK拓展/1.6/Defs/</code>（贴图 <code>Cont/</code> 引用，保留炉体）；<code>label</code>→常减压蒸馏塔；摘旧陶瓷配方（产品 defName 不动，确认挂玻璃台）；研究改挂石化蒸馏节点（六档铁律）。</li><li><b>裂解/转化比例＝5 档（+/- 按钮，仿 Rimefeller 裂解厂；不要滑块）</b>：真实常减压+裂解里，<b>加工深度</b>决定轻/重分配——越深→轻馏分+气越多、沥青/润滑油越少。定 5 档等差表（<b>输入固定 40 原油，每档总料守恒 40，全整数好算</b>；轻馏分再喂 ②裂解器→燃油，故&quot;多馏分=多燃油&quot;）：</li></ol>
+<table><thead><tr><th>档</th><th>深度</th><th>轻馏分(→燃油)</th><th>天然气</th><th>润滑油</th><th>沥青</th><th>合计</th></tr></thead><tbody><tr><td>1</td><td>常压留底</td><td>10</td><td>2</td><td>8</td><td><b>20</b></td><td>40</td></tr><tr><td>2</td><td>偏轻</td><td>14</td><td>4</td><td>6</td><td>16</td><td>40</td></tr><tr><td>3</td><td>平衡</td><td>18</td><td>6</td><td>4</td><td>12</td><td>40</td></tr><tr><td>4</td><td>偏重裂解</td><td>22</td><td>8</td><td>2</td><td>8</td><td>40</td></tr><tr><td>5</td><td>深裂解</td><td><b>26</b></td><td><b>10</b></td><td>0</td><td><b>4</b></td><td>40</td></tr></tbody></table>
+<p>规律：<b>每升一档 → 馏分+4、气+2、润滑油−2、沥青−4</b>，总料守恒。越高档越吃干榨净（燃油/气多、沥青几乎不剩）。</p>
+<ol><li><b>选择器实现（同一张表，两选一）</b>：</li></ol>
+<ul><li><b>真·+/- 跳档（推荐，和 Rimefeller 裂解厂一样手感）</b>：小 DLL 组件——一个 1~5 档位整数 + 两个 Gizmo 按钮（＋/−），当前档决定这炉套表里哪一行配方。纯 XML 造不出计数器 UI，要按钮就得走这条。</li><li><b>零代码近似</b>：5 行做成 5 个配方挂塔上，玩家启用哪个 bill＝跑哪档（是&quot;选档&quot;不是&quot;+/- 计数&quot;）。</li></ul>
+<ol><li>副产统一在此台出：馏分、天然气、润滑油、沥青。</li></ol>
+<hr>
+<h3 id="sec2">3. 沥青出口（卸货湾）+ 塔架构定稿</h3>
+<p>你三条要求（+/- 按钮、整套代码和石化一致、必须挨着前置厂沥青从此出口）同指一实现——<b>蒸馏塔复用 Rimefeller <code>RefineryBase</code>+<code>CompRefinery</code>（自定义 <code>CompRefineryAsphalt</code>）</b>：挨着卸货湾＝<code>CompRefinery</code> 原生强制、+/- 分配＝精炼台自带 UI（5 档映射其档）、产气入网＝同 comp 顺带注 Helixien 网。<b>沥青出口 = 复刻 <code>RefineryLoadingBay</code></b>（<code>AdaptiveStorage.ThingClass</code>）→ <code>Petro_AsphaltExportBay</code>，改名&quot;沥青出口&quot;、过滤只 <code>Asphalt</code>、紧贴塔；改色须放<b>重着色 png 副本</b>（<code>loadbay.png</code> 无遮罩，<code>&lt;color&gt;</code> 无效）。降级：不上 DLL 时塔做普通工作台+沥青出口纯存储+PlaceWorker 强制挨着。细节见 <code>…_产物贴图明细.md</code>。</p>
+<hr>
+<h3 id="sec2">4. 天然气体系（详案见 <code>…_天然气体系.md</code> · 已定稿）</h3>
+<ul><li><b>气源</b>：蒸馏塔产气入 Helixien 网（小 DLL comp，见 §3），<b>必须接管道+储气罐 <code>VHGE_GasTank</code>，不接/无消纳→放空扔掉</b>。</li><li><b>储运/用</b>：全套复用 VHGE 现成（储气罐/管道/泵/阀/发电机/加热器/冷却器/燃气灶/燃气台），DefInjected 改名&quot;天然气&quot;+补译中文。</li><li><b>罐子/危险</b>：新建可搬运 <code>Petro_GasCanister</code>（仿 <code>OilBarrel</code>）；不做泄露事件，罐子/储罐挂 <code>CompProperties_Explosive</code> <b>固定大威力+堆叠连锁（纯 XML）</b>，被击毁即大火球爆。</li></ul>
+<hr>
+<h3 id="sec2">5. 沥青换皮（污染统一·体系不动）</h3>
+<p>复制 MUM <code>CarbonFiber_a/b/c.png</code> → <code>污染统一/Textures/Things/Item/Resource/Asphalt/Asphalt_a/b/c.png</code>；<code>Asphalt</code> def <code>graphicClass</code>→<code>Graphic_StackCount</code>、<code>texPath</code>→目录；其余全保留。<b>沥青只从蒸馏塔出（定稿）</b>：退休 <code>污染统一/Patches/Patch_AsphaltProducer.xml</code>（撤掉 CrudeCracker 的沥青自动副产），焚烧制混凝土兜底配方保留。</p>
+<hr>
+<h3 id="sec2">6. 后置 · 芳烃重整台（用户新提，采纳）</h3>
+<p><b>天界熔炉改造为&quot;催化重整/芳烃抽提台&quot;</b>（极致档，压链尾），跑用户给的两条配方：</p>
+<ul><li><b>配方3（推荐·零新建）</b>：<code>化合燃料 → 丁二烯 + 二甲苯</code>。两产物皆 Vile 现成，且 Vile <code>MakeNylon</code> 吃丁二烯、<code>MakeZylon</code>/芳纶/橡胶吃二甲苯 → 直接接进 Vile 高端合成链。</li><li><b>配方2（二选一）</b>：<code>沥青 → 芳烃</code>。全 modset <b>无 苯/甲苯 def、无人消费</b> → 省事版产物改用现成 <code>Xylene</code>(+<code>Propylene</code>/<code>Butadiene</code>) 与配方3 共用下游；还原版才新建 <code>Benzene</code>+<code>Toluene</code> 并补消耗端（苯→苯乙烯→聚苯乙烯、甲苯→溶剂/炸药）。</li></ul>
+<p>&gt; 闭环：油井→蒸馏塔(沥青/气/润滑油/馏分)→裂解器(燃油)→<b>芳烃台(丁二烯/二甲苯/苯系)→Vile 尼龙/扎纶/橡胶/塑料</b>。后置落地，不再暂缓。数值/新建清单见 <code>…_产物贴图明细.md</code>。</p>
+<hr>
+<h3 id="sec2">7. 落地顺序 · 验证 · 风险</h3>
+<p><b>顺序（定稿）</b>：① 读 <code>docs/00/03/04</code> 核 defName → ② 沥青换皮+退休 CrudeCracker 副产(零风险) → ③ VHGE 改名&quot;天然气&quot;+补译 → ④ 天然气罐子+固定爆炸(纯XML) → ⑤ 高炉迁 1.6+蒸馏塔(走 <code>CompRefinery</code>)+沥青出口 → ⑥ 芳烃重整台(天界熔炉改·配方3先落) → ⑦ 小 DLL <code>CompRefineryAsphalt</code>(产沥青+5档+注气一体)。 <b>验证</b>：补丁 xpath 存在性门控（1.6 Operation 级 MayRequire 失效），不拿 1xx 当最终层；跑 <code>_tmp/patch_simulator.py</code>；冷启动读 <code>Unified.xml</code>(UTF-8+BOM) 核对高炉已加载/罐子可堆叠可炸/燃气台改名生效/无 duplicate·越级；相关 mod 双目录逐文件 hash 同步。 <b>风险</b>：① 罐子爆炸参数过大会拆家/崩档，<code>explosiveRadius</code>/<code>wickTicks</code> 实测调；② 螺旋气别当堆叠副产；③ 自定义 <code>CompRefineryAsphalt</code> 改 Rimefeller 进料/产物涉其代码，先保守版（塔自产、裂解器仍吃原油）；④ 陶瓷产品 defName 牵连 faction/CE/建筑，只改挂载不改 def。</p>
+<hr>
+<h3 id="sec2">8. 决策定稿（本轮已拍）</h3>
+<ol><li><b>转化比例＝5 档 +/-</b>：复用 Rimefeller <code>CompRefinery</code> 原生分配 UI（§3），5 档映射其档位，不自造 Gizmo/滑块。</li><li><b>气源＝蒸馏塔产气入网</b>：必须接 管道+储气罐(<code>VHGE_GasTank</code>)，不接/无消纳→放空扔掉；小 DLL comp（并入 <code>CompRefineryAsphalt</code>）注 Helixien 网。</li><li><b>罐子爆炸＝怎么简单怎么来</b>：<code>CompProperties_Explosive</code> 固定大威力+堆叠连锁，纯 XML 0 DLL；不做泄露事件。</li><li><b>沥青只从蒸馏塔出</b>：退休 <code>Patch_AsphaltProducer.xml</code>（撤 CrudeCracker 副产），单源好控。</li><li><b>VHGE 全套改名&quot;天然气&quot;+补译中文</b>：确认（DefInjected，根 <code>&lt;LanguageData&gt;</code>）。</li><li><b>沥青出口</b>：复刻 <code>RefineryLoadingBay</code>→<code>Petro_AsphaltExportBay</code>，改名+重着色 png（<code>&lt;color&gt;</code> 对无遮罩 Graphic_Single 无效）+过滤只 <code>Asphalt</code>+紧贴塔；塔走 <code>RefineryBase</code>/<code>CompRefinery</code> 使&quot;必须挨着&quot;原生成立。</li><li><b>后置芳烃台（§6）</b>：配方3 采纳（燃油→丁二烯+二甲苯，零新建）；<b>配方2 待你选</b>：省事版(沥青→现成二甲苯) 还是 还原版(新建苯+甲苯+消耗端)？</li></ol>
+<p><b>下一步（先做零风险项）</b>：② 沥青换皮+退休 CrudeCracker 副产 → ③ VHGE 改名补译 → ④ 罐子+固定爆炸。小 DLL（产气入网+5档）与高炉迁移放后面。要我现在开工第②步（纯 XML、可回滚）吗？</p></main></div></body></html>

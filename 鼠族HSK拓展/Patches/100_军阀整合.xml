@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 合并原 100-103 相邻补丁(军阀种族/CE适配/二战武器/载具入侵兼容)。100→103 严格相邻, 保持原操作相对顺序。 -->
+    <!-- ───────── 来源: 100_军阀种族补丁.xml ───────── -->
+<!-- 100_军阀种族补丁(Ratkin Faction+ 整合,HSK 适配版 2026-08-22) -->
+	<!-- 原版 basicMemberKind Add 已因 RatkinRaceHSK 自带而移除;Anty 段用 xpath 存在性门控
+	     (1.6 起 Operation 级 MayRequire 已失效,见 ⑤ 注释)。 -->
+
+	<!-- ① 流浪者/求援者生成派系加入军阀 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/AlienRace.RaceSettings[defName = "RK_Race_Setting"]/pawnKindSettings/alienwandererkinds/li[1]/factionDefs</xpath>
+		<value>
+			<li>Rakinia_Warlord</li>
+		</value>
+	</Operation>
+
+	<!-- ② 鼠族关系生成概率清零(军阀走敌对路线的基准) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/relationSettings</xpath>
+		<value>
+			<relationSettings>
+				<relationChanceModifierChild>0</relationChanceModifierChild>
+				<relationChanceModifierExLover>0</relationChanceModifierExLover>
+				<relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+				<relationChanceModifierFiance>0</relationChanceModifierFiance>
+				<relationChanceModifierLover>0</relationChanceModifierLover>
+				<relationChanceModifierParent>0</relationChanceModifierParent>
+				<relationChanceModifierSibling>0</relationChanceModifierSibling>
+				<relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+			</relationSettings>
+		</value>
+	</Operation>
+
+	<!-- ③ thoughtSettings 兜底创建(缺失才 Add;2026-08-22 改 Conditional,避免 Sequence Always 在节点已存在时重复添加) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/thoughtSettings</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace</xpath>
+			<value>
+				<thoughtSettings />
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- ④ 鼠族吃鼠鼠蛋糕思想替换为 C 版(本族吃同族) -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/thoughtSettings</xpath>
+		<value>
+			<replacerList>
+				<li>
+					<original>AC_AteRatkinCake</original>
+					<replacer>AC_AteRatkinCake_C</replacer>
+				</li>
+			</replacerList>
+		</value>
+	</Operation>
+
+	<!-- ⑤ 蚂蚁族(若安装)同样替换为 B 版。
+	     2026-08-22 修复: 1.6 起 Operation 级 MayRequire 属性已失效(PatchOperation 无该字段,ApplyPatches 直调 ApplyWorker,
+	     日志实测 Conditional 的 MayRequire 不拦截,Anty 未装时仍执行 nomatch → "Failed to find a node" 报错)。
+	     改 xpath 存在性门控: 外层先确认 Anty ThingDef 存在,不存在则整段跳过(无 nomatch,零副作用)。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Anty"]</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Anty"]/alienRace/thoughtSettings</xpath>
+			<match Class="PatchOperationAdd">
+				<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Anty"]/alienRace/thoughtSettings</xpath>
+				<value>
+					<replacerList>
+						<li>
+							<original>AC_AteRatkinCake</original>
+							<replacer>AC_AteRatkinCake_B</replacer>
+						</li>
+					</replacerList>
+				</value>
+			</match>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName = "Anty"]/alienRace</xpath>
+				<value>
+					<thoughtSettings>
+						<replacerList>
+							<li>
+								<original>AC_AteRatkinCake</original>
+								<replacer>AC_AteRatkinCake_B</replacer>
+							</li>
+						</replacerList>
+					</thoughtSettings>
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+    <!-- ───────── 来源: 101_军阀CE适配.xml ───────── -->
+<!-- 101_军阀CE适配(Ratkin Faction+ 整合,CE 加载时生效)
+	     2026-08-22 策略: 默认开启,不加任何门控(用户环境必有 CE=HSK 适配版)。
+	     教训: 曾用 xpath 门控检查 CE 标志 def,选到被 HSK-CE 禁用(.bak)的 Ammo_10x18mmCharged,
+	     导致本补丁静默失效且无任何报错 → 不可取。错误应当爆出来才能定位修复,而非静默跳过。
+	     若未来 CE 环境异常,报错会直接暴露在 Player.log。 -->
+
+	<!-- ① 为军阀 PawnKind 追加负重装备标签 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[
+		defName="RatkinWarlord" or
+		defName="RatkinBattlefieldPriest" or
+		defName="RatkinCombatantWarlord" or
+		defName="RatkinDefenderWarlord"
+		]/apparelTags</xpath>
+		<value>
+			<li>RK_Loadbearing</li>
+		</value>
+	</Operation>
+
+	<!-- ② 鼠族军阀(贵族): 弹匣 2-6 -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="RatkinWarlord"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+				  <min>2</min>
+				  <max>6</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ③ 战地牧师: 弹匣 2-5 -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="RatkinBattlefieldPriest"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+				  <min>2</min>
+				  <max>5</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ④ 鼠族士兵: 弹匣 6-10 -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="RatkinCombatantWarlord"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+				  <min>6</min>
+				  <max>10</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ⑤ 卫花使: 弹匣 8-12 -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="RatkinDefenderWarlord"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+				  <min>8</min>
+				  <max>12</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+    <!-- ───────── 来源: 102_军阀二战武器.xml ───────── -->
+<!-- 102_军阀二战武器(Ratkin Faction+ 整合: 军阀装备接入 鼠族HSK拓展 的二战武器池) -->
+	<!-- 把 81/82 号整合的二战枪械(白玫瑰/矢车菊/雪绒花/山梅花等,均已 CE 适配)
+	     加入军阀 PawnKind 的 weaponTags,使军阀部队使用二战装备。
+	     仅追加 CE 兼容枪械标签(82_二战军服CE适配 覆盖清单),避免非 CE 枪出现空枪。 -->
+
+	<!-- ① 鼠族士兵(主力): 各国制式步枪 + 霰弹 + SMG + LMG -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="RatkinCombatantWarlord"]/weaponTags</xpath>
+		<value>
+			<li>RK_KB_Rifle</li>
+			<li>RK_EU_Rifle</li>
+			
+			
+			<li>RK_YE_Rifle</li>
+			
+			<li>RK_MR_Shotgun</li>
+			<li>RK_KB_SMG</li>
+			<li>RK_WR_LMG</li>
+		</value>
+	</Operation>
+
+	<!-- ② 鼠族军阀(领袖): 狙击 / 步枪 / SMG / 反坦克 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="RatkinWarlord"]/weaponTags</xpath>
+		<value>
+			<li>RK_WR_SniperRifle</li>
+			
+			<li>RK_KB_SMG</li>
+			<li>RK_WR_AT</li>
+		</value>
+	</Operation>
+
+	<!-- ③ 卫花使(盾卫): 手枪 / 霰弹 / SMG 短兵相接 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="RatkinDefenderWarlord"]/weaponTags</xpath>
+		<value>
+			<li>RK_KB_Pistol</li>
+			<li>RK_MR_Shotgun</li>
+			<li>RK_KB_SMG</li>
+		</value>
+	</Operation>
+    <!-- ───────── 来源: 103_军阀载具入侵兼容.xml ───────── -->
+<!-- 103_军阀载具入侵兼容(Ratkin Faction+ 整合: Aerocraft Framework + Ratkin Vehicles+ 可选)
+	     2026-08-22 修复: 原版 MayRequire 门控在 1.6 已失效(Operation 级无 MayRequire 字段,
+	     日志实测未装 Aerocraft/Ratkin Vehicles+ 时仍执行 Add → RatkinLiaison_* PawnKindDef 缺失交叉引用报错)。
+	     改 xpath 存在性门控: 外层 Conditional 检查载具 mod 提供的 PawnKindDef RatkinLiaison_Fighter
+	     是否存在,不存在则整段跳过(载具 PawnKind 由外部 mod 提供,本 mod 不定义)。 -->
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/PawnKindDef[defName = "RatkinLiaison_Fighter"]</xpath>
+		<match Class="PatchOperationSequence">
+			<success>Normal</success>
+			<operations>
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/FactionDef[@Name = "RatkinFactionBadBase"]/pawnGroupMakers/li[2]/options</xpath>
+					<value>
+						<RatkinLiaison_Fighter>3</RatkinLiaison_Fighter>
+					</value>
+				</li>
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/FactionDef[@Name = "RatkinFactionBadBase"]/pawnGroupMakers/li[4]/options</xpath>
+					<value>
+						<RatkinLiaison_Fighter>3</RatkinLiaison_Fighter>
+					</value>
+				</li>
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/FactionDef[@Name = "RatkinFactionBadBase"]/pawnGroupMakers</xpath>
+					<value>
+						<li>
+							<kindDef>Combat</kindDef>
+							<commonality>50</commonality>
+							<maxTotalPoints>15000</maxTotalPoints>
+							<options>
+								<RatkinKnight>5</RatkinKnight>
+								<RatkinSoldier>5</RatkinSoldier>
+								<RatkinCombatantWarlord>5</RatkinCombatantWarlord>
+								<RatkinDefenderWarlord>5</RatkinDefenderWarlord>
+								<RatkinLiaison_Fighter>3</RatkinLiaison_Fighter>
+								<RatkinLiaison_Airship>1</RatkinLiaison_Airship>
+							</options>
+						</li>
+					</value>
+				</li>
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/FactionDef[@Name = "RatkinFactionBadBase"]/pawnGroupMakers</xpath>
+					<value>
+						<li>
+							<kindDef>Combat</kindDef>
+							<commonality>50</commonality>
+							<maxTotalPoints>10000</maxTotalPoints>
+							<options>
+								<RatkinSoldier>5</RatkinSoldier>
+								<RatkinCombatantWarlord>5</RatkinCombatantWarlord>
+								<RatkinDefenderWarlord>5</RatkinDefenderWarlord>
+								<RatkinEliteGuardener>5</RatkinEliteGuardener>
+								<RatkinLiaison_Fighter>2</RatkinLiaison_Fighter>
+								<RatkinLiaison_Bomber>1</RatkinLiaison_Bomber>
+							</options>
+						</li>
+					</value>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+</Patch>

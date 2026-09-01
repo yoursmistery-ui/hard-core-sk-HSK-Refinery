@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): Odyssey_BuildingPatch.xml, Odyssey_RitualPatch.xml, Odyssey_StorytellerPatch.xml -->
+<Patch><Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName = "GravEngine"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+		<value>
+			<li>OARK_GravFieldExtender</li>
+			<li>OARK_AirportClearanceBeacon</li>
+			<li>OARK_SpaceportAccessPermit</li>
+		</value>
+	</Operation>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Vanilla Gravship Expanded - Chapter 1</li>
+        </mods>
+        <match Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName = "VGE_GravhulkEngine" or defName = "VGE_GravjumperEngine"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+            <value>
+                <li>OARK_GravFieldExtender</li>
+                <li>OARK_AirportClearanceBeacon</li>
+                <li>OARK_SpaceportAccessPermit</li>
+            </value>
+        </match>
+    </Operation><Operation Class="PatchOperationAdd">
+		<xpath>Defs/RitualOutcomeEffectDef[defName = "GravshipLaunch"]/comps</xpath>
+		<value>
+			<li Class="RitualOutcomeComp_GravshipFacilities">
+				<label>金鸢尾兰逆重延展装置</label>
+				<facilityQualityOffsets>
+					<li>
+						<key>OARK_GravFieldExtender</key>
+						<value>0.0125</value>
+					</li>
+				</facilityQualityOffsets>
+			</li>
+		</value>
+	</Operation><Operation Class="PatchOperationAdd">
+		<xpath>/Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+		<value>
+			<li Class="StorytellerCompProperties_OnOffCycle">
+				<incident>OARK_ScienceShipLaunch</incident>
+				<onDays>20</onDays>
+				<offDays>70</offDays>
+				<numIncidentsRange>0~1</numIncidentsRange>
+				<minSpacingDays>15</minSpacingDays>
+				<allowedTargetTags>
+					<li>World</li>
+				</allowedTargetTags>
+			</li>
+		</value>
+	</Operation></Patch>

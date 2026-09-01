@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <HediffDef>
+        <defName>OAGene_Hediff_ProtagonistHomecoming</defName>
+        <label>Homecoming</label>
+        <description>I have been away from home for too long. Leaving without saying goodbye left behind too many regrets and guilt. Maybe it's time for me to go back</description>
+        <hediffClass>OberoniaAureaGene.Snowstorm.Hediff_ProtagonistHomecoming</hediffClass>
+        <isBad>false</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <duplicationAllowed>false</duplicationAllowed>
+        <initialSeverity>0.5</initialSeverity>
+        <maxSeverity>3.0</maxSeverity>
+        <stages>
+            <li>
+                <becomeVisible>false</becomeVisible>
+            </li>
+            <li>
+                <label>期盼</label>
+                <minSeverity>1.0</minSeverity>
+            </li>
+            <li>
+                <label>执念</label>
+                <minSeverity>2.0</minSeverity>
+            </li>
+            <li>
+                <label>夙愿</label>
+                <minSeverity>3.0</minSeverity>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>OAGene_Hediff_ProtagonistHomecomed</defName>
+        <label>回忆</label>
+        <description>实现主角回忆的隐藏状态。</description>
+        <hediffClass>HediffWithComps</hediffClass>
+        <isBad>false</isBad>
+        <scenarioCanAdd>false</scenarioCanAdd>
+        <duplicationAllowed>false</duplicationAllowed>
+        <maxSeverity>1.0</maxSeverity>
+        <stages>
+            <li>
+                <becomeVisible>false</becomeVisible>
+            </li>
+        </stages>
+        <comps>
+            <li Class="OberoniaAureaGene.Snowstorm.HediffCompProperties_ProtagonistHomecomed">
+                <permanentThought>OAGene_Thought_LostInMemory_Permanent</permanentThought>
+            </li>
+            <li Class="HediffCompProperties_DisappearsOnDeath"/>
+        </comps>
+    </HediffDef>
+
+</Defs>

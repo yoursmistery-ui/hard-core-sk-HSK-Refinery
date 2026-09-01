@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- RKGE 异种人型接入鼠族派系(HSK 基因体系适配版 2026-08-21) -->
+	<!-- 2026-08-22 修正: 派系异种池已由 92_鼠族异种生成限制.xml 统一 Replace 接管
+	     (RatkinFactionBase=初鼠0.92/鼠人0.05/实验白鼠0.03, 玩家/朝圣/商队各有专属池),
+	     原 4 个派系异种 Add 在 92 号 Replace 之后执行(RKGE/ 子目录排序靠后),叠加成
+	     同一异种两行(鼠人 15%+5%、实验白鼠 7%+3%)→ 已删除,仅保留 Farmers pawnGroupMaker。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers</xpath>
+		<value>
+			<li>
+				<kindDef>Farmers</kindDef>
+				<options>
+					<RatkinColonist>20</RatkinColonist>
+					<RatkinServant>15</RatkinServant>
+					<RatkinEliteGuardener>10</RatkinEliteGuardener>
+					<RatkinKnight>10</RatkinKnight>
+					<RatkinPriest>10</RatkinPriest>
+				</options>
+			</li>
+		</value>
+	</Operation>
+
+</Patch>

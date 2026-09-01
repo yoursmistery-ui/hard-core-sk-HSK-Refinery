@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+03_帝国金币(2026-08-19 创建, 2026-08-20 更新: 贡品收集者改收金令 + 金鼠族贡品收集者)
+
+需求(用户):
+  1. 帝国定居点商人(Base_Empire_Standard)用金令(GoldCoin)替代金矿(Gold)商品行;
+  2. 帝国征兵队/皇家贡品收集者(Empire_Caravan_TributeCollector)收购金令替代金矿;
+  3. 金鼠族贡品收集者(OA_RK_Caravan_TributeCollector)同样收购金令替代金矿(2026-08-20 新增)。
+
+实现:
+  - Base_Empire_Standard: Gold(金矿)商品行 -> GoldCoin(帝国金令), 固定价格 Normal(乘数 1.0)。
+  - Empire_Caravan_TributeCollector: StockGenerator_BuySingleDef 的 Gold -> GoldCoin。
+    注: 贡品收集者用 tradeCurrency=Favor(威望)结算, Gold 行是"收购金矿换威望"行;
+    改为 GoldCoin 后变成"收购金令换威望", 符合帝国气质(2026-08-20 用户要求)。
+  - OA_RK_Caravan_TributeCollector: 同上, 金鼠族贡品收集者 BuySingleDef Gold -> GoldCoin。
+  - 金令 MV=10 已由 01 补丁设置。
+
+MayRequire=skyarkhangel.HSK.DLC: 金令(GoldCoin)定义来自 Core_SK DLCModule。
+本补丁为最终层, 后于 Core_SK_DLCModule / Royalty / 金鼠族 加载。
+-->
+
+<Patch>
+
+  <!-- 1. 帝国定居点商人(Base_Empire_Standard): 金矿商品行 -> 金令商品行(固定价格 Normal = 乘数 1.0) -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef[defName="Base_Empire_Standard"]/stockGenerators/li[thingDef="Gold"]</xpath>
+    <value>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>GoldCoin</thingDef>
+        <price>Normal</price>
+        <countRange>100~200</countRange>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- 2. 帝国贡品收集者(Empire_Caravan_TributeCollector): 收购金矿 -> 收购金令 -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TributeCollector"]/stockGenerators/li[thingDef="Gold"]</xpath>
+    <value>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>GoldCoin</thingDef>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- 3. 金鼠族贡品收集者(OA_RK_Caravan_TributeCollector): 收购金矿 -> 收购金令 -->
+  <!-- 无 MayRequire 门控: 金鼠族是独立 mod, 只要存在就改; GoldCoin 依赖 Core_SK DLCModule -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef[defName="OA_RK_Caravan_TributeCollector"]/stockGenerators/li[thingDef="Gold"]</xpath>
+    <value>
+      <li Class="StockGenerator_BuySingleDef">
+        <thingDef>GoldCoin</thingDef>
+      </li>
+    </value>
+  </Operation>
+
+</Patch>

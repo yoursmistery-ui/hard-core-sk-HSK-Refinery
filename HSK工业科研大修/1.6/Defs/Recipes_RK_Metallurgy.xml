@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ===== 冶铁链统一（2026-08-30）：主干最后一段 + 炉渣下游 =====
+       主干：生铁 →(精炼炉搅炼) 熟铁 →(渗碳炉) 泡钢 →(窑/坩埚) 坩埚钢 →(铁匠工坊锻打) 锻造钢
+       旁路删除见 Patches/98_冶铁链统一.xml -->
+
+  <!-- 坩埚钢 → 锻造钢：现状缺这条边，补上（用户拍板：最后在铁匠工坊打一下） -->
+  <RecipeDef>
+    <defName>RK_Met_ForgeSteelFromCrucible</defName>
+    <label>forge crucible steel into tool steel billets</label>
+    <description>把坩埚钢锭加热到白亮色，夹着焊剂反复折叠锻打，锤出残余气孔与偏析，打成可用的锻造钢坯。
+
+这一步才是坩埚钢真正变成材料的地方——没经过锻打的钢锭只是脆的铸块，敲两下就裂。</description>
+    <jobString>锻打坩埚钢。</jobString>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <workAmount>2400</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smith</effectWorking>
+    <soundWorking>Recipe_Smith</soundWorking>
+    <recipeUsers>
+      <li>FueledSmithy</li>
+    </recipeUsers>
+    <researchPrerequisite>Steel_B3</researchPrerequisite>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>CrucibleSteel</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>FluxPowder</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>CrucibleSteel</li>
+        <li>FluxPowder</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ForgedSteel>30</ForgedSteel>
+    </products>
+  </RecipeDef>
+
+  <!-- 炉渣 → 矿渣混凝土（手拌档）：省砂、产量更高，给玩家消化渣的动力 -->
+  <RecipeDef>
+    <defName>RK_Met_MixSlagConcrete</defName>
+    <label>mix slag concrete</label>
+    <description>把炉渣碾碎过筛，掺砂加水拌成矿渣混凝土。渣里的活性玻璃质在硬化过程中继续反应，强度比普通砂石的更高，还顺手清掉了渣场。
+
+没有炉渣时仍可用砂加碎石拌普通混凝土，只是费砂。</description>
+    <jobString>拌制矿渣混凝土。</jobString>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <workAmount>1000</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <recipeUsers>
+      <li>ConcreteMixer</li>
+    </recipeUsers>
+    <researchPrerequisite>Concrete_C1</researchPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RK_Met_Slag</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SandResource</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RK_Met_Slag</li>
+        <li>SandResource</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ConcreteResource>15</ConcreteResource>
+    </products>
+  </RecipeDef>
+
+  <!-- 同一配方的电动档，独立 def + 更高研究档，避免 ResearchTreeSK 重复解锁 -->
+  <RecipeDef>
+    <defName>RK_Met_MixSlagConcreteElectric</defName>
+    <label>mix slag concrete (electric)</label>
+    <description>电动搅拌机定量加水拌制矿渣混凝土，同一批料省掉一半工时。</description>
+    <jobString>拌制矿渣混凝土。</jobString>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <workAmount>600</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <recipeUsers>
+      <li>EConcreteMixer</li>
+    </recipeUsers>
+    <researchPrerequisite>Concrete_C2</researchPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RK_Met_Slag</li>
+          </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SandResource</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RK_Met_Slag</li>
+        <li>SandResource</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ConcreteResource>15</ConcreteResource>
+    </products>
+  </RecipeDef>
+
+  <!-- 炉渣回炉：榨出残余生铁（不改原版 ExtractMetalFromSlag，它吃的是战损渣块） -->
+  <RecipeDef>
+    <defName>RK_Met_ReSmeltSlag</defName>
+    <label>resmelt slag for residual iron</label>
+    <description>把炉渣连同焦炭重新投进高炉，把里面夹带的铁粒再榨一遍。出料不多，但渣场堆成山的时候，这比什么都值钱。</description>
+    <jobString>回炉矿渣。</jobString>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <workAmount>1400</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <recipeUsers>
+      <li>TableFurnace</li>
+    </recipeUsers>
+    <researchPrerequisite>Metallurgy_B3</researchPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RK_Met_Slag</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RK_Met_Slag</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <PigIron>5</PigIron>
+    </products>
+  </RecipeDef>
+
+</Defs>

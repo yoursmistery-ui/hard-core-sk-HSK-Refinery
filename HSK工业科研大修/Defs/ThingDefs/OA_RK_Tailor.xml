@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- =====================================================================
+       金鸢尾兰缝纫台 (OA_RK_Tailor) —— 2026-08-27 自「金鼠族 HSK版本」整体迁入本 mod,
+       并升级为「太空时代」生产建筑,与 HSK 先进纺织工作台(HyperTailoringBench)同档:
+         · techLevel = Spacer(与 HyperTailoringBench 功能档一致)
+         · researchPrerequisites = Apparel_D1(服装生产 V = 解锁 HyperTailoringBench 的同一太空节点)
+         · constructionSkillPrerequisite 8 → 16(对齐 HyperTailoringBench)
+       职责: 承载「鼠族 + 金鼠族」全部太空/极致时代 服装/装甲/配件(严格互斥,只挂本台)。
+       太空时代之前的金鼠族/鼠族衣物仍走鼠族缝纫台(RK_ElectricTailoringBench/RK_HandTailoringBench)。
+       引用的布料精加工/回收设施(OA_RK_Cloth_Processing / _B)仍由「金鼠族 HSK版本」定义,
+       linkableFacilities 按 defName 全局解析, 故本 mod loadAfter 金鼠族。
+       贴图 Building/OA_RK_Tailor 仍位于金鼠族 Textures(RimWorld 贴图为全局路径解析, 无需搬移)。
+       ===================================================================== -->
+  <ThingDef ParentName="BenchBase">
+    <defName>OA_RK_Tailor</defName>
+    <label>Ratkin Space Tailoring Bench</label>
+    <description>A dedicated space-age sewing bench for Ratkin and Oberonia Aurea clothing and armor, the Ratkin counterpart of the advanced tailoring bench. Compared to the ordinary ratkin tailoring benches, this specialized facility streamlines meaningless repetitive work and is where all space- and ultra-era Ratkin gear is crafted.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Building/OA_RK_Tailor</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.2,2)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <costList>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <ComponentAdvanced>2</ComponentAdvanced>
+    </costList>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.1</Flammability>
+      <WorkTableWorkSpeedFactor>1.40</WorkTableWorkSpeedFactor>
+    </statBases>
+    <size>(2,1)</size>
+    <designationCategory>Production</designationCategory>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(1,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>16</constructionSkillPrerequisite>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+          <li>OA_RK_Cloth_Processing</li>
+          <li>OA_RK_Cloth_Processing_B</li>
+          <li MayRequire="VanillaExpanded.VFEProduction">VFE_TailorCabinet</li>
+        </linkableFacilities>
+      </li>
+      <li Class="CompProperties_Breakdownable" />
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Apparel_D1</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,55 @@
+<ModMetaData>
+	<name>Vanilla Skills Expanded</name>
+	<author>legodude17, Oskar Potocki, Sarg Bjornson (HSK 本地改造版)</author>
+	<modIconPath IgnoreIfNoMatchingField="True">UI/VELogo</modIconPath>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>vanillaexpanded.skills</packageId>
+	<description>Vanilla Skills Expanded 本地改造版(HSK 适配)。
+
+本版在原 Vanilla Skills Expanded 基础上:
+- 属性精简:移除 VSE 专属的缝制/武器制作/零部件/地板/屋顶/修理/石块产出率等 StatDef,统一使用 HSK 的裁缝速度(TailoringSpeed)、锻造速度(SmithingSpeed)、电子器件制作速度(ElectronicCraftingSpeed)与原版建造速度(ConstructionSpeed);保留 3 个品质加成(手工/艺创/建造)。
+- 专精优化:删除铺设/速艺/地质/虚识专精,利刃改挂近战伤害、决斗改挂原版近战冷却;新增「精工」(手工品质)、「闪避」(近战闪避)、「格挡」(近战格挡)三个专精。
+- 数值规范化:全部专精按档位统一(速度/产量类满级+50%、成功率类满级+20%、品质类满级+16%、冷却类满级-10%、战斗概率类满级+20%)。
+- 适配 Hardcore SK:专精工作速度纳入 HSK 全局工作速度(WorkSpeedGlobal)体系。
+- 新增「遗忘专精」功能:专精面板(角色卡右上角按钮)顶部提供遗忘按钮,当专精达到最高等级(20 级)时可遗忘,遗忘后专精消失(技能等级与激情保留),可重新选择其它专精。
+- 移除「偏长(Critical)」激情对其他技能 25% 学习速度的惩罚。
+
+原版说明:Vanilla Skills Expanded 在原版技能系统上引入专精(Expertise)与新的激情类型。每名殖民者只能获得有限个专精,专精只能在拥有激情且等级超过 15 级的技能中选择。专精会像普通技能一样随使用升级,提供强力但特定的加成。本 mod 还引入了 3 种新激情类型:偏长、恃才与乏味。</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Hardcore SK</displayName>
+		    <downloadUrl>https://rimworld.example/skyarkhangel.HSK</downloadUrl>
+			</li>
+		<li>
+			<packageId>DimonSever000.ModIndicator.Specific</packageId>
+			<displayName>HSK Autosort and Mod Assistant</displayName>
+		    <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+			</li>
+	</modDependencies>
+	<loadAfter>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>ducks.insaneskills</li>
+		<li>jaxe.rimhud</li>
+		<li>skyarkhangel.HSK</li>
+		<li>skyarkhangel.HSK.Core</li>
+		<li>skyarkhangel.HSK.DLC</li>
+				<li>DimonSever000.ModIndicator.Specific</li>
+	</loadAfter>
+	<loadBefore>
+		<li>ratys.madskills</li>
+	</loadBefore>
+</ModMetaData>

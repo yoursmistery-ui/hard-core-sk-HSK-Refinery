@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 冶铁链统一（2026-08-30，用户拍板：删生铁块双轨，统一 生铁→熟铁→坩埚钢→锻造钢；炉渣走副产物闭环）
+     执行序：98 号在 Patches 根目录内是最大编号（95/96/97 之后），只删不改既有补丁写入的节点，
+     且引用的目标全部来自 Vile's Metallurgy 原始 def（非其它补丁 Add 的节点），故无需担心前后次序。
+     所有操作套 PatchOperationConditional 存在性门控（1.6 Operation 级 MayRequire 已失效）。 -->
+<Patch>
+
+  <!-- ===== 一、删除熟铁/锻钢旁路配方（6 条）=====
+       熟铁唯一入口 = MakeWroughtIron_PigIron_Finery（生铁+煤+助熔 @精炼炉）
+       锻钢唯一入口 = RK_Met_ForgeSteelFromCrucible（坩埚钢+助熔 @铁匠工坊，见 Recipes_RK_Metallurgy.xml） -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeCastIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeCastIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Forge"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Forge"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Smithy"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Smithy"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath></match>
+  </Operation>
+
+  <!-- ===== 二、清理上述配方在建筑 recipes 列表里的悬空引用 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="MakeCastIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeCastIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromCastIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromCastIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="MakeWroughtIron_Forge"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeWroughtIron_Forge"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_Smithy"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_Smithy"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath></match>
+  </Operation>
+
+  <!-- ===== 三、把铸铁摘出 CastBar（不再当铸造选项）
+       注意：**不能删 CastIron 这个 def** —— 实测 Recipes_Pipes / Recipes_CastTools(_Batch) 的
+       disallowedThingDefs 与 filter 直接按 defName 引用它，删 def 会留下悬空交叉引用报错。
+       第一节已删掉唯一生产者 MakeCastIron，铸铁从此绝迹；炉渣另建 RK_Met_Slag，
+       绝不再复用 CastIron——否则 41 条吃 CastBar 的铸造配方会让小人拿矿渣铸锤子和炮弹。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="CastIron"]/thingCategories/li[text()="CastBar"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef[defName="CastIron"]/thingCategories/li[text()="CastBar"]</xpath></match>
+  </Operation>
+
+  <!-- ===== 四、生铁并入 CastBar（铸件本就该吃生铁水浇模，41 条铸造配方自动改口）===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PigIron"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="PigIron"]/thingCategories</xpath>
+      <value><li>CastBar</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="PigIron"]</xpath>
+      <value><thingCategories><li>CastBar</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== 五、炉渣作为多产物挂到三处冶炼配方（原生 products 直写格式）===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakePigIron_Furnace"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakePigIron_Furnace"]/products</xpath>
+      <value><RK_Met_Slag>25</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeIronBloom_Bloomery"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeIronBloom_Bloomery"]/products</xpath>
+      <value><RK_Met_Slag>8</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_PigIron_Finery"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_PigIron_Finery"]/products</xpath>
+      <value><RK_Met_Slag>10</RK_Met_Slag></value>
+    </match>
+  </Operation>
+
+  <!-- ===== 六、熟铁科技档 = 原始（用户定：熟铁是冶铁链第一件可用金属，归原始时代锻造金属）=====
+       Vile 的 WroughtIron 未写 techLevel，此处显式 Add；已有节点则 Replace。解锁仍由精炼炉配方研究把关，不改科研门槛。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="WroughtIron"]/techLevel</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="WroughtIron"]/techLevel</xpath>
+      <value><techLevel>Neolithic</techLevel></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="WroughtIron"]</xpath>
+      <value><techLevel>Neolithic</techLevel></value>
+    </nomatch>
+  </Operation>
+
+</Patch>

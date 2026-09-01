@@ -1,0 +1,1167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         01_科技与名字.xml  (2026-08-22 按大类合并)
+         合并自 5 个补丁: 00_科技前置修复.xml, 07_多功能工具科技后移.xml, 42_Norbal名字扩展.xml, 43_NorbalXenotypeNameMaker.xml, 47_人名中文化.xml
+         科技前置修复 + 多功能工具科技后移 + Norbal/人名中文化。
+         ============================================================ -->
+    <!-- 00_科技前置修复(合并: FindMod+Sequence 改为平铺 + MayRequire=Core SK) -->
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+        <xpath>Defs/ResearchProjectDef[defName="Metals_C1"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Electricity</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+        <xpath>Defs/ResearchProjectDef[defName="Concrete_C2"]/prerequisites</xpath>
+        <value>
+            <prerequisites>
+                <li>Concrete_C1</li>
+                <li>Electricity</li>
+            </prerequisites>
+        </value>
+    </Operation>
+    <!-- ========== 金属加工 II/III/IV 右移一格(2026-08-23) ========== -->
+    <!-- 用户要求: Metals_C1/C2/C3(金属加工 II/III/IV)整体右移一格;
+         鼠族拓展的工业工具节点(RKHSK_Tools_Industrial1/2)在其右侧,
+         顺带右移一格避免撞车(Metals_C3 9→10 会撞 Industrial1 10)。
+         2026-08-23 晚修正: Metals_C1 回退到 7.00 —— 8 与 Machining(8,30)/
+         CentralHeating(8,10) 同列触发 ResearchTreeSK "not positioned to the right"
+         (Metals_C1 是二者的共同前置); C1 回 7 后 Machining/CentralHeating 均在右侧。
+         C2/C3 保持 9/10 (与 Industrial1/2 11/12 不撞)。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Metals_C1"]/researchViewX</xpath>
+        <value><researchViewX>7.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Metals_C2"]/researchViewX</xpath>
+        <value><researchViewX>9.00</researchViewX></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Metals_C3"]/researchViewX</xpath>
+        <value><researchViewX>10.00</researchViewX></value>
+    </Operation>
+    <!-- ========== 食物科技整体下移(+3行,避开 Apparel_SK 衣物块) ========== -->
+    <!-- 2026-08-23: 金鼠族 06_金鼠族科技上移 把 HSK 服饰链(Vile 中世纪甲等)整链下移至
+         Apparel_SK 的 y44~47,与 Core_SK 的 Food_SK 食品网格(y45~48)共用坐标撞车,
+         ResearchTreeSK 报坐标重复。本段把整个 Food_SK 块下移 3 行至 y48~51,
+         正好落在衣物块(y44~47)正下方,与缝纫及其它 tab 完全错开。
+         (仅下移 1 格不足: 衣物块跨 y45~47 三行,Food 顶行须整体低于 y47。) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_00"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_B3"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_B4"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C1"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="PackagedSurvivalMeal"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C7"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C8"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="NutrientPaste"]/researchViewY</xpath>
+        <value><researchViewY>48.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_0"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Pemmican"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_B1"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_B2"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C2"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C6"]/researchViewY</xpath>
+        <value><researchViewY>49.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Bakery_B1"]/researchViewY</xpath>
+        <value><researchViewY>50.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Bakery_B2"]/researchViewY</xpath>
+        <value><researchViewY>50.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Bakery_C1"]/researchViewY</xpath>
+        <value><researchViewY>50.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C4"]/researchViewY</xpath>
+        <value><researchViewY>50.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Brewing"]/researchViewY</xpath>
+        <value><researchViewY>51.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Alcohol_B2"]/researchViewY</xpath>
+        <value><researchViewY>51.00</researchViewY></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C3"]/researchViewY</xpath>
+        <value><researchViewY>51.00</researchViewY></value>
+    </Operation>
+    <!-- 来源: 07_多功能工具科技后移.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TFJ_Tool_Multitool"]/recipeMaker/researchPrerequisite</xpath>
+    <value>
+        <researchPrerequisite>Components_D3</researchPrerequisite>
+    </value>
+</Operation>
+
+    <!-- 来源: 42_Norbal名字扩展.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionBaseNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinks-&gt;奥丁</li>
+        <li>Nornorbinks-&gt;索尔</li>
+        <li>Nornorbinks-&gt;弗雷</li>
+        <li>Nornorbinks-&gt;提尔</li>
+        <li>Nornorbinks-&gt;巴德</li>
+        <li>Nornorbinks-&gt;霍德</li>
+        <li>Nornorbinks-&gt;维达</li>
+        <li>Nornorbinks-&gt;瓦利</li>
+        <li>Nornorbinks-&gt;布拉基</li>
+        <li>Nornorbinks-&gt;伊登</li>
+        <li>Nornorbinks-&gt;希芙</li>
+        <li>Nornorbinks-&gt;芙蕾雅</li>
+        <li>Nornorbinks-&gt;格芙琼</li>
+        <li>Nornorbinks-&gt;斯卡蒂</li>
+        <li>Nornorbinks-&gt;乌勒尔</li>
+        <li>Nornorbinks-&gt;尼约德</li>
+        <li>Nornorbinks-&gt;洛芬</li>
+        <li>Nornorbinks-&gt;斯诺特拉</li>
+        <li>Nornorbinks-&gt;瓦芙</li>
+        <li>Nornorbinks-&gt;赫林</li>
+        <li>Nornorbinks-&gt;格娜</li>
+        <li>Nornorbinks-&gt;约德</li>
+        <li>Nornorbinks-&gt;贝斯特拉</li>
+        <li>Nornorbinks-&gt;古娜</li>
+        <li>Nornorbinks-&gt;雷格</li>
+        <li>Nornorbinks-&gt;西格</li>
+        <li>Nornorbinks-&gt;埃里克</li>
+        <li>Nornorbinks-&gt;拉格纳</li>
+        <li>Nornorbinks-&gt;比约恩</li>
+        <li>Nornorbinks-&gt;海姆达尔</li>
+        <li>Nornorbinks-&gt;维德</li>
+        <li>Nornorbinks-&gt;巴尔德</li>
+        <li>Nornorbinks-&gt;弗蕾</li>
+        <li>Nornorbinks-&gt;尼奥德</li>
+        <li>Nornorbinks-&gt;洛基</li>
+        <li>Nornorbinks-&gt;布伦希</li>
+        <li>Nornorbinks-&gt;齐格飞</li>
+        <li>Nornorbinks-&gt;沃尔夫</li>
+        <li>Nornorbinks-&gt;乌尔里希</li>
+        <li>Nornorbinks-&gt;埃吉尔</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionBaseNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinge-&gt;雷夫</li>
+        <li>Nornorbinge-&gt;乌尔夫</li>
+        <li>Nornorbinge-&gt;斯滕</li>
+        <li>Nornorbinge-&gt;哈拉尔德</li>
+        <li>Nornorbinge-&gt;克努特</li>
+        <li>Nornorbinge-&gt;斯韦恩</li>
+        <li>Nornorbinge-&gt;奥拉夫</li>
+        <li>Nornorbinge-&gt;马格努斯</li>
+        <li>Nornorbinge-&gt;埃纳尔</li>
+        <li>Nornorbinge-&gt;芬恩</li>
+        <li>Nornorbinge-&gt;冈纳尔</li>
+        <li>Nornorbinge-&gt;伊瓦尔</li>
+        <li>Nornorbinge-&gt;哈夫丹</li>
+        <li>Nornorbinge-&gt;罗洛</li>
+        <li>Nornorbinge-&gt;西格德</li>
+        <li>Nornorbinge-&gt;托尔斯坦</li>
+        <li>Nornorbinge-&gt;格里姆</li>
+        <li>Nornorbinge-&gt;卡尔</li>
+        <li>Nornorbinge-&gt;奥德</li>
+        <li>Nornorbinge-&gt;索尔薇</li>
+        <li>Nornorbinge-&gt;阿斯加德</li>
+        <li>Nornorbinge-&gt;瓦兰</li>
+        <li>Nornorbinge-&gt;埃达</li>
+        <li>Nornorbinge-&gt;尤弥尔</li>
+        <li>Nornorbinge-&gt;芬里尔</li>
+        <li>Nornorbinge-&gt;海拉</li>
+        <li>Nornorbinge-&gt;穆斯贝尔</li>
+        <li>Nornorbinge-&gt;尼福尔</li>
+        <li>Nornorbinge-&gt;瓦纳</li>
+        <li>Nornorbinge-&gt;阿尔夫</li>
+        <li>Nornorbinge-&gt;杜瓦林</li>
+        <li>Nornorbinge-&gt;奥塔</li>
+        <li>Nornorbinge-&gt;雷金</li>
+        <li>Nornorbinge-&gt;法夫纳</li>
+        <li>Nornorbinge-&gt;西古尔德</li>
+        <li>Nornorbinge-&gt;古德伦</li>
+        <li>Nornorbinge-&gt;克里姆希尔德</li>
+        <li>Nornorbinge-&gt;哈根</li>
+        <li>Nornorbinge-&gt;斯诺里</li>
+        <li>Nornorbinge-&gt;瓦格纳</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinks-&gt;奥丁</li>
+        <li>Nornorbinks-&gt;索尔</li>
+        <li>Nornorbinks-&gt;弗雷</li>
+        <li>Nornorbinks-&gt;提尔</li>
+        <li>Nornorbinks-&gt;巴德</li>
+        <li>Nornorbinks-&gt;霍德</li>
+        <li>Nornorbinks-&gt;维达</li>
+        <li>Nornorbinks-&gt;瓦利</li>
+        <li>Nornorbinks-&gt;布拉基</li>
+        <li>Nornorbinks-&gt;伊登</li>
+        <li>Nornorbinks-&gt;希芙</li>
+        <li>Nornorbinks-&gt;芙蕾雅</li>
+        <li>Nornorbinks-&gt;格芙琼</li>
+        <li>Nornorbinks-&gt;斯卡蒂</li>
+        <li>Nornorbinks-&gt;乌勒尔</li>
+        <li>Nornorbinks-&gt;尼约德</li>
+        <li>Nornorbinks-&gt;洛芬</li>
+        <li>Nornorbinks-&gt;斯诺特拉</li>
+        <li>Nornorbinks-&gt;瓦芙</li>
+        <li>Nornorbinks-&gt;赫林</li>
+        <li>Nornorbinks-&gt;格娜</li>
+        <li>Nornorbinks-&gt;约德</li>
+        <li>Nornorbinks-&gt;贝斯特拉</li>
+        <li>Nornorbinks-&gt;古娜</li>
+        <li>Nornorbinks-&gt;雷格</li>
+        <li>Nornorbinks-&gt;西格</li>
+        <li>Nornorbinks-&gt;埃里克</li>
+        <li>Nornorbinks-&gt;拉格纳</li>
+        <li>Nornorbinks-&gt;比约恩</li>
+        <li>Nornorbinks-&gt;海姆达尔</li>
+        <li>Nornorbinks-&gt;维德</li>
+        <li>Nornorbinks-&gt;巴尔德</li>
+        <li>Nornorbinks-&gt;弗蕾</li>
+        <li>Nornorbinks-&gt;尼奥德</li>
+        <li>Nornorbinks-&gt;洛基</li>
+        <li>Nornorbinks-&gt;布伦希</li>
+        <li>Nornorbinks-&gt;齐格飞</li>
+        <li>Nornorbinks-&gt;沃尔夫</li>
+        <li>Nornorbinks-&gt;乌尔里希</li>
+        <li>Nornorbinks-&gt;埃吉尔</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinge-&gt;雷夫</li>
+        <li>Nornorbinge-&gt;乌尔夫</li>
+        <li>Nornorbinge-&gt;斯滕</li>
+        <li>Nornorbinge-&gt;哈拉尔德</li>
+        <li>Nornorbinge-&gt;克努特</li>
+        <li>Nornorbinge-&gt;斯韦恩</li>
+        <li>Nornorbinge-&gt;奥拉夫</li>
+        <li>Nornorbinge-&gt;马格努斯</li>
+        <li>Nornorbinge-&gt;埃纳尔</li>
+        <li>Nornorbinge-&gt;芬恩</li>
+        <li>Nornorbinge-&gt;冈纳尔</li>
+        <li>Nornorbinge-&gt;伊瓦尔</li>
+        <li>Nornorbinge-&gt;哈夫丹</li>
+        <li>Nornorbinge-&gt;罗洛</li>
+        <li>Nornorbinge-&gt;西格德</li>
+        <li>Nornorbinge-&gt;托尔斯坦</li>
+        <li>Nornorbinge-&gt;格里姆</li>
+        <li>Nornorbinge-&gt;卡尔</li>
+        <li>Nornorbinge-&gt;奥德</li>
+        <li>Nornorbinge-&gt;索尔薇</li>
+        <li>Nornorbinge-&gt;阿斯加德</li>
+        <li>Nornorbinge-&gt;瓦兰</li>
+        <li>Nornorbinge-&gt;埃达</li>
+        <li>Nornorbinge-&gt;尤弥尔</li>
+        <li>Nornorbinge-&gt;芬里尔</li>
+        <li>Nornorbinge-&gt;海拉</li>
+        <li>Nornorbinge-&gt;穆斯贝尔</li>
+        <li>Nornorbinge-&gt;尼福尔</li>
+        <li>Nornorbinge-&gt;瓦纳</li>
+        <li>Nornorbinge-&gt;阿尔夫</li>
+        <li>Nornorbinge-&gt;杜瓦林</li>
+        <li>Nornorbinge-&gt;奥塔</li>
+        <li>Nornorbinge-&gt;雷金</li>
+        <li>Nornorbinge-&gt;法夫纳</li>
+        <li>Nornorbinge-&gt;西古尔德</li>
+        <li>Nornorbinge-&gt;古德伦</li>
+        <li>Nornorbinge-&gt;克里姆希尔德</li>
+        <li>Nornorbinge-&gt;哈根</li>
+        <li>Nornorbinge-&gt;斯诺里</li>
+        <li>Nornorbinge-&gt;瓦格纳</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionBaseNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinks-&gt;阿宝</li>
+        <li>Nornorbinks-&gt;白泽</li>
+        <li>Nornorbinks-&gt;苍梧</li>
+        <li>Nornorbinks-&gt;赤霄</li>
+        <li>Nornorbinks-&gt;楚云</li>
+        <li>Nornorbinks-&gt;大禹</li>
+        <li>Nornorbinks-&gt;丹朱</li>
+        <li>Nornorbinks-&gt;东篱</li>
+        <li>Nornorbinks-&gt;杜若</li>
+        <li>Nornorbinks-&gt;飞廉</li>
+        <li>Nornorbinks-&gt;扶摇</li>
+        <li>Nornorbinks-&gt;甘棠</li>
+        <li>Nornorbinks-&gt;孤鸿</li>
+        <li>Nornorbinks-&gt;顾北</li>
+        <li>Nornorbinks-&gt;观澜</li>
+        <li>Nornorbinks-&gt;归鸿</li>
+        <li>Nornorbinks-&gt;寒山</li>
+        <li>Nornorbinks-&gt;鹤鸣</li>
+        <li>Nornorbinks-&gt;衡芜</li>
+        <li>Nornorbinks-&gt;怀瑾</li>
+        <li>Nornorbinks-&gt;黄歇</li>
+        <li>Nornorbinks-&gt;稷下</li>
+        <li>Nornorbinks-&gt;江离</li>
+        <li>Nornorbinks-&gt;惊蛰</li>
+        <li>Nornorbinks-&gt;九歌</li>
+        <li>Nornorbinks-&gt;兰亭</li>
+        <li>Nornorbinks-&gt;乐正</li>
+        <li>Nornorbinks-&gt;离骚</li>
+        <li>Nornorbinks-&gt;临渊</li>
+        <li>Nornorbinks-&gt;凌波</li>
+        <li>Nornorbinks-&gt;流萤</li>
+        <li>Nornorbinks-&gt;龙渊</li>
+        <li>Nornorbinks-&gt;洛神</li>
+        <li>Nornorbinks-&gt;梦溪</li>
+        <li>Nornorbinks-&gt;明玑</li>
+        <li>Nornorbinks-&gt;墨白</li>
+        <li>Nornorbinks-&gt;南乔</li>
+        <li>Nornorbinks-&gt;凝霜</li>
+        <li>Nornorbinks-&gt;磐石</li>
+        <li>Nornorbinks-&gt;青梧</li>
+        <li>Nornorbinks-&gt;清晏</li>
+        <li>Nornorbinks-&gt;曲水</li>
+        <li>Nornorbinks-&gt;任侠</li>
+        <li>Nornorbinks-&gt;若木</li>
+        <li>Nornorbinks-&gt;桑榆</li>
+        <li>Nornorbinks-&gt;山鬼</li>
+        <li>Nornorbinks-&gt;沈舟</li>
+        <li>Nornorbinks-&gt;疏影</li>
+        <li>Nornorbinks-&gt;霜降</li>
+        <li>Nornorbinks-&gt;苏木</li>
+        <li>Nornorbinks-&gt;天璇</li>
+        <li>Nornorbinks-&gt;听澜</li>
+        <li>Nornorbinks-&gt;望舒</li>
+        <li>Nornorbinks-&gt;闻笛</li>
+        <li>Nornorbinks-&gt;无涯</li>
+        <li>Nornorbinks-&gt;西洲</li>
+        <li>Nornorbinks-&gt;行云</li>
+        <li>Nornorbinks-&gt;玄冥</li>
+        <li>Nornorbinks-&gt;雪见</li>
+        <li>Nornorbinks-&gt;燕然</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionBaseNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinge-&gt;安澜</li>
+        <li>Nornorbinge-&gt;白露</li>
+        <li>Nornorbinge-&gt;北辰</li>
+        <li>Nornorbinge-&gt;沧浪</li>
+        <li>Nornorbinge-&gt;长风</li>
+        <li>Nornorbinge-&gt;澄澈</li>
+        <li>Nornorbinge-&gt;初雪</li>
+        <li>Nornorbinge-&gt;春和</li>
+        <li>Nornorbinge-&gt;丹青</li>
+        <li>Nornorbinge-&gt;东君</li>
+        <li>Nornorbinge-&gt;渡舟</li>
+        <li>Nornorbinge-&gt;芳华</li>
+        <li>Nornorbinge-&gt;飞星</li>
+        <li>Nornorbinge-&gt;风眠</li>
+        <li>Nornorbinge-&gt;归舟</li>
+        <li>Nornorbinge-&gt;海晏</li>
+        <li>Nornorbinge-&gt;浩渺</li>
+        <li>Nornorbinge-&gt;河清</li>
+        <li>Nornorbinge-&gt;鹤归</li>
+        <li>Nornorbinge-&gt;花信</li>
+        <li>Nornorbinge-&gt;怀霜</li>
+        <li>Nornorbinge-&gt;惊鸿</li>
+        <li>Nornorbinge-&gt;静好</li>
+        <li>Nornorbinge-&gt;九霄</li>
+        <li>Nornorbinge-&gt;空谷</li>
+        <li>Nornorbinge-&gt;兰若</li>
+        <li>Nornorbinge-&gt;朗月</li>
+        <li>Nornorbinge-&gt;临风</li>
+        <li>Nornorbinge-&gt;流云</li>
+        <li>Nornorbinge-&gt;落霞</li>
+        <li>Nornorbinge-&gt;明澈</li>
+        <li>Nornorbinge-&gt;暮雪</li>
+        <li>Nornorbinge-&gt;南薰</li>
+        <li>Nornorbinge-&gt;凝光</li>
+        <li>Nornorbinge-&gt;平川</li>
+        <li>Nornorbinge-&gt;栖迟</li>
+        <li>Nornorbinge-&gt;清辉</li>
+        <li>Nornorbinge-&gt;秋水</li>
+        <li>Nornorbinge-&gt;曲径</li>
+        <li>Nornorbinge-&gt;日暮</li>
+        <li>Nornorbinge-&gt;山岚</li>
+        <li>Nornorbinge-&gt;疏狂</li>
+        <li>Nornorbinge-&gt;松风</li>
+        <li>Nornorbinge-&gt;岁寒</li>
+        <li>Nornorbinge-&gt;天光</li>
+        <li>Nornorbinge-&gt;听雨</li>
+        <li>Nornorbinge-&gt;晚晴</li>
+        <li>Nornorbinge-&gt;望月</li>
+        <li>Nornorbinge-&gt;微澜</li>
+        <li>Nornorbinge-&gt;无尘</li>
+        <li>Nornorbinge-&gt;西风</li>
+        <li>Nornorbinge-&gt;晓雾</li>
+        <li>Nornorbinge-&gt;星河</li>
+        <li>Nornorbinge-&gt;行歌</li>
+        <li>Nornorbinge-&gt;虚竹</li>
+        <li>Nornorbinge-&gt;烟波</li>
+        <li>Nornorbinge-&gt;瑶光</li>
+        <li>Nornorbinge-&gt;一苇</li>
+        <li>Nornorbinge-&gt;云岫</li>
+        <li>Nornorbinge-&gt;昭华</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinks-&gt;阿宝</li>
+        <li>Nornorbinks-&gt;白泽</li>
+        <li>Nornorbinks-&gt;苍梧</li>
+        <li>Nornorbinks-&gt;赤霄</li>
+        <li>Nornorbinks-&gt;楚云</li>
+        <li>Nornorbinks-&gt;大禹</li>
+        <li>Nornorbinks-&gt;丹朱</li>
+        <li>Nornorbinks-&gt;东篱</li>
+        <li>Nornorbinks-&gt;杜若</li>
+        <li>Nornorbinks-&gt;飞廉</li>
+        <li>Nornorbinks-&gt;扶摇</li>
+        <li>Nornorbinks-&gt;甘棠</li>
+        <li>Nornorbinks-&gt;孤鸿</li>
+        <li>Nornorbinks-&gt;顾北</li>
+        <li>Nornorbinks-&gt;观澜</li>
+        <li>Nornorbinks-&gt;归鸿</li>
+        <li>Nornorbinks-&gt;寒山</li>
+        <li>Nornorbinks-&gt;鹤鸣</li>
+        <li>Nornorbinks-&gt;衡芜</li>
+        <li>Nornorbinks-&gt;怀瑾</li>
+        <li>Nornorbinks-&gt;黄歇</li>
+        <li>Nornorbinks-&gt;稷下</li>
+        <li>Nornorbinks-&gt;江离</li>
+        <li>Nornorbinks-&gt;惊蛰</li>
+        <li>Nornorbinks-&gt;九歌</li>
+        <li>Nornorbinks-&gt;兰亭</li>
+        <li>Nornorbinks-&gt;乐正</li>
+        <li>Nornorbinks-&gt;离骚</li>
+        <li>Nornorbinks-&gt;临渊</li>
+        <li>Nornorbinks-&gt;凌波</li>
+        <li>Nornorbinks-&gt;流萤</li>
+        <li>Nornorbinks-&gt;龙渊</li>
+        <li>Nornorbinks-&gt;洛神</li>
+        <li>Nornorbinks-&gt;梦溪</li>
+        <li>Nornorbinks-&gt;明玑</li>
+        <li>Nornorbinks-&gt;墨白</li>
+        <li>Nornorbinks-&gt;南乔</li>
+        <li>Nornorbinks-&gt;凝霜</li>
+        <li>Nornorbinks-&gt;磐石</li>
+        <li>Nornorbinks-&gt;青梧</li>
+        <li>Nornorbinks-&gt;清晏</li>
+        <li>Nornorbinks-&gt;曲水</li>
+        <li>Nornorbinks-&gt;任侠</li>
+        <li>Nornorbinks-&gt;若木</li>
+        <li>Nornorbinks-&gt;桑榆</li>
+        <li>Nornorbinks-&gt;山鬼</li>
+        <li>Nornorbinks-&gt;沈舟</li>
+        <li>Nornorbinks-&gt;疏影</li>
+        <li>Nornorbinks-&gt;霜降</li>
+        <li>Nornorbinks-&gt;苏木</li>
+        <li>Nornorbinks-&gt;天璇</li>
+        <li>Nornorbinks-&gt;听澜</li>
+        <li>Nornorbinks-&gt;望舒</li>
+        <li>Nornorbinks-&gt;闻笛</li>
+        <li>Nornorbinks-&gt;无涯</li>
+        <li>Nornorbinks-&gt;西洲</li>
+        <li>Nornorbinks-&gt;行云</li>
+        <li>Nornorbinks-&gt;玄冥</li>
+        <li>Nornorbinks-&gt;雪见</li>
+        <li>Nornorbinks-&gt;燕然</li>
+    </value>
+</Operation>
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RulePackDef[defName="NamerFactionNorbal"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>Nornorbinge-&gt;安澜</li>
+        <li>Nornorbinge-&gt;白露</li>
+        <li>Nornorbinge-&gt;北辰</li>
+        <li>Nornorbinge-&gt;沧浪</li>
+        <li>Nornorbinge-&gt;长风</li>
+        <li>Nornorbinge-&gt;澄澈</li>
+        <li>Nornorbinge-&gt;初雪</li>
+        <li>Nornorbinge-&gt;春和</li>
+        <li>Nornorbinge-&gt;丹青</li>
+        <li>Nornorbinge-&gt;东君</li>
+        <li>Nornorbinge-&gt;渡舟</li>
+        <li>Nornorbinge-&gt;芳华</li>
+        <li>Nornorbinge-&gt;飞星</li>
+        <li>Nornorbinge-&gt;风眠</li>
+        <li>Nornorbinge-&gt;归舟</li>
+        <li>Nornorbinge-&gt;海晏</li>
+        <li>Nornorbinge-&gt;浩渺</li>
+        <li>Nornorbinge-&gt;河清</li>
+        <li>Nornorbinge-&gt;鹤归</li>
+        <li>Nornorbinge-&gt;花信</li>
+        <li>Nornorbinge-&gt;怀霜</li>
+        <li>Nornorbinge-&gt;惊鸿</li>
+        <li>Nornorbinge-&gt;静好</li>
+        <li>Nornorbinge-&gt;九霄</li>
+        <li>Nornorbinge-&gt;空谷</li>
+        <li>Nornorbinge-&gt;兰若</li>
+        <li>Nornorbinge-&gt;朗月</li>
+        <li>Nornorbinge-&gt;临风</li>
+        <li>Nornorbinge-&gt;流云</li>
+        <li>Nornorbinge-&gt;落霞</li>
+        <li>Nornorbinge-&gt;明澈</li>
+        <li>Nornorbinge-&gt;暮雪</li>
+        <li>Nornorbinge-&gt;南薰</li>
+        <li>Nornorbinge-&gt;凝光</li>
+        <li>Nornorbinge-&gt;平川</li>
+        <li>Nornorbinge-&gt;栖迟</li>
+        <li>Nornorbinge-&gt;清辉</li>
+        <li>Nornorbinge-&gt;秋水</li>
+        <li>Nornorbinge-&gt;曲径</li>
+        <li>Nornorbinge-&gt;日暮</li>
+        <li>Nornorbinge-&gt;山岚</li>
+        <li>Nornorbinge-&gt;疏狂</li>
+        <li>Nornorbinge-&gt;松风</li>
+        <li>Nornorbinge-&gt;岁寒</li>
+        <li>Nornorbinge-&gt;天光</li>
+        <li>Nornorbinge-&gt;听雨</li>
+        <li>Nornorbinge-&gt;晚晴</li>
+        <li>Nornorbinge-&gt;望月</li>
+        <li>Nornorbinge-&gt;微澜</li>
+        <li>Nornorbinge-&gt;无尘</li>
+        <li>Nornorbinge-&gt;西风</li>
+        <li>Nornorbinge-&gt;晓雾</li>
+        <li>Nornorbinge-&gt;星河</li>
+        <li>Nornorbinge-&gt;行歌</li>
+        <li>Nornorbinge-&gt;虚竹</li>
+        <li>Nornorbinge-&gt;烟波</li>
+        <li>Nornorbinge-&gt;瑶光</li>
+        <li>Nornorbinge-&gt;一苇</li>
+        <li>Nornorbinge-&gt;云岫</li>
+        <li>Nornorbinge-&gt;昭华</li>
+    </value>
+</Operation>
+
+    <!-- 来源: 43_NorbalXenotypeNameMaker.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RulePackDef>
+            <defName>NamerXenotypeNorbal</defName>
+            <label>norbal pawn name</label>
+            <rulePack>
+                <rulesStrings>
+                    <li>name-&gt;[Nornorbinks] [Nornorbinge]</li>
+                    <li>Nornorbinks-&gt;奥丁</li>
+                    <li>Nornorbinks-&gt;索尔</li>
+                    <li>Nornorbinks-&gt;弗雷</li>
+                    <li>Nornorbinks-&gt;提尔</li>
+                    <li>Nornorbinks-&gt;巴德</li>
+                    <li>Nornorbinks-&gt;霍德</li>
+                    <li>Nornorbinks-&gt;维达</li>
+                    <li>Nornorbinks-&gt;瓦利</li>
+                    <li>Nornorbinks-&gt;布拉基</li>
+                    <li>Nornorbinks-&gt;伊登</li>
+                    <li>Nornorbinks-&gt;希芙</li>
+                    <li>Nornorbinks-&gt;芙蕾雅</li>
+                    <li>Nornorbinks-&gt;斯卡蒂</li>
+                    <li>Nornorbinks-&gt;尼约德</li>
+                    <li>Nornorbinks-&gt;洛基</li>
+                    <li>Nornorbinks-&gt;海姆达尔</li>
+                    <li>Nornorbinks-&gt;拉格纳</li>
+                    <li>Nornorbinks-&gt;比约恩</li>
+                    <li>Nornorbinks-&gt;埃里克</li>
+                    <li>Nornorbinks-&gt;齐格飞</li>
+                    <li>Nornorbinks-&gt;沃尔夫</li>
+                    <li>Nornorbinks-&gt;乌尔里希</li>
+                    <li>Nornorbinks-&gt;埃吉尔</li>
+                    <li>Nornorbinks-&gt;布伦希</li>
+                    <li>Nornorbinks-&gt;阿宝</li>
+                    <li>Nornorbinks-&gt;白泽</li>
+                    <li>Nornorbinks-&gt;苍梧</li>
+                    <li>Nornorbinks-&gt;赤霄</li>
+                    <li>Nornorbinks-&gt;楚云</li>
+                    <li>Nornorbinks-&gt;大禹</li>
+                    <li>Nornorbinks-&gt;丹朱</li>
+                    <li>Nornorbinks-&gt;东篱</li>
+                    <li>Nornorbinks-&gt;杜若</li>
+                    <li>Nornorbinks-&gt;飞廉</li>
+                    <li>Nornorbinks-&gt;扶摇</li>
+                    <li>Nornorbinks-&gt;甘棠</li>
+                    <li>Nornorbinks-&gt;孤鸿</li>
+                    <li>Nornorbinks-&gt;顾北</li>
+                    <li>Nornorbinks-&gt;观澜</li>
+                    <li>Nornorbinks-&gt;归鸿</li>
+                    <li>Nornorbinks-&gt;寒山</li>
+                    <li>Nornorbinks-&gt;鹤鸣</li>
+                    <li>Nornorbinks-&gt;衡芜</li>
+                    <li>Nornorbinks-&gt;怀瑾</li>
+                    <li>Nornorbinks-&gt;江离</li>
+                    <li>Nornorbinks-&gt;惊蛰</li>
+                    <li>Nornorbinks-&gt;九歌</li>
+                    <li>Nornorbinks-&gt;兰亭</li>
+                    <li>Nornorbinks-&gt;临渊</li>
+                    <li>Nornorbinks-&gt;凌波</li>
+                    <li>Nornorbinks-&gt;流萤</li>
+                    <li>Nornorbinks-&gt;龙渊</li>
+                    <li>Nornorbinks-&gt;洛神</li>
+                    <li>Nornorbinks-&gt;梦溪</li>
+                    <li>Nornorbinks-&gt;清晏</li>
+                    <li>Nornorbinks-&gt;曲水</li>
+                    <li>Nornorbinks-&gt;若木</li>
+                    <li>Nornorbinks-&gt;桑榆</li>
+                    <li>Nornorbinks-&gt;疏影</li>
+                    <li>Nornorbinks-&gt;霜降</li>
+                    <li>Nornorbinks-&gt;天璇</li>
+                    <li>Nornorbinks-&gt;望舒</li>
+                    <li>Nornorbinks-&gt;闻笛</li>
+                    <li>Nornorbinks-&gt;无涯</li>
+                    <li>Nornorbinks-&gt;西洲</li>
+                    <li>Nornorbinks-&gt;行云</li>
+                    <li>Nornorbinks-&gt;玄冥</li>
+                    <li>Nornorbinks-&gt;雪见</li>
+                    <li>Nornorbinks-&gt;燕然</li>
+                    <li>Nornorbinks-&gt;安吉尔</li>
+                    <li>Nornorbinks-&gt;凯尔</li>
+                    <li>Nornorbinks-&gt;唐</li>
+                    <li>Nornorbinks-&gt;埃雷特</li>
+                    <li>Nornorbinks-&gt;佛若</li>
+                    <li>Nornorbinks-&gt;盖尔</li>
+                    <li>Nornorbinks-&gt;霍多尔</li>
+                    <li>Nornorbinks-&gt;伊利亚</li>
+                    <li>Nornorbinks-&gt;约迪尔</li>
+                    <li>Nornorbinks-&gt;凯里斯</li>
+                    <li>Nornorbinks-&gt;莱杜姆</li>
+                    <li>Nornorbinks-&gt;穆尔特</li>
+                    <li>Nornorbinks-&gt;诺博</li>
+                    <li>Nornorbinks-&gt;奥利姆</li>
+                    <li>Nornorbinks-&gt;普迪尔</li>
+                    <li>Nornorbinks-&gt;库努姆</li>
+                    <li>Nornorbinks-&gt;罗斯特</li>
+                    <li>Nornorbinks-&gt;斯滕</li>
+                    <li>Nornorbinks-&gt;泰尔</li>
+                    <li>Nornorbinks-&gt;乌利尔</li>
+                    <li>Nornorbinks-&gt;韦尔</li>
+                    <li>Nornorbinks-&gt;瓦恩</li>
+                    <li>Nornorbinks-&gt;克西迪尔</li>
+                    <li>Nornorbinks-&gt;伊卢姆</li>
+                    <li>Nornorbinks-&gt;扎迪尔</li>
+                    <li>Nornorbinks-&gt;霜角</li>
+                    <li>Nornorbinks-&gt;北风</li>
+                    <li>Nornorbinks-&gt;极光</li>
+                    <li>Nornorbinks-&gt;冰原</li>
+                    <li>Nornorbinks-&gt;雪岭</li>
+                    <li>Nornorbinks-&gt;冻土</li>
+                    <li>Nornorbinks-&gt;苍狼</li>
+                    <li>Nornorbinks-&gt;银杉</li>
+                    <li>Nornorbinks-&gt;雾凇</li>
+                    <li>Nornorbinks-&gt;寒塘</li>
+                    <li>Nornorbinks-&gt;磐岩</li>
+                    <li>Nornorbinks-&gt;烛龙</li>
+                    <li>Nornorbinks-&gt;玄鸟</li>
+                    <li>Nornorbinks-&gt;应龙</li>
+                    <li>Nornorbinks-&gt;白鲸</li>
+                    <li>Nornorbinks-&gt;崖柏</li>
+                    <li>Nornorbinks-&gt;青竹</li>
+                    <li>Nornorbinks-&gt;独居</li>
+                    <li>Nornorbinge-&gt;雷夫</li>
+                    <li>Nornorbinge-&gt;乌尔夫</li>
+                    <li>Nornorbinge-&gt;斯滕</li>
+                    <li>Nornorbinge-&gt;哈拉尔德</li>
+                    <li>Nornorbinge-&gt;克努特</li>
+                    <li>Nornorbinge-&gt;斯韦恩</li>
+                    <li>Nornorbinge-&gt;奥拉夫</li>
+                    <li>Nornorbinge-&gt;马格努斯</li>
+                    <li>Nornorbinge-&gt;埃纳尔</li>
+                    <li>Nornorbinge-&gt;芬恩</li>
+                    <li>Nornorbinge-&gt;冈纳尔</li>
+                    <li>Nornorbinge-&gt;伊瓦尔</li>
+                    <li>Nornorbinge-&gt;哈夫丹</li>
+                    <li>Nornorbinge-&gt;罗洛</li>
+                    <li>Nornorbinge-&gt;西格德</li>
+                    <li>Nornorbinge-&gt;格里姆</li>
+                    <li>Nornorbinge-&gt;奥德</li>
+                    <li>Nornorbinge-&gt;索尔薇</li>
+                    <li>Nornorbinge-&gt;阿斯加德</li>
+                    <li>Nornorbinge-&gt;瓦兰</li>
+                    <li>Nornorbinge-&gt;埃达</li>
+                    <li>Nornorbinge-&gt;尤弥尔</li>
+                    <li>Nornorbinge-&gt;芬里尔</li>
+                    <li>Nornorbinge-&gt;海拉</li>
+                    <li>Nornorbinge-&gt;瓦纳</li>
+                    <li>Nornorbinge-&gt;阿尔夫</li>
+                    <li>Nornorbinge-&gt;雷金</li>
+                    <li>Nornorbinge-&gt;法夫纳</li>
+                    <li>Nornorbinge-&gt;西古尔德</li>
+                    <li>Nornorbinge-&gt;古德伦</li>
+                    <li>Nornorbinge-&gt;哈根</li>
+                    <li>Nornorbinge-&gt;斯诺里</li>
+                    <li>Nornorbinge-&gt;瓦格纳</li>
+                    <li>Nornorbinge-&gt;安澜</li>
+                    <li>Nornorbinge-&gt;白露</li>
+                    <li>Nornorbinge-&gt;北辰</li>
+                    <li>Nornorbinge-&gt;沧浪</li>
+                    <li>Nornorbinge-&gt;长风</li>
+                    <li>Nornorbinge-&gt;澄澈</li>
+                    <li>Nornorbinge-&gt;初雪</li>
+                    <li>Nornorbinge-&gt;春和</li>
+                    <li>Nornorbinge-&gt;丹青</li>
+                    <li>Nornorbinge-&gt;东君</li>
+                    <li>Nornorbinge-&gt;渡舟</li>
+                    <li>Nornorbinge-&gt;芳华</li>
+                    <li>Nornorbinge-&gt;飞星</li>
+                    <li>Nornorbinge-&gt;风眠</li>
+                    <li>Nornorbinge-&gt;归舟</li>
+                    <li>Nornorbinge-&gt;海晏</li>
+                    <li>Nornorbinge-&gt;浩渺</li>
+                    <li>Nornorbinge-&gt;河清</li>
+                    <li>Nornorbinge-&gt;鹤归</li>
+                    <li>Nornorbinge-&gt;花信</li>
+                    <li>Nornorbinge-&gt;怀霜</li>
+                    <li>Nornorbinge-&gt;惊鸿</li>
+                    <li>Nornorbinge-&gt;静好</li>
+                    <li>Nornorbinge-&gt;九霄</li>
+                    <li>Nornorbinge-&gt;空谷</li>
+                    <li>Nornorbinge-&gt;兰若</li>
+                    <li>Nornorbinge-&gt;朗月</li>
+                    <li>Nornorbinge-&gt;临风</li>
+                    <li>Nornorbinge-&gt;流云</li>
+                    <li>Nornorbinge-&gt;落霞</li>
+                    <li>Nornorbinge-&gt;明澈</li>
+                    <li>Nornorbinge-&gt;暮雪</li>
+                    <li>Nornorbinge-&gt;南薰</li>
+                    <li>Nornorbinge-&gt;凝光</li>
+                    <li>Nornorbinge-&gt;平川</li>
+                    <li>Nornorbinge-&gt;栖迟</li>
+                    <li>Nornorbinge-&gt;清辉</li>
+                    <li>Nornorbinge-&gt;秋水</li>
+                    <li>Nornorbinge-&gt;曲径</li>
+                    <li>Nornorbinge-&gt;日暮</li>
+                    <li>Nornorbinge-&gt;山岚</li>
+                    <li>Nornorbinge-&gt;疏狂</li>
+                    <li>Nornorbinge-&gt;松风</li>
+                    <li>Nornorbinge-&gt;岁寒</li>
+                    <li>Nornorbinge-&gt;天光</li>
+                    <li>Nornorbinge-&gt;听雨</li>
+                    <li>Nornorbinge-&gt;晚晴</li>
+                    <li>Nornorbinge-&gt;望月</li>
+                    <li>Nornorbinge-&gt;微澜</li>
+                    <li>Nornorbinge-&gt;无尘</li>
+                    <li>Nornorbinge-&gt;西风</li>
+                    <li>Nornorbinge-&gt;晓雾</li>
+                    <li>Nornorbinge-&gt;星河</li>
+                    <li>Nornorbinge-&gt;行歌</li>
+                    <li>Nornorbinge-&gt;虚竹</li>
+                    <li>Nornorbinge-&gt;烟波</li>
+                    <li>Nornorbinge-&gt;瑶光</li>
+                    <li>Nornorbinge-&gt;一苇</li>
+                    <li>Nornorbinge-&gt;云岫</li>
+                    <li>Nornorbinge-&gt;昭华</li>
+                    <li>Nornorbinge-&gt;阿达夫</li>
+                    <li>Nornorbinge-&gt;巴埃</li>
+                    <li>Nornorbinge-&gt;坎尼</li>
+                    <li>Nornorbinge-&gt;多斯</li>
+                    <li>Nornorbinge-&gt;恩格</li>
+                    <li>Nornorbinge-&gt;富夫</li>
+                    <li>Nornorbinge-&gt;加夫</li>
+                    <li>Nornorbinge-&gt;霍斯</li>
+                    <li>Nornorbinge-&gt;伊肯</li>
+                    <li>Nornorbinge-&gt;约斯</li>
+                    <li>Nornorbinge-&gt;莱尔</li>
+                    <li>Nornorbinge-&gt;米克</li>
+                    <li>Nornorbinge-&gt;尼克</li>
+                    <li>Nornorbinge-&gt;奥斯特</li>
+                    <li>Nornorbinge-&gt;佩克</li>
+                    <li>Nornorbinge-&gt;卡恩</li>
+                    <li>Nornorbinge-&gt;拉克</li>
+                    <li>Nornorbinge-&gt;塔姆</li>
+                    <li>Nornorbinge-&gt;乌尔</li>
+                    <li>Nornorbinge-&gt;瓦斯</li>
+                    <li>Nornorbinge-&gt;克塞</li>
+                    <li>Nornorbinge-&gt;伊思</li>
+                    <li>Nornorbinge-&gt;扎夫</li>
+                    <li>Nornorbinge-&gt;冰冠</li>
+                    <li>Nornorbinge-&gt;霜河</li>
+                    <li>Nornorbinge-&gt;雪山</li>
+                    <li>Nornorbinge-&gt;苔原</li>
+                    <li>Nornorbinge-&gt;寒霜</li>
+                    <li>Nornorbinge-&gt;澄江</li>
+                    <li>Nornorbinge-&gt;远岫</li>
+                    <li>Nornorbinge-&gt;长风万里</li>
+                </rulesStrings>
+            </rulePack>
+        </RulePackDef>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/XenotypeDef[defName="Baseline_Norbal"]/nameMaker</xpath>
+    <value>
+        <nameMaker>NamerXenotypeNorbal</nameMaker>
+    </value>
+</Operation>
+
+
+    <!-- 来源: 47_人名中文化.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="RK_Culture_Virtuard"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="RK_Culture_Virtuard"]/pawnNameMakerFemale</xpath>
+    <value>
+        <pawnNameMakerFemale>HskCnPersonNameFemale</pawnNameMakerFemale>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Vigingr"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Animatic"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Outrageous"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Knighthood"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Knighthood"]/pawnNameMakerFemale</xpath>
+    <value>
+        <pawnNameMakerFemale>HskCnPersonNameFemale</pawnNameMakerFemale>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/CultureDef[defName="Astrofeline"]/pawnNameMaker</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/CultureDef[defName="AsariCulture"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/CultureDef[defName="AsariCulture"]/pawnNameMaker</xpath>
+        <value>
+            <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+        </value>
+    </match>
+</Operation>
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/CultureDef[defName="Aolarian"]/pawnNameMaker</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/CultureDef[defName="Aolarian"]/pawnNameMaker</xpath>
+        <value>
+            <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/CultureDef[defName="Aolarian"]</xpath>
+        <value>
+            <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/CultureDef[defName="LegionCulture"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/CultureDef[defName="LegionCulture"]/pawnNameMaker</xpath>
+        <value>
+            <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+        </value>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/CultureDef[defName="Satanism"]</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/CultureDef[defName="Corporatocracy"]</xpath>
+    <value>
+        <pawnNameMaker>HskCnPersonName</pawnNameMaker>
+    </value>
+</Operation>
+
+    <!-- ============================================================
+         ResearchTreeSK 坐标警告修复(2026-08-23, 二次修订)
+         报错: "research nodes not positioned to the right of their prerequisites"
+         根因: Metals_C1 曾右移到 8 与 Machining/CentralHeating 同列(x 相同);
+               Food_C1 与 MicroelectronicsBasics 同列(Core_SK 原布局)。
+         修复(终版): ①Machining/CentralHeating/Food_C1 保持 x=8 不动, 改移它们的
+               前置 —— Metals_C1 回退 7(见文件顶部)、MicroelectronicsBasics 左移到 7
+               (见本文件末尾追加段), 前置全部 < 8, 同列警告自然消除;
+               ②Melee_C1/Biosculpting/NeuralSupercharger 右移 1 格(9.00) 有效, 保留;
+               ③Storage_C2 用整数 12.00(右移 2 格目标)。
+         ⚠️ 教训: ResearchTreeSK 对 researchViewX 非整数强制向下取整(floor),
+            半格坐标(8.5/10.5)会被打回整数、修复无效且产生 "position was fixed" 噪音。
+            本块旧版曾用 8.50/12.50 半格, 全部失效, 已改为整数。
+         全部 Conditional 门控: 目标节点不存在时静默跳过(1.6 无 Operation 级
+               MayRequire, 不用 Conditional 会误报 Failed to find a node)。
+         ============================================================ -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Machining"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Machining"]/researchViewX</xpath>
+            <value><researchViewX>8.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Melee_C1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Melee_C1"]/researchViewX</xpath>
+            <value><researchViewX>9.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="CentralHeating"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="CentralHeating"]/researchViewX</xpath>
+            <value><researchViewX>8.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Storage_C2"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Storage_C2"]/researchViewX</xpath>
+            <value><researchViewX>12.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Biosculpting"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Biosculpting"]/researchViewX</xpath>
+            <value><researchViewX>9.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="NeuralSupercharger"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="NeuralSupercharger"]/researchViewX</xpath>
+            <value><researchViewX>9.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Food_C1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Food_C1"]/researchViewX</xpath>
+            <value><researchViewX>8.00</researchViewX></value>
+        </match>
+    </Operation>
+
+    <!-- ============================================================
+         2026-08-23 用户布局/依赖调整
+         ① 存储设施 VII/VIII/VX(Storage_C2/C3/C4)各向右移动 2 格
+            (Storage_C2 见上方 12.00;此处补 Storage_C3/C4)
+         ② 电力工程 I(Electricity)追加前置 科学技术研究 II(Research_table_B2)
+         ③ 存储设施 X(Storage_D1)保留 Storage_C4 并追加前置 电子 II(Electronics_C2)
+         全部 Conditional 门控: 目标节点不存在时静默跳过。
+         ============================================================ -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Storage_C3"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Storage_C3"]/researchViewX</xpath>
+            <value><researchViewX>13.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Storage_C4"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Storage_C4"]/researchViewX</xpath>
+            <value><researchViewX>14.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Electricity"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Electricity"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>Research_table_B2</li>
+                </prerequisites>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Storage_D1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Storage_D1"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>Storage_C4</li>
+                    <li>Electronics_C2</li>
+                </prerequisites>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- ============================================================
+         2026-08-23 晚: ResearchTreeSK 同列/冗余警告根治(追加段)
+         ① Electricity 左移一格 7→6: Metals_C1 回退到 7 后, 其前置 Electricity(7,15)
+            与 Metals_C1(7,22) 同列 —— 双保险左移, 保证 Metals_C1(7) 严格在
+            Electricity(6) 右侧。Electricity 无前置、256 个后代全部 x>6, 安全。
+         ② MicroelectronicsBasics 左移一格 8→7: 消除 Food_C1(8,48) 与
+            MicroelectronicsBasics(8,21) 同列警告(前置 7 < 子节点 8)。
+         ③ Research_table_C1(科学技术研究 III) 前置删 Research_table_B2:
+            B2 已通过 MicroelectronicsBasics→Electricity→B2 间接可达
+            (本文件上方给 Electricity 追加的前置正是 B2), 列表冗余;
+            删直接项后游戏内研究顺序不变, ResearchTreeSK 冗余警告消除。
+         ④ Stargate_F1(星门) 前置删 ShipBasics: ShipBasics 已通过其 5 个直接后代
+            (ShipComputerCore/ShipEngine/ShipReactor/ShipCryptosleep/ShipSensorCluster)
+            间接可达, 列表冗余; 删直接项后星门仍须先研究星际飞行基础, 逻辑不变。
+         全部 Conditional 门控: 目标节点不存在时静默跳过。
+         ============================================================ -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Electricity"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Electricity"]/researchViewX</xpath>
+            <value><researchViewX>6.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="MicroelectronicsBasics"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="MicroelectronicsBasics"]/researchViewX</xpath>
+            <value><researchViewX>7.00</researchViewX></value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Research_table_C1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Research_table_C1"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>MicroelectronicsBasics</li>
+                </prerequisites>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Stargate_F1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Stargate_F1"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>ShipComputerCore</li>
+                    <li>ShipCryptosleep</li>
+                    <li>ShipEngine</li>
+                    <li>ShipReactor</li>
+                    <li>ShipSensorCluster</li>
+                </prerequisites>
+            </value>
+        </match>
+    </Operation>
+    <!-- ========== 玻璃制作 I(Glass_B1)位置修复(2026-08-27,自鼠族HSK拓展 32 号补丁迁入) ==========
+         vitech.metallurgy 加载序在 local.ratkin.clothesweapons 之后,其补丁把 Glass_B1
+         从 Core_SK 原始 (4,20) 挪到 (5,20);修复必须由加载序更晚的 mod 执行(本 mod 满足),
+         写在鼠族 32 号补丁里会被 Vile 补丁覆盖、永不生效。
+         (5,20) 与工具 I(RKHSK_Tools_Medieval1)同页签(Craft_SK)撞车,Construction_B3(5,13)
+         亦不满足"前置在右侧";改回 (4,20)(前置 Ceramics_B1 在 (3,20) 右侧一格)。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Glass_B1"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Glass_B1"]/researchViewX</xpath>
+            <value><researchViewX>4.00</researchViewX></value>
+        </match>
+    </Operation>
+
+
+</Patch>

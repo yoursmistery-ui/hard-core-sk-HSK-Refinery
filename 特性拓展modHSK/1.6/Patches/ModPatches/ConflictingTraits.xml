@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 特性互斥统一补丁 (2026-08-24 统一版, 取代 ConflictingTraits_Reaver/Slow/NeatFreak 三个分散文件)
+	     全部互斥双向声明: HSKTraitConflictGuard 依赖 TraitDef.ConflictsWith(单向), 双向声明保证生成期兜底。
+	     无 conflictingTraits 节点的特质用 Conditional 双分支(nomatch 建节点 / match 追加)。
+	     组别与用户需求对应, 近似映射见 设计/特性互斥规则.md。 -->
+
+	<!-- ============ 组1: 唯美主义(Aesthete) ↔ 心理变态(Psychopath) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Aesthete"]/conflictingTraits</xpath>
+		<value>
+			<li>Psychopath</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Psychopath"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Psychopath"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Aesthete</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Psychopath"]/conflictingTraits</xpath>
+			<value>
+				<li>Aesthete</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组2: 抑郁症(≈Bipolar)/懦弱(Wimp) ↔ 意志坚定/钢铁意志(Nerves)/坚韧(Tough) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Bipolar"]/conflictingTraits</xpath>
+		<value>
+			<li>Nerves</li>
+			<li>Tough</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Wimp"]/conflictingTraits</xpath>
+		<value>
+			<li>Nerves</li>
+			<li>Tough</li>
+			<li>Reaver</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Nerves"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Nerves"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Bipolar</li>
+					<li>Wimp</li>
+					<li>VTE_Anxious</li>
+					<li>VTE_Schizoid</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Nerves"]/conflictingTraits</xpath>
+			<value>
+				<li>Bipolar</li>
+				<li>Wimp</li>
+				<li>VTE_Anxious</li>
+				<li>VTE_Schizoid</li>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Tough"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Tough"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Bipolar</li>
+					<li>Wimp</li>
+					<li>VTE_Anxious</li>
+					<li>VTE_Schizoid</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Tough"]/conflictingTraits</xpath>
+			<value>
+				<li>Bipolar</li>
+				<li>Wimp</li>
+				<li>VTE_Anxious</li>
+				<li>VTE_Schizoid</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组3: 乐观(≈Confident) ↔ 冷漠(VTE_Desensitized) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Confident"]/conflictingTraits</xpath>
+		<value>
+			<li>VTE_Desensitized</li>
+			<li>VTE_WorldWeary</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Desensitized"]/conflictingTraits</xpath>
+		<value>
+			<li>Confident</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="VTE_WorldWeary"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="VTE_WorldWeary"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Confident</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="VTE_WorldWeary"]/conflictingTraits</xpath>
+			<value>
+				<li>Confident</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组4: 意志坚定/钢铁意志(Nerves)/坚韧(Tough) ↔ 崩溃艺术家(≈VTE_Anxious)/精神分裂症(VTE_Schizoid) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Anxious"]/conflictingTraits</xpath>
+		<value>
+			<li>Nerves</li>
+			<li>Tough</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="VTE_Schizoid"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="VTE_Schizoid"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Nerves</li>
+					<li>Tough</li>
+					<li>Religious</li>
+					<li>VTE_Prude</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="VTE_Schizoid"]/conflictingTraits</xpath>
+			<value>
+				<li>Nerves</li>
+				<li>Tough</li>
+				<li>Religious</li>
+				<li>VTE_Prude</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组5: 虔诚(Religious)/专一(VTE_Prude) ↔ 花心(VTE_Insatiable)/胡思乱想(VTE_AbsentMinded)/精神分裂症(VTE_Schizoid) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Religious"]/conflictingTraits</xpath>
+		<value>
+			<li>VTE_Insatiable</li>
+			<li>VTE_AbsentMinded</li>
+			<li>VTE_Schizoid</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Insatiable"]/conflictingTraits</xpath>
+		<value>
+			<li>Religious</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_AbsentMinded"]/conflictingTraits</xpath>
+		<value>
+			<li>Religious</li>
+			<li>VTE_Prude</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Prude"]/conflictingTraits</xpath>
+		<value>
+			<li>VTE_AbsentMinded</li>
+			<li>VTE_Schizoid</li>
+		</value>
+	</Operation>
+
+	<!-- ============ 组6: 嗜血(Bloodlust) ↔ 脆弱(Fragile / Delicate) ============ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Bloodlust"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Bloodlust"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Fragile</li>
+					<li>Delicate</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Bloodlust"]/conflictingTraits</xpath>
+			<value>
+				<li>Fragile</li>
+				<li>Delicate</li>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Fragile"]/conflictingTraits</xpath>
+		<value>
+			<li>Bloodlust</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Delicate"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Delicate"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Bloodlust</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Delicate"]/conflictingTraits</xpath>
+			<value>
+				<li>Bloodlust</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组7: 工作狂(VTE_Workaholic)/勤奋(Industriousness) ↔ 慢性子(Slow) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Workaholic"]/conflictingTraits</xpath>
+		<value>
+			<li>Slow</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Slow"]/conflictingTraits</xpath>
+		<value>
+			<li>VTE_Workaholic</li>
+			<li>Industriousness</li>
+			<li>EatingSpeed</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="Industriousness"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Industriousness"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Slow</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="Industriousness"]/conflictingTraits</xpath>
+			<value>
+				<li>Slow</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 组8: 自信(Confident) ↔ 悲观(≈VTE_WorldWeary 厌世) [并入组3 Confident 操作] ============ -->
+
+	<!-- ============ 旧组并入: 格斗者(Reaver) ↔ 懦弱(Wimp)/柔弱(Weak)/胆小鬼(VTE_Coward) ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Reaver"]/conflictingTraits</xpath>
+		<value>
+			<li>Wimp</li>
+			<li>Weak</li>
+			<li>VTE_Coward</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Weak"]/conflictingTraits</xpath>
+		<value>
+			<li>Reaver</li>
+			<li>Brawler</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Coward"]/conflictingTraits</xpath>
+		<value>
+			<li>Reaver</li>
+		</value>
+	</Operation>
+
+	<!-- ============ 并入: 好斗(Brawler) ↔ 柔弱(Weak)/胆小鬼(VTE_Coward) [原部署遗留 ConflictingTraits_Brawler.xml, 2026-08-24 并入] ============ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="Brawler"]/conflictingTraits</xpath>
+		<value>
+			<li>Weak</li>
+			<li>VTE_Coward</li>
+		</value>
+	</Operation>
+
+	<!-- ============ 旧组并入: 慢性子(Slow) ↔ 狼吞虎咽(EatingSpeed) [Slow 侧见组7; EatingSpeed 侧在此] ============ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="EatingSpeed"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="EatingSpeed"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>Slow</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="EatingSpeed"]/conflictingTraits</xpath>
+			<value>
+				<li>Slow</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ============ 旧组并入: 洁癖(NeatFreak) ↔ 邋遢鬼(VTE_Slob) ============ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraitDef[defName="NeatFreak"]/conflictingTraits</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="NeatFreak"]</xpath>
+			<value>
+				<conflictingTraits>
+					<li>VTE_Slob</li>
+				</conflictingTraits>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraitDef[defName="NeatFreak"]/conflictingTraits</xpath>
+			<value>
+				<li>VTE_Slob</li>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraitDef[defName="VTE_Slob"]/conflictingTraits</xpath>
+		<value>
+			<li>NeatFreak</li>
+		</value>
+	</Operation>
+</Patch>

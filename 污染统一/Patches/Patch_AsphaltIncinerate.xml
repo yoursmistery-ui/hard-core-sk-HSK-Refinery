@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 沥青不再使用独立焚烧炉，直接挂到原版电焚化炉 ElectricCrematorium，
+	     在原有焚尸/焚衣/焚武器/焚药品配方基础上追加「焚烧沥青制混凝土」配方。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="ElectricCrematorium"]/recipes</xpath>
+		<value>
+			<li>Process_Asphalt_To_Concrete</li>
+		</value>
+	</Operation>
+</Patch>

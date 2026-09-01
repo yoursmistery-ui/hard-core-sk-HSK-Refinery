@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 写作工作类型年龄限制: 人类与鼠族均 13 岁解锁(VBooksE 1.6 原版仅 Human,
+         鼠族基类(RatkinRaceHSK)需单独补丁;两操作均 xpath 存在性门控) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Human"]/race/lifeStageWorkSettings</xpath>
+        <value>
+            <VBE_Writing>13</VBE_Writing>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race/lifeStageWorkSettings</xpath>
+        <value>
+            <VBE_Writing>13</VBE_Writing>
+        </value>
+    </Operation>
+</Patch>

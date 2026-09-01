@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+01_帝国银令货币(2026-08-19 创建, 2026-08-20 改名: 银币→银令, 金币→金令)
+
+需求(用户): 双货币定版(2026-08-21) ——
+游戏普通结算货币 = 帝国银令(SilverCoin),只能贸易获得,不能自产;
+银矿(Silver)回归纯材料(银矿=银矿,银令=银令,价格 1:1);
+金令(GoldCoin)为第二高面值货币(一般等价物,1 金令 = 35 银令),只在帝国及个别势力少量携带流通。
+
+机制(1.6.4871 反编译确认):
+  - 原版把货币硬编码绑定在 ThingDefOf.Silver 上(全程序集 21 处 ldsfld),
+    货币结算/商人资金/资源面板全部指向它;Assemblies/ImperialCoinFix.dll 用
+    Harmony transpiler 把这 21 处全部替换为 ThingDefOf.SilverCoin,使货币 = 帝国银令。
+  - 商人的"钱" = TraderKindDef 库存里生成的货币物品(TraderKindDef 无独立资金字段),
+    因此商人资金行必须从 Silver 改为 SilverCoin,否则商人没钱支付。
+  - Core_SK_DLCModule(Royalty/Patches/SK_Patches_Royalty_TradersUseCoins.xml)给商人
+    加的 SilverCoin/GoldCoin 是"可购买的商品",会出现在商人商品列表里(花钱买钱),删除;
+    金令商品行后续由 04 补丁按"工业时代以上"标准选择性恢复。
+  - Vile MS 的 MakeCoins(银锭x10 -> 银x100)与 MeltCoins(银x10 -> 银锭x10)是"自己造钱"
+    的配方,银矿与银锭 10:1 无损互换,严重破坏数值体系——已由 HSK修复整合 36 号补丁
+    (删除铸币配方)整体删除(2026-08-19 用户要求),货币完全无法自产,本 mod 不再改造 MakeCoins。
+  - 资源条: 银令进「资源」组顶部(First + alwaysShow = 资源条第一行常驻,原版银行为),
+    银矿降 Middle 让位,金令 Last + 有才显示。
+
+所有操作 MayRequire 门控(依赖 Core_SK DLCModule 提供 SilverCoin/GoldCoin),缺依赖自动跳过,不刷错。
+
+本补丁为最终层,后于 Core_SK / Core_SK_DLCModule / Vile MS 加载。
+-->
+
+<Patch>
+
+  <!-- ⚠️ 顺序必须: 先删硬币商品行, 再改资金行。若反过来, Remove li[thingDef="SilverCoin"] 会把刚改完的资金行也删掉 → 商人没钱(2026-08-19 实测) -->
+
+  <!-- 1. 删除 Core_SK_DLCModule 给商人加的银令/金令商品行(商人不再卖货币; 此时资金行还是 Silver, 不会误删) -->
+  <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef/stockGenerators/li[thingDef="SilverCoin"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef/stockGenerators/li[thingDef="GoldCoin"]</xpath>
+  </Operation>
+
+  <!-- 2. 商人资金行: 所有 TraderKindDef 库存中的 Silver(资金)改为 SilverCoin -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/TraderKindDef/stockGenerators/li[thingDef="Silver"]/thingDef</xpath>
+    <value>
+      <thingDef>SilverCoin</thingDef>
+    </value>
+  </Operation>
+
+  <!-- 3. 硬币面值对齐: 1 金令 = 35 银令(对应游戏内金矿:银矿 35:1)。
+         银令 MV=1、金令 MV=35, 覆盖 Core_SK 默认的 25/500, 使商人估值/财富计算/quickinfo
+         与 DLL 的 ExchangeRate=35 一致, 消除"金币(10)比银币(25)还便宜"的面值错乱。
+         注意: 银令作为货币行结算仍按"枚数"走(不受 MV 影响), MV 只影响其作为物品的估值。 -->
+  <Operation Class="PatchOperationConditional" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/ThingDef[defName="SilverCoin"]/statBases/MarketValue</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="SilverCoin"]/statBases/MarketValue</xpath>
+      <value>
+        <MarketValue>1</MarketValue>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SilverCoin"]/statBases</xpath>
+      <value>
+        <MarketValue>1</MarketValue>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/ThingDef[defName="GoldCoin"]/statBases/MarketValue</xpath>
+    <value>
+      <MarketValue>35</MarketValue>
+    </value>
+  </Operation>
+
+  <!-- 4. (已移除 2026-08-19) 原"铸币配方改为纯冶炼(银矿石 -> 银锭)"改造: MakeCoins 配方
+         已被 HSK修复整合 36 号补丁整体删除,此处的 Replace 若保留会报 Failed to find a node。 -->
+
+  <!-- 5. 银令: 保留在 Coins 分类(不进「资源」组, 资源条不显示), 优先级 First 供 ResourceCounter 计数 -->
+  <!-- ⚠️ ResourceCountPriority 合法值: Uncounted/Last/Middle/First(1.6 反射确认), 无 Normal -->
+  <!-- ⚠️ 2026-08-19 改版: 用户要求资源条最顶不显示金令银令, 改左上角独立 UI 展示(见 ImperialCoinFix.dll 的 GameComponent)。 -->
+  <!-- 银令原始 XML 无 thingCategories 节点(在父类 CoinBase), 保持继承 Coins 即可, 本补丁不再动 thingCategories -->
+
+  <!-- 6. 银矿(材料)恢复 First(原版行为, 资源条第一行是银矿材料, 不再是货币) -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/ThingDef[defName="Silver"]/resourceReadoutPriority</xpath>
+    <value>
+      <resourceReadoutPriority>First</resourceReadoutPriority>
+    </value>
+  </Operation>
+
+  <!-- 7. 金令: 保留在 Coins 分类(不进资源组), 优先级 Last 供计数, alwaysShow=true(用户要求金令 0 也显示) -->
+  <!-- Coins 分类排最上由 ImperialCoinFix.dll 的 ResourceReadout 构造器 postfix 实现(把 Coins 移到 RootThingCategories 首位) -->
+  <Operation Class="PatchOperationConditional" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/ThingDef[defName="GoldCoin"]/resourceReadoutAlwaysShow</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="GoldCoin"]/resourceReadoutAlwaysShow</xpath>
+      <value>
+        <resourceReadoutAlwaysShow>true</resourceReadoutAlwaysShow>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GoldCoin"]</xpath>
+      <value>
+        <resourceReadoutAlwaysShow>true</resourceReadoutAlwaysShow>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs/ThingDef[defName="GoldCoin"]/resourceReadoutPriority</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="GoldCoin"]/resourceReadoutPriority</xpath>
+      <value>
+        <resourceReadoutPriority>Last</resourceReadoutPriority>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GoldCoin"]</xpath>
+      <value>
+        <resourceReadoutPriority>Last</resourceReadoutPriority>
+      </value>
+    </nomatch>
+  </Operation>
+
+</Patch>

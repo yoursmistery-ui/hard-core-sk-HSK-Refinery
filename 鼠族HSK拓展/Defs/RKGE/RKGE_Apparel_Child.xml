@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef Abstract="True" Name="RKGE_ChildApparelMakeableBase"	ParentName="RKGE_ApparelMakeableBase">
+		<apparel>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<developmentalStageFilter>Child</developmentalStageFilter>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RKGE_ChildApparelMakeableBase">
+		<defName>RK_SchoolUniform_Child</defName>
+		<label>kid school uniform</label>
+		<description>The clothes that little ratkin wear to school that can keep their whole body warm.</description>
+		<graphicData>
+			<texPath>Apparel/RK_Dress_Child</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>4000</WorkToMake>
+			<Mass>0.3</Mass>
+			<StuffEffectMultiplierArmor>0.20</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>2.7</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>1.5</EquipDelay>
+		</statBases>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Worker</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Apparel/RK_Dress_Child</wornGraphicPath>
+			<layers>
+				<li>OnSkin</li>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>RK_Worker</li>
+				<li>RK_Servant</li>
+				<li>RK_Maid</li>
+				<li>RK_1Tier</li>
+				<li>RK_Thief</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+</Defs>

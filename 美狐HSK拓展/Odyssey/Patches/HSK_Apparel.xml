@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Convert vanilla percentage armor into HSK/CE millimetre-style values. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_Vacsuit"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>3</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_Vacsuit"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>6</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_Vacsuit"]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+			<WornBulk>5</WornBulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_Vacsuit"]/costList</xpath>
+		<value>
+			<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+				<Miho_MilitaryGradeBalisticCeramics>50</Miho_MilitaryGradeBalisticCeramics>
+				<Plastic>25</Plastic>
+				<SyntheticFibers>40</SyntheticFibers>
+			</costList>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Hat_Vacsuit"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>8</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Hat_Vacsuit"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>12</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Hat_Vacsuit"]/statBases</xpath>
+		<value>
+			<Bulk>3</Bulk>
+			<WornBulk>2</WornBulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Hat_Vacsuit"]/costList</xpath>
+		<value>
+			<costList>
+				<ComponentIndustrial>2</ComponentIndustrial>
+				<Miho_MilitaryGradeBalisticCeramics>35</Miho_MilitaryGradeBalisticCeramics>
+				<Plastic>10</Plastic>
+				<SyntheticFibers>12</SyntheticFibers>
+			</costList>
+		</value>
+	</Operation>
+</Patch>

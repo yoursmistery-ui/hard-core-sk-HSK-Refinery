@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- 室内游泳池: 封闭房间内出现 卫生→水池娱乐 建筑(游泳池 DBHSwimmingPool /
+	     热水浴缸 HotTub)即判定。worker 见 Source/RoomRoleIndoorPool.cs;
+	     未装 DBH 时得分恒 0,def 闲置无害,无需 FindMod 门控。 -->
+	<RoomRoleDef>
+		<defName>HSKF_IndoorPool</defName>
+		<label>indoor swimming pool</label>
+		<workerClass>RoomRoleIndoorPool.RoomRoleWorker_IndoorPool</workerClass>
+		<relatedStats>
+			<li>Beauty</li>
+			<li>Cleanliness</li>
+			<li>Wealth</li>
+			<li>Space</li>
+			<li>Impressiveness</li>
+		</relatedStats>
+	</RoomRoleDef>
+
+	<!-- 电力适配间: 封闭房间内发电设施与电池合计 >= 2 台即判定(每台 100 分)。
+	     通用识别口径见 Source/RoomRolePowerRoom.cs(发电=CompPowerTrader 且
+	     PowerConsumption<0;电池=CompPowerBattery),无外部 mod 依赖。 -->
+	<RoomRoleDef>
+		<defName>HSKF_PowerRoom</defName>
+		<label>power room</label>
+		<workerClass>RoomRolePowerRoom.RoomRoleWorker_PowerRoom</workerClass>
+		<relatedStats>
+			<li>Beauty</li>
+			<li>Cleanliness</li>
+			<li>Wealth</li>
+			<li>Space</li>
+			<li>Impressiveness</li>
+		</relatedStats>
+	</RoomRoleDef>
+
+</Defs>

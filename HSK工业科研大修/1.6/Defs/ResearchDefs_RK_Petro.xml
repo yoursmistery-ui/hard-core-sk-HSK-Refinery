@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 自有科研节点（HSK工业科研大修, 2026-08-29 v3 精简）
+       v3: 五档链收拢为三档链。I 蒸馏(8 档塔+油泥+燃气发电+储罐+铺路) →
+           II 管道精炼(里程碑, 接入 Rimefeller 精炼厂体系) → III 连续合成(合成氨/中性胺精炼厂)。
+       节点一律 ParentName="IndustrialBase"(Core_SK: techLevel Industrial + SimpleResearchBench +
+       SK.AdvancedResearchExtension[Simple,HiTech] + requiredResearchFacilities LabTerminal + ResearchTreeSKModExtension),
+       档位与邻排的 Oil_Industry_C* 一致, 不产生 techlevel 越级。坐标 Craft_SK Y=28 X=10~12
+       (2026-08-30 右移一格: 原占用 (9,28) 与 Miho_HeavyFactory 撞车, 且 X=9 与前置 Oil_Industry_C2 同列)。 -->
+
+  <ResearchProjectDef ParentName="IndustrialBase">
+    <defName>RK_Petro_AtmosphericDistillation</defName>
+    <label>石化工业 I·常减压蒸馏</label>
+    <description>在石油化学的基础上建成常减压蒸馏塔, 把原油按沸点切成化合燃料、天然气与沥青(50/30/20), 通过 8 档账单控制单批处理量; 副产炼油油泥需定期清理。同时解锁燃气发电机、天然气/沥青储罐与沥青铺路地面。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>1200</baseCost>
+    <prerequisites>
+      <li>Oil_Industry_C2</li>
+      <li>Electricity</li>
+    </prerequisites>
+    <researchViewX>10.00</researchViewX>
+    <researchViewY>28.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="IndustrialBase">
+    <defName>RK_Petro_Refining</defName>
+    <label>石化工业 II·管道精炼</label>
+    <description>掌握管道化连续精炼技术, 将化合燃料送入精炼厂体系, 分馏出乙烯、丙烯、丁二烯、苯、二甲苯等基础化工单体, 支撑合成纤维与高分子材料产业链。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>1400</baseCost>
+    <prerequisites>
+      <li>RK_Petro_AtmosphericDistillation</li>
+    </prerequisites>
+    <researchViewX>11.00</researchViewX>
+    <researchViewY>28.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="IndustrialBase">
+    <defName>RK_Petro_Synthesis</defName>
+    <label>石化工业 III·连续合成</label>
+    <description>解锁合成氨精炼厂与中性胺精炼厂: 以化合燃料为原料连续合成合成氨与中性胺, 前者供化工与化肥, 后者是药品与弹药的关键原料。</description>
+    <tab>Craft_SK</tab>
+    <baseCost>1600</baseCost>
+    <prerequisites>
+      <li>RK_Petro_Refining</li>
+    </prerequisites>
+    <researchViewX>12.00</researchViewX>
+    <researchViewY>28.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

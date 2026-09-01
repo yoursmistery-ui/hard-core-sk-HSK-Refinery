@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 隐藏鼠族原版神职讲台: 其贴图已由 文化讲台(Lectern) 的鼠族风格替换使用 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_Pulpit"]/building</xpath>
+		<value><neverBuildable>true</neverBuildable></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RK_Pulpit"]/designationCategory</xpath>
+		<value><designationCategory IsNull="True" /></value>
+	</Operation>
+</Patch>

@@ -1,0 +1,661 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Board</defName>
+    <label>board</label>
+    <description>A message board filled with various news. A nearby settlement has burned down nearby? How sad.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Board</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,3)</drawSize>
+      <damageData>
+        <rect>(0.4,0.2,1.4,1.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.6,0.8,0.1)</volume>
+        <offset>(0,0,-0.4)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>40</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>10</Mass>
+	  <Beauty>15</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>80</costStuffCount>
+    <costList>
+      <MeleeWeapon_Axe>1</MeleeWeapon_Axe></costList>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <fillPercent>0.4</fillPercent>
+    <rotatable>false</rotatable>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Boat</defName>
+    <label>boat</label>
+    <description>A perfectly buoyant boat. Why not spend time meditating on calm waters, away from this world of pain and hopelessness?</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Boat</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(4,4)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>10</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>140</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>20</Mass>
+	  <Beauty>20</Beauty>
+    </statBases>
+    <size>(1,2)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <Steel>40</Steel>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Bridgeable</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <drawerType>RealtimeOnly</drawerType>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Box</defName>
+    <label>simple box</label>
+    <description>A container that is not only good for storing items, but also stopping bullets in an emergency.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Box</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.6,1.6)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.4,0.4,0.4)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>2</Mass>
+	  <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>15</costStuffCount>
+    <costList>
+      <Steel>5</Steel>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <fillPercent>0.4</fillPercent>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+	<thingClass>Building_Storage</thingClass>
+    <building>
+      <blueprintClass>Blueprint_Storage</blueprintClass>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Bucket</defName>
+    <label>simple bucket</label>
+    <description>A simple but efficient bucket. It can be used to transport water or store grains.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Bucket</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,0.4,0.4)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.2,0.2,0.2)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>2</Mass>
+	  <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>15</costStuffCount>
+    <costList>
+      <Steel>5</Steel>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Cart</defName>
+    <label>simple cart</label>
+    <description>A wheelbarrow that can store a lot of items. The wheels do not function.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Cart</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.6,0.6,0.6)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>40</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>10</Mass>
+	  <Beauty>15</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>80</costStuffCount>
+    <costList>
+      <Steel>20</Steel>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <fillPercent>0.4</fillPercent>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+	<defName>RKFC_GloomyDeco_Kennel</defName>
+	<label>simple kennel</label>
+	<description>A comfy home for small animals. For some reason, the animals sleep in anywhere except for these houses.</description>
+	<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+	<graphicData>
+		<texPath>GloomyDeco/Kennel</texPath>
+		<graphicClass>Graphic_Multi</graphicClass>
+		<shaderType>CutoutComplex</shaderType>
+		<drawSize>(1.5,1.5)</drawSize>
+		<damageData>
+			<rect>(0.1,0.1,0.8,0.8)</rect>
+		</damageData>
+		<shadowData>
+			<volume>(0.5,0.5,0.5)</volume>
+			<offset>(0,0,0.0)</offset>
+		</shadowData>
+	</graphicData>
+	<altitudeLayer>Building</altitudeLayer>
+	<passability>PassThroughOnly</passability>
+	<pathCost>40</pathCost>
+	<canOverlapZones>true</canOverlapZones>
+	<statBases>
+		<SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>120</MaxHitPoints>
+		<WorkToBuild>800</WorkToBuild>
+		<Flammability>1.0</Flammability>
+		<Mass>10</Mass>
+		<BedRestEffectiveness>1.2</BedRestEffectiveness>
+		<Comfort>1.00</Comfort>
+		<ImmunityGainSpeedFactor>1.05</ImmunityGainSpeedFactor>
+		<SurgerySuccessChanceFactor>1</SurgerySuccessChanceFactor>
+		<Beauty>10</Beauty>
+	</statBases>
+	<size>(1,1)</size>
+	<stuffCategories>
+		<li>Woody</li>
+	</stuffCategories>
+	<costStuffCount>80</costStuffCount>
+	<costList>
+		<Steel>20</Steel>
+	</costList>
+	<defaultPlacingRot>South</defaultPlacingRot>
+	<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+	<designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+	<resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+	<fillPercent>0.2</fillPercent>
+	<thingClass>Building_Bed</thingClass>
+	<building>
+		<bed_humanlike>false</bed_humanlike>
+		<bed_maxBodySize>0.55</bed_maxBodySize>
+		<bed_showSleeperBody>false</bed_showSleeperBody>
+		<bed_healPerDay>4</bed_healPerDay>
+	</building>
+    <comps>
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>false</drawAssignmentOverlay>
+        <compClass>CompAssignableToPawn_Bed</compClass>
+      </li>
+    </comps>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Lumberjack</defName>
+    <label>stump</label>
+    <description>The usual tree stump. It could be used to chop fireowod.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Lumberjack</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.0,1.0)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>2</Mass>
+	  <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>15</costStuffCount>
+    <costList>
+      <MeleeWeapon_Axe>1</MeleeWeapon_Axe></costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_MailBox</defName>
+    <label>mailbox</label>
+    <description>A small and charming mailbox. What could be in the mailbox in such a bright, cheerful morning? \n\n Uh oh, it's a message about incoming raiders.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/MailBox</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.8,1.8)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.1,0.5,0.1)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>6</Mass>
+	  <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <costList>
+      <Steel>20</Steel>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Rope</defName>
+    <label>clothesline</label>
+    <description>An unremarkable clothesline that will do its job.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Rope</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.0,2.0)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>6</Mass>
+	  <Beauty>15</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>20</costStuffCount>
+    <costList>
+      <Cloth>40</Cloth>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Scarecrow</defName>
+    <label>scarecrow</label>
+    <description>A cute scarecrow. It does not seem to retain its purpose of scaring crows.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Scarecrow</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.4,1.4)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.2,0.6,0.2)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>6</Mass>
+	  <Beauty>15</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+	  <WoodLog>20</WoodLog>
+      <Cloth>40</Cloth>
+    </costList>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <thingClass>Building</thingClass>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Sign</defName>
+    <label>crop sign</label>
+    <description>A signpost with endless possibilities.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Sign</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.5,1.5)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.1,0.5,0.1)</volume>
+        <offset>(0,0,-0.4)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>LowPlant</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>6</Mass>
+	  <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>50</costStuffCount>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <rotatable>false</rotatable>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Stone</defName>
+    <label>cobblestone</label>
+    <description>A small and shapely cobblestone.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Stone</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(0.8,0.8)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>2</Mass>
+	  <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>10</costStuffCount>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GloomyDeco_Tool</defName>
+    <label>tool</label>
+    <description>A multitool with many different purposes. Unfortunately, colonists do not seem to know how it is used.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/Tool</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>2</Mass>
+	  <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+	  <WoodLog>40</WoodLog>
+      <Steel>10</Steel>
+    </costList>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <!-- custom -->
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_TrashCan</defName>
+    <label>trash can</label>
+    <description>It's a trash can that you can throw away trash.\n\nBlock up to 10 trash falling around. (same room)\nIf more than 8 trash, your colonist will clean.\nIf more than 10 trash, cleanliness and beauty will be reduced.</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/TrashCan</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.6,0.6,0.6)</volume>
+        <offset>(0,0,0.0)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>6</Mass>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>50</costStuffCount>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_GloomyDeco_Tree</defName>
+    <label>tree</label>
+    <description>A wood made by tree. Made by tree, this wood is real tree or not?</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>GloomyDeco/TreeIcon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(2.4,2.4)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,1.6,1.6)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.5,4.0,0.5)</volume>
+        <offset>(0,0,-0.7)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>80</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>140</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>20</Mass>
+	  <Beauty>30</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>140</costStuffCount>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+	<!-- custom -->
+    <drawerType>RealtimeOnly</drawerType>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <fillPercent>0.4</fillPercent>
+<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="BasedHygieneMom" MayRequire="Dubwise.DubsBadHygiene"><defName>RKFC_GloomyDeco_Well</defName><label>well</label><description>Accesses ground water. Water must be hauled to a water tub before it can be used for washing or drinking.</description><graphicData><texPath>GloomyDeco/Well</texPath><graphicClass>Graphic_Multi</graphicClass><shaderType>CutoutComplex</shaderType><drawSize>(2.4,2.4)</drawSize></graphicData><uiIconPath>GloomyDeco/Well_MenuIcon</uiIconPath><uiIconScale>1</uiIconScale><tickerType>Normal</tickerType><category>Building</category><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><blockWind>false</blockWind><castEdgeShadows>false</castEdgeShadows><pathCost>60</pathCost><drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected><defaultStuff>BlocksGranite</defaultStuff><stuffCategories><li>Woody</li><li>Stony</li><li>Ceramic</li><li>Bricks</li></stuffCategories><costStuffCount>25</costStuffCount><costList><ComponentMedieval>1</ComponentMedieval></costList><placeWorkers><li>DubsBadHygiene.PlaceWorker_WaterGrid</li><li>DubsBadHygiene.PlaceWorker_SewageGrid</li></placeWorkers><comps><li Class="DubsBadHygiene.CompProperties_WaterInlet"><compClass>DubsBadHygiene.CompBaseWell</compClass><Radius>7.9</Radius></li><li Class="CompProperties_Forbiddable"/></comps><leaveResourcesWhenKilled>true</leaveResourcesWhenKilled><rotatable>false</rotatable><building><paintable>true</paintable></building><statBases><MaxHitPoints>100</MaxHitPoints><WorkToBuild>2000</WorkToBuild><Flammability>1.0</Flammability></statBases><socialPropernessMatters>true</socialPropernessMatters></ThingDef></Defs>

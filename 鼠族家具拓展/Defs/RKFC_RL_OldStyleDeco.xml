@@ -1,0 +1,935 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+
+  <!-- ================================================================
+       老式鼠族装饰(整合自 Ratkin Lifestyle+ / 3263391066, Feng Xinzi)
+       原则: 只保留 workshop 贴图, 属性/数值/研究/材料全部按 HSK 家具
+       与建筑标准重做; 全部 def 重命名为 RKFC_RL_ 命名空间, 彻底独立,
+       不依赖 GloomyFurniture / Gloomylynx / 原 mod DLL。
+       动态件(木船漂浮/风车叶片/烛台火焰/发电)由本 mod 自带
+       Assemblies/RatkinFurniture.dll(namespace RatkinFurniture)实现。
+       ================================================================ -->
+
+  <!-- 晾衣架下拉组 -->
+  <DesignatorDropdownGroupDef>
+    <defName>RKFC_RL_ClothHanger</defName>
+    <label>clothes hanger</label>
+  </DesignatorDropdownGroupDef>
+
+  <!-- 画作下拉组 -->
+  <DesignatorDropdownGroupDef>
+    <defName>RKFC_RL_Paint</defName>
+    <label>paint</label>
+  </DesignatorDropdownGroupDef>
+
+  <!-- 晾衣架抽象基类(木质材质制) -->
+  <ThingDef Abstract="True" ParentName="RKFC_FurnitureBase" Name="RKFC_RL_ClothHangerBase">
+    <graphicData>
+      <drawSize>(2.1,2.1)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <shadowData>
+        <volume>(1.6,0.8,0.4)</volume>
+        <offset>(0,0,-0.4)</offset>
+      </shadowData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.20</fillPercent>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Mass>6</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>20</Beauty>
+    </statBases>
+    <pathCost>25</pathCost>
+    <rotatable>false</rotatable>
+    <size>(2,1)</size>
+    <designatorDropdown>RKFC_RL_ClothHanger</designatorDropdown>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>10</costStuffCount>
+    <costList>
+      <Cloth>20</Cloth>
+    </costList>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 画作抽象基类(艺术品, 挂墙) -->
+  <ThingDef Abstract="True" ParentName="RKFC_ArtableFurnitureBase" Name="RKFC_RL_PaintBase">
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <thingClass>Building</thingClass>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>Standable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.1</fillPercent>
+    <designatorDropdown>RKFC_RL_Paint</designatorDropdown>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <constructEffect>ConstructWood</constructEffect>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Mass>5</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>100</Beauty>
+    </statBases>
+    <costList>
+      <WoodLog>35</WoodLog>
+      <Dye>100</Dye>
+    </costList>
+    <placeWorkers>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>
+      <isEdifice>false</isEdifice>
+    </building>
+    <clearBuildingArea>false</clearBuildingArea>
+    <artisticSkillPrerequisite>8</artisticSkillPrerequisite>
+    <researchPrerequisites>
+      <li>Art_A1</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- 烛台抽象基座(燃料+发光+发热+火焰, 原版 Torch 式) -->
+  <ThingDef Abstract="True" ParentName="BuildingBase" Name="RKFC_RL_CandleBase">
+    <description>鼠族家庭里常见的照明用品。</description>
+    <category>Building</category>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <uiIconScale>1.5</uiIconScale>
+    <rotatable>false</rotatable>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <drawerType>RealtimeOnly</drawerType>
+    <fillPercent>0.05</fillPercent>
+    <costList>
+      <WoodLog>5</WoodLog>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>5</costStuffCount>
+    <statBases>
+      <MaxHitPoints>40</MaxHitPoints>
+      <WorkToBuild>100</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>0.05</Mass>
+      <Beauty>2</Beauty>
+    </statBases>
+    <selectable>true</selectable>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <destroyable>true</destroyable>
+    <clearBuildingArea>false</clearBuildingArea>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+    <constructionSkillPrerequisite>2</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>PlaceWorker_Heater</li>
+      <li>PlaceWorker_GlowRadius</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0.5</fuelConsumptionRate>
+        <fuelCapacity>25.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </fuelFilter>
+        <initialFuelPercent>1</initialFuelPercent>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>7</glowRadius>
+        <glowColor>(252,187,113,0)</glowColor>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusher</compClass>
+        <heatPerSecond>2.5</heatPerSecond>
+        <heatPushMaxTemperature>23</heatPushMaxTemperature>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ============ 公告牌 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Board</defName>
+    <label>bulletin board</label>
+    <description>一块用来发布消息的告示牌，也可以用来贴寻物启事。</description>
+    <graphicData>
+      <drawSize>(3.2,3.2)</drawSize>
+      <texPath>RL/RL_Board</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+        <volume>(1.5,0.5,0.3)</volume>
+        <offset>(0,0,-0.2)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.40</fillPercent>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>15</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>30</Beauty>
+    </statBases>
+    <pathCost>14</pathCost>
+    <rotatable>false</rotatable>
+    <size>(2,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 木船(漂浮动画) ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Boat</defName>
+    <label>boat</label>
+    <description>一艘木船，很适合钓鱼的时候乘坐。</description>
+    <thingClass>RatkinFurniture.Boat</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>RL/RL_Boat</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.6,3.6)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <damageData>
+        <rect>(0.1,0.1,0.8,0.8)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>10</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>140</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Mass>20</Mass>
+      <Beauty>20</Beauty>
+    </statBases>
+    <size>(1,2)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>60</costStuffCount>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Bridgeable</terrainAffordanceNeeded>
+    <resourcesFractionWhenDeconstructed>0.2</resourcesFractionWhenDeconstructed>
+    <drawerType>RealtimeOnly</drawerType>
+    <researchPrerequisites>
+      <li>Construction_B1</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 风车(装饰, 叶片旋转) ============ -->
+  <ThingDef ParentName="BuildingBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Windmill</defName>
+    <thingClass>RatkinFurniture.Windmill</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <label>windmill</label>
+    <description>巨大的风车，常见于大大小小的农庄之中。</description>
+    <graphicData>
+      <texPath>RL/RL_Windmill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(5,5)</drawSize>
+      <damageData>
+        <rect>(0.2,0.0,2.6,3.0)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.6,3.0,1.6)</volume>
+        <offset>(0,0,-0.6)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <blockWind>true</blockWind>
+    <fillPercent>1.0</fillPercent>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>3300</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>80</Beauty>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <size>(2,3)</size>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <constructEffect>ConstructWood</constructEffect>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <allowAutoroof>false</allowAutoroof>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+    <costList>
+      <WoodLog>120</WoodLog>
+      <Steel>20</Steel>
+      <Cloth>40</Cloth>
+    </costList>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+  </ThingDef>
+
+  <!-- ============ 发电风车 ============ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_RL_Windmill_Power</defName>
+    <thingClass>RatkinFurniture.Windmill</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <label>windmill (electricity)</label>
+    <description>巨大的风车，可以借助风力发电。</description>
+    <graphicData>
+      <texPath>RL/RL_Windmill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(5,5)</drawSize>
+      <damageData>
+        <rect>(0.2,0.0,2.6,3.0)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(1.6,3.0,1.6)</volume>
+        <offset>(0,0,-0.6)</offset>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <canOverlapZones>false</canOverlapZones>
+    <blockWind>true</blockWind>
+    <fillPercent>1.0</fillPercent>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>3300</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>80</Beauty>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <size>(2,3)</size>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <constructEffect>ConstructMetal</constructEffect>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <building>
+      <allowAutoroof>false</allowAutoroof>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>RatkinFurniture.CompPowerWind</compClass>
+        <basePowerConsumption>-1400</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <researchPrerequisites>
+      <li>Electricity</li>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+    <costList>
+      <WoodLog>120</WoodLog>
+      <Steel>60</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+      <Cloth>40</Cloth>
+    </costList>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <designationCategory>Power</designationCategory>
+  </ThingDef>
+
+  <!-- ============ 干草堆 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Haystack</defName>
+    <label>haystack</label>
+    <description>一堆打包起来的干草。\n\n可以旋转来改变样式。</description>
+    <graphicData>
+      <drawSize>(3.2,3.2)</drawSize>
+      <texPath>RL/RL_Haystack</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <constructEffect>ConstructWood</constructEffect>
+    <fillPercent>0.60</fillPercent>
+    <statBases>
+      <MaxHitPoints>450</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>22</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>30</Beauty>
+    </statBases>
+    <costList>
+      <Hay>200</Hay>
+    </costList>
+    <pathCost>25</pathCost>
+    <rotatable>true</rotatable>
+    <size>(2,2)</size>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 干草块 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_HayBlock</defName>
+    <label>hay block</label>
+    <description>一块异常方正的干草，有人猜测可能是受到了超凡智能的影响。</description>
+    <graphicData>
+      <drawSize>(2.2,2.2)</drawSize>
+      <drawOffset>(0,0,0.05)</drawOffset>
+      <texPath>RL/RL_HayBlock</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <blockWind>true</blockWind>
+    <fillPercent>1.0</fillPercent>
+    <constructEffect>ConstructWood</constructEffect>
+    <statBases>
+      <MaxHitPoints>64</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>12</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>20</Beauty>
+    </statBases>
+    <costList>
+      <Hay>64</Hay>
+    </costList>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 晾衣架 A/B ============ -->
+  <ThingDef ParentName="RKFC_RL_ClothHangerBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_ClothesHanger_A</defName>
+    <label>clothes hanger</label>
+    <description>晾晒衣服的简单架子。</description>
+    <graphicData>
+      <texPath>RL/RL_ClothesHanger_A</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_ClothHangerBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_ClothesHanger_B</defName>
+    <label>clothes hanger</label>
+    <description>晾晒被子的简单架子。</description>
+    <graphicData>
+      <texPath>RL/RL_ClothesHanger_B</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ============ 推车 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Cart</defName>
+    <label>cart</label>
+    <description>用来运送人员或者物资的简单推车，方便实用。</description>
+    <graphicData>
+      <drawSize>(1.8,1.8)</drawSize>
+      <shadowData>
+        <volume>(0.4,1.4,0.4)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <texPath>RL/RL_Cart</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.40</fillPercent>
+    <statBases>
+      <MaxHitPoints>225</MaxHitPoints>
+      <WorkToBuild>2800</WorkToBuild>
+      <Mass>15</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>20</Beauty>
+    </statBases>
+    <pathCost>25</pathCost>
+    <rotatable>true</rotatable>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 稻草人 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Scarecrow</defName>
+    <label>scarecrow</label>
+    <description>用来吓走小动物的稻草人，尽管大部分时候收效甚微。\n\n可以旋转来改变样式。</description>
+    <graphicData>
+      <drawSize>(1.4,1.4)</drawSize>
+      <drawOffset>(0,0,0.4)</drawOffset>
+      <shadowData>
+        <volume>(0.4,1.4,0.4)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+      <texPath>RL/RL_Scarecrow</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.40</fillPercent>
+    <statBases>
+      <MaxHitPoints>275</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>30</Beauty>
+    </statBases>
+    <costList>
+      <Hay>100</Hay>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>10</costStuffCount>
+    <pathCost>25</pathCost>
+    <rotatable>true</rotatable>
+    <size>(1,1)</size>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 工具 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Tool</defName>
+    <label>tool</label>
+    <description>一把随意摆放的工具。\n\n可以旋转来改变样式。</description>
+    <graphicData>
+      <drawSize>(1.8,1.8)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <shadowData>
+        <volume>(0.2,0.6,0.2)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <texPath>RL/RL_Tool</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.10</fillPercent>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>2</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>10</Beauty>
+    </statBases>
+    <pathCost>15</pathCost>
+    <rotatable>true</rotatable>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>5</costStuffCount>
+    <costList>
+      <Steel>5</Steel>
+    </costList>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 石十字架 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Cross_Stone</defName>
+    <label>cross</label>
+    <description>一个十字架，经常出现在墓园里。</description>
+    <graphicData>
+      <texPath>RL/RL_Cross_B</texPath>
+      <drawSize>(2.0,2.0)</drawSize>
+      <shadowData>
+        <volume>(0.25,0.6,0.25)</volume>
+        <offset>(0,0,-0.2)</offset>
+      </shadowData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.20</fillPercent>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>1500</WorkToBuild>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>15</costStuffCount>
+    <pathCost>5</pathCost>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 木十字架 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Cross_Wood</defName>
+    <label>wooden cross</label>
+    <description>一个十字架，经常出现在墓园里。</description>
+    <graphicData>
+      <texPath>RL/RL_Cross_A</texPath>
+      <drawSize>(2.0,2.0)</drawSize>
+      <shadowData>
+        <volume>(0.25,0.6,0.25)</volume>
+        <offset>(0,0,-0.2)</offset>
+      </shadowData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.20</fillPercent>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>1500</WorkToBuild>
+      <Mass>5</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <pathCost>5</pathCost>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>15</costStuffCount>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 鹅卵石铺路 ============ -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKFC_RL_Stone</defName>
+    <label>cobblestone</label>
+    <description>一堆鹅卵石铺成的路面。\n\n可以旋转来改变样式。</description>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <graphicData>
+      <texPath>RL/RL_Stone</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(0.9,0.9)</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Mass>2</Mass>
+      <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>10</costStuffCount>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <designationCategory>Accessories</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+    <researchPrerequisites>
+      <li>Construction_B1</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 画作 ×8 ============ -->
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Earring</defName>
+    <label>"A ratkin with a pearl earring"</label>
+    <description>画面上是一个带着漂亮耳环的鼠族少女。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Earring</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Umbrella</defName>
+    <label>"woman with a parasol"</label>
+    <description>画面上是一个撑着阳伞的鼠族贵妇。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Umbrella</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Shout</defName>
+    <label>"Shout"</label>
+    <description>画面上是一个被老鼠吓到的人。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Shout</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Traveler</defName>
+    <label>"The wanderer above the sea of fog"</label>
+    <description>画面上是一个站在山顶上的鼠族士兵。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Traveler</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_VanGogh</defName>
+    <label>"self-portrait"</label>
+    <description>画面上是一个不知名的鼠族画家。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_VanGogh</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_MonaLisa</defName>
+    <label>"Mona Lisa smile"</label>
+    <description>画面上是一个微笑着的鼠族修女。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_MonaLisa</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Joan</defName>
+    <label>"Joan of Arc"</label>
+    <description>画面上是一个举着旗帜的鼠族骑士。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Joan</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_PaintBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Paint_Genesis</defName>
+    <label>"Genesis"</label>
+    <description>画面上是一只青蛙创造鼠族的画面。</description>
+    <graphicData>
+      <texPath>RL/RL_Paint_Genesis</texPath>
+      <drawOffset>(0,0,-0.25)</drawOffset>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ============ 烛台 ×4 ============ -->
+  <ThingDef ParentName="RKFC_RL_CandleBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Candle_A</defName>
+    <label>three-headed candlestick</label>
+    <graphicData>
+      <texPath>RL/RL_Candle_A</texPath>
+      <drawOffset>(0,0,0.25)</drawOffset>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(-0.09,0,0.19)</offset>
+      </li>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(0.09,0,0.19)</offset>
+      </li>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(0.27,0,0.19)</offset>
+      </li>
+
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_CandleBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Candle_B</defName>
+    <label>candle</label>
+    <graphicData>
+      <texPath>RL/RL_Candle_B</texPath>
+      <drawOffset>(0,0,0.25)</drawOffset>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(0,0,0.16)</offset>
+      </li>
+
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_CandleBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Candle_C</defName>
+    <label>candlestick</label>
+    <graphicData>
+      <texPath>RL/RL_Candle_C</texPath>
+      <drawOffset>(0,0,0.25)</drawOffset>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(0,0,0.40)</offset>
+      </li>
+
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="RKFC_RL_CandleBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Candle_D</defName>
+    <label>candelabrum</label>
+    <graphicData>
+      <texPath>RL/RL_Candle_D</texPath>
+      <drawOffset>(0,0,0.25)</drawOffset>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_FireOverlay">
+        <compClass>RatkinFurniture.CompFireOverlay</compClass>
+        <fireSize>0.2</fireSize>
+        <offset>(0,0,0.37)</offset>
+      </li>
+
+    </comps>
+  </ThingDef>
+
+  <!-- ============ 酒桶堆 ============ -->
+  <ThingDef ParentName="RKFC_FurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_WineBarrel</defName>
+    <label>wine barrels bunch</label>
+    <description>一堆空酒桶。</description>
+    <graphicData>
+      <texPath>RL/RL_Barrel</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <shadowData>
+        <volume>(1.6,0.8,0.4)</volume>
+        <offset>(0,0,-0.4)</offset>
+      </shadowData>
+      <graphicClass>Graphic_Multi</graphicClass>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.65</fillPercent>
+    <statBases>
+      <MaxHitPoints>280</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Mass>14</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>20</Beauty>
+    </statBases>
+    <pathCost>45</pathCost>
+    <rotatable>true</rotatable>
+    <size>(2,1)</size>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>60</costStuffCount>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ============ 骑士雕像 ============ -->
+  <ThingDef ParentName="RKFC_ArtableFurnitureBase">
+    <designationCategory>Accessories</designationCategory><defName>RKFC_RL_Statue</defName>
+    <label>knight statue</label>
+    <description>一尊威武的鼠族骑士雕像。</description>
+    <graphicData>
+      <drawSize>(1.5,1.5)</drawSize>
+      <drawOffset>(0,0,0.28)</drawOffset>
+      <shadowData>
+        <volume>(0.4,0.8,0.4)</volume>
+        <offset>(0,0,0.2)</offset>
+      </shadowData>
+      <texPath>RL/RL_Statue</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>45</pathCost>
+    <blockWind>true</blockWind>
+    <fillPercent>0.70</fillPercent>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>6000</WorkToBuild>
+      <Mass>20</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>65</Beauty>
+    </statBases>
+    <stuffCategories>
+      <li>Stony</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>80</costStuffCount>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <rotatable>true</rotatable>
+    <size>(1,1)</size>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <artisticSkillPrerequisite>8</artisticSkillPrerequisite>
+    <researchPrerequisites>
+      <li>Art_B1</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

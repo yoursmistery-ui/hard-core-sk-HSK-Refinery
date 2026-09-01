@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 阶段B·防护统一：让"只防毒"的装备同时具备辐射抗性，补齐互通断点。
+	     已有装束（HSK化学防护服 / Rimatomics防辐射服）已同时带 ToxicEnvironmentResistance 与 Radiation 两类抗性，
+	     这里把原版防毒面具与HSK呼吸面罩也补上 Radiation 抗性，使任意环境危害都可被同一抗性栈抵御。 -->
+
+	<!-- 原版 Biotech 防毒面具：0.8 毒抗 + 新增 0.35 辐射抗 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Apparel_GasMask"]/equippedStatOffsets</xpath>
+		<value>
+			<Radiation>-0.35</Radiation>
+		</value>
+	</Operation>
+
+	<!-- HSK 呼吸面罩：0.6 毒抗 + 新增 0.35 辐射抗 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Apparel_Respirator"]/equippedStatOffsets</xpath>
+		<value>
+			<Radiation>-0.35</Radiation>
+		</value>
+	</Operation>
+</Patch>

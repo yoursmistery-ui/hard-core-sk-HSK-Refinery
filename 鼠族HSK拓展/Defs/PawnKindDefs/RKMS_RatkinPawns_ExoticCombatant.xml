@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<PawnKindDef Name="RKExoticMilitia" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticGuerrilla</defName>
+		<label>Moustate guerrilla</label>
+		<combatPower>35</combatPower>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateMilitia</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateMilitia</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<specificApparelRequirements>
+			<li>
+				<bodyPartGroup>Torso</bodyPartGroup>
+				<apparelLayer>OnSkin</apparelLayer>
+				<requiredTag>RK_ExoticTier1</requiredTag>
+			</li>
+		</specificApparelRequirements>
+		<gearHealthRange>
+			<min>0.35</min>
+			<max>0.9</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>110</min>
+			<max>800</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>200</min>
+			<max>1800</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_Murderer</li>
+			<li>RK_WorkerTool</li>
+			<li>RK_ExoticWorker</li>
+			<li>RK_ExoticFarmer</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticWorker</li>
+			<li>RK_ExoticFarmer</li>
+			<li>RK_ExoticTier1</li>
+			<li>RK_ExoticLightShield</li>
+			<li>RK_ExoticLightArmor</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>0.35</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticMilitia">
+		<defName>RatkinExoticGuerrillaRange</defName>
+		<disallowedTraits>
+			<li>Brawler</li>
+		</disallowedTraits>
+		<weaponTags Inherit="false">
+			<li>RK_RangeExoticTier1</li>
+		</weaponTags>
+		<apparelTags Inherit="false">
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticWorker</li>
+			<li>RK_ExoticFarmer</li>
+			<li>RK_ExoticTier1</li>
+			<li>RK_ExoticLightArmor</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>0.72</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticMilitia">
+		<defName>RatkinExoticRevolutionist</defName>
+		<label>Moustate revolutionist</label>
+		<combatPower>35</combatPower>
+		<minGenerationAge>18</minGenerationAge>
+		<maxGenerationAge>35</maxGenerationAge>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateMilitia</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateRevolutionist</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.55</min>
+			<max>0.9</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>1222</min>
+			<max>2222</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>800</min>
+			<max>1800</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<apparelRequired>
+			<li>RK_SashiMono</li>
+		</apparelRequired>
+		<apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef Name="RKExoticMercenary" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticMercenary</defName>
+		<label>Moustate mercenary</label>
+		<combatPower>35</combatPower>
+		<minGenerationAge>9</minGenerationAge>
+		<maxGenerationAge>30</maxGenerationAge>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateMilitia</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateMilitia</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_YiShang</li>
+		</apparelRequired>
+		<gearHealthRange>
+			<min>0.35</min>
+			<max>0.9</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>880</min>
+			<max>2200</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>200</min>
+			<max>1300</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_MeleeExoticTier1</li>
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticMilitia</li>
+			<li>RK_ExoticWorker</li>
+			<li>RK_ExoticFarmer</li>
+			<li>RK_ExoticTier1</li>
+			<li>RK_ExoticLightShield</li>
+			<li>RK_ExoticLightArmor</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>0.35</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+
+	<PawnKindDef Name="RKExoticGallantry" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticGallantry</defName>
+		<label>Moustate gallantry</label>
+		<combatPower>150</combatPower>
+		<biocodeWeaponChance>1</biocodeWeaponChance>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateMilitia</li>
+					<li>MoustateMaster</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateMilitia</li>
+					<li>MoustateMaster</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_YiShang</li>
+			<li>RK_DouLi</li>
+			<li>RK_CrossBack</li>
+			<li>RK_Souyi</li>
+		</apparelRequired>
+		<gearHealthRange>
+			<min>0.52</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>880</min>
+			<max>2200</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>550</min>
+			<max>12939</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticGongFu</li>
+			<li>RK_MeleeExoticTier2</li>
+			<li>RK_MeleeExoticTier3</li>
+			<li>RK_RangeExoticBow</li>
+			<li>RK_ExoticDefender</li>
+		</weaponTags>
+		<apparelTags Inherit="false">
+			<li>RK_DaXia</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>0.6</apparelAllowHeadgearChance>
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>8~18</range>
+			</li>
+			<li>
+				<skill>Shooting</skill>
+				<range>8~18</range>
+			</li>
+		</skills>
+		<inventoryOptions>
+			<skipChance>0</skipChance>
+			<subOptionsChooseOne>
+				<li>
+					<thingDef>RK_CanJuan</thingDef>
+					<countRange>1~12</countRange>
+				</li>
+			</subOptionsChooseOne>
+		</inventoryOptions>
+	</PawnKindDef>
+
+
+	<PawnKindDef Name="RKExoticDefender" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticDefender</defName>
+		<label>Moustate defender</label>
+		<combatPower>70</combatPower>
+		<apparelRequired>
+			<li>RK_FangRen</li>
+		</apparelRequired>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>MoustateDefender</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.55</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>1100</min>
+			<max>1800</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>500</min>
+			<max>2000</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticDefender</li>
+			<li>RK_MeleeExoticTier1</li>
+			<li>RK_RangeExoticTier1</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticDefender</li>
+			<li>RK_ExoticTier1</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticLightArmor</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>0.9</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticDefender">
+		<defName>RatkinExoticDefenderShield</defName>
+		<apparelRequired>
+			<li>RK_TieMao</li>
+		</apparelRequired>
+		<weaponTags Inherit="false">
+			<li>RK_MeleeExoticTier2</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticDefender</li>
+			<li>RK_ExoticLightShield</li>
+			<li>RK_ExoticApparel</li>
+		</apparelTags>
+	</PawnKindDef>
+
+
+	<PawnKindDef Name="RKExoticSengitai" ParentName="RKExoticDefender">
+		<defName>RatkinExoticSengitai</defName>
+		<label>Moustate SenGiTai</label>
+		<combatPower>85</combatPower>
+		<apparelMoney>
+			<min>1500</min>
+			<max>2600</max>
+		</apparelMoney>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateSenGiTai</li>
+					<li>MoustateMilitia</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateSenGiTai</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired Inherit="false">
+			<li>RK_TieMao</li>
+			<li>RK_SenGiTai</li>
+		</apparelRequired>
+		<weaponTags Inherit="false">
+			<li>RK_MeleeSengitaiTier2</li>
+		</weaponTags>
+		<apparelTags Inherit="false">
+			<li>RK_ExoticDefender</li>
+			<li>RK_ExoticLightShield</li>
+			<li>RK_SenGiTai</li>
+			<li>RK_SenGiTaiArmor</li>
+		</apparelTags>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticSengitaiLeader</defName>
+		<label>Moustate Sengitai chief</label>
+		<factionLeader>false</factionLeader>
+		<itemQuality>Excellent</itemQuality>
+		<combatPower>400</combatPower>
+		<minGenerationAge>25</minGenerationAge>
+		<maxGenerationAge>45</maxGenerationAge>
+		<forcedTraits>
+			<Tough>0</Tough>
+		</forcedTraits>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateSenGiTai</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateMaster</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateSenGiTaiLeader</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_SenGiTai</li>
+			<li>RK_Jinngasa</li>
+			<li>RK_Haori</li>
+		</apparelRequired>
+		<gearHealthRange>
+			<min>0.95</min>
+			<max>1.2</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>7500</min>
+			<max>12500</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>6500</min>
+			<max>8800</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_Koutetsumaru</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticMiliSign</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>12~19</range>
+			</li>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticSengitai">
+		<defName>RatkinExoticSengitaiRanged</defName>
+		<label>Moustate SenGiTai shooter</label>
+		<apparelRequired>
+			<li>RK_DouMaru</li>
+		</apparelRequired>
+		<weaponMoney>
+			<min>500</min>
+			<max>1234</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_RangeSengitaiTier1</li>
+			<li>RK_ExoticGrenadeT1</li>
+			<li>RK_RangeSengitaiTier1</li>
+		</weaponTags>
+		<apparelTags Inherit="false">
+			<li>RK_ExoticDefender</li>
+			<li>RK_SenGiTai</li>
+			<li>RK_ExoticShooterShield</li>
+			<li>RK_SenGiTaiArmor</li>
+		</apparelTags>
+	</PawnKindDef>
+
+
+	<PawnKindDef ParentName="RKExoticSengitai">
+		<defName>RatkinExoticSengitaiRifle</defName>
+		<label>Moustate SenGiTai metsuke</label>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateSenGiTai</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateMaster</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateSenGiTaiLeaderB</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_DouMaru</li>
+		</apparelRequired>
+		<weaponMoney>
+			<min>1000</min>
+			<max>2000</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_RangeSengitaiTier2</li>
+		</weaponTags>
+		<apparelTags Inherit="false">
+			<li>RK_ExoticDefender</li>
+			<li>RK_SenGiTai</li>
+			<li>RK_ExoticShooterShield</li>
+			<li>RK_SenGiTaiArmor</li>
+		</apparelTags>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticSoldier</defName>
+		<label>Moustate minuteman</label>
+		<combatPower>100</combatPower>
+		<apparelRequired>
+			<li>RK_YiShang</li>
+			<li>RK_TieMao</li>
+			<li>RK_Gusoku</li>
+			<li>RK_SashiMono</li>
+		</apparelRequired>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>MoustateSoldier</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.75</min>
+			<max>1.2</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>1500</min>
+			<max>2500</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1000</min>
+			<max>2500</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_RangeExoticTier2</li>
+			<li>RK_2TierWeapon</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticLightArmor</li>
+			<li>RK_ExoticMiliSign</li>
+			<li>RK_ExoticShooterShield</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+
+	<PawnKindDef ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticLogistor</defName>
+		<label>Moustate logistor</label>
+		<factionLeader>true</factionLeader>
+		<trader>true</trader>
+		<itemQuality>Excellent</itemQuality>
+		<combatPower>300</combatPower>
+		<minGenerationAge>25</minGenerationAge>
+		<maxGenerationAge>45</maxGenerationAge>
+		<forcedTraits>
+			<Tough>0</Tough>
+		</forcedTraits>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateMaster</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateLogistor</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_LogistorUniform</li>
+			<li>RK_LogistorHel</li>
+			<li>RK_ExoticCloak</li>
+		</apparelRequired>
+		<gearHealthRange>
+			<min>0.95</min>
+			<max>1.2</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>7500</min>
+			<max>12500</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1500</min>
+			<max>3800</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticSoldierLeader</li>
+			<li>RK_MeleeExoticTier3</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_Logistor</li>
+			<li>RK_ExoticSoldierLeader</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticMiliSign</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>12~19</range>
+			</li>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticRegistrar</defName>
+		<label>Moustate registrar</label>
+		<combatPower>180</combatPower>
+		<itemQuality>Good</itemQuality>
+		<minGenerationAge>25</minGenerationAge>
+		<maxGenerationAge>45</maxGenerationAge>
+		<apparelRequired>
+			<li>RK_RegistrarUniform</li>
+			<li>RK_RegistrarHel</li>
+			<li>RK_ExoticCloak</li>
+		</apparelRequired>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateRegistrar</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.75</min>
+			<max>1.2</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>7500</min>
+			<max>12500</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1500</min>
+			<max>3800</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticSoldierLeader</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_ExoticSoldierLeader</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticMiliSign</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>5~12</range>
+			</li>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+	<PawnKindDef Name="RKExoticManatwar" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticManatwar</defName>
+		<label>Moustate manatwar</label>
+		<combatPower>100</combatPower>
+		<disallowedTraits>
+			<li>Brawler</li>
+		</disallowedTraits>
+		<apparelRequired>
+			<li>RK_ManatwarUniform</li>
+			<li>RK_ManGear</li>
+			<li>RK_ManatwarHelmet</li>
+		</apparelRequired>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+					<li>MoustateDefender</li>
+					<li>MoustateSoldier</li>
+					<li>MoustateUneducated</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateManatwar</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.75</min>
+			<max>1.2</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>400</min>
+			<max>1300</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1000</min>
+			<max>2500</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_ExoticRanger</li>
+			<li>RK_RangeExoticTier2</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticRanger</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticTier3</li>
+			<li>RK_ExoticLightArmor</li>
+		</apparelTags>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticManatwar">
+		<defName>RatkinExoticManatwarPeaceful</defName>
+		<apparelRequired Inherit="false">
+			<li>RK_ManatwarUniform</li>
+			<li>RK_ManGear</li>
+			<li>RK_ManCap</li>
+		</apparelRequired>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticManatwar">
+		<defName>RatkinExoticManatwarDemoman</defName>
+		<label>Moustate manatwar demoman</label>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+					<li>MoustateDefender</li>
+					<li>MoustateSoldier</li>
+					<li>MoustateUneducated</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateDemoman</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<weaponTags Inherit="false">
+			<li>RK_ExoticGrenadeT2</li>
+		</weaponTags>
+	</PawnKindDef>
+
+
+	<PawnKindDef ParentName="RKExoticManatwar">
+		<defName>RatkinExoticManatwarMarksman</defName>
+		<label>Moustate manatwar marksman</label>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+					<li>MoustateDefender</li>
+					<li>MoustateSoldier</li>
+					<li>MoustateUneducated</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateMarksman</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_ExoticCloak</li>
+		</apparelRequired>
+		<weaponMoney>
+			<min>1800</min>
+			<max>4000</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_3TierWeapon</li>
+			<li>RK_RangeExoticTier3</li>
+		</weaponTags>
+		<apparelTags>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>10~18</range>
+			</li>
+		</skills>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticManatwar">
+		<defName>RatkinExoticManatwarGunner</defName>
+		<label>Moustate manatwar gunner</label>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+					<li>MoustateDefender</li>
+					<li>MoustateSoldier</li>
+					<li>MoustateUneducated</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateGunner</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired Inherit="false">
+			<li>RK_ManatwarUniform</li>
+			<li>RK_MRgunner</li>
+			<li>RK_ManatwarHelmet</li>
+		</apparelRequired>
+		<weaponMoney>
+			<min>2200</min>
+			<max>4500</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_ExoticLMG</li>
+		</weaponTags>
+		<apparelTags>
+			<li>BeltDefensePop</li>
+		</apparelTags>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>8~16</range>
+			</li>
+		</skills>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticManatwar">
+		<defName>RatkinExoticManatwarLeader</defName>
+		<label>Moustate manatwar captain</label>
+		<backstoryFiltersOverride Inherit="False">
+			<li>
+				<categoriesChildhood>
+					<li>MoustateRural</li>
+					<li>MoustateWorker</li>
+					<li>MoustateMilitia</li>
+					<li>MoustateNoble</li>
+					<li>MoustateScholar</li>
+					<li>MoustateDefender</li>
+					<li>MoustateSoldier</li>
+					<li>MoustateUneducated</li>
+				</categoriesChildhood>
+				<categoriesAdulthood>
+					<li>MoustateManatwarLeader</li>
+				</categoriesAdulthood>
+			</li>
+		</backstoryFiltersOverride>
+		<apparelRequired>
+			<li>RK_ExoticCloak</li>
+		</apparelRequired>
+		<itemQuality>Excellent</itemQuality>
+		<apparelMoney>
+			<min>3500</min>
+			<max>6600</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>2200</min>
+			<max>3600</max>
+		</weaponMoney>
+		<weaponTags Inherit="false">
+			<li>RK_RangeExoticLeader</li>
+		</weaponTags>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>12~18</range>
+			</li>
+			<li>
+				<skill>Melee</skill>
+				<range>12~16</range>
+			</li>
+			<li>
+				<skill>Social</skill>
+				<range>5~15</range>
+			</li>
+		</skills>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+	</PawnKindDef>
+
+
+	<PawnKindDef Name="RatkinExoticSentry" ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticSentry</defName>
+		<label>Moustate sentry</label>
+		<combatPower>125</combatPower>
+		<apparelRequired>
+			<li>RK_DuiJinJia</li>
+			<li>RK_ZhanLi</li>
+		</apparelRequired>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>MoustateSoldier</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.65</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>1900</min>
+			<max>2700</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1500</min>
+			<max>2300</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_MeleeExoticTier2</li>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_RangeExoticTier2</li>
+			<li>RK_2TierWeapon</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticHeavyArmor</li>
+		</apparelTags>
+		<skills>
+			<li>
+				<skill>Shooting</skill>
+				<range>9~12</range>
+			</li>
+			<li>
+				<skill>Melee</skill>
+				<range>10~16</range>
+			</li>
+		</skills>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+	<PawnKindDef ParentName="RKExoticCombatantBase">
+		<defName>RatkinExoticSentryLeader</defName>
+		<label>Moustate sentry leader</label>
+		<combatPower>200</combatPower>
+		<itemQuality>Excellent</itemQuality>
+		<apparelRequired>
+			<li>RK_YiShang</li>
+			<li>RK_BuMianJia</li>
+			<li>RK_GaoDing</li>
+		</apparelRequired>
+		<backstoryFiltersOverride>
+			<li>
+				<categories>
+					<li>MoustateSoldier</li>
+				</categories>
+			</li>
+		</backstoryFiltersOverride>
+		<gearHealthRange>
+			<min>0.65</min>
+			<max>1</max>
+		</gearHealthRange>
+		<apparelMoney>
+			<min>3300</min>
+			<max>3800</max>
+		</apparelMoney>
+		<weaponMoney>
+			<min>1500</min>
+			<max>2300</max>
+		</weaponMoney>
+		<weaponTags>
+			<li>RK_MeleeExoticTier3</li>
+		</weaponTags>
+		<apparelTags>
+			<li>RK_ExoticSoldier</li>
+			<li>RK_ExoticTier2</li>
+			<li>RK_ExoticHeavyArmor</li>
+		</apparelTags>
+		<skills>
+			<li>
+				<skill>Melee</skill>
+				<range>15~20</range>
+			</li>
+		</skills>
+		<apparelAllowHeadgearChance>1</apparelAllowHeadgearChance>
+	</PawnKindDef>
+
+</Defs>

@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  P2·前置材料链的生产建筑(2026-08-28): 蚕匾 / 沤浆池 / 造纸台 / 抄写台 + 抄写系 4 件链接件
+  全部 thingClass=Building_WorkTable(原版), **不依赖 Processor Framework**;
+  MO 原档里 蚕→丝绸床、纸→造纸压机 是 PF 自动机, 抄写台是 MO DLL 类
+  (MedievalOverhaul.Building_ScribeTable) → 这里全部降级为原版手动工作台,
+  将来启用 PF 时可另加自动化机器而不冲突(defName 不同)。
+  抄写系 4 件用原版 CompProperties_Facility(+4% 工作台速度, 半径 6),
+  宿主就是本文件的 RK_ScribeTable —— 上一批移植的装饰件终于有了作用对象。
+============================================================================ -->
+
+	<ThingDef Name="RK_CraftTableBase" ParentName="TableBase" Abstract="True">
+		<designationCategory>Production</designationCategory>
+		<hasInteractionCell>True</hasInteractionCell>
+		<surfaceType>Item</surfaceType>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RK_HangingPaperRack</li>
+					<li>RK_QuillAndInkwell</li>
+					<li>RK_BookStack</li>
+					<li>RK_PaperStack</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="RK_ScribeLinkBase" ParentName="BuildingBase" Abstract="True">
+		<designationCategory>Misc</designationCategory>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<pathCost>30</pathCost>
+		<rotatable>true</rotatable>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>0.8</Flammability>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>Fabrication</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<maxDistance>6</maxDistance>
+				<maxSimultaneous>1</maxSimultaneous>
+				<statOffsets>
+					<WorkTableWorkSpeedFactor>0.04</WorkTableWorkSpeedFactor>
+				</statOffsets>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ 蚕匾 ============ -->
+	<ThingDef ParentName="RK_CraftTableBase">
+		<defName>RK_SilkwormTray</defName>
+		<uiIconPath>Things/Building/Production/SilkBed/SilkBed</uiIconPath>
+		<label>蚕匾架</label>
+		<description>一层层竹匾搭成的架子, 养着吃桑叶与嫩草的蚕。它们吐出的茧被收集后, 就能缫出可以织造的生丝。</description>
+		<graphicData>
+			<texPath>Things/Building/Production/SilkBed/SilkBed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<size>(2,2)</size>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<uiIconScale>0.8</uiIconScale>
+		<statBases>
+			<WorkToBuild>2000</WorkToBuild>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>10</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>-2</Beauty>
+			<Cleanliness>0</Cleanliness>
+		</statBases>
+		<costList>
+			<WroughtIron>10</WroughtIron>
+					<ComponentMedieval>1</ComponentMedieval>
+		</costList>
+		<costStuffCount>45</costStuffCount>
+		<stuffCategories>
+			<li>SoftwoodLumber</li>
+			<li>HardwoodLumber</li>
+			<li>EngineeredLumber</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>RK_Sericulture</li>
+		</researchPrerequisites>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+	</ThingDef>
+
+	<!-- ============ 沤浆池 ============ -->
+	<ThingDef ParentName="RK_CraftTableBase">
+		<defName>RK_PulpVat</defName>
+		<label>沤浆池</label>
+		<description>木板围衬的浅池, 木头、破布与草木灰在这里泡烂、捣碎成稠浆。造纸的第一步, 也是最臭的一步。</description>
+		<graphicData>
+			<texPath>Things/Building/Production/Presser/Presser</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<size>(2,2)</size>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<statBases>
+			<WorkToBuild>3200</WorkToBuild>
+			<MaxHitPoints>140</MaxHitPoints>
+			<Mass>40</Mass>
+			<Flammability>0.2</Flammability>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<costList>
+			<WroughtIron>8</WroughtIron>
+					<ComponentMedieval>1</ComponentMedieval>
+		</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>SoftwoodLumber</li>
+			<li>HardwoodLumber</li>
+			<li>EngineeredLumber</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>Fabrication</li>
+		</researchPrerequisites>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+	</ThingDef>
+
+	<!-- ============ 造纸台 ============ -->
+	<ThingDef ParentName="RK_CraftTableBase">
+		<defName>RK_PaperPress</defName>
+		<label>造纸台</label>
+		<description>带螺旋压杆的结实木台。纸浆摊在帘床上, 压去水分、晾干, 就是一叠可以写字的纸。</description>
+		<graphicData>
+			<texPath>Things/Building/Production/PaperPress/PaperPress</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<size>(2,2)</size>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<statBases>
+			<WorkToBuild>4200</WorkToBuild>
+			<MaxHitPoints>160</MaxHitPoints>
+			<Mass>35</Mass>
+			<Flammability>0.8</Flammability>
+			<Beauty>2</Beauty>
+		</statBases>
+		<costList>
+			<WroughtIron>15</WroughtIron>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<costStuffCount>110</costStuffCount>
+		<stuffCategories>
+			<li>SoftwoodLumber</li>
+			<li>HardwoodLumber</li>
+			<li>EngineeredLumber</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>Fabrication</li>
+		</researchPrerequisites>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+	</ThingDef>
+
+	<!-- ============ 抄写台 ============ -->
+	<ThingDef ParentName="RK_CraftTableBase">
+		<defName>RK_ScribeTable</defName>
+		<label>抄写台</label>
+		<description>带斜面的大桌子, 摆着蜡板、羊皮、封漆、羽毛笔与墨水。在这里可以把纸誊写成书——包括那些讲不清来源、却能让人凭空长本事的"专著"。旁边晾纸架、墨水台、书堆、纸堆越多, 抄得越快。</description>
+		<graphicData>
+			<texPath>Things/Building/Misc/TableScribe</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(5,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<size>(3,2)</size>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<pathCost>50</pathCost>
+		<blockWind>false</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<statBases>
+			<WorkToBuild>9000</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Mass>45</Mass>
+			<Flammability>0.8</Flammability>
+			<Beauty>10</Beauty>
+		</statBases>
+		<costList>
+			<WroughtIron>20</WroughtIron>
+					<ComponentMedieval>3</ComponentMedieval>
+		</costList>
+		<costStuffCount>150</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>Fabrication</li>
+		</researchPrerequisites>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+	</ThingDef>
+
+	<!-- ============ 抄写系链接件 4 ============ -->
+	<ThingDef ParentName="RK_ScribeLinkBase">
+		<defName>RK_HangingPaperRack</defName>
+		<uiIconPath>Things/Building/Misc/HangingPaperRack_MenuIcon</uiIconPath>
+		<label>晾纸架</label>
+		<description>一排横杆, 挂着刚压好、还在滴水的纸页。放在抄写台旁, 纸不至于皱成一团。</description>
+		<graphicData>
+			<texPath>Things/Building/Misc/HangingPaperRack</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<costStuffCount>35</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ScribeLinkBase">
+		<defName>RK_QuillAndInkwell</defName>
+		<uiIconPath>Things/Building/Misc/QuillAndInkwell_MenuIcon</uiIconPath>
+		<label>羽毛笔与墨水台</label>
+		<description>一整排削好的羽毛笔和几罐现成的墨水。抄写员不必再为蘸墨停下来。</description>
+		<graphicData>
+			<texPath>Things/Building/Misc/QuillAndInkwell</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<costStuffCount>25</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ScribeLinkBase">
+		<defName>RK_BookStack</defName>
+		<uiIconPath>Things/Building/Misc/BookStack_MenuIcon</uiIconPath>
+		<label>参考书堆</label>
+		<description>抄写台上摞起的旧书, 既是范本也是查证依据。抄写台旁再多放一摞, 也方便随时翻阅。</description>
+		<graphicData>
+			<texPath>Things/Building/Misc/BookStack</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.6,1.6)</drawSize>
+		</graphicData>
+		<size>(1,1)</size>
+		<costStuffCount>20</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ScribeLinkBase">
+		<defName>RK_PaperStack</defName>
+		<uiIconPath>Things/Building/Misc/PaperStack_MenuIcon</uiIconPath>
+		<label>纸堆</label>
+		<description>压在重物下、边角对齐的一摞纸。离抄写台越近, 誊写越顺手。</description>
+		<graphicData>
+			<texPath>Things/Building/Misc/PaperStack</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.6,1.6)</drawSize>
+		</graphicData>
+		<size>(1,1)</size>
+		<costStuffCount>15</costStuffCount>
+	</ThingDef>
+
+</Defs>

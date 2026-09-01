@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ============================================================
+		Tavern 酒馆家具 —— HSK 适配补丁
+		1. 材料适配：WoodLog（原木）→ WoodPlank（HSK 木板）
+		2. 属性等价：对齐 HSK 同水平同材料家具/建筑
+	============================================================ -->
+
+	<!-- ===== 1. 材料适配：WoodLog → WoodPlank ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftArmchair"]/costList/WoodLog</xpath>
+		<value><WoodPlank>75</WoodPlank></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Kitchen"]/costList/WoodLog</xpath>
+		<value><WoodPlank>30</WoodPlank></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_KitchenShelfs"]/costList/WoodLog</xpath>
+		<value><WoodPlank>20</WoodPlank></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_KitchenCloset"]/costList/WoodLog</xpath>
+		<value><WoodPlank>50</WoodPlank></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Oven"]/costList/WoodLog</xpath>
+		<value><WoodPlank>80</WoodPlank></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_KitchenButch"]/costList/WoodLog</xpath>
+		<value><WoodPlank>50</WoodPlank></value>
+	</Operation>
+
+	<!-- ===== 2. 属性等价：桌子对齐 HSK Table1x1c/1x2c/2x2c ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x1Table"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>65</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x1Table"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>500</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x2Table"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>75</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x2Table"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>700</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2Table"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>100</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2Table"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>900</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2Table"]/statBases/Beauty</xpath>
+		<value><Beauty>4</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2RoundTable"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>100</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2RoundTable"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>900</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_2x2RoundTable"]/statBases/Beauty</xpath>
+		<value><Beauty>4</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x2Counter"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>75</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x2Counter"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>700</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x3Counter"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>85</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x3Counter"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>800</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x3Counter"]/statBases/Beauty</xpath>
+		<value><Beauty>3</Beauty></value>
+	</Operation>
+
+	<!-- ===== 3. 属性等价：椅子/凳子对齐 HSK ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_ChairA"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>90</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_ChairA"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>900</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_ChairA"]/statBases/Comfort</xpath>
+		<value><Comfort>0.5</Comfort></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftChair"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>80</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftChair"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>1100</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftChair"]/statBases/Comfort</xpath>
+		<value><Comfort>0.6</Comfort></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_StoolA"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>50</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_StoolA"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>350</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_StoolA"]/statBases/Comfort</xpath>
+		<value><Comfort>0.3</Comfort></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_TavernBench"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>80</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_TavernBench"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>550</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_TavernBench"]/statBases/Comfort</xpath>
+		<value><Comfort>0.5</Comfort></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftStool"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>50</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftStool"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>500</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftStool"]/statBases/Comfort</xpath>
+		<value><Comfort>0.4</Comfort></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftArmchair"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>90</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftArmchair"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>2100</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftArmchair"]/statBases/Comfort</xpath>
+		<value><Comfort>0.9</Comfort></value>
+	</Operation>
+
+	<!-- ===== 4. 属性等价：床对齐 HSK Bed/DoubleBed ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftBed"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>80</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftBed"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>800</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftDoubleBed"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>110</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_SoftDoubleBed"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>1540</WorkToBuild></value>
+	</Operation>
+
+	<!-- ===== 5. 属性等价：储物对齐 HSK EndTableSimple/Dresser/ClutterLocker ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_EndTable"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>100</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_EndTable"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>1100</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_EndTable"]/statBases/Beauty</xpath>
+		<value><Beauty>8</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Dresser"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>5000</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Dresser"]/statBases/Beauty</xpath>
+		<value><Beauty>10</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Wardrobe"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>100</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Wardrobe"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>750</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Wardrobe"]/statBases/Beauty</xpath>
+		<value><Beauty>10</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x1Wardrobe"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>100</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x1Wardrobe"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>1100</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_1x1Wardrobe"]/statBases/Beauty</xpath>
+		<value><Beauty>8</Beauty></value>
+	</Operation>
+
+	<!-- ===== 6. 属性等价：灯对齐 HSK Candle/GlowstoneTableLamp ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Candleholder"]/statBases/MaxHitPoints</xpath>
+		<value><MaxHitPoints>20</MaxHitPoints></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Candleholder"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>130</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_Candleholder"]/statBases/Beauty</xpath>
+		<value><Beauty>3</Beauty></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_TableLight"]/statBases/WorkToBuild</xpath>
+		<value><WorkToBuild>300</WorkToBuild></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Tav_TableLight"]/statBases/Beauty</xpath>
+		<value><Beauty>7</Beauty></value>
+	</Operation>
+</Patch>

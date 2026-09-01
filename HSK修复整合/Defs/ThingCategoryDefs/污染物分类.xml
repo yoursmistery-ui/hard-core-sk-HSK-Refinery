@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 污染物分类(2026-08-19 用户要求, 2026-08-20 更新):
+         把「有毒垃圾(Wastepack)」归入统一的「污染物」分类,便于资源管理与存储过滤。
+         挂在 Items(物品)根下,与 垃圾(Waste)/杂项(ItemsMisc) 平级。
+         分类移动由 75_资源管理分类.xml 执行。
+         (卫生粪便污泥 FecalSludge 曾并入本类, 2026-08-20 用户改回 DBH 原始 Waste 垃圾分类。)
+         中文名见 Languages/ChineseSimplified/DefInjected/ThingCategoryDef/ThingCategories.xml。 -->
+    <!-- 注意: <Defs> 的直接子节点必须就是 Def 元素本身,<li> 包裹会报
+         "Type li is not a Def type"(LoadedModManager 按子节点元素名解析 Def 类型)。 -->
+    <ThingCategoryDef>
+        <defName>RK_Pollutants</defName>
+        <label>pollutants</label>
+        <parent>Items</parent>
+    </ThingCategoryDef>
+</Defs>

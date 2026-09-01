@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>RK_ScenarioWasteRat</defName>
+		<label>Stay at home</label>
+		<description>Deep into playing Zhubo Shushu Severe Dependence, a sip of Pink Meowpaw went down the wrong pipe—when she opened her eyes again, she and her entire house had plunged into RimWorld. At least this time, no one could call her a shut-in anymore.</description>
+		<scenario>
+			<name>Stay at home</name>
+			<summary>Can’t be a shut-in anymore</summary>
+			<description>Deep into playing Zhubo Shushu Severe Dependence, a sip of Pink Meowpaw went down the wrong pipe—when she opened her eyes again, she and her entire house had plunged into RimWorld. At least this time, no one could call her a shut-in anymore.</description>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>PlayerColony</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>Deep into playing Zhubo Shushu Severe Dependence, a sip of Pink Meowpaw went down the wrong pipe—when she opened her eyes again, she and her entire house had plunged into RimWorld. At least this time, no one could call her a shut-in anymore.</text>
+					<closeSound>GameStartSting</closeSound>
+				</li>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+					<def>ConfigurePawnsKindDefs</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+          <leftBehindPawnKind>RatkinWaster_Player</leftBehindPawnKind>
+					<kindCounts>
+						<li>
+							<requiredAtStart>True</requiredAtStart>
+							<count>1</count>
+							<kindDef>RatkinWaster_Player</kindDef>
+						</li>
+					</kindCounts>
+				</li>
+				<li Class="ScenPart_StartingAnimal">
+					<def>StartingAnimal</def>
+					<animalKind>Cat</animalKind>
+					<count>1</count>
+					<bondToRandomPlayerPawnChance>1</bondToRandomPlayerPawnChance>
+				</li>
+        <li Class="Meow.ScenPart_PlayerPawnsSpawnAt">
+          <def>PlayerPawnsSpawnAt</def>
+					<startingPointMarks>
+						<li>RK_Seat_MimiChair</li>
+					</startingPointMarks>
+					<startingPointMarksAnimals>
+						<li>AnimalSleepingBox</li>
+					</startingPointMarksAnimals>
+					<startingPointMarksMechanoids>
+						<li>DiningChair</li>
+					</startingPointMarksMechanoids>
+					<unfogPointMarks>
+						<li>DiningChair</li>
+						<li>RK_Seat_MimiChair</li>
+						<li>AncientToilet</li>
+						<li>RK_MeleeWeapon_Crowbar</li>
+					</unfogPointMarks>
+					<refogMap>true</refogMap>
+        </li>
+				<!-- <li Class="KCSG.ScenPart_AddStartingStructure">
+					<def>VFEC_AddStartingStructure</def>
+					<preGenClear>True</preGenClear>
+					<fullClear>True</fullClear>
+					<structureLabel>Mouse House</structureLabel>
+					<nearMapCenter>True</nearMapCenter>
+					<clearFogInRect>True</clearFogInRect>
+					<spawnTheStartingPawn>False</spawnTheStartingPawn>
+					<chooseFrom>
+						<li>Mice_Home</li>
+					</chooseFrom>
+				</li> -->
+				<!-- <li Class="Meow.ScenPart_StartWithPrefab">
+					<def>StartWithPrefab</def>
+					<showSummary>false</showSummary>
+					<prefabExtDef>MousieHouseTerrain</prefabExtDef>
+					<clearBeforeGenerate>false</clearBeforeGenerate>
+				</li> -->
+				<li Class="Meow.ScenPart_StartWithPrefab">
+					<def>StartWithPrefab</def>
+					<showSummary>true</showSummary>
+					<prefabExtDef>MousieHouse</prefabExtDef>
+					<forbidAllSpawnedItems>true</forbidAllSpawnedItems>
+					<forbidBuildings>false</forbidBuildings>
+					<rotation>North</rotation>
+					<randomizeRotation>false</randomizeRotation>
+					<chargeBatteries>true</chargeBatteries>
+					<batteryChargeRange>0.8~1.0</batteryChargeRange>
+					<reconnectPower>true</reconnectPower>
+					<spawnInPlayerFaction>true</spawnInPlayerFaction>
+					<AddBooksToBookcases>true</AddBooksToBookcases>
+					<books>
+						<li>Novel</li>
+						<li>TextBook</li>
+						<li>Schematic</li>
+					</books>
+					<bookWeights>
+						<li>30</li>
+						<li>35</li>
+						<li>20</li>
+					</bookWeights>
+					<qualityGeneratorBooks>Gift</qualityGeneratorBooks>
+					<!-- <changeImpassableTileAs>Sand</changeImpassableTileAs> -->
+					<changeWaterTileAs>Sand</changeWaterTileAs>
+					<!-- <changeOtherTileAs>Sand</changeOtherTileAs> -->
+					<generateLater>true</generateLater>
+					<clearEarlier>true</clearEarlier>
+					<clearBeforeGenerate>true</clearBeforeGenerate>
+					<addEdgeDef>Concrete</addEdgeDef>
+					<edgeDist>3</edgeDist>
+					<edgeChance>0.3</edgeChance>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+</Defs>

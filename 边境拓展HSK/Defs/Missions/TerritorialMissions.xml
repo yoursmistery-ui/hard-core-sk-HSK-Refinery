@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <QuestScriptDef>
+    <defName>BOTR_TerritorialMission</defName>
+    <questAvailableLetterTextIsDescription>true</questAvailableLetterTextIsDescription>
+    <everAcceptableInSpace>true</everAcceptableInSpace>
+    <root Class="QuestNode_Sequence">
+      <nodes />
+    </root>
+  </QuestScriptDef>
+
+  <QuestScriptDef>
+    <defName>BOTR_AutonomousDefenseGarrison</defName>
+    <everAcceptableInSpace>true</everAcceptableInSpace>
+    <root Class="QuestNode_Sequence">
+      <nodes />
+    </root>
+  </QuestScriptDef>
+
+  <!-- Retained for save compatibility with mission offers created before
+       territorial missions became registered RimWorld quests. -->
+  <LetterDef>
+    <defName>BOTR_TerritorialMissionOffer</defName>
+    <letterClass>BordersOfTheRim.ChoiceLetter_TerritorialMissionOffer</letterClass>
+    <color>(95, 151, 191)</color>
+    <flashInterval>-1</flashInterval>
+    <pauseMode>MajorThreat</pauseMode>
+  </LetterDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>BOTR_TerritorialCommandCenter</defName>
+    <label>territorial command center</label>
+    <description>A hardened military communications node coordinating this faction's operations across the surrounding territory. Destroying it will cripple the current offensive.</description>
+    <size>(2, 1)</size>
+    <fillPercent>0.65</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <selectable>true</selectable>
+    <rotatable>true</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <graphicData>
+      <texPath>Things/Building/Misc/CommsConsole</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3, 2)</drawSize>
+      <shadowData>
+        <volume>(2, 0.5, 1)</volume>
+      </shadowData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>600</MaxHitPoints>
+      <Flammability>0.25</Flammability>
+      <Beauty>-8</Beauty>
+      <Mass>80</Mass>
+    </statBases>
+    <comps>
+      <li Class="BordersOfTheRim.CompProperties_TerritorialCommandCenter" />
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>BOTR_TerritorialSupplyDepot</defName>
+    <label>territorial supply depot</label>
+    <description>A forward depot holding fuel, ammunition, and supplies for the faction's territorial campaign. Destroying it will weaken enemy operations for several days.</description>
+    <size>(2, 2)</size>
+    <fillPercent>0.45</fillPercent>
+    <passability>PassThroughOnly</passability>
+    <pathCost>25</pathCost>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <graphicData>
+      <texPath>Things/Building/Misc/DropBeacon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.5, 2.5)</drawSize>
+      <shadowData>
+        <volume>(1.5, 0.35, 1.5)</volume>
+      </shadowData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>450</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Beauty>-6</Beauty>
+      <Mass>60</Mass>
+    </statBases>
+    <comps>
+      <li Class="BordersOfTheRim.CompProperties_TerritorialSupplyDepot" />
+    </comps>
+  </ThingDef>
+</Defs>

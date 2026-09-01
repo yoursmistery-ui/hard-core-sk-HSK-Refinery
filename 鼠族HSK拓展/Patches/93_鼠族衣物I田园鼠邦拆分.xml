@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- ============================================================ -->
+  <!--  93_鼠族衣物I田园鼠邦拆分.xml (2026-08-27)                  -->
+  <!--  需求:                                                      -->
+  <!--  ① B1(鼠族衣物I·日常衣装) 拆出 22 件鼠邦传统/田园服饰到     -->
+  <!--     新节点 鼠族衣物I·田园鼠邦(Ratkin_Apparel_B1c, 中世纪)   -->
+  <!--  ② B2A(鼠族衣物II·礼服装) 改完整工业时代                    -->
+  <!--     (techLevel Industrial + LabTerminal 研究终端设施)       -->
+  <!--  ③ B1b(头脸配饰) 改名 鼠族衣物II·头脸配饰                   -->
+  <!--  MoustateJewerly 改名/改前置/工业时代 → 直接改               -->
+  <!--     Defs/ResearchDefs/ResearchProjects.xml                  -->
+  <!--  注意: 22 件中 RK_ExoticFarmerDress 完全继承 RK_Ruqun 的    -->
+  <!--  recipeMaker(无物理节点), 补丁操作原始 XML 不解析继承,      -->
+  <!--  须用 Add recipeMaker 覆盖, 其余 21 件用 Replace。          -->
+  <!-- ============================================================ -->
+
+  <!-- 1. 新增节点: 鼠族衣物I·田园鼠邦 (中世纪, 前置 B1, 坐标 6,45) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs</xpath>
+    <value>
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B1c</defName>
+        <label>鼠族衣物I·田园鼠邦</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>6.00</researchViewX>
+        <researchViewY>45.00</researchViewY>
+        <baseCost>300</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B1</li>
+        </prerequisites>
+        <techLevel>Medieval</techLevel>
+      </ResearchProjectDef>
+    </value>
+  </Operation>
+
+  <!-- 2. 22 件鼠邦传统/田园服饰配方迁移 B1 -> B1c -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Ruqun"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Suyi"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_HeChang"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_ZhongShan"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_YiShang"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_BiaoShiFu"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_SenGiTai"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_DaoPao"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Pipao"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Haori"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_DongYi"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Souyi"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_DuDouChild"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_JiaAoChild"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_DouLi"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_FuJin"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_TieMao"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_FangRen"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Gusoku"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_SashiMono"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_ManGear"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite></value>
+  </Operation>
+  <!-- RK_ExoticFarmerDress: 无物理 recipeMaker(继承 RK_Ruqun), Add 覆盖 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="RK_ExoticFarmerDress"]</xpath>
+    <value>
+      <recipeMaker>
+        <researchPrerequisite>Ratkin_Apparel_B1c</researchPrerequisite>
+      </recipeMaker>
+    </value>
+  </Operation>
+
+  <!-- 3. B2A(鼠族衣物II·礼服装) 改完整工业时代 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/techLevel</xpath>
+    <value><techLevel>Industrial</techLevel></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]</xpath>
+    <value>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+    </value>
+  </Operation>
+
+  <!-- 4. B1b 头脸配饰 改名 鼠族衣物II·头脸配饰 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1b"]/label</xpath>
+    <value><label>鼠族衣物II·头脸配饰</label></value>
+  </Operation>
+
+  <!-- ================================================================
+       5. 补齐 B1b/B2B/B2C/B2D 的工业级设施门槛 (2026-08-28)
+       问题: 这四个节点由 91_鼠族衣物科技树拆分.xml 创建时, 只写了
+             <techLevel>Industrial</techLevel> 而 ParentName 仍是
+             MedievalBase(不带 LabTerminal 设施要求), 且未补
+             requiredResearchFacilities → "研究树显示工业级, 实际只要
+             简单研究台即可研究", 与同类 B2A(93 号已完整工业化)/
+             C1/C2b(IndustrialBase 父类) 不一致。
+             前置链矛盾: B2A(需终端) → B2B → B2C → B2D(不需终端)。
+       修复: 与上方 B2A 处理保持一致, Add requiredResearchFacilities
+             =LabTerminal。只补设施不改 techLevel(已是 Industrial),
+             也不改 ParentName(避免与 91 号创建处冲突)。
+       顺序: 本文件 93 > 91(创建处), 节点已存在; 99 号补丁只改
+             Fabrication 的 requiredResearchBuilding, 与本字段无冲突。
+       涉及游戏内名称: 鼠族衣物II·头脸配饰 / 冬暖装 / 职业装备 / 软甲防御
+       ================================================================ -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1b"]</xpath>
+    <value>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2B"]</xpath>
+    <value>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2C"]</xpath>
+    <value>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2D"]</xpath>
+    <value>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
+    </value>
+  </Operation>
+
+</Patch>

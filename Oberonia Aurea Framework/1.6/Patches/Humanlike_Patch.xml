@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Human"]/comps/li[@Class="OberoniaAurea_Frame.CompProperties_PawnPreApplyDamage"]</xpath>
+        <success>Always</success>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Human"]/comps</xpath>
+            <value>
+                <li Class="OberoniaAurea_Frame.CompProperties_PawnPreApplyDamage" />
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Humanoid Alien Races</li>
+            <li>Humanoid Alien Races ~ Dev</li>
+        </mods>
+        <success>Always</success>
+        <match Class="PatchOperationSequence">
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike" and not(comps)]</xpath>
+                    <value>
+                        <comps/>
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>Defs/AlienRace.ThingDef_AlienRace[race/intelligence="Humanlike" and comps and not(comps/li[@Class="OberoniaAurea_Frame.CompProperties_PawnPreApplyDamage"])]/comps</xpath>
+                    <value>
+                        <li Class="OberoniaAurea_Frame.CompProperties_PawnPreApplyDamage" />
+                    </value>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+    
+</Patch>

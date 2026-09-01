@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>特性拓展modHSK</name>
+    <author>local</author>
+    <modVersion>0.2.0</modVersion>
+    <packageId>vanillaexpanded.vanillatraitsexpanded</packageId>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <modDependencies>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <downloadUrl>https://rimworld.example/brrainz.harmony</downloadUrl>
+			</li>
+        <li>
+            <packageId>skyarkhangel.HSK</packageId>
+            <displayName>Core SK</displayName>
+            <downloadUrl>https://rimworld.example/skyarkhangel.HSK</downloadUrl>
+			</li>
+    </modDependencies>
+    <loadAfter>
+        <li>brrainz.harmony</li>
+        <li>skyarkhangel.hsk</li>
+        <li>skyarkhangel.hsk.core</li>
+        <li>skyarkhangel.hsk.dlc</li>
+        <li>moretraitslots.kv.rw</li>
+        <li>solaris.ratkinracemod</li>
+        <li>solarweb.stratum</li>
+        <!-- ↓ 用户要求: 本 mod 压到内容 mod 的最末尾, 只留在 HSK修复整合(local.hskfixpack) 与
+             汉化包(AITranslation.Pack) 之前。理由: 互斥注入与授予要认得其它 mod 后加进来的
+             TraitDef, 越晚加载看到的特性池越全(AGENTS.md §3 补丁只能引用更早加载的 def)。
+             2026-08-28 补入 vanillaexpanded.skills 与工业大修: 08-27 曾为避环刻意漏掉它们,
+             起因是 VSE 的 About 里有历史遗留边 loadAfter vanillaexpanded.vanillatraitsexpanded;
+             那条边已删(VSE 全仓无任何 VTE 引用), 所以现在不成环(cycle_all.py 复核 0)。
+             ⚠ 不得再加 local.hskfixpack / aitranslation.pack / EndMod 组作为 loadAfter:
+                修复整合与本 mod 是"它 loadAfter 我们"的关系, 反向声明即 2-环。 -->
+        <li>local.ratkin.clothesweapons</li>
+        <li>miho.fortifiedoutremer</li>
+        <li>local.ratkin.goldenhsk</li>
+        <li>local.ratkin.furniture</li>
+        <li>DARKkai.RatkinBackStoryExpanded.HSK</li>
+        <li>VanillaExpanded.VBooksE</li>
+        <li>local.hsktavernintegration</li>
+        <li>meathax.ShowMeYourTools</li>
+        <li>local.imperialcoin</li>
+        <li>ratkinpatch.HSKIndustrialResearchOverhaul</li>
+        <li>vanillaexpanded.skills</li>
+        <li>ratkinpatch.PollutionUnify</li>
+        <li>local.reelstorage.hskfix</li>
+        <li>local.ratkin.afu.hairstyles</li>
+        <li>Vinzero.GloomyHairUP</li>
+        <li>Butterfish.HairModdingPlus</li>
+        <li>NehsModsForDev.bordersoftherim</li>
+        <li>VanillaExpanded.VMemesE</li>
+        <li>vanillaexpanded.vanillasocialinteractionsexpanded</li>
+        <li>carnysenpai.traitraritycolors</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+    </loadAfter>
+    <description>
+特性拓展modHSK —— Vanilla Traits Expanded(原版 VTE)HSK 适配本地版(顶替社区工坊 VTE)
+本地版直接采用原 VTE 的 packageId,去掉社区工坊引用。整合原版 VTE 的 53 个生活方式特性及其 Thought/MentalState/Hediff/Job 配套。
+
+注意: 原版 VTE 本体只提供特性定义与生效逻辑, 并不含任何"动态获得特性"的代码(特性只在人物生成时按 commonality 随机出现)。本包的动态获得由自研引擎 HSKTraitExt v2(Harmony)提供。
+
+【v2 节奏门】(2026-08-27 重做, 定位为附属玩法, 门槛高、节奏慢)
+一 开局门: 本局进行满 2 年后才开始任何动态特性判定。
+二 入队门: 单个殖民者入队满 1 年才具备资格。
+三 个人冷却: 每获得一条特性后, 该人下次判定推迟 1 至 1.5 年(随机), 负面特性再乘 1.5 倍。
+四 年度配额: 全殖民地每年能获得特性的人数按人口分档 —— 14 人以下 1 人, 15 至 24 人 2 人, 25 至 34 人 3 人, 以此类推, 上限 6 人。
+五 单人容量: 动态特性总数默认不超过 2 条。
+六 阈值与概率已整体抬高(常见维度阈值约为此前两倍, 负面特性概率再乘 0.4), 实际速率约每殖民地 0.2 至 1.5 次/年。
+
+【v2 因果修正】
+· 早起鸟: 旧规则把"早起鸟"当作"夜间劳作"计数器的负向结果(熬夜越多越可能拿到早起鸟), 语义完全颠倒。现拆成两个独立计数器 —— 夜行计数达标得夜猫子, 晨间劳作计数达标才得早起鸟。
+· 同一思路清理了其余"正负特性挂同一计数器"的维度(清洁/邋遢、岩矿/幽闭恐惧、近战/胆小、射击/视力、社交/忧虑等), 其不可靠的负向分支一律移除; 负面特性改由真正度量负面行为的计数器驱动(精神崩溃次数、屠宰伴侣动物次数)。
+· 保留性格漂移(动态特性会随生活改变退场)与禁毒 2 年移除成瘾特性; 均只作用于本包动态授予过的特性, 不碰人物生成自带的特性。
+所有参数可在 设置 - 特性拓展modHSK 中调整。
+    </description>
+</ModMetaData>

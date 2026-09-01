@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         07_配方与工作台.xml  (2026-08-22 按大类合并; 2026-08-27 拆分)
+         合并自 18 个补丁: 08_锻造台配方重分配.xml, 11_锻造厂木板适配.xml, 26_配方工作台整理.xml, 27_混凝土搅拌机配方.xml, 28_中世纪护甲工作台修复.xml, 29_工作台配方归位.xml, 30_鼠族枪械高级武器台.xml, 31_人类装备归位电动缝纫台.xml, 32_鼠族太空衣物挂先进纺织台.xml, 36_删除铸币配方.xml, 39_GoldToGoldBar.xml, 40_SilverToSilverBar.xml, 41_WoodLogToWoodPlank.xml, 43_壁炉重复解锁修复.xml, 44_VileAnyLeatherRecipes.xml, 49_弩箭木板适配.xml, 55_锯木台胶合板与乐器木板适配.xml, 63_手工锯木台原木材质.xml
+         ⚠ 2026-08-27 工业内容迁移: 锻造台配方重分配(08)/锻造厂木板适配(11)/混凝土搅拌机(27)/
+         工作台配方归位(29)/人类装备归位电动缝纫台(31)/删除铸币(36)/金银木锭(39/40/41)/自密封紧固件
+         已迁至 工业科研大修 A4_配方与工作台归位.xml。
+         本文件仅保留: 壁炉重复解锁 + Vile任意皮革 + 弩箭木板 + 锯木台 + 手工锯木台。
+         ============================================================ -->
+    <!-- 来源: 43_壁炉重复解锁修复.xml -->
+<Operation Class="PatchOperationConditional" MayRequire="ViTech.HCSKamusebouche">
+    <xpath>/Defs/ThingDef[defName="OpenHearth"]/recipes/li[text()="Make_BabyFood"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="OpenHearth"]/recipes/li[text()="Make_BabyFood"]</xpath>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="ViTech.HCSKamusebouche">
+    <xpath>/Defs/ThingDef[defName="OpenHearth"]/recipes/li[text()="Make_BabyFoodBulk"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="OpenHearth"]/recipes/li[text()="Make_BabyFoodBulk"]</xpath>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="ViTech.HCSKWood">
+    <xpath>/Defs/RecipeDef[defName="MakeRushlight"]/recipeUsers/li[text()="OpenHearth"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>/Defs/RecipeDef[defName="MakeRushlight"]/recipeUsers/li[text()="OpenHearth"]</xpath>
+    </match>
+</Operation>
+
+    <!-- 来源: 44_VileAnyLeatherRecipes.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>BrineCure_AnyLeather</defName>
+            <label>cure any leather</label>
+            <jobString>Brine-curing hides.</jobString>
+            <description>Skins and hides are submersed in salty water. The water must be paddled by hand, though it's much faster than dry curing. Cures any raw hide into its matching cured hide.</description>
+            <uiIconThing>Hide_StockHideCured</uiIconThing>
+            <ingredients>
+                <li>
+                    <filter>
+                        <categories>
+                            <li>UncuredHides</li>
+                        </categories>
+                    </filter>
+                    <count>1</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <categories>
+                    <li>UncuredHides</li>
+                </categories>
+            </fixedIngredientFilter>
+            <products>
+                <Hide_StockHideCured>1</Hide_StockHideCured>
+            </products>
+            <recipeUsers>
+                <li>BriningStation</li>
+            </recipeUsers>
+            <workSpeedStat>TailoringSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <workAmount>200</workAmount>
+        </RecipeDef>
+        <RecipeDef>
+            <defName>TanDrum_AnyLeather</defName>
+            <label>tan any leather (x25)</label>
+            <jobString>Tanning hides.</jobString>
+            <description>Tan any raw or cured hide into 25 of its matching full-grain leather.</description>
+            <uiIconThing>Leather_Plain</uiIconThing>
+            <ingredients>
+                <li>
+                    <filter>
+                        <categories>
+                            <li>UncuredHides</li>
+                            <li>CuredHides</li>
+                        </categories>
+                    </filter>
+                    <count>5</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>Chromium</li>
+                        </thingDefs>
+                    </filter>
+                    <count>5</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <categories>
+                    <li>UncuredHides</li>
+                    <li>CuredHides</li>
+                </categories>
+            </fixedIngredientFilter>
+            <products>
+                <Leather_Plain>25</Leather_Plain>
+            </products>
+            <recipeUsers>
+                <li>TanningDrum</li>
+            </recipeUsers>
+            <workSpeedStat>TailoringSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <workAmount>800</workAmount>
+        </RecipeDef>
+    </value>
+</Operation>
+
+    <!-- 来源: 49_弩箭木板适配.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Stone"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Stone"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>AcaciaPlank</li>
+                <li>BambooPlank</li>
+                <li>BirchPlank</li>
+                <li>CecropiaPlank</li>
+                <li>CypressPlank</li>
+                <li>DragonwoodPlank</li>
+                <li>MangrovePlank</li>
+                <li>MaplePlank</li>
+                <li>OakPlank</li>
+                <li>PinePlank</li>
+                <li>PoplarPlank</li>
+                <li>RedWoodPlank</li>
+                <li>TeakPlank</li>
+                <li>WillowPlank</li>
+                <li>WoodPlank</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Steel"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Steel"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>AcaciaPlank</li>
+                <li>BambooPlank</li>
+                <li>BirchPlank</li>
+                <li>CecropiaPlank</li>
+                <li>CypressPlank</li>
+                <li>DragonwoodPlank</li>
+                <li>MangrovePlank</li>
+                <li>MaplePlank</li>
+                <li>OakPlank</li>
+                <li>PinePlank</li>
+                <li>PoplarPlank</li>
+                <li>RedWoodPlank</li>
+                <li>TeakPlank</li>
+                <li>WillowPlank</li>
+                <li>WoodPlank</li>
+                <li>Steel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Plasteel"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Plasteel"]/ingredients</xpath>
+        <value>
+            <ingredients>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>AcaciaPlank</li>
+                            <li>BambooPlank</li>
+                            <li>BirchPlank</li>
+                            <li>CecropiaPlank</li>
+                            <li>CypressPlank</li>
+                            <li>DragonwoodPlank</li>
+                            <li>MangrovePlank</li>
+                            <li>MaplePlank</li>
+                            <li>OakPlank</li>
+                            <li>PinePlank</li>
+                            <li>PoplarPlank</li>
+                            <li>RedWoodPlank</li>
+                            <li>TeakPlank</li>
+                            <li>WillowPlank</li>
+                            <li>WoodPlank</li>
+                        </thingDefs>
+                    </filter>
+                    <count>1</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>Plasteel</li>
+                        </thingDefs>
+                    </filter>
+                    <count>1</count>
+                </li>
+            </ingredients>
+        </value>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Plasteel"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Plasteel"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+                <thingDefs>
+                    <li>AcaciaPlank</li>
+                    <li>BambooPlank</li>
+                    <li>BirchPlank</li>
+                    <li>CecropiaPlank</li>
+                    <li>CypressPlank</li>
+                    <li>DragonwoodPlank</li>
+                    <li>MangrovePlank</li>
+                    <li>MaplePlank</li>
+                    <li>OakPlank</li>
+                    <li>PinePlank</li>
+                    <li>PoplarPlank</li>
+                    <li>RedWoodPlank</li>
+                    <li>TeakPlank</li>
+                    <li>WillowPlank</li>
+                    <li>WoodPlank</li>
+                    <li>Plasteel</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+        </value>
+    </match>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Venom"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>MedicineHerbal</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Venom"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>AcaciaPlank</li>
+                <li>BambooPlank</li>
+                <li>BirchPlank</li>
+                <li>CecropiaPlank</li>
+                <li>CypressPlank</li>
+                <li>DragonwoodPlank</li>
+                <li>MangrovePlank</li>
+                <li>MaplePlank</li>
+                <li>OakPlank</li>
+                <li>PinePlank</li>
+                <li>PoplarPlank</li>
+                <li>RedWoodPlank</li>
+                <li>TeakPlank</li>
+                <li>WillowPlank</li>
+                <li>WoodPlank</li>
+                <li>Steel</li>
+                <li>MedicineHerbal</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Flame"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Prometheum</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Flame"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>AcaciaPlank</li>
+                <li>BambooPlank</li>
+                <li>BirchPlank</li>
+                <li>CecropiaPlank</li>
+                <li>CypressPlank</li>
+                <li>DragonwoodPlank</li>
+                <li>MangrovePlank</li>
+                <li>MaplePlank</li>
+                <li>OakPlank</li>
+                <li>PinePlank</li>
+                <li>PoplarPlank</li>
+                <li>RedWoodPlank</li>
+                <li>TeakPlank</li>
+                <li>WillowPlank</li>
+                <li>WoodPlank</li>
+                <li>Steel</li>
+                <li>Prometheum</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Light_Metallic"]/ingredients/li/filter/thingDefs[li="WoodLog"]</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+        </thingDefs>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Light_Metallic"]/fixedIngredientFilter/thingDefs</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+        </thingDefs>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Light_Venom"]/ingredients/li/filter/thingDefs[li="WoodLog"]</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+        </thingDefs>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Light_Venom"]/fixedIngredientFilter/thingDefs</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+            <li>MedicineHerbal</li>
+        </thingDefs>
+    </value>
+</Operation>
+
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Broadhead"]/ingredients/li/filter/thingDefs[li="WoodLog"]</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+        </thingDefs>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Broadhead"]/fixedIngredientFilter/thingDefs</xpath>
+    <value>
+        <thingDefs>
+            <li>AcaciaPlank</li>
+            <li>BambooPlank</li>
+            <li>BirchPlank</li>
+            <li>CecropiaPlank</li>
+            <li>CypressPlank</li>
+            <li>DragonwoodPlank</li>
+            <li>MangrovePlank</li>
+            <li>MaplePlank</li>
+            <li>OakPlank</li>
+            <li>PinePlank</li>
+            <li>PoplarPlank</li>
+            <li>RedWoodPlank</li>
+            <li>TeakPlank</li>
+            <li>WillowPlank</li>
+            <li>WoodPlank</li>
+        </thingDefs>
+    </value>
+</Operation>
+
+    <!-- 来源: 55_锯木台胶合板与乐器木板适配.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeWoodPlanks_Hand"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>Softwoods</li>
+                        <li>Hardwoods</li>
+                        <li>Ultrahardwoods</li>
+                    </categories>
+                    <thingDefs>
+                        <li>Bamboo</li>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeWoodPlanks_Hand"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <categories>
+                <li>Softwoods</li>
+                <li>Hardwoods</li>
+                <li>Ultrahardwoods</li>
+            </categories>
+            <thingDefs>
+                <li>Bamboo</li>
+                <li>WoodLog</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeWoodPlanks_Electric"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>Softwoods</li>
+                        <li>Hardwoods</li>
+                        <li>Ultrahardwoods</li>
+                    </categories>
+                    <thingDefs>
+                        <li>Bamboo</li>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakeWoodPlanks_Electric"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <categories>
+                <li>Softwoods</li>
+                <li>Hardwoods</li>
+                <li>Ultrahardwoods</li>
+            </categories>
+            <thingDefs>
+                <li>Bamboo</li>
+                <li>WoodLog</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="RKHSKSawPlywood_Hand"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKSawPlywood_Hand"]</xpath>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="RKHSKSawPlywood_Electric"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="RKHSKSawPlywood_Electric"]</xpath>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="TableSawmillHand"]/recipes/li[text()="RKHSKSawPlywood_Hand"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TableSawmillHand"]/recipes/li[text()="RKHSKSawPlywood_Hand"]</xpath>
+    </match>
+</Operation>
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="TableSawmillElectric"]/recipes/li[text()="RKHSKSawPlywood_Electric"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="TableSawmillElectric"]/recipes/li[text()="RKHSKSawPlywood_Electric"]</xpath>
+    </match>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Harpsichord"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories>
+            <li>SoftwoodLumber</li>
+            <li>HardwoodLumber</li>
+            <li>UltrahardwoodLumber</li>
+            <li>EngineeredLumber</li>
+        </stuffCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Piano"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories>
+            <li>SoftwoodLumber</li>
+            <li>HardwoodLumber</li>
+            <li>UltrahardwoodLumber</li>
+            <li>EngineeredLumber</li>
+        </stuffCategories>
+    </value>
+</Operation>
+
+    <!-- 来源: 63_手工锯木台原木材质.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TableSawmillHand"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories>
+            <li>WoodLogs</li>
+            <li>Woody</li>
+            <li MayRequire="ViTech.HCSKWood">Softwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Hardwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Ultrahardwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Bambooish</li>
+        </stuffCategories>
+    </value>
+</Operation>
+
+
+</Patch>

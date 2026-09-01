@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <QuestScriptDef>
+        <defName>OAGene_OpportunitySite_SnowstormCamp</defName>
+        <autoAccept>true</autoAccept>
+        <isRootSpecial>true</isRootSpecial>
+        <defaultChallengeRating>1</defaultChallengeRating>
+        <rootSelectionWeight>0</rootSelectionWeight>
+        <rootMinPoints>350</rootMinPoints>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName->风雪据点</li>
+                <li>questName->风雪幸存者据点</li>
+                <li>questName->风雪旅者据点</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+                <li>questDescription->一群不知来自什么地方的旅行者们近期抵达了这一带，我们得到消息他们打算在这里制造一个营地，并修养很长一段的时间。\n\n除非我们主动去接触，否则我们不会知道这伙幸存者的对外态度。若是他们是友善的幸存者，那么我们或许可以与他们进行交易，购买一些实用的物品，甚至得到他们的礼物；而若是他们是排外的幸存者，那么我们将会碰一鼻子灰，除非————\n\n我们变得比他们更加排外。</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <root Class="QuestNode_Sequence">
+            <nodes>
+
+                <li Class="OberoniaAureaGene.Snowstorm.QuestNode_IsSnowstoryScenario" />
+
+                <li Class="QuestNode_GetMap" />
+
+                <li Class="OberoniaAurea_Frame.QuestNode_GetNearTile">
+                    <storeAs>siteTile</storeAs>
+                    <minDist>4</minDist>
+                    <maxDist>9</maxDist>
+                </li>
+                <li Class="OberoniaAureaGene.Snowstorm.QuestNode_GetSnowstormCampFaction">
+                    <storeAs>siteFaction</storeAs>
+                    <factionDef>OutlanderCivil</factionDef>
+                </li>
+
+                <li Class="QuestNode_GetDefaultSitePartsParams">
+                    <tile>$siteTile</tile>
+                    <faction>$siteFaction</faction>
+                    <sitePartDefs>OAGene_SnowstormCamp</sitePartDefs>
+                    <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+                </li>
+                <li Class="QuestNode_Set">
+                    <name>sitePoints</name>
+                    <value>2000</value>
+                </li>
+
+                <li Class="QuestNode_SubScript">
+                    <def>Util_GenerateSite</def>
+                    <parms>
+                        <singleSitePartRules>
+                            <rulesStrings>
+                                <li>root(priority=1,sitePart==OAGene_SnowstormCamp)->一批旅行者们在你们附近建立了一个临时的御寒庇护所，也许你们可以去拜访他们。</li>
+                            </rulesStrings>
+                        </singleSitePartRules>
+                    </parms>
+                </li>
+
+                <li Class="QuestNode_SpawnWorldObjects">
+                    <worldObjects>$site</worldObjects>
+                </li>
+
+                <li Class="QuestNode_WorldObjectTimeout">
+                    <worldObject>$site</worldObject>
+                    <isQuestTimeout>true</isQuestTimeout>
+                    <delayTicks>$(randInt(18,20)*60000)</delayTicks>
+                    <inSignalDisable>site.MapGenerated</inSignalDisable>
+                    <destroyOnCleanup>true</destroyOnCleanup>
+                    <node Class="QuestNode_End">
+                        <outcome>Success</outcome>
+                    </node>
+                </li>
+
+                <li Class="QuestNode_Signal">
+                    <inSignal>site.Destroyed</inSignal>
+                    <node Class="QuestNode_End">
+                        <outcome>Success</outcome>
+                    </node>
+                </li>
+
+            </nodes>
+        </root>
+    </QuestScriptDef>
+
+</Defs>

@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ==========================================================================
+	     Knights of Favonius 西风骑士团 近战武器整合 (2026-08-26, 后工业档)
+	     来源: Steam 创意工坊 3768887719 "Knights of Favonius - Weapon and Armour"
+	     适配: 整合 5 把近战武器 (通用武器, 人类/鼠族均可使用)。
+	     - 父类 BaseMeleeWeapon_Sharp_Quality (同本mod其它近战武器)
+	     - recipeMaker Inherit=False IsNull=True 关闭自动配方(参照 12 号补丁铁律)
+     - 全部武器 CE 适配 (CombatExtended.ToolCE + Bulk + weaponTags)
+	     - 全部武器带 SYS.CompProperties_WeaponExtention 位置偏移(鼠族手持适配)
+	     - 贴图统一放 Textures/Weapon/Favonius/ (体型缩放 patch 按此前缀定位)
+	     - 研究: RKHSK_FavoniusArmory (Weapon_SK tab, 后工业档, 前置 Melee_C2)
+	     ========================================================================== -->
+
+	<!-- ============ Favonius basic sword 西风基础剑 (单手) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_Sword</defName>
+		<label>西风基础剑</label>
+		<description>西风骑士团新兵配发的制式长剑。朴素可靠, 适合斩除魔物, 守护蒙德的市民。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/KOFS</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<SyntheticFibers>15</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>CE_OneHandedWeapon</li>
+			<li>RK_WeaponTag_OneHand</li>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>10000</WorkToMake>
+			<Mass>1.6</Mass>
+			<Bulk>4</Bulk>
+			<MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeHitChance>2</MeleeHitChance>
+			<MeleeCritChance>0.25</MeleeCritChance>
+			<MeleeParryChance>0.2</MeleeParryChance>
+			<Suppressability>-0.2</Suppressability>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>5</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>5.4</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ Favonius Officers Rapier 西风细剑 (单手) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_Rapier</defName>
+		<label>西风骑士细剑</label>
+		<description>西风骑士团军官配发的精工细剑。轻盈易用, 专为精准突刺而设计。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/KOFR</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>60</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<SyntheticFibers>12</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>CE_OneHandedWeapon</li>
+			<li>RK_WeaponTag_OneHand</li>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>10000</WorkToMake>
+			<Mass>1.4</Mass>
+			<Bulk>3</Bulk>
+			<MeleeCounterParryBonus>0.6</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>5</MeleeDodgeChance>
+			<MeleeHitChance>3</MeleeHitChance>
+			<MeleeCritChance>0.4</MeleeCritChance>
+			<MeleeParryChance>0.35</MeleeParryChance>
+			<Suppressability>-0.3</Suppressability>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>1.2</cooldownTime>
+				<armorPenetrationSharp>5.6</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>4.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ Favonius Sword 西风之剑 (单手, 元素附魔) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_GreatSword</defName>
+		<label>西风之剑</label>
+		<description>西风骑士团的独特长剑。剑身轻盈锋利, 经由蒙德工匠研究风元素亲和而制成, 蕴含元素之力。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/Favonius_Sword</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>60</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>8</ComponentIndustrial>
+			<SyntheticFibers>20</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>CE_OneHandedWeapon</li>
+			<li>RK_WeaponTag_OneHand</li>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>20000</WorkToMake>
+			<Mass>1.8</Mass>
+			<Bulk>5</Bulk>
+			<MeleeCounterParryBonus>0.5</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.2</MoveSpeed>
+			<MeleeDodgeChance>5</MeleeDodgeChance>
+			<MeleeCritChance>0.45</MeleeCritChance>
+			<MeleeParryChance>0.35</MeleeParryChance>
+			<Suppressability>-0.35</Suppressability>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>18</power>
+				<cooldownTime>1.55</cooldownTime>
+				<armorPenetrationSharp>5.6</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ Favonius Greatsword 西风大剑 (双手) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_Claymore</defName>
+		<label>西风大剑</label>
+		<description>西风骑士团的沉重典礼大剑。易于引导元素之力, 破坏力惊人。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/Favonius_Greatsword</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.3,1.3)</drawSize>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>150</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>10</ComponentIndustrial>
+			<SyntheticFibers>24</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>RK_WeaponTag_TwoHand</li>
+			<li>RK_WeaponTag_TwoHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>40000</WorkToMake>
+			<Mass>5</Mass>
+			<Bulk>9</Bulk>
+			<MeleeCounterParryBonus>1.0</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.2</MoveSpeed>
+			<MeleeDodgeChance>3</MeleeDodgeChance>
+			<MeleeCritChance>0.7</MeleeCritChance>
+			<MeleeParryChance>0.5</MeleeParryChance>
+			<Suppressability>-0.45</Suppressability>
+			<PainShockThreshold>0.3</PainShockThreshold>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>1.2</cooldownTime>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>9</armorPenetrationSharp>
+				<armorPenetrationBlunt>6.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ Favonius Lance 西风长枪 (双手长杆) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_Lance</defName>
+		<label>西风长枪</label>
+		<description>以西风骑士团风格打造的长杆兵器。枪杆笔直, 枪尖如风般轻灵, 既是典礼仪仗, 也是魔物的克星。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/Favonius_Lance</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.3,1.3)</drawSize>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>150</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>8</ComponentIndustrial>
+			<SyntheticFibers>16</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>RK_WeaponTag_TwoHand</li>
+			<li>RK_WeaponTag_TwoHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>15000</WorkToMake>
+			<Mass>4</Mass>
+			<Bulk>8</Bulk>
+			<MeleeCounterParryBonus>0.8</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.03</MoveSpeed>
+			<MeleeDodgeChance>3</MeleeDodgeChance>
+			<MeleeHitChance>2</MeleeHitChance>
+			<MeleeCritChance>0.5</MeleeCritChance>
+			<MeleeParryChance>0.4</MeleeParryChance>
+			<Suppressability>-0.4</Suppressability>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+					<li>Poke</li>
+				</capacities>
+				<power>15</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>7.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- ============ Favonius Codex 西风书 (单手, 修女/传教士手持工具) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Favonius_Codex</defName>
+		<label>西风书</label>
+		<description>记载蒙德元素与物质之理的秘典，镶有元素结晶。修女与传教士常随身携带，用于传道授业。书页蕴含灵能增幅之力，即便用作武器也只是权宜之举。</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Weapon/Favonius/Favonius_Codex</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconScale>1.2</uiIconScale>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>30</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentIndustrial>6</ComponentIndustrial>
+			<SyntheticFibers>40</SyntheticFibers>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>CE_OneHandedWeapon</li>
+			<li>RK_WeaponTag_OneHand</li>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>1</Mass>
+			<Bulk>2</Bulk>
+			<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<!-- 传教/社交属性 -->
+			<SocialImpact>0.3</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+			<!-- 灵能属性(参考原版灵能法杖 eltex staff 并大幅强化) -->
+			<PsychicSensitivityOffset>0.5</PsychicSensitivityOffset>
+			<PsychicEntropyRecoveryRate>0.2</PsychicEntropyRecoveryRate>
+			<MeditationFocusGain>0.15</MeditationFocusGain>
+			<PsychicSensitivity>0.1</PsychicSensitivity>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>书页</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>10</power>
+				<cooldownTime>1.8</cooldownTime>
+				<armorPenetrationSharp>1</armorPenetrationSharp>
+				<armorPenetrationBlunt>1</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>书角</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationSharp>1</armorPenetrationSharp>
+				<armorPenetrationBlunt>1</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<comps>
+			<li Class="SYS.CompProperties_WeaponExtention">
+				<littleDown>True</littleDown>
+				<northOffset>
+					<position>(0.2,0,0.25)</position>
+					<angle>-45</angle>
+				</northOffset>
+				<southOffset>
+					<position>(-0.25,0.3,0.2)</position>
+					<angle>45</angle>
+				</southOffset>
+				<eastOffset>
+					<position>(0.15,0.3,0.2)</position>
+					<angle>-45</angle>
+				</eastOffset>
+				<westOffset>
+					<position>(-0.15,-0.3,0.2)</position>
+					<angle>45</angle>
+				</westOffset>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

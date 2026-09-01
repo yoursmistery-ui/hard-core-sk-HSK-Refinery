@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 90_污染鼠族CE适配 (2026-08-22)
+         RKMD(污染鼠族/RKGE EXT_Modern)枪械 CE 化, 弹药映射同 82: 手枪/SMG=9x19mmPara, 步枪/狙击=303British -->
+    <!-- RKMD_MachinePistol: 冲锋手枪 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RKMD_MachinePistol</defName>
+        <statBases>
+            <SightsEfficiency>0.8</SightsEfficiency>
+            <ShotSpread>0.12</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+            <Bulk>5</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>0.6</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+            <warmupTime>0.8</warmupTime>
+            <range>18.9</range>
+            <burstShotCount>6</burstShotCount>
+            <soundCast>Shot_MachinePistol</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>7</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>20</magazineSize>
+            <reloadTime>2.0</reloadTime>
+            <ammoSet>AmmoSet_9x19mmPara</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiUseBurstMode>TRUE</aiUseBurstMode>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aimedBurstShotCount>3</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <!-- RKMD_DualMachinePistol: 双持冲锋手枪 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RKMD_DualMachinePistol</defName>
+        <statBases>
+            <SightsEfficiency>0.8</SightsEfficiency>
+            <ShotSpread>0.14</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <Bulk>8</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>0.8</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+            <warmupTime>0.7</warmupTime>
+            <range>18.9</range>
+            <burstShotCount>12</burstShotCount>
+            <soundCast>Shot_MachinePistol</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>7</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>40</magazineSize>
+            <reloadTime>3.0</reloadTime>
+            <ammoSet>AmmoSet_9x19mmPara</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiUseBurstMode>TRUE</aiUseBurstMode>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aimedBurstShotCount>6</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <!-- RK_HuntingRifle: 大威力单发猎枪 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_HuntingRifle</defName>
+        <statBases>
+            <SightsEfficiency>1.0</SightsEfficiency>
+            <ShotSpread>0.11</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <Bulk>8</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.6</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+            <warmupTime>2.3</warmupTime>
+            <range>41.9</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_HuntingRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>1</magazineSize>
+            <reloadTime>2.5</reloadTime>
+            <ammoSet>AmmoSet_303British</ammoSet>
+        </AmmoUser>
+    </Operation>
+    <!-- RK_HuntingRifle_toxic: 毒猎枪 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_HuntingRifle_toxic</defName>
+        <statBases>
+            <SightsEfficiency>1.0</SightsEfficiency>
+            <ShotSpread>0.11</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <Bulk>8</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.6</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+            <warmupTime>2.45</warmupTime>
+            <range>41.9</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_HuntingRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>1</magazineSize>
+            <reloadTime>2.5</reloadTime>
+            <ammoSet>AmmoSet_303British</ammoSet>
+        </AmmoUser>
+    </Operation>
+    <!-- RK_SharpHunter: 猎手步枪(狙击) -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_SharpHunter</defName>
+        <statBases>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <ShotSpread>0.12</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+            <Bulk>8</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.2</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+            <warmupTime>3.7</warmupTime>
+            <range>46.9</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_HuntingRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>3.0</reloadTime>
+            <ammoSet>AmmoSet_303British</ammoSet>
+        </AmmoUser>
+    </Operation>
+    <!-- RK_CrazySting: 毒气手枪 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_CrazySting</defName>
+        <statBases>
+            <SightsEfficiency>0.8</SightsEfficiency>
+            <ShotSpread>0.07</ShotSpread>
+            <SwayFactor>1.1</SwayFactor>
+            <Bulk>3</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>0.7</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+            <warmupTime>0.85</warmupTime>
+            <range>24.9</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_CrazySting</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>8</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>8</magazineSize>
+            <reloadTime>2.0</reloadTime>
+            <ammoSet>AmmoSet_9x19mmPara</ammoSet>
+        </AmmoUser>
+    </Operation>
+</Patch>

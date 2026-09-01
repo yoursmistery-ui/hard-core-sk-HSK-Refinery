@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 统一逻辑(用户 2026-08-30): 熔炼台(ElectricSmelter/SmeltRod)也在工作点平放同色钢坯, 手不接触。
+     存在性门控防呆; lay 模式为 HSK 本地扩展(见 §7.15/JobToolDef.propColor)。 -->
+<Patch>
+
+  <!-- 统一逻辑(用户 2026-08-30): 熔炼台也在工作点放同色钢坯(坩埚料), 手不接触 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <!-- 根因: HSK 冶铁链把熔炼配方的台子改成了 Vile 的 Finery(精炼炉/搅炼熟铁)与
+             Foundry(坩埚炉/熔铸), 而 SmeltRod 的 workbenchDefs 是上游写的原版台子清单,
+             不含这两个 → 在台子前干活匹配不到工具, 杆子自然不动。补挂进去。 -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]/workbenchDefs</xpath>
+          <value>
+            <li>Finery</li>
+            <li>Foundry</li>
+            <li>EAF</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_SmeltRod"]</xpath>
+          <value>
+        <propTexPath>Things/Item/Billet/Billet_A</propTexPath>
+        <propScale>0.3</propScale>
+        <propColor>(255,146,58)</propColor>
+        <propMode>lay</propMode>
+        <propFlash>true</propFlash>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <!-- ===== 工作台适配总表补挂(2026-08-30 全量核对 Unified 终态, 只挂台子不改工具行为) ===== -->
+  <!-- 1) 锯木台(手推/电动): 新建台用斧(借树斧贴图与挥砍)。不能给 JE_Tool_Axe 本体加
+        workbenchDefs——那是砍树工具, 加了会把砍树动画锁死在锯木台上。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Axe"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+        <JobEffects.JobToolDef>
+          <defName>JE_Tool_SawmillAxe</defName>
+          <jobDefs><li>DoBill</li></jobDefs>
+          <workbenchDefs><li>TableSawmillHand</li><li>TableSawmillElectric</li></workbenchDefs>
+          <texPath>Things/JobEffects/Tools/Axe</texPath>
+          <swingStyle>Chop</swingStyle>
+          <handCount>2</handCount>
+          <handPosA>0.16</handPosA>
+          <handPosB>0.44</handPosB>
+          <scale>1.0</scale>
+          <reach>0.14</reach>
+          <period>0.55</period>
+          <windupAngle>55</windupAngle>
+          <strikeSound>JE_AxeChop</strikeSound>
+          <impactBitFleck>JE_WoodChip</impactBitFleck>
+          <impactBitCount>3</impactBitCount>
+          <impactBitSpeed>4~8</impactBitSpeed>
+          <impactBitScale>0.25~0.45</impactBitScale>
+          <impactSpread>70</impactSpread>
+        </JobEffects.JobToolDef>
+      </value>
+    </match>
+  </Operation>
+  <!-- 2) 鼠族锻造台(RK_ 前缀版): 电焊枪 + 大锤同步挂上 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchWelder"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_BenchWelder"]/workbenchDefs</xpath>
+      <value><li>RK_ElectricSmithy</li><li>RK_FueledSmithy</li></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_AnvilSledge"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_AnvilSledge"]/workbenchDefs</xpath>
+      <value><li>RK_ElectricSmithy</li><li>RK_FueledSmithy</li></value>
+    </match>
+  </Operation>
+  <!-- 3) 回收台(拆解武器/熔炼): 金属錾 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_MetalChisel"]/workbenchDefs</xpath>
+      <value><li>TableRecycling</li></value>
+    </match>
+  </Operation>
+  <!-- 4) 碎尸点(机械体拆解): 切肉刀 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Cleaver"]/workbenchDefs</xpath>
+      <value><li>CraftingSpot</li></value>
+    </match>
+  </Operation>
+  <!-- 5) 火塘(原始烹饪): 汤勺 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Spoon"]/workbenchDefs</xpath>
+      <value><li>Hearth</li></value>
+    </match>
+  </Operation>
+</Patch>

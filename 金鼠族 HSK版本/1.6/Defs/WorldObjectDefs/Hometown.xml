@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <WorldObjectDef>
+        <defName>OAGene_Hometown</defName>
+        <label>故乡</label>
+        <description>一座小镇坐落于此，但只有少数人才知道具体位置。</description>
+        <worldObjectClass>OberoniaAureaGene.Snowstorm.WorldObject_Hometown</worldObjectClass>
+        <texture>Icon/RK_DefaultColony</texture>
+        <expandingIcon>true</expandingIcon>
+        <expandingIconTexture>Icon/RK_icon</expandingIconTexture>
+        <mapGenerator>OAGene_Hometown</mapGenerator>
+        <canBePlayerHome>true</canBePlayerHome>
+        <comps>
+            <li Class="WorldObjectCompProperties_Abandon" />
+            <li Class="WorldObjectCompProperties_FormCaravan" />
+        </comps>
+    </WorldObjectDef>
+
+    <MapGeneratorDef ParentName="MapCommonBase">
+        <defName>OAGene_Hometown</defName>
+        <genSteps>
+            <li>RocksFromGrid</li>
+            <li>OAGene_Hometown</li>
+        </genSteps>
+    </MapGeneratorDef>
+
+    <WorldObjectDef>
+        <defName>OAGene_Hometown_Sealed</defName>
+        <label>故乡（尘封）</label>
+        <description>尘封的小镇</description>
+        <texture>Icon/RK_DefaultColony</texture>
+        <expandingIcon>true</expandingIcon>
+        <expandingIconTexture>Icon/RK_icon</expandingIconTexture>
+    </WorldObjectDef>
+
+</Defs>

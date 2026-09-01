@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         06_图标.xml  (2026-08-22 按大类合并)
+         合并自 5 个补丁: 12_铅合金图标修复.xml, 15_聚碳酸酯图标修复.xml, 16_聚苯乙烯图标修复.xml, 38_乙烯特氟龙HSK原版贴图.xml, 45_VileLeatherStationIcons.xml
+         铅合金/聚碳酸酯/聚苯乙烯/乙烯特氟龙/皮革站图标修复。
+         ============================================================ -->
+    <!-- 来源: 12_铅合金图标修复.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LeadBar"]/graphicData/texPath</xpath>
+    <value>
+        <texPath>Things/Item/Ingot</texPath>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LeadBar"]/graphicData/graphicClass</xpath>
+    <value>
+        <graphicClass>Graphic_StackCount</graphicClass>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LeadBar"]/graphicData/color</xpath>
+    <value>
+        <color>(129,107,100)</color>
+    </value>
+</Operation>
+
+    <!-- 来源: 15_聚碳酸酯图标修复.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Polycarbonate"]/graphicData</xpath>
+    <value>
+        <graphicData>
+            <texPath>Things/Item/Material/PolycarbonateRed</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+    </value>
+</Operation>
+
+    <!-- 来源: 16_聚苯乙烯图标修复.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Polystyrene"]/graphicData</xpath>
+    <value>
+        <graphicData>
+            <texPath>Things/Item/Chemical/Styrene</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+    </value>
+</Operation>
+
+    <!-- 来源: 38_乙烯特氟龙HSK原版贴图.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Polymers"]/graphicData</xpath>
+    <value>
+        <graphicData>
+            <texPath>Things/Item/Resource/Polymers</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Paraffins"]/graphicData</xpath>
+    <value>
+        <graphicData>
+            <texPath>Things/Item/Resource/Paraffinwax</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <color>(255,255,255)</color>
+        </graphicData>
+    </value>
+</Operation>
+
+    <!-- 来源: 45_VileLeatherStationIcons.xml -->
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_ExoticSkins"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_ExoticSkins"]</xpath>
+        <value>
+            <uiIconThing>Hide_ExoticSkinCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_LightAnimalSkins"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_LightAnimalSkins"]</xpath>
+        <value>
+            <uiIconThing>Hide_LightAnimalSkinCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_RodentSkins"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_RodentSkins"]</xpath>
+        <value>
+            <uiIconThing>Hide_RodentSkinCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_HumanSkins"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_HumanSkins"]</xpath>
+        <value>
+            <uiIconThing>Hide_HumanSkinCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_PorousHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_PorousHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_PorousHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_ImmunogenicHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_ImmunogenicHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_ImmunogenicHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_SoftHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_SoftHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_SoftHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_DurableHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_DurableHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_DurableHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_HeavyHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_HeavyHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_HeavyHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_WaterproofSkin"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_WaterproofSkin"]</xpath>
+        <value>
+            <uiIconThing>Hide_WaterproofSkinCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_StockHide"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_StockHide"]</xpath>
+        <value>
+            <uiIconThing>Hide_StockHideCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_HeavyFurPelt"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_HeavyFurPelt"]</xpath>
+        <value>
+            <uiIconThing>Hide_HeavyFurPeltCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_RichFurPelt"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_RichFurPelt"]</xpath>
+        <value>
+            <uiIconThing>Hide_HeavyFurPeltCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_RuggedFurPelt"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_RuggedFurPelt"]</xpath>
+        <value>
+            <uiIconThing>Hide_RuggedFurPeltCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="BrineCure_WarmFurPelt"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="BrineCure_WarmFurPelt"]</xpath>
+        <value>
+            <uiIconThing>Hide_WarmFurPeltCured</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherLightRodent"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherLightRodent"]</xpath>
+        <value>
+            <uiIconThing>Leather_Light</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherExotic"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherExotic"]</xpath>
+        <value>
+            <uiIconThing>Leather_Lizard</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherBreathable"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherBreathable"]</xpath>
+        <value>
+            <uiIconThing>Leather_Boomanimal</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherHeavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherHeavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_Elephant</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherWaterproof"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherWaterproof"]</xpath>
+        <value>
+            <uiIconThing>Leather_Waterproof</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherDurable"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherDurable"]</xpath>
+        <value>
+            <uiIconThing>Leather_Rhinoceros</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherStock"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherStock"]</xpath>
+        <value>
+            <uiIconThing>Leather_Plain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherSoft"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherSoft"]</xpath>
+        <value>
+            <uiIconThing>Leather_Pig</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_LeatherSterile"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_LeatherSterile"]</xpath>
+        <value>
+            <uiIconThing>Leather_Nightling</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_FurWarm"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_FurWarm"]</xpath>
+        <value>
+            <uiIconThing>Leather_Bluefur</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_FurRugged"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_FurRugged"]</xpath>
+        <value>
+            <uiIconThing>Leather_Wolf</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_FurHeavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_FurHeavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_Heavy</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_FurFine"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_FurFine"]</xpath>
+        <value>
+            <uiIconThing>Leather_Panthera</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_SplitHeavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_SplitHeavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_SplitThick"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_SplitThick"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_SplitMedium"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_SplitMedium"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanDrum_SplitThin"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanDrum_SplitThin"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherLight"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherLight"]</xpath>
+        <value>
+            <uiIconThing>Leather_Light</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherLightRodent"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherLightRodent"]</xpath>
+        <value>
+            <uiIconThing>Leather_Light</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherExotic"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherExotic"]</xpath>
+        <value>
+            <uiIconThing>Leather_Lizard</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherBreathable"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherBreathable"]</xpath>
+        <value>
+            <uiIconThing>Leather_Boomanimal</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherHeavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherHeavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_Elephant</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherWaterproof"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherWaterproof"]</xpath>
+        <value>
+            <uiIconThing>Leather_Waterproof</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherDurable"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherDurable"]</xpath>
+        <value>
+            <uiIconThing>Leather_Rhinoceros</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherStock"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherStock"]</xpath>
+        <value>
+            <uiIconThing>Leather_Rhinoceros</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherSoft"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherSoft"]</xpath>
+        <value>
+            <uiIconThing>Leather_Pig</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_LeatherSterile"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_LeatherSterile"]</xpath>
+        <value>
+            <uiIconThing>Leather_Nightling</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_FurWarm"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_FurWarm"]</xpath>
+        <value>
+            <uiIconThing>Leather_Bluefur</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_FurRugged"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_FurRugged"]</xpath>
+        <value>
+            <uiIconThing>Leather_Wolf</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_FurHeavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_FurHeavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_Heavy</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_FurRich"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_FurRich"]</xpath>
+        <value>
+            <uiIconThing>Leather_Panthera</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_HumanLeather"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_HumanLeather"]</xpath>
+        <value>
+            <uiIconThing>Leather_Human</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Heavy"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Heavy"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Thick"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Thick"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Medium"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_Medium"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_ThinSkins"]/uiIconThing</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="TanVat_TopGrain_ThinSkins"]</xpath>
+        <value>
+            <uiIconThing>Leather_CorrectedGrain</uiIconThing>
+        </value>
+    </nomatch>
+</Operation>
+
+</Patch>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <GameConditionDef Name="OAGene_SnowstormPrecursor">
+        <defName>OAGene_SnowstormPrecursor</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_SnowstormPrecursor</conditionClass>
+        <label>A sudden drop in temperature</label>
+        <description>The rapid drop in temperature in a short period of time often indicates only one thing, which is an unnatural change in temperature.</description>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>The temperature is rapidly decreasing at an unconventional rate. This level of sudden temperature drop will never happen for no reason, perhaps something is about to come.</letterText>
+        <allowUnderground>false</allowUnderground>
+        <causesTraderCaravanExit>true</causesTraderCaravanExit>
+        <temperatureOffset>-20</temperatureOffset>
+        <silencedByConditions>
+            <li>OAGene_ExtremeSnowstorm</li>
+        </silencedByConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_ExtremeIceStorm</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_Icestorm</conditionClass>
+        <label>Ice crystal blizzard</label>
+        <description>A large amount of snow crystals gradually appeared during the extreme blizzard. These sharp and icy ice crystals are carried in the wind and snow, making the already cold blizzard even more ruthless and deadly, and even injuring everyone who is not under the roof.\nIn this weather, the snow and wind crystal collector will operate at an incredible speed until it is completely filled.\n\nIn this extreme ice crystal weather, only a roof reinforced with support pillars can avoid the fate of being smashed and riddled with holes.</description>
+        <weatherDef>OAGene_IceSnowExtreme</weatherDef>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>A large amount of wind, snow, and broken crystals are mixed in this blizzard, which will greatly enhance its destructive power in a short period of time. These ice crystals are both rare collectibles and deadly weapons. If there is no reason to go out, it is best to stay at home.\n\nIn this extreme ice crystal weather, only a roof reinforced with support pillars can avoid the fate of being smashed and riddled with holes.</letterText>
+        <startMessage>A large amount of ice crystals began to appear in the blizzard.</startMessage>
+        <endMessage>The ice crystals in the blizzard gradually decreased.</endMessage>
+        <allowUnderground>false</allowUnderground>
+        <preventNeutralVisitors>true</preventNeutralVisitors>
+        <causesTraderCaravanExit>true</causesTraderCaravanExit>
+        <pennedAnimalsSeekShelter>true</pennedAnimalsSeekShelter>
+        <temperatureOffset>-30</temperatureOffset>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_IceRain</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_IceRain</conditionClass>
+        <label>Ice crystal rain</label>
+        <description>Ice crystals appear sporadically in the form of sparse raindrops, which can cause a slight decrease in temperature and potentially injure anyone outdoors. \nIf a wind and snow crystal collector is established, it will be able to collect a certain amount of wind and snow crystals.</description>
+        <weatherDef>OAGene_IceRain</weatherDef>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>Sparse ice crystals begin to fall like rain, and there is a possibility of being hit by ice crystals when going out. \nThese ice crystals are rare natural collectibles, and many gemstone collectors include them in their collections. If there is a production of broken crystal collectors, then perhaps we can take the opportunity to make a profit.</letterText>
+        <endMessage>This rare ice crystal rain is coming to an end.</endMessage>
+        <allowUnderground>false</allowUnderground>
+        <temperatureOffset>-10</temperatureOffset>
+        <causesTraderCaravanExit>true</causesTraderCaravanExit>
+        <pennedAnimalsSeekShelter>true</pennedAnimalsSeekShelter>
+        <exclusiveConditions>
+            <li>OAGene_ExtremeSnowstorm</li>
+            <li>OAGene_ExtremeIceStorm</li>
+        </exclusiveConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_StarryNight</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_StarryNight</conditionClass>
+        <label>Starry night</label>
+        <description>The blizzard briefly subsided, and although there were still occasional gusts of cold wind, thick snow clouds were rarely seen in the sky.\nThe impurities in the atmosphere are washed away by wind and snow, so much so that the night sky, which usually only has three or two stars, appears much more crowded and magnificent than usual. The interplay between stars and ice crystals adorns the world after the snowstorm, making it difficult to distinguish whether the ice crystals adorn the moonlit night or the stars fall to earth</description>
+        <letterText>The blizzard briefly subsided, and thick snow clouds were rarely seen in the sky, replaced by an unprecedented magnificent starry night.\nThe impurities in the atmosphere are washed away by wind and snow, so much so that the night sky, which usually only has three or two stars, appears much more crowded and magnificent than usual.</letterText>
+        <endMessage>The blizzard has once again ravaged, and the stars have been obscured by thick clouds.</endMessage>
+        <letterDef>PositiveEvent</letterDef>
+        <canBePermanent>false</canBePermanent>
+        <allowUnderground>false</allowUnderground>
+        <weatherDef>OAGene_StarryNight</weatherDef>
+        <temperatureOffset>25</temperatureOffset>
+        <silencedByConditions>
+            <li MayRequire="Ludeon.RimWorld.Anomaly">UnnaturalDarkness</li>
+        </silencedByConditions>
+        <exclusiveConditions>
+            <li>OAGene_ExtremeIceStorm</li>
+        </exclusiveConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_SnowstormWarm</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_TemperatureChange</conditionClass>
+        <label>Warming up</label>
+        <description>The brief climate change during extreme blizzards may not last long, but it is enough to do something.</description>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>The blizzard has slightly weakened and the temperature has briefly risen.</letterText>
+        <endMessage>The blizzard has once again intensified.</endMessage>
+        <allowUnderground>false</allowUnderground>
+        <temperatureOffset>20</temperatureOffset>
+        <exclusiveConditions>
+            <li>OAGene_SnowstormCold</li>
+        </exclusiveConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_SnowstormCold</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_TemperatureChange</conditionClass>
+        <label>Sudden cooling</label>
+        <description>The brief climate change during extreme blizzards may not last long, but if not prepared, it can be fatal.</description>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>The intensity of the blizzard suddenly increases, and the temperature will drop sharply in the short term.</letterText>
+        <endMessage>The blizzard has regained its initial intensity.</endMessage>
+        <allowUnderground>false</allowUnderground>
+        <temperatureOffset>-25</temperatureOffset>
+        <exclusiveConditions>
+            <li>OAGene_SnowstormWarm</li>
+        </exclusiveConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_SuperColdSnap</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_SuperColdSnap</conditionClass>
+        <label>Great Cold Wave</label>
+        <description>A rare cold wave is freezing this area.</description>
+        <descriptionFuture>A strong and sustained cold wave will continue around [map_definite] [gameConditionDuration_duration], It will cause harm to unprotected organisms and crops, and freeze all crops that are not cold resistant.</descriptionFuture>
+        <letterText>An extremely rare sustained cold wave suddenly strikes, which will last for several days.\n\nCold wave induced hypothermia can quickly kill organisms that are not cold resistant. Please ensure that you have a shelter with a suitable temperature and well fitting warm clothing. If possible, try to harvest the crops before they freeze to death.</letterText>
+        <endMessage>The long lasting cold wave has ended.</endMessage>
+        <letterDef>NegativeEvent</letterDef>
+        <canBePermanent>true</canBePermanent>
+        <natural>true</natural>
+        <allowUnderground>false</allowUnderground>
+        <temperatureOffset>-30</temperatureOffset>
+        <exclusiveConditions>
+            <li>HeatWave</li>
+            <li>ColdSnap</li>
+        </exclusiveConditions>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>OAGene_SnowstormFog</defName>
+        <conditionClass>OberoniaAureaGene.Snowstorm.GameCondition_SnowstormFog</conditionClass>
+        <label>Snow and mist diffuse</label>
+        <description>A large amount of snow and fog began to spread throughout the entire area with the blizzard. These snow and fog are so thick that even extreme winds cannot blow them away.\nIn this kind of snow and mist, even a few steps away, it becomes difficult to see clearly, and wanting to see what the distance looks like has become a luxury. Even experienced explorers will lose their way in this thick fog.</description>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
+        <letterText>A large amount of snow and fog are blown up by the blizzard, which covers everyone's sight and makes distant observation a luxury.\n\nThe strong wind failed to disperse these snow and mist, they were so thick that they could even make people feel touched. Perhaps only when this blizzard is over, the snow and fog carried by the wind and snow will gradually dissipate.</letterText>
+        <endMessage>The thick snow and mist began to slowly dissipate.</endMessage>
+        <allowUnderground>false</allowUnderground>
+        <layerWhitelist>
+            <li>Surface</li>
+        </layerWhitelist>
+    </GameConditionDef>
+
+</Defs>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!--crate-->
+	<ThingDef Name="sbzCrateBase" ParentName="AdaptiveStorageBase" Abstract="True">
+		<rotatable>false</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>50</pathCost>	
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsNeatStorage</li>
+		</thingCategories>
+		<building>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<maxItemsInCell>6</maxItemsInCell>
+			<fixedStorageSettings>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories>
+						<li>Root</li>
+					</categories>
+					<disallowedCategories>
+						<li>Plants</li>
+						<li>BuildingsNeatStorage</li>
+					</disallowedCategories>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Preferred</priority>
+				<filter>
+					<disallowNotEverStorable>true</disallowNotEverStorable>
+					<categories>
+					</categories>
+				</filter>
+			</defaultStorageSettings>
+			<paintable>true</paintable>
+		</building>
+	</ThingDef>
+
+
+
+    <AdaptiveStorage.GraphicsDef>
+		<defName>sbz_MidCrateASF</defName>
+		<targetDef>sbz_MidCrate</targetDef>
+        <graphics>
+            <li>
+                <graphicData>
+                    <texPath>Things/Building/Storage/Crate/sbz_MidCrate</texPath>
+                    <graphicClass>Graphic_Multi</graphicClass>
+                    <drawSize>(2,2)</drawSize>
+					<drawRotated>false</drawRotated>
+                </graphicData>
+				<graphicDatas>
+					<li>
+						<texPath>Things/Building/Storage/Crate/sbz_MidCrateLayer</texPath>
+						<graphicClass>Graphic_Multi</graphicClass>
+						<shaderType>CutoutComplex</shaderType>
+						<drawSize>(2,2)</drawSize>
+						<drawRotated>false</drawRotated>
+						<renderQueue>2950</renderQueue>
+						<altitudeLayer>ItemImportant</altitudeLayer>
+						<drawOffset>(0,0.2,0)</drawOffset>
+					</li>
+				</graphicDatas>
+            </li>
+        </graphics>
+		<showContainedItems>true</showContainedItems>
+		<itemGraphics>
+			<columns>
+				<c0>
+					<rows>
+						<r0>
+							<stackBehaviour>Circle</stackBehaviour>
+							<drawOffset>(0.15,0,0.2)</drawOffset>
+							<drawScale>1</drawScale>
+							<drawOffsetEast>(0,0,0.2)</drawOffsetEast>
+							<drawOffsetWest>(0,0,0.2)</drawOffsetWest>
+							<stackOffsetFactor>0.6</stackOffsetFactor>
+						</r0>
+					</rows>
+				</c0>
+				<c1>
+					<rows>
+						<r0>
+							<stackBehaviour>Circle</stackBehaviour>
+							<drawOffset>(-0.15,0,0.2)</drawOffset>
+							<drawScale>1</drawScale>
+							<drawOffsetEast>(0,0,-0.15)</drawOffsetEast>
+							<drawOffsetWest>(0,0,-0.15)</drawOffsetWest>
+							<stackOffsetFactor>0.6</stackOffsetFactor>
+						</r0>
+					</rows>
+				</c1>
+			</columns>
+		</itemGraphics>
+	</AdaptiveStorage.GraphicsDef>
+
+	<ThingDef ParentName="sbzCrateBase">
+		<defName>sbz_MidCrate</defName>
+		<label>crate</label>
+		<rotatable>true</rotatable>
+		<description>A crate that can hold up to 12 items of various kinds.</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/Crate/sbz_MidCrate</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<costStuffCount>40</costStuffCount>
+		<uiIconScale>1</uiIconScale>
+		<uiOrder>1092</uiOrder>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Mass>20</Mass>
+			<WorkToBuild>2000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<size>(2,1)</size>
+	</ThingDef>
+
+
+	<!--pallet-->
+
+	
+
+</Defs>

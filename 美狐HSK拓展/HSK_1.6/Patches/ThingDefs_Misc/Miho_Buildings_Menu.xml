@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!--Miho_DeployableHMG: 一级分类 MihoBuilding -> Security(并入 HSK 防御分类)-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="Miho_DeployableHMG"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Security</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_DeployableMissile: 一级分类 MihoBuilding -> Security(并入 HSK 防御分类)-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="Miho_DeployableMissile"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Security</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_DeployableAutocannon: 一级分类 MihoBuilding -> Security(并入 HSK 防御分类)-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="Miho_DeployableAutocannon"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Security</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_Turret_Machinegun 重机枪塔 -> SubCategory_Machineguns-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Machineguns"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Machineguns"]/defNames</xpath>
+      <value>
+        <li>Miho_Turret_Machinegun</li>
+      </value>
+    </match>
+  </Operation>
+  <!--Miho_Turret_Missile 导弹塔 -> SubCategory_RocketLaunchers-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_RocketLaunchers"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_RocketLaunchers"]/defNames</xpath>
+      <value>
+        <li>Miho_Turret_Missile</li>
+      </value>
+    </match>
+  </Operation>
+  <!--Miho_Turret_InfantryGun 步兵炮 -> SubCategory_Cannons-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Cannons"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Cannons"]/defNames</xpath>
+      <value>
+        <li>Miho_Turret_InfantryGun</li>
+      </value>
+    </match>
+  </Operation>
+  <!--Miho_TableMachining: 一级分类 -> Production-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Miho_TableMachining"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Production</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_MechFactory: 一级分类 -> Production-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Miho_MechFactory"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Production</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_TableMachining 综合工作台 -> SubCategory_Machining-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Machining"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Machining"]/defNames</xpath>
+      <value>
+        <li>Miho_TableMachining</li>
+      </value>
+    </match>
+  </Operation>
+  <!--Miho_MechFactory 机械工厂 -> SubCategory_Hightech-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Hightech"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Hightech"]/defNames</xpath>
+      <value>
+        <li>Miho_MechFactory</li>
+      </value>
+    </match>
+  </Operation>
+  <!--Miho_Tatami: 一级分类 -> Accessories(榻榻米=装饰地毯类)-->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Miho_Tatami"]/designationCategory</xpath>
+    <value>
+      <designationCategory>Accessories</designationCategory>
+    </value>
+  </Operation>
+  <!--Miho_Tatami 榻榻米 -> SubCategory_ModernRugs-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ModernRugs"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ModernRugs"]/defNames</xpath>
+      <value>
+        <li>Miho_Tatami</li>
+      </value>
+    </match>
+  </Operation>
+  <!--运输装置归类: Miho_Shuttle / Miho_Shuttle_Civ (Odyssey) -> 杂项 Misc -> SubCategory_Transportation-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Miho_Shuttle"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Miho_Shuttle"]/designationCategory</xpath>
+      <value>
+        <designationCategory>Misc</designationCategory>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Miho_Shuttle_Civ"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Miho_Shuttle_Civ"]/designationCategory</xpath>
+      <value>
+        <designationCategory>Misc</designationCategory>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Miho_Shuttle"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Transportation"]</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Transportation"]/defNames</xpath>
+        <value>
+          <li>Miho_Shuttle</li>
+          <li>Miho_Shuttle_Civ</li>
+        </value>
+      </match>
+    </match>
+  </Operation>
+  <!--运输装置归类: MihoSRTSKaminari (SRTS) -> 杂项 Misc -> SubCategory_Transportation-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MihoSRTSKaminari"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="MihoSRTSKaminari"]/designationCategory</xpath>
+      <value>
+        <designationCategory>Misc</designationCategory>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MihoSRTSKaminari"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Transportation"]</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Transportation"]/defNames</xpath>
+        <value>
+          <li>MihoSRTSKaminari</li>
+        </value>
+      </match>
+    </match>
+  </Operation>
+</Patch>

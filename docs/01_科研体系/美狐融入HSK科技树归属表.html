@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>美狐融入 HSK 科技树 —— 归属表</title><style>:root{--bg:#151719;--fg:#e6e6e6;--mut:#9aa0a6;--card:#1f2326;--line:#2f3437;--ok:#2e7d32;--warn:#b8860b;--bad:#c62828}*{box-sizing:border-box}body{margin:0;padding:28px;background:var(--bg);color:var(--fg);font:14px/1.65 "Microsoft YaHei",-apple-system,Segoe UI,sans-serif}h1{font-size:24px;margin:0 0 6px}h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}h3{font-size:15px;margin:22px 0 8px;color:#cfd8dc}p{margin:8px 0}code{background:#0d0f10;padding:1px 5px;border-radius:3px;font-family:Consolas,Menlo,monospace;font-size:12.5px;color:#a5d6a7}a{color:#64b5f6;text-decoration:none}ul{margin:8px 0;padding-left:22px}.sub{color:var(--mut);font-size:13px}.nav{position:sticky;top:0;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:16px 0 24px}.nav a{margin-right:16px;font-size:13px}table{border-collapse:collapse;width:100%;margin:12px 0;background:var(--card);font-size:13px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#24282b;font-weight:600;color:#b0bec5}tr:hover td{background:#26292c}.chip{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11.5px;color:#fff;white-space:nowrap}.badge{display:inline-block;padding:1px 7px;border-radius:3px;font-size:11.5px;background:var(--ok);color:#fff}.badge.w{background:var(--warn)}.badge.b{background:var(--bad)}.zh{color:var(--mut)}.ok{color:#81c784}.mono{font-family:Consolas,monospace;white-space:pre;background:#0d0f10;border:1px solid var(--line);border-radius:6px;padding:14px;font-size:12.5px;overflow:auto;line-height:1.5}.note{border-left:3px solid var(--warn);background:#232019;padding:10px 14px;margin:14px 0;border-radius:0 6px 6px 0}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.tabs span{background:#24282b;border:1px solid var(--line);border-radius:14px;padding:3px 12px;font-size:12.5px}</style></head><body>
+<h1>美狐(Miho)融入 HSK 科技树 —— 归属表</h1>
+<div class="sub">生成脚本 <code>_tmp/gen_miho_integration_doc.py</code> · 校验 <code>_tmp/verify_miho_integration.py</code> 21 项全通过 · 2026-08-27</div>
+<div class="note"><b>⚠ 需重启游戏生效</b><br><code>MissileGirl/Cache/Unified.xml</code> 与 <code>Mods/Unified.xml</code> 仍是上一次启动的终态,本次改动尚未进合并缓存。</div>
+<div class="nav"><a href="#why">为什么原先沉底</a><a href="#how">落位方式选型</a><a href="#table">总表</a><a href="#pre">前置挂接</a><a href="#bench">研究台门槛</a><a href="#verify">校验结果</a><a href="#files">改动文件</a></div>
+<div class="tabs"><span>服装_SK 6</span><span>手工_SK 4</span><span>建筑_SK 8</span><span>武器_SK 5</span><span>合计 23</span></div>
+<h2 id="why">一、为什么原先沉在最底</h2>
+<p><code>ResearchTreeSK.PopulateNodes</code> 把节点分成两堆:</p><ul><li><b>NodesSK</b> = 带 <code>ResearchTreeSK.ResearchTreeSKModExtension</code> → 保留 XML 坐标,进主网格,按页签分层、按档位列对齐。</li><li><b>NodesOther</b> = 没有 → X/Y 置 −1,由 <code>OrderAndPlaceOtherNodes</code> 按"前置深度"自动排布,<b>整堆追加在整张表最下方</b>(<code>TabOtherYRanges</code>),页签只当分组标签。</li></ul>
+<p>实测全环境 <b>517</b> 个研究节点中 <code>NodesOther</code> <b>只有美狐这 23 个</b> —— 这就是"整条线孤零零沉在底层"的成因。</p>
+<h2 id="how">二、落位方式:选「显式坐标 + 进 NodesSK」</h2>
+<table><tr><th>方案</th><th>效果</th><th>结论</th></tr><tr><td>继续走 NodesOther 自动排布</td><td>永远留在主网格下方的独立带,页签仍是孤立分组</td><td><span class="badge b">✗ 达不到融入</span></td></tr><tr><td><b>显式坐标 + ResearchTreeSKModExtension</b></td><td>进入主网格,显示在对应 HSK 页签、与档位列对齐</td><td><span class="badge">✓ 采用</span></td></tr></table>
+<p>代价:<code>PopulateNodes</code> 的坐标查重 <code>(X,Y)</code> <b>不分页签</b>,撞车即 <code>Log.Error("HardcoreSK research ... have the same position")</code>。</p>
+<p>对策:坐标不手填,由 <code>_tmp/miho_layout_design.py</code> 先读出全部 <b>494</b> 个 NodesSK 占格再求解,并校验前置存在 / 拓扑无环 / techLevel 不低于前置 / X 严格大于所有前置 / X 不小于档位左界 / (X,Y) 全局唯一。</p>
+<p>落位行刻意选在页签带尾部稀疏行:<code>Apparel_SK</code> Y=47(全局空行)、<code>Weapon_SK</code> Y=38、<code>Buildings_SK</code> Y=27~28、<code>Craft_SK</code> Y=18~20。</p>
+<div class="note">⚠ <b>Core_SK / ResearchTreeSK 升级后必须重跑</b> <code>_tmp/miho_layout_probe.py</code> + <code>miho_layout_design.py</code> 复核撞车(它们重读 <code>Cache/Unified.xml</code>)。</div>
+<h2 id="table">三、总表:节点 → 页签 → 前置 → techLevel</h2>
+<h3>服装_SK(<code>Apparel_SK</code>,6 节点)</h3>
+<table><tr><th>中文名</th><th>defName</th><th>techLevel</th><th>(X,Y)</th><th>研究台</th><th>设施</th><th>SK 可接受台</th><th>前置</th></tr>
+<tr><td>美狐衣物</td><td><code>Miho_ApparelBasic</code></td><td><span class="chip" style="background:#8d6e63">Medieval</span></td><td>(5,&nbsp;47)</td><td>基础研究台</td><td>—</td><td>基础研究台 + 高级研究台</td><td>Apparel_B1 Apparel production II</td></tr>
+<tr><td>乌木丝绸</td><td><code>Miho_Silk</code></td><td><span class="chip" style="background:#8d6e63">Medieval</span></td><td>(6,&nbsp;47)</td><td>基础研究台</td><td>—</td><td>基础研究台 + 高级研究台</td><td>Miho_ApparelBasic 美狐衣物, Fabric_Plants_B1 Fabric Plants III</td></tr>
+<tr><td>美狐先进衣物</td><td><code>Miho_ApparelAdvanced</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(7,&nbsp;47)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_ApparelBasic 美狐衣物, Miho_Silk 乌木丝绸, ComplexClothing Advanced sewing II</td></tr>
+<tr><td>美狐灵素衣物</td><td><code>Miho_ApparelEltex</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(17,&nbsp;47)</td><td>高级研究台</td><td>—</td><td>高级研究台</td><td>Miho_ApparelAdvanced 美狐先进衣物, MicroelectronicsBasics Electronics I</td></tr>
+<tr><td>美狐刺客护甲</td><td><code>Miho_ApparelAssassin</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(18,&nbsp;47)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_ApparelEltex 美狐灵素衣物</td></tr>
+<tr><td>美狐女巫护甲</td><td><code>Miho_ApparelSorcerees</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(20,&nbsp;47)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_ApparelAssassin 美狐刺客护甲, Miho_Persona 谐波物体还原理论</td></tr>
+</table>
+<h3>手工_SK(<code>Craft_SK</code>,4 节点)</h3>
+<table><tr><th>中文名</th><th>defName</th><th>techLevel</th><th>(X,Y)</th><th>研究台</th><th>设施</th><th>SK 可接受台</th><th>前置</th></tr>
+<tr><td>机械素骇入</td><td><code>Miho_MechHack</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(18,&nbsp;18)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_HeavyFactory 美狐重工业, MultiAnalyzer Research technologies V</td></tr>
+<tr><td>谐波物体还原理论</td><td><code>Miho_Persona</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(19,&nbsp;18)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_MechHack 机械素骇入, Electronics_D1 Electronics III</td></tr>
+<tr><td>超凡科技量产织造</td><td><code>Miho_Celestial</code></td><td><span class="chip" style="background:#e53935">Ultra</span></td><td>(22,&nbsp;18)</td><td>高级研究台</td><td>多元分析仪、实验室工作站</td><td>高级研究台</td><td>Miho_Persona 谐波物体还原理论, Components_E1 Components IV</td></tr>
+<tr><td>大型机械素核心</td><td><code>Miho_MechCore</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(18,&nbsp;20)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_HeavyFactory 美狐重工业, MultiAnalyzer Research technologies V</td></tr>
+</table>
+<h3>建筑_SK(<code>Buildings_SK</code>,8 节点)</h3>
+<table><tr><th>中文名</th><th>defName</th><th>techLevel</th><th>(X,Y)</th><th>研究台</th><th>设施</th><th>SK 可接受台</th><th>前置</th></tr>
+<tr><td>支援无人机</td><td><code>Miho_CommandDrone</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(20,&nbsp;27)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_LightWarDrone 先进战斗无人机, Miho_Persona 谐波物体还原理论, HighMechtech high mechtech</td></tr>
+<tr><td>基础美狐工厂</td><td><code>Miho_BasicFactory</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(7,&nbsp;28)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Electricity Power engineering I</td></tr>
+<tr><td>美狐重工业</td><td><code>Miho_HeavyFactory</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(9,&nbsp;28)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_BasicFactory 基础美狐工厂, Machining Guns I</td></tr>
+<tr><td>美狐无人机</td><td><code>Miho_Drone</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(13,&nbsp;28)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_BasicFactory 基础美狐工厂, BasicMechtech basic mechtech</td></tr>
+<tr><td>基础战斗无人机</td><td><code>Miho_GuardDrone</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(15,&nbsp;28)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_Drone 美狐无人机, Turrets_31 Turrets I, Miho_Weapon 美狐武器</td></tr>
+<tr><td>先进战斗无人机</td><td><code>Miho_LightWarDrone</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(16,&nbsp;28)</td><td>高级研究台</td><td>—</td><td>高级研究台</td><td>Miho_GuardDrone 基础战斗无人机, StandardMechtech standard mechtech, Mortars Artillery I</td></tr>
+<tr><td>火炮无人机</td><td><code>Miho_HeavyWarDrone</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(20,&nbsp;28)</td><td>高级研究台</td><td>—</td><td>高级研究台</td><td>Miho_LightWarDrone 先进战斗无人机, HighMechtech high mechtech</td></tr>
+<tr><td>集束火炮无人机</td><td><code>Miho_HeavyWarBattery</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(21,&nbsp;28)</td><td>高级研究台</td><td>—</td><td>高级研究台</td><td>Miho_HeavyWarDrone 火炮无人机</td></tr>
+</table>
+<h3>武器_SK(<code>Weapon_SK</code>,5 节点)</h3>
+<table><tr><th>中文名</th><th>defName</th><th>techLevel</th><th>(X,Y)</th><th>研究台</th><th>设施</th><th>SK 可接受台</th><th>前置</th></tr>
+<tr><td>美狐武器</td><td><code>Miho_Weapon</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(11,&nbsp;38)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>BlowbackOperation SMG I</td></tr>
+<tr><td>害虫控制武器</td><td><code>Miho_VerminControlWeapon</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(12,&nbsp;38)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_Weapon 美狐武器, GasOperation Shotgun I</td></tr>
+<tr><td>美狐战斗护甲</td><td><code>Miho_HeavyWeapon</code></td><td><span class="chip" style="background:#1e88e5">Industrial</span></td><td>(15,&nbsp;38)</td><td>基础研究台</td><td>研究终端</td><td>基础研究台 + 高级研究台</td><td>Miho_Weapon 美狐武器, PrecisionRifling Sniper rifles II</td></tr>
+<tr><td>美狐等离子武器</td><td><code>Miho_PlasmaWeapon</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(19,&nbsp;38)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_HeavyWeapon 美狐战斗护甲, ChargedShot Directed-energy weapon I</td></tr>
+<tr><td>美狐等离子突击炮</td><td><code>Miho_HeavyPlasma</code></td><td><span class="chip" style="background:#8e24aa">Spacer</span></td><td>(21,&nbsp;38)</td><td>高级研究台</td><td>多元分析仪</td><td>高级研究台</td><td>Miho_PlasmaWeapon 美狐等离子武器, Miho_HeavyWarDrone 火炮无人机</td></tr>
+</table>
+<h2 id="pre">四、前置挂接说明(不再从虚空起步)</h2>
+<table><tr><th>入口节点</th><th>新挂 HSK 前置</th><th>该前置档位/坐标</th><th>理由</th></tr><tr><td><code>Miho_ApparelBasic</code> 美狐衣物</td><td><code>Apparel_B1</code> 服饰生产 II</td><td>Medieval (4,39)</td><td>原<b>无任何前置</b>,整条服装线的虚空起点;先掌握基础服饰生产再学美狐文化</td></tr><tr><td><code>Miho_Silk</code> 乌木丝绸</td><td>追加 <code>Fabric_Plants_B1</code> 纺织植物 III</td><td>Medieval (3,56)</td><td>丝绸原料来自纤维作物,顺带把服装线与植物线打通</td></tr><tr><td><code>Miho_ApparelAdvanced</code> 美狐先进衣物</td><td>追加 <code>Miho_Silk</code></td><td>—</td><td>原只挂 ComplexClothing;先进衣物要用丝绸,让丝绸成为必经节点而非旁支</td></tr><tr><td><code>Miho_HeavyFactory</code> 美狐重工业</td><td>追加 <code>Machining</code> 机械加工</td><td>Industrial (8,30)</td><td>重工业需要机床能力,同时把工厂线锚进 HSK 工业段</td></tr><tr><td><code>Miho_Persona</code> 调和客观环原理论</td><td>追加 <code>Electronics_D1</code> 电子学 III</td><td>Spacer (17,21)</td><td>机械灵魂属电子学前沿,避免太空段节点只依赖美狐内部链</td></tr><tr><td><code>Miho_Celestial</code> 超凡科技量产织造</td><td>追加 <code>Components_E1</code> 组件 V</td><td>Ultra (21,21)</td><td>极致档合金需要极致档组件,与 HSK 极致段对齐</td></tr><tr><td><code>Miho_GuardDrone</code> 基础战斗无人机</td><td><code>GunTurrets</code> → <code>Turrets_31</code> 炮塔 I</td><td>Industrial (14,36)</td><td>Core_SK 把 GunTurrets 抬到 Spacer,原写法触发传递闭包越级告警;换同工业档前置清零</td></tr></table>
+<p class="sub">其余节点原本已挂 HSK/原版前置(<code>Electricity</code> / <code>BlowbackOperation</code> / <code>GasOperation</code> / <code>PrecisionRifling</code> / <code>ChargedShot</code> / <code>ComplexClothing</code> / <code>MicroelectronicsBasics</code> / <code>BasicMechtech</code> / <code>StandardMechtech</code> / <code>Mortars</code> / <code>HighMechtech</code> / <code>MultiAnalyzer</code>),保持不变。</p>
+<h2 id="bench">五、研究台门槛(HSK 六档)</h2>
+<ul><li>中世纪档 → <code>SimpleResearchBench</code>,SK 可接受台 <code>[基础研究台, 高级研究台]</code></li><li>前工业档 → <code>SimpleResearchBench</code> + 设施 <code>研究终端</code>,可接受台同上</li><li>太空档 → <code>HiTechResearchBench</code>(多数带设施 <code>多元分析仪</code>),可接受台 <code>[高级研究台]</code></li><li>极致档 → <code>HiTechResearchBench</code> + 设施 <code>多元分析仪</code>+<code>实验室工作站</code>,可接受台 <code>[高级研究台]</code></li></ul>
+<div class="note">⚠ 关键坑:<code>LabTerminal</code> / <code>LabStation</code> / <code>MultiAnalyzer</code> 是<b>设施</b>(<code>SK.Building_Lamp</code>),不能写进 <code>requiredResearchBuilding</code>,否则节点在任何研究台都点不动且日志零报错。详见 <code>docs/08_铁律/研究台档位机制.md</code> §1b。</div>
+<h2 id="verify">六、校验结果</h2>
+<div class="mono"><span class="ok">  [OK]</span> Operation 全部命中并执行 (25)
+<span class="ok">  [OK]</span> 覆盖 23 个美狐节点
+<span class="ok">  [OK]</span> 研究台全部是真正的 Building_ResearchBench
+<span class="ok">  [OK]</span> 可研究性 23/23 通过
+<span class="ok">  [OK]</span> tab/坐标/前置 与设计表逐项一致
+<span class="ok">  [OK]</span> 每个节点有 SK.AdvancedResearchExtension
+<span class="ok">  [OK]</span> 每个节点有 ResearchTreeSKModExtension(进 NodesSK 主网格)
+<span class="ok">  [OK]</span> 与 494 个 NodesSK 占格零撞车(不分页签)
+<span class="ok">  [OK]</span> 美狐内部坐标互不撞车
+<span class="ok">  [OK]</span> 前置 def 全部存在
+<span class="ok">  [OK]</span> techLevel 不低于任何前置(不触发 RTSK 自动抬档)
+<span class="ok">  [OK]</span> X 严格大于所有前置(不触发 not positioned to the right)
+<span class="ok">  [OK]</span> X 不小于档位左界(不落入更低档列)
+<span class="ok">  [OK]</span> 美狐内部依赖拓扑无环
+<span class="ok">  [OK]</span> TechLevelLeftBounds 未位移
+<span class="ok">  [OK]</span> Miho_ResearchTab 定义已退役
+<span class="ok">  [OK]</span> 1.6 源 defs 无 Miho_ResearchTab 残留
+<span class="ok">  [OK]</span> 合并终态无 Miho_ResearchTab
+<span class="ok">  [OK]</span> Miho_Schematic 书籍 doers 存在
+<span class="ok">  [OK]</span> 书籍不再引用已退役的 Miho_ResearchTab
+<span class="ok">  [OK]</span> 书籍 include == 23 个美狐节点</div>
+<h2 id="files">七、改动文件</h2>
+<table><tr><th>文件</th><th>改动</th></tr><tr><td><code>美狐HSK拓展/1.6/Defs/ResearchProjectDefs/Research.xml</code></td><td>23 节点的 tab / researchViewX,Y / prerequisites</td></tr><tr><td><code>美狐HSK拓展/1.6/Defs/ResearchProjectDefs/ResearchTabs.xml</code></td><td>退役 <code>Miho_ResearchTab</code>(留空文件+注释便于回退)</td></tr><tr><td><code>美狐HSK拓展/1.6/Defs/Resource.xml</code></td><td><code>Miho_Schematic</code>(美狐技术文档)研读奖励:<code>tabs=[Miho_ResearchTab]</code> → <code>include</code> 显式列举 23 节点。<code>ReadingOutcomeDoerGainResearch.IsValid</code> 要求 <code>project.tab ∈ tabs</code>,页签退役后不改会让商人出售的这本书一个都选不中</td></tr><tr><td><code>美狐HSK拓展/HSK_1.6/Patches/ResearchProjectDefs/Miho_ResearchBench.xml</code></td><td>25 Operation:六档研究台 + <code>SK.AdvancedResearchExtension</code> + <code>ResearchTreeSKModExtension</code></td></tr><tr><td><code>HSK/Languages/{简中,英,俄}/DefInjected/ResearchTabDef/ResearchTabs.xml</code>、<code>Cont/Languages/English/.../Miho, the celestial fox - 2816826107.xml</code></td><td>移除悬空 <code>Miho_ResearchTab.label</code> 键</td></tr></table>
+<p class="sub">备份:<code>_tmp/backup_miho融入hsk_20260827/</code>(改动前原文件)。1.5 分支未动 —— 本环境只跑 1.6,1.5 仍使用独立页签。</p>
+</body></html>

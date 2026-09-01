@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- HSK Mod Assistant 标记:把本 mod 登记为 HSK 原生(NativeAddon),由 HSK Autosort and Mod Assistant 判定为 HSK。
+         1.6 起 Operation 级 MayRequire 失效,改用 PatchOperationConditional 做 xpath 存在性门控。
+         id 用本 mod packageId=khamenman.armorracks。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+            <value>
+                <li>
+                    <id>khamenman.armorracks</id>
+                </li>
+            </value>
+        </match>
+    </Operation>
+</Patch>

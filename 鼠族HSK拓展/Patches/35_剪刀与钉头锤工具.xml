@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 35_剪刀与钉头锤工具.xml, 38_VSE适配_零部件配方.xml -->
+<Patch><!-- 35_钉头锤工具化(2026-08-09 用户要求;2026-08-26 剪刀部分迁往 hsk工业大修):
+         钉头锤(RK_Mace)加强为工具,工作速度种类多加(建造/锻造/冶炼/综合劳动);
+         适配 SurvivalToolsLite(thingClass=SurvivalTool + SurvivalToolProperties
+         + 工具分类: 中世纪工具(SurvivalToolsMedieval)),MayRequire 门控。
+         注: 96_钉头锤恢复武器.xml 撤销本补丁的工具化(钉头锤属武器序列)。
+         剪刀(RK_Scissors)配方与 STL 适配已迁至 hsk工业大修/Patches/35_剪刀工具.xml。 -->
+
+    <!-- 钉头锤 RK_Mace: 工具化(建造/锻造/冶炼/手工,更多工作速度种类) -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Mace"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Mace"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Mace"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <ConstructionSpeed>1.25</ConstructionSpeed>
+                    <SmithingSpeed>1.25</SmithingSpeed>
+                    <SmeltingSpeed>1.15</SmeltingSpeed>
+                    <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Constructor</li>
+                    <li>Crafter</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Mace"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation><!-- 38_VSE适配_零部件配方(2026-08-23):
+	     原 Vanilla Skills Expanded/HSKCompat.xml 中的 HSK 零部件配方挂载迁移至此。
+	     VSE 的 VSE_ComponentCraftingSpeed 已随属性精简删除,HSK 零部件配方改挂
+	     Core_SK 电子器件制作速度 ElectronicCraftingSpeed。
+	     全部 PatchOperationConditional 门控:配方不存在时自动跳过。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/RecipeDef[defName="Make_ComponentMedievalBronze"]/workSpeedStat</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="Make_ComponentMedievalBronze"]/workSpeedStat</xpath>
+			<value>
+				<workSpeedStat>ElectronicCraftingSpeed</workSpeedStat>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/RecipeDef[defName="Make_ComponentAdvanced"]/workSpeedStat</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="Make_ComponentAdvanced"]/workSpeedStat</xpath>
+			<value>
+				<workSpeedStat>ElectronicCraftingSpeed</workSpeedStat>
+			</value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/RecipeDef[defName="Make_ComponentUltra"]/workSpeedStat</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="Make_ComponentUltra"]/workSpeedStat</xpath>
+			<value>
+				<workSpeedStat>ElectronicCraftingSpeed</workSpeedStat>
+			</value>
+		</match>
+	</Operation></Patch>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- HSK Mod Assistant 标记: 本地附加,归为 HSK 环境附加 mod(NativeAddon)。
+         MayRequire 门控沿用既有补丁写法(本环境 FindMod 不生效);
+         id 保留工坊原 packageId,便于后续 diff/修 bug。
+         HSKMod=true = HSK 集成/适配标记;loadAfter = 交给 Mod Assistant 自动排序锚点:
+         本 mod 是"世界地图派系疆域/战争"系统,须在世界生成与派系/种族 def 定稿后加载
+         (Core SK / 鼠族种族 / RimThemes 世界生成 / Factional War 派系战争),故排在它们之后。 -->
+    <Operation Class="PatchOperationAdd" MayRequire="DimonSever000.ModIndicator.Specific">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+        <value>
+            <li>
+                <id>NehsModsForDev.bordersoftherim</id>
+                <HSKMod>true</HSKMod>
+                <loadAfter>
+                    <li>skyarkhangel.hsk</li>
+                    <li>Solaris.RatkinRaceMod</li>
+                    <li>skyarkhangel.rimthemeslite</li>
+                    <li>sr.modrimworld.factionalwarcontinued</li>
+                </loadAfter>
+            </li>
+        </value>
+    </Operation>
+</Patch>

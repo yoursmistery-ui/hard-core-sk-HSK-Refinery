@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 悬赏实物奖励池(2026-08-30 v5 奖励改版):银赏金保留,实物按赏金 35~50% 分档加成。
+       C# 侧 BountyRewards.DeliverBonus 用 loadID 做种子确定性生成,海报展示与实际发放一致。
+       defName 已用 _tmp/verify_bounty_pool_defs.py 全量核实存在于本环境;新增物品前先跑一遍。 -->
+
+  <!-- 金属锭池:钢/塑钢/金/铀/玉 -->
+  <ThingSetMakerDef>
+    <defName>RK_BountyReward_Ingots</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <totalMarketValueRange>300~500</totalMarketValueRange>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+            <li>Plasteel</li>
+            <li>Gold</li>
+            <li>Uranium</li>
+            <li>Jade</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+  <!-- 军火池:工业枪械 + 近战 + 鼠族特色武器 -->
+  <ThingSetMakerDef>
+    <defName>RK_BountyReward_Arms</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <totalMarketValueRange>300~500</totalMarketValueRange>
+        <filter>
+          <thingDefs>
+            <li>Gun_Revolver</li>
+            <li>Gun_Autopistol</li>
+            <li>Gun_BoltActionRifle</li>
+            <li>Gun_HeavySMG</li>
+            <li>Gun_PumpShotgun</li>
+            <li>Gun_ChainShotgun</li>
+            <li>Gun_SniperRifle</li>
+            <li>Gun_LMG</li>
+            <li>MeleeWeapon_Knife</li>
+            <li>MeleeWeapon_Gladius</li>
+            <li>MeleeWeapon_LongSword</li>
+            <li>MeleeWeapon_Spear</li>
+            <li>MeleeWeapon_Ikwa</li>
+            <li>MeleeWeapon_Mace</li>
+            <li>RK_GongFu</li>
+            <li>RK_YanYue</li>
+            <li>RK_DaWang</li>
+            <li>RK_MingWang</li>
+            <li>RK_PowerChargedGuanDao</li>
+            <li>RK_ZhaMian_Null</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+  <!-- 装备衣物池:原版防弹系列 + Core_SK 中世纪/工装衣物 -->
+  <ThingSetMakerDef>
+    <defName>RK_BountyReward_Gear</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <totalMarketValueRange>300~500</totalMarketValueRange>
+        <filter>
+          <thingDefs>
+            <li>Apparel_FlakVest</li>
+            <li>Apparel_FlakJacket</li>
+            <li>Apparel_FlakPants</li>
+            <li>Apparel_SimpleHelmet</li>
+            <li>Apparel_AdvancedHelmet</li>
+            <li>Apparel_SmokepopBelt</li>
+            <li>Apparel_Gambeson</li>
+            <li>Apparel_GambesonPadded</li>
+            <li>Apparel_BrocadeVest</li>
+            <li>Apparel_FurCoat</li>
+            <li>Apparel_HazardVest</li>
+            <li>Apparel_HazardHelmet</li>
+            <li>Apparel_LongCloak</li>
+            <li>Apparel_DesertRobe</li>
+            <li>Apparel_Ammobelt</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+  <!-- 杂项池:零件/医药/化工 -->
+  <ThingSetMakerDef>
+    <defName>RK_BountyReward_Sundries</defName>
+    <root Class="ThingSetMaker_MarketValue">
+      <fixedParams>
+        <totalMarketValueRange>300~500</totalMarketValueRange>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+            <li>ComponentSpacer</li>
+            <li>MedicineIndustrial</li>
+            <li>MedicineUltratech</li>
+            <li>Chemfuel</li>
+            <li>Neutroamine</li>
+          </thingDefs>
+        </filter>
+      </fixedParams>
+    </root>
+  </ThingSetMakerDef>
+
+</Defs>

@@ -1,0 +1,961 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         02_地板与材质.xml  (2026-08-22 按大类合并)
+         合并自 5 个补丁: 01_地板材质分组.xml, 34_皮革等级分类补全.xml, 58_茅草床材质修复.xml, 59_圣物木质材质扩充.xml, 66_资源管理分类通用.xml
+         地板材质分组 + 皮革等级分类 + 茅草床/圣物木质材质 + 资源分类。
+         ============================================================ -->
+    <!-- 来源: 01_地板材质分组.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="DBHMosaicTile" or defName="DBHMosaicSandstone" or defName="DBHMosaicGranite" or defName="DBHMosaicLimestone" or defName="DBHMosaicSlate" or defName="DBHMosaicMarble" or defName="ZF_DBHMosaicBasalt" or defName="ZF_DBHMosaicAlabaster" or defName="ZF_DBHMosaicPegmatite" or defName="ZF_DBHMosaicDunite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_DBHMosaic</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_HerringboneSandstone" or defName="Lino_HerringboneGranite" or defName="Lino_HerringboneLimestone" or defName="Lino_HerringboneSlate" or defName="Lino_HerringboneMarble") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoHerringbone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_MosaicRed" or defName="Lino_MosaicGreen" or defName="Lino_MosaicBlue" or defName="Lino_MosaicCream" or defName="Lino_MosaicDark" or defName="Lino_MosaicGold") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoMosaic</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_PavementSandstone" or defName="Lino_PavementGranite" or defName="Lino_PavementLimestone" or defName="Lino_PavementSlate" or defName="Lino_PavementMarble" or defName="Lino_PavementGold") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoPavement</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_Red" or defName="Lino_Green" or defName="Lino_Blue" or defName="Lino_White" or defName="Lino_Dark" or defName="Lino_Gold") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoColour</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_FlagstoneSandstone" or defName="Lino_FlagstoneGranite" or defName="Lino_FlagstoneLimestone" or defName="Lino_FlagstoneSlate" or defName="Lino_FlagstoneMarble") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoFlagstone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_ColourTilesRed" or defName="Lino_ColourTilesGreen" or defName="Lino_ColourTilesBlue" or defName="Lino_ColourTilesWhite" or defName="Lino_ColourTilesDark" or defName="Lino_ColourTilesGold") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoColourTiles</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="Lino_TileSandstone" or defName="Lino_TileGranite" or defName="Lino_TileLimestone" or defName="Lino_TileSlate" or defName="Lino_TileMarble") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Floors_LinoTileStone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="CobbleFloorSandstone" or defName="CobbleFloorGranite" or defName="CobbleFloorLimestone" or defName="CobbleFloorSlate" or defName="CobbleFloorMarble" or defName="CobbleFloorAlabaster" or defName="CobbleFloorBasalt" or defName="CobbleFloorDunite" or defName="CobbleFloorPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_Cobblestone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FlagstoneSandstone" or defName="FlagstoneGranite" or defName="FlagstoneLimestone" or defName="FlagstoneSlate" or defName="FlagstoneMarble" or defName="FlagstoneVacstone" or defName="FlagstoneAlabaster" or defName="FlagstoneBasalt" or defName="FlagstoneDunite" or defName="FlagstonePegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_Flagstone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="RoughSandstoneFloor" or defName="RoughGraniteFloor" or defName="RoughLimestoneFloor" or defName="RoughSlateFloor" or defName="RoughMarbleFloor" or defName="RoughCeramicsFloor" or defName="RoughAlabasterFloor" or defName="RoughBasaltFloor" or defName="RoughDuniteFloor" or defName="RoughPegmatiteFloor") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_RoughStone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneHexSandstone" or defName="FloorStoneHexGranite" or defName="FloorStoneHexLimestone" or defName="FloorStoneHexSlate" or defName="FloorStoneHexMarble" or defName="FloorStoneHexCeramics" or defName="FloorStoneHexAlabaster" or defName="FloorStoneHexBasalt" or defName="FloorStoneHexDunite" or defName="FloorStoneHexPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneHex</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneMosaicSandstone" or defName="FloorStoneMosaicGranite" or defName="FloorStoneMosaicLimestone" or defName="FloorStoneMosaicSlate" or defName="FloorStoneMosaicMarble" or defName="FloorStoneMosaicClayBrick" or defName="FloorStoneMosaicCeramics" or defName="FloorStoneMosaicAlabaster" or defName="FloorStoneMosaicBasalt" or defName="FloorStoneMosaicDunite" or defName="FloorStoneMosaicPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneMosaic</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneRandomSandstone" or defName="FloorStoneRandomGranite" or defName="FloorStoneRandomLimestone" or defName="FloorStoneRandomSlate" or defName="FloorStoneRandomMarble" or defName="FloorStoneRandomClayBrick" or defName="FloorStoneRandomCeramics" or defName="FloorStoneRandomAlabaster" or defName="FloorStoneRandomBasalt" or defName="FloorStoneRandomDunite" or defName="FloorStoneRandomPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneRandom</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneRoughSandstone" or defName="FloorStoneRoughGranite" or defName="FloorStoneRoughLimestone" or defName="FloorStoneRoughSlate" or defName="FloorStoneRoughMarble" or defName="FloorStoneRoughCeramics" or defName="FloorStoneRoughAlabaster" or defName="FloorStoneRoughBasalt" or defName="FloorStoneRoughDunite" or defName="FloorStoneRoughPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneRough</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneSlabsSandstone" or defName="FloorStoneSlabsGranite" or defName="FloorStoneSlabsLimestone" or defName="FloorStoneSlabsSlate" or defName="FloorStoneSlabsMarble" or defName="FloorStoneSlabsCeramics" or defName="FloorStoneSlabsAlabaster" or defName="FloorStoneSlabsBasalt" or defName="FloorStoneSlabsDunite" or defName="FloorStoneSlabsPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneSlabs</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="FloorStoneStaggeredSandstone" or defName="FloorStoneStaggeredGranite" or defName="FloorStoneStaggeredLimestone" or defName="FloorStoneStaggeredSlate" or defName="FloorStoneStaggeredMarble" or defName="FloorStoneStaggeredCeramics" or defName="FloorStoneStaggeredClayBrick" or defName="FloorStoneStaggeredAlabaster" or defName="FloorStoneStaggeredBasalt" or defName="FloorStoneStaggeredDunite" or defName="FloorStoneStaggeredPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_StoneStaggered</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="EXF_TileSandstone" or defName="EXF_TileGranite" or defName="EXF_TileLimestone" or defName="EXF_TileSlate" or defName="EXF_TileMarble" or defName="EXF_TileCeramics" or defName="EXF_TileAlabaster" or defName="EXF_TileBasalt" or defName="EXF_TileDunite" or defName="EXF_TilePegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_TileFloor</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="TileSandstone" or defName="TileGranite" or defName="TileLimestone" or defName="TileSlate" or defName="TileMarble" or defName="TileVacstone" or defName="ClayBrickTile" or defName="TileCeramics" or defName="TileAlabaster" or defName="TileBasalt" or defName="TileDunite" or defName="TilePegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Natural_TileStone</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="MBrickSandstone" or defName="MBrickGranite" or defName="MBrickLimestone" or defName="MBrickSlate" or defName="MBrickMarble" or defName="MBrickClayBrick" or defName="MBrickCeramics" or defName="MBrickAlabaster" or defName="MBrickBasalt" or defName="MBrickDunite" or defName="MBrickPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_Bricks</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="HerrBrickSandstone" or defName="HerrBrickGranite" or defName="HerrBrickLimestone" or defName="HerrBrickSlate" or defName="HerrBrickMarble" or defName="HerrBrickClayBrick" or defName="HerrBrickCeramics" or defName="HerrBrickAlabaster" or defName="HerrBrickBasalt" or defName="HerrBrickDunite" or defName="HerrBrickPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_HerringboneBricks</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="UEBrickSandstone" or defName="UEBrickGranite" or defName="UEBrickLimestone" or defName="UEBrickSlate" or defName="UEBrickMarble" or defName="UEBrickClayBrick" or defName="UEBrickCeramics" or defName="UEBrickAlabaster" or defName="UEBrickBasalt" or defName="UEBrickDunite" or defName="UEBrickPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_UnevenBricks</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="MetalTile" or defName="SilverTile" or defName="TinTile" or defName="CopperTile" or defName="AluminiumTile" or defName="CupronickelTile" or defName="SteinTile" or defName="TitaniumTile") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_MetalTiles</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="MedBrickSandstone" or defName="MedBrickGranite" or defName="MedBrickLimestone" or defName="MedBrickSlate" or defName="MedBrickMarble" or defName="MedBrickClayBrick" or defName="MedBrickCeramics" or defName="MedBrickAlabaster" or defName="MedBrickBasalt" or defName="MedBrickDunite" or defName="MedBrickPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_MedBricks</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="PlateCopperBar" or defName="PlateSilver" or defName="PlateGold" or defName="PlateSteel" or defName="PlateCupronickelAlloy" or defName="PlateCeramics") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_MetalPlates</designatorDropdown>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TerrainDef[(defName="SBrickSandstone" or defName="SBrickGranite" or defName="SBrickLimestone" or defName="SBrickSlate" or defName="SBrickMarble" or defName="SBrickClayBrick" or defName="SBrickCeramics" or defName="SBrickAlabaster" or defName="SBrickBasalt" or defName="SBrickDunite" or defName="SBrickPegmatite") and not(designatorDropdown)]</xpath>
+    <value>
+        <designatorDropdown>SKFloor_Outside_SmallBricks</designatorDropdown>
+    </value>
+</Operation>
+    <!-- 来源: 34_皮革等级分类补全.xml -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rawhide"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rawhide"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rawhide"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Rawhide"]/label</xpath>
+        <value>
+            <label>rawhide (B+)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BoiledLeather"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="BoiledLeather"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BoiledLeather"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="BoiledLeather"]/label</xpath>
+        <value>
+            <label>cuir bouilli (B+)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chitin"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Chitin"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chitin"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Chitin"]/label</xpath>
+        <value>
+            <label>Chitin (B+)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DragonScales"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DragonScales"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DragonScales"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="DragonScales"]/label</xpath>
+        <value>
+            <label>dragon scales (B+)</label>
+        </value>
+    </match>
+</Operation>
+
+	
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PVCLeather"]/thingCategories</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="PVCLeather"]/thingCategories</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PVCLeather"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="PVCLeather"]/label</xpath>
+        <value>
+            <label>Vinyl faux-leather (B+)</label>
+        </value>
+    </match>
+</Operation>
+
+	
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Armadillo"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_Armadillo"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Armadillo"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Armadillo"]/label</xpath>
+        <value>
+            <label>armadillo leather (B)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Hippo"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_Hippo"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Hippo"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Hippo"]/label</xpath>
+        <value>
+            <label>hippo leather (B)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mastodon"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_Mastodon"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mastodon"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Mastodon"]/label</xpath>
+        <value>
+            <label>mastodon leather (B)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mink"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_Mink"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mink"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Mink"]/label</xpath>
+        <value>
+            <label>mink fur (B)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Sealskin"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_Sealskin"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Sealskin"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Sealskin"]/label</xpath>
+        <value>
+            <label>sealskin (B)</label>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_Leather_KingHamster"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Leather_KingHamster"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersB</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_Leather_KingHamster"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="RK_Leather_KingHamster"]/label</xpath>
+        <value>
+            <label>Hamstrox fur (B)</label>
+        </value>
+    </match>
+</Operation>
+
+	
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]/label</xpath>
+        <value>
+            <label>thrumbomane (A)</label>
+        </value>
+    </match>
+</Operation>
+
+	
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rayon"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rayon"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Synthread"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Synthread"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Modacrylic"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Modacrylic"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fleece"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Fleece"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Velour"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Velour"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kevlar"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Kevlar"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hyperweave"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Hyperweave"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ChitinPlating"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ChitinPlating"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Nomex"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Nomex"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+  
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Micropel"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Micropel"]</xpath>
+        <value>
+            <thingCategories>
+                <li>LeathersA</li>
+            </thingCategories>
+        </value>
+    </match>
+</Operation>
+
+
+    <!-- 来源: Vile鞣制1.6适配/zz_UserFix_LeatherGradesAndAnimalHides.xml(2026-08-22 整合) -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Human"]/label</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Human"]/label</xpath>
+        <value>
+            <label>humanoid leather (E)</label>
+        </value>
+    </match>
+</Operation>
+
+    <!-- 来源: Vile鞣制1.6适配/zz_UserFix_OdysseyDescriptions.xml(2026-08-22 整合,英文描述,中文见语言文件) -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_AlphaThrumbo"]/description</xpath>
+        <value>
+            <description>TIER 3 - Industrial
+>>> Optimal	Armor, Beauty
+>> Suitable	All-season, Durability
+X Inadvisable 	Blunt armor, Production
+
+The extraordinary pelt of an alpha thrumbo. It is light, remarkably resistant to blades, and insulates well in both heat and cold, making it a premium all-season material.</description>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Armadillo"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Armadillo"]/description</xpath>
+        <value>
+            <description>TIER 2 - Medieval
+>>> Optimal	Armor
+>> Suitable	Durability
+X Inadvisable 	Winter, Summer
+
+Tough armadillo skin that resists cutting well, but provides little protection from heat or cold.</description>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Hippo"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Hippo"]/description</xpath>
+        <value>
+            <description>TIER 2 - Medieval
+>>> Optimal	Armor
+>> Suitable	Durability
+X Inadvisable 	Winter, Summer
+
+Thick hippo hide that is extremely tough and long-wearing. It offers good blade protection but does little to insulate against extreme weather.</description>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mastodon"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Mastodon"]/description</xpath>
+        <value>
+            <description>TIER 2 - Medieval
+>>> Optimal	Winter
+>> Suitable	Armor, Durability
+X Inadvisable 	Summer, Bedding
+
+Tanned mastodon hide. Thick and durable, with long fibers that trap heat well, making it excellent for cold-weather clothing and winter gear.</description>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Mink"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Mink"]/description</xpath>
+        <value>
+            <description>TIER 2 - Medieval
+>>> Optimal	Beauty, Bedding
+>> Suitable	Winter
+X Inadvisable 	Armor, Durability
+
+Soft, sleek mink fur prized for premium winter clothing and high-end furnishings. It is luxurious but offers little protection.</description>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Leather_Sealskin"]/description</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_Sealskin"]/description</xpath>
+        <value>
+            <description>TIER 2 - Medieval
+>>> Optimal	Winter
+>> Suitable	Beauty, Bedding
+X Inadvisable 	Armor, Durability
+
+Soft, luxurious seal hide. It is not very strong, but it insulates extremely well and is highly valued for bedding and decorative clothing.</description>
+        </value>
+    </match>
+</Operation>
+
+    <!-- 来源: 58_茅草床材质修复.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="HayBed"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li MayRequire="ViTech.HCSKWood">Softwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Hardwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Ultrahardwoods</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="HayBedDouble"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li MayRequire="ViTech.HCSKWood">Softwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Hardwoods</li>
+            <li MayRequire="ViTech.HCSKWood">Ultrahardwoods</li>
+        </stuffCategories>
+    </value>
+</Operation>
+
+    <!-- 来源: 59_圣物木质材质扩充.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TorchLamp"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Darktorch"]/stuffCategories</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Darktorch"]/stuffCategories</xpath>
+        <value>
+            <stuffCategories Inherit="False">
+                <li>WoodLogs</li>
+                <li>Woody</li>
+            </stuffCategories>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Darktorch"]</xpath>
+        <value>
+            <stuffCategories Inherit="False">
+                <li>WoodLogs</li>
+                <li>Woody</li>
+            </stuffCategories>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DarktorchFungus"]/stuffCategories</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="DarktorchFungus"]/stuffCategories</xpath>
+        <value>
+            <stuffCategories Inherit="False">
+                <li>WoodLogs</li>
+                <li>Woody</li>
+            </stuffCategories>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="DarktorchFungus"]</xpath>
+        <value>
+            <stuffCategories Inherit="False">
+                <li>WoodLogs</li>
+                <li>Woody</li>
+            </stuffCategories>
+        </value>
+    </nomatch>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ChristmasTree"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Effigy"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Pyre"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="WoodenDebris"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="PrimitiveStoolWood"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="PrimitiveTableWood"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bow_Short"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bow_Recurve"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="NorbalBow_Grape"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="blowgun"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparello_Rimramhood"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ShieldTribal"]/stuffCategories</xpath>
+    <value>
+        <stuffCategories Inherit="False">
+            <li>WoodLogs</li>
+            <li>Woody</li>
+        </stuffCategories>
+    </value>
+</Operation>
+
+    <!-- 来源: 66_资源管理分类通用.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Wastepack"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>RK_Pollutants</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FecalSludge"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>Waste</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="lifesupport"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>Medicine</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LivingFrost" or defName="LivingFire" or defName="ArtificialBone"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="PsychicAmplifier"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>ItemsMisc</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ThrumboHorn"]/thingCategories</xpath>
+    <value>
+        <thingCategories>
+            <li>ExoticHorns</li>
+        </thingCategories>
+    </value>
+</Operation>
+
+<!-- ================================================================
+     Compaste(复合黏剂/环氧树脂) 贴图回退 HSK 原版 (2026-08-24)
+     Vile's Materials Science 用 SK.PatchOperationReplaceExtended 把 Compaste
+     graphicData.texPath 覆盖成 Things/Item/Chemical/ThermosetResin(环氧树脂贴图),
+     Vile 自带 ZZ_RestoreHSKTextures.xml 在生效环境压不过它; 本 mod 加载序 167 后于
+     Vile 157, 此处强制改回 HSK 原版贴图 Things/Item/Resource/CompoundPaste。
+     ================================================================ -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Compaste"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Compaste"]/graphicData/texPath</xpath>
+        <value>
+            <texPath>Things/Item/Resource/CompoundPaste</texPath>
+        </value>
+    </match>
+</Operation>
+
+</Patch>

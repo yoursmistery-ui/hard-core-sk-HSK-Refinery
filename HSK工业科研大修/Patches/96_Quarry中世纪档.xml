@@ -1,0 +1,44 @@
+<Patch>
+  <!-- 96_Quarry中世纪档 (2026-08-30, 体系化收编批2)
+       档位定案: 大修 RK 链=原始档(采掘点), Quarry=下一档中世纪(采石场)。
+       科研链: RK_Mining_Primitive(原始) → Mining_B1(中世纪, 94 号已挂前置) → RK_Quarry_Medieval(本批新增节点, X6/Y24)。
+       Quarry 现状: 三采石场共用 QRY_QuarryBase, 唯一门槛 Mining_B1; 均无 techLevel 字段;
+       QRY_Platform(ParentName=BuildingBase)无任何科研门槛, 单独补挂。
+       工作类型 QuarryMining 与 Core_SK 采集 designation 的改挂维持现状(决策点 D3)。 -->
+
+  <!-- 1) 三采石场: Mining_B1 → RK_Quarry_Medieval + 补 techLevel(基类无该字段, 继承链 StandardBuilding 亦无) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[@Name="QRY_QuarryBase"]</xpath>
+    <match Class="PatchOperationSequence">
+      <success>Normal</success>
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ThingDef[@Name="QRY_QuarryBase"]/researchPrerequisites</xpath>
+          <value>
+            <researchPrerequisites>
+              <li>RK_Quarry_Medieval</li>
+            </researchPrerequisites>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[@Name="QRY_QuarryBase"]</xpath>
+          <value><techLevel>Medieval</techLevel></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- 2) 配套平台随采石场解锁 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="QRY_Platform"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="QRY_Platform"]</xpath>
+      <value>
+        <researchPrerequisites>
+          <li>RK_Quarry_Medieval</li>
+        </researchPrerequisites>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

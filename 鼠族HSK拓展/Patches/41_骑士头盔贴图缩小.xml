@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 41_骑士头盔贴图缩小(2026-08-09 用户要求):
+         40 号修复蒙版后头盔不再是满屏大方块,但整体仍偏大。
+         穿戴绘制(Graphic_Multi)按 apparel.def.graphicData.drawSize 缩放,
+         最终 def 继承抽象父类 RK_ApparelAttr_CataphractHelmetBase 的 (0.9,0.9);
+         这里覆盖为 (0.75,0.75)(约再缩小 17%,比中世纪板甲盔 RK_PlateHelmet 还小一点)。
+         注意: 具体 def 的 graphicData 原始 XML 里没有 drawSize 节点(来自父类),
+         因此用 PatchOperationAdd 添加,继承合并时子节点覆盖父节点。
+         地面/世界贴图同用此 drawSize(变小属预期);背包/信息卡图标不受影响。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Apparel_SpaceArmorHelmet"]/graphicData</xpath>
+        <value>
+            <drawSize>(0.75, 0.75)</drawSize>
+        </value>
+    </Operation>
+</Patch>

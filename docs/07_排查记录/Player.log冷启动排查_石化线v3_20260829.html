@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Player.log 冷启动排查+闭环验证 · 石化线 v3 · 2026-08-29</title>
+<style>
+:root{--bg:#0f1115;--fg:#e6e6e6;--mut:#9aa0a6;--card:#171a21;--line:#282d37;--ok:#3fb950;--fix:#d29922;--up:#58a6ff;--no:#8b949e}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 "Segoe UI",system-ui,sans-serif;padding:22px}
+h1{font-size:21px;margin:0}.sub{color:var(--mut);font-size:13px;margin:4px 0 14px}
+h2{font-size:17px;margin:22px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line)}
+nav{background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line)}nav a{color:var(--up);text-decoration:none;margin-right:13px;font-size:13px}
+table{border-collapse:collapse;width:100%;margin:6px 0;font-size:13px}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}th{background:var(--card)}
+code{background:#20242c;padding:1px 4px;border-radius:4px;font-size:12px;color:#e3b341}
+.b{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;font-weight:700;color:#000}
+.bo{background:var(--ok)}.bf{background:var(--fix)}.bu{background:var(--up)}.bn{background:var(--no)}.bgr{background:#2ea043;color:#fff}
+.c{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--fix);border-radius:7px;padding:10px 12px;margin:9px 0}
+.c.ok{border-left-color:var(--ok)}.c h3{margin:0 0 4px;font-size:14.5px}.c p{margin:3px 0;font-size:13.5px}
+</style></head><body>
+<h1>Player.log 冷启动排查 + 闭环验证 · 石化线 v3</h1>
+<div class="sub">2026-08-29 · 对照 <code>Player-prev.log</code>=多为存量 · <b>v3 高风险面 100% 清白</b> · 代理 R0–R4 真机冷启动闭环自验证</div>
+<nav><a href="#s1">收敛</a><a href="#s2">修复</a><a href="#s2h">火焰</a><a href="#s3">第三方</a><a href="#s4">噪音</a><a href="#s5">缓存</a><a href="#s6">清单</a></nav>
+
+<div class="c ok"><h3>结论 <span class="b bgr">终态·本地真错误 0</span></h3>
+<p>v3 新 DLL、管网出料口、两台精炼厂、卸货湾换皮、68 张死贴图 —— §七关键字全程 0。共修 9 项(A–G 本地真错误 + H 壁炉火焰 + I PF.dll OnGUI)，R5 全归零零回归。</p></div>
+
+<h2 id="s1">1 · 收敛曲线</h2>
+<table><tr><th>轮次</th><th>就绪</th><th>行数</th><th>本地真错误</th><th>处置</th></tr>
+<tr><td>R0 起点</td><td>10:31</td><td>2767</td><td>A–E 5类 + 陈旧缓存幽灵罐</td><td>分析+首轮修 A–E+清缓存</td></tr>
+<tr><td>R1</td><td>18:31</td><td>2165</td><td>A–E归零,又暴露 F+G(R0 被陈旧缓存掩盖)</td><td>修 F</td></tr>
+<tr><td><b>R2</b></td><td>18:48</td><td>2147</td><td><span class="b bgr">0</span> 仅剩第三方 2 条(vitech/JewelryBench)</td><td>修 G(停用)→ 全部本地真错误清零</td></tr>
+<tr><td><b>R3</b></td><td>19:10</td><td>2164</td><td><span class="b bgr">0</span></td><td>"不留兼容层"→G 改彻底删除；复扫 `Rustic_` 零悬空</td></tr>
+<tr><td>R4</td><td>19:27</td><td>2147</td><td><span class="b bgr">0</span> +壁炉火焰(H)</td><td>合并 def 确认 FireOverlay</td></tr>
+<tr><td><b>R5</b></td><td>21:53</td><td>2162</td><td><span class="b bgr">0</span></td><td>PF.dll 回退(I)→OnGUI MissingField 消除;旧 1935 档隔离,重打 2155</td></tr></table>
+
+<h2 id="s2">2 · 修复明细</h2>
+<div class="c"><h3>A 液体托盘悬空研究 <span class="b bf">v3</span> <span class="b bo">归零</span></h3>
+<p><code>RK_Petro_Polymerization</code> 五档收三档后被删,Reel <code>ReelStorageBarrelPallet</code> 仍引用 → 改指 <code>RK_Petro_Synthesis</code>。</p></div>
+<div class="c"><h3>B RKHSKFix 去木板 22×Failed to find a node <span class="b bf">存量</span> <span class="b bo">归零</span></h3>
+<p>11 配方 WoodPlank 已被更早补丁改写成 stuffCategories→Remove 打空。<span class="l">修</span> 22 op 套 <code>PatchOperationConditional</code> 门控,只包失败配方,xpath 逐字不变。<b>注</b> simulator 以终态作基线无法模拟 01→50 次序,其"全失败"属伪报。</p></div>
+<div class="c"><h3>C 金鼠族 <code>targetFuelLevelMax</code> <span class="b bf">存量</span> <span class="b bo">归零</span></h3>
+<p>反编译确认 1.6 <code>CompProperties_Refuelable</code> 无此字段 → 删(<code>OAGene_SnowstormCampfire</code>)。</p></div>
+<div class="c"><h3>D 盔甲架三 def NRE 丢弃 <span class="b bf">存量</span> <span class="b bo">归零·坐实根因</span></h3>
+<p><code>uiIconPath</code> 误写进 <code>&lt;graphicData&gt;</code>(它是 ThingDef 级字段非 GraphicData 字段)→ 解析 NRE、def 丢弃、"防 stuffable 卡死"失效。<span class="l">修</span> 提到 ThingDef 级(<code>_south.png</code> 均在)。R2 归零证实即根因。</p></div>
+<div class="c"><h3>E 储罐 ConfigError 缺 tickerType + 幻影罐 <span class="b bf">v3</span> <span class="b bo">归零</span></h3>
+<p>立式 <code>Asphalt/AmmoniaTankVertical</code> 每-tick Refuelable 未设 tickerType→补 <code>Normal</code>。卧式/中性胺罐幻影＝陈旧缓存残存已删 def→清缓存。</p></div>
+<div class="c"><h3>F 燃气管 blueprintGraphicData <span class="b bf">v3·R1</span> <span class="b bo">归零</span></h3>
+<p><code>RK_Petro_GasPipe_NG/NH3</code> 写 ThingDef 无的 <code>blueprintGraphicData</code>(Rustic_Structures 同类因自定义 thingClass 才有效)→ 删,零行为变化。误删 uiIconPath 已复位。</p></div>
+<div class="c"><h3>G ProcessDefs_Rustic + 死机器 彻底删除 <span class="b bf">08-28·R1</span> <span class="b bo">归零</span></h3>
+<p>缫丝床/造纸压机两条 <code>ProcessDef</code> 抛 <code>InvalidOperationException</code>。根因(反编译融合版 <code>ProcessorFramework.dll</code>)：<code>ProcessDef.thingDef</code> 被定为运行时 <code>ActiveProcess</code>(无无参构造),与 MO 原版 <code>&lt;thingDef&gt;产品</code> 不兼容 → 整 def 不加载 + 两台建筑 <code>&lt;processes&gt;</code> 报错。清缓存后 0 条能加载、功能根本无法工作;丝绸/纸张<b>手动链</b>(§八)不依赖 PF、完整可用。<b>按"不留兼容层"彻底删除</b>两文件(回收站+工作区备份 `_tmp/petro_dead_removed_20260829/`)+剥 SubCategories 两 <code>&lt;li&gt;</code>+改 About §十。恢复需把 PF.dll thingDef/BonusOutput.thingDef 改回 ThingDef 重编译。</p></div>
+
+<h2 id="s2h">2H · 壁炉火焰特效（视觉 bug·用户追加）</h2>
+<div class="c"><h3>H 壁炉火焰 <span class="b bf">H</span> <span class="b bo">已补</span></h3>
+<p>燃料壁炉 <code>RKFC_RGK_Fireplace</code> 照抄 Heater 独漏 <code>CompProperties_FireOverlay</code>→无明火。补该 comp(FireOverlay 需 Normal+RealtimeOnly)。电力版=电加热器无明火不动。</p></div>
+
+<div class="c"><h3>I PF.dll OnGUI 崩溃/卡死 <span class="b bf">用户追加</span> <span class="b bo">归零</span></h3>
+<p>开小人面板即 <code>MissingFieldException: ActiveProcess Verse.Thing.def</code>。根因(dnfile):08-29 05:17 Cecil 把 <code>Verse.Thing::def</code> MemberRef 从外部 ThingDef 误改本地 ActiveProcess。修:回退 pre-mod 干净版 <code>3e24319</code>,不伤石化(GasPort 在独立 BlueprintUnlockHSK.dll)。R5 全 0;开面板需现场复验。</p></div>
+
+<h2 id="s3">3 · 第三方 / 上游 <span class="b bu">不动</span></h2>
+<p>vitech <code>Super_matter_E2</code> dup · JewelryBench <code>uiIconScale</code>(VFE) · BarrelProcessor/Beer(PF DLL 探测) · WorkGiver Tav/KAU 悬空 · Miho_CelestialForge(美狐 1.5/,另案) · CompPawnGizmo(CE 良性) · InputLegacyModule。</p>
+
+<h2 id="s4">4 · 慢性噪音 <span class="b bn">勿追因</span></h2>
+<p>Fallback handler / GAGARIN Cache / Harmony FieldRefAccess / Map Preview RNG / Thing_* loadID(旧存档 pawn 引用,非 def) / Keyz / Random state / HSK Core 自检通过。228 mod 冷启动 3–7 分钟正常。</p>
+
+<h2 id="s6">6 · 修改文件（双目录 SHA-256 MATCH，11 件）</h2>
+<ol>
+<li><code>Reel存储HSK适配/…/ReelStorage_ThingDefs.xml</code>→Synthesis</li>
+<li><code>鼠族HSK拓展/Patches/50_去除木板.xml</code> 14 门控 · <code>工业大修/Patches/50_工具_材质与战斗适配.xml</code> 8 门控</li>
+<li><code>工业大修/1.6/Defs/Buildings_RK_Petro_Tanks.xml</code> 2 罐 tickerType</li>
+<li><code>金鼠族/…/Buildings_Temperature.xml</code> 删字段 · <code>盔甲架HSK适配/…/Building_{ArmorRack,Mechanized,Mending}ArmorRack.xml</code> uiIconPath 归位</li>
+<li><code>工业大修/1.6/Defs/Buildings_RK_Petro_GasNet.xml</code> 删 blueprint · <code>SubCategories_RK_TextilePaper.xml</code> 剥 2 处死 <code>&lt;li&gt;</code> · <code>About.xml</code> §十 更正</li>
+<li><b>删</b>：<code>工业大修/1.6/Defs/Buildings_Rustic_Processors.xml</code> + <code>ProcessDefs_Rustic.xml</code>（回收站/备份 `_tmp/petro_dead_removed_20260829/`）</li>
+<li><code>鼠族家具拓展/Defs/RKFC_JoyTemp.xml</code> 壁炉补 FireOverlay(H)·部署到真实 pkg 文件夹</li></ol>
+
+<h2 id="s7">7 · 交付归档</h2>
+
+<ul>
+<li>主档 solid LZMA2 -mx=9：<code>…\outputs\RimWorld_Mods_v3_20260829_1935.7z</code> = 1,266,196,270 B（≈1.18 GiB），51.5%（≈2:1），58122 文件；<code>7z t</code> 通过。</li>
+<li>900MB 分卷（-v900m，>1GB 微信传输）：同目录 <code>..._split.7z.001</code>(900 MiB)+<code>.002</code>(308 MiB)；<code>7z t</code> 通过；解压须两卷同目录。</li></ul>
+</body></html>

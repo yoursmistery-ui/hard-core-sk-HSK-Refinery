@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- HSK 适配(2026-08-27): 研究并入 Craft_SK tab,挂 Core_SK 六档研究台门禁
+	     清洁整理(2026-08-28): 把"书写"下沉到原始时代 → 链条改为 书写(Neolithic)→印刷(Industrial)→印刷机(Industrial)。
+	     VBE_Writing = 原始档(Neolithic, PrimitiveResearchBench): 写作台造价仅木料+石/木料, 原始聚落即可抄书传承知识。
+	     VBE_Printing = 前工业档(LabTerminal 研究终端,电力时代), 前置 VBE_Writing+Electricity。
+	     VBE_PrintingPress = 印刷机(VBEE 移植,前工业档)。
+		     坐标(2026-08-27 修订): ResearchTreeSK 的重复坐标检查是全局的(不分页签),
+		     原 (3,7)/(4,7)/(5,7) 与 Buildings_SK 的 ComplexFurniture(3,7)/Tables_B2(4,7)
+		     全局撞车;且 VBE_Printing 前置 Electricity 在 X=6,须 X>6。
+		     整链右移至 (8,7)/(9,7)/(10,7)(全局空闲,前置规则全部满足)。 -->
+	<ResearchProjectDef>
+		<defName>VBE_Writing</defName>
+		<label>writing</label>
+		<tab>Craft_SK</tab>
+		<description>Construct a writing desk and have your colonists write books that pass their knowledge to other members of their society.</description>
+		<baseCost>250</baseCost>
+		<techLevel>Neolithic</techLevel>
+		<requiredResearchBuilding>PrimitiveResearchBench</requiredResearchBuilding>
+		<modExtensions Inherit="False">
+			<li Class="SK.AdvancedResearchExtension">
+				<requiredResearchBuildings>
+					<li>PrimitiveResearchBench</li>
+					<li>SimpleResearchBench</li>
+				</requiredResearchBuildings>
+			</li>
+			<li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+		</modExtensions>
+		<researchViewY>7</researchViewY>
+		<researchViewX>8</researchViewX>
+	</ResearchProjectDef>
+	<ResearchProjectDef>
+		<defName>VBE_Printing</defName>
+		<label>printing</label>
+		<tab>Craft_SK</tab>
+		<description>Build a typewriter, which allows your colonists to write books significantly faster, as well as create newspapers for temporary joy boost.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+		<modExtensions Inherit="False">
+			<li Class="SK.AdvancedResearchExtension">
+				<requiredResearchBuildings>
+					<li>LabTerminal</li>
+				</requiredResearchBuildings>
+			</li>
+			<li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+		</modExtensions>
+		<prerequisites>
+			<li>VBE_Writing</li>
+			<li>Electricity</li>
+		</prerequisites>
+		<researchViewY>7</researchViewY>
+		<researchViewX>9</researchViewX>
+	</ResearchProjectDef>
+	<!-- 印刷机研究(VBEE 移植,前工业档) -->
+	<ResearchProjectDef>
+		<defName>VBE_PrintingPress</defName>
+		<label>printing press</label>
+		<tab>Craft_SK</tab>
+		<description>Build a printing press, which allows your colonists to make copies of existing books, as well as write newspapers.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+		<modExtensions Inherit="False">
+			<li Class="SK.AdvancedResearchExtension">
+				<requiredResearchBuildings>
+					<li>LabTerminal</li>
+				</requiredResearchBuildings>
+			</li>
+			<li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+		</modExtensions>
+		<prerequisites>
+			<li>VBE_Printing</li>
+		</prerequisites>
+		<researchViewY>7</researchViewY>
+		<researchViewX>10</researchViewX>
+	</ResearchProjectDef>
+</Defs>

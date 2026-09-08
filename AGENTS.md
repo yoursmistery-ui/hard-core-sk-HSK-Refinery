@@ -20,6 +20,7 @@
 - **单文件 ≤ 10KB 铁律**: 任何文档/说明类文件不得超过 10KB;超出部分外挂到 `docs/` 下的独立文档(主文件留指针)。代码/XML 以功能为准,但过长的详录/方案同样按主题拆分外挂。
 - **没做完的东西不写进去(2026-08-30 用户要求)**: 交付文档/`docs/00_HSK参考文档合集导航.md` 只收录**已自验通过**的成果——先跑完核对(链接与锚点可达、体积达标、覆盖率与缺项清单已消化或明确降级为"参考"),再登记导航;生成中途的待办/占位/未核实条目一律留在 `_tmp/` 核对脚本输出里,不进正文、不进导航。文档正文里也不得混入"未标注/缺数据"的伪结论,缺失项要么补齐、要么显式标注为参考对照(如非同类目条目另立"参考:"分组),不得与已核实内容混排冒充完成品。
 - **工坊 mod 一律本地定位,禁联网抓 steam.com**: 用户给的 `steamcommunity.com/.../?id=<数字>` 链接**只是提供工坊 ID**,须到本地 `steamapps\workshop\content\294100\<id>` 找该 mod 再取资源(贴图/def/参考),不要用 WebFetch/WebSearch 抓 steam 页面。
+- **GitHub 远端(私有) `github.com/yoursmistery-ui/hard-core-sk-HSK-Refinery`,两分支各司其职**: `main` = **开发工作区**(本仓库,只收 mod 成品+docs,`_tmp/`/`参考素材/`/`.trash/` 等全 gitignore);`mods` = **orphan 部署快照**(独立历史,镜像游戏当前加载的 `RimWorld\Mods` 全量 mod、约 2.4G,排除 `Unified.xml` 因其 103MB 撞 GitHub 单文件 100MB 硬限)。同步节奏:日常改动落 `main` 后 `git push`;需要固化"as-deployed"全量环境时再在一次性 worktree 里重建 `mods` 快照分支并强推。`mods` 走共享对象库建分支可让整合包 blob 与 `main` 去重,只上传额外工坊 mod。
 
 ## 2. 加载顺序
 - Core_SK → RatkinRaceHSK(HSK_Generated 整体替换鼠族基类,基类自带 recipeMaker 自动配方)→ 本 mod(最末)。旧"自动配方"=基类 recipeMaker 产物,须最终层补丁关闭。

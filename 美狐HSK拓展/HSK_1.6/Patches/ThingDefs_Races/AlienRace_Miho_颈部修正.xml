@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!--
+		2026-09-05 美狐脖子修正(与 Cont/Textures/Miho/Body* 的「砍脖子」烘焙配套)
+
+		症状: 美狐脖子看起来过长; 把头往下挪时, 身体贴图上的颈顶会挡在下巴前面形成突起。
+		原因: Miho 的头是 bodyAddon「Miho/Head/Head」且 inFrontOfBody=false(画在身体后面),
+		      脖子却画在身体贴图里(Thin_south 颈顶 y=181 → 肩线 y=208, 约 27px)。
+		做法: ① 身体贴图按头部轮廓裁掉被下巴盖住的颈段(north 平切, 背面被 HairBack 挡);
+		      ② 这里把 headOffsetDirectional 四个朝向的 offset.y 统一下移 0.065 格。
+		换算: HAR 的 atlasScale=3 → 1 格 = 64×3 = 192 贴图px, 12px = 0.065 格。
+		      (反编译确认 AlienPartGenerator.RotationOffset.GetOffset 返回的是
+		       BaseHeadOffsetAt 的加性偏移, 单位=格; bodyTypes 覆盖项也是叠加,
+		       所以只改朝向默认 offset 就能带动 Child/Baby。)
+		2026-09-06: 首版下移 0.125 用户两轮反馈「头太低」, 全部回抬恢复原版偏移
+		      (南 -0.05/北 -0.09/东西 -0.08), 颈长修正完全由贴图裁剪承担。
+		Child/Baby 的 bodyTypes 覆盖值(如 north Child (0,0))保持不动, 会随朝向默认值一起下移。
+	-->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/south/offset</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/south/offset</xpath>
+			<value>
+				<offset>(0, -0.05)</offset>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/south</xpath>
+			<value>
+				<offset>(0, -0.05)</offset>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/north/offset</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/north/offset</xpath>
+			<value>
+				<offset>(0, -0.09)</offset>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/north</xpath>
+			<value>
+				<offset>(0, -0.09)</offset>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/east/offset</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/east/offset</xpath>
+			<value>
+				<offset>(-0.06, -0.08)</offset>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/east</xpath>
+			<value>
+				<offset>(-0.06, -0.08)</offset>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/west/offset</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/west/offset</xpath>
+			<value>
+				<offset>(0.06, -0.08)</offset>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/headOffsetDirectional/west</xpath>
+			<value>
+				<offset>(0.06, -0.08)</offset>
+			</value>
+		</nomatch>
+	</Operation>
+</Patch>

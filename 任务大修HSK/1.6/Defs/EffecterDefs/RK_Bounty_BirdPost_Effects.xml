@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- 十一期信鸽送信:柱顶扑翅帧动画(6帧@12fps)+羽毛飘落+扑翅声 -->
+	<ThingDef>
+		<defName>RK_Mote_BirdPostFlap</defName>
+		<thingClass>MoteThrown</thingClass>
+		<label>mote</label>
+		<category>Mote</category>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<tickerType>Normal</tickerType>
+		<useHitPoints>false</useHitPoints>
+		<isSaveable>false</isSaveable>
+		<rotatable>false</rotatable>
+		<mote>
+			<fadeInTime>0.15</fadeInTime>
+			<solidTime>2.2</solidTime>
+			<fadeOutTime>0.4</fadeOutTime>
+		</mote>
+		<graphicData>
+			<graphicClass>Graphic_MoteWithAgeSecs</graphicClass>
+			<shaderType>CutoutAnimated</shaderType>
+			<texPath>Things/Mote/RK_BirdFlap</texPath>
+			<shaderParameters>
+				<_NumFrames>6</_NumFrames>
+				<_FramesPerSec>12</_FramesPerSec>
+			</shaderParameters>
+			<drawSize>1</drawSize>
+			<drawOffset>(0, 0, 0.9375)</drawOffset>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef>
+		<defName>RK_Mote_BirdFeather</defName>
+		<thingClass>MoteThrown</thingClass>
+		<label>mote</label>
+		<category>Mote</category>
+		<altitudeLayer>MoteLow</altitudeLayer>
+		<tickerType>Normal</tickerType>
+		<useHitPoints>false</useHitPoints>
+		<isSaveable>false</isSaveable>
+		<rotatable>false</rotatable>
+		<mote>
+			<fadeInTime>0.1</fadeInTime>
+			<solidTime>1.5</solidTime>
+			<fadeOutTime>1.4</fadeOutTime>
+			<speedPerTime>0.12</speedPerTime>
+		</mote>
+		<graphicData>
+			<graphicClass>Graphic_Mote</graphicClass>
+			<shaderType>Mote</shaderType>
+			<texPath>Things/Mote/RK_Feather</texPath>
+			<drawSize>0.22</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<EffecterDef>
+		<defName>RK_BirdPost_Flap</defName>
+		<children>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<moteDef>RK_Mote_BirdPostFlap</moteDef>
+				<burstCount>1</burstCount>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+				<moteDef>RK_Mote_BirdFeather</moteDef>
+				<burstCount>2~4</burstCount>
+				<spawnLocType>OnSource</spawnLocType>
+				<positionRadius>0.35</positionRadius>
+				<angle>0~360</angle>
+				<speed>0.06~0.16</speed>
+				<airTime>3</airTime>
+				<rotationRate>-60~60</rotationRate>
+				<scale>0.8~1.3</scale>
+				<initialDelayTicks>15</initialDelayTicks>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>
+				<soundDef>RK_BirdPost_FlapSound</soundDef>
+				<spawnLocType>OnSource</spawnLocType>
+			</li>
+		</children>
+	</EffecterDef>
+
+</Defs>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>Kiiro_SkyLanternFestivalMemory</defName>
+    <durationDays>15</durationDays>
+	<stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>unforgettable kiiro sky lantern festival</label>
+        <description>I joined a unforgettable sky lantern festival with kiiros.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>Kiiro_BonfirePartyMemory</defName>
+    <durationDays>7</durationDays>
+	<stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>bonfire party</label>
+        <description>I joined a bonfire party with kiiros.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <!-- 劳动协助的心情加成 -->
+  <ThoughtDef>
+    <defName>Kiiro_OnDuty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <showBubble>true</showBubble>
+    <stages>
+      <li>
+        <label>pleasure in helping</label>
+        <description>I'm helping our friends do what I can.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <!-- 团聚 -->
+  <ThoughtDef>
+    <defName>Kiiro_Reunion</defName>
+    <durationDays>15</durationDays>
+    <stackLimit>1</stackLimit>
+    <showBubble>true</showBubble>
+    <stages>
+      <li>
+        <label>reunion</label>
+        <description>Reunite with loved ones.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <!-- 拒绝团聚 -->
+  <ThoughtDef>
+    <defName>Kiiro_ReunionReject</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <showBubble>true</showBubble>
+    <stages>
+      <li>
+        <label>failure to reunion</label>
+        <description>I can't be with my loved ones.</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+
+  <!-- 食用腌制小食的心情减益 -->
+  <ThoughtDef>
+    <defName>Kiiro_AteCuringSnack</defName>
+    <durationDays>0.8</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.5</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>ate jerky</label>
+        <description>I can't eat it anymore, it’s so salty...</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <!-- 商户刚来的心情加成 -->
+  <ThoughtDef>
+    <defName>Kiiro_MerchantArrive</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <showBubble>true</showBubble>
+    <stages>
+      <li>
+        <label>new beginning</label>
+        <description>I left home for a merchant life here. The future's unforeseeable, but I'm expecting it.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- 商户的心情 -->
+  <ThoughtDef>
+    <defName>Kiiro_MerchantOwner</defName>
+    <workerClass>Kiiro_Event.ThoughtWorker_MerchantOwner</workerClass>
+    <validWhileDespawned>false</validWhileDespawned>
+    <stages>
+      <li>
+        <label>tiny shop</label>
+        <description>It's too small...too small!</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>crowded shop</label>
+        <description>My shop's a bit crowded, but that's okey.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>running a Shop</label>
+        <description>I own a shop here!</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+      <li>
+        <label>spacious Shop</label>
+        <description>My shop is so big! I need to plan where to put the shelves.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+      <li>
+        <label>huge shop</label>
+        <description>My shop is huge! I'm a big shot!</description>
+        <baseMoodEffect>24</baseMoodEffect>
+      </li>
+      <li>
+        <label>Worried</label>
+        <description>I don't have enough space for my goods... I don't know how to continue trading.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+    <nullifyingTraits>
+    </nullifyingTraits>
+  </ThoughtDef>
+
+
+
+  <!-- 交易的玩家方小人心情加成 -->
+  <ThoughtDef>
+    <defName>Kiiro_TradeInMerchantRoom</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>awful shop</label>
+        <description>I had to traded in an awful shop.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+      <li IsNull="True" />
+      <!-- dull -->
+      <li IsNull="True" />
+      <!-- mediocre -->
+      <li>
+        <label>decent shop</label>
+        <description>I got to traded in a pretty decent shop.</description>
+        <baseMoodEffect>2</baseMoodEffect>
+      </li>
+      <li>
+        <label>slightly impressive shop</label>
+        <description>I got to traded in a slightly impressive shop. I like it.</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+      <li>
+        <label>impressive shop</label>
+        <description>I traded in an impressive shop. It was great.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+      <li>
+        <label>very impressive shop</label>
+        <description>I traded in a very impressive shop. I love it.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+      <li>
+        <label>extremely impressive shop</label>
+        <description>I traded in an extremely impressive shop. It was marvelous.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <li>
+        <label>unbelievably impressive shop</label>
+        <description>I traded in an unbelievably impressive shop. It was truly astounding.</description>
+        <baseMoodEffect>7</baseMoodEffect>
+      </li>
+      <li>
+        <label>wondrously impressive shop</label>
+        <description>I traded in a heavenly shop. It was wondrous.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <!-- 购物长时间等待的负面心情 -->
+  <ThoughtDef>
+    <defName>Kiiro_TerribleShopping</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <showBubble>true</showBubble>
+    <stages>
+      <li>
+        <label>bad shopping experience</label>
+        <description>I waited for a long time, but no one came to check me out. The shopkeeper ran off to somewhere.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- 勇者剧本开局其他人的心情加成 -->
+  <ThoughtDef>
+    <defName>Kiiro_HopeOfValor</defName>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>we are saved</label>
+        <description>I saw our valor fighting for us. We will be safe.</description>
+        <baseMoodEffect>25</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+</Defs>

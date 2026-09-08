@@ -379,6 +379,55 @@ namespace ReloadRegistryFix
             }
         }
 
+        // —— NoMix 口径辅助(2026-09-08): 全部只在诊断冷却命中时调用, 非热路径 ——
+        private static void AddUsableByDef(Dictionary<ThingDef, float> byDef, ThingDef def, float qty)
+        {
+            if (def == null)
+            {
+                return;
+            }
+            float cur;
+            byDef.TryGetValue(def, out cur);
+            byDef[def] = cur + qty;
+        }
+
+        private static float MaxByDef(Dictionary<ThingDef, float> byDef)
+        {
+            float mx = 0f;
+            foreach (KeyValuePair<ThingDef, float> kv in byDef)
+            {
+                if (kv.Value > mx)
+                {
+                    mx = kv.Value;
+                }
+            }
+            return mx;
+        }
+
+        private static string BestDefTag(Dictionary<ThingDef, float> byDef)
+        {
+            ThingDef best = null;
+            float mx = 0f;
+            foreach (KeyValuePair<ThingDef, float> kv in byDef)
+            {
+                if (kv.Value > mx)
+                {
+                    mx = kv.Value;
+                    best = kv.Key;
+                }
+            }
+            return (best != null ? best.defName : "-") + "=" + mx.ToString("0.#");
+        }
+
+        private static bool EnoughUsable(bool allowMix, float total, Dictionary<ThingDef, float> byDef, float need)
+        {
+            if (total + 0.001f < need)
+            {
+                return false;
+            }
+            return allowMix || MaxByDef(byDef) + 0.001f >= need;
+        }
+
         // 搜索失败且常规自愈无事可修 → 按【每条原料】统计候选并诊断;
         // 顺手释放「活着的小人持有的死任务预留」(与读档时原版清理语义一致)。
         // 返回 true 表示确认是 region/可达性脏化(根 Region 为 null,或每条原料都有
@@ -439,6 +488,13 @@ namespace ReloadRegistryFix
                         continue;
                     }
                     float need = ing.GetBaseCount();
+                    // 2026-09-08 二修: 真实搜索在 allowMixingIngredients=false 时走 NoMix 选择器
+                    // (TryFindBestIngredientsInSet_NoMixHelper): 按 def 聚合可用量, 槽内【禁止跨
+                    // def 混料】——单一 def 聚合不够数即失败。旧诊断把所有 def 混着累加,
+                    // "皮60+布80 需皮类120" 会误判候选充足 → 又一轮无效 region 重建。
+                    // 现按 def 分桶: allowMix 配方用总量判定, 否则用单 def 最大量判定。
+                    bool allowMix = bill.recipe.allowMixingIngredients;
+                    Dictionary<ThingDef, float> usableByDef = new Dictionary<ThingDef, float>();
                     float usable = 0f;
                     float reservedQty = 0f;
                     float forbiddenQty = 0f;
@@ -447,7 +503,8 @@ namespace ReloadRegistryFix
                     float outOfRadiusQty = 0f;
                     int scanned = 0;
                     string usableSample = null;
-                    for (int i = 0; i < allThings.Count && scanned < 48 && usable < need; i++)
+                    for (int i = 0; i < allThings.Count && scanned < 48 &&
+                        !EnoughUsable(allowMix, usable, usableByDef, need); i++)
                     {
                         Thing t = allThings[i];
                         if (t == null || t.Destroyed || !t.Spawned || t is Mote)
@@ -459,7 +516,16 @@ namespace ReloadRegistryFix
                             continue;
                         }
                         scanned++;
-                        float qty = Math.Max(1f, (float)t.stackCount);
+                        // 2026-09-08: 口径对齐真实搜索(TryFindBestBillIngredientsInSet_AllowMix):
+                        // need=GetBaseCount() 与可用量都必须按 recipe.ingredientValueGetter 的
+                        // 单位计(营养值配方按营养, 件数配方按件)。旧写法 max(1,stackCount) 用
+                        // 件数去比营养需求, 高估 ~20 倍 → 真缺料被误判区域脏化 → 反复无效
+                        // region 全量重建(百毫秒级卡顿)+ 诊断行每冷却期刷一条。
+                        float qty = bill.recipe.IngredientValueGetter.ValuePerUnitOf(t.def) * (float)t.stackCount;
+                        if (qty <= 0.0001f)
+                        {
+                            continue;
+                        }
                         if (t.IsForbidden(pawn))
                         {
                             forbiddenQty += qty;
@@ -511,6 +577,7 @@ namespace ReloadRegistryFix
                             reRegistered++;
                             AddNote(notes, Describe(t) + "->reRegisteredRegionLister");
                             usable += qty;
+                            AddUsableByDef(usableByDef, t.def, qty);
                             if (usableSample == null)
                             {
                                 usableSample = Describe(t) + "(lister=" + inRegionLister + ",dist=" +
@@ -519,16 +586,20 @@ namespace ReloadRegistryFix
                             continue;
                         }
                         usable += qty;
+                        AddUsableByDef(usableByDef, t.def, qty);
                         if (usableSample == null)
                         {
                             usableSample = Describe(t) + "(lister=" + inRegionLister + ",dist=" +
                                 (int)Math.Sqrt((double)(t.Position - billGiver.Position).LengthHorizontalSquared) + ")";
                         }
                     }
-                    if (usable + 0.001f < need)
+                    float effective = allowMix ? usable : MaxByDef(usableByDef);
+                    if (effective + 0.001f < need)
                     {
                         anyIngredientShort = true;
-                        AddNote(notes, ing.Summary + " need=" + need + " usable=" + usable +
+                        string effTag = allowMix ? "" : (" 单def最大=" + BestDefTag(usableByDef));
+                        AddNote(notes, ing.Summary + " need=" + need + " usable=" + effective + effTag +
+                            " (总量=" + usable + ")" +
                             " forbidden=" + forbiddenQty + " reserved=" + reservedQty +
                             " unreachable=" + unreachableQty + " unfindable=" + unfindableQty +
                             " outOfRadius=" + outOfRadiusQty);

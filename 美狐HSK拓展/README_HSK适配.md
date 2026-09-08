@@ -46,6 +46,9 @@
 - 炮塔 3 座附件已做(StrongMetallic + Weapon_Parts/Launcher_Component/Plastic),未动
 - 全部 HSK 材料已核验存在(Core_SK 定义),保留美狐自产陶瓷/丝绸(生产链自洽)
 
+### 2.3c 头部渲染修复(2026-09-02)
+- 移除 `1.6/Defs/Race_Miho.xml` 的 `headOffsetDirectional`(north -0.09 / south -0.05 / east,west -0.08):HAR 的 alignWithHead 头部挂件(头发/耳/脑后发)定位用硬编码 Head 预设、**不跟随**该偏移(反编译 AlienRace.dll 证实: 偏移只经 BaseHeadOffsetAt postfix 加在头部上),导致头部下坠前移而头发留在原位,侧向出现"秃头+耳朵错位"。移除后头部回标准位,与头发/耳朵/帽子全部对齐(静态叠图核验东向 0 间隙)。
+
 ### 2.4 研究台门槛(Miho_ResearchBench.xml)
 - Miho_Celestial(极致档)研究台门槛 HiTechResearchBench → **LabStation**(实验室工作站),补 SK.AdvancedResearchExtension 扩展(仅 LabStation)
 - 其余 12 个 HiTech 节点门槛附件已写好,无需改动

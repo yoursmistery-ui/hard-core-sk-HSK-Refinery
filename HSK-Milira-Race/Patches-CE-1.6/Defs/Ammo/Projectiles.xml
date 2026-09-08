@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <!-- MiliraAbilities_Misc.xml -->
+
+    <ThingDef ParentName="Bullet_MiliraCombatDroneRocket">
+        <defName>Bullet_MiliraRocket</defName>
+        <label>rocket</label>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Rocket</texPath>
+            <drawSize>1</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <speed>60</speed>
+        </projectile>
+    </ThingDef>
+
+    <!-- Apparel_Belt.xml -->
+<!--离子震爆手雷-->
+    <ThingDef ParentName="BaseGrenadeProjectile">
+        <defName>Bullet_MiliraPlasmaShockGrenade</defName>
+        <label>plasma shock grenade</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Proj_PlasmaShockGrenade</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBombBig</damageDef>
+            <explosionRadius>2.6</explosionRadius>
+            <damageAmountBase>63</damageAmountBase>
+            <stoppingPower>1.8</stoppingPower>
+            <speed>22</speed>
+            <explosionDelay>100</explosionDelay>
+        </projectile>
+    </ThingDef>
+<!--斥力手雷-->
+    <ThingDef ParentName="BaseGrenadeProjectile">
+        <!-- TODO: Could it be better if implemented with ProjectileCE_Explosive + custom CompExplosiveCE? -->
+        <defName>Bullet_MiliraRepulsiveGrenade</defName>
+        <label>Repulsive Grenade</label>
+        <thingClass>MiliraCE.ProjectileCE_Repulsive</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Proj_RepulsiveGrenade</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <explosionRadius>4.5</explosionRadius>
+            <speed>22</speed>
+            <damageAmountBase>8</damageAmountBase>
+            <armorPenetrationBase>1.0</armorPenetrationBase>
+            <explosionDelay>100</explosionDelay>
+            <explosionEffect>Milira_TrapRepulsiveActivated</explosionEffect>
+            <dropsCasings>false</dropsCasings>
+            <dangerFactor>0</dangerFactor>
+            <airborneSuppressionFactor>0</airborneSuppressionFactor>
+        </projectile>
+        <modExtensions>
+            <li Class="AncotLibrary.FieldForceProjectile_Extension">
+                <removeHediffsAffected>
+                    <li>Milian_KnightI_KnightCharge</li>
+                </removeHediffsAffected>
+            </li>
+        </modExtensions>
+    </ThingDef>
+<!--引力手雷-->
+    <ThingDef ParentName="BaseGrenadeProjectile">
+        <!-- TODO: Could it be better if implemented with ProjectileCE_Explosive + custom CompExplosiveCE? -->
+        <defName>Bullet_MiliraAttractiveGrenade</defName>
+        <label>gravitational grenade</label>
+        <thingClass>MiliraCE.ProjectileCE_Gravitational</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Proj_AttractiveGrenade</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <explosionRadius>8.5</explosionRadius>
+            <speed>22</speed>
+            <damageAmountBase>6</damageAmountBase>
+            <armorPenetrationBase>1.0</armorPenetrationBase>
+            <explosionDelay>100</explosionDelay>
+            <explosionEffect>Milira_TrapAttractiveActivated</explosionEffect>
+            <dropsCasings>false</dropsCasings>
+            <dangerFactor>0</dangerFactor>
+            <airborneSuppressionFactor>0</airborneSuppressionFactor>
+        </projectile>
+        <modExtensions>
+            <li Class="AncotLibrary.FieldForceProjectile_Extension">
+                <removeHediffsAffected>
+                    <li>Milian_KnightI_KnightCharge</li>
+                </removeHediffsAffected>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- Apparel_CombatDrone.xml -->
+<!--浮游炮：脉冲榴弹-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraCombatDroneGrenade_EMP</defName>
+        <label>EMP grenade</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraProjectile_EMPLauncher</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>2.0</drawSize>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>EMP</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <damageAmountBase>40</damageAmountBase>
+            <stoppingPower>2.0</stoppingPower>
+            <speed>80</speed>
+        </projectile>
+    </ThingDef>
+<!--浮游炮：燃烧榴弹-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraCombatDroneGrenade_Incendiary</defName>
+        <label>incendiary grenade</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Things/Projectile/ShellIncendiary</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>0.5</drawSize>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Flame</damageDef>
+            <explosionRadius>2.9</explosionRadius>
+            <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+            <preExplosionSpawnChance>0.55</preExplosionSpawnChance>
+            <damageAmountBase>10</damageAmountBase>
+            <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+            <soundExplode>MortarIncendiary_Explode</soundExplode>
+            <stoppingPower>2.0</stoppingPower>
+            <speed>65</speed>
+            <ai_IsIncendiary>true</ai_IsIncendiary>
+        </projectile>
+    </ThingDef>
+<!--浮游炮：凝滞脉冲-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraCombatDroneGrenade_StunImpulse</defName>
+        <label>stun impulse</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Null/null</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Ancot_StunExceptInstigatorFaction</damageDef>
+            <explosionRadius>1.9</explosionRadius>
+            <damageAmountBase>6</damageAmountBase>
+            <soundExplode>Explosion_EMP</soundExplode>
+            <stoppingPower>10.0</stoppingPower>
+            <speed>80</speed>
+        </projectile>
+        <modExtensions>
+            <li Class="AncotLibrary.ExplosiveProjectileExtension">
+                <doTrail>true</doTrail>
+                <trailFleck>Milira_AirPuffGlow_Angled</trailFleck>
+                <trailFreauency>1</trailFreauency>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="CombatExtended.CompProperties_ProjectileFleck">
+                <FleckDatas>
+                    <li>
+                        <fleck>Milira_AirPuffGlow_Angled</fleck>
+                        <emissionsPerTick>1</emissionsPerTick>
+                        <flecksPerEmission>1</flecksPerEmission>
+                        <scale>1</scale>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+<!--浮游炮：四联装火箭用火箭弹-->
+    <ThingDef Name="Bullet_MiliraCombatDroneRocket" ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraCombatDroneRocket</defName>
+        <label>rocket</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraProjectile_SmallRocketII</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>2</drawSize>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>2.0</explosionRadius>
+            <damageAmountBase>147</damageAmountBase>
+            <stoppingPower>1.4</stoppingPower>
+            <speed>45</speed>
+        </projectile>
+        <comps>
+            <li Class="CombatExtended.CompProperties_Fragments">
+                <fragments>
+                    <Fragment_Large>3</Fragment_Large>
+                    <Fragment_Small>7</Fragment_Small>
+                </fragments>
+            </li>
+            <li Class="CombatExtended.CompProperties_ProjectileFleck">
+                <FleckDatas>
+                    <li>
+                        <fleck>Fleck_CERocketSmokeTrail</fleck>
+                        <emissionsPerTick>2</emissionsPerTick>
+                        <rotation>0~360</rotation>
+                        <flecksPerEmission>1</flecksPerEmission>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- Apparel_ConceptWeaponry.xml -->
+
+    <ThingDef ParentName="Bullet_MiliraPlasmaCannonCharged">
+        <defName>Bullet_MiliraHeavyPlasmaCannon</defName>
+        <label>heavy plasmon</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBombBig</damageDef>
+            <explosionRadius>3.5</explosionRadius>
+            <damageAmountBase>126</damageAmountBase>
+            <stoppingPower>2.4</stoppingPower>
+            <speed>115</speed>
+        </projectile>
+    </ThingDef>
+
+    <!-- Buildings_Deploy.xml -->
+<!--不落要塞重型粒子炮用电浆团-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MilianFortressGun_HeavyPlasma</defName>
+        <label>particle Bolt</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Null/null</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.8</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>true</flyOverhead>
+            <damageDef>Milira_ParticleBombBig</damageDef>
+            <explosionRadius>3.9</explosionRadius>
+            <explosionEffect>Milira_HeavyBombExplosion</explosionEffect>
+            <damageAmountBase>3870</damageAmountBase>
+            <armorPenetrationSharp>600</armorPenetrationSharp>
+            <armorPenetrationBlunt>100000</armorPenetrationBlunt>
+            <stoppingPower>5.6</stoppingPower>
+            <speed>0</speed>
+            <gravityFactor>40</gravityFactor>
+        </projectile>
+    </ThingDef>
+
+    <!-- Buildings_Security.xml -->
+<!--小型离子炮塔用离子束-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraTurretPlasma</defName>
+        <label>ionic beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>12</damageAmountBase>
+            <armorPenetrationSharp>9</armorPenetrationSharp>
+            <armorPenetrationBlunt>16</armorPenetrationBlunt>
+            <stoppingPower>0.6</stoppingPower>
+            <speed>95</speed>
+        </projectile>
+    </ThingDef>
+<!--重型粒子冲击炮塔用冲击粒子团-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraTurretHeavyParticle</defName>
+        <label>impact particle charge</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_ParticleExplode</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.25</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>false</flyOverhead>
+            <damageDef>Milira_ParticleBomb</damageDef>
+            <explosionRadius>1</explosionRadius>
+            <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            <damageAmountBase>15</damageAmountBase>
+            <stoppingPower>1.0</stoppingPower>
+            <speed>85</speed>
+            <secondaryDamage>
+                <li>
+                    <def>Flame_Secondary</def>
+                    <amount>6</amount>
+                </li>
+            </secondaryDamage>
+        </projectile>
+    </ThingDef>
+<!--重型电浆炮塔用电浆团-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraTurretHeavyPlasma</defName>
+        <label>plasma charge</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.8</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>false</flyOverhead>
+            <damageDef>Milira_PlasmaBombBig</damageDef>
+            <explosionRadius>4.2</explosionRadius>
+            <damageAmountBase>143</damageAmountBase>
+            <stoppingPower>1.8</stoppingPower>
+            <speed>75</speed>
+        </projectile>
+        <comps>
+            <li Class="MiliraCE.CompProperties_ProjectileFleckColorable">
+                <FleckDatas>
+                    <li>
+                        <fleck>Milira_AirPuff</fleck>
+                        <fleckColor>(0.6, 0.8, 1.0)</fleckColor>
+                        <emissionsPerTick>1</emissionsPerTick>
+                        <flecksPerEmission>1</flecksPerEmission>
+                        <scale>1</scale>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+<!--联装火箭炮塔用火箭弹-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraHeavyRocket</defName>
+        <label>rocket</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraProjectile_SmallRocketII</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.5</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>true</flyOverhead>
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <damageAmountBase>147</damageAmountBase>
+            <stoppingPower>8.0</stoppingPower>
+            <speed>0</speed>
+            <gravityFactor>5</gravityFactor>
+        </projectile>
+        <comps>
+            <li Class="CombatExtended.CompProperties_Fragments">
+                <fragments>
+                    <Fragment_Small>25</Fragment_Small>
+                </fragments>
+            </li>
+            <li Class="CombatExtended.CompProperties_ProjectileFleck">
+                <FleckDatas>
+                    <li>
+                        <fleck>Fleck_CERocketSmokeTrail</fleck>
+                        <emissionsPerTick>2</emissionsPerTick>
+                        <rotation>0~360</rotation>
+                        <flecksPerEmission>1</flecksPerEmission>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+<!--重型电磁炮塔用电磁弹-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraHeavyRailGun</defName>
+        <label>electromagnetic round</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Things/Projectile/ChargeLanceShot</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>2.4</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>73</damageAmountBase>
+            <armorPenetrationSharp>130</armorPenetrationSharp>
+            <armorPenetrationBlunt>7250</armorPenetrationBlunt>
+            <stoppingPower>2.6</stoppingPower>
+            <speed>354</speed>
+            <secondaryDamage>
+                <li>
+                    <def>Stun</def>
+                    <amount>8</amount>
+                </li>
+            </secondaryDamage>
+            <pelletCount>2</pelletCount>
+        </projectile>
+    </ThingDef>
+
+    <!-- Milian_Weapon_Bishop.xml -->
+<!--引航权杖用离子束-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPivotScepter</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet_Vulnerable</damageDef>
+            <damageAmountBase>8</damageAmountBase>
+            <armorPenetrationSharp>26</armorPenetrationSharp>
+            <armorPenetrationBlunt>112.5</armorPenetrationBlunt>
+            <stoppingPower>0.7</stoppingPower>
+            <speed>105</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>0.8</drawSize>
+        </graphicData>
+    </ThingDef>
+
+    <!-- Milira_SpaceRange_Particle.xml -->
+<!--浮游炮：长程粒子用粒子束-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraParticleRifle</defName>
+        <label>particle beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>15</damageAmountBase>
+            <armorPenetrationSharp>2.5</armorPenetrationSharp>
+            <armorPenetrationBlunt>6.5</armorPenetrationBlunt>
+            <stoppingPower>1.5</stoppingPower>
+            <speed>125</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Particle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+    </ThingDef>
+
+    <!-- Race_MechSpecial.xml -->
+<!--自律浮游单元用离子束-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraFloatUnit_ParticleBlaster</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraBullet_PiecesEMPGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>10</damageAmountBase>
+            <armorPenetrationSharp>6</armorPenetrationSharp>
+            <armorPenetrationBlunt>12</armorPenetrationBlunt>
+            <stoppingPower>0.6</stoppingPower>
+            <speed>82</speed>
+        </projectile>
+    </ThingDef>
+<!--小型离子浮游单元用离子束-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraFloatUnit_SmallPlasmaGun</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraBullet_PiecesEMPGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>0.8</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>false</flyOverhead>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>6</damageAmountBase>
+            <armorPenetrationSharp>3.5</armorPenetrationSharp>
+            <armorPenetrationBlunt>10</armorPenetrationBlunt>
+            <stoppingPower>0.3</stoppingPower>
+            <speed>68</speed>
+        </projectile>
+    </ThingDef>
+
+    <!-- Race_Milian_Knight.xml -->
+<!--飞锤-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_Milian_KnightIV_Hammer</defName>
+        <label>Thrown Hammer</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milian/Projectile/Projectile_Hammer</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.0</drawSize>
+            <shaderType>MoteGlow</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Ancot_StunExceptInstigatorFaction</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <damageAmountBase>8</damageAmountBase>
+            <armorPenetrationSharp>18</armorPenetrationSharp>
+            <armorPenetrationBlunt>90</armorPenetrationBlunt>
+            <stoppingPower>5.0</stoppingPower>
+            <speed>46</speed>
+        </projectile>
+    </ThingDef>
+
+    <!-- New -->
+<!--浮游炮：散射粒子用粒子束-->
+    <ThingDef ParentName="Bullet_MilianParticleBeamGun">
+        <defName>Bullet_MilianParticleBeamGun_Scattered</defName>
+        <label>Particle beam</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <pelletCount>5</pelletCount>
+            <spreadMult>8.9</spreadMult>
+        </projectile>
+    </ThingDef>
+
+</Defs>

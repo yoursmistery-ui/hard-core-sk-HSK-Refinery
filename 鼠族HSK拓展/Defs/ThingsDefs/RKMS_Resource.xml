@@ -44,29 +44,12 @@
 		<statBases>
 			<MarketValue>50</MarketValue>
 			<Mass>0.1</Mass>
-			<StuffPower_Armor_Sharp>0.5</StuffPower_Armor_Sharp>
-			<StuffPower_Armor_Blunt>0.2</StuffPower_Armor_Blunt>
-			<StuffPower_Armor_Heat>0.2</StuffPower_Armor_Heat>
-			<StuffPower_Insulation_Cold>16</StuffPower_Insulation_Cold>
-			<StuffPower_Insulation_Heat>16</StuffPower_Insulation_Heat>
-			<BluntDamageMultiplier>0.6</BluntDamageMultiplier>
 			<Flammability>1</Flammability>
 			<DeteriorationRate>6</DeteriorationRate>
 			<Beauty>0</Beauty>
 		</statBases>
-		<stuffProps>
-			<statFactors>
-				<Flammability>1</Flammability>
-				<Beauty>1</Beauty>
-			</statFactors>
-			<categories>
-				<li>Fabric</li>
-			</categories>
-			<color>(248,241,194)</color>
-			<commonality>0</commonality>
-			<allowColorGenerators>true</allowColorGenerators>
-			<canSuggestUseDefaultStuff>false</canSuggestUseDefaultStuff>
-		</stuffProps>
+		<!-- 2026-09-08 移除 stuffProps(Fabric)/StuffPower/BluntDamageMultiplier/colorGeneratorInTraderStock:
+		     残卷不应出现在织物选择里;8 本古籍配方全部 costList 直写,无任何 stuff 引用,摘除无副作用 -->
 		<thingCategories>
 			<li>RK_AncientSecrets</li>
 		</thingCategories>
@@ -79,23 +62,6 @@
 			</li>
 		</comps>
 		<smeltable>false</smeltable>
-		<colorGeneratorInTraderStock Class="ColorGenerator_Options">
-			<options>
-				<li>
-					<weight>5</weight>
-					<only>(0.33,0.33,0.33,1)</only>
-				</li>
-				<li>
-					<weight>10</weight>
-					<min>(0.3,0.3,0.3,1)</min>
-					<max>(0.9,0.9,0.9,1)</max>
-				</li>
-				<li>
-					<weight>5</weight>
-					<only>(0.9,0.9,0.9,1)</only>
-				</li>
-			</options>
-		</colorGeneratorInTraderStock>
 		<allowedArchonexusCount>5</allowedArchonexusCount>
 	</ThingDef>
 

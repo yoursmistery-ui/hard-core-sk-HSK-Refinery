@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Kiiro_MerchantUtilityBase" ParentName="Kiiro_ApparelBase" Abstract="True">
+		<statBases>
+			<Mass>0.4</Mass>
+			<EquipDelay>1.0</EquipDelay>
+			<MaxHitPoints>60</MaxHitPoints>
+		</statBases>
+		<graphicData>
+			<onGroundRandomRotateAngle>0</onGroundRandomRotateAngle>
+			<drawSize>1.0</drawSize>
+			<drawOffset>(0,0,0)</drawOffset>
+		</graphicData>
+		<recipeMaker Inherit="false">
+		</recipeMaker>
+		<apparel>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>0.4</wearPerDay>			<!-- 和原版的默认值一样 -->
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<tags>
+				<li>Kiiro_Misc</li>
+			</tags>
+		</apparel>
+		<comps Inherit="false">			<!--不继承品质-->
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<thingCategories>
+			<li>Kiiro_Apparel_Utility</li>
+		</thingCategories>
+		<generateAllowChance>0</generateAllowChance>
+		<hiddenWhileUndiscovered>true</hiddenWhileUndiscovered>
+	</ThingDef>
+
+	<!-- 缝针套组 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_TailorSet</defName>
+		<label>sewing kit</label>
+		<description>A full set of portable sewing tools that can be used to repair clothing while carrying. \n\nSelect the carrier wearing clothing in the lowest percentage of durability for its return to a certain durability. More than 75% of the most durable clothing is beyond repair.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/TailorSet</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<costList>
+			<Cloth>120</Cloth>
+			<Steel>40</Steel>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_TailorSet</li>
+			</tags>
+		</apparel>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>10</maxCharges>
+				<ammoDef>Cloth</ammoDef>
+				<ammoCountPerCharge>5</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>Repair</chargeNoun>
+				<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_MendApparel">
+				<verbClass>AncotLibrary.Verb_MendApparel</verbClass>
+				<commandIcon>Kiiro_Event/Apparels/TailorSet</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+				<percentThreshold>0.75</percentThreshold>
+				<hitPointPerUse>20</hitPointPerUse>
+			</li>
+		</verbs>
+	</ThingDef>
+
+	<!-- 登山杖 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_Alpenstock</defName>
+		<label>hiking staff</label>
+		<description>A portable hiking staff that helps traverse rough terrain and slightly increases travel speed in caravan.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/Alpenstock</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<costList>
+			<WoodLog>60</WoodLog>
+			<Steel>60</Steel>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_Alpenstock</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<CaravanBonusSpeedFactor>0.1</CaravanBonusSpeedFactor>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!-- 磨刀砥石 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_KnifeStone</defName>
+		<label>sharpening stone</label>
+		<description>A portable sharpening stone.\n\nTemporarily increases the wearer's melee damage with each use. Consumes steel.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/KnifeStone</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<costList>
+			<Steel>80</Steel>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_KnifeStone</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>10</maxCharges>
+				<ammoDef>Steel</ammoDef>
+				<ammoCountPerCharge>5</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>Sharpen</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_Job">
+				<verbClass>AncotLibrary.Verb_Job</verbClass>
+				<commandIcon>Kiiro_Event/Apparels/KnifeStone</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+				<jobDef>Ancot_SharpenWeapon</jobDef>
+				<jobNum>1</jobNum>
+			</li>
+		</verbs>
+	</ThingDef>
+
+	<!-- 怀表 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_PocketWatch</defName>
+		<label>pocket watch</label>
+		<description>A small and portable timekeeping device. Wearing it can subtly increase the wearer's work efficiency.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/PocketWatch</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>350</MarketValue>
+		</statBases>
+		<costList>
+			<Steel>60</Steel>
+			<Plasteel>10</Plasteel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_PocketWatch</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<WorkSpeedGlobal>0.05</WorkSpeedGlobal>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!-- 精致怀表 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_PocketWatch_Delicate</defName>
+		<label>delicate pocket watch</label>
+		<description>A delicate, small, portable timekeeping device. Wearing it can subtly increase the wearer's work efficiency.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/PocketWatch_Delicate</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>520</MarketValue>
+		</statBases>
+		<costList>
+			<Silver>20</Silver>
+			<Steel>40</Steel>
+			<Plasteel>10</Plasteel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_PocketWatch_Delicate</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<WorkSpeedGlobal>0.08</WorkSpeedGlobal>
+			<SocialImpact>0.05</SocialImpact>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<!-- 紧急包扎绷带 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_EmergencyBandage</defName>
+		<label>emergency bandage</label>
+		<description>A portable bandage for basic first aid. Bandaging a target will heal three random wounds with low quality. Consumes mixed herbal. Bandaging speed and quality are affected by the wearer's medical skill.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/EmergencyBandage</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<costList>
+			<Cloth>80</Cloth>
+			<Kiiro_MixMedicineHerbal>10</Kiiro_MixMedicineHerbal>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_EmergencyBandage</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>10</maxCharges>
+				<ammoDef>Kiiro_MixMedicineHerbal</ammoDef>
+				<ammoCountPerCharge>1</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>bandage</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_Job">
+				<verbClass>AncotLibrary.Verb_EmergencyTend</verbClass>
+				<commandIcon>Kiiro_Event/Apparels/EmergencyBandage</commandIcon>
+				<violent>false</violent>
+				<range>14.9</range>
+				<targetable>true</targetable>
+				<hasStandardCommand>true</hasStandardCommand>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>true</onlyManualCast>
+				<requireLineOfSight>false</requireLineOfSight>
+				<targetParams>
+					<canTargetSelf>true</canTargetSelf>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetMechs>false</canTargetMechs>
+				</targetParams>
+				<jobDef>Ancot_EmergencyTend</jobDef>
+				<jobNum>1</jobNum>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+
+
+	<!-- 腌制小食口袋 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_CuringSnackBag</defName>
+		<label>jerky pouch</label>
+		<description>A wearable pouch for carrying jerky. Quickly consuming the jerky and slightly restores hunger.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/CuringSnackBag</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<costList>
+			<Cloth>80</Cloth>
+			<Kiiro_CuringFood>10</Kiiro_CuringFood>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_CuringSnackBag</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>10</maxCharges>
+				<ammoDef>Kiiro_CuringFood</ammoDef>
+				<ammoCountPerCharge>1</ammoCountPerCharge>
+				<baseReloadTicks>60</baseReloadTicks>
+				<soundReload>Standard_Reload</soundReload>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>Jerky</chargeNoun>
+				<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+			</li>
+		</comps>
+		<verbs>
+			<li Class="AncotLibrary.VerbProperties_Job">
+				<verbClass>AncotLibrary.Verb_Job</verbClass>
+				<commandIcon>Kiiro_Event/Items/CuringSnack/CuringSnackB</commandIcon>
+				<violent>false</violent>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>false</targetable>
+				<nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+				<onlyManualCast>True</onlyManualCast>
+				<jobDef>Kiiro_UseCuringSnackBag</jobDef>
+				<jobNum>1</jobNum>
+			</li>
+		</verbs>
+	</ThingDef>
+
+
+
+	<!-- 多功能工具套组 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_ToolSet</defName>
+		<label>multi-tool set</label>
+		<description>A versatile tool set that increases the wearer's overall work efficiency.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/ToolSet</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>650</MarketValue>
+		</statBases>
+		<costList>
+			<Steel>80</Steel>
+			<Plasteel>40</Plasteel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_ToolSet</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<MiningSpeed>0.22</MiningSpeed>
+			<MiningYield>0.12</MiningYield>
+			<PlantWorkSpeed>0.30</PlantWorkSpeed>
+			<PlantHarvestYield>0.25</PlantHarvestYield>
+			<ConstructionSpeed>0.09</ConstructionSpeed>
+			<ConstructSuccessChance>0.03</ConstructSuccessChance>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<!-- 砖瓦工具套组 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_TileToolSet</defName>
+		<label>tile tool set</label>
+		<description>A set of handy construction tools, including a trowel and a bricklayer's knife. Increases the wearer's construction work efficiency.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/TileToolSet</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>400</MarketValue>
+		</statBases>
+		<costList>
+			<Steel>80</Steel>
+			<Plasteel>20</Plasteel>
+			<WoodLog>40</WoodLog>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_TileToolSet</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<ConstructionSpeed>0.24</ConstructionSpeed>
+			<ConstructSuccessChance>0.1</ConstructSuccessChance>
+			<SmoothingSpeed>0.2</SmoothingSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+
+	<!-- 螺丝刀套组 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_ScrewdriverSet</defName>
+		<label>screwdriver set</label>
+		<description>A set of screwdrivers of various sizes and diameters. Increases the wearer's mechanical work efficiency.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/ScrewdriverSet</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<costList>
+			<Plasteel>50</Plasteel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_ScrewdriverSet</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<ButcheryMechanoidEfficiency>0.1</ButcheryMechanoidEfficiency>
+			<ButcheryMechanoidSpeed>0.3</ButcheryMechanoidSpeed>
+			<MechRepairSpeed MayRequire="Ludeon.RimWorld.Biotech">0.2</MechRepairSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+
+	<!-- 草药书 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_HerbalBook</defName>
+		<label>Herbal book</label>
+		<description>A handwritten book containing knowledge about various herbs, compiled by many barefoot doctors and herbalists. Increases the carrier's medical skill.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/HerbalBook</texPath>
+			<drawSize>1.0</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>220</MarketValue>
+		</statBases>
+		<costList>
+			<Cloth>20</Cloth>
+			<Kiiro_Paper>50</Kiiro_Paper>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_HerbalBook</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<DrugSynthesisSpeed>0.1</DrugSynthesisSpeed>
+			<MedicalTendSpeed>0.1</MedicalTendSpeed>
+			<MedicalTendQuality>0.05</MedicalTendQuality>
+			<MedicalSurgerySuccessChance>0.04</MedicalSurgerySuccessChance>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<!-- 现代医学著作 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_ModernMedicine</defName>
+		<label>modern medicine textbook</label>
+		<description>A book containing scientific medical knowledge, from general health care to the treatment of complex diseases. Includes a handwritten notebook for taking notes. Greatly increases the carrier's medical skill.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/ModernMedicine</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<costList>
+			<Cloth>20</Cloth>
+			<Kiiro_Paper>60</Kiiro_Paper>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_ModernMedicine</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<DrugSynthesisSpeed>0.2</DrugSynthesisSpeed>
+			<MedicalTendSpeed>0.2</MedicalTendSpeed>
+			<MedicalTendQuality>0.08</MedicalTendQuality>
+			<MedicalSurgerySuccessChance>0.15</MedicalSurgerySuccessChance>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<!-- 野外生存指南 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_SurvivalGuide</defName>
+		<label>survival guide</label>
+		<description>A guidebook on how to find food and survive in the wild. The pages are waterproofed and the cover is made of thick leather.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/SurvivalGuide</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>220</MarketValue>
+		</statBases>
+		<costList>
+			<Cloth>20</Cloth>
+			<Kiiro_Paper>50</Kiiro_Paper>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_SurvivalGuide</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<ForagedNutritionPerDay>0.5</ForagedNutritionPerDay>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!-- 精制鱼线 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase" MayRequire="Ludeon.RimWorld.Odyssey">
+		<defName>Kiiro_RefinedFishingLine</defName>
+		<label>refined fishing line</label>
+		<description>A spool of tough, break-resistant fishing line that helps during fishing.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/FishingToolSet</texPath>
+			<drawSize>1.2</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>260</MarketValue>
+		</statBases>
+		<costList>
+			<Cloth>50</Cloth>
+			<Steel>20</Steel>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_RefinedFishingLine</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+			<FishingSpeed>0.2</FishingSpeed>
+      <FishingYield>0.25</FishingYield>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+	<!-- =饰品============================================================================================================================================ -->
+
+	<!-- 翡玉手镯 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_JadeBracelet</defName>
+		<label>jade bracelet</label>
+		<description>A bracelet made from finely polished jade.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/JadeBracelet</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>300</MarketValue>
+		</statBases>
+		<costList>
+			<Jade>20</Jade>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_JadeBracelet</li>
+			</tags>
+			<bodyPartGroups Inherit="false">
+				<li>Arms</li>
+			</bodyPartGroups>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.03</SocialImpact>
+			<MentalBreakThreshold>-0.05</MentalBreakThreshold>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<!-- 翡玉吊坠 -->
+	<ThingDef ParentName="Kiiro_MerchantUtilityBase">
+		<defName>Kiiro_JadePendant</defName>
+		<label>jade pendant</label>
+		<description>A pendant made from finely polished jade, strung on a silk cord.</description>
+		<graphicData>
+			<texPath>Kiiro_Event/Apparels/JadePendant</texPath>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<statBases>
+			<MarketValue>300</MarketValue>
+		</statBases>
+		<costList>
+			<Jade>20</Jade>
+		</costList>
+		<apparel>
+			<tags>
+				<li>Kiiro_JadeBracelet</li>
+			</tags>
+			<bodyPartGroups Inherit="false">
+				<li>Neck</li>
+			</bodyPartGroups>
+		</apparel>
+		<equippedStatOffsets>
+			<SocialImpact>0.08</SocialImpact>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+
+</Defs>

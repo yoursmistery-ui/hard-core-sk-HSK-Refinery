@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Milira_ConsumeTravelRation</defName>
+    <driverClass>Milira.JobDriver_ConsumeTravelRation</driverClass>
+    <reportString>Consuming travel ration.</reportString>
+  </JobDef>
+
+  <JobDef Name="Milira_ExitMapFlying">
+    <defName>Milira_ExitMapFlying</defName>
+    <driverClass>Milira.JobDriver_ExitMapFlying</driverClass>
+    <reportString>fleeing.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  <JobDef ParentName="Milira_ExitMapFlying">
+    <defName>Milira_ExitMapFlyingNorth</defName>
+    <driverClass>Milira.JobDriver_ExitMapFlyingNorth</driverClass>
+  </JobDef>
+  
+</Defs>

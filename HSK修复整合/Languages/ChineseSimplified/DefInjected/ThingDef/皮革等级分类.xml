@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <!-- 全皮革等级中文名(2026-08-19 用户要求「所有皮革翻译名称带等级,一眼看出等级」;
-       由旧 Vile鞣制1.6适配/Languages 两文件整合迁移,HSK修复整合加载序 160,
-       早于 HSK 汉化(185/186),first-wins 生效。
+       由旧 Vile鞣制1.6适配/Languages 两文件整合迁移。生效依据(2026-09-08 反编译
+       TranslationDatabase.InjectIntoData_* 更正): DefInjected 跨 mod 为 **last-wins**
+       (按 mod 顺序遍历各 package 逐个 SetValue 覆盖), 本 mod 位次最晚(219 > hsk.core.chs 192 / hsk.mod.chs 193)故覆盖成功。
        等级体系: E < D < C < B < A,带 +/- 细分:
          低端 E / 剖层 D(D-)/ 头层 C(C-)/ 全粒面 B(B- B+)/ 高科技 A(A+)。
        本次修正:
@@ -17,20 +18,22 @@
   <Leather_Patch.label>混缝皮革（E级）</Leather_Patch.label>
   <Leather_Human.label>人皮（E级）</Leather_Human.label>
   <Leather_Dog.label>鹿皮（E级）</Leather_Dog.label>
+  <TannedFur.label>鞣制毛皮（E级）</TannedFur.label>
   <!-- ============ 剖层 D 级(LeathersD) ============ -->
   <Leather_Bird.label>真皮（D级）</Leather_Bird.label>
   <Leather_Chinchilla.label>绒面革（D-级）</Leather_Chinchilla.label>
   <!-- ============ 头层 C 级(LeathersC) ============ -->
   <Leather_Fox.label>棕色压纹皮革（C级）</Leather_Fox.label>
-  <Leather_BarghestFur.label>黄褐色正绒面革（C级）</Leather_BarghestFur.label>
-  <Leather_UpholsteryBrown.label>牛血红装饰皮革（C级）</Leather_UpholsteryBrown.label>
+  <Leather_FinishedRed.label>红色压纹皮革（C级）</Leather_FinishedRed.label>
+  <Leather_FinishedBlack.label>黑色成品皮革（C级）</Leather_FinishedBlack.label>
+  <Leather_NubuckYellow.label>黄色正绒面革（C级）</Leather_NubuckYellow.label>
+  <Leather_UpholsteryGray.label>灰色装饰皮革（C级）</Leather_UpholsteryGray.label>
+  <Leather_UpholsteryBordeaux.label>波尔多红装饰皮革（C级）</Leather_UpholsteryBordeaux.label>
   <!-- 装饰皮革 stuffAdjective 唯一化(2026-08-22): 汉化包 HSK.Mod.CHS 把三件装饰皮革
        stuffAdjective 全设为「装饰皮革」,StuffCount 报同名警告(装饰皮革门垫/拼缝地毯/垫子床)。
        本文件加载序 194(2026-08-22 起晚于 HSK.Mod.CHS 193),last-write-wins 覆盖为唯一值,
        与 label 形容词一致。 -->
-  <Leather_UpholsteryBrown.stuffProps.stuffAdjective>牛血红装饰皮革</Leather_UpholsteryBrown.stuffProps.stuffAdjective>
-  <Leather_UpholsteryGray.stuffProps.stuffAdjective>灰色装饰皮革</Leather_UpholsteryGray.stuffProps.stuffAdjective>
-  <Leather_UpholsteryBordeaux.stuffProps.stuffAdjective>波尔多红装饰皮革</Leather_UpholsteryBordeaux.stuffProps.stuffAdjective>
+  <Leather_CorrectedGrain.label>未完成的皮革（C-级）</Leather_CorrectedGrain.label>
   <!-- ============ 全粒面 B 级(LeathersB,B-/B+) ============ -->
   <Leather_Plain.label>普通皮革（B级）</Leather_Plain.label>
   <Leather_Light.label>轻薄皮革（B-级）</Leather_Light.label>
@@ -42,32 +45,34 @@
   <Leather_Elephant.label>厚重皮革（B级）</Leather_Elephant.label>
   <Leather_Heavy.label>厚重毛皮（B级）</Leather_Heavy.label>
   <Leather_Rhinoceros.label>耐用皮革（B级）</Leather_Rhinoceros.label>
-  <PVCLeather.label>PVC人造革（B+级）</PVCLeather.label>
+  <Leather_Nightling.label>无菌皮革（B级）</Leather_Nightling.label>
+  <Leather_Boomanimal.label>透气皮革（B级）</Leather_Boomanimal.label>
+  <Leather_Waterproof.label>防水皮革（B+级）</Leather_Waterproof.label>
   <Leather_Armadillo.label>犰狳皮（B级）</Leather_Armadillo.label>
   <Leather_Hippo.label>河马皮（B级）</Leather_Hippo.label>
   <Leather_Mastodon.label>乳齿象皮（B级）</Leather_Mastodon.label>
   <Leather_Mink.label>水貂皮（B级）</Leather_Mink.label>
   <Leather_Sealskin.label>海豹皮（B级）</Leather_Sealskin.label>
-  <RK_Leather_KingHamster.label>仓鼠大王皮（B级）</RK_Leather_KingHamster.label>
   <!-- ============ 高科技 A/A+ 级(LeathersA) ============ -->
   <Leather_AlphaThrumbo.label>阿尔法敲击兽皮（A级）</Leather_AlphaThrumbo.label>
   <DevilstrandCloth.label>魔菇人造革（A级）</DevilstrandCloth.label>
-  <Rayon.label>嫘萦（A级）</Rayon.label>
   <Synthread.label>聚酯纤维（A级）</Synthread.label>
-  <Modacrylic.label>变性聚丙烯腈（A级）</Modacrylic.label>
-  <Fleece.label>抓毛绒（A级）</Fleece.label>
-  <Velour.label>丝绒（A级）</Velour.label>
-  <Kevlar.label>凯夫拉（芳纶）（A级）</Kevlar.label>
   <Hyperweave.label>大力马（A+级）</Hyperweave.label>
-  <ChitinPlating.label>柴隆（A+级）</ChitinPlating.label>
-  <Nomex.label>诺梅克斯（A+级）</Nomex.label>
-  <Micropel.label>微型像素（A+级）</Micropel.label>
   <Leather_Thrumbo.label>超防护皮革（A+级）</Leather_Thrumbo.label>
+  <Leather_FireDragonskin.label>超透气皮革（A+级）</Leather_FireDragonskin.label>
+  <Leather_KirinHide.label>超耐热皮革（A+级）</Leather_KirinHide.label>
+  <Leather_FeatheredRaptorLeather.label>超免疫皮革（A+级）</Leather_FeatheredRaptorLeather.label>
+  <!-- ============ 本工作区软料归级(2026-09-08 用户要求「名称后面要跟分级,和其他一致」) ============
+       分类落位写在各自 def 的 thingCategories: 丝绸→LeathersB、绒革→LeathersC、乌木丝绸→LeathersA。
+       生丝(RK_RawSilk)为非 stuff 的缫丝中间原料, 按 Vile 生皮(生普通皮革等)惯例不带等级, 归 CTextiles 原料区。
+       stuffAdjective 一律留短名(不带等级), 否则成品名会拼成「丝绸（B级）·衬衫」。 -->
+  <RK_Silk.label>丝绸（B级）</RK_Silk.label>
+  <RK_Silk.stuffProps.stuffAdjective>丝绸</RK_Silk.stuffProps.stuffAdjective>
+  <VDE_Gaubric.label>绒革（C级）</VDE_Gaubric.label>
+  <VDE_Gaubric.stuffProps.stuffAdjective>绒革</VDE_Gaubric.stuffProps.stuffAdjective>
+  <Miho_Ebony_SilkCloth.label>乌木丝绸（A+级）</Miho_Ebony_SilkCloth.label>
+  <Miho_Ebony_SilkCloth.stuffProps.stuffAdjective>乌木丝绸</Miho_Ebony_SilkCloth.stuffProps.stuffAdjective>
   <!-- ============ 替代金属的硬皮革 B+ 级(LeathersB,用户要求「用来替代金属的皮革通通划分到 B+ 级别」) ============ -->
-  <Rawhide.label>生革（B+级）</Rawhide.label>
-  <BoiledLeather.label>熟革（B+级）</BoiledLeather.label>
-  <Chitin.label>甲壳（B+级）</Chitin.label>
-  <DragonScales.label>龙鳞（B+级）</DragonScales.label>
   <!-- ============ 奥德赛/其他皮革描述(保留旧版等级与用途提示) ============ -->
   <Leather_AlphaThrumbo.description>等级3 - 工业时代
 &gt;&gt;&gt; 最佳 护甲、美观
@@ -105,4 +110,8 @@ X 不建议 护甲、耐久
 X 不建议 护甲、耐久
 
 柔软奢华的海豹皮。它不算坚固，但隔温性能极佳，常用于制作床铺和装饰性衣物。</Leather_Sealskin.description>
+
+  <RK_Leather_KingHamster.label>仓鼠大王皮（B级）</RK_Leather_KingHamster.label>
+  
+  
 </LanguageData>

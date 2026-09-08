@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Ratkin GreatWar 未移植名枪 4 把(2026-09-06 搬入): 杏梅栓动/夹竹桃栓动/灰叶枫自动步枪/火百合冲锋枪
+       按 80 号补丁模式: 无自动配方(缴获/商人获得), CE 适配见 Patches/81_GW2名枪CE适配.xml -->
+  <ThingDef ParentName="RK_IndustrialRangeWeapon">
+  		<defName>RK_NR_Mume</defName>
+  		<label>"Mume"Bolt-Action Rifle</label>
+  		<description>A replica of the old rifles from the Kornblume Confederation, serving as the main standard-issue rifle during both the Empire and Republic periods.</description>
+  		<graphicData>
+  			<texPath>Things/Item/Equipment/WeaponRanged/RK_NR_Mume</texPath>
+  			<graphicClass>Graphic_Single</graphicClass>
+              <drawSize>1.0</drawSize>
+  		</graphicData>
+  		<soundInteract>Interact_Rifle</soundInteract>
+          <weaponTags Inherit="false">
+  			<li>RK_NR_Rifle</li>
+  		</weaponTags>
+  		<statBases>
+  			<WorkToMake>8000</WorkToMake>
+  			<Mass>2.5</Mass>
+  			<AccuracyTouch>0.70</AccuracyTouch>
+  			<AccuracyShort>0.75</AccuracyShort>
+  			<AccuracyMedium>0.85</AccuracyMedium>
+  			<AccuracyLong>0.80</AccuracyLong>
+  			<RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+  		</statBases>
+  		<costList>
+  			<Steel>30</Steel>
+  			<ComponentIndustrial>2</ComponentIndustrial>
+  			<WoodPlank>40</WoodPlank>
+  		</costList>		
+  		<equippedAngleOffset>45</equippedAngleOffset>
+  		<verbs>
+  			<li>
+  				<verbClass>Verb_Shoot</verbClass>
+  				<hasStandardCommand>true</hasStandardCommand>
+  				<defaultProjectile>Bullet_Mume</defaultProjectile>
+  				<warmupTime>1.6</warmupTime>
+  				<range>45</range>
+  				<soundCast>RK_KB_Fichte</soundCast>
+                  <soundCastTail>GunTail_Heavy</soundCastTail>
+  				<muzzleFlashScale>10</muzzleFlashScale>
+  			</li>	
+  		</verbs>
+  		<comps Inherit="False">
+  		    <li Class="RatkinWeapons.CompProperties_Bayonet" MayRequire="bbb.ratkinweapon.morefailure">
+  				<cooldown>1800</cooldown>
+  				<radius>14.9</radius>
+  				<label>RK.BayonetLabel</label>
+  				<description>RK.BayonetDescription</description>
+  				<icon>UI/Abilities/RK_Bayonet</icon>
+  			</li>
+  			<li>
+                <compClass>CompEquippable</compClass>
+              </li>
+  			<li Class="CompProperties_Forbiddable" />
+              <li Class="CompProperties_Styleable" />
+              <li>
+                <compClass>CompQuality</compClass>
+              </li>
+              <li Class="CompProperties_Art">
+                <nameMaker>NamerArtWeaponGun</nameMaker>
+                <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+                <minQualityForArtistic>Excellent</minQualityForArtistic>
+              </li>
+  		</comps>
+  		<tools>
+  			<li>
+  				<label>stock</label>
+  				<capacities>
+  					<li>Blunt</li>
+  				</capacities>
+  				<power>7</power>
+  				<cooldownTime>2</cooldownTime>
+  			</li>
+  			<li>
+  				<label>bayonet</label>
+  				<capacities>
+  					<li>Cut</li>
+  					<li>Stab</li>
+  				</capacities>
+  				<power>17</power>
+  				<cooldownTime>2.3</cooldownTime>
+  	        </li>
+  		</tools>
+  	</ThingDef>
+  
+  	
+  	
+  <ThingDef ParentName="RK_IndustrialRangeWeapon">
+  		<defName>RK_LS_Zakkum</defName>
+  		<label>"Zakkum"Bolt-Action Rifle</label>
+  		<description>A standard-issue rifle manufactured in the Lale Sultanate under license from the Kornblume Confederation. Although an older model, it featured a sturdy bolt and excellent accuracy.</description>
+  		<graphicData>
+  			<texPath>Things/Item/Equipment/WeaponRanged/RK_LS_Zakkum</texPath>
+  			<graphicClass>Graphic_Single</graphicClass>
+              <drawSize>1.0</drawSize>
+  		</graphicData>
+  		<soundInteract>Interact_Rifle</soundInteract>
+          <weaponTags Inherit="false">
+  			<li>RK_LS_Rifle</li>
+  		</weaponTags>
+  		<statBases>
+  			<WorkToMake>11000</WorkToMake>
+  			<Mass>2.5</Mass>
+  			<AccuracyTouch>0.74</AccuracyTouch>
+  			<AccuracyShort>0.80</AccuracyShort>
+  			<AccuracyMedium>0.90</AccuracyMedium>
+  			<AccuracyLong>0.84</AccuracyLong>
+  			<RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
+  		</statBases>
+  		<costList>
+  			<Steel>50</Steel>
+  			<ComponentIndustrial>2</ComponentIndustrial>
+  			<WoodPlank>50</WoodPlank>
+  		</costList>		
+  		<equippedAngleOffset>45</equippedAngleOffset>
+  		<verbs>
+  			<li>
+  				<verbClass>Verb_Shoot</verbClass>
+  				<hasStandardCommand>true</hasStandardCommand>
+  				<defaultProjectile>Bullet_Zakkum</defaultProjectile>
+  				<warmupTime>1.6</warmupTime>
+  				<range>45</range>
+  				<soundCast>RK_KB_Fichte</soundCast>
+                  <soundCastTail>GunTail_Heavy</soundCastTail>
+  				<muzzleFlashScale>10</muzzleFlashScale>
+  			</li>	
+  		</verbs>
+  		<tools>
+  			<li>
+  				<label>stock</label>
+  				<capacities>
+  					<li>Blunt</li>
+  				</capacities>
+  				<power>7</power>
+  				<cooldownTime>2</cooldownTime>
+  			</li>
+  		</tools>
+  	</ThingDef>
+  
+  	
+  	
+  <ThingDef ParentName="RK_IndustrialRangeWeapon">
+  		<defName>RK_SD_Klyon</defName>
+  		<label>"Klyon" Automatic Rifle</label>
+  		<description>One of the earliest automatic rifles in the world, capable of fully automatic fire. Considered a forerunner of the assault rifle, though only issued to a limited number of units.</description>
+  		<graphicData>
+  			<texPath>Things/Item/Equipment/WeaponRanged/RK_SD_Klyon</texPath>
+  			<graphicClass>Graphic_Single</graphicClass>
+              <drawSize>0.9</drawSize>
+  		</graphicData>
+  		<soundInteract>Interact_Rifle</soundInteract>
+          <weaponTags Inherit="false">
+  			<li>RK_SD_SemiRifle</li>
+  		</weaponTags>
+  		<statBases>
+  			<WorkToMake>19000</WorkToMake>
+  			<Mass>2.5</Mass>
+  			<AccuracyTouch>0.65</AccuracyTouch>
+  			<AccuracyShort>0.80</AccuracyShort>
+  			<AccuracyMedium>0.75</AccuracyMedium>
+  			<AccuracyLong>0.50</AccuracyLong>
+  			<RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+  		</statBases>
+  		<costList>
+  			<Steel>100</Steel>
+  			<ComponentIndustrial>6</ComponentIndustrial>
+  			<WoodPlank>80</WoodPlank>
+  		</costList>		
+  		<equippedAngleOffset>45</equippedAngleOffset>
+  		<verbs>
+  			<li>
+  				<verbClass>Verb_Shoot</verbClass>
+  				<hasStandardCommand>true</hasStandardCommand>
+  				<defaultProjectile>Bullet_Klyon</defaultProjectile>
+  				<warmupTime>1.8</warmupTime>
+  				<range>37</range>
+  				<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+  				<burstShotCount>5</burstShotCount>
+  				<soundCast>RK_SD_Klyon</soundCast>
+                  <soundCastTail>GunTail_Medium</soundCastTail>
+  				<muzzleFlashScale>10</muzzleFlashScale>
+  			</li>	
+  		</verbs>
+  		<tools>
+  			<li>
+  				<label>stock</label>
+  				<capacities>
+  					<li>Blunt</li>
+  				</capacities>
+  				<power>7</power>
+  				<cooldownTime>2</cooldownTime>
+  			</li>
+  		</tools>
+  	</ThingDef>
+  
+  	
+  	
+  <ThingDef ParentName="RK_IndustrialRangeWeapon">
+  		<defName>RK_VK_Gloriosa</defName>
+  		<label>"Gloriosa"Submachine Gun</label>
+  		<description>One of the world’s earliest dual-barrel submachine guns, originally designed as an aircraft-mounted weapon. With an extremely high rate of fire, it could unleash massive firepower in a short time. Later modified for use by ground forces.</description>
+  		<graphicData>
+  			<texPath>Things/Item/Equipment/WeaponRanged/RK_VK_Gloriosa</texPath>
+  			<graphicClass>Graphic_Single</graphicClass>
+              <drawSize>1.0</drawSize>
+  		</graphicData>
+  		<soundInteract>Interact_SMG</soundInteract>
+          <weaponTags Inherit="false">
+  			<li>RK_VK_SMG</li>
+  		</weaponTags>
+  		<statBases>
+  			<WorkToMake>15000</WorkToMake>
+  			<Mass>2.5</Mass>
+  			<AccuracyTouch>0.70</AccuracyTouch>
+  			<AccuracyShort>0.65</AccuracyShort>
+  			<AccuracyMedium>0.40</AccuracyMedium>
+  			<AccuracyLong>0.30</AccuracyLong>
+  			<RangedWeapon_Cooldown>3.3</RangedWeapon_Cooldown>
+  		</statBases>
+  		<costList>
+  			<Steel>80</Steel>
+  			<ComponentIndustrial>5</ComponentIndustrial>
+  			<WoodPlank>40</WoodPlank>
+  		</costList>		
+  		<equippedAngleOffset>45</equippedAngleOffset>
+  		<verbs>
+  			<li>
+  				<verbClass>Verb_Shoot</verbClass>
+  				<hasStandardCommand>true</hasStandardCommand>
+  				<defaultProjectile>Bullet_Quattrofoglie</defaultProjectile>
+  				<warmupTime>0.4</warmupTime>
+  				<range>20</range>
+  				<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+  				<burstShotCount>8</burstShotCount>
+  				<soundCast>RK_VK_Gloriosa</soundCast>
+                  <soundCastTail>GunTail_Light</soundCastTail>
+  				<muzzleFlashScale>9</muzzleFlashScale>
+  			</li>	
+  		</verbs>
+  		<tools>
+  			<li>
+  				<label>stock</label>
+  				<capacities>
+  					<li>Blunt</li>
+  				</capacities>
+  				<power>7</power>
+  				<cooldownTime>2</cooldownTime>
+  			</li>
+  		</tools>
+  	</ThingDef>
+  
+  	
+  	
+  
+  
+  
+  	
+  	
+  
+  	
+  	
+</Defs>

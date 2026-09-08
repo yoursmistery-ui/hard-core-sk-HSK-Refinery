@@ -26,7 +26,7 @@ namespace QuestBoardHSK
                 }
                 catch (System.Exception ex)
                 {
-                    Log.Error("QuestBoardHSK 补丁失败 " + type.Name + ": " + ex.Message);
+                    Log.Error("QuestBoardHSK 补丁失败 " + type.Name + ": " + ex.ToString());
                 }
             }
         }
@@ -40,6 +40,10 @@ namespace QuestBoardHSK
         {
             if (__instance.GetComponent<BountyRadioManager>() == null)
                 __instance.components.Add(new BountyRadioManager(__instance));
+            if (__instance.GetComponent<SkyNetCampaign>() == null)
+                __instance.components.Add(new SkyNetCampaign(__instance));
+            if (__instance.GetComponent<RaidArchiveComp>() == null)
+                __instance.components.Add(new RaidArchiveComp(__instance));
         }
     }
 }

@@ -3,9 +3,9 @@
 
   <!-- ============================================================================
        Dubs Bad Hygiene (Dubwise.DubsBadHygiene) compatibility — NEW TOOLS.
-       Three hand tools for DBH's custom hygiene/sanitation work jobs. Like the Medieval
-       Overhaul smith-hammer scene, these tools are defined INLINE here rather than in a
-       gated Patches/ file: jobDefs is matched by defName STRING at runtime, so when DBH
+       Four hand tools for DBH's custom hygiene/sanitation/agriculture work jobs. Like the
+       Medieval Overhaul smith-hammer scene, these tools are defined INLINE here rather than
+       in a gated Patches/ file: jobDefs is matched by defName STRING at runtime, so when DBH
        is not installed the job names below simply never resolve and the tool stays inert
        (it never draws, exactly like the DLC-gated tools). No PatchOperationFindMod needed.
 
@@ -19,6 +19,8 @@
                                  cleanBedpan
          plunger              -> clearBlockage (JobDriver_FixBlockage)
          muck scoop           -> emptySeptictank, emptyLatrine, RemoveSewage
+         fertiliser trowel    -> PlaceFertilizer (施肥, WorkGiver_PlaceFertilizer over a
+                                 designated growing plot; consumes Biosolids / Core_SK 肥料)
        ============================================================================ -->
 
   <!-- Scrub brush / sponge: a doctor/warden sponges down a dirty or sick patient (and washes
@@ -32,6 +34,10 @@
     <jobDefs>
       <li>washPatient</li>
       <li>cleanBedpan</li>
+      <li>washHands</li>
+      <li>washAtCell</li>
+      <li>useWashBucket</li>
+      <li>CleanOil</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/ScrubBrush</texPath>
     <swingStyle>Sweep</swingStyle>
@@ -88,6 +94,8 @@
       <li>emptySeptictank</li>
       <li>emptyLatrine</li>
       <li>RemoveSewage</li>
+      <li>LoadComposter</li>
+      <li>UnloadComposter</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/MuckScoop</texPath>
     <swingStyle>Dig</swingStyle>
@@ -104,6 +112,52 @@
     <impactDustFleck>DustPuff</impactDustFleck>
     <restFleck>JE_ChipRest</restFleck>
     <idleScale>0.68</idleScale>
+    <idleAngle>150</idleAngle>
+  </JobEffects.JobToolDef>
+  <!-- Fertiliser trowel + pail: DBH's 施肥 (PlaceFertilizer) — the colonist stands in the
+       designated bed, dips a hand trowel into the pail carried in the off hand and casts the
+       stuff sideways across the soil. Reuses the sowing trowel sprite + the muck pail sprite
+       (no new art); pale salt grains are the fertiliser going down, a couple of soil clods kick
+       up with it. One-handed Sweep so the cast reads as scattering rather than digging. -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_FertilizerTrowel</defName>
+    <handCount>1</handCount>
+    <handPosA>0.28</handPosA>
+    <jobDefs>
+      <li>PlaceFertilizer</li>
+    </jobDefs>
+    <texPath>Things/JobEffects/Tools/Trowel</texPath>
+    <swingStyle>Sweep</swingStyle>
+    <scale>0.85</scale>
+    <reach>0.14</reach>
+    <period>0.6</period>
+    <windupAngle>46</windupAngle>
+    <strikeSound>JE_TrowelScoop</strikeSound>
+    <!-- off hand holds the fertiliser pail low at the side -->
+    <offhandTexPath>Things/JobEffects/Tools/MuckBucket</offhandTexPath>
+    <offhandScale>0.55</offhandScale>
+    <offhandLateral>0.26</offhandLateral>
+    <offhandForward>0.04</offhandForward>
+    <offhandDrop>0.2</offhandDrop>
+    <offhandForwardProfile>0.16</offhandForwardProfile>
+    <offhandDropProfile>0.22</offhandDropProfile>
+    <offhandGripRaise>0.26</offhandGripRaise>
+    <!-- the cast: pale grains spread wide over the bed -->
+    <impactBitFleck>JE_SaltGrain</impactBitFleck>
+    <impactBitCount>7</impactBitCount>
+    <impactBitSpeed>2~5</impactBitSpeed>
+    <impactBitScale>0.3~0.5</impactBitScale>
+    <impactSpread>100</impactSpread>
+    <impactBitFleck2>JE_SoilClod</impactBitFleck2>
+    <impactBitCount2>3</impactBitCount2>
+    <impactBitSpeed2>2~5</impactBitSpeed2>
+    <impactBitScale2>0.3~0.5</impactBitScale2>
+    <impactSpread2>70</impactSpread2>
+    <impactDustFleck>DustPuff</impactDustFleck>
+    <impactAtTip>true</impactAtTip>
+    <impactTipOffset>(0, -0.04)</impactTipOffset>
+    <restFleck>JE_ChipRest</restFleck>
+    <idleScale>0.74</idleScale>
     <idleAngle>150</idleAngle>
   </JobEffects.JobToolDef>
 

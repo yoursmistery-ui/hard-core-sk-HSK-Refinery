@@ -29,6 +29,22 @@ namespace JobEffects
                 if (target == null) return;
                 MethodInfo prefix = AccessTools.Method(typeof(SmyhCompat), nameof(SuppressAllTimeHands));
                 h.Patch(target, prefix: new HarmonyMethod(prefix));
+
+                // The WEAPON branch: HandDrawer.PostDraw calls DrawHandsOnWeapon(Pawn) whenever the
+                // pawn has an equipped primary and the current job doesn't set neverShowWeapon — i.e.
+                // exactly while working. That draw is the real weapon posed in-hand (idle 143°/217°)
+                // and nothing else covered it: the equip-hide prefix only stops vanilla's
+                // DrawEquipmentAndApparelExtras, and SuppressAllTimeHands only covers the no-weapon
+                // branch. Result: animated pickaxe in one hand + the equipped sword still floating in
+                // the other during work. Same gate as the vanilla-path equip-hide (OverrideToolMods +
+                // active/holstering tool). Two overloads exist — MUST name the param types or Harmony
+                // throws AmbiguousMatchException and PatchAll takes the whole assembly down.
+                MethodInfo weaponDraw = AccessTools.Method(drawer, "DrawHandsOnWeapon", new Type[] { typeof(Pawn) });
+                if (weaponDraw != null)
+                {
+                    MethodInfo wPrefix = AccessTools.Method(typeof(SmyhCompat), nameof(SuppressWeaponPose));
+                    h.Patch(weaponDraw, prefix: new HarmonyMethod(wPrefix));
+                }
             }
             catch (Exception e)
             {
@@ -47,6 +63,35 @@ namespace JobEffects
                     return false;
             }
             catch { }
+            return true;
+        }
+
+        // Prefix on HandDrawer.DrawHandsOnWeapon(Pawn) — the equipped-weapon pose branch of
+        // PostDraw. Skip SMYH's in-hand weapon ONLY while OUR animated tool is actually drawn
+        // IN-HAND for this pawn (HasActiveTool) — then SMYH's posed sword + our in-hand tool
+        // would double up. NOT during the holster linger: there the tool rides the BELT (hip),
+        // which never conflicts with SMYH's in-hand weapon pose, so the colonist should keep
+        // showing weapon+hands while walking between jobs. (Was gated on IsHolstering too — that
+        // linger rarely clears during Wait_Wander/GotoWander, so it wrongly hid the hands: the
+        // "weapon but no hand" bug, 2026-09-07.)
+        private static bool weaponGateWarned;
+
+        public static bool SuppressWeaponPose(Pawn pawn)
+        {
+            try
+            {
+                if (!JobEffectsSettings.OverrideToolMods) return true;
+                if (ToolAnimator.HasActiveTool(pawn))
+                    return false;
+            }
+            catch (Exception e)
+            {
+                if (!weaponGateWarned)
+                {
+                    weaponGateWarned = true;
+                    Log.Warning("[Show Me Your Tools] SMYH weapon-pose gate threw, vanilla weapon draw re-enabled: " + e);
+                }
+            }
             return true;
         }
     }

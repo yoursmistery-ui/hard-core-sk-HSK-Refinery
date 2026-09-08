@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMiliraPlasmaPistol</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberPlasmaSmall</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+<!--离子手枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPistol</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaPistol>Bullet_MiliraPlasmaPistol</Ammo_MiliraPlasmaPistol>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--离子手枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPistolCharged</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaPistol>Bullet_MiliraPlasmaPistolCharged</Ammo_MiliraPlasmaPistol>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--离子手枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPistol_Scattered</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaPistol>Bullet_MiliraPlasmaPistol_Scattered</Ammo_MiliraPlasmaPistol>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--离子手枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPistolCharged_Scattered</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaPistol>Bullet_MiliraPlasmaPistolCharged_Scattered</Ammo_MiliraPlasmaPistol>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+<!--米莉拉轻型离子单元-->
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+        <defName>Ammo_MiliraPlasmaPistol</defName>
+        <label>Milira Pistol Ion Cell</label>
+        <description>Ion containment cell optimized for pistol-sized launchers used by Milira.</description>
+        <statBases>
+            <Mass>0.014</Mass>
+            <Bulk>0.01</Bulk>
+            <MarketValue>0.23</MarketValue>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMiliraPlasmaPistol</li>
+        </thingCategories>
+        <graphicData>
+            <texPath>Things/Ammo/PlasmaCell/Pistol</texPath>
+            <graphicClass>CombatExtended.Graphic_StackCountRanged</graphicClass>
+        </graphicData>
+        <ammoClass>Charged</ammoClass>
+    </ThingDef>
+<!--米莉拉轻型离子单元（离子手枪用未充能）-->
+    <!-- ================== Projectiles ================== -->
+
+    <ThingDef ParentName="BaseBulletCE" Name="Bullet_MiliraPlasmaPistol">
+        <defName>Bullet_MiliraPlasmaPistol</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>8</damageAmountBase>
+            <armorPenetrationSharp>12</armorPenetrationSharp>
+            <armorPenetrationBlunt>18</armorPenetrationBlunt>
+            <stoppingPower>0.7</stoppingPower>
+            <speed>105</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>0.8</drawSize>
+        </graphicData>
+    </ThingDef>
+<!--米莉拉轻型离子单元（离子手枪用充能后）-->
+    <ThingDef ParentName="BaseBulletCE" Name="Bullet_MiliraPlasmaPistolCharged">
+        <defName>Bullet_MiliraPlasmaPistolCharged</defName>
+        <label>ionic beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>10</damageAmountBase>
+            <armorPenetrationSharp>24</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>1.0</stoppingPower>
+            <speed>105</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>0.8</drawSize>
+        </graphicData>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraPlasmaPistol">
+        <defName>Bullet_MiliraPlasmaPistol_Scattered</defName>
+        <label>ion beam</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <pelletCount>5</pelletCount>
+            <spreadMult>8.9</spreadMult>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraPlasmaPistolCharged">
+        <defName>Bullet_MiliraPlasmaPistolCharged_Scattered</defName>
+        <label>ionic beam</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <pelletCount>5</pelletCount>
+            <spreadMult>8.9</spreadMult>
+        </projectile>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="MiliraCE_MiliraAmmoPlasmaStandardRecipeBase">
+        <defName>MakeAmmo_MiliraPlasmaPistol</defName>
+        <label>make Milira Pistol Ion Cells</label>
+        <description>Craft 500 shots' worth of Milira Pistol Ion Cells.</description>
+        <jobString>Making Milira Pistol Ion Cells.</jobString>
+        <workAmount>3400</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>14</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Steel</li>
+                <li>Plasteel</li>
+                <li>ComponentIndustrial</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MiliraPlasmaPistol>500</Ammo_MiliraPlasmaPistol>
+        </products>
+    </RecipeDef>
+
+</Defs>

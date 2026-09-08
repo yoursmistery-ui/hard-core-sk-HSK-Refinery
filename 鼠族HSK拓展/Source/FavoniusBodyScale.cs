@@ -8,8 +8,8 @@
 // 方案: Harmony Postfix patch PawnRenderNodeWorker.ScaleFor
 //   - 命中条件(任中其一):
 //     a) 渲染节点贴图路径 node.Props.texPath 前缀在白名单:
-//        "Weapon/Favonius"(本mod西风武器) / "Things/Weapon/RK_Crowbar"(撬棍, 2026-08-27 增补);
-//     b) [仅手持节点] 持有者主装备 defName 前缀在白名单: "RKHSK_Favonius" / "RK_MeleeWeapon_Crowbar";
+//        "Weapon/Favonius"(本mod西风武器);
+//     b) [仅手持节点] 持有者主装备 defName 前缀在白名单: "RKHSK_Favonius";
 //     c) [仅手持节点, 2026-08-27 泛化] 主装备是任意 SurvivalToolsLite 生存工具
 //        (thingClass=SurvivalToolsLite.SurvivalTool 或挂 SurvivalToolProperties 扩展,
 //         类型全名字符串判断不引用 STL 程序集, 按 ThingDef 缓存判定结果)。
@@ -52,7 +52,7 @@ namespace RK_Favonius
     }
 
     /// <summary>
-    /// 按持有者 baseBodySize 1:1 缩放白名单武器(西风系列 + 撬棍等人类尺寸工具)。
+    /// 按持有者 baseBodySize 1:1 缩放白名单武器(西风系列等人类尺寸工具)。
     /// </summary>
     [HarmonyPatch(typeof(PawnRenderNodeWorker), "ScaleFor")]
     public static class Patch_PawnRenderNodeWorker_ScaleFor
@@ -61,13 +61,11 @@ namespace RK_Favonius
         static readonly string[] TexPathPrefixes =
         {
             "Weapon/Favonius",           // 西风骑士团武器
-            "Things/Weapon/RK_Crowbar",  // 撬棍(2026-08-27 用户要求, 人类尺寸工具需随体型缩放)
         };
         // 命中条件 b: 持有者主装备 defName 前缀白名单(双保险)
         static readonly string[] PrimaryDefPrefixes =
         {
             "RKHSK_Favonius",
-            "RK_MeleeWeapon_Crowbar",
         };
 
         static void Postfix(PawnRenderNode node, PawnDrawParms parms, ref Vector3 __result)

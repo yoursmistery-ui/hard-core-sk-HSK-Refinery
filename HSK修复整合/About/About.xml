@@ -137,6 +137,7 @@
         <li>butterfish.hairmoddingplus</li>
         <li>vinzero.gloomyhairup</li>
         <li>nehsmodsfordev.bordersoftherim</li>
+        <li>saucypigeon.pawnbadge</li>
     </loadAfter>
     <loadBefore>
         <li>trinity.runtimegcfixed</li>
@@ -203,5 +204,6 @@ HSK 修复整合(大型补丁,2026-08-09): 由 7 个独立小 mod 合并而成 �
     48. 鼠族王国开局中立(2026-08-28 用户要求): "The enemy of my enemy is my friend"(arpomo6.hmpc.teomeimf)把和平的鼠族王国 Rakinia 一并塞进"永久敌对未列入者"名单,导致四个鼠族开局剧本与鼠族王国一律开局敌对。Patches/11 把三个鼠族玩家派系(RK_PlayerFaction/OA_RK_PlayerFaction/_B)追加进 Rakinia 的 permanentEnemyToEveryoneExcept→普通鼠族开局改中立;离乡流亡(RK_ExileFaction)/逃亡者(RK_EscapeFaction)不加→保持敌对派系事件。xpath 存在性门控,未装 teomeimf 时零影响。本 mod 已 loadAfter teomeimf。
     49. 燃煤发电机燃料补全(2026-08-30 用户要求「改成可以烧泥炭-煤-木炭-焦煤」): Vile's Metallurgy 的 Buildings_Patch.xml 把 CoalPowerPlant 的 fuelFilter 整体替换为 Coal 分类+Coke,顶掉了原版 Peat(泥炭),煤/木炭(Charcoal 挂 Coal 分类)/焦煤本已可烧。Patches/04_设施与建筑.xml 追加 Add 补回 Peat 并显式列出 Charcoal;汉化包(1.6HSK核心汉化)CoalPowerPlant/CoalPowerPlant_Frame 描述同步改为「煤炭、木炭、焦煤或泥炭」。加载序在本环境 Vile 之后,单 Operation Add,lxml 模拟断言终态 categories=[Coal] thingDefs=[Coke,Peat,Charcoal] 通过。
     50. Ask Before Enter 放行后商队不出现修复(2026-08-30 用户反馈「偶尔商队来了点放进来却不进来,存档体现不出来」): Mlie.AskBeforeEnter 的 Main.AskDialog「允许他们进入」回调只做了一次 incident.TryExecute(parms)。若点放行那一刻地图边缘找不到合法可达的进入格(门正关/边缘被雾遮蔽/有敌对领主暂堵/Change Map Edge Limit 收窄可用边缘),TryResolveParms 的 RCellFinder.TryFindRandomPawnEntryCell 返回 false → TryExecuteWorker 直接 false;说书人正常 MTB 路径每 interval 会重新掷点隐式重试,而本 mod 只有一次机会即把事件静默丢弃,既不报错也不出商队 —— 表现为偶尔、与存档无关。修复: HSKFixPack.dll 新增 AskBeforeEnterRetryFix,Harmony 前缀整体替换 Main.AskDialog(保留 送走来晚 选项与 Achievement 计数),仅把「进入」改为先正常执行一次,失败且确实没生成任何小人(用 AllPawnsCount 前后差判定,规避已生成小人但找不到殖民地外落脚点时的重复生成)时,把事件带 45000 tick 重试窗口重新压入 incidentQueue(forced=true 不再二次弹窗),由说书人在门开/雾散后自动再放行。未装 ABE 时 TypeByName 返回 null 自动跳过。启动核对该补丁: Player.log 出现「[HSKFix] patched AskBeforeEnter.Main.AskDialog」、18244 patch ops 0 failed、0 异常。
+51. PawnBadge 重复 tab 修复(2026-09-06 用户反馈「徽章 mod 有 bug,标签有两个+,标签的 icon 缺失」): SaucyPigeon.PawnBadge(1.6)/1.6/Patches/CompBadges_Patches_Base.xml 对所有 Humanlike race 添加 &lt;li&gt;RR_PawnBadge.ITab_Pawn_Badge&lt;/li&gt; 但 PatchOperationAdd 不去重。子 def(Ratkin/Alien_Nova/Alien_Dova/SkynetCovert/MihoMihoPawn,ParentName 分别 RK_PawnBase/BaseHumanlikePawn/MihoPawn)继承父类 inspectorTabs 时已获 1 份 ITab_Pawn_Badge,Base patch 再加 1 份 → inspectorTabs 出现连续 2 个相同 li → ITab 被实例化两次,inspector 底部 tab 栏出现两个「徽章」,打开后看到重叠的徽章选择面板。Patches/91_PawnBadgeTab去重.xml 用 PatchOperationConditional 门控(count(inspectorTabs/li[...]) > 1)→ 仅作用于有重复的 def;match 分支用 count(preceding-sibling::li[.='RR_PawnBadge.ITab_Pawn_Badge']) >= 1 删除非首个的重复 li,保留第一个。Unified.xml 实测 5 个 def 命中,删除 5 个 li → 所有 def 剩 1 份 ITab_Pawn_Badge,tab 不再重复。未装 Pawn_Badge 或全部 1 份时静默跳过。「icon 缺失」(用户报告的灰色方块)是 mod 设计的 "No Badge"(清除徽章)按钮占位符(RR_PawnBadge.dll line 358 `new BadgeDef("", Controller.GreyTex)`),底部 tab 整体无 icon 是 RimWorld 1.6 InspectorPaneUtility 原生设计(只调 ButtonText,所有 tab 纯文字),均非 bug,经用户确认不修。
         </description>
 </ModMetaData>

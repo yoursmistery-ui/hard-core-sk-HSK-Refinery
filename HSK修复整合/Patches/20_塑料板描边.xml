@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  20_塑料板描边.xml (2026-09-06)
+  目的: 塑料板一族(ABS/聚丙烯/聚氯乙烯/玻璃纤维)原图是平板且无黑描边,
+        雪地等浅色地面上几乎隐形; 按 VMS 同族已描边平板(有机玻璃/HDPEWhite)的
+        风格补纯黑粗描边(128px→3px, 64px→2px, alpha 平滑剪影后外扩)。
+  做法: 描边版贴图放本 mod Textures/Things/Item/MaterialOutlined/<同名文件夹>/
+        (Graphic_StackCount 文件夹式, 内含 <名>_a/_b/_c 三张堆叠变体, 与 VMS 原命名一致),
+        此处仅重指 4 个 def 的 graphicData/texPath; VMS 原图与 def 其余字段(color 等)不动。
+  位次: 文件名序 20_ 无既有依赖; 目标 def 属 Vile MS(加载序 157), 本 mod 167 必已在其后。
+  门控: 1.6 Operation 级 MayRequire 失效 → 一律顶层 Conditional xpath 存在性门控。
+-->
+<Patch>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ABS"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="ABS"]/graphicData/texPath</xpath>
+      <value><texPath>Things/Item/MaterialOutlined/ABSBlack</texPath></value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PPPlastic"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="PPPlastic"]/graphicData/texPath</xpath>
+      <value><texPath>Things/Item/MaterialOutlined/HDPEBlue</texPath></value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PVCPlastic"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="PVCPlastic"]/graphicData/texPath</xpath>
+      <value><texPath>Things/Item/MaterialOutlined/HDPEGreen</texPath></value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fiberglass"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="Fiberglass"]/graphicData/texPath</xpath>
+      <value><texPath>Things/Item/MaterialOutlined/Fiberglass</texPath></value>
+    </match>
+  </Operation>
+</Patch>

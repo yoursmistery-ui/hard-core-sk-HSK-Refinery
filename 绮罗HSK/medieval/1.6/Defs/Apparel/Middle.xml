@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="KME_ArmorBase" ParentName="Kiiro_MiddleBase" Abstract="true">
+
+        <recipeMaker Inherit="False">
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                    <li MayRequire="Ludeon.RimWorld.Anomaly">Bioferrite</li>
+                    <li MayRequire="Ludeon.RimWorld.Odyssey">Obsidian</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+
+        <tradeTags>
+            <li>Clothing</li>
+            <li>Armor</li>
+        </tradeTags>
+
+        <apparel>
+            <useWornGraphicMask>false</useWornGraphicMask>
+            <developmentalStageFilter>Adult</developmentalStageFilter>
+            <layers>
+                <!-- <li>Middle</li> -->
+            </layers>
+            <bodyPartGroups>
+                <li>Torso</li>
+                <li>Legs</li>
+                <li>Arms</li>
+                <li>Neck</li>
+                <li>Shoulders</li>
+                <li>Feet</li>
+                <li>Hands</li>
+            </bodyPartGroups>
+            <tags>
+                <li>KME_Kiiro_armor</li>
+            </tags>
+        </apparel>
+    </ThingDef>
+
+    <ThingDef Name="KME_FabricArmorBase" ParentName="KME_ArmorBase" Abstract="true">
+        <recipeMaker>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <recipeUsers>
+                <li>Kiiro_TailoringBench</li>
+                <li>Kiiro_HandleTailoringBench</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+            <researchPrerequisites>
+                <li>Kiiro_Apparel_I</li>
+                <li>Kiiro_Process</li>
+            </researchPrerequisites>
+        </recipeMaker>
+        <stuffCategories>
+            <li>Fabric</li>
+        </stuffCategories>
+    </ThingDef>
+
+    <ThingDef Name="KME_LeatheryArmorBase" ParentName="KME_ArmorBase" Abstract="true">
+        <recipeMaker>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <recipeUsers>
+                <li>Kiiro_TailoringBench</li>
+                <li>Kiiro_HandleTailoringBench</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+            <researchPrerequisites>
+                <li>Kiiro_Apparel_II</li>
+                <li>Kiiro_Process</li>
+            </researchPrerequisites>
+        </recipeMaker>
+        <stuffCategories>
+            <li>Leathery</li>
+        </stuffCategories>
+    </ThingDef>
+    
+    <ThingDef Name="KME_MetalicArmorBase" ParentName="KME_ArmorBase" Abstract="true">
+        <smeltable>true</smeltable>
+        <recipeMaker >
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>Kiiro_FueledSmithy</li>
+                <li>Kiiro_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+            <researchPrerequisites>
+                <li>PlateArmor</li>
+                <li>Kiiro_Process</li>
+            </researchPrerequisites>
+        </recipeMaker>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+    </ThingDef>
+
+    <!-- 绮罗武装衣 -->
+    <ThingDef ParentName="KME_FabricArmorBase">
+        <defName>KME_Kiiro_Armor_ArmingDoublet</defName>
+        <label>kiiro arming doublet</label>
+        <description>Thick clothes filled with cotton that absorb impact, it was originally meant to be worn under other armor, but Kiiros couldn't do it.</description>
+        <graphicData>
+            <texPath>Apparel/Middle/ArmingDoublet/ArmingDoublet</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/Middle/ArmingDoublet/ArmingDoublet</wornGraphicPath>
+            <tags>
+                <li>Kiiro_SimpleArmor</li>
+                <li>Kiiro_Torso</li>
+                <li>KME_Kiiro_Armor_ranged</li>
+            </tags>
+        </apparel>
+
+        <stuffCategories>
+            <li>Leathery</li>
+        </stuffCategories>
+
+        <costStuffCount>100</costStuffCount>
+        <statBases>
+            <WorkToMake>12000</WorkToMake>
+            <MaxHitPoints>200</MaxHitPoints>
+            <Mass>3</Mass>
+            <Bulk MayRequire="CETeam.CombatExtended">3</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">1</WornBulk>
+            <EquipDelay>3</EquipDelay>
+            <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.4</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.3</StuffEffectMultiplierInsulation_Heat>
+            <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.1</ArmorRating_Heat>
+        </statBases>
+        <equippedStatOffsets>
+			<RangedCooldownFactor>-0.1</RangedCooldownFactor>
+			<AimingDelayFactor>-0.05</AimingDelayFactor>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+        </equippedStatOffsets>
+    </ThingDef>
+
+    <!-- 绮罗皮甲 -->
+    <ThingDef ParentName="KME_LeatheryArmorBase">
+        <defName>KME_Kiiro_Armor_PaddedLeather</defName>
+        <label>kiiro padded leather</label>
+        <description>Armor made of thickened leather, has good defense and flexibility, can make wearer stay cool in hot weather.</description>
+        <graphicData>
+            <texPath>Apparel/Middle/PaddedLeather/PaddedLeather</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/Middle/PaddedLeather/PaddedLeather</wornGraphicPath>
+            <tags>
+                <li>Kiiro_SimpleArmor</li>
+                <li>Kiiro_Torso</li>
+                <li>KME_Kiiro_Armor_melee</li>
+            </tags>
+        </apparel>
+
+        <costList>
+            <Cloth>25</Cloth>
+        </costList>
+
+        <costStuffCount>125</costStuffCount>
+        <statBases>
+            <WorkToMake>24000</WorkToMake>
+            <MaxHitPoints>250</MaxHitPoints>
+            <Mass>6</Mass>
+            <Bulk MayRequire="CETeam.CombatExtended">6</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">4</WornBulk>
+            <EquipDelay>6</EquipDelay>
+            <StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+            <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.2</ArmorRating_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+            <MeleeCooldownFactor>-0.1</MeleeCooldownFactor>
+            <MeleeHitChance>3</MeleeHitChance>
+        </equippedStatOffsets>
+    </ThingDef>
+
+    <!-- 绮罗板甲 -->
+    <ThingDef ParentName="KME_MetalicArmorBase">
+        <defName>KME_Kiiro_Armor_PlateArmor</defName>
+        <label>kiiro plate armor</label>
+        <description>An excellent plate armor made with forged hammer, designed to match the Kiiros' body engineering, has considerable defense.</description>
+        <graphicData>
+            <texPath>Apparel/Middle/PlateArmor/PlateArmor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/Middle/PlateArmor/PlateArmor</wornGraphicPath>
+            <tags>
+                <li>Kiiro_NormalArmor</li>
+                <li>Kiiro_Torso</li>
+                <li>KME_Kiiro_Armor_melee</li>
+            </tags>
+        </apparel>
+
+        <!-- <costList>
+            <Cloth>25</Cloth>
+        </costList> -->
+        <costStuffCount>150</costStuffCount>
+        <statBases>
+            <WorkToMake>36000</WorkToMake>
+            <MaxHitPoints>300</MaxHitPoints>
+            <Mass>9</Mass>
+            <Bulk MayRequire="CETeam.CombatExtended">9</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">6</WornBulk>
+            <EquipDelay>9</EquipDelay>
+            <StuffEffectMultiplierArmor>0.7</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+            <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.1</ArmorRating_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+            <PainShockThreshold>0.1</PainShockThreshold>
+            <MeleeDodgeChance>-3</MeleeDodgeChance>
+        </equippedStatOffsets>
+    </ThingDef>
+
+</Defs>

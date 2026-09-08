@@ -174,4 +174,64 @@
             <displayPriority>415</displayPriority>
         </recipeMaker>
     </ThingDef>
+
+	<!-- ===== 新增精选衣甲 2026-09-06 (正方·白蔷薇) ===== -->
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_WR_OfficerUniform</defName>
+		<label>White Rose Officer's Jacket</label>
+		<description>The official uniform worn by military officers and members of the royal guard in the White Rose Kingdom during the Great War.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_WR_OfficerUniform/RK_WR_OfficerUniform</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>11000</WorkToMake><Mass>0.35</Mass><ArmorRating_Sharp>0.45</ArmorRating_Sharp><ArmorRating_Blunt>0.25</ArmorRating_Blunt><ArmorRating_Heat>0.41</ArmorRating_Heat><Flammability>0.4</Flammability><EquipDelay>2</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_WR</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><SocialImpact>0.2</SocialImpact><MoveSpeed>0.05</MoveSpeed></equippedStatOffsets>
+		<costStuffCount>75</costStuffCount><stuffCategories><li>Fabric</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li><li>Arms</li><li>Legs</li></bodyPartGroups>
+			<defaultOutfitTags><li>RK_Noble</li></defaultOutfitTags>
+			<wornGraphicPath>Things/Item/Apparel/RK_WR_OfficerUniform/RK_WR_OfficerUniform</wornGraphicPath>
+			<layers><li>OnSkin</li></layers><tags><li>RK_WR_Officer</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_WR_InfantryEquipment</defName>
+		<label>White Rose Infantry Equipment</label>
+		<description>Infantry equipment used by White Rose Kingdom soldiers during the Great War. Increases carrying capacity while maintaining mobility.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_WR_InfantryEquipment/RK_WR_InfantryEquipment</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>5000</WorkToMake><Mass>0.35</Mass><EquipDelay>1.5</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_WR</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><CarryingCapacity>20</CarryingCapacity><AimingDelayFactor>-0.2</AimingDelayFactor></equippedStatOffsets>
+		<costStuffCount>60</costStuffCount><stuffCategories><li>Fabric</li><li>Leathery</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_WR_InfantryEquipment/RK_WR_InfantryEquipment</wornGraphicPath>
+			<layers><li>Middle</li></layers><tags><li>RK_WR_Officer</li><li>RK_WR_Soldier</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_WR_DayfieldBodyShield</defName>
+		<label>White Rose Dayfield Body Shield</label>
+		<description>Made of steel plates sewn into cotton fabric, intended to stop pistol bullets and shrapnel, but heavy and stuffy.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_WR_DayfieldBodyShield/RK_WR_DayfieldBodyShield</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>280</MaxHitPoints><WorkToMake>16000</WorkToMake><Mass>1.2</Mass><ArmorRating_Sharp>0.24</ArmorRating_Sharp><ArmorRating_Blunt>0.11</ArmorRating_Blunt><ArmorRating_Heat>0.54</ArmorRating_Heat><Flammability>0</Flammability><EquipDelay>2</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_WR</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><PainShockThreshold>0.1</PainShockThreshold><IncomingDamageFactor>-0.1</IncomingDamageFactor><MoveSpeed>-0.1</MoveSpeed></equippedStatOffsets>
+		<costList><Steel>70</Steel></costList><costStuffCount>190</costStuffCount><stuffCategories><li>Metallic</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_WR_DayfieldBodyShield/RK_WR_DayfieldBodyShield</wornGraphicPath>
+			<layers><li>Middle</li></layers><tags><li>RK_WR_Soldier</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_HatMakeableBase">
+		<defName>RK_WR_BrodieHelmetCover</defName>
+		<label>White Rose Brodie Helmet With Camouflage Cover</label>
+		<description>Equipping the Brodie helmet with a camouflage cover reduces its visibility on the battlefield.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_WR_BrodieHelmetCover/RK_WR_BrodieHelmetCover</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>1</drawSize><shaderType>CutoutComplex</shaderType></graphicData>
+		<costList><Steel>75</Steel></costList><costStuffCount>40</costStuffCount><stuffCategories><li>Metallic</li></stuffCategories>
+		<statBases><MaxHitPoints>220</MaxHitPoints><WorkToMake>15500</WorkToMake><Mass>1.1</Mass><ArmorRating_Sharp>0.40</ArmorRating_Sharp><ArmorRating_Blunt>0.20</ArmorRating_Blunt><EquipDelay>1.5</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<equippedStatOffsets><PainShockThreshold>0.1</PainShockThreshold><IncomingDamageFactor>-0.1</IncomingDamageFactor><MoveSpeed>-0.05</MoveSpeed><HuntingStealth>0.1</HuntingStealth></equippedStatOffsets>
+		<apparel><bodyPartGroups><li>UpperHead</li><li>Eyes</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_WR_BrodieHelmetCover/RK_WR_BrodieHelmetCover</wornGraphicPath>
+			<layers><li>Overhead</li></layers><defaultOutfitTags><li>Soldier</li></defaultOutfitTags><tags><li>RK_WR_Officer</li><li>RK_WR_Soldier</li></tags></apparel>
+		<recipeMaker><researchPrerequisite>RK_WR</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+	</ThingDef>
+
 </Defs>

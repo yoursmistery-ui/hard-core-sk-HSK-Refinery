@@ -10,24 +10,44 @@ namespace JobEffects
     /// <summary>
     /// Override other tool/animation mods (Dark Ages: Medieval Tools' ShowTools, Melee Animation,
     /// Tools O' Plenty, carry-openly mods, SMYH weapon-hands) for any job our animated tool covers.
-    /// DrawEquipmentAndApparelExtras is the single vanilla chokepoint that draws the equipped
-    /// weapon/tool (the part those mods force-show / pose during work). When our tool is active for
-    /// the pawn we skip ONLY the weapon draw here and still draw apparel worn-extras, so their
-    /// duplicate tool/effect vanishes and only our animated tool shows.
+    /// DrawEquipmentAndApparelExtras is the vanilla chokepoint that draws the equipped weapon/tool
+    /// (the part those mods force-show / pose during work). When our tool is active for the pawn we
+    /// skip ONLY the weapon draw here and still draw apparel worn-extras, so their duplicate
+    /// tool/effect vanishes and only our animated tool shows.
     /// </summary>
     [HarmonyPatch(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawEquipmentAndApparelExtras))]
     public static class Patch_DrawEquipment_OverrideToolMods
     {
+        private static bool gateWarned;
+
         public static bool Prefix(Pawn pawn)
         {
             if (pawn == null) return true;
-            if (!JobEffectsSettings.OverrideToolMods) return true;
+            bool overrideOn = JobEffectsSettings.OverrideToolMods;
             // Hide while the tool is being animated AND while it is still lingering at the hip
             // after the job ended (holster hold + fade). Without the lingering case, the vanilla
             // weapon would snap back in the instant a swing/work finishes, right over the tool
             // that is still fading out on the belt — the "pop" HSK batch-2 removes.
-            bool active;
-            try { active = ToolAnimator.HasActiveTool(pawn) || ToolAnimator.IsHolstering(pawn); } catch { return true; }
+            bool hasActive, holst;
+            try
+            {
+                hasActive = ToolAnimator.HasActiveTool(pawn);
+                holst = ToolAnimator.IsHolstering(pawn);
+            }
+            catch (System.Exception e)
+            {
+                // Swallowing silently here would silently re-enable the vanilla equipped-tool draw
+                // (read: the tool animates AND the real tool shows). Surface it once so the log
+                // pinpoints the desync instead of hiding it.
+                if (!gateWarned)
+                {
+                    gateWarned = true;
+                    Log.Warning("[Show Me Your Tools] equip-hide gate threw, vanilla tool draw re-enabled: " + e);
+                }
+                return true;
+            }
+            bool active = hasActive || holst;
+            if (!overrideOn) return true;
             if (!active) return true;   // we're not drawing a tool for this job — let everything draw
 
             // Our animated tool covers this job: hide the real equipped tool/weapon (and whatever the
@@ -39,6 +59,142 @@ namespace JobEffects
                 {
                     try { worn[i].DrawWornExtras(); } catch { }
                 }
+            }
+            return false;
+        }
+    }
+    /// <summary>
+    /// 第二层抑制 (2026-09-06): 1.6 完整渲染路径装备走 PawnRenderTree →
+    /// PawnRenderNodeWorker_Carried.PostDraw (仅 CarriedThing 为空时才调 DrawEquipmentAndApparelExtras,
+    /// 缓存帧路径则由 RenderPawnAt 直调)。在渲染树这一层同样按"工具动画激活"拦截: 手动画 worn-extras
+    /// 后跳过原方法, 装备精灵即消失。与上一层双保险覆盖两条装备绘制路径。
+    /// </summary>
+    [HarmonyPatch(typeof(PawnRenderNodeWorker_Carried), nameof(PawnRenderNodeWorker_Carried.PostDraw))]
+    public static class Patch_CarriedPostDraw_HideEquipment
+    {
+        public static bool Prefix(PawnDrawParms parms)
+        {
+            Pawn pawn = parms.pawn;
+            if (pawn == null || !JobEffectsSettings.OverrideToolMods) return true;
+            if (pawn.carryTracker != null && pawn.carryTracker.CarriedThing != null) return true;
+            bool active;
+            try
+            {
+                active = ToolAnimator.HasActiveTool(pawn) || ToolAnimator.IsHolstering(pawn);
+            }
+            catch { return true; }
+            if (!active) return true;
+            if (pawn.apparel != null)
+            {
+                List<Apparel> worn = pawn.apparel.WornApparel;
+                for (int i = 0; i < worn.Count; i++)
+                {
+                    try { worn[i].DrawWornExtras(); } catch { }
+                }
+            }
+            return false;
+        }
+    }
+    /// <summary>
+    /// 第三层兜底 (2026-09-06): 任何上层路径最终都要经 DrawEquipmentAiming 画装备精灵
+    /// (AM/Yayo 的 wiggle 补丁也都以它为前提)。工具动画激活时在此再拦一次, 兜住未知管线。
+    /// 只拦"正在干活的 pawn 的主手装备"; 战斗/瞄准/搬运一律放行。
+    /// </summary>
+    [HarmonyPatch(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawEquipmentAiming))]
+    public static class Patch_DrawEquipmentAiming_HideWhenWorking
+    {
+        public static bool Prefix(Thing eq)
+        {
+            if (!JobEffectsSettings.OverrideToolMods || eq == null) return true;
+            Pawn holder = ((eq.ParentHolder) as Pawn_EquipmentTracker)?.pawn;
+            if (holder == null || holder.equipment == null || eq != holder.equipment.Primary) return true;
+            if (holder.carryTracker != null && holder.carryTracker.CarriedThing != null) return true;
+            bool active;
+            try
+            {
+                // 干活(工具在手/收刀) 或 AM 本帧自己画武器 → 原版武器精灵让位。
+                // AM 让位判据必须留在这一层(DrawEquipmentAiming 最内层): AM 的 PreDraw 变换刷新
+                // 也在这一层它自己的前缀里跑, 先于本前缀执行 → 网格位置正常, 不会像早先在外层
+                // extras/PostDraw 压那样把 AM 网格冻在原地。
+                active = ToolAnimator.HasActiveTool(holder) || ToolAnimator.IsHolstering(holder)
+                         || AmAnimGate.Animating(holder);
+            }
+            catch { return true; }
+            return !active;
+        }
+    }
+    /// <summary>
+    /// (2026-09-08 终稿) 本类曾针对 SYS"额外画武器"的 bug 做过兜底; 该问题已于当日通过
+    /// **XML 全量摘除武器 def 上的 SYS.CompProperties_Sheath / CompProperties_WeaponExtention**
+    /// 根治(71 处三 mod 清零, 见 _tmp/sys_comp_removal_20260908/), 对应 C# 兜底层
+    /// (SysSheathOff.cs) 已删除。
+    /// 本前缀保留为常规 equip-hide: 干活(工具在手/收刀)或 AM 本帧自己画该武器时,
+    /// 原版扛着的武器让位, 只留动画/工具那一把。
+    /// </summary>
+    [HarmonyPatch(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawCarriedWeapon))]
+    public static class Patch_DrawCarriedWeapon_HideWhenAmOrWorking
+    {
+        // High 优先级: 排在其余 equip 相关前缀(AM/SMYH/SYS 等)之前, 判定 AM 在画时直接短路,
+        // 让原版扛武器让位, 避免出现"动画网格 + 原版精灵"两把。
+        [HarmonyPriority(Priority.High)]
+        public static bool Prefix(ThingWithComps weapon)
+        {
+            if (!JobEffectsSettings.OverrideToolMods || weapon == null) return true;
+            Pawn holder = (weapon.ParentHolder as Pawn_EquipmentTracker)?.pawn;
+            if (holder == null || holder.equipment == null || weapon != holder.equipment.Primary) return true;
+            bool hide;
+            try
+            {
+                hide = ToolAnimator.HasActiveTool(holder) || ToolAnimator.IsHolstering(holder)
+                       || AmAnimGate.Animating(holder);
+            }
+            catch { return true; }
+            return !hide;
+        }
+    }
+    /// <summary>
+    /// Melee Animation 本帧是否自己画该小人的武器网格(= 原版武器精灵该让位)。
+    /// 镜像 AM 逐帧协作: currentAnimation 存活(!IsDestroyed) && !wantsVanillaDrawThisFrame。
+    /// wantsVanilla 由 AM 挂在 DrawEquipmentAiming 的前缀每帧 PreDraw 刷新, 本类只读。
+    /// 反射目标一次缓存, 逐 pawn 仅 comp 类型扫描, 零分配。AM 未加载时恒 false。
+    /// </summary>
+    internal static class AmAnimGate
+    {
+        private static readonly bool amActive =
+            ModLister.GetActiveModWithIdentifier("co.uk.epicguru.meleeanimation", true) != null;
+        private static System.Type compType;
+        private static System.Reflection.FieldInfo curAnim;
+        private static System.Reflection.FieldInfo wantsVanilla;
+        private static System.Reflection.PropertyInfo destroyed;
+        private static bool resolved;
+
+        private static void Resolve()
+        {
+            if (resolved) return;
+            resolved = true;
+            if (!amActive) return;
+            compType = AccessTools.TypeByName("AM.Idle.IdleControllerComp");
+            if (compType == null) return;
+            curAnim = AccessTools.Field(compType, "currentAnimation");
+            wantsVanilla = AccessTools.Field(compType, "wantsVanillaDrawThisFrame");
+            destroyed = AccessTools.Property(AccessTools.TypeByName("AM.AnimRenderer"), "IsDestroyed");
+        }
+
+        public static bool Animating(Pawn pawn)
+        {
+            if (!amActive) return false;
+            Resolve();
+            if (compType == null || curAnim == null || wantsVanilla == null || pawn == null) return false;
+            var comps = pawn.AllComps;
+            for (int i = 0; i < comps.Count; i++)
+            {
+                if (comps[i] == null || comps[i].GetType() != compType) continue;
+                object anim = curAnim.GetValue(comps[i]);
+                if (anim == null) return false;
+                if (destroyed != null && (bool)destroyed.GetValue(anim, null)) return false;
+                // 只要 AM 有存活动画就压原版武器(去掉时序敏感的 wantsVanilla 判定:
+                // 它在 DrawEquipmentAiming 调用点的值与 SMYH 调用点不同步, 导致原版漏抑制→双画)。
+                return true;
             }
             return false;
         }

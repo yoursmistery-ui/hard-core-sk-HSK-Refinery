@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_MerchantSettle</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <questDescriptionAndNameRules>
+      <rulesStrings>
+        <li>questName->Merchant</li>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionAndNameRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+
+        <!-- Generate laborers -->
+        <li Class="QuestNode_GeneratePawn">
+          <kindDef>$merchantPawnKind</kindDef>
+          <faction>$permitFaction</faction>
+          <addToList>laborers</addToList>
+          <storeAs>merchantOwner</storeAs>
+          <allowAddictions>false</allowAddictions>
+          <biocodeWeaponChance>0</biocodeWeaponChance>
+          <biocodeApparelChance>0</biocodeApparelChance>
+          <allowPregnant>false</allowPregnant>
+        </li>
+
+        <!-- Lock their apparel -->
+        <!-- <li Class="QuestNode_SetAllApparelLocked">
+          <pawns>$laborers</pawns>
+        </li> -->
+
+        <!-- 禁用工作。不会随着任务结束而取消 -->
+        <li Class="QuestNode_WorkDisabled">
+          <pawns>$laborers</pawns>
+          <disabledWorkTags>
+            <!-- <li>Violent</li> -->
+            <!-- <li>Social</li> -->
+            <li>Artistic</li>
+            <li>Intellectual</li>
+            <li>Hunting</li>
+            <li>Animals</li>
+            <li>Cleaning</li>
+            <li>Hauling</li>
+            <li>ManualSkilled</li>            <!-- 包含建筑 -->
+          </disabledWorkTags>
+        </li>
+
+        <!-- 初始心情奖励 -->
+        <li Class="QuestNode_AddMemoryThought">
+          <pawns>$laborers</pawns>
+          <def>Kiiro_MerchantArrive</def>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetWalkInSpot" />
+
+        <li Class="QuestNode_ExtraFaction">
+          <faction>Kiiro_Faction</faction>
+          <pawns>$laborers</pawns>
+          <factionType>HomeFaction</factionType>
+          <inSignalsRemovePawn>
+            <li>laborers.RanWild</li>
+            <li>laborers.BecameMutant</li>
+          </inSignalsRemovePawn>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>delayTicks</name>
+          <value>$(roundToTicksRough(randInt(60000,150000)))</value>
+        </li>
+
+        <!-- 延迟一段时间后发送确认信封 -->
+        <li Class="QuestNode_Delay">
+          <delayTicks>$delayTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="Kiiro_Event.QuestNode_MerchantConfirmLetter" />
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_JoinPlayer">
+          <pawns>$laborers</pawns>
+          <joinPlayer>True</joinPlayer>
+          <makePrisoners>False</makePrisoners>
+        </li>
+
+        <li Class="QuestNode_LeaveOnCleanup">
+          <pawns>$laborers</pawns>
+          <sendStandardLetter>false</sendStandardLetter>
+          <inSignalRemovePawn>laborers.RanWild</inSignalRemovePawn>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>Accept</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Delay">
+                <delayTicks>$delayTicks</delayTicks>
+                <node Class="QuestNode_Sequence">
+                  <nodes>
+                    <!-- 边缘进入，这个可用/但是这个方法会弹人员到达信封 -->
+                    <li Class="QuestNode_PawnsArrive">
+                      <pawns>$laborers</pawns>
+                      <arrivalMode>EdgeWalkIn</arrivalMode>
+                    </li>
+                    <li Class="QuestNode_SendSignals">
+                      <outSignals>laborersArrived</outSignals>
+                    </li>
+                    <!-- 在人员到达时再添加到商户列表 -->
+                    <li Class="Kiiro_Event.QuestNode_MerchantAddOn">
+                      <pawns>$laborers</pawns>
+                      <merchantDef>$merchantDef</merchantDef>
+                    </li>
+                  </nodes>
+                </node>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- <li Class="QuestNode_Delay">
+          <delayTicks>600</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_PawnsArrive">
+                <inSignal>Accept</inSignal>
+                <pawns>$laborers</pawns>
+                <arrivalMode>EdgeWalkIn</arrivalMode>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>laborersArrived</outSignals>
+              </li>
+            </nodes>
+          </node>
+        </li> -->
+
+        <!-- <li Class="Kiiro_Event.QuestNode_ExtraInspectStringAddOn">
+          <pawns>$laborers</pawns>
+          <extraInspectString>入驻的商户。</extraInspectString>
+        </li> -->
+
+
+        <!-- Goodwill penalty for laborer killed -->
+        <li Class="QuestNode_Set">
+          <name>goodwillPenaltyPawn</name>
+          <value>-24</value>
+        </li>
+
+        <!-- Laborer killed: Goodwill impact. Don't end quest. 保留-->
+        <li Class="QuestNode_Signal">
+          <inSignal>laborers.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelLaborerDied">Kiiro merchant owner died: {SUBJECT_definite}</label>
+                <text TKey="LetterTextLaborerDied">Kiiro merchant owner has dead.</text>
+              </li>
+              <li Class="Kiiro_Event.QuestNode_FactionGoodwillAffect">
+                <faction>$permitFaction</faction>
+                <goodwill>-30</goodwill>
+                <historyEvent>Kiiro_LaborKilled</historyEvent>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+
+        <!-- <li Class="QuestNode_Delay">
+          <delayTicks>$delayTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li> -->
+
+        <li Class="QuestNode_End">
+          <inSignal>Kiiro.laborerLeft</inSignal>
+          <outcome>Success</outcome>
+        </li>
+
+        <!-- 各种移除商户字典的情况 -->
+        <!-- <li Class="Kiiro_Event.QuestNode_MerchantRemove">
+          <inSignal>permitFaction.BecameHostileToPlayer</inSignal>
+          <pawns>$laborers</pawns>
+        </li> -->
+        <li Class="Kiiro_Event.QuestNode_MerchantRemove">
+          <inSignal>Reject</inSignal>
+          <pawns>$laborers</pawns>
+        </li>
+        <li Class="Kiiro_Event.QuestNode_MerchantRemove">
+          <inSignal>laborers.Destroyed</inSignal>
+          <pawns>$laborers</pawns>
+        </li>
+        <li Class="Kiiro_Event.QuestNode_MerchantRemove">
+          <inSignal>laborers.RanWild</inSignal>
+          <pawns>$laborers</pawns>
+        </li>
+
+        <!-- 直接拒绝也会结束任务 -->
+        <li Class="QuestNode_End">
+          <inSignal>Reject</inSignal>
+          <outcome>Success</outcome>
+        </li>
+
+        <!-- - - - - - - -  -->
+        <!--      End       -->
+        <!-- - - - - - - -  -->
+
+
+        <!-- End if the permit's faction becomes hostile -->
+        <li Class="QuestNode_Signal">
+          <inSignal>permitFaction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <letterDef>NegativeEvent</letterDef>
+                <label TKey="LetterLabelQuestExpired">Kiiro Merchant Leaving</label>
+                <text TKey="LetterTextQuestExpired">Due to the hostile relationship with us, Kiiro merchants has ceased their settling-in.</text>
+              </li>
+              <li Class="Kiiro_Event.QuestNode_MerchantRemove">
+                <pawns>$laborers</pawns>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

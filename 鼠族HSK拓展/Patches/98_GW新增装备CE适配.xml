@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 98_GW新增装备CE适配 (2026-09-06): 精选新增 4 枪 MakeGunCECompatible + 8 衣甲 CE Bulk/WornBulk/%护甲→mm -->
+         弹种映射: WhiteRose=303British / TalinumRevolver=9x19Para / Buche·Maipflanze=7.92×57毛瑟
+         (2026-09-06 晚: 本环境已自创 AmmoSet_792x57mmMauser,由 303British 归位) -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_WR_WhiteRose</defName>
+        <statBases><SightsEfficiency>1.15</SightsEfficiency><ShotSpread>0.09</ShotSpread><SwayFactor>1.4</SwayFactor><Bulk>8</Bulk></statBases>
+        <Properties><recoilAmount>1.0</recoilAmount><verbClass>CombatExtended.Verb_ShootCE</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile><warmupTime>1.6</warmupTime><range>48</range><burstShotCount>1</burstShotCount><ticksBetweenBurstShots>8</ticksBetweenBurstShots><soundCast>RK_WR_WhiteRose</soundCast><soundCastTail>GunTail_Heavy</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></Properties>
+        <AmmoUser><magazineSize>10</magazineSize><reloadTime>3.0</reloadTime><ammoSet>AmmoSet_792x57mmMauser</ammoSet></AmmoUser>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_WR_TalinumRevolver</defName>
+        <statBases><SightsEfficiency>1.0</SightsEfficiency><ShotSpread>0.1</ShotSpread><SwayFactor>0.9</SwayFactor><Bulk>2</Bulk></statBases>
+        <Properties><recoilAmount>0.7</recoilAmount><verbClass>CombatExtended.Verb_ShootCE</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile><warmupTime>0.6</warmupTime><range>25</range><burstShotCount>1</burstShotCount><ticksBetweenBurstShots>8</ticksBetweenBurstShots><soundCast>RK_WR_TalinumRevolver</soundCast><soundCastTail>GunTail_Light</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></Properties>
+        <AmmoUser><magazineSize>6</magazineSize><reloadTime>3.2</reloadTime><ammoSet>AmmoSet_9x19mmPara</ammoSet></AmmoUser>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_KB_Buche</defName>
+        <statBases><SightsEfficiency>1.5</SightsEfficiency><ShotSpread>0.06</ShotSpread><SwayFactor>1.3</SwayFactor><Bulk>8</Bulk></statBases>
+        <Properties><recoilAmount>1.2</recoilAmount><verbClass>CombatExtended.Verb_ShootCE</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile><warmupTime>2.4</warmupTime><range>64</range><burstShotCount>1</burstShotCount><ticksBetweenBurstShots>8</ticksBetweenBurstShots><soundCast>RK_KB_Fichte</soundCast><soundCastTail>GunTail_Heavy</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></Properties>
+        <AmmoUser><magazineSize>5</magazineSize><reloadTime>2.8</reloadTime><ammoSet>AmmoSet_792x57mmMauser</ammoSet></AmmoUser>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_KB_Maipflanze</defName>
+        <statBases><SightsEfficiency>0.9</SightsEfficiency><ShotSpread>0.14</ShotSpread><SwayFactor>1.7</SwayFactor><Bulk>12</Bulk></statBases>
+        <Properties><recoilAmount>1.5</recoilAmount><verbClass>CombatExtended.Verb_ShootCE</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile><warmupTime>2.0</warmupTime><range>42</range><burstShotCount>7</burstShotCount><ticksBetweenBurstShots>8</ticksBetweenBurstShots><soundCast>RK_KB_Maipflanze</soundCast><soundCastTail>GunTail_Heavy</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></Properties>
+        <AmmoUser><magazineSize>47</magazineSize><reloadTime>5.5</reloadTime><ammoSet>AmmoSet_792x57mmMauser</ammoSet></AmmoUser>
+        <FireModes><aiUseBurstMode>true</aiUseBurstMode><aiAimMode>AimedShot</aiAimMode></FireModes>
+    </Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_WR_OfficerUniform"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_OfficerUniform"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>4</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_OfficerUniform"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_WR_InfantryEquipment"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_WR_DayfieldBodyShield"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_DayfieldBodyShield"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>4</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_DayfieldBodyShield"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_WR_BrodieHelmetCover"]/statBases</xpath><value><Bulk>2</Bulk><WornBulk>1</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_BrodieHelmetCover"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>5</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_WR_BrodieHelmetCover"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_KB_OfficerUniform"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_OfficerUniform"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>4</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_OfficerUniform"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_KB_Sturmtruppen"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_Sturmtruppen"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>4</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_Sturmtruppen"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_KB_AssaultEquipment"]/statBases</xpath><value><Bulk>3</Bulk><WornBulk>3</WornBulk></value></Operation>
+    <Operation Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RK_KB_Generalsmantel"]/statBases</xpath><value><Bulk>4</Bulk><WornBulk>4</WornBulk></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_Generalsmantel"]/statBases/ArmorRating_Sharp</xpath><value><ArmorRating_Sharp>4</ArmorRating_Sharp></value></Operation>
+    <Operation Class="PatchOperationReplace"><xpath>Defs/ThingDef[defName="RK_KB_Generalsmantel"]/statBases/ArmorRating_Blunt</xpath><value><ArmorRating_Blunt>3</ArmorRating_Blunt></value></Operation>
+</Patch>

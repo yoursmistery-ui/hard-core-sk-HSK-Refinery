@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- HSK Mod Assistant 标记: 本地附加,归为 HSK 环境附加 mod(NativeAddon)。
+         MayRequire 门控沿用既有补丁写法(本环境 FindMod 不生效);
+         本 mod 是纯内容 mod(种植箱/爬藤架/提灯太阳灯),排在 Core SK 之后即可。 -->
+    <Operation Class="PatchOperationAdd" MayRequire="DimonSever000.ModIndicator.Specific">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+        <value>
+            <li>
+                <id>local.hskagrioverhaul</id>
+                <HSKMod>true</HSKMod>
+                <loadAfter>
+                    <li>skyarkhangel.hsk</li>
+                </loadAfter>
+            </li>
+        </value>
+    </Operation>
+</Patch>

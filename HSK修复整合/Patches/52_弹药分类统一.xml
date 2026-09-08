@@ -116,6 +116,77 @@
     </match>
   </Operation>
 
+  <!-- 5c) 删除锻造版后, 剥离 AmmoDef 上失效的 CE_AutoEnableCrafting* 标签。
+       CE AmmoInjector 按 "Make"+defName 找配方(上文已删), 保留标签即每帧刷 "found no recipe named MakeAmmo_..."。
+       用 Inherit="False" 在具体 AmmoDef 上整体覆盖继承的 tradeTags: 只留 AmmoBase 的 CE_AmmoInjector/CE_Ammo(控制 menuHidden/销毁)
+       与 CE_AutoEnableTrade(商队可交易), 去掉 CE_AutoEnableCrafting*; 弹药改由 Vile's Metallurgy Foundry 铸造配方生产。
+       不碰 38CannonAmmoBase 基类(Grapeshot 与其共用, 且 MakeAmmo_Grapeshot 保留)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_38mmCannonball"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_38mmCannonball"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Shell"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Shell"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Canister"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Canister"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_Shell"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_Shell"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_GreekFire"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_GreekFire"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+
   <!-- 6) CannonParts 双配方二选一: 留铸造 Cast_CannonParts(补研究 GunPowderTech), 删锻造 Make_CannonParts_Forged -->
   <Operation Class="PatchOperationConditional">
     <xpath>/Defs/RecipeDef[defName="Cast_CannonParts"]</xpath>

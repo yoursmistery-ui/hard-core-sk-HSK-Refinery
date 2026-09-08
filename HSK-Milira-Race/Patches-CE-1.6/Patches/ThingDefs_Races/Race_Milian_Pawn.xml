@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milira_MilianBase_Pawn -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[@Name="Milira_MilianBase_Pawn"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>left fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.0</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>right fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.0</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- Milian_Mechanoid_PawnI -->
+<!--士兵I型-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnI"]/statBases/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>1</ArmorRating_Sharp>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnI"]/statBases/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>1</ArmorRating_Blunt>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnI"]/statBases</xpath>
+        <value>
+            <AimingAccuracy>0.6</AimingAccuracy>
+            <ShootingAccuracyPawn>0.769</ShootingAccuracyPawn>
+            <NightVisionEfficiency>0.4</NightVisionEfficiency>
+        </value>
+    </Operation>
+
+    <!-- Milian_Mechanoid_PawnII -->
+<!--士兵II型-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnII"]/statBases/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>1</ArmorRating_Sharp>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnII"]/statBases/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>1</ArmorRating_Blunt>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnII"]/statBases</xpath>
+        <value>
+            <AimingAccuracy>0.6</AimingAccuracy>
+            <ShootingAccuracyPawn>0.769</ShootingAccuracyPawn>
+            <NightVisionEfficiency>0.4</NightVisionEfficiency>
+        </value>
+    </Operation>
+
+    <!-- Milian_Mechanoid_PawnIII -->
+<!--禁卫军-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIII"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>left fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>right fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIII"]/statBases/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>1.5</ArmorRating_Sharp>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIII"]/statBases/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>2</ArmorRating_Blunt>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIII"]/statBases</xpath>
+        <value>
+            <AimingAccuracy>0.6</AimingAccuracy>
+            <ShootingAccuracyPawn>0.769</ShootingAccuracyPawn>
+            <NightVisionEfficiency>0.4</NightVisionEfficiency>
+        </value>
+    </Operation>
+
+    <!-- Milian_Mechanoid_PawnIV -->
+<!--百夫长-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIV"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>left fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>right fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8.0</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+                    <armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIV"]/statBases/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>1.8</ArmorRating_Sharp>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIV"]/statBases/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>3</ArmorRating_Blunt>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_Mechanoid_PawnIV"]/statBases</xpath>
+        <value>
+            <AimingAccuracy>0.6</AimingAccuracy>
+            <ShootingAccuracyPawn>0.769</ShootingAccuracyPawn>
+            <NightVisionEfficiency>0.4</NightVisionEfficiency>
+        </value>
+    </Operation>
+
+</Patch>

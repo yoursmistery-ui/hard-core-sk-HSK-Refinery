@@ -45,7 +45,8 @@ namespace JobEffects
         public bool seasonalParticles = true;   // leaf/soil flecks tint by season
         public bool materialChips = true;        // chip color keyed to the worked thing
         public bool groundLitter = true;         // settling embers/chips that fade out
-        public bool holsterTools = true;         // last tool lingers at the hip, then fades; also rides the belt while walking to a job
+        public bool holsterTools = true;         // last tool lingers at the hip, then fades after work ends
+        public bool enrouteToolCarry = false;    // ride the tool on the belt while WALKING to a covered job (pre-play). Off by default: tool appears only when work starts, so it never double-draws with an AM/Yayo melee weapon during the approach.
         public bool toolFoley = true;            // short handle clatter when a tool is drawn from the belt / stowed
 
         // Performance LOD: skip drawing tools when zoomed far out (sprites a few px) and drop the
@@ -141,6 +142,7 @@ namespace JobEffects
         public static bool MaterialChips => Instance == null || Instance.materialChips;
         public static bool GroundLitter => Instance == null || Instance.groundLitter;
         public static bool HolsterTools => Instance == null || Instance.holsterTools;
+        public static bool EnRouteToolCarry => Instance != null && Instance.enrouteToolCarry;
         public static bool ToolFoley => Instance == null || Instance.toolFoley;
         public static bool ZoomLod => Instance == null || Instance.zoomLod;
         public static int MaxAnimatedPawns => Instance == null ? 60 : Mathf.Clamp(Instance.maxAnimatedPawns, 5, 200);
@@ -188,6 +190,7 @@ namespace JobEffects
             Scribe_Values.Look(ref materialChips, "materialChips", true);
             Scribe_Values.Look(ref groundLitter, "groundLitter", true);
             Scribe_Values.Look(ref holsterTools, "holsterTools", true);
+            Scribe_Values.Look(ref enrouteToolCarry, "enrouteToolCarry", false);
             Scribe_Values.Look(ref toolFoley, "toolFoley", true);
             Scribe_Values.Look(ref zoomLod, "zoomLod", true);
             Scribe_Values.Look(ref maxAnimatedPawns, "maxAnimatedPawns", 60);

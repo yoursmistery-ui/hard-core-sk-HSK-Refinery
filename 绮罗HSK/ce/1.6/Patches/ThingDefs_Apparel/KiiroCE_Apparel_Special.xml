@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗特殊服装-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_SpecialBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>2</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗特殊服装-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_SpecialBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>3</Bulk>
+			<WornBulk>1.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 厚重法官大衣  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Penance"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 月宵鲜花头饰  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MintHeadwear"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>1</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<!-- 月宵鲜花头饰-重量 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MintHeadwear"
+		]/statBases</xpath>
+		<value>
+			<Mass>0.5</Mass>
+		</value>
+	</Operation>
+	<!-- 月宵鲜花头饰-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MintHeadwear"
+		]/statBases</xpath>
+		<value>
+			<Bulk>0.5</Bulk>
+			<WornBulk>0</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 月宵长裙  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MintDress"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 补给队制服帽  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_NoelleHat"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 补给队制服裙  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_NoelleDress"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+</Patch>

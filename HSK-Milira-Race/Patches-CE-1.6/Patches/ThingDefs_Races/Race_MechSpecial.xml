@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_FloatUnitBase -->
+<!--自律离子浮游单元-->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>/Defs/ThingDef[@Name="Milian_FloatUnitBase"]</xpath>
+        <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+                <bodyShape>Birdlike</bodyShape>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[@Name="Milian_FloatUnitBase"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <cooldownTime>0.4</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[@Name="Milian_FloatUnitBase"]/comps</xpath>
+        <value>
+            <comps Inherit="false">
+                <li>
+                    <compClass>CombatExtended.CompPawnGizmo</compClass>
+                </li>
+                <li>
+                    <compClass>CombatExtended.CompAmmoGiver</compClass>
+                </li>
+                <li Class="CombatExtended.CompProperties_MechAmmo">
+                    <gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
+                    <gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
+                </li>
+                <li Class="CompProperties_CanBeDormant" />
+                <li Class="CompProperties_WakeUpDormant">
+                    <wakeUpOnDamage>true</wakeUpOnDamage>
+                    <wakeUpCheckRadius>30</wakeUpCheckRadius>
+                    <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+                </li>
+                <li Class="AncotLibrary.CompProperties_CommandTerminal" />
+            </comps>
+        </value>
+    </Operation>
+
+    <!-- Milian_AutonomousFloatUnit -->
+<!--自律浮游单元-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_AutonomousFloatUnit"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <cooldownTime>0.4</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_AutonomousFloatUnit_PlasmaBlaster</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.12</ShotSpread>
+            <SwayFactor>0.9</SwayFactor>
+            <Bulk>6</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraFloatUnit_ParticleBlaster</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>23</range>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <defaultCooldownTime>1.8</defaultCooldownTime>
+            <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+            <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>108</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milian_FloatUnit_SmallPlasma -->
+<!--小型离子浮游单元-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_SmallPlasma"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <cooldownTime>0.4</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_FloatUnit_SmallPlasmaGun</defName>
+        <statBases>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.13</ShotSpread>
+            <SwayFactor>0.90</SwayFactor>
+            <Bulk>6</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraFloatUnit_SmallPlasmaGun</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>15</range>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>3</muzzleFlashScale>
+            <defaultCooldownTime>1.2</defaultCooldownTime>
+            <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+            <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>72</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milian_FloatUnit_Shield -->
+<!--护盾浮游单元-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_Shield"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <cooldownTime>2.0</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- Milian_FloatUnit_MechControl -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_MechControl"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <cooldownTime>0.4</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+</Patch>

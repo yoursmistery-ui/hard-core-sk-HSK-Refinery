@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- FADX FA comps 注入(2026-09-08 工坊 3559452526 并入改写):
+	     原 FindMod+Sequence 嵌套在 1.6 不生效 → 顶层 Conditional;
+	     原目标 defName "Kurin"(Deluxe 版) → 本 mod "Kurin_Race";
+	     所在 FADeluxe 文件夹由 LoadFolders IfModActive=FA Experimentals 门控,
+	     compClass 存在性自门控防重复注入; comps 节点缺失时先补建。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps</xpath>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]</xpath>
+						<value>
+							<comps />
+						</value>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps/li[compClass="FacialAnimation.DrawFaceGraphicsComp"]</xpath>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps</xpath>
+						<value>
+							<li>
+								<compClass>FacialAnimation.DrawFaceGraphicsComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.HeadControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.EyeballControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.LidControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.BrowControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.MouthControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.FacialAnimationControllerComp</compClass>
+							</li>
+						</value>
+					</nomatch>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps/li[compClass="FacialAnimation.EmotionControllerComp"]</xpath>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps</xpath>
+						<value>
+							<li>
+								<compClass>FacialAnimation.LidOptionControllerComp</compClass>
+							</li>
+							<li>
+								<compClass>FacialAnimation.EmotionControllerComp</compClass>
+							</li>
+						</value>
+					</nomatch>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

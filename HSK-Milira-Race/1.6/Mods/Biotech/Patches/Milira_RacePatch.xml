@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/statBases</xpath>
+				<value>
+					<statBases>
+						<!-- 飞行相关 -->
+						<MaxFlightTime>5000</MaxFlightTime>
+						<FlightCooldown>0</FlightCooldown>
+
+						<MarketValue>5500</MarketValue>
+						<Flammability>0</Flammability>
+						<MoveSpeed>4.6</MoveSpeed>
+						<MentalBreakThreshold>0.22</MentalBreakThreshold>
+						<ComfyTemperatureMax>45</ComfyTemperatureMax>
+						<ComfyTemperatureMin>-25</ComfyTemperatureMin>
+						<ImmunityGainSpeed>1.08</ImmunityGainSpeed>
+						<CarryingCapacity>100</CarryingCapacity>
+						<RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">10</RoyalFavorValue>
+						<MeatAmount>110</MeatAmount>
+						<LeatherAmount>65</LeatherAmount>
+						<Mass>52</Mass>
+						<!--==-->
+						<GlobalLearningFactor>1.0</GlobalLearningFactor>
+						<PsychicSensitivity>1.0</PsychicSensitivity>
+						<AimingDelayFactor>0.9</AimingDelayFactor>
+						<PainShockThreshold>0.95</PainShockThreshold>
+						<GeneralLaborSpeed>1.0</GeneralLaborSpeed>						<!--=普通工作=-->
+						<DrugSynthesisSpeed>1.0</DrugSynthesisSpeed>
+						<MedicalTendSpeed>1.0</MedicalTendSpeed>
+						<MedicalTendQuality>1.0</MedicalTendQuality>
+						<MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>
+						<!--==-->
+						<NegotiationAbility>1.0</NegotiationAbility>
+						<SellPriceFactor>1.0</SellPriceFactor>
+						<TradePriceImprovement>1.0</TradePriceImprovement>
+						<SocialImpact>1.0</SocialImpact>
+						<!--==-->
+						<WorkSpeedGlobal>1.0</WorkSpeedGlobal>						<!--=全局工作=-->
+						<EatingSpeed>1.0</EatingSpeed>
+						<ConstructionSpeed>1.0</ConstructionSpeed>
+						<ButcheryMechanoidEfficiency>1.0</ButcheryMechanoidEfficiency>
+						<ButcheryMechanoidSpeed>1.0</ButcheryMechanoidSpeed>
+						<SmeltingSpeed>1.0</SmeltingSpeed>
+						<ResearchSpeed>1.0</ResearchSpeed>
+						<MiningSpeed>1.0</MiningSpeed>
+						<MiningYield>1.0</MiningYield>
+						<!--==-->
+						<ButcheryFleshEfficiency>1.0</ButcheryFleshEfficiency>
+						<ButcheryFleshSpeed>1.0</ButcheryFleshSpeed>
+						<!-- <FoodPoisonChance>0.5</FoodPoisonChance> -->
+						<CookSpeed>1.0</CookSpeed>
+						<RestRateMultiplier>1.0</RestRateMultiplier>
+						<PlantWorkSpeed>1.0</PlantWorkSpeed>
+						<PlantHarvestYield>1.0</PlantHarvestYield>
+						<!--=护甲=-->
+						<!-- <ArmorRating_Sharp>0.15</ArmorRating_Sharp>
+						<ArmorRating_Blunt>0.15</ArmorRating_Blunt> -->
+						<ArmorRating_Heat>0.25</ArmorRating_Heat>
+						<!--=心灵能力=-->
+						<PsychicEntropyRecoveryRate>2</PsychicEntropyRecoveryRate>
+						<!-- <PsychicEntropyMax>30</PsychicEntropyMax> -->
+						<MeditationFocusGain>1.5</MeditationFocusGain>
+
+						<VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">1</VacuumResistance>
+					</statBases>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/xenotypeList</xpath>
+				<value>
+					<xenotypeList MayRequire="Ludeon.RimWorld.Biotech">
+						<li MayRequire="Ludeon.RimWorld.Biotech">MiliraXenotype</li>
+					</xenotypeList>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<!-- <Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Milira_Race"]/alienRace/raceRestriction/whiteXenotypeList</xpath>
+				<value>
+        <whiteXenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">MiliraXenotype</li>
+        </whiteXenotypeList>			
+				</value>
+			</li>
+		</operations>
+	</Operation> -->
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/FactionDef[defName="Milira_Faction"]/xenotypeSet</xpath>
+				<value>
+					<xenotypeSet>
+						<xenotypeChances>
+							<MiliraXenotype MayRequire="Ludeon.RimWorld.Biotech">1</MiliraXenotype>
+							<Baseliner MayRequire="Ludeon.RimWorld.Biotech">0</Baseliner>
+							<Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+							<Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+							<Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+							<Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+							<Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+							<Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+							<Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+							<Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+							<Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+							<Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+						</xenotypeChances>
+					</xenotypeSet>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<!--panwkind-->
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/PawnKindDef[@Name="Milira_PawnBase"]/xenotypeSet</xpath>
+				<value>
+					<xenotypeSet>
+						<xenotypeChances>
+							<MiliraXenotype MayRequire="Ludeon.RimWorld.Biotech">1</MiliraXenotype>
+							<Baseliner MayRequire="Ludeon.RimWorld.Biotech">0</Baseliner>
+							<Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+							<Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+							<Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+							<Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+							<Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+							<Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+							<Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+							<Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+							<Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+							<Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+						</xenotypeChances>
+					</xenotypeSet>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+
+
+
+	<!-- <Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/FactionDef[defName="Milira_Faction"]/xenotypeSet</xpath>
+				<value>	
+    <xenotypeSet>
+      <xenotypeChances>
+	    <MiliraXenotype MayRequire="Ludeon.RimWorld.Biotech">0.99</MiliraXenotype>
+      </xenotypeChances>
+    </xenotypeSet>				
+				</value>
+			</li>
+		</operations>
+	</Operation> -->
+
+
+</Patch>

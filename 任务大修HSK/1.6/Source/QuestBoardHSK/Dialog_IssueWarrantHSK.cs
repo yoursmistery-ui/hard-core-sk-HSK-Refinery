@@ -53,6 +53,20 @@ namespace QuestBoardHSK
         public void AssignAnimal(Pawn animal) => curAnimal = animal;
         public void AssignArtifact(Thing artifact) => curArtifact = artifact;
 
+        /// <summary>袭击档案一键通缉入口:直接预填目标小人(2026-09-02);动物目标自动切 Animal 类型。</summary>
+        public void PreselectPawn(Pawn p)
+        {
+            if (p == null)
+                return;
+            SetType(p.RaceProps.Animal ? TargetType.Animal : TargetType.Human);
+            if (p.RaceProps.Animal)
+                curAnimal = p;
+            else
+                curPawn = p;
+            if (curReason.NullOrEmpty())
+                curReason = Utils.GenerateTextFromRule(SW_DefOf.SW_WantedFor, p.thingIDNumber);
+        }
+
         public override void DoWindowContents(Rect inRect)
         {
             // SW 未激活:整个发单表单依赖 Dialog_SelectPawn/Animal/Artifact(在 SimpleWarrants.dll),
@@ -147,45 +161,25 @@ namespace QuestBoardHSK
                 y += 86f;
             }
 
-            // —— 活捉报酬 / 击杀报酬(pawn) 或 单一报酬(artifact)——
-            if (curType == TargetType.Artifact)
+            // —— 赏金由系统按公式定，玩家不手填（2026-09-02 改判）——
             {
-                Rect rewardLabel = new Rect(inRect.x, y, 100f, 24f);
-                Widgets.Label(rewardLabel, "SW.CapturePayment".Translate());
-                Rect rewardField = new Rect(rewardLabel.xMax, y, 80f, 24f);
-                Widgets.TextFieldNumeric<int>(rewardField, ref curReward, ref buffCurReward, 0f, 1E+09f);
-                y += 30f;
-            }
-            else
-            {
-                Rect capLabel = new Rect(inRect.x, y, 100f, 24f);
-                Widgets.Label(capLabel, "SW.CapturePayment".Translate());
-                Rect capField = new Rect(capLabel.xMax, y, 80f, 24f);
-                if (capturePaymentEnabled)
-                    Widgets.TextFieldNumeric<int>(capField, ref curCapturePayment, ref buffCurCapturePayment, 0f, 1E+09f);
-                Rect capBox = new Rect(capField.xMax + 5f, y, 24f, 24f);
-                Widgets.Checkbox(capBox.x, capBox.y, ref capturePaymentEnabled);
-                y += 30f;
-
-                Rect deadLabel = new Rect(inRect.x, y, 100f, 24f);
-                Widgets.Label(deadLabel, "SW.DeathPayment".Translate());
-                Rect deadField = new Rect(deadLabel.xMax, y, 80f, 24f);
-                if (deathPaymentEnabled)
-                    Widgets.TextFieldNumeric<int>(deadField, ref curDeathPayment, ref buffCurDeathPayment, 0f, 1E+09f);
-                Rect deadBox = new Rect(deadField.xMax + 5f, y, 24f, 24f);
-                Widgets.Checkbox(deadBox.x, deadBox.y, ref deathPaymentEnabled);
-                y += 30f;
+                int sysReward = RecommendedReward();
+                GUI.color = sysReward > 0 ? DimmedTextColor() : ColoredText.ThreatColor;
+                Widgets.Label(new Rect(inRect.x, y, inRect.width - 16f, 22f),
+                    sysReward > 0
+                        ? "RK_Bounty.SystemReward".Translate(sysReward)
+                        : "RK_Bounty.SystemRewardNone".Translate());
+                GUI.color = Color.white;
+                y += 24f;
             }
 
-            // —— 预付费提示(仅 NPC 派系目标,且为目标 > 我方 1档才显示)——
+            // —— 预付费提示(仅 NPC 派系目标;跨档费用按每超 1 档 ×2 累进)——
             if (TryGetTargetFaction(out Faction targetFac, out bool isNpcTarget))
             {
                 if (isNpcTarget)
                 {
-                    int prepay = BountyRules.PrepayForTech(targetFac.def.techLevel);
+                    int prepay = BountyRules.PrepayCost(targetFac.def.techLevel);
                     bool overTech = targetFac.def.techLevel > BountyRules.PlayerTechLevel();
-                    if (overTech)
-                        prepay = Mathf.RoundToInt(prepay * BountyRules.AboveTechCostFactor);
                     GUI.color = overTech ? ColoredText.ThreatColor : DimmedTextColor();
                     Widgets.Label(new Rect(inRect.x, y, inRect.width - 16f, 22f),
                         overTech
@@ -226,13 +220,32 @@ namespace QuestBoardHSK
             Rect nameRect = new Rect(createWarrant.x, photo.yMax + 4f, createWarrant.width, 22f);
             Widgets.Label(nameRect, curType == TargetType.Human ? (string)pawn.Name.ToString() : pawn.def.LabelCap.Resolve());
 
-            Rect selectRect = new Rect(createWarrant.x, nameRect.yMax + 6f, createWarrant.width, 24f);
+            // 身价 + 科技档信息行(2026-09-02,配合报酬上下限)
+            GUI.color = DimmedTextColor();
+            Rect infoRect = new Rect(createWarrant.x, nameRect.yMax + 2f, createWarrant.width, 18f);
+            string techStr = pawn.Faction != null && pawn.Faction.def != null
+                ? BountyRules.TechLevelLabel(pawn.Faction.def.techLevel)
+                : "—";
+            int tier = BountyRules.TierOf(pawn.Faction != null && pawn.Faction.def != null
+                ? pawn.Faction.def.techLevel : TechLevel.Medieval);
+            Widgets.Label(infoRect,
+                "RK_Bounty.PosterValue".Translate(Mathf.RoundToInt(pawn.MarketValue))
+                + " · " + "RK_Bounty.PosterTech".Translate(techStr)
+                + " · <color=" + TaskTiers.BadgeHex(tier) + ">T" + tier + "</color>");
+            GUI.color = Color.white;
+
+            Rect selectRect = new Rect(createWarrant.x, infoRect.yMax + 4f, createWarrant.width, 24f);
             if (Widgets.ButtonTextSubtle(selectRect, "SW.Select".Translate()))
             {
                 EnsureStubParent();
                 SyncToStub(); // 把当前字段同步到 stub,Dialog_SelectPawn 从 stub 读 allPawns 列表
                 if (curType == TargetType.Human)
-                    Find.WindowStack.Add(new Dialog_SelectPawn(stubParent));
+                {
+                    // 2026-09-02 通缉扩展:候选池=世界 pawn ∪ 地图在场外派系 pawn(覆盖 SW 默认列表)
+                    var sel = new Dialog_SelectPawn(stubParent);
+                    sel.allPawns = WarrantCandidates.HumanPawns();
+                    Find.WindowStack.Add(sel);
+                }
                 else
                     Find.WindowStack.Add(new Dialog_SelectAnimal(stubParent));
             }
@@ -362,38 +375,13 @@ namespace QuestBoardHSK
                 return;
             }
 
-            // 预付费拦截(科技门槛已在 SW.CreateWarrant 校验,这里二次保险)
-            if (w is Warrant_Pawn wp && wp.Pawn != null)
+            // 统一校验+预付扣费(信鸽柱/预付;跨档不再硬拒,费用累进)——与 SW 主窗旁路共用 BountyRules 入口。
+            // 校验失败时 w 未扣费未入册,直接丢弃即可。
+            if (!BountyRules.TryChargePrepay(w, out TaggedString failMsg, out bool _))
             {
-                Faction targetFac = wp.Pawn.Faction;
-                if (targetFac != null && targetFac != Faction.OfPlayer)
-                {
-                    TechLevel targetTech = targetFac.def.techLevel;
-                    TechLevel myTech = BountyRules.PlayerTechLevel();
-                    if (targetTech > myTech + BountyRules.MaxTechGap)
-                    {
-                        Find.WindowStack.Add(new Dialog_MessageBox(
-                            "RK_Bounty.IssueTooHighTech".Translate(targetFac.Name, BountyRules.TechLevelLabel(targetTech))));
-                        return;
-                    }
-                    int prepay = BountyRules.PrepayForTech(targetTech);
-                    bool overTech = targetTech > myTech;
-                    if (overTech)
-                        prepay = Mathf.RoundToInt(prepay * BountyRules.AboveTechCostFactor);
-                    List<Thing> silvers = Utils.AllPlayerSilver();
-                    int have = silvers.Sum(t => t.stackCount);
-                    if (have < prepay)
-                    {
-                        Find.WindowStack.Add(new Dialog_MessageBox(
-                            "RK_Bounty.NeedPrepay".Translate(prepay, have)));
-                        return;
-                    }
-                    w.Pay(silvers, prepay);
-                    Messages.Message(overTech
-                        ? "RK_Bounty.PrepayPaidOver".Translate(prepay)
-                        : "RK_Bounty.PrepayPaid".Translate(prepay),
-                        MessageTypeDefOf.NeutralEvent, false);
-                }
+                if (!failMsg.Equals(TaggedString.Empty))
+                    Find.WindowStack.Add(new Dialog_MessageBox(failMsg));
+                return;
             }
 
             // 非敌对目标二次确认(SW 原版行为,OnCreate 钩子 AngerOnIssue 会代替固定 -80 激怒)
@@ -461,20 +449,17 @@ namespace QuestBoardHSK
                 issuer = Faction.OfPlayer,
                 createdTick = Find.TickManager.TicksGame
             };
+            int rec = RecommendedReward();
             wp.thing = pawn;
-            wp.rewardForLiving = curCapturePayment;
-            wp.rewardForDead = curDeathPayment;
+            wp.rewardForLiving = rec;
+            wp.rewardForDead = rec;
             wp.reason = curReason ?? "";
             if (!curMessage.NullOrEmpty())
                 wp.message = curMessage;
             else
                 wp.message = Utils.GenerateTextFromRule(SW_DefOf.SW_Messages);
 
-            if (deathPaymentEnabled && curDeathPayment <= 0)
-                failReason = "SW.YouMustFillAmountForDeadReward".Translate();
-            else if (capturePaymentEnabled && curCapturePayment <= 0)
-                failReason = "SW.YouMustFillAmountForCaptureReward".Translate();
-
+            // 赏金由系统定(RecommendedReward),无玩家手填,无需区间校验(2026-09-02 改判)
             return wp;
         }
 
@@ -491,12 +476,27 @@ namespace QuestBoardHSK
                 issuer = Faction.OfPlayer,
                 createdTick = Find.TickManager.TicksGame,
                 thing = curArtifact,
-                reward = curReward,
+                reward = RecommendedReward(),
                 message = Utils.GenerateTextFromRule(SW_DefOf.SW_Messages)
             };
-            if (curReward <= 0)
-                failReason = "SW.YouMustFillAmountForReward".Translate();
             return wa;
+        }
+
+        /// <summary>
+        /// 系统报价赏金(2026-09-02 改判:玩家不手填)。pawn=建议区间中值(无则按身价),artifact=物品价值。
+        /// </summary>
+        private int RecommendedReward()
+        {
+            if (curType == TargetType.Artifact)
+                return curArtifact != null ? Mathf.Max(1, Mathf.RoundToInt(curArtifact.MarketValue)) : 0;
+            Pawn p = curType == TargetType.Human ? curPawn : curAnimal;
+            if (p == null)
+                return 0;
+            BountyRules.RewardBounds(p, out int mn, out int mx, out bool _);
+            int rec = mx > 0 ? Mathf.RoundToInt((mn + mx) * 0.5f) : Mathf.RoundToInt(p.MarketValue);
+            TechLevel tl = (p.Faction != null && p.Faction.def != null) ? p.Faction.def.techLevel : TechLevel.Medieval;
+            rec = Mathf.RoundToInt(rec * BountyRules.TierRewardMult(BountyRules.TierOf(tl)));
+            return Mathf.Max(1, rec);
         }
 
         private static string GetLabel(TargetType t)

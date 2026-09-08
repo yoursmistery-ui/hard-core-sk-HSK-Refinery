@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_MedicalAssistance</defName>
+    <rootSelectionWeight>0.4</rootSelectionWeight>
+    <autoAccept>false</autoAccept>
+    <expireDaysRange>0.5~2</expireDaysRange>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->medical assistance</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->[Info], the town's doctors are helpless in this situation and hope to seek your assistance.\n\nUpon accepting this request, [escortCount] guerrilla members will escort the patients to your colony for treatment. The group will arrive within [delayTicks_duration]. They will remain in your colony and follow your commands until the treatment is complete. You must ensure the patients' safety; if they die from disease or accidents, your goodwill with the Kiiro will decrease.</li>
+        <li>Info->A severe outbreak of [disease_label] has occurred in [kiiro_settlement_label]! Although the town managed to contain the situation in time, [patientCount] residents are still in critical condition</li>  
+        <li>Info->The Kiiro of [kiiro_settlement_label] recently welcomed a group of companions wandering from afar, among whom [patientCount] Kiiro are suffering from severe [disease_label]</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <!-- <li Class="Kiiro_Event.QuestNode_ModSettingOn">
+          <modSettingSwitch>HarvestDay</modSettingSwitch>
+        </li> -->
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_MedicalAssistance</tag>
+          <faction>$faction</faction>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_Root_KiiroMedicalAssistance">
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ExtraInspectStringAddOn">
+          <pawns>$escorts</pawns>
+          <extraInspectString>escort</extraInspectString>
+          <!-- <delayTicks>$($laborersDurationDays * 60000+$delayTicks)</delayTicks> -->
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ExtraInspectStringAddOn">
+          <pawns>$patients</pawns>
+          <extraInspectString>Patient</extraInspectString>
+          <!-- <delayTicks>$($laborersDurationDays * 60000+$delayTicks)</delayTicks> -->
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

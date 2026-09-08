@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_ParticleBeamGun -->
+<!--=粒子光束枪=-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamGun"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamGun"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleBeamGun</defName>
+        <statBases>
+            <Bulk>4</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.07</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MilianParticleBeamGun</defaultProjectile>
+            <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+            <warmupTime>2.0</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>57</range>
+            <burstShotCount>4</burstShotCount>
+            <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>5</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>20</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>MiliraCE_AmmoSet_MilianParticleBeamGun</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>2</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- Milian_PulsedBeamGun -->
+<!--=脉冲光束枪=-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_PulsedBeamGun"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_PulsedBeamGun"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_PulsedBeamGun</defName>
+        <statBases>
+            <Bulk>2</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.1035</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MilianPulsedBeamGun</defaultProjectile>
+            <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+            <warmupTime>2.0</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>42</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>16</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>4</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>MiliraCE_AmmoSet_MilianPulsedBeamGun</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- Milian_ParticleBeamBlaster -->
+<!--=粒子冲击炮=-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamBlaster"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamBlaster"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.5</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleBeamBlaster</defName>
+        <statBases>
+            <Bulk>8</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.146</ShotSpread>
+            <SwayFactor>1.8</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+            </targetParams>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MilianParticleBeamBlaster</defaultProjectile>
+            <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+            <warmupTime>2.2</warmupTime>
+            <recoilAmount>1.38</recoilAmount>
+            <range>42</range>
+            <burstShotCount>6</burstShotCount>
+            <ammoConsumedPerShotCount>2</ammoConsumedPerShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Shot_ChargeBlaster</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <ai_AvoidFriendlyFireRadius>8</ai_AvoidFriendlyFireRadius>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>60</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MilianParticleHeavy_ParticleBeamBlaster</ammoSet>
+            <chargedAmmoSet>AmmoSet_MilianParticleHeavy_ParticleBeamBlasterCharged</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>3</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamBlaster"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamBlaster"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleBeamBlaster"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MilianParticleBeamBlasterCharged</projectileCharged>
+        </value>
+    </Operation>
+
+</Patch>

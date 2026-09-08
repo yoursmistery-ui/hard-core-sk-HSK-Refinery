@@ -4879,4 +4879,69 @@
 </Operation>
 
 
+    <!-- 来源: Vile's Leather Tanning/Animals_leatherAmount_Normal.xml 的 Amuse Bouche 鱼量覆盖。
+         该补丁用普通 Replace 打 statBases/LeatherAmount(节点由 FishThingBase 继承或 Amuse Bouche 后置补丁补),
+         在 1.6 下报 Failed to find a node。本地按其设计意图代管: 这两条鱼的 LeatherAmount 归一为 1。
+         三步存在性门控与文件既有 leatherDef 写法一致(先删同类节点再补, 无 statBases 时整块补)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases/LeatherAmount</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases/LeatherAmount</xpath>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+        <value>
+            <LeatherAmount>1</LeatherAmount>
+        </value>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+            <value>
+                <statBases>
+                    <LeatherAmount>1</LeatherAmount>
+                </statBases>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases/LeatherAmount</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases/LeatherAmount</xpath>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+        <value>
+            <LeatherAmount>1</LeatherAmount>
+        </value>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+            <value>
+                <statBases>
+                    <LeatherAmount>1</LeatherAmount>
+                </statBases>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+
 </Patch>

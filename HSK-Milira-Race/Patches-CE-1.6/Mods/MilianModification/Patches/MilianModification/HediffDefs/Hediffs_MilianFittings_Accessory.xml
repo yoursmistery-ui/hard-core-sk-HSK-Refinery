@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- MilianFitting_PlasmaGrenade -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/AbilityDef[defName="MilianAbility_PlasmaGrenade"]/comps/li[@Class="AncotLibrary.CompProperties_AbilityLaunchProjectileArea"]</xpath>
+        <value>
+            <li Class="MiliraCE.CompProperties_AbilityLaunchProjectileCEArea">
+                <projectileDef>Bullet_MiliraPlasmaShockGrenade</projectileDef>
+                <burstShotCount>1</burstShotCount>
+                <radius>1.9</radius>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_ShootingStabilizer -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_ShootingStabilizer"]/stages/li/statOffsetsBySeverity/li[stat="ShootingAccuracyPawn"]/valueBySeverity/points</xpath>
+        <value>
+            <points>
+                <li>(0.01, 0)</li>
+                <li>(0.8, 2.5)</li>
+            </points>
+        </value>
+    </Operation>
+
+</Patch>

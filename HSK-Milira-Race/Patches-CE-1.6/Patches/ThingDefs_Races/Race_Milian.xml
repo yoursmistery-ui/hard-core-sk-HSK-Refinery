@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/statBases</xpath>
+        <value>
+            <CarryWeight>50</CarryWeight>
+            <CarryBulk>25</CarryBulk>
+            <Suppressability>0</Suppressability>
+            <SmokeSensitivity>0</SmokeSensitivity>
+            <NightVisionEfficiency>0.80</NightVisionEfficiency>
+            <MeleeDodgeChance>1</MeleeDodgeChance>
+            <MeleeCritChance>1</MeleeCritChance>
+            <MeleeParryChance>1</MeleeParryChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/statBases/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>1</ArmorRating_Sharp>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/statBases/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>1.5</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>Left fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.4</cooldownTime>
+                    <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+                    <chanceFactor>0.2</chanceFactor>
+                    <armorPenetrationBlunt>0.75</armorPenetrationBlunt>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Right fist</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.4</cooldownTime>
+                    <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+                    <chanceFactor>0.2</chanceFactor>
+                    <armorPenetrationBlunt>0.75</armorPenetrationBlunt>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]</xpath>
+            <value>
+                <comps />
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/comps</xpath>
+        <value>
+            <li>
+                <compClass>CombatExtended.CompPawnGizmo</compClass>
+            </li>
+            <!-- <li Class="CombatExtended.CompProperties_Suppressable" /> -->
+            <li>
+                <compClass>CombatExtended.CompAmmoGiver</compClass>
+            </li>
+            <li Class="CombatExtended.CompProperties_MechAmmo">
+                <gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
+                <gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
+            </li>
+            <li Class="CombatExtended.CompProperties_ArmorDurability">
+                <Durability>1000</Durability>
+                <Regenerates>false</Regenerates>
+                <Repairable>true</Repairable>
+                <RepairIngredients>
+                    <Milira_SplendidSteel>10</Milira_SplendidSteel>
+                    <Milira_Feather>5</Milira_Feather>
+                </RepairIngredients>
+                <RepairTime>300</RepairTime>
+                <RepairValue>200</RepairValue>
+                <CanOverHeal>true</CanOverHeal>
+                <MaxOverHeal>70</MaxOverHeal>
+                <MinArmorPct>0.5</MinArmorPct>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Milian_Race"]/alienRace/raceRestriction/whiteApparelList</xpath>
+        <value>
+            <li>CE_Apparel_TacVest</li>
+            <li>CE_Apparel_Backpack</li>
+            <li>CE_Apparel_TribalBackpack</li>
+            <li>CE_Apparel_BallisticShield</li>
+        </value>
+    </Operation>
+
+</Patch>

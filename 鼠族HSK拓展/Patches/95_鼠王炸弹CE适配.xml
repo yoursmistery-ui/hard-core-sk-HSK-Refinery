@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 鼠王炸弹 CE 适配(2026-09-06):把 RK_GrenadeRatKing/RK_Proj_RatKing 由原版投掷手雷改成 CE 手雷
+     结构照抄 CombatExtended 自身对 Weapon_GrenadeMechanite 的 vanilla->CE 手雷补丁:
+     AmmoDef + AmmoThing + Verb_ShootCEOneUse(无弹匣, 一次一发自我消耗) + ProjectileCE_Explosive + CompProperties_ExplosiveCE -->
+<Patch>
+
+  <!-- ========== 弹体 RK_Proj_RatKing → CE 爆炸弹 ========== -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_RatKing"]/thingClass</xpath>
+    <value>
+      <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_RatKing"]/projectile</xpath>
+    <value>
+      <projectile Class="CombatExtended.ProjectilePropertiesCE">
+        <explosionRadius>2.3</explosionRadius>
+        <damageDef>BombRatKing</damageDef>
+        <damageAmountBase>60</damageAmountBase>
+        <armorPenetrationSharp>6</armorPenetrationSharp>
+        <armorPenetrationBlunt>3</armorPenetrationBlunt>
+        <speed>9</speed>
+        <explosionDelay>110</explosionDelay>
+      </projectile>
+    </value>
+  </Operation>
+
+  <!-- ========== 手雷本体 RK_GrenadeRatKing → CE AmmoDef/AmmoThing ========== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeRatKing"]</xpath>
+    <value>
+      <thingClass>CombatExtended.AmmoThing</thingClass>
+      <stackLimit>50</stackLimit>
+      <resourceReadoutPriority>First</resourceReadoutPriority>
+      <detonateProjectile>RK_Proj_RatKing</detonateProjectile>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeRatKing"]</xpath>
+    <attribute>Class</attribute>
+    <value>CombatExtended.AmmoDef</value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeRatKing"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    <value>
+      <li Class="CombatExtended.CompProperties_ExplosiveCE">
+        <explosiveRadius>4</explosiveRadius>
+        <explosiveDamageType>BombRatKing</explosiveDamageType>
+        <damageAmountBase>60</damageAmountBase>
+        <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>RK_GrenadeRatKing</defName>
+    <statBases>
+      <Bulk>3</Bulk>
+      <SightsEfficiency>1.0</SightsEfficiency>
+    </statBases>
+    <Properties>
+      <label>投掷鼠王炸弹</label>
+      <verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <range>9.9</range>
+      <minRange>1.9</minRange>
+      <warmupTime>2.3</warmupTime>
+      <noiseRadius>4</noiseRadius>
+      <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+      <soundCast>ThrowGrenade</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+      <defaultProjectile>RK_Proj_RatKing</defaultProjectile>
+      <onlyManualCast>false</onlyManualCast>
+      <ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+      <ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+    </Properties>
+    <weaponTags>
+      <li>CE_AI_Grenade</li>
+      <li>CE_OneHandedWeapon</li>
+    </weaponTags>
+  </Operation>
+
+  <!-- 近战砸击也 CE 化, 避免信息卡 "no support for Combat Extended" -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeRatKing"]</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>bomb</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>6</power>
+          <cooldownTime>1.5</cooldownTime>
+          <armorPenetrationBlunt>1.6</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+</Patch>

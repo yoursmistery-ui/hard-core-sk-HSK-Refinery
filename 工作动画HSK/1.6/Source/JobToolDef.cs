@@ -58,6 +58,38 @@ namespace JobEffects
         // colliding with the material build tools. A tool with this set matches nothing else.
         public List<string> buildTerrainDefs;
 
+        // For FinishFrame jobs on TERRAFORM plots (HSK / FertileFields land reclamation - the
+        // "改造地形" architect category). The plot is built like any blueprint, but what it produces is
+        // a terrain change plus soil/clay/peat output, so it wants a spade, not a welder. Detected on
+        // the frame's entityDefToBuild: its resolved thingClass is FertileFields.Building_Terraform
+        // (every Core_SK / HMC plot inherits it) or it carries a FertileFields.Terrain modExtension.
+        // The material build tools EXCLUDE those frames exactly like they exclude TerrainDef floors
+        // (see Matches), so without a tool here a terraform plot would draw nothing at all.
+        public bool terraformOnly = false;
+
+        // For FinishFrame jobs only: the frame's entityDefToBuild defName must contain one of these
+        // substrings (case-insensitive). Lets a narrow tool claim specific build targets without
+        // listing every def - e.g. the manure fork that works ONLY the fertilise/tilth plots
+        // (Topsoil-DirtFert, SoilRich-SoilTilled) while the general spade takes every other terraform.
+        // Combine with terraformOnly to keep the keyword tool inside the terraform set.
+        public List<string> buildEntityNameKeywords;
+
+        // For FinishFrame jobs only: claim a frame by the VANILLA BUILD EFFECT of the def it
+        // produces - the built def's constructEffect defName (ConstructWood / ConstructMetal /
+        // ConstructDirt / ConstructStone). Floors and other terrain frames have no Stuff, so the
+        // frameStuffCategories test can never read their material and every material tool rejects
+        // them, leaving the colonist laying a wood floor bare-handed. constructEffect is the
+        // engine's own material tag, so one line covers every wood floor in every mod without
+        // listing defNames. A match is a FULL claim: the tool draws for that frame and the stuff
+        // test is skipped (see ToolAnimator.Matches).
+        public List<string> buildConstructEffects;
+
+        // For Ingest jobs only: the food being eaten must have an ingestible.foodType whose name
+        // contains one of these substrings (case-insensitive) - "Meal" for cooked meals, "Kibble",
+        // "VegetableOrFruit", etc. Keeps the eating utensil out of a colonist's hand while they
+        // crunch an apple or lap paste off a tray. A tool that sets this matches NO other job.
+        public List<string> ingestFoodTypes;
+
         // Electricity tech-gate. When the "Gate modern tools behind Electricity research" setting
         // is on AND the Electricity research is NOT yet finished, this tool is treated as
         // anachronistic for a pre-industrial colony: it is either SWAPPED to a period-correct tool
@@ -459,6 +491,15 @@ namespace JobEffects
         // mouthpiece off the lips. Overrides holdVertical's centred draw. Scoped (default off) so
         // it never disturbs the medicine kits / book / spyglass Hold poses.
         public bool holdMouthAnchor = false;
+
+        // Hold style: EATING. The utensil runs a bite cycle off `period` — dip at the plate (low,
+        // out in front at `reach`), lift to the lips, chew there, lower back down — instead of the
+        // static hold. Anchored on the painted BOWL (the sprite's head, ~28% down the canvas), so
+        // the handle hangs into the fist rather than the bowl floating above the hand, and the
+        // bowl itself lands exactly on the plate / mouth anchor. Faces off the clean cardinal body
+        // facing like the recorder (the work dir can be diagonal). Pair with ingestFoodTypes so a
+        // utensil only appears for food you would actually use one on. Scoped (default off).
+        public bool holdEat = false;
 
         // Hold style: shift the held item sideways (cells) toward the facing/playing side, so a
         // recorder is held OUT past the face instead of dead-centre over it. Mirrors with facing.

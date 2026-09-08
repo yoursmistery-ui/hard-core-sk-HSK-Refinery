@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+	<!--
+		2026-09-03: 种族徒手 tools 换 ToolCE(CE 适配铁律:近战 tools 全部 ToolCE,原版 Tool 会被 CE 过滤)。
+		附带修复 "Kurin_Race has multiple CompPawnGizmo" 告警:
+		BasePawn 已被 Core_SK_CoreModule 补丁挂了 CompPawnGizmo(全体 pawn 继承),
+		而 CE 的 RaceUtil.PatchHARs 会对 tools 含非 ToolCE 的 HAR 种族再注入一份(不查重)→ 双份。
+		tools 全 ToolCE 后 RaceUtil 不再选中本族,重复即消失。
+		Kurin_Race 自身无 tools 节点(徒手继承自 Human 基类),用 Conditional 兼容两种落点。
+	-->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/tools</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/tools</xpath>
+			<value>
+				<tools>
+					<li Class="CombatExtended.ToolCE">
+						<label>left fist</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+					<li Class="CombatExtended.ToolCE">
+						<label>right fist</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+					<li Class="CombatExtended.ToolCE">
+						<label>head</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+						<chanceFactor>0.2</chanceFactor>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+				</tools>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]</xpath>
+			<value>
+				<tools>
+					<li Class="CombatExtended.ToolCE">
+						<label>left fist</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+					<li Class="CombatExtended.ToolCE">
+						<label>right fist</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+					<li Class="CombatExtended.ToolCE">
+						<label>head</label>
+						<capacities>
+							<li>Blunt</li>
+						</capacities>
+						<power>8.2</power>
+						<cooldownTime>2</cooldownTime>
+						<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+						<chanceFactor>0.2</chanceFactor>
+						<armorPenetrationBlunt>0.35</armorPenetrationBlunt>
+					</li>
+				</tools>
+			</value>
+		</nomatch>
+	</Operation>
+</Patch>

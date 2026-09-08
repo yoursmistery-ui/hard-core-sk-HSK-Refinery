@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Kiiro_MineralFound</defName>
+    <label>mineral found by kiiros</label>
+    <workerClass>SitePartWorker_PreciousLump</workerClass>
+    <description>Mineable lumps of precious resources.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Kiiro_Event/Icon/MineralFound</expandingIconTexture>
+    <forceExitAndRemoveMapCountdownDurationDays>11</forceExitAndRemoveMapCountdownDurationDays>
+    <mainPartAllThreatsLabel>unknown threat may appear</mainPartAllThreatsLabel>
+    <tags>
+      <li>Kiiro_MineralFound</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_MineralFound</defName>
+    <linkWithSite>Kiiro_MineralFound</linkWithSite>
+    <order>450</order>
+    <genStep Class="Kiiro_Event.GenStep_PreciousLump">
+      <mineables>
+        <li>MineableGold</li>
+        <li>MineableSilver</li>
+        <li>MineableSteel</li>
+        <li>MineablePlasteel</li>
+        <li>MineableComponentsIndustrial</li>
+        <li>MineableUranium</li>
+        <li>MineableJade</li>
+      </mineables>
+      <totalValueRange><min>1500</min><max>3500</max></totalValueRange>
+      <nearMapCenter>true</nearMapCenter>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ============================================================================
+       HSK 杂活补漏 (cross-mod chores that bind no vanilla JobDef) — NEW TOOLS.
+       这两件工作既不是原版 JobDef、也进不了已有工具的 jobDefs 列表，原因是老工具身上
+       还挂着额外门禁：
+         · JE_Tool_Needle 带 workbenchDefs(Hand/ElectricTailoringBench)，而 Mending 的
+           Mend 作业台子可能是别的 mod 的缝纫台 -> 单独一条无门禁的 def 更确定；
+         · JE_Tool_Sickle 带 nonTreeOnly(要求 targetA 是非树植物)，而 VEF 的拔草
+           (VEF_RemoveWeeds) 目标是工作格 -> 复用同一张镰刀贴图另开一条。
+       贴图全部复用(Needle / Sickle)，只改参数。jobDefs 按 defName 字符串匹配，
+       对应 mod 未启用时永不命中 -> 天然惰性，无需门控补丁。
+       文件名 H 开头排在 JobTools_JobEffects.xml 之前(字母序=def 序)。
+       ============================================================================ -->
+
+  <!-- 修补针: Mending(&回收) 的 Mend 作业——小人在台子上捏针缝补破损衣物。与缝纫台针
+       同一动作同一贴图，只是不限工作台，保证 HSK 环境里换过的缝纫台也能画出来。 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_MendingNeedle</defName>
+    <handCount>1</handCount>
+    <handPosA>0.32</handPosA>
+    <jobDefs>
+      <li>Mend</li>
+    </jobDefs>
+    <texPath>Things/JobEffects/Tools/Needle</texPath>
+    <swingStyle>Stab</swingStyle>
+    <stabVaried>true</stabVaried>
+    <scale>0.6</scale>
+    <reach>0.12</reach>
+    <period>0.32</period>
+    <stabDistance>0.26</stabDistance>
+    <idleScale>0.7</idleScale>
+    <idleAngle>150</idleAngle>
+  </JobEffects.JobToolDef>
+
+  <!-- 除草镰: VEF 的 removing weeds(拔除杂草地块)。镰刀横扫割草，草叶+少量土块飞起
+       (草被连根拔起，所以带一点泥土)，与收割镰同一张贴图，但不带 nonTreeOnly 门禁。 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_WeedSickle</defName>
+    <handPosA>0.16</handPosA>
+    <handPosB>0.36</handPosB>
+    <jobDefs>
+      <li>VEF_RemoveWeeds</li>
+    </jobDefs>
+    <texPath>Things/JobEffects/Tools/Sickle</texPath>
+    <swingStyle>Sweep</swingStyle>
+    <scale>0.95</scale>
+    <reach>0.18</reach>
+    <period>0.6</period>
+    <windupAngle>70</windupAngle>
+    <strikeSound>JE_SickleSwish</strikeSound>
+    <impactBitFleck>JE_LeafFall</impactBitFleck>
+    <impactBitCount>6</impactBitCount>
+    <impactBitSpeed>2~5</impactBitSpeed>
+    <impactBitScale>0.35~0.56</impactBitScale>
+    <impactSpread>95</impactSpread>
+    <impactBitFleck2>JE_SoilClod</impactBitFleck2>
+    <impactBitCount2>3</impactBitCount2>
+    <impactBitSpeed2>2~4</impactBitSpeed2>
+    <impactBitScale2>0.25~0.45</impactBitScale2>
+    <impactSpread2>70</impactSpread2>
+    <seasonTintBits>true</seasonTintBits>
+    <restFleck>JE_LeafPale</restFleck>
+    <idleScale>0.62</idleScale>
+    <idleAngle>150</idleAngle>
+  </JobEffects.JobToolDef>
+
+</Defs>

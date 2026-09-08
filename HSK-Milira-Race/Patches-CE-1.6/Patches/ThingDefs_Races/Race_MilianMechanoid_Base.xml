@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]/statBases</xpath>
+        <value>
+            <CarryWeight>50</CarryWeight>
+            <CarryBulk>25</CarryBulk>
+            <ArmorRating_Electric>1.5</ArmorRating_Electric>
+            <!-- <Suppressability>0</Suppressability> -->
+            <SmokeSensitivity>0</SmokeSensitivity>
+            <NightVisionEfficiency>0.80</NightVisionEfficiency>
+            <MeleeDodgeChance>0.1</MeleeDodgeChance>
+            <MeleeCritChance>0.04</MeleeCritChance>
+            <MeleeParryChance>0.04</MeleeParryChance>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]</xpath>
+        <value>
+            <damageMultipliers>
+                <li>
+                    <damageDef>Electrical</damageDef>
+                    <multiplier>0</multiplier>
+                </li>
+            </damageMultipliers>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]</xpath>
+            <value>
+                <comps />
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]/comps</xpath>
+        <value>
+            <li>
+                <compClass>CombatExtended.CompPawnGizmo</compClass>
+            </li>
+            <!-- <li Class="CombatExtended.CompProperties_Suppressable" /> -->
+            <li>
+                <compClass>CombatExtended.CompAmmoGiver</compClass>
+            </li>
+            <li Class="CombatExtended.CompProperties_MechAmmo">
+                <gizmoIconSetMagCount>UI/Buttons/SetMagCount</gizmoIconSetMagCount>
+                <gizmoIconTakeAmmoNow>UI/Buttons/TakeAmmoNow</gizmoIconTakeAmmoNow>
+            </li>
+            <li Class="CombatExtended.CompProperties_ArmorDurability">
+                <Durability>1000</Durability>
+                <Regenerates>false</Regenerates>
+                <Repairable>true</Repairable>
+                <RepairIngredients>
+                    <Milira_SplendidSteel>10</Milira_SplendidSteel>
+                    <Milira_Feather>5</Milira_Feather>
+                </RepairIngredients>
+                <RepairTime>300</RepairTime>
+                <RepairValue>200</RepairValue>
+                <CanOverHeal>true</CanOverHeal>
+                <MaxOverHeal>70</MaxOverHeal>
+                <MinArmorPct>0.5</MinArmorPct>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>/Defs/ThingDef[@Name="Milira_BaseMilian"]</xpath>
+        <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+                <bodyShape>Humanoid</bodyShape>
+            </li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>/Defs/PawnKindDef[@Name="BaseMilianKind_Mechanoid"]</xpath>
+        <value>
+            <li Class="CombatExtended.LoadoutPropertiesExtension">
+                <primaryMagazineCount>
+                    <min>8</min>
+                    <max>8</max>
+                </primaryMagazineCount>
+            </li>
+        </value>
+    </Operation>
+
+</Patch>

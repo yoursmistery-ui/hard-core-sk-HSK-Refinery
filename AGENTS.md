@@ -37,11 +37,18 @@
 - **关自动配方**: Replace recipeMaker 为 IsNull **不生效**,须 Add `<recipeMaker Inherit="False" IsNull="True"/>` 到 ThingDef(12 号: 先条件 Remove 再 Add)。
 - **改自动配方工作台**: 整体 Replace/Add recipeMaker + `Inherit="false"`(深度合并,否则 recipeUsers 合并挂两台)。
 - PatchOperation 操作**原始 XML,不解析继承**: 子类无自有节点时 xpath 报 "Failed to find a node",须打基类 `[Name="XXXBase"]` 或 Add 到 ThingDef 自身。
+- **补丁勿给"有继承关系的父子 def"挂同一 thingCategory(2026-09-03)**: XML 继承会把父类 thingCategories 列表并入子类,父子都补 → 子类重复 → config error "has duplicate thingCategory"。子 def 只补父 def 即可(分类经继承获得)。父子关系须在**原始 Defs**上按 Name/ParentName 链排查(Unified 终态已剥 ParentName),并纳入补丁改名(实例: VMS 把 Core_SK `Plastic` 挂名 `HDPEBase` → PPPlastic/PVCPlastic;`AnodizedAluminiumRed` 自带 Name → AnodizedAluminiumBlue)。15 号生成器已内置此检查;排查脚本 `_tmp/材料门控/find_inherited_patched.py`。
 - **xpath 不支持 union(`A|B`)**,须拆多 Operation;Conditional 的 nomatch Add 目标必须存在。
+- **1.6 已删除 `ITab_Fuel` 类型**(Assembly-CSharp.dll 字节级确认): CompProperties_Refuelable 建筑的 def **不要再写** `<inspectorTabs><li>ITab_Fuel</li></inspectorTabs>`,1.6 燃料页签由 CompRefuelable 自动挂载;写了必报 "Could not find a type named ITab_Fuel" + 随后 ResolveReferences 的 inspector tab ArgumentNullException(两条报错同源)。ITab_Shells/ITab_Storage 等其余页签类型仍在,写法不变。
+- **挂 `<li>ITab_Bills</li>` 的建筑必须 worktable 系类**: `ITab_Bills.get_SelTable` 对 SelThing 硬转 `IBillGiver`,thingClass 不是 `Building_WorkTable`/`Building_WorkTable_HeatPush`/UF 等实现者就报 `InvalidCastException`(实例: RK_CraftTableBase 继承 Core_SK 餐桌基类 TableBase,thingClass 被带成 Building,蚕匾/沤浆池/造纸台/抄写台账单页全炸)——从非工作台抽象基类继承时必须显式写 `<thingClass>Building_WorkTable</thingClass>`。
 - **补丁执行顺序=文件名(字符串)序,`1xx` 是陷阱编号**: `105_` 首字符 '1' < '3'/'5'/'9',实际排在 11/32/52/91 号**之前**。**永远不要把 1xx 当"最终层补丁"**(引用它后 Add 的节点时目标尚不存在,Replace 全报 Failed)。要"最后执行"用 >91 的两位数编号或并入 92 号末尾;引用其它补丁 Add 的节点须验证目标补丁文件名序在自身之前。
 - **1.6 起 Operation 级 `MayRequire` 已失效**(反编译确认: PatchOperation 无该字段,Apply/Conditional 均不检查)→ 未装目标 mod 时操作仍执行报错。**根治: 一律用 xpath 存在性门控**(外层 PatchOperationConditional 检查目标 def 节点是否存在)或 PatchOperationFindMod。注意 Def 节点级 MayRequire(如 `<li MayRequire="Ludeon.RimWorld.Biotech">`)仍有效,勿删。
 - **禁用 FindMod+Sequence 嵌套**(1.6 实测不生效)→ **一律顶层独立 Operation**: 原版职位用顶层 Conditional(xpath 存在性,match=Replace/nomatch=Add);VME/可选 mod 职位用顶层 Conditional + match=Sequence[内层 Conditional];可选内容用顶层 Conditional(xpath=该 mod 特有 def 存在门控)+Sequence。
 - **改补丁后必须用 `_tmp/patch_simulator.py`(lxml)模拟执行验证**(lxml 与 .NET 语义差异: xpath 无前导 / 时统一加 /;Sequence 子元素 tag 是 li;Conditional/FindMod 的 match 是单个 Operation 整体递归)。
+- **Conditional 的 match/nomatch 必须用属性形式 `<match Class="PatchOperationReplace">`,禁止 `<match><Operation Class="...">` 嵌套**(2026-09-04 实例: 乡村研究补丁嵌套写法 → "doesn't correspond to any field in type PatchOperation",19 操作全废)。
+- **PatchOperationReplace 语义 = 把 value 的"子节点"拼回被匹配节点位置**: Replace 整个 `researchPrerequisites` 节点时 value 必须保留 `<researchPrerequisites>` 完整外层,写裸 `<li>` 会把 li 直接拼进 ThingDef(researchPrerequisites 整个被删且 XML 非法)。
+- **Conditional 两分支 value 处理列表节点一律带 `Inherit="False"`**,挡父类继承的旧列表项(实例: Rustic_CastleWallEmbrasures 无自身 prereq,父类 Rustic_CastleWallBase 挂 Stonecutting,不挡则终态双前置)。Replace 分支即使用不上也统一带,防后续父类改动。
+- **About.xml 的 `<description>` 内禁未转义 HTML 标签**(`<font>/<b>` 等): 字符串字段含子 XML 元素 → 启动报 `MissingMethodException: Default constructor not found for type System.String`(每次域重载一次)。强调文本用【】或纯文本。
 - **按主题合并/精简补丁(减少 xml 数)安全法**: ①**只搬不改**——逐字抽取每个源文件 `<Patch>` inner 按原文件名序拼接成新 `<Patch>`,绝不 reformat 操作内容;②新文件命名占据"组内首个源"的排序位,且**只做连续段切分**(不跨段移动某操作到另一段),保证全局执行顺序逐一不变;③若想把不相交主题各自合并成一块,须先证两组触及的 def **零交集**(`indep_check` 式 token 交集为空)才能相对任意重排;④合并后跑 `_tmp/merge_equiv.py` 把"原始集 vs 合并集"应用到同一 pre-patch 基线树,diff 最终 def 状态须 0 差异,并对合并文件 inner 做注释/空白归一后与源拼接做字节相等核对。工具类示例见 §7.8。
 - **RecipeDef 同挂 researchPrerequisite+researchPrerequisites 告警**: 继承 BaseMakeableGun 的枪若子类另写复数前置列表,深度合并后单个 Gunsmithing 仍被继承保留 → 两字段并存报错。**无法用 xpath 删继承节点**,根治: 在子类 recipeMaker 内 Add 空节点 `<researchPrerequisite Inherit="false" />` 屏蔽继承的单个前置,复数列表保留(多头科研必须用列表)。
 - **ResearchTreeSK 重复解锁**: 同一无门槛配方挂 2 个以上同研究解锁的工作台 → 启动报 "duplicate unlocked defs"。根治: 给配方补显式 `<researchPrerequisite>`(被工作台遍历跳过)或从其中一个工作台删该配方/recipeUsers 条目。验证以游戏日志为准(Unified.xml 可能含 DefOverwrite 双份误报)。
@@ -56,6 +63,7 @@
 ## 4. 汉化与贴图铁律
 
 - **DefInjected 根节点必须 `<LanguageData>`**,defName 作**节点名**(`<ThingDef><X><label>..</label></X></ThingDef>`);写成 `<Defs>`+`<defName>值</defName>` 会被**静默跳过、日志无报错**。
+- **改材料名必须同时管短形容词(2026-09-08)**: 成品物品名 = `"ThingMadeOfStuffLabel".Translate(stuff.LabelAsStuff, 物品名)`,而 `ThingDef.LabelAsStuff = stuffProps.stuffAdjective ?? label`(反编译确认)。∴ 只改 `<X.label>` 成长名会把**整串材料名当形容词拼进物品名**(实例 `强化工程级·电力工业·美狐陶瓷鼠族戒杖`)。材料名可以长、**形容词必须短**:补 `<X.stuffProps.stuffAdjective>美狐陶瓷</X.stuffProps.stuffAdjective>`(DefInjected 支持嵌套字段路径,见 `DefInjectionPackage.SetDefFieldAtPath`)。缺口扫描/生成 = `_tmp/metals_doc/scan_adjective_gaps.py` + `apply_short_adjective.py`,落位 `1.6hsk附属mod汉化/1.6/补译_材料能力档/.../DefInjected/ThingDef/材料能力档_短形容词.xml`(18 项:美狐陶瓷/军规陶瓷/天界鳞、黑曜石、5 宝石、9 矿石);其余 90 个改名材料核心汉化已带中文形容词。
 - **DefInjected 全不加载的兜底**: 本地整合 mod 汉化失效时,把中文 label/description 直接注入 Defs 文件(`_tmp/酒馆汉化修复/inject_labels.py`),100% 生效。
 - About.xml/description **不能含未转义 `<tag>`**(整 mod 被静默移出 ModsConfig);写完 ET.parse 验证。
 - **统一贴图方向命名**: 机制A渲染的耳朵贴图需 `_east/_north/_south/_west` 四方向;耳朵 `_west`=`_east` 水平镜像。特殊异种耳贴图原缺 `_west`(机制B下无此需),改走机制A后必须补全。
@@ -142,7 +150,7 @@
 | 西风骑士团武器/装甲/书整合(含体型缩放 DLL) | `docs/维护详录_鼠族HSK拓展.md` §1.1 |
 | 全部踩坑实例(补丁/汉化/DLL/崩溃/异种渲染) | §3 |
 | 研究节点终态与金鼠族/鼠邦 | §4 |
-| 配方材料规则(科技档/工作台/无抽奖/金鼠族材料) | §5 |
+| 配方材料规则(科技档/工作台/无抽奖/金鼠族材料) + **材料科技档硬门控(材料档≥物品档, StuffTechGate DLL+StuffTechTiers.xml+零部件 14 号补丁+金属锭科技分类 15 号)** | §5 |
 | CE 适配三件套 / 弹药体系 / CompPawnGizmo | §6 |
 | 补丁职责与各迁移史 | §7 |
 | 补丁按主题合并精简(工具24→3 / 相邻段合并 / 全树等价验证法) | §7.8 |

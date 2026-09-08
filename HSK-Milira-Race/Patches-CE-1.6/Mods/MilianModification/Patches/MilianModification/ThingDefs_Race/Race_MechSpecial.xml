@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_FloatUnit_SmallShield -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_SmallShield"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                    <cooldownTime>2.0</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- Milian_FloatUnit_SmallBomb -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_SmallBomb"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                    <cooldownTime>2.0</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_SmallBomb"]/comps/li[@Class="AncotLibrary.CompProperties_SelfDetonation"]</xpath>
+        <value>
+            <li Class="MiliraCE.CompProperties_SelfDetonation">
+                <radius>6</radius>
+                <damageAmount>50</damageAmount>
+                <damageDef>Bomb</damageDef>
+                <angle>30</angle>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Milian_FloatUnit_SmallSniper -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_FloatUnit_SmallSniper"]/tools</xpath>
+        <value>
+            <tools Inherit="false">
+                <li Class="CombatExtended.ToolCE">
+                    <label>body</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>2</power>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                    <cooldownTime>2.0</cooldownTime>
+                    <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+                    <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_AutonomousFloatUnit_ElectromagneticSniper</defName>
+        <statBases>
+            <SightsEfficiency>3</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+            <Bulk>3</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MilianAutonomousFloatUnit_ElectromagneticSniper</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>75</range>
+            <soundCast>Milira_Shot_MagneticRailRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <defaultCooldownTime>6.8</defaultCooldownTime>
+            <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+            <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>408</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+</Patch>

@@ -30,11 +30,17 @@
 		<backstoryCategories>
 			<li>Offworld</li>
 		</backstoryCategories>
-<!-- 本派系不写 xenotypeSet: 原稿曾引用 OAGene_WhiteRatkin / OAGene_TravelRatkin /
-		 OAGene_BiochemicalRatkinI 三个异种人,但它们由 [OA]Ratkin Gene Expand 提供,
-		 本环境未安装(Data/本地 Mods/创意工坊全量检索均无该 XenotypeDef) → 死引用会让
-		 池权重全数落空、余量全部划给智人种(BaselinerChance = 1 − Σ)。
-		 故删掉注释残块, 改由 92 号③ 的 RatkinFactionBase 纯鼠族池统一供给。 -->
+<!-- 2026-09-07 主题池: 多国联军,多样性侧重(河狸/松鼠生产 + 废土鼠/田鼠边地);
+		 不产豚鼠/实验鼠/仓鼠(用户定)。原稿 OAGene_WhiteRatkin 系死引用已删。 -->
+		<xenotypeSet Inherit="False">
+			<xenotypeChances>
+				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
+				<Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Beaver>
+				<Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+				<Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Waster>
+				<Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+			</xenotypeChances>
+		</xenotypeSet>
 <pawnGroupMakers Inherit="False">
 			<li>
 				<kindDef>Combat</kindDef>
@@ -270,6 +276,7 @@
 		<canStageAttacks>true</canStageAttacks>
 		<factionIconPath>UI/Icons/Factions/RK_CA</factionIconPath>
 		<techLevel>Industrial</techLevel>
+		<naturalEnemy>true</naturalEnemy>
 		<fixedLeaderKinds>
             <li>RatkinEliteDefender</li>
         </fixedLeaderKinds>
@@ -277,11 +284,16 @@
 		<backstoryCategories>
 			<li>Offworld</li>
 		</backstoryCategories>
-<!-- 本派系不写 xenotypeSet: 原稿曾引用 OAGene_WhiteRatkin / OAGene_TravelRatkin /
-		 OAGene_BiochemicalRatkinI 三个异种人,但它们由 [OA]Ratkin Gene Expand 提供,
-		 本环境未安装(Data/本地 Mods/创意工坊全量检索均无该 XenotypeDef) → 死引用会让
-		 池权重全数落空、余量全部划给智人种(BaselinerChance = 1 − Σ)。
-		 故删掉注释残块, 改由 92 号③ 的 RatkinFactionBase 纯鼠族池统一供给。 -->
+<!-- 2026-09-07 主题池: 军事同盟,战力侧重(仓鼠近战蛮兵/废土鼠射手/雪鼠机动)。
+		 原稿 OAGene_WhiteRatkin 系死引用已删。 -->
+		<xenotypeSet Inherit="False">
+			<xenotypeChances>
+				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+				<Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.12</Ratkin_Hamster>
+				<Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Waster>
+				<OAGene_SnowRatkin>0.04</OAGene_SnowRatkin>
+			</xenotypeChances>
+		</xenotypeSet>
 <pawnGroupMakers Inherit="False">
 			<li>
 				<kindDef>Combat</kindDef>

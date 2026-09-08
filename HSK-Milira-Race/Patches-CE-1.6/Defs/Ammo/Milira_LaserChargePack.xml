@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMiliraLaserChargePack</defName>
+        <label>Milira laser charge pack</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberCharge</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+ <!-- Milira_RayPistol 射线手枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraRayPistol</defName>
+        <label>Milira laser charge pack</label>
+        <ammoTypes>
+            <Ammo_MiliraLaserChargePack>Bullet_MiliraRayPistol</Ammo_MiliraLaserChargePack>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+   <!-- Milira_RayRifle射线步枪 -->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraRayRifle</defName>
+        <label>Milira laser charge pack</label>
+        <ammoTypes>
+            <Ammo_MiliraLaserChargePack>Bullet_MiliraRayRifle</Ammo_MiliraLaserChargePack>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+   <!-- Milira_ConvergentRaySniper聚能射线狙击枪 -->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraConvergentRaySniper</defName>
+        <label>Milira laser charge pack</label>
+        <ammoTypes>
+            <Ammo_MiliraLaserChargePack>Bullet_MiliraConvergentRaySniper</Ammo_MiliraLaserChargePack>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+    <!-- Milira_LaserMG脉冲激光机枪 -->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraLaserMG</defName>
+        <label>Milira laser charge pack</label>
+        <ammoTypes>
+            <Ammo_MiliraLaserChargePack>Bullet_MiliraLaserMG</Ammo_MiliraLaserChargePack>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+        <defName>Ammo_MiliraLaserChargePack</defName>
+        <label>Milira laser charge pack</label>
+        <description>A charge pack for various laser weapons used by Milira.</description>
+        <statBases>
+            <Mass>0.008</Mass>
+            <Bulk>0.01</Bulk>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMiliraLaserChargePack</li>
+        </thingCategories>
+        <stackLimit>5000</stackLimit>
+        <graphicData>
+            <texPath>Things/Ammo/LaserPack</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <ammoClass>Laser</ammoClass>
+    </ThingDef>
+
+    <!-- ================== Projectiles ================== -->
+
+    <ThingDef ParentName="BaseBulletCE" Name="Bullet_MiliraLaserBase" Abstract="True">
+        <label>ray</label>
+        <thingClass>MiliraCE.BulletCE_AncotBeam</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_Ray</damageDef>
+            <stoppingPower>0.2</stoppingPower>
+            <speed>325</speed>
+            <gravityFactor>0.01</gravityFactor>
+            <beamMoteDef>Milira_Mote_LaserPulse</beamMoteDef>
+            <beamStartOffset>1</beamStartOffset>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/Null/null</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_Custom_Extension">
+                <impactEffecter>Milira_PlasmaChargeFire_Backward_Big</impactEffecter>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraLaserBase">
+        <defName>Bullet_MiliraRayPistol</defName>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageAmountBase>6</damageAmountBase>
+            <armorPenetrationSharp>20</armorPenetrationSharp>
+            <armorPenetrationBlunt>0.001</armorPenetrationBlunt>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraLaserBase">
+        <defName>Bullet_MiliraRayRifle</defName>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageAmountBase>10</damageAmountBase>
+            <armorPenetrationSharp>25</armorPenetrationSharp>
+            <armorPenetrationBlunt>0.001</armorPenetrationBlunt>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraLaserBase">
+        <defName>Bullet_MiliraConvergentRaySniper</defName>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageAmountBase>15</damageAmountBase>
+            <armorPenetrationSharp>39</armorPenetrationSharp>
+            <armorPenetrationBlunt>0.001</armorPenetrationBlunt>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraLaserBase">
+        <defName>Bullet_MiliraLaserMG</defName>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageAmountBase>17</damageAmountBase>
+            <armorPenetrationSharp>25</armorPenetrationSharp>
+            <armorPenetrationBlunt>0.001</armorPenetrationBlunt>
+        </projectile>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="ChargeAmmoRecipeBase">
+        <defName>MakeAmmo_MiliraLaserChargePack</defName>
+        <label>make Milira laser charge pack x500</label>
+        <description>Craft 500 Milira laser charge pack.</description>
+        <jobString>Making Milira laser charge pack.</jobString>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>8</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>8</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Plasteel</li>
+                <li>Steel</li>
+                <li>ComponentIndustrial</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MiliraLaserChargePack>500</Ammo_MiliraLaserChargePack>
+        </products>
+        <workAmount>8400</workAmount>
+    </RecipeDef>
+
+</Defs>

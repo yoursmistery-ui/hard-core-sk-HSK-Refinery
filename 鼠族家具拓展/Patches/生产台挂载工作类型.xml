@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 生产台挂载工作类型 (2026-09-05)
+	     根因: 本 mod 生产台 defName 未挂进任何 WorkGiverDef 的 fixedBillGiverDefs,
+	     WorkGiver_DoBill.ThingIsUsableBillGiver 只认该列表 → 台子有账单也永不出活
+	     (屠宰台/灶台/篝火全部只显示账单、小人永不来干活; 鼠族屠宰台无法屠宰即此因)。
+	     写法沿用 工案工作台挂载工作类型.xml 的 Sequence+Test 门控。
+	     挂载映射(参照 Core_SK 同类台):
+	       RKFC_GL_TableButcher   → DoBillsButcherFlesh(屠宰尸体) + DoBillsCook(其余烹饪配方, 同 TableKitchen 双挂模式)
+	       RKFC_RGK_FueledStove   → DoBillsCook(同 FueledStove)
+	       RKFC_GL_ElectricStove  → DoBillsCook(同 ElectricStove)
+	       RKFC_GL_Bonfire        → DoBillsCook(同 Campfire 系)
+	     注: RKFC_GL_FueledSmithy/ElectricSmithy 无 recipes(账单页为空), 无需挂载。 -->
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/WorkGiverDef[defName="DoBillsButcherFlesh"]/fixedBillGiverDefs</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/WorkGiverDef[defName="DoBillsButcherFlesh"]/fixedBillGiverDefs</xpath>
+				<value>
+					<li>RKFC_GL_TableButcher</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/WorkGiverDef[defName="DoBillsCook"]/fixedBillGiverDefs</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/WorkGiverDef[defName="DoBillsCook"]/fixedBillGiverDefs</xpath>
+				<value>
+					<li>RKFC_GL_TableButcher</li>
+					<li>RKFC_RGK_FueledStove</li>
+					<li>RKFC_GL_ElectricStove</li>
+					<li>RKFC_GL_Bonfire</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

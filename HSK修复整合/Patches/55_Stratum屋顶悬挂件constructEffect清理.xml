@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  55_Stratum屋顶悬挂件constructEffect清理.xml (2026-09-06)
+  目的: 消除启动 Config error "madeFromStuff but has a defined constructEffect
+        (which will always be overridden by stuff's construct animation)"。
+  源头: Core_SK_Stratum(1.6)/Defs/Things/Buildings/RoofAttachments/{Hanging,RoofTop}.xml
+        里 5 个 madeFromStuff 建筑自带 constructEffect=ConstructMetal;
+        madeFromStuff 时该字段恒被选材动画覆盖, 属无效字段, 直接摘除。
+        仅摘日志实际报错的 5 个 def, 其余非 madeFromStuff 的 constructEffect 不动。
+  位次: 文件名序 55_ 无既有依赖; Core_SK_Stratum 为硬前置(加载序恒在本 mod 之前)。
+  门控: 1.6 Operation 级 MayRequire 失效 → 顶层 Conditional 以 constructEffect
+        节点存在性作门控(节点在则摘除, 不在则静默跳过)。
+-->
+<Patch>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-PASpeaker_Hanging"]/constructEffect</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-PASpeaker_Hanging"]/constructEffect</xpath>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-PATransmitter"]/constructEffect</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-PATransmitter"]/constructEffect</xpath>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RooftopScannerBooster"]/constructEffect</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RooftopScannerBooster"]/constructEffect</xpath>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RotaryTurbineVent"]/constructEffect</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RotaryTurbineVent"]/constructEffect</xpath>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RooftopSolarGenerator"]/constructEffect</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="SolarWeb-Stratum-RooftopSolarGenerator"]/constructEffect</xpath>
+    </match>
+  </Operation>
+</Patch>

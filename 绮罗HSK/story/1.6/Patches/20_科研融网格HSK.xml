@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 绮罗 科研融入 HSK 主网格: 每节点补 requiredResearchBuilding(按档)+SK.AdvancedResearchExtension 硬门槛+ResearchTreeSKModExtension; 坐标落空行 Y>=90 全局唯一零撞车, X=10+依赖深度(前置严格左). 外部前置(Machining/MicroelectronicsBasics/OrbitalTech/ComplexFurniture)实测同/低于本节点档, 不越级. -->
+  <!-- Kiiro_Furniture : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Furniture"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Furniture"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Furniture"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Furniture"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Furniture"]/researchViewY</xpath>
+    <value><researchViewY>116</researchViewY></value>
+  </Operation>
+</Patch>

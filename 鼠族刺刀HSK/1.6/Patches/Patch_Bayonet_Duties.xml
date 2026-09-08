@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 敌方 AI 刺刀: 把刺刀决策节点插进原版战斗职责链
+          (模式照抄 Ratkin Weapons+ Patches/Duties.xml, 仅保留刺刀部分)
+          JobGiver 内部会校验武器带刺刀组件且冷却完毕, 对其它种族无副作用 -->
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/DutyDef[defName = "AssaultColony" or defName = "Defend" or defName="Escort" or defName="HuntEnemiesIndividual" or defName="PrisonerEscape" or defName="AssaultThing"]/thinkNode[@Class="ThinkNode_Priority"]/subNodes/li[@Class="JobGiver_TakeCombatEnhancingDrug"]</xpath>
+    <value>
+      <li Class="RatkinWeapons.JobGiver_TryUseBayonet">
+      </li>
+    </value>
+  </Operation>
+</Patch>

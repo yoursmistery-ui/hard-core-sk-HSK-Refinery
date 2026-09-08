@@ -118,6 +118,10 @@
       <li>HarvestDesignated</li>
       <li>Harvest</li>
       <li>ExtractTree</li>
+      <li>FellTree</li>
+      <li>FellTreeDesignated</li>
+      <li>HarvestTree</li>
+      <li>HarvestTreeDesignated</li>
     </jobDefs>
     <treeOnly>true</treeOnly>
     <motionBlur>false</motionBlur>
@@ -154,8 +158,9 @@
   </JobEffects.JobToolDef>
 
   <!-- Construction hammer: building WOOD (and soft — fabric/leather upholstery tacking)
-       frames, plus roofing in both directions. Stone and metal frames fail the
-       frameStuffCategories filter and fall through to the build chisel / welder below. -->
+       frames, WOOD FLOORS (via the ConstructWood build effect — a terrain frame has no Stuff),
+       plus roofing in both directions. Stone and metal frames fail the frameStuffCategories
+       filter and fall through to the build chisel / welder below. -->
   <JobEffects.JobToolDef>
     <defName>JE_Tool_Hammer</defName>
     <handPosA>0.15</handPosA>
@@ -164,13 +169,34 @@
       <li>FinishFrame</li>
       <li>BuildRoof</li>
       <li>RemoveRoof</li>
+      <li>SolarWeb-Stratum-BuildCustomRoof</li>
+      <li>SolarWeb-Stratum-RepairCustomRoof</li>
+      <li>UpgradeBuilding</li>
     </jobDefs>
-    <!-- FinishFrame only; BuildRoof/RemoveRoof ignore this filter -->
+    <!-- FinishFrame only; BuildRoof/RemoveRoof ignore this filter.
+         FLOORS are matched through this same list too: a floor frame has no Stuff, so the tool
+         resolves the terrain's BUILD COST categories instead (see ToolAnimator.TerrainCostCategories).
+         WoodLogs / Bambooish / Straw only ever show up there — 原木地板(LogFloor/Tiki/Rustic)、
+         竹地板(TikiFloorBamboo)、草席/茅草地板(Thatch/Weave/WovenLeaf/StrawMatting) — none of those
+         planks carry Woody, so without them those floors would stay bare-handed. -->
     <frameStuffCategories>
       <li>Woody</li>
       <li>Fabric</li>
       <li>Leathery</li>
+      <li>WoodLogs</li>
+      <li>Bambooish</li>
+      <li>Straw</li>
     </frameStuffCategories>
+    <!-- Belt-and-braces: the material list above now claims wood floors through their build cost
+         (木板/竹/原木/草席地板). This early claim additionally catches a modded wood floor whose
+         cost item carries NO stuffProps at all (a custom "planks" thing), which the cost lookup
+         cannot read — the engine's own ConstructWood build effect still names it as wood work.
+         ConstructMetal would hand metal/ceramic/tech floors to the hammer (wrong tool: they belong
+         to the welder / chisel lists), ConstructDirt would drag 石砖+地毯+草席 all onto the hammer,
+         so neither goes here. -->
+    <buildConstructEffects>
+      <li>ConstructWood</li>
+    </buildConstructEffects>
     <texPath>Things/JobEffects/Tools/Hammer</texPath>
     <!-- RETEXTURE: new head is shorter in-canvas; bump scale to keep the visible tool size. -->
     <scale>1.12</scale>
@@ -206,8 +232,13 @@
     <jobDefs>
       <li>FinishFrame</li>
     </jobDefs>
+    <!-- Floors too (matched by their build cost): Ceramic / Matty = 马赛克砖、美狐瓷砖、哑光瓷砖
+         — masonry work, so they take the chisel rather than the welder their ConstructMetal /
+         ConstructDirt build effect would otherwise suggest. -->
     <frameStuffCategories>
       <li>Stony</li>
+      <li>Ceramic</li>
+      <li>Matty</li>
     </frameStuffCategories>
     <texPath>Things/JobEffects/Tools/Chisel</texPath>
     <malletTexPath>Things/JobEffects/Tools/Hammer</malletTexPath>
@@ -257,9 +288,18 @@
       <li>DisassembleMech</li>
     </jobDefs>
     <!-- FinishFrame only; Repair / FixBrokenDownBuilding ignore this filter.
-         "None" = unstuffed frames (machines, powered buildings — welder work). -->
+         "None" = unstuffed frames (machines, powered buildings — welder work).
+         Floors too (matched by their build cost): StrongMetallic / RuggedMetallic = 钢板·强化
+         地板, Precious = 金砖, Plastic / LightMaterial / HF = 塑胶地板·无菌砖·合纤地板 (the seam
+         gets heat-welded). 瓷砖类故意不在这里 — they carry Ceramic and take the chisel above. -->
     <frameStuffCategories>
       <li>Metallic</li>
+      <li>StrongMetallic</li>
+      <li>RuggedMetallic</li>
+      <li>Precious</li>
+      <li>Plastic</li>
+      <li>LightMaterial</li>
+      <li>HF</li>
       <li>None</li>
     </frameStuffCategories>
     <texPath>Things/JobEffects/Tools/Welder</texPath>
@@ -429,6 +469,9 @@
            Both target a cell (not a Thing), so they bypass every Thing/material gate. -->
       <li>RemoveFloor</li>
       <li>RemoveFoundation</li>
+      <li>Recycle</li>
+      <li>VFE_Loot</li>
+      <li>VME_DeconstructBuilding</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Crowbar</texPath>
     <swingStyle>Pry</swingStyle>
@@ -458,6 +501,7 @@
     <jobDefs>
       <li>SmoothWall</li>
       <li>SmoothFloor</li>
+      <li>SolarWeb-Stratum-SmoothRoof</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Chisel</texPath>
     <!-- Chisel-and-mallet: the chisel is held PLANTED against the rock while a small hand
@@ -495,6 +539,9 @@
     <jobDefs>
       <li>Clean</li>
       <li>ClearSnow</li>
+      <li>Clean_Prioritized</li>
+      <li>SolarWeb-Stratum-CleanSkylight</li>
+      <li>BeatFireWithTool</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Broom</texPath>
     <swingStyle>Sweep</swingStyle>
@@ -516,6 +563,7 @@
       <li>Sow</li>
       <li>PlantSeed</li>
       <li>Replant</li>
+      <li>SowWithSeeds</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Trowel</texPath>
     <swingStyle>Dig</swingStyle>
@@ -836,6 +884,31 @@
     <restFleck>JE_EmberRest</restFleck>
   </JobEffects.JobToolDef>
 
+  <!-- Eating spoon: a colonist eating a COOKED MEAL works a spoon through bite cycles — dip at
+       the plate, lift to the mouth, chew, back down (holdEat). Gated on the food's ingestible
+       foodType so nobody spoons an apple or laps kibble; art is the cook's spoon, drawn small. -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_EatingSpoon</defName>
+    <handCount>1</handCount>
+    <handPosA>0.12</handPosA>
+    <jobDefs>
+      <li>Ingest</li>
+    </jobDefs>
+    <ingestFoodTypes>
+      <li>Meal</li>
+    </ingestFoodTypes>
+    <texPath>Things/JobEffects/Tools/Spoon</texPath>
+    <swingStyle>Hold</swingStyle>
+    <holdEat>true</holdEat>
+    <scale>0.5</scale>
+    <reach>0.26</reach>
+    <period>2.4</period>
+    <holdAngleOffset>18</holdAngleOffset>
+    <holdLateral>0.05</holdLateral>
+    <!-- vanilla carries the meal itself; never park a spoon at the hip while walking -->
+    <noHolster>true</noHolster>
+  </JobEffects.JobToolDef>
+
   <!-- Drug-lab flask: making drugs at the drug lab. The colonist holds a full Erlenmeyer flask
        (TestTubeA1) upright, then slowly pours it out — tilting fully inverted at the bill's
        halfway point, where it swaps to the empty flask (TestTubeA2) — and rights it back upright
@@ -1008,6 +1081,8 @@
            when VFE isn't loaded — the lookup just never matches a job by this name. The competing
            VFE rod mote is suppressed in code so only our animated rod shows. -->
       <li>VCEF_FishJob</li>
+      <li>JobDef_FishAtFishingPier</li>
+      <li>JobDef_AquacultureBasinHarvest</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/FishingRod</texPath>
     <swingStyle>Hold</swingStyle>
@@ -1112,6 +1187,9 @@
     <handPosB>0.88</handPosB>
     <jobDefs>
       <li>TendPatient</li>
+      <li>TendPawnOnGround</li>
+      <li>TendSelf</li>
+      <li>Stabilize</li>
     </jobDefs>
     <!-- Default kit handles every tend EXCEPT herbal medicine (herbal bundle) and glitterworld
          medicine (the glitterworld kit covers that). -->
@@ -1271,6 +1349,10 @@
     <headScale>0.7</headScale>
     <jobDefs>
       <li>Research</li>
+      <li>RK_StudyBlueprint</li>
+      <li>SuperviseConstruction</li>
+      <li>SuperviseResearch</li>
+      <li>RimatomicsResearch</li>
     </jobDefs>
     <swingStyle>Scratch</swingStyle>
     <scale>0.8</scale>
@@ -1306,6 +1388,8 @@
     <handPosA>0.30</handPosA>
     <jobDefs>
       <li>Ignite</li>
+      <li>IgniteFire</li>
+      <li>UseSignalFire</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Torch</texPath>
     <swingStyle>Stir</swingStyle>
@@ -1333,6 +1417,11 @@
     <handPosB>0.38</handPosB>
     <jobDefs>
       <li>FillIn</li>
+      <li>FillUniversalFermenter</li>
+      <li>TakeProductOutOfUniversalFermenter</li>
+      <li>FillProcessor</li>
+      <li>EmptyProcessor</li>
+      <li>VSIE_BuildSnowmanTogether</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Shovel</texPath>
     <swingStyle>Dig</swingStyle>
@@ -1368,6 +1457,9 @@
       <li>StudyItem</li>
       <li>AnalyzeItem</li>
       <li>InvestigateMonolith</li>
+      <li>OARK_Job_Hack</li>
+      <li>JobDef_StudyStrangeArtifact</li>
+      <li>JobDef_StudyAncientStargate</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/HackDevice</texPath>
     <swingStyle>Stir</swingStyle>
@@ -1397,6 +1489,7 @@
       <li>Maintain</li>
       <!-- RepairMech moved to JE_Tool_Screwdriver below — the wrench keeps routine Maintain.
            RepairMechRemote is a channeled at-range ability — left off on purpose. -->
+      <li>OA_RK_RepairCircuitRegulator</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Wrench</texPath>
     <swingStyle>Crank</swingStyle>
@@ -1427,6 +1520,10 @@
     <handCount>1</handCount>
     <jobDefs>
       <li>RepairMech</li>
+      <li>ModifyWeapon</li>
+      <li>ArmDetonatorJob</li>
+      <li>DisarmDetonatorJob</li>
+      <li>InstallDetonator</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Screwdriver</texPath>
     <swingStyle>Crank</swingStyle>
@@ -1561,6 +1658,19 @@
     <handPosA>0.30</handPosA>
     <jobDefs>
       <li>RearmTurret</li>
+      <li>ReloadTurret</li>
+      <li>ReloadAutoLoader</li>
+      <li>MTA_TakeAmmo</li>
+      <li>MTA_UnloadAmmo</li>
+      <li>ReloadWeapon</li>
+      <li>BetterReload</li>
+      <li>ReloadFromInventory</li>
+      <li>Unload</li>
+      <li>VEF_RefuelSecondary</li>
+      <li>LoadRailgunMagazine</li>
+      <li>LoadSilo</li>
+      <li>RemoveFuelModule</li>
+      <li>UnloadPlutonium</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Shell</texPath>
     <swingStyle>Load</swingStyle>
@@ -1622,6 +1732,7 @@
     <handPosA>0.36</handPosA>
     <jobDefs>
       <li>Floordrawing</li>
+      <li>Doodle</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Crayon</texPath>
     <swingStyle>Stir</swingStyle>
@@ -1668,6 +1779,7 @@
     <jobDefs>
       <li>UseTelescope</li>
       <li>Skygaze</li>
+      <li>VSIE_Skygaze</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/Spyglass</texPath>
     <swingStyle>Hold</swingStyle>
@@ -1694,6 +1806,7 @@
     <jobDefs>
       <li>Pray</li>
       <li>Meditate</li>
+      <li>RK_Job_PrayerService</li>
     </jobDefs>
     <texPath>Things/JobEffects/Tools/RosaryB</texPath>
     <texPathProfile>Things/JobEffects/Tools/RosaryA</texPathProfile>

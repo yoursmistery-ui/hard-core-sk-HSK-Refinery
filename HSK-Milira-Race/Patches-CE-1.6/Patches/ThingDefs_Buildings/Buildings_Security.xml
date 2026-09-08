@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- TODO: Should these turrets use ammo or not? Their original versions don't need to be refueled. -->
+
+    <!-- MiliraTurret_Plasma -->
+<!--小型离子炮塔-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_Plasma"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_Plasma"]/statBases</xpath>
+        <value>
+            <Bulk>15</Bulk>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_Plasma"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_Plasma"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.85</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_Plasma"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+<!--小型离子炮-->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurretGun_Plasma</defName>
+        <statBases>
+            <Bulk>12</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.063</ShotSpread>
+            <SwayFactor>0.7</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraTurretPlasma</defaultProjectile>
+            <warmupTime>0.6</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>50</range>
+            <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+            <burstShotCount>5</burstShotCount>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>6</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>5</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- MiliraTurret_HeavyParticle -->
+<!--  重型粒子冲击炮塔 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/statBases</xpath>
+        <value>
+            <Bulk>160</Bulk>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.85</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyParticle"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+<!-- 重型粒子冲击炮 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurretGun_HeavyParticle</defName>
+        <statBases>
+            <Bulk>96</Bulk>
+            <SightsEfficiency>1.5</SightsEfficiency>
+            <ShotSpread>0.0648</ShotSpread>
+            <SwayFactor>1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraTurretHeavyParticle</defaultProjectile>
+            <warmupTime>2.3</warmupTime>
+            <recoilAmount>1</recoilAmount>
+            <minRange>0</minRange>
+            <range>78</range>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <burstShotCount>24</burstShotCount>
+            <soundCast>Shot_ChargeBlaster</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <stopBurstWithoutLos>false</stopBurstWithoutLos>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+            <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <noSingleShot>true</noSingleShot>
+        </FireModes>
+    </Operation>
+
+    <!-- MiliraTurret_HeavyPlasma -->
+<!--  重型电浆炮塔 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/statBases</xpath>
+        <value>
+            <Bulk>160</Bulk>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.85</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyPlasma"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+<!--重型电浆炮-->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurretGun_HeavyPlasma</defName>
+        <statBases>
+            <Bulk>96</Bulk>
+            <SightsEfficiency>1.8</SightsEfficiency>
+            <ShotSpread>0.0648</ShotSpread>
+            <SwayFactor>1.33</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraTurretHeavyPlasma</defaultProjectile>
+            <warmupTime>3.8</warmupTime>
+            <recoilAmount>1</recoilAmount>
+            <minRange>4.9</minRange>
+            <range>86</range>
+            <ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <stopBurstWithoutLos>false</stopBurstWithoutLos>
+            <soundAiming>Milira_HeavyPlasma_Aiming</soundAiming>
+            <aimingTargetMote>Mote_HellsphereCannon_Target</aimingTargetMote>
+            <aimingLineMote>Mote_HellsphereCannon_Aim</aimingLineMote>
+            <aimingChargeMote>Mote_HellsphereCannon_Charge</aimingChargeMote>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+            <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+            <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- MiliraTurret_HeavyRocketLauncher -->
+<!--  联装火箭炮塔 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/statBases</xpath>
+        <value>
+            <Bulk>160</Bulk>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/placeWorkers/li[.="PlaceWorker_ShowTurretRadius"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.85</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRocketLauncher"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+<!--联装火箭炮-->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurretGun_HeavyRocketLauncher</defName>
+        <statBases>
+            <Bulk>104</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootMortarCE</verbClass>
+            <defaultProjectile>Bullet_MiliraHeavyRocket</defaultProjectile>
+            <warmupTime>2.4</warmupTime>
+            <recoilAmount>1</recoilAmount>
+            <minRange>10</minRange>
+            <range>80</range>
+            <requireLineOfSight>false</requireLineOfSight>
+            <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+            <burstShotCount>8</burstShotCount>
+            <circularError>1.5</circularError>
+            <indirectFirePenalty>0.25</indirectFirePenalty>
+            <soundCast>Milira_Shot_Rocket</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <targetParams>
+                <onlyTargetDamagedThings>true</onlyTargetDamagedThings>
+            </targetParams>
+            <ai_RangedAlawaysShootGroundBelowTarget>true</ai_RangedAlawaysShootGroundBelowTarget>
+            <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+            <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <noSingleShot>true</noSingleShot>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef[defName="MiliraTurretGun_HeavyRocketLauncher"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName="MiliraTurretGun_HeavyRocketLauncher"]</xpath>
+            <value>
+                <comps />
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <!-- Optimizes speed of projectile with flyOverhead=true -->
+        <xpath>/Defs/ThingDef[defName="MiliraTurretGun_HeavyRocketLauncher"]/comps</xpath>
+        <value>
+            <li Class="CombatExtended.CompProperties_Charges">
+                <chargeSpeeds>
+                    <li>20</li>
+                    <li>30</li>
+                    <li>40</li>
+                    <li>50</li>
+                    <li>60</li>
+                </chargeSpeeds>
+            </li>
+        </value>
+    </Operation>
+
+
+    <!-- MiliraTurret_HeavyRailGun -->
+<!--重型电磁加农炮塔-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/thingClass</xpath>
+        <value>
+            <thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/statBases</xpath>
+        <value>
+            <Bulk>160</Bulk>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/statBases/ShootingAccuracyTurret</xpath>
+        <value>
+            <ShootingAccuracyTurret>1.00</ShootingAccuracyTurret>
+            <AimingAccuracy>0.50</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.85</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="MiliraTurret_HeavyRailGun"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+<!-- 重型电磁加农炮 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurretGun_HeavyRailGun</defName>
+        <statBases>
+            <Bulk>96</Bulk>
+            <SightsEfficiency>1.93</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>1.5</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraHeavyRailGun</defaultProjectile>
+            <warmupTime>3.8</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <minRange>4.9</minRange>
+            <range>80</range>
+            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Milira_Shot_HeavyRasterCannon</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <stopBurstWithoutLos>false</stopBurstWithoutLos>
+            <soundAiming>Milira_HeavyPlasma_Aiming</soundAiming>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+</Patch>

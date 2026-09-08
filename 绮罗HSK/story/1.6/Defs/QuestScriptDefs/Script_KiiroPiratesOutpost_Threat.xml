@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_PiratesOutpostThreat</defName>
+    <autoAccept>true</autoAccept>
+    <rootSelectionWeight>0.6</rootSelectionWeight>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <rootMinPoints>0</rootMinPoints>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Pirates threat</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The kiiro scouts have spotted a pirate outpost near [kiiro_settlement_label]! While the exact intentions of the pirates are unknown, the kiiros feels threatened, and the residents of [kiiro_settlement_label] are in a state of anxiety.\n\nSeveral guerrilla teams have gathered near [kiiro_settlement_label] and are discussing an attack plan. However, due to the significant strength of the pirate outpost, they hope to receive assistance from allies.\n\nThe reinforced pirate outpost has been marked on your map. You can send a team to the outpost to fight alongside the kiiro guerrilla teams.\n\nThis is a challenging quest.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questAvailableLetterDef>NewQuest_ThreatBig</questAvailableLetterDef>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <!-- 调整远行队袭击点数（大地图威胁事件专用） -->
+        <li Class="QuestNode_SubScript">
+          <def>Kiiro_Util_AdjustPointsForOutpost</def>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+          <parms>
+            <pointsFactorTwoStar>1.2</pointsFactorTwoStar>
+            <pointsFactorThreeStar>1.5</pointsFactorThreeStar>
+          </parms>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetRandomHostileFaction">
+          <storeAs>siteFaction</storeAs>
+        </li>
+
+        <!-- 获取玩家基地地图 -->
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_Set">          <!--设置地点距离-->
+          <name>siteDistRange</name>
+          <value>2~4</value>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>PiratesOutpost</modSettingSwitch>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_SettlementThreat</tag>
+          <faction>Kiiro_Faction</faction>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <!-- 获取较近的一处大地图地块 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+        </li>
+
+        <!-- 获取一个随机数用于表达概率 -->
+        <li Class="Kiiro_Event.QuestNode_RandomValue">
+          <value1>0</value1>
+          <value2>100</value2>
+          <storeAs>probability</storeAs>
+        </li>
+
+        <!-- 根据概率触发不同事件 -->
+        <li Class="QuestNode_Greater">          <!--若值1大于值2则执行node，小于则执行elseNode-->
+          <value1>$probability</value1>
+          <value2>-1</value2>
+          <node Class="QuestNode_ViolentQuestsAllowed">            <!--若允许暴力事件则将威胁几率设置成100%，否则设置成0-->
+            <node Class="QuestNode_Set">
+              <name>siteThreatChance</name>
+              <value>1.0</value>
+            </node>
+            <elseNode Class="QuestNode_Set">
+              <name>siteThreatChance</name>
+              <value>0</value>
+            </elseNode>
+          </node>
+          <elseNode Class="QuestNode_Set">            <!--值1小于值2时执行-->
+            <name>siteThreatChance</name>
+            <value>0</value>
+          </elseNode>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <!-- <storeFactionAs>siteFaction</storeFactionAs> -->
+          <sitePartsTags>
+            <!-- <li> -->
+            <!-- <tag>Kiiro_Outpost</tag> -->
+            <!-- </li> -->
+            <li>
+              <tag>Kiiro_ReinforcedOutpost</tag>              <!--猫猫自己的site威胁tag-->
+              <chance>$siteThreatChance</chance>
+            </li>
+          </sitePartsTags>
+        </li>
+
+        <!-- 需要dll改（已改） -->
+        <li Class="Kiiro_Event.QuestNode_GetDefaultSitePartsParams_Kiiro_MineralFound">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <!-- 随机存在8-12天 -->
+        <li Class="Kiiro_Event.QuestNode_RandomValue">
+          <value1>$(8*60000)</value1>
+          <value2>$(12*60000)</value2>
+          <storeAs>timeoutTicks</storeAs>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <delayTicks>$timeoutTicks</delayTicks>
+          <isQuestTimeout>true</isQuestTimeout>
+          <!-- <inSignalDisable>site.MapGenerated</inSignalDisable> -->
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <!-- <li Class="QuestNode_Letter"> -->
+              <!-- <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label> -->
+              <!-- <text TKey="LetterTextQuestExpired">Others have mined the lump. The quest [resolvedQuestName] has expired.</text> -->
+              <!-- </li> -->
+              <li Class="QuestNode_SendSignals">
+                <outSignals>Timeout</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <!-- 未解决威胁站点时触发后续惩罚结局 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>Timeout</inSignal>
+          <!-- <inSignalDisable>site.MapGenerated</inSignalDisable> -->
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <!-- 下列node随机触发 -->
+              <li Class="QuestNode_RandomNode">
+                <nodes>
+                  <!-- 绮罗自行解决 -->
+                  <li Class="QuestNode_Sequence">
+                    <selectionWeight>40</selectionWeight>
+                    <nodes>
+                      <li Class="QuestNode_Letter">
+                        <label>Pirate outpost destroyed</label>
+                        <text>The guerrilla assembled near [kiiro_settlement_label] have successfully destroyed the pirate outpost, albeit at great cost.</text>
+                      </li>
+                    </nodes>
+                  </li>
+                  <!-- 移除接近的绮罗定居点 -->
+                  <li Class="QuestNode_Sequence">
+                    <selectionWeight>60</selectionWeight>
+                    <nodes>
+                      <li Class="Kiiro_Event.QuestNode_FactionGoodwillAffect">
+                        <faction>Kiiro_Faction</faction>
+                        <goodwill>-30</goodwill>
+                      </li>
+                      <li Class="QuestNode_Letter">
+                        <letterDef>NegativeEvent</letterDef>
+                        <label TKey="LetterLabelQuestExpired">[kiiro_settlement_label] destroyed</label>
+                        <text TKey="LetterTextQuestExpired">The assembled pirates launched an attack on [kiiro_settlement_label], and despite the valiant resistance of nearby guerrilla teams and hastily organized militia from [kiiro_settlement_label], the settlement ultimately fell. The remaining guerrilla members sacrificed their lives to protect the residents of [kiiro_settlement_label], allowing them to evacuate their homeland and embark on a long journey. Your relationship with kiiros has decreased by [goodWillRewardAbs].</text>
+                      </li>
+                      <li Class="QuestNode_DestroyWorldObject">
+                        <worldObject>$kiiro_settlement</worldObject>
+                      </li>
+                    </nodes>
+                  </li>
+                </nodes>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+        <!-- 派系敌对则结束任务 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[resolvedQuestName] failed</label>
+                <text TKey="LetterTextQuestExpired">Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$site</worldObject>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

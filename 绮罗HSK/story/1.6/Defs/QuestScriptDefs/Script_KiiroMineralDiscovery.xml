@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_Mineral_Discovery</defName>
+    <autoAccept>true</autoAccept>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <isRootSpecial>true</isRootSpecial>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->mineral discovery</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The scouts from [kiiro_settlement_label] have discovered a newly fallen meteorite nearby, which appears to contain some minerals. [kiiro_settlement_label] lacks the means to send miners to extract these minerals and has decided to entrust this meteorite mine to you. The location of the meteorite has now been marked on your map.\n\nThere may be unknown threats near the meteorite.\n\n"There might be others eyeing this meteorite as well, please be cautious."</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <!-- 调整远行队袭击点数 -->
+        <li Class="QuestNode_SubScript">
+          <def>Kiiro_Util_AdjustPointsForDistantFight</def>          <!--改成了更难的曲线-->
+        </li>
+
+        <!-- 检查绮罗派系是否可用 -->
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_Set">          <!--设置地点距离-->
+          <name>siteDistRange</name>
+          <value>3~6</value>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>true</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <!-- 获取较近的一处大地图地块 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>false</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>MineralDiscovery</modSettingSwitch>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_Mineral_Discovery</tag>
+          <faction>$siteFaction</faction>
+        </li>
+
+        <!-- 获取一个随机数用于表达概率 -->
+        <li Class="Kiiro_Event.QuestNode_RandomValue">
+          <value1>0</value1>
+          <value2>100</value2>
+          <storeAs>probability</storeAs>
+        </li>
+
+        <!-- 根据概率触发不同事件 -->
+        <li Class="QuestNode_Greater">          <!--若值1大于值2则执行node，小于则执行elseNode-->
+          <value1>$probability</value1>
+          <value2>70</value2>
+          <node Class="QuestNode_ViolentQuestsAllowed">            <!--若允许暴力事件则将威胁几率设置成100%，否则设置成0-->
+            <node Class="QuestNode_Set">
+              <name>siteThreatChance</name>
+              <value>1.0</value>
+            </node>
+            <elseNode Class="QuestNode_Set">
+              <name>siteThreatChance</name>
+              <value>0</value>
+            </elseNode>
+          </node>
+          <elseNode Class="QuestNode_Set">            <!--值1小于值2时执行-->
+            <name>siteThreatChance</name>
+            <value>0</value>
+          </elseNode>
+        </li>
+
+        <!-- 获取随机矿物（这个任务专用） -->
+        <!-- <li Class="Kiiro_Event.QuestNode_RandomMineable"> -->
+        <!-- <maxValue>15</maxValue> -->
+        <!-- <storeAs>randomMineable</storeAs> -->
+        <!-- </li> -->
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li>
+              <tag>Kiiro_MineralFound</tag>
+            </li>
+            <li>
+              <tag>Kiiro_MineralThreat</tag>
+              <chance>$siteThreatChance</chance>
+            </li>
+          </sitePartsTags>
+        </li>
+
+        <!-- 需要dll改（已改） -->
+        <li Class="Kiiro_Event.QuestNode_GetDefaultSitePartsParams_Kiiro_MineralFound">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <!-- 随机存在5-10天 -->
+        <li Class="Kiiro_Event.QuestNode_RandomValue">
+          <value1>$(5*60000)</value1>
+          <value2>$(10*60000)</value2>
+          <storeAs>timeoutTicks</storeAs>
+        </li>
+
+
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <delayTicks>$timeoutTicks</delayTicks>
+          <isQuestTimeout>true</isQuestTimeout>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">Seems that the meteorite mine has already been mined by someone else.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

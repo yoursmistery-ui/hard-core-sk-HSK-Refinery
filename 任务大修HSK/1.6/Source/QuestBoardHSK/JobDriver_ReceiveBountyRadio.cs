@@ -7,7 +7,7 @@ using SimpleWarrants;
 namespace QuestBoardHSK
 {
     /// <summary>
-    /// 殖民者接收悬赏通讯:目标可以是通讯台(需通电)或悬赏公告牌(随时可用)。
+    /// 殖民者收取信鸽来件:目标为信鸽柱(十期起唯一接收入口;目标已泛化,留通讯台兼容)。
     /// 走到交互格 → 操作约 8 秒 → 从待接收队列弹出一条通缉转入榜单。
     /// </summary>
     public class JobDriver_ReceiveBountyRadio : JobDriver

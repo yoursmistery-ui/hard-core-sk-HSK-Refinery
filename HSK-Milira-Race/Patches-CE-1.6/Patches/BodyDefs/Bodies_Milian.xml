@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Arm groups -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/BodyDef[defName="Milian_Body"]//*[customLabel="left shoulder"]/groups</xpath>
+        <value>
+            <li>LeftShoulder</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/BodyDef[defName="Milian_Body"]//*[customLabel="right shoulder"]/groups</xpath>
+        <value>
+            <li>RightShoulder</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/BodyDef[defName="Milian_Body"]//*[customLabel="left arm"]/groups</xpath>
+        <value>
+            <li>LeftArm</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/BodyDef[defName="Milian_Body"]//*[customLabel="right arm"]/groups</xpath>
+        <value>
+            <li>RightArm</li>
+        </value>
+    </Operation>
+
+    <!-- Natural Armor -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/BodyDef[defName="Milian_Body"]//*[
+            def="Milian_Torso" or
+            def="Milian_Neck" or
+            def="Milian_Head" or
+            def="Milian_Jaw" or
+            def="Milian_Nose" or
+            def="Milian_Ear" or
+            def="Milian_Shoulder" or
+            def="Milian_Arm" or
+            def="Milian_Hand" or
+            def="Milian_Finger" or
+            def="Milian_Leg" or
+            def="Milian_Foot" or
+            def="Milian_Toe"
+            ]/groups</xpath>
+        <value>
+            <li>CoveredByNaturalArmor</li>
+        </value>
+    </Operation>
+
+</Patch>

@@ -11,6 +11,7 @@ dotnet exec "%CSC%" -nologo -t:library -optimize+ -langversion:latest ^
  -r:"%GAME%\RimWorldWin64_Data\Managed\Assembly-CSharp.dll" ^
  -r:"%GAME%\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll" ^
  -r:"%GAME%\Mods\Harmony\Current\Assemblies\0Harmony.dll" ^
+ -r:"%~dp0..\..\Assemblies\BordersOfTheRim.dll" ^
  -out:"%~dp0..\..\Assemblies\BordersOfTheRim.HSKPatch.dll" ^
  "%~dp0UsabilityPatch.cs"
 endlocal

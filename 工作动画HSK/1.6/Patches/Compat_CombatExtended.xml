@@ -91,6 +91,24 @@
       </operations>
     </match>
   </Operation><!-- ============================================================================
+       Compatibility: RatkinRaceHSK (Solaris.RatkinRaceMod) — the base 鼠族 race mod
+       Maps the Ratkin sewing machines (鼠族缝纫机, texPath RK_SewingMachine) to the sewing
+       needle. These are the race mod's own tailoring benches, distinct from the vanilla
+       Hand/ElectricTailoringBench already on the needle and from the golden ratkin
+       OA_RK_Tailor above. workbenchDefs matching is by exact defName (no inheritance), so
+       both must be listed. Gated on the bench def existing (xpath gate, inert if absent).
+       ============================================================================ -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="RK_ElectricTailoringBench"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/JobEffects.JobToolDef[defName="JE_Tool_Needle"]/workbenchDefs</xpath>
+      <value>
+        <li>RK_HandTailoringBench</li>
+        <li>RK_ElectricTailoringBench</li>
+      </value>
+    </match>
+  </Operation><!-- ============================================================================
        Compatibility: HSK / Core_SK (skyarkhangel.HSK)
        Maps the HSK-era worker-operated production benches to the matching animated tool by
        appending their defNames to existing tools' <workbenchDefs>. All of these benches are

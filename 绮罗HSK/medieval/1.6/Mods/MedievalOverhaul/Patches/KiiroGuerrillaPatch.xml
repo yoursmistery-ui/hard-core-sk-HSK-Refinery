@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 游击队 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Guerrilla"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+        		<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>KME_Kiiro_helmet</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Torso</bodyPartGroup>
+        		<apparelLayer>Middle</apparelLayer>
+				<requiredTag>KME_Kiiro_armor</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Shoulders</bodyPartGroup>
+        		<apparelLayer>Shell</apparelLayer>
+				<requiredTag>KME_Kiiro_cloak</requiredTag>
+        		<color>(128, 128, 128)</color>
+			</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Guerrilla"]/apparelTags</xpath>
+		<value>
+			<li>Kiiro_AutoCrossBowPack</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Guerrilla"]/weaponTags</xpath>
+		<value>
+            <weaponTags>
+                <li>Kiiro_MedievalRangeWeapon</li>
+                <li>Kiiro_MedievalMeleeWeapon</li>
+            </weaponTags>
+		</value>
+	</Operation>
+
+    <!-- 狙击手 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaSniper"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+        		<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>KME_Kiiro_helmet_ranged</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Torso</bodyPartGroup>
+        		<apparelLayer>Middle</apparelLayer>
+				<requiredTag>KME_Kiiro_armor_ranged</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Shoulders</bodyPartGroup>
+        		<apparelLayer>Shell</apparelLayer>
+				<requiredTag>KME_Kiiro_cloak</requiredTag>
+        		<color>(34, 139, 34)</color>
+			</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaSniper"]/apparelTags</xpath>
+		<value>
+			<li>Kiiro_AutoCrossBowPack</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaSniper"]/weaponTags</xpath>
+		<value>
+            <weaponTags>
+                <li>Kiiro_RepeatingCrossbow</li>
+            </weaponTags>
+		</value>
+	</Operation>
+
+    <!-- 掷弹兵，改成近战兵 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaGrenadier"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+        		<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>KME_Kiiro_helmet_melee</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Torso</bodyPartGroup>
+        		<apparelLayer>Middle</apparelLayer>
+				<requiredTag>KME_Kiiro_armor_melee</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Shoulders</bodyPartGroup>
+        		<apparelLayer>Shell</apparelLayer>
+				<requiredTag>KME_Kiiro_cloak</requiredTag>
+        		<color>(200, 200, 0)</color>
+			</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaGrenadier"]/apparelTags</xpath>
+		<value>
+			<li>Kiiro_AutoCrossBowPack</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaGrenadier"]/weaponTags</xpath>
+		<value>
+            <weaponTags>
+                <li>Kiiro_TwoHandSword</li>
+            </weaponTags>
+		</value>
+	</Operation>
+
+    <!-- 医疗兵 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaMedic"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+        		<bodyPartGroup>Torso</bodyPartGroup>
+        		<apparelLayer>Middle</apparelLayer>
+				<requiredTag>KME_Kiiro_armor</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Shoulders</bodyPartGroup>
+        		<apparelLayer>Shell</apparelLayer>
+				<requiredTag>KME_Kiiro_cloak</requiredTag>
+        		<color>(0, 200, 200)</color>
+			</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaMedic"]/apparelTags</xpath>
+		<value>
+			<li>Kiiro_PoisonBottle</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaMedic"]/weaponTags</xpath>
+		<value>
+            <weaponTags>
+                <li>Kiiro_MedievalRangeWeapon</li>
+            </weaponTags>
+		</value>
+	</Operation>
+    
+    <!-- 游击队长 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaCaptain"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+        		<bodyPartGroup>UpperHead</bodyPartGroup>
+				<requiredTag>KME_Kiiro_helmet_melee</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Torso</bodyPartGroup>
+        		<apparelLayer>Middle</apparelLayer>
+				<requiredTag>KME_Kiiro_armor_melee</requiredTag>
+			</li>
+			<li>
+        		<bodyPartGroup>Shoulders</bodyPartGroup>
+        		<apparelLayer>Shell</apparelLayer>
+				<requiredTag>KME_Kiiro_cloak</requiredTag>
+        		<color>(200, 0, 0)</color>
+			</li>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaCaptain"]/weaponTags</xpath>
+		<value>
+            <weaponTags>
+                <li>Kiiro_RepeatingCrossbow</li>
+                <li>Kiiro_TwoHandSword</li>
+            </weaponTags>
+		</value>
+	</Operation>
+</Patch>

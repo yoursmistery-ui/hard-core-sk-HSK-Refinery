@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMiliraRailRifle</defName>
+        <label>Milira Rail rifle</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberRailgunRifle</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraMagneticRailRifle</defName>
+        <label>Milira Rail rifle</label>
+        <ammoTypes>
+            <Ammo_MiliraRailRifle>Bullet_MiliraMagneticRailRifle</Ammo_MiliraRailRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+        <defName>Ammo_MiliraRailRifle</defName>
+        <label>Milira Rail rifle (Sabot)</label>
+        <description>Fin-stabilized tungsten carbide penetrator with discarding sabot, designed for railgun rifles used by Milira.</description>
+        <statBases>
+            <Mass>0.01</Mass>
+            <Bulk>0.008</Bulk>
+            <MarketValue>0.06</MarketValue>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMiliraRailRifle</li>
+        </thingCategories>
+        <graphicData>
+            <texPath>Things/Ammo/Railgun/Rifle</texPath>
+            <graphicClass>CombatExtended.Graphic_StackCountRanged</graphicClass>
+        </graphicData>
+        <ammoClass>Charged</ammoClass>
+    </ThingDef>
+
+    <!-- ================== Projectiles ================== -->
+
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraMagneticRailRifle</defName>
+        <label>magnetic round</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>28</damageAmountBase>
+            <armorPenetrationSharp>45</armorPenetrationSharp>
+            <armorPenetrationBlunt>252.72</armorPenetrationBlunt>
+            <stoppingPower>2.6</stoppingPower>
+            <speed>250</speed>
+            <secondaryDamage>
+                <li>
+                    <def>Stun</def>
+                    <amount>2</amount>
+                </li>
+            </secondaryDamage>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="MiliraCE_MiliraAmmoRailgunRecipeBase">
+        <defName>MakeAmmo_MiliraRailRifle</defName>
+        <label>make Milira Rail rifle cartridge (Sabot) x500</label>
+        <description>Craft 500 Milira Rail rifle (Sabot) cartridges.</description>
+        <jobString>Making Milira Rail rifle (Sabot) cartridges.</jobString>
+        <workAmount>1000</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Uranium</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Steel</li>
+                <li>Uranium</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MiliraRailRifle>500</Ammo_MiliraRailRifle>
+        </products>
+    </RecipeDef>
+
+</Defs>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗内衣-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_UnderwearBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.45</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗内衣-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_UnderwearBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>2</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗内衣-材料系数 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_UnderwearBase"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗内衣道具-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_UnderwearPropBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.3</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗内衣道具-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_UnderwearPropBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>0.5</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+</Patch>

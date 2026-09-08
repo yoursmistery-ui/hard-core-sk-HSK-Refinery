@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_NewSettlementEstablish</defName>
+    <!-- <autoAccept>false</autoAccept> -->
+    <expireDaysRange>1~3</expireDaysRange>
+    <!-- <rootSelectionWeight>1.2</rootSelectionWeight> -->
+    <!-- <rootMinProgressScore>8</rootMinProgressScore> -->
+    <isRootSpecial>true</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->kiiro new settlement</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->[QuestInfo], hoping to ask your consent. Kiiros will not settle too close to [map_definite] to avoid causing any inconvenience to you.\n\nUpon obtaining your consent, kiiros will begin the process of constructing their own settlement, which will take some time.</li>
+
+        <li>QuestInfo->A group of displaced kiiro wishes to establish a village near [map_definite] in order to settle down and end their wandering life</li>
+        <li>QuestInfo->The kiiros wishes to establish a new village near [map_definite] for easier communication with you</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_Set">          <!--设置地点距离-->
+          <name>siteDistRange</name>
+          <value>5~8</value>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>NewSettlementEstablish</modSettingSwitch>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <!-- 获取范围内绮罗定居点数量 -->
+        <li Class="Kiiro_Event.QuestNode_IsKiiroSettlementNearby">
+          <maxTileDistance>8</maxTileDistance>
+          <maxSettlementCount>3</maxSettlementCount>
+        </li>
+
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_NewSettlement</tag>
+          <faction>$faction</faction>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <!-- 生成在玩家定居点附近 -->
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>tile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+        </li>
+
+        <li Class="QuestNode_GenerateWorldObject">
+          <def>Kiiro_SettlementUnderConstruction</def>
+          <tile>$tile</tile>
+          <faction>Kiiro_Faction</faction>
+          <storeAs>Kiiro_NewSettlementUnderConstruction</storeAs>
+        </li>
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$Kiiro_NewSettlementUnderConstruction</worldObjects>
+          <tile>$tile</tile>
+        </li>
+
+        <!-- 随机存在6-9天 -->
+        <!-- <li Class="Kiiro_Event.QuestNode_RandomValue">
+          <value1>$(6*60000)</value1>
+          <value2>$(9*60000)</value2>
+          <storeAs>FinishTimeTicks</storeAs>
+        </li> -->
+
+        <li Class="QuestNode_Set">
+          <name>checkTimeTicks</name>
+          <value>$(randInt(3,3)*60000)</value>
+        </li>
+
+        <li Class="QuestNode_Delay">
+          <delayTicks>$checkTimeTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_RandomNode">
+                <nodes>
+                  <li Class="QuestNode_Sequence">
+                    <selectionWeight>60</selectionWeight>
+                    <nodes>
+                      <li Class="QuestNode_Letter">
+                        <letterDef>NeutralEvent</letterDef>
+                        <label TKey="LetterLabelQuestExpired">kiiro town constructing</label>
+                        <text TKey="LetterTextQuestExpired">The Kiiro's village is progressing smoothly in its construction. Before long, a brand-new settlement belonging to the Kiiro will emerge near [map_definite].</text>
+                      </li>
+                      <li Class="QuestNode_Delay">
+                        <delayTicks>$(randInt(3,3)*60000)</delayTicks>
+                        <outSignalComplete>FinishConstruction</outSignalComplete>
+                      </li>
+                    </nodes>
+                  </li>
+                  <li Class="QuestNode_Sequence">
+                    <selectionWeight>40</selectionWeight>
+                    <nodes>
+                      <li Class="QuestNode_Set">
+                        <name>requestedThingCount</name>
+                        <value>$(randInt(6,12)*50)</value>
+                      </li>
+                      <li Class="QuestNode_Set">
+                        <name>finishTimeTicks</name>
+                        <value>$(randInt(14,18)*60000)</value>
+                      </li>
+                      <li Class="QuestNode_Letter">
+                        <letterDef>PositiveEvent</letterDef>
+                        <label TKey="LetterLabel_ResourceRequest">kiiro town resource request</label>
+                        <text TKey="LetterDesc_ResourceRequest">The Kiiro's town construction has encountered a shortage of building materials... They are requesting [requestedThingCount] x woodlogs from you to expedite the completion of the town. Without these materials, the construction progress will become extremely slow, requiring an additional [finishTimeTicks_duration] to finish.</text>
+                      </li>
+                      <li Class="Kiiro_Event.QuestNode_ResourceRequest_Initiate">
+                        <worldObject>$Kiiro_NewSettlementUnderConstruction</worldObject>
+                        <requestedThingDef>WoodLog</requestedThingDef>
+                        <requestedThingCount>$requestedThingCount</requestedThingCount>
+                        <duration>$(randInt(4,8)*60000)</duration>
+                      </li>
+                      <li Class="QuestNode_Delay">
+                        <delayTicks>$finishTimeTicks</delayTicks>
+                        <outSignalComplete>FinishConstruction</outSignalComplete>
+                      </li>
+                      <li Class="QuestNode_Signal">
+                        <inSignal>Kiiro_NewSettlementUnderConstruction.TradeRequestFulfilled</inSignal>
+                        <node Class="QuestNode_Sequence">
+                          <nodes>
+                            <li Class="QuestNode_Delay">
+                              <delayTicks>$(randInt(3,5)*60000)</delayTicks>
+                              <outSignalComplete>FinishConstruction</outSignalComplete>
+                            </li>
+                            <li Class="QuestNode_Letter">
+                              <letterDef>PositiveEvent</letterDef>
+                              <label TKey="LetterLabel_RequestFinished">assistance appreciation</label>
+                              <text TKey="LetterDesc_RequestFinished">The Kiiro have received the building materials for assistance! Thanks to your help, the Kiiro's town should be completed soon.</text>
+                            </li>
+                          </nodes>
+                        </node>
+                      </li>
+                    </nodes>
+                  </li>
+                </nodes>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        
+
+        <!-- <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$Kiiro_NewSettlementUnderConstruction</worldObject>
+          <delayTicks>$FinishTimeTicks</delayTicks>
+          <isQuestTimeout>true</isQuestTimeout>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <letterDef>PositiveEvent</letterDef>
+                <label TKey="LetterLabelQuestExpired">Kiiro village construction completed</label>
+                <text TKey="LetterTextQuestExpired">A new kiiro village has been constructed near [map_definite].</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>FinishConstruction</outSignals>
+              </li>
+            </nodes>
+          </node>
+        </li> -->
+
+        <!-- 接收信号生成定居点 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>FinishConstruction</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <letterDef>PositiveEvent</letterDef>
+                <label TKey="LetterLabel_ConstructFinished">Kiiro village construction completed</label>
+                <text TKey="LetterDesc_ConstructFinished">A new kiiro village has been constructed near [map_definite].</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$Kiiro_NewSettlementUnderConstruction</worldObject>
+              </li>
+              <li Class="QuestNode_GenerateWorldObject">
+                <def>Settlement</def>
+                <tile>$tile</tile>
+                <faction>Kiiro_Faction</faction>
+                <storeAs>Kiiro_NewSettlement</storeAs>
+              </li>
+              <li Class="QuestNode_SpawnWorldObjects">
+                <worldObjects>$Kiiro_NewSettlement</worldObjects>
+                <tile>$tile</tile>
+              </li>
+              <li Class="Kiiro_Event.QuestNode_KiiroSettlementNaming" />
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+        <!-- 派系敌对则结束任务 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabel_Failed">[resolvedQuestName] failed</label>
+                <text TKey="LetterDesc_Failed">Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$Kiiro_NewSettlementUnderConstruction</worldObject>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

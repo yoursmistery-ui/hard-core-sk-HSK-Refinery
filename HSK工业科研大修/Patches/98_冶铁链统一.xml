@@ -5,17 +5,11 @@
      所有操作套 PatchOperationConditional 存在性门控（1.6 Operation 级 MayRequire 已失效）。 -->
 <Patch>
 
-  <!-- ===== 一、删除熟铁/锻钢旁路配方（6 条）=====
-       熟铁唯一入口 = MakeWroughtIron_PigIron_Finery（生铁+煤+助熔 @精炼炉）
-       锻钢唯一入口 = RK_Met_ForgeSteelFromCrucible（坩埚钢+助熔 @铁匠工坊，见 Recipes_RK_Metallurgy.xml） -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="MakeCastIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeCastIron"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]</xpath></match>
-  </Operation>
+  <!-- ===== 一、删除熟铁/锻钢旁路配方（4 条）=====
+       ※ 铸铁线两条入口均已还原，熟铁现在有生铁/铸铁两条路线，待用户精修流程后再定唯一入口。
+       锻钢唯一入口 = RK_Met_ForgeSteelFromCrucible（坩埚钢+助熔 @铁匠工坊，见 Recipes_RK_Metallurgy.xml）
+       ※ MakeCastIron（生铁x75→铸铁x100 @精炼炉）与 PuddleWroughtIronFromCastIron（铸铁→熟铁 @精炼炉）
+         保留：2026-09-02 用户要求暂时还原铸铁线并精修流程，Vile 原流程暂不动。 -->
   <Operation Class="PatchOperationConditional">
     <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath>
     <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath></match>
@@ -35,14 +29,6 @@
 
   <!-- ===== 二、清理上述配方在建筑 recipes 列表里的悬空引用 ===== -->
   <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="MakeCastIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeCastIron"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromCastIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromCastIron"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
     <xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath>
     <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath></match>
   </Operation>
@@ -59,15 +45,10 @@
     <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath></match>
   </Operation>
 
-  <!-- ===== 三、把铸铁摘出 CastBar（不再当铸造选项）
-       注意：**不能删 CastIron 这个 def** —— 实测 Recipes_Pipes / Recipes_CastTools(_Batch) 的
+  <!-- ===== 三、铸铁保留在 CastBar 分类（2026-09-02 用户要求暂时还原铸铁配方，原"摘出 CastBar"操作已移除）
+       注意：CastIron 这个 def 不能删 —— Recipes_Pipes / Recipes_CastTools(_Batch) 的
        disallowedThingDefs 与 filter 直接按 defName 引用它，删 def 会留下悬空交叉引用报错。
-       第一节已删掉唯一生产者 MakeCastIron，铸铁从此绝迹；炉渣另建 RK_Met_Slag，
-       绝不再复用 CastIron——否则 41 条吃 CastBar 的铸造配方会让小人拿矿渣铸锤子和炮弹。 -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef[defName="CastIron"]/thingCategories/li[text()="CastBar"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef[defName="CastIron"]/thingCategories/li[text()="CastBar"]</xpath></match>
-  </Operation>
+       炉渣不复用 CastIron——否则 41 条吃 CastBar 的铸造配方会让小人拿矿渣铸锤子和炮弹。 -->
 
   <!-- ===== 四、生铁并入 CastBar（铸件本就该吃生铁水浇模，41 条铸造配方自动改口）===== -->
   <Operation Class="PatchOperationConditional">

@@ -70,6 +70,8 @@ namespace JobEffects
         {
             unchecked { resolveEpoch++; }
             PawnStates.Clear();   // one store now: anim, resolve cache, memo, draw buffer, foley, beat-fire, work-hit, mote suppression
+            terraformFrameCache.Clear();   // keyed by ThingDef: defs are rebuilt every load, so old keys would pin the previous def graph
+            terrainCostCatsCache.Clear();  // same reason, keyed by TerrainDef
             galleryTools.Clear();
             GalleryEffects = true;
             GalleryFacing = Rot4.South;
@@ -105,7 +107,13 @@ namespace JobEffects
             // 定义了映射 AttackMelee 的 JobToolDef, 本 mod 也绝不画工具——避免小刀污染骨骼动画.
             if (job.def.defName == "AttackMelee" || IsMeleeSyncJob(job.def)) return null;
             if (!Lookup.TryGetValue(job.def.index, out List<JobToolDef> candidates)) return null;
+            // Several mod/HSK chores carry their work cell in targetB and leave targetA empty
+            // (SK's holly-wash / signal fire, TimeBombs arming & disarming, FertileFields collect
+            // designators). Resolution used to bail on the invalid targetA, so nothing ever drew for
+            // them. Fall back to targetB as the aim target — the candidate match below then sees
+            // exactly what the draw code aims at.
             LocalTargetInfo target = job.targetA;
+            if (!target.IsValid) target = job.targetB;
             if (!target.IsValid) return null;
 
             int id = pawn.thingIDNumber;
@@ -680,7 +688,10 @@ namespace JobEffects
             // Per-frame animator cap: on a large colony only the nearest N active workers draw the
             // full tool. A capped-out worker bails here → fully vanilla (HasActiveTool agrees, so the
             // real equipment shows). Walking/holster pawns aren't "active", so they're never capped.
-            if (active && !gallery && !ActivePawnPassesCap(pawn)) return;
+            // (HSK 2026-09-06) melee-sync 例外与隐藏门控 ActiveDrawnTool 对齐: 那边对 melee job
+            // 绕过 cap,这边不同步绕过的话,近战结算帧会出现「原版武器被隐藏 + 工具不绘制」的空窗。
+            bool meleeSync = pawn.CurJob != null && pawn.CurJob.def != null && IsMeleeSyncJob(pawn.CurJob.def);
+            if (active && !gallery && !meleeSync && !ActivePawnPassesCap(pawn)) return;
 
             bool shown = false;
             if (active)
@@ -744,12 +755,15 @@ namespace JobEffects
             }
             else
             {
-                // Holster ON THE WAY to a job: while the pawn is still pathing to a job our tool
-                // covers, the tool rides on the belt at full opacity (steady, no fade) until they
-                // arrive and start working. Resolved WITHOUT the MovingNow gate TryResolve uses.
+                // Holster ON THE WAY to a job (opt-in pre-play): while the pawn is still pathing to a
+                // job our tool covers, the tool rides on the belt at full opacity (steady, no fade)
+                // until they arrive and start working. Resolved WITHOUT the MovingNow gate TryResolve
+                // uses. Gated on EnRouteToolCarry (default OFF) so by default the tool is only taken
+                // out when work actually starts — otherwise it double-draws with an AM/Yayo melee
+                // weapon during the approach.
                 JobToolDef carried = null;
                 bool walking = pawn.pather != null && pawn.pather.MovingNow;
-                if (JobEffectsSettings.HolsterTools && walking
+                if (JobEffectsSettings.EnRouteToolCarry && JobEffectsSettings.HolsterTools && walking
                     && TryResolveCarried(pawn, st, out carried)
                     && carried.swingStyle != SwingStyle.Scratch
                     && !carried.noHolster)   // noHolster tools (medicine kits) never ride the belt en route — vanilla draws the carried item
@@ -793,6 +807,15 @@ namespace JobEffects
                 if (Diag.Enabled && shown) Diag.NoteHolsterDrawn();
             }
 
+            // (HSK 2026-09-06) 双显追踪: 本帧画了工具(活动工具或腰间 holste r),若武器隐藏门控
+            // (HasActiveTool/IsHolstering,即 DrawEquipmentAndApparelExtras 前缀所用的判定,
+            // 此处 memo 命中零开销)判 false,原版武器就会与工具动画同显。不一致时限流 dump
+            // 完整门控状态,一次游戏会话即可定位漏点。
+            if (shown && !IsGalleryPawn(id) && !HasActiveTool(pawn) && !IsHolstering(pawn))
+            {
+                TraceHideGateMiss(pawn, st);
+            }
+
             // Tool foley: a short handle clatter when a tool first appears (drawn from the belt)
             // and when it finally disappears (stowed). Edge-triggered + throttled (see PlayFoley)
             // so the rapid work / reposition / work cadence within a job doesn't chatter.
@@ -816,6 +839,41 @@ namespace JobEffects
         }
 
         // ---- Tool resolution shared by draw + lean ----
+
+        // (HSK 2026-09-06) 双显追踪: 工具已绘制而武器隐藏门控判 false 时 dump 完整门控状态。
+        // 限流: 同一 pawn 60s 一条、全局 20s 一条,防刷屏;任何一次出现都意味着渲染侧与
+        // DrawEquipmentAndApparelExtras 隐藏前缀的门控不一致,日志里的状态组合即漏点。
+        private static readonly Dictionary<int, float> traceLastByPawn = new Dictionary<int, float>();
+        private static float traceLastGlobal = -999f;
+
+        private static void TraceHideGateMiss(Pawn pawn, PawnToolState st)
+        {
+            try
+            {
+                float now = Time.unscaledTime;
+                if (now - traceLastGlobal < 20f) return;
+                float last;
+                if (traceLastByPawn.TryGetValue(pawn.thingIDNumber, out last) && now - last < 60f) return;
+                traceLastByPawn[pawn.thingIDNumber] = now;
+                traceLastGlobal = now;
+                Job job = pawn.CurJob;
+                bool meleeSync = job != null && job.def != null && IsMeleeSyncJob(job.def);
+                Log.Warning(string.Format(
+                    "[Show Me Your Tools][双显追踪] 工具已绘制但隐藏门控为false: pawn={0} job={1} movingNow={2} stunned={3} passesCap={4} lod={5} lastTool={6} memoTool={7} jobCouldHaveTool={8} meleeSync={9}",
+                    pawn.LabelShortCap,
+                    job != null && job.def != null ? job.def.defName : "null",
+                    pawn.pather != null && pawn.pather.MovingNow,
+                    pawn.stances != null && pawn.stances.stunner != null && pawn.stances.stunner.Stunned,
+                    ActivePawnPassesCap(pawn),
+                    CurrentLod().ToString(),
+                    st.lastTool != null ? st.lastTool.defName : "null",
+                    st.memoTool != null ? st.memoTool.defName : "null",
+                    JobCouldHaveTool(pawn),
+                    meleeSync));
+            }
+            catch { }
+        }
+
 
         // Among the JobToolDefs registered for a job, choose the one to draw. Normally the FIRST
         // enabled candidate that Matches (XML order = priority, which the surgery / grave / build
@@ -889,7 +947,10 @@ namespace JobEffects
 
             // Active-work gate — cheap, applied fresh every frame (NOT baked into the resolution
             // cache, which is keyed on job/target identity only).
-            if (pawn.pather != null && pawn.pather.MovingNow) return false;
+            // (HSK 2026-09-06) melee-sync 例外与 ActiveDrawnTool 对齐: 追逐/近战结算中
+            // (MovingNow)的 melee job 之前在这被拒 → 工具不画,而隐藏门控照样隐藏原版武器。
+            bool meleeSync = pawn.CurJob != null && pawn.CurJob.def != null && IsMeleeSyncJob(pawn.CurJob.def);
+            if (!meleeSync && pawn.pather != null && pawn.pather.MovingNow) return false;
             if (pawn.stances != null && pawn.stances.stunner != null && pawn.stances.stunner.Stunned) return false;
 
             tool = ResolveEffectiveTool(pawn, st);   // memoized candidate match + tech-gate, shared by every flow
@@ -897,7 +958,10 @@ namespace JobEffects
 
             Job job = pawn.CurJob;
             if (job == null) return false;       // resolved non-null already implies a job; guard anyway
+            // Same targetB fallback as ResolveEffectiveTool: aim at whatever the resolver matched,
+            // otherwise an empty targetA would point the swing at the map origin.
             LocalTargetInfo target = job.targetA;
+            if (!target.IsValid) target = job.targetB;
 
             map = pawn.Map;
             if (map == null) return false;
@@ -1123,9 +1187,34 @@ namespace JobEffects
         // pose so the held toy shrinks onto a child to match the body-scaled hands + forearms.
         private static float currentBodyScale = 1f;
 
+        // Small-body vertical drop reference (cells). Pawn.DrawPos rides at the FULL-human
+        // body-centre height and does NOT sink with a shorter race, so on a Ratkin (baseBodySize
+        // 0.8) the whole work-animation stack — tool + fists + forearms — floats too high above
+        // the actual torso. We lower the shared drawLoc.z by (1 - baseBodySize) * this reference
+        // once per frame in DrawActive so everything welds to the real body. 0.0 = old behaviour.
+        // Humans/other baseBodySize>=1 races are a no-op (the term is <= 0 and clamped away).
+        // TUNE: raise if the tool still sits too high on a Ratkin; lower if it sinks to the belt.
+        private const float SmallBodyDropRef = 0.9f;
+
+        // Vertical drop (cells) for a shorter-than-human body: how far the work-animation stack /
+        // belted tool must sink so it welds to the real torso instead of the full-human DrawPos
+        // body-centre height. 0 for humans (baseBodySize 1.0) and larger races. Shared by DrawActive
+        // (active tool + hands + arms) and DrawHolster (belt carry / fade) so both track the body.
+        private static float SmallBodyDrop(Pawn pawn)
+        {
+            float bbs = pawn?.RaceProps != null ? Mathf.Clamp(pawn.RaceProps.baseBodySize, 0.5f, 2.5f) : 1f;
+            return bbs < 1f ? (1f - bbs) * SmallBodyDropRef : 0f;
+        }
+
         private static void DrawActive(Pawn pawn, Vector3 drawLoc, JobToolDef tool, Vector3 dir, Map map, PawnToolState st)
         {
             currentBodyScale = ArmRenderer.BodyScaleFor(pawn);
+            // Sink the shared drawLoc onto a shorter body's real torso before anything reads it.
+            // Pawn.DrawPos sits at the full-human body-centre height regardless of race, so a
+            // Ratkin (baseBodySize 0.8) otherwise works with the tool + fists + forearms floating
+            // ~0.2 cells above its shoulders. Lower once here → DrawTool / DrawHands / DrawArms all
+            // weld to the corrected line. No-op for humans (baseBodySize 1.0) and larger races.
+            drawLoc.z -= SmallBodyDrop(pawn);
             Vector3 pawnFlat = new Vector3(drawLoc.x, 0f, drawLoc.z);
             Thing worked = pawn.CurJob?.targetA.Thing;
             bool north = SetDrawAltitudes(pawn, dir, tool);
@@ -1704,6 +1793,10 @@ namespace JobEffects
             Vector3 pos = drawLoc;
             pos.x += tool.idleHipOffset * side * hipFac * bodyScale;
             pos.z += tool.idleBeltDrop * bodyScale;
+            // Same shorter-body sink as DrawActive so the belted tool rides the real hip line, not
+            // the full-human DrawPos height (no-op on humans). Keeps the holster consistent with the
+            // active-tool and linger poses for a Ratkin.
+            pos.z -= SmallBodyDrop(pawn);
             // Self-contained depth (computed above): the colonist's own band when matching depth,
             // MoteOverhead when not. No longer reads the ambient currentToolY, so calling this from
             // the active brow-wipe pose doesn't disturb that animation's own altitude.
@@ -2070,6 +2163,72 @@ namespace JobEffects
                     Vector3 axisDown = hrotM * new Vector3(0f, 0f, -1f);
                     grip = mouth + axisDown * (bsM * 0.62f); grip.y = 0f;   // low (toward the bell)
                     tip  = mouth + axisDown * (bsM * 0.16f); tip.y  = 0f;   // high (just below the mouthpiece)
+                    return;
+                }
+
+                // Eating (holdEat): the spoon runs a BITE CYCLE instead of a static hold — dip at
+                // the plate (low, out in front at reach), lift to the lips, chew there, lower back
+                // down, one bite per `period`. Anchored on the painted bowl so the handle hangs
+                // into the fist and the bowl lands exactly on the plate / mouth anchor. Facing runs
+                // off the clean cardinal body facing (the work dir can be diagonal), like the
+                // recorder. Scoped to the flag; everything else falls through to the generic Hold.
+                if (tool.holdEat)
+                {
+                    Vector3 fvecE = bodyFacing.FacingCell.ToVector3(); fvecE.y = 0f;
+                    if (fvecE.sqrMagnitude < 0.01f) fvecE = new Vector3(0f, 0f, -1f);
+                    fvecE = fvecE.normalized;
+                    Vector3 frightE = Vector3.Cross(Vector3.up, fvecE).normalized;   // pawn's right (screen)
+                    bool fnorthE = bodyFacing == Rot4.North;
+                    bool fprofileE = bodyFacing.IsHorizontal;
+                    float bsE = tool.scale;
+
+                    float eCycle = Mathf.Max(0.5f, tool.period);
+                    float ePh = (animTime / eCycle) % 1f;
+                    // lift / chew at the mouth / lower / rest over the plate (remainder of cycle)
+                    const float eRise = 0.22f, eChew = 0.40f, eFall = 0.22f;
+                    float bite; float chew = 0f;
+                    if (ePh < eRise) bite = Mathf.SmoothStep(0f, 1f, ePh / eRise);
+                    else if (ePh < eRise + eChew)
+                    {
+                        bite = 1f;
+                        // two jaw-bobs' worth of lift while the spoon is at the mouth
+                        chew = Mathf.Sin((ePh - eRise) / eChew * Mathf.PI * 2f) * 0.016f;
+                    }
+                    else if (ePh < eRise + eChew + eFall) bite = Mathf.SmoothStep(1f, 0f, (ePh - eRise - eChew) / eFall);
+                    else bite = 0f;
+
+                    // Plate: on the table (or in front of the belly when eating standing up).
+                    Vector3 plate = new Vector3(drawLoc.x, currentToolY, drawLoc.z);
+                    plate += fvecE * (tool.reach * (fprofileE ? 1f : 0.55f));
+                    plate.z += (fnorthE ? 0.02f : 0.08f) + tool.holdRaise;
+                    // Mouth: the recorder's lips anchor, plus the chew bob.
+                    Vector3 mouthE = new Vector3(drawLoc.x, currentToolY, drawLoc.z);
+                    mouthE += fvecE * (fprofileE ? 0.13f : 0.03f);
+                    mouthE += frightE * tool.holdLateral;
+                    mouthE.z += (fnorthE ? 0.20f : fprofileE ? 0.28f : 0.30f) + tool.holdRaise + chew;
+
+                    Vector3 bowl = Vector3.Lerp(plate, mouthE, bite);
+                    bowl.y = currentToolY;
+
+                    // Bowl flat-ish over the plate -> tipped up into the mouth; faint idle wobble.
+                    float wobE = Mathf.Sin(animTime * 1.7f) * 1.2f;
+                    float leanE = Mathf.Lerp(tool.holdAngleOffset, tool.holdAngleOffset + 42f, bite);
+                    Quaternion hrotE = Quaternion.AngleAxis(wobE + leanE * (bodyFacing == Rot4.West ? -1f : 1f), Vector3.up);
+
+                    // Pivot about the painted bowl (~28% down the 256-px canvas: the spoon head runs
+                    // from the top edge to just past mid-canvas) so the anchor IS the bowl and the
+                    // handle hangs down-screen into the fist.
+                    Matrix4x4 hmE = Matrix4x4.Translate(bowl)
+                        * Matrix4x4.Rotate(hrotE)
+                        * Matrix4x4.Translate(new Vector3(0f, 0f, -0.285f * bsE))
+                        * Matrix4x4.Scale(new Vector3(bsE, 1f, bsE));
+                    Emit(mesh, hmE, mat, 0);
+
+                    // One fist on the handle: grip = butt end, tip = up at the bowl (handPosA
+                    // slides the fist along that span).
+                    Vector3 axisDownE = hrotE * new Vector3(0f, 0f, -1f);
+                    grip = bowl + axisDownE * (bsE * 0.86f); grip.y = 0f;   // handle butt (the fist)
+                    tip  = bowl + axisDownE * (bsE * 0.14f); tip.y  = 0f;   // just below the bowl
                     return;
                 }
 
@@ -3295,6 +3454,23 @@ namespace JobEffects
                 if (t == null || !tool.workbenchDefs.Contains(t.def.defName))
                     return false;
             }
+            // Ingest food-type gate: an eating tool claims only the foods you would actually use a
+            // utensil for (Meal), so nobody spoons an apple. Any other job fails it outright.
+            if (tool.ingestFoodTypes != null && tool.ingestFoodTypes.Count > 0)
+            {
+                if (job?.def?.defName != "Ingest") return false;
+                IngestibleProperties ing = target.Thing?.def?.ingestible;
+                if (ing == null) return false;
+                string ft = ing.foodType.ToString();
+                bool typeOk = false;
+                for (int i = 0; i < tool.ingestFoodTypes.Count && !typeOk; i++)
+                {
+                    string kw = tool.ingestFoodTypes[i];
+                    if (!kw.NullOrEmpty())
+                        typeOk = ft.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                if (!typeOk) return false;
+            }
             // Terrain-build gating: a tool that lists buildTerrainDefs claims ONLY FinishFrame jobs
             // whose frame builds one of those TerrainDefs (e.g. a hoe tilling Medieval Overhaul's
             // plowed soil). Normal build tools EXCLUDE every TerrainDef frame (the frameStuffCategories
@@ -3308,6 +3484,37 @@ namespace JobEffects
                 if (!(built is TerrainDef) || !tool.buildTerrainDefs.Contains(built.defName))
                     return false;
             }
+            // Terraform-plot gating, same shape as buildTerrainDefs above: a terraformOnly tool claims
+            // ONLY FinishFrame jobs on HSK / FertileFields land-reclamation plots (挖塘取泥、铺表土、
+            // 造田…这些蓝图改的是地形而不是盖房子), and nothing else.
+            if (tool.terraformOnly && (job?.def?.defName != "FinishFrame" || !IsTerraformFrame(target.Thing)))
+                return false;
+            // Built-def keyword gate (FinishFrame only): narrows a construction tool to frames whose
+            // entityDefToBuild defName contains one of the keywords. Lets the manure fork take just the
+            // DirtFert / SoilTilled fertilise plots out of the whole terraform set without listing defs.
+            if (tool.buildEntityNameKeywords != null && tool.buildEntityNameKeywords.Count > 0)
+            {
+                if (job?.def?.defName != "FinishFrame") return false;
+                string builtName = target.Thing?.def?.entityDefToBuild?.defName;
+                if (builtName.NullOrEmpty()) return false;
+                bool nameOk = false;
+                for (int i = 0; i < tool.buildEntityNameKeywords.Count && !nameOk; i++)
+                {
+                    string kw = tool.buildEntityNameKeywords[i];
+                    if (!kw.NullOrEmpty())
+                        nameOk = builtName.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                if (!nameOk) return false;
+            }
+            // Build-effect claim (FinishFrame): a tool that names constructEffects takes those
+            // frames outright. This is the only way a terrain / floor frame can get a construction
+            // tool at all - floors carry no Stuff, so the material test below rejects every one of
+            // them (the TerrainDef exclusion). Returning true skips the remaining gates, all of
+            // which are medicine / surgery filters no FinishFrame job can trip.
+            if (tool.buildConstructEffects != null && tool.buildConstructEffects.Count > 0
+                && job?.def?.defName == "FinishFrame"
+                && ConstructEffectMatches(target.Thing?.def?.entityDefToBuild, tool.buildConstructEffects))
+                return true;
             // Construction tool selection is purely material-based below: hammer = wood / fabric /
             // leather, chisel = stone, welder = metal / unstuffed. The welder is then swapped to the
             // hammer pre-Electricity by the tech-gate (ApplyTechGate, applied after resolution).
@@ -3319,12 +3526,27 @@ namespace JobEffects
             if (tool.frameStuffCategories != null && tool.frameStuffCategories.Count > 0
                 && job?.def?.defName == "FinishFrame")
             {
-                // Floors are FinishFrame jobs too, but their frames are unstuffed (costList),
-                // so they used to fall into the welder's "None" bucket and a colonist would
-                // "weld" a floor down (e.g. VFE-Tribals painted floors). A frame that builds a
-                // TerrainDef is a floor/terrain — none of the material construction tools
-                // (hammer = wood, chisel = stone, welder = metal) apply to it.
-                if (target.Thing?.def?.entityDefToBuild is TerrainDef)
+                // FLOORS / terrain: a floor frame carries no Stuff (floors are built from a
+                // costList, not out of a stuff), so the material test below always came up empty
+                // and every floor — stone tile, carpet, plastic sheet — was laid bare-handed.
+                // Judge the terrain by what it actually COSTS: its own stuffCategories (the
+                // costStuffCount builds) or the stuff categories of each costList item. Floors
+                // with no readable material (fungus gravel, ice-crystal plating) stay bare-handed;
+                // they are deliberately NOT dumped into the welder's "None" bucket, which is what
+                // made colonists "weld a painted floor down" before terrain was excluded.
+                TerrainDef ter = target.Thing?.def?.entityDefToBuild as TerrainDef;
+                if (ter != null)
+                {
+                    List<string> tcats = TerrainCostCategories(ter);
+                    if (tcats == null) return false;
+                    for (int i = 0; i < tcats.Count; i++)
+                        if (tool.frameStuffCategories.Contains(tcats[i])) return true;
+                    return false;
+                }
+                // Terraform plots are unstuffed too (costList / pure work-to-dig), so before this
+                // exclusion they fell straight into the welder's "None" bucket and a colonist would
+                // torch-weld a marsh dry. They get their own spade/fork via terraformOnly instead.
+                if (IsTerraformFrame(target.Thing))
                     return false;
                 ThingDef stuff = target.Thing?.Stuff;
                 bool stuffOk = false;
@@ -3357,6 +3579,97 @@ namespace JobEffects
                     return false;
             }
             return true;
+        }
+
+        // Does the def being built carry one of the tool's named build effects? constructEffect is
+        // declared separately on ThingDef and TerrainDef (the BuildableDef base has no such field),
+        // so resolve it per kind. This is the engine's own material tag (ConstructWood /
+        // ConstructMetal / ConstructDirt / ConstructStone), which is why it also covers modded
+        // floors whose Stuff a frame never carries.
+        private static bool ConstructEffectMatches(BuildableDef built, List<string> effects)
+        {
+            if (built == null || effects == null || effects.Count == 0) return false;
+            EffecterDef eff = null;
+            ThingDef td = built as ThingDef;
+            if (td != null) eff = td.constructEffect;
+            else
+            {
+                TerrainDef trd = built as TerrainDef;
+                if (trd != null) eff = trd.constructEffect;
+            }
+            return eff != null && effects.Contains(eff.defName);
+        }
+
+        // What material is this floor / terrain actually built from? A floor frame has no Stuff,
+        // so the material has to come off the BUILD COST: the terrain's own stuffCategories (the
+        // costStuffCount builds) or the stuffProps categories of each costList item (木板/石砖/
+        // 陶瓷/布料/钢…). Cached per TerrainDef — Matches() runs this for every material build
+        // tool on every floor, and defs are rebuilt each load so the cache is cleared in
+        // ResetTransientState. Null = nothing readable (fungus gravel, ice-crystal plating), which
+        // leaves the floor bare-handed instead of guessing a tool.
+        private static readonly Dictionary<TerrainDef, List<string>> terrainCostCatsCache = new Dictionary<TerrainDef, List<string>>();
+        private static List<string> TerrainCostCategories(TerrainDef ter)
+        {
+            if (ter == null) return null;
+            List<string> cached;
+            if (terrainCostCatsCache.TryGetValue(ter, out cached)) return cached;
+            List<string> cats = null;
+            if (ter.costStuffCount > 0 && ter.stuffCategories != null && ter.stuffCategories.Count > 0)
+            {
+                for (int i = 0; i < ter.stuffCategories.Count; i++)
+                {
+                    StuffCategoryDef sc = ter.stuffCategories[i];
+                    if (sc == null) continue;
+                    if (cats == null) cats = new List<string>();
+                    if (!cats.Contains(sc.defName)) cats.Add(sc.defName);
+                }
+            }
+            if (cats == null && ter.costList != null)
+            {
+                for (int i = 0; i < ter.costList.Count; i++)
+                {
+                    List<StuffCategoryDef> scs = ter.costList[i]?.thingDef?.stuffProps?.categories;
+                    if (scs == null) continue;
+                    for (int j = 0; j < scs.Count; j++)
+                    {
+                        if (scs[j] == null) continue;
+                        if (cats == null) cats = new List<string>();
+                        if (!cats.Contains(scs[j].defName)) cats.Add(scs[j].defName);
+                    }
+                }
+            }
+            terrainCostCatsCache[ter] = cats;
+            return cats;
+        }
+
+        // Is this construction frame a TERRAFORM plot (HSK / FertileFields 改造地形)? Detected on the
+        // BUILT def, not the frame: every plot (Core_SK's 43 + the HMC peat/clay ones + any future
+        // addon) inherits thingClass FertileFields.Building_Terraform, and each carries a
+        // FertileFields.Terrain modExtension as a second signal. Cached per def because Matches() runs
+        // this for every material build tool on every frame, and Type.Name allocates.
+        private static readonly Dictionary<ThingDef, bool> terraformFrameCache = new Dictionary<ThingDef, bool>();
+        private static bool IsTerraformFrame(Thing frame)
+        {
+            ThingDef built = frame?.def?.entityDefToBuild as ThingDef;
+            if (built == null) return false;
+            if (terraformFrameCache.TryGetValue(built, out bool known)) return known;
+            bool terra = false;
+            Type tc = built.thingClass;
+            // Exact class name — a substring test on "Terraform" would also catch Core_SK's
+            // SK.Events.Building_MechanoidTerraformer (a real building you weld into place).
+            if (tc != null && (tc.Name == "Building_Terraform" || tc.Name.EndsWith("_Terraform", StringComparison.Ordinal)))
+                terra = true;
+            if (!terra && built.modExtensions != null)
+            {
+                for (int i = 0; i < built.modExtensions.Count && !terra; i++)
+                {
+                    string tn = built.modExtensions[i]?.GetType().FullName;
+                    if (tn != null && tn.StartsWith("FertileFields.Terrain", StringComparison.Ordinal))
+                        terra = true;
+                }
+            }
+            terraformFrameCache[built] = terra;
+            return terra;
         }
 
         private static float SwingOffset(JobToolDef tool, float t)
@@ -4139,6 +4452,9 @@ namespace JobEffects
                 return st.memoTool;
 
             JobToolDef tool = null;
+            // (HSK 2026-09-06) 与渲染路径的 LOD 裁剪对齐: OnPawnRendered 在 Culled 档直接 return
+            // 不画工具,而这里此前不看 LOD → 拉远视野时「工具不画 + 原版武器被隐藏」双双消失。
+            if (CurrentLod() == LodLevel.Culled) return null;
             // Melee attack jobs (currently AttackMelee) are covered by JobTools_Melee.xml. A pawn
             // mid-chase is pather.MovingNow AND a busy colony may cap us out — both gates would
             // here report "no tool", which (a) hides the animated weapon for the chase frames and

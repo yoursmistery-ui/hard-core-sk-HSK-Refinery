@@ -70,30 +70,34 @@
 			<color>(214,208,188)</color>
 		</graphicData>
 		<stackLimit>150</stackLimit>
+		<thingCategories Inherit="False">
+			<!-- 原料中间物: 归 Textiles 下的 CTextiles(原料/半成品区, Vile 生皮等中间物同区), 不入皮革成品档 -->
+			<li>CTextiles</li>
+		</thingCategories>
 		<statBases>
 			<MarketValue>3.2</MarketValue>
 			<Mass>0.01</Mass>
 		</statBases>
 	</ThingDef>
 
-	<!-- ============ 丝绸(stuff, Vile 布料产业 TIER 2.5 奢华天然织物) ============
-	     定位: 超越原始时代的超强布料, 介于中世纪有机布(麻/棉 TIER2)与工业合成布(人造丝/抓绒 TIER3)之间。
+	<!-- ============ 丝绸(stuff, Vile 布料产业 TIER 3 奢华织物) ============
+	     定位: 工业时代奢华织物(2026-09-02 从中世纪抬档到工业, 蚕桑研究随节点抬档)。
 	     双面隔热俱佳、铺作床褥休息效率最高、光泽美丽, 代价是易燃。字段结构对齐 Vile's Materials Science 布料。 -->
 	<ThingDef ParentName="ResourceBase">
 		<defName>RK_Silk</defName>
 		<label>丝绸</label>
-		<description>TIER 2.5 - 中世纪(奢华)
+		<description>TIER 3 - 工业(奢华)
 &gt;&gt;&gt; 极佳	寝具、御寒与防暑
 &gt;&gt; 尚可	经济、软甲
 X 不宜	明火
 
-以生丝在织机上织成、再经打磨的轻薄织物。这是超越原始时代的超强布料: 又轻又暖, 寒暑双面隔热一流, 铺作床褥时休息效率冠绝诸布, 光泽华美, 为贵族衣饰与镶金家具所必需——唯一的软肋是极易燃烧。</description>
+以生丝在织机上织成、再经打磨的轻薄织物。这是工业时代的奢华布料: 又轻又暖, 寒暑双面隔热一流, 铺作床褥时休息效率冠绝诸布, 光泽华美, 为贵族衣饰与镶金家具所必需——唯一的软肋是极易燃烧。</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/SilkFabric</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<stackLimit>150</stackLimit>
-		<techLevel>Medieval</techLevel>
+		<techLevel>Industrial</techLevel>
 		<statBases>
 			<StuffPower_Armor_Sharp>0.60</StuffPower_Armor_Sharp>
 			<StuffPower_Armor_Blunt>0.20</StuffPower_Armor_Blunt>
@@ -134,7 +138,8 @@ X 不宜	明火
 			<li>Textiles</li>
 		</tradeTags>
 		<thingCategories>
-			<li>Textiles</li>
+			<!-- 归入 Vile 皮革分级(Hell Bent for Leather Tanning): B档全粒面 = 顶级天然织物 -->
+			<li>LeathersB</li>
 		</thingCategories>
 	</ThingDef>
 
@@ -148,6 +153,9 @@ X 不宜	明火
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<stackLimit>150</stackLimit>
+		<thingCategories Inherit="False">
+			<li>MiscManufactured</li>
+		</thingCategories>
 		<statBases>
 			<MarketValue>1.6</MarketValue>
 			<Mass>0.05</Mass>
@@ -164,6 +172,9 @@ X 不宜	明火
 			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<stackLimit>250</stackLimit>
+		<thingCategories Inherit="False">
+			<li>MiscManufactured</li>
+		</thingCategories>
 		<statBases>
 			<MarketValue>2.4</MarketValue>
 			<Mass>0.01</Mass>

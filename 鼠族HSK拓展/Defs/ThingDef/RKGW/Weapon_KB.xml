@@ -26,7 +26,7 @@
 		<costList>
 			<Steel>50</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
-			<WoodLog>40</WoodLog>
+			<WoodPlank>40</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_KB_Weapon</researchPrerequisite>
@@ -120,7 +120,7 @@
 		<costList>
 			<Steel>80</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
-			<WoodLog>40</WoodLog>
+			<WoodPlank>40</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_KB_Weapon</researchPrerequisite>
@@ -136,7 +136,7 @@
 				<defaultProjectile>Bullet_Rotkiefere</defaultProjectile>
 				<warmupTime>0.4</warmupTime>
 				<range>20</range>
-				<ticksBetweenBurstShots>7.0</ticksBetweenBurstShots>
+				<ticksBetweenBurstShots>7</ticksBetweenBurstShots>
 				<burstShotCount>6</burstShotCount>
 				<soundCast>RK_KB_SommerEiche</soundCast>
 				<soundCastTail>GunTail_Light</soundCastTail>
@@ -216,7 +216,7 @@
 		<costList>
 			<Steel>40</Steel>
 			<ComponentIndustrial>2</ComponentIndustrial>
-			<WoodLog>20</WoodLog>
+			<WoodPlank>20</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_KB_Weapon</researchPrerequisite>
@@ -250,4 +250,43 @@
 			</li>
 		</tools>
 	</ThingDef>
+
+	<!-- ===== 新增精选枪 2026-09-06 (反方·矢车菊) 子弹复用 Bullet_Fichte ===== -->
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_KB_Buche</defName>
+		<label>"Buche" Sniper Rifle</label>
+		<description>The "Fichte" bolt-action rifle fitted with an optical scope, intended for sniper use. Extremely accurate.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponRanged/RK_KB_Buche</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.9</drawSize></graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false"><li>RK_KB_SniperRifle</li></weaponTags>
+		<statBases>
+			<WorkToMake>17000</WorkToMake><Mass>2.5</Mass><Bulk>8</Bulk>
+			<AccuracyTouch>0.55</AccuracyTouch><AccuracyShort>0.70</AccuracyShort><AccuracyMedium>0.90</AccuracyMedium><AccuracyLong>0.95</AccuracyLong>
+			<RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+		</statBases>
+		<costList><Steel>100</Steel><ComponentIndustrial>4</ComponentIndustrial><WoodPlank>40</WoodPlank></costList>
+		<recipeMaker><researchPrerequisite>RK_KB_Weapon</researchPrerequisite><skillRequirements><Crafting>5</Crafting></skillRequirements></recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs><li><verbClass>Verb_Shoot</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_Fichte</defaultProjectile><warmupTime>1.8</warmupTime><range>55</range><soundCast>RK_KB_Fichte</soundCast><soundCastTail>GunTail_Heavy</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></li></verbs>
+		<tools><li Class="CombatExtended.ToolCE"><label>stock</label><capacities><li>Blunt</li></capacities><power>7</power><cooldownTime>2</cooldownTime><armorPenetrationBlunt>3</armorPenetrationBlunt><linkedBodyPartsGroup>Stock</linkedBodyPartsGroup></li></tools>
+	</ThingDef>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_KB_Maipflanze</defName>
+		<label>"Maipflanze" Light Machine Gun</label>
+		<description>A light machine gun purchased by the Kornblume Confederation. Relatively lightweight, suitable for mobile fire support.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponRanged/RK_KB_Maipflanze</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.9</drawSize></graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false"><li>RK_KB_LMG</li></weaponTags>
+		<statBases>
+			<WorkToMake>16000</WorkToMake><Mass>5.4</Mass><Bulk>12</Bulk>
+			<AccuracyTouch>0.40</AccuracyTouch><AccuracyShort>0.48</AccuracyShort><AccuracyMedium>0.45</AccuracyMedium><AccuracyLong>0.30</AccuracyLong>
+			<RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+		</statBases>
+		<costList><Steel>120</Steel><ComponentIndustrial>4</ComponentIndustrial><WoodPlank>40</WoodPlank></costList>
+		<recipeMaker><researchPrerequisite>RK_KB_Weapon</researchPrerequisite><skillRequirements><Crafting>5</Crafting></skillRequirements></recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs><li><verbClass>Verb_Shoot</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_Fichte</defaultProjectile><warmupTime>2.2</warmupTime><range>27</range><ticksBetweenBurstShots>8</ticksBetweenBurstShots><burstShotCount>7</burstShotCount><soundCast>RK_KB_Maipflanze</soundCast><soundCastTail>GunTail_Medium</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></li></verbs>
+		<tools><li Class="CombatExtended.ToolCE"><label>stock</label><capacities><li>Blunt</li></capacities><power>7</power><cooldownTime>2</cooldownTime><armorPenetrationBlunt>3</armorPenetrationBlunt><linkedBodyPartsGroup>Stock</linkedBodyPartsGroup></li></tools>
+	</ThingDef>
+
 </Defs>

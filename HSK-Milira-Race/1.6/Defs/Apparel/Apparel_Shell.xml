@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="Milira_ShellBase" ParentName="Milira_ApparelBase" Abstract="True">
+		<statBases>
+			<Mass>2.2</Mass>
+			<EquipDelay>2.5</EquipDelay>
+		</statBases>
+		<apparel>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+		</apparel>
+		<thingCategories>
+			<li>Milira_Apparel_Shell</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef Name="Milira_ShellBaseI" ParentName="Milira_ShellBase" Abstract="True">
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_I</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_TailoringBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<apparel>
+			<tags>
+				<li>Milira_Shell</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef Name="Milira_ShellBaseII" ParentName="Milira_ShellBase" Abstract="True">
+		<recipeMaker>
+			<researchPrerequisite>Milira_Apparel_II</researchPrerequisite>
+			<recipeUsers>
+				<li>Milira_TailoringBench</li>
+			</recipeUsers>
+		</recipeMaker>
+		<apparel>
+			<tags>
+				<li>Milira_Shell</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+
+	<!--1级衣服-->
+
+	<ThingDef ParentName="Milira_ShellBaseII">
+		<defName>Milira_Dustcoat</defName>
+		<label>Milira dust coat</label>
+		<description>A thick coat that provides excellent protection against dust and sand while also offering good warmth.</description>
+		<costStuffCount>140</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Shell/Dustcoat/Dustcoat</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>12000</WorkToMake>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.30</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.35</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.6</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.6</StuffEffectMultiplierInsulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>false</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Legs</li>
+				<li>Arms</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Feet</li>
+				<li>Hands</li>
+				<li>Milira_Wings</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Shell/Dustcoat/Dustcoat</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="Milira_ShellBaseII">
+		<defName>Milira_PlushCape</defName>
+		<label>Milira plush cape</label>
+		<description>A plush cape that covers the upper body. It looks very warm and cozy.</description>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Leathery</li>
+		</stuffCategories>
+		<graphicData>
+			<texPath>Milira/Apparel/Shell/PlushCape/PlushCape</texPath>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>9000</WorkToMake>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.20</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.7</StuffEffectMultiplierInsulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>false</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Arms</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Shell/PlushCape/PlushCape</wornGraphicPath>
+			<tags>
+				<li>Milira_DailyWear</li>
+				<li>Milira_Daily</li>
+			</tags>
+		</apparel>
+		<equippedStatOffsets>
+		</equippedStatOffsets>
+	</ThingDef>
+
+  <!-- 猎手风衣 -->
+	<ThingDef ParentName="Milira_ShellBaseII">
+		<defName>Milira_HunterCoat</defName>
+		<label>Milira hunter coat</label>
+		<description>The retro-style wide coat offers protection and insulation.</description>
+    <costStuffCount>80</costStuffCount>
+    <stuffCategories>
+      <li>Leathery</li>
+      <li>Fabric</li>
+    </stuffCategories>
+    <costList>
+      <Milira_FeatherThread>20</Milira_FeatherThread>
+    </costList>
+		<graphicData>
+			<texPath>Milira/Apparel/Shell/HunterCoat/HunterCoat</texPath>
+      <shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToMake>32000</WorkToMake>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.30</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.30</ArmorRating_Heat>
+			<StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+      <Insulation_Cold>10</Insulation_Cold>
+      <Insulation_Heat>10</Insulation_Heat>
+		</statBases>
+		<apparel>
+			<useWornGraphicMask>true</useWornGraphicMask>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+        <li>Arms</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Feet</li>
+        <li>Hands</li>
+        <li>Milira_Wings</li>
+      </bodyPartGroups>
+			<wornGraphicPath>Milira/Apparel/Shell/HunterCoat/HunterCoat</wornGraphicPath>
+			<tags>
+				<li>Milira_Hunter</li>
+			</tags>
+			<renderNodeProperties>
+				<li>
+					<debugLabel>Milira_HunterCoat BG</debugLabel>
+					<nodeClass>AncotLibrary.PawnRenderNode_ApparelAddition</nodeClass>
+					<workerClass>PawnRenderNodeWorker_Apparel_Body</workerClass>
+					<pawnType>Any</pawnType>
+					<texPath>Milira/Apparel/Shell/HunterCoat/HunterCoatBG</texPath>
+					<baseLayer>-10</baseLayer>
+					<parentTagDef>ApparelBody</parentTagDef>
+				</li>
+			</renderNodeProperties>
+		</apparel>
+		<equippedStatOffsets>
+      <MeleeDodgeChance>4</MeleeDodgeChance>
+      <Ancot_RangeDodgeChance>0.06</Ancot_RangeDodgeChance>
+    </equippedStatOffsets>
+	</ThingDef>
+
+
+</Defs>

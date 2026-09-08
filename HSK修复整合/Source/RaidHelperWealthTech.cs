@@ -1,10 +1,15 @@
 // RaidHelperWealthTech.cs — 袭击派系科技档上限 + 增援延期 + 财富挂钩(2026-08-31 用户需求)
 //
 // 需求:
-//   1. 袭击派系科技等级最多高玩家一个档(玩家档由 Tech Advancing 模组维护,
+//   1. 普通袭击派系科技等级最多高玩家一个档(玩家档由 Tech Advancing 模组维护,
 //      它直接改写 Faction.OfPlayer.def.techLevel,故直接读该值)。
-//      机械体/虫族(SK.FactionDefOfLocal)豁免 —— 它们是事件型敌人,不受科技进程约束;
-//      豁免的代价是其袭击首日改由 Patches/13_袭击首日延期.xml 延到 机械体320/虫族480 天。
+//      机械体/虫族/天网是"固定门槛大敌"(2026-09-04 用户调整): 不再豁免科技档,
+//      改吃"玩家科技档下限 + 财富门槛"双条件(与年限叠加,三条件并存才触发):
+//        Mechanoid             -> Industrial + 100 万财富
+//        Insect / Insectoid    -> Industrial + 50 万财富(09-04 二次下调: 100→50)
+//        SkynetHumanlike(天网) -> Spacer     + 200 万财富
+//      年限(最早袭击日)由 Patches/13_袭击首日延期.xml + 18_威胁事件年限提前.xml 控制:
+//      机械 180 / 虫族 240 / 天网 120 天。
 //   2. 后期增援(Raid Assistant)EnableAfterDaysPassed 120 → 400(RimWorld 1年=60天,400天≈6.7年)。
 //   3. 袭击与财富挂钩:
 //      a) 中心空投概率: 财富除数 1,000,000 → 2,000,000,上限压到 0.12(原版 0.15,第一次改 0.30 后用户要求再降);
@@ -74,8 +79,20 @@ namespace RaidHelperWealthTech
             return (t > mx) ? mx : t;
         }
 
-        // 科技档上限豁免: 机械体/虫族(与 RaidHelperComponent.exceptionalFactionDefs 同集)
-        public static bool IsTechExempt(Faction f)
+        // 玩家当前科技档(Tech Advancing 直接改写 Faction.OfPlayer.def.techLevel)
+        public static int PlayerTechLevel()
+        {
+            if (Faction.OfPlayer == null || Faction.OfPlayer.def == null)
+            {
+                return 0;
+            }
+            return (int)Faction.OfPlayer.def.techLevel;
+        }
+
+        // "固定门槛大敌"派系判定(2026-09-04): 机械体/虫族不再豁免科技档,
+        // 与天网一样吃"玩家科技档下限 + 财富"双门槛。
+        // (天网 Skynet_SK 未纳入编译引用,按其 defName 判,未装该 mod 时恒 false 安全)
+        public static bool IsFixedGateFaction(Faction f)
         {
             if (f == null || f.def == null)
             {
@@ -89,12 +106,47 @@ namespace RaidHelperWealthTech
             {
                 return true;
             }
+            if (f.def.defName == "SkynetHumanlike")
+            {
+                return true;
+            }
+            // 美狐海盗(2026-09-07): 只挂科技门槛(Industrial),不设财富门槛(返回 0 恒过)
+            if (f.def.defName == "Miho_Faction_Supremacist")
+            {
+                return true;
+            }
             return false;
         }
 
-        // 豁免派系的财富门槛(2026-08-31 二次要求: 除延期天数外再加财富门槛)
-        // 机械体 500,000 / 虫族(Insect + Insectoid) 1,000,000
-        public static float ExemptWealthGate(Faction f)
+        // 固定门槛派系要求的最低玩家科技档
+        public static int FixedGateMinTech(Faction f)
+        {
+            if (f == null || f.def == null)
+            {
+                return 0;
+            }
+            if (f.def == FactionDefOf.Mechanoid)
+            {
+                return (int)TechLevel.Industrial;
+            }
+            if (f.def == FactionDefOfLocal.Insectoid || f.def == FactionDefOfLocal.Insect)
+            {
+                return (int)TechLevel.Industrial;
+            }
+            if (f.def.defName == "SkynetHumanlike")
+            {
+                return (int)TechLevel.Spacer;
+            }
+            if (f.def.defName == "Miho_Faction_Supremacist")
+            {
+                return (int)TechLevel.Industrial;
+            }
+            return 0;
+        }
+
+        // 固定门槛派系的财富门槛(2026-09-04 定值: 机械族 100 万, 虫族 50 万(二次下调), 天网 200 万;
+        // 2026-09-07 用户要求降 40%: 机械 60 万, 虫族 30 万, 天网 120 万)
+        public static float FixedGateWealth(Faction f)
         {
             if (f == null || f.def == null)
             {
@@ -102,23 +154,31 @@ namespace RaidHelperWealthTech
             }
             if (f.def == FactionDefOf.Mechanoid)
             {
-                return 500000f;
+                return 600000f;
             }
             if (f.def == FactionDefOfLocal.Insectoid || f.def == FactionDefOfLocal.Insect)
             {
-                return 1000000f;
+                return 300000f;
+            }
+            if (f.def.defName == "SkynetHumanlike")
+            {
+                return 1200000f;
             }
             return 0f;
         }
 
         // 派系整体准入判定(ResolveFaction / TryResolveRaidFaction 共用):
         //   普通派系: techLevel ≤ 玩家档+1
-        //   豁免派系(机械体/虫族): 不受科技档限制,但须过财富门槛
+        //   固定门槛大敌(机械体/虫族/天网): 玩家档≥下限 且 财富≥门槛
         public static bool FactionAllowed(Faction f)
         {
-            if (IsTechExempt(f))
+            if (IsFixedGateFaction(f))
             {
-                return ColonyWealth() >= ExemptWealthGate(f);
+                if (PlayerTechLevel() < FixedGateMinTech(f))
+                {
+                    return false;
+                }
+                return ColonyWealth() >= FixedGateWealth(f);
             }
             return (int)f.def.techLevel <= MaxRaidTech();
         }
@@ -137,9 +197,10 @@ namespace RaidHelperWealthTech
         }
 
         // 高财富时高 tech 档派系权重放大(每 200 万财富,高 1 档 +100%,最多 +200%)
+        // 固定门槛大敌(机械/虫族/天网)不加成,避免后期被财富放大刷屏
         public static float FactionWeight(Faction f, float commonality)
         {
-            if (commonality <= 0f || IsTechExempt(f))
+            if (commonality <= 0f || IsFixedGateFaction(f))
             {
                 return commonality;
             }
@@ -318,6 +379,61 @@ namespace RaidHelperWealthTech
             Widgets.Label(canvas, "HSK修复整合: Core_SK 袭击参数已锁定,此设置页已禁用。");
             Text.Anchor = TextAnchor.UpperLeft;
             return false;
+        }
+    }
+
+    // 需求5(2026-09-04 用户调整): 事件型大敌的科技档/财富门槛。
+    // IncidentDef 无原生"科技"字段;1.6 事件 worker 的附加检查走 CanFireNowSub,
+    // 但随机调度必经基类 IncidentWorker.CanFireNow -> 在此打 Prefix 按 defName 拦表:
+    //   PsychicEmanatorShipPartCrash / DefoliatorShipPartCrash(心灵/枯萎者飞船)
+    //       -> 玩家需 Industrial+(财富沿用 IncidentDef.minThreatPoints 8000,不另设)
+    //   Salvation / AgentPodCrash / AgentTravelerGroup(天网 3 事件)
+    //       -> 玩家需 Spacer+ 且财富 ≥ 2,000,000
+    // 命中门槛即 __result=false(本次不触发),其余事件不受影响。
+    [HarmonyPatch(typeof(IncidentWorker), "CanFireNow")]
+    public static class ThreatEvent_CanFireNow_TechGate
+    {
+        private static bool TryEventGate(string defName, out int minTech, out float wealth)
+        {
+            minTech = 0;
+            wealth = 0f;
+            if (defName == "PsychicEmanatorShipPartCrash" || defName == "DefoliatorShipPartCrash")
+            {
+                minTech = (int)TechLevel.Industrial;
+                return true;
+            }
+            if (defName == "Salvation" || defName == "AgentPodCrash" || defName == "AgentTravelerGroup")
+            {
+                minTech = (int)TechLevel.Spacer;
+                wealth = 2000000f;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool Prefix(IncidentWorker __instance, ref bool __result)
+        {
+            if (__instance == null || __instance.def == null)
+            {
+                return true;
+            }
+            int minTech;
+            float wealth;
+            if (!TryEventGate(__instance.def.defName, out minTech, out wealth))
+            {
+                return true;
+            }
+            if (WealthRaidHooks.PlayerTechLevel() < minTech)
+            {
+                __result = false;
+                return false;
+            }
+            if (wealth > 0f && WealthRaidHooks.ColonyWealth() < wealth)
+            {
+                __result = false;
+                return false;
+            }
+            return true;
         }
     }
 }

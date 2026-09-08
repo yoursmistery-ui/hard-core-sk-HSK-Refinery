@@ -120,8 +120,11 @@ namespace JobEffects
             l.CheckboxLabeled("Settling debris", ref s.groundLitter,
                 "A few embers and chips land near the work and briefly linger before fading.");
             l.CheckboxLabeled("Tool holstering", ref s.holsterTools,
-                "When a colonist stops working, the tool rests at their hip for a moment, then fades away. "
-                + "Also rides on their belt while they walk to a job it covers.");
+                "When a colonist stops working, the tool rests at their hip for a moment, then fades away.");
+            l.CheckboxLabeled("   \u2514 Carry the tool while walking to a job", ref s.enrouteToolCarry,
+                "Ride the tool on the belt while the colonist is still walking to a job it covers, so it is "
+                + "already out when they arrive. Off by default: the tool is only taken out when work actually "
+                + "starts, so it never double-draws with a held melee weapon during the approach. Requires Tool holstering.");
             l.CheckboxLabeled("Tool handling sounds", ref s.toolFoley,
                 "A short handle clatter as a colonist pulls a tool out to start work and stows it when done.");
             l.CheckboxLabeled("Tools share the colonist's depth", ref s.toolsMatchPawnDepth,
@@ -272,6 +275,38 @@ namespace JobEffects
             SmyhCompat.Apply(h);   // optional: suppress SMYH's duplicate resting hands during tool work
             SmyhArmHook.Apply(h);  // optional: extend forearms onto every SMYH hand (weapons/carried/idle)
             MeleeAnimationCompat.Apply(); // optional: silence Melee Animation's weapon anim while a tool is in use
+
+            // Startup self-check: the equip-hide prefixes are the chokepoints that keep the
+            // real equipped tool invisible while our animated tool draws. If PatchAll partially
+            // failed (a sibling patch's target went missing), these could be absent while the
+            // animator still works — the exact "tool animates but the real one won't hide" split.
+            // One log line at startup makes that state visible instead of silent.
+            try
+            {
+                System.Reflection.MethodBase[] targets =
+                {
+                    AccessTools.Method(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawEquipmentAndApparelExtras)),
+                    AccessTools.Method(typeof(PawnRenderUtility), nameof(PawnRenderUtility.DrawEquipmentAiming)),
+                    AccessTools.Method(typeof(PawnRenderNodeWorker_Carried), nameof(PawnRenderNodeWorker_Carried.PostDraw)),
+                };
+                string[] names = { "extras", "aiming", "carried" };
+                int ok = 0;
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    bool ours = false;
+                    Patches info = targets[i] != null ? Harmony.GetPatchInfo(targets[i]) : null;
+                    if (info != null)
+                        for (int j = 0; j < info.Prefixes.Count; j++)
+                            if (info.Prefixes[j].owner == "meathax.JobEffects") { ours = true; break; }
+                    if (ours) ok++;
+                    else Log.Warning("[Show Me Your Tools] equip-hide patch MISSING on " + names[i] + " (that path can draw the equipped tool)");
+                }
+                Log.Message("[Show Me Your Tools] equip-hide patches applied " + ok + "/" + targets.Length);
+            }
+            catch (System.Exception e)
+            {
+                Log.Warning("[Show Me Your Tools] equip-hide self-check failed: " + e.Message);
+            }
         }
     }
 }

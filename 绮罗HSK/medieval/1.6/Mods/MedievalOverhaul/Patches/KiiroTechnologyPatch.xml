@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <!-- 作战服装 -->
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]/techLevel</xpath>
+		<value>
+			<techLevel>Medieval</techLevel>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]/requiredResearchBuilding</xpath>
+		<value>
+            <requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+		</value>
+	</Operation>
+
+    <!-- 其他科技 -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]</xpath>
+		<value>
+            <requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]</xpath>
+		<value>
+            <requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]</xpath>
+		<value>
+            <requiredResearchBuilding>DankPyon_AdvancedResearchBench</requiredResearchBuilding>
+		</value>
+	</Operation>
+
+    <!-- 魅影武器 -->
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="Kiiro_PTMeleeWeaponBase"]/techLevel</xpath>
+		<value>
+			<techLevel>Medieval</techLevel>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="Kiiro_PTMeleeWeaponBase"]/recipeMaker/recipeUsers</xpath>
+		<value>
+			<recipeUsers Inherit="false">
+                <li>Kiiro_FueledSmithy</li>
+                <li>Kiiro_ElectricSmithy</li>
+            </recipeUsers>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="Kiiro_PTMeleeWeaponBase"]/recipeMaker/researchPrerequisite</xpath>
+		<value>
+			<researchPrerequisites>
+               <li>Kiiro_Amamech</li>
+               <li>Kiiro_ImprovedMedievalWeapon</li>
+               <li>Kiiro_ConcealedWeapon</li>
+            </researchPrerequisites>
+		</value>
+	</Operation>
+</Patch>

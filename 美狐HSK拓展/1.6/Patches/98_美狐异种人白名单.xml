@@ -54,5 +54,23 @@
             </value>
         </match>
     </Operation>
+    <!-- C. 已有 onlyUseRaceRestrictedXenotypes → 强制 true
+         (HAR CanUseXenotype: 开启后本族只能用 whiteXenotypeList = xenotypeList 注册条目,
+          防生成出猪猡种/高骑种等原版异种人;魅狐 Kurin_Race 源 defs 已自带同款开关) -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/onlyUseRaceRestrictedXenotypes</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/onlyUseRaceRestrictedXenotypes</xpath>
+            <value>
+                <onlyUseRaceRestrictedXenotypes>true</onlyUseRaceRestrictedXenotypes>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction</xpath>
+            <value>
+                <onlyUseRaceRestrictedXenotypes>true</onlyUseRaceRestrictedXenotypes>
+            </value>
+        </nomatch>
+    </Operation>
 
 </Patch>

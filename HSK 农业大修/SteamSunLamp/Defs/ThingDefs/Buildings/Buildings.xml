@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+<!-- HSK 本地适配(原 mod: Medieval Steam Sun Lamp, 作者 GA-YUKI):
+     中世纪方案: 仿 Core_SK 原生萤石灯 GlowstoneLamp(ParentName="SK_LampBase"),
+     萤石(Glowstone)自发光, 免电力免燃料; 保留夜间自动关闭(Schedule, 配合作物休眠期);
+     小灯挂 照明I(Light_B1), 大灯挂 照明II(Light_B2), 均为中世纪档;
+     建材 = 木/石框架 + 萤石 + 煤炭 + 泥土 + 玻璃(用户指定);
+     光照 = 电太阳灯(overlight 7 / glow 14 / 光圈 5.8)的一半: 大灯 3.5/7/2.9, 小灯再减半 2/4/1.5;
+     冷光不发热(无 HeatPusher); defName 保留原作命名。 -->
+
+	<ThingDef ParentName="SK_LampBase">
+		<defName>GAYUKI_SteamSunLamp</defName>
+		<label>glowstone sun lamp</label>
+		<description>A large lantern packed with crushed glowstone. It lights an area brightly enough to grow crops, glowing on its own without any power or fuel. It turns itself off at night to match the plants' resting period.</description>
+		<graphicData>
+			<texPath>Things/Building/SteamSunLamp</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.5,1.5)</drawSize>
+			<shadowData>
+				<volume>(0.6,1, 0.3)</volume>
+				<offset>(0,0,-0.25)</offset>
+			</shadowData>
+		</graphicData>
+		<uiIconPath>Things/Building/SteamSunLamp</uiIconPath>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<tickerType>Rare</tickerType>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+			<Beauty>12</Beauty>
+			<Bulk>15</Bulk>
+			<Mass>4.5</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<costList>
+			<Glowstone>15</Glowstone>
+			<Glass>6</Glass>
+			<Dirt>40</Dirt>
+			<Coal>20</Coal>
+		</costList>
+		<uiOrder>2993</uiOrder>
+		<comps>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Glower">
+				<overlightRadius>3.5</overlightRadius>
+				<glowRadius>7</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Schedule">
+				<!-- Match plant growing times -->
+				<startTime>0.25</startTime>
+				<endTime>0.8</endTime>
+				<offMessage>Off for plant resting period</offMessage>
+			</li>
+		</comps>
+		<specialDisplayRadius>2.9</specialDisplayRadius>
+		<building>
+			<uninstallWork>800</uninstallWork>
+		</building>
+		<researchPrerequisites>
+			<li>Light_B2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="SK_LampBase">
+		<defName>GAYUKI_SmallSteamSunLamp</defName>
+		<label>small glowstone sun lamp</label>
+		<description>A smaller version of the glowstone sun lamp. It illuminates a smaller area and uses less glowstone. The glowstone glows on its own without any power or fuel, and the lamp turns itself off at night to match the plants' resting period.</description>
+		<graphicData>
+			<texPath>Things/Building/SmallSteamSunLamp</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.5,1.5)</drawSize>
+			<shadowData>
+				<volume>(0.6,1, 0.4)</volume>
+				<offset>(0,0,-0.20)</offset>
+			</shadowData>
+		</graphicData>
+		<uiIconPath>Things/Building/SmallSteamSunLamp</uiIconPath>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<tickerType>Rare</tickerType>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToBuild>350</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Bulk>10</Bulk>
+			<Mass>3.5</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>12</costStuffCount>
+		<costList>
+			<Glowstone>10</Glowstone>
+			<Glass>3</Glass>
+			<Dirt>25</Dirt>
+			<Coal>10</Coal>
+		</costList>
+		<uiOrder>2992</uiOrder>
+		<comps>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Glower">
+				<overlightRadius>2</overlightRadius>
+				<glowRadius>4</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Schedule">
+				<!-- Match plant growing times -->
+				<startTime>0.25</startTime>
+				<endTime>0.8</endTime>
+				<offMessage>Off for plant resting period</offMessage>
+			</li>
+		</comps>
+		<specialDisplayRadius>1.5</specialDisplayRadius>
+		<building>
+			<uninstallWork>500</uninstallWork>
+		</building>
+		<researchPrerequisites>
+			<li>Light_B1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+	</ThingDef>
+
+</Defs>

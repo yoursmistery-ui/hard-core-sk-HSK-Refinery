@@ -15,6 +15,13 @@
   - OA_RK_Caravan_TributeCollector: 同上, 金鼠族贡品收集者 BuySingleDef Gold -> GoldCoin。
   - 金令 MV=10 已由 01 补丁设置。
 
+⚠️ tradeCurrency 必须保持 Favor(勿改 Silver)! 两个贡品收集者都是"只收购、不出售"的商人
+   (stockGenerators 全是 Buy*)。反编译确认 Pawn_TraderTracker.CanTradeNow: 当商人无货可卖时
+   (Goods.Any(WillTrade)=false), 只有 tradeCurrency==Favor 才返回 true; 而黄色问号气泡
+   (Pawn.ShouldShowQuestionMark→CanTradeNow) 正是靠它显示。改 Silver 会让商人头顶问号消失、无法交互。
+   收购 GoldCoin 换 Favor 积分 = "用金币换帝国积分", 本补丁已实现, 无需动 tradeCurrency。
+   (原 06_TributeCoinCurrency.xml 因把 tradeCurrency 改 Silver 破坏问号, 已于 2026-09-05 删除。)
+
 MayRequire=skyarkhangel.HSK.DLC: 金令(GoldCoin)定义来自 Core_SK DLCModule。
 本补丁为最终层, 后于 Core_SK_DLCModule / Royalty / 金鼠族 加载。
 -->

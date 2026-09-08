@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <GeneCategoryDef>
+    <defName>Milira_GeneCategory</defName>
+    <label>Milira</label>
+    <displayPriorityInXenotype>531</displayPriorityInXenotype>
+  </GeneCategoryDef>
+
+  <GeneDef Name="MiliraGeneBase" Abstract="True">
+    <displayCategory>Milira_GeneCategory</displayCategory>
+    <randomChosen>true</randomChosen>
+  </GeneDef>
+
+  <!--博闻-->
+  <GeneDef ParentName="MiliraGeneBase">
+    <defName>Milira_Knowledgeable</defName>
+    <label>knowledgeable</label>
+    <description>Carriers of this gene have high learning and research speed.</description>
+    <iconPath>Milira/Icon/Gene_Knowledgeable</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <!-- <selectionWeight>0.2</selectionWeight> -->
+    <statFactors>
+      <GlobalLearningFactor>1.5</GlobalLearningFactor>
+      <ResearchSpeed>1.35</ResearchSpeed>
+      <LearningRateFactor>1.2</LearningRateFactor>
+    </statFactors>
+    <biostatMet>-3</biostatMet>
+    <biostatCpx>6</biostatCpx>
+    <exclusionTags>
+      <li>Learning_Slow</li>
+      <li>Learning_Fast</li>
+    </exclusionTags>
+    <symbolPack>
+      <prefixSymbols>
+        <li><symbol>brain</symbol></li>
+        <li><symbol>nerd</symbol></li>
+        <li><symbol>smart</symbol></li>
+        <li><symbol>corti</symbol></li>
+        <li><symbol>neuro</symbol></li>
+        <li><symbol>mnemo</symbol></li>
+      </prefixSymbols>
+      <suffixSymbols>
+        <li><symbol>nerd</symbol></li>
+        <li><symbol>brain</symbol></li>
+      </suffixSymbols>
+    </symbolPack>
+  </GeneDef>
+
+  <!--谈判专家-->
+  <GeneDef ParentName="MiliraGeneBase">
+    <defName>Milira_ProNegotiator</defName>
+    <label>pro negotiator</label>
+    <description>Carriers of this gene have high negotiation skills.</description>
+    <iconPath>Milira/Icon/Gene_ProNegotiator</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <!-- <selectionWeight>0.2</selectionWeight> -->
+    <statFactors>
+      <NegotiationAbility>1.5</NegotiationAbility>
+    </statFactors>
+    <biostatMet>-1</biostatMet>
+  </GeneDef>
+
+  <!--慢条斯理-->
+  <GeneDef ParentName="MiliraGeneBase">
+    <defName>Milira_Leisurely</defName>
+    <label>leisurely</label>
+    <description>Carriers of this gene cares more about being elegant than finishing jobs.</description>
+    <iconPath>Milira/Icon/Gene_Leisurely</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <!-- <selectionWeight>0.2</selectionWeight> -->
+    <statFactors>
+      <WorkSpeedGlobal>0.8</WorkSpeedGlobal>
+      <EatingSpeed>0.75</EatingSpeed>
+    </statFactors>
+    <statOffsets>
+      <MoveSpeed>-0.2</MoveSpeed>
+    </statOffsets>
+    <biostatMet>6</biostatMet>
+    <biostatCpx>6</biostatCpx>
+  </GeneDef>
+
+  <!--洁癖-->
+  <GeneDef ParentName="MiliraGeneBase">
+    <defName>Milira_Ablutomania</defName>
+    <label>ablutomania</label>
+    <description>Carriers of this gene dislike dirty environments and spend more time cleaning.</description>
+    <iconPath>Milira/Icon/Gene_Ablutomania</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <!-- <selectionWeight>0.2</selectionWeight> -->
+    <statFactors>
+      <ButcheryFleshSpeed>0.2</ButcheryFleshSpeed>
+      <CleaningSpeed>1.25</CleaningSpeed>
+      <DrugSynthesisSpeed>0.9</DrugSynthesisSpeed>
+    </statFactors>
+    <biostatMet>2</biostatMet>
+  </GeneDef>
+
+  <!--机械擅长-->
+  <GeneDef ParentName="MiliraGeneBase">
+    <defName>Milira_Mechining</defName>
+    <label>mechining</label>
+    <description>Carriers of this gene have a strong ability in mechanics.</description>
+    <iconPath>Milira/Icon/Gene_Mechining</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <!-- <selectionWeight>0.2</selectionWeight> -->
+    <statFactors>
+      <ButcheryMechanoidEfficiency>1.5</ButcheryMechanoidEfficiency>
+      <ButcheryMechanoidSpeed>1.8</ButcheryMechanoidSpeed>
+      <SmeltingSpeed>1.35</SmeltingSpeed>
+    </statFactors>
+    <statOffsets>
+      <MechBandwidth>3</MechBandwidth>
+      <WorkSpeedGlobalOffsetMech>0.1</WorkSpeedGlobalOffsetMech>
+      <MechRepairSpeed>0.5</MechRepairSpeed>
+      <MechFormingSpeed>0.2</MechFormingSpeed>
+    </statOffsets>
+    <biostatMet>-2</biostatMet>
+    <biostatCpx>2</biostatCpx>
+  </GeneDef>
+
+
+</Defs>

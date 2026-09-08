@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 柱子"支撑柱"计数识别(2026-09-08): 把 酒馆(SD_*Column)/金鼠族(OA_RK_Zhuzi*)/鼠族家具转角柱(RKFC_*_FloorFence)
+	     纳入圣物房间(祭坛)与王座厅的"支撑柱"数量要求, 使其能被算作柱子。
+	     ⚠️ 2026-09-08 用户要求: 外观不跟随文化风格更换 → 已删除原第一/二/三段
+	     (CompStyleable + StyleDominance + 文化柱式 thingDefStyles 映射), 仅保留第四段房间计数。
+	     房间计数按 defName 匹配 RoomRequirement_ThingAnyOfCount.things, 与 CompStyleable 无关, 无需换皮即生效。 -->
+
+	<!-- ===== 圣物房间"支撑柱"计数要求识别这些柱子(2026-09-08 用户实测 0/4) ===== -->
+	<!-- 机制: 原版祭坛/王座厅要求是 RoomRequirement_ThingCount 只认 def=Column;
+	     终态(Unified.xml 实测)已被替换为 RoomRequirement_ThingAnyOfCount(things 列表):
+	     祭坛=VEF本地包 Replace + 金鼠族 Add(OA_RK_Zhuzi); 王座=金鼠族补丁加 OA 两柱(12 个称号含继承)。
+	     这里只补缺: 祭坛缺 OA_RK_Zhuzi_New + 酒馆三柱 + 鼠族转角柱; 王座缺 酒馆三柱 + 鼠族转角柱。
+	     ⚠️ 酒馆工具整合HSK 自带同类补丁(1.6/LoadFolders/)因缺根 LoadFolders.xml 从未加载, 保持不启用(防止本补丁重复添加)。 -->
+	<!-- 兜底 Replace(仅当 AnyOfCount 尚未建立时生效, 与金鼠族同款; VEF 本地包在场时为 no-op): -->
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+			<value><li Class="RoomRequirement_ThingAnyOfCount"><things><li>Column</li></things><count>4</count></li></value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/RoyalTitleDef[defName="Knight"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RoyalTitleDef[defName="Knight"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+			<value><li Class="RoomRequirement_ThingAnyOfCount"><things><li>Column</li></things><count>2</count></li></value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/RoyalTitleDef[defName="Praetor" or defName="Baron"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RoyalTitleDef[defName="Praetor" or defName="Baron"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+			<value><li Class="RoomRequirement_ThingAnyOfCount"><things><li>Column</li></things><count>4</count></li></value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/RoyalTitleDef[defName="Count" or @Name="BaseEmpireTitleNPC"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/RoyalTitleDef[defName="Count" or @Name="BaseEmpireTitleNPC"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+			<value><li Class="RoomRequirement_ThingAnyOfCount"><things><li>Column</li></things><count>6</count></li></value>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<success>Always</success>
+					<xpath>Defs/ThingDef[defName="OA_RK_Zhuzi_New"]</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+						<value><li>OA_RK_Zhuzi_New</li></value>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<success>Always</success>
+					<xpath>Defs/ThingDef[defName="SD_WoodColumn"]</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+						<value><li>SD_WoodColumn</li><li>SD_StoneColumn</li><li>SD_IndustrialColumn</li></value>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<success>Always</success>
+					<xpath>Defs/ThingDef[defName="RKFC_RGK_FloorFence"]</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+						<value><li>RKFC_RGK_FloorFence</li><li>RKFC_GL_FloorFence</li></value>
+					</match>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/RoyalTitleDef[defName="Knight"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<success>Always</success>
+					<xpath>Defs/ThingDef[defName="SD_WoodColumn"]</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/RoyalTitleDef/throneRoomRequirements//li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+						<value><li>SD_WoodColumn</li><li>SD_StoneColumn</li><li>SD_IndustrialColumn</li></value>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<success>Always</success>
+					<xpath>Defs/ThingDef[defName="RKFC_RGK_FloorFence"]</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>Defs/RoyalTitleDef/throneRoomRequirements//li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+						<value><li>RKFC_RGK_FloorFence</li><li>RKFC_GL_FloorFence</li></value>
+					</match>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- ===== 五、原版支撑柱(Column)去文化样式(2026-09-08 用户要求) ===== -->
+	<!-- 症状: 殖民地主导文化为 VME_Corporate 时, 原版支撑柱被运行期自动刷成 VME_Corporate_Column(细黑条贴图), 且不写入存档。
+	     本 mod 加载序在 Ideology 之后, 该 CompProperties_Styleable 由 Ideology 注入到 Column, 此处按合并后原始 XML 删除。
+	     移除后支撑柱永不吃任何文化样式 → 恢复默认石柱外观(含存档内已放置的 4 根)。房间"支撑柱"计数按 defName, 不受影响。 -->
+	<Operation Class="PatchOperationConditional">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="Column"]/comps/li[@Class="CompProperties_Styleable"]</xpath>
+		<match Class="PatchOperationRemove">
+			<xpath>Defs/ThingDef[defName="Column"]/comps/li[@Class="CompProperties_Styleable"]</xpath>
+		</match>
+	</Operation>
+</Patch>

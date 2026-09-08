@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN:
+    <li>lastOrNot(lodgerCount==1)-></li>
+    <li>lastOrNot(lodgerCount>=2)->last</li>
+    <li>lodgersLabelSingularOrPlural(lodgerCount==1)->[lodgersLabel]</li>
+    <li>lodgersLabelSingularOrPlural(lodgerCount>=2)->[lodgersLabelPlural]</li>
+    <li>lodgersArriveLetterLabel->[lodgersLabelSingularOrPlural] arrived</li>
+    <li>lodgersArriveLetterText->[lodgersSingularOrPluralDef] [hasHave] arrived. [lodgersPronoun] will stay with you for [questDurationTicks_duration] so [lodgersPronoun] can rest and regroup.</li>
+    <li>hasHave(lodgerCount==1)->has</li>
+    <li>hasHave(lodgerCount>=2)->have</li>
+    <li>appalledButNoAction->The {PAWNSALIVECOUNT_multiple ? others seem : last [lodgersLabel] is} appalled at this, but {PAWNSALIVECOUNT_multiple ? are: is} not taking action against you.</li>
+    <li>othersWillNotAccept->The {PAWNSALIVECOUNT_multiple ? others are : last [lodgersLabel] is} not willing to accept this</li>
+    <li>turnedViolent->[othersWillNotAccept], and {PAWNSALIVECOUNT_multiple ? have : has } turned violently against you.</li>
+    <li>decidedToLeave->[othersWillNotAccept], and {PAWNSALIVECOUNT_multiple ? have : has } decided to leave.</li>
+    <li>whoAskedToStay->who asked to stay with you</li>
+    <li>oneOfThe->one of the desperate [faction_pawnsPlural] who asked to stay with you</li>
+    <li>questOver->The quest '[resolvedQuestName]' is over.</li>
+    <li>letterIntroDeath->{SUBJECT_definite}, [oneOfThe] has died.</li>
+    <li>lodgerDiedMemoryThoughtLetterLabel->[lodgersLabel] died: Anger</li>
+    <li>lodgerDiedMemoryThoughtLetterText->[letterIntroDeath]\n\n[appalledButNoAction]</li>
+    <li>lodgerDiedAttackPlayerLetterLabel->[lodgersLabel] died: Revenge</li>
+    <li>lodgerDiedAttackPlayerLetterText->[letterIntroDeath]\n\n[turnedViolent]</li>
+    <li>lodgerDiedLeaveMapLetterLabel->[lodgersLabel] died: Departure</li>
+    <li>lodgerDiedLeaveMapLetterText->[letterIntroDeath]\n\n[decidedToLeave]</li>
+    <li>lodgersAllDiedLetterLabel->Quest failed</li>
+    <li>lodgersAllDiedLetterText->{SUBJECT_definite}, the [lastOrNot] desperate [faction_pawnSingular] [whoAskedToStay], has died.\n\n[questOver]</li>
+    <li>letterIntroArrested->You arrested {SUBJECT_definite}, [oneOfThe].</li>
+    <li>lodgerArrestedMemoryThoughtLetterLabel->[lodgersLabel] arrested: Anger</li>
+    <li>lodgerArrestedMemoryThoughtLetterText->[letterIntroArrested]\n\n[appalledButNoAction]</li>
+    <li>lodgerArrestedAttackPlayerLetterLabel->[lodgersLabel] arrested: Revenge</li>
+    <li>lodgerArrestedAttackPlayerLetterText->[letterIntroArrested]\n\n[turnedViolent]</li>
+    <li>lodgerArrestedLeaveMapLetterLabel->[lodgersLabel] arrested: Departure</li>
+    <li>lodgerArrestedLeaveMapLetterText->[letterIntroArrested]\n\n[decidedToLeave]</li>
+    <li>lodgersAllArrestedLetterLabel->Quest failed</li>
+    <li>lodgersAllArrestedLetterText->You arrested {SUBJECT_definite}, the [lastOrNot] desperate [faction_pawnSingular] [whoAskedToStay].\n\n[questOver]</li>
+    <li>letterIntroViolated->{SUBJECT_definite}, [oneOfThe], was violated by surgery.</li>
+    <li>lodgerViolatedMemoryThoughtLetterLabel->[lodgersLabel] violated: Anger</li>
+    <li>lodgerViolatedMemoryThoughtLetterText->[letterIntroViolated]\n\n[appalledButNoAction]</li>
+    <li>lodgerViolatedAttackPlayerLetterLabel->[lodgersLabel] violated: Revenge</li>
+    <li>lodgerViolatedAttackPlayerLetterText->[letterIntroViolated]\n\n[turnedViolent]</li>
+    <li>lodgerViolatedLeaveMapLetterLabel->[lodgersLabel] arrested: Departure</li>
+    <li>lodgerViolatedLeaveMapLetterText->[letterIntroViolated]\n\n[decidedToLeave]</li>
+    <li>lodgersLeavingLetterLabel->[lodgersLabelSingularOrPlural] leaving</li>
+    <li>lodgersLeavingLetterText->{FACTION_leaderNameDef} thanks you for allowing {FACTION_leaderObjective} to stay at [map_definite] for these [questDurationTicks_duration]. {FACTION_leaderPronoun} is now moving on with {FACTION_leaderPossessive} people.\n\n{FACTION_leaderNameDef} says {FACTION_leaderPronoun} won't forget what you've done.</li>
+  -->
+  <Kiiro_Hospitality_Refugee.questContentRules.rulesStrings>
+    <li>lastOrNot(lodgerCount==1)-></li>
+    <li>lastOrNot(lodgerCount>=2)->最後的</li>
+    <li>lodgersLabelSingularOrPlural(lodgerCount==1)->[lodgersLabel]</li>
+    <li>lodgersLabelSingularOrPlural(lodgerCount>=2)->[lodgersLabelPlural]</li>
+    <li>lodgersArriveLetterLabel->[lodgersLabelSingularOrPlural] 抵達</li>
+    <li>lodgersArriveLetterText->[lodgersSingularOrPluralDef] [hasHave] 抵達。 [lodgersPronoun]將會和你共處[questDurationTicks_duration]來重整旗鼓。</li>
+    <li>hasHave(lodgerCount==1)->已經</li>
+    <li>hasHave(lodgerCount>=2)->已經</li>
+    <li>appalledButNoAction->The {PAWNSALIVECOUNT_multiple ? 其她人似乎 : 最後的 [lodgersLabel]} 對此感到震驚，但是並不會對你採取行動。</li>
+    <li>othersWillNotAccept->The {PAWNSALIVECOUNT_multiple ? 其她人 : 最後的 [lodgersLabel]} 不樂意接受</li>
+    <li>turnedViolent->[othersWillNotAccept]， 並且對你十分生氣。</li>
+    <li>decidedToLeave->[othersWillNotAccept]， 並且決定離開。</li>
+    <li>whoAskedToStay->請求與你共處的人</li>
+    <li>oneOfThe->其中一個絕望的 [whoAskedToStay]</li>
+    <li>questOver->任務 '[resolvedQuestName]' 已經結束。</li>
+    <li>letterIntroDeath->{SUBJECT_definite}， [oneOfThe] 已經死亡。</li>
+    <li>lodgerDiedMemoryThoughtLetterLabel->[lodgersLabel] 死亡：憤怒</li>
+    <li>lodgerDiedMemoryThoughtLetterText->[letterIntroDeath]\n\n[appalledButNoAction]</li>
+    <li>lodgerDiedAttackPlayerLetterLabel->[lodgersLabel] 死亡：復仇</li>
+    <li>lodgerDiedAttackPlayerLetterText->[letterIntroDeath]\n\n[turnedViolent]</li>
+    <li>lodgerDiedLeaveMapLetterLabel->[lodgersLabel] 死亡：離開</li>
+    <li>lodgerDiedLeaveMapLetterText->[letterIntroDeath]\n\n[decidedToLeave]</li>
+    <li>lodgersAllDiedLetterLabel->任務失敗</li>
+    <li>lodgersAllDiedLetterText->{SUBJECT_definite}， [lastOrNot] 不顧一切的 [faction_pawnSingular] （[whoAskedToStay]）， 已經死亡。\n\n[questOver]</li>
+    <li>letterIntroArrested->你逮捕了 {SUBJECT_definite} （[oneOfThe]）。</li>
+    <li>lodgerArrestedMemoryThoughtLetterLabel->[lodgersLabel] 逮捕：憤怒</li>
+    <li>lodgerArrestedMemoryThoughtLetterText->[letterIntroArrested]\n\n[appalledButNoAction]</li>
+    <li>lodgerArrestedAttackPlayerLetterLabel->[lodgersLabel] 逮捕：復仇</li>
+    <li>lodgerArrestedAttackPlayerLetterText->[letterIntroArrested]\n\n[turnedViolent]</li>
+    <li>lodgerArrestedLeaveMapLetterLabel->[lodgersLabel] 逮捕：離開</li>
+    <li>lodgerArrestedLeaveMapLetterText->[letterIntroArrested]\n\n[decidedToLeave]</li>
+    <li>lodgersAllArrestedLetterLabel->任務失敗</li>
+    <li>lodgersAllArrestedLetterText->你逮捕了 {SUBJECT_definite}, [lastOrNot] 不顧一切的 [faction_pawnSingular] （[whoAskedToStay]）。\n\n[questOver]</li>
+    <li>letterIntroViolated->{SUBJECT_definite}，（[oneOfThe]）， 被執行了非法的手術。</li>
+    <li>lodgerViolatedMemoryThoughtLetterLabel->[lodgersLabel] 違法：憤怒</li>
+    <li>lodgerViolatedMemoryThoughtLetterText->[letterIntroViolated]\n\n[appalledButNoAction]</li>
+    <li>lodgerViolatedAttackPlayerLetterLabel->[lodgersLabel] 違法：復仇</li>
+    <li>lodgerViolatedAttackPlayerLetterText->[letterIntroViolated]\n\n[turnedViolent]</li>
+    <li>lodgerViolatedLeaveMapLetterLabel->[lodgersLabel] 違法：離開</li>
+    <li>lodgerViolatedLeaveMapLetterText->[letterIntroViolated]\n\n[decidedToLeave]</li>
+    <li>areIs(lodgerCount==1)->正</li>
+    <li>areIs(lodgerCount>=2)->正</li>
+    <li>lodgersLeavingLetterLabel->[lodgersLabelSingularOrPlural] 離開</li>
+    <li>lodgersLeavingLetterText->{FACTION_leaderNameDef} 感謝你允許 {FACTION_leaderObjective} 在 [questDurationTicks_duration] 里待在 [map_definite]。 {FACTION_leaderPronoun} 現在正與 {FACTION_leaderPossessive} 一同前進。\n\n{FACTION_leaderNameDef} 說 {FACTION_leaderPronoun} 永遠不會忘記你做的這些事。</li>
+  </Kiiro_Hospitality_Refugee.questContentRules.rulesStrings>
+  <!-- EN:
+    <li>lodgersLabel->kiiro</li>
+    <li>lodgersLabelPlural->kiiros</li>
+  -->
+  <Kiiro_Hospitality_Refugee.questDescriptionAndNameRules.rulesStrings>
+    <li>lodgersLabel->綺羅</li>
+    <li>lodgersLabelPlural->綺羅</li>
+  </Kiiro_Hospitality_Refugee.questDescriptionAndNameRules.rulesStrings>
+  <!-- EN:
+    <li>offer(lodgerCount==1)->offers</li>
+    <li>offer(lodgerCount>=2)->offer</li>
+    <li>lodgersPronoun(lodgerCount==1)->[asker_pronoun]</li>
+    <li>lodgersPronoun(lodgerCount>=2)->they</li>
+    <li>lodgersPreposition(lodgerCount==1)->[asker_objective]self</li>
+    <li>lodgersPreposition(lodgerCount>=2)->themselves</li>
+    <li>lodgersObjective(lodgerCount==1)->[asker_objective]</li>
+    <li>lodgersObjective(lodgerCount>=2)->them</li>
+    <li>lodgersPossessive(lodgerCount==1)->[asker_possessive]</li>
+    <li>lodgersPossessive(lodgerCount>=2)->their</li>
+    <li>lodgersSingularOrPluralDef(lodgerCount==1)->[asker_nameDef]</li>
+    <li>lodgersSingularOrPluralDef(lodgerCount>=2)->the [lodgersLabelPlural]</li>
+    <li>questDescription->[approachInfo] [claimInfo] [asker_nameDef] begs you for permission to stay at [map_definite] for [questDurationTicks_duration] so [lodgersPronoun] can rest and regroup.\n\nIn return, [lodgersPronoun] [offer] to work and fight for free during that time.\n\n[joinInfo] [lodgersPronoun] may also reward you later for helping [lodgersObjective] - but there is no way to know [lodgersPossessive] true intentions.\n\n[travelerInfo] part of kiiro faction.</li>
+    <li>approachInfo(lodgerCount==1)->A desperate [faction_pawnSingular] named [asker_nameDef] is approaching.</li>
+    <li>approachInfo(lodgerCount==2)->[asker_nameDef] and another desperate [faction_pawnSingular] are approaching.</li>
+    <li>approachInfo(lodgerCount==2,childCount==1,priority=1)->[asker_nameDef] is approaching with a child in tow.</li>
+    <li>approachInfo(lodgerCount>=3)->[lodgerCount] desperate [faction_pawnsPlural] are approaching. Their leader is called [asker_nameDef].</li>
+    <li>approachInfo(lodgerCount>=3,childCount==1,priority=1)->[lodgerCount] desperate [faction_pawnsPlural] including a child are approaching. Their leader is called [asker_nameDef].</li>
+    <li>approachInfo(lodgerCount>=3,childCount>=2,priority=1)->[lodgerCount] desperate [faction_pawnsPlural] including some children are approaching. Their leader is called [asker_nameDef].</li>
+    <li>approachInfo(lodgerCount>=3,allButOneChildren==true,priority=2)->A group of [lodgerCount] desperate [faction_pawnsPlural] are approaching consisting of [asker_nameDef] and [lodgersCountMinusOne] children [asker_pronoun] has taken under [asker_possessive] wing.</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef] claims to have lost [asker_possessive] home in a recent attack.</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef] claims to get separated from [asker_possessive] companions and lost contact with them.</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef] claims to get lost in this area.</li>
+    <li>claimInfo(lodgerCount>=2)->They claim to have lost their home in a recent attack.</li>
+    <li>claimInfo(lodgerCount>=2)->They claim to unexpectedly lost contact with their companions and it became impossible to go back.</li>
+    <li>claimInfo(lodgerCount>=2)->They claim to get lost in this area.</li>
+    <li>claimInfo(lodgerCount>=2)->They claim to have escaped an organ harvesting operation.</li>
+    <li>claimInfo(lodgerCount>=2)->They say they escaped from a slave caravan.</li>
+    <li>claimInfo(lodgerCount>=2)->They say their caravan was ambushed and everything was taken.</li>
+    <li>joinInfo(lodgerCount==1)->[asker_pronoun] may offer to join you.</li>
+    <li>joinInfo(lodgerCount>=2)->Some of them may offer to join you.</li>
+    <li>travelerInfo(lodgerCount==1)->This [faction_pawnSingular] is</li>
+    <li>travelerInfo(lodgerCount>=2)->These [faction_pawnsPlural] are</li>
+  -->
+  <Kiiro_Hospitality_Refugee.questDescriptionRules.rulesStrings>
+    <li>offer(lodgerCount==1)->提議</li>
+    <li>offer(lodgerCount>=2)->提議</li>
+    <li>lodgersPronoun(lodgerCount==1)->[asker_pronoun]</li>
+    <li>lodgersPronoun(lodgerCount>=2)->她們</li>
+    <li>lodgersPreposition(lodgerCount==1)->[asker_objective]自己</li>
+    <li>lodgersPreposition(lodgerCount>=2)->她們自己</li>
+    <li>lodgersObjective(lodgerCount==1)->[asker_objective]</li>
+    <li>lodgersObjective(lodgerCount>=2)->她們</li>
+    <li>lodgersPossessive(lodgerCount==1)->[asker_possessive]</li>
+    <li>lodgersPossessive(lodgerCount>=2)->她們的</li>
+    <li>lodgersSingularOrPluralDef(lodgerCount==1)->[asker_nameDef]</li>
+    <li>lodgersSingularOrPluralDef(lodgerCount>=2)->the [lodgersLabelPlural]</li>
+    <li>questDescription->[approachInfo][claimInfo][asker_nameDef]請求你允許在[map_definite]待上 [questDurationTicks_duration]來讓[lodgersPronoun]能夠重整旗鼓。\n\n作為回報，[lodgersPronoun][offer]在此期間內免費為你工作和戰鬥。\n\n[joinInfo][lodgersPronoun]可能會在過後酬謝你對[lodgersObjective]的幫助 ——但你沒有辦法知曉[lodgersPossessive]的真實意圖。\n\n[travelerInfo]屬於綺羅隱居鄉。</li>
+    <li>approachInfo(lodgerCount==1)->名叫[asker_nameDef]的絕望的[faction_pawnSingular]正在靠近。</li>
+    <li>approachInfo(lodgerCount==2)->[asker_nameDef]和其他絕望的[faction_pawnSingular]正在靠近。</li>
+    <li>approachInfo(lodgerCount==2,childCount==1,priority=1)->[asker_nameDef]正帶著一個孩子靠近。</li>
+    <li>approachInfo(lodgerCount>=3)->[lodgerCount]名絕望的[faction_pawnsPlural]正在靠近，她們的領頭人是[asker_nameDef]。</li>
+    <li>approachInfo(lodgerCount>=3,childCount==1,priority=1)->[lodgerCount]名窮途末路的[faction_pawnsPlural]正帶著一個孩子靠近。她們的領頭人是[asker_nameDef]。</li>
+    <li>approachInfo(lodgerCount>=3,childCount>=2,priority=1)->[lodgerCount]名窮途末路的[faction_pawnsPlural]正帶著一些孩子靠近。她們的領頭人是[asker_nameDef]。</li>
+    <li>approachInfo(lodgerCount>=3,allButOneChildren==true,priority=2)->[asker_nameDef]帶著[lodgersCountMinusOne]名孩子正在靠近。</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef]聲稱[asker_possessive]在最近一次襲擊中失去了家園。</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef]聲稱與[asker_possessive]同伴走散並且失去了聯繫。</li>
+    <li>claimInfo(lodgerCount==1)->[asker_nameDef]聲稱自己在這片區域迷了路。</li>
+    <li>claimInfo(lodgerCount>=2)->她們聲稱在最近一次襲擊中失去了家園。</li>
+    <li>claimInfo(lodgerCount>=2)->她們聲稱與其她夥伴走散，並且再也回不去了。</li>
+    <li>claimInfo(lodgerCount>=2)->她們聲稱在這片區域迷路了。</li>
+    <li>claimInfo(lodgerCount>=2)->她們聲稱逃離了器官采割手術。</li>
+    <li>claimInfo(lodgerCount>=2)->她們說她們是從一個奴隸商隊中逃出來的。</li>
+    <li>claimInfo(lodgerCount>=2)->她們說她們的商隊遭到襲擊，所有的貨物都被搶走了。</li>
+    <li>joinInfo(lodgerCount==1)->[asker_pronoun]可能會請求加入你。</li>
+    <li>joinInfo(lodgerCount>=2)->她們中的一部分可能會請求加入你。</li>
+    <li>travelerInfo(lodgerCount==1)->這名[faction_pawnSingular]</li>
+    <li>travelerInfo(lodgerCount>=2)->這些[faction_pawnsPlural]</li>
+  </Kiiro_Hospitality_Refugee.questDescriptionRules.rulesStrings>
+  <!-- EN:
+    <li>questName(lodgerCount==1)->kiiro the [lodgerAdj]</li>
+    <li>questName(lodgerCount==1)->[athe] [lodgerAdj] kiiro [lodgerSingle]</li>
+    <li>questName(p=2,lodgerCount>=2)->[lodgerAdj] kiiro [lodgerPlural]</li>
+    <li>athe->a</li>
+    <li>athe->the</li>
+    <li>lodgerAdj->tired</li>
+    <li>lodgerAdj->lost</li>
+    <li>lodgerAdj->destitute</li>
+    <li>lodgerAdj->poor</li>
+    <li>lodgerAdj->wandering</li>
+    <li>lodgerAdj->dusty</li>
+    <li>lodgerAdj->hopeless</li>
+    <li>lodgerAdj->helpless</li>
+    <li>lodgerSingle->traveler</li>
+    <li>lodgerSingle->refugee</li>
+    <li>lodgerSingle->drifter</li>
+    <li>lodgerSingle->survivor</li>
+    <li>lodgerSingle->nomad</li>
+    <li>lodgerSingle->vagabond</li>
+    <li>lodgerPlural->travelers</li>
+    <li>lodgerPlural->refugees</li>
+    <li>lodgerPlural->drifters</li>
+    <li>lodgerPlural->survivors</li>
+    <li>lodgerPlural->nomads</li>
+    <li>lodgerPlural->vagabonds</li>
+  -->
+  <Kiiro_Hospitality_Refugee.questNameRules.rulesStrings>
+    <li>questName(lodgerCount==1)->[lodgerAdj]綺羅</li>
+    <li>questName(lodgerCount==1)->[athe][lodgerAdj]綺羅[lodgerSingle]</li>
+    <li>questName(p=2,lodgerCount>=2)->[lodgerAdj]綺羅[lodgerPlural]</li>
+    <li>athe->一位</li>
+    <li>athe->這</li>
+    <li>lodgerAdj->疲倦的</li>
+    <li>lodgerAdj->迷失的</li>
+    <li>lodgerAdj->窮困的</li>
+    <li>lodgerAdj->可憐的</li>
+    <li>lodgerAdj->徘徊的</li>
+    <li>lodgerAdj->風塵僕僕的</li>
+    <li>lodgerAdj->絕望的</li>
+    <li>lodgerAdj->無助的</li>
+    <li>lodgerSingle->旅行者</li>
+    <li>lodgerSingle->難民</li>
+    <li>lodgerSingle->漂泊者</li>
+    <li>lodgerSingle->倖存者</li>
+    <li>lodgerSingle->流浪者</li>
+    <li>lodgerPlural->旅行者</li>
+    <li>lodgerPlural->難民</li>
+    <li>lodgerPlural->漂泊者</li>
+    <li>lodgerPlural->倖存者</li>
+    <li>lodgerPlural->流浪者</li>
+  </Kiiro_Hospitality_Refugee.questNameRules.rulesStrings>
+  <!-- EN: Leaving in {0}. -->
+  <Kiiro_Hospitality_Refugee.root.nodes.ExtraInspectStringAddOn.extraInspectString.slateRef>于{0}后離開。</Kiiro_Hospitality_Refugee.root.nodes.ExtraInspectStringAddOn.extraInspectString.slateRef>
+  
+</LanguageData>

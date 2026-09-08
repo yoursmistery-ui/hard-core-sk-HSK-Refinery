@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>Kiiro_Scenarios_ValorStory</defName>
+    <label>kiiro valor story</label>
+    <description>She has been walking the path of salvation alone for years. Whether the title of valor is a duty or a desire to her is now impossible to tell. The ideals she once held dear have begun to crumble after years of journeys and countless sights; her delicate shoulders can not bear the weight of kiiro's fate. In the end, the power of a single person is far too insignificant...\n\nWith a gentle sigh, she shakes her head to dispel the wandering thoughts. Reading the markings on map, she realizes that the next village where she will rest is just ahead.\n\nNote: You will face a hasty battle at start, this is a difficult scenario.</description>
+    <scenario>
+      <summary>The tale of a young kiiro valor journeying across the land. Difficult.</summary>
+      <playerFaction Inherit="false">
+        <def>PlayerFaction</def>
+        <factionDef>Kiiro_PlayerFaction_ValorStart</factionDef>
+      </playerFaction>
+      <parts>
+
+        <!-- Config pages -->
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>Ancot_ConfigurePawnsKindDefs</def>
+          <pawnChoiceCount>1</pawnChoiceCount>
+          <leftBehindPawnKind>Kiiro_Valor</leftBehindPawnKind>
+          <kindCounts>
+            <li>
+              <kindDef>Kiiro_Valor</kindDef>
+              <count>1</count>
+              <requiredAtStart>true</requiredAtStart>
+            </li>
+          </kindCounts>
+        </li>
+
+        <!-- Player starting stuff spawn method-->
+        <li Class="AncotLibrary.ScenPart_PlayerPawnsArriveMethod_MapEdge">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+        </li>
+
+        <li Class="AncotLibrary.ScenPart_ForcedStartMap">
+          <def>ForcedMap</def>
+          <mapGenerator>Kiiro_SettlementUnderAssault</mapGenerator>
+          <layerDef>Surface</layerDef>
+        </li>
+
+        <!-- Scatter some things anywhere -->
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>ShipChunk</thingDef>
+          <allowRoofed>false</allowRoofed>
+          <count>15</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>WoodLog</thingDef>
+          <count>900</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>Steel</thingDef>
+          <count>540</count>
+        </li>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
+          <thingDef>ChunkSlagSteel</thingDef>
+          <count>25</count>
+        </li>
+
+        <!-- Game start dialog -->
+        <li Class="ScenPart_GameStartDialog">
+          <def>GameStartDialog</def>
+          <text>What came into view were houses—and flames. Sporadic gunshots echoing among the dwellings, and she immediately realized what's happening.</text>
+          <textKey>GameStartDialog</textKey>
+          <closeSound>GameStartSting</closeSound>
+        </li>
+
+        <li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>KiiroWandererJoin</incident>
+					<minDays>3</minDays>
+					<maxDays>6</maxDays>
+				</li>
+
+        <li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>Kiiro_LateReturningShepherd</incident>
+					<minDays>0.6</minDays>
+					<maxDays>0.8</maxDays>
+				</li>
+
+        <li Class="ScenPart_DisableIncident">
+					<def>DisableIncident</def>
+					<incident>KiiroValorJoin</incident>
+				</li>
+        
+        <li Class="AncotLibrary.ScenPart_CreateQuest">
+					<def>Ancot_CreateQuest</def>
+					<questDef>Kiiro_WanderingMerchant</questDef>
+					<minDays>15</minDays>
+					<maxDays>18</maxDays>
+				</li>
+
+        <li Class="ScenPart_DisableMapGen">
+					<def>Ancot_AncientRuins</def>
+				</li>
+
+      </parts>
+    </scenario>
+  </ScenarioDef>
+
+</Defs>

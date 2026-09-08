@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milira_MagneticRailRifle -->
+<!--磁轨步枪-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_MagneticRailRifle"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                        <li>Poke</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_MagneticRailRifle"]/equippedStatOffsets/ShootingAccuracyPawn</xpath>
+        <value>
+            <ShootingAccuracyPawn>6.0</ShootingAccuracyPawn>
+            <AimingAccuracy>0.30</AimingAccuracy>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_MagneticRailRifle</defName>
+        <statBases>
+            <Bulk>7.6</Bulk>
+            <SightsEfficiency>2.7</SightsEfficiency>
+            <ShotSpread>0.009</ShotSpread>
+            <SwayFactor>1.35</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraMagneticRailRifle</defaultProjectile>
+            <warmupTime>2.8</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>86</range>
+            <burstShotCount>10</burstShotCount>
+            <ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_MagneticRailRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>5</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>30</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MiliraMagneticRailRifle</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>5</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- Milira_HandRailGun -->
+<!--轻型轨道炮-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_HandRailGun"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>18</power>
+                    <cooldownTime>2.9</cooldownTime>
+                    <armorPenetrationBlunt>6</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>10</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationBlunt>5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_HandRailGun</defName>
+        <statBases>
+            <Bulk>20</Bulk>
+            <SightsEfficiency>2.7</SightsEfficiency>
+            <ShotSpread>0.0225</ShotSpread>
+            <SwayFactor>1.35</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraHandRailGun</defaultProjectile>
+            <warmupTime>4.8</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>92</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>84</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_HeavyRasterCannon</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>5</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MiliraHandRailGun</ammoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+</Patch>

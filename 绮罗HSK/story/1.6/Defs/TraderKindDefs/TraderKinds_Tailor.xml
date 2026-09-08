@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 1 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorA</defName>
+    <label>Bare-Bones Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>240~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>40~70</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>2~4</thingDefCountRange>
+        <countRange>30~50</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>3~5</countRange>
+        <price>Cheap</price>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+
+  <!-- 2 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorB</defName>
+    <label>Modest Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>360~450</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>60~105</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>2~5</thingDefCountRange>
+        <countRange>45~75</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>5~8</countRange>
+        <price>Cheap</price>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+
+
+  <!-- 3 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorC</defName>
+    <label>Established Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>540~675</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>90~158</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>3~6</thingDefCountRange>
+        <countRange>68~113</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>7~11</countRange>
+        <price>Cheap</price>
+      </li>
+
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>60~100</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_GuerrillaWear</tradeTag>
+        <countRange>1~3</countRange>
+        <price>Cheap</price>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+
+
+  <!-- 4 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorD</defName>
+    <label>Diverse Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>810~1013</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>135~236</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>3~7</thingDefCountRange>
+        <countRange>101~169</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>10~17</countRange>
+        <price>VeryCheap</price>
+      </li>
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>90~150</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Synthread</thingDef>
+        <countRange>30~65</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Leather_Thrumbo</thingDef>
+        <countRange>30~50</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_GuerrillaWear</tradeTag>
+        <countRange>2~5</countRange>
+        <price>Cheap</price>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_Maid</tradeTag>
+        <countRange>2~4</countRange>
+        <price>Cheap</price>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+
+
+  <!-- 5 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorE</defName>
+    <label>Well-Stocked Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>1215~1519</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>203~354</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>4~8</thingDefCountRange>
+        <countRange>152~253</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>15~25</countRange>
+        <price>VeryCheap</price>
+      </li>
+
+
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>135~225</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Synthread</thingDef>
+        <countRange>45~98</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Leather_Thrumbo</thingDef>
+        <countRange>45~75</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_GuerrillaWear</tradeTag>
+        <countRange>2~7</countRange>
+        <price>Cheap</price>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_Maid</tradeTag>
+        <countRange>3~6</countRange>
+        <price>Cheap</price>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Kiiro_TailorSet</thingDef>
+        <countRange>1~2</countRange>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+
+
+
+  <!-- 6 级 -->
+  <TraderKindDef>
+    <defName>Kiiro_Merchant_TailorF</defName>
+    <label>Abundant Tailor House</label>
+    <requestable>false</requestable>
+    <hideThingsNotWillingToTrade>true</hideThingsNotWillingToTrade>
+    <stockGenerators>
+      <!-- 基础 -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>1823~2278</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>304~532</countRange>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>5~10</thingDefCountRange>
+        <countRange>228~380</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Human</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_DailyClothing</tradeTag>
+        <countRange>23~38</countRange>
+        <price>VeryCheap</price>
+      </li>
+
+
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>DevilstrandCloth</thingDef>
+        <countRange>203~338</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Synthread</thingDef>
+        <countRange>68~146</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Leather_Thrumbo</thingDef>
+        <countRange>68~113</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_GuerrillaWear</tradeTag>
+        <countRange>3~10</countRange>
+        <price>Cheap</price>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Kiiro_Maid</tradeTag>
+        <countRange>5~9</countRange>
+        <price>Cheap</price>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Kiiro_TailorSet</thingDef>
+        <countRange>2~3</countRange>
+      </li>
+
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_DailyClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_GuerrillaWear</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Kiiro_Maid</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Textiles</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>BasicClothing</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Clothing</tag>
+      </li>
+
+    </stockGenerators>
+  </TraderKindDef>
+
+</Defs>

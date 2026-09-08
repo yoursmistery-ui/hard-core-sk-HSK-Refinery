@@ -51,6 +51,19 @@ namespace BlueprintUnlockHSK
                 {
                     Log.Warning("[BlueprintUnlockHSK] 科研树节点徽标补丁失败(已跳过): " + e.Message);
                 }
+
+                // 门控科技未集齐蓝图 → 强制节点 Available=false:
+                // ResearchTreeSK 的置灰/锁图标/禁止点击全部只看 Node.Available, 不看 CanStartNow,
+                // 所以仅靠 Patch_CanStartNow 无法让科研树节点变灰不可点。这里补上科研树侧的门禁。
+                try
+                {
+                    harmony.Patch(AccessTools.Method(nodeType, "UpdateCaches"),
+                        postfix: new HarmonyMethod(typeof(Patch_NodeUpdateCaches).GetMethod("Postfix")));
+                }
+                catch (System.Exception e)
+                {
+                    Log.Warning("[BlueprintUnlockHSK] 科研树节点门禁补丁失败(已跳过): " + e.Message);
+                }
             }
 
             // ---- 事件/任务蓝图投放 (全部按类型存在性门控, 未装对应 mod 自动跳过) ----
@@ -1057,6 +1070,73 @@ namespace BlueprintUnlockHSK
             __result = tracker.IsTechUnlocked(__instance.defName)
                 && BlueprintGateDatabase.PrereqsFinished(__instance);
             return false;
+        }
+    }
+
+    // ---- 科研树门禁: 未集齐蓝图时强制节点不可用 (置灰/锁/禁止点击) ----
+    // ResearchTreeSK 的节点可用态是 public bool Node.Available 字段, 在 UpdateCaches() 里按
+    // 原版条件重算 (每帧 PreOpen 遍历全部节点刷新)。科研树的灰色背景 + 锁图标 + Tree.cs 里
+    // 点击入队判定, 全都只看这个 Available 字段, 完全不读 CanStartNow —— 所以仅在 CanStartNow
+    // 上门禁不足以让节点变灰不可点。这里在 UpdateCaches 之后追加一道: 命中"蓝图门控且未集齐"
+    // 的科技就把 Available 压成 false。已集齐/非门控科技一律不动。
+    public static class Patch_NodeUpdateCaches
+    {
+        private static FieldInfo fResearch;
+        private static FieldInfo fAvailable;
+        private static bool inited;
+
+        private static void EnsureInit()
+        {
+            if (inited)
+            {
+                return;
+            }
+            System.Type nodeType = AccessTools.TypeByName("ResearchTreeSK.Node");
+            if (nodeType != null)
+            {
+                fResearch = AccessTools.Field(nodeType, "Research");
+                fAvailable = AccessTools.Field(nodeType, "Available");
+            }
+            inited = true;
+        }
+
+        public static void Postfix(object __instance)
+        {
+            // 本补丁跑在科研树每帧刷新流程里, 绝不能抛异常: 一律吞掉, 失败时最坏是本帧不置灰。
+            try
+            {
+                EnsureInit();
+                if (fResearch == null || fAvailable == null || __instance == null)
+                {
+                    return;
+                }
+                if (!((bool)fAvailable.GetValue(__instance)))
+                {
+                    return; // 本已不可用, 无需处理
+                }
+                ResearchProjectDef p = fResearch.GetValue(__instance) as ResearchProjectDef;
+                if (p == null || p.IsFinished)
+                {
+                    return;
+                }
+                BlueprintTargetExtension target = BlueprintGateDatabase.GetExtensionForTech(p.defName);
+                if (target == null)
+                {
+                    return; // 非蓝图门控科技
+                }
+                BlueprintUnlockTracker tracker = BlueprintUnlockTracker.Get();
+                if (tracker == null)
+                {
+                    return;
+                }
+                if (!tracker.IsTechUnlocked(p.defName))
+                {
+                    fAvailable.SetValue(__instance, false); // 蓝图未集齐 → 置灰 + 锁 + 不可点
+                }
+            }
+            catch
+            {
+            }
         }
     }
 

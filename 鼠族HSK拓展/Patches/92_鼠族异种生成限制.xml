@@ -77,18 +77,34 @@
             <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/xenotypeSet/xenotypeChances</xpath>
             <value>
                 <xenotypeChances>
-                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                    <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                    <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                    <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                    <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                 </xenotypeChances>
             </value>
         </match>
+    </Operation>
+
+    <!-- ②a 翻转 RKBasePawnKind.useFactionXenotypes=false→true(2026-09-07)。
+         基类默认 false 时职位池优先、派系 xenotypeSet 全部空转,③~⑥ 与各派系主题池
+         均不生效;翻转后派系池生效,职位池(②/②b)退为无派系/无池派系的兜底。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/useFactionXenotypes</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/useFactionXenotypes</xpath>
+            <value>
+                <useFactionXenotypes>true</useFactionXenotypes>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]</xpath>
+            <value>
+                <useFactionXenotypes>true</useFactionXenotypes>
+            </value>
+        </nomatch>
     </Operation>
 
     <!-- ② 上游压在鼠族职位池上的"初鼠族 + 4 条原版"混合池 → 换回本地纯鼠族池。
@@ -107,66 +123,50 @@
             <xpath>Defs/PawnKindDef/xenotypeSet/xenotypeChances[RK_XenoType_Ratkin][Sanguophage][Hussar][Genie][Starjack]</xpath>
             <value>
                 <xenotypeChances>
-                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                    <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                    <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                    <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                    <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                 </xenotypeChances>
             </value>
         </match>
     </Operation>
 
     <!-- ③ 王国系(所有 ParentName=RatkinFactionBase 的王国学派系继承此池):
-         初鼠族 0.92 正统主导 + 家鼠/实验鼠点缀,不产废土鼠/田鼠。 -->
+         2026-09-07 重调: 生产/日常侧重(河狸/松鼠),不混军事系。 -->
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/xenotypeSet/xenotypeChances</xpath>
         <value>
             <xenotypeChances>
-                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.85</RK_XenoType_Ratkin>
-                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                <OAGene_SnowRatkin>0.02</OAGene_SnowRatkin>
-                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Squirrel>
-                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Hamster>
-                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.84</RK_XenoType_Ratkin>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Beaver>
+                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Squirrel>
             </xenotypeChances>
         </value>
     </Operation>
 
-    <!-- ④ 朝圣者派系: 初鼠族 + 实验鼠稍高(神秘学者气质)。 -->
+    <!-- ④ 朝圣者派系: 2026-09-07 重调,学术侧重(实验鼠)。 -->
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/FactionDef[defName="RK_Faction_Pilgrims"]/xenotypeSet/xenotypeChances</xpath>
         <value>
             <xenotypeChances>
-                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
-                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                <OAGene_SnowRatkin>0.02</OAGene_SnowRatkin>
-                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_LabRat>
-                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.042</Ratkin_Squirrel>
-                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.028</Ratkin_Hamster>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.82</RK_XenoType_Ratkin>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.12</Ratkin_LabRat>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Beaver>
             </xenotypeChances>
         </value>
     </Operation>
 
-    <!-- ⑤ 商队派系: 行商流动,田鼠(体格健壮适行商)占比提高。 -->
+    <!-- ⑤ 商队派系: 2026-09-07 重调,行商耐用侧重(田鼠)+仓鼠护卫。 -->
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/FactionDef[defName="RK_Faction_Caravan"]/xenotypeSet/xenotypeChances</xpath>
         <value>
             <xenotypeChances>
-                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.71</RK_XenoType_Ratkin>
-                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_GuineaPig>
-                <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
-                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Hamster>
-                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Vole>
-                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_LabRat>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
+                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.12</Ratkin_Vole>
+                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Hamster>
             </xenotypeChances>
         </value>
     </Operation>
@@ -180,15 +180,12 @@
         <xpath>Defs/FactionDef[defName="RK_PlayerFaction"]/xenotypeSet/xenotypeChances</xpath>
         <value>
             <xenotypeChances>
-                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.81</RK_XenoType_Ratkin>
-                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                <OAGene_SnowRatkin>0.02</OAGene_SnowRatkin>
-                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                <!-- 2026-09-07 重调: 玩家池最丰富(5 种),变体合计 0.32 -->
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.68</RK_XenoType_Ratkin>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Beaver>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_LabRat>
+                <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Waster>
+                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Vole>
             </xenotypeChances>
         </value>
     </Operation>
@@ -198,15 +195,12 @@
             <xpath>Defs/FactionDef[defName="RK_EscapeFaction"]/xenotypeSet/xenotypeChances</xpath>
             <value>
                 <xenotypeChances>
-                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                    <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                    <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                    <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                    <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                 </xenotypeChances>
             </value>
         </match>
@@ -215,15 +209,12 @@
             <value>
                 <xenotypeSet>
                     <xenotypeChances>
-                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                        <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                        <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                        <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                        <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                        <!-- 2026-09-07 重调: 与 match 分支同池 -->
+                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                     </xenotypeChances>
                 </xenotypeSet>
             </value>
@@ -235,15 +226,12 @@
             <xpath>Defs/FactionDef[defName="RK_ExileFaction"]/xenotypeSet/xenotypeChances</xpath>
             <value>
                 <xenotypeChances>
-                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                    <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                    <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                    <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                    <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                 </xenotypeChances>
             </value>
         </match>
@@ -252,15 +240,12 @@
             <value>
                 <xenotypeSet>
                     <xenotypeChances>
-                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Beaver>
-                        <Ratkin_GuineaPig MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_GuineaPig>
-                        <OAGene_SnowRatkin>0.03</OAGene_SnowRatkin>
-                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-                        <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-                        <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+                        <!-- 2026-09-07 重调: 与 match 分支同池 -->
+                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
                     </xenotypeChances>
                 </xenotypeSet>
             </value>

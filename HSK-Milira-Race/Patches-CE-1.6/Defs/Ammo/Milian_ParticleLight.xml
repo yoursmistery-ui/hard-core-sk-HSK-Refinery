@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMilianParticleLight</defName>
+        <label>Milian Light Particle Cell</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberPlasmaSmall</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+<!--=粒子光束枪=-->
+    <CombatExtended.AmmoSetDef>
+        <defName>MiliraCE_AmmoSet_MilianParticleBeamGun</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MilianParticleBeamGun</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--=脉冲光束枪=-->
+    <CombatExtended.AmmoSetDef>
+        <defName>MiliraCE_AmmoSet_MilianPulsedBeamGun</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MilianPulsedBeamGun</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--粒子冲锋枪未充能-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraParticleSMG</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MiliraParticleSMG</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--粒子冲锋枪充能后-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraParticleSMG_Blast</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MiliraParticleSMG_Blast</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!--粒子冲锋枪-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraParticleSMGCharged_Blast</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MiliraParticleSMGCharged_Blast</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!-- Milian_ParticleLMG粒子光束机枪未充能 -->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraParticleLMG</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MiliraParticleLMG</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+<!-- Milian_ParticleLMG粒子光束机枪充能后 -->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraParticleLMGCharged</defName>
+        <label>Milian Light Particle Cell</label>
+        <ammoTypes>
+            <Ammo_MilianParticleLight>Bullet_MiliraParticleLMGCharged</Ammo_MilianParticleLight>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+        <defName>Ammo_MilianParticleLight</defName>
+        <label>Milian Light Particle Cell</label>
+        <description>Particle containment cell optimized for low-power launchers used by Milian.</description>
+        <statBases>
+            <Mass>0.014</Mass>
+            <Bulk>0.01</Bulk>
+            <MarketValue>0.23</MarketValue>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMilianParticleLight</li>
+        </thingCategories>
+        <graphicData>
+            <texPath>Things/Ammo/PlasmaCell/Pistol</texPath>
+            <graphicClass>CombatExtended.Graphic_StackCountRanged</graphicClass>
+        </graphicData>
+        <ammoClass>Charged</ammoClass>
+    </ThingDef>
+
+    <!-- ================== Projectiles ================== -->
+<!--米莉安轻型粒子单元（<仪式杖用）-->
+    <ThingDef ParentName="BaseBulletCE" Name="Bullet_MilianParticleBeamGun">
+        <defName>Bullet_MilianParticleBeamGun</defName>
+        <label>Particle beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraBullet_PiecesParticleGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>false</flyOverhead>
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>13</damageAmountBase>
+            <armorPenetrationSharp>4.5</armorPenetrationSharp>
+            <armorPenetrationBlunt>11</armorPenetrationBlunt>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>82</speed>
+        </projectile>
+    </ThingDef>
+<!--米莉安轻型粒子单元（脉冲光束枪用）-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MilianPulsedBeamGun</defName>
+        <label>pulse beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraBullet_PiecesEMPGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.2</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>false</flyOverhead>
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>8</damageAmountBase>
+            <armorPenetrationSharp>18</armorPenetrationSharp>
+            <armorPenetrationBlunt>14.40</armorPenetrationBlunt>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>80</speed>
+            <secondaryDamage>
+                <li>
+                    <def>EMP</def>
+                    <amount>25</amount>
+                </li>
+            </secondaryDamage>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef Name="BaseMilianParticleBullet" ParentName="BaseBulletCE" Abstract="true">
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Particle</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>15</damageAmountBase>
+            <armorPenetrationSharp>6</armorPenetrationSharp>
+            <armorPenetrationBlunt>12</armorPenetrationBlunt>
+            <stoppingPower>1.5</stoppingPower>
+            <speed>100</speed>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseMilianParticleBullet">
+        <defName>Bullet_MiliraParticleSMG</defName>
+        <label>particle beam</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>12</damageAmountBase>
+            <armorPenetrationSharp>3.5</armorPenetrationSharp>
+            <armorPenetrationBlunt>10</armorPenetrationBlunt>
+            <stoppingPower>0.5</stoppingPower>
+            <speed>90</speed>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MilianParticleBeamBlasterCharged">
+        <defName>Bullet_MiliraParticleSMG_Blast</defName>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraParticleSMGCharged_Blast</defName>
+        <label>explosive particle</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_ParticleBomb</damageDef>
+            <explosionRadius>2.5</explosionRadius>
+            <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            <damageAmountBase>71</damageAmountBase>
+            <stoppingPower>2.4</stoppingPower>
+            <speed>125</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_ParticleExplode</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.5,1.5)</drawSize>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.ExplosiveProjectileExtension">
+                <doTrail>true</doTrail>
+                <trailFleck>Milira_AirPuffGlow</trailFleck>
+                <trailFreauency>1</trailFreauency>
+                <trailColor>(0.86,0.87,0.70)</trailColor>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="MiliraCE.CompProperties_ProjectileFleckColorable">
+                <FleckDatas>
+                    <li>
+                        <fleck>Milira_AirPuffGlow</fleck>
+                        <fleckColor>(0.86,0.87,0.70)</fleckColor>
+                        <emissionsPerTick>1</emissionsPerTick>
+                        <flecksPerEmission>1</flecksPerEmission>
+                        <scale>1</scale>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseMilianParticleBullet" Name="Bullet_MiliraParticleLMG">
+        <defName>Bullet_MiliraParticleLMG</defName>
+        <label>particle beam</label>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>23</damageAmountBase>
+            <armorPenetrationSharp>10</armorPenetrationSharp>
+            <armorPenetrationBlunt>18</armorPenetrationBlunt>
+            <stoppingPower>0.5</stoppingPower>
+            <speed>95</speed>
+        </projectile>
+    </ThingDef>
+
+    <ThingDef ParentName="Bullet_MiliraParticleLMG">
+        <defName>Bullet_MiliraParticleLMGCharged</defName>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageAmountBase>28</damageAmountBase>
+            <armorPenetrationSharp>15</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>0.5</stoppingPower>
+            <speed>115</speed>
+        </projectile>
+        <graphicData>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.2</drawSize>
+        </graphicData>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="MiliraCE_MilianAmmoRecipeBase">
+        <defName>MakeAmmo_MilianParticleLight</defName>
+        <label>make Milian Light Particle Cells</label>
+        <description>Craft 500 shots' worth of Milian Light Particle Cells.</description>
+        <jobString>Making Milian Light Particle Cells.</jobString>
+        <workAmount>3400</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>14</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Steel</li>
+                <li>Plasteel</li>
+                <li>ComponentIndustrial</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MilianParticleLight>500</Ammo_MilianParticleLight>
+        </products>
+    </RecipeDef>
+
+</Defs>

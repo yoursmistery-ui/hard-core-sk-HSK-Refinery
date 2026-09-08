@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Milira Race (HSK/CE Patched, All-in-One)</name>
+	<author>Ancot — HSK/CE patch by CarbineAction; CE patches by pntfvur</author>
+	<supportedVersions>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>CarbineAction.HSK.Milira.Race</packageId>
+	<modIconPath IgnoreIfNoMatchingField="True">Milira/Faction/Faction_Icon</modIconPath>
+	<description>HSK/CE-patched all-in-one fork of the Milira Race mod.
+
+ABSORBED MODS (do not enable separately):
+  - Milira Race            (workshop 3256974620, Ancot)
+  - Milira Race Gene Patch (workshop 3257000248, Ancot)
+  - Milira CE Patch        (workshop 3410567648, pntfvur)
+
+All three are bundled. Disable the originals and enable this fork instead.
+
+--- HSK CONVERSIONS ---
+
+* All raw ore costs converted to HSK refined materials:
+  - Steel       -> SteelBar
+  - Gold        -> GoldBar
+  - Silver      -> SilverBar
+  - Uranium     -> DepletedUranium
+  - Plasteel    -> Plasteel (HSK refined, kept as-is)
+
+* Weapon recipes follow HSK class-component pipeline where applicable:
+  - Pistol-tier  -> Pistol_Component + Weapon_Parts + Plastic
+  - Rifle-tier   -> AdvRifle_Component + Charged_Component + Weapon_Parts + Plastic
+  - Heavy-tier   -> Heavy_Component + Charged_Component + Weapon_Parts + Plastic
+
+* Apparel rebalanced to HSK premium-craftable patterns where applicable.
+
+* Version-matched CE patches load conditionally when CE is active.
+
+* Biotech gene patch is bundled for both 1.5 and 1.6.
+
+Original mod by Ancot. CE patches by pntfvur. HSK conversion + bundling by CarbineAction.
+
+Required: Hardcore SK, Combat Extended, Vanilla Expanded Framework, Humanoid Alien Races, Ancot Library.</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2023507013</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>erdelf.HumanoidAlienRaces</packageId>
+			<displayName>Humanoid Alien Races</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/839005762</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ancot.KiiroRace</packageId>
+			<displayName>绮罗 Kiiro HSK (含 AncotLibrary)</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2988200143</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Hardcore SK</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2424766948</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>CETeam.CombatExtended</packageId>
+			<displayName>Combat Extended</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2890901044</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>erdelf.HumanoidAlienRaces</li>
+		<li>Ancot.KiiroRace</li>
+		<li>skyarkhangel.HSK</li>
+		<li>CETeam.CombatExtended</li>
+	</loadAfter>
+	<incompatibleWith>
+		<li>Ancot.MiliraRace</li>
+		<li>Ancot.MiliraRaceGenePatch</li>
+		<li>pntfvur.RimPatches.Milira.CE</li>
+		<li>QuamtumFox.Milira.CE</li>
+	</incompatibleWith>
+</ModMetaData>

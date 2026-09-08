@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef MayRequire="Ludeon.RimWorld.Biotech">
+    <defName>Kiiro_Refugee_Baby</defName>
+    <autoAccept>true</autoAccept> 
+    <defaultCharity>true</defaultCharity>
+    <successHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityFulfilled_RefugeePodCrash</successHistoryEvent>
+    <failedOrExpiredHistoryEvent MayRequire="Ludeon.RimWorld.Ideology">CharityRefused_RefugeePodCrash</failedOrExpiredHistoryEvent>
+    <defaultHidden>true</defaultHidden>
+    <isRootSpecial>true</isRootSpecial>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->kiiro refugee baby</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="Kiiro_Event.QuestNode_Root_KiiroRefugeeBaby" />
+  </QuestScriptDef>
+
+</Defs>

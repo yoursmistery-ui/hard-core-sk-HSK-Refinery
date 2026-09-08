@@ -26,7 +26,7 @@
 		<costList>
 			<Steel>150</Steel>
 			<ComponentIndustrial>5</ComponentIndustrial>
-			<WoodLog>40</WoodLog>
+			<WoodPlank>40</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
@@ -88,7 +88,7 @@
 		<costList>
 			<Steel>60</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
-			<WoodLog>40</WoodLog>
+			<WoodPlank>40</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
@@ -148,7 +148,7 @@
 		<costList>
 			<Steel>200</Steel>
 			<ComponentIndustrial>5</ComponentIndustrial>
-			<WoodLog>10</WoodLog>
+			<WoodPlank>10</WoodPlank>
 		</costList>
 		<recipeMaker>
 			<researchPrerequisite>RK_WR_Weapon</researchPrerequisite>
@@ -187,4 +187,46 @@
 			</li>
 		</tools>
 	</ThingDef>
+
+	<!-- ===== 新增精选枪 2026-09-06 (正方·白蔷薇) ===== -->
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_WR_WhiteRose</defName>
+		<label>"WhiteRose" Short Magazine Rifle</label>
+		<description>The "White Rose" Carbine is the standard-issue rifle used by the White Rose Kingdom Army.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponRanged/RK_WR_WhiteRose</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>1.0</drawSize></graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false"><li>RK_WR_Rifle</li></weaponTags>
+		<statBases>
+			<WorkToMake>12000</WorkToMake><Mass>2.5</Mass><Bulk>8</Bulk>
+			<AccuracyTouch>0.65</AccuracyTouch><AccuracyShort>0.75</AccuracyShort><AccuracyMedium>0.95</AccuracyMedium><AccuracyLong>0.85</AccuracyLong>
+			<RangedWeapon_Cooldown>1.4</RangedWeapon_Cooldown>
+		</statBases>
+		<costList><Steel>40</Steel><ComponentIndustrial>2</ComponentIndustrial><WoodPlank>40</WoodPlank></costList>
+		<recipeMaker><researchPrerequisite>RK_WR_Weapon</researchPrerequisite><skillRequirements><Crafting>5</Crafting></skillRequirements></recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs><li><verbClass>Verb_Shoot</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_WhiteRose</defaultProjectile><warmupTime>1.6</warmupTime><range>40</range><soundCast>RK_WR_WhiteRose</soundCast><soundCastTail>GunTail_Heavy</soundCastTail><muzzleFlashScale>10</muzzleFlashScale></li></verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE"><label>stock</label><capacities><li>Blunt</li></capacities><power>7</power><cooldownTime>2</cooldownTime><armorPenetrationBlunt>3</armorPenetrationBlunt><linkedBodyPartsGroup>Stock</linkedBodyPartsGroup></li>
+			<li Class="CombatExtended.ToolCE"><label>bayonet</label><capacities><li>Cut</li></capacities><power>17</power><cooldownTime>2.3</cooldownTime><armorPenetrationSharp>6</armorPenetrationSharp><armorPenetrationBlunt>3</armorPenetrationBlunt><linkedBodyPartsGroup>Blade</linkedBodyPartsGroup></li>
+		</tools>
+	</ThingDef>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_WR_TalinumRevolver</defName>
+		<label>"Talinum" Revolver</label>
+		<description>The "Talinum" revolver is the standard-issue sidearm of the White Rose Kingdom Army. Renowned for its rugged reliability.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponRanged/RK_WR_TalinumRevolver</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.9</drawSize></graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false"><li>RK_WR_Pistol</li></weaponTags>
+		<statBases>
+			<WorkToMake>7000</WorkToMake><Mass>1</Mass><Bulk>2</Bulk>
+			<AccuracyTouch>0.85</AccuracyTouch><AccuracyShort>0.90</AccuracyShort><AccuracyMedium>0.70</AccuracyMedium><AccuracyLong>0.20</AccuracyLong>
+			<RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
+		</statBases>
+		<costList><Steel>20</Steel><ComponentIndustrial>1</ComponentIndustrial><WoodPlank>20</WoodPlank></costList>
+		<recipeMaker><researchPrerequisite>RK_WR_Weapon</researchPrerequisite><skillRequirements><Crafting>5</Crafting></skillRequirements></recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs><li><verbClass>Verb_Shoot</verbClass><hasStandardCommand>true</hasStandardCommand><defaultProjectile>Bullet_Talinum</defaultProjectile><warmupTime>0.6</warmupTime><range>20</range><soundCast>RK_WR_TalinumRevolver</soundCast><soundCastTail>GunTail_Light</soundCastTail><muzzleFlashScale>5</muzzleFlashScale></li></verbs>
+		<tools><li Class="CombatExtended.ToolCE"><label>stock</label><capacities><li>Blunt</li></capacities><power>7</power><cooldownTime>2</cooldownTime><armorPenetrationBlunt>3</armorPenetrationBlunt><linkedBodyPartsGroup>Stock</linkedBodyPartsGroup></li></tools>
+	</ThingDef>
+
 </Defs>

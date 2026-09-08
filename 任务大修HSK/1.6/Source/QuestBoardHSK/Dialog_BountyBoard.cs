@@ -15,7 +15,7 @@ namespace QuestBoardHSK
     /// </summary>
     public class Dialog_BountyBoard : Window
     {
-        private enum ViewTab { Available, Related, Pending }
+        private enum ViewTab { Available, Related, Pending, Raids }
 
         private const float LeftWidth = 430f;
         private const float RowH = 46f;
@@ -26,6 +26,11 @@ namespace QuestBoardHSK
         private string search = "";
         private Faction facFilter;
         private string xenoFilter;
+
+        // 袭击档案页签(2026-09-02):独立的选中项/滚动,不与悬赏列表混用
+        private RaidRecord selectedRaid;
+        private Vector2 raidListScroll;
+        private Vector2 raidDetailScroll;
 
         // 列表缓存:OnGUI 每帧重算 LINQ 违反性能铁律,按签名+30 tick 节流缓存
         private string listCacheSig;
@@ -107,35 +112,57 @@ namespace QuestBoardHSK
                 GUI.color = Color.white;
                 contentTop += 24f;
             }
+            // —— 缺少通信台警告(2026-09-03):外联/空投放货的前置设施,前期最容易漏 ——
+            string commsWarn = CommsWarningText();
+            if (commsWarn != null)
+            {
+                GUI.color = ColoredText.ThreatColor;
+                Widgets.Label(new Rect(inRect.x, contentTop - 2f, inRect.width, 22f), commsWarn);
+                GUI.color = Color.white;
+                contentTop += 24f;
+            }
             Rect left = new Rect(inRect.x, contentTop, LeftWidth, inRect.yMax - contentTop);
             Rect right = new Rect(left.xMax + 14f, contentTop, inRect.xMax - (left.xMax + 14f), left.height);
 
             float y = left.y;
 
-            // 过滤行:搜索 + 派系 + 人种
-            Rect searchRect = new Rect(left.x, y, 124f, 26f);
-            search = Widgets.TextField(searchRect, search);
-            if (Widgets.ButtonText(new Rect(searchRect.xMax + 6f, y, 136f, 26f),
-                "SW.FactionFilter".Translate(facFilter != null ? facFilter.Name : "RK_Bounty.All".Translate())))
+            // 过滤行:搜索 + 派系 + 人种(袭击档案页签不需要)
+            if (tab != ViewTab.Raids)
             {
-                Find.WindowStack.Add(new FloatMenu(FactionMenuOptions()));
+                Rect searchRect = new Rect(left.x, y, 124f, 26f);
+                search = Widgets.TextField(searchRect, search);
+                if (Widgets.ButtonText(new Rect(searchRect.xMax + 6f, y, 136f, 26f),
+                    "SW.FactionFilter".Translate(facFilter != null ? facFilter.Name : "RK_Bounty.All".Translate())))
+                {
+                    Find.WindowStack.Add(new FloatMenu(FactionMenuOptions()));
+                }
+                if (Widgets.ButtonText(new Rect(searchRect.xMax + 148f, y, 138f, 26f),
+                    "SW.XenotypeFilter".Translate(xenoFilter ?? "RK_Bounty.All".Translate())))
+                {
+                    Find.WindowStack.Add(new FloatMenu(XenotypeMenuOptions(mgr)));
+                }
+                y += 32f;
             }
-            if (Widgets.ButtonText(new Rect(searchRect.xMax + 148f, y, 138f, 26f),
-                "SW.XenotypeFilter".Translate(xenoFilter ?? "RK_Bounty.All".Translate())))
-            {
-                Find.WindowStack.Add(new FloatMenu(XenotypeMenuOptions(mgr)));
-            }
-            y += 32f;
 
-            // 页签:可接 / 已接 / 无线电
-            float tabW = (LeftWidth - 24f) / 3f;
+            // 页签:可接 / 已接 / 无线电 / 袭击档案
+            float tabGap = 5f;
+            float tabW = (LeftWidth - 24f - tabGap * 3f) / 4f;
             Rect tabA = new Rect(left.x, y, tabW, 30f);
-            Rect tabR = new Rect(tabA.xMax + 12f, y, tabW, 30f);
-            Rect tabP = new Rect(tabR.xMax + 12f, y, tabW, 30f);
+            Rect tabR = new Rect(tabA.xMax + tabGap, y, tabW, 30f);
+            Rect tabP = new Rect(tabR.xMax + tabGap, y, tabW, 30f);
+            Rect tabD = new Rect(tabP.xMax + tabGap, y, tabW, 30f);
             DrawTabButton(tabA, "RK_Bounty.Available".Translate(mgr.availableWarrants.Count), tab == ViewTab.Available, ViewTab.Available);
             DrawTabButton(tabR, "RK_Bounty.Related".Translate(RelatedList(mgr).Count), tab == ViewTab.Related, ViewTab.Related);
             DrawTabButton(tabP, "RK_Bounty.RadioTab".Translate(radio != null ? radio.pending.Count : 0), tab == ViewTab.Pending, ViewTab.Pending);
+            DrawTabButton(tabD, "RK_Bounty.RaidsTab".Translate(RaidArchiveComp.Get() != null ? RaidArchiveComp.Get().raids.Count : 0), tab == ViewTab.Raids, ViewTab.Raids);
             y += 38f;
+
+            // 袭击档案页签:独立分支(左列表 + 右详情),不走悬赏列表/海报
+            if (tab == ViewTab.Raids)
+            {
+                DrawRaidArchive(left, right, y);
+                return;
+            }
 
             // 列表(带缓存)
             List<Warrant> list = CurrentList(mgr, radio);
@@ -180,6 +207,19 @@ namespace QuestBoardHSK
                 GUI.color = Color.white;
                 Text.Anchor = TextAnchor.UpperLeft;
             }
+        }
+
+        /// <summary>缺少通信台的警告文案;已有通信台(含蓝图/框架)/轨道殖民地/无家园图时返回 null。</summary>
+        private static string CommsWarningText()
+        {
+            if (Find.AnyPlayerHomeMap == null || BirdPostUtil.CommsConsoleDef == null)
+                return null;
+            if (Utils.PlayerHomeIsOrbital() || BirdPostUtil.HasAnyCommsConsole())
+                return null;
+            string research = BirdPostUtil.MissingCommsResearchLabel();
+            if (!research.NullOrEmpty())
+                return "RK_Bounty.NoCommsWarningResearch".Translate(research).RawText;
+            return "RK_Bounty.NoCommsWarning".Translate().RawText;
         }
 
         // ================= 通缉令海报 =================
@@ -366,6 +406,9 @@ namespace QuestBoardHSK
                     daysLeft <= 2 ? ColoredText.ThreatColor : Color.white);
             }
 
+            // —— 悬赏进度(2026-09-02) ——
+            iy = DrawProgressBlock(infoX, infoW, iy, w, mgr, radio);
+
             // —— 实物加成清单 ——
             RefreshPosterCache(w);
             if (posterEntries != null && posterEntries.Count > 0)
@@ -437,7 +480,35 @@ namespace QuestBoardHSK
             }
             else if (related)
             {
-                if (w.issuer == Faction.OfPlayer && w.accepteer == null)
+                // 十期·方向B:玩家接的 NPC 悬赏 → 取货状态/「叫他们来取」
+                PickupRequest pr = radio != null
+                    ? radio.pickups.FirstOrDefault(p => p != null && p.warrant == w)
+                    : null;
+                if (pr != null)
+                {
+                    if (pr.stage == PickupStage.Waiting)
+                    {
+                        Rect talk = new Rect(x + width - 190f, btnY, 190f, 36f);
+                        if (Widgets.ButtonText(talk, pr.StatusLabel()))
+                            BountyPickup.ReopenPartyDialog(pr);
+                    }
+                    else
+                    {
+                        GUI.color = StampBlueColor;
+                        Text.Anchor = TextAnchor.MiddleRight;
+                        Widgets.Label(new Rect(x, btnY + 4f, width, 28f), pr.StatusLabel());
+                        Text.Anchor = TextAnchor.UpperLeft;
+                        GUI.color = Color.white;
+                    }
+                }
+                else if (w is Warrant_Pawn wpCall && wpCall.issuer != null
+                    && !wpCall.issuer.IsPlayer && wpCall.accepteer == Faction.OfPlayer)
+                {
+                    Rect call = new Rect(x + width - 190f, btnY, 190f, 36f);
+                    if (Widgets.ButtonText(call, "RK_Bounty.PickupCall".Translate()))
+                        BountyPickup.ShowMethodMenu(wpCall);
+                }
+                else if (w.issuer == Faction.OfPlayer && w.accepteer == null)
                 {
                     Rect remove = new Rect(x + width - 150f, btnY, 150f, 36f);
                     if (Widgets.ButtonText(remove, "SW.RemoveWarrant".Translate()))
@@ -466,6 +537,65 @@ namespace QuestBoardHSK
                 Text.Anchor = TextAnchor.UpperLeft;
                 GUI.color = Color.white;
             }
+        }
+
+        // ================= 悬赏进度(2026-09-02) =================
+
+        /// <summary>海报右栏进度模块:标题行 + 进度条(执行单带 35%/70% 里程碑刻度) + 状态行。</summary>
+        private float DrawProgressBlock(float x, float wid, float y, Warrant w, WarrantsManager mgr, BountyRadioManager radio)
+        {
+            BountyProgressInfo pi = BountyProgress.GetInfo(w, mgr, radio);
+            if (pi == null)
+                return y;
+            Color warn = ColoredText.ThreatColor;
+            if (!pi.HasBar)
+            {
+                // 等待接单等无条状态:只画一行状态说明
+                GUI.color = DimmedTextColor();
+                Text.Anchor = TextAnchor.MiddleLeft;
+                Widgets.Label(new Rect(x, y, wid, 20f), pi.statusText);
+                Text.Anchor = TextAnchor.UpperLeft;
+                GUI.color = Color.white;
+                return y + 24f;
+            }
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.LowerLeft;
+            GUI.color = DimmedTextColor();
+            Widgets.Label(new Rect(x, y, wid * 0.6f, 20f), pi.header);
+            Text.Anchor = TextAnchor.LowerRight;
+            GUI.color = pi.danger ? warn : Color.white;
+            Widgets.Label(new Rect(x + wid * 0.5f, y, wid * 0.5f, 20f), pi.rightText);
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = Color.white;
+            y += 22f;
+
+            Rect bar = new Rect(x, y, wid, 13f);
+            GUI.color = PaperDarkColor;
+            GUI.DrawTexture(bar, BaseContent.WhiteTex);
+            Rect fill = bar;
+            fill.width = bar.width * Mathf.Clamp01(pi.fraction);
+            if (fill.width > 0.5f)
+            {
+                GUI.color = pi.danger ? warn : pi.fillColor;
+                GUI.DrawTexture(fill, BaseContent.WhiteTex);
+            }
+            DrawFrameLines(bar, new Color(0.35f, 0.32f, 0.25f), 1f);
+            // 执行单:35%/70% 里程碑刻度(与追踪/交火进展信口径一致)
+            if (pi.kind == BountyProgressKind.Execution)
+            {
+                GUI.color = new Color(0.75f, 0.72f, 0.62f, 0.85f);
+                float m1 = bar.x + bar.width * BountyProgress.TrackMilestoneFrac;
+                float m2 = bar.x + bar.width * BountyProgress.ClashMilestoneFrac;
+                GUI.DrawTexture(new Rect(m1 - 0.75f, bar.y + 2f, 1.5f, bar.height - 4f), BaseContent.WhiteTex);
+                GUI.DrawTexture(new Rect(m2 - 0.75f, bar.y + 2f, 1.5f, bar.height - 4f), BaseContent.WhiteTex);
+                GUI.color = Color.white;
+            }
+            y += 17f;
+
+            GUI.color = pi.danger ? warn : DimmedTextColor();
+            Widgets.Label(new Rect(x, y, wid, 18f), pi.statusText);
+            GUI.color = Color.white;
+            return y + 22f;
         }
 
         private void RefreshPosterCache(Warrant w)
@@ -696,6 +826,235 @@ namespace QuestBoardHSK
                 GUI.color = Color.white;
         }
 
+        // ================= 袭击档案(2026-09-02) =================
+
+        private const float RaidRowH = 52f;
+        private const float RaidMemberH = 46f;
+
+        private void DrawRaidArchive(Rect left, Rect right, float y)
+        {
+            RaidArchiveComp comp = RaidArchiveComp.Get();
+            List<RaidRecord> raids = comp != null ? comp.raids : null;
+
+            // 选中项失效保护(列表滚动移除后可空引用)
+            if (selectedRaid != null && (raids == null || !raids.Contains(selectedRaid)))
+                selectedRaid = null;
+
+            // 左栏:袭击列表
+            Rect scrollOut = new Rect(left.x, y, left.width, left.yMax - y);
+            float listH = raids != null ? raids.Count * (RaidRowH + 6f) : 0f;
+            Rect scrollView = new Rect(0f, 0f, scrollOut.width - 18f, Mathf.Max(1f, listH));
+            Widgets.BeginScrollView(scrollOut, ref raidListScroll, scrollView);
+            if (raids == null || raids.Count == 0)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = DimmedTextColor();
+                Widgets.Label(new Rect(0f, 0f, scrollOut.width, 60f), "RK_Bounty.RaidNoRecord".Translate());
+                GUI.color = Color.white;
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+            float rowY = 0f;
+            for (int i = 0; i < (raids != null ? raids.Count : 0); i++)
+            {
+                DrawRaidListRow(new Rect(0f, rowY, scrollView.width, RaidRowH), raids[i]);
+                rowY += RaidRowH + 6f;
+            }
+            Widgets.EndScrollView();
+
+            // 右栏:袭击详情
+            if (selectedRaid != null)
+                DrawRaidDetail(right, selectedRaid);
+            else
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = DimmedTextColor();
+                Widgets.Label(right, "RK_Bounty.RaidSelectHint".Translate());
+                GUI.color = Color.white;
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+        }
+
+        // 事件种类标签:袭击沿用战术名(袭击/围攻/突袭),其余种类走翻译键
+        private static string KindLabelOf(RaidRecord rec)
+        {
+            return rec.kind == RaidEventKind.Raid
+                ? rec.strategyLabel
+                : ("RK_Bounty.Kind_" + rec.kind).Translate().ToString();
+        }
+
+        private void DrawRaidListRow(Rect row, RaidRecord rec)
+        {
+            if (Mouse.IsOver(row) && selectedRaid != rec)
+            {
+                GUI.color = GenUI.MouseoverColor;
+                GUI.DrawTexture(row, BaseContent.WhiteTex);
+                GUI.color = Color.white;
+            }
+            Widgets.DrawOptionBackground(row, selectedRaid == rec);
+
+            Color facCol = rec.faction != null ? rec.faction.Color : DimmedTextColor();
+
+            // 波次章:派系色方块 + 中央波次数字
+            Rect badge = new Rect(row.x + 6f, row.y + 8f, 36f, 36f);
+            GUI.color = facCol;
+            GUI.DrawTexture(badge, BaseContent.WhiteTex);
+            DrawFrameLines(badge, new Color(0f, 0f, 0f, 0.3f), 1.5f);
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = Color.white;
+            Widgets.Label(badge, rec.wave.ToString());
+            Text.Anchor = TextAnchor.UpperLeft;
+
+            float textX = row.x + 52f;
+            float textW = row.width - 52f - 8f;
+
+            Text.Font = GameFont.Small;
+            Text.Anchor = TextAnchor.LowerLeft;
+            GUI.color = facCol;
+            Widgets.Label(new Rect(textX, row.y + 4f, textW, 22f),
+                "RK_Bounty.RaidWave".Translate(rec.wave) + " · "
+                + (rec.factionName.NullOrEmpty() ? KindLabelOf(rec) : rec.factionName));
+            GUI.color = Color.white;
+
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = DimmedTextColor();
+            Widgets.Label(new Rect(textX, row.y + 26f, textW, 18f),
+                KindLabelOf(rec) + " · " + "RK_Bounty.RaidDay".Translate(rec.day)
+                + " · " + "RK_Bounty.RaidMembers".Translate(rec.MemberCount));
+            GUI.color = Color.white;
+            Text.Font = GameFont.Small;
+
+            if (Widgets.ButtonInvisible(row))
+                selectedRaid = rec;
+        }
+
+        private void DrawRaidDetail(Rect r, RaidRecord rec)
+        {
+            Color facCol = rec.faction != null ? rec.faction.Color : DimmedTextColor();
+            GUI.color = PaperColor;
+            GUI.DrawTexture(r, BaseContent.WhiteTex);
+            DrawFrameLines(r, facCol, 2f);
+            DrawCornerBracket(r, facCol, top: true);
+
+            float pad = 14f;
+            float x = r.x + pad;
+            float width = r.width - pad * 2f;
+            float y = r.y + pad;
+
+            Text.Font = GameFont.Medium;
+            GUI.color = Color.white;
+            Widgets.Label(new Rect(x, y, width - 100f, 30f),
+                "RK_Bounty.RaidWave".Translate(rec.wave) + " · "
+                + (rec.factionName.NullOrEmpty() ? KindLabelOf(rec) : rec.factionName));
+            Text.Font = GameFont.Small;
+            y += 32f;
+
+            GUI.color = DimmedTextColor();
+            Widgets.Label(new Rect(x, y, width, 22f),
+                KindLabelOf(rec) + " · " + "RK_Bounty.RaidDay".Translate(rec.day)
+                + " · " + "RK_Bounty.RaidPoints".Translate(Mathf.RoundToInt(rec.points))
+                + " · " + "RK_Bounty.RaidMembers".Translate(rec.MemberCount));
+            GUI.color = facCol;
+            DrawLine(x, y + 28f, x + width, y + 28f, 1.5f);
+            y += 36f;
+
+            // 成员滚动列表
+            Rect scrollOut = new Rect(x, y, width, r.yMax - pad - y);
+            Rect scrollView = new Rect(0f, 0f, scrollOut.width - 18f,
+                Mathf.Max(1f, rec.MemberCount) * (RaidMemberH + 6f));
+            Widgets.BeginScrollView(scrollOut, ref raidDetailScroll, scrollView);
+            if (rec.MemberCount == 0)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = DimmedTextColor();
+                Widgets.Label(new Rect(0f, 0f, scrollOut.width, 60f), "RK_Bounty.RaidNoMember".Translate());
+                GUI.color = Color.white;
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+            float my = 0f;
+            for (int i = 0; i < rec.MemberCount; i++)
+                my = DrawRaidMemberRow(new Rect(0f, my, scrollView.width, RaidMemberH), rec.members[i]) + 6f;
+            Widgets.EndScrollView();
+        }
+
+        private float DrawRaidMemberRow(Rect row, RaidMember m)
+        {
+            bool alive = m.pawn != null && !m.pawn.Dead && !m.pawn.Destroyed;
+            WarrantsManager mgr = WarrantsManager.Instance;
+            bool inWarrant = alive && mgr != null && HasActiveWarrant(mgr, m.pawn);
+
+            GUI.color = PaperDarkColor;
+            GUI.DrawTexture(row, BaseContent.WhiteTex);
+
+            // 头像(存活用身体贴图,已死灰块)
+            Rect avatar = new Rect(row.x + 5f, row.y + 5f, 36f, 36f);
+            if (alive)
+            {
+                Widgets.ThingIcon(avatar, m.pawn);
+            }
+            else
+            {
+                GUI.color = new Color(0.55f, 0.55f, 0.55f, 0.4f);
+                GUI.DrawTexture(avatar, BaseContent.WhiteTex);
+                GUI.color = Color.white;
+            }
+
+            float textX = row.x + 50f;
+            float textW = row.width - 50f - 118f;
+
+            Text.Anchor = TextAnchor.LowerLeft;
+            GUI.color = alive ? Color.white : DimmedTextColor();
+            Widgets.Label(new Rect(textX, row.y + 2f, textW, 21f), m.name);
+            Text.Font = GameFont.Tiny;
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = DimmedTextColor();
+            // 动物成员无派系科技档,只显示身价(string 显式定型,避免 TaggedString 二义)
+            string techSuffix = (m.pawn != null && m.pawn.RaceProps.Animal)
+                ? ""
+                : " · " + BountyRules.TechLevelLabel((TechLevel)m.techLevel);
+            Widgets.Label(new Rect(textX, row.y + 23f, textW, 18f),
+                "RK_Bounty.PosterValue".Translate(m.marketValue).RawText + techSuffix);
+            Text.Font = GameFont.Small;
+            GUI.color = Color.white;
+
+            // 右侧:通缉按钮 / 悬赏在案 / 已死亡
+            Rect btn = new Rect(row.xMax - 108f, row.y + 6f, 104f, 34f);
+            if (!alive)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = DimmedTextColor();
+                Widgets.Label(btn, "RK_Bounty.RaidDead".Translate());
+                Text.Anchor = TextAnchor.UpperLeft;
+                GUI.color = Color.white;
+            }
+            else if (inWarrant)
+            {
+                Text.Anchor = TextAnchor.MiddleCenter;
+                GUI.color = ColoredText.ThreatColor;
+                Widgets.Label(btn, "RK_Bounty.RaidInWarrant".Translate());
+                Text.Anchor = TextAnchor.UpperLeft;
+                GUI.color = Color.white;
+            }
+            else if (Widgets.ButtonText(btn, "RK_Bounty.RaidWarrant".Translate()))
+            {
+                var dlg = new Dialog_IssueWarrantHSK();
+                dlg.PreselectPawn(m.pawn);
+                Find.WindowStack.Add(dlg);
+            }
+            return row.yMax;
+        }
+
+        private static bool HasActiveWarrant(WarrantsManager mgr, Pawn pawn)
+        {
+            if (mgr == null || pawn == null)
+                return false;
+            foreach (Warrant w in mgr.createdWarrants)
+                if (w.thing == pawn) return true;
+            foreach (Warrant w in mgr.availableWarrants)
+                if (w.thing == pawn) return true;
+            return false;
+        }
+
         // 次要文字用原版标准灰(与提示/货币色一致,主题 mod 对原版常量做整体映射)
         private static Color DimmedTextColor()
         {
@@ -759,6 +1118,23 @@ namespace QuestBoardHSK
                     Text.Font = GameFont.Small;
                     Text.Anchor = TextAnchor.UpperLeft;
                 }
+            }
+
+            // 悬赏进度细条(2026-09-02):行底一条 2.5px,颜色随种类,临近截止转警示红
+            BountyProgressInfo piRow = BountyProgress.GetInfo(w, WarrantsManager.Instance, BountyRadioManager.Get());
+            if (piRow != null && piRow.HasBar)
+            {
+                Rect pbar = new Rect(textX, row.yMax - 4f, textW, 2.5f);
+                GUI.color = new Color(0f, 0f, 0f, 0.35f);
+                GUI.DrawTexture(pbar, BaseContent.WhiteTex);
+                Rect pfill = pbar;
+                pfill.width = pbar.width * Mathf.Clamp01(piRow.fraction);
+                if (pfill.width > 1f)
+                {
+                    GUI.color = piRow.danger ? ColoredText.ThreatColor : piRow.fillColor;
+                    GUI.DrawTexture(pfill, BaseContent.WhiteTex);
+                }
+                GUI.color = Color.white;
             }
 
             if (Widgets.ButtonInvisible(row))

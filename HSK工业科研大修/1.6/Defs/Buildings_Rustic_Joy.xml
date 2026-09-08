@@ -3,6 +3,8 @@
 <!-- 乡村娱乐建筑(骰子杯/塔罗桌/战棋桌 + JoyGiver + JobDef)
      来源: Medieval Overhaul 1.6.2.2 纯原版类 def 移植(2026-08-27), 前缀统一改为 Rustic_,
      RawWood→Woody/WoodLog, Clay→SoftClay, Linen→Cloth, 研究 RusticFurniture→ComplexFurniture。
+     2026-09-06 材料对齐乡村家具产业线定案: 选材截断为 Woody(木板), 固定 WoodLog→ComponentMedieval
+     (塔罗 2×2→5 / 战棋 2×3→6); 骰子杯本无固定木材成本, 仅截断选材。
 -->
 <ThingDef ParentName="FurnitureWithQualityBase">
 		<defName>Rustic_CupAndDice</defName>
@@ -43,10 +45,8 @@
 			<Beauty>4</Beauty>
 			<JoyGainFactor>1</JoyGainFactor>
 		</statBases>
-		<stuffCategories>
-			<li>Metallic</li>
+		<stuffCategories Inherit="False">
 			<li>Woody</li>
-			<li>Stony</li>
 		</stuffCategories>
 		<costStuffCount>70</costStuffCount>
 		<pathCost>30</pathCost>
@@ -88,15 +88,13 @@
 			<JoyGainFactor>1.3</JoyGainFactor>
 		</statBases>
 		<size>(2,2)</size>
-		<stuffCategories>
-			<li>Metallic</li>
+		<stuffCategories Inherit="False">
 			<li>Woody</li>
-			<li>Stony</li>
 		</stuffCategories>
 		<costStuffCount>50</costStuffCount>
 		<costList>
 			<Cloth>50</Cloth>
-			<WoodLog>25</WoodLog>
+			<ComponentMedieval>5</ComponentMedieval>
 		</costList>
 		<pathCost>42</pathCost>
 		<passability>PassThroughOnly</passability>
@@ -147,15 +145,13 @@
 			<JoyGainFactor>1.3</JoyGainFactor>
 		</statBases>
 		<size>(2,3)</size>
-		<stuffCategories>
-			<li>Metallic</li>
+		<stuffCategories Inherit="False">
 			<li>Woody</li>
-			<li>Stony</li>
 		</stuffCategories>
 		<costStuffCount>80</costStuffCount>
 		<costList>
 			<Cloth>80</Cloth>
-			<WoodLog>30</WoodLog>
+			<ComponentMedieval>6</ComponentMedieval>
 		</costList>
 		<pathCost>42</pathCost>
 		<passability>PassThroughOnly</passability>

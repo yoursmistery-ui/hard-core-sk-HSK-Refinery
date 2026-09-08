@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- MilianFitting_Gunlink -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_Gunlink"]/stages/li/statOffsets</xpath>
+        <value>
+            <NightVisionEfficiency_Implant>0.80</NightVisionEfficiency_Implant>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_Gunlink"]/stages/li/statOffsets/ShootingAccuracyPawn</xpath>
+        <value>
+            <ShootingAccuracyPawn>1.5</ShootingAccuracyPawn>
+            <AimingAccuracy>0.6</AimingAccuracy>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_CombatPreviewChip -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_CombatPreviewChip"]/stages/li/statOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>0.10</MeleeParryChance>
+            <MeleeDodgeChance>0.10</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_CombatPreviewChip"]/stages/li/statOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>5.0</MeleeHitChance>
+            <MeleeCritChance>0.20</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_ShieldTacticsChip -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_ShieldTacticsChip"]/stages/li/statOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>-0.10</MeleeParryChance>
+            <MeleeDodgeChance>-0.10</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_ShieldTacticsChip"]/stages/li/statOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>3.0</MeleeHitChance>
+            <MeleeCritChance>0.15</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_DefendOrder -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_DefendOrder"]/stages/li/statOffsets/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>2</ArmorRating_Sharp>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_DefendOrder"]/stages/li/statOffsets/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>6</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_IdelBandwidthProtocol -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_IdelBandwidthProtocol"]/stages/li/statFactorsBySeverity/li/stat[.="RangedCooldownFactor"]</xpath>
+        <value>
+            <stat>AimingDelayFactor</stat>
+        </value>
+    </Operation>
+
+</Patch>

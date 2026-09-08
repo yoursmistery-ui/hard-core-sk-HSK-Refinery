@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>任务与悬赏体系优化 · P3 展开</title><style>
+:root{--bg:#f6f7f9;--fg:#1f2328;--muted:#57606a;--card:#fff;--line:#d0d7de;--accent:#2f6feb;--warn:#bf6a02;--code:#eff2f5;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;line-height:1.7;font-size:15.5px}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+header.top{border-bottom:2px solid var(--accent);padding-bottom:12px;margin-bottom:8px}
+header.top h1{font-size:24px;margin:0}
+.badge{display:inline-block;font-size:12px;color:#fff;background:var(--accent);border-radius:4px;padding:2px 8px;margin-top:6px}
+article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px 34px;margin-top:18px}
+h1{font-size:23px;margin:.2em 0 .6em}
+h2{font-size:19px;margin:1.6em 0 .6em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+h3{font-size:16px;margin:1.3em 0 .5em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+blockquote{margin:1em 0;padding:.6em 1em;background:#fff8e6;border-left:4px solid var(--warn);color:#5c4400;border-radius:0 6px 6px 0}
+blockquote p{margin:.2em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef1f5;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-family:"SFMono-Regular",Consolas,"Cascadia Code",monospace;font-size:13px}
+ul,ol{padding-left:1.5em}
+li{margin:.25em 0}
+hr{border:0;border-top:1px solid var(--line);margin:1.6em 0}
+strong{color:#0a0d12}
+pre{background:#0d1117;color:#e6edf3;padding:14px 16px;border-radius:8px;overflow-x:auto}
+pre code{background:transparent;color:inherit;padding:0;font-size:13px}
+.foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:26px}
+</style>
+<style id="qw-mobile-enhance">
+.mnav{display:flex;gap:6px;overflow-x:auto;padding:8px 2px;position:sticky;top:0;background:#fff;z-index:9;-webkit-overflow-scrolling:touch}
+.mnav a{flex:0 0 auto;font-size:13px;padding:6px 11px;border-radius:999px;background:#eef1f6;color:#2f6df0;text-decoration:none;white-space:nowrap}
+.mnav a:active{background:#dde4f7}
+@media (max-width:640px){
+  body{padding:10px;font-size:15px}
+  h1{font-size:19px;line-height:1.35}
+  h2{font-size:17px}
+  h3{font-size:15px}
+  table{font-size:13px;display:block;overflow-x:auto}
+  th,td{padding:5px 7px}
+  pre,code{font-size:12.5px;word-break:break-all}
+  img{max-width:100%;height:auto}
+}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><h1>任务与悬赏体系优化 · P3 展开</h1><nav class="mnav"><a href="#tier">一、任务分级 tier（补现缺的一等概念）</a><a href="#_2">二、奖励统一公式（表驱动，单一金额源）</a><a href="#tier_1">三、来源体系（注册表 + tier 门控）</a><a href="#_3">四、任务属性 × 外政联动</a><a href="#_4">五、悬赏令专项优化（公告牌 / 无线电 / 通缉）</a><a href="#_5">六、落地挂钩 &amp; 分期</a><a href="#_6">七、待拍板</a></nav><span class="badge">设计方案 · 未实现</span></header>
+<article><h1 id="_1">任务与悬赏体系优化</h1>
+<blockquote>
+<p>立档 2026-09-02。性质：<strong>设计方案，未实现</strong>。把现有 <code>任务大修HSK</code> 八期（RimQuest 任务板 + SimpleWarrants 通缉 + 自研 <code>QuestBoardHSK.dll</code>）按<strong>等级/奖励/来源/属性</strong>四维度重构，并与外政（双线认可度/从属/阵营线）、刺客两派（库林中世纪 + 美狐高科技）、天网 raid-boss、战争委任打通。= 主方案 §四 + §五 P3 的展开。
+原则：复用现成能力、<strong>表驱动</strong>、<strong>全主线程落</strong>（好感/发信/起任务/Dialog）、别加功能型 mod。挂钩类名见 <a href="./外政数据结构与挂钩点附录.html"><code>外政数据结构与挂钩点附录.md</code></a> §5；线程约束见 <a href="./外政核心_线程与事件决策模型.html"><code>外政核心_线程与事件决策模型.md</code></a>。</p>
+</blockquote>
+<hr />
+<h2 id="tier">一、任务分级 tier（补现缺的一等概念）</h2>
+<p><strong>已建成一等表 <code>TaskTierDef</code></strong>（<code>1.6/Defs/TaskTier/RK_TaskTiers.xml</code>，改值/加档不重编；<code>BountyRules.TierOf</code>/<code>TierRewardMult</code> 优先查表、缺则回退内置）。rank 1–4 按目标科技档落位、rank 5=天网终章 boss（非通缉）：</p>
+<table>
+<thead>
+<tr>
+<th>tier</th>
+<th>定位</th>
+<th>威胁点带</th>
+<th>目标科技档</th>
+<th>rewardMult</th>
+<th>可发来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T1 地方</strong></td>
+<td>寻物/驯捕/低阶通缉</td>
+<td>150–350</td>
+<td>Neolithic–Medieval</td>
+<td>1.0</td>
+<td>SW 随机、商队夹带、面对面</td>
+</tr>
+<tr>
+<td><strong>T2 领地</strong></td>
+<td>清剿据点/族色委托</td>
+<td>350–700</td>
+<td>Industrial</td>
+<td>1.3</td>
+<td>族色发单、玩家发布</td>
+</tr>
+<tr>
+<td><strong>T3 外政</strong></td>
+<td>定向暗杀(失败不扣好感)/勒索</td>
+<td>700–1400</td>
+<td>Spacer</td>
+<td>1.7</td>
+<td>公会直供/NPC patron、认可度/tension 解锁</td>
+</tr>
+<tr>
+<td><strong>T4 战争</strong></td>
+<td>战争委任 / 区域大 boss</td>
+<td>1400+</td>
+<td>Ultra–Archotech</td>
+<td>2.2</td>
+<td>读 BOTR <code>ActiveWars</code></td>
+</tr>
+<tr>
+<td><strong>T5 终章</strong></td>
+<td><strong>天网 Skynet 最终 boss</strong></td>
+<td>5000+</td>
+<td>机器族(非通缉)</td>
+<td>3.0</td>
+<td>天网 boss 战令专章（不入公告牌）</td>
+</tr>
+</tbody>
+</table>
+<p>落地：tier 由目标科技档派生（不入库、不给 <code>Warrant</code> 加字段）；发单窗/交付回写/暗杀源/#8 奖励统一读此表，UI 徽章 <code>T{rank}</code> 按 <code>badgeColor</code> 上色。<strong>#1 显式分层已接</strong>：<code>BountyRadioManager.warrantTier</code>(<code>loadID→rank</code>, 存档) 覆盖派生值——暗杀源钉 T3、#8 优先读覆盖、<code>SetWarrantTier</code> 供天网 T5 战令等未来钉档；未钉则按科技档派生。每档带 <code>badgeColor</code>/<code>summary</code>/<code>failGoodwill</code> 供 UI 与结算后续取用（现 <code>failGoodwill</code> 全 0=不扣，契合暗杀规则）。</p>
+<h2 id="_2">二、奖励统一公式（表驱动，单一金额源）</h2>
+<p>现双路径未统一（悬赏=SW <code>AssignRewards</code> 公式；族色=XML×1.75）。合并为读一张 <code>RewardCurveDef</code> 表：</p>
+<pre><code>银币 = Base(tier) × 科技档系数(低档×0.5) × 派系关系倍率(0→1.0/+100→1.5/−100→1.4)
+       × 从属修正(帝国从属间发单 ×0.6) × 双线认可增益(对应线 standing 越高 ×1.0~1.3)
+</code></pre>
+<ul>
+<li>改 <code>HarmonyPatches.cs</code> 补 #8 <code>WarrantsManager.AssignRewards</code> Postfix 读表（替 <code>BountyRules</code> 里的散常数）。</li>
+<li>实物包 <code>BountyRewards.cs</code> 选池改按 <strong>tier × 目标派系阵营线</strong>（imperial 池 / free 池 / 各族特产）。</li>
+<li>保留：SW 30% 尸体酬概率、财富缩放、受雇成功率科技线性。</li>
+<li>预付手续费：从"目标科技档 500~5000"改 <strong><code>tier × 目标科技档</code></strong>；帝国从属间发单免/减预付。</li>
+<li><strong>发单金额系统给、玩家不手填</strong>：<code>Dialog_IssueWarrantHSK</code> 去掉"输入赏金"字段，只做"选目标 → 显示系统报价 → 确认"；通缉/暗杀单赏金一律按上面公式算，预付同理自动定。</li>
+</ul>
+<h2 id="tier_1">三、来源体系（注册表 + tier 门控）</h2>
+<p>现 5 源全保留（SW 周期随机 / 开局补单封顶 / 商队夹带 25% / RimQuest 面对面 / 玩家发布）。新增<strong>外政驱动定向任务</strong>：</p>
+<ol>
+<li><strong>双线认可度解锁</strong>：某线 standing 达阈 → 解锁该线专属定向任务（帝国线给护商/讨伐、free 线给走私/佣兵单）。</li>
+<li><strong>战争委任</strong>：读 BOTR <code>ActiveWars</code>/<code>TerritorialMissionType</code> → 生成 T4 战令（复用现成 <code>TerritorialMissions</code>）。</li>
+<li><strong>天网 raid-boss</strong>：T4 定向战令（见 <a href="./天网Skynet_boss整合.html"><code>天网Skynet_boss整合.md</code></a> §3）。</li>
+<li><strong>刺客两派委托</strong>：库林隐修会发 Medieval 档、美狐机枢会发 Spacer/骇入档（见 <a href="./刺客派系双阶整合.html"><code>刺客派系双阶整合.md</code></a>）。</li>
+</ol>
+<p>门控：低科技/低认可刷不出高档单。B 决策核心抛 command → C 订阅注册来源 → <strong>主线程 <code>QuestUtility.CreateQuest</code> 落地</strong>（不后台跑）。</p>
+<h2 id="_3">四、任务属性 × 外政联动</h2>
+<p>每任务挂外政上下文：<code>归属派系 · 阵营线(imperial/free) · 目标从属态 · 认可度收益(±) · 好感代价 · tier</code>。
+落地：新增 <code>QuestTagDef</code> + <code>loadID→上下文</code> 字典（存档 Scribe；<code>Warrant</code> 不加字段）。
+- 完成 → 回写<strong>双线认可度</strong>（按任务阵营线给对应 <code>standing</code> + 分项，附录 §1）与好感（原版 <code>TryAffectGoodwillWith</code>）。
+- 失败/弃单 → 沿用八期故事信变体（<code>Tale_TakeFail_*</code>）+ 好感结算；<strong>暗杀链例外：失败不扣好感、成功加好感（见 §五）</strong>。</p>
+<h2 id="_4">五、悬赏令专项优化（公告牌 / 无线电 / 通缉）</h2>
+<ul>
+<li><strong>目标合法性叠加阵营线/从属</strong>：现有 <code>IsWorldNpcFaction</code>+<code>TechGapOk</code> → 再叠"阵营线/从属"过滤：<strong>帝国从属间不得互开悬赏</strong>；同线目标降好感代价、跨线提价。</li>
+<li><strong>海报卡增行</strong>：阵营线 / 目标从属态 / 本单认可收益 / 暗杀解锁阈值。</li>
+<li><strong>暗杀战令</strong>（好感/敌对驱动，无间谍网）：目标线认可过低 <strong>或</strong> BOTR <code>FactionBorderContact.tension</code> 超阈 → 解锁暗杀 ChoiceLetter；接现通缉 4 类 <code>QuestScriptDef</code>（Pawn/Animal/Tame/Artifact）扩"暗杀"子类，走原版 <code>Pawn.Kill</code>/<code>SetRelationDirect</code>（避开 BOTR 占的 <code>CheckDefeated</code>/<code>Quest.Accept</code>）。<strong>结算：成功→加好感、失败→不扣好感</strong>（覆盖 SW 原拒付 −100/发单激怒，暗杀链不扣）；<strong>赏金金额系统按 §二 公式定、玩家不手填</strong>。</li>
+<li>保留：无线电待接收队列、全局一周一条限流、榜上 15 天期限、≤2 天红字警示。</li>
+</ul>
+<h2 id="_5">六、落地挂钩 &amp; 分期</h2>
+<blockquote>
+<p><strong>实装进度（2026-09-02）</strong>：P2 双线认可度已实装——<code>WorldComponent_EdgePolitics</code> 存 <code>imperial/freeStanding</code>(按 loadID, 0–100) + <code>AwardRecognition/RecognitionOf/OnImperialLine</code> 桥接 + 存档；<code>BotrBridge</code> 反射读 BOTR 从属判帝国线（缺 BOTR 安全降级）。P3 已实装——<code>BountyRules</code> <code>TierOf</code>/<code>TierRewardMult</code>(T1–T4)；#8 奖励=身价×科技×关系×tier×认可度(上限表控)；#1 生成加"帝国线从属间不开单"；#6 交付 <code>EdgeBridge.Award(issuer)</code> 回写认可度；发单窗目标行加 <strong>T 徽章</strong>；公告牌新增<strong>「外政」页签</strong>（<code>Dialog_BountyBoard.ViewTab.Diplomacy</code> → <code>DrawDiplomacy</code>，列各世界 NPC 派系的帝国线/民间线标签 + 认可度条 + 承认标记，数据经 <code>EdgeBridge</code> 反射取自 edgepolitics，缺则全按民间线/0）。<strong><code>RewardCurveDef</code> 已表化</strong>——<code>1.6/Defs/RewardCurve/RK_RewardCurve.xml</code>（tier/prepay/aboveTechCost/recognition 参数，改值不重编，缺则回退常量）。P5 暗杀委托源已实装——<code>BountyRadioManager.TryAssassinContract</code>（NPC patron 委托 kill-only 通缉、复用信鸽/公告牌管线、独立冷却+共享周限流、全 try/catch）。DLL/XML 双目录同步、0 错、无环（期间并行会话曾把 <code>BountyPickup.cs</code> 改坏致整工程编不过，其修复后全树 0 错）。<strong>#2 天网终章 <code>SkyNetCampaign</code>(GameComponent,已接)</strong>：三段链(侦察 day200→入侵 day260→终章 day400,对齐 Skynet <code>earliestRaidDays</code>)+ 发战令信；<code>Pawn.Killed</code> postfix 监听 <code>*PrototypeTX*</code> 被杀 → HumanResistance 好感 +30 + 双线认可 + 掉落天网科技(<code>AndroidRepairKit</code>/<code>NitinolAlloy</code>/<code>Plasteel</code>,GetNamedSilentFail 兜底);未装 Skynet 静默 no-op。<strong>未做/待游戏核验</strong>：暗杀/终章链的 SW 原生好感结算实际表现、<code>SkyNetCampaign</code> 阶段/掉落运行确认、外政页签渲染。
+挂钩点（附录 §5 表）：等级→补 #1 postfix 定 tier；奖励→补 #8 + 新 <code>RewardCurveDef</code>；来源→<code>BountyRadioManager</code> 注册新源 + <code>Dialog_BountyBoard</code> 加"外政/情报"页签；属性→<code>loadID→上下文</code> 字典；暗杀→新 <code>QuestScriptDef</code> + ChoiceLetter。别人 mod 的事件/任务入口只 postfix 喂决策，<strong>执行留主线程</strong>。</p>
+</blockquote>
+<p>分期（= 主方案 P3→P4）：① tier + 奖励表 → ② 来源注册（战争委任/天网/刺客两派）→ ③ 属性回写双线认可度 → ④ 悬赏合法性叠加阵营线 → ⑤ 暗杀战令（P4）。</p>
+<h2 id="_6">七、待拍板</h2>
+<ol>
+<li><strong>tier 曲线数值</strong>：T1–T4 银币带、研究台科技档、是否把等级<strong>显式展示</strong>给玩家。</li>
+<li><strong>外政任务 UI</strong>：与悬赏<strong>共用公告牌弹窗加页签</strong>，还是独立"外政/情报"窗。</li>
+<li><strong>刺客两派定价</strong>：库林(中世纪)单 vs 美狐(高科技)单 奖励差幅、是否各自独立认可度线。</li>
+<li><strong>认可度硬/软门</strong>：双线认可度是硬锁"能否接 T4/boss 单"，还是只调奖励与好感代价。</li>
+</ol></article>
+<div class="foot">由 任务与悬赏体系优化.md 生成 · 鼠族HSK · 外政与任务大修</div>
+</div></body></html>

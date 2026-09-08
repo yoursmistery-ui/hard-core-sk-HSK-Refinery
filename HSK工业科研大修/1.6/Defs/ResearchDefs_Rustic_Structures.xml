@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 中世纪乡村结构 · 围栏工
+       19 项乡村结构建筑拆分 4 档解锁(HSK工业科研大修, 2026-09-03 建)。
+       实测原状态: 5 项无 prereq(开局就解锁)、其余多挂 ComplexFurniture、都铎墙/城堡墙挂 Stonecutting;
+       现统一收敛到本档 4 个独立节点, 链式递进。
+       ParentName="MedievalBase" (Core_SK: techLevel Medieval + SimpleResearchBench + 高级研究台 + ResearchTreeSKModExtension)
+       坐标: 围栏工(3,6) 起, 链阶梯右下走 朴素门具(5,7) → 加固门具(6,8) → 立柱与城堡(7,9)。
+       ⚠ 2026-09-05 修正: 先前放 Y=6 X=3~6 直线, 但 Core_SK 把 娱乐设施 III/IV/V
+       (Harp/Harpsichord/Piano) 就摆在 (4,6)(5,6)(6,6)——(3,6) 是 Enjoyment II 与 III 之间
+       的空档, 再往右并非空位; ResearchTreeSK 的坐标键跨页签全局唯一, 撞位即启动报错。
+       (2,5) 亦曾被 Core_SK Art_A1 艺术I 占用。落位前须按终态查重(全树扫描:
+       _tmp/research_pos_census2.py 读 MissileGirl\Cache\Unified.xml)。 -->
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_SimpleFences</defName>
+    <label>围栏工</label>
+    <description>在原始木屋外另立一排尖头木桩, 便能圈出牲口与作物的活动范围; 缝里漏箭的射孔木桩亦可一战, 帐篷布墙更是临时据点的拆装良伴。四样最朴素的围蔽工, 是乡村秩序的起手式。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>200</baseCost>
+    <researchViewX>3.00</researchViewX>
+    <researchViewY>6.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_SimpleDoors</defName>
+    <label>朴素门具</label>
+    <description>从单格木门到原木框、原木栅门、加固木门, 直至沉重石板门——一并五件通行的门户, 是构筑一座能进能出的村落的全部基础门槛。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>400</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_SimpleFences</li>
+    </prerequisites>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>7.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_AdvancedDoors</defName>
+    <label>加固门具</label>
+    <description>双格宽门、加固原木大门、双格石板闸门——四道更厚、更稳、更费料的大门, 既是车马通道也是械斗要冲的关键节点。一条宽阔门洞即宣告此处已非乡野小寨。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>800</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_SimpleDoors</li>
+    </prerequisites>
+    <researchViewX>6.00</researchViewX>
+    <researchViewY>8.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_ColumnsAndCastle</defName>
+    <label>立柱与城堡工程</label>
+    <description>撑起门廊的原木柱、撑起宫厅的皇家金柱、撑起隔间的两格高立柱; 半木泥坯的都铎墙, 巨石垒砌的城堡墙与留出射击孔的射孔城堡墙。六件撑得起屋宇门面、抵得住攻城兵器的构件, 让一座聚落真正长出城墙与穹顶。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>1200</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_AdvancedDoors</li>
+    </prerequisites>
+    <researchViewX>7.00</researchViewX>
+    <researchViewY>9.00</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- 学术陈设 · 书籍家具档(HSK工业科研大修, 2026-09-04 建)
+       收口 Buildings_Rustic_Book.xml 的 6 件书籍家具(经文讲台/研究书架 1x1·1x2/空书架 1x1·1x2/皇家书架),
+       原多挂通用 ComplexFurniture(家具一), 现独立成档, 前置仍为家具一。
+       坐标 (5,8): 家具行 Y=7 之下的分支, 跨页签全局查重确认空闲(见 _tmp/scan_all_research_global.py)。 -->
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_BookFurniture</defName>
+    <label>学术陈设</label>
+    <description>为研读与治学备下的家什: 讲台摊开经卷, 书架塞满抄本。摆在研究台旁的研究书架能加快研究进度, 空书架专司藏书, 皇家书架则以衬绸描金装点书房。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>300</baseCost>
+    <prerequisites>
+      <li>ComplexFurniture</li>
+    </prerequisites>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>8.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

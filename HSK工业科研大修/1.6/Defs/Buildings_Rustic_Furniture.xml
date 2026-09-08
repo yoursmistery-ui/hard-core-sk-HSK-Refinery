@@ -4,7 +4,8 @@
      来源: Medieval Overhaul 1.6.2.2 Buildings_Furniture.xml 纯原版类 def 移植。
      前缀统一 Rustic_; 基类改用原版 TableBase / FurnitureWithQualityBase / BedBase
      (取代 MO 的 DankPyon_TableGatherSpotBase / ArtableFurnitureBase / BasicBedBase, 后者含 MO 专属属性)。
-     材料映射(2026-08-29 产业线改版): 原木系(桌/凳/椅/床架)→ 原木类 stuff(WoodLogs+WYP Softwoods/Hardwoods/Ultrahardwoods);
+     材料映射(2026-08-29 产业线改版)
+     drawSize 修正(2026-09-06): 全部非 1×1 家具补齐/改正 drawSize。本 mod 贴图按 128px/格绘制(RoundTable 64px/格), GraphicData 缺省 drawSize=(1,1) 格会把画布压进一格 → 内容与占地错位; 规则 drawSize=画布像素/每格像素, 逐贴图实测 alpha 边界定值。: 原木系(桌/凳/椅/床架)→ 原木类 stuff(WoodLogs+WYP Softwoods/Hardwoods/Ultrahardwoods);
      乡村桌几 → 木板(Woody)+ 原始零部件 ComponentMedieval(铁加固系保留 Metallic, 无石材/塑料);
      稻草床 → 原木 stuff + 干草 Hay; 毛皮床 → 皮革 stuff + 原木 WoodLog(固定劈木)。
      研究分档(按用途, 见 09 计划 §二):
@@ -24,6 +25,7 @@
 			<texPath>Things/Building/Furniture/LogTable1x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.1,2.2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogTable1x2_north</uiIconPath>
 		<size>(1,2)</size>
@@ -54,6 +56,7 @@
 			<texPath>Things/Building/Furniture/LogTable1x3</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,5)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogTable1x3_north</uiIconPath>
 		<size>(1,3)</size>
@@ -84,6 +87,7 @@
 			<texPath>Things/Building/Furniture/LogTable1x4</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,6)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogTable1x4_north</uiIconPath>
 		<size>(1,4)</size>
@@ -114,6 +118,7 @@
 			<texPath>Things/Building/Furniture/LogTable2x4</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogTable2x4_north</uiIconPath>
 		<size>(2,4)</size>
@@ -144,6 +149,7 @@
 			<texPath>Things/Building/Furniture/RusticTable1x1</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTable1x1_north</uiIconPath>
 		<size>(1,1)</size>
@@ -174,6 +180,7 @@
 			<texPath>Things/Building/Furniture/ReinforcedRusticTable1x1</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable1x1_north</uiIconPath>
 		<size>(1,1)</size>
@@ -205,6 +212,7 @@
 			<texPath>Things/Building/Furniture/RusticTable1x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTable1x2_north</uiIconPath>
 		<size>(1,2)</size>
@@ -235,6 +243,7 @@
 			<texPath>Things/Building/Furniture/ReinforcedRusticTable1x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable1x2_north</uiIconPath>
 		<size>(1,2)</size>
@@ -266,6 +275,7 @@
 			<texPath>Things/Building/Furniture/RusticTable1x3</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,5)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTable1x3_north</uiIconPath>
 		<size>(1,3)</size>
@@ -296,6 +306,7 @@
 			<texPath>Things/Building/Furniture/RusticTable2x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTable2x2_north</uiIconPath>
 		<size>(2,2)</size>
@@ -326,6 +337,7 @@
 			<texPath>Things/Building/Furniture/ReinforcedRusticTable2x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable2x2_north</uiIconPath>
 		<size>(2,2)</size>
@@ -357,6 +369,7 @@
 			<texPath>Things/Building/Furniture/RusticRoundTable2x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticRoundTable2x2_south</uiIconPath>
 		<size>(2,2)</size>
@@ -387,6 +400,7 @@
 			<texPath>Things/Building/Furniture/RusticTable2x4</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTable2x4_north</uiIconPath>
 		<size>(2,4)</size>
@@ -417,6 +431,7 @@
 			<texPath>Things/Building/Furniture/ReinforcedRusticTable2x4</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable2x4_north</uiIconPath>
 		<size>(2,4)</size>
@@ -478,6 +493,7 @@
 			<texPath>Things/Building/Furniture/RusticTallEndTable</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/RusticTallEndTable_south</uiIconPath>
 		<size>(1,1)</size>
@@ -540,6 +556,7 @@
 			<texPath>Things/Building/Furniture/LogBench1x2</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.1,2.2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogBench1x2_north</uiIconPath>
 		<size>(1,2)</size>
@@ -570,6 +587,7 @@
 			<texPath>Things/Building/Furniture/LogBench1x3</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.3,3.2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogBench1x3_north</uiIconPath>
 		<size>(1,3)</size>
@@ -600,6 +618,7 @@
 			<texPath>Things/Building/Furniture/LogBench1x4</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.4,4.2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogBench1x4_north</uiIconPath>
 		<size>(1,4)</size>
@@ -686,6 +705,7 @@
 			<texPath>Things/Building/Furniture/BedStraw</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedStraw_south</uiIconPath>
 		<size>(1,2)</size>
@@ -719,6 +739,7 @@
 			<texPath>Things/Building/Furniture/BedStrawDouble</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedStrawDouble_south</uiIconPath>
 		<size>(2,2)</size>
@@ -752,7 +773,7 @@
 			<texPath>Things/Building/Furniture/LogSlabBed</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(1.5,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/LogSlabBed_south</uiIconPath>
 		<size>(1,2)</size>
@@ -783,7 +804,7 @@
 			<texPath>Things/Building/Furniture/DoubleLogSlabBed</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(3,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/DoubleLogSlabBed_south</uiIconPath>
 		<size>(2,2)</size>
@@ -814,7 +835,7 @@
 			<texPath>Things/Building/Furniture/BedWicker</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(1.5,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedWicker_south</uiIconPath>
 		<size>(1,2)</size>
@@ -845,7 +866,7 @@
 			<texPath>Things/Building/Furniture/BedWickerDouble</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(3,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedWickerDouble_south</uiIconPath>
 		<size>(2,2)</size>
@@ -878,7 +899,7 @@
 			<texPath>Things/Building/Furniture/BedFur</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(1.5,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedFur_south</uiIconPath>
 		<size>(1,2)</size>
@@ -917,7 +938,7 @@
 			<texPath>Things/Building/Furniture/BedFurDouble</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
-			<drawSize>(3,3)</drawSize>
+			<drawSize>(2,2)</drawSize>
 		</graphicData>
 		<uiIconPath>Things/Building/Furniture/BedFurDouble_south</uiIconPath>
 		<size>(2,2)</size>

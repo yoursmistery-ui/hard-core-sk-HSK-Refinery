@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_OpportunitySite_HuntingSurplus</defName>
+    <rootSelectionWeight>1</rootSelectionWeight>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <autoAccept>true</autoAccept>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->hunting surplus</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->In order to survive the cold winter, the hunters of [kiiro_settlement_label] organized a collective hunting activity. This hunt was unexpectedly bountiful, yielding far more game than the hunters had anticipated. Kiiros decided to bury the surplus preys on-site and have informed you of the burial location.\n\n"If you need it, just go and take away. We left a mark nearby, so you can easily find it by following that."</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_Set">          <!--设置地点距离-->
+          <name>siteDistRange</name>
+          <value>1~3</value>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>OpportunitySite_HuntingSurplus</modSettingSwitch>
+        </li>
+
+        <!--判定季节触发-->
+        <li Class="Kiiro_Event.QuestNode_IsRightSeason">
+          <seasons>
+            <li>Winter</li>
+            <li>PermanentWinter</li>
+          </seasons>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_OpportunitySite_HuntingSurplus</tag>
+          <faction>$siteFaction</faction>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <!-- 生成在绮罗定居点附近 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>tile</storeAs>
+          <preferCloserTiles>false</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+        </li>
+
+        <li Class="QuestNode_GenerateWorldObject">
+          <def>Kiiro_HuntingSurplus</def>
+          <tile>$tile</tile>
+          <faction>Kiiro_Faction</faction>
+          <storeAs>Kiiro_HuntingSurplus</storeAs>
+        </li>
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$Kiiro_HuntingSurplus</worldObjects>
+          <tile>$tile</tile>
+        </li>
+
+        <!-- 3到6天 -->
+        <li Class="QuestNode_Set">
+          <name>timeoutTicks</name>
+          <value>$(randInt(3,6)*60000)</value>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$Kiiro_HuntingSurplus</worldObject>
+          <delayTicks>$timeoutTicks</delayTicks>
+          <isQuestTimeout>true</isQuestTimeout>
+          <inSignalDisable>Kiiro_HuntingSurplus.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">Seems that the buried preys has already been taken by someone else.</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>Timeout</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+        <!-- 派系敌对则结束任务 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[resolvedQuestName] failed</label>
+                <text TKey="LetterTextQuestExpired">Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$Kiiro_HuntingSurplus</worldObject>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_End">
+          <inSignal>Kiiro_HuntingSurplus.Resolved</inSignal>
+          <outcome>Success</outcome>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

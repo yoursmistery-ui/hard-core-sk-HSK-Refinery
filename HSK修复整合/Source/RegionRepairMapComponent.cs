@@ -29,10 +29,25 @@ namespace ReloadRegistryFix
         // 延迟几个 tick,离开当前配方搜索调用栈后再执行(防重入)。
         private const int RequestDelayTicks = 5;
 
-        // 同一地图两次 region 重建的最小间隔(≈100 秒),避免合法不可达场景反复重建。
-        private const int MinRebuildGapTicks = 6000;
+        // 该图"上次重建至今"若已连续无事件超过此阈值,就把退避计数归零 → 恢复灵敏
+        // (说明那次重建大概率真修好了, 之后偶发的新脏化应尽快再修)。≈ 2.5 游戏天。
+        private const int BackoffResetTicks = 150000;
+
+        // 固定间隔 6000t(100 秒)会在"配方原料真没货(非脏化误判)"时, 每 100 秒白烧一次
+        // 65~70ms 全量重建、永不停歇。改为指数退避: 同一条失败链上连续重建若都没让配方恢复
+        // (下一图仍诊断到脏化 → 说明多半不是脏化而是真没货), 允许间隔按 6000→30000→90000
+        // →180000t 逐级拉长, 把无效重建压到几乎不出现; 一旦重建见效(账单不再失败、无新请求),
+        // 静默超过 BackoffResetTicks 即在下次触发时归零、恢复灵敏。单次重建本体(约 65ms)不变。
+        private static int AllowedGap(int attempts)
+        {
+            if (attempts <= 1) return 6000;
+            if (attempts == 2) return 30000;
+            if (attempts == 3) return 90000;
+            return 180000;
+        }
 
         private static readonly Dictionary<Map, int> lastRebuildTick = new Dictionary<Map, int>();
+        private static readonly Dictionary<Map, int> rebuildAttempts = new Dictionary<Map, int>();
 
         private int requestedTick = -1;
         private bool rebuilding;
@@ -72,27 +87,23 @@ namespace ReloadRegistryFix
             {
                 return;
             }
-            int last;
-            if (lastRebuildTick.TryGetValue(map, out last) && now - last < MinRebuildGapTicks)
+            int last, attempts;
+            lastRebuildTick.TryGetValue(map, out last);
+            rebuildAttempts.TryGetValue(map, out attempts);
+            int gap = AllowedGap(attempts);
+            if (last != 0 && now - last < gap)
             {
                 return;
             }
-            lastRebuildTick[map] = now;
-            if (lastRebuildTick.Count > 32)
+            // 静默足够久(上次重建后一直没再被请求 → 那次多半真修好了)→ 退避归零, 恢复灵敏。
+            if (last != 0 && now - last > BackoffResetTicks)
             {
-                List<Map> dead = new List<Map>();
-                foreach (KeyValuePair<Map, int> kv in lastRebuildTick)
-                {
-                    if (kv.Key == null || kv.Key.Disposed)
-                    {
-                        dead.Add(kv.Key);
-                    }
-                }
-                for (int i = 0; i < dead.Count; i++)
-                {
-                    lastRebuildTick.Remove(dead[i]);
-                }
+                attempts = 0;
             }
+            attempts++;
+            lastRebuildTick[map] = now;
+            rebuildAttempts[map] = attempts;
+            CleanupDeadMaps();
             if (map.regionAndRoomUpdater == null || !map.regionAndRoomUpdater.Enabled)
             {
                 return;
@@ -102,7 +113,8 @@ namespace ReloadRegistryFix
             {
                 map.regionAndRoomUpdater.RebuildAllRegionsAndRooms();
                 Log.Message("[ReloadRegistryFix] rebuilt regions for map " + map.Tile +
-                    " (region/reachability staleness recovery; bill ingredient search should resume)");
+                    " (attempt " + attempts + ", next gap " + AllowedGap(attempts) +
+                    "t; region/reachability staleness recovery; bill ingredient search should resume)");
             }
             catch (Exception e)
             {
@@ -111,6 +123,27 @@ namespace ReloadRegistryFix
             finally
             {
                 rebuilding = false;
+            }
+        }
+
+        private static void CleanupDeadMaps()
+        {
+            if (lastRebuildTick.Count <= 32)
+            {
+                return;
+            }
+            List<Map> dead = new List<Map>();
+            foreach (KeyValuePair<Map, int> kv in lastRebuildTick)
+            {
+                if (kv.Key == null || kv.Key.Disposed)
+                {
+                    dead.Add(kv.Key);
+                }
+            }
+            for (int i = 0; i < dead.Count; i++)
+            {
+                lastRebuildTick.Remove(dead[i]);
+                rebuildAttempts.Remove(dead[i]);
             }
         }
     }

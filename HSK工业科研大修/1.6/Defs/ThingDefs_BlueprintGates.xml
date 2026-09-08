@@ -122,36 +122,50 @@
 
 
 
-		<!-- ===== 分档抽象基类 tier1 (RK_Schematic_Medieval): 挂对应可视子分类 ===== -->
+	<!-- ===== 分档抽象基类 tier1 (RK_Schematic_Medieval): 挂对应可视子分类 ===== -->
+	<!-- 贴图必须用中世纪版 Blueprint_Old(羊皮纸手绘); 基类 Blueprint_New 是工业蓝底网格, 勿沿用 -->
 	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier1" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Schematic_Medieval</li>
 		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Blueprints/Blueprint_Old</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Old</uiIconPath>
 	</ThingDef>
 
 
 	<!-- ===== 分档抽象基类 tier2 (RK_Blueprint_Industrial): 挂对应可视子分类 ===== -->
+	<!-- 工业档直接沿用基类 Blueprint_New(蓝底网格工业蓝图); MO 图纸卷轴已让位给高科技档 -->
 	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier2" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Blueprint_Industrial</li>
 		</thingCategories>
+	</ThingDef>
+
+
+	<!-- ===== 高科技档共享基类 (tier3 太空 / tier4 极致 / tier5 超凡) ===== -->
+	<!-- 三档统一用 Blueprint_HighTech(紫色高科技图纸卷轴); 基类 Blueprint_New 属工业档, 不得再被继承 -->
+	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_TierHighTech" Abstract="True">
 		<graphicData>
-			<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll</texPath>
+			<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>0.8</drawSize>
 		</graphicData>
-		<uiIconPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll</uiIconPath>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_HighTech</uiIconPath>
 		<comps Inherit="False">
 			<li Class="CompProperties_Book">
 				<ageYearsRange>100~200</ageYearsRange>
 				<openGraphic>
-					<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll_Open</texPath>
-					<graphicClass>Graphic_Multi</graphicClass>
+					<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
 					<drawSize>0.7</drawSize>
 				</openGraphic>
 				<verticalGraphic>
-					<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll_Vertical</texPath>
-					<graphicClass>Graphic_Multi</graphicClass>
+					<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
 					<addTopAltitudeBias>true</addTopAltitudeBias>
 				</verticalGraphic>
 				<doers>
@@ -163,7 +177,7 @@
 
 
 	<!-- ===== 分档抽象基类 tier3 (RK_Blueprint_Spacer): 挂对应可视子分类 ===== -->
-	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier3" Abstract="True">
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier3" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Blueprint_Spacer</li>
 		</thingCategories>
@@ -171,7 +185,7 @@
 
 
 	<!-- ===== 分档抽象基类 tier4 (RK_Blueprint_Ultra): 挂对应可视子分类 ===== -->
-	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier4" Abstract="True">
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier4" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Blueprint_Ultra</li>
 		</thingCategories>
@@ -179,7 +193,7 @@
 
 
 	<!-- ===== 分档抽象基类 tier5 (RK_Blueprint_Archotech): 挂对应可视子分类 ===== -->
-	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier5" Abstract="True">
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier5" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Blueprint_Archotech</li>
 		</thingCategories>
@@ -433,59 +447,11 @@
 
 		<description>一份记载着【电力工程】科技的图纸卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
 
-		<graphicData>
-
-			<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll</texPath>
-
-			<graphicClass>Graphic_Single</graphicClass>
-
-			<drawSize>0.8</drawSize>
-
-		</graphicData>
-
-		<uiIconPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll</uiIconPath>
-
 		<statBases>
 
 			<MarketValue>1500</MarketValue>
 
 		</statBases>
-
-		<comps Inherit="False">
-
-			<li Class="CompProperties_Book">
-
-				<ageYearsRange>100~200</ageYearsRange>
-
-				<openGraphic>
-
-					<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll_Open</texPath>
-
-					<graphicClass>Graphic_Multi</graphicClass>
-
-					<drawSize>0.7</drawSize>
-
-				</openGraphic>
-
-				<verticalGraphic>
-
-					<texPath>Things/Item/Blueprints/SchematicScroll/SchematicScroll_Vertical</texPath>
-
-					<graphicClass>Graphic_Multi</graphicClass>
-
-					<addTopAltitudeBias>true</addTopAltitudeBias>
-
-				</verticalGraphic>
-
-				<doers>
-
-					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
-
-				</doers>
-
-			</li>
-
-		</comps>
 
 		<modExtensions>
 

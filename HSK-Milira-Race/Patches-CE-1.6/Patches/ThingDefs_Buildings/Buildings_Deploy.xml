@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_Fortress -->
+<!-- 米莉安不落要塞 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Fortress"]/thingClass</xpath>
+        <value>
+            <thingClass>MiliraCE.Building_TurretGunCEFortress</thingClass>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Fortress"]/fillPercent</xpath>
+        <value>
+            <fillPercent>0.75</fillPercent>
+        </value>
+    </Operation>
+    <!-- <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_Fortress"]/building/turretBurstCooldownTime</xpath>
+        <value>
+            <turretBurstCooldownTime>1</turretBurstCooldownTime>
+        </value>
+    </Operation> -->
+
+<!--  重型粒子炮 -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MilianFortressGun_HeavyPlasma</defName>
+        <statBases>
+            <Bulk>96</Bulk>
+            <SightsEfficiency>2.5</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCE_Fortress</verbClass>
+            <defaultProjectile>Bullet_MilianFortressGun_HeavyPlasma</defaultProjectile>
+            <warmupTime>1.6</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <minRange>4.9</minRange>
+            <range>1000</range>
+            <ticksBetweenBurstShots>70</ticksBetweenBurstShots>
+            <requireLineOfSight>false</requireLineOfSight>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>Milira_Shot_HeavyMortar</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <stopBurstWithoutLos>false</stopBurstWithoutLos>
+            <soundAiming>Milira_HeavyPlasma_Aiming</soundAiming>
+            <muzzleFlashScale>9</muzzleFlashScale>
+            <targetParams>
+                <canTargetLocations>true</canTargetLocations>
+            </targetParams>
+            <ai_AvoidFriendlyFireRadius>8</ai_AvoidFriendlyFireRadius>
+            <ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <noSnapshot>true</noSnapshot>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="MilianFortressGun_HeavyPlasma"]/verbs/li[verbClass="Milira.Verb_Shoot_Fortress"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef[defName="MilianFortressGun_HeavyPlasma"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName="MilianFortressGun_HeavyPlasma"]</xpath>
+            <value>
+                <comps />
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <!-- Optimizes speed of projectile with flyOverhead=true -->
+        <xpath>/Defs/ThingDef[defName="MilianFortressGun_HeavyPlasma"]/comps</xpath>
+        <value>
+            <li Class="CombatExtended.CompProperties_Charges">
+                <chargeSpeeds>
+                    <li>20</li>
+                    <li>30</li>
+                    <li>40</li>
+                    <li>50</li>
+                    <li>60</li>
+                    <li>70</li>
+                    <li>80</li>
+                    <li>90</li>
+                    <li>100</li>
+                    <li>110</li>
+                    <li>120</li>
+                    <li>130</li>
+                    <li>140</li>
+                    <li>150</li>
+                </chargeSpeeds>
+            </li>
+        </value>
+    </Operation>
+
+</Patch>

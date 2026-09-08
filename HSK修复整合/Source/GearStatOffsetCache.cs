@@ -6,8 +6,9 @@
 // 该 stat 的全部 StatPart),是加法型偏移(非乘法)。
 //
 // 方案:与工具缓存同款 —— __state 记输入值,postfix 用 val_after - val_before 反推
-// 偏移量并缓存,按 (pawn, parentStat) 键,TTL 120 tick(2 秒)。装备装卸最多延迟 2 秒
-// 反映,无感。加法型偏移无需绝对值处理(正负由 subtract 标志决定,自动保留)。
+// 偏移量并缓存,按 (pawn, parentStat) 键,TTL 120 tick(2 秒)兜底 + **装备指纹即时失效**
+// (2026-09-08: 件数/各件 thingIDNumber/主手武器混合哈希,换装穿脱当 tick 就重算,
+//  不再依赖 TTL → 根治"脱衣服后舒适温度延迟 2 秒";诊断日志同时下线)。
 // 未命中的早期返回(非 pawn / 无装备)也正确缓存为 0 偏移。
 //
 // 编译:并入 HSKFixPack.dll(系统 csc,C#5)。
@@ -30,11 +31,44 @@ namespace GearStatOffsetCache
         {
             public float offset;
             public int tick;
+            public int fp;                                       // 缓存时装备指纹(穿着/武器变动即时失效)
         }
 
         private static readonly Dictionary<Pawn, Dictionary<StatDef, Entry>> cache =
             new Dictionary<Pawn, Dictionary<StatDef, Entry>>();
         private static int lastCleanupTick = -1;
+
+        // 装备指纹(2026-09-08): 件数 + 各件 thingIDNumber + 主手武器 id 的混合累乘。
+        // 取代原「只比穿着件数」的诊断判据, 并升级为真正的失效依据 —— 换装/穿脱的当个
+        // tick 就重算, 根治「脱衣服后舒适温度还挂着旧值」; 同时诊断日志全部下线
+        // (09-08 实测该诊断 735 行/局, 其中大量是 worn 4↔3 摆动但偏移值根本没变,
+        //  纯噪声 + 每次摆动 4 行字符串分配)。
+        // 成本: 几到十几次整数乘加(遍历的是内部 List 字段, 零分配), 远低于被缓存掉的
+        // 那次真实计算(逐件 GetStatValue + StatWorker.StatOffsetFromGear 递归 StatPart)。
+        private static int ApparelFingerprint(Pawn pawn)
+        {
+            if (pawn.apparel == null)
+            {
+                return -1;
+            }
+            List<Apparel> worn = pawn.apparel.WornApparel;
+            if (worn == null)
+            {
+                return -1;
+            }
+            int h = 17;
+            for (int i = 0; i < worn.Count; i++)
+            {
+                if (worn[i] != null)
+                {
+                    h = h * 31 + worn[i].thingIDNumber;
+                }
+            }
+            ThingWithComps prim = pawn.equipment != null ? pawn.equipment.Primary : null;
+            h = h * 31 + worn.Count;
+            h = h * 31 + (prim != null ? prim.thingIDNumber : 0);
+            return h;
+        }
 
         static GearStatOffsetCacheInit()
         {
@@ -55,7 +89,7 @@ namespace GearStatOffsetCache
                 harmony.Patch(method,
                     prefix: new HarmonyMethod(typeof(GearStatOffsetCacheInit), "Prefix"),
                     postfix: new HarmonyMethod(typeof(GearStatOffsetCacheInit), "Postfix"));
-                Log.Message("[HSKFix] GearStatOffsetCache: cached StatPart_GearStatOffset offset (TTL " + TTL + " ticks)");
+                Log.Message("[HSKFix] GearStatOffsetCache: cached StatPart_GearStatOffset offset (TTL " + TTL + " ticks, 诊断日志=变化触发 STALE/CHANGE)");
             }
             catch (Exception e)
             {
@@ -84,12 +118,13 @@ namespace GearStatOffsetCache
                     return true;
                 }
                 Entry e;
-                if (d.TryGetValue(part.parentStat, out e) && GenTicks.TicksGame - e.tick <= TTL)
+                if (d.TryGetValue(part.parentStat, out e) && GenTicks.TicksGame - e.tick <= TTL &&
+                    ApparelFingerprint(pawn) == e.fp)
                 {
                     val += e.offset;
                     return false;
                 }
-                return true;
+                return true;                                     // 装备指纹变了 → 当 tick 重算
             }
             catch
             {
@@ -118,7 +153,12 @@ namespace GearStatOffsetCache
                     d = new Dictionary<StatDef, Entry>();
                     cache[pawn] = d;
                 }
-                d[part.parentStat] = new Entry { offset = offset, tick = GenTicks.TicksGame };
+                d[part.parentStat] = new Entry
+                {
+                    offset = offset,
+                    tick = GenTicks.TicksGame,
+                    fp = ApparelFingerprint(pawn)
+                };
                 int now = GenTicks.TicksGame;
                 if (now - lastCleanupTick > CleanupInterval)
                 {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Royalty</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+		<operations>
+		
+		<li Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[
+			defName="Kiiro_PackJump" or 
+			defName="Kiiro_LowShieldPack" or 
+			defName="Kiiro_ArcShieldBelt"
+			]/statBases</xpath>
+			<value>
+				<Bulk>2.5</Bulk>
+				<WornBulk>1.2</WornBulk>
+			</value>
+		</li>
+		
+		<li Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="Kiiro_ArcShieldBelt"]/statBases/EnergyShieldEnergyMax</xpath>
+			<value>
+				<EnergyShieldEnergyMax>0.9</EnergyShieldEnergyMax>
+			</value>
+		</li>
+		</operations>
+		</match>
+	</Operation>
+</Patch>

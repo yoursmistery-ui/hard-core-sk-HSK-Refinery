@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_BishopScepter -->
+<!--  仪式杖 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_BishopScepter"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_BishopScepter"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Shaft</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>15</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_BishopScepter</defName>
+        <statBases>
+            <Bulk>3</Bulk>
+            <SightsEfficiency>2.18</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.9</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MilianParticleBeamGun</defaultProjectile>
+            <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+            <warmupTime>1.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>56</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>5</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>MiliraCE_AmmoSet_MilianParticleBeamGun</ammoSet>
+            <reloadOneAtATime>true</reloadOneAtATime>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- Milian_PivotScepter -->
+<!--引航权杖-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_PivotScepter"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_PivotScepter"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Shaft</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>15</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_PivotScepter</defName>
+        <statBases>
+            <Bulk>3</Bulk>
+            <SightsEfficiency>2.18</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.9</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MiliraPivotScepter</defaultProjectile>
+            <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+            <warmupTime>1.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>56</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>5</muzzleFlashScale>
+        </Properties>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+
+    <!-- Milian_ParticleLongRangeSniper -->
+<!--=长程集束粒子狙击枪=-->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLongRangeSniper"]/weaponTags</xpath>
+        <value>
+            <li>NoSwitch</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLongRangeSniper"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleLongRangeSniper</defName>
+        <statBases>
+            <Bulk>15</Bulk>
+            <SightsEfficiency>2.7</SightsEfficiency>
+            <ShotSpread>0.0315</ShotSpread>
+            <SwayFactor>1.7</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <onlyManualCast>false</onlyManualCast>
+            <defaultProjectile>Bullet_MilianParticleLongRangeSniper</defaultProjectile>
+            <ai_IsBuildingDestroyer>false</ai_IsBuildingDestroyer>
+            <warmupTime>4.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>80</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>52</ticksBetweenBurstShots>
+            <requireLineOfSight>true</requireLineOfSight>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <noiseRadius>2</noiseRadius>
+            <muzzleFlashScale>5</muzzleFlashScale>
+            <aimingTargetMote>Milira_Mote_ParticleSniperTargeting</aimingTargetMote>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MilianParticleHeavy_ParticleLongRangeSniper</ammoSet>
+            <chargedAmmoSet>AmmoSet_MilianParticleHeavy_ParticleLongRangeSniperCharged</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLongRangeSniper"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLongRangeSniper"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+
+</Patch>

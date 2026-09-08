@@ -90,6 +90,8 @@ namespace MeleeSwing
         // Patch_Verb_MeleeAttack_ApplyMeleeDamageToTarget.PatchAll 一致 —— 这样无论原版
         // (Verb_MeleeAttackDamage / Verb_MeleeApplyHediff)、CE(Verb_MeleeAttackCE)、鼠族
         // (Verb_ChainSword / Verb_GunlanceFiring / Verb_MeleeExplosion), 攻击命中必然迸剑气。
+
+
         private static int PatchSlashOnAllMeleeSubclasses(Harmony harmony)
         {
             int count = 0;

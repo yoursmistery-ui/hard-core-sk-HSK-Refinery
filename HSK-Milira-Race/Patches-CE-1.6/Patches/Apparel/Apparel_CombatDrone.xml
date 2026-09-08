@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milira_CombatDroneBase -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@Name="Milira_CombatDroneBase"]/statBases</xpath>
+        <value>
+            <Bulk>0.5</Bulk>
+            <WornBulk>0.2</WornBulk>
+        </value>
+    </Operation>
+
+    <!-- TODO: Should these be modified to utilize ammo system? But these are uncontrollable turrets? -->
+    <!-- TODO: Should Milira_CombatDrone_MiniGun use AmmoSet 7.62x51mm? -->
+
+    <!-- Milira_CombatDrone_EMPLauncher 浮游炮：脉冲榴弹-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_EMPLauncher"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_EMPLauncher</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>1.68</SwayFactor>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraCombatDroneGrenade_EMP</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>45</range>
+            <soundCast>Mortar_LaunchA</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <minRange>2.5</minRange>
+            <defaultCooldownTime>24</defaultCooldownTime>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>1440</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_IncendiaryGrenadeLauncher 脉冲榴弹发射器-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_IncendiaryGrenadeLauncher"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_IncendiaryGrenadeLauncher</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>1.68</SwayFactor>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraCombatDroneGrenade_Incendiary</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>45</range>
+            <soundCast>Mortar_LaunchA</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <minRange>2.5</minRange>
+            <defaultCooldownTime>24</defaultCooldownTime>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>1440</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_StunImpulseLauncher 浮游炮：燃烧榴弹-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_StunImpulseLauncher"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_StunImpulseLauncher</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>1.68</SwayFactor>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraCombatDroneGrenade_StunImpulse</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>45</range>
+            <soundCast>Milira_Shot_StunImpulse</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <minRange>2.5</minRange>
+            <defaultCooldownTime>60</defaultCooldownTime>
+            <burstShotCount>3</burstShotCount>
+            <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_ParticleImpactBlaster 凝滞脉冲-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_ParticleImpactBlaster"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_ParticleImpactBlaster</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.02</ShotSpread>
+            <SwayFactor>1.68</SwayFactor>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MilianParticleBeamBlaster</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>30</range>
+            <soundCast>Shot_ChargeBlaster</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <minRange>2.5</minRange>
+            <defaultCooldownTime>5</defaultCooldownTime>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>300</ticksBetweenBurstShots>
+            <ai_AvoidFriendlyFireRadius>4</ai_AvoidFriendlyFireRadius>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_ScatterParticleBlaster 散射粒子-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_ScatterParticleBlaster"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_ScatterParticleBlaster</defName>
+        <statBases>
+            <SwayFactor>1.26</SwayFactor>
+            <ShotSpread>0.05</ShotSpread>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MilianParticleBeamGun_Scattered</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>10</range>
+            <soundCast>Shot_ChargeBlaster</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <defaultCooldownTime>15</defaultCooldownTime>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>900</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_LongRangeParticleBlaster 浮游炮：长程粒子-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_LongRangeParticleBlaster"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_LongRangeParticleBlaster</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.09</ShotSpread>
+            <SwayFactor>1.45</SwayFactor>
+            <Bulk>4</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraParticleRifle</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>48</range>
+            <soundCast>Shot_ChargeBlaster</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <defaultCooldownTime>6.5</defaultCooldownTime>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>390</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_EnergyBubble 防护泡-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_EnergyBubble"]/statBases</xpath>
+        <value>
+            <Bulk>1</Bulk>
+            <WornBulk>0.4</WornBulk>
+        </value>
+    </Operation>
+
+    <!-- Milira_CombatDrone_QuadrupleRocketLauncher 四联装火箭-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_QuadrupleRocketLauncher"]/statBases</xpath>
+        <value>
+            <Bulk>6</Bulk>
+            <WornBulk>3</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_QuadrupleRocketLauncher</defName>
+        <statBases>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>1.61</SwayFactor>
+            <Bulk>3</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_MiliraCombatDroneRocket</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>48</range>
+            <soundCast>Milira_Shot_Rocket</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>4</muzzleFlashScale>
+            <minRange>4.5</minRange>
+            <defaultCooldownTime>45</defaultCooldownTime>
+            <linkedBodyPartsGroup>Torso</linkedBodyPartsGroup>
+            <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+            <burstShotCount>4</burstShotCount>
+            <ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+            <ai_RangedAlawaysShootGroundBelowTarget>true</ai_RangedAlawaysShootGroundBelowTarget>
+            <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_MiniGun 近防机枪-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_MiniGun"]/statBases</xpath>
+        <value>
+            <Bulk>6</Bulk>
+            <WornBulk>3</WornBulk>
+        </value>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>MiliraTurret_CombatDrone_MiniGun</defName>
+        <statBases>
+            <SwayFactor>2.36</SwayFactor>
+            <ShotSpread>0.07</ShotSpread>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <Bulk>2</Bulk>
+        </statBases>
+        <Properties>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <defaultProjectile>Bullet_762x51mmNATO_FMJ</defaultProjectile>
+            <requireLineOfSight>true</requireLineOfSight>
+            <range>42</range>
+            <soundCast>Shot_Minigun</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>3</muzzleFlashScale>
+            <defaultCooldownTime>12</defaultCooldownTime>
+            <burstShotCount>24</burstShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        </Properties>
+    </Operation>
+
+    <!-- Milira_CombatDrone_MechControlUnit -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_CombatDrone_MechControlUnit"]/statBases</xpath>
+        <value>
+            <Bulk>6</Bulk>
+            <WornBulk>3</WornBulk>
+        </value>
+    </Operation>
+
+</Patch>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  16_前期金属风格统一.xml (2026-09-03)
+  目的: 把非铁前期金属(铜/锡/铅/青铜)统一成"铸铁锭"风格 —— 一个时代一个风格。
+  做法: 仅重指向 graphicData.texPath 到铸铁锭文件夹 Things/Item/CastIronIngot,
+        各自保留原版 color(游戏按 color 乘染, 效果=铸铁锭轮廓染成本金属色)。
+  铁族(熟铁/生铁/铁坯)与铸铁本身不动。
+  Graphic_StackCount 规则: texPath 视作文件夹, 加载其内 IngotCastIron_A/B/C 三张按堆叠档染色。
+  位次: 本 mod 文件名序 16_ 晚于 06_(LeadBar→Ingot)/10_(Tin/Copper→Ingot), 覆盖它们;
+        HSK修复整合加载序后于 Vile(Bronze→BronzeIngot), 天然覆盖。
+  目标 def 恒存在(Core_SK/Vile), 直接 PatchOperationReplace, 无需门控。
+-->
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="CopperBar"]/graphicData/texPath</xpath>
+    <value><texPath>Things/Item/CastIronIngot</texPath></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TinBar"]/graphicData/texPath</xpath>
+    <value><texPath>Things/Item/CastIronIngot</texPath></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="LeadBar"]/graphicData/texPath</xpath>
+    <value><texPath>Things/Item/CastIronIngot</texPath></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Bronze"]/graphicData/texPath</xpath>
+    <value><texPath>Things/Item/CastIronIngot</texPath></value>
+  </Operation>
+</Patch>

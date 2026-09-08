@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+<!-- HSK 本地适配(原 mod: Medieval Overhaul: Small Planting, 作者 GA-YUKI):
+     thingClass 由 MedievalOverhaul.Building_PlanterBox 改为原版 Building_PlantGrower;
+     DankPyon 研究/作物/sowTag/地面类型 替换为本环境等价物;
+     种植箱研究 = 农业I(SewageSludgeComposting), 爬藤架研究 = 农业II(Cultivation_C1);
+     材料: 移除 DankPyon_RawWood, 保留 金属/木材/石材; 造价沿用原作。 -->
+
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>GYK_Post1x2c</defName>
+		<label>post(1x2)</label>
+		<description>A support post to let climbing plants grow effectively.</description>
+		<thingClass>Building_PlantGrower</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Post1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,3)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>170</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-3</Cleanliness>
+			<Mass>6</Mass>
+		</statBases>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<size>(2,1)</size>
+		<passability>PassThroughOnly</passability>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>12</costStuffCount>
+		<fertility>0.8</fertility>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<designationCategory>Production</designationCategory>
+		<researchPrerequisites>
+			<li>Cultivation_C1</li>
+		</researchPrerequisites>
+		<techLevel>Medieval</techLevel>
+		<building>
+            <defaultPlantToGrow>Plant_Hops</defaultPlantToGrow>
+            <sowTag>Ground</sowTag>
+            <buildingTags>
+                <li>Production</li>
+            </buildingTags>
+        </building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<uiIconPath>Things/Building/Post1x2_south</uiIconPath>
+	</ThingDef>
+
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>GYK_Post1x1c</defName>
+		<label>post(1x1)</label>
+		<description>A support post to let climbing plants grow effectively.</description>
+		<thingClass>Building_PlantGrower</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Post1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>35</MaxHitPoints>
+			<WorkToBuild>130</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-2</Cleanliness>
+			<Mass>4.5</Mass>
+		</statBases>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<size>(1,1)</size>
+		<passability>PassThroughOnly</passability>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>9</costStuffCount>
+		<fertility>0.8</fertility>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<designationCategory>Production</designationCategory>
+		<researchPrerequisites>
+			<li>Cultivation_C1</li>
+		</researchPrerequisites>
+		<techLevel>Medieval</techLevel>
+		<building>
+            <defaultPlantToGrow>Plant_Hops</defaultPlantToGrow>
+            <sowTag>Ground</sowTag>
+            <buildingTags>
+                <li>Production</li>
+            </buildingTags>
+        </building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<uiIconPath>Things/Building/Post1x1_south</uiIconPath>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>GYK_GardeningBox1x2c</defName>
+		<label>gardening box(1x2)</label>
+		<description>A box filled with dirt to grow plants.</description>
+		<thingClass>Building_PlantGrower</thingClass>
+		<techLevel>Medieval</techLevel>
+		<graphicData>
+			<texPath>Things/Building/GardeningBox1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,2)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>48</MaxHitPoints>
+			<WorkToBuild>180</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-3</Cleanliness>
+			<Mass>6</Mass>
+		</statBases>
+		<altitudeLayer>LowPlant</altitudeLayer>
+		<size>(1,2)</size>
+		<passability>PassThroughOnly</passability>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>42</costStuffCount>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<fertility>0.8</fertility>
+		<designationCategory>Production</designationCategory>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<researchPrerequisites>
+			<li>SewageSludgeComposting</li>
+		</researchPrerequisites>
+		<building>
+			<defaultPlantToGrow>Plant_Rice</defaultPlantToGrow>
+			<sowTag>Ground</sowTag>
+			<paintable>false</paintable>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<uiIconPath>Things/Building/GardeningBox1x2_east</uiIconPath>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>GYK_GardeningBox1x1c</defName>
+		<label>gardening box(1x1)</label>
+		<description>A box filled with dirt to grow plants.</description>
+		<thingClass>Building_PlantGrower</thingClass>
+		<techLevel>Medieval</techLevel>
+		<graphicData>
+			<texPath>Things/Building/GardeningBox1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>32</MaxHitPoints>
+			<WorkToBuild>90</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-2</Cleanliness>
+			<Mass>4</Mass>
+		</statBases>
+		<altitudeLayer>LowPlant</altitudeLayer>
+		<size>(1,1)</size>
+		<passability>PassThroughOnly</passability>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>28</costStuffCount>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<fertility>0.8</fertility>
+		<designationCategory>Production</designationCategory>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<researchPrerequisites>
+			<li>SewageSludgeComposting</li>
+		</researchPrerequisites>
+		<building>
+			<defaultPlantToGrow>Plant_Rice</defaultPlantToGrow>
+			<sowTag>Ground</sowTag>
+			<paintable>false</paintable>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<uiIconPath>Things/Building/GardeningBox1x1_east</uiIconPath>
+	</ThingDef>
+
+</Defs>

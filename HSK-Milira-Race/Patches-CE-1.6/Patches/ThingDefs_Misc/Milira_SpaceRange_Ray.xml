@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milira_RayPistol 射线手枪-->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayPistol"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                        <li>Poke</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_RayPistol</defName>
+        <statBases>
+            <Bulk>1.4</Bulk>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraRayPistol</defaultProjectile>
+            <warmupTime>1.8</warmupTime>
+            <range>10</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_RayRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>8</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>15</magazineSize>
+            <reloadTime>4</reloadTime>
+            <ammoSet>AmmoSet_MiliraRayPistol</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraRayPistol</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milira_RayPistol"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_RayPistol"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayPistol"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive"]/verbProps</xpath>
+        <value>
+            <verbProps Class="CombatExtended.VerbPropertiesCE">
+                <label>charged mode</label>
+                <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+                <isPrimary>true</isPrimary>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_MiliraRayPistol</defaultProjectile>
+                <warmupTime>0.6</warmupTime>
+                <range>10</range>
+                <burstShotCount>3</burstShotCount>
+                <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+                <soundCast>Milira_Shot_RayRifle</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>8</muzzleFlashScale>
+            </verbProps>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayPistol"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraRayPistol</projectileCharged>
+        </value>
+    </Operation>
+
+    <!-- Milira_RayRifle射线步枪 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayRifle"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                        <li>Poke</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_RayRifle</defName>
+        <statBases>
+            <Bulk>9.2</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraRayRifle</defaultProjectile>
+            <warmupTime>2.8</warmupTime>
+            <range>57</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_RayRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>8</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>40</magazineSize>
+            <reloadTime>3.2</reloadTime>
+            <ammoSet>AmmoSet_MiliraRayRifle</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraRayRifle</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milira_RayRifle"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_RayRifle"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayRifle"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive"]/verbProps</xpath>
+        <value>
+            <verbProps Class="CombatExtended.VerbPropertiesCE">
+                <label>charged mode</label>
+                <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+                <isPrimary>true</isPrimary>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_MiliraRayRifle</defaultProjectile>
+                <warmupTime>2.2</warmupTime>
+                <range>57</range>
+                <burstShotCount>10</burstShotCount>
+                <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+                <soundCast>Milira_Shot_RayRifle</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>8</muzzleFlashScale>
+            </verbProps>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_RayRifle"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraRayRifle</projectileCharged>
+        </value>
+    </Operation>
+
+    <!-- Milira_ConvergentRaySniper聚能射线狙击枪 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                        <li>Poke</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_ConvergentRaySniper</defName>
+        <statBases>
+            <Bulk>8.4</Bulk>
+            <SightsEfficiency>1.8</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargableMultiple_FullCharge</verbClass>
+            <isPrimary>true</isPrimary>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraConvergentRaySniper</defaultProjectile>
+            <warmupTime>2.5</warmupTime>
+            <range>68</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>44</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_RayRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>6</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MiliraConvergentRaySniper</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraConvergentRaySniper</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>AimedShot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShootMultiple_FullCharge"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/verbs/li[verbClass="MiliraCE.Verb_ShootCEChargableMultiple_FullCharge"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.VerbPropertiesCE_Ancot</value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive"]/verbProps</xpath>
+        <value>
+            <verbProps Class="MiliraCE.VerbPropertiesCE_Ancot">
+                <label>charged mode</label>
+                <verbClass>MiliraCE.Verb_ShootCEChargableMultiple_FullCharge</verbClass>
+                <isPrimary>true</isPrimary>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_MiliraConvergentRaySniper</defaultProjectile>
+                <warmupTime>2.5</warmupTime>
+                <range>72</range>
+                <fullChargeShot>true</fullChargeShot>
+                <burstShotCount>1</burstShotCount>
+                <ticksBetweenBurstShots>44</ticksBetweenBurstShots>
+                <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>8</muzzleFlashScale>
+                <aimingTargetMote>Milira_Mote_RaySniperTargeting</aimingTargetMote>
+            </verbProps>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_ConvergentRaySniper"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraConvergentRaySniper</projectileCharged>
+        </value>
+    </Operation>
+
+    <!-- Milira_LaserMG脉冲激光机枪 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_LaserMG"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>stock</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                        <li>Poke</li>
+                    </capacities>
+                    <power>6</power>
+                    <cooldownTime>1.7</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milira_LaserMG</defName>
+        <statBases>
+            <Bulk>19.2</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.01</ShotSpread>
+            <SwayFactor>0.1</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraLaserMG</defaultProjectile>
+            <warmupTime>2.5</warmupTime>
+            <range>65</range>
+            <burstShotCount>32767</burstShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <disableWhenChargeEmpty>true</disableWhenChargeEmpty>
+            <soundCast>Milira_Shot_RayRifle</soundCast>
+            <soundCastTail>GunTail_Medium</soundCastTail>
+            <muzzleFlashScale>9</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>240</magazineSize>
+            <reloadTime>12</reloadTime>
+            <ammoSet>AmmoSet_MiliraLaserMG</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraLaserMG</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <noSingleShot>true</noSingleShot>
+            <aimedBurstShotCount>32767</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milira_LaserMG"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShootSustained"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_LaserMG"]/verbs/li[verbClass="MiliraCE.Verb_ShootCEChargable"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.VerbPropertiesCE_Ancot</value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milira_LaserMG"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+</Patch>

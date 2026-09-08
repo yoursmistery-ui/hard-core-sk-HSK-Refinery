@@ -93,6 +93,15 @@
 		</value>
 	</Operation>
 
+	<!-- 2026-09-03: 终态发现 Alien_Miho 的 tools 为「继承的原版 li + 本补丁 ToolCE」混合(11 li/3 ToolCE),
+	     导致 CE RaceUtil 仍选中本族注入第二份 CompPawnGizmo(与 BasePawn 继承的那份重复)。清理无 Class 的原版 li。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/tools/li[not(@Class)]</xpath>
+		<match Class="PatchOperationRemove">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/tools/li[not(@Class)]</xpath>
+		</match>
+	</Operation>
+
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/damageMultipliers</xpath>
 		<value>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_LaborAssist</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <questDescriptionAndNameRules>
+      <rulesStrings>
+        <li>questName->Laborers</li>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionAndNameRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <!-- Generate laborers -->
+        <li Class="QuestNode_LoopCount">          <!--循环执行-->
+          <loopCount>$laborersCount</loopCount>
+          <node Class="QuestNode_GeneratePawn">
+            <kindDef>$laborersPawnKind</kindDef>
+            <faction>$permitFaction</faction>
+            <addToList>laborers</addToList>
+            <allowAddictions>false</allowAddictions>
+            <biocodeWeaponChance>0</biocodeWeaponChance>
+            <biocodeApparelChance>0</biocodeApparelChance>
+            <allowPregnant>false</allowPregnant>
+          </node>
+        </li>
+
+        <!-- 禁用工作-->
+        <li Class="QuestNode_WorkDisabled">
+          <pawns>$laborers</pawns>
+          <disabledWorkTags>
+            <li>Violent</li>
+          </disabledWorkTags>
+        </li>
+
+        <!-- Give on duty thought -->
+        <li Class="QuestNode_AddMemoryThought">
+          <pawns>$laborers</pawns>
+          <def>Kiiro_OnDuty</def>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetWalkInSpot" />
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_ExtraFaction">
+          <faction>Kiiro_Faction</faction>
+          <pawns>$laborers</pawns>
+          <factionType>HomeFaction</factionType>
+          <inSignalsRemovePawn>
+            <li>laborers.RanWild</li>
+            <li>laborers.BecameMutant</li>
+          </inSignalsRemovePawn>
+        </li>
+        <li Class="QuestNode_JoinPlayer">
+          <pawns>$laborers</pawns>
+          <joinPlayer>True</joinPlayer>
+          <makePrisoners>False</makePrisoners>
+        </li>
+        <li Class="QuestNode_LeaveOnCleanup">
+          <pawns>$laborers</pawns>
+          <sendStandardLetter>false</sendStandardLetter>
+          <inSignalRemovePawn>laborers.RanWild</inSignalRemovePawn>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>delayTicks</name>
+          <value>$(roundToTicksRough(randInt(120000,150000)))</value>
+        </li>
+        <li Class="QuestNode_Delay">
+          <delayTicks>$delayTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <!-- 边缘进入，这个可用/但是这个方法会弹人员到达信封 -->
+              <li Class="QuestNode_PawnsArrive">
+                <pawns>$laborers</pawns>
+                <arrivalMode>EdgeWalkIn</arrivalMode>
+              </li>
+              <!-- Lock their apparel -->
+              <li Class="QuestNode_SetAllApparelLocked">
+                <pawns>$laborers</pawns>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>laborersArrived</outSignals>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ExtraInspectStringAddOn">
+          <pawns>$laborers</pawns>
+          <extraInspectString>Completing work assistance in {0}.</extraInspectString>          <!--于{0}后完成工作协助。-->
+          <delayTicks>$($laborersDurationDays * 60000+$delayTicks)</delayTicks>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>stayTicks</name>
+          <value>$($laborersDurationDays * 60000+$delayTicks)</value>
+        </li>
+        <li Class="QuestNode_Delay">
+          <delayTicks>$($stayTicks-60000)</delayTicks>
+          <node Class="QuestNode_Letter">
+            <label TKey="LetterLabelHelpersLeaving">one day left: work assist</label>
+            <text TKey="LetterTextHelpersLeaving">The required work assist is only one day left.</text>
+            <lookTargets>$laborers</lookTargets>
+            <filterDeadPawnsFromLookTargets>true</filterDeadPawnsFromLookTargets>
+          </node>
+        </li>
+        <!-- laborers leave after their duration expires. Only if stayTicks >= 0 -->
+        <li Class="QuestNode_GreaterOrEqual">
+          <value1>$stayTicks</value1>
+          <value2>0</value2>
+          <node Class="QuestNode_Delay">
+            <delayTicks>$stayTicks</delayTicks>
+            <node Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_AnyPawnAlive">
+                  <pawns>$laborers</pawns>
+                  <node Class="QuestNode_Letter">
+                    <label TKey="LetterLabelHelpersLeaving">work assist completed</label>
+                    <text TKey="LetterTextHelpersLeaving">The kiiros from [kiiro_settlement_label] completed work assist just now, and now leaving.</text>
+                    <lookTargets>$laborers</lookTargets>
+                    <filterDeadPawnsFromLookTargets>true</filterDeadPawnsFromLookTargets>
+                  </node>
+                </li>
+                <li Class="QuestNode_Leave">
+                  <pawns>$laborers</pawns>
+                  <sendStandardLetter>false</sendStandardLetter>
+                  <inSignalRemovePawn>laborers.RanWild</inSignalRemovePawn>
+                </li>
+                <li Class="QuestNode_SendSignals">
+                  <outSignals>laborerLeft</outSignals>
+                </li>
+              </nodes>
+            </node>
+          </node>
+        </li>
+
+        <li Class="QuestNode_End">
+          <inSignal>laborerLeft</inSignal>
+          <outcome>Success</outcome>
+        </li>
+
+        <!-- Goodwill penalty for laborer killed -->
+        <li Class="QuestNode_Set">
+          <name>goodwillPenaltyPawn</name>
+          <value>-24</value>
+        </li>
+
+        <!-- Laborer killed: Goodwill impact. Don't end quest. 保留-->
+        <li Class="QuestNode_Signal">
+          <inSignal>laborers.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelLaborerDied">worker died: {SUBJECT_definite}</label>
+                <text TKey="LetterTextLaborerDied">A worker sent to you by [permitFaction_name] has died. Your goodwill with [permitFaction_name] has fallen by [goodwillPenaltyPawn].</text>
+              </li>
+              <li Class="Kiiro_Event.QuestNode_FactionGoodwillAffect">
+                <faction>Kiiro_Faction</faction>
+                <goodwill>$goodwillPenaltyPawn</goodwill>
+                <historyEvent>Kiiro_LaborKilled</historyEvent>
+              </li>
+              <li Class="QuestNode_ChangeFactionGoodwill">
+                <faction>$permitFaction</faction>
+                <change>$goodwillPenalty</change>
+                <reason>QuestPawnLost</reason>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- - - - - - - -  -->
+        <!--      End       -->
+        <!-- - - - - - - -  -->
+
+
+
+        <!-- End if the permit's faction becomes hostile -->
+        <li Class="QuestNode_Signal">
+          <inSignal>permitFaction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <letterDef>NegativeEvent</letterDef>
+                <label TKey="LetterLabelQuestExpired">kiiro work assist suspended</label>
+                <text TKey="LetterTextQuestExpired">due to we are now hostile to kiiro, the required kiiro work assist was forced to suspend.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

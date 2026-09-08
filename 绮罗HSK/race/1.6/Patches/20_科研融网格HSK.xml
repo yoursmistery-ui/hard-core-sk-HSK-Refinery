@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 绮罗 科研融入 HSK 主网格: 每节点补 requiredResearchBuilding(按档)+SK.AdvancedResearchExtension 硬门槛+ResearchTreeSKModExtension; 坐标落空行 Y>=90 全局唯一零撞车, X=10+依赖深度(前置严格左). 外部前置(Machining/MicroelectronicsBasics/OrbitalTech/ComplexFurniture)实测同/低于本节点档, 不越级. -->
+  <!-- Kiiro_Apparel_I : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_I"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_I"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_I"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_I"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_I"]/researchViewY</xpath>
+    <value><researchViewY>90</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Food : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Food"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Food"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Food"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Food"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Food"]/researchViewY</xpath>
+    <value><researchViewY>91</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Smithing : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Smithing"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Smithing"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Smithing"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Smithing"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Smithing"]/researchViewY</xpath>
+    <value><researchViewY>92</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_SchizonepetaPlanting : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_SchizonepetaPlanting"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_SchizonepetaPlanting"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_SchizonepetaPlanting"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_SchizonepetaPlanting"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_SchizonepetaPlanting"]/researchViewY</xpath>
+    <value><researchViewY>93</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_PaperMaking : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperMaking"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperMaking"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperMaking"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperMaking"]/researchViewX</xpath>
+    <value><researchViewX>10</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperMaking"]/researchViewY</xpath>
+    <value><researchViewY>94</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_II : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_II"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_II"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_II"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_II"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_II"]/researchViewY</xpath>
+    <value><researchViewY>95</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Process : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Process"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Process"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Process"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Process"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Process"]/researchViewY</xpath>
+    <value><researchViewY>96</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_BaseMedievalWeapon : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BaseMedievalWeapon"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_BaseMedievalWeapon"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BaseMedievalWeapon"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BaseMedievalWeapon"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BaseMedievalWeapon"]/researchViewY</xpath>
+    <value><researchViewY>97</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_NepetalactoneExtract : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_NepetalactoneExtract"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_NepetalactoneExtract"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_NepetalactoneExtract"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_NepetalactoneExtract"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_NepetalactoneExtract"]/researchViewY</xpath>
+    <value><researchViewY>98</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_MixedMedicineHerbal : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_MixedMedicineHerbal"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_MixedMedicineHerbal"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_MixedMedicineHerbal"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_MixedMedicineHerbal"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_MixedMedicineHerbal"]/researchViewY</xpath>
+    <value><researchViewY>99</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_PaperFolding : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperFolding"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperFolding"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperFolding"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperFolding"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PaperFolding"]/researchViewY</xpath>
+    <value><researchViewY>100</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_BookWriting : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BookWriting"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_BookWriting"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BookWriting"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BookWriting"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_BookWriting"]/researchViewY</xpath>
+    <value><researchViewY>101</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Machining : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Machining"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Machining"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Machining"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Machining"]/researchViewX</xpath>
+    <value><researchViewX>11</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Machining"]/researchViewY</xpath>
+    <value><researchViewY>102</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_III : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_III"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_III"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_III"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_III"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_III"]/researchViewY</xpath>
+    <value><researchViewY>103</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_Maid : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Maid"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Maid"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Maid"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Maid"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Maid"]/researchViewY</xpath>
+    <value><researchViewY>104</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_CosSuit : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_CosSuit"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_CosSuit"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_CosSuit"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_CosSuit"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_CosSuit"]/researchViewY</xpath>
+    <value><researchViewY>105</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_ImprovedMedievalWeapon : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ImprovedMedievalWeapon"]/researchViewY</xpath>
+    <value><researchViewY>106</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_ConcealedWeapon : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_ConcealedWeapon"]/researchViewY</xpath>
+    <value><researchViewY>107</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_EnvenomTech : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_EnvenomTech"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_EnvenomTech"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_EnvenomTech"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_EnvenomTech"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_EnvenomTech"]/researchViewY</xpath>
+    <value><researchViewY>108</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Amamech : Medieval -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]</xpath>
+      <value><requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Amamech"]/researchViewY</xpath>
+    <value><researchViewY>109</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Grenades : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Grenades"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Grenades"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Grenades"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Grenades"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Grenades"]/researchViewY</xpath>
+    <value><researchViewY>110</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_TRGun : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_TRGun"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_TRGun"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_TRGun"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_TRGun"]/researchViewX</xpath>
+    <value><researchViewX>12</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_TRGun"]/researchViewY</xpath>
+    <value><researchViewY>111</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_IV : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]/researchViewX</xpath>
+    <value><researchViewX>13</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_IV"]/researchViewY</xpath>
+    <value><researchViewY>112</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_PrototypeGun : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PrototypeGun"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_PrototypeGun"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PrototypeGun"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PrototypeGun"]/researchViewX</xpath>
+    <value><researchViewX>13</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_PrototypeGun"]/researchViewY</xpath>
+    <value><researchViewY>113</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_AutoLauncher : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_AutoLauncher"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_AutoLauncher"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_AutoLauncher"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_AutoLauncher"]/researchViewX</xpath>
+    <value><researchViewX>13</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_AutoLauncher"]/researchViewY</xpath>
+    <value><researchViewY>114</researchViewY></value>
+  </Operation>
+  <!-- Kiiro_Apparel_Vacsuit : Industrial -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Vacsuit"]/requiredResearchBuilding</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Vacsuit"]</xpath>
+      <value><requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Vacsuit"]</xpath>
+    <value>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Vacsuit"]/researchViewX</xpath>
+    <value><researchViewX>16</researchViewX></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Kiiro_Apparel_Vacsuit"]/researchViewY</xpath>
+    <value><researchViewY>115</researchViewY></value>
+  </Operation>
+</Patch>

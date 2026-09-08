@@ -1,14 +1,11 @@
-// 特性拓展modHSK —— 机制二: 行为计数挂号 (v2)
-// 拦截: Pawn_JobTracker.EndCurrentJob(前缀取结工任务) + Pawn.Kill(击杀计数)
-//       + MentalStateHandler.TryStartMentalState(精神崩溃计数, 唯一真正的"负向"独立计数器)
+// 特性拓展modHSK —— 路径A 行为沉淀: 行为计数挂号 (v5 重写)
+// 拦截: Pawn_JobTracker.EndCurrentJob(前缀取结工上下文) + Pawn.Kill(击杀计数)
+//       + MentalStateHandler.TryStartMentalState(精神崩溃计数)
 //
-// v2 变更(2026-08-27):
-//   1. ★修正"同源正负计数"结构性错误: 旧表把互斥的正负特性挂在同一个计数器上
-//      (例: 夜间劳作计数 → 达标给"夜猫子", 计数略低给"早起鸟"), 于是"熬夜越多越可能拿到早起鸟"。
-//      现在每个计数器只对应一条因果: 夜行/晨行、耐热/耐寒各自独立计数, 负面特性改由
-//      真正度量负面行为的计数器(精神崩溃 / 虐待伴侣动物)驱动。
-//   2. 只统计玩家可控殖民者, 其余直接 return(热路径减负, AGENTS.md §9)。
-//   3. 规则按 TriggerType 预分桶, 每次收工只遍历同类规则, 不再全表扫描; 复用 HashSet 缓冲避免逐次分配。
+// 热路径纪律(AGENTS.md §9):
+//   · 只统计玩家可控殖民者(Countable 早短路), 其余零开销返回;
+//   · 规则按 TriggerType 预分桶, 每次收工只遍历同类规则; 复用 HashSet 缓冲;
+//   · 达标才掷骰, 门控未开窗不消费计数(资格保留到窗口打开)。
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,7 +18,6 @@ namespace HSKTraitExt
 {
     public static class HSKBehaviorHook
     {
-        // TriggerType -> 规则桶(首次使用时懒建)
         private static Dictionary<string, List<HSKData.LifestyleRule>> buckets;
         private static readonly HashSet<string> typeBuffer = new HashSet<string>();
 
@@ -32,7 +28,7 @@ namespace HSKTraitExt
                 if (buckets == null)
                 {
                     buckets = new Dictionary<string, List<HSKData.LifestyleRule>>();
-                    foreach (var r in HSKData.LifestyleRules)
+                    foreach (HSKData.LifestyleRule r in HSKData.LifestyleRules)
                     {
                         List<HSKData.LifestyleRule> l;
                         if (!buckets.TryGetValue(r.TriggerType, out l)) { l = new List<HSKData.LifestyleRule>(); buckets[r.TriggerType] = l; }
@@ -64,7 +60,7 @@ namespace HSKTraitExt
         private static MethodInfo FindEndCurrentJob()
         {
             string[] names = { "Verse.Pawn_JobTracker", "Verse.AI.Pawn_JobTracker" };
-            foreach (var n in names)
+            foreach (string n in names)
             {
                 Type t = AccessTools.TypeByName(n);
                 if (t == null) continue;
@@ -74,8 +70,7 @@ namespace HSKTraitExt
             return null;
         }
 
-        // TryStartMentalState 存在多重载风险 → 显式按"返回 bool 且首参 MentalStateDef"挑主重载,
-        // 规避 [HarmonyPatch] 字符串式声明的 AmbiguousMatchException(连带整个 PatchAll 崩)。
+        // TryStartMentalState 多重载 → 显式按"返回 bool 且首参 MentalStateDef"挑主重载
         private static MethodInfo FindTryStartMentalState()
         {
             Type t = AccessTools.TypeByName("RimWorld.MentalStateHandler");
@@ -93,13 +88,13 @@ namespace HSKTraitExt
             return best;
         }
 
-        // 热路径闸门: 非玩家殖民者 / 机制二关闭 → 一律零开销返回
+        // 热路径闸门
         private static bool Countable(Pawn pawn)
         {
             if (pawn == null || !pawn.IsColonistPlayerControlled) return false;
             if (pawn.story == null || pawn.story.traits == null) return false;
-            if (HSKTraitMod.settings == null) return false;
-            if (!HSKTraitMod.settings.enableMechanismTwo) return false;
+            HSKTraitSetting s = HSKTraitMod.settings;
+            if (s == null || !s.enableGrowth || !s.enableBehavior) return false;
             return true;
         }
 
@@ -113,17 +108,18 @@ namespace HSKTraitExt
                 if (!Countable(pawn)) return;
                 Job job = GetFieldValue<Job>(__instance, "curJob");
                 if (job == null) return;
-                HSKPawnEntry e = HSKLedger.Game == null ? null : HSKLedger.Game.EntryFor(pawn);
+                HSKTraitLedger led = HSKLedger.Game;
+                if (led == null) return;
+                HSKPawnEntry e = led.EntryFor(pawn);
                 if (e == null) return;
                 JobDef jd = job.def;
-                e.pendingJobDef   = (jd != null) ? jd.defName : "";
-                e.pendingWorkType = "";
-                e.pendingJoyKind  = (jd != null && jd.joyKind != null) ? jd.joyKind.defName : "";
+                e.pendingJobDef = (jd != null) ? jd.defName : "";
+                e.pendingJoyKind = (jd != null && jd.joyKind != null) ? jd.joyKind.defName : "";
                 Thing t = job.GetTarget(TargetIndex.A).Thing;
                 e.pendingTargetDef = (t != null && t.def != null) ? t.def.defName : "";
                 e.pendingHour = GenLocalDate.HourInteger(pawn);
-                // Thing.AmbientTemperature = GenTemperature.GetTemperatureForCell(Position, Map), 收工时一次调用可接受
                 e.pendingRoomTemp = pawn.AmbientTemperature;
+                e.pendingMoodHigh = (pawn.needs != null && pawn.needs.mood != null && pawn.needs.mood.CurLevel > 0.85f);
                 e.pendingSuccess = true;
             }
             catch { }
@@ -136,19 +132,21 @@ namespace HSKTraitExt
                 if (__instance == null) return;
                 Pawn pawn = GetFieldValue<Pawn>(__instance, "pawn");
                 if (!Countable(pawn)) return;
-                HSKPawnEntry e = HSKLedger.Game == null ? null : HSKLedger.Game.EntryFor(pawn);
+                HSKTraitLedger led = HSKLedger.Game;
+                if (led == null) return;
+                HSKPawnEntry e = led.EntryFor(pawn);
                 if (e == null || !e.pendingSuccess) return;
 
                 Dispatch(pawn, e);
 
-                // 记录"真实摄入毒品"的时间(禁毒X年移除成瘾特性用): 仅 Ingest/Eat 摄入动作算,
-                // 搬运/加工等只是碰到毒品不算吸毒。
+                // 成瘾类"真实摄入"时刻(供禁毒/退场等未来逻辑用; v5 仅记录)
                 string jd = e.pendingJobDef ?? "";
                 if ((jd == "Ingest" || jd == "Eat") && !String.IsNullOrEmpty(DrugKey(e.pendingTargetDef ?? "")))
-                    e.lastDrugUseTick = Find.TickManager.TicksGame;
+                    e.lastIngestTick = Find.TickManager.TicksGame;
 
                 e.pendingSuccess = false;
-                e.pendingJobDef = e.pendingWorkType = e.pendingJoyKind = e.pendingTargetDef = null;
+                e.pendingJobDef = e.pendingJoyKind = e.pendingTargetDef = null;
+                e.pendingMoodHigh = false;
             }
             catch { }
         }
@@ -162,14 +160,15 @@ namespace HSKTraitExt
                 if (!dinfo.HasValue) return;
                 Pawn killer = dinfo.Value.Instigator as Pawn;
                 if (!Countable(killer)) return;
-                HSKPawnEntry e = HSKLedger.Game == null ? null : HSKLedger.Game.EntryFor(killer);
+                HSKTraitLedger led = HSKLedger.Game;
+                if (led == null) return;
+                HSKPawnEntry e = led.EntryFor(killer);
                 if (e == null) return;
-                IncrementAndMaybeGrant(killer, e, "击杀人类", "Kill");
+                IncrementAndMaybeGrant(killer, e, "嗜血", "Kill");
             }
             catch { }
         }
 
-        // 精神崩溃 = 真正的负向行为计数(压力崩溃维度), 供 VTE_WorldWeary 等负向特性使用
         private static void MentalBreakPostfix(object __instance, bool __result)
         {
             try
@@ -177,7 +176,9 @@ namespace HSKTraitExt
                 if (!__result) return;
                 Pawn pawn = GetFieldValue<Pawn>(__instance, "pawn");
                 if (!Countable(pawn)) return;
-                HSKPawnEntry e = HSKLedger.Game == null ? null : HSKLedger.Game.EntryFor(pawn);
+                HSKTraitLedger led = HSKLedger.Game;
+                if (led == null) return;
+                HSKPawnEntry e = led.EntryFor(pawn);
                 if (e == null) return;
                 IncrementAndMaybeGrant(pawn, e, "压力崩溃", "MentalBreak");
             }
@@ -189,12 +190,12 @@ namespace HSKTraitExt
         {
             string jd = e.pendingJobDef ?? "";
             string tg = e.pendingTargetDef ?? "";
-            IEnumerable<string> types = ActiveTypes(e, jd, tg);
-            foreach (string tt in types)
+            ActiveTypes(e, jd, tg);
+            foreach (string tt in typeBuffer)
             {
                 List<HSKData.LifestyleRule> rules;
                 if (!Buckets.TryGetValue(tt, out rules)) continue;
-                foreach (var r in rules)
+                foreach (HSKData.LifestyleRule r in rules)
                 {
                     if (!Match(e, r, tt, jd, tg)) continue;
                     IncrementAndMaybeGrant(pawn, e, r.Key, tt);
@@ -202,22 +203,22 @@ namespace HSKTraitExt
             }
         }
 
-        // 复用缓冲, 避免每次收工 new HashSet
-        private static HashSet<string> ActiveTypes(HSKPawnEntry e, string jd, string tg)
+        // 复用缓冲, 避免每次收工 new HashSet(调用方消费后由下一轮 Clear)
+        private static void ActiveTypes(HSKPawnEntry e, string jd, string tg)
         {
             typeBuffer.Clear();
             typeBuffer.Add("Job");
             typeBuffer.Add("WorkType");
             if (e.pendingJoyKind != null && e.pendingJoyKind.Length > 0) typeBuffer.Add("JoyKind");
             if (jd.IndexOf("Plant", StringComparison.OrdinalIgnoreCase) >= 0 || jd == "Harvest") typeBuffer.Add("Plant");
-            if (jd == "Eat" || jd == "Ingest") { typeBuffer.Add("Eat"); typeBuffer.Add("Drug"); }
+            if (jd == "Eat" || jd == "Ingest") typeBuffer.Add("Eat");
             if (jd == "ButcherCorpse") typeBuffer.Add("AbuseAnimal");
             int h = e.pendingHour;
             if (h < 6 || h >= 22) typeBuffer.Add("Night");
             else if (h >= 6 && h < 9) typeBuffer.Add("Dawn");
             if (e.pendingRoomTemp > HotTemp) typeBuffer.Add("TempHot");
             else if (e.pendingRoomTemp < ColdTemp) typeBuffer.Add("TempCold");
-            return typeBuffer;
+            if (e.pendingMoodHigh) typeBuffer.Add("MoodHigh");
         }
 
         private const float HotTemp = 35f;   // ℃, 高于此算"耐热作业"
@@ -236,23 +237,15 @@ namespace HSKTraitExt
                     if (r.TriggerTarget == "Art") return IsArtJob(jd);
                     return false;
                 case "JoyKind":
-                    return e.pendingJoyKind != "" && String.Equals(e.pendingJoyKind, r.TriggerTarget, StringComparison.OrdinalIgnoreCase);
-                case "Eat":
-                    return jd == "Eat" || jd == "Ingest";
-                case "Night":
-                    return e.pendingHour < 6 || e.pendingHour >= 22;
-                case "Dawn":
-                    return e.pendingHour >= 6 && e.pendingHour < 9;
-                case "TempHot":
-                    return e.pendingRoomTemp > HotTemp;
-                case "TempCold":
-                    return e.pendingRoomTemp < ColdTemp;
+                    return e.pendingJoyKind != null && e.pendingJoyKind != "" && String.Equals(e.pendingJoyKind, r.TriggerTarget, StringComparison.OrdinalIgnoreCase);
                 case "AbuseAnimal":
                     // 屠宰"可作伴侣的物种"(petness>0)算虐待动物; 普通家畜/猎物不计。
                     return IsCompanionSpecies(tg);
                 case "Drug":
                     if (jd != "Ingest" && jd != "Eat") return false;
                     return DrugKey(tg) == r.TriggerTarget;
+                case "Night": case "Dawn": case "TempHot": case "TempCold": case "MoodHigh":
+                    return true; // 计数已在 ActiveTypes 里按条件筛过
                 default:
                     return false;
             }
@@ -271,10 +264,8 @@ namespace HSKTraitExt
             if (String.IsNullOrEmpty(jd)) return false;
             switch (jd)
             {
-                case "BuildArtifact": case "Sculpt": case "CreateArt":
-                    return true;
-                default:
-                    return false;
+                case "BuildArtifact": case "Sculpt": case "CreateArt": return true;
+                default: return false;
             }
         }
 
@@ -284,33 +275,28 @@ namespace HSKTraitExt
             switch (jd)
             {
                 case "FinishFrame": case "Repair": case "FixBrokenDownBuilding":
-                case "FillIn": case "DeconstructForBlueprint": case "ConstructRoof":
-                    return true;
-                default:
-                    return false;
+                case "FillIn": case "DeconstructForBlueprint": case "ConstructRoof": return true;
+                default: return false;
             }
         }
 
         private static string DrugKey(string tdef)
         {
             // 只认"消遣类成瘾药物"(Social/Hard), 医用(Medical)与非毒品一律不计。
-            // 旧实现把一切非烟酒目标都归为 Other, 导致吃饭/干活都算"药物滥用", 已修复。
             if (String.IsNullOrEmpty(tdef)) return null;
             ThingDef def = DefDatabase<ThingDef>.GetNamedSilentFail(tdef);
             if (def == null || def.ingestible == null) return null;
             DrugCategory dc = def.ingestible.drugCategory;
             if (dc == DrugCategory.None || dc == DrugCategory.Medical) return null;
             string l = tdef.ToLowerInvariant();
-            if (l.Contains("smokeleaf")) return "Smokeleaf";   // 烟叶/大麻烟
+            if (l.Contains("smokeleaf")) return "Smokeleaf";
             if (l.Contains("beer") || l.Contains("wort") || l.Contains("wine") || l.Contains("alcohol")) return "Alcohol";
-            return "Other";                                     // Yayo/Flake/GoJuice/WakeUp/仙馔蜜露等 → 药物滥用
+            return "Other";
         }
 
-        // ---- 达标后按概率授予(取代"达标即100%获得") ----
-        // 每条规则达标(计数≥阈值)时消费本次资格并掷一次骰:
-        //   通过 → 授予; 失败 → 本次资格作废, 需重新积累到阈值才有下一次机会。
-        // v2: 阈值/概率已在 表/规则-生活习惯特性.csv 里整体抬高(负面特性再叠 neg* 系数),
-        //     这里另乘设置里的全局倍率; 门控未开窗时不消费计数, 等窗口打开再判定。
+        // ---- 达标后按概率授予 ----
+        // 达标(计数≥阈值)时消费本次资格并掷一次骰: 通过→授予; 失败→资格作废需重新积累。
+        // 门控未开窗时不消费计数。
         private static void IncrementAndMaybeGrant(Pawn pawn, HSKPawnEntry e, string key, string triggerType)
         {
             e.AddCount(key, 1);
@@ -319,83 +305,35 @@ namespace HSKTraitExt
             HSKTraitSetting s = HSKTraitMod.settings;
             float tscale = (s != null && s.thresholdScale > 0f) ? s.thresholdScale : 1f;
 
-            foreach (var r in rules)
+            foreach (HSKData.LifestyleRule r in rules)
             {
                 if (r.Key != key) continue;
                 int cnt = e.GetCount(key);
-
                 int posTh = (int)(r.PosThreshold * tscale);
-                float posCh = r.Chance;
-                // 三种毒品可分别定制阈值/概率(设置优先, 否则用规则表默认值)
-                if (IsDrugKey(key))
-                {
-                    int dth = DrugThresholdFor(key);
-                    if (dth > 0) posTh = (int)(dth * tscale);
-                    float dch = DrugChanceFor(key);
-                    if (dch > 0f) posCh = dch;
-                }
                 int negTh = (int)(r.NegThreshold * tscale);
+                float chance = r.Chance;
+                if (s != null) chance *= s.grantChanceScale;
 
                 if (posTh > 0 && r.PosTrait != "" && cnt >= posTh)
                 {
-                    if (!HSKTraits.CanAcquireNow(pawn, e, false)) return;  // 未开窗: 不消费计数
-                    e.AddCount(key, -posTh);                              // 开窗时无论成败都消费本次资格
-                    if (!RollChance(posCh, false)) return;
-                    HSKTraits.Grant(pawn, r.PosTrait, r.PosDegree, "生活习惯:" + key, false, key, -1, cnt);
+                    if (!HSKGrowth.CanAcquireNow(pawn, e, false)) return;   // 未开窗: 不消费计数
+                    e.AddCount(key, -posTh);                                // 开窗即消费本次资格
+                    if (chance < 1f && !Rand.Chance(chance)) return;
+                    HSKGrowth.GrantWithReason(pawn, r.PosTrait, r.PosDegree, r.Key, false, cnt);
                 }
                 else if (negTh > 0 && r.NegTrait != "" && cnt >= negTh)
                 {
-                    if (!HSKTraits.CanAcquireNow(pawn, e, true)) return;
+                    if (!HSKGrowth.CanAcquireNow(pawn, e, true)) return;
                     e.AddCount(key, -negTh);
-                    if (!RollChance(r.Chance, true)) return;
-                    HSKTraits.Grant(pawn, r.NegTrait, r.NegDegree, "生活习惯恶化:" + key, true, key, -1, cnt);
+                    if (chance < 1f && !Rand.Chance(chance)) return;
+                    HSKGrowth.GrantWithReason(pawn, r.NegTrait, r.NegDegree, r.Key, true, cnt);
                 }
             }
-        }
-
-        private static bool IsDrugKey(string key)
-        {
-            return key == "饮酒" || key == "吸烟" || key == "药物滥用";
-        }
-
-        private static int DrugThresholdFor(string key)
-        {
-            HSKTraitSetting s = HSKTraitMod.settings;
-            if (s == null) return 0;
-            if (key == "饮酒") return s.drugAlcoholThreshold;
-            if (key == "吸烟") return s.drugSmokeleafThreshold;
-            if (key == "药物滥用") return s.drugHardThreshold;
-            return 0;
-        }
-
-        private static float DrugChanceFor(string key)
-        {
-            HSKTraitSetting s = HSKTraitMod.settings;
-            if (s == null) return -1f;
-            if (key == "饮酒") return s.drugAlcoholChance;
-            if (key == "吸烟") return s.drugSmokeleafChance;
-            if (key == "药物滥用") return s.drugHardChance;
-            return -1f;
-        }
-
-        // 概率骰: 规则自带 Chance × 全局倍率; 负面特性再乘 negChanceScale(默认 0.4)
-        private static bool RollChance(float chance, bool negative)
-        {
-            HSKTraitSetting s = HSKTraitMod.settings;
-            float p = chance;
-            if (s != null)
-            {
-                p *= s.grantChanceScale;
-                if (negative) p *= s.negChanceScale;
-            }
-            if (p <= 0f) return false;
-            if (p >= 1f) return true;
-            return Rand.Chance(p);
         }
 
         private static T GetFieldValue<T>(object inst, string field)
         {
-            var f = inst.GetType().GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo f = inst.GetType().GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (f == null) return default(T);
             object v = f.GetValue(inst);
             return (v is T) ? (T)v : default(T);

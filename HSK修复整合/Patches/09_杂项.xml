@@ -740,6 +740,37 @@
     </match>
 </Operation>
 
+    <!-- RPG Inventory 美狐专用层并入已有槽(2026-09-04 用户要求「并入原有层级」):
+         2026-08-27 批量补槽时按「美狐特有的就不做」把 Miho_Under(内衣 11 件)/Miho_Special(特殊穿戴 8 件)留成无槽,
+         现用户指出美狐圣诞装等内衣不进装备栏。
+         不改衣服 <layers>: Miho_Under 被 14 个 PawnKinds_Miho 的 specificApparelRequirements(apparelLayer Miho_Under)
+         引用用于给美狐 NPC 生成内衣, 换层会掉装且改渲染优先级(drawOrder Miho_Under=-5 / Miho_Special=999)。
+         改为把 Miho 层「追加」进两个已有槽的 apparelLayers → 复用原有格, 不新开列、不改 19 件 def:
+           - Miho_Under  → ItemSlotLegsUnderwear(0,4 原版内衣列, 层 Underwear / 部位 Legs): 11 件内衣均含 Legs → 全收。
+             该列此前因无服饰匹配被 simplified 视图折叠, 现由美狐内衣激活(内衣归内衣列, 属"原有层级"非新列)。
+           - Miho_Special → ItemSlotEyeCover(6,0 护眼格, 层 EyeCover, 无 bodyPartGroups): 放大镜/眼镜/口罩等 8 件全收;
+             EyeCover 与 Overhead(帽子)是不同层, 美狐仍可帽子+眼镜同穿。列 6 本就可见 → 零宽度变化。
+         Operation 级 MayRequire 1.6 已失效, 沿用 xpath 存在性门控(目标槽不存在即整段跳过)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotLegsUnderwear']/apparelLayers</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotLegsUnderwear']/apparelLayers</xpath>
+        <value>
+            <li>Miho_Under</li>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotEyeCover']/apparelLayers</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotEyeCover']/apparelLayers</xpath>
+        <value>
+            <li>Miho_Special</li>
+        </value>
+    </match>
+</Operation>
+
 <Operation Class="PatchOperationConditional">
     <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotShouldersCEWebbing']/bodyPartGroups</xpath>
     <match Class="PatchOperationAdd">

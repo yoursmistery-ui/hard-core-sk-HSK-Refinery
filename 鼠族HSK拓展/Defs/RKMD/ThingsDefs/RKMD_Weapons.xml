@@ -1,66 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Defs>
 	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
-		<defName>RK_MeleeWeapon_Crowbar</defName>
-		<label>crowbar</label>
-		<description>A simple tool for prying and levering, the crowbar is a long metal bar with a curved end. It's useful for breaking things apart or lifting heavy objects.</description>
-		<techLevel>Industrial</techLevel>
-		<costStuffCount>50</costStuffCount>
-		<statBases>
-			<WorkToMake>2000</WorkToMake>
-			<Mass>1.5</Mass>
-			<Bulk>5</Bulk>
-		</statBases>
-		<soundInteract>Interact_Crowbar</soundInteract>
-		<meleeHitSound>MeleeHit_Crowbar</meleeHitSound>
-		<recipeMaker>
-			<researchPrerequisite>Smithing</researchPrerequisite>
-			<skillRequirements>
-				<Crafting>1</Crafting>
-			</skillRequirements>
-			<displayPriority>437</displayPriority>
-		</recipeMaker>
-		<stuffCategories>
-			<li>Metallic</li>
-		</stuffCategories>
-		<weaponTags>
-			<li>IndustrialMelee</li>
-			<li>Crowbar</li>
-		</weaponTags>
-		<tools>
-			<li Class="CombatExtended.ToolCE">
-				<label>head</label>
-				<capacities>
-					<li>Demolish</li>
-				</capacities>
-				<power>10</power>
-				<cooldownTime>1.5</cooldownTime>
-				<armorPenetrationBlunt>4</armorPenetrationBlunt>
-				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
-			</li>
-			<!-- <li>
-        <label>handle</label>
-        <capacities>
-          <li>Blunt</li>
-        </capacities>
-        <power>7</power>
-        <cooldownTime>1.5</cooldownTime>
-      </li> -->
-		</tools>
-		<equippedAngleOffset>-20</equippedAngleOffset>
-		<equippedStatOffsets>
-			<FixBrokenDownBuildingSuccessChance>0.15</FixBrokenDownBuildingSuccessChance>
-		</equippedStatOffsets>
-		<graphicData>
-			<texPath>Things/Weapon/RK_Crowbar</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-			<drawSize>0.8</drawSize>
-		</graphicData>
-		<tradeTags>
-			<li>MimiThings</li>
-		</tradeTags>
-	</ThingDef>
-	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
 		<defName>RK_ScrewDriver</defName>
 		<label>screw driver</label>
 		<description>A common tool found in modern cities, it can help you quickly disassemble troublesome objects; in extreme cases, it can also serve as a convenient weapon.</description>
@@ -72,7 +12,6 @@
 			<Bulk>2</Bulk>
 		</statBases>
 		<soundInteract>Interact_Crowbar</soundInteract>
-		<!-- <meleeHitSound>MeleeHit_Crowbar</meleeHitSound> -->
 		<recipeMaker>
 			<researchPrerequisite>Smithing</researchPrerequisite>
 			<skillRequirements>
@@ -302,25 +241,6 @@
 				<invertEast>false</invertEast>
 				<invertSouth>true</invertSouth>
 				<invertWest>false</invertWest>
-			</li>
-			<li Class="SYS.CompProperties_WeaponExtention">
-				<littleDown>false</littleDown>
-				<northOffset>
-					<position>(-0.08,-0.3,-0.1)</position>
-					<angle>-28</angle>
-				</northOffset>
-				<southOffset>
-					<position>(0.16,0.3,0.02)</position>
-					<angle>4</angle>
-				</southOffset>
-				<eastOffset>
-					<position>(0.15,0.3,0.17)</position>
-					<angle>-90</angle>
-				</eastOffset>
-				<westOffset>
-					<position>(-0.15,-0.3,0.17)</position>
-					<angle>90</angle>
-				</westOffset>
 			</li>
 			<li Class="RatkinGeneExpanded.CompProperties_IsHuntingWeapon"/>
 		</comps>

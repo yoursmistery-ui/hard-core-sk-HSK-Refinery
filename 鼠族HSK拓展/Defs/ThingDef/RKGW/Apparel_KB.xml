@@ -173,4 +173,65 @@
             <displayPriority>415</displayPriority>
         </recipeMaker>
     </ThingDef>
+
+	<!-- ===== 新增精选衣甲 2026-09-06 (反方·矢车菊) ===== -->
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_KB_OfficerUniform</defName>
+		<label>Kornblume Waffenrock</label>
+		<description>The uniform jacket worn by officers of the Kornblume Confederation, designed with strong practicality.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_KB_OfficerUniform/RK_KB_OfficerUniform</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>11000</WorkToMake><Mass>0.35</Mass><ArmorRating_Sharp>0.45</ArmorRating_Sharp><ArmorRating_Blunt>0.25</ArmorRating_Blunt><ArmorRating_Heat>0.41</ArmorRating_Heat><Flammability>0.4</Flammability><EquipDelay>2</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_KB</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><SocialImpact>0.2</SocialImpact><ShootingAccuracyPawn>0.05</ShootingAccuracyPawn></equippedStatOffsets>
+		<costStuffCount>75</costStuffCount><stuffCategories><li>Fabric</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li><li>Arms</li><li>Legs</li></bodyPartGroups>
+			<defaultOutfitTags><li>RK_Noble</li></defaultOutfitTags>
+			<wornGraphicPath>Things/Item/Apparel/RK_KB_OfficerUniform/RK_KB_OfficerUniform</wornGraphicPath>
+			<layers><li>OnSkin</li></layers><tags><li>RK_KB_Officer</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_KB_Sturmtruppen</defName>
+		<label>Kornblume Stormtrooper Uniform</label>
+		<description>Issued in the late war period when the Confederation military attempted to unify uniforms to enhance a sense of honor.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_KB_Sturmtruppen/RK_KB_Sturmtruppen</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>12000</WorkToMake><Mass>0.35</Mass><ArmorRating_Sharp>0.45</ArmorRating_Sharp><ArmorRating_Blunt>0.25</ArmorRating_Blunt><ArmorRating_Heat>0.41</ArmorRating_Heat><Flammability>0.4</Flammability><EquipDelay>2</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_KB</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><MeleeDodgeChance>0.1</MeleeDodgeChance><MoveSpeed>0.1</MoveSpeed><ShootingAccuracyPawn>0.05</ShootingAccuracyPawn></equippedStatOffsets>
+		<costStuffCount>75</costStuffCount><stuffCategories><li>Fabric</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li><li>Arms</li><li>Legs</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_KB_Sturmtruppen/RK_KB_Sturmtruppen</wornGraphicPath>
+			<layers><li>OnSkin</li></layers><tags><li>RK_KB_Soldier</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_KB_AssaultEquipment</defName>
+		<label>Kornblume Assault Equipment</label>
+		<description>Stormtroopers wore canvas bandoliers filled with bullets and grenades for fast assaults.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_KB_AssaultEquipment/RK_KB_AssaultEquipment</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>5000</WorkToMake><Mass>0.35</Mass><EquipDelay>1.5</EquipDelay></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_KB</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><VEF_MassCarryCapacity MayRequire="OskarPotocki.VanillaFactionsExpanded.Core">25</VEF_MassCarryCapacity><CarryingCapacity>25</CarryingCapacity><AimingDelayFactor>-0.3</AimingDelayFactor></equippedStatOffsets>
+		<costStuffCount>60</costStuffCount><stuffCategories><li>Fabric</li><li>Leathery</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_KB_AssaultEquipment/RK_KB_AssaultEquipment</wornGraphicPath>
+			<layers><li>Middle</li></layers><tags><li>RK_KB_Soldier</li></tags></apparel>
+	</ThingDef>
+	<ThingDef ParentName="RK_ApparelMakeableBase">
+		<defName>RK_KB_Generalsmantel</defName>
+		<label>Kornblume Generalsmantel</label>
+		<description>Beyond warmth, it served as a visible mark of a general's rank and prestige.</description>
+		<graphicData><texPath>Things/Item/Apparel/RK_KB_Generalsmantel/RK_KB_Generalsmantel</texPath><graphicClass>Graphic_Single</graphicClass><shaderType>CutoutComplex</shaderType></graphicData>
+		<statBases><MaxHitPoints>150</MaxHitPoints><WorkToMake>5000</WorkToMake><Mass>0.35</Mass><ArmorRating_Sharp>0.45</ArmorRating_Sharp><ArmorRating_Blunt>0.25</ArmorRating_Blunt><ArmorRating_Heat>0.41</ArmorRating_Heat><Flammability>0.4</Flammability><EquipDelay>2</EquipDelay><Insulation_Cold>3</Insulation_Cold></statBases>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker><researchPrerequisite>RK_KB</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements><displayPriority>415</displayPriority></recipeMaker>
+		<equippedStatOffsets><SocialImpact>0.3</SocialImpact></equippedStatOffsets>
+		<costStuffCount>75</costStuffCount><stuffCategories><li>Fabric</li></stuffCategories>
+		<apparel><bodyPartGroups><li>Torso</li><li>Neck</li><li>Shoulders</li><li>Arms</li><li>Legs</li></bodyPartGroups>
+			<wornGraphicPath>Things/Item/Apparel/RK_KB_Generalsmantel/RK_KB_Generalsmantel</wornGraphicPath>
+			<layers><li>Shell</li></layers><drawData><defaultData><layer>30</layer></defaultData></drawData>
+			<tags><li>RK_KB_Officer</li></tags></apparel>
+	</ThingDef>
+
 </Defs>

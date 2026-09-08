@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMiliraPlasmaRifle</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberPlasmaMedium</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaRifle</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaRifle</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaRifleCharged</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaRifleCharged</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaRifleCharged_Switched</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaRifleCharged_Switched</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaMG</defName>
+        <label>Milira Heavy Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaMG</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaMGCharged</defName>
+        <label>Milira Heavy Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaMGCharged</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPulseSniperRifle</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaPulseSniperRifle</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraPlasmaPulseSniperRifleCharged</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <ammoTypes>
+            <Ammo_MiliraPlasmaRifle>Bullet_MiliraPlasmaPulseSniperRifleCharged</Ammo_MiliraPlasmaRifle>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+<!--米莉拉标准型离子单元-->
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerSmallAmmoBase">
+        <defName>Ammo_MiliraPlasmaRifle</defName>
+        <label>Milira Rifle Ion Cell</label>
+        <description>Ion containment cell optimized for rifle-sized launchers used by Milira.</description>
+        <statBases>
+            <Mass>0.017</Mass>
+            <Bulk>0.01</Bulk>
+            <MarketValue>0.24</MarketValue>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMiliraPlasmaRifle</li>
+        </thingCategories>
+        <graphicData>
+            <texPath>Things/Ammo/PlasmaCell/Rifle</texPath>
+            <graphicClass>CombatExtended.Graphic_StackCountRanged</graphicClass>
+        </graphicData>
+        <ammoClass>Charged</ammoClass>
+    </ThingDef>
+
+    <!-- ================== Projectiles ================== -->
+<!--米莉拉标准型离子单元（离子步枪用未充能）-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaRifle</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>11</damageAmountBase>
+            <armorPenetrationSharp>20</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>1.2</stoppingPower>
+            <speed>125</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+    </ThingDef>
+<!--米莉拉标准型离子单元（离子步枪用充能后）-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaRifleCharged</defName>
+        <label>ion beam charged</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>18</damageAmountBase>
+            <armorPenetrationSharp>25</armorPenetrationSharp>
+            <armorPenetrationBlunt>47.2</armorPenetrationBlunt>
+            <stoppingPower>1.5</stoppingPower>
+            <speed>125</speed>
+            <explosionEffect>Milira_PlasmaChargeHit</explosionEffect>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_PlasmaCharged</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_Custom_Extension">
+                <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+            </li>
+        </modExtensions>
+    </ThingDef>
+<!--负载扩散离子束（离子步枪用）-->
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraPlasmaRifleCharged_Switched</defName>
+        <label>diffusion ion beam charged</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBomb</damageDef>
+            <explosionRadius>1</explosionRadius>
+            <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            <damageAmountBase>24</damageAmountBase>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>125</speed>
+            <explosionEffect>Milira_PlasmaChargeHit</explosionEffect>
+            <secondaryDamage>
+                <li>
+                    <def>Flame_Secondary</def>
+                    <amount>6</amount>
+                </li>
+            </secondaryDamage>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_PlasmaExplode</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_ExplosiveCustom_Extension">
+                <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+            </li>
+        </modExtensions>
+    </ThingDef>
+<!--离子急射机枪用未充能-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaMG</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>19</damageAmountBase>
+            <armorPenetrationSharp>15</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>0.4</stoppingPower>
+            <speed>85</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+    </ThingDef>
+<!--离子急射机枪用充能后-->
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaMGCharged</defName>
+        <label>ion beam charged</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>24</damageAmountBase>
+            <armorPenetrationSharp>25</armorPenetrationSharp>
+            <armorPenetrationBlunt>47.2</armorPenetrationBlunt>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>105</speed>
+            <explosionEffect>Milira_PlasmaChargeHit</explosionEffect>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_Custom_Extension">
+                <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaPulseSniperRifle</defName>
+        <label>ion beam</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>15</damageAmountBase>
+            <armorPenetrationSharp>20</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>1.2</stoppingPower>
+            <speed>225</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_Plasma</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MiliraPlasmaPulseSniperRifleCharged</defName>
+        <label>ion beam charged</label>
+        <thingClass>MiliraCE.BulletCE_AncotCustom</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_PlasmaBullet</damageDef>
+            <damageAmountBase>35</damageAmountBase>
+            <armorPenetrationSharp>80</armorPenetrationSharp>
+            <armorPenetrationBlunt>184</armorPenetrationBlunt>
+            <stoppingPower>1.5</stoppingPower>
+            <speed>300</speed>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_PlasmaCharged</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.6</drawSize>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_Custom_Extension">
+                <impactEffecter>Milira_PlasmaChargeHit</impactEffecter>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="MiliraCE_MiliraAmmoPlasmaStandardRecipeBase">
+        <defName>MakeAmmo_MiliraPlasmaRifle</defName>
+        <label>make Milira Rifle Ion Cells</label>
+        <description>Craft 500 shots' worth of Milira Rifle Ion Cells.</description>
+        <jobString>Making Milira Rifle Ion Cells.</jobString>
+        <workAmount>3800</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>18</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Steel</li>
+                <li>Plasteel</li>
+                <li>ComponentIndustrial</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MiliraPlasmaRifle>500</Ammo_MiliraPlasmaRifle>
+        </products>
+    </RecipeDef>
+
+</Defs>

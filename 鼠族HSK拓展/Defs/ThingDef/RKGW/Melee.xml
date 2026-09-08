@@ -14,7 +14,7 @@
             <li>RK_RCG_Lance</li>
         </weaponTags>
         <costList>
-            <WoodLog>50</WoodLog>
+            <WoodPlank>50</WoodPlank>
         </costList>
         <costStuffCount>30</costStuffCount>
         <stuffCategories>
@@ -57,25 +57,6 @@
             </skillRequirements>
         </recipeMaker>
         <comps>
-            <li Class="SYS.CompProperties_WeaponExtention">
-                <littleDown>True</littleDown>
-                <northOffset>
-                    <position>(0.2,0,0.25)</position>
-                    <angle>-45</angle>
-                </northOffset>
-                <southOffset>
-                    <position>(-0.25,0.3,0.2)</position>
-                    <angle>45</angle>
-                </southOffset>
-                <eastOffset>
-                    <position>(0.15,0.3,0.2)</position>
-                    <angle>-45</angle>
-                </eastOffset>
-                <westOffset>
-                    <position>(-0.15,-0.3,0.2)</position>
-                    <angle>45</angle>
-                </westOffset>
-            </li>
         </comps>
     </ThingDef>
     <ThingDef ParentName="RK_MeleeWeapon">
@@ -91,7 +72,7 @@
             <li>RK_RCG_Trench_EU</li>
         </weaponTags>
         <costList>
-            <WoodLog>60</WoodLog>
+            <WoodPlank>60</WoodPlank>
         </costList>
         <costStuffCount>70</costStuffCount>
         <stuffCategories>
@@ -133,24 +114,6 @@
             </skillRequirements>
         </recipeMaker>
         <comps>
-            <li Class="SYS.CompProperties_WeaponExtention">
-                <northOffset>
-                    <position>(0.3,0,0.1)</position>
-                    <angle>-90</angle>
-                </northOffset>
-                <eastOffset>
-                    <position>(0.3,0,-0.15)</position>
-                    <angle>-20</angle>
-                </eastOffset>
-                <southOffset>
-                    <position>(-0.3,0.3,0)</position>
-                    <angle>90</angle>
-                </southOffset>
-                <westOffset>
-                    <position>(-0.3,-0.3,-0.15)</position>
-                    <angle>20</angle>
-                </westOffset>
-            </li>
         </comps>
     </ThingDef>
     <ThingDef ParentName="RK_MeleeWeapon">
@@ -166,7 +129,7 @@
             <li>RK_RCG_Saber</li>
         </weaponTags>
         <costList>
-            <WoodLog>50</WoodLog>
+            <WoodPlank>50</WoodPlank>
         </costList>
         <costStuffCount>50</costStuffCount>
         <stuffCategories>
@@ -209,25 +172,39 @@
             </skillRequirements>
         </recipeMaker>
         <comps>
-            <li Class="SYS.CompProperties_WeaponExtention">
-                <littleDown>True</littleDown>
-                <northOffset>
-                    <position>(0.2,0,0.25)</position>
-                    <angle>-45</angle>
-                </northOffset>
-                <southOffset>
-                    <position>(-0.25,0.3,0.2)</position>
-                    <angle>45</angle>
-                </southOffset>
-                <eastOffset>
-                    <position>(0.15,0.3,0.2)</position>
-                    <angle>-45</angle>
-                </eastOffset>
-                <westOffset>
-                    <position>(-0.15,-0.3,0.2)</position>
-                    <angle>45</angle>
-                </westOffset>
-            </li>
         </comps>
     </ThingDef>
+
+	<!-- ===== 新增精选近战 2026-09-06 ===== -->
+	<ThingDef ParentName="RK_MeleeWeapon">
+		<defName>RK_Truncheon</defName>
+		<label>Truncheon</label>
+		<description>A lead-headed truncheon with extended striking reach.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponMelee/RK_Truncheon</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags Inherit="false"><li>RK_RCG_Trench_WR</li></weaponTags>
+		<costList><WoodPlank>80</WoodPlank></costList>
+		<costStuffCount>10</costStuffCount>
+		<stuffCategories><li>Metallic</li></stuffCategories>
+		<statBases><WorkToMake>4000</WorkToMake><Mass>1.8</Mass><Bulk>3</Bulk></statBases>
+		<equippedAngleOffset>20</equippedAngleOffset>
+		<tools><li Class="CombatExtended.ToolCE"><label>truncheon</label><capacities><li>Blunt</li></capacities><power>18</power><cooldownTime>2.5</cooldownTime><armorPenetrationBlunt>12</armorPenetrationBlunt><linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup></li></tools>
+		<recipeMaker><researchPrerequisite>Smithing</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements></recipeMaker>
+	</ThingDef>
+	<ThingDef ParentName="RK_MeleeWeapon">
+		<defName>RK_Grabenkeule</defName>
+		<label>Grabenkeule</label>
+		<description>A versatile weapon used for night raids or close-quarters fighting.</description>
+		<graphicData><texPath>Things/Item/Equipment/WeaponMelee/RK_Grabenkeule</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+		<techLevel>Medieval</techLevel>
+		<weaponTags Inherit="false"><li>RK_RCG_Trench_KB</li></weaponTags>
+		<costList><WoodPlank>40</WoodPlank></costList>
+		<costStuffCount>30</costStuffCount>
+		<stuffCategories><li>Metallic</li></stuffCategories>
+		<statBases><WorkToMake>5000</WorkToMake><Mass>1.4</Mass><Bulk>3</Bulk></statBases>
+		<equippedAngleOffset>20</equippedAngleOffset>
+		<tools><li Class="CombatExtended.ToolCE"><label>hammer</label><capacities><li>Blunt</li></capacities><power>16</power><cooldownTime>2</cooldownTime><armorPenetrationBlunt>11</armorPenetrationBlunt><linkedBodyPartsGroup>Head</linkedBodyPartsGroup></li></tools>
+		<recipeMaker><researchPrerequisite>Smithing</researchPrerequisite><skillRequirements><Crafting>4</Crafting></skillRequirements></recipeMaker>
+	</ThingDef>
+
 </Defs>

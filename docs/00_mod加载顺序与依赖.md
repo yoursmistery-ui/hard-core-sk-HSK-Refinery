@@ -65,6 +65,7 @@
 | 鼠族HSK拓展 | local.ratkin.clothesweapons | Harmony, Core SK, Solaris.RatkinRaceMod | 依赖项 + ModIndicator;loadBefore 金鼠族/家具/徽章 | — | 种族 mod 段 |
 | 美狐HSK拓展 | (见其 About) | Core SK | — | — | 种族 mod 段 |
 | 金鼠族 HSK版本 | (见其 About) | — | — | — | 种族 mod 段;loadAfter 鼠族HSK拓展? |
+| 绮罗HSK(7→1) | Ancot.KiiroRace | — | — | — | 七件合并为一,见 06_种族整合/绮罗Kiiro_HSK整合方案.md |
 | 工作动画HSK | meathax.ShowMeYourTools(沿用工坊原ID) | Harmony, Core SK | 依赖项 + 动画兼容组(详见 About) | — | 2026-08-30 由酒馆拆出(JobEffects),见详录 §7.14;补丁只操作自有节点,跨 mod 引用=字符串无边 |
 | 酒馆工具整合HSK | local.hsktavernintegration | Harmony, VEF, Core SK | 依赖项 + local.ratkin.furniture + ModIndicator | — | Simple Doors+Tavern;工作动画已拆出(详录 §7.14) |
 | HSK修复整合 | local.hskfixpack | Harmony, Core SK | 依赖项 + ModIndicator(**2026-08-27 已删 aitranslation.pack 反向项**) | **特性拓展/酒馆/帝国银币 + EndMod 组** | 修复整合压尾;汉化包在其后;loadBefore 被其覆盖的 mod |

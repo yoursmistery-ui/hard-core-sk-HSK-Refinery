@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_HarvestDay</defName>
+    <rootSelectionWeight>1</rootSelectionWeight>
+    <autoAccept>false</autoAccept>
+    <expireDaysRange>0.8~2</expireDaysRange>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->harvest day</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The autumn wind sweeps across the fields, and the Kiiro of [kiiro_settlement_label] have welcomed this year's harvest. They have sent a team carrying grain to you, wishing to share the joy of the harvest together.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">
+          <modSettingSwitch>HarvestDay</modSettingSwitch>
+        </li>
+
+        <!--判定季节触发-->
+        <li Class="Kiiro_Event.QuestNode_IsRightSeason">
+          <seasons>
+            <li>Fall</li>
+          </seasons>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_HarvestDay</tag>
+          <faction>$faction</faction>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_Root_KiiroHarvestDay">
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

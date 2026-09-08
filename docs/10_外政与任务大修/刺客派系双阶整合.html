@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>刺客派系·两阶(跨两族·两派系) · 规划设计</title><style>
+:root{--bg:#f6f7f9;--fg:#1f2328;--muted:#57606a;--card:#fff;--line:#d0d7de;--accent:#2f6feb;--warn:#bf6a02;--code:#eff2f5;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;line-height:1.7;font-size:15.5px}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+header.top{border-bottom:2px solid var(--accent);padding-bottom:12px;margin-bottom:8px}
+header.top h1{font-size:24px;margin:0}
+.badge{display:inline-block;font-size:12px;color:#fff;background:var(--accent);border-radius:4px;padding:2px 8px;margin-top:6px}
+article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:28px 34px;margin-top:18px}
+h1{font-size:23px;margin:.2em 0 .6em}
+h2{font-size:19px;margin:1.6em 0 .6em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+h3{font-size:16px;margin:1.3em 0 .5em}
+p{margin:.6em 0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+blockquote{margin:1em 0;padding:.6em 1em;background:#fff8e6;border-left:4px solid var(--warn);color:#5c4400;border-radius:0 6px 6px 0}
+blockquote p{margin:.2em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef1f5;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-family:"SFMono-Regular",Consolas,"Cascadia Code",monospace;font-size:13px}
+ul,ol{padding-left:1.5em}
+li{margin:.25em 0}
+hr{border:0;border-top:1px solid var(--line);margin:1.6em 0}
+strong{color:#0a0d12}
+pre{background:#0d1117;color:#e6edf3;padding:14px 16px;border-radius:8px;overflow-x:auto}
+pre code{background:transparent;color:inherit;padding:0;font-size:13px}
+.foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:26px}
+</style>
+<style id="qw-mobile-enhance">
+.mnav{display:flex;gap:6px;overflow-x:auto;padding:8px 2px;position:sticky;top:0;background:#fff;z-index:9;-webkit-overflow-scrolling:touch}
+.mnav a{flex:0 0 auto;font-size:13px;padding:6px 11px;border-radius:999px;background:#eef1f6;color:#2f6df0;text-decoration:none;white-space:nowrap}
+.mnav a:active{background:#dde4f7}
+@media (max-width:640px){
+  body{padding:10px;font-size:15px}
+  h1{font-size:19px;line-height:1.35}
+  h2{font-size:17px}
+  h3{font-size:15px}
+  table{font-size:13px;display:block;overflow-x:auto}
+  th,td{padding:5px 7px}
+  pre,code{font-size:12.5px;word-break:break-all}
+  img{max-width:100%;height:auto}
+}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><h1>刺客派系·两阶(跨两族·两派系) · 规划设计</h1><nav class="mnav"><a href="#0">0. 分族定档：库林=中世纪、美狐=高科技（评估后定）</a><a href="#1">1. 两隐藏"暗杀队"（改自各族敌对那一支，友好那一支原职不动）</a><a href="#2">2. 接触 / 外交（隐藏服务派系）</a><a href="#3">3. 刺杀委托 / 悬赏（复用现有钩子，非新建）</a><a href="#4-defs">4. 改造清单（动 defs 前你过目；改后跑校验）</a><a href="#5">5. 待你拍板</a></nav><span class="badge">设计先行 · 待过目后动 defs</span></header>
+<article><h1 id="_1">刺客派系·两阶（跨两族·两派系方案）· 设计与融合规划</h1>
+<blockquote>
+<p>立档 2026-09-02（<strong>取代</strong>旧「刺客双联盟」加派系思路）。<strong>09-02 二次改判</strong>：用户要<strong>两个独立派系</strong>（一 Medieval 一高科技），跨两族分派，<strong>不再合并成单派系</strong>。承接 <a href="./外政与任务大修重构_架构设计方案.html"><code>外政与任务大修重构_架构设计方案.md</code></a>、<a href="./外政数据结构与挂钩点附录.html"><code>外政数据结构与挂钩点附录.md</code></a>、<a href="./天网Skynet_boss整合.html"><code>天网Skynet_boss整合.md</code></a>、<a href="./派系战争x政治边界联动.html"><code>派系战争x政治边界联动.md</code></a>、<a href="./任务与悬赏体系优化.html"><code>任务与悬赏体系优化.md</code></a>。
+性质：<strong>设计先行·待过目后动 defs</strong>。<strong>做减法不做加法</strong>：两阶各<strong>复用现有 FactionDef 改角色</strong>（不 spawn 新 FactionDef、不复制本体内容进别处）。faction 级 <code>techLevel</code> 两族均 <code>Spacer</code>（种族决定，勿乱改触发科技档告警），"中世纪/高科技"靠<strong>限定生成的 pawnKind 组 + 发的委托档 + 装备</strong>体现，非 faction 档。</p>
+</blockquote>
+<h2 id="0">0. 分族定档：库林=中世纪、美狐=高科技（评估后定）</h2>
+<p>候选=美狐 Miho vs 魅狐(=库林战狐 Kurin，其汉化全用"魅狐×"前缀)；绮罗不存在。技术适配度四维：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>库林 Kurin</th>
+<th>美狐 Miho</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两派系"可融合性"</td>
+<td><code>Kurin_Faction</code>(共和国/<code>naturalEnemy=false</code>/President) + <code>Kurin_Faction_Hostile</code>(战狐/<code>naturalEnemy=true</code>/Warlord) <strong>共用同一 <code>xenotypeSet</code>/文化/backstory 且 <code>pawnGroupMakers</code> 几乎逐条相同</strong>（Ninja/Slasher/Sniper/Elite/Savage/Vigilante）→ 只是外交立场不同，合并近乎内容零改</td>
+<td><code>Miho_Faction_Megacorp</code>+<code>Miho_Faction_Supremacist</code> 两派各自 18/17 引用、结构分叉更多</td>
+<td><strong>库林</strong>：同族异构，减法成本低</td>
+</tr>
+<tr>
+<td>退役改指面</td>
+<td><code>Kurin_Faction_Hostile</code> 仅 <strong>4 文件</strong>引用（见 §4 清单）</td>
+<td>每派 ~17–18 文件</td>
+<td><strong>库林</strong>：悬空风险小</td>
+</tr>
+<tr>
+<td>刺客身份</td>
+<td>原生 <code>Kurin_Ninja</code>+<code>Kurin_Shadowfox_Armor/Helmet</code>+<code>Kurin_Sniper/EliteSniper</code>+<code>Kurin_Slasher/EliteSlasher</code>+<code>KurinTailBlade</code>(中世纪刃)</td>
+<td><code>Miho_ApparelAssassin</code>+<code>Miho_Soldier_AssassinRanged</code>/<code>LowAssassin</code></td>
+<td>平手，库林"影狐/忍者/狙击"更成体系</td>
+</tr>
+<tr>
+<td>双阶科技梯</td>
+<td>Medieval→Spacer 齐：中世纪支=Savage/Initiate/Slasher/Tailblade 近战；高级支=EliteSniper/EliteTrooper/<code>Kurin_Mechtech</code>/<code>Mechanitor</code></td>
+<td>中世纪=Ebony silk+Tachi；高级=<code>Miho_MechHack</code>/<code>Persona</code> <strong>真·骇入能力</strong></td>
+<td><strong>张力点，见下</strong></td>
+</tr>
+</tbody>
+</table>
+<p>⚠ <strong>两阶分给两族（用户改判"要两个派系"）</strong>：真·电子骇入（<code>Miho_Ability_HackingKill/Slow</code>、<code>Miho_MechHack</code>/<code>Persona</code>、灵能机械素弹）只有美狐有 → <strong>高科技刺客=美狐</strong>，用激进支 <code>Miho_Faction_Supremacist</code>(<code>naturalEnemy=true</code>) 改档，<strong><code>Miho_Faction_Megacorp</code> 保留商队/盟友不碰</strong>；库林忍者/影狐/尾刃 <code>KurinTailBlade</code>/武士刀这套近战潜行最正 → <strong>中世纪刺客=库林</strong>，用 <code>Kurin_Faction</code> 改档。∴ 各取所长：库林(中世纪) + 美狐(高科技)。</p>
+<h2 id="1">1. 两隐藏"暗杀队"（改自各族<strong>敌对那一支</strong>，友好那一支原职不动）</h2>
+<ul>
+<li><strong>中世纪暗杀队</strong> = <code>Kurin_Faction_Hostile</code> → <code>hidden=true</code> + <code>hiddenBase</code>；label/desc 刺客化；只留近战潜行兵种（<code>Kurin_Savage/Initiate/Slasher/Ninja</code> + <code>KurinTailBlade</code>），走 Medieval 档。</li>
+<li><strong>高科技暗杀队</strong> = <code>Miho_Faction_Supremacist</code> → <code>hidden=true</code> + <code>hiddenBase</code>；留骇入/狙击/Persona 兵种（<code>Miho_Soldier_AssassinRanged/LowAssassin</code> + <code>Miho_MechHack</code>），走 Spacer 档。</li>
+<li><strong>保留不动</strong>：<code>Kurin_Faction</code>（共和国/族色发单方）、<code>Miho_Faction_Megacorp</code>（商队诸侯）——隐藏化友好支会掏空种族身份、断族色发单入口。</li>
+<li><strong>每队只两功能</strong>：① 商队（<code>hiddenBase</code> 派 <code>caravanTraderKinds</code>/可访问交易；⚠ hidden 无据点则原版不派商队，故必给 <code>hiddenBase</code>）② 暗杀 &amp; 接委托（作 QuestGiver 发暗杀单 + 接玩家发的通缉/暗杀单，走现公告牌/<code>Warrant</code>）。<strong>不驻外扩张、不进 BOTR 领土/战争、不进外交大列表</strong>。</li>
+<li>结算规则（权威见 <a href="./任务与悬赏体系优化.html"><code>任务与悬赏体系优化.md</code></a> §二/§五）：<strong>暗杀成功→加好感、失败→不扣好感；悬赏金额由系统按公式定，玩家不手填</strong>。</li>
+</ul>
+<h2 id="2">2. 接触 / 外交（隐藏服务派系）</h2>
+<ul>
+<li>不主动出现在外交/派系列表；接触只经 ①其商队到访 ②暗杀委托单（ChoiceLetter/公告牌）③找到 <code>hiddenBase</code>。<code>naturalEnemy</code>/<code>permanentEnemy=false</code>。</li>
+<li>敌我/态度进 <code>edgepolitics</code> <code>loadID→关系</code> 态（附录 §0/§1）；对玩家默认中立、可委托。⚠ 容器未建 → 登记留设计（承 §5）。</li>
+</ul>
+<h2 id="3">3. 刺杀委托 / 悬赏（复用现有钩子，非新建）</h2>
+<ul>
+<li><strong><code>Kurin_Faction</code>（友好共和国，保留）已是族色任务发布者</strong>：<code>任务大修HSK/1.6/Defs/QuestDefs/HSK_族色任务发布者.xml</code> 已引用 <code>Kurin_Faction</code> → 该发单入口不动；<code>Kurin_Faction_Hostile</code> 改成隐藏暗杀队不影响它（该文件只引 <code>Kurin_Faction</code>）。</li>
+<li>玩家接单（刺杀某 pawn/派系目标）走悬赏公告牌：目标过 <code>BountyRules.TechGapOk</code>（修会 Spacer/中世纪支 Medieval → 玩家档±1 才见对应单）。<code>Warrant</code> 上游类不能加字段 → 契约 <code>branch/tier/阵营线</code> 用 <code>loadID→值</code> 持久化（仿 <code>bountyProgress</code>）。</li>
+<li>被发单：ChoiceLetter 委托单（接单/拒），酬=银币+<code>freeStanding</code>+库林特产，好感走原版 <code>TryAffectGoodwillWith</code>。</li>
+</ul>
+<h2 id="4-defs">4. 改造清单（动 defs 前你过目；改后跑校验）</h2>
+<blockquote>
+<p><strong>09-02 改判</strong>：<code>Kurin_Faction_Hostile</code>、<code>Miho_Faction_Supremacist</code> 各<strong>改造成隐藏暗杀队</strong>（<strong>不删、不退役</strong>，故无悬空引用面）；友好 <code>Kurin_Faction</code>、<code>Miho_Faction_Megacorp</code> 原职不动。</p>
+<p><strong>实装状态（09-02）</strong>：派系壳层已改并双目录同步（哈希一致，待游戏核验）——两支 def 各加 <code>hidden=true</code>、<code>naturalEnemy=false</code>、<code>canSiege/canStageAttacks=false</code>（<code>Faction_MihoPirate.xml</code> 的 Supremacist、<code>Factions_Kurin.xml</code> 的 Hostile）；中文 <code>DefInjected</code> label/desc/leaderTitle 改（魅狐影刃会 / 美狐机枢会）。<strong>未做</strong>：商队到访（现靠隐藏据点被访问交易；主动到访商队需 P1 事件）、暗杀/委托任务源与好感/金额规则（属 P3 悬赏体系）。友好 <code>Kurin_Faction</code>/<code>Miho_Faction_Megacorp</code> 未改。</p>
+</blockquote>
+<p>对每个暗杀队 def（<code>库林战狐HSK拓展/1.6/Defs/Factions_Kurin.xml</code> 的 Hostile / <code>美狐HSK拓展/1.6/Defs/FactionDefs/Faction_MihoPirate.xml</code> 的 Supremacist）：
+1. 加 <code>hidden=true</code> + 配 <code>hiddenBase</code>（据点用于派商队 / 被访问交易；⚠ 无据点则原版不给隐藏派系派商队）。
+2. <code>label</code>/<code>description</code>/<code>leaderTitle</code> 改刺客公会语义。
+3. <code>naturalEnemy=false</code>、<code>permanentEnemy=false</code>；关 <code>canSiege</code>/<code>canStageAttacks</code>（不袭击、不进 BOTR 战争）。<strong>保留</strong> <code>settlementGenerationWeight</code>（&gt;0）+<code>requiredCountAtGameStart</code>，让隐藏据点能被生成/发现以承载"商队"交易（归 0 就没得交易了）。
+4. <code>pawnGroupMakers</code> 只留本档兵种（库林=近战潜行忍者 / 美狐=骇入·狙击·Persona），移不符档的组。
+5. 汉化 <code>DefInjected/FactionDef</code>（中/英）对应 label/desc 改。<strong>不新增 FactionDef、不新增 packageId</strong>。</p>
+<p>铁律：改 def 不为旧存档兼容（AGENTS §1，直接开新档）；跨 mod 引用不加 loadAfter；每文件过 <code>ET.parse</code>；两 def <strong>原地改造、不删不退役</strong>（故无悬空引用）；改补丁过 <code>patch_simulator.py</code>；<strong>双目录同步</strong>（库林战狐HSK拓展 + 美狐HSK拓展 工作区↔Mods 逐文件，游戏关时）；冷启动留你排期。</p>
+<h2 id="5">5. 待你拍板</h2>
+<ol>
+<li>~~高级分支定位~~ <strong>已定</strong>：高科技=美狐（真骇入）、中世纪=库林。</li>
+<li>~~接触模型~~ <strong>已定</strong>：隐藏服务派系（<code>hidden=true</code>+<code>hiddenBase</code>，只做商队+暗杀/委托）。</li>
+<li><strong><code>edgepolitics</code> 骨架本轮建不建</strong>：暗杀队敌我进 <code>loadID→关系</code> 需容器 → 本轮顺带建 <code>local.hsk.edgepolitics</code> 骨架，还是登记留设计等外政 P1？</li>
+<li><strong>本轮实装范围</strong>：只做到"两 def 改隐藏暗杀队 + 兵种筛选 + 汉化"（可现身层），还是连<strong>暗杀/接委托任务源</strong>一起（走公告牌 + 成功加好感/失败不扣 + 金额系统定）？</li>
+</ol></article>
+<div class="foot">由 刺客派系双阶整合.md 生成 · 鼠族HSK · 外政与任务大修</div>
+</div></body></html>

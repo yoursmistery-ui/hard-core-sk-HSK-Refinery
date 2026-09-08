@@ -9,6 +9,10 @@
   添加条目 → 这些珠宝不在任何种族白名单内 → 只有"没有 raceRestriction 限制"的
   种族(智人种等)能穿; 鼠族/美狐等有独占白名单的种族默认穿不了(待后续按族开放)。
   新增两个 ApparelLayerDef(原版无项链/戒指层), drawOrder 沿用 MO。
+  分类(2026-09-07): 项链挂 Meow_Amulet(护符)、戒指挂 Meow_Ring(指环),
+  两个 ThingCategoryDef 定义在 鼠族HSK拓展 Defs/MeowFramework/Base_Jewelry.xml,
+  跨 mod defName 引用加载完成后统一解析, 无需排序边。原先只挂 Apparel 大类,
+  在仓储分类树里散在"服饰"根部无子分组。
 ============================================================================ -->
 
 	<ApparelLayerDef>
@@ -36,7 +40,7 @@
 		</statBases>
 		<useHitPoints>false</useHitPoints>
 		<thingCategories>
-			<li>Apparel</li>
+			<li>Meow_Amulet</li>
 		</thingCategories>
 		<tradeTags>
 			<li>Rustic_Jewelry</li>
@@ -69,6 +73,9 @@
 		<statBases>
 			<Mass>0.25</Mass>
 		</statBases>
+		<thingCategories Inherit="False">
+			<li>Meow_Ring</li>
+		</thingCategories>
 		<apparel>
 			<bodyPartGroups Inherit="False">
 				<li>MiddleFingers</li>

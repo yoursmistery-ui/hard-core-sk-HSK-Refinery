@@ -24,8 +24,12 @@
 // 抓调用栈只在异常路径(限流: 前 10 次全栈,之后每 100 次摘要一行)。
 //
 // 日志前缀 [RegistryLeakTracer];复现「配方找不到原料」后查该关键字即可。
+// ⚠️ 2026-09-04 修正: Map Preview 后台线程 Dispose 临时预览地图会触发
+//    地图级 Clear/Remove(清空时 0 件,正常清理) → 三个 prefix 统一加
+//    「目标须在 Find.Maps 中」门控,只盯真实游戏地图,消误报。
 // 编译: 并入 HSKFixPack.dll(系统 csc,C#5)。
 using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
 using Verse;
@@ -111,6 +115,11 @@ namespace RegistryLeakTracer
                 {
                     return;
                 }
+                // 预览/临时地图(Map Preview 等)的注销是正常清理,只盯真实游戏地图。
+                if (!IsRealGameMap(t.Map))
+                {
+                    return;
+                }
                 removeHits++;
                 if (removeLogged >= MaxFullStacks)
                 {
@@ -144,6 +153,11 @@ namespace RegistryLeakTracer
                 {
                     return;
                 }
+                // 预览/临时地图(Map Preview 等)的注销是正常清理,只盯真实游戏地图。
+                if (!IsRealGameMap(thing.Map))
+                {
+                    return;
+                }
                 sourceHits++;
                 if (sourceLogged >= MaxFullStacks)
                 {
@@ -173,6 +187,25 @@ namespace RegistryLeakTracer
                 {
                     return;
                 }
+                // 2026-09-04 修正: Map Preview mod 游玩中在后台线程生成预览地图,
+                // DisposeMap 会 Clear 临时地图自己的 lister(其 use 也是 Global),
+                // 属正常清理而非注册表丢失。1.6 的 ListerThings 不持有 map 引用,
+                // 故用引用比对: 仅当该实例是 Find.Maps 中某张真实地图的
+                // listerThings 时才报告(临时预览图不在其中)。
+                bool isRealMapLister = false;
+                List<Map> maps = Find.Maps;
+                for (int i = 0; i < maps.Count; i++)
+                {
+                    if (maps[i].listerThings == __instance)
+                    {
+                        isRealMapLister = true;
+                        break;
+                    }
+                }
+                if (!isRealMapLister)
+                {
+                    return;
+                }
                 if (Current.ProgramState != ProgramState.Playing)
                 {
                     return;
@@ -190,6 +223,26 @@ namespace RegistryLeakTracer
             {
                 Log.Warning("[RegistryLeakTracer] clear-trace failed: " + e.Message);
             }
+        }
+
+        // 2026-09-04 新增: Map Preview 会在后台线程生成临时预览地图再 Dispose,
+        // 其对临时地图(Global 级)的 Clear/Remove 是正常清理,不是注册表丢失。
+        // 仅当目标所在地图是 Find.Maps 中的真实游戏地图时才值得报警。
+        private static bool IsRealGameMap(Map map)
+        {
+            if (map == null)
+            {
+                return false;
+            }
+            List<Map> maps = Find.Maps;
+            for (int i = 0; i < maps.Count; i++)
+            {
+                if (maps[i] == map)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static string Describe(Thing thing)

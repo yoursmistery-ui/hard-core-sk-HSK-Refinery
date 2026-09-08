@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
   <!-- 全皮革等级中文名(2026-08-19 用户要求「所有皮革翻译名称带等级,一眼看出等级」;
-       由旧 Vile鞣制1.6适配/Languages 两文件整合迁移,HSK修复整合加载序 160,
-       早于 HSK 汉化(185/186),first-wins 生效。
+       由旧 Vile鞣制1.6适配/Languages 两文件整合迁移。生效依据(2026-09-08 反编译
+       TranslationDatabase.InjectIntoData_* 更正): DefInjected 跨 mod 为 **last-wins**
+       (按 mod 顺序遍历各 package 逐个 SetValue 覆盖), 本 mod 位次最晚(219 > hsk.core.chs 192 / hsk.mod.chs 193)故覆盖成功。
        等级体系: E < D < C < B < A,带 +/- 细分:
          低端 E / 剖层 D(D-)/ 头层 C(C-)/ 全粒面 B(B- B+)/ 高科技 A(A+)。
        本次修正:
@@ -61,6 +62,16 @@
   <Leather_FireDragonskin.label>超透气皮革（A+级）</Leather_FireDragonskin.label>
   <Leather_KirinHide.label>超耐热皮革（A+级）</Leather_KirinHide.label>
   <Leather_FeatheredRaptorLeather.label>超免疫皮革（A+级）</Leather_FeatheredRaptorLeather.label>
+  <!-- ============ 本工作区软料归级(2026-09-08 用户要求「名称后面要跟分级,和其他一致」) ============
+       分类落位写在各自 def 的 thingCategories: 丝绸→LeathersB、绒革→LeathersC、乌木丝绸→LeathersA。
+       生丝(RK_RawSilk)为非 stuff 的缫丝中间原料, 按 Vile 生皮(生普通皮革等)惯例不带等级, 归 CTextiles 原料区。
+       stuffAdjective 一律留短名(不带等级), 否则成品名会拼成「丝绸（B级）·衬衫」。 -->
+  <RK_Silk.label>丝绸（B级）</RK_Silk.label>
+  <RK_Silk.stuffProps.stuffAdjective>丝绸</RK_Silk.stuffProps.stuffAdjective>
+  <VDE_Gaubric.label>绒革（C级）</VDE_Gaubric.label>
+  <VDE_Gaubric.stuffProps.stuffAdjective>绒革</VDE_Gaubric.stuffProps.stuffAdjective>
+  <Miho_Ebony_SilkCloth.label>乌木丝绸（A+级）</Miho_Ebony_SilkCloth.label>
+  <Miho_Ebony_SilkCloth.stuffProps.stuffAdjective>乌木丝绸</Miho_Ebony_SilkCloth.stuffProps.stuffAdjective>
   <!-- ============ 替代金属的硬皮革 B+ 级(LeathersB,用户要求「用来替代金属的皮革通通划分到 B+ 级别」) ============ -->
   <!-- ============ 奥德赛/其他皮革描述(保留旧版等级与用途提示) ============ -->
   <Leather_AlphaThrumbo.description>等级3 - 工业时代
@@ -99,4 +110,8 @@ X 不建议 护甲、耐久
 X 不建议 护甲、耐久
 
 柔软奢华的海豹皮。它不算坚固，但隔温性能极佳，常用于制作床铺和装饰性衣物。</Leather_Sealskin.description>
+
+  <RK_Leather_KingHamster.label>仓鼠大王皮（B级）</RK_Leather_KingHamster.label>
+  
+  
 </LanguageData>

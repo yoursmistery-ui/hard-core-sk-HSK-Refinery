@@ -58,8 +58,6 @@ namespace QuestBoardHSK
                     silver.SplitOff(take).Destroy();
                     reward -= take;
                 }
-                IncidentParms parms = StorytellerUtility.DefaultParmsNow(SW_DefOf.FactionArrival, map);
-                parms.faction = hunter;
                 Thing deliver = warrant.thing;
                 if (dead)
                 {
@@ -69,14 +67,15 @@ namespace QuestBoardHSK
                 }
                 else
                 {
+                    // 十期:捆缚双腿一天(替代 SW 的 DamageLegsUntilIncapableOfMoving 永久致残+麻醉)
                     Pawn p = warrant.thing as Pawn;
-                    if (p != null)
-                    {
-                        HealthUtility.DamageLegsUntilIncapableOfMoving(p, false);
-                        HealthUtility.TryAnesthetize(p);
-                    }
+                    if (p != null && !p.Dead)
+                        ApplyDeliveredHediff(p);
                 }
-                if (Utils.PlayerHomeIsOrbital())
+                if (deliver == null)
+                    return;
+                // 十期:轨道据点或已通电通讯台 → 空投;否则送货队抵达边缘,弹 ABE 式询问
+                if (Utils.PlayerHomeIsOrbital() || BirdPostUtil.HasPoweredCommsConsole())
                 {
                     Map home = Find.AnyPlayerHomeMap;
                     DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(home), home,
@@ -86,7 +85,7 @@ namespace QuestBoardHSK
                 }
                 else
                 {
-                    ((IncidentWorker_Visitors)SW_DefOf.SW_Visitors.Worker).SpawnVisitors(deliver, parms);
+                    ShowDeliveryDialog(warrant);
                 }
             };
             pay.resolveTree = true;
@@ -120,6 +119,81 @@ namespace QuestBoardHSK
 
             Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(node, hunter, true, false, title));
             Find.Archive.Add(new ArchivedDialog(node.text, title, hunter));
+        }
+
+        // —— 十期:送货队交接(ABE 式询问:放行/打发走/稍后再来) ——
+
+        internal static void ApplyDeliveredHediff(Pawn p)
+        {
+            if (p == null || p.Dead || p.health == null)
+                return;
+            HediffDef bound = DefDatabase<HediffDef>.GetNamedSilentFail("RK_Bounty_Delivered");
+            if (bound == null)
+                return;
+            if (p.health.hediffSet.GetFirstHediffOfDef(bound) == null)
+                p.health.AddHediff(bound);
+        }
+
+        /// <summary>送货队已抵达地图边缘:放行(SW 访客队走进来)/打发走(货丢边缘)/稍后再来(6h 重弹)。</summary>
+        internal static void ShowDeliveryDialog(Warrant warrant)
+        {
+            if (warrant == null)
+                return;
+            Thing deliver = warrant.thing;
+            if (deliver is Pawn pp && pp.Dead)
+                deliver = pp.Corpse;
+            if (deliver == null || deliver.Destroyed)
+                return;
+            Faction hunter = warrant.accepteer;
+            if (hunter == null)
+            {
+                // 兜底:无派系信息时不询问,直接按放行处理
+                DeliverByVisitors(warrant, deliver);
+                return;
+            }
+            TaggedString title = "RK_Bounty.DeliveryTitle".Translate();
+            DiaNode node = new DiaNode("RK_Bounty.DeliveryText".Translate(
+                hunter.Name, deliver.LabelCap));
+
+            DiaOption enter = new DiaOption("ABE.Enter".Translate());
+            enter.action = delegate { DeliverByVisitors(warrant, deliver); };
+            enter.resolveTree = true;
+            node.options.Add(enter);
+
+            DiaOption sendAway = new DiaOption("ABE.SendAway".Translate());
+            sendAway.action = delegate { DeliverAtEdge(deliver); };
+            sendAway.resolveTree = true;
+            node.options.Add(sendAway);
+
+            DiaOption later = new DiaOption("ABE.Later".Translate());
+            later.action = delegate { BountyRadioManager.Get()?.QueueDelayedDelivery(warrant); };
+            later.resolveTree = true;
+            node.options.Add(later);
+
+            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(node, hunter, true, false, title));
+            Find.Archive.Add(new ArchivedDialog(node.text, title, hunter));
+        }
+
+        private static void DeliverByVisitors(Warrant warrant, Thing deliver)
+        {
+            Map map = Find.AnyPlayerHomeMap;
+            if (map == null)
+                return;
+            IncidentParms parms = StorytellerUtility.DefaultParmsNow(SW_DefOf.FactionArrival, map);
+            parms.faction = warrant.accepteer;
+            parms.forced = true;
+            ((IncidentWorker_Visitors)SW_DefOf.SW_Visitors.Worker).SpawnVisitors(deliver, parms);
+        }
+
+        /// <summary>打发走:货(活体/尸体)直接留在地图边缘,玩家自行取回;款已付,视为交割完成。</summary>
+        private static void DeliverAtEdge(Thing deliver)
+        {
+            Map map = Find.AnyPlayerHomeMap;
+            if (map == null)
+                return;
+            IntVec3 cell = CellFinder.RandomEdgeCell(map);
+            GenSpawn.Spawn(deliver, cell, map);
+            Messages.Message("RK_Bounty.DeliveredEdge".Translate(), MessageTypeDefOf.NeutralEvent, false);
         }
 
         private static TaggedString IssueSuccessStory(Warrant warrant, bool dead, int reward)

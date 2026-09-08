@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- MilianFitting_SunPlateSteelBone -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_SunPlateSteelBone"]/stages/li/statOffsets/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>4</ArmorRating_Sharp>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_SunPlateSteelBone"]/stages/li/statOffsets/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>12</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_RegenerativeArmor -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_RegenerativeArmor"]/stages/li/statOffsets/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>-2</ArmorRating_Sharp>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_RegenerativeArmor"]/stages/li/statOffsets/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>-6</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_KineticEnergyArmor -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_KineticEnergyArmor"]/stages/li/statOffsets/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>2</ArmorRating_Sharp>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_KineticEnergyArmor"]/stages/li/statOffsets/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>6</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_BlastPaddingArmor -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_BlastPaddingArmor"]/stages/li/statOffsetsBySeverity/li[stat="ArmorRating_Sharp"]/valueBySeverity/points</xpath>
+        <value>
+            <points>
+                <li>(0, 8)</li>
+                <li>(1, 0)</li>
+            </points>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_BlastPaddingArmor"]/stages/li/statOffsetsBySeverity/li[stat="ArmorRating_Blunt"]/valueBySeverity/points</xpath>
+        <value>
+            <points>
+                <li>(0, 64)</li>
+                <li>(1, 0)</li>
+            </points>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_AntiKnockModule -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_AntiKnockMode"]/stages/li/statOffsets/ArmorRating_Sharp</xpath>
+        <value>
+            <ArmorRating_Sharp>76</ArmorRating_Sharp>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_AntiKnockMode"]/stages/li/statOffsets/ArmorRating_Blunt</xpath>
+        <value>
+            <ArmorRating_Blunt>356</ArmorRating_Blunt>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_EnergyBlade -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_EnergyBlade"]/comps/li[@Class="HediffCompProperties_VerbGiver"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>24</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationSharp>48</armorPenetrationSharp>
+                    <armorPenetrationBlunt>5.4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_PowerHammer -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_PowerHammer"]/comps/li[@Class="HediffCompProperties_VerbGiver"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Power Hammer</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>18</power>
+                    <cooldownTime>2.6</cooldownTime>
+                    <armorPenetrationBlunt>120</armorPenetrationBlunt>
+                    <extraMeleeDamages>
+                        <li>
+                            <def>Stun</def>
+                            <amount>3</amount>
+                            <chance>1.0</chance>
+                        </li>
+                    </extraMeleeDamages>
+                    <linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_OverloadCircuit -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_OverloadMode"]/stages/li[label="Overdrive"]/statOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>0.40</MeleeParryChance>
+            <MeleeDodgeChance>0.40</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_OverloadMode"]/stages/li[label="Overdrive"]/statOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>8.0</MeleeHitChance>
+            <MeleeCritChance>0.50</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_Amplifier -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_Amplifier"]/stages/li/statOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>0.20</MeleeParryChance>
+            <MeleeDodgeChance>0.20</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_Amplifier"]/stages/li/statOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>5.0</MeleeHitChance>
+            <MeleeCritChance>0.20</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_DicingSaw -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_DicingSaw"]/comps/li[@Class="HediffCompProperties_VerbGiver"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>14</power>
+                    <cooldownTime>1.2</cooldownTime>
+                    <armorPenetrationSharp>7.8</armorPenetrationSharp>
+                    <armorPenetrationBlunt>10</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_ConstructionHammer -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_ConstructionHammer"]/comps/li[@Class="HediffCompProperties_VerbGiver"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>head</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>12</power>
+                    <cooldownTime>2.2</cooldownTime>
+                    <armorPenetrationBlunt>40</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+                    <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_CounterStorm -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/HediffDef[defName="Milian_CounterStorm"]/stages/li/statOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>10.0</MeleeHitChance>
+            <MeleeCritChance>0.60</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_ShoulderRocketTank -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/AbilityDef[defName="MilianAbility_ShoulderRocketTank"]/comps/li[@Class="AncotLibrary.CompProperties_AbilityLaunchProjectileArea"]</xpath>
+        <value>
+            <li Class="MiliraCE.CompProperties_AbilityLaunchProjectileCEArea">
+                <projectileDef>Bullet_MilianShoulderRocket</projectileDef>
+                <burstShotCount>1</burstShotCount>
+                <radius>1.9</radius>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- MilianFitting_LoadBracket -->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/HediffDef[defName="MilianFitting_LoadBracket"]/stages/li/statOffsets</xpath>
+        <value>
+            <CarryWeight>25</CarryWeight>
+            <CarryBulk>50</CarryBulk>
+        </value>
+    </Operation>
+
+</Patch>

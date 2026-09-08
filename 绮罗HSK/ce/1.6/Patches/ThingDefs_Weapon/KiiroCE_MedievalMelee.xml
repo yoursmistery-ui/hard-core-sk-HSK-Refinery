@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!--绮罗长矛-->
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="KiiroSpecial_Spear"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs</xpath>
+		<value>
+			<ThingDef ParentName="BaseProjectileNeolithic" >
+				<defName>KiiroSpecial_Spear</defName>
+				<label>kiiro spear</label>
+				<graphicData>
+					<texPath>Kiiro/Weapon/Medieval/Projectile/SpearPoken</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+				</graphicData>
+				<projectile Class="CombatExtended.ProjectilePropertiesCE">
+					<damageDef>ArrowHighVelocity</damageDef>
+					<damageAmountBase>16</damageAmountBase>
+					<armorPenetrationSharp>4.15</armorPenetrationSharp>
+					<speed>400</speed>
+					<dropsCasings>false</dropsCasings>
+				</projectile>
+			</ThingDef>
+		</value>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_Spear</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>1.6</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.01</ShotSpread>
+			<SwayFactor>0.01</SwayFactor>
+			<Bulk>12.00</Bulk>
+			<MeleeCounterParryBonus>1.8</MeleeCounterParryBonus>
+		</statBases>
+		<Properties>
+			<recoilAmount>0</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>KiiroSpecial_Spear</defaultProjectile>
+			<warmupTime>0</warmupTime>
+			<range>2.4</range>
+			<soundCast>Bow_Recurve</soundCast>
+		</Properties>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Spear"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>6</power>
+					<cooldownTime>1.8</cooldownTime>
+					<chanceFactor>0.15</chanceFactor>
+					<armorPenetrationBlunt>2.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>32</power>
+					<cooldownTime>1.45</cooldownTime>
+					<armorPenetrationSharp>5.25</armorPenetrationSharp>
+					<armorPenetrationBlunt>2.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Spear"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.20</MeleeCritChance>
+				<MeleeParryChance>1.5</MeleeParryChance>
+				<MeleeDodgeChance>1</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	
+	<!--绮罗长戈-->
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="KiiroSpecial_DaggerAxe"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs</xpath>
+		<value>
+			<ThingDef ParentName="BaseProjectileNeolithic">
+				<defName>KiiroSpecial_DaggerAxe</defName>
+				<label>kiiro dagger-axe</label>
+				<graphicData>
+					<texPath>Kiiro/Weapon/Medieval/Projectile/SpearPoken</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+				</graphicData>
+				<projectile Class="CombatExtended.ProjectilePropertiesCE">
+					<damageDef>ArrowHighVelocity</damageDef>
+					<damageAmountBase>26</damageAmountBase>
+					<armorPenetrationSharp>4.55</armorPenetrationSharp>
+					<speed>400</speed>
+					<dropsCasings>false</dropsCasings>
+				</projectile>
+			</ThingDef>
+		</value>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_DaggerAxe</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>2.8</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.01</ShotSpread>
+			<SwayFactor>0.01</SwayFactor>
+			<Bulk>12.00</Bulk>
+			<MeleeCounterParryBonus>1.8</MeleeCounterParryBonus>
+		</statBases>
+		<Properties>
+			<recoilAmount>0</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>KiiroSpecial_DaggerAxe</defaultProjectile>
+			<warmupTime>0</warmupTime>
+			<range>2.4</range>
+			<soundCast>Bow_Recurve</soundCast>
+		</Properties>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_DaggerAxe"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>6</power>
+					<cooldownTime>1.8</cooldownTime>
+					<chanceFactor>0.15</chanceFactor>
+					<armorPenetrationBlunt>0.8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Poke</li>
+					</capacities>
+					<power>20</power>
+					<cooldownTime>1.85</cooldownTime>
+					<armorPenetrationSharp>3.75</armorPenetrationSharp>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>45</power>
+					<cooldownTime>2.6</cooldownTime>
+					<armorPenetrationSharp>5.5</armorPenetrationSharp>
+					<armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_DaggerAxe"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.20</MeleeCritChance>
+				<MeleeParryChance>1.4</MeleeParryChance>
+				<MeleeDodgeChance>0.8</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	
+	<!--绮罗朴刀-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_LongHandledBlade"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>6</power>
+					<chanceFactor>0.1</chanceFactor>
+					<cooldownTime>1.5</cooldownTime>
+					<armorPenetrationBlunt>1</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>46</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationSharp>3.8</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.2</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_LongHandledBlade"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.60</MeleeCritChance>
+				<MeleeParryChance>1.5</MeleeParryChance>
+				<MeleeDodgeChance>0.6</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_LongHandledBlade"]/statBases</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.80</MeleeCounterParryBonus>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_LongHandledBlade"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
+		</value>
+	</Operation>
+
+	<!--绮罗双手剑-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/AncotLibrary.ThingDef_Custom[defName="Kiiro_TwoHandSword"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>point</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>4</power>
+					<chanceFactor>0.1</chanceFactor>
+					<cooldownTime>2.2</cooldownTime>
+					<armorPenetrationSharp>4.8</armorPenetrationSharp>
+					<armorPenetrationBlunt>3.4</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>40</power>
+					<cooldownTime>1.8</cooldownTime>
+					<armorPenetrationSharp>4.25</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.6</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AncotLibrary.ThingDef_Custom[defName="Kiiro_TwoHandSword"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.8</MeleeCritChance>
+				<MeleeParryChance>0.7</MeleeParryChance>
+				<MeleeDodgeChance>0.4</MeleeDodgeChance>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AncotLibrary.ThingDef_Custom[defName="Kiiro_TwoHandSword"]/statBases</xpath>
+		<value>
+			<MeleeCounterParryBonus>1</MeleeCounterParryBonus>
+			<Bulk>12</Bulk>
+		</value>
+	</Operation>
+</Patch>

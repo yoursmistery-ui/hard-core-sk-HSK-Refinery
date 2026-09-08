@@ -1,9 +1,14 @@
-// RKPerf.cs — 鼠族HSK拓展 性能优化补丁 v7(无损)
+// RKPerf.cs — 鼠族HSK拓展 性能优化补丁 v8(无损)
 // 2026-08-18 v1: STL GetBestSurvivalTool tick 缓存。
 // 2026-08-18 v2: 新增 StatWorker_MarketValue.CalculatedBaseMarketValue 永久缓存。
 // 2026-08-18 v3: 工具缓存改跨 tick(TTL 120)。
 // 2026-08-19 v6: 新增 MarketValue 懒预热(MapComponent, ≤1.5ms/tick 预算)。
 // 2026-08-19 v7: 预热改「双向类别交集」材质展开 + 预算提到 3ms + 幂等跳过。
+// 2026-09-06 v8: 新增 Patch 4 高频 stat TTL 缓存(WorkSpeedGlobal 等 8 项,TTL 90)。
+//    Analyzer 实测这组 stat 占 ~0.7ms/tick(WorkSpeedGlobal 单项 0.4ms,单次 30-80µs,
+//    HSK StatPart 链条深);数值只随装备/健康/状态缓变,TTL 90 tick(1x=1.5s,
+//    900TPS=0.1s 实时)内重算无意义。只缓存 Thing 请求(StatRequest.Thing!=null),
+//    def/材质请求不缓存;applyPostProcess 两个语义分表;CWT 随 Thing 回收。
 //    ⚠️ HSK 材质系统实测(Unified.xml + 反射确认): ThingDef.stuffCategories 与
 //    stuffProps.categories 元素类型均为 RimWorld.StuffCategoryDef(无材质树/无 parent,
 //    扁平类别集合);允许材质 = def 要求类别 ∩ 材质声明类别。v6 按 defName 找同名
@@ -11,7 +16,7 @@
 //    无同名 ThingCategoryDef),材质组合实际未预热;v7 用倒排索引做双向匹配,与游戏
 //    语义一致,材质组合全量覆盖。
 // 所有 patch 均为无损: 不改数值,只消除重复计算;目标缺失时自动跳过。
-// ⚠️ 本 HSK 环境 Stat* 类型位于 RimWorld 命名空间(非原版 Verse),patch 目标一律用反射门控。
+// ⚠️ 1.6 本体 StatWorker 已在 RimWorld 命名空间(dnfile 确认),patch 目标仍一律反射门控。
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +38,7 @@ namespace RKPerf
             {
                 Harmony harmony = new Harmony("local.ratkin.perfopts");
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
-                Log.Message("[RKPerf] 性能优化补丁 v7 已加载 (工具跨tick缓存 + MarketValue 永久缓存 + 懒预热双向匹配)");
+                Log.Message("[RKPerf] 性能优化补丁 v8 已加载 (工具跨tick缓存 + MarketValue 永久缓存 + 懒预热双向匹配 + 高频stat TTL缓存)");
             }
             catch (Exception e)
             {
@@ -428,6 +433,287 @@ namespace RKPerf
             {
                 return null;
             }
+        }
+    }
+
+    // ============ Patch 4: 高频 stat TTL 缓存(无损, 2026-09-06 v8) ============
+    // Analyzer 实测 WorkSpeedGlobal/GeneralLaborSpeed/MiningSpeed/CookSpeed/
+    // StonecuttingSpeed/WorkTableWorkSpeedFactor/CarryBulk/DeteriorationRate 合计
+    // ~0.7ms/tick(WorkSpeedGlobal 单项 0.4ms, 单次 30-80µs, HSK StatPart 链条深)。
+    // 这些值只随装备/健康/心情/环境缓变, TTL 90 tick(1x=1.5s, 900TPS=0.1s 实时)内
+    // 重算是纯浪费。设计:
+    //  · 打在 StatWorker.GetValue 三个 Thing 型重载上(StatRequest 重载是漏斗,
+    //    其余两个可能不走它, 全覆盖);def/材质型 GetValueAbstract 不动。
+    //  · 只缓存 StatRequest.Thing != null 的查询;键 = Thing 引用(CWT 自动回收),
+    //    值内按 applyPostProcess 分两张表, 防止 true/false 语义串味。
+    //  · 热点 stat 用名字从 DefDatabase 解析(HSK/CE 补充的 stat 名缺哪个跳哪个,
+    //    不写死类型引用);非热点 stat 前缀一次 HashSet 判定即放行, 开销 ~20ns。
+    //  · 线程安全与 Patch 1 同口径: CWT 本身线程安全, 字典读写竞争风险与既有
+    //    补丁一致(主线程写、渲染只读, 实际无碰撞)。
+    public static class Patch_HotStatCache
+    {
+        internal const int TtlTicks = 90;
+
+        internal sealed class Entry
+        {
+            public int tick = -1000000;
+            public Dictionary<StatWorker, float> vals = new Dictionary<StatWorker, float>();
+            public Dictionary<StatWorker, float> valsNoPost;
+        }
+
+        internal static readonly ConditionalWeakTable<Thing, Entry> Table =
+            new ConditionalWeakTable<Thing, Entry>();
+
+        internal static HashSet<StatWorker> hot;
+
+        private static readonly string[] HotNames = new string[]
+        {
+            "WorkSpeedGlobal", "GeneralLaborSpeed", "MiningSpeed", "CookSpeed",
+            "StonecuttingSpeed", "WorkTableWorkSpeedFactor", "CarryBulk", "DeteriorationRate"
+        };
+
+        // 1.6 StatWorker.stat 非 public(反射确认),但每个 StatDef 有独立 worker 实例
+        // (StatDef.Worker 公开)——热点过滤与缓存键一律用 worker 实例身份,热路径零反射。
+        internal static void InitHot()
+        {
+            HashSet<StatWorker> set = new HashSet<StatWorker>();
+            for (int i = 0; i < HotNames.Length; i++)
+            {
+                StatDef def = DefDatabase<StatDef>.GetNamedSilentFail(HotNames[i]);
+                if (def != null && def.Worker != null)
+                {
+                    set.Add(def.Worker);
+                }
+            }
+            hot = set;
+        }
+
+        // 三个重载共用: 命中返回 true 并写出 __result;未命中返回 false 走原方法
+        internal static bool TryHit(StatWorker worker, Thing thing, bool applyPostProcess, int tick, ref float __result)
+        {
+            if (!hot.Contains(worker))
+            {
+                return false;
+            }
+            Entry entry = Table.GetOrCreateValue(thing);
+            if (tick - entry.tick >= TtlTicks)
+            {
+                entry.tick = tick;
+                entry.vals.Clear();
+                if (entry.valsNoPost != null)
+                {
+                    entry.valsNoPost.Clear();
+                }
+            }
+            float v;
+            if (applyPostProcess)
+            {
+                if (entry.vals.TryGetValue(worker, out v))
+                {
+                    __result = v;
+                    return true;
+                }
+            }
+            else
+            {
+                if (entry.valsNoPost != null && entry.valsNoPost.TryGetValue(worker, out v))
+                {
+                    __result = v;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        internal static void Store(StatWorker worker, Thing thing, bool applyPostProcess, int tick, float value)
+        {
+            if (!hot.Contains(worker))
+            {
+                return;
+            }
+            Entry entry = Table.GetOrCreateValue(thing);
+            if (tick - entry.tick >= TtlTicks)
+            {
+                entry.tick = tick;
+                entry.vals.Clear();
+                if (entry.valsNoPost != null)
+                {
+                    entry.valsNoPost.Clear();
+                }
+            }
+            if (applyPostProcess)
+            {
+                entry.vals[worker] = value;
+            }
+            else
+            {
+                if (entry.valsNoPost == null)
+                {
+                    entry.valsNoPost = new Dictionary<StatWorker, float>();
+                }
+                entry.valsNoPost[worker] = value;
+            }
+        }
+
+        internal static int NowTicks()
+        {
+            return (Find.TickManager != null) ? Find.TickManager.TicksGame : 0;
+        }
+    }
+
+    // 主漏斗: GetValue(StatRequest, bool) —— StatExtension/Thing.GetStatValue 最终都到这
+    [HarmonyPatch]
+    public static class Patch_HotStatCache_Request
+    {
+        public static MethodBase TargetMethod()
+        {
+            Type t = AccessTools.TypeByName("RimWorld.StatWorker");
+            if (t == null)
+            {
+                t = AccessTools.TypeByName("Verse.StatWorker");
+            }
+            if (t == null)
+            {
+                Log.Message("[RKPerf] StatWorker 未找到, 跳过高频stat缓存");
+                return null;
+            }
+            return AccessTools.Method(t, "GetValue", new Type[] { typeof(StatRequest), typeof(bool) });
+        }
+
+        public static bool Prefix(StatWorker __instance, StatRequest req, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null)
+            {
+                Patch_HotStatCache.InitHot();
+            }
+            Thing thing = req.Thing;
+            if (thing == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return true;
+            }
+            float v = 0f;
+            if (Patch_HotStatCache.TryHit(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), ref v))
+            {
+                __result = v;
+                return false;
+            }
+            return true;
+        }
+
+        public static void Postfix(StatWorker __instance, StatRequest req, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return;
+            }
+            Thing thing = req.Thing;
+            if (thing == null)
+            {
+                return;
+            }
+            Patch_HotStatCache.Store(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), __result);
+        }
+    }
+
+    // 覆盖: GetValue(Thing, bool, int) —— StatExtension.GetStatValue(thing,...,cacheStaleAfterTicks) 入口
+    [HarmonyPatch]
+    public static class Patch_HotStatCache_Thing
+    {
+        public static MethodBase TargetMethod()
+        {
+            Type t = AccessTools.TypeByName("RimWorld.StatWorker");
+            if (t == null)
+            {
+                t = AccessTools.TypeByName("Verse.StatWorker");
+            }
+            if (t == null)
+            {
+                return null;
+            }
+            return AccessTools.Method(t, "GetValue", new Type[] { typeof(Thing), typeof(bool), typeof(int) });
+        }
+
+        public static bool Prefix(StatWorker __instance, Thing thing, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null)
+            {
+                Patch_HotStatCache.InitHot();
+            }
+            if (thing == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return true;
+            }
+            float v = 0f;
+            if (Patch_HotStatCache.TryHit(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), ref v))
+            {
+                __result = v;
+                return false;
+            }
+            return true;
+        }
+
+        public static void Postfix(StatWorker __instance, Thing thing, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return;
+            }
+            if (thing == null)
+            {
+                return;
+            }
+            Patch_HotStatCache.Store(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), __result);
+        }
+    }
+
+    // 覆盖: GetValue(Thing, Pawn, bool)
+    [HarmonyPatch]
+    public static class Patch_HotStatCache_ThingPawn
+    {
+        public static MethodBase TargetMethod()
+        {
+            Type t = AccessTools.TypeByName("RimWorld.StatWorker");
+            if (t == null)
+            {
+                t = AccessTools.TypeByName("Verse.StatWorker");
+            }
+            if (t == null)
+            {
+                return null;
+            }
+            return AccessTools.Method(t, "GetValue", new Type[] { typeof(Thing), typeof(Pawn), typeof(bool) });
+        }
+
+        public static bool Prefix(StatWorker __instance, Thing thing, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null)
+            {
+                Patch_HotStatCache.InitHot();
+            }
+            if (thing == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return true;
+            }
+            float v = 0f;
+            if (Patch_HotStatCache.TryHit(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), ref v))
+            {
+                __result = v;
+                return false;
+            }
+            return true;
+        }
+
+        public static void Postfix(StatWorker __instance, Thing thing, bool applyPostProcess, ref float __result)
+        {
+            if (Patch_HotStatCache.hot == null || Patch_HotStatCache.hot.Count == 0)
+            {
+                return;
+            }
+            if (thing == null)
+            {
+                return;
+            }
+            Patch_HotStatCache.Store(__instance, thing, applyPostProcess, Patch_HotStatCache.NowTicks(), __result);
         }
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- Keyz' Allow Utilities: 在 Orders(计划)栏"解禁"按钮后加一个一键"全部允许"按钮。
+         类实现在 HSKFixPack.dll (KAU_AllowAllFix.Designator_KAU_AllowAll), 点击即调用原 mod 的 AllowAll。
+         MayRequire 门控: 未装 keyz182.KeyzAllowUtilities 时不注入。 -->
+    <Operation Class="PatchOperationInsert">
+        <order>Append</order>
+        <xpath>Defs/DesignationCategoryDef[defName="Orders"]/specialDesignatorClasses/li[text()="Designator_Unforbid"]</xpath>
+        <value>
+            <li MayRequire="keyz182.KeyzAllowUtilities">KAU_AllowAllFix.Designator_KAU_AllowAll</li>
+        </value>
+    </Operation>
+</Patch>

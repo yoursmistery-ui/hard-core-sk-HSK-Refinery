@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milira_SwiftBlade -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_SwiftBlade"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Milira_Slash</li>
+                    </capacities>
+                    <power>18</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationSharp>16.8</armorPenetrationSharp>
+                    <armorPenetrationBlunt>5.67</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SwiftBlade"]/statBases</xpath>
+        <value>
+            <Bulk>5.5</Bulk>
+            <MeleeCounterParryBonus>0.6</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_SwiftBlade"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>2.0</MeleeHitChance>
+            <MeleeCritChance>0.05</MeleeCritChance>
+
+            <MeleeParryChance>0.60</MeleeParryChance>
+            <MeleeDodgeChance>0.40</MeleeDodgeChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SwiftBlade"]/weaponTags</xpath>
+        <value>
+            <li>CE_OneHandedWeapon</li>
+        </value>
+    </Operation>
+
+    <!-- Milira_Glaive -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Glaive"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Blade</label>
+                    <capacities>
+                        <li>Milira_SlashArc</li>
+                    </capacities>
+                    <power>42</power>
+                    <cooldownTime>4.6</cooldownTime>
+                    <armorPenetrationSharp>15.3</armorPenetrationSharp>
+                    <armorPenetrationBlunt>12</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Handle</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>26</power>
+                    <cooldownTime>3.5</cooldownTime>
+                    <armorPenetrationBlunt>12</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Glaive"]/statBases</xpath>
+        <value>
+            <Bulk>17</Bulk>
+            <MeleeCounterParryBonus>0.35</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Glaive"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>3.0</MeleeHitChance>
+            <MeleeCritChance>0.05</MeleeCritChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Glaive"]/equippedStatOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>0.10</MeleeParryChance>
+            <MeleeDodgeChance>0.15</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_SawBlade -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_SawBlade"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Milira_SlashCharged</li>
+                    </capacities>
+                    <power>10</power>
+                    <cooldownTime>0.9</cooldownTime>
+                    <armorPenetrationSharp>21.88</armorPenetrationSharp>
+                    <armorPenetrationBlunt>11.81</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SawBlade"]/statBases</xpath>
+        <value>
+            <Bulk>16</Bulk>
+            <MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SawBlade"]/equippedStatOffsets</xpath>
+        <value>
+            <MeleeCritChance>0.05</MeleeCritChance>
+
+            <MeleeParryChance>0.25</MeleeParryChance>
+            <MeleeDodgeChance>0.25</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_PoleBlade -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_PoleBlade"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Milira_CutAOE</li>
+                    </capacities>
+                    <power>26</power>
+                    <cooldownTime>2.2</cooldownTime>
+                    <armorPenetrationSharp>17.71</armorPenetrationSharp>
+                    <armorPenetrationBlunt>9.56</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_PoleBlade"]/statBases</xpath>
+        <value>
+            <Bulk>12.5</Bulk>
+            <MeleeCounterParryBonus>0.4</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_PoleBlade"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>4</MeleeHitChance>
+            <MeleeCritChance>0.1</MeleeCritChance>
+
+            <MeleeParryChance>0.25</MeleeParryChance>
+            <MeleeDodgeChance>0.25</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_Lance -->
+<!--米莉拉的骑枪-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Lance"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>point</label>
+                    <capacities>
+                        <li>Stab</li>
+                    </capacities>
+                    <power>30</power>
+                    <cooldownTime>2.2</cooldownTime>
+                    <armorPenetrationSharp>27</armorPenetrationSharp>
+                    <armorPenetrationBlunt>13.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Lance"]/statBases</xpath>
+        <value>
+            <Bulk>15</Bulk>
+            <MeleeCounterParryBonus>0.9</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Lance"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>15.0</MeleeHitChance>
+            <MeleeCritChance>0.5</MeleeCritChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Lance"]/equippedStatOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>0.05</MeleeParryChance>
+            <MeleeDodgeChance>0.10</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_Sickle -->
+<!--米莉拉的战镰-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Sickle"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>24</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationSharp>20</armorPenetrationSharp>
+                    <armorPenetrationBlunt>18</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Handle</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>20</power>
+                    <cooldownTime>1.5</cooldownTime>
+                    <armorPenetrationBlunt>32</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Sickle"]/statBases</xpath>
+        <value>
+            <Bulk>15</Bulk>
+            <MeleeCounterParryBonus>0.6</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Sickle"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>8</MeleeHitChance>
+            <MeleeCritChance>0.2</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_Hammer -->
+         <!--米莉拉的战锤-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Hammer"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>head</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>40</power>
+                    <cooldownTime>3.2</cooldownTime>
+                    <armorPenetrationBlunt>180</armorPenetrationBlunt>
+                    <extraMeleeDamages>
+                        <li>
+                            <def>Stun</def>
+                            <amount>4</amount>
+                            <chance>0.33</chance>
+                        </li>
+                    </extraMeleeDamages>
+                    <linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>handle</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>32</power>
+                    <cooldownTime>2.6</cooldownTime>
+                    <armorPenetrationBlunt>36</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Hammer"]/statBases</xpath>
+        <value>
+            <Bulk>18</Bulk>
+            <MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Hammer"]/equippedStatOffsets</xpath>
+        <value>
+            <MeleeCritChance>2.0</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_TwoHandSword -->
+<!--米莉拉的大剑-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_TwoHandSword"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>40</power>
+                    <cooldownTime>3.2</cooldownTime>
+                    <armorPenetrationSharp>42</armorPenetrationSharp>
+                    <armorPenetrationBlunt>10</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_TwoHandSword"]/statBases</xpath>
+        <value>
+            <Bulk>22.5</Bulk>
+            <MeleeCounterParryBonus>0.35</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_TwoHandSword"]/equippedStatOffsets</xpath>
+        <value>
+            <MeleeCritChance>0.05</MeleeCritChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_Spear -->
+<!--米莉拉的战矛-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Spear"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>point</label>
+                    <capacities>
+                        <li>Stab</li>
+                    </capacities>
+                    <power>24</power>
+                    <cooldownTime>1.4</cooldownTime>
+                    <armorPenetrationSharp>45</armorPenetrationSharp>
+                    <armorPenetrationBlunt>5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+                </li>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>20</power>
+                    <cooldownTime>1.1</cooldownTime>
+                    <armorPenetrationSharp>30.38</armorPenetrationSharp>
+                    <armorPenetrationBlunt>12.15</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_Spear"]/statBases</xpath>
+        <value>
+            <Bulk>12</Bulk>
+            <MeleeCounterParryBonus>2.4</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Spear"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>8</MeleeHitChance>
+            <MeleeCritChance>0.25</MeleeCritChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_Spear"]/equippedStatOffsets/MeleeDodgeChance</xpath>
+        <value>
+            <MeleeParryChance>1.8</MeleeParryChance>
+            <MeleeDodgeChance>0.9</MeleeDodgeChance>
+        </value>
+    </Operation>
+
+    <!-- Milira_SingleHandblade -->
+  <!--米莉拉的战刀-->
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_SingleHandblade"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>35</power>
+                    <cooldownTime>0.8</cooldownTime>
+                    <armorPenetrationSharp>45</armorPenetrationSharp>
+                    <armorPenetrationBlunt>5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SingleHandblade"]/statBases</xpath>
+        <value>
+            <Bulk>7</Bulk>
+            <MeleeCounterParryBonus>0.6</MeleeCounterParryBonus>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milira_SingleHandblade"]/equippedStatOffsets/MeleeHitChance</xpath>
+        <value>
+            <MeleeHitChance>8</MeleeHitChance>
+            <MeleeCritChance>0.24</MeleeCritChance>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milira_SingleHandblade"]/weaponTags</xpath>
+        <value>
+            <li>CE_OneHandedWeapon</li>
+        </value>
+    </Operation>
+
+</Patch>

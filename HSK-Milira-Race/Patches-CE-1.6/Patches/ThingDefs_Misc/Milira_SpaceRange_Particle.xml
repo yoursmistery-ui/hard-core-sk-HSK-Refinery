@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- Milian_ParticleSMG粒子冲锋枪 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.5</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleSMG</defName>
+        <statBases>
+            <Bulk>4.8</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.124</ShotSpread>
+            <SwayFactor>2</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <isPrimary>true</isPrimary>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraParticleSMG</defaultProjectile>
+            <warmupTime>1.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>27</range>
+            <burstShotCount>8</burstShotCount>
+            <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_ParticlePulse</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>2</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>40</magazineSize>
+            <reloadTime>4.0</reloadTime>
+            <ammoSet>AmmoSet_MiliraParticleSMG</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraParticleSMG</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>4</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/verbs/li[verbClass="MiliraCE.Verb_ShootCEChargable"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.VerbPropertiesCE_Ancot</value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/verbs/li[verbClass="MiliraCE.Verb_ShootCEChargable"]</xpath>
+        <value>
+            <chargeCostPerBurstShot>0</chargeCostPerBurstShot>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch"]</xpath>
+        <value>
+            <li Class="CombatExtended.CompProperties_UnderBarrel">
+                <standardLabel>switch to rapid mode</standardLabel>
+                <underBarrelLabel>switch to blast mode</underBarrelLabel>
+                <standardIconTexPath>AncotLibrary/Gizmos/Switch_II</standardIconTexPath>
+                <underBarrelIconTexPath>AncotLibrary/Gizmos/Switch_I</underBarrelIconTexPath>
+                <oneAmmoHolder>true</oneAmmoHolder>
+                <verbPropsUnderBarrel Class="MiliraCE.VerbPropertiesCE_Ancot">
+                    <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+                    <isPrimary>true</isPrimary>
+                    <hasStandardCommand>true</hasStandardCommand>
+                    <defaultProjectile>Bullet_MiliraParticleSMG_Blast</defaultProjectile>
+                    <warmupTime>1.8</warmupTime>
+                    <recoilAmount>1.38</recoilAmount>
+                    <range>24</range>
+                    <targetParams>
+                        <canTargetLocations>true</canTargetLocations>
+                    </targetParams>
+                    <burstShotCount>1</burstShotCount>
+                    <ammoConsumedPerShotCount>2</ammoConsumedPerShotCount>
+                    <ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+                    <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+                    <soundCastTail>GunTail_Heavy</soundCastTail>
+                    <muzzleFlashScale>6</muzzleFlashScale>
+                    <ai_AvoidFriendlyFireRadius>4</ai_AvoidFriendlyFireRadius>
+                </verbPropsUnderBarrel>
+                <propsUnderBarrel Class="MiliraCE.CompProperties_AmmoUserChargable">
+                    <magazineSize>40</magazineSize>
+                    <reloadTime>4.0</reloadTime>
+                    <ammoSet>AmmoSet_MiliraParticleSMG_Blast</ammoSet>
+                    <chargedAmmoSet>AmmoSet_MiliraParticleSMGCharged_Blast</chargedAmmoSet>
+                </propsUnderBarrel>
+                <propsFireModesUnderBarrel>
+                    <aiAimMode>Snapshot</aiAimMode>
+                    <aiUseBurstMode>false</aiUseBurstMode>
+                    <aimedBurstShotCount>1</aimedBurstShotCount>
+                </propsFireModesUnderBarrel>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraParticleSMG</projectileCharged>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleSMG"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged_Switched</xpath>
+        <value>
+            <projectileCharged_Switched>Bullet_MiliraParticleSMGCharged_Blast</projectileCharged_Switched>
+        </value>
+    </Operation>
+
+    <!-- Milian_ParticleDiffusionBlaster粒子散射炮 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1.5</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleDiffusionBlaster</defName>
+        <statBases>
+            <Bulk>6</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.1576</ShotSpread>
+            <SwayFactor>1.5</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargableMultiple_FullCharge</verbClass>
+            <isPrimary>true</isPrimary>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraParticleDiffusionBlaster</defaultProjectile>
+            <warmupTime>1.5</warmupTime>
+            <recoilAmount>0</recoilAmount>
+            <range>16</range>
+            <burstShotCount>1</burstShotCount>
+            <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>2</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>24</magazineSize>
+            <reloadTime>4</reloadTime>
+            <ammoSet>AmmoSet_MiliraParticleDiffusionBlaster</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraParticleDiffusionBlasterCharged</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>false</aiUseBurstMode>
+            <aimedBurstShotCount>1</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShootMultiple_FullCharge"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/verbs/li[verbClass="MiliraCE.Verb_ShootCEChargableMultiple_FullCharge"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.VerbPropertiesCE_Ancot</value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch"]</xpath>
+        <value>
+            <li Class="CombatExtended.CompProperties_UnderBarrel">
+                <standardLabel>switch to diffusion mode</standardLabel>
+                <underBarrelLabel>switch to salvo mode</underBarrelLabel>
+                <standardIconTexPath>AncotLibrary/Gizmos/Switch_II</standardIconTexPath>
+                <underBarrelIconTexPath>AncotLibrary/Gizmos/Switch_I</underBarrelIconTexPath>
+                <oneAmmoHolder>true</oneAmmoHolder>
+                <verbPropsUnderBarrel Class="MiliraCE.VerbPropertiesCE_Ancot">
+                    <verbClass>MiliraCE.Verb_ShootCEChargableMultiple_FullCharge</verbClass>
+                    <isPrimary>true</isPrimary>
+                    <hasStandardCommand>true</hasStandardCommand>
+                    <defaultProjectile>Bullet_MiliraParticleDiffusionBlaster_Blast</defaultProjectile>
+                    <warmupTime>1.8</warmupTime>
+                    <recoilAmount>1.38</recoilAmount>
+                    <range>16</range>
+                    <targetParams>
+                        <canTargetLocations>true</canTargetLocations>
+                    </targetParams>
+                    <fullChargeShot>true</fullChargeShot>
+                    <burstShotCount>1</burstShotCount>
+                    <ammoConsumedPerShotCount>6</ammoConsumedPerShotCount>
+                    <ticksBetweenBurstShots>30</ticksBetweenBurstShots>
+                    <soundCast>Milira_Shot_HeavyPlasma</soundCast>
+                    <soundCastTail>GunTail_Heavy</soundCastTail>
+                    <muzzleFlashScale>6</muzzleFlashScale>
+                    <ai_AvoidFriendlyFireRadius>4</ai_AvoidFriendlyFireRadius>
+                </verbPropsUnderBarrel>
+                <propsUnderBarrel Class="MiliraCE.CompProperties_AmmoUserChargable">
+                    <magazineSize>24</magazineSize>
+                    <reloadTime>4</reloadTime>
+                    <ammoSet>AmmoSet_MiliraParticleDiffusionBlaster_Blast</ammoSet>
+                    <chargedAmmoSet>AmmoSet_MiliraParticleDiffusionBlasterCharged_Blast</chargedAmmoSet>
+                </propsUnderBarrel>
+                <propsFireModesUnderBarrel>
+                    <aiAimMode>Snapshot</aiAimMode>
+                    <aiUseBurstMode>false</aiUseBurstMode>
+                    <aimedBurstShotCount>1</aimedBurstShotCount>
+                </propsFireModesUnderBarrel>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraParticleDiffusionBlasterCharged</projectileCharged>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleDiffusionBlaster"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged_Switched</xpath>
+        <value>
+            <projectileCharged_Switched>Bullet_MiliraParticleDiffusionBlasterCharged_Blast</projectileCharged_Switched>
+        </value>
+    </Operation>
+
+    <!-- Milian_ParticleLMG粒子光束机枪 -->
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLMG"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>Barrel</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>12</power>
+                    <cooldownTime>1.5</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>Milian_ParticleLMG</defName>
+        <statBases>
+            <Bulk>11.5</Bulk>
+            <SightsEfficiency>1.1</SightsEfficiency>
+            <ShotSpread>0.03</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+        </statBases>
+        <Properties>
+            <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+            <isPrimary>true</isPrimary>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_MiliraParticleLMG</defaultProjectile>
+            <warmupTime>2.8</warmupTime>
+            <recoilAmount>1.38</recoilAmount>
+            <range>62</range>
+            <burstShotCount>24</burstShotCount>
+            <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+            <soundCast>Milira_Shot_PlasmaRifle</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>2</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>192</magazineSize>
+            <reloadTime>12</reloadTime>
+            <ammoSet>AmmoSet_MiliraParticleLMG</ammoSet>
+            <chargedAmmoSet>AmmoSet_MiliraParticleLMGCharged</chargedAmmoSet>
+        </AmmoUser>
+        <FireModes>
+            <aiAimMode>Snapshot</aiAimMode>
+            <aiUseBurstMode>true</aiUseBurstMode>
+            <aimedBurstShotCount>12</aimedBurstShotCount>
+        </FireModes>
+    </Operation>
+    <Operation Class="PatchOperationRemove">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLMG"]/verbs/li[verbClass="AncotLibrary.Verb_ChargeShoot"]</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLMG"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]</xpath>
+        <attribute>Class</attribute>
+        <value>MiliraCE.CompProperties_AmmoUserChargable</value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLMG"]/comps/li[@Class="AncotLibrary.CompProperties_RangeWeaponVerbSwitch_EnergyPassive"]/verbProps</xpath>
+        <value>
+            <verbProps Class="CombatExtended.VerbPropertiesCE">
+                <label>rapid mode</label>
+                <verbClass>MiliraCE.Verb_ShootCEChargable</verbClass>
+                <isPrimary>true</isPrimary>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_MiliraParticleLMGCharged</defaultProjectile>
+                <warmupTime>0.8</warmupTime>
+                <recoilAmount>1.38</recoilAmount>
+                <range>62</range>
+                <burstShotCount>20</burstShotCount>
+                <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+                <soundCast>Milira_Shot_ParticlePulse</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>2</muzzleFlashScale>
+            </verbProps>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="Milian_ParticleLMG"]/comps/li[@Class="AncotLibrary.CompProperties_WeaponCharge"]/projectileCharged</xpath>
+        <value>
+            <projectileCharged>Bullet_MiliraParticleLMGCharged</projectileCharged>
+        </value>
+    </Operation>
+
+</Patch>

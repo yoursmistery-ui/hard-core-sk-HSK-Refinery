@@ -1392,38 +1392,6 @@
             </li>
         </value>
     </Operation>
-    <!-- 撬棍 RK_MeleeWeapon_Crowbar: 拆建/维修(2026-08-27 用户要求;
-         def 本体在 鼠族HSK拓展\Defs\RKMD\ThingsDefs\RKMD_Weapons.xml,工业档近战武器;
-         属性只挂已装 StatPart_SurvivalTool 的池子(STL 原生 + 48/A3 号补挂),保证生效:
-         建造 1.3(RightToolForJob 把 Deconstruct/Repair/FixBrokenDownBuilding 都映射到建造速度,
-         介于铁锤 1.2 与大锤 1.8 之间)、综合劳动 1.15、切石 1.15(与大锤同值);
-         toolWearFactor 0.8(工业钢制整体撬,比中世纪木柄工具耐磨);
-         原 equippedStatOffsets 的 FixBrokenDownBuildingSuccessChance 0.15 保留
-         (该属性未被工具系统接管,不在 baseWorkStatFactors,无双重建模问题)。 -->
-    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
-        <xpath>Defs/ThingDef[defName="RK_MeleeWeapon_Crowbar"]</xpath>
-        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
-    </Operation>
-    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
-        <xpath>Defs/ThingDef[defName="RK_MeleeWeapon_Crowbar"]/statBases</xpath>
-        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
-    </Operation>
-    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
-        <xpath>Defs/ThingDef[defName="RK_MeleeWeapon_Crowbar"]</xpath>
-        <value>
-            <li Class="SurvivalToolsLite.SurvivalToolProperties">
-                <baseWorkStatFactors>
-                    <ConstructionSpeed>1.3</ConstructionSpeed>
-                    <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
-                    <StonecuttingSpeed>1.15</StonecuttingSpeed>
-                </baseWorkStatFactors>
-                <defaultSurvivalToolAssignmentTags>
-                    <li>Constructor</li>
-                </defaultSurvivalToolAssignmentTags>
-                <toolWearFactor>0.8</toolWearFactor>
-            </li>
-        </value>
-    </Operation>
     <!-- ───────── 来源: 29_鼠族工具分类.xml ───────── -->
 <!-- 鼠族工具工具分类(2026-08-08, 用户要求):
          7 件鼠族工具(RK_Cleaver/RK_Pickaxe/RK_Axe/RK_Hockey/RK_Weapon_Maul/RK_Fork/RK_Dagger)

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 威胁事件/派系最早出现日下调(2026-09-04): 年限仅作低限,实际由 RaidHelperWealthTech.cs
+       的科技档+财富门槛兜底(三条件并存):
+         SkynetHumanlike(天网派系袭击)  earliestRaidDays 180→120  (DLL: Spacer+200 万)
+         Salvation / AgentPodCrash / AgentTravelerGroup(天网事件) earliestDay 180→120  (同上)
+         PsychicEmanatorShipPartCrash / DefoliatorShipPartCrash(心灵/枯萎者飞船)
+             earliestDay 170→120  (DLL: Industrial,财富沿用 minThreatPoints 8000)
+       本文件(18_)后于 13_ 执行;对 Faster raids progression(更早加载)的 180 值同样覆盖。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="SkynetHumanlike"]/earliestRaidDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="SkynetHumanlike"]/earliestRaidDays</xpath>
+      <value>
+        <earliestRaidDays>120</earliestRaidDays>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="Salvation"]/earliestDay</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="Salvation"]/earliestDay</xpath>
+      <value>
+        <earliestDay>120</earliestDay>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/earliestDay</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/earliestDay</xpath>
+      <value>
+        <earliestDay>120</earliestDay>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/earliestDay</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/earliestDay</xpath>
+      <value>
+        <earliestDay>120</earliestDay>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="PsychicEmanatorShipPartCrash"]/earliestDay</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="PsychicEmanatorShipPartCrash"]/earliestDay</xpath>
+      <value>
+        <earliestDay>120</earliestDay>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="DefoliatorShipPartCrash"]/earliestDay</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="DefoliatorShipPartCrash"]/earliestDay</xpath>
+      <value>
+        <earliestDay>120</earliestDay>
+      </value>
+    </match>
+  </Operation>
+</Patch>

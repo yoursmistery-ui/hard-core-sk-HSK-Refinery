@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <!-- Hediffs_MilianFittings_Torso.xml -->
+
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MilianShoulderRocket</defName>
+        <label>rocket</label>
+        <graphicData>
+            <texPath>Milira/Projectile/MiliraProjectile_SmallRocketII</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>1.5</drawSize>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bomb</damageDef>
+            <explosionRadius>1.9</explosionRadius>
+            <damageAmountBase>40</damageAmountBase>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>50</speed>
+        </projectile>
+        <comps>
+            <li Class="CombatExtended.CompProperties_Fragments">
+                <fragments>
+                    <Fragment_Small>9</Fragment_Small>
+                </fragments>
+            </li>
+            <li Class="CombatExtended.CompProperties_ProjectileFleck">
+                <FleckDatas>
+                    <li>
+                        <fleck>Fleck_CERocketSmokeTrail</fleck>
+                        <emissionsPerTick>2</emissionsPerTick>
+                        <rotation>0~360</rotation>
+                        <flecksPerEmission>1</flecksPerEmission>
+                    </li>
+                </FleckDatas>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- Buildings_Turrets.xml -->
+
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MilianFortressGun_CIWS</defName>
+        <label>CIWS bullet</label>
+        <thingClass>MiliracE.BulletCE_LongBarrelAdaptive</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>18</damageAmountBase>
+            <armorPenetrationSharp>20</armorPenetrationSharp>
+            <armorPenetrationBlunt>25.6</armorPenetrationBlunt>
+            <stoppingPower>0.8</stoppingPower>
+            <speed>155</speed>
+        </projectile>
+        <modExtensions>
+            <li Class="AncotLibrary.ModExtension_Bullet_LongBarrelAdaptive">
+                <barrelLength>3</barrelLength>
+            </li>
+        </modExtensions>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MilianFortressGun_HeavyPlasma_II</defName>
+        <label>Plasma</label>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <graphicData>
+            <texPath>Milira/Null/null</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.8</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <flyOverhead>true</flyOverhead>
+            <damageDef>Milira_PlasmaBombBig</damageDef>
+            <explosionRadius>4.9</explosionRadius>
+            <explosionEffect>Milira_HeavyBombExplosion</explosionEffect>
+            <damageAmountBase>546</damageAmountBase>
+            <stoppingPower>3.6</stoppingPower>
+            <speed>0</speed>
+            <gravityFactor>80</gravityFactor>
+        </projectile>
+    </ThingDef>
+
+    <!-- Race_MechSpecial.xml -->
+
+    <ThingDef ParentName="BaseBulletCE">
+        <defName>Bullet_MilianAutonomousFloatUnit_ElectromagneticSniper</defName>
+        <label>magnetic round</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+            <drawSize>1.0</drawSize>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Bullet</damageDef>
+            <damageAmountBase>16</damageAmountBase>
+            <armorPenetrationSharp>25</armorPenetrationSharp>
+            <armorPenetrationBlunt>47.2</armorPenetrationBlunt>
+            <stoppingPower>1.0</stoppingPower>
+            <speed>145</speed>
+        </projectile>
+    </ThingDef>
+
+</Defs>

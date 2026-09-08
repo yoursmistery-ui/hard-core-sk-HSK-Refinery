@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingCategoryDef>
+        <defName>AmmoMiliraRailHeavy</defName>
+        <label>Milira Rail gun</label>
+        <parent>AmmoMilira</parent>
+        <iconPath>UI/Icons/ThingCategories/CaliberRailgunHighCaliber</iconPath>
+    </ThingCategoryDef>
+
+    <!-- ==================== AmmoSet ========================== -->
+<!--米莉拉重型轨道弹-->
+    <CombatExtended.AmmoSetDef>
+        <defName>AmmoSet_MiliraHandRailGun</defName>
+        <label>Milira Rail gun</label>
+        <ammoTypes>
+            <Ammo_MiliraRailHeavy>Bullet_MiliraHandRailGun</Ammo_MiliraRailHeavy>
+        </ammoTypes>
+    </CombatExtended.AmmoSetDef>
+
+    <!-- ==================== Ammo ========================== -->
+
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SpacerMediumAmmoBase">
+        <defName>Ammo_MiliraRailHeavy</defName>
+        <label>Milira Rail gun (Sabot)</label>
+        <description>Fin-stabilized tungsten carbide penetrator with discarding sabot, designed for large-caliber railgun weapons used by Milira.</description>
+        <statBases>
+            <Mass>0.051</Mass>
+            <Bulk>0.04</Bulk>
+            <MarketValue>0.33</MarketValue>
+        </statBases>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_Milira_UniversalBench</li>
+        </tradeTags>
+        <thingCategories>
+            <li>AmmoMiliraRailHeavy</li>
+        </thingCategories>
+        <stackLimit>200</stackLimit>
+        <graphicData>
+            <texPath>Things/Ammo/Railgun/HighCaliber</texPath>
+            <graphicClass>CombatExtended.Graphic_StackCountRanged</graphicClass>
+        </graphicData>
+        <ammoClass>Charged</ammoClass>
+    </ThingDef>
+
+    <!-- ================== Projectiles ================== -->
+
+    <ThingDef ParentName="BaseExplosiveBullet">
+        <defName>Bullet_MiliraHandRailGun</defName>
+        <label>steel bolt</label>
+        <thingClass>CombatExtended.BulletCE</thingClass>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Milira_RailGunBullet</damageDef>
+            <damageAmountBase>318</damageAmountBase>
+            <armorPenetrationSharp>170</armorPenetrationSharp>
+            <armorPenetrationBlunt>70400</armorPenetrationBlunt>
+            <stoppingPower>5.6</stoppingPower>
+            <speed>354</speed>
+            <secondaryDamage>
+                <li>
+                    <def>Stun</def>
+                    <amount>2</amount>
+                </li>
+            </secondaryDamage>
+            <explosionEffect>Milira_HandRailGunHit</explosionEffect>
+        </projectile>
+        <graphicData>
+            <texPath>Milira/ProjectileNew/Bullet_RailGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>MoteGlow</shaderType>
+            <drawSize>1.5</drawSize>
+        </graphicData>
+        <modExtensions>
+            <li Class="AncotLibrary.Projectile_Custom_Extension">
+                <impactEffecter>Milira_HandRailGunHit</impactEffecter>
+            </li>
+        </modExtensions>
+        <comps>
+            <li Class="MiliraCE.CompProperties_ExplosiveCEDirectional">
+                <damageAmountBase>30</damageAmountBase>
+                <explosiveDamageType>Milira_KineticBomb</explosiveDamageType>
+                <explosiveRadius>1.5</explosiveRadius>
+                <directionalDamageAmountBase>30</directionalDamageAmountBase>
+                <directionalExplosiveDamageType>Milira_KineticBomb</directionalExplosiveDamageType>
+                <directionalExplosiveRadius>6</directionalExplosiveRadius>
+                <directionalExplosiveAngle>30</directionalExplosiveAngle>
+            </li>
+            <li Class="CombatExtended.CompProperties_Fragments">
+                <fragments>
+                    <Fragment_Large>3</Fragment_Large>
+                </fragments>
+                <fragXZAngleRange>-2~2</fragXZAngleRange>
+                <fragAngleRange>-2~2</fragAngleRange>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <!-- ==================== Recipes ========================== -->
+
+    <RecipeDef ParentName="MiliraCE_MiliraAmmoRailgunRecipeBase">
+        <defName>MakeAmmo_MiliraRailHeavy</defName>
+        <label>make Milira Rail gun cartridge (Sabot) x200</label>
+        <description>Craft 200 Milira Rail gun (Sabot) cartridges.</description>
+        <jobString>Making Milira Rail gun (Sabot) cartridges.</jobString>
+        <workAmount>2200</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Uranium</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Steel</li>
+                <li>Uranium</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_MiliraRailHeavy>200</Ammo_MiliraRailHeavy>
+        </products>
+    </RecipeDef>
+
+</Defs>

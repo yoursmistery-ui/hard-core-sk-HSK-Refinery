@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="TableBase">
+    <defName>Kiiro_Cashier</defName>
+    <label>kiiro merchant cash register</label>
+    <description>Where Kiiro Merchant trades.\n\nOnly placed indoors without any other cash registers. Binding merchant makes the room corresponding shop.\n\n After binding, assign a non-merchant colonist to interact with the bound merchant with right click on the cash register.\n\n Can be placed on a table.</description>
+    <thingClass>Kiiro_Event.Building_Cashier</thingClass>
+    <surfaceType>Item</surfaceType>
+    <!-- <uiOrder>2060</uiOrder> -->
+    <tickerType>Normal</tickerType>
+    <drawGUIOverlay>True</drawGUIOverlay>
+    <clearBuildingArea>false</clearBuildingArea>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <!-- <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,1)</interactionCellOffset> -->
+    <!-- <interactionCellIcon>DiningChair</interactionCellIcon> -->
+    <multipleInteractionCellOffsets>
+      <li>(0,0,1)</li>
+      <li>(0,0,-1)</li>
+    </multipleInteractionCellOffsets>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/CashierMedieval/CashierMedieval</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>1.2</drawSize>
+      <!-- <shadowData>
+        <volume>(0.3, 0.6, 0.3)</volume>
+      </shadowData> -->
+    </graphicData>
+    <building>
+      <isEdifice>false</isEdifice>
+      <canPlaceOverWall>false</canPlaceOverWall>
+      <buildingTags>
+        <li>Kiiro_Cashier</li>
+      </buildingTags>
+    </building>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>1</Mass>
+      <Kiiro_MerchantCapacity>2</Kiiro_MerchantCapacity><!-- 给收银台加了一点货物储量 -->
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+    </statBases>
+    <pathCost>30</pathCost>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>30</costStuffCount>
+    <designationCategory>Kiiro_Furniture</designationCategory>
+    <placeWorkers>
+      <!-- <li>PlaceWorker_ShowFacilitiesConnections</li> -->
+      <li>Kiiro_Event.PlaceWorker_Cashier</li>
+    </placeWorkers>
+    <researchPrerequisites Inherit="false">
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <comps Inherit="false">
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>true</drawAssignmentOverlay>
+        <maxAssignedPawnsCount>1</maxAssignedPawnsCount>
+        <compClass>Kiiro_Event.CompAssignableToPawn_KiiroMerchant</compClass>
+        <noAssignablePawnsDesc>Bind a merchant.</noAssignablePawnsDesc>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_KiiroMerchant">
+      </li>
+    </comps>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <castEdgeShadows>false</castEdgeShadows>
+  </ThingDef>
+
+
+  <!-- <ThingDef ParentName="TableBase">
+    <defName>Kiiro_MailBox</defName>
+    <label>kiiro mail box</label>
+    <description>信箱。</description>
+    <surfaceType>Item</surfaceType>
+    <tickerType>Normal</tickerType>
+    <drawGUIOverlay>True</drawGUIOverlay>
+    <clearBuildingArea>false</clearBuildingArea>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,1)</interactionCellOffset>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/CashierMedieval/CashierMedieval</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <building>
+    </building>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>1</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+    </statBases>
+    <pathCost>30</pathCost>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>30</costStuffCount>
+    <designationCategory>Kiiro_Furniture</designationCategory>
+    <placeWorkers>
+      <li>AncotLibrary.PlaceWorker_OnlyOneInMapColonist</li>
+    </placeWorkers>
+    <researchPrerequisites Inherit="false">
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <comps Inherit="false">
+    </comps>
+    <staticSunShadowHeight>0</staticSunShadowHeight>
+    <castEdgeShadows>false</castEdgeShadows>
+  </ThingDef> -->
+
+</Defs>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗魅影匕首 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_PhantomDagger"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>point</label>
+					<capacities>
+						<li>HitNeckOnly</li>
+					</capacities>
+					<power>56</power>
+					<cooldownTime>2.4</cooldownTime>
+					<armorPenetrationSharp>18</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.9</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>HitNeckOnly</li>
+					</capacities>
+					<power>28</power>
+					<cooldownTime>1.4</cooldownTime>
+					<armorPenetrationSharp>18</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.9</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_PhantomDagger"]/equippedStatOffsets</xpath>
+		<value>
+			<MeleeCritChance>2.00</MeleeCritChance>
+			<MeleeParryChance>0.15</MeleeParryChance>
+			<MeleeDodgeChance>1.15</MeleeDodgeChance>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_PhantomDagger"]/statBases</xpath>
+		<value>
+			<Bulk>0.4</Bulk>
+			<MeleeCounterParryBonus>1.5</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_PhantomDagger"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗外附猫爪 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Claw"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>claw</label>
+					<capacities>
+						<li>Kiiro_ClawScratch</li>
+					</capacities>
+					<power>16</power>
+					<cooldownTime>0.6</cooldownTime>
+					<armorPenetrationSharp>14</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
+					<extraMeleeDamages>
+						<li>
+							<def>Scratch</def>
+							<amount>10</amount>
+							<chance>1.0</chance>
+						</li>
+					</extraMeleeDamages>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Claw"]/equippedStatOffsets</xpath>
+		<value>
+			<MeleeCritChance>1.60</MeleeCritChance>
+			<MeleeParryChance>0.1</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Claw"]/statBases</xpath>
+		<value>
+			<Bulk>0.4</Bulk>
+			<MeleeCounterParryBonus>2.0</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+</Patch>

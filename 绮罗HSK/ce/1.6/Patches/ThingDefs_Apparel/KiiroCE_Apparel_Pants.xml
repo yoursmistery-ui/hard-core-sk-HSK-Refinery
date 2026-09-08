@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗下装修改-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_PantsBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.8</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗下装修改-重量-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_PantsBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>1.5</Bulk>
+			<WornBulk>1</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗热裤 绮罗短裙 绮罗朴素长裙 绮罗休闲短裤 绮罗格子百褶裙 绮罗深色薄裙 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_HotPant" or 
+		defName="Kiiro_ShortDressII" or 
+		defName="Kiiro_LongSkirt" or 
+		defName="Kiiro_Shorts" or 
+		defName="Kiiro_ShortDress" or 
+		defName="Kiiro_DarkSkirt"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+</Patch>

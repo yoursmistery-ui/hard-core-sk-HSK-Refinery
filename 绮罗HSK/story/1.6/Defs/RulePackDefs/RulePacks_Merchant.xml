@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RulePackDef>
+    <defName>Kiiro_MerchantTrade</defName>
+    <rulePack>
+      <rulesStrings>
+        <!-- =游戏状态========================================================================================================= -->
+        <!-- 耀斑时 -->
+        <li>r_logentry(gameCondition==SolarFlare)->Solar flares are quite a trouble for electronic devices……[trade]</li>
+        <li>r_logentry(gameCondition==SolarFlare)->We don't have such trouble in our town. That's not always good to do a technology progress, isn't it? [trade]</li>
+        <li>r_logentry(gameCondition==SolarFlare)->eihhh? the calculator makes no response. I've just learned it……[trade]</li>
+        <li>r_logentry(gameCondition==SolarFlare)->Power's shut down…But don't worry, shop's operating normally. [trade]</li>
+        <li>r_logentry(gameCondition==SolarFlare)->Mmm, it suddenly became so quiet. Without those machine hum…maybe I'll sleep well tonight. [trade]</li>
+        <!-- 日蚀 -->
+        <li>r_logentry(gameCondition==Eclipse)->How shall so small a moon covering so big a sun? [trade]</li>
+        <li>r_logentry(gameCondition==Eclipse)->It's said to be the best moment to directly look into the sun. [trade]</li>
+        <li>r_logentry(gameCondition==Eclipse)->It's dark, however I can see it clearly~[trade]</li>
+        <!-- 有毒尘埃 -->
+        <li>r_logentry(gameCondition==ToxicFallout)->How long shall it last? I'm fed up! [trade]</li>
+        <li>r_logentry(gameCondition==ToxicFallout)->Who did this pollution? That's annoying. [trade]</li>
+        <li>r_logentry(gameCondition==ToxicFallout)->Woowa, recently the air's really stinky! better stay in the room. [trade]</li>
+        <!-- 火山冬天 -->
+        <li>r_logentry(gameCondition==VolcanicWinter)->What a long lasting volcanic winter… No idea how much the food production would decrease. [trade]</li>
+        <li>r_logentry(gameCondition==VolcanicWinter)->Such a distance has the volcanic ash drifted. [trade]</li>
+        <li>r_logentry(gameCondition==VolcanicWinter)->Cough cough, when shall the volcanic ash be clear… [trade]</li>
+        <li>r_logentry(gameCondition==VolcanicWinter)->Ugh, this weather… I feel grimy all over. [trade]</li>
+        <!-- 极光 -->
+        <li>r_logentry(gameCondition==Aurora)->Such a beautiful aurora[trade]</li>
+        <li>r_logentry(gameCondition==Aurora)->It's always pleasing to see the aurora. [trade]</li>
+        <li>r_logentry(gameCondition==Aurora)->Aurora… what a stunning sight. [trade]</li>
+        <li>r_logentry(gameCondition==Aurora)->Ah… they say if you make a wish during the aurora, it might come true! [trade]</li>
+        <!-- 心灵低语 -->
+        <li>r_logentry(gameCondition==PsychicDrone)->Someone's talking inside me… [trade]</li>
+        <li>r_logentry(gameCondition==PsychicDrone)->Wooa! Don't speak in my mind! Ahh, sorry sorry, I didn't mean you. [trade]</li>
+        <li>r_logentry(gameCondition==PsychicDrone)->Even blocking my ears doesn't work, I can't mind it. [trade]</li>
+        <li>r_logentry(gameCondition==PsychicDrone)->Deep breath, deep breath… there still be strange voices! Ahh. [trade]</li>
+        <!-- 心灵抚慰 -->
+        <li>r_logentry(gameCondition==PsychicSoothe)->I feel warm in my heart, like sunshine. [trade]</li>
+        <li>r_logentry(gameCondition==PsychicSoothe)->Don't know why, I'm calm. [trade]</li>
+        <li>r_logentry(gameCondition==PsychicSoothe)->Hoomeow… I'm entirely relaxed, that's caused by the so called psycho soothing? Is that the right name for it? [trade]</li>
+        <li>r_logentry(gameCondition==PsychicSoothe)->Mmm… I suddenly feel like to stretch. [trade]</li>
+        <!-- 热浪 -->
+        <li>r_logentry(gameCondition==HeatWave)->It's suddenly hot. [trade]</li>
+        <li>r_logentry(gameCondition==HeatWave)->The weather's changing… remember to change your outfit. [trade]</li>
+        <li>r_logentry(gameCondition==HeatWave)->I-It's so hot all of a sudden! I didn't even get a chance to change clothes… [trade]</li>
+        <!-- 寒流 -->
+        <li>r_logentry(gameCondition==ColdSnap)->It's abruptly cold… may the food production decrease? [trade]</li>
+        <li>r_logentry(gameCondition==ColdSnap)->The weather's changing… remember to change your outfit. [trade]</li>
+        <li>r_logentry(gameCondition==ColdSnap)->huuu… it's freezing! Even my tail is shivering… [trade]</li>
+        <!-- 闪电风暴 -->
+        <li>r_logentry(gameCondition==Flashstorm)->The thunder is so loud! It's best to stay in bed on a day like this. [trade]</li>
+        <li>r_logentry(gameCondition==Flashstorm)->Don't stand under a tree! You could get struck by lightning. [trade]</li>
+        <li>r_logentry(gameCondition==Flashstorm)->Better stay indoors with such weather[trade]</li>
+        <li>r_logentry(gameCondition==Flashstorm)-> This house is so sturdy, it won't leak at all. [trade]</li>
+        <!-- 太空 -->
+        <li>r_logentry(map_inVacuum==true)->Wow, so this is what space feels like… I hope my shelves are still intact. [trade]</li>
+        <li>r_logentry(map_inVacuum==true)->I'm trying to find my village from up here, you know. [trade]</li>
+        <li>r_logentry(map_inVacuum==true)->Maybe we should build a statue of the Valor here in space? Heh, just kidding. [trade]</li>
+        <li>r_logentry(map_inVacuum==true)->Hmm… what does this button do? Gravity switch? What if I push it? Will I fly? Sleep on the ceiling? …Alright, alright, I won't touch it. [trade]</li>
+        <li>r_logentry(map_inVacuum==true)->You know… back when we were kids, we used to lie on the grass, enjoying the breeze while watching the stars… I never thought we'd reach them one day. [trade]</li>
+        <!-- =天气状况========================================================================================================= -->
+        <!--雾雨 -->
+        <li>r_logentry(weatherMap==FoggyRain)->Raining, better stay indoors[trade]</li>
+        <li>r_logentry(weatherMap==FoggyRain)->Rain is gently tapping on the ground. Ah, [trade]</li>
+        <li>r_logentry(weatherMap==FoggyRain)->Rain has refreshed the air. [trade]</li>
+        <li>r_logentry(weatherMap==FoggyRain)->It's most suitable for reading indoors thesedays. [trade]</li>
+        <li>r_logentry(weatherMap==FoggyRain)->The water vapor gathers together to form fog. [trade]</li>
+        <li>r_logentry(weatherMap==FoggyRain)->Sky is foggy, and everything outside is hazy. [trade]</li>
+        <!--雾-->
+        <li>r_logentry(weatherMap==Fog)->It's so foggy outside, I can hardly see anything. [trade]</li>
+        <li>r_logentry(weatherMap==Fog)->It's foggy, so be careful. [trade]</li>
+        <li>r_logentry(weatherMap==Fog)->Foggy days' not good for hunting. Our hunter would never step into the mountains in such days. [trade]</li>
+        <li>r_logentry(weatherMap==Fog)->Would there be anything jump out abruptly from the frog… woowa, I'm sorry. Are you scared? [trade]</li>
+        <!-- 雨 -->
+        <li>r_logentry(weatherMap==Rain)->It's raining, bring in the clothes. [trade]</li>
+        <li>r_logentry(weatherMap==Rain)->Not a good day to go outside… [trade]</li>
+        <li>r_logentry(weatherMap==Rain)->The rain's drizzling down… it feels like the sky is weeping… [trade]</li>
+        <!-- 小雪 -->
+        <li>r_logentry(weatherMap==SnowGentle)->It's snowing… the atmosphere is getting cold. [trade]</li>
+        <li>r_logentry(weatherMap==SnowGentle)->You can hear the voice of snow falling down when the whole world is quite. [trade]</li>
+        <li>r_logentry(weatherMap==SnowGentle)->Let's sleep besides the fireplace, so cozy. [trade]</li>
+        <li>r_logentry(weatherMap==SnowGentle)->Every thing will be covered in white if it keeps to snowing. [trade]</li>
+        <li>r_logentry(weatherMap==SnowGentle)->Once there's thicker snow we can pile a snowman. [trade]</li>
+        <li>r_logentry(weatherMap==SnowGentle)->The hunters in the village will probably start hunting in groups soon. They'll try to get enough food for the whole season before winter really sets in. [trade]</li>
+        <!-- 大雪 -->
+        <li>r_logentry(weatherMap==SnowHard)->How big the snow is, no idea if everyone in the village's good. [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->If there're fellows wandering in such a big snow… [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->With all this snow, I wonder how I'm going to get supplies… Oh, don't worry, I'll figure it out. [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->It's snowing so hard! Want to build a snowman together later? [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->The heavy snow will heal the land. [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->Better drink tea or read books indoors. [trade]</li>
+        <li>r_logentry(weatherMap==SnowHard)->We'll operate even in hard snowy days. [trade]</li>
+        <!-- 旱天雷 -->
+        <li>r_logentry(weatherMap==DryThunderstorm)->So strange, only thunder, no rain. [trade]</li>
+        <li>r_logentry(weatherMap==DryThunderstorm)->Aware the fire! [trade]</li>
+        <li>r_logentry(weatherMap==DryThunderstorm)->I think I saw something get struck by lightning! Should we go check it out? [trade]</li>
+        <li>r_logentry(weatherMap==DryThunderstorm)->Stuffy, and the sky feels heavy… [trade]</li>
+        <!-- 雷暴雨 -->
+        <li>r_logentry(weatherMap==RainyThunderstorm)->It's thunderstorm! Be aware. [trade]</li>
+        <li>r_logentry(weatherMap==RainyThunderstorm)->Woowa, such a heavy rain. I'll get soaked in a moment. [trade]</li>
+        <li>r_logentry(weatherMap==RainyThunderstorm)->The rain sound is loud, clearly heard even in my bed. [trade]</li>
+        <li>r_logentry(weatherMap==RainyThunderstorm)->How scaring, would the roof blow off? [trade]</li>
+        <li>r_logentry(weatherMap==RainyThunderstorm)->It's lightning and thundering outside. Let's stay indoors. [trade]</li>
+        <!-- =需求相关========================================================================================================= -->
+        <!-- 休息值需求偏低 -->
+        <li>r_logentry(talkPawnNeed_rest==true)->Yawn… I'm so sleepy. [trade]</li>
+        <li>r_logentry(talkPawnNeed_rest==true)->Ugh, I'm so tired. Let's finish this and then I'm going to bed. [trade]</li>
+        <li>r_logentry(talkPawnNeed_rest==true)->…Ah! What what? I just lost my attention… [trade]</li>
+        <li>r_logentry(talkPawnNeed_rest==true)->So tired, gotta go bed after this. [trade]</li>
+        <li>r_logentry(talkPawnNeed_rest==true)->Nyaa… I'm gonna fall asleep at this rate… [trade]</li>
+        <!-- 有伤口没好 -->
+        <li>r_logentry(talkPawnInjured==true)->Ouch… my wound still hurts. [trade]</li>
+        <li>r_logentry(talkPawnInjured==true)->My old wound is still aching… I wish it would heal faster. [trade]</li>
+        <li>r_logentry(talkPawnInjured==true)->Ouch! I accidentally touched my wound… It's fine. [trade]</li>
+        <li>r_logentry(talkPawnInjured==true)->I need to change my bandages later… or it might get infected. [trade]</li>
+        <!-- 娱乐值需求偏低 -->
+        <li>r_logentry(talkPawnNeed_joy==true)->I'm bored. Let's play cards. [trade]</li>
+        <li>r_logentry(talkPawnNeed_joy==true)->What is there to do around here? Give me some ideas. [trade]</li>
+        <li>r_logentry(talkPawnNeed_joy==true)->This? It's origami. I'm using it to pass the time. I can give you one if you buy something. [trade]</li>
+        <li>r_logentry(talkPawnNeed_joy==true)->People say I play with my tail when I'm bored? That's not true… What am I doing? Oh, I'm playing with my tail. [trade]</li>
+        <li>r_logentry(talkPawnNeed_joy==true)->I'm sooo bored… Can we have something to talk about? [trade]</li>
+        <!-- 户外值需求偏低 -->
+        <li>r_logentry(talkPawnNeed_outdoor==true)->I feel so cooped up. Maybe we should go outside. [trade]</li>
+        <li>r_logentry(talkPawnNeed_outdoor==true)->I think I need to get some exercise. Want to come with me? [trade]</li>
+        <li>r_logentry(talkPawnNeed_outdoor==true)->If I stay inside too long, I'll turn into a big, whole-wheat, sugar-free bread loaf! Why sugar-free? Um… [trade]</li>
+        <li>r_logentry(talkPawnNeed_outdoor==true)->If I stay inside too long, I'll turn into a big, white steamed bun! [trade]</li>
+        <!-- 舒适度需求偏低 -->
+        <li>r_logentry(talkPawnNeed_comfort==true)->I think I've been sitting too long. My body feels so stiff. [trade]</li>
+        <li>r_logentry(talkPawnNeed_comfort==true)->Your furniture is so cheap. I know a really good carpenter. Maybe… ahem,[trade]</li>
+        <li>r_logentry(talkPawnNeed_comfort==true)->My legs are so sore. I think I've been standing too long. [trade]</li>
+        <!-- 饥饿度需求偏低 -->
+        <li>r_logentry(talkPawnNeed_food==true)->My stomach is growling. Let's go eat. [trade]</li>
+        <li>r_logentry(talkPawnNeed_food==true)->I'm hungry. Let's hurry up, I can't wait to eat. [trade]</li>
+        <!-- 心情偏低 -->
+        <li>r_logentry(talkPawnNeed_mood==true)->Oi! [trade]</li>
+        <li>r_logentry(talkPawnNeed_mood==true)->I'm coming. [trade]</li>
+        <li>r_logentry(talkPawnNeed_mood==true)->emmm……[trade]</li>
+        <li>r_logentry(talkPawnNeed_mood==true)->Ah……[trade]</li>
+
+        <!-- 心情偏高 -->
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->I'm in a great mood! Let's go for a walk later. [trade]</li>
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->I was a bit worried before coming here, but I think it's going to work out! [trade]</li>
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->These goods? I'm taking these back to the village. They're not for sale. [trade]</li>
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->Oh, I'm writing a letter to let the villagers know I'm okay… But anyway, let's get down to business. [trade]</li>
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->Hey, I spent all yesterday making this paperfolding! Here, it's for you. Be happy! [trade]</li>
+        <li>r_logentry(talkPawnNeed_moodHappy==true)->Heave-ho, heave-ho… huh? What am I doing? Writing a letter to the folks back in the village-telling them I'm doing great here. [trade]</li>
+	      <li>r_logentry(talkPawnNeed_moodHappy==true)->Wanna swim with me? I'm actually a pretty good swimmer. [trade]</li>
+        <!-- =地图亮度========================================================================================================= -->
+        <!-- 地图亮度低 -->
+        <li>r_logentry(map_dark==true)->It's completely dark now… If I don't get to bed soon, a monster will come and eat me… Boo! [trade]</li>
+        <li>r_logentry(map_dark==true)->It's getting dark. Let's wrap this up so we can go to bed early. ! [[trade]</li>
+        <li>r_logentry(map_dark==true)->It's night. Time for bed. [trade]</li>
+        <li>r_logentry(map_dark==true)->>It's so dark… time to sleep, maybe? Can't sleep? need a bedtime story? [trade]</li>
+        <!-- 地图亮度达到100% -->
+        <li>r_logentry(map_sunny==true)->The weather is beautiful. [trade]</li>
+        <li>r_logentry(map_sunny==true)->It's a sunny day. [trade]</li>
+        <li>r_logentry(map_sunny==true)->The sun is up! [trade]</li>
+        <li>r_logentry(map_sunny==true)->Such weather! Wanna go fishing? [trade]</li>
+        <!-- =时间========================================================================================================= -->
+        <!-- 时间为20点至凌晨4点 -->
+        <li>r_logentry(time==night)->Well, good evening. [trade]</li>
+        <li>r_logentry(time==night)->It's so late… [trade]</li>
+        <li>r_logentry(time==night)->Ugh, I don't want to be working late at night… [trade]</li>
+        <li>r_logentry(time==night)->Meow, I'm so sleepy. [trade]</li>
+        <!-- 时间为4点至7点 -->
+        <li>r_logentry(time==morning)->Good morning! You're up early. [trade]</li>
+        <li>r_logentry(time==morning)->Well, the early bird gets the worm. You too? [trade]</li>
+        <li>r_logentry(time==morning)->It's early. You go ahead and look around. I'll just close my eyes for a minute… [trade]</li>
+        <li>r_logentry(time==forenoon)->Morning. [trade]</li>
+        <!-- 时间为7点至11点 -->
+        <li>r_logentry(time==forenoon)->Goodmorning! [trade]</li>
+        <li>r_logentry(time==forenoon)->Morning[trade]</li>
+        <li>r_logentry(time==forenoon)->The sun is up. Time to open up shop. [trade]</li>
+        <li>r_logentry(time==forenoon)->I'm feeling great today! [trade]</li>
+        <!-- 时间为11点至14点 -->
+        <li>r_logentry(time==noon)->Good noon. Have you eaten? [trade]</li>
+        <li>r_logentry(time==noon)->Good noon. [trade]</li>
+        <li>r_logentry(time==noon)->Maybe I should go take a nap after this. [trade]</li>
+        <li>r_logentry(time==noon)->Good morning! Ehh? Already noon? Okey… [trade]</li>
+        <li>r_logentry(time==noon)->Good afternoon. Would you like a cup of tea? [trade]</li>
+        <!-- 时间为14点至17点 -->
+        <li>r_logentry(time==afternoon)->What a lazy afternoon. [trade]</li>
+        <li>r_logentry(time==afternoon)->Good afternoon. [trade]</li>
+        <!-- 时间为17点至20点 -->
+        <li>r_logentry(time==evening)->If you come any later, I'll be closing up shop. [trade]</li>
+        <li>r_logentry(time==evening)->Good evening! [trade]</li>
+        <li>r_logentry(time==evening)->I'm closing up shop! If you want to buy anything, hurry up. [trade]</li>
+        <li>r_logentry(time==evening)->Heave-ho, heave-ho… what am I doing? Wrapping up work, of course. [trade]</li>
+
+
+        <!-- =地图温度========================================================================================================= -->
+        <!-- 地图温度大于40度 -->
+        <li>r_logentry(temperatureMap==veryHot)->Woomeow, What's the temperature? The air's warping! [trade]</li>
+        <li>r_logentry(temperatureMap==veryHot)->It's so hot, how is it going in my village thesedays… ahh. [trade]</li>
+        <li>r_logentry(temperatureMap==veryHot)->I can smell something burning… Is everything okay? [trade]</li>
+        <li>r_logentry(temperatureMap==veryHot)->Ugh… I should save up for an air conditioner, what was it called again? The kind that goes *whoosh* and cools everything down. [trade]</li>
+        <!-- 地图温度大于30度小于40度 -->
+        <li>r_logentry(temperatureMap==hot)->You should drink plenty of water in this heat. [trade]</li>
+        <li>r_logentry(temperatureMap==hot)->The sun is so strong. Let's stay indoors. [trade]</li>
+        <li>r_logentry(temperatureMap==hot)->This weather is perfect for drying fish… [trade]</li>
+        <!-- 地图温度大于15度小于30度 -->
+        <li>r_logentry(temperatureMap==comfort)->This is the perfect temperature. I should probably take a nap… Oh, but I should finish this trade first. [trade]</li>
+        <li>r_logentry(temperatureMap==comfort)->It's such a comfortable temperature. [trade]</li>
+        <li>r_logentry(temperatureMap==comfort)->Ahh~ that's the scent of mother nature… mingled with flowers. Oops, spaced out for a second. [trade]</li>
+        <!-- 地图温度大于0度小于10度 -->
+        <li>r_logentry(temperatureMap==cold)->It's a bit cold. Put on more clothes so you don't catch a cold. [trade]</li>
+        <li>r_logentry(temperatureMap==cold)->It's a little chilly. You should bundle up. [trade]</li>
+        <li>r_logentry(temperatureMap==cold)->It's cold enough for frost… I hope the farm is okay. [trade]</li>
+        <li>r_logentry(temperatureMap==veryCold)->So cold… Can't even move my fingers properly. [trade]</li>
+        <!-- 地图温度小于0度 -->
+        <li>r_logentry(temperatureMap==veryCold)->I'm freezing. Let's warm up by the fire. [trade]</li>
+        <li>r_logentry(temperatureMap==veryCold)->It's so cold, my breath is freezing. [trade]</li>
+        <li>r_logentry(temperatureMap==veryCold)->I wonder how the village is doing in this cold weather. [trade]</li>
+        <li>r_logentry(temperatureMap==veryCold)->If the corps in the village harvested in time? [trade]</li>
+        <li>r_logentry(temperatureMap==veryCold)->Let's breathe out and make fog together! [trade]</li>
+        <!-- =常态随机========================================================================================================= -->
+        <li>r_logentry->Good day. [trade]</li>
+        <li>r_logentry->Hello! [trade]</li>
+        <li>r_logentry->Welcome! [trade]</li>
+        <li>r_logentry->Here to shop? [trade]</li>
+        <li>r_logentry->Here, I made this paperfolding for you. [trade]</li>
+
+        <!-- 商铺宽敞 -->
+        <li>r_logentry(MerchantRoom==spacious)->Hehe, I have a big shop! I've never had such a big place before. [trade]</li>
+        <li>r_logentry(MerchantRoom==spacious)->I've never seen a house this big in the village. [trade]</li>
+        <li>r_logentry(MerchantRoom==spacious)->My room is so spacious… I can fit so much stuff in here. [trade]</li>
+        <li>r_logentry(MerchantRoom==spacious)->What a nice place! So much space for me to display these goods. [trade]</li>
+        <!-- 商铺拥挤 -->
+        <li>r_logentry(MerchantRoom==crowd)->My shop is small, but cozy. [trade]</li>
+        <li>r_logentry(MerchantRoom==crowd)->I wish I had a bigger room… Oh well, there's no more space. [trade]</li>
+        <li>r_logentry(MerchantRoom==crowd)->Don't worry, I can still do business even if I'm surrounded by goods. [trade]</li>
+        <li>r_logentry(MerchantRoom==crowd)->Ah, the shop may be small, but the items are really exquisite! [trade]</li>
+
+        <!-- 交易请求 -->
+        <li>trade->May I help you?</li>
+        <li>trade->Anything you want?</li>
+        <li>trade->What'd you like?</li>
+        <li>trade->Can I do something for you?</li>
+        <li>trade->Wanna some Kiiro specialties?</li>
+        <li>trade->Anything?</li>
+        <li>trade->Take a look and see if there's anything you like.</li>
+        <li>trade->Are you here to buy or sell? Both are welcome.</li>
+        <li>trade->Staring at me won't get you a discount, you know.~</li>
+        <li>trade->Can I get you something? The shopkeeper is not for sale, by the way.</li>
+        <li>trade->Is there anything you like? I can get it for you.</li>
+        <li>trade->Um… Something else? I'll keep an eye out for it next time I restock…</li>
+        <li>trade->Um, glittering world Medicine… Archo Bionic Eye… Shield Core? What are those? I don't have those.</li>
+        <li>trade->We have a sale going on right now. Are you interested?</li>
+        <li>trade->Looking to buy something? Go ahead, take your time.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+
+  <RulePackDef>
+    <defName>Kiiro_MerchantInvest</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>r_logentry(investment==I)->Um…would you sponsor me? I'm kind of tight on cash right now actually…</li>
+        <li>r_logentry(investment==II)->Um…would you sponsor me?</li>
+        <li>r_logentry(investment==III)->Um…would you sponsor me?</li>
+        <li>r_logentry(investment==IV)->Um…would you sponsor me?</li>
+        <li>r_logentry(investment==V)->Ah, this is enough for now. Let's save the money for places that need it more.</li>
+        <li>r_logentry(investment==V)->I don't need more money now. These are enough for my little shop…</li>
+        <li>r_logentry(investment==V)->Ah, thank you so much for your graceful help. I'll keep that in mind.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>

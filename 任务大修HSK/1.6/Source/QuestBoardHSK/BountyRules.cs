@@ -253,8 +253,10 @@ namespace QuestBoardHSK
                 default: return c != null ? c.tier1Mult : 1f;
             }
         }
-        // 隐藏刺客公会(改造自敌对支):暗杀委托的直供方 / 好感结算对象
-        private static readonly HashSet<string> GuildDefNames = new HashSet<string> { "Kurin_Faction_Hostile", "Miho_Faction_Supremacist" };
+        // 刺客公会:暗杀委托的直供方 / 好感结算对象 / 玩家发布悬赏的执行方。
+        // Kurin 已退役敌对支 _Hostile、合并为统一"魅狐影刃会" Kurin_Faction(中世纪档,可见定居+族色发单方);
+        // Miho_Faction_Supremacist = 隐藏的美狐机枢会(高科技档)。两公会都是 IsAssassinGuild → 路由/结算走这条。
+        private static readonly HashSet<string> GuildDefNames = new HashSet<string> { "Kurin_Faction", "Miho_Faction_Supremacist" };
         public static bool IsAssassinGuild(Faction f)
         {
             return f != null && f.def != null && GuildDefNames.Contains(f.def.defName);

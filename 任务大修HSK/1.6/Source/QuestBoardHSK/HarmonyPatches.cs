@@ -342,16 +342,16 @@ namespace QuestBoardHSK
         }
     }
 
-    // —— 刺客公会双阶接单(2026-09-03 双阶整合实装):玩家发布的悬赏一律由两个隐藏刺客公会执行——
-    //    目标中世纪及以下档→魅狐影刃会(Kurin_Faction_Hostile),更高档/无派系目标→美狐机枢会
-    //    (Miho_Faction_Supremacist)。SW 原版 GetValidWarrantIssuers 过滤 Hidden 派系,两公会 09-02
-    //    隐藏化后永远接不到单(悬赏仍被普通派系接走);这里整体接管 HandleCreatedWarrants 的派系选择,
+    // —— 刺客公会双阶接单(2026-09-03 双阶整合实装 / 09-08 路由改指合并派系):玩家发布的悬赏一律由两个刺客公会执行——
+    //    目标中世纪及以下档→魅狐影刃会(Kurin_Faction,合并后可见定居+发单方),更高档/无派系目标→美狐机枢会
+    //    (Miho_Faction_Supremacist,隐藏)。SW 原版 GetValidWarrantIssuers 过滤 Hidden 派系,机枢会隐藏后
+    //    永远接不到单(悬赏仍被普通派系接走);这里整体接管 HandleCreatedWarrants 的派系选择,
     //    AcceptChance 接单节奏/AcceptBy/入册/完成期限/播报复刻原流程;两公会都不在场(未装 mod/全灭)
     //    时放行 SW 原版随机派系逻辑兜底。
     [HarmonyPatch(typeof(WarrantsManager), nameof(WarrantsManager.HandleCreatedWarrants))]
     internal static class WarrantsManager_HandleCreatedWarrants_AssassinGuild_Patch
     {
-        private const string MedievalGuildDefName = "Kurin_Faction_Hostile";
+        private const string MedievalGuildDefName = "Kurin_Faction";
         private const string SpacerGuildDefName = "Miho_Faction_Supremacist";
 
         private static Faction Guild(string defName)

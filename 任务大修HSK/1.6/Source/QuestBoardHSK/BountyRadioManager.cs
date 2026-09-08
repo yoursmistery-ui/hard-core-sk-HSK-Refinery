@@ -142,16 +142,19 @@ namespace QuestBoardHSK
 
         public override void GameComponentTick()
         {
-            // 刺客公会隐藏钉补(一次性/每会话,幂等不序列化):1.6 实证 Faction.Hidden => hidden ?? def.hidden,
-            // 且世界生成把实例 hidden 固化为 false(FactionGeneratorParms.hidden 默认 false,不读 def.hidden),
-            // 所以 def 写 hidden=true 对已生成世界(含新开档)永远不生效 → 运行时把两公会实例钉 true。
+            // 刺客公会隐藏钉补(一次性/每会话,幂等不序列化):仅钉"本体设计上隐藏"的公会。
+            // 1.6 实证 Faction.Hidden => hidden ?? def.hidden,且世界生成把实例 hidden 固化为 false
+            // (FactionGeneratorParms.hidden 默认 false,不读 def.hidden),所以 def 写 hidden=true 对已生成世界
+            // (含新开档)永远不生效 → 运行时把 def.hidden==true 的公会(美狐机枢会)实例钉 true。
+            // ⚠ Kurin_Faction 合并后是"可见"的影刃会(定居+族色发单方,def 无 hidden),绝不能被误钉隐藏,
+            //    故门控加 f.def.hidden:只有本体声明 hidden 的公会才被钉。
             if (!guildsHiddenApplied)
             {
                 guildsHiddenApplied = true;
                 try
                 {
                     foreach (Faction f in Find.FactionManager.AllFactions)
-                        if (BountyRules.IsAssassinGuild(f) && f.hidden != true)
+                        if (BountyRules.IsAssassinGuild(f) && f.def != null && f.def.hidden && f.hidden != true)
                             f.hidden = true;
                 }
                 catch (Exception e)

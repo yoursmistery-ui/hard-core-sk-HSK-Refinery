@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金鼠族开局剧本 HSK 科技适配 · 2026-09-08</title>
+<style>
+:root{--bg:#f7f7f8;--card:#fff;--ink:#1f2328;--muted:#6b7280;--line:#e5e7eb;--ac:#2563eb;--ok:#dcfce7;--okf:#166534;--bad:#ffe4e6;--badf:#9f1239}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;font-size:14px}
+.wrap{max-width:1060px;margin:0 auto;padding:22px 16px 60px}
+h1{font-size:21px;margin:0 0 4px}h2{font-size:16px;margin:22px 0 8px;padding-left:8px;border-left:3px solid var(--ac)}
+.sub{color:var(--muted);font-size:13px;margin-bottom:12px}
+.nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:0;background:var(--bg);padding:7px 0;z-index:5}
+.nav a{text-decoration:none;font-size:12.5px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 11px;color:var(--ink)}
+.card,table{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.card{padding:12px 14px;margin-bottom:10px}
+table{border-collapse:collapse;width:100%;font-size:13px;overflow:hidden}
+th{background:#f3f4f6;text-align:left;padding:7px 9px;font-size:12.5px;white-space:nowrap}
+td{border-top:1px solid var(--line);padding:6px 9px;vertical-align:top}
+tbody tr:hover{background:#f9fafb}
+code{background:#f3f4f6;border-radius:4px;padding:1px 5px;font-size:12.5px}
+.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600}
+.badge.ok{background:var(--ok);color:var(--okf)}
+li{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>金鼠族开局剧本 HSK 科技适配 · 2026-09-08</h1>
+<div class="sub"><span class="badge ok">已修复 · 双目录已同步</span>　对象：<code>金鼠族 HSK版本</code> 剧本 <code>OA_RK_Scenario</code> / <code>OA_RK_Scenario_Navigate</code>(Odyssey)</div>
+<div class="nav">
+<a href="#phen">现象与归因</a><a href="#evid">证据链</a><a href="#fix">修法</a><a href="#cmp">改动前后对照</a><a href="#verify">验证与生效</a>
+</div>
+
+<h2 id="phen">现象与归因</h2>
+<div class="card">
+<p>两个剧本的 <code>ScenPart_StartingResearch</code> 沿用<b>原版时代的选点</b>，未按 HSK 科技树重新校准。HSK 下这些 defName 虽都存在，但档位/语义全变，造成<b>双向错配</b>：</p>
+<ul>
+<li><b>超发</b>：<code>SterileMaterials</code> 在 HSK 已抬到 <b>Spacer 档</b>（900 点，前置 Plastic_floor_C4，HiTechResearchBench）。开局给了会经 <code>FinishProject</code> 递归连带解锁 塑料地板 C1→C4 + 石化线 Oil_Industry_C1/C2/C5 + Mining_C1 整条链。</li>
+<li><b>欠发</b>：金鼠族<b>核心科技一个没给</b>——衣物I（<code>OA_RK_Apparel_I</code>，缝纫设施+常服）、武器I（<code>OA_RK_Weapon_I</code>，古典步枪）、医疗（<code>OA_RK_Oberonia_Aurea_Research_C</code>，青苏药物）开局全要自己从零研究 → "有配方没科技"，种族特色生产线开不了工。</li>
+</ul>
+</div>
+
+<h2 id="evid">证据链</h2>
+<div class="card">
+<ul>
+<li>反编译 <code>RimWorld.ScenPart_StartingResearch.PostGameStart</code> → <code>ResearchManager.FinishProject</code>：<b>递归完成全部前置</b>（1.6 确认），故剧本每个节点都按"前置闭包"计强度。</li>
+<li>反编译 <code>DirectXmlCrossRefLoader.WantedRefForList.TryResolve</code>：列表型交叉引用解析失败<b>静默跳过</b>（非 null 入列）→ <code>Rifles_C1</code> 的悬空前置 <code>Gunsmithing</code>（Core_SK 源码引用但 def 已不存在）只产生一条启动期噪音，不会让开局递归炸掉。</li>
+<li>全 Mods 源码建研究表（613 节点）算闭包：现状剧本 <b>31 节点 15275 点</b>（Spacer 1 个）。</li>
+<li>基准：鼠族 TradeRoad 给 <code>Ratkin_Apparel_B1+Electricity</code>（闭包 6 节点 3100 点）；美狐 <code>Miho_Start</code> 给 7 项（闭包 20 节点 11450 点，含 <code>Machining/BlowbackOperation/BasicMechtech</code> 三个死引用——美狐侧遗留，另案）。</li>
+<li>派系层兜底：金鼠族玩家派系 <code>startingResearchTags = RK_ResearchTag_MedievalBasic</code>，自动授予鼠族基础锻造/缝纫/试做（<code>ResearchUtility.ApplyPlayerStartingResearch</code>，同样递归）。</li>
+<li><code>BasicGravtech</code> 为原版 Odyssey def，HSK DLC 模块仅重挂档（2500 点/前置 OrbitalTech），Navigate 保留它正确。</li>
+<li>起始物品全部存在（<code>Gun_BoltActionRifle/Apparel_FlakVest/Synthread</code> 为原版 def，HSK 未删；OA_RK 系物品在 mod 内），问题不在物品清单。</li>
+</ul>
+</div>
+
+<h2 id="fix">修法</h2>
+<div class="card">
+<p>并入既有剧本 def 文件（不新建 xml），两个剧本同改：</p>
+<ul>
+<li><b>删</b> 4 个原版时代节点：<code>CarpetMaking</code> / <code>SterileMaterials</code>（Spacer 超发）/ <code>NobleApparel</code> / <code>TreeSowing</code>（地板/贵族/植树 filler，基准剧本均不给）。</li>
+<li><b>增</b> 3 个金鼠族核心科技：<code>OA_RK_Apparel_I</code> + <code>OA_RK_Weapon_I</code> + <code>OA_RK_Oberonia_Aurea_Research_C</code>（医疗，前置已随农业线给，净增 1200 点）。</li>
+<li><b>留</b>：<code>OA_RK_Oberonia_Aurea_Research/_B</code>（种族农业线）、<code>Electricity</code>（与鼠族基准一致）；Navigate 另留 <code>BasicGravtech/BiofuelRefining</code>。</li>
+</ul>
+</div>
+
+<h2 id="cmp">改动前后对照</h2>
+<table>
+<thead><tr><th>项</th><th>改前</th><th>改后</th></tr></thead>
+<tbody>
+<tr><td>剧本直接给</td><td>7 节点</td><td>6 节点</td></tr>
+<tr><td>前置闭包</td><td>31 节点 / 15275 点 / 封顶 Spacer</td><td>14 节点 / 8100 点 / <b>封顶 Industrial</b></td></tr>
+<tr><td>种族衣物/武器/医疗</td><td>❌ 全缺</td><td>✅ 衣物I+武器I+医疗C</td></tr>
+<tr><td>Spacer 超发链</td><td>SterileMaterials→塑料石化整链</td><td>已删</td></tr>
+<tr><td>开局可生产</td><td>金鼠族专属物品 0</td><td>常服/头饰/旅行装+古典步枪+青苏药物</td></tr>
+</tbody>
+</table>
+
+<h2 id="verify">验证与生效</h2>
+<div class="card">
+<ul>
+<li><code>ET.parse</code> 双文件良构；新引用 defName 全部在研究表中（原版 def 白名单核对 <code>BasicGravtech</code>）。</li>
+<li>闭包复算确认删超发/补欠发如上表；未改坐标/前置，不触发科研普查与 techlevel 越级问题。</li>
+<li>剧本中文汉化键已存在（<code>1.6/Languages/ChineseSimplified/DefInjected/ScenarioDef/</code>，legacy 目录名在无同名括号目录时生效），本次改动不涉键。</li>
+<li>双目录 <code>.sync_tmp</code>+<code>os.replace</code> 原子同步，sha1 一致（<code>a61e628786c0</code> / <code>2edf70966339</code>）。纯 XML，游戏完全退出后冷启动生效。</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

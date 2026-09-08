@@ -161,6 +161,12 @@
 					<thingDef>OARK_AirportClearanceBeacon</thingDef>
 					<count>2</count>
 				</li>
+				<!-- 2026-09-08 HSK 适配: 删除原版时代节点 CarpetMaking/SterileMaterials/NobleApparel/TreeSowing
+				     (HSK 下 SterileMaterials 已抬到 Spacer 档,开局会给会连带解锁整条塑料石化链=超发;
+				     其余为地板/贵族/植树 filler,鼠族/美狐基准剧本均不给)。
+				     新增金鼠族核心科技: 衣物I(缝纫设施+常服)/武器I(古典步枪)/医疗C(青苏药物),
+				     与鼠族(TradeRoad)/美狐(Miho_Start)开局强度对齐; 派系 tag RK_ResearchTag_MedievalBasic
+				     另自动授予鼠族基础锻造/缝纫。 -->
 				<li Class="ScenPart_StartingResearch">
 					<def>StartingResearch</def>
 					<project>OA_RK_Oberonia_Aurea_Research_B</project>
@@ -171,23 +177,19 @@
 				</li>
 				<li Class="ScenPart_StartingResearch">
 					<def>StartingResearch</def>
+					<project>OA_RK_Oberonia_Aurea_Research_C</project>
+				</li>
+				<li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
+					<project>OA_RK_Apparel_I</project>
+				</li>
+				<li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
+					<project>OA_RK_Weapon_I</project>
+				</li>
+				<li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
 					<project>Electricity</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>CarpetMaking</project>
-				</li>
-<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>SterileMaterials</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>NobleApparel</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>TreeSowing</project>
 				</li>
 				<!--li Class="ScenPart_ForcedTrait">
 					<def>ForcedTrait</def>

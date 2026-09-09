@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- ============================================================
+       60_研究树坐标整合.xml  (2026-09-09)
+       科研树全局布局微调(用户定稿坐标)。
+       覆盖对象: 坐标源在第三方/HSK 文件(Core_SK Defs / HMC Vile's
+       Pre-Industrial / Rimatomics_SK / Core_SK NewRatkinPlus.xml)的
+       研究, 工作区无源文件, 故集中在此覆写(本 mod 为最末内容层)。
+       工作区自有 mod(库林/美狐/鼠族拓展/工业大修/书籍拓展)的节点
+       已直接改各自源文件, 不在此列。
+       坐标约束: ResearchTreeSK 全局(跨 tab)唯一, 落地前已静态校验无撞车。
+       生成脚本: _tmp/apply_research_layout.py / gen_60_patch.py, 勿手改。
+       ============================================================ -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="AdvancedFabrication"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="AdvancedFabrication"]/researchViewX</xpath>
+          <value><researchViewX>13.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="AdvancedFabrication"]/researchViewY</xpath>
+          <value><researchViewY>39.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Apparel_B1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Apparel_B1"]/researchViewX</xpath>
+          <value><researchViewX>3.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Apparel_B1"]/researchViewY</xpath>
+          <value><researchViewY>39.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Apparel_C2"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Apparel_C2"]/researchViewX</xpath>
+          <value><researchViewX>8.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Apparel_C2"]/researchViewY</xpath>
+          <value><researchViewY>40.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Armor_B2"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_B2"]/researchViewX</xpath>
+          <value><researchViewX>4.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_B2"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Armor_C1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_C1"]/researchViewX</xpath>
+          <value><researchViewX>8.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_C1"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Armor_Improvised"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_Improvised"]/researchViewX</xpath>
+          <value><researchViewX>5.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_Improvised"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Armor_IronAge"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_IronAge"]/researchViewX</xpath>
+          <value><researchViewX>2.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_IronAge"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Armor_Munition"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_Munition"]/researchViewX</xpath>
+          <value><researchViewX>7.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Armor_Munition"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="BiofuelRefining"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="BiofuelRefining"]/researchViewX</xpath>
+          <value><researchViewX>10.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="BiofuelRefining"]/researchViewY</xpath>
+          <value><researchViewY>27.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Chemistry_C2"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Chemistry_C2"]/researchViewX</xpath>
+          <value><researchViewX>12.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Chemistry_C2"]/researchViewY</xpath>
+          <value><researchViewY>27.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Chemistry_C3"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Chemistry_C3"]/researchViewX</xpath>
+          <value><researchViewX>13.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Chemistry_C3"]/researchViewY</xpath>
+          <value><researchViewY>27.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="ComplexClothing"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="ComplexClothing"]/researchViewX</xpath>
+          <value><researchViewX>5.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="ComplexClothing"]/researchViewY</xpath>
+          <value><researchViewY>39.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Cultivation_C1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Cultivation_C1"]/researchViewX</xpath>
+          <value><researchViewX>8.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Cultivation_C1"]/researchViewY</xpath>
+          <value><researchViewY>52.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Fabrication"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Fabrication"]/researchViewX</xpath>
+          <value><researchViewX>7.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Fabrication"]/researchViewY</xpath>
+          <value><researchViewY>39.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Generators_C3"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Generators_C3"]/researchViewX</xpath>
+          <value><researchViewX>13.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Generators_C3"]/researchViewY</xpath>
+          <value><researchViewY>15.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Generators_C4"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Generators_C4"]/researchViewX</xpath>
+          <value><researchViewX>14.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Generators_C4"]/researchViewY</xpath>
+          <value><researchViewY>15.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Gunsmithing"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Gunsmithing"]/researchViewX</xpath>
+          <value><researchViewX>9.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Gunsmithing"]/researchViewY</xpath>
+          <value><researchViewY>30.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Hydroponics"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Hydroponics"]/researchViewX</xpath>
+          <value><researchViewX>9.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Hydroponics"]/researchViewY</xpath>
+          <value><researchViewY>52.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="NobleApparel"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="NobleApparel"]/researchViewX</xpath>
+          <value><researchViewX>4.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="NobleApparel"]/researchViewY</xpath>
+          <value><researchViewY>41.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C3"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C3"]/researchViewX</xpath>
+          <value><researchViewX>11.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C3"]/researchViewY</xpath>
+          <value><researchViewY>24.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C4"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C4"]/researchViewX</xpath>
+          <value><researchViewX>12.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C4"]/researchViewY</xpath>
+          <value><researchViewY>25.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C5"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C5"]/researchViewX</xpath>
+          <value><researchViewX>11.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C5"]/researchViewY</xpath>
+          <value><researchViewY>26.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C6"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C6"]/researchViewX</xpath>
+          <value><researchViewX>12.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Oil_Industry_C6"]/researchViewY</xpath>
+          <value><researchViewY>26.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="PlateArmor"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="PlateArmor"]/researchViewX</xpath>
+          <value><researchViewX>3.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="PlateArmor"]/researchViewY</xpath>
+          <value><researchViewY>42.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]/researchViewX</xpath>
+          <value><researchViewX>5.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]/researchViewY</xpath>
+          <value><researchViewY>44.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/researchViewX</xpath>
+          <value><researchViewX>8.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/researchViewY</xpath>
+          <value><researchViewY>43.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_B1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_B1"]/researchViewX</xpath>
+          <value><researchViewX>3.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_B1"]/researchViewY</xpath>
+          <value><researchViewY>44.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Repair_table_C1"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Repair_table_C1"]/researchViewX</xpath>
+          <value><researchViewX>13.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="Repair_table_C1"]/researchViewY</xpath>
+          <value><researchViewY>26.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="RimatomicsActivate"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="RimatomicsActivate"]/researchViewX</xpath>
+          <value><researchViewX>15.00</researchViewX></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ResearchProjectDef[defName="RimatomicsActivate"]/researchViewY</xpath>
+          <value><researchViewY>15.00</researchViewY></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

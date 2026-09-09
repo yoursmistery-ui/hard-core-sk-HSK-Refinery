@@ -664,6 +664,88 @@ namespace BlueprintUnlockHSK
     //  右键追加「研读」选项 (强制指派走科研工作链路)。
     public class BlueprintBook : Book
     {
+        // ---- 已读/未读 贴图切换 (2026-09-09) ----
+        //  蓝图 def 默认贴图 (XML) = 该科技档 _Unread (卷轴); 读过后 Graphic / UIIconOverride
+        //  改指同名 _Read (展开图)。readTexPath 由 def.graphicData.texPath 把 "_Unread" 换成
+        //  "_Read" 推导, 无需在代码里硬编档序。Thing.Graphic 与 Thing.UIIconOverride 均为
+        //  virtual, 直接重写即覆盖地图渲染 + 所有走 Widgets.GetIconFor 的 UI 图标 (背包/搜索/
+        //  查看卡/商队), 不需要 Harmony。isReadCache 只 false→true 单向, 命中后停止查表。
+        private bool isReadCache;
+        private Graphic readGraphicCache;
+        private Texture2D readTexCache;
+
+        private bool NowRead()
+        {
+            if (isReadCache)
+            {
+                return true;
+            }
+            BlueprintUnlockTracker tracker = BlueprintUnlockTracker.Get();
+            if (tracker != null && tracker.IsRead(def.defName))
+            {
+                isReadCache = true;
+            }
+            return isReadCache;
+        }
+
+        private string ReadTexPath()
+        {
+            GraphicData gd = def.graphicData;
+            if (gd == null || gd.texPath == null)
+            {
+                return null;
+            }
+            if (gd.texPath.Contains("_Unread"))
+            {
+                return gd.texPath.Replace("_Unread", "_Read");
+            }
+            return null;
+        }
+
+        public override Graphic Graphic
+        {
+            get
+            {
+                if (NowRead())
+                {
+                    if (readGraphicCache == null)
+                    {
+                        string p = ReadTexPath();
+                        if (p != null)
+                        {
+                            Color c = def.graphicData.color;
+                            readGraphicCache = GraphicDatabase.Get<Graphic_Single>(p, ShaderDatabase.Cutout, def.graphicData.drawSize, c, c);
+                        }
+                    }
+                    if (readGraphicCache != null)
+                    {
+                        return readGraphicCache;
+                    }
+                }
+                return base.Graphic;
+            }
+        }
+
+        public override Texture UIIconOverride
+        {
+            get
+            {
+                if (NowRead())
+                {
+                    if (readTexCache == null)
+                    {
+                        string p = ReadTexPath();
+                        if (p != null)
+                        {
+                            readTexCache = ContentFinder<Texture2D>.Get(p, false);
+                        }
+                    }
+                    return readTexCache;
+                }
+                return null;
+            }
+        }
+
         public override string LabelNoCount
         {
             get

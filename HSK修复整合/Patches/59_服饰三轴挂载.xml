@@ -2776,27 +2776,15 @@
       <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Neolithic</li></thingCategories></value>
     </nomatch>
   </Operation>
-  <Operation Class="PatchOperationConditional">
+  <!-- Androids 两件原始 def 自带裸 <li>Apparel</li>: Apparel 正是三轴树的显示根,
+       留着会让这两件挂在根节点上成游离叶子(看着像没分类分级); 整块 Replace 只留三轴。 -->
+  <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="ChJAndroidThermalBandages"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="ChJAndroidThermalBandages"]/thingCategories</xpath>
-      <value><li>HSK_P_Under</li><li>HSK_U_Daily</li><li>RK_Apparel_Neolithic</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="ChJAndroidThermalBandages"]</xpath>
-      <value><thingCategories><li>HSK_P_Under</li><li>HSK_U_Daily</li><li>RK_Apparel_Neolithic</li></thingCategories></value>
-    </nomatch>
+    <value><thingCategories Inherit="False"><li>HSK_P_Under</li><li>HSK_U_Daily</li><li>RK_Apparel_Neolithic</li></thingCategories></value>
   </Operation>
-  <Operation Class="PatchOperationConditional">
+  <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="ChjAndroid_ChemfuelGenerator"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="ChjAndroid_ChemfuelGenerator"]/thingCategories</xpath>
-      <value><li>HSK_P_Acc</li><li>HSK_U_Daily</li><li>RK_Apparel_Medieval</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="ChjAndroid_ChemfuelGenerator"]</xpath>
-      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Daily</li><li>RK_Apparel_Medieval</li></thingCategories></value>
-    </nomatch>
+    <value><thingCategories Inherit="False"><li>HSK_P_Acc</li><li>HSK_U_Daily</li><li>RK_Apparel_Medieval</li></thingCategories></value>
   </Operation>
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ThingDef[defName="Gloves_Chef"]/thingCategories</xpath>

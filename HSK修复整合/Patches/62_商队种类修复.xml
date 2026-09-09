@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 62_商队种类修复 (2026-09-09)
+       根因: 太阳帝国(Empire) 的 caravanTraderKinds 最终态只有两项 ——
+         Empire_Caravan_TraderGeneral(帝国商人, commonality=1, 自带原版 permitRequiredForTrading=TradeCaravan)
+         Caravan_AnimalTrader(动物商人, 由 Core_SK/Patches/SK_Patches_AnimalTrader_AllHumanFaction.xml 追加给所有人族派系)
+       反编译 IncidentWorker_TraderCaravanArrival.TraderKindCommonality: 有 permitRequiredForTrading 而殖民地
+       无人持有该许可(Faction_Empire 授予的"与商队贸易"特许状, 骑士级头衔才给) → 权重直接判 0,
+       于是帝国每次抽商队种类都只剩动物商人 → 表现为"帝国商队 100% 动物商人"。
+       修法: ① 解除该特许门槛(该 def 无 ParentName, 删节点即字段回默认 null, 不存在继承回补);
+             ② 动物商人原无 commonality 节点(=默认 1, 比多数种类略高且人人可用), 降到 0.5 变稀客。
+       效果: 帝国 = 帝国商人 2/3 / 动物商人 1/3; 其余派系动物商人占比约减半
+             (如出lander 系有效 6 种[奴隶商人被意识形态门控判 0]: 1/6≈17% → 0.5/5.5≈9%)。
+       门控: 1.6 起 Operation 级 MayRequire 失效, 一律用 xpath 存在性 Conditional(Royalty 未装时静默跳过)。 -->
+
+  <!-- ① 帝国商人商队: 去掉皇家特许状门控 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/permitRequiredForTrading</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/permitRequiredForTrading</xpath>
+    </match>
+  </Operation>
+
+  <!-- ② 动物商人降权: 上游已写 commonality 则改写, 没有则补节点 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_AnimalTrader"]/commonality</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_AnimalTrader"]/commonality</xpath>
+      <value><commonality>0.5</commonality></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/TraderKindDef[defName="Caravan_AnimalTrader"]</xpath>
+      <value><commonality>0.5</commonality></value>
+    </nomatch>
+  </Operation>
+</Patch>

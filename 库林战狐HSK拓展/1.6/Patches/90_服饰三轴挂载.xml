@@ -4,17 +4,10 @@
        每件补挂 ①穿戴位置 ②用途场景 ③科技档位 三个新分类。
        Conditional: 已有 thingCategories 则追加 li; 没有则整体 Add 一个 thingCategories 节点
        (不带 Inherit="False", 让父类继承的旧分类照常合并, 只做加法)。 -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>Defs/ThingDef[defName="Kurin_Apparel_Underwear"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Kurin_Apparel_Underwear"]/thingCategories</xpath>
-      <value><li>HSK_P_Under</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Kurin_Apparel_Underwear"]</xpath>
-      <value><thingCategories><li>HSK_P_Under</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
-    </nomatch>
-  </Operation>
+  <!-- 2026-09-09 修复: 删除对 Abstract 基类 Kurin_Apparel_Underwear(ThingDef)的挂载块。
+       该块与 9 个具体变体块(Underwear 系挂 Medieval / Waterfox_Armor 挂 Combat+Industrial)
+       冲突: 变体继承基类 thingCategories 后与自带列表合并 → HSK_P_Under/HSK_U_Noble 重复,
+       报 "has duplicate thingCategory"。基类(Abstract, 不注册为商品)无需挂三轴, 由各变体自挂。 -->
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ThingDef[defName="Kurin_Kid_Hat"]/thingCategories</xpath>
     <match Class="PatchOperationAdd">

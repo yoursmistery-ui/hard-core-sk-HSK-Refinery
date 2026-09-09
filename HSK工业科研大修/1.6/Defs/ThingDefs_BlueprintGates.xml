@@ -123,26 +123,32 @@
 
 
 	<!-- ===== 分档抽象基类 tier1 (RK_Schematic_Medieval): 挂对应可视子分类 ===== -->
-	<!-- 贴图必须用中世纪版 Blueprint_Old(羊皮纸手绘); 基类 Blueprint_New 是工业蓝底网格, 勿沿用 -->
+	<!-- 默认=中世纪未读卷轴 Blueprint_Medieval_Unread; 读过后 BlueprintBook.Graphic/UIIconOverride 自动切 Blueprint_Medieval_Read -->
 	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier1" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Schematic_Medieval</li>
 		</thingCategories>
 		<graphicData>
-			<texPath>Things/Item/Blueprints/Blueprint_Old</texPath>
+			<texPath>Things/Item/Blueprints/Blueprint_Medieval_Unread</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>0.8</drawSize>
 		</graphicData>
-		<uiIconPath>Things/Item/Blueprints/Blueprint_Old</uiIconPath>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Medieval_Unread</uiIconPath>
 	</ThingDef>
 
 
 	<!-- ===== 分档抽象基类 tier2 (RK_Blueprint_Industrial): 挂对应可视子分类 ===== -->
-	<!-- 工业档直接沿用基类 Blueprint_New(蓝底网格工业蓝图); MO 图纸卷轴已让位给高科技档 -->
+	<!-- 默认=工业未读卷轴 Blueprint_Industrial_Unread; 读过后 BlueprintBook.Graphic/UIIconOverride 自动切 Blueprint_Industrial_Read -->
 	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier2" Abstract="True">
 		<thingCategories Inherit="False">
 			<li>RK_Blueprint_Industrial</li>
 		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Blueprints/Blueprint_Industrial_Unread</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Industrial_Unread</uiIconPath>
 	</ThingDef>
 
 
@@ -150,11 +156,11 @@
 	<!-- 三档统一用 Blueprint_HighTech(紫色高科技图纸卷轴); 基类 Blueprint_New 属工业档, 不得再被继承 -->
 	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_TierHighTech" Abstract="True">
 		<graphicData>
-			<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
+			<texPath>Things/Item/Blueprints/Blueprint_Spacer_Unread</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>0.8</drawSize>
 		</graphicData>
-		<uiIconPath>Things/Item/Blueprints/Blueprint_HighTech</uiIconPath>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Spacer_Unread</uiIconPath>
 		<comps Inherit="False">
 			<li Class="CompProperties_Book">
 				<ageYearsRange>100~200</ageYearsRange>

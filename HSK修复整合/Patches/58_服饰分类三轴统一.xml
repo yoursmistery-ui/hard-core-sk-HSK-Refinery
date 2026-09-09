@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 58_服饰分类三轴统一 (2026-09-09)
+       把 115 个旧服饰分类里的顶层节点 re-parent 进 58 行新建的三轴骨架, 一个不删、不改 defName。
+       安全性: 改 parent 不影响成员关系, 故 Core_SK 深空采矿船 StockGenerator_Category
+       (SetChemicalProtectionSuit) 与 Vile_Mending.xml 的 ThingFilter 收料(7 个 *LayerCat) 均不受影响。
+       每个操作顶层独立 Conditional 门控: 目标不存在(未装对应 mod)时静默跳过, 不报错。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="BaseLayerCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="BaseLayerCat"]/parent</xpath>
+      <value><parent>HSK_P_Under</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="UpperDressCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="UpperDressCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="MiddleLayerCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="MiddleLayerCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ShellLayerCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ShellLayerCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="CombinedArmorCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="CombinedArmorCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="VestsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="VestsCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="BodySuitsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="BodySuitsCat"]/parent</xpath>
+      <value><parent>HSK_P_Torso</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="FullBodySuitsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="FullBodySuitsCat"]/parent</xpath>
+      <value><parent>HSK_P_Full</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="FullArmorCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="FullArmorCat"]/parent</xpath>
+      <value><parent>HSK_P_Full</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="PantsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="PantsCat"]/parent</xpath>
+      <value><parent>HSK_P_Legs</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="BootsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="BootsCat"]/parent</xpath>
+      <value><parent>HSK_P_Feet</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="GlovesCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="GlovesCat"]/parent</xpath>
+      <value><parent>HSK_P_Hands</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Headgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Headgear"]/parent</xpath>
+      <value><parent>HSK_P_Head</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ArmorHeadgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ArmorHeadgear"]/parent</xpath>
+      <value><parent>HSK_P_Head</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="KidsApparel"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="KidsApparel"]/parent</xpath>
+      <value><parent>HSK_P_Head</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="AccessoriesCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="AccessoriesCat"]/parent</xpath>
+      <value><parent>HSK_P_Face</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="GasMasksCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="GasMasksCat"]/parent</xpath>
+      <value><parent>HSK_P_Face</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ApparelMisc"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ApparelMisc"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Loadout"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Loadout"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ShieldCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ShieldCat"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Shields"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Shields"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="VFEC_Shields"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="VFEC_Shields"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Hazmat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Hazmat"]/parent</xpath>
+      <value><parent>HSK_P_Acc</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ApparelNoble"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ApparelNoble"]/parent</xpath>
+      <value><parent>HSK_U_Noble</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="SpecialHelmetsCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="SpecialHelmetsCat"]/parent</xpath>
+      <value><parent>HSK_U_Work</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ApparelArmor"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ApparelArmor"]/parent</xpath>
+      <value><parent>HSK_U_Combat</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Mopp"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Mopp"]/parent</xpath>
+      <value><parent>HSK_U_Combat</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="ApparelUtility"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="ApparelUtility"]/parent</xpath>
+      <value><parent>HSK_U_Tac</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="SpecialApparelCat"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="SpecialApparelCat"]/parent</xpath>
+      <value><parent>HSK_U_Tac</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Meow_Jewelry"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Meow_Jewelry"]/parent</xpath>
+      <value><parent>HSK_U_Orn</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_Scroll"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_Scroll"]/parent</xpath>
+      <value><parent>HSK_U_Orn</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_Apparel"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_Apparel"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_Headgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_Headgear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_ApparelArmor"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_ApparelArmor"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_ArmorHeadgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_ArmorHeadgear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_ApparelNoble"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_ApparelNoble"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_ThingCategory_Util"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_ThingCategory_Util"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="RK_HeadgearNoble"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="RK_HeadgearNoble"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="OARatkin_Apparel"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="OARatkin_Apparel"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="OARatkin_Armor"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="OARatkin_Armor"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="OARatkin_Utility"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="OARatkin_Utility"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="OARatkin_Headgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="OARatkin_Headgear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="OARatkin_ArmorHeadgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="OARatkin_ArmorHeadgear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Miho_Apparel"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Miho_Apparel"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Miho_Headgear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Miho_Headgear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_OnSkin"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_OnSkin"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Overhead"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Overhead"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Shell"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Shell"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Underwear"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Kurin_Apparel_Underwear"]/parent</xpath>
+      <value><parent>HSK_ApparelLegacy</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Meow_Amulet"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Meow_Amulet"]/parent</xpath>
+      <value><parent>Meow_Jewelry</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Meow_Bracelet"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Meow_Bracelet"]/parent</xpath>
+      <value><parent>Meow_Jewelry</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Meow_Ring"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Meow_Ring"]/parent</xpath>
+      <value><parent>Meow_Jewelry</parent></value>
+    </match>
+  </Operation>
+  <!-- Sets(身份套装池) 原样保留在 Apparel 下, 33 个子类成员关系不动。
+       不试图排序: ThingCategoryDef 无排序字段, 写了会报错并被丢弃。 -->
+</Patch>

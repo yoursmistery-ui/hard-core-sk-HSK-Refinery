@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 95_服饰三轴挂载 (2026-09-09, 本 mod 自有服饰挂三轴; 分类 def 见 HSK修复整合)
+       每件补挂 ①穿戴位置 ②用途场景 ③科技档位 三个新分类。
+       Conditional: 已有 thingCategories 则追加 li; 没有则整体 Add 一个 thingCategories 节点
+       (不带 Inherit="False", 让父类继承的旧分类照常合并, 只做加法)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OAGene_SnowstormBarrette"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OAGene_SnowstormBarrette"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OAGene_SnowstormBarrette"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OAGene_SnowstormCloak"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OAGene_SnowstormCloak"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Daily</li><li>RK_Apparel_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OAGene_SnowstormCloak"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Daily</li><li>RK_Apparel_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Env</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Env</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Apparel_F"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_F"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Apparel_F"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Belt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Belt"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Belt"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_BlitzBelt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_BlitzBelt"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_BlitzBelt"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_AA"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AA"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AA"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_AB"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AB"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AB"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_AC"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AC"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_AC"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Component_F"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_F"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Component_F"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_EMPBelt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_EMPBelt"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_EMPBelt"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_FirstAid"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_FirstAid"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Work</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_FirstAid"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Work</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Hat_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Hat_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Hat_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Hat_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Hat_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Hat_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_LifeformDetect"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_LifeformDetect"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_LifeformDetect"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Middle"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Middle"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Middle"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Apparel_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Component_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Component_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Component_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Tac</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Component_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Component_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Acc</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Head</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_AA"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_AA"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_AA"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Noble</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui_ACC"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui_ACC"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui_ACC"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_G"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_G"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_G"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Sandwich_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Traveller_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Traveller_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Traveller_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Traveller_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Traveller_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Traveller_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_A"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_A"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_A"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_B"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_B"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_B"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_C"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_C"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_C"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_D"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_D"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_D"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_E"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_E"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_E"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_F"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_F"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_F"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_G"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_G"]/thingCategories</xpath>
+      <value><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OA_RK_Windbreaker_G"]</xpath>
+      <value><thingCategories><li>HSK_P_Torso</li><li>HSK_U_Combat</li><li>RK_Apparel_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+</Patch>

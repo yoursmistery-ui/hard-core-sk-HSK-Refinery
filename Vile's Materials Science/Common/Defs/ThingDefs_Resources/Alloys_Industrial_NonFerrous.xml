@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- Core_SK owns ThingDef AluminiumBar; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_Industrial_NonFerrous.xml. -->
+	
+	<!-- Core_SK owns ThingDef CupronickelAlloy; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_Industrial_NonFerrous.xml. -->
+	
+	<ThingDef ParentName="ResourceBase" Name="AluminiumAnodizedRed_Parent">
+		<defName>AnodizedAluminiumRed</defName>
+		<label>anodized 3003 aluminium</label>
+		<description>TIER 3 - Industrial
+>>> Optimal	Construction, Lightweight
+>> Suitable	Economy
+X Inadvisable 	Durability, Blunt Weapons
+			
+Tools Recommended: Any (mediocre, but light and efficient)
+			
+Anodizing is a chemical process that not only colors and adds beauty to the 3003 Aluminum alloy, but also toughness. Additions of silicon give it strength and durability, while still maintaining its light weight and great workability. It's less durable than 6061, so is best for commercial use. Weapons and tools made of this tend to be a bit sub-par, but they can be made quickly, and buildings made with 6061 go up quickly.</description>
+		<graphicData>
+			<texPath>Things/Item/Material/AnodizedAluminiumRed</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Metal_Drop</soundDrop>
+		<stackLimit>600</stackLimit>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MarketValue>5</MarketValue>
+			<StuffPower_Armor_Blunt>1</StuffPower_Armor_Blunt>
+			<StuffPower_Armor_Sharp>0.9</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Heat>0.06</StuffPower_Armor_Heat>
+			<StuffPower_Insulation_Cold>-7</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>-7</StuffPower_Insulation_Heat>
+			<SharpDamageMultiplier>1</SharpDamageMultiplier>
+			<BluntDamageMultiplier>0.8</BluntDamageMultiplier>
+			<DeteriorationRate>0</DeteriorationRate>
+			<Flammability>0</Flammability>
+			<Mass>0.25</Mass>
+			<Bulk>0.35</Bulk>
+		</statBases>
+		<useHitPoints>true</useHitPoints>
+		<slagDef>ChunkSlagSteel</slagDef>
+		<thingCategories>
+			<li>SLDBar</li>
+			<li>LightBar</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<stuffProps>
+            <appearance>Cladding</appearance>
+			<stuffAdjective>3003 Aluminium</stuffAdjective>
+			<categories>
+				<li>Metallic</li>
+				<li>StrongMetallic</li>
+				<li>CorrosionResistant</li>
+				<li>LightMaterial</li>
+			</categories>
+			<constructEffect>ConstructMetal</constructEffect>
+			<color>(255,71,85)</color>
+			<commonality>0.8</commonality>
+			<soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+			<soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+			<soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+			<statFactors>
+				<MaxHitPoints>1.45</MaxHitPoints>
+				<Beauty>2</Beauty>
+				<Flammability>0</Flammability>
+				<WorkToMake>0.8</WorkToMake>
+				<WorkToBuild>0.7</WorkToBuild>
+				<DoorOpenSpeed>1.4</DoorOpenSpeed>
+				<MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
+				<MoveSpeed>0.7</MoveSpeed>
+				<MarketValue>0.8</MarketValue>
+				<BedRestEffectiveness>1</BedRestEffectiveness>
+				<ImmunityGainSpeedFactor>1</ImmunityGainSpeedFactor>
+				<WorkTableWorkSpeedFactor>1.12</WorkTableWorkSpeedFactor>
+				<MeleePenetrationFactor>1</MeleePenetrationFactor>
+				<Mass>0.5</Mass>
+				<Cleanliness>1.2</Cleanliness>
+			</statFactors>
+			<statOffsets>
+				<Beauty>2</Beauty>
+			</statOffsets>
+		</stuffProps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<modExtensions>
+		    <li Class="SurvivalToolsLite.StuffPropsTool">
+                <toolStatFactors>
+                    <TreeFellingSpeed>1.1</TreeFellingSpeed>
+					<PlantHarvestingSpeed>1.1</PlantHarvestingSpeed>
+					<PlantWorkSpeed>1.1</PlantWorkSpeed>
+					<MiningSpeed>0.9</MiningSpeed>
+					<MiningYieldDigging>1.1</MiningYieldDigging>
+					<ConstructionSpeed>1.1</ConstructionSpeed>
+					<SmithingSpeed>1.1</SmithingSpeed>
+					<CookSpeed>1.1</CookSpeed>
+					<ButcheryFleshSpeed>1.1</ButcheryFleshSpeed>
+                </toolStatFactors>
+            </li>
+		</modExtensions>
+	</ThingDef>
+	
+	<ThingDef ParentName="AluminiumAnodizedRed_Parent">
+		<defName>AnodizedAluminiumBlue</defName>
+        <label>anodized 6061 aluminium</label>
+        		<description>TIER 3 - Industrial
+>>> Optimal	Construction, Lightweight
+>> Suitable	Production
+X Inadvisable 	Durability, Blunt Weapons
+			
+Tools Recommended: Any (mediocre, but light and efficient)
+			
+Anodizing is a chemical process that not only colors and adds beauty to the 6061 Aluminum alloy, but also toughness. Additions of silicon and copper give it strength and durability, approaching that some steels, while still maintaining its light weight and great workability.  It's stronger than 3003, and better for industrial use. Weapons and tools made of this tend to be a bit sub-par, but they can be made quickly, and buildings made with 6061 go up quickly.</description>
+		<graphicData>
+			<texPath>Things/Item/Material/AnodizedAluminiumBlue</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+        <statBases>
+			<MarketValue>7</MarketValue>
+			<StuffPower_Armor_Heat>0.08</StuffPower_Armor_Heat>
+		</statBases>
+		<stuffProps>
+			<stuffAdjective>6061 Aluminium</stuffAdjective>
+			<color>(2,129,253)</color>
+            <statFactors>
+				<MaxHitPoints>1.75</MaxHitPoints>
+				<WorkTableWorkSpeedFactor>1.18</WorkTableWorkSpeedFactor>
+			</statFactors>
+		</stuffProps>
+        <modExtensions>
+		    <li Class="SurvivalToolsLite.StuffPropsTool">
+                <toolStatFactors>
+                    <TreeFellingSpeed>1.15</TreeFellingSpeed>
+					<PlantHarvestingSpeed>1.1</PlantHarvestingSpeed>
+					<PlantWorkSpeed>1.1</PlantWorkSpeed>
+					<MiningSpeed>0.95</MiningSpeed>
+					<MiningYieldDigging>1.1</MiningYieldDigging>
+					<ConstructionSpeed>1.15</ConstructionSpeed>
+					<CookSpeed>1.1</CookSpeed>
+					<ButcheryFleshSpeed>1.1</ButcheryFleshSpeed>
+                </toolStatFactors>
+            </li>
+		</modExtensions>
+	</ThingDef>
+	
+	<!-- Core_SK owns ThingDef Titanium; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_Industrial_NonFerrous.xml. -->
+
+	<!-- Core_SK owns ThingDef DepletedUranium; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_Industrial_NonFerrous.xml. -->
+	
+	
+</Defs>

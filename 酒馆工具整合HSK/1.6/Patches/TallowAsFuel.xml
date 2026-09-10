@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ============================================================
+		2026-08-29 油料六件套加入燃烧设施燃料单
+		六件套 = Kindling 引火物 / Pitch 树脂 / FishOil 鱼油 / Tallow 油脂 / PlantWax 蜡 / Turpentine 松节油
+		(全部为 Core_SK/Vile 系 ThingWithComps 燃料物品, Unified.xml 终态确认存在;
+		 各设施只补缺集, 不重复添加已有项; Tallow 原为本文件主角, 现 TavTallow 已删, 全部为 Core_SK Tallow)
+
+		① HSK 取暖/明火设施(燃料组件按 Unified.xml 终态 = SK.CompFueled_Properties):
+		   Campfire 缺 Pitch/FishOil/Tallow/PlantWax/Turpentine
+		   Brazier 缺 Kindling/Pitch/FishOil/Tallow/PlantWax/Turpentine
+		   Building_Heater / OpenHearth 缺 Pitch/FishOil/Tallow/PlantWax/Turpentine
+		② 原版未改设施(CompProperties_Refuelable): DarklightBrazier 缺全部6种, Darktorch 缺5种(有Kindling)
+		③ 本 mod Tav_Oven: 已有 Charcoal/Coal/Kindling/Tallow, 补 Pitch/FishOil/PlantWax/Turpentine
+		④ 鼠族家具拓展 13 个燃料建筑(CompProperties_Refuelable): 灯9+篝火/壁炉/锻造炉/炉灶, 各补全部6种
+		 TorchLamp/TorchWallLamp 终态已含全部六种, 无需补。
+		⑤ HSK工业科研大修 10 个(CompProperties_Refuelable): 燃气锅炉(+6, 天然气外兼烧油料),
+		   Rustic 乡村照明 9 个 —— 火把x2/路灯(烧煤)各补6种, 油灯x2/蜡烛类x4(烧油脂)各补5种(已有Tallow)。
+
+		门控: 逐 def 顶层 Conditional(xpath 存在性, 1.6 Operation 级 MayRequire 已失效);
+		目标 mod 未装/def 不存在时静默 no-op(反编译 PatchOperationConditional.ApplyWorker 实证)。
+	============================================================ -->
+
+	<!-- ===== ① Campfire: +5 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Campfire"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Campfire"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ① Brazier: +6 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Brazier"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Brazier"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ① Building_Heater: +5 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Building_Heater"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Building_Heater"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ① OpenHearth: +5 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="OpenHearth"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="OpenHearth"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ② DarklightBrazier(皇室): +6 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="DarklightBrazier"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="DarklightBrazier"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ② Darktorch(意识形态): +5 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Darktorch"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Darktorch"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ③ Tav_Oven: +4(已有 Charcoal/Coal/Kindling/Tallow) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Tav_Oven"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Tav_Oven"]/comps/li[@Class="SK.CompFueled_Properties"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ④ 鼠族家具拓展: 9 灯 + 篝火/壁炉/锻造炉/炉灶, 各 +6 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_Street_Lamp_L"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_Street_Lamp_L"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_Street_Lamp_Seven"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_Street_Lamp_Seven"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_EndTableWithLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_EndTableWithLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_lamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_lamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_LampM"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_LampM"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_lamp_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_lamp_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_LampM_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_LampM_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_Wall_Lamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_Wall_Lamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_Wall_Lamp_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_Wall_Lamp_White"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_Bonfire"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_Bonfire"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_Fireplace"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_Fireplace"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_GL_FueledSmithy"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_GL_FueledSmithy"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_FueledStove"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_FueledStove"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ⑤ HSK工业科研大修: 燃气锅炉 +6(天然气之外兼烧油料) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RK_Petro_GasBoiler"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RK_Petro_GasBoiler"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ⑤ Rustic 火把x2/路灯(烧煤): 各 +6 ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_TorchLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_TorchLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_WallTorch"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_WallTorch"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_LampPost"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_LampPost"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>Tallow</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== ⑤ Rustic 油灯x2/蜡烛类x4(烧油脂): 各 +5(已有Tallow) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_OilLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_OilLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_WallLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_WallLamp"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_Candle"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_Candle"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_Candles"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_Candles"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_CandleStand"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_CandleStand"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Rustic_Candelabra"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Rustic_Candelabra"]/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs</xpath>
+			<value>
+				<li>Kindling</li>
+				<li>Pitch</li>
+				<li>FishOil</li>
+				<li>PlantWax</li>
+				<li>Turpentine</li>
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

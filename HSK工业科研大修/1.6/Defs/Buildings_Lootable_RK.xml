@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  P1 · 可搜刮战利品容器 (M1 骨架批, 2026-08-28)
+  来源: Medieval Overhaul 1.6.2.2 机制复刻 —— thingClass 换成我们自研的
+        BlueprintUnlockHSK.Building_LootableHSK(语义抄 MO Building_Lootable,
+        见 Source/LootableHSK.cs), 扩展换成 LootableExtensionHSK。
+  定制: 新增 blueprintTier / blueprintChance / blueprintSeriesTech / blueprintCount
+        → 废墟探索成为 112 本蓝图书的定向获取渠道(优先给未读卷册)。
+  材料/物品引用一律改为本环境已存在的 def(Unified.xml 逐个核对)。
+  这些容器**不可建造**(无 designationCategory / 无造价), 由地图生成与站点布局投放;
+  M1 阶段可用开发者模式直接摆放验证。
+============================================================================ -->
+
+	<ThingDef Name="Rustic_LootBuildingBase" ParentName="BuildingBase" Abstract="True">
+		<thingClass>BlueprintUnlockHSK.Building_LootableHSK</thingClass>
+		<category>Building</category>
+		<tickerType>Never</tickerType>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<fillPercent>0.40</fillPercent>
+		<blockLight>false</blockLight>
+		<holdsRoof>false</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<selectable>true</selectable>
+		<rotatable>false</rotatable>
+		<size>(1,1)</size>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>250</WorkToBuild>
+			<Mass>4</Mass>
+			<Flammability>0.5</Flammability>
+			<SellPriceFactor>0</SellPriceFactor>
+		</statBases>
+		<building>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<!-- 搜索容器不应进建筑师菜单(基类无 designationCategory), 但需清掉 HSK BuildingBase 的研究门禁 -->
+		<researchPrerequisites Inherit="False"/>
+		<costList Inherit="False"/>
+	</ThingDef>
+
+	<!-- ======================= 1. 藏身处木桶 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootBarrelClosed</defName>
+		<label>废弃木桶</label>
+		<description>一只箍着铁皮的旧木桶, 桶口的塞子已经腐烂。里面大概还剩下些前人来不及搬走的东西。\n\n搜刮后可能翻出杂物, 偶尔也夹着一卷旧图纸。</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/BarrelClosed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>2~8</lootCount>
+				<maxStacks>3</maxStacks>
+				<lootQualityRange>1~3</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Pemmican</li>
+					<li>MealSurvivalPack</li>
+					<li>Salt</li>
+					<li>Cloth</li>
+					<li>ComponentMedieval</li>
+					<li>Steel</li>
+					
+				</randomItems>
+				<emptyGraphicData>
+					<texPath>Things/Building/Storage/BarrelClosed</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>(2,2)</drawSize>
+					<color>(120,110,100)</color>
+				</emptyGraphicData>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.10</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>1</blueprintTier>
+				<blueprintChance>0.20</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 2. 封口麻袋 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootSackClosed</defName>
+		<label>封口麻袋</label>
+		<description>一只扎口的粗麻袋, 缝线已经松脱。撕开就能倒出里面的东西, 但袋子也就废了。</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/SackClosed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>1~4</lootCount>
+				<maxStacks>2</maxStacks>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Salt</li>
+					<li>Pemmican</li>
+					<li>Cloth</li>
+					<li>Wool</li>
+					<li>ComponentMedieval</li>
+				</randomItems>
+				<emptyGraphicData>
+					<texPath>Things/Building/Storage/SackClosed</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>(2,2)</drawSize>
+					<color>(110,102,92)</color>
+				</emptyGraphicData>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.10</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<isDestroyed>true</isDestroyed>
+				<blueprintTier>1</blueprintTier>
+				<blueprintChance>0.12</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 3. 板条箱 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootCrate</defName>
+		<label>撬开的板条箱</label>
+		<description>钉死的木箱, 箱盖被人用刀撬开过又草草钉回去。里面的物资被挑剩了一部分。</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/Crate1x1</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>0.85</lootChance>
+				<lootCount>1~6</lootCount>
+				<maxStacks>3</maxStacks>
+				<lootQualityRange>1~4</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Steel</li>
+					<li>Plasteel</li>
+					<li>ComponentIndustrial</li>
+					<li>SilverCoin</li>
+					<li>GoldCoin</li>
+				</randomItems>
+				<emptyGraphicData>
+					<texPath>Things/Building/Storage/Crate1x1</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>(2,2)</drawSize>
+					<color>(115,105,95)</color>
+				</emptyGraphicData>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.10</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>2</blueprintTier>
+				<blueprintChance>0.22</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 4. 战利品货架 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootShelf</defName>
+		<label>杂货架</label>
+		<description>一家破产商队的货架, 药品、化学品和零嘴被胡乱堆在一起, 值钱货却不见了。</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/ShelfFilledA</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.8,2.2)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>1~5</lootCount>
+				<maxStacks>4</maxStacks>
+				<lootQualityRange>1~4</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Medicine</li>
+					<li>Neutroamine</li>
+					<li>Jade</li>
+					<li>SilverCoin</li>
+					<li>Chocolate</li>
+					
+					<li>Cloth</li>
+				</randomItems>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.10</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>2</blueprintTier>
+				<blueprintChance>0.25</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+				<emptyGraphicData>
+					<texPath>Things/Building/Storage/RackEmpty</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>(2.8,2.2)</drawSize>
+				</emptyGraphicData>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 5. 武器架 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootWeaponRack</defName>
+		<label>锈蚀的武器架</label>
+		<description>民兵队的武器架。好武器早被拿走, 剩下的还能用——只要你不介意剑柄上的霉斑。</description>
+		<graphicData>
+			<texPath>Things/Building/Storage/RackFilled1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.8,2.2)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>2~8</lootCount>
+				<maxStacks>3</maxStacks>
+				<lootQualityRange>0~3</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>RK_Crossbow</li>
+					<li>RK_Weapon_Arbalest</li>
+					<li>RK_Halberd</li>
+					<li>MeleeWeapon_Knife</li>
+					<li>Apparel_FlakVest</li>
+					<li>Apparel_FlakJacket</li>
+				</randomItems>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.10</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>1</blueprintTier>
+				<blueprintChance>0.25</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+				<emptyGraphicData>
+					<texPath>Things/Building/Storage/RackEmpty</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>(2.8,2.2)</drawSize>
+				</emptyGraphicData>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 6. 碎书堆(出书/图纸) ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootBookPile</defName>
+		<label>霉烂的书堆</label>
+		<description>塌下来的书架残骸, 书页被雨水泡成一团。运气好时还能撕下几页看得出图样的东西。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBookshelf</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<Flammability>0.85</Flammability>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>0.6</lootChance>
+				<lootCount>1~2</lootCount>
+				<maxStacks>1</maxStacks>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>TextBook</li>
+				</randomItems>
+				<isDestroyed>true</isDestroyed>
+				<blueprintTier>1</blueprintTier>
+				<blueprintChance>0.9</blueprintChance>
+				<blueprintCount>2</blueprintCount>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 7. 骸骨堆 ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootBonePile</defName>
+		<label>骸骨堆</label>
+		<description>堆在墙角的白骨, 多半是当年守这里的人。骨头缝里塞着些随葬的小东西。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinBonePile1x1</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>0.9</lootChance>
+				<lootCount>1~4</lootCount>
+				<maxStacks>2</maxStacks>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Steel</li>
+					<li>SilverCoin</li>
+					<li>Cloth</li>
+				</randomItems>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.15</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>1</blueprintTier>
+				<blueprintChance>0.15</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 8. 铠甲像(高档, 中世纪→极致) ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootArmorStatue</defName>
+		<label>立姿铠甲像</label>
+		<description>一具被人立在原地当装饰的骑士全身甲, 甲胄内还锁着一套完整的护具。传闻某些家族会把祖传的图纸一并封进铠甲里。</description>
+		<graphicData>
+			<texPath>Things/Building/Art/ArmorStatue_east</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Beauty>60</Beauty>
+			<Mass>12</Mass>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>1~3</lootCount>
+				<maxStacks>2</maxStacks>
+				<lootQualityRange>2~5</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>Apparel_PlateArmor</li>
+					<li>Steel</li>
+					<li>Plasteel</li>
+					<li>GoldCoin</li>
+				</randomItems>
+				<emptyGraphicData>
+					<texPath>Things/Building/Art/ArmorStatue_east</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>(2,2)</drawSize>
+					<color>(96,96,100)</color>
+				</emptyGraphicData>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.15</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>4</blueprintTier>
+				<blueprintChance>0.8</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2.5</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 9. 太空遗物箱(工业→太空档) ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootTechCache</defName>
+		<label>军用补给箱</label>
+		<description>一个工业时代的制式补给箱, 封条完好。里面通常还有未拆封的精密部件——偶尔还夹着军用技术文档。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedCrate1x1</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>2~6</lootCount>
+				<maxStacks>3</maxStacks>
+				<lootQualityRange>2~5</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>ComponentSpacer</li>
+					<li>ComponentIndustrial</li>
+					<li>Uranium</li>
+					<li>Plasteel</li>
+					<li>Neutroamine</li>
+					<li>SilverCoin</li>
+				</randomItems>
+				<emptyGraphicData>
+					<texPath>Things/Building/Ruin/RuinedCrate1x1</texPath>
+					<graphicClass>Graphic_Random</graphicClass>
+					<drawSize>(1,1)</drawSize>
+				</emptyGraphicData>
+				<blueprintTier>3</blueprintTier>
+				<blueprintChance>0.35</blueprintChance>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>2</effectSize>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ======================= 10. 古代圣物柜(最高档) ======================= -->
+	<ThingDef ParentName="Rustic_LootBuildingBase">
+		<defName>Rustic_LootReliquary</defName>
+		<label>古代圣物柜</label>
+		<description>一具沉重的镀金圣物柜, 柜门上的锁早已被人用暴力解决。传闻旧帝国的骑士团会把最珍贵的技术典籍封存在这样的柜子里, 由人世代看守。</description>
+		<graphicData>
+			<texPath>Things/Building/Art/AncientReliquary</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(2.9,0.6,1.9)</volume>
+			</shadowData>
+		</graphicData>
+		<size>(3,1)</size>
+		<rotatable>true</rotatable>
+		<fillPercent>0.55</fillPercent>
+		<tickerType>Never</tickerType>
+		<statBases>
+			<MaxHitPoints>350</MaxHitPoints>
+			<Beauty>500</Beauty>
+			<Mass>100</Mass>
+			<Flammability>0.3</Flammability>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.LootableExtensionHSK">
+				<lootChance>1</lootChance>
+				<lootCount>1~5</lootCount>
+				<maxStacks>4</maxStacks>
+				<lootQualityRange>3~6</lootQualityRange>
+				<isRandom>true</isRandom>
+				<randomItems>
+					<li>GoldCoin</li>
+					<li>Plasteel</li>
+					<li>ComponentSpacer</li>
+					<li>Gun_ChargeLance</li>
+					<li>Gun_PlasmaRifle</li>
+					<li>Apparel_MarineBodysuit</li>
+				</randomItems>
+				<enemysToSpawn><li>Rat</li></enemysToSpawn>
+				<enemySpawnChance>0.15</enemySpawnChance>
+				<hostileEnemy>false</hostileEnemy>
+				<blueprintTier>5</blueprintTier>
+				<blueprintChance>1</blueprintChance>
+				<blueprintCount>2</blueprintCount>
+				<searchEffect>DustPuff</searchEffect>
+				<effectSize>3</effectSize>
+				<emptyGraphicData>
+					<texPath>Things/Building/Ruin/AncientReliquaryRuined</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>(5,4)</drawSize>
+				</emptyGraphicData>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

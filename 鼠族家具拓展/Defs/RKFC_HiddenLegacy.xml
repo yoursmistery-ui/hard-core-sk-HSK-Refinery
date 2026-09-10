@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+	<!-- 旧存档兼容: 已从建造菜单移除(文化风格化)的家具,保留 def 定义使旧存档可正常读档。
+	     隐藏处理: 移除 designationCategory(不进建造菜单) + generateCommonality 0(不生成)。
+	     2026-08-17: 象棋桌/电视/炉灶(燃料·电力)已从文化风格拆出为独立物品,移入 RKFC_JoyTemp.xml。 -->
+
+<ThingDef ParentName="RKFC_ArtableFurnitureBase">
+		<defName>RKFC_RGKDiningChair</defName>
+		<generateCommonality>0</generateCommonality>
+		<label>dining chair</label>
+		<description>A comfortable and attractive chair. Can be used at tables, work stations, and elsewhere.</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Chair3</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.23, 0.26, 0.23)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>170</MaxHitPoints>
+			<WorkToBuild>7000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>8</Beauty>
+			<Comfort>0.75</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc3</designationHotKey>
+		<fillPercent>0.35</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<uiIconOffset>(0,0.1)</uiIconOffset>
+		<uiIconScale>0.90</uiIconScale>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites>
+</ThingDef>
+
+</Defs>

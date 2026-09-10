@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- ============================================================================
+
+  美狐科技书 (Miho_Schematic) 统一接入「读书推进解锁」体系 —— v6, 2026-09-11
+
+  ============================================================================
+
+  背景: 此前存在三套互不相通的「解锁方式」——
+
+    ① 原版科研蓝图 (Techprint): 科研台消耗品, 与本 mod 体系无关 (见 72 号补丁);
+
+    ② 本 mod 蓝图书 / 科技典籍: 走 BlueprintTargetExtension + 卷体系;
+
+    ③ 美狐科技书 Miho_Schematic: 走原版 BookOutcomeProperties_GainResearch, 只加科研进度,
+
+       不参与门控 —— 也就是"白送进度"。
+
+  v6 把 ③ 也纳入 ② 的同一套「卷」体系:
+
+    1. thingClass → BlueprintUnlockHSK.BlueprintBook
+
+       (卷绑定 boundVolumes / 本地进度 localProgress / 已读标记都存这个子类);
+
+    2. doers 追加 BlueprintUnlockHSK.BlueprintBookProperties
+
+       (原版 GainResearch 保留 —— 目标科技已解锁时它仍照常吃科研进度加速);
+
+    3. modExtensions 挂 BlueprintTargetExtension:
+
+         randomVolume = true → 生成时随机绑定 1~2 卷 (且限定同一科技);
+
+         volumeTechs  = 美狐 23 项科技 → 每本书随机解锁其中一项
+
+                        (概率大头落在尚未解锁的科技上);
+
+         gate         = true → 该科技未读满就不能立项研究 (与蓝图书同一道硬门槛);
+
+         standalone   = true → 不参与本 mod 蓝图系列的卷数平均。
+
+  美狐 23 项科技在终态里没有蓝图书 → 每项卷数 = 1 (BlueprintGateDatabase.GetVolumeCount 回落值)
+
+  → 「读完一本美狐书」= 随机解锁 23 项中的 1 项。
+
+  ⚠ 跨 mod 补丁: 外层用 PatchOperationFindMod(比 About 的 <name>, 非 packageId),
+
+   美狐缺失时整段跳过; 内层 xpath 存在性门控兜底 (1.6 起 Operation 级 MayRequire 失效)。
+
+  ⚠ Miho_Schematic 原本没有 <thingClass> 节点 (继承 BookBase) → 用 Conditional 的
+
+   nomatch 分支 Add 一个进去。
+
+  ============================================================================ -->
+
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>美狐HSK拓展</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+
+				<!-- ===== 1) thingClass → BlueprintBook ===== -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/thingClass</xpath>
+					<match Class="PatchOperationReplace">
+						<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/thingClass</xpath>
+						<value>
+							<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+						</value>
+					</match>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>/Defs/ThingDef[defName="Miho_Schematic"]</xpath>
+						<value>
+							<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+						</value>
+					</nomatch>
+				</li>
+
+				<!-- ===== 2) doers 追加本 mod 的 doer (原版 GainResearch 保留) ===== -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/comps/li/doers</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/comps/li/doers</xpath>
+						<value>
+							<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+						</value>
+					</match>
+				</li>
+
+				<!-- ===== 3) 挂 BlueprintTargetExtension: 23 项美狐科技 = 随机卷池 ===== -->
+				<li Class="PatchOperationConditional">
+					<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/modExtensions</xpath>
+					<match Class="PatchOperationAdd">
+						<xpath>/Defs/ThingDef[defName="Miho_Schematic"]/modExtensions</xpath>
+						<value>
+							<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+								<targetTech>Miho_ApparelBasic</targetTech>
+								<tier>3</tier>
+								<standalone>true</standalone>
+								<gate>true</gate>
+								<randomVolume>true</randomVolume>
+								<volumeTechs>
+									<li>Miho_ApparelBasic</li>
+									<li>Miho_Silk</li>
+									<li>Miho_ApparelAdvanced</li>
+									<li>Miho_ApparelEltex</li>
+									<li>Miho_ApparelAssassin</li>
+									<li>Miho_ApparelSorcerees</li>
+									<li>Miho_BasicFactory</li>
+									<li>Miho_HeavyFactory</li>
+									<li>Miho_MechHack</li>
+									<li>Miho_MechCore</li>
+									<li>Miho_Persona</li>
+									<li>Miho_Celestial</li>
+									<li>Miho_Drone</li>
+									<li>Miho_GuardDrone</li>
+									<li>Miho_LightWarDrone</li>
+									<li>Miho_CommandDrone</li>
+									<li>Miho_HeavyWarDrone</li>
+									<li>Miho_HeavyWarBattery</li>
+									<li>Miho_HeavyPlasma</li>
+									<li>Miho_Weapon</li>
+									<li>Miho_HeavyWeapon</li>
+									<li>Miho_PlasmaWeapon</li>
+									<li>Miho_VerminControlWeapon</li>
+								</volumeTechs>
+							</li>
+						</value>
+					</match>
+					<nomatch Class="PatchOperationAdd">
+						<xpath>/Defs/ThingDef[defName="Miho_Schematic"]</xpath>
+						<value>
+							<modExtensions>
+								<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+									<targetTech>Miho_ApparelBasic</targetTech>
+									<tier>3</tier>
+									<standalone>true</standalone>
+									<gate>true</gate>
+									<randomVolume>true</randomVolume>
+									<volumeTechs>
+										<li>Miho_ApparelBasic</li>
+										<li>Miho_Silk</li>
+										<li>Miho_ApparelAdvanced</li>
+										<li>Miho_ApparelEltex</li>
+										<li>Miho_ApparelAssassin</li>
+										<li>Miho_ApparelSorcerees</li>
+										<li>Miho_BasicFactory</li>
+										<li>Miho_HeavyFactory</li>
+										<li>Miho_MechHack</li>
+										<li>Miho_MechCore</li>
+										<li>Miho_Persona</li>
+										<li>Miho_Celestial</li>
+										<li>Miho_Drone</li>
+										<li>Miho_GuardDrone</li>
+										<li>Miho_LightWarDrone</li>
+										<li>Miho_CommandDrone</li>
+										<li>Miho_HeavyWarDrone</li>
+										<li>Miho_HeavyWarBattery</li>
+										<li>Miho_HeavyPlasma</li>
+										<li>Miho_Weapon</li>
+										<li>Miho_HeavyWeapon</li>
+										<li>Miho_PlasmaWeapon</li>
+										<li>Miho_VerminControlWeapon</li>
+									</volumeTechs>
+								</li>
+							</modExtensions>
+						</value>
+					</nomatch>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

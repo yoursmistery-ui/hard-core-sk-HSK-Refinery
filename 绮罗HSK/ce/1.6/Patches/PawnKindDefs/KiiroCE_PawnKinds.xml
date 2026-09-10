@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- ========== 添加背包的tag =========== -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>
+			Defs/PawnKindDef[
+			defName="Kiiro_Towner" or
+			defName="Kiiro_WoundedSoldier" or
+			defName="Kiiro_Guerrilla" or
+			defName="Kiiro_GuerrillaSniper" or
+			defName="Kiiro_GuerrillaGrenadier" or
+			defName="Kiiro_GuerrillaMedic" or
+			defName="Kiiro_GuerrillaCaptain" or
+			defName="Kiiro_Militia" or
+			defName="Kiiro_MilitiaIII" or
+			defName="Kiiro_MilitiaIV" or
+			defName="Kiiro_MilitiaV"
+			]/apparelTags
+		</xpath>
+		<value>
+			<li>Kiiro_Bag</li>
+			<li>Kiiro_Shoulders</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>
+			Defs/PawnKindDef[
+			defName="Kiiro_SCS" or
+			defName="Kiiro_SCSSmokeMaker" or
+			defName="Kiiro_SCSSniper" or 
+			defName="Kiiro_SCSAssassin"
+			]/apparelTags
+		</xpath>
+		<value>
+			<li>Kiiro_Bag</li>
+			<li>Kiiro_Shoulders</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗居民 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Towner"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>10</min>
+					<max>25</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Towner"]/apparelMoney</xpath>
+		<value>
+			<apparelMoney>100~600</apparelMoney>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Towner"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+				<bodyPartGroup>Shoulders</bodyPartGroup>
+				<requiredTag>Kiiro_Bag</requiredTag>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 伤兵 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_WoundedSoldier"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>2</min>
+					<max>3</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗游击队 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Guerrilla"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>4</min>
+					<max>5</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗游击队狙击手 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaSniper"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>8</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗游击队掷弹手 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaGrenadier"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>4</min>
+					<max>20</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗随队军医 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaMedic"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>6</min>
+					<max>10</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗游击队长 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaCaptain"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>4</min>
+					<max>6</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_GuerrillaCaptain"]/specificApparelRequirements</xpath>
+		<value>
+			<li>
+				<bodyPartGroup>Shoulders</bodyPartGroup>
+				<requiredTag>Kiiro_Bag</requiredTag>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗民兵 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_Militia"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>12</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+	<!-- ========== 绮罗民兵 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_MilitiaIII"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>12</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗弓手 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_MilitiaIV"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>8</min>
+					<max>15</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗毒箭师 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_MilitiaV"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>10</min>
+					<max>35</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+
+	<!-- ========== 绮罗特战队员 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_SCS"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>10</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗特战烟幕手 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_SCSSmokeMaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>4</min>
+					<max>10</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ========== 绮罗特战狙击手 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_SCSSniper"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>8</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+	
+	<!-- ========== 绮罗特战潜行者 ========== -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/PawnKindDef[defName="Kiiro_SCSAssassin"]</xpath>
+		<value>
+			<li Class="CombatExtended.LoadoutPropertiesExtension">
+				<primaryMagazineCount>
+					<min>5</min>
+					<max>8</max>
+				</primaryMagazineCount>
+			</li>
+		</value>
+	</Operation>
+</Patch>

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  P2·前置材料链(2026-08-28): 丝绸链 + 纸张链
+  来源: MO 的 DankPyon_Silk / Silkworm / Paper / Mixture_Paper, 改为纯原版实现。
+  与 MO 的差异: MO 用 Processor 自动加工机(风车/丝绸床/造纸压机)产出,
+    本环境 Processor Framework 尚未启用 → 这一批全部走**原版 RecipeDef + 工作台**,
+    装 PF 后再补自动化机器(见 MO整合执行计划/02_P2)。
+  融合点: 生丝 → 丝绸 这一步挂在 **HSK 现有纺织机 TableLoom** 上(服装生产 II),
+    不新建第二套纺织台。
+============================================================================ -->
+
+	<ThingDef ParentName="ResourceBase" Name="RK_ChainItemBase" Abstract="True">
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
+		<tradeTags>
+			<li>CheapGoods</li>
+		</tradeTags>
+		<statBases>
+			<Mass>0.02</Mass>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+		</statBases>
+		<healthAffectsPrice>false</healthAffectsPrice>
+	</ThingDef>
+
+	<!-- ============ 蚕种(可购买/搜刮, 会变质) ============ -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>RK_Silkworm</defName>
+		<label>蚕种</label>
+		<description>一小盒蚕卵与幼虫。它们只吃桑叶与嫩草, 却能把这些东西变成可以缫丝的茧。放久了会死, 别囤太多。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Silkworm</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<stackLimit>25</stackLimit>
+		<tickerType>Rare</tickerType>
+		<statBases>
+			<MarketValue>5</MarketValue>
+			<Mass>0.01</Mass>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<!-- 纯原料, 不可食用: 不设 <ingestible>; 分类与生丝同放纺织原料区 CTextiles
+		     (原误挂 FoodRaw → 会被 29 处以 FoodRaw 收料的烹饪配方当食材选走) -->
+		<thingCategories>
+			<li>CTextiles</li>
+		</thingCategories>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>10</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>AnimalProductRaw</li>
+		</tradeTags>
+	</ThingDef>
+
+	<!-- ============ 生丝(缫出的丝絮) ============ -->
+	<ThingDef ParentName="RK_ChainItemBase">
+		<defName>RK_RawSilk</defName>
+		<label>生丝</label>
+		<description>从蚕茧里缫出来、尚未加捻织造的丝絮。柔软发亮, 但直接裁剪会散开——必须上织机。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/SilkFabric</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(214,208,188)</color>
+		</graphicData>
+		<stackLimit>150</stackLimit>
+		<thingCategories Inherit="False">
+			<!-- 原料中间物: 归 Textiles 下的 CTextiles(原料/半成品区, Vile 生皮等中间物同区), 不入皮革成品档 -->
+			<li>CTextiles</li>
+		</thingCategories>
+		<statBases>
+			<MarketValue>3.2</MarketValue>
+			<Mass>0.01</Mass>
+		</statBases>
+	</ThingDef>
+
+	<!-- ============ 丝绸(stuff, Vile 布料产业 TIER 3 奢华织物) ============
+	     定位: 工业时代奢华织物(2026-09-02 从中世纪抬档到工业, 蚕桑研究随节点抬档)。
+	     双面隔热俱佳、铺作床褥休息效率最高、光泽美丽, 代价是易燃。字段结构对齐 Vile's Materials Science 布料。 -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>RK_Silk</defName>
+		<label>丝绸</label>
+		<description>TIER 3 - 工业(奢华)
+&gt;&gt;&gt; 极佳	寝具、御寒与防暑
+&gt;&gt; 尚可	经济、软甲
+X 不宜	明火
+
+以生丝在织机上织成、再经打磨的轻薄织物。这是工业时代的奢华布料: 又轻又暖, 寒暑双面隔热一流, 铺作床褥时休息效率冠绝诸布, 光泽华美, 为贵族衣饰与镶金家具所必需——唯一的软肋是极易燃烧。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/SilkFabric</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<stackLimit>150</stackLimit>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<StuffPower_Armor_Sharp>0.60</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Blunt>0.20</StuffPower_Armor_Blunt>
+			<StuffPower_Armor_Heat>0.12</StuffPower_Armor_Heat>
+			<StuffPower_Insulation_Cold>22</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>18</StuffPower_Insulation_Heat>
+			<MaxHitPoints>75</MaxHitPoints>
+			<MarketValue>15</MarketValue>
+			<Mass>0.010</Mass>
+			<Bulk>0.03</Bulk>
+			<Flammability>1.8</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+		</statBases>
+		<burnableByRecipe>true</burnableByRecipe>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<stuffProps>
+			<stuffAdjective>丝绸</stuffAdjective>
+			<categories>
+				<li>Fabric</li>
+			</categories>
+			<color>(238,230,210)</color>
+			<statFactors>
+				<MaxHitPoints>1.15</MaxHitPoints>
+				<Beauty>2.5</Beauty>
+				<Flammability>1.3</Flammability>
+				<WorkToMake>1.4</WorkToMake>
+				<WorkToBuild>1.4</WorkToBuild>
+				<MoveSpeed>0.9</MoveSpeed>
+				<MarketValue>1.6</MarketValue>
+				<BedRestEffectiveness>1.3</BedRestEffectiveness>
+				<ImmunityGainSpeedFactor>1.15</ImmunityGainSpeedFactor>
+				<Mass>0.35</Mass>
+				<Cleanliness>1.5</Cleanliness>
+			</statFactors>
+			<commonality>0.15</commonality>
+		</stuffProps>
+		<tradeTags>
+			<li>Textiles</li>
+		</tradeTags>
+		<thingCategories>
+			<!-- 丝绸属织物, 独立于 Vile 皮革分级; 归高级织物类 HTextiles(与丝绒/人造丝/恶魔丝同级) -->
+			<li>HTextiles</li>
+		</thingCategories>
+	</ThingDef>
+
+	<!-- ============ 纸浆 ============ -->
+	<ThingDef ParentName="RK_ChainItemBase">
+		<defName>RK_PaperPulp</defName>
+		<label>纸浆</label>
+		<description>木纤维与破布被泡烂、磨碎后调成的稠浆。它是纸的唯一原料: 摊开、压榨、晾干, 就是一张能写字的东西。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/PaperMixture/PaperMixtureA</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stackLimit>150</stackLimit>
+		<thingCategories Inherit="False">
+			<li>MiscManufactured</li>
+		</thingCategories>
+		<statBases>
+			<MarketValue>1.6</MarketValue>
+			<Mass>0.05</Mass>
+		</statBases>
+	</ThingDef>
+
+	<!-- ============ 纸 ============ -->
+	<ThingDef ParentName="RK_ChainItemBase">
+		<defName>RK_Paper</defName>
+		<label>纸张</label>
+		<description>一沓压平的纸。抄书、绘制图纸、留下往来书信都离不开它。在拓印技术出现之前, 纸本身就是财富。</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Paper</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<stackLimit>250</stackLimit>
+		<thingCategories Inherit="False">
+			<li>MiscManufactured</li>
+		</thingCategories>
+		<statBases>
+			<MarketValue>2.4</MarketValue>
+			<Mass>0.01</Mass>
+		</statBases>
+		<tradeTags>
+			<li>Crafted</li>
+		</tradeTags>
+	</ThingDef>
+
+</Defs>

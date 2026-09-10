@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 储罐建筑（HSK工业科研大修, 2026-08-29 v3 精简）
+       v3: 储罐只做立式(Graphic_Single 单图不旋转), 卧式四向与石脑油/中性胺罐已删。
+       v4: 三罐改占地 4×4, drawSize 同比放大 (4,5.2)。
+       v5 (2026-08-31): 三罐改卧式可旋转, 占地/占位逻辑对齐 Rimefeller 化合燃料储罐(FuelStorage):
+           size (4,2) + rotatable + Graphic_Multi(_north 横图 / _east 竖图, RimWorld 按朝向交换 drawSize),
+           drawSize (4.5,2.25); 新增 CompProperties_TankGaugeHSK —— 选中时画液位条 + info 显示储量
+           (仿 FuelStorage 的 StorageTank 悬浮效果; Rimefeller 原版 comp 只认 Fuel/Oil 且绑其管网, 装不了本 mod 介质)。
+           存量仍走 CompRefuelable.Fuel(沥青罐纯 Refuelable; 天然气/氨罐另挂 GasPort 管网), 逻辑不变。
+           defName 保留 Vertical 后缀(仅历史命名, 补丁/科研引用它, 不随朝向改名)。 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_AsphaltTankVertical</defName>
+    <label>沥青储罐</label>
+    <description>卧式钢罐，专门储存沥青（以液体形态入罐存储）。占地 4×2，可旋转摆放。选中时在罐顶显示储量液位条。被击毁会泄漏并可能起火。</description>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_Tank_Asphalt</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(3.6,1.8)</drawSize><damageData><rect>(0.05,0.05,0.95,0.95)</rect></damageData><linkFlags><li>Custom2</li></linkFlags></graphicData>
+    <size>(4,2)</size>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>180</pathCost><fillPercent>0.5</fillPercent>
+    <statBases><MaxHitPoints>250</MaxHitPoints><WorkToBuild>2500</WorkToBuild><Flammability>0.5</Flammability><Beauty>-6</Beauty></statBases>
+    <costList><Steel>100</Steel><ComponentIndustrial>2</ComponentIndustrial></costList>
+    <researchPrerequisites><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <designationCategory>Rimefeller</designationCategory>
+    <comps>
+      <li Class="CompProperties_Refuelable"><fuelConsumptionRate>0</fuelConsumptionRate><fuelCapacity>20000</fuelCapacity><fuelFilter><thingDefs><li>Asphalt</li></thingDefs></fuelFilter><consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Source</role><gasType>Asphalt</gasType></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_TankGaugeHSK"><barColor>(0.30, 0.26, 0.20)</barColor></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_NaturalGasTankVertical</defName>
+    <label>天然气储罐</label>
+    <description>卧式罐，储存压缩天然气，供燃气发电与锅炉取气。占地 4×2，可旋转摆放；选中时显示储量液位条。受击会剧烈爆炸。</description>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_Tank_NaturalGas</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(3.6,1.8)</drawSize><damageData><rect>(0.05,0.05,0.95,0.95)</rect></damageData><linkFlags><li>Custom1</li></linkFlags></graphicData>
+    <size>(4,2)</size>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>180</pathCost><fillPercent>0.5</fillPercent>
+    <statBases><MaxHitPoints>200</MaxHitPoints><WorkToBuild>2800</WorkToBuild><Flammability>0.8</Flammability><Beauty>-4</Beauty></statBases>
+    <costList><Steel>120</Steel><ComponentIndustrial>2</ComponentIndustrial></costList>
+    <researchPrerequisites><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <designationCategory>Rimefeller</designationCategory>
+    <comps>
+      <li Class="CompProperties_Refuelable"><fuelConsumptionRate>0</fuelConsumptionRate><fuelCapacity>20000</fuelCapacity><fuelFilter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></fuelFilter><consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed></li>
+      <li Class="CompProperties_Explosive"><explosiveRadius>5</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>70</min><max>150</max></wickTicks><startWickHitPointsPercent>0.3</startWickHitPointsPercent></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Source</role></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_TankGaugeHSK"><barColor>(0.30, 0.80, 0.35)</barColor></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_AmmoniaTankVertical</defName>
+    <label>氨储罐</label>
+    <description>卧式罐，储存液氨，供化工与化肥取料。占地 4×2，可旋转摆放；选中时显示储量液位条。受击会泄漏剧毒气体。</description>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_Tank_Ammonia</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(3.6,1.8)</drawSize><damageData><rect>(0.05,0.05,0.95,0.95)</rect></damageData><linkFlags><li>Custom3</li></linkFlags></graphicData>
+    <size>(4,2)</size>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>180</pathCost><fillPercent>0.5</fillPercent>
+    <statBases><MaxHitPoints>200</MaxHitPoints><WorkToBuild>2600</WorkToBuild><Flammability>0.4</Flammability><Beauty>-4</Beauty></statBases>
+    <costList><Steel>110</Steel><ComponentIndustrial>2</ComponentIndustrial></costList>
+    <researchPrerequisites><li>RK_Petro_Synthesis</li></researchPrerequisites>
+    <designationCategory>Rimefeller</designationCategory>
+    <comps>
+      <li Class="CompProperties_Refuelable"><fuelConsumptionRate>0</fuelConsumptionRate><fuelCapacity>20000</fuelCapacity><fuelFilter><thingDefs><li>SyntheticAmmonia</li></thingDefs></fuelFilter><consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Source</role><gasType>Ammonia</gasType></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasToxic"><amountPerCell>90</amountPerCell><radius>2</radius></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_TankGaugeHSK"><barColor>(0.85, 0.60, 0.20)</barColor></li>
+    </comps>
+  </ThingDef>
+
+</Defs>

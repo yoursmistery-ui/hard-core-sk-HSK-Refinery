@@ -1,0 +1,10 @@
+<Patch>
+	<!-- 古典水井(RKFC_GloomyDeco_Well)从 Hygiene 分类根移入 Core_SK 的水井二级分类 SubCategory_WaterWells -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_WaterWells"]</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_WaterWells"]/defNames</xpath>
+			<value><li>RKFC_GloomyDeco_Well</li></value>
+		</match>
+	</Operation>
+</Patch>

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef Name="RKFC_FurnitureBase" ParentName="BuildingBase" Abstract="True">
+		<designationCategory>Furniture</designationCategory>
+		<thingClass>Building</thingClass>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+	</ThingDef>
+  <ThingDef Name="RKFC_FurnitureWithQualityBase" ParentName="RKFC_FurnitureBase" Abstract="True">
+		<thingClass>Building</thingClass>
+		<comps>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+  <ThingDef Name="RKFC_ArtableFurnitureBase" ParentName="RKFC_FurnitureWithQualityBase" Abstract="True">
+		<comps>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtFurniture</nameMaker>
+				<descriptionMaker>ArtDescription_Furniture</descriptionMaker>
+				<minQualityForArtistic>Excellent</minQualityForArtistic>
+			</li>
+		</comps>
+		<inspectorTabs>
+			<li>ITab_Art</li>
+		</inspectorTabs>
+	</ThingDef>
+  <ThingDef Abstract="True" ParentName="RKFC_FurnitureWithQualityBase" Name="RKFC_TableBase">
+		<description>People eat off tables when chairs are placed facing them.</description>
+		<thingClass>Building</thingClass>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>60</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<canOverlapZones>false</canOverlapZones>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<surfaceType>Eat</surfaceType>
+		<!-- <comps> -->
+			<!-- <li Class="CompProperties_RoomIdentifier"> -->
+				<!-- <roomStat>Impressiveness</roomStat> -->
+			<!-- </li> -->
+		<!-- </comps> -->
+	</ThingDef>
+  <ThingDef Abstract="True" ParentName="RKFC_TableBase" Name="RKFC_TableGatherSpotBase">
+		<comps>
+			<li>
+				<compClass>CompGatherSpot</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+  <ThingDef Name="RKFC_ArtableBedBase" ParentName="BedWithQualityBase" Abstract="True">	
+		<designationCategory>Furniture</designationCategory>
+		<comps>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtFurniture</nameMaker>
+				<descriptionMaker>ArtDescription_Furniture</descriptionMaker>
+				<minQualityForArtistic>Excellent</minQualityForArtistic>
+			</li>
+		</comps>
+		<inspectorTabs>
+			<li>ITab_Art</li>
+		</inspectorTabs>
+	</ThingDef>
+  <ThingDef Name="RKFC_RugBase" Abstract="True">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<repairEffect>Repair</repairEffect>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<comps>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<!-- <li Class="CompProperties_RoomIdentifier"> -->
+				<!-- <roomStat>Impressiveness</roomStat> -->
+			<!-- </li> -->
+		</comps>
+		<designationCategory>Furniture</designationCategory>
+		<tradeTags>
+			<li>Furniture</li>
+		</tradeTags>
+	</ThingDef>
+  <ThingDef ParentName="PlantBase" Name="RKFC_DecoTree" Abstract="True">	
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>130</pathCost>
+		<blockWind>true</blockWind>		
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Beauty>5</Beauty>
+			<Nutrition>1.2</Nutrition>		
+		</statBases>
+		<ingestible>
+			<foodType>Tree</foodType>
+			<preferability>RawBad</preferability>
+		</ingestible>
+		<plant>
+			<soundHarvesting>Harvest_Tree</soundHarvesting>
+			<soundHarvestFinish>Harvest_Tree_Finish</soundHarvestFinish>
+			<growDays>14</growDays>
+			<harvestTag>Wood</harvestTag>		
+			<sowResearchPrerequisites>
+				<li>TreeSowing</li>
+			</sowResearchPrerequisites>
+			<sowWork>4000</sowWork>
+			<sowMinSkill>6</sowMinSkill>
+			<sowTags>
+				<li>Ground</li>
+			</sowTags>
+			<visualSizeRange>1.3~2.0</visualSizeRange>
+			<topWindExposure>0.25</topWindExposure>
+			<blockAdjacentSow>true</blockAdjacentSow>
+			<wildOrder>2</wildOrder>			
+			<harvestedThingDef>WoodLog</harvestedThingDef>
+			<harvestYield>4</harvestYield>
+			<harvestMinGrowth>0.90</harvestMinGrowth>
+			<harvestAfterGrowth>0.75</harvestAfterGrowth>
+			<harvestFailable>false</harvestFailable>
+			<purpose>Beauty</purpose>
+			<leaflessGraphicPath>Things/Plant/Tree_Leafless</leaflessGraphicPath>
+			<interferesWithRoof>true</interferesWithRoof>
+		</plant>
+		<selectable>true</selectable>
+	</ThingDef>
+  <ThingDef Abstract="True" Name="RKFC_WallLightBase" ParentName="LampBase">
+		<researchPrerequisites Inherit="False"/>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>Furniture</designationCategory>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<terrainAffordanceNeeded IsNull="True"/>
+		<pathCost>0</pathCost>
+		<statBases>
+			<MaxHitPoints>45</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0.0</Flammability>
+			<Mass>2</Mass>
+		</statBases>
+		<costList>
+			<Steel>20</Steel>
+			<WoodLog>5</WoodLog>
+		</costList>
+		<placeWorkers Inherit="False">
+			<li>Placeworker_AttachedToWall</li>
+		</placeWorkers>
+		<building>
+			<isEdifice>false</isEdifice>
+			<isAttachment>true</isAttachment>
+		</building>
+		<rotatable>true</rotatable>
+		<overrideMinifiedRot>North</overrideMinifiedRot>
+		<minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+		<uiIconPath>Things/Building/Furniture/GL_WallLit_menuicon</uiIconPath>
+		<uiIconScale>1.5</uiIconScale>
+	</ThingDef>
+  <ThingDef Name="RKFC_FenceBase" Abstract="True">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<repairEffect>Repair</repairEffect>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<statBases>
+			<SellPriceFactor>0.70</SellPriceFactor>
+		</statBases>
+	</ThingDef>
+  <ThingDef Abstract="True" Name="RKFC_WallRelatedCommandsBase" ParentName="BuildingBase">
+		<building>
+			<relatedBuildCommands>
+								<li>Autodoor</li>
+				<li>OrnateDoor</li>
+				<li MayRequire="Ludeon.RimWorld.Anomaly">SecurityDoor</li>
+				<li MayRequire="Ludeon.RimWorld.Odyssey">VacBarrier</li>
+				<li>Cooler</li>
+				<li>Vent</li>
+			</relatedBuildCommands>
+		</building>
+	</ThingDef>
+  <ThingDef Abstract="True" Name="RKFC_FenceWallRelatedCommandsBase" ParentName="RKFC_FenceBase">
+		<building>
+			<relatedBuildCommands>
+								<li>Autodoor</li>
+				<li>OrnateDoor</li>
+				<li MayRequire="Ludeon.RimWorld.Anomaly">SecurityDoor</li>
+				<li MayRequire="Ludeon.RimWorld.Odyssey">VacBarrier</li>
+				<li>Cooler</li>
+				<li>Vent</li>
+			</relatedBuildCommands>
+		</building>
+		<!-- 1.6: &#48317;&#54805; &#49444;&#44228; &#46300;&#47196;&#50864;(&#51649;&#49440; &#46300;&#47000;&#44536; &#46321;) &#8212; placingDraggableDimensions &#54596;&#46300; &#50630;&#51020; -->
+		<drawStyleCategory>Walls</drawStyleCategory>
+	</ThingDef>
+  <ThingDef Abstract="True" Name="RKFC_WallWindowBase" ParentName="BuildingBase">
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<altitudeLayer>Blueprint</altitudeLayer>
+		<passability>Standable</passability>
+		<statBases>
+			<MaxHitPoints>10</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Mass>2</Mass>
+		</statBases>
+		<size>(1,1)</size>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<rotatable>true</rotatable>
+		<selectable>true</selectable>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+		<!-- <designationCategory>OldStyleFurniture</designationCategory> -->
+	</ThingDef>
+  <ThingDef Name="RKFC_WallWindow" ParentName="RKFC_WallWindowBase">
+		<defName>RKFC_RGK_window</defName>
+		<label>window</label>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_window</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<Beauty>8</Beauty>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>5</costStuffCount>
+		<uiIconPath>Things/Building/Furniture/RGK_window_south</uiIconPath>
+		<description>It's a window where you can look outside.</description>
+	<designationCategory>Structure</designationCategory><researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+</Defs>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+07_开局资金转硬币(2026-08-20)
+需求: 开局/派系初始携带的"银"应是可流通的帝国银令, 而不是一堆原始银矿石。
+
+目标: ScenPart_StartingThing_Defined 与 PawnKindDef 初始库存里以
+      <thingDef>Silver</thingDef> 方式给出的"资金/初始携带银" → 一律改为 SilverCoin。
+      仅匹配"把 Silver 当一件物品发放"的场景/派系出生点行为。
+
+安全边界(不误伤的)设置:
+  - 材料成本: <costList><Silver>N</Silver></costList> 用的是元素 <Silver>, 不是 <thingDef>, 天然不匹配下面的 xpath → 保留为银矿石。
+  - 商人资金行: TraderKindDef 的 stockGenerators li[thingDef="Silver"] 已在 01 补丁改为 SilverCoin,
+                此文件在其后执行, 已无 Silver 可再命中。
+  - 配方原料过滤器: <filter><thingDefs><li>Silver</li></thingDefs> 用 <li> 文本, 不是 <thingDef>, 也不命中。
+-->
+
+<Patch>
+  <!-- 剧本开局物品: ScenPart_StartingThing_Defined(及衍生)里 thingDef=Silver → SilverCoin -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ScenarioDef/scenario/parts/li//thingDef[text()="Silver"]</xpath>
+    <value>
+      <thingDef>SilverCoin</thingDef>
+    </value>
+  </Operation>
+
+  <!-- 派系成员出生携带: PawnKindDef 任意层级的 thingDef=Silver → SilverCoin
+       (含 items 初始库存、subOptionsChooseOne 选项、生成权重里的资金项) -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/PawnKindDef//thingDef[text()="Silver"]</xpath>
+    <value>
+      <thingDef>SilverCoin</thingDef>
+    </value>
+  </Operation>
+</Patch>

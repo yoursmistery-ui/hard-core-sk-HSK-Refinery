@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 研究节点(2026-08-23 整合终态)
+        23 节点精简为 9 节点:
+          农业线 3: 种植 / 传统食物 / 医疗(金鼠族特色,保留)
+          衣物线 3: 金鼠族衣物科技 I / II / III
+          武器线 3: 金鼠族武器科技 I / II / III
+        已删除: 建筑线 4(Basic_Building/恒温水培/作物改良/暖光,
+                其配方/建筑改挂种植)+ 旧衣物 8 + 旧武器 8
+                + 炮台/EMP(更早删除)。
+        节点前置挂鼠族/HSK 同级科技,一条条挂载:
+          农业 金鸢尾兰 ← 农业I(HSK); 传统食品 ← 金鸢尾兰; 医疗 ← 金鸢尾兰
+          衣物 I ← 鼠族衣物II; II ← I+鼠族制服; III ← II+鼠族盔甲III
+          武器 I ← HSK步枪I; II ← I; III ← II
+        坐标: 金鸢尾兰(植物页签 y52 农业区) / 传统食品(植物页签 y52 金鸢尾兰右侧)
+        柱与地板(OA_RK_Zhuzi/OA_RK_Floor)已改挂建造III(Construction_B3)
+        ===================================================================== -->
+    <ResearchProjectDef ParentName="MedievalBase">
+        <defName>OA_RK_Oberonia_Aurea_Research</defName>
+        <label>金鼠族农业科技</label>
+        <description>研究金鸢尾兰的种植技艺与金鸢尾兰茶的冲泡方法,逐渐了解金鸢尾兰帝国本身。</description>
+        <tab>Plants_SK</tab>
+        <baseCost>600</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>SewageSludgeComposting</li>
+        </prerequisites>
+        <researchViewX>3.00</researchViewX>
+        <researchViewY>52.00</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="MedievalBase">
+        <defName>OA_RK_Oberonia_Aurea_Research_B</defName>
+        <label>金鼠族传统食物</label>
+        <description>学习将金鸢尾兰加工成美味佳肴的各种方法。</description>
+        <tab>Plants_SK</tab>
+        <baseCost>300</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>OA_RK_Oberonia_Aurea_Research</li>
+        </prerequisites>
+        <researchViewX>5.00</researchViewX>
+        <researchViewY>52.00</researchViewY>
+    </ResearchProjectDef>
+
+    <!-- 2026-08-28: 医疗节点原 Medieval 标记与所在工业区块(Medicine_SK x12-14 工业列)不符,改 Industrial -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>OA_RK_Oberonia_Aurea_Research_C</defName>
+        <label>金鼠族医疗</label>
+        <description>从金鸢尾兰中提取青苏等特殊药用成分,制作促进免疫与伤口愈合的药物。</description>
+        <tab>Medicine_SK</tab>
+        <baseCost>1200</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>OA_RK_Oberonia_Aurea_Research</li>
+        </prerequisites>
+        <researchViewX>14.00</researchViewX>
+        <researchViewY>51.00</researchViewY>
+    </ResearchProjectDef>
+
+    <!-- ==================== 衣物线 ==================== -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>OA_RK_Apparel_I</defName>
+        <label>金鼠族衣物科技 I</label>
+        <description>金鼠族基础服饰科技: 解锁金鸢尾兰风格的常服、头饰、旅行装与缝纫设施(合成纤维生产)。前置鼠族衣物 II。</description>
+        <tab>Apparel_SK</tab>
+        <baseCost>500</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>Ratkin_Apparel_B2A</li>
+        </prerequisites>
+        <researchViewX>12.00</researchViewX>
+        <researchViewY>44.00</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>OA_RK_Apparel_II</defName>
+        <label>金鼠族衣物科技 II</label>
+        <description>金鼠族宫廷服饰科技: 解锁金鸢尾兰宫廷服饰、职业制服与工业配件。前置金鼠族衣物 I + 鼠族制服。</description>
+        <tab>Apparel_SK</tab>
+        <baseCost>800</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>OA_RK_Apparel_I</li>
+            <li>Ratkin_Apparel_Uniform</li>
+        </prerequisites>
+        <researchViewX>16.00</researchViewX>
+        <researchViewY>44.00</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="HitechBase">
+        <defName>OA_RK_Apparel_III</defName>
+        <label>金鼠族衣物科技 III</label>
+        <description>金鼠族战斗护甲科技: 解锁战斗服、全防护突击装甲与重型突击装甲。前置金鼠族衣物 II + 鼠族盔甲 II。</description>
+        <tab>Apparel_SK</tab>
+        <baseCost>1500</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>OA_RK_Apparel_II</li>
+            <li>Ratkin_Armor_D1</li>
+        </prerequisites>
+        <researchViewX>20.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+    </ResearchProjectDef>
+
+    <!-- ==================== 武器线 ==================== -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>OA_RK_Weapon_I</defName>
+        <label>金鼠族武器科技 I</label>
+        <description>金鼠族古典武器科技: 解锁铀弹古典步枪与原型 Blitz 武器。前置 HSK 步枪 I。</description>
+        <tab>Weapon_SK</tab>
+        <baseCost>700</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>Rifles_C1</li>
+        </prerequisites>
+        <researchViewX>16.00</researchViewX>
+        <researchViewY>34.00</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="HitechBase">
+        <defName>OA_RK_Weapon_II</defName>
+        <label>金鼠族武器科技 II</label>
+        <description>金鼠族标准武器科技: 解锁标准 Blitz 武器、反重甲武器与先进 Blitz 武器。前置金鼠族武器 I。</description>
+        <tab>Weapon_SK</tab>
+        <baseCost>1400</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>OA_RK_Weapon_I</li>
+        </prerequisites>
+        <researchViewX>18.00</researchViewX>
+        <researchViewY>33.00</researchViewY>
+    </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="HitechBase">
+        <defName>OA_RK_Weapon_III</defName>
+        <label>金鼠族武器科技 III</label>
+        <description>金鼠族重型武器科技: 解锁重突击武器与不稳定电荷武器。前置金鼠族武器 II。</description>
+        <tab>Weapon_SK</tab>
+        <baseCost>2000</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>OA_RK_Weapon_II</li>
+        </prerequisites>
+        <researchViewX>20.00</researchViewX>
+        <researchViewY>33.00</researchViewY>
+    </ResearchProjectDef>
+
+
+    <ResearchProjectDef ParentName="HitechBase">
+        <defName>OA_RK_Apparel_IV</defName>
+        <label>金鼠族衣物科技 IV</label>
+        <description>金鼠族先进服饰科技: 解锁金鸢尾兰太空头饰、技术常服、多功能腰带与先进配件。前置金鼠族衣物 II + 服装生产 V。</description>
+        <tab>Apparel_SK</tab>
+        <baseCost>1200</baseCost>
+        <techLevel>Spacer</techLevel>
+        <prerequisites>
+            <li>OA_RK_Apparel_II</li>
+            <li>Apparel_D1</li>
+        </prerequisites>
+        <researchViewX>19.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+    </ResearchProjectDef>
+
+</Defs>

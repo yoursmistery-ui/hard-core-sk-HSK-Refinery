@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>AmmoKiiroPTGuardian</defName>
+		<label>Kiiro PT Guardian</label>
+		<parent>AmmoHighCaliber</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberHighCaliber</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_KiiroPTGuardian</defName>
+		<label>Kiiro PT Guardian</label>
+		<ammoTypes>
+			<Ammo_KiiroPTGuardian_FMJ>Bullet_KiiroPTGuardian_FMJ</Ammo_KiiroPTGuardian_FMJ>
+			<Ammo_KiiroPTGuardian_AP>Bullet_KiiroPTGuardian_AP</Ammo_KiiroPTGuardian_AP>
+			<Ammo_KiiroPTGuardian_Incendiary>Bullet_KiiroPTGuardian_Incendiary</Ammo_KiiroPTGuardian_Incendiary>
+			<Ammo_KiiroPTGuardian_HE>Bullet_KiiroPTGuardian_HE</Ammo_KiiroPTGuardian_HE>
+			<Ammo_KiiroPTGuardian_Sabot>Bullet_KiiroPTGuardian_Sabot</Ammo_KiiroPTGuardian_Sabot>
+		</ammoTypes>
+		<similarTo>AmmoSet_AntiMateriel</similarTo>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="AmmoKiiroPTGuardianBase" ParentName="MediumAmmoBase" Abstract="True">
+		<description>A type of High caliber ammunition developed by the Kiiro race for the prototype series of weapons. It has strong penetration but average power. It is commonly used on fixed machine guns when defending positions.</description>
+		<statBases>
+			<Mass>0.09</Mass>
+			<Bulk>0.11</Bulk>
+		</statBases>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting</li>
+		</tradeTags>
+		<thingCategories>
+			<li>AmmoKiiroPTGuardian</li>
+		</thingCategories>
+		<stackLimit>5000</stackLimit>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="AmmoKiiroPTGuardianBase">
+		<defName>Ammo_KiiroPTGuardian_FMJ</defName>
+		<label>Kiiro PT Guardian (FMJ)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/HighCaliber/FMJ</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.48</MarketValue>
+		</statBases>
+		<ammoClass>FullMetalJacket</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTGuardian_FMJ</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="AmmoKiiroPTGuardianBase">
+		<defName>Ammo_KiiroPTGuardian_AP</defName>
+		<label>Kiiro PT Guardian (AP)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/HighCaliber/AP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.48</MarketValue>
+		</statBases>
+		<ammoClass>ArmorPiercing</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTGuardian_AP</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="AmmoKiiroPTGuardianBase">
+		<defName>Ammo_KiiroPTGuardian_Incendiary</defName>
+		<label>Kiiro PT Guardian (AP-I)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/HighCaliber/Incendiary</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.65</MarketValue>
+		</statBases>
+		<ammoClass>IncendiaryAP</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTGuardian_Incendiary</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="AmmoKiiroPTGuardianBase">
+		<defName>Ammo_KiiroPTGuardian_HE</defName>
+		<label>Kiiro PT Guardian (AP-HE)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/HighCaliber/HE</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.86</MarketValue>
+		</statBases>
+		<ammoClass>ExplosiveAP</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTGuardian_HE</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="AmmoKiiroPTGuardianBase">
+		<defName>Ammo_KiiroPTGuardian_Sabot</defName>
+		<label>Kiiro PT Guardian (Sabot)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/HighCaliber/Sabot</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.56</MarketValue>
+			<Mass>0.08</Mass>
+		</statBases>
+		<ammoClass>Sabot</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTGuardian_Sabot</cookOffProjectile>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Name="BaseKiiroPTGuardianBullet" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<speed>163</speed>
+			<dropsCasings>true</dropsCasings>
+			<casingMoteDefname>Fleck_RifleAmmoCasings_HighCal</casingMoteDefname>
+			<casingFilthDefname>Filth_RifleAmmoCasings_HighCal</casingFilthDefname>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGuardianBullet">
+		<defName>Bullet_KiiroPTGuardian_FMJ</defName>
+		<label>Kiiro PT Guardian bullet (FMJ)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>38</damageAmountBase>
+			<armorPenetrationSharp>14.5</armorPenetrationSharp>
+			<armorPenetrationBlunt>380</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGuardianBullet">
+		<defName>Bullet_KiiroPTGuardian_AP</defName>
+		<label>Kiiro PT Guardian bullet (AP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>23</damageAmountBase>
+			<armorPenetrationSharp>30</armorPenetrationSharp>
+			<armorPenetrationBlunt>380</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGuardianBullet">
+		<defName>Bullet_KiiroPTGuardian_Incendiary</defName>
+		<label>Kiiro PT Guardian bullet (AP-I)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>23</damageAmountBase>
+			<armorPenetrationSharp>30</armorPenetrationSharp>
+			<armorPenetrationBlunt>380</armorPenetrationBlunt>
+			<secondaryDamage>
+				<li>
+					<def>Flame_Secondary</def>
+					<amount>15</amount>
+				</li>
+			</secondaryDamage>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGuardianBullet">
+		<defName>Bullet_KiiroPTGuardian_HE</defName>
+		<label>Kiiro PT Guardian bullet (AP-HE)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>38</damageAmountBase>
+			<armorPenetrationSharp>14.5</armorPenetrationSharp>
+			<armorPenetrationBlunt>380</armorPenetrationBlunt>
+			<secondaryDamage>
+				<li>
+					<def>Bomb_Secondary</def>
+					<amount>20</amount>
+				</li>
+			</secondaryDamage>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGuardianBullet">
+		<defName>Bullet_KiiroPTGuardian_Sabot</defName>
+		<label>Kiiro PT Guardian bullet (Sabot)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>20</damageAmountBase>
+			<armorPenetrationSharp>45</armorPenetrationSharp>
+			<armorPenetrationBlunt>480</armorPenetrationBlunt>
+			<speed>230</speed>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTGuardian_FMJ</defName>
+		<label>make Kiiro PT Guardian (FMJ) cartridge x300</label>
+		<description>Craft 300 Kiiro PT Guardian (FMJ) cartridges.</description>
+		<jobString>Making Kiiro PT Guardian (FMJ) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGuardian_FMJ>300</Ammo_KiiroPTGuardian_FMJ>
+		</products>
+		<workAmount>5000</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTGuardian_AP</defName>
+		<label>make Kiiro PT Guardian (AP) cartridge x300</label>
+		<description>Craft 300 Kiiro PT Guardian (AP) cartridges.</description>
+		<jobString>Making Kiiro PT Guardian (AP) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGuardian_AP>300</Ammo_KiiroPTGuardian_AP>
+		</products>
+		<workAmount>6000</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTGuardian_Incendiary</defName>
+		<label>make Kiiro PT Guardian (AP-I) cartridge x300</label>
+		<description>Craft 300 Kiiro PT Guardian (AP-I) cartridges.</description>
+		<jobString>Making Kiiro PT Guardian (AP-I) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Prometheum</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Prometheum</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGuardian_Incendiary>300</Ammo_KiiroPTGuardian_Incendiary>
+		</products>
+		<workAmount>7000</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTGuardian_HE</defName>
+		<label>make Kiiro PT Guardian (AP-HE) cartridge x300</label>
+		<description>Craft 300 Kiiro PT Guardian (AP-HE) cartridges.</description>
+		<jobString>Making Kiiro PT Guardian (AP-HE) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGuardian_HE>300</Ammo_KiiroPTGuardian_HE>
+		</products>
+		<workAmount>9000</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTGuardian_Sabot</defName>
+		<label>make Kiiro PT Guardian (Sabot) cartridge x300</label>
+		<description>Craft 300 Kiiro PT Guardian (Sabot) cartridges.</description>
+		<jobString>Making Kiiro PT Guardian (Sabot) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>35</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>7</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</filter>
+				<count>6</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Uranium</li>
+				<li>Chemfuel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGuardian_Sabot>300</Ammo_KiiroPTGuardian_Sabot>
+		</products>
+		<workAmount>6600</workAmount>
+	</RecipeDef>
+
+</Defs>

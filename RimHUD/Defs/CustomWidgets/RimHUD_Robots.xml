@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs MayRequire="Jaxe.RimHUD">
+    <!--
+    RimHUD 适配 · Misc Robots 自定义部件(2026-08-15;2026-08-15 修复 Def 类型名)
+
+    RimHUD 集成 API(源码确认 Jaxe-Dev/RimHUD, ExternalWidgetDef):
+      - 部件 def 为 ExternalWidgetDef 子类(CustomBarDef / CustomValueDef 等),apiVersion=1;
+      - defClass = 本 mod Assemblies/RimHUDRobotsAdapt.dll 内静态类,RimHUD 在 def
+        加载期(ResolveReferences → InitializeV1 → GetHandler)用 Harmony AccessTools.Method
+        反射解析该类上的 GetParameters(Pawn) 方法,运行时 FastInvokeHandler 调用;
+        返回类型必须精确匹配(见源码注释),故每个 def 用独立 defClass 类;
+      - 布局中引用: <CustomBar DefName="..." /> / <CustomValue DefName="..." />。
+
+    ⚠️ Def 类型名写法(2026-08-15 实测修复): 游戏 GenTypes.GetTypeInAnyAssembly 对 Def 元素名
+    只按"带命名空间的全名"解析(短名仅对 Verse/RimWorld 等忽略命名空间可用)——Unified.xml 中
+    第三方程序集 Def 元素一律全名,如 AlienRace.ThingDef_AlienRace / RR_PawnBadge.BadgeDef /
+    AdaptiveStorage.ContentLabelStyleDef。CustomBarDef 在命名空间 RimHUD(非忽略命名空间),
+    元素名必须写 <RimHUD.CustomBarDef>(短名 <CustomBarDef> 报 "Type CustomBarDef is not a Def
+    type or could not be found")。
+
+    电量条 = 机器人 needs.rest(充电列同源);非机器人返回 fill=-1,部件自动不绘制。
+    -->
+    <RimHUD.CustomBarDef>
+        <defName>RK_HR_Battery</defName>
+        <apiVersion>1</apiVersion>
+        <defClass>RimHUDRobotsAdapt.BatteryWidget</defClass>
+        <label>电量</label>
+        <colorStyle>MainToLow</colorStyle>
+    </RimHUD.CustomBarDef>
+
+    <RimHUD.CustomValueDef>
+        <defName>RK_HR_Status</defName>
+        <apiVersion>1</apiVersion>
+        <defClass>RimHUDRobotsAdapt.StatusWidget</defClass>
+        <label>状态</label>
+    </RimHUD.CustomValueDef>
+
+    <!--
+    Vanilla Skills Expanded(vanillaexpanded.skills)专精部件(2026-08-15):
+      反射 VSE.ExpertiseTrackers.Expertise(pawn).AllExpertise 列出专精(名称吃 VSE DefInjected 汉化,
+      本 mod 另提供 47 个专精中文名兜底),tooltip 逐条显示 名称 — 等级描述;
+      无 VSE / 无专精时返回 null,部件自动不绘制。布局引用: <CustomValue DefName="RK_HR_VSE_Expertise" />。
+    -->
+    <RimHUD.CustomValueDef>
+        <defName>RK_HR_VSE_Expertise</defName>
+        <apiVersion>1</apiVersion>
+        <defClass>RimHUDRobotsAdapt.VSEExpertiseWidget</defClass>
+        <label>专精</label>
+    </RimHUD.CustomValueDef>
+
+    <!--
+    护甲厚度(RK_HR_Armor,2026-08-15;2026-08-15 改自绘图标版): CustomWidgetDef 自绘部件,
+    遍历穿着护甲求和 ArmorRating_Sharp/Blunt/Heat(原版 1.6 StatDefOf;CE 下由 CombatExtended
+    的 StatWorker 计算成护甲厚度,与 CE 角色卡护甲面板同源);绘制参考 RPG Style Inventory
+    装备栏的「图标 + 数值标注」: 锐/钝/热 三枚小图标各跟数值,悬停逐件列明细
+    (图标复制自 RPG 的 Sandy_Armor*_Icon,本 mod 自包含);对敌人/己方任何 pawn 均显示,
+    无穿着护甲 GetMaxHeight 返回 0 行自动折叠。通用部件,CE / 非 CE 均可用。
+    ⚠️ defClass 需提供 OnDraw(Pawn, Rect): bool 与 GetMaxHeight(): float(见源码)。
+    -->
+    <RimHUD.CustomWidgetDef>
+        <defName>RK_HR_Armor</defName>
+        <label>护甲</label>
+        <apiVersion>1</apiVersion>
+        <defClass>RimHUDRobotsAdapt.CEArmorWidget</defClass>
+    </RimHUD.CustomWidgetDef>
+</Defs>

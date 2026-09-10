@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperation.FindModByID">
+    <mods>
+      <li>doug.conn</li>
+    </mods>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ResearchProjectDef[
+      defName="CONN_NeuralNetwork" or
+      defName="CONN_CyberneticOrganism"
+      ]</xpath>
+    </match>
+  </Operation>
+
+</Patch>

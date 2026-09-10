@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- <QuestScriptDef>
+    <defName>Kiiro_TradeRouteBanditCamp</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <rootMinPoints>0</rootMinPoints>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->11</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->1111</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+          <parms>
+            <pointsFactorTwoStar>1.5</pointsFactorTwoStar>
+            <pointsFactorThreeStar>2</pointsFactorThreeStar>
+          </parms>
+        </li>
+        <li Class="QuestNode_SubScript">
+          <def>Util_AdjustPointsForDistantFight</def>
+        </li>
+        <li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>3~6</value>
+        </li>
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetPawn">
+          <storeAs>asker</storeAs>
+          <mustBeFactionLeader>true</mustBeFactionLeader>
+          <allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+          <hostileWeight>0.15</hostileWeight>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetSiteTile">
+          <storeAs>tile</storeAs>
+          <preferCloserTiles>false</preferCloserTiles>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <storeFactionAs>siteFaction</storeFactionAs>
+          <sitePartsTags>
+            <li><tag>BanditCamp</tag></li>
+          </sitePartsTags>
+          <mustBeHostileToFactionOf>$asker</mustBeHostileToFactionOf>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+        </li>
+        
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(12,28)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <destroyOnCleanup>true</destroyOnCleanup>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">The bandit camp has packed up and moved on. The quest [resolvedQuestName] has expired.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+        <li Class="QuestNode_Signal">
+          <inSignal>site.AllEnemiesDefeated</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Notify_PlayerRaidedSomeone">
+                <getRaidersFromMapParent>$site</getRaidersFromMapParent>
+              </li>
+            </nodes>
+          </node>
+        </li>
+        <li Class="QuestNode_End">
+          <inSignal>site.AllEnemiesDefeated</inSignal>
+          <outcome>Success</outcome>
+        </li>
+
+        
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[resolvedQuestName] failed</label>
+                <text TKey="LetterTextQuestExpired">Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$site</worldObject>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+
+      </nodes>
+    </root>
+  </QuestScriptDef> -->
+
+</Defs>

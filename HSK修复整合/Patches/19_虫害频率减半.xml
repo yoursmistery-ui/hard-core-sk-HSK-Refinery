@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 事件类虫害全局概率 -50%(2026-09-04 用户要求)。
+       终态 baseChance 基准: Infestation = 2.1(Core_SK 已从原版 2.7 压下), DeepDrillInfestation = 1(原版)。
+       hskfixpack 最后加载, 用 Conditional+Replace 对现值减半, 对上游(Faster raids 等)改动同样覆盖:
+         Infestation         2.1 → 1.05
+         DeepDrillInfestation 1  → 0.5
+       仅事件类; 虫族派系 raid 频率(RaidCommonalityFromPoints 曲线)与财富门槛不在此文件。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="Infestation"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="Infestation"]/baseChance</xpath>
+      <value>
+        <baseChance>1.05</baseChance>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="DeepDrillInfestation"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="DeepDrillInfestation"]/baseChance</xpath>
+      <value>
+        <baseChance>0.5</baseChance>
+      </value>
+    </match>
+  </Operation>
+</Patch>

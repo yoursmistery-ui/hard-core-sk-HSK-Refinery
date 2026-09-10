@@ -1,0 +1,1170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!--
+    DefOverwrite list:
+    PowerConduit
+    WaterproofConduit
+    HiddenConduit
+    PowerSwitch
+    Battery
+    SolarGenerator
+    WindTurbine
+    WoodFiredGenerator
+    ChemfuelPoweredGenerator
+    GeothermalGenerator
+    WatermillGenerator
+    -->
+
+	<ThingDef Name="PowerFueled" ParentName="StandardBuilding" Abstract="True">
+		<thingClass>Building</thingClass>
+		<passability>PassThroughOnly</passability>
+		<tickerType>Normal</tickerType>
+		<surfaceType>Item</surfaceType>
+		<fillPercent>0.85</fillPercent>
+		<pathCost>90</pathCost>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<inspectorTabs>
+			<li>SK.ITab_Fuel</li>
+		</inspectorTabs>
+	</ThingDef>
+
+	<!-- Conduits / Batteries -->
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>HeavyPowerConduit</defName>
+		<label>heavy power conduit</label>
+		<description>A set of heavy electrical cables for moving power around. They are very strong and non-flammable.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/HeavyPowerConduit_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Transmitter</linkType>
+			<linkFlags>
+				<li>PowerConduit</li>
+			</linkFlags>
+			<damageData>
+				<rect>(0,0.35,1,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/HeavyPowerConduit_MenuIcon</uiIconPath>
+		<building>
+			<isPowerConduit>true</isPowerConduit>
+			<ai_chillDestination>false</ai_chillDestination>
+			<isInert>true</isInert>
+			<isEdifice>false</isEdifice>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/PowerConduit_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+		</building>
+		<drawerType>MapMeshOnly</drawerType>
+		<altitudeLayer>Conduits</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>200</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>0</Beauty>
+		</statBases>
+		<noRightClickDraftAttack>true</noRightClickDraftAttack>
+		<drawStyleCategory>Default1D</drawStyleCategory>
+		<costList>
+			<Wire>2</Wire>
+			<Rubber>1</Rubber>
+			<ReinforcedConcrete>1</ReinforcedConcrete>
+			<Pipe>1</Pipe>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTransmitter</compClass>
+				<transmitsPower>true</transmitsPower>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_Conduit</li>
+		</placeWorkers>
+		<rotatable>false</rotatable>
+		<blockWind>false</blockWind>
+		<neverMultiSelect>true</neverMultiSelect>
+		<designationCategory>Power</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<clearBuildingArea>false</clearBuildingArea>
+		<researchPrerequisites>
+			<li>Electrical_engineering_C2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+		<modExtensions>
+			<li Class="SK.Events.EarthquakeExtension">
+				<immunityToDamage>true</immunityToDamage>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>PowerSwitchFlicker</defName>
+		<label>power switch flicker</label>
+		<thingClass>Building_PowerSwitch</thingClass>
+		<description>Switches power on/off with autoflicker.</description>
+		<graphicData>
+			<texPath>Things/Building/Power/PowerSwitch</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<canOverlapZones>false</canOverlapZones>
+		<building>
+			<uninstallWork>150</uninstallWork>
+			<ai_chillDestination>false</ai_chillDestination>
+			<isEdifice>true</isEdifice>
+			<allowWireConnection>false</allowWireConnection>
+		</building>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>355</WorkToBuild>
+			<Flammability>0.4</Flammability>
+			<Beauty>-2</Beauty>
+			<Mass>30</Mass>
+		</statBases>
+		<!-- <placingDraggableDimensions>0</placingDraggableDimensions> -->
+		<costList>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<ElectronicComponents>1</ElectronicComponents>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTransmitter</compClass>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Flickable" />
+			<li Class="SK.CompProperties_AutoFlicker" />
+		</comps>
+		<rotatable>false</rotatable>
+		<blockWind>false</blockWind>
+		<neverMultiSelect>false</neverMultiSelect>
+		<tickerType>Normal</tickerType>
+		<designationCategory>Power</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>Electrical_engineering_C2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>TimerSwitch</defName>
+		<label>scheduled switch</label>
+		<thingClass>SK.TimeOfDaySwitch</thingClass>
+		<description>Switches power on/off based on the time of day.</description>
+		<graphicData>
+			<texPath>Things/Building/Power/PowerSwitch</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<allowWireConnection>false</allowWireConnection>
+		</building>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Standable</passability>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>170</WorkToBuild>
+			<Flammability>0.4</Flammability>
+			<Beauty>-2</Beauty>
+			<Mass>30</Mass>
+		</statBases>
+		<canOverlapZones>false</canOverlapZones>
+		<!-- <placingDraggableDimensions>0</placingDraggableDimensions> -->
+		<costList>
+			<Plastic>10</Plastic>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<ElectronicComponents>2</ElectronicComponents>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTransmitter</compClass>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Flickable" />
+		</comps>
+		<rotatable>false</rotatable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<tickerType>Normal</tickerType>
+		<designationCategory>Power</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>Electrical_engineering_C2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>FissionBattery</defName>
+		<label>fission battery</label>
+		<thingClass>SK.Building_Battery</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/FissionBattery</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,3)</drawSize>
+			<shadowData>
+				<volume>(0.8, 0.4, 1.8)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<building>
+			<uninstallWork>450</uninstallWork>
+		</building>
+		<thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<fillPercent>0.7</fillPercent>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<MaxHitPoints>240</MaxHitPoints>
+			<WorkToBuild>6500</WorkToBuild>
+			<Flammability>2.0</Flammability>
+			<Beauty>-6</Beauty>
+			<Mass>200</Mass>
+		</statBases>
+		<description>Stores electricity and recycles charge using fission processes. Slightly more efficient than standard batteries. Warning - charged batteries tend to explode when heated or wet. Holds up to 4,000 W.</description>
+		<size>(1,2)</size>
+		<stuffCategories>
+			<li>HeavyMetallic</li>
+		</stuffCategories>
+		<costStuffCount>75</costStuffCount>
+		<costList>
+			<BiosyntheticMaterial>5</BiosyntheticMaterial>
+			<ComponentSpacer>3</ComponentSpacer>
+			<MagneticMaterial>3</MagneticMaterial>
+			<Microchips>1</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Battery">
+				<storedEnergyMax>4000</storedEnergyMax>
+				<efficiency>0.7</efficiency>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(0,162,255,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>3.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<researchPrerequisites>
+			<li>Electrical_engineering_E1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<!-- Generators -->
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>AdvancedSolarGenerator</defName>
+		<label>advanced solar generator</label>
+		<thingClass>SK.Building_AdvSolarGenerator</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/Advanced_solarpanel/advSolarPanel_base</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shadowData>
+				<volume>(3.8, 0.6, 3.8)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+		</graphicData>
+		<uiIconPath>Things/Building/Power/Advanced_solarpanel/advSolarPane_icon</uiIconPath>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>3500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Mass>2000</Mass>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<description>Produces electricity from sunlight. Does not work in the dark.</description>
+		<size>(4,4)</size>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<costStuffCount>120</costStuffCount>
+		<costList>
+			<Glass>95</Glass>
+			<ReinforcedConcrete>12</ReinforcedConcrete>
+			<AdvMechanism>5</AdvMechanism>
+			<Electronics>5</Electronics>
+		</costList>
+		<placeWorkers>
+			<li>PlaceWorker_NotUnderRoof</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>SK.CompAdvPowerPlantSolar</compClass>
+				<basePowerConsumption>-1</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>5</glowRadius>
+				<glowColor>(1,213,238,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<empChancePerTick>0.03</empChancePerTick>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+		</building>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<designationHotKey>Misc3</designationHotKey>
+		<researchPrerequisites>
+			<li>Renewable_energy_D2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>AdvancedWindTurbine</defName>
+		<thingClass>Building</thingClass>
+		<label>advanced wind turbine</label>
+		<description>A wind-powered electrical generator. Requires a large clear space in front and behind for optimal air flow.</description>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/Advanced_wind_turbine</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(5,2)</drawSize>
+			<shadowData>
+				<volume>(0.2, 1.0, 0.8)</volume>
+			</shadowData>
+			<damageData>
+				<rect>(2,0.15,1,1.4)</rect>
+			</damageData>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>8500</WorkToBuild>
+			<Flammability>0.4</Flammability>
+			<Beauty>-12</Beauty>
+		</statBases>
+		<blockWind>true</blockWind>
+		<tickerType>Normal</tickerType>
+		<size>(5,2)</size>
+		<canOverlapZones>false</canOverlapZones>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<rotatable>true</rotatable>
+		<designationCategory>Power</designationCategory>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<costStuffCount>120</costStuffCount>
+		<costList>
+			<Plastic>80</Plastic>
+			<ReinforcedConcrete>10</ReinforcedConcrete>
+			<AdvMechanism>6</AdvMechanism>
+			<Electronics>6</Electronics>
+		</costList>
+		<placeWorkers>
+			<li>PlaceWorker_WindTurbine</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerPlantWind</compClass>
+				<basePowerConsumption>-2200</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li>
+				<compClass>CompAutoCutWindTurbine</compClass>
+			</li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<empEffecterDimensions>(1.8,0,0.5)</empEffecterDimensions>
+				<empEffecterOffset>(0,0,-0.5)</empEffecterOffset>
+				<empChancePerTick>0.3</empChancePerTick>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>Renewable_energy_D2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+		<inspectorTabs>
+			<li>ITab_WindTurbineAutoCut</li>
+		</inspectorTabs>
+	</ThingDef>
+
+	<ThingDef ParentName="PowerFueled">
+		<defName>CoalPowerPlant</defName>
+		<label>coal power plant</label>
+		<thingClass>SK.Building_CoalPowerPlant</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/CoalPowerPlant/Coalpowerplant</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(3,2)</drawSize>
+			<shadowData>
+				<volume>(2.8, 0.8, 1.8)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.9</fillPercent>
+		<blockWind>true</blockWind>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<WorkToBuild>4200</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-60</Beauty>
+		</statBases>
+		<description>The Coal Power Plant that produces electricity by burning coal-like fuels. Can be fueled with Coal or Peat.\nMax. power output: 2,500 W.</description>
+		<size>(3,2)</size>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<costStuffCount>200</costStuffCount>
+		<costList>
+			<ReinforcedConcrete>25</ReinforcedConcrete>
+			<ComponentIndustrial>10</ComponentIndustrial>
+			<Mechanism>4</Mechanism>
+		</costList>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+		</building>
+		<comps>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Power">
+				<compClass>SK.CompPowerPlantFueled</compClass>
+				<basePowerConsumption>-2000</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>WoodFiredGenerator_Ambience</soundAmbientProducingPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(217,112,33,0)</glowColor>
+			</li>
+			<li Class="SK.CompProperties_HeatPusherAdvanced">
+				<compClass>SK.CompHeatPusherAdvanced</compClass>
+				<heatPerSecond>35</heatPerSecond>
+				<heatPushMaxTemperature>75</heatPushMaxTemperature>
+			</li>
+			<li Class="SK.CompFueled_Properties">
+				<canAutoBurn>true</canAutoBurn>
+				<operatingTemp>1200</operatingTemp>
+				<drawfirefuel>false</drawfirefuel>
+				<smokeDrawOffset>(0.1,1.2,0.5)</smokeDrawOffset>
+				<smokesize>1.9</smokesize>
+				<smoketype>black</smoketype>
+				<fuelCapacity>60</fuelCapacity>
+				<burnFuelMultiplier>0.7</burnFuelMultiplier>
+				<smokeDensity>4</smokeDensity>
+				<fuelFilter>
+					<categories>
+						<li>Coal</li>
+					</categories>
+					<thingDefs>
+						<li>Peat</li>
+					</thingDefs>
+				</fuelFilter>
+			</li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<researchPrerequisites>
+			<li>Generators_C2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<modExtensions>
+			<li Class="SK.Events.AccidentalExplosionExtension" />
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>ThermoelectricGenerator</defName>
+		<label>thermoelectric generator</label>
+		<thingClass>SK.Building_ThermoelectricGenerator</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/ThermoelectricGenerator/Thermoelectric_Generator</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(0.8, 0.4, 0.8)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>PawnUnused</altitudeLayer>
+		<passability>Impassable</passability>
+		<fillPercent>0.99</fillPercent>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>6000</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>-5</Beauty>
+		</statBases>
+		<tickerType>Rare</tickerType>
+		<description>Produces electricity from differences in temperatures between two rooms. Should be placed in a wall. Example: At 1,600 C (2,912 F) difference, power output is 16,200 W at 600% efficiency. \n\nCan withstand up to 350 celsius and down to -150 celsius.\n\nCan be overestressed in extreme temperatures giving it a chance to be damaged or a slim chance to break down.</description>
+		<size>(1,1)</size>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<costList>
+			<Plastic>70</Plastic>
+			<Rubber>60</Rubber>
+			<ComponentSpacer>6</ComponentSpacer>
+			<Microchips>4</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerPlant</compClass>
+				<basePowerConsumption>-1</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>GeothermalPlant_Ambience</soundAmbientProducingPower>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+			<li Class="SK.CompProperties_RestrictedPlacement">
+				<compClass>SK.CompRestrictedPlacement</compClass>
+				<thingDefs>
+					<li>Wall</li>
+					<li>ClutterSilverWall</li>
+					<li>ClutterUWallLight</li>
+				</thingDefs>
+			</li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<rotatable>true</rotatable>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<placeWorkers>
+			<li>PlaceWorker_vent</li>
+			<li>SK.PlaceWorker_OnlyOnThing</li>
+		</placeWorkers>
+		<building>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<isEdifice>false</isEdifice>
+		</building>
+		<canOverlapZones>false</canOverlapZones>
+		<coversFloor>true</coversFloor>
+		<blockLight>true</blockLight>
+		<castEdgeShadows>true</castEdgeShadows>
+		<researchPrerequisites>
+			<li>Renewable_energy_D2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>GauseWindTurbine</defName>
+		<label>Gause Wind Turbine</label>
+		<thingClass>Building</thingClass>
+		<description>A wind-powered gause electrical generator. Please keep all limbs and pets away from the turbine area!\nMax. power output: 2,250 W at maximum wind speed.</description>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/HorizontalWindTurbine/HorizontalWindTurbineOFF</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(5,5)</drawSize>
+			<shadowData>
+				<volume>(4.7, 0.3, 4.7)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconPath>Things/Building/Power/HorizontalWindTurbine/HorizontalWindTurbine_icon</uiIconPath>
+		<passability>Impassable</passability>
+		<fillPercent>0.75</fillPercent>
+		<statBases>
+			<MaxHitPoints>270</MaxHitPoints>
+			<WorkToBuild>9300</WorkToBuild>
+			<Flammability>0.4</Flammability>
+			<Beauty>-12</Beauty>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<size>(5,5)</size>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
+		<blockWind>false</blockWind>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<costStuffCount>400</costStuffCount>
+		<costList>
+			<Plastic>170</Plastic>
+			<ReinforcedConcrete>80</ReinforcedConcrete>
+			<Mechanism>10</Mechanism>
+			<Microchips>2</Microchips>
+		</costList>
+		<placeWorkers>
+			<li>PlaceWorker_NotUnderRoof</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>-3000</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li>
+				<compClass>SK.HorizontalWindTurbine</compClass>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>Renewable_energy_D1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>16</constructionSkillPrerequisite>
+		<modExtensions>
+			<li Class="SK.Events.AccidentalExplosionExtension" />
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>TeslaLightningPower</defName>
+		<label>tesla lightning generator</label>
+		<thingClass>SK.TeslaLightningPower</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<shaderType>Transparent</shaderType>
+			<texPath>Things/Building/Power/Tesla/TeslaPP</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(5,5)</drawSize>
+			<shadowData>
+				<volume>(4.7, 0.5, 4.7)</volume>
+			</shadowData>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>0.85</fillPercent>
+		<statBases>
+			<MaxHitPoints>350</MaxHitPoints>
+			<WorkToBuild>11500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<description>Harness the incredible power source of lightning through the invention of Nikola Tesla, the Tesla Lightning Generator! It needs to cool off from time to time when it gets too hot.\nMax. power output: 6,000 W.</description>
+		<size>(5,5)</size>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<costStuffCount>750</costStuffCount>
+		<costList>
+			<Glass>200</Glass>
+			<SyntheticFibers>200</SyntheticFibers>
+			<ReinforcedConcrete>100</ReinforcedConcrete>
+			<Microchips>6</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerPlant</compClass>
+				<basePowerConsumption>1</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>XITurbine</soundAmbientProducingPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>5</glowRadius>
+				<glowColor>(95,210,250,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>8</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+		</comps>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<researchPrerequisites>
+			<li>Renewable_energy_D3</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>17</constructionSkillPrerequisite>
+		<modExtensions>
+			<li Class="SK.Events.AccidentalExplosionExtension" />
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="PowerFueled">
+		<defName>PlasmaGeothermalPlant</defName>
+		<label>plasma reactor</label>
+		<thingClass>SK.Building_Plasmareactor</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/PlasmaGeothermal/PlasmaGeothermal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shadowData>
+				<volume>(3.7, 0.7, 3.7)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>11000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<description>Produces tax-free electricity from a steam geyser. Must be placed on a steam geyser. A Plasma Generator can be linked to absorb plasma discharges. Requires to be fueled by Tin or Aluminium.</description>
+		<size>(4,4)</size>
+		<stuffCategories>
+			<li>SolidMetallic</li>
+		</stuffCategories>
+		<costStuffCount>440</costStuffCount>
+		<costList>
+			<Glass>180</Glass>
+			<SyntheticFibers>150</SyntheticFibers>
+			<ReinforcedConcrete>100</ReinforcedConcrete>
+			<Microchips>5</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Power">
+				<compClass>SK.CompPowerPlantFueled</compClass>
+				<basePowerConsumption>-30000</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>PlasmaTurbine</soundAmbientProducingPower>
+			</li>
+			<li Class="SK.CompFueled_Properties">
+				<canAutoBurn>true</canAutoBurn>
+				<operatingTemp>3000</operatingTemp>
+				<drawfirefuel>false</drawfirefuel>
+				<smokeDrawOffset>(0,0,1.5)</smokeDrawOffset>
+				<smokesize>2.0</smokesize>
+				<fuelCapacity>100</fuelCapacity>
+				<burnFuelMultiplier>1</burnFuelMultiplier>
+				<smokeEnabled>false</smokeEnabled>
+				<fuelFilter>
+					<thingDefs>
+						<li>Aluminium</li>
+						<li>Tin</li>
+					</thingDefs>
+				</fuelFilter>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>5</glowRadius>
+				<glowColor>(0,255,246,1)</glowColor>
+			</li>
+			<li Class="SK.CompProperties_HeatPusherAdvanced">
+				<compClass>SK.CompHeatPusherAdvanced</compClass>
+				<heatPerSecond>40</heatPerSecond>
+				<heatPushMaxTemperature>75</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>7</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+			</li>
+			<li Class="SK.CompProperties_RestrictedPlacement">
+				<compClass>SK.CompRestrictedPlacement</compClass>
+				<thingDefs>
+					<li>SteamGeyser</li>
+				</thingDefs>
+			</li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<rotatable>false</rotatable>
+		<designationCategory>Power</designationCategory>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<placeWorkers>
+			<li>SK.PlaceWorker_OnlyOnThing</li>
+			<li>SK.PlaceWorker_NoNearPlasmaGeothermalPlant</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>Generators_D1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>17</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>PlasmaGen</defName>
+		<label>plasma generator</label>
+		<thingClass>SK.Building_PlasmaGenerator</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/PlasmaGen/PlasmaGen_off</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.8, 0.8, 1.8)</volume>
+			</shadowData>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>0.65</fillPercent>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>4000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<description>Produces tax-free electricity through plasma discharges from a Plasma Reactor. It needs to be fully charged first.</description>
+		<size>(2,2)</size>
+		<stuffCategories>
+			<li>SolidMetallic</li>
+		</stuffCategories>
+		<costStuffCount>210</costStuffCount>
+		<costList>
+			<SyntheticFibers>100</SyntheticFibers>
+			<Glass>50</Glass>
+			<ReinforcedConcrete>25</ReinforcedConcrete>
+			<Microchips>2</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>1</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<soundAmbientProducingPower>PlasmaTurbine</soundAmbientProducingPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(0,255,246,1)</glowColor>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>5</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<placeWorkers>
+			<li>SK.PlaceWorker_PGNearPlasmaGeothermalPlant</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>Generators_D1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>17</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="StandardBuilding">
+		<defName>XenonIonTurbine</defName>
+		<label>xenon-ion turbine</label>
+		<thingClass>SK.Building_XenonIonTurbine</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/XenonIonTurbine/XenonIonTurbine</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shadowData>
+				<volume>(3.7, 0.8, 3.7)</volume>
+			</shadowData>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<WorkToBuild>13600</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>-20</Beauty>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<description>Must be placed on a steam geyser. The Xenon-Ion Turbine produces power from extreme heat, and efficiency can go above 100%. Example: At 250 C (482 F) power output is 5,000 W with 150% efficiency.</description>
+		<size>(4,4)</size>
+		<stuffCategories>
+			<li>SolidMetallic</li>
+		</stuffCategories>
+		<costStuffCount>700</costStuffCount>
+		<costList>
+			<Glass>150</Glass>
+			<ReinforcedConcrete>60</ReinforcedConcrete>
+			<BiosyntheticMaterial>60</BiosyntheticMaterial>
+			<AdvMechanism>12</AdvMechanism>
+			<Microchips>5</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerPlant</compClass>
+				<basePowerConsumption>-1</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>XITurbine</soundAmbientProducingPower>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>4</glowRadius>
+				<glowColor>(0,162,255,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>8</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+			</li>
+			<li Class="SK.CompProperties_RestrictedPlacement">
+				<compClass>SK.CompRestrictedPlacement</compClass>
+				<thingDefs>
+					<li>SteamGeyser</li>
+				</thingDefs>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>SK.PlaceWorker_OnlyOnThing</li>
+		</placeWorkers>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<researchPrerequisites>
+			<li>Generators_D2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>18</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="PowerFueled">
+		<defName>AntimatterReactor</defName>
+		<label>antimatter reactor</label>
+		<description>The contained antimatter is separated from ordinary matter by magnetic fields, preventing unintended reactions. The energy is then extracted in much the same way that nuclear reactors capture the heat and light energy released by fission reactions.\nMax. power output: 60,000 W.</description>
+		<thingClass>SK.Building_AntimatterReactor</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Power/AntimatterReactor/AntimatterReactor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(6,6)</drawSize>
+			<shadowData>
+				<volume>(5.7, 1, 5.7)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+			<WorkToBuild>18000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-120</Beauty>
+		</statBases>
+		<rotatable>false</rotatable>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<size>(6,6)</size>
+		<stuffCategories>
+			<li>SolidMetallic</li>
+		</stuffCategories>
+		<costStuffCount>800</costStuffCount>
+		<costList>
+			<Glass>200</Glass>
+			<ReinforcedConcrete>200</ReinforcedConcrete>
+			<MagneticMaterial>65</MagneticMaterial>
+			<AdvMechanism>15</AdvMechanism>
+			<Microchips>5</Microchips>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Power">
+				<compClass>SK.CompPowerPlantFueled</compClass>
+				<basePowerConsumption>-60000</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<soundAmbientProducingPower>PlasmaTurbine</soundAmbientProducingPower>
+			</li>
+			<li Class="SK.CompFueled_Properties">
+				<canAutoBurn>true</canAutoBurn>
+				<operatingTemp>10000</operatingTemp>
+				<drawfirefuel>false</drawfirefuel>
+				<throwsmoke>false</throwsmoke>
+				<fuelCapacity>50</fuelCapacity>
+				<burnFuelMultiplier>1</burnFuelMultiplier>
+				<smokeEnabled>false</smokeEnabled>
+				<fuelFilter>
+					<thingDefs>
+						<li>Antimatter</li>
+					</thingDefs>
+				</fuelFilter>
+			</li>
+			<li Class="SK.CompProperties_HeatPusherAdvanced">
+				<compClass>SK.CompHeatPusherAdvanced</compClass>
+				<heatPerSecond>50</heatPerSecond>
+				<heatPushMaxTemperature>150</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>7</glowRadius>
+				<glowColor>(255,255,0,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>11</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+			</li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+		</comps>
+		<designationCategory>Power</designationCategory>
+		<researchPrerequisites>
+			<li>Generators_E1</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>19</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<!-- Misc power -->
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>LightningRod</defName>
+		<label>lightning rod</label>
+		<description>A lightning rod with an ion beam emitter for map-wide protection from lightning strikes.\n\nRequires power, but discharges power for a short while after it gets hit. Can get overwhelmed.\n\nThese rods were called by many Zeon Resistance agents as "Tridents" due to the structure looking like a trident protruding into the sky, and is also a symbol Zeon's eventual downfall at the mercy of this lightning rod.</description>
+		<thingClass>Building</thingClass>
+		<uiIconPath>Things/Building/LightningRod/LightningRod_MenuIcon</uiIconPath>
+		<graphicData>
+			<texPath>Things/Building/LightningRod/LightningRod</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(8,8)</drawSize>
+			<shadowData>
+				<volume>(0.7,1,0.7)</volume>
+			</shadowData>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<passability>Impassable</passability>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>false</castEdgeShadows>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<fillPercent>1</fillPercent>
+		<blockLight>true</blockLight>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+			<WorkToBuild>8500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-40</Beauty>
+			<Bulk>500</Bulk>
+			<Mass>700</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<costStuffCount>240</costStuffCount>
+		<costList>
+			<Wire>70</Wire>
+			<ComponentIndustrial>12</ComponentIndustrial>
+			<Electronics>6</Electronics>
+		</costList>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="SK.CompProperties_LightningRod">
+				<compClass>SK.CompLightningRod</compClass>
+				<cooldownSpeed>0.25</cooldownSpeed>
+				<chargeCapacity>2000</chargeCapacity>
+				<fakeZIndex>4</fakeZIndex>
+				<shortCircuitInRain>false</shortCircuitInRain>
+				<basePowerConsumption>750</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+				<oneInXChanceHitPowerSave>4</oneInXChanceHitPowerSave>
+				<powerGainDischarge>4500</powerGainDischarge>
+				<strikesHitBase>false</strikesHitBase>
+				<cooldownPercentPowerSave>50</cooldownPercentPowerSave>
+			</li>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
+		</comps>
+		<size>(1,1)</size>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<placeWorkers>
+			<li>PlaceWorker_NotUnderRoof</li>
+		</placeWorkers>
+		<designationCategory>Power</designationCategory>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<researchPrerequisites>
+			<li>Renewable_energy_C4</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>14</constructionSkillPrerequisite>
+	</ThingDef>
+
+</Defs>

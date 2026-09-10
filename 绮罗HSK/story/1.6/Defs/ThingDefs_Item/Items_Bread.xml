@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 玉米糕 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_CornCake</defName>
+    <label>corn cake</label>
+    <description>A delicate pastry made from finely ground cornmeal, easy to digest and suitable even for babys.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/CornCake</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>6</MarketValue>
+      <Nutrition>0.3</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>-2</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+      <babiesCanIngest>true</babiesCanIngest>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>7</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <performMergeCompatibilityChecks>false</performMergeCompatibilityChecks>
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 农家面包 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_CountryBread</defName>
+    <label>country bread</label>
+    <description>A coarse, hard bread baked in the simplest manner. Rough in texture and not particularly pleasant to eat, yet it provides a solid sense of fullness. It is never absent from the villages of Kiiro.\n\nCan be stored for long periods of time.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/CountryBread</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>8</MarketValue>
+      <Nutrition>0.4</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>-2</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>12</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 白吐司 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_WhiteToast</defName>
+    <label>white toast</label>
+    <description>Soft-textured sliced bread, often served as an accompaniment to other foods.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/WhiteToast</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>6</MarketValue>
+      <Nutrition>0.3</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>-2</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-25</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>5</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 精致食物=========================================================================================================================================================================== -->
+  <!-- 三明治 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_Sandwich</defName>
+    <label>sandwich</label>
+    <description>A food made by layering vegetables, eggs, and slices of meat between pieces of bread, complemented with a variety of sauces. It offers balanced nutrition and a rich, satisfying texture.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/Sandwich</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>15</MarketValue>
+      <Nutrition>0.7</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealFine</preferability>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>4</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 可颂面包 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_Croissant</defName>
+    <label>croissant</label>
+    <description>A golden, fluffy loaf with a crisp exterior and a soft, tender interior.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/Croissant</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>15</MarketValue>
+      <Nutrition>0.7</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealFine</preferability>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>7</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 莓果面包 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_JamBun</defName>
+    <label>berry bread</label>
+    <description>A soft, fluffy bread filled with sweet jam, its surface also dotted with fresh berries.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/JamBun</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>24</MarketValue>
+      <Nutrition>0.6</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealFine</preferability>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+      <joy>0.15</joy>
+      <joyKind>Gluttonous</joyKind>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>5</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 奢侈食物=========================================================================================================================================================================== -->
+  <!-- 巧克力流心面包 -->
+  <ThingDef ParentName="Kiiro_MealBase">
+    <defName>Kiiro_ChocolateLavaBread</defName>
+    <label>chocolate lava bread</label>
+    <description>A soft loaf of bread filled with a rich, decadent chocolate center. Delicious, though quite high in calories.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/ChocolateLavaBread</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>30</MarketValue>
+      <Nutrition>0.8</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>MealLavish</preferability>
+      <tasteThought>AteLavishMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+      <joy>0.25</joy>
+      <joyKind>Gluttonous</joyKind>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>6</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+</Defs>

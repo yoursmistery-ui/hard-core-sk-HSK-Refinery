@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>OA_RK_EMPInst</defName>
+    <label>Single-use EMP generator</label>
+    <tickerType>Normal</tickerType>
+    <description>An EMP generator that has been airdropped. It was attached with a self-destruct device to prevent being reverse engineered.</description>
+    <graphicData>
+      <texPath>Building/OA_RK_EMP_B</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.3, 0.2, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <drawSize>(2.45,2.6)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>0.5</Flammability>
+      <Mass>5</Mass>
+    </statBases>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <fillPercent>0.35</fillPercent>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <compClass>OberoniaAurea.CompEMPInstExplosion</compClass>
+        <explosiveRadius>33.9</explosiveRadius>
+        <explosiveDamageType>EMP</explosiveDamageType>
+        <startWickHitPointsPercent>-1</startWickHitPointsPercent>
+      </li>
+      <li Class="CompProperties_Explosive"> <!-- 用于次生爆炸 -->
+        <compClass>OberoniaAurea.CompEMPInstExplosion</compClass>
+        <explosiveRadius>33.9</explosiveRadius>
+        <explosiveDamageType>OA_RK_ExtraStun</explosiveDamageType>
+        <startWickHitPointsPercent>-1</startWickHitPointsPercent>
+        <explosionSound>Explosion_EMP</explosionSound>
+      </li>
+    </comps>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <pathCost>14</pathCost>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+  <TerrainDef ParentName="FloorBase">
+    <defName>OA_RK_Floor</defName>
+    <label>Oberonia Aurea self-cleaning carpet</label>
+    <renderPrecedence>200</renderPrecedence>
+    <description>Carpets knitted with Oberonia Aurea's signature self-cleaning fabric. Oberonia Aurea's special embroidery process makes them more aesthetically pleasing than normal carpets and easier to clean and maintain.</description>
+    <texturePath>Building/OA_RK_Floor</texturePath>
+    <color>(0.67, 0.67, 0.67)</color>
+    <pollutionTintColor>(0.95, 0.95, 0.93, 1)</pollutionTintColor>
+    <isPaintable>true</isPaintable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <statBases>
+      <WorkToBuild>3800</WorkToBuild>
+      <Cleanliness>1.0</Cleanliness>
+      <CleaningTimeFactor>0.66</CleaningTimeFactor>
+      <Beauty>8</Beauty>
+    </statBases>
+    <costList>
+      <Synthread>18</Synthread>
+      <Silver>15</Silver>
+    </costList>
+    <tags>
+      <li>Floor</li>
+      <li>FineFloor</li>
+    </tags>
+    <constructEffect>ConstructMetal</constructEffect>
+    <designationHotKey>Misc4</designationHotKey>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>Construction_B3</li>
+    </researchPrerequisites>
+    <uiOrder>2115</uiOrder>
+  </TerrainDef>
+
+  
+
+  
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>OA_RK_Zhuzi</defName>
+    <label>Illumination column</label>
+    <description>The Oberonia Aurea Empire's source of light. Capable of illuminating large areas, in addition to acting as support pillars.</description>
+    <designationCategory>Structure</designationCategory>
+    <uiOrder>2041</uiOrder>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.25</fillPercent>
+    <pathCost>0</pathCost>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToBuild>1600</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>0.1</Flammability>
+      <Beauty>11</Beauty>
+      <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">6</StyleDominance>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <Plasteel>12</Plasteel>
+      <Titanium>3</Titanium>
+    </costList>
+    <holdsRoof>true</holdsRoof>
+    <canOverlapZones>false</canOverlapZones>
+    <rotatable>false</rotatable>
+    <fertility>0</fertility>
+    <specialDisplayRadius>6.9</specialDisplayRadius>
+    <building>
+      <isInert>true</isInert>
+      <ai_chillDestination>false</ai_chillDestination>
+      <paintable>true</paintable>
+    </building>
+    <graphicData>
+      <drawSize>(1.1,1.28)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <texPath>Building/OA_RK_Zhuzi</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!--shaderType>CutoutComplex</shaderType-->
+      <shadowData>
+        <volume>(0.3, 0.5, 0.3)</volume>
+        <offset>(0,0,-0.23)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Styleable" />
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>40</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>18</glowRadius>
+        <glowColor>(216,177,110,0)</glowColor>
+        <colorPickerEnabled>true</colorPickerEnabled>
+        <darklightToggle>true</darklightToggle>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>Construction_B3</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>OA_RK_Cloth_Processing</defName>
+    <label>Fabric finishing facility</label>
+    <description>A facility that allows for the fine processing of fabrics, which drastically reduces the difficulty of works involve complex patterns./n/n Increase work speed of all kinds of tailor bench.</description>
+    <graphicData>
+      <texPath>Building/OA_RK_Cloth_Processing</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.2,2.15)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.35</staticSunShadowHeight>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <pathCost>42</pathCost>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>6000</WorkToBuild>
+      <Mass>20</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,2)</size>
+    <costList>
+      <Plasteel>120</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <ComponentAdvanced>2</ComponentAdvanced>
+      <AdvMechanism>2</AdvMechanism>
+    </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <researchPrerequisites>
+      <li>OA_RK_Apparel_I</li>
+    </researchPrerequisites>
+    <designationCategory>Misc</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <WorkTableWorkSpeedFactor>0.19</WorkTableWorkSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>150</basePowerConsumption>
+      </li>
+    </comps>
+    <designationHotKey>Misc6</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>

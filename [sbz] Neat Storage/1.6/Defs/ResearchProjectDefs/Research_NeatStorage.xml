@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- [sbz] Neat Storage 的 HSK 科技接入: 在 Storage 线(Storage VI → Storage VII)之间插入两个工业档节点。
+	     坐标: Storage_C1(Storage VI)=X7, Storage_C2(Storage VII)=X12, 故 X8/X9 为空位。
+	     ParentName=IndustrialBase 继承工业档研究设施门槛(LabTerminal)。 -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Storage_C1b</defName>
+		<label>储物家具</label>
+		<description>木石打造的收纳家具: 货箱、托盘、展示架、展柜、衣架与纺织架。
+
+容量不算高, 但造型精致、占地灵活, 适合把生活区与库房收拾得井井有条。</description>
+		<baseCost>500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Storage_C1</li>
+		</prerequisites>
+		<researchViewX>8.00</researchViewX>
+		<researchViewY>12.00</researchViewY>
+		<tab>Buildings_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Storage_C2b</defName>
+		<label>精工家具</label>
+		<description>金属打造的专用收纳: 保险箱、密封圆桶与横竖两种武器架。
+
+比木石家具更耐用, 适合存放贵重物品与军械。</description>
+		<baseCost>650</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Storage_C1b</li>
+		</prerequisites>
+		<researchViewX>9.00</researchViewX>
+		<researchViewY>12.00</researchViewY>
+		<tab>Buildings_SK</tab>
+	</ResearchProjectDef>
+
+</Defs>

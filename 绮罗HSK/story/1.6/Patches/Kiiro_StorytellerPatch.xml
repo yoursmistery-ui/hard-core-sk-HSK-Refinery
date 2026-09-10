@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/Kiiro.StorytellerDef_Custom[defName="AncotWood"]/comps</xpath>
+        <value>
+
+          <!-- #####################################绮罗独享事件########################################### -->
+          <!--  -->
+          <li Class="StorytellerCompProperties_SingleOnceFixed" MayRequire="Ludeon.RimWorld.Biotech">
+            <fireAfterDaysPassed>8</fireAfterDaysPassed>
+            <incident MayRequire="Ludeon.RimWorld.Biotech">Kiiro_Refugee_Baby</incident>
+            <allowedTargetTags>
+              <li>Map_PlayerHome</li>
+            </allowedTargetTags>
+          </li>
+
+          <!-- Quests - Kiiro -->
+          <li Class="Kiiro_Event.StorytellerCompProperties_RandomKiiroQuest">
+            <category>GiveQuest</category>
+            <allowedTargetTags>
+              <li>World</li>
+            </allowedTargetTags>
+            <onDays>15</onDays>
+            <numIncidentsRange>1.5~2.5</numIncidentsRange>
+            <acceptFractionByDaysPassedCurve>
+              <points>
+                <li>(5, 0)</li>
+                <li>(8, 1)</li>
+              </points>
+            </acceptFractionByDaysPassedCurve>
+            <minSpacingDays>0</minSpacingDays>
+            <enableIfAnyModActive>
+              <li>Ancot.KiiroStoryEventsExpanded</li>
+            </enableIfAnyModActive>
+          </li>
+
+          <li Class="StorytellerCompProperties_OnOffCycle" MayRequire="Ludeon.RimWorld.Ideology">
+            <incident MayRequire="Ludeon.RimWorld.Ideology">Kiiro_GiveQuest_Beggars</incident>
+            <onDays>30</onDays>
+            <offDays>10</offDays>
+            <minSpacingDays>10</minSpacingDays>
+            <numIncidentsRange>0~1</numIncidentsRange>
+            <allowedTargetTags>
+              <li>Map_PlayerHome</li>
+            </allowedTargetTags>
+            <enableIfAnyModActive>
+              <li>Ludeon.RimWorld.Ideology</li>
+            </enableIfAnyModActive>
+          </li>
+
+
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+
+  <!-- 给基础叙事者加 -->
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+        <value>
+
+          <li Class="StorytellerCompProperties_OnOffCycle">
+            <incident>Kiiro_NewSettlement_Establish</incident>
+            <onDays>15</onDays>
+            <offDays>45</offDays>
+            <minSpacingDays>10</minSpacingDays>
+            <numIncidentsRange>0~1</numIncidentsRange>
+            <allowedTargetTags>
+              <li>World</li>
+            </allowedTargetTags>
+            <enableIfAnyModActive>
+              <li>Ancot.KiiroStoryEventsExpanded</li>
+            </enableIfAnyModActive>
+          </li>
+
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+
+</Patch>

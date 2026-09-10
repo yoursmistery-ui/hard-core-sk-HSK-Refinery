@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <!--流浪者加入 完成-->
+  <IncidentDef>
+    <defName>KiiroWandererJoin</defName>
+    <label>kiiro wanderer join</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <questScriptDef>KiiroWandererJoins</questScriptDef>
+    <baseChance>0.2</baseChance>
+    <pawnKind>Kiiro_Refuge</pawnKind>
+    <populationEffect>IncreaseEasy</populationEffect>
+  </IncidentDef>
+  
+  <!--亲属加入 完成-->
+  <IncidentDef>
+    <defName>KiiroRelativeJoin</defName>
+    <label>kiiro relative join</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <questScriptDef>KiiroRelativeJoins</questScriptDef>
+    <baseChance>1.0</baseChance>
+    <!-- <pawnKind>Kiiro_Refugee</pawnKind> -->
+    <!-- <populationEffect>IncreaseEasy</populationEffect> -->
+  </IncidentDef>
+  
+  <!--行乞者-->
+  <IncidentDef>
+    <defName>Kiiro_GiveQuest_Beggars</defName>
+    <category>GiveQuest</category>
+    <label>kiiro beggars arrive</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <letterLabel>kiiro beggars arrive</letterLabel>
+    <questScriptDef>Kiiro_Beggars</questScriptDef>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <baseChance>0.1</baseChance> <!-- given by a special storyteller comp -->
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+  
+  <!--托孤-->
+  <IncidentDef MayRequire="Ludeon.RimWorld.Biotech">
+    <defName>Kiiro_Refugee_Baby</defName>
+    <label>kiiro entrust orphan</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+	  <baseChance>0.2</baseChance>
+	  <minRefireDays>60</minRefireDays>
+    <questScriptDef>Kiiro_Refugee_Baby</questScriptDef>
+    <populationEffect>IncreaseEasy</populationEffect>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+  
+  <!--矿物发现-->
+  <IncidentDef>
+    <defName>Kiiro_Mineral_Discovery</defName>
+    <label>mineral discovery</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <baseChance>1.0</baseChance>
+    <questScriptDef>Kiiro_Mineral_Discovery</questScriptDef>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+  
+  <!--新村镇-->
+  <IncidentDef>
+    <defName>Kiiro_NewSettlement_Establish</defName>
+    <label>kiiro new settlement</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>World</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <baseChance>1.2</baseChance>
+    <questScriptDef>Kiiro_NewSettlementEstablish</questScriptDef>
+    <requireColonistsPresent>True</requireColonistsPresent>
+  </IncidentDef>
+  
+  <IncidentDef>
+    <defName>Kiiro_RaidFriendly_CallForAid</defName>
+    <label>kiiro friendly raid</label>
+    <category>AllyAssistance</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Map_RaidBeacon</li>
+      <li>Map_TempIncident</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_RaidFriendlyKiiro</workerClass>
+    <baseChance>0</baseChance> <!-- 只由通讯台触发 -->
+    <pointsScaleable>true</pointsScaleable>
+  </IncidentDef>
+
+  <!-- 商户交租 -->
+  <IncidentDef>
+    <defName>Kiiro_MerchantRent</defName>
+    <label>Merchant pays rent</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_KiiroMerchantRent</workerClass>
+    <baseChance>0</baseChance>
+    <pointsScaleable>true</pointsScaleable>
+    <minRefireDays>30</minRefireDays>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>Kiiro_TradeFestivalSuggest</defName>
+    <label>trade festival suggest</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_KiiroTradeFestivalSuggest</workerClass>
+    <baseChance>0</baseChance>
+    <minRefireDays>9999</minRefireDays>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>Kiiro_TradeFestival</defName>
+    <label>trade festival</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_KiiroTradeFestival</workerClass>
+    <baseChance>0</baseChance>
+    <questScriptDef>Kiiro_TradeFestival</questScriptDef>
+    <minRefireDays>50</minRefireDays>
+  </IncidentDef>
+
+  <!--晚归的牧羊人-->
+  <IncidentDef>
+    <defName>Kiiro_LateReturningShepherd</defName>
+    <label>late returning shepherd</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_ShepherdJoin</workerClass>
+    <questScriptDef>KiiroWandererJoins</questScriptDef>
+    <baseChance>0</baseChance>
+    <pawnKind>Kiiro_Shepherd</pawnKind>
+    <minRefireDays>99999</minRefireDays>
+  </IncidentDef>
+
+  <!-- 勇者剧本结局任务 -->
+  <IncidentDef>
+    <defName>Kiiro_ValorEndGame</defName>
+    <label>Kiiro Valor unfinished journey</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>Kiiro_Event.IncidentWorker_GiveKiiroQuest</workerClass>
+    <baseChance>0</baseChance>
+    <questScriptDef>Kiiro_ValorEndGame</questScriptDef>
+    <requireColonistsPresent>True</requireColonistsPresent>
+    <minRefireDays>999999</minRefireDays>
+  </IncidentDef>
+
+</Defs>

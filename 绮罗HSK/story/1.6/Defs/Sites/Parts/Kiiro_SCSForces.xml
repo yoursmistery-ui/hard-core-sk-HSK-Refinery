@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Kiiro_SCSForces</defName>
+    <label>kiiro SCS forces</label>
+    <workerClass>Kiiro_Event.SitePartWorker_SCSForces</workerClass>
+    <description>a kiiro SCS group is in this area.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Kiiro_Event/Icon/MineralFound</expandingIconTexture>
+	<wantsThreatPoints>true</wantsThreatPoints>
+    <!-- <minThreatPoints>250</minThreatPoints> -->
+    <tags>
+      <li>Kiiro_SCSForces</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_SCSForces</defName>
+    <linkWithSite>Kiiro_SCSForces</linkWithSite>
+    <order>450</order>
+    <genStep Class="Kiiro_Event.GenStep_KiiroSCSForces" />
+  </GenStepDef>
+
+</Defs>

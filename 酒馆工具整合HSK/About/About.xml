@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>酒馆工具整合 HSK整合包</name>
+    <author>HSK 本地整合</author>
+    <modVersion>1.0.0</modVersion>
+    <packageId>local.hsktavernintegration</packageId>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <modDependencies>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <downloadUrl>https://rimworld.example/brrainz.harmony</downloadUrl>
+			</li>
+        <li>
+            <packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+            <displayName>Vanilla Expanded Framework</displayName>
+            <downloadUrl>https://rimworld.example/OskarPotocki.VanillaFactionsExpanded.Core</downloadUrl>
+			</li>
+        <li>
+            <packageId>skyarkhangel.HSK</packageId>
+            <displayName>Core SK</displayName>
+            <downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+        </li>
+        <li>
+            <packageId>DimonSever000.ModIndicator.Specific</packageId>
+            <displayName>HSK Autosort and Mod Assistant</displayName>
+            <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+			</li>
+    </modDependencies>
+    <loadAfter>
+        <li>brrainz.harmony</li>
+        <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+        <li>skyarkhangel.hsk</li>
+        <li>skyarkhangel.hsk.core</li>
+        <li>skyarkhangel.hsk.dlc</li>
+        <li>local.ratkin.furniture</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+    </loadAfter>
+    <description>
+酒馆工具整合 HSK整合包 —— 将三个工坊 mod 合并为一个本地 mod（packageId: local.hsktavernintegration），顶替工坊原版：
+
+1. Simple Doors（ODs.SimpleDoors）：1x1/2x1/3x1 低科技门（木/石/工业）与柱子。材料已适配 HSK 体系：木门/木柱=HSK 木板（Woody），石门/石柱=HSK 砖块（Bricks），工业门/柱=HSK 金属（Metallic）+ 工业组件；研究沿用 HSK（家具I/石材加工I/机械加工）。
+
+2. Tavern（ODs.Tavern）：酒馆家具套装（桌椅、柜台、床、灯具、装饰、生产台与家常食物）。材料与属性将按 HSK 同水平同材料家具对齐。
+
+3.（已拆出）工作动画工具系统（Show Me Your Tools / JobEffects）已于 2026-08-30 独立为「工作动画HSK」(meathax.ShowMeYourTools)，本包不再包含。
+
+2026-08-28：纺织/装饰整合——删除装饰台（Tav_TableDecor）及其 11 条工作台配方（各类地毯、旗帜、奖杯、厨房装饰），这些物件本就带造价清单，一律改在建筑菜单「辅助建筑 → 装饰与地毯」直接建造；唯一保留的垫料配方 TavMake_Padding 迁至 HSK 共享纺织机 TableLoom（TailoringSpeed，前置 Apparel_B1），与织绸同线。详见 docs/维护详录 §7.12。
+
+2026-08-22：原「大型工具整合（HSK 工具体系重做）」已整体迁往 鼠族HSK拓展（local.ratkin.clothesweapons）的 93-98 号补丁（工具科研节点/科研前置/镐斧与鼠族工具删除/锤子进化链/钉头锤恢复/JE 贴图替换），本 mod 不再包含工具调整部分。
+
+依赖：Harmony、Vanilla Expanded Framework。存档兼容：存档引用 defName（SD_*/Tav_*/JE_*）而非 packageId，合并后旧存档不受影响。
+    </description>
+</ModMetaData>

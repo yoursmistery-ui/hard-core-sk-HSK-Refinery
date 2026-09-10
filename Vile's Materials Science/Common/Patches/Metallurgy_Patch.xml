@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+    <Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Vile's Metallurgy</li>
+	</mods>
+        
+    <!-- NOMATCH -->    
+        
+	<nomatch Class="PatchOperationSequence">
+		<operations>  
+            <li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="TableFurnace"]/recipes</xpath>
+				<value>
+                    <li>MakeCoins</li>
+					<li>MeltCoins</li>
+				</value>
+			</li>
+    </operations>
+		</nomatch>
+    </Operation>	
+    
+    <!-- MATCH -->
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Vile's Metallurgy</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+		<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeLeadBars_Hand"]/label</xpath>
+				<value>
+                    <label>Smelt lead and silver (15 Pb / 10 Ag)</label>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeLeadBars_Hand"]/description</xpath>
+				<value>
+                    <description>Smelts 15 lead and 10 silver from anglesite ore.</description>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeLeadBars_Hand"]/jobString</xpath>
+				<value>
+                    <jobString>Smelting lead and silver.</jobString>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeLeadBars_Hand"]/products</xpath>
+				<value>
+                    <products>
+						<LeadBar>15</LeadBar>
+						<PureSilver>10</PureSilver>
+					</products>
+				</value>
+			</li>
+		
+		<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Silver"]/label</xpath>
+				<value>
+                    <label>Silver Coin</label>
+				</value>
+			</li>
+            
+            <li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="CrucibleSteel"]/stuffProps</xpath>
+				<value>
+                    <appearance>Panel</appearance>
+				</value>
+			</li>
+            <li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="FirePit" or defName="Foundry"]/recipes</xpath>
+				<value>
+                    <li>MakeCoins</li>
+					<li>MeltCoins</li>
+				</value>
+			</li>
+              <li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="CrucibleSteel"]/stuffProps/categories</xpath>
+				<value>
+                    <li>CorrosionResistant</li>
+				</value>
+			</li>
+            
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="TableFurnace"]/recipes</xpath>
+				<value>
+					<recipes>
+						<li>MakePigIron_Furnace</li>
+						<li>MakeTinBars_Hand</li>
+						<li>MakeCopperBars_Hand</li>
+						<li>MakeBronze_Hand</li>
+						<li>MakeCoins</li>
+						<li>MeltCoins</li>
+						<li>MakeSilverBars_Hand</li>
+						<li>MakeGoldBars_Hand</li>
+						<li>MakeGlass</li>
+						<li>MakeCharcoal_Hand</li>
+					</recipes>
+				</value>
+			</li>
+
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="Extract_BogIron"]/products</xpath>
+				<value>
+                    <products>
+                        <BogIron>10</BogIron>
+                    </products>
+				</value>
+			</li>
+		
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeIronBloom_Bloomery"]/ingredients</xpath>
+				<value>
+                    	<ingredients>
+                            <li>
+                                <filter>
+                                    <thingDefs>
+                                        <li>BogIron</li>
+                                        <li>Iron</li> <!-- iron ore -->
+                                    </thingDefs>
+                                </filter>
+                                <count>15</count>
+                            </li>
+                        </ingredients>
+				</value>
+			</li>
+		    <li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakeIronBloom_Bloomery"]/fixedIngredientFilter</xpath>
+				<value>
+                    <fixedIngredientFilter>
+                        <thingDefs>
+                            <li>BogIron</li>
+                            <li>Iron</li><!-- iron ore -->
+                        </thingDefs>
+                    </fixedIngredientFilter>
+				</value>
+			</li>
+            
+            
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakePigIron_Furnace"]/ingredients</xpath>
+				<value>
+                    <ingredients>
+                        <li>
+                            <filter>
+                                <thingDefs>
+                                    <li>BogIron</li>
+                                    <li>Iron</li> <!-- iron ore -->
+                                </thingDefs>
+                            </filter>
+                            <count>80</count>
+                        </li>
+                    </ingredients>
+				</value>
+			</li>
+		    <li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="MakePigIron_Furnace"]/fixedIngredientFilter</xpath>
+				<value>
+                     <fixedIngredientFilter>
+                        <thingDefs>
+                            <li>BogIron</li>
+                            <li>Iron</li><!-- iron ore -->
+                        </thingDefs>
+                    </fixedIngredientFilter>
+				</value>
+			</li>
+		</operations>
+		</match>
+    </Operation>	
+</Patch>	
+

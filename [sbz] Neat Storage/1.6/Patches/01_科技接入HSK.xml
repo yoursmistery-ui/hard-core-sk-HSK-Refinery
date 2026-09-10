@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- 把 Neat Storage 的原版科技前置(ComplexFurniture / Smithing / Machining)
+	     换成 HSK Storage 线的两个新节点: Storage_C1b(储物家具) / Storage_C2b(精工家具)。
+	     只改基类与各建筑自身显式声明的节点, 子类继承自动生效。 -->
+
+	<!-- ===== 木石档 → Storage_C1b(储物家具) ===== -->
+
+	<!-- 货箱/托盘 7 个的基类 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="sbzCrateBase"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C1b</li>
+		</value>
+	</Operation>
+
+	<!-- 展示架/展柜/衣架 基类(大号, 2×1) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="sbzDisplayShelfBase"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C1b</li>
+		</value>
+	</Operation>
+
+	<!-- 展示架/展柜/衣架 基类(小号, 1×1) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="sbzSmallDisplayShelfBase"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C1b</li>
+		</value>
+	</Operation>
+
+	<!-- 肉钩(原 Smithing) -->
+
+	<!-- 纺织架(原 Smithing) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="sbz_TextileRack"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C1b</li>
+		</value>
+	</Operation>
+
+	<!-- 尸体堆放点: 原版无科技要求, 补上 Storage_C1b -->
+
+	<!-- ===== 金属档 → Storage_C2b(精工家具) ===== -->
+
+	<!-- 横/竖武器架 基类(原 Machining) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="sbzWeaponRackBase"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C2b</li>
+		</value>
+	</Operation>
+
+	<!-- 老式武器架(原 ComplexFurniture) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="sbz_WeaponRack"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C2b</li>
+		</value>
+	</Operation>
+
+	<!-- 保险箱(原 Machining) -->
+
+	<!-- 密封圆桶(原 Machining) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="sbz_Drum"]/researchPrerequisites/li</xpath>
+		<value>
+			<li>Storage_C2b</li>
+		</value>
+	</Operation>
+
+</Patch>

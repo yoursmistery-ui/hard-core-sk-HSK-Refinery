@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="MealCooked">
+		<defName>AC_RatkinCake</defName>
+		<label>ratkin cake</label>
+		<description>A food that some ratkins who had no choice would eat during times of famine. It may be made from the flesh of anyone's child or the grease of anyone's wife.</description>
+		<graphicData>
+			<texPath>Things/Meals/RatkinCake</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>70</MarketValue>
+			<WorkToMake>1500</WorkToMake>
+			<Nutrition>2.0</Nutrition>
+		</statBases>
+		<thingCategories Inherit="false">
+		  <li>FoodMeals</li>
+		</thingCategories>
+		<ingestible>
+			<preferability>MealFine</preferability>
+			<optimalityOffsetHumanlikes>20</optimalityOffsetHumanlikes>
+			<tasteThought>AC_AteRatkinCake</tasteThought>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
+			<outcomeDoers>
+			  <li Class="IngestionOutcomeDoer_GiveHediff">
+				<hediffDef>AC_RatkinCakeHigh</hediffDef>
+				<severity>0.5</severity>
+			  </li>
+			</outcomeDoers>
+		</ingestible>
+		<comps>
+			<li Class="CompProperties_Ingredients">
+				<noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+			</li>
+		</comps>
+		<rotatable>false</rotatable>
+	</ThingDef>
+	
+</Defs>

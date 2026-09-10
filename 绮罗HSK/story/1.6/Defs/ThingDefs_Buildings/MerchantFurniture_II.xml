@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 中型小料架 -->
+  <ThingDef Name="Kiiro_MaterialRackBase" ParentName="Kiiro_FurnitureBase" Abstract="true">
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.1,2.1)</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+    </comps>
+    <uiIconScale>1.0</uiIconScale>
+    <drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+
+  <!-- 中型小料架 -->
+  <ThingDef ParentName="Kiiro_MaterialRackBase">
+    <defName>Kiiro_MaterialRackMedium</defName>
+    <label>kiiro medium material rack</label>
+    <description>A medium material rack for merchant.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/MaterialRackMedium/MaterialRackMedium</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.1,2.1)</drawSize>
+      <drawOffset>(0,0,0)</drawOffset>
+    </graphicData>
+    <costStuffCount>30</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>16</Kiiro_MerchantCapacity>
+      <Beauty>20</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>3</goodsGroup>
+        <groupOffset_Horizontal>(0.55, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.65, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.2,-0.01,0)</goodsInGroupOffset>
+        <goodsLayer>2</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.65,0.05,0.3)</drawOffsetSouth>
+          <drawOffsetWest>(-0.2,0.05,0.8)</drawOffsetWest>
+          <drawOffsetNorth>(0.65,0.05,0.1)</drawOffsetNorth>
+          <drawOffsetEast>(0.2,0.05,-0.3)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,-0.03,0.3)</drawOffsetSouth>
+          <drawOffsetWest>(0.45,0.03,0)</drawOffsetWest>
+          <drawOffsetNorth>(0,-0.03,0.3)</drawOffsetNorth>
+          <drawOffsetEast>(-0.45,0.03,0)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 大型小料架 -->
+  <ThingDef ParentName="Kiiro_MaterialRackBase">
+    <defName>Kiiro_MaterialRackLarge</defName>
+    <label>kiiro large material rack</label>
+    <description>A large material rack for merchant.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/MaterialRackLarge/MaterialRackLarge</texPath>
+    </graphicData>
+    <costStuffCount>60</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>36</Kiiro_MerchantCapacity>
+      <Beauty>30</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>3</goodsGroup>
+        <groupOffset_Horizontal>(0.55, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.65, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.2,-0.01,0)</goodsInGroupOffset>
+        <goodsLayer>4</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.65,0.1,-0.3)</drawOffsetSouth>
+          <drawOffsetWest>(-0.65,0.1,0.8)</drawOffsetWest>
+          <drawOffsetNorth>(0.65,0.1,-0.3)</drawOffsetNorth>
+          <drawOffsetEast>(0.65,0.1,-0.3)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,-0.03,0.4)</drawOffsetSouth>
+          <drawOffsetWest>(0.45,0.03,0)</drawOffsetWest>
+          <drawOffsetNorth>(0,-0.03,0.4)</drawOffsetNorth>
+          <drawOffsetEast>(-0.45,0.03,0)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- 层叠货架 -->
+  <ThingDef ParentName="Kiiro_MaterialRackBase">
+    <defName>Kiiro_StackRackMedium</defName>
+    <label>kiiro medium stack rack</label>
+    <description>A medium stack rack for merchant.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/StackRackMedium/StackRackMedium</texPath>
+      <drawSize>(2.4,2.4)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <drawOffsetEast>(0,0,0.1)</drawOffsetEast>
+      <drawOffsetWest>(0,0,0.1)</drawOffsetWest>
+    </graphicData>
+    <costStuffCount>40</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>20</Kiiro_MerchantCapacity>
+      <Beauty>25</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>3</goodsGroup>
+        <groupOffset_Horizontal>(0.55, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.65, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.2,-0.01,0)</goodsInGroupOffset>
+        <goodsLayer>3</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.65,0.1,-0.1)</drawOffsetSouth>
+          <drawOffsetWest>(-0.25,0.1,0.6)</drawOffsetWest>
+          <drawOffsetNorth>(0.65,0.1,0.1)</drawOffsetNorth>
+          <drawOffsetEast>(0.25,0.1,-0.5)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,-0.03,0.4)</drawOffsetSouth>
+          <drawOffsetWest>(0.25,0.03,0.2)</drawOffsetWest>
+          <drawOffsetNorth>(0,-0.03,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(-0.25,0.03,0.2)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+
+</Defs>

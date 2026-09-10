@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <IssueDef>
+        <defName>OARK_Birthday</defName>
+        <label>Birthday</label>
+        <iconPath>Ui/OARK_Birthday</iconPath>
+    </IssueDef>
+
+    <!-- 诞生日（恐惧）-->
+    <PreceptDef>
+        <defName>OARK_Birthday_Fear</defName>
+        <issue>OARK_Birthday</issue>
+        <label>Fear</label>
+        <description>Every birthday brings us one step closer to illness and death.</description>
+        <impact>Medium</impact>
+        <displayOrderInIssue>40</displayOrderInIssue>
+        <displayOrderInImpact>851</displayOrderInImpact>
+        <defaultSelectionWeight>1</defaultSelectionWeight>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>OARK_Birthday_Fear</thought>
+                <description>Birthday (Fear)</description>
+            </li>
+        </comps>
+    </PreceptDef>
+
+    <!-- 诞生日（漠视）-->
+    <PreceptDef>
+        <defName>OARK_Birthday_Ignore</defName>
+        <issue>OARK_Birthday</issue>
+        <label>Ignore</label>
+        <description>A birthday is just one of countless days, nothing special at all.</description>
+        <impact>Low</impact>
+        <displayOrderInIssue>20</displayOrderInIssue>
+        <displayOrderInImpact>851</displayOrderInImpact>
+        <defaultSelectionWeight>6</defaultSelectionWeight>
+    </PreceptDef>
+
+    <!-- 诞生日（平淡）-->
+    <PreceptDef>
+        <defName>OARK_Birthday_Ordinary</defName>
+        <issue>OARK_Birthday</issue>
+        <label>Ordinary</label>
+        <description>Although the birthday is special, we still have many other things to do.\n\nThe probability of receiving blessings increases for people who celebrate their birthdays, and they tend to be more inclined towards positive words.</description>
+        <impact>Low</impact>
+        <displayOrderInIssue>10</displayOrderInIssue>
+        <displayOrderInImpact>851</displayOrderInImpact>
+        <defaultSelectionWeight>2</defaultSelectionWeight>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>OARK_Birthday_Ordinary</thought>
+                <description>Birthday (Ordinary)</description>
+            </li>
+        </comps>
+    </PreceptDef>
+
+    <!-- 诞生日（重视）-->
+    <PreceptDef>
+        <defName>OARK_Birthday_Appreciate</defName>
+        <issue>OARK_Birthday</issue>
+        <label>Appreciate</label>
+        <description>A birthday is a unique commemoration day for everyone, and it deserves to be valued.\n\nPeople who celebrate their birthdays have a significantly higher probability of receiving blessings, and they tend to be more inclined towards positive words.\nYou will receive a notification on a colonist's birthday.</description>
+        <impact>Medium</impact>
+        <displayOrderInIssue>10</displayOrderInIssue>
+        <displayOrderInImpact>851</displayOrderInImpact>
+        <defaultSelectionWeight>1</defaultSelectionWeight>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>OARK_Birthday_Appreciate</thought>
+                <description>Birthday (Appreciate)</description>
+            </li>
+        </comps>
+    </PreceptDef>
+
+    <!-- 诞生日（庄重）-->
+    <PreceptDef>
+        <defName>OARK_Birthday_Solemn</defName>
+        <issue>OARK_Birthday</issue>
+        <label>Solemn</label>
+        <description>The birthday grants life its beginning, and it must be treated with solemnity.\n\nPeople who celebrate their birthdays have a significantly higher probability of receiving blessings, and they tend to be more inclined towards positive words.\nYou will receive a notification on a colonist's birthday.</description>
+        <impact>High</impact>
+        <displayOrderInIssue>10</displayOrderInIssue>
+        <displayOrderInImpact>851</displayOrderInImpact>
+        <defaultSelectionWeight>1</defaultSelectionWeight>
+        <comps>
+            <li Class="PreceptComp_SituationalThought">
+                <thought>OARK_Birthday_Solemn</thought>
+                <description>Birthday (Solemn)</description>
+            </li>
+        </comps>
+    </PreceptDef>
+
+
+    <!-- 诞生日（恐惧）-->
+    <ThoughtDef>
+        <defName>OARK_Birthday_Fear</defName>
+        <thoughtClass>Thought_Situational</thoughtClass>
+        <workerClass>OberoniaAurea.ThoughtWorker_Precept_Birthday</workerClass>
+        <stages>
+            <li>
+                <label>Birthday (Fear)</label>
+                <description>A birthday is never a good thing...</description>
+                <baseMoodEffect>-6</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- 诞生日（平淡）-->
+    <ThoughtDef>
+        <defName>OARK_Birthday_Ordinary</defName>
+        <thoughtClass>Thought_Situational</thoughtClass>
+        <workerClass>OberoniaAurea.ThoughtWorker_Precept_Birthday</workerClass>
+        <stages>
+            <li>
+                <label>Birthday (Ordinary)</label>
+                <description>Will anyone remember my birthday?</description>
+                <baseMoodEffect>2</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- 诞生日（重视）-->
+    <ThoughtDef>
+        <defName>OARK_Birthday_Appreciate</defName>
+        <thoughtClass>Thought_Situational</thoughtClass>
+        <workerClass>OberoniaAurea.ThoughtWorker_Precept_Birthday</workerClass>
+        <stages>
+            <li>
+                <label>Birthday (Appreciate)</label>
+                <description>Today is my birthday!</description>
+                <baseMoodEffect>6</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <!-- 诞生日（庄重）-->
+    <ThoughtDef>
+        <defName>OARK_Birthday_Solemn</defName>
+        <thoughtClass>Thought_Situational</thoughtClass>
+        <workerClass>OberoniaAurea.ThoughtWorker_Precept_Birthday</workerClass>
+        <stages>
+            <li>
+                <label>Birthday (Solemn)</label>
+                <description>My life began on this date.</description>
+                <baseMoodEffect>12</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+</Defs>

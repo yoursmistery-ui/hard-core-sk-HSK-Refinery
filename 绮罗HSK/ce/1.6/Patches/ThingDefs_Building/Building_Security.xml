@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗机巧穿云弩 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBow"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBow"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.8</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBow"]/statBases/Mass</xpath>
+		<value>
+			<Mass>14</Mass>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBow"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗穿云弩机 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_AutoCrossBow</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.06</ShotSpread>
+			<SwayFactor>0.75</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.91</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_KiiroAutoCrossBow_Steel</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>34.9</range>
+			<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>Bow_Large</soundCast>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+	</Operation>
+	
+	<!-- 绮罗机巧飞星弩 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBowII"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBowII"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.6</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBowII"]/statBases/Mass</xpath>
+		<value>
+			<Mass>14</Mass>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBowII"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoCrossBowII"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>12</turretBurstCooldownTime>
+		</value>
+	</Operation>
+
+	<!-- 绮罗飞星弩机 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_AutoCrossBowII</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>12</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.5</ShotSpread>
+			<SwayFactor>0.75</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.75</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_KiiroAutoCrossBowII_steel</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>30.9</range>
+			<ticksBetweenBurstShots>0</ticksBetweenBurstShots>
+			<burstShotCount>24</burstShotCount>
+			<soundCast>Bow_Large</soundCast>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+	</Operation>
+	
+	<!-- 绮罗原型重机枪塔 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_PT_HMG"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_PT_HMG"]/statBases/Mass</xpath>
+		<value>
+			<Mass>16</Mass>
+			<Bulk>10</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_PT_HMG"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_PT_HMG"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+
+	<!-- 绮罗原型重机枪 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_PT_HMG</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.3</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.25</SightsEfficiency>
+			<ShotSpread>0.08</ShotSpread>
+			<SwayFactor>1.05</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.55</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_KiiroPTGuardian_FMJ</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>75</range>
+			<burstShotCount>10</burstShotCount>
+			<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+			<soundCast>HeavyMG</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>16</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>400</magazineSize>
+			<reloadTime>7.8</reloadTime>
+			<ammoSet>AmmoSet_KiiroPTGuardian</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>5</aimedBurstShotCount>
+			<aiUseBurstMode>TRUE</aiUseBurstMode>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="Kiiro_PT_HMGAmmo"]/recipeMaker</xpath>
+	</Operation>
+	
+	<!-- 便携式自动榴弹投射器 -->
+	<!-- 绮罗自动EMP发射器 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoEMPLauncher"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoEMPLauncher"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.6</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoEMPLauncher"]/statBases/Mass</xpath>
+		<value>
+			<Mass>14</Mass>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoEMPLauncher"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_AutoEMPLauncher</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>20</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.3</ShotSpread>
+			<SwayFactor>0.95</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.8</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_KiiroPTGrenades_EMP</defaultProjectile>
+			<warmupTime>1.1</warmupTime>
+			<minRange>5</minRange>
+			<range>44</range>
+			<soundCast>InfernoCannon_Fire</soundCast>
+			<recoilPattern>Mounted</recoilPattern>
+			<ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+		</Properties>
+	</Operation>
+
+	<!-- 绮罗自动榴弹发射器 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>6</turretBurstCooldownTime>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.6</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/statBases/Mass</xpath>
+		<value>
+			<Mass>14</Mass>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoHE_FRAGLauncher"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_AutoHE_FRAGLauncher</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>8</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.16</ShotSpread>
+			<SwayFactor>1.00</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.8</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_KiiroPTGrenades_HE</defaultProjectile>
+			<warmupTime>1.1</warmupTime>
+			<minRange>5</minRange>
+			<range>44</range>
+			<soundCast>InfernoCannon_Fire</soundCast>
+			<recoilPattern>Mounted</recoilPattern>
+			<ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+		</Properties>
+	</Operation>
+
+	<!-- 绮罗自动烟雾弹发射器 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>4</turretBurstCooldownTime>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.6</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/statBases/Mass</xpath>
+		<value>
+			<Mass>14</Mass>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="KiiroTurret_AutoSmokeLauncher"]/fillPercent</xpath>
+		<value>
+			<fillPercent>0.85</fillPercent>
+		</value>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>KiiroTurretGun_AutoSmokeLauncher</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.3</ShotSpread>
+			<SwayFactor>0.95</SwayFactor>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.8</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_KiiroPTGrenades_Smoke</defaultProjectile>
+			<warmupTime>1.1</warmupTime>
+			<minRange>5</minRange>
+			<range>44</range>
+			<soundCast>InfernoCannon_Fire</soundCast>
+			<recoilPattern>Mounted</recoilPattern>
+			<ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+		</Properties>
+	</Operation>
+</Patch>

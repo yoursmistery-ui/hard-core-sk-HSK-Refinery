@@ -1,0 +1,39 @@
+<Patch>
+  <!-- 53_生果出口补全 (2026-08-30, 体系化收编批5 / 农业断头修复)
+       问题链: Core_SK 原版果派 MakePieBlueberry 按 FruitFoodRaw 分类过滤(BFTGU 四种水果天然可进);
+       但 Amuse Bouche changes_meals_pie.xml 把 ingredients 水果槽与 fixedIngredientFilter 整体
+       Replace 成 defName 白名单(只列 RawBerries) → BFTGU 生果全部出不了口;
+       BFTGU 自带 RecipePatch 只往 fixedIngredientFilter 补了 Rawblueberry/RawCranberries 两种,
+       且 ingredients 配比槽一个都没补(槽不认, 账单允许也做不进派); RawBearberries/RawPricklyPear 两处皆缺。
+       RawCattail 是 BasicPlantFoodRaw, 天然能进 AB 炒蔬菜(按 categories 过滤), 无需处理。
+       本补丁(在修复整合层, 晚于 AB/BFTGU 双方 patch 执行):
+         ingredients 水果槽 + 4 种; fixedIngredientFilter + 2 种(蓝莓/蔓越莓 BFTGU 已加, 不重复)。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakePieBlueberry"]/ingredients/li[2]/filter/thingDefs</xpath>
+    <match Class="PatchOperationSequence">
+      <success>Normal</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="MakePieBlueberry"]/ingredients/li[2]/filter/thingDefs</xpath>
+          <value>
+            <li>Rawblueberry</li>
+            <li>RawCranberries</li>
+            <li>RawBearberries</li>
+            <li>RawPricklyPear</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="MakePieBlueberry"]/fixedIngredientFilter/thingDefs</xpath>
+          <value>
+            <li>Rawblueberry</li>
+            <li>RawCranberries</li>
+            <li>RawBearberries</li>
+            <li>RawPricklyPear</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         A1_熔炼体系.xml  (2026-08-27 自 HSK修复整合 03_熔炼.xml 迁入)
+         熔炼扩展 + 熔炼自动换工具。
+         注意: 熔炼 30% 材料返还/弹药单批上限逻辑在 HSKFixPack.dll(HSK修复整合),
+         DLL 全局生效, 本补丁仅含 XML 配方挂载与过滤调整。
+         ============================================================ -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="EAF"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltAmmo</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltAmmo</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="FueledSmithy"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltAmmo</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricSmithy"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltAmmo</li>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="EAF"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponCrate</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponCrate</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="FueledSmithy"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponCrate</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricSmithy"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponCrate</li>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="EAF"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponParts</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/recipes</xpath>
+    <value>
+        <li>RKHSKSmeltWeaponParts</li>
+    </value>
+</Operation>
+
+	
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/ingredients/li/filter</xpath>
+    <value>
+        <filter>
+            <categories>
+                <li>Weapons</li>
+            </categories>
+            <disallowedCategories>
+                <li>Ammo</li>
+                <li>WeaponsTurrets</li>
+            </disallowedCategories>
+        </filter>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter/categories</xpath>
+    <value>
+        <categories>
+            <li>Weapons</li>
+        </categories>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter/specialFiltersToDisallow/li[text()="AllowNonSmeltableWeapons"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter/specialFiltersToDisallow/li[text()="AllowNonSmeltableWeapons"]</xpath>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter/disallowedCategories</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter/disallowedCategories</xpath>
+        <value>
+            <disallowedCategories>
+                <li>Ammo</li>
+                <li>WeaponsTurrets</li>
+            </disallowedCategories>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter</xpath>
+        <value>
+            <disallowedCategories>
+                <li>Ammo</li>
+                <li>WeaponsTurrets</li>
+            </disallowedCategories>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/disallowedCategories</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/disallowedCategories</xpath>
+        <value>
+            <disallowedCategories>
+                <li>Ammo</li>
+                <li>WeaponsTurrets</li>
+            </disallowedCategories>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter</xpath>
+        <value>
+            <disallowedCategories>
+                <li>Ammo</li>
+                <li>WeaponsTurrets</li>
+            </disallowedCategories>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/forceHiddenSpecialFilters</xpath>
+    <value>
+        <li>AllowNonSmeltableWeapons</li>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[stuffProps/categories/li[text()="Woody"]]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Arbalest"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="blowgun"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Compound"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Great"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Recurve"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Bow_Short"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CE_Weapon_GrenadeSmoke"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Crossbow"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Crossbow_Compound"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Norbal_Scorpion"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Pila"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_AutoCrossBow"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_Crossbow"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_EnhanceCrossBow"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_Weapon_Arbalest"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Sunderer"]</xpath>
+    <value>
+        <smeltable>true</smeltable>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="CE_Weapon_GrenadeSmoke"]</xpath>
+    <value>
+        <smeltProducts>
+            <Steel>2</Steel>
+            <Cloth>2</Cloth>
+        </smeltProducts>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/ingredients/li/filter</xpath>
+    <value>
+        <thingDefs>
+            <li>RK_Spear</li>
+            <li>RK_HeavyLance</li>
+            <li>RK_LightLance</li>
+            <li>RK_OneHanded</li>
+            <li>RK_TwoHanded</li>
+            <li>RK_Mace</li>
+            <li>RK_Halberd</li>
+            <li>RK_LongSword</li>
+            <li>MeleeWeapon_Dagger</li>
+            <li>MeleeWeapon_Club</li>
+            <li>Crossbow</li>
+            <li>Crossbow_Compound</li>
+            <li>Arbalest</li>
+            <li>RK_Crossbow</li>
+            <li>RK_AutoCrossBow</li>
+            <li>RK_EnhanceCrossBow</li>
+            <li>RK_Weapon_Arbalest</li>
+            <li>Bow_Great</li>
+            <li>Bow_Recurve</li>
+            <li>Bow_Short</li>
+            <li>Bow_Compound</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Revolver_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BoltActionRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChainShotgun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_HeavySMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_LMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_AssaultRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_SniperRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Minigun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Bow_Great_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeLance_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey,Ludeon.RimWorld.Anomaly">Gun_HellcatRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BeamRepeater_Unique</li>
+        </thingDefs>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/fixedIngredientFilter</xpath>
+    <value>
+        <thingDefs>
+            <li>RK_Spear</li>
+            <li>RK_HeavyLance</li>
+            <li>RK_LightLance</li>
+            <li>RK_OneHanded</li>
+            <li>RK_TwoHanded</li>
+            <li>RK_Mace</li>
+            <li>RK_Halberd</li>
+            <li>RK_LongSword</li>
+            <li>MeleeWeapon_Dagger</li>
+            <li>MeleeWeapon_Club</li>
+            <li>Crossbow</li>
+            <li>Crossbow_Compound</li>
+            <li>Arbalest</li>
+            <li>RK_Crossbow</li>
+            <li>RK_AutoCrossBow</li>
+            <li>RK_EnhanceCrossBow</li>
+            <li>RK_Weapon_Arbalest</li>
+            <li>Bow_Great</li>
+            <li>Bow_Recurve</li>
+            <li>Bow_Short</li>
+            <li>Bow_Compound</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Revolver_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BoltActionRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChainShotgun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_HeavySMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_LMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_AssaultRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_SniperRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Minigun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Bow_Great_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeLance_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey,Ludeon.RimWorld.Anomaly">Gun_HellcatRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BeamRepeater_Unique</li>
+        </thingDefs>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter</xpath>
+    <value>
+        <thingDefs>
+            <li>RK_Spear</li>
+            <li>RK_HeavyLance</li>
+            <li>RK_LightLance</li>
+            <li>RK_OneHanded</li>
+            <li>RK_TwoHanded</li>
+            <li>RK_Mace</li>
+            <li>RK_Halberd</li>
+            <li>RK_LongSword</li>
+            <li>MeleeWeapon_Dagger</li>
+            <li>MeleeWeapon_Club</li>
+            <li>Crossbow</li>
+            <li>Crossbow_Compound</li>
+            <li>Arbalest</li>
+            <li>RK_Crossbow</li>
+            <li>RK_AutoCrossBow</li>
+            <li>RK_EnhanceCrossBow</li>
+            <li>RK_Weapon_Arbalest</li>
+            <li>Bow_Great</li>
+            <li>Bow_Recurve</li>
+            <li>Bow_Short</li>
+            <li>Bow_Compound</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Revolver_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BoltActionRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChainShotgun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_HeavySMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_LMG_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_AssaultRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_SniperRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_Minigun_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Bow_Great_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_ChargeLance_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey,Ludeon.RimWorld.Anomaly">Gun_HellcatRifle_Unique</li>
+            <li MayRequire="Ludeon.RimWorld.Odyssey">Gun_BeamRepeater_Unique</li>
+        </thingDefs>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/specialFiltersToDisallow/li[text()="RimworldFavourites_AllowFavourited"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/RecipeDef[defName="SmeltWeapon"]/defaultIngredientFilter/specialFiltersToDisallow/li[text()="RimworldFavourites_AllowFavourited"]</xpath>
+    </match>
+</Operation>
+
+    <!-- 来源: 18_熔炼自动换工具.xml -->
+<Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+    <xpath>Defs/WorkGiverDef[defName="DoBillsSmeltMetal_Hand"]</xpath>
+    <value>
+        <li Class="SurvivalToolsLite.WorkGiverExtension">
+            <requiredStats>
+                <li>SmeltingSpeed</li>
+            </requiredStats>
+        </li>
+    </value>
+</Operation>
+
+</Patch>

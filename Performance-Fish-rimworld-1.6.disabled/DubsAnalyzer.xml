@@ -1,0 +1,250 @@
+<Analyzer>
+
+	<性能优化>
+		<!-- Settings, Tick, Update, GUI or Modder. Defaults to Modder -->
+		<!--Category>Modder</Category-->
+
+		<!-- On hover tooltip for the sidebar entry -->
+		<Tooltip>由 Performance Fish 打补丁并优化的方法。配合其模组设置使用, 可衡量性能提升, 或发现补丁异常时的问题。</Tooltip>
+		
+		<!-- All methods in types -->
+		<!--Types>
+			<li></li>
+		</Types-->
+
+		<!-- Specific methods -->
+		<Methods>
+			<!-- DesignationManager -->
+			<li>Verse.DesignationManager:SpawnedDesignationsOfDef</li>
+			<li>Verse.DesignationManager:AnySpawnedDesignationOfDef</li>
+			<li>Verse.DesignationManager:AllDesignationsOn</li>
+			<li>Verse.DesignationManager:DesignationOn</li>
+			<li>Verse.DesignationManager:HasMapDesignationOn</li>
+
+			<!-- Misc -->
+			<!--li>Verse.GenList:ListFullCopy</li--><!-- generic -->
+			<li>Verse.ThingFilter:CopyAllowancesFrom</li>
+			<li>Verse.DrawBatch:Flush</li>
+
+			<!-- HediffComp_PsychicHarmonizer -->
+			<li>RimWorld.HediffComp_PsychicHarmonizer:CompPostTickInterval</li>
+
+			<!-- HediffSet -->
+			<li>Verse.HediffSet:HasHediff</li>
+
+			<!-- Lister -->
+			<li>Verse.Map:MapPreTick</li>
+			<li>Verse.ListerBuildings:ColonistsHaveBuilding</li>
+			<li>Verse.ListerBuildings:ColonistsHaveResearchBench</li>
+			<li>Verse.ListerBuildings:ColonistsHaveBuildingWithPowerOn</li>
+			<li>Verse.ListerBuildings:AllBuildingsColonistOfDef</li>
+			<li>Verse.ListerBuildings:AllBuildingsNonColonistOfDef</li>
+
+			<!-- StorageSettings -->
+			<li>RimWorld.StorageSettings:AllowedToAccept</li>
+
+			<!-- MassUtility -->
+			<li>RimWorld.MassUtility:GearMass</li>
+			<li>RimWorld.MassUtility:InventoryMass</li>
+
+			<!-- RecipeDef -->
+			<li>Verse.RecipeDef:get_AllRecipeUsers</li>
+			<li>Verse.UnfinishedThing:BillOnTableForMe</li>
+
+			<!-- Room -->
+			<!-- Verse.Room:get_ContainedBeds and Verse.Room:get_Owners are almost exclusively used by Pawn_Ownership.get_OwnedRoom -->
+			<li>RimWorld.Pawn_Ownership:get_OwnedRoom</li>
+			<li>Verse.Room:get_Regions</li>
+			<li>Verse.Room:get_ContainedAndAdjacentThings</li>
+
+			<!-- StoreUtility -->
+
+			<!-- ThingFilter -->
+			<li>Verse.ThingFilter:get_AllowedThingDefs</li>
+			<li>Verse.ThingFilter:get_AllStorableThingDefs</li>
+
+			<!-- ThingOwnerUtility -->
+			<!--li>Verse.ThingOwnerUtility.GetAllThingsRecursively</li--><!-- generic -->
+			<li>Verse.MapPawns:get_AllPawnsUnspawned</li>
+
+			<!-- ThoughtWorker_Precept_AltarSharing -->
+			<li>RimWorld.ThoughtWorker_Precept_AltarSharing:ShouldHaveThought</li>
+
+			<!-- GenClosest -->
+
+			<!-- Utility -->
+
+			<!-- WorkGiver_DoBill -->
+			<!--li>RimWorld.WorkGiver_DoBill:TryFindBestIngredientsHelper</li-->
+			<!--li>RimWorld.WorkGiver_DoBill+&lt;&gt;c__DisplayClass21_0:&lt;TryFindBestIngredientsHelper&gt;b__4</li-->
+
+			<!-- WorkGiver_Haul -->
+			<!--li>RimWorld.WorkGiver_Haul:PotentialWorkThingsGlobal</li-->
+			<li>PerformanceFish.JobSystem.WorkGiver_HaulOptimization+PotentialWorkThingsGlobal_Patch:Sort</li>
+			<li>RimWorld.WorkGiver_Haul:JobOnThing</li>
+
+			<!-- JobGiver_Haul -->
+			<li>RimWorld.JobGiver_Haul:TryGiveJob</li>
+
+			<!-- Toils_Bed -->
+			<li>RimWorld.Toils_Bed:BedNoLongerUsable</li>
+
+			<!-- IdeoUtility -->
+			<li>RimWorld.IdeoUtility:GetStyleDominance</li>
+
+			<!-- ThingCompPatches -->
+			<li>RimWorld.CompAssignableToPawn_Bed:IdeoligionForbids</li>
+
+			<!-- Reflection -->
+			<li>System.RuntimeType:GetField</li>
+			<li>System.Type:GetMethod</li>
+			<li>System.Type:GetConstructor</li>
+			<li>System.Type:GetProperty</li>
+			<li>System.Reflection.FieldInfo:GetValue</li>
+			<li>System.Reflection.FieldInfo:SetValue</li>
+			<li>System.Reflection.MethodBase:Invoke</li>
+		</Methods>
+
+		<!-- Specific methods of all subclasses -->
+		<!--DerivedMethods>
+			<li></li>
+		</DerivedMethods-->
+
+		<!-- All methods of subclasses -->
+		<!--DerivedTypes>
+			<li></li>
+		</DerivedTypes-->
+
+		<!-- All methods of types nested within specified types -->
+		<!--NestedTypes>
+			<li></li> 
+		</NestedTypes-->
+	</性能优化>
+
+	<能力>
+		<Tooltip>能力的 Tick 方法。冷却、效果、战斗。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.Ability:AbilityTick</li>
+		</DerivedMethods>
+	</能力>
+
+	<能力组件>
+		<Tooltip>附加在能力上的组件。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.AbilityComp:CompTick</li>
+		</DerivedMethods>
+	</能力组件>
+
+	<基因>
+		<Tooltip>基因的 Tick 方法。没有基因需要 tick 时通常为空。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li MayRequire="Ludeon.RimWorld.Biotech">Verse.Gene:Tick</li>
+		</DerivedMethods>
+	</基因>
+
+	<健康组件>
+		<Tooltip>附加在健康状态上的组件。通常负责实际逻辑。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>Verse.HediffComp:CompPostTick</li>
+		</DerivedMethods>
+	</健康组件>
+
+	<健康状态>
+		<Tooltip>植入小人体内的健康状态等内容的 Tick。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>Verse.Hediff:Tick</li>
+			<li>Verse.Hediff:PostTick</li>
+		</DerivedMethods>
+	</健康状态>
+
+	<精神崩溃>
+		<Tooltip>精神崩溃(狂暴、发怒等)的 Tick 方法。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>Verse.AI.MentalState:MentalStateTick</li>
+		</DerivedMethods>
+	</精神崩溃>
+
+	<戒律>
+		<Tooltip>戒律的 Tick 方法。意识形态内容。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li MayRequire="Ludeon.RimWorld.Ideology">RimWorld.Precept:Tick</li>
+		</DerivedMethods>
+	</戒律>
+
+	<仪式义务触发>
+		<Tooltip>意识形态仪式触发器的 Tick 方法。加载大量戒律时可能扩展得很厉害。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.RitualObligationTrigger:Tick</li>
+		</DerivedMethods>
+	</仪式义务触发>
+
+	<属性部件>
+		<Tooltip>StatPart 的 TransformValue 方法。未缓存时每次属性查询都会运行。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.StatPart:TransformValue</li>
+		</DerivedMethods>
+	</属性部件>
+
+	<物品组件Tick>
+		<Tooltip>附加在物品上组件的 Tick 方法。任何 ThingWithComps 都可能有, 任何 mod 都能添加新的。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>Verse.ThingComp:CompTick</li>
+			<li>Verse.ThingComp:CompTickRare</li>
+			<li>Verse.ThingComp:CompTickLong</li>
+		</DerivedMethods>
+	</物品组件Tick>
+
+	<世界组件Tick>
+		<Tooltip>附加在世界上的单实例组件的 Tick 方法。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.Planet.WorldComponent:WorldComponentTick</li>
+		</DerivedMethods>
+	</世界组件Tick>
+
+	<世界物体组件>
+		<Tooltip>附加在定居点、商队等上的组件。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.Planet.WorldObjectComp:CompTick</li>
+		</DerivedMethods>
+	</世界物体组件>
+
+	<世界物体>
+		<Tooltip>定居点、商队等。</Tooltip>
+		<Category>Tick</Category>
+		<DerivedMethods>
+			<li>RimWorld.Planet.WorldObject:Tick</li>
+		</DerivedMethods>
+	</世界物体>
+
+	<物品组件更新>
+		<Tooltip>附加在物品上组件的 Update 方法。任何 ThingWithComps 都可能有, 任何 mod 都能添加新的。</Tooltip>
+		<Category>Update</Category>
+		<DerivedMethods>
+			<li>Verse.ThingComp:DrawGUIOverlay</li>
+			<li>Verse.ThingComp:PostDraw</li>
+			<li>Verse.ThingComp:PostDrawExtraSelectionOverlays</li>
+			<li>Verse.ThingComp:PostPrintOnto</li>
+		</DerivedMethods>
+	</物品组件更新>
+
+	<世界组件更新>
+		<Tooltip>附加在世界上的单实例组件的 Update 方法。</Tooltip>
+		<Category>Update</Category>
+		<DerivedMethods>
+			<li>RimWorld.Planet.WorldComponent:WorldComponentUpdate</li>
+		</DerivedMethods>
+	</世界组件更新>
+
+</Analyzer>

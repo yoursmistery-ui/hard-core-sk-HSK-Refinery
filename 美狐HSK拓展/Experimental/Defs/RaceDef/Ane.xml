@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs> 
+ <HediffDef ParentName="DiseaseBase">
+    <defName>Miho_Drone_Anesthetic_Hediff</defName>
+    <label>최소 의식 상태</label>
+    <description>특정한 전류를 보내 메카나이트 하이브의 활동을 중단했습니다.</description>
+    <isBad>false</isBad>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <comps>
+    </comps>
+    <stages>
+      <li>
+        <label>Minimally Conscious State</label>
+        <painFactor>0</painFactor>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.01</setMax>
+          </li>
+        </capMods>
+        <statOffsets>
+			<HungerRateMultiplier>-100</HungerRateMultiplier><!-- 허기 -->
+        </statOffsets>
+
+      </li>
+    </stages>
+  </HediffDef>
+
+  <RecipeDef Abstract="True" Name="MihoDroneSurgery">
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>0</workSkillLearnFactor>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MihoDroneSurgery">
+    <defName>Miho_Drone_Anestheize</defName>
+    <label>최소 의식 상태화</label>
+    <description>특정한 전류를 보내 메카나이트 하이브의 활동을 멈춰 신진대사를 억제합니다.</description>
+    <workerClass>Recipe_InstallImplant</workerClass>
+    <workAmount>1500</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <surgerySuccessChanceFactor>100</surgerySuccessChanceFactor>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+    <addsHediff>Miho_Drone_Anesthetic_Hediff</addsHediff>
+  </RecipeDef>
+
+
+  <RecipeDef ParentName="MihoDroneSurgery">
+    <defName>Miho_Cure_Drone_Anestheize</defName>
+    <label>의식 재시동</label>
+    <description>특정한 전류를 보내 재시동을 겁니다.</description>
+    <workerClass>Recipe_RemoveHediff</workerClass>
+    <jobString>재시동 중.</jobString>
+    <workAmount>1500</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <isViolation>false</isViolation>
+    <targetsBodyPart>false</targetsBodyPart>
+    <surgerySuccessChanceFactor>100</surgerySuccessChanceFactor>
+
+    <removesHediff>Miho_Drone_Anesthetic_Hediff</removesHediff>
+    <successfullyRemovedHediffMessage>성공적으로 재시동 되었습니다.</successfullyRemovedHediffMessage>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Medicine</li>
+      </categories>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+</Defs>

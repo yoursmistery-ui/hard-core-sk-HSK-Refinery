@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Kiiro_ThrumboFound</defName>
+    <label>kiiro thrumbo found</label>
+    <workerClass>Kiiro_Event.SitePartWorker_ThrumboFound</workerClass>
+    <description>thrumbo is passing this area.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Kiiro_Event/Icon/Kiiro_Thrumbo</expandingIconTexture>
+	<wantsThreatPoints>false</wantsThreatPoints>
+    <!-- <minThreatPoints>250</minThreatPoints> -->
+    <tags>
+      <li>Kiiro_ThrumboFound</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_ThrumboFound</defName>
+    <linkWithSite>Kiiro_ThrumboFound</linkWithSite>
+    <order>450</order>
+    <genStep Class="Kiiro_Event.GenStep_WildThrumbo" />
+  </GenStepDef>
+  
+  
+  <!-- 大群敲击兽 -->
+  <SitePartDef>
+    <defName>Kiiro_ThrumboFound_Group</defName>
+    <label>kiiro thrumbo found</label>
+    <workerClass>Kiiro_Event.SitePartWorker_ThrumboFound</workerClass>
+    <description>thrumbo is passing this area.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Kiiro_Event/Icon/Kiiro_Thrumbo</expandingIconTexture>
+	<wantsThreatPoints>false</wantsThreatPoints>
+    <!-- <minThreatPoints>250</minThreatPoints> -->
+    <tags>
+      <li>Kiiro_ThrumboFound_Group</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_ThrumboFound_Group</defName>
+    <linkWithSite>Kiiro_ThrumboFound_Group</linkWithSite>
+    <order>450</order>
+    <genStep Class="Kiiro_Event.GenStep_WildThrumboGroup" />
+  </GenStepDef>
+  
+  
+  <!-- 敲击兽加入 -->
+  <SitePartDef>
+    <defName>Kiiro_ThrumboFound_Join</defName>
+    <label>kiiro thrumbo found</label>
+    <workerClass>Kiiro_Event.SitePartWorker_ThrumboFound</workerClass>
+    <description>thrumbo is passing this area.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>Kiiro_Event/Icon/Kiiro_Thrumbo</expandingIconTexture>
+	<wantsThreatPoints>false</wantsThreatPoints>
+    <!-- <minThreatPoints>250</minThreatPoints> -->
+    <tags>
+      <li>Kiiro_ThrumboFound_Join</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_ThrumboFound_Join</defName>
+    <linkWithSite>Kiiro_ThrumboFound_Join</linkWithSite>
+    <order>450</order>
+    <genStep Class="Kiiro_Event.GenStep_WildThrumboJoin" />
+  </GenStepDef>
+
+</Defs>

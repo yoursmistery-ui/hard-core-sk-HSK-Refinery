@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThoughtDef>
+        <defName>OA_RK_thought_SkyWarmth</defName>
+        <thoughtClass>OberoniaAurea.Thought_SkyWarmth</thoughtClass>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>OA_RK_hediff_SkyWarmth</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <stages>
+            <li>
+                <label>Warm glow</label>
+                <description>This warm feeling is so comfortable.</description>
+                <baseMoodEffect>3</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>OA_RK_SandWichD_Thought</defName>
+        <workerClass>ThoughtWorker_Hediff</workerClass>
+        <hediff>OA_RK_SandWichD</hediff>
+        <validWhileDespawned>true</validWhileDespawned>
+        <stages>
+            <li>
+                <label>Heavy armor</label>
+                <description>Damn it! This thing is almost suffocating me!</description>
+                <baseMoodEffect>-4</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>OARK_BirthdayWishes</defName>
+        <durationDays>7</durationDays>
+        <stackLimit>7</stackLimit>
+        <stackedEffectMultiplier>0.7</stackedEffectMultiplier>
+        <validWhileDespawned>true</validWhileDespawned>
+        <stages>
+            <li>
+                <!-- 恐惧 -->
+                <label>Birthday Wishes</label>
+                <description>Why are you wishing me a happy birthday? Creepy...</description>
+                <baseMoodEffect>-4</baseMoodEffect>
+
+                <!--labelSocial>生日祝福</labelSocial-->
+                <baseOpinionOffset>-10</baseOpinionOffset>
+            </li>
+
+            <!-- 漠视无心情 -->
+
+            <!-- 无戒律、平淡 -->
+            <li>
+                <label>Birthday Wishes</label>
+                <description>Someone wished me well. That always feels nice.</description>
+                <baseMoodEffect>2</baseMoodEffect>
+
+                <!--labelSocial>在生日祝福我</labelSocial-->
+                <baseOpinionOffset>5</baseOpinionOffset>
+            </li>
+
+            <!-- 重视 -->
+            <li>
+                <label>Birthday Wishes</label>
+                <description>Someone wished me well. It makes me feel valued.</description>
+                <baseMoodEffect>4</baseMoodEffect>
+
+                <!--labelSocial>在生日祝福我</labelSocial-->
+                <baseOpinionOffset>10</baseOpinionOffset>
+            </li>
+            <!-- 庄重 -->
+            <li>
+                <label>Birthday Wishes</label>
+                <description>Someone wished me a happy birthday. It fills me with contentment.</description>
+                <baseMoodEffect>6</baseMoodEffect>
+
+                <!--labelSocial>在生日祝福我</labelSocial-->
+                <baseOpinionOffset>15</baseOpinionOffset>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+</Defs>

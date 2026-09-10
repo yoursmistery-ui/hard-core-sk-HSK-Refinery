@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>AmmoKiiroPTRifle</defName>
+		<label>Kiiro PT Rifleman</label>
+		<parent>AmmoRifles</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberRifle</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_KiiroPTRifle</defName>
+		<label>Kiiro PT Rifleman</label>
+		<ammoTypes>
+			<Ammo_KiiroPTRifle_FMJ>Bullet_KiiroPTRifle_FMJ</Ammo_KiiroPTRifle_FMJ>
+			<Ammo_KiiroPTRifle_AP>Bullet_KiiroPTRifle_AP</Ammo_KiiroPTRifle_AP>
+			<Ammo_KiiroPTRifle_HP>Bullet_KiiroPTRifle_HP</Ammo_KiiroPTRifle_HP>
+			<Ammo_KiiroPTRifle_Incendiary>Bullet_KiiroPTRifle_Incendiary</Ammo_KiiroPTRifle_Incendiary>
+			<Ammo_KiiroPTRifle_HE>Bullet_KiiroPTRifle_HE</Ammo_KiiroPTRifle_HE>
+			<Ammo_KiiroPTRifle_Sabot>Bullet_KiiroPTRifle_Sabot</Ammo_KiiroPTRifle_Sabot>
+		</ammoTypes>
+		<similarTo>AmmoSet_RifleIntermediate</similarTo>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="KiiroPTRifleBase" ParentName="SmallAmmoBase" Abstract="True">
+		<description>A type of rifle ammunition developed by the Kiiro race for the prototype series of weapons. It has strong penetration but less power.</description>
+		<statBases>
+			<Mass>0.015</Mass>
+			<Bulk>0.02</Bulk>
+		</statBases>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting</li>
+		</tradeTags>
+		<thingCategories>
+			<li>AmmoKiiroPTRifle</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_FMJ</defName>
+		<label>Kiiro PT Rifleman (FMJ)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/FMJ</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.12</MarketValue>
+		</statBases>
+		<ammoClass>FullMetalJacket</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_FMJ</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_AP</defName>
+		<label>Kiiro PT Rifleman (AP)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/AP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.12</MarketValue>
+		</statBases>
+		<ammoClass>ArmorPiercing</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_AP</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_HP</defName>
+		<label>Kiiro PT Rifleman (HP)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/HP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.12</MarketValue>
+		</statBases>
+		<ammoClass>HollowPoint</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_HP</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_Incendiary</defName>
+		<label>Kiiro PT Rifleman (AP-I)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/Incendiary</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.14</MarketValue>
+		</statBases>
+		<ammoClass>IncendiaryAP</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_Incendiary</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_HE</defName>
+		<label>Kiiro PT Rifleman (AP-HE)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/HE</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.2</MarketValue>
+		</statBases>
+		<ammoClass>ExplosiveAP</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_HE</cookOffProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTRifleBase">
+		<defName>Ammo_KiiroPTRifle_Sabot</defName>
+		<label>Kiiro PT Rifleman (Sabot)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rifle/Sabot</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>0.14</MarketValue>
+			<Mass>0.012</Mass>
+		</statBases>
+		<ammoClass>Sabot</ammoClass>
+		<cookOffProjectile>Bullet_KiiroPTRifle_Sabot</cookOffProjectile>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Name="BaseKiiroPTRifleBullet" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<speed>140</speed>
+			<dropsCasings>true</dropsCasings>
+			<casingMoteDefname>Fleck_RifleAmmoCasings_Steel</casingMoteDefname>
+			<casingFilthDefname>Filth_RifleAmmoCasings_Steel</casingFilthDefname>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_FMJ</defName>
+		<label>Kiiro PT Rifleman bullet (FMJ)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>18</damageAmountBase>
+			<armorPenetrationSharp>8</armorPenetrationSharp>
+			<armorPenetrationBlunt>69.16</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_AP</defName>
+		<label>Kiiro PT Rifleman bullet (AP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>10</damageAmountBase>
+			<armorPenetrationSharp>15</armorPenetrationSharp>
+			<armorPenetrationBlunt>69.16</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_HP</defName>
+		<label>Kiiro PT Rifleman bullet (HP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>21</damageAmountBase>
+			<armorPenetrationSharp>5</armorPenetrationSharp>
+			<armorPenetrationBlunt>69.16</armorPenetrationBlunt>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_Incendiary</defName>
+		<label>Kiiro PT Rifleman bullet (AP-I)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>10</damageAmountBase>
+			<armorPenetrationSharp>15</armorPenetrationSharp>
+			<armorPenetrationBlunt>69.16</armorPenetrationBlunt>
+			<secondaryDamage>
+				<li>
+					<def>Flame_Secondary</def>
+					<amount>8</amount>
+				</li>
+			</secondaryDamage>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_HE</defName>
+		<label>Kiiro PT Rifleman bullet (AP-HE)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>18</damageAmountBase>
+			<armorPenetrationSharp>8</armorPenetrationSharp>
+			<armorPenetrationBlunt>69.16</armorPenetrationBlunt>
+			<secondaryDamage>
+				<li>
+					<def>Bomb_Secondary</def>
+					<amount>10</amount>
+				</li>
+			</secondaryDamage>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTRifleBullet">
+		<defName>Bullet_KiiroPTRifle_Sabot</defName>
+		<label>Kiiro PT Rifleman bullet (Sabot)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>9</damageAmountBase>
+			<armorPenetrationSharp>26.75</armorPenetrationSharp>
+			<armorPenetrationBlunt>94.11</armorPenetrationBlunt>
+			<speed>189</speed>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_FMJ</defName>
+		<label>make Kiiro PT Rifleman (FMJ) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (FMJ) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (FMJ) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>26</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_FMJ>500</Ammo_KiiroPTRifle_FMJ>
+		</products>
+		<workAmount>1800</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_AP</defName>
+		<label>make Kiiro PT Rifleman (AP) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (AP) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (AP) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>26</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_AP>500</Ammo_KiiroPTRifle_AP>
+		</products>
+		<workAmount>2160</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_HP</defName>
+		<label>make Kiiro PT Rifleman (HP) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (HP) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (HP) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>26</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_HP>500</Ammo_KiiroPTRifle_HP>
+		</products>
+		<workAmount>1800</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_Incendiary</defName>
+		<label>make Kiiro PT Rifleman (AP-I) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (AP-I) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (AP-I) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>26</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Prometheum</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Prometheum</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_Incendiary>500</Ammo_KiiroPTRifle_Incendiary>
+		</products>
+		<workAmount>2600</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_HE</defName>
+		<label>make Kiiro PT Rifleman (AP-HE) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (AP-HE) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (AP-HE) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>26</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_HE>500</Ammo_KiiroPTRifle_HE>
+		</products>
+		<workAmount>3800</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AdvancedAmmoRecipeBase">
+		<defName>MakeAmmo_KiiroPTRifle_Sabot</defName>
+		<label>make Kiiro PT Rifleman (Sabot) cartridge x500</label>
+		<description>Craft 500 Kiiro PT Rifleman (Sabot) cartridges.</description>
+		<jobString>Making Kiiro PT Rifleman (Sabot) cartridges.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Uranium</li>
+				<li>Chemfuel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTRifle_Sabot>500</Ammo_KiiroPTRifle_Sabot>
+		</products>
+		<workAmount>2800</workAmount>
+	</RecipeDef>
+
+</Defs>

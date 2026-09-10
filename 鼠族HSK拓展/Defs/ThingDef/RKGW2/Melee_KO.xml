@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+    <ThingDef ParentName="RK_MeleeWeapon">
+        <defName>RK_KnightSword</defName>
+        <label>Knight Sword</label>
+        <description>The standard-issue weapon of the Order State infantry is designed for rapid production and ease of use. Its specialized craftsmanship allows it to tear through even the most hardened armor.</description>
+        <graphicData>
+            <texPath>Things/Item/Equipment/WeaponMelee/RK_KnightSword</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <techLevel>Medieval</techLevel>
+        <weaponTags Inherit="false">
+            <li>RK_RCKO_Saber</li>
+        </weaponTags>
+        <costList>
+            <WoodPlank>50</WoodPlank>
+        </costList>
+        <costStuffCount>100</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <statBases>
+            <WorkToMake>5000</WorkToMake>
+            <Mass>1.6</Mass>
+            	<Bulk>6</Bulk>
+        </statBases>
+        <equippedAngleOffset>-20</equippedAngleOffset>
+        <tools>
+            <li Class="CombatExtended.ToolCE">
+            	<label>tip</label>
+            	<capacities>
+            		<li>Stab</li>
+            	</capacities>
+            	<power>22</power>
+            	<cooldownTime>2</cooldownTime>
+            	<armorPenetrationSharp>7</armorPenetrationSharp>
+            	<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+            	<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+            	<label>blade</label>
+            	<capacities>
+            		<li>Cut</li>
+            	</capacities>
+            	<power>18</power>
+            	<cooldownTime>2.0</cooldownTime>
+            	<armorPenetrationSharp>5.4</armorPenetrationSharp>
+            	<armorPenetrationBlunt>4</armorPenetrationBlunt>
+            	<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+            </li>
+            </tools>
+        <recipeMaker>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>4</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+        <comps>
+        </comps>
+    </ThingDef>
+</Defs>

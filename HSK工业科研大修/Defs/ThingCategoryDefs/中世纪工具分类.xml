@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 中世纪工具分类(2026-08-09 用户要求):
+         STL/Core_SK 原生工具分类只有 基本工具(SurvivalToolsNeolithic)/
+         工业(SurvivalToolsIndustrial)/先进工具(SurvivalToolsSpacer) 三档,
+         没有中世纪档;鼠族开局即中世纪,工具按科技档分成两档:
+         - 中世纪工具(SurvivalToolsMedieval): 8 件鼠族中世纪工具
+           (剁肉刀/矿镐/斧头/锄头/锤子/草叉/匕首/钉头锤),由 29/35 号补丁从 Neolithic 挪入;
+         - 工业工具(SurvivalToolsIndustrial): 剪刀/冲击钻/液压钳(35/36/37 号)。
+         分类挂到 SurvivalTools 根下(与 STL/Core_SK 原生分类同级)。
+         注(2026-08-09 二次修复): 不再用 MayRequire 门控——Defs 文件里 MayRequire 写在 Def 节点
+         本身虽然受支持(CE/Core_SK 同款写法),但为彻底避免加载/解析风险,与 SurvivalToolsNeolithic
+         一样无条件加载;工具补丁(29/35/36/37)仍 MayRequire 门控,未装 STL 时没有工具引用此分类,
+         只会有一个空分类节点,无任何报错。
+         中文名见 Languages/ChineseSimplified/DefInjected/ThingCategoryDef/ThingCategories.xml。 -->
+    <!-- 注意: <Defs> 的直接子节点必须就是 Def 元素本身,<li> 包裹会报
+         "Type li is not a Def type"(LoadedModManager 按子节点元素名解析 Def 类型)。 -->
+    <ThingCategoryDef>
+        <defName>SurvivalToolsMedieval</defName>
+        <label>medieval tools</label>
+        <parent>SurvivalTools</parent>
+    </ThingCategoryDef>
+</Defs>

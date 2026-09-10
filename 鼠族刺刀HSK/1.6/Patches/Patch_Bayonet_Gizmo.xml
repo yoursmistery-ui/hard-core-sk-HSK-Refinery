@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 1) 给 Pawn 基类挂 gizmo 转发组件(把武器上的刺刀技能显示到小人指令栏)
+          模式照抄 Ratkin Weapons+ Patches/Bayonet.xml -->
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationTest">
+        <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+        <success>Invert</success>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[@Name="BasePawn"]</xpath>
+        <value>
+          <comps />
+        </value>
+      </li>
+    </operations>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <value>
+      <li Class="RatkinWeapons.CompProperties_GetGizmo"/>
+    </value>
+  </Operation>
+
+  <!-- 2) 本体鼠族步枪挂刺刀组件(HSK 终态只存活 RK_Rifle / RK_SniperRifle,
+          用 xpath 存在性门控, 未命中即静默跳过) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_Rifle"]</xpath>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationTest">
+          <xpath>Defs/ThingDef[defName="RK_Rifle"]/comps</xpath>
+          <success>Invert</success>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="RK_Rifle"]</xpath>
+          <value>
+            <comps />
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="RK_Rifle"]/comps</xpath>
+          <value>
+            <li Class="RatkinWeapons.CompProperties_Bayonet">
+              <cooldown>1800</cooldown>
+              <radius>14.9</radius>
+              <label>RK.BayonetLabel</label>
+              <description>RK.BayonetDescription</description>
+              <icon>UI/Abilities/RK_Bayonet</icon>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_SniperRifle"]</xpath>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationTest">
+          <xpath>Defs/ThingDef[defName="RK_SniperRifle"]/comps</xpath>
+          <success>Invert</success>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="RK_SniperRifle"]</xpath>
+          <value>
+            <comps />
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="RK_SniperRifle"]/comps</xpath>
+          <value>
+            <li Class="RatkinWeapons.CompProperties_Bayonet">
+              <cooldown>1800</cooldown>
+              <radius>14.9</radius>
+              <label>RK.BayonetLabel</label>
+              <description>RK.BayonetDescription</description>
+              <icon>UI/Abilities/RK_Bayonet</icon>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

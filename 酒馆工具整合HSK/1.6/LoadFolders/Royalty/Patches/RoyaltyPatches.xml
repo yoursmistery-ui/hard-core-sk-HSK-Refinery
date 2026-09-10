@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Royalty</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/RoyalTitleDef[defName="Knight"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+					<match Class="PatchOperationReplace">
+						<xpath>Defs/RoyalTitleDef[defName="Knight"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+						<value>
+							<li Class="RoomRequirement_ThingAnyOfCount">
+								<things>
+									<li>Column</li>
+								</things>
+								<count>2</count>
+							</li>
+						</value>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/RoyalTitleDef[defName="Praetor" or defName="Baron"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+					<match Class="PatchOperationReplace">
+						<xpath>Defs/RoyalTitleDef[defName="Praetor" or defName="Baron"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+						<value>
+							<li Class="RoomRequirement_ThingAnyOfCount">
+								<things>
+									<li>Column</li>
+								</things>
+								<count>4</count>
+							</li>
+						</value>
+					</match>
+				</li>
+				<li Class="PatchOperationConditional">
+					<xpath>Defs/RoyalTitleDef[defName="Count" or @Name="BaseEmpireTitleNPC"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+					<match Class="PatchOperationReplace">
+						<xpath>Defs/RoyalTitleDef[defName="Count" or @Name="BaseEmpireTitleNPC"]/throneRoomRequirements//li[@Class="RoomRequirement_ThingCount"][thingDef="Column"]</xpath>
+						<value>
+							<li Class="RoomRequirement_ThingAnyOfCount">
+								<things>
+									<li>Column</li>
+								</things>
+								<count>6</count>
+							</li>
+						</value>
+					</match>
+				</li>
+	
+				<li Class="PatchOperationInsert" MayRequire="Ludeon.RimWorld.Royalty">
+					<xpath>Defs/RoyalTitleDef/throneRoomRequirements//li[@Class='RoomRequirement_ThingAnyOfCount']/things/li[text()="Column"]</xpath>
+					<order>Append</order>
+					<value>
+						<li>SD_IndustrialColumn</li>
+						<li>SD_StoneColumn</li>
+						<li>SD_WoodColumn</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

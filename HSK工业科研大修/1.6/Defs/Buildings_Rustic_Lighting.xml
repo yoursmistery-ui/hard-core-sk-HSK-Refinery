@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村照明与取火(2026-08-29 · 第二批波次 2)
+     来源: Medieval Overhaul 1.6.2.2 Buildings_Furniture.xml 纯原版类 def 移植。
+     前缀统一 Rustic_; 剥离 MO DLL 依赖: MedievalOverhaul.CompProperties_StoreFuelThing /
+     MedievalOverhaul.ITab_Fuel / CannotBePlacedTogetherWithThisModExtension,
+     以及 MO 专属的 FocusStrengthOffset_BuildingDefsLit 清单(原版 Refuelable 自带燃料 UI, 无需 ITab_Fuel)。
+     材料映射: Tallow→Tallow, Coal→Coal, RawWood/Wood 类别→Woody, IronIngot→WroughtIron。
+     ⚠ Tar(焦油)与 Wax(蜂蜡)本环境均不存在 → 油灯燃料改烧 Tallow(牛油);
+       蜂蜡变体(Candle_Beeswax / Candles_Beeswax)不移植(无养蜂产业链)。
+     研究分档(按用途, 见 09 计划 §二):
+       篝火/火把/大柴堆 → RK_PrimitiveLighting(Neolithic, 本 mod 新建, Buildings_SK Y=9 X=2);
+       油灯/路灯/蜡烛   → Light_B1(Medieval, HSK 既有, Buildings_SK Y=9 X=3)。
+     菜单: designationCategory=Accessories(HSK 辅助建筑) + 子分类「乡村照明」(SubCategories_Rustic_Lighting.xml)。
+     ⚠ stuffable 建筑全部显式写 uiIconPath(AGENTS §5: 缺失会在点选时每帧 NRE 卡死)。 -->
+
+	<!--==================== 原始档 · 取火与照明(RK_PrimitiveLighting) ====================-->
+
+	<ThingDef ParentName="TorchLamp">
+		<defName>Rustic_TorchLamp</defName>
+		<label>乡村火把</label>
+		<description>一根浸过油脂的木柄火把, 插在地上就能烧上一天。光不算亮, 却足够让人在夜里看清脚下、干活不至于慢半拍。消耗木料或煤, 雨天烧得更快些。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTorch</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTorch_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<costList Inherit="False"/>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<comps Inherit="False">
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(184,136,83,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>24.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Coal</li>
+					</thingDefs>
+					<categories>
+						<li>Woody</li>
+					</categories>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_FireOverlay">
+				<fireSize>0.4</fireSize>
+				<offsetNorth>(0,0,1)</offsetNorth>
+				<offsetSouth>(0,0,0.2)</offsetSouth>
+				<offsetWest>(-.25,0,0.6)</offsetWest>
+				<offsetEast>(0.25,0,.6)</offsetEast>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>RK_PrimitiveLighting</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_WallTorch</defName>
+		<label>壁挂火把</label>
+		<description>钉在墙上的短火把, 比落地火把暗一点, 却不占地面。走廊、哨塔与狭窄的工坊里最合适——人在墙边走过, 影子被拉得很长。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticWallTorch</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticWallTorch_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<terrainAffordanceNeeded IsNull="True"/>
+		<pathCost>0</pathCost>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>15</costStuffCount>
+		<building>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+			<isEdifice>false</isEdifice>
+			<isAttachment>true</isAttachment>
+		</building>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+			<li>Placeworker_AttachedToWall</li>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>9</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.0</fuelConsumptionRate>
+				<fuelCapacity>24.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Coal</li>
+					</thingDefs>
+					<categories>
+						<li>Woody</li>
+					</categories>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_FireOverlay">
+				<fireSize>0.45</fireSize>
+				<offsetNorth>(0,0,-0.175)</offsetNorth>
+				<offsetSouth>(0,0,0.675)</offsetSouth>
+				<offsetWest>(0.475,0,0.20)</offsetWest>
+				<offsetEast>(-0.475,0,0.20)</offsetEast>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites>
+			<li>RK_PrimitiveLighting</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 中世纪档 · 油灯与蜡烛(Light_B1) ====================-->
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_OilLamp</defName>
+		<label>油灯</label>
+		<description>一盏铜制油灯, 亮度不输火把, 却烧得更久。灯油取自动物油脂, 不怕雨淋, 也因此成了中世纪街巷与书房里最常见的光。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticLamp</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticLamp_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>14</pathCost>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<Beauty>5</Beauty>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>2000</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>2</Mass>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<selectable>true</selectable>
+		<rotatable>true</rotatable>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<clearBuildingArea>false</clearBuildingArea>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<costList>
+			<Tallow>15</Tallow>
+		</costList>
+		<building>
+			<isEdifice>false</isEdifice>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+			<li>PlaceWorker_Heater</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>24</fuelCapacity>
+				<initialFuelPercent>0</initialFuelPercent>
+				<fuelConsumptionPerTickInRain>0.0000</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites>
+			<li>Light_B1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_WallLamp</defName>
+		<label>壁挂油灯</label>
+		<description>嵌在墙上的金属油灯, 亮如寻常火把而更耐久, 且完全不受雨水影响。走廊与楼梯间装上几盏, 夜里便再不必摸黑。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/WallLamp</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawOffsetNorth>(0,0,1)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-1)</drawOffsetSouth>
+			<drawOffsetWest>(-1,0,0)</drawOffsetWest>
+			<drawOffsetEast>(1,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/WallLamp_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<terrainAffordanceNeeded IsNull="True"/>
+		<pathCost>0</pathCost>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToBuild>100</WorkToBuild>
+			<Flammability>0</Flammability>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>15</costStuffCount>
+		<building>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+			<isEdifice>false</isEdifice>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<isAttachment>true</isAttachment>
+		</building>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+			<li>Placeworker_AttachedToWall</li>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>9</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>24.0</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites>
+			<li>Light_B1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_LampPost</defName>
+		<label>路灯</label>
+		<description>一根立在路口的铁木灯柱, 把火光举到人头之上, 照亮的范围比落地火把大得多。夜里往来的人走得快些, 心里也踏实些。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LampPost</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LampPost_west</uiIconPath>
+		<uiIconScale>2</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>14</pathCost>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>600</WorkToBuild>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<costList>
+			<WroughtIron>5</WroughtIron>
+		</costList>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>40</costStuffCount>
+		<defaultPlacingRot>East</defaultPlacingRot>
+		<building>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+			<isInert>true</isInert>
+			<isEdifice>true</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.5</fuelConsumptionRate>
+				<fuelCapacity>40.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Coal</li>
+					</thingDefs>
+					<categories>
+						<li>Woody</li>
+					</categories>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3.5</heatPerSecond>
+				<heatPushMaxTemperature>23</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites>
+			<li>Light_B1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!-- 蜡烛三件: 纯牛油浇铸, 无 stuff -->
+
+	<ThingDef ParentName="BuildingBase" Name="Rustic_SingleCandleBase" Abstract="True">
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>14</pathCost>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<Beauty>3</Beauty>
+			<MaxHitPoints>60</MaxHitPoints>
+			<WorkToBuild>250</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Mass>0.5</Mass>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<building>
+			<isEdifice>false</isEdifice>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+			<li>PlaceWorker_Heater</li>
+			<li>PlaceWorker_MeditationOffsetBuildingsNear</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>20</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>16</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites>
+			<li>Light_B1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SingleCandleBase">
+		<defName>Rustic_Candle</defName>
+		<label>蜡烛</label>
+		<description>一小截牛油烛, 光只够照亮桌面方圆几步。算不得什么照明, 却被摆在案头与床头——那点摇晃的暖意, 比亮度更要紧。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticCandle</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticCandle_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<costList>
+			<Tallow>10</Tallow>
+		</costList>
+		<comps Inherit="False">
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>4</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>20</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>13</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SingleCandleBase">
+		<defName>Rustic_Candles</defName>
+		<label>烛台(三枝)</label>
+		<description>并排点燃的三枝牛油烛, 光比单枝亮些。摆在长桌正中, 一整顿饭的工夫都够用。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticCandles</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticCandles_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<costList>
+			<Tallow>15</Tallow>
+		</costList>
+		<comps Inherit="False">
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>6</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>20</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>16</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SingleCandleBase">
+		<defName>Rustic_CandleStand</defName>
+		<label>落地烛架</label>
+		<description>一具及腰高的烛架, 把烛火托到与人眼齐平。木、石、金属都做得, 教堂与领主厅堂里常见此物。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/CandleStand</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<!-- MO 原档未给 CandleStand 做 _MenuIcon, 此处直接取朝南正面图充当图标。
+		     ⚠ 该建筑有 stuffCategories, 按 AGENTS §5 必须写 uiIconPath, 否则点选时每帧 NRE 卡死。 -->
+		<uiIconPath>Things/Building/Furniture/CandleStand_south</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<statBases>
+			<Beauty>5</Beauty>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Mass>5</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<costList>
+			<Tallow>15</Tallow>
+		</costList>
+		<comps Inherit="False">
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>6</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>20</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>16</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SingleCandleBase">
+		<defName>Rustic_Candelabra</defName>
+		<label>枝形烛台</label>
+		<description>数枝烛火分叉而上, 端在手边或置于案上皆宜。一件讲排场胜过讲照明的物件——来客看见它, 便知这户人家不缺牛油。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Candelabra</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/Candelabra_MenuIcon</uiIconPath>
+		<uiIconScale>0.85</uiIconScale>
+		<statBases>
+			<Beauty>5</Beauty>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Mass>2</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<comps Inherit="False">
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>6</glowRadius>
+				<glowColor>(247,172,65,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1.0</fuelConsumptionRate>
+				<fuelCapacity>20</fuelCapacity>
+				<fuelConsumptionPerTickInRain>0.0006</fuelConsumptionPerTickInRain>
+				<fuelFilter>
+					<thingDefs>
+						<li>Tallow</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+				<destroyOnNoFuel>false</destroyOnNoFuel>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>1</heatPerSecond>
+				<heatPushMaxTemperature>16</heatPushMaxTemperature>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

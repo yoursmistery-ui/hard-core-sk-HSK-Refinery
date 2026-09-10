@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 工具科研节点(用户要求 2026-08-21): 中世纪 2 节点 + 工业 2 节点,按科技档位划分。
+         布局在 Craft_SK 标签:中世纪工具在 Y=20 行(Craft_B1 X=3 → 工具I X=5 → 工具II X=6,
+         避开 Y=22 行的 Metallurgy_B3/B4/B5 与 Metals_C1/C2/C3);
+         工业工具在 Y=22 行(Metals_C3 X=10 → 工业工具I X=11 → 工业工具II X=12)。
+         2026-08-21 修订: 工具II(原含 工具III)前置由工业 Metals_C1/C2 改为中世纪 冶金学III(Metallurgy_B3);
+         工业工具II 去掉 Electronics_C2 前置(避免画在电子正下方),只依赖工业工具I;
+         串联科技全部满足"前节点 X+1"规则,保证研究树渲染无错乱。
+         2026-08-23 修订: 金属加工 II/III/IV(Metals_C1/C2/C3)整体右移一格(7/8/9→8/9/10,
+         HSK修复整合 01 号补丁),工业工具随之右移一格(10/11→11/12)避免撞车。
+         2026-08-23 再修订(用户要求): 工业工具II 重新依赖 电子II(Electronics_C2);
+         按时代研究台要求(与 HSK 六档基类一致)——
+         中世纪工具 I/II = 中世纪档(基础研究台 SimpleResearchBench,继承 MedievalBase 即可);
+         工业工具 I = 前工业档(基础研究台+研究终端 LabTerminal,继承 IndustrialBase 即可,前置 Metals_C3 无石油依赖);
+         工业工具 II = 后工业档(高级研究台 HiTechResearchBench,对应 HSK HitechBase:
+         研究台升级+保留研究终端设施,须同时覆盖 SK.AdvancedResearchExtension 可用研究台列表)。
+         2026-08-27 修订(用户要求): 删除 工具III(RKHSK_Tools_Medieval3,原专业工具/剪刀),
+         并入 工具II(RKHSK_Tools_Medieval2);剪刀配方前置改挂 RKHSK_Tools_Medieval2,
+         工业工具I 前直由 RKHSK_Tools_Medieval3 改为 RKHSK_Tools_Medieval2。 -->
+
+    <!-- 中世纪工具 I: 基础工具(手斧/矿镐/手锤/镰刀/扫把/锄头) -->
+    <ResearchProjectDef ParentName="MedievalBase">
+        <defName>RKHSK_Tools_Medieval1</defName>
+        <label>Tools I</label>
+        <description>Basic hand tools: axe, pickaxe, hammer, sickle, broom and hoe.</description>
+        <baseCost>600</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>Craft_B1</li>
+        </prerequisites>
+        <researchViewX>5.00</researchViewX>
+        <researchViewY>20.00</researchViewY>
+        <tab>Craft_SK</tab>
+    </ResearchProjectDef>
+
+    <!-- 中世纪工具 II: 进阶工具(鼠族斧/剁肉刀/草叉/锄头/小锤);2026-08-27 并入原 工具III 的剪刀 -->
+    <ResearchProjectDef ParentName="MedievalBase">
+        <defName>RKHSK_Tools_Medieval2</defName>
+        <label>Tools II</label>
+        <description>Advanced medieval tools: axe, cleaver, pitchfork, hoe and small hammer.</description>
+        <baseCost>1000</baseCost>
+        <techLevel>Medieval</techLevel>
+        <prerequisites>
+            <li>RKHSK_Tools_Medieval1</li>
+            <li>Metallurgy_B3</li>
+        </prerequisites>
+        <researchViewX>6.00</researchViewX>
+        <researchViewY>20.00</researchViewY>
+        <tab>Craft_SK</tab>
+    </ResearchProjectDef>
+
+    <!-- 工业工具 I: 工业基础工具(大锤/扳手/骨锯) -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>RKHSK_Tools_Industrial1</defName>
+        <label>Industrial Tools I</label>
+        <description>Industrial tools: sledgehammer, monkey wrench and bonesaw.</description>
+        <baseCost>1800</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>RKHSK_Tools_Medieval2</li>
+            <li>Metals_C3</li>
+        </prerequisites>
+        <researchViewX>11.00</researchViewX>
+        <researchViewY>22.00</researchViewY>
+        <tab>Craft_SK</tab>
+    </ResearchProjectDef>
+
+    <!-- 工业工具 II: 工业进阶工具(液压钳/冲击钻/电焊枪)。
+         2026-08-23 修订: 前置补 电子II(Electronics_C2,后工业/石化时代档);
+         研究台要求升级为 HSK 后工业档(HitechBase): 高级研究台(HiTechResearchBench)
+         为唯一可用研究台(原继承 IndustrialBase 的 [基础研究台,高级研究台] 列表被覆盖),
+         研究终端(LabTerminal)设施保留(与 HitechBase 一致)。 -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>RKHSK_Tools_Industrial2</defName>
+        <label>Industrial Tools II</label>
+        <description>Advanced industrial tools: hydraulic pliers, impact drill and welding torch.</description>
+        <baseCost>2200</baseCost>
+        <techLevel>Industrial</techLevel>
+        <prerequisites>
+            <li>RKHSK_Tools_Industrial1</li>
+            <li>Electronics_C2</li>
+        </prerequisites>
+        <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+        <modExtensions Inherit="False">
+            <li Class="SK.AdvancedResearchExtension">
+                <requiredResearchBuildings>
+                    <li>HiTechResearchBench</li>
+                </requiredResearchBuildings>
+            </li>
+            <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+        </modExtensions>
+        <researchViewX>13.00</researchViewX>
+        <researchViewY>22.00</researchViewY>
+        <tab>Craft_SK</tab>
+    </ResearchProjectDef>
+</Defs>

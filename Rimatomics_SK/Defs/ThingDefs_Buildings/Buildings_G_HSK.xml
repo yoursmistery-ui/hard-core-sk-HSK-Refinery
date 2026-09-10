@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="UniversalFermenterBase" Class="UniversalFermenterSK.ThingDef_UF">
+		<defName>GasCentrifuge</defName>
+		<label>Gas centrifuge</label>
+		<description>Separates uranium ore into isotopes, producing enriched uranium.</description>
+		<graphicData>
+			<texPath>Things/Building/Production/GasCentrifuge/GC_off</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<drawRotated>false</drawRotated>
+			<shadowData>
+				<volume>(2.22, 0.8, 0.62)</volume>
+				<offset>(0, 0, -0.13)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.3,0.1,2.4,1.8)</rect>
+			</damageData>
+		</graphicData>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<FramePath>Things/Building/Production/GasCentrifuge/GC_anim</FramePath>
+		<AnimationType>standart</AnimationType>
+		<FrameCount>6</FrameCount>
+		<multispeed>5</multispeed>
+		<pathCost>80</pathCost>
+		<statBases>
+			<MaxHitPoints>340</MaxHitPoints>
+			<WorkToBuild>11500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-10</Cleanliness>
+			<Beauty>-60</Beauty>
+		</statBases>
+		<size>(3,3)</size>
+		<stuffCategories>
+			<li>RuggedMetallic</li>
+		</stuffCategories>
+		<costStuffCount>270</costStuffCount>
+		<costList>
+			<ReinforcedConcrete>90</ReinforcedConcrete>
+			<SyntheticFibers>35</SyntheticFibers>
+			<ComponentIndustrial>15</ComponentIndustrial>
+			<Mechanism>15</Mechanism>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>1000</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<soundAmbientProducingPower>GeothermalPlant_Ambience</soundAmbientProducingPower>
+				<idlePowerDraw>100</idlePowerDraw>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<designationCategory>Production</designationCategory>
+		<researchPrerequisites>
+			<li>RimatomicsActivate</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+		
+		<!-- ThingDef_UF fields -->
+		<showProductIcon>true</showProductIcon>
+		<barOffset>(0.0, 0.25)</barOffset>
+		<barScale>(1.0, 1.0)</barScale>
+		<slotsCount>10</slotsCount>
+	</ThingDef>
+	
+	
+	
+	<!-- Recipe -->
+	
+	<RecipeDef ParentName="GlitterpediaModExtBase" Class="UniversalFermenterSK.RecipeDef_UF">
+		<defName>SeparateU235</defName>
+		<label>Make enriched uranium</label>
+		<description>Make enriched uranium from uranium ore by isotope separation.</description>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Uranium</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Uranium</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<UraniumPellets>15</UraniumPellets>
+		</products>
+		<recipeUsers>
+			<li>GasCentrifuge</li>
+		</recipeUsers>
+		<researchPrerequisite>RimatomicsActivate</researchPrerequisite>
+		<!-- RecipeDef_UF fields -->
+		<usesTemperature>false</usesTemperature>
+		<processDays>1</processDays>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="GlitterpediaModExtBase" Class="UniversalFermenterSK.RecipeDef_UF">
+		<defName>SeperatePrometheum</defName>
+		<label>Make prometheum</label>
+		<description>seperate prometheum from nuclear fission by-product.</description>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>NuclearWaste</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SyntheticAmmonia</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>NuclearWaste</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Prometheum>5</Prometheum>
+		</products>
+		<recipeUsers>
+			<li>GasCentrifuge</li>
+		</recipeUsers>
+		<researchPrerequisite>RimatomicsActivate</researchPrerequisite>
+		<!-- RecipeDef_UF fields -->
+		<usesTemperature>false</usesTemperature>
+		<processDays>1</processDays>
+	</RecipeDef>
+	
+</Defs>

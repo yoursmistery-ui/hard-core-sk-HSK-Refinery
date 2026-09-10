@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- ============ HSK 整合: Ratkin Weapons+ 细剑 (单手武器) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_Rapier</defName>
+		<label>ratkin rapier</label>
+		<description>A rapier used by the royal family. The long blade allows ratkins to fend off attacks from a safe distance.</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Item_Weapon/RK_Rapier</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<costStuffCount>40</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>5</ComponentMedieval>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<LeadBar>20</LeadBar>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>CE_OneHandedWeapon</li>
+			<li>RK_WeaponTag_OneHand</li>
+			<li>RK_WeaponTag_OneHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>6000</WorkToMake>
+			<Mass>1.6</Mass>
+			<Bulk>3</Bulk>
+			<MeleeCounterParryBonus>0.6</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>5</MeleeDodgeChance>
+			<MeleeHitChance>3</MeleeHitChance>
+			<MeleeCritChance>0.4</MeleeCritChance>
+			<MeleeParryChance>0.35</MeleeParryChance>
+			<Suppressability>-0.3</Suppressability>
+		</equippedStatOffsets>
+		<equippedAngleOffset>-20</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>2.5</cooldownTime>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+	</ThingDef>
+
+	<!-- ============ HSK 整合: Ratkin Weapons+ 双刃剑 (双手武器) ============ -->
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RKHSK_TwoBladed</defName>
+		<label>ratkin two-bladed sword</label>
+		<description>The double-edged sword used by the noble of the ratkins. It's bulky, but enough to block attacks in many directions.</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Item_Weapon/RK_TwoBladed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<techLevel>Medieval</techLevel>
+		<costStuffCount>90</costStuffCount>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>5</ComponentMedieval>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<LeadBar>20</LeadBar>
+		</costList>
+		<weaponTags Inherit="false">
+			<li>MedievalMeleeAdvanced</li>
+			<li>RK_WeaponTag_TwoHand</li>
+			<li>RK_WeaponTag_TwoHandMelee</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>8</Mass>
+			<Bulk>9</Bulk>
+			<MeleeCounterParryBonus>1.2</MeleeCounterParryBonus>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeHitChance>-3</MeleeHitChance>
+			<MeleeCritChance>0.7</MeleeCritChance>
+			<MeleeParryChance>0.5</MeleeParryChance>
+			<Suppressability>-0.45</Suppressability>
+			<ArmorRating_Sharp>0.30</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.30</ArmorRating_Blunt>
+			<PainShockThreshold>0.4</PainShockThreshold>
+		</equippedStatOffsets>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>30</power>
+				<cooldownTime>3.0</cooldownTime>
+				<armorPenetrationSharp>5.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>8.4</power>
+				<cooldownTime>0.8</cooldownTime>
+				<armorPenetrationSharp>4.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4.5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>shaft</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.8</cooldownTime>
+				<armorPenetrationSharp>3</armorPenetrationSharp>
+				<armorPenetrationBlunt>6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<recipeMaker Inherit="False" IsNull="True" />
+	</ThingDef>
+
+</Defs>

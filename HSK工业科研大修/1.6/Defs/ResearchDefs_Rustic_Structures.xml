@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 中世纪乡村结构 · 围栏工
+       19 项乡村结构建筑拆分 4 档解锁(HSK工业科研大修, 2026-09-03 建)。
+       实测原状态: 5 项无 prereq(开局就解锁)、其余多挂 ComplexFurniture、都铎墙/城堡墙挂 Stonecutting;
+       现统一收敛到本档 4 个独立节点, 链式递进。
+       ParentName="MedievalBase" (Core_SK: techLevel Medieval + SimpleResearchBench + 高级研究台 + ResearchTreeSKModExtension)
+       坐标(2026-09-10 用户改版, 由"Y=6 一横排"改成"左上→右下大跨步阶梯"): 围栏工(3,16) 起,
+       链式 朴素门具(4,15) → 加固门具(5,14) → 立柱与城堡(6,14)。
+       落位前按**运行时终态 Unified.xml**查重: (3,16)(4,15)(5,14)(6,14) 四格均空闲(该行 Y=16 只占 X=8,9,10,12,13,18,19,20),
+       且满足 ResearchTreeSK 的"前置须在左侧"(4>3、5>4、6>5 → 不会新增 not-positioned-to-the-right 告警)。
+       ⚠ 坐标只信运行时终态: 总览文档会过期(09-10 实测漏过 [sbz] 节点), grep 各 mod 源文件也不可信
+       (Core_SK 的 Storage_C2/C3 被补丁移位)。脚本 `_tmp/check_coord_unified.py`。
+       (历史教训 2026-09-05: 原放 Y=6 横排 X=3~6, 撞上 Core_SK 娱乐设施 III/IV/V 占的 (4,6)(5,6)(6,6)。) -->
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_SimpleFences</defName>
+    <label>围栏工</label>
+    <description>在原始木屋外另立一排尖头木桩, 便能圈出牲口与作物的活动范围; 缝里漏箭的射孔木桩亦可一战, 帐篷布墙更是临时据点的拆装良伴。四样最朴素的围蔽工, 是乡村秩序的起手式。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>200</baseCost>
+    <researchViewX>3.00</researchViewX>
+    <researchViewY>16.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_SimpleDoors</defName>
+    <label>朴素门具</label>
+    <description>从单格木门到原木框、原木栅门、加固木门, 直至沉重石板门——一并五件通行的门户, 是构筑一座能进能出的村落的全部基础门槛。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>400</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_SimpleFences</li>
+    </prerequisites>
+    <researchViewX>4.00</researchViewX>
+    <researchViewY>15.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_AdvancedDoors</defName>
+    <label>加固门具</label>
+    <description>双格宽门、加固原木大门、双格石板闸门——四道更厚、更稳、更费料的大门, 既是车马通道也是械斗要冲的关键节点。一条宽阔门洞即宣告此处已非乡野小寨。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>800</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_SimpleDoors</li>
+    </prerequisites>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>14.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_ColumnsAndCastle</defName>
+    <label>立柱与城堡工程</label>
+    <description>撑起门廊的原木柱、撑起宫厅的皇家金柱、撑起隔间的两格高立柱; 半木泥坯的都铎墙, 巨石垒砌的城堡墙与留出射击孔的射孔城堡墙。六件撑得起屋宇门面、抵得住攻城兵器的构件, 让一座聚落真正长出城墙与穹顶。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>1200</baseCost>
+    <prerequisites>
+      <li>RK_Rustic_AdvancedDoors</li>
+    </prerequisites>
+    <researchViewX>6.00</researchViewX>
+    <researchViewY>14.00</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- 学术陈设 · 书籍家具档(HSK工业科研大修, 2026-09-04 建)
+       收口 Buildings_Rustic_Book.xml 的 6 件书籍家具(经文讲台/研究书架 1x1·1x2/空书架 1x1·1x2/皇家书架),
+       原多挂通用 ComplexFurniture(家具一), 现独立成档, 前置仍为家具一。
+       坐标 (5,8): 家具行 Y=7 之下的分支, 跨页签全局查重确认空闲(见 _tmp/scan_all_research_global.py)。 -->
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_BookFurniture</defName>
+    <label>学术陈设</label>
+    <description>为研读与治学备下的家什: 讲台摊开经卷, 书架塞满抄本。摆在研究台旁的研究书架能加快研究进度, 空书架专司藏书, 皇家书架则以衬绸描金装点书房。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>300</baseCost>
+    <prerequisites>
+      <li>ComplexFurniture</li>
+    </prerequisites>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>8.00</researchViewY>
+  </ResearchProjectDef>
+  <!-- 中世纪冰箱 · 独立档(HSK工业科研大修, 2026-09-10 用户要求)
+       收口 Buildings_Rustic_IceChest.xml 的冰柜 Rustic_IceChest 与凿冰配方 RK_Mine_Ice。
+       原先这两件都直接挂 Core_SK 的 Temperature_control_B1(游戏内显示「温度控制 II」)上,
+       用户在科研树里搜"冰/冷藏"找不到对应节点, 故拆出独立节点。
+       坐标 (5,11): 2026-09-10 用户改版 —— 落在**温度行**「温度控制 II」(4,11) 右侧紧邻空位,
+         与两个前置(温度控制 II / 存储 III)同排邻近, 树上就是一条横边拉过来。
+         (原定 (10,12) 存储行 + 更早的"挂 Temperature_control_B1"均已作废。)
+         查重与"前置须在左侧"(5 > 4) 均按运行时终态 Unified.xml 核过。
+         ⚠ 查坐标只能信 Unified.xml: `docs/01_科研体系/科研节点总览.md` 是快照会过期
+         (曾漏 [sbz] Neat Storage 的 Storage_C1b(8,12)/Storage_C2b(9,12)), 直接 grep 各 mod 源文件也不可信。
+         脚本: `_tmp/check_coord_unified.py`(按 Unified 建全局占用表)。 -->
+  <ResearchProjectDef ParentName="MedievalBase">
+    <defName>RK_Rustic_IceChest</defName>
+    <label>中世纪冰箱</label>
+    <description>从封冻的湖面凿下整块冰, 塞进双层隔热木柜的底层, 上层存粮——中世纪人家就是靠这一柜冰, 把肉和菜留过夏天。冰在柜里慢慢化开, 天越热化得越快; 冰一化完, 柜子便只是一只普通木箱了。有了凿冰与造柜这两手, 你终于不必再单靠腌制与风干熬过整年。</description>
+    <tab>Buildings_SK</tab>
+    <baseCost>300</baseCost>
+    <prerequisites>
+      <li>Temperature_control_B1</li>
+      <li>Storage_B2</li>
+    </prerequisites>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>11.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

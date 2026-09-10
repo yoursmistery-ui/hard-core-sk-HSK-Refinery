@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 需求:技能拓展中最高等级的技能(偏长/Critical)狂热 删除对其他技能 25% 的学习速度惩罚。
+	     机制:VSE 的 PassionDef learnRateFactorOther=0.25(其他技能学习速度 x0.25)由
+	     LearnRateFactorCache.GetValueFor 对每个技能乘算;改为 1 即取消惩罚。
+	     副作用:PassionDef.IsCritical 判定基于 learnRateFactorOther != 1,改为 1 后
+	     该激情不再被标记为 critical(生成时不再强制每图至多一个,但 commonality 0.25 仍稀有)。
+	     注意:本操作是最终层补丁,后于原版 Defs 加载,覆盖 VSE_Critical 定义。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/VSE.Passions.PassionDef[defName="VSE_Critical"]/learnRateFactorOther</xpath>
+		<value>
+			<learnRateFactorOther>1</learnRateFactorOther>
+		</value>
+	</Operation>
+</Patch>

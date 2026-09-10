@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==========================================================================
+	     传说书(娱乐书) ×1, 移植自 Medieval Overhaul 的传说书 Tale(BookDefs.xml L48-86)
+		     铁律: ParentName=BookBase(原版 Data/Core/Defs/Books/BookDefs.xml 抽象), 不写 thingClass
+		       (BookBase 已带 thingClass=Book), 无 MO 自有命名空间类;
+		     doers: 任务原要求 BookOutcomeDoer_GainMood —— 经核原版 1.6 全部 BookOutcome 类
+		       (GainResearch/GainSkillExp/GiveQuest/JoyFactorModifier/MentalBreak/GainAnomalyResearch),
+		       不存在 GainMood 变体; 原版小说(Novel)的心情增益即 BookOutcomeProperties_JoyFactorModifier,
+		       MO 的 Tale 也用它 → 采用该类, 无参数, 属"参数名照原版文件"的最接近降级替代。
+		     nameMaker/descriptionMaker 复用原版 Namer_Novel / Description_Novel(已核实存在);
+		     marketValue=160 与 MO Tale 档一致; MO Tale 无 workToMake 字段(写作走 MO 抄书台 RecipeDef,
+		       本轮不移植配方) → 不写; 贴图用原版小说书本(不新拷)。
+		     ⚠ defName 用 RK_Book_Tale_Medieval 而非任务书写的 RK_BookTale:
+		       已冻结的 TraderKinds_RK_Medieval.xml(流浪学者 MultiDef)引用的是前者, 重写商人文件被禁止,
+		       故对齐商人引用避免断链(文件路径仍按任务命名 Books_RK_Tale.xml)。
+		     ========================================================================== -->
+
+	<ThingDef ParentName="BookBase">
+		<defName>RK_Book_Tale_Medieval</defName>
+		<label>传说故事书</label>
+		<description>装帧精美的传说典籍，记载着冒险与神话的故事。每一册都将读者带向远方的土地与逝去的时代。由抄写员手书、配以细密插画，因其动人的故事与匠心的装帧而备受喜爱——既是消遣，也是历史的留存。</description>
+		<graphicData>
+			<texPath>Things/Item/Book/Novel/Novel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Book/Novel/Novel</uiIconPath>
+		<statBases>
+			<MarketValue>160</MarketValue>
+		</statBases>
+		<tradeTags>
+			<li>Book</li>
+		</tradeTags>
+		<comps>
+			<li Class="CompProperties_Book">
+				<nameMaker>Namer_Novel</nameMaker>
+				<descriptionMaker>Description_Novel</descriptionMaker>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Novel/Novel_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Novel/Novel_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BookOutcomeProperties_JoyFactorModifier" />
+				</doers>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 悬赏公告牌:给鼠族公告牌(RKFC_RL_Board)挂 QuestBoardHSK comp。
+       1.6 Operation 级 MayRequire 已失效 → 用 xpath 存在性门控:公告牌 def 不存在(未装鼠族家具拓展)时整段跳过。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RKFC_RL_Board"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>Defs/ThingDef[defName="RKFC_RL_Board"]/comps</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RKFC_RL_Board"]/comps</xpath>
+        <value>
+          <li Class="QuestBoardHSK.CompProperties_BountyBoard" />
+        </value>
+      </match>
+      <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RKFC_RL_Board"]</xpath>
+        <value>
+          <comps>
+            <li Class="QuestBoardHSK.CompProperties_BountyBoard" />
+          </comps>
+        </value>
+      </nomatch>
+    </match>
+  </Operation>
+
+</Patch>

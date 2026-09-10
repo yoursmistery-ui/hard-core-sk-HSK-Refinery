@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Better GC: Mothballed and World Pawns</name>
+	<author>GwinnBleidd</author>
+	<url></url>
+	<supportedVersions>
+		<li>1.4</li>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>GwinnBleidd.MothballedAndDeadPawns</packageId>
+	<loadBefore>
+		<li>dubwise.dubsperformanceanalyzer.steam</li>
+		<li>dimonsever000.wiki.specific</li>
+		<li>taranchuk.performanceoptimizer</li>
+		<li>krkr.rocketman</li>
+	</loadBefore>
+	<description>
+		The mod is meant to improve game performance by (1) better pawn mothballing and (2) reducing the number of world pawns that the game keeps forever. 
+		It makes no impact on new games (since the world's not bloated yet), but rather on the games that ran for a while.
+
+		Please read before installing the mod for the details, technical or otherwise.
+
+		TLDR: 
+			1. More pawns mothballed due to allowMothballIfLowPriorityWorldPawn tag (xml patch)
+			2. Better pawn cleanup by GC for those pawns that were not seen for over 1 year (runs on save load).
+
+		I've been running a colony for 7 years, and my performance eroded from 600-700 TPS to 100-120 TPS, while the savefile expanded from 25M to 80M.
+		I started debugging and discovered that my save file had almost 2000 pawns that were not processed by the garbage collector, and, on top of it, 200+ of those pawns were "active", so each of them "ticked".
+
+		The reason for the 200+ active pawns that were not mothballed was diseases.
+		The game code prevents pawn mothballing if the pawn has hediffs unless the hediff has allowMothballIfLowPriorityWorldPawn tag. 
+		The main culprit (for my case) was the DiseasesOverhauled mod (that added a bunch of hediffs without the tag), and GeneticDrugNeed hediff added by Biotech expansion.
+		So the mod does just that: it patches some hediff by adding allowMothballIfLowPriorityWorldPawn tag to them. 
+		As a result my number of ticking pawns went down from 200+ to 80+.
+
+		The second thing was bloated world pawns storage.
+		Pawns never get discarded if they have relations to other pawns or appear in logs somewhere.
+		So after you've got a bunch of big raids, you're bound to get some pawns with relations. They will be kept, probably forever.
+		To remedy that I added a patch that runs when the world is loaded from the save.
+		The patch checks if the pawn could be garbage collected (meaning, it's not an "important" pawn, e.g. not a faction leader, kidnapped, caravan member, reserved for a quest, has a corpse present on the map, etc),
+		then it checks that the pawn was a "WorldPawn" (meaning it was not seen by a player) for over a year (5 years if the pawn belongs to your faction), and then the patch clears pawn relations and the log entries the pawn appears in.
+		Then, the mod triggers a pawn mothballing and garbage collection process, so you don't have to wait until the game runs it on its own (toggleable).
+
+		In my case, it brought down the number of world pawns from 2000 to under 1000.
+
+		All in all, my savefile size went down from 80M to 58M, and my TPS went up from 100-120 to 250-270 TPS.
+		YMMV, depending on how many pawns you've got in your save file and whether you use Diseases Overhauled mod.
+
+		It's still in beta, though I have 150+ mods and it seems to run fine.
+		Please let me know if there are other common diseases that have to be patched.
+		
+		PLEASE MAKE SURE TO MAKE A BACKUP COPY OF YOUR SAVE FILE BEFORE TRYING THIS MOD.
+	</description>
+</ModMetaData>

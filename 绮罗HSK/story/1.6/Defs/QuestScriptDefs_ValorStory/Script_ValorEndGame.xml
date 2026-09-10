@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_ValorEndGame</defName>
+    <defaultChallengeRating>4</defaultChallengeRating>
+    <isRootSpecial>true</isRootSpecial>
+    <minRefireDays>999999</minRefireDays>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->The Valor's Journey Continues</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->As the village regains its foothold, life returns to its normal course. Perhaps this place now has the strength to protect itself from danger. [Valor_label] understands that her mission does not end here, it is time to embark on a new journey.\n\nShould [Valor_label] now depart from [map_definite]?\n\nAccepting this quest will remove [Valor_label] from [map_definite].</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="AncotLibrary.QuestNode_PlayerWealth">
+          <wealthRange>500000~9999999999</wealthRange>
+        </li>
+        <li Class="AncotLibrary.QuestNode_Colonists">
+          <colonistRange>20~999</colonistRange>
+          <race>Kiiro_Race</race>
+        </li>
+        <li Class="AncotLibrary.QuestNode_DaysPassed">
+          <dayRange>120~9999</dayRange>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetPawn_ValorForScenario">
+          <storeAs>Valor</storeAs>
+        </li>
+
+        <li Class="AncotLibrary.QuestNode_LordJob_ExitMapBest">
+          <pawn>$Valor</pawn>
+          <faction>Kiiro_Faction</faction>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_RewardValorEndGame">
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>Valor.LeftMap</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>QuestEnd</outSignals>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_Delay">
+          <inSignalEnable>QuestEnd</inSignalEnable>
+          <delayTicks>300</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_EndGame">
+          <inSignal>QuestEnd</inSignal>
+          <introText>[Valor_label] left the village she saved, continuing her unfinished journey.</introText>
+          <endingText>[Valor_label]'s deeds in [map_definite] gradually becomes legend. To honor [Valor_label], the kiiro build monuments and weave these tales into stories and ballads which passed through generations.\nWhether they meet again or not, [Valor_label]'s name is forever etched in the memory of [map_definite] and kiiros.\n\nStoryteller: Valor [Valor_label] unlocked.</endingText>
+        </li>
+        <li Class="Kiiro_Event.QuestNode_UnlockValorStoryteller">
+          <inSignal>QuestEnd</inSignal>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+        <!-- 派系敌对则结束任务 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>[resolvedQuestName] failed</label>
+                <text>Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

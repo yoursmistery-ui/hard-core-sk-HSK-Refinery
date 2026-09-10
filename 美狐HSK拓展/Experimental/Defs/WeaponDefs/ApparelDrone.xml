@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="ApparelBase">
+    <defName>Miho_Apparel_ShieldforDrone</defName>
+    <label>드론 실드 초축전기</label>
+    <description>강력한 투사체 차단 장치 입니다. 다만 지속적으로 드론의 열량을 앗아갑니다.</description>
+    <thingClass>ShieldBelt</thingClass>
+    <graphicData>
+      <texPath>Mech/Items/ShieldGenerator</texPath>
+			<drawSize>(1.5,1.5)</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+
+    <statBases>
+      <Mass>25</Mass>
+      <WorkToMake>74000</WorkToMake>
+      <Flammability>0.4</Flammability>
+      <EnergyShieldRechargeRate>0.2</EnergyShieldRechargeRate>
+      <EnergyShieldEnergyMax>5</EnergyShieldEnergyMax>
+      <EquipDelay>5</EquipDelay>
+    </statBases>
+    <costList>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+
+      <Steel>100</Steel>
+      <Miho_HeatCeramics>20</Miho_HeatCeramics>
+    </costList>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.1</MoveSpeed>
+<HungerRateMultiplier>2</HungerRateMultiplier>
+    </equippedStatOffsets>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+      <researchPrerequisite>ShieldBelt</researchPrerequisite>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableMachining</li>
+      </recipeUsers>
+      <useIngredientsForColor>false</useIngredientsForColor>
+      <skillRequirements>
+        <Crafting>10</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <apparel>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <careIfDamaged>false</careIfDamaged>
+      <wearPerDay>0</wearPerDay>
+      <bodyPartGroups>
+        <li>Torso</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>MihoSapsalShield</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.33,0.33,0.33,1)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.65,0.65,0.65,1)</only>
+        </li>
+        <li>
+          <weight>6</weight>
+          <min>(0.3,0.3,0.3,1)</min>
+          <max>(0.5,0.5,0.5,1)</max>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+
+
+<ThingDef ParentName="ApparelMakeableBase">
+    <defName>Miho_Apparel_SolarpanelforDrone</defName>
+    <label>드론 태양열 열량 보존장치</label>
+    <description>태양열 열량 보존장치는 드론의 온 몸을 데워줘 열량을 아낄 수 있게 합니다.</description>
+    <graphicData>
+      <texPath>Mech/Items/SolarAuxiliaEngine</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.5,1.5)</drawSize>
+
+    </graphicData>
+    <costList>
+      <Miho_HeatCeramics>70</Miho_HeatCeramics>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <thingCategories>
+      <li>Miho_Apparel</li>
+    </thingCategories>
+    <recipeMaker>
+            <researchPrerequisite>Miho_PlasmaWeapon</researchPrerequisite> 
+      <recipeUsers Inherit="false">
+        <li>Miho_TableMachining</li>
+      </recipeUsers>	
+    </recipeMaker>
+    <statBases>
+	  <MaxHitPoints>300</MaxHitPoints>
+	  <WorkToMake>70000</WorkToMake>
+      <Mass>20</Mass>
+      <EquipDelay>15</EquipDelay>
+
+    </statBases>
+    <equippedStatOffsets>
+      <MoveSpeed>-0.15</MoveSpeed>
+<HungerRateMultiplier>-0.5</HungerRateMultiplier>
+
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+
+        <li>Torso</li>
+
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+
+      </layers>
+      <tags>
+        <li>MihoSapsalArmy</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>Worker</li>
+        <li>Soldier</li>
+
+      </defaultOutfitTags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(255,255,255)</only>
+        </li>
+        <li>
+          <weight>15</weight>
+          <only>(255,255,255)</only>
+        </li>
+        <li>
+          <weight>20</weight>
+          <only>(255,255,255)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+  
+</Defs>

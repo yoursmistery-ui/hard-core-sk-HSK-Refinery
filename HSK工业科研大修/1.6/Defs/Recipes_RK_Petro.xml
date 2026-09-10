@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 配方（HSK工业科研大修, 2026-08-29 v3 精简）
+       蒸馏塔 8 档 bill(原油桶×10/档, 化燃:气:沥青 = 50:30:20, 总产出 10→80);
+       其余三烯二苯等产物改由 Rimefeller 精炼厂体系(已被 Vile 改造)承接, 本文件不再定义。
+       炼油油泥由蒸馏塔的 CompWasteAccumulator 内部累积, 不占配方产物。 -->
+
+  <!-- ===== 常减压蒸馏塔: 8 档(玩家挂哪个 bill = 选哪档批量) ===== -->
+  <RecipeDef><defName>RK_Recipe_Distill_T1</defName><label>蒸馏·一档(小批量)</label><description>小批量常减压蒸馏：10 桶原油 → 化合燃料 5 / 天然气 3 / 沥青 2。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill>
+    <effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers>
+    <researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>5</Chemfuel><RK_Petro_NaturalGas>3</RK_Petro_NaturalGas><Asphalt>2</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T2</defName><label>蒸馏·二档</label><description>20 桶原油 → 化合燃料 10 / 天然气 6 / 沥青 4。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>10</Chemfuel><RK_Petro_NaturalGas>6</RK_Petro_NaturalGas><Asphalt>4</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T3</defName><label>蒸馏·三档</label><description>30 桶原油 → 化合燃料 15 / 天然气 9 / 沥青 6。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>15</Chemfuel><RK_Petro_NaturalGas>9</RK_Petro_NaturalGas><Asphalt>6</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T4</defName><label>蒸馏·四档</label><description>40 桶原油 → 化合燃料 20 / 天然气 12 / 沥青 8。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>20</Chemfuel><RK_Petro_NaturalGas>12</RK_Petro_NaturalGas><Asphalt>8</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T5</defName><label>蒸馏·五档</label><description>50 桶原油 → 化合燃料 25 / 天然气 15 / 沥青 10。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>25</Chemfuel><RK_Petro_NaturalGas>15</RK_Petro_NaturalGas><Asphalt>10</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T6</defName><label>蒸馏·六档</label><description>60 桶原油 → 化合燃料 30 / 天然气 18 / 沥青 12。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>30</Chemfuel><RK_Petro_NaturalGas>18</RK_Petro_NaturalGas><Asphalt>12</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T7</defName><label>蒸馏·七档</label><description>70 桶原油 → 化合燃料 35 / 天然气 21 / 沥青 14。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>35</Chemfuel><RK_Petro_NaturalGas>21</RK_Petro_NaturalGas><Asphalt>14</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T8</defName><label>蒸馏·八档(大批量)</label><description>大批量常减压蒸馏：80 桶原油 → 化合燃料 40 / 天然气 24 / 沥青 16。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>40</Chemfuel><RK_Petro_NaturalGas>24</RK_Petro_NaturalGas><Asphalt>16</Asphalt></products>
+  </RecipeDef>
+
+  <!-- ===== 污染统一并入(2026-08-29): 核废料 → 毒废包, 接进原版废料处理链 =====
+       Def 级 MayRequire 门控: 未装 Rimatomics 时整条配方不加载, 防 recipeUsers 悬空引用。 -->
+  <RecipeDef MayRequire="Dubwise.Rimatomics">
+    <defName>Process_NuclearWaste_To_Wastepack</defName>
+    <label>核废料转换为废料包</label>
+    <description>将辐射性核废料稀释封装为常规废料包，使其能进入原版废料处理链统一消纳。每次转换需谨慎操作。</description>
+    <jobString>正在封装核废料。</jobString>
+    <workAmount>600</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <effectWorking>ConstructMetal</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>NuclearWaste</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NuclearWaste</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Wastepack>2</Wastepack>
+    </products>
+    <recipeUsers>
+      <li>TableRimatomicsMachining</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <!-- ===== 沥青焚烧回收(原污染统一配方, 2026-08-29 并入): 挂原版电焚化炉 ===== -->
+  <RecipeDef>
+    <defName>Process_Asphalt_To_Concrete</defName>
+    <label>焚烧沥青制混凝土</label>
+    <description>将堆积的沥青投入焚化炉高温焚烧，烧尽重质烃类后，残余矿质残渣经压实即可回收为混凝土。</description>
+    <jobString>正在焚烧沥青。</jobString>
+    <workAmount>180</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Asphalt</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Asphalt</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <ConcreteResource>3</ConcreteResource>
+    </products>
+  </RecipeDef>
+
+</Defs>

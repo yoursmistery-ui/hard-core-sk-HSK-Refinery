@@ -1,0 +1,1534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村装饰与艺术建筑
+     来源: Medieval Overhaul 1.6.2.2 Buildings_Art/Art_Vases/Banners/Decoration/Loot 纯原版类 def 移植(2026-08-27),
+     前缀统一 Rustic_; 跳过冰雕系列(MO 融化 comp/MO minified 类依赖 DLL)。
+     材料映射: Clay→SoftClay, Linen→Cloth, Paper→Cloth, IronIngot→Iron, Ale→Beer, Mead/Wine/IceWine/GriffonWine→Alcohol_Wine,
+     MulberryWine→Alcohol_BerryWine, 宝石(Ruby/Emerald/Sapphire)→Jade; Gems 材质档删除; 研究 RusticFurniture→ComplexFurniture。
+     dominantStyleCategory(MO 旧世界观风格)与 MO modExtensions 已剥离; 菜单统一挂 Furniture 下"乡村装饰"子分类。 -->
+
+	<!--==================== 基类 ====================-->
+	<ThingDef ParentName="SculptureBase" Name="Rustic_SculptureBase" Abstract="True">
+		<rotatable>false</rotatable>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<designationCategory>Accessories</designationCategory>
+	</ThingDef>
+
+	<!-- 古物基类: 不经雕刻台, 直接建造 -->
+	<ThingDef ParentName="Rustic_SculptureBase" Name="Rustic_AncientArtBase" Abstract="True">
+		<recipeMaker>
+			<recipeUsers Inherit="False"/>
+		</recipeMaker>
+	</ThingDef>
+
+	<!-- 2x2 巨型古迹基类 -->
+	<ThingDef ParentName="Rustic_AncientArtBase" Name="Rustic_GrandSculptureBase" Abstract="True">
+		<fillPercent>0.5</fillPercent>
+		<size>(2,2)</size>
+		<canOverlapZones>false</canOverlapZones>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<Beauty>600</Beauty>
+			<Mass>28</Mass>
+			<WorkToMake>205000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">60</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>400</costStuffCount>
+		<castEdgeShadows>true</castEdgeShadows>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+	</ThingDef>
+
+	<!-- 桌面摆件基类 -->
+	<ThingDef ParentName="FurnitureBase" Name="Rustic_OnTopTableBase" Abstract="True">
+		<graphicData>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.85</uiIconScale>
+		<uiIconOffset>(0, 0.25)</uiIconOffset>
+		<building>
+			<paintable>false</paintable>
+			<isEdifice>false</isEdifice>
+		</building>
+		<size>(1,1)</size>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<wipesPlants>true</wipesPlants>
+		<passability>Standable</passability>
+		<pathCost>0</pathCost>
+		<clearBuildingArea>false</clearBuildingArea>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>1</Mass>
+			<WorkToBuild>10</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>3</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Styleable" Inherit="False"/>
+		</comps>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<designationCategory>Accessories</designationCategory>
+	</ThingDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Beverages</defName>
+		<label>乡村酒饮摆件</label>
+	</DesignatorDropdownGroupDef>
+	<ThingDef ParentName="Rustic_OnTopTableBase" Name="Rustic_BeveragesGroup" Abstract="True">
+		<designatorDropdown>Rustic_Beverages</designatorDropdown>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_ScribeTools</defName>
+		<label>乡村抄写工具摆件</label>
+	</DesignatorDropdownGroupDef>
+	<ThingDef ParentName="Rustic_OnTopTableBase" Name="Rustic_ScribeToolsGroup" Abstract="True">
+		<designatorDropdown>Rustic_ScribeTools</designatorDropdown>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_OnTopTableBase" Name="Rustic_KitchenGroup_Base" Abstract="True">
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>15</costStuffCount>
+	</ThingDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_ResearchTools</defName>
+		<label>乡村研究炼金摆件</label>
+	</DesignatorDropdownGroupDef>
+	<ThingDef ParentName="Rustic_OnTopTableBase" Name="Rustic_ResearchToolsGroup" Abstract="True">
+		<designatorDropdown>Rustic_ResearchTools</designatorDropdown>
+	</ThingDef>
+
+	<!-- 横幅基类 -->
+	<ThingDef ParentName="FurnitureWithQualityBase" Name="Rustic_BannerBase" Abstract="True">
+		<description>染色的亚麻长幡, 悬挂起来宣示领主的旗号。</description>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.25</fillPercent>
+		<pathCost>0</pathCost>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>750</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>20</Beauty>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<costList>
+			<Cloth>40</Cloth>
+		</costList>
+		<holdsRoof>false</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+		<graphicData>
+			<drawSize>(3,3)</drawSize>
+			<drawOffset>(0,0,0.4)</drawOffset>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+				<offset>(0,0,-0.23)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<rotatable>true</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!-- 不可建造的阵营旗帜(战利品/生成物) -->
+	<ThingDef ParentName="Rustic_BannerBase" Name="Rustic_NonBuildableBanners" Abstract="True">
+		<designationCategory Inherit="false"/>
+		<stuffCategories Inherit="False"/>
+		<costStuffCount Inherit="False"/>
+		<costList Inherit="False"/>
+		<researchPrerequisites Inherit="False"/>
+	</ThingDef>
+
+	<!-- 战利品装饰基类(原 MO 废墟发现物, 本地化为可建造的收藏陈设; MO 专属 modExtensions 已剥离) -->
+	<ThingDef ParentName="BuildingBase" Name="Rustic_LootDecorBase" Abstract="True">
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>20</pathCost>
+		<useHitPoints>true</useHitPoints>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<fillPercent>0.35</fillPercent>
+		<rotatable>false</rotatable>
+		<clearBuildingArea>false</clearBuildingArea>
+		<thingCategories>
+			<li>BuildingsArt</li>
+		</thingCategories>
+		<size>(1,1)</size>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<statBases>
+			<Flammability>0</Flammability>
+			<SellPriceFactor>1.10</SellPriceFactor>
+			<MeditationFocusStrength>0.0</MeditationFocusStrength>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<tradeTags>
+			<li>Rustic_Loot</li>
+		</tradeTags>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 雕塑与艺术 ====================-->
+	<ThingDef ParentName="Rustic_SculptureBase">
+		<defName>Rustic_Bust</defName>
+		<label>半身像</label>
+		<description>以半身人物为形雕琢的艺术像, 常摆在庄园走廊两侧追念先人。</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/Bust</texPath>
+		</graphicData>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>90</MaxHitPoints>
+			<Mass>3</Mass>
+			<Beauty>50</Beauty>
+			<WorkToMake>18000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SculptureBase">
+		<defName>Rustic_Pedestal</defName>
+		<label>展示台座</label>
+		<description>一方立式台座, 用来郑重其事地展示你最得意的物件。</description>
+		<graphicData>
+			<texPath>Things/Building/Art/Pedestal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>90</MaxHitPoints>
+			<Mass>3</Mass>
+			<Beauty>20</Beauty>
+			<WorkToMake>9000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<fillPercent>0.35</fillPercent>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SculptureBase">
+		<defName>Rustic_ArmorStatue</defName>
+		<label>铠甲像</label>
+		<description>一尊真人大小的骑士铠甲立像, 无声地替主人守着大门。</description>
+		<graphicData>
+			<texPath>Things/Building/Art/ArmorStatue_east</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<castEdgeShadows>true</castEdgeShadows>
+		<rotatable>True</rotatable>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Mass>7</Mass>
+			<Beauty>100</Beauty>
+			<WorkToMake>30000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">20</StyleDominance>
+		</statBases>
+		<size>(1,1)</size>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_AncientArtBase">
+		<defName>Rustic_Ancient_Column</defName>
+		<label>古柱</label>
+		<description>雕饰华丽的古老立柱, 撑起过某个已湮灭王朝的殿宇。</description>
+		<graphicData>
+			<texPath>Things/Building/Art/Column1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5,5)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.5</uiIconScale>
+		<castEdgeShadows>true</castEdgeShadows>
+		<rotatable>True</rotatable>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<statBases>
+			<MaxHitPoints>800</MaxHitPoints>
+			<Mass>7</Mass>
+			<Beauty>100</Beauty>
+			<WorkToMake>30000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">20</StyleDominance>
+		</statBases>
+		<holdsRoof>true</holdsRoof>
+		<size>(1,1)</size>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_RNGLarge2x2c</defName>
+		<label>骰子神巨像</label>
+		<description>地下帝国众多神祇之一。骰子神偶尔仁慈, 但多数时候冷酷无情——就像运气本身。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/RNGLarge2x2</texPath>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_RNG2x2c</defName>
+		<label>骰子神方尖碑</label>
+		<description>方尖碑顶刻着骰子神的徽记。信徒说:投下命运之石, 神自有裁断。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/RNG2x2</texPath>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_ArchonSculpture2x2c</defName>
+		<label>执政官巨像</label>
+		<description>一位早已作古的统治者的巨大石像, 面容被岁月磨平, 只剩下威严的轮廓。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/ArchonLarge2x2</texPath>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_ArchonObeliskSculpture2x2c</defName>
+		<label>执政官方尖碑</label>
+		<description>为纪念一位显赫统治者而立的方尖碑化身, 碑身铭文已无人能读。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/Archon2x2</texPath>
+			<drawSize>(5,5)</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_Obelisk2x2c</defName>
+		<label>大方尖碑</label>
+		<description>一座古老纪念碑, 刻满未知文字的碑文静静诉说着某个失落文明。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/Obelisk2x2</texPath>
+			<drawSize>(5,5)</drawSize>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_GrandSculptureBase">
+		<defName>Rustic_Brazier2x2c</defName>
+		<label>古方尖火盆</label>
+		<description>顶端燃着火盆的古老纪念碑, 夜风中也烧得格外明亮, 是冥想者钟爱的火焰焦点。</description>
+		<castEdgeShadows>true</castEdgeShadows>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/AncientBrazier2x2</texPath>
+			<drawSize>(5,5)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<costList>
+			<GoldBar>100</GoldBar>
+		</costList>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+			<li>PlaceWorker_MeditationOffsetBuildingsNear</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>18</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>6.5</heatPerSecond>
+				<heatPushMaxTemperature>29</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_FireOverlay">
+				<fireSize>1.5</fireSize>
+				<offset>(0,0,1.9)</offset>
+			</li>
+			<li Class="CompProperties_MeditationFocus">
+				<statDef>MeditationFocusStrength</statDef>
+				<focusTypes><li>Flame</li></focusTypes>
+				<offsets>
+					<li Class="FocusStrengthOffset_Lit">
+						<offset>0.1</offset>
+					</li>
+					<li Class="FocusStrengthOffset_BuildingDefsLit">
+						<defs>
+							<li>Campfire</li>
+							<li>TorchLamp</li>
+							<li MayRequire="Ludeon.RimWorld.Royalty">Brazier</li>
+							<li MayRequire="Ludeon.RimWorld.Ideology">Darktorch</li>
+							<li MayRequire="Ludeon.RimWorld.Ideology">DarktorchFungus</li>
+						</defs>
+						<offsetPerBuilding>0.01</offsetPerBuilding>
+						<radius>9.9</radius>
+						<maxBuildings>8</maxBuildings>
+						<explanationKey>MeditationFocusPerFlame</explanationKey>
+						<explanationKeyAbstract>MeditationFocusPerFlameAbstract</explanationKeyAbstract>
+					</li>
+				</offsets>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_AncientArtBase">
+		<defName>Rustic_Brazier1x1c</defName>
+		<label>古风火盆</label>
+		<description>一只燃烧不息的古老火盆, 火光摇曳, 既取暖也静心。</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Building/Art/AncientBrazier1x1</texPath>
+			<drawSize>(2,2)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>90</MaxHitPoints>
+			<Mass>3</Mass>
+			<Beauty>50</Beauty>
+			<WorkToMake>18000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<GoldBar>25</GoldBar>
+		</costList>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+			<li>PlaceWorker_MeditationOffsetBuildingsNear</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps Inherit="False">
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Styleable"/>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>6.5</heatPerSecond>
+				<heatPushMaxTemperature>29</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_FireOverlay">
+				<fireSize>0.8</fireSize>
+				<offset>(0,0,0.6)</offset>
+			</li>
+			<li Class="CompProperties_MeditationFocus">
+				<statDef>MeditationFocusStrength</statDef>
+				<focusTypes><li>Flame</li></focusTypes>
+				<offsets>
+					<li Class="FocusStrengthOffset_Lit">
+						<offset>0.1</offset>
+					</li>
+					<li Class="FocusStrengthOffset_BuildingDefsLit">
+						<defs>
+							<li>Campfire</li>
+							<li>TorchLamp</li>
+							<li MayRequire="Ludeon.RimWorld.Royalty">Brazier</li>
+							<li MayRequire="Ludeon.RimWorld.Ideology">Darktorch</li>
+							<li MayRequire="Ludeon.RimWorld.Ideology">DarktorchFungus</li>
+						</defs>
+						<offsetPerBuilding>0.01</offsetPerBuilding>
+						<radius>9.9</radius>
+						<maxBuildings>8</maxBuildings>
+						<explanationKey>MeditationFocusPerFlame</explanationKey>
+						<explanationKeyAbstract>MeditationFocusPerFlameAbstract</explanationKeyAbstract>
+					</li>
+				</offsets>
+			</li>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtSculpture</nameMaker>
+				<descriptionMaker>ArtDescription_Sculpture</descriptionMaker>
+				<canBeEnjoyedAsArt>true</canBeEnjoyedAsArt>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_SculptureBase">
+		<defName>Rustic_Vase</defName>
+		<label>陶土花瓶</label>
+		<description>用天然黏土手工捏制的简朴花瓶, 摆在角落也别有风味。</description>
+		<graphicData>
+			<graphicClass>Graphic_Random</graphicClass>
+			<texPath>Things/Building/Art/Vase</texPath>
+			<drawSize>(2,2)</drawSize>
+			<color>(132, 99, 81)</color>
+		</graphicData>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>5</Mass>
+			<Beauty>25</Beauty>
+			<WorkToMake>6000</WorkToMake>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<costList>
+			<SoftClay>50</SoftClay>
+		</costList>
+		<recipeMaker>
+			<defaultIngredientFilter Inherit="False"/>
+		</recipeMaker>
+	</ThingDef>
+
+	<!--==================== 桌面摆件: 酒饮 ====================-->
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_Milk</defName>
+		<label>空牛奶罐</label>
+		<description>喝空的牛奶罐, 随手搁在桌面上充个生活气息。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_Milk</texPath>
+		</graphicData>
+		<costList>
+			<Milk>1</Milk>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_Ale</defName>
+		<label>空麦酒杯</label>
+		<description>见底的麦酒杯, 酒馆散场的最好证明。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_Ale</texPath>
+		</graphicData>
+		<costList Inherit="false">
+			<Beer>1</Beer>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_Mead</defName>
+		<label>空蜂蜜酒瓶</label>
+		<description>剩下一股蜜香的空瓶, 宴饮余温尚存。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_Mead</texPath>
+		</graphicData>
+		<costList Inherit="false">
+			<Alcohol_Wine>1</Alcohol_Wine>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_Wine</defName>
+		<label>空红酒瓶</label>
+		<description>一只空酒瓶。好酒配好桌, 空瓶也一样。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_Wine</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<costList Inherit="false">
+			<Alcohol_Wine>1</Alcohol_Wine>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_MulberryWine</defName>
+		<label>空桑葚酒瓶</label>
+		<description>桑葚酿的空瓶, 瓶底还挂着一点深紫。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_MulberryWine</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<costList Inherit="false">
+			<Alcohol_BerryWine>1</Alcohol_BerryWine>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_IceWine</defName>
+		<label>空冰酒瓶</label>
+		<description>来自霜冻年份的珍酿空瓶, 摆出来就身价不凡。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_IceWine</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>10</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<costList Inherit="false">
+			<Alcohol_Wine>1</Alcohol_Wine>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BeveragesGroup">
+		<defName>Rustic_OnTop_Bottle_GriffonWine</defName>
+		<label>空鹫鹰酒瓶</label>
+		<description>传说以鹫鹰庄园之名封藏的美酒, 如今只剩瓶子还在讲故事。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bottle_GriffonWine</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>10</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">5</StyleDominance>
+		</statBases>
+		<costList Inherit="false">
+			<Alcohol_Wine>1</Alcohol_Wine>
+		</costList>
+	</ThingDef>
+
+	<!--==================== 桌面摆件: 抄写工具 ====================-->
+	<ThingDef ParentName="Rustic_ScribeToolsGroup">
+		<defName>Rustic_OnTop_Scribe_StackPaper</defName>
+		<label>废稿纸堆</label>
+		<description>被水泡皱、撕破又胡乱叠起的纸堆, 抄写员的日常见证。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/StackPaper</texPath>
+		</graphicData>
+		<costList>
+			<Cloth>25</Cloth>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_ScribeToolsGroup">
+		<defName>Rustic_OnTop_Scribe_ScrollAndInkwell</defName>
+		<label>废卷轴与羽毛笔</label>
+		<description>撕烂的卷轴和秃了尖的羽毛笔, 好点子可不一定跟着一起报废。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/ScrollAndQuill</texPath>
+		</graphicData>
+		<costList>
+			<Cloth>25</Cloth>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_ScribeToolsGroup">
+		<defName>Rustic_OnTop_Scribe_Book</defName>
+		<label>破损旧书</label>
+		<description>一本被水泡过、撕散了页的旧书, 摆着总比烧掉体面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Book</texPath>
+		</graphicData>
+		<costList>
+			<Cloth>50</Cloth>
+		</costList>
+	</ThingDef>
+
+	<!--==================== 桌面摆件: 餐厨 ====================-->
+	<ThingDef ParentName="Rustic_KitchenGroup_Base">
+		<defName>Rustic_OnTop_Kitchen_Bowl</defName>
+		<label>空碗</label>
+		<description>一只空碗。有人刚刚用过, 或者很快会有人用。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Bowl</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_KitchenGroup_Base">
+		<defName>Rustic_OnTop_Kitchen_Plate</defName>
+		<label>空盘</label>
+		<description>吃空的木盘, 面包屑是唯一的余味。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Plate</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_KitchenGroup_Base">
+		<defName>Rustic_OnTop_Kitchen_CookingPot</defName>
+		<label>空炖锅</label>
+		<description>底锅还留着炖肉香气的空锅, 厨房戏份的常客。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/CookingPot</texPath>
+		</graphicData>
+		<costStuffCount>20</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_KitchenGroup_Base">
+		<defName>Rustic_OnTop_Kitchen_Cup</defName>
+		<label>空杯</label>
+		<description>一只倒扣的空杯, 免得落灰。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Cup</texPath>
+		</graphicData>
+		<costStuffCount>10</costStuffCount>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_KitchenGroup_Base">
+		<defName>Rustic_OnTop_Kitchen_EmbeddedCleaver</defName>
+		<label>剁骨柴刀</label>
+		<description>一把深深嵌在案板里的剁骨刀, 仿佛屠夫刚刚转身去擦汗。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/EmbeddedCleaver</texPath>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<costList>
+			<WoodLog>10</WoodLog>
+		</costList>
+		<researchPrerequisites>
+			<li>Smithing</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 桌面摆件: 研究与炼金 ====================-->
+	<ThingDef ParentName="Rustic_ResearchToolsGroup">
+		<defName>Rustic_OnTop_Research_Flasks</defName>
+		<label>闲置烧瓶</label>
+		<description>几只安静落灰的烧瓶, 里面的液体早已失去了活性。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/ResearchFlask</texPath>
+		</graphicData>
+		<costList>
+			<WoodLog>15</WoodLog>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_ResearchToolsGroup">
+		<defName>Rustic_OnTop_Research_Vials</defName>
+		<label>闲置药瓶</label>
+		<description>一排失去药性的玻璃小瓶, 炼金术士的失败陈列。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/Vials</texPath>
+		</graphicData>
+		<costList>
+			<WoodLog>15</WoodLog>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_ResearchToolsGroup">
+		<defName>Rustic_OnTop_Alchemy_MortarAndPestle</defName>
+		<label>破旧研钵</label>
+		<description>崩了口的研钵和杵, 研磨过无数可疑的东西。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Props/MortarAndPestle</texPath>
+		</graphicData>
+		<costList>
+			<WoodLog>15</WoodLog>
+		</costList>
+	</ThingDef>
+
+	<!--==================== 喷泉与清水桶 ====================-->
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>Rustic_Fountain1x1c</defName>
+		<label>小喷泉</label>
+		<description>一泓细水在石盆中循环不息, 庭院里的点睛之笔。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Fountain1x1</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconScale>0.8</uiIconScale>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Mass>7</Mass>
+			<Beauty>60</Beauty>
+			<WorkToMake>20000</WorkToMake>
+			<SellPriceFactor>1.10</SellPriceFactor>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">40</StyleDominance>
+		</statBases>
+		<pathCost>42</pathCost>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>Rustic_Fountain2x2c</defName>
+		<label>大喷泉</label>
+		<description>层叠石池托起喷涌的水柱, 整片庭院因它而安静下来。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Fountain2x2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<size>(2,2)</size>
+		<uiIconScale>0.8</uiIconScale>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<Beauty>250</Beauty>
+			<Mass>28</Mass>
+			<WorkToMake>50000</WorkToMake>
+			<SellPriceFactor>1.10</SellPriceFactor>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">40</StyleDominance>
+		</statBases>
+		<pathCost>42</pathCost>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>400</costStuffCount>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_BarrelWater</defName>
+		<label>清水桶</label>
+		<description>满满一桶清水, 净手也净物, 放在哪儿都让人安心。</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/BarrelWater</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconScale>0.75</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>30</pathCost>
+		<costList>
+			<WroughtIron>5</WroughtIron>
+		</costList>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>600</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>0.5</Beauty>
+			<Cleanliness>5</Cleanliness>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance>
+		</statBases>
+		<designationCategory>Accessories</designationCategory>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+		</comps>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 壁挂旗与隔断 ====================-->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_WallBanner1x2c</defName>
+		<label>壁挂旗 (1x2)</label>
+		<description>钉在墙上的装饰挂旗, 空荡荡的墙面需要一点体面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/BannerFlag</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3.5,2)</drawSize>
+			<drawOffsetNorth>(0,0,0.25)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.2)</drawOffsetSouth>
+			<drawOffsetWest>(-0.27,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.27,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<size>(2,1)</size>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>Standable</passability>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0.1</fillPercent>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded IsNull="True" />
+		<pathCost>0</pathCost>
+		<building>
+			<isEdifice>false</isEdifice>
+			<isAttachment>true</isAttachment>
+		</building>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<placeWorkers>
+			<li>Placeworker_AttachedToWall</li>
+		</placeWorkers>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">8</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Fabric</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RoomDivider1x2c</defName>
+		<label>屏风隔断 (1x2)</label>
+		<description>一架简单的屏风, 为大通铺守出一点点隐私。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/RoomDivider1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3.5,2)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.6</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">8</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_ThickRoomDivider_Open1x2c</defName>
+		<label>厚隔断·透窗 (1x2)</label>
+		<description>带窗格厚木隔断, 能撑起屋顶, 隔开视线却不隔开光。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/ThickDividerWindow</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,3)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0.6</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<holdsRoof>true</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">8</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_ThickRoomDivider_Closed1x2c</defName>
+		<label>厚隔断·封闭 (1x2)</label>
+		<description>结实的封闭式厚隔断, 同样能撑起屋顶, 隐私效果一流。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/ThickDividerCovered</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,3)</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0.6</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<holdsRoof>true</holdsRoof>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">8</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<designationCategory>Accessories</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 招牌 12 种 ====================-->
+	<ThingDef ParentName="BuildingBase" Name="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Tavern</defName>
+		<label>酒馆招牌</label>
+		<description>一块悬吊的木质招牌, 宣告这间屋子的用途——懂酒的人自然会推门。</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignTavern</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconScale>0.75</uiIconScale>
+		<uiIconOffset>(0, 0.25)</uiIconOffset>
+		<size>(1,1)</size>
+		<defaultPlacingRot>East</defaultPlacingRot>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.3</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>0</pathCost>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>4</Mass>
+			<WorkToBuild>250</WorkToBuild>
+			<Flammability>1</Flammability>
+			<Beauty>2</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">3</StyleDominance>
+		</statBases>
+		<designationCategory>Accessories</designationCategory>
+		<comps>
+			<li Class="CompProperties_Styleable"/>
+		</comps>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Bread</defName>
+		<label>面包坊招牌</label>
+		<description>挂着面包图样的招牌, 循着麦香就能找到。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignBakery</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Butcher</defName>
+		<label>肉铺招牌</label>
+		<description>屠夫铺子的招牌, 刀斧图案比任何广告都直白。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignButcher</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Smith</defName>
+		<label>铁匠铺招牌</label>
+		<description>锤砧标志的铁匠铺招牌, 叮当声就是最好的吆喝。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignSmith</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Apothecary</defName>
+		<label>草药铺招牌</label>
+		<description>挂起草药铺的招牌, 治不好也先看看。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignHerbalist</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Jewelry</defName>
+		<label>珠宝铺招牌</label>
+		<description>镶嵌小宝石的招牌, 珠宝匠的体面从门面开始。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignJewelry</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Library</defName>
+		<label>藏书馆招牌</label>
+		<description>刻着书本的招牌, 请保持安静。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignBook</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Tailor</defName>
+		<label>裁缝铺招牌</label>
+		<description>针线与布卷的招牌, 量体裁衣在此。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignTailor</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Woodworking</defName>
+		<label>木匠铺招牌</label>
+		<description>刨花与墨斗的招牌, 木匠的手艺写在门面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignWoodworking</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Barn</defName>
+		<label>谷仓招牌</label>
+		<description>朴素的谷仓招牌, 马蹄和干草味从门缝里漏出来。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignBarn</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Winery</defName>
+		<label>酒庄招牌</label>
+		<description>一串葡萄形的招牌, 说明这院子的秘密都在橡木桶里。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignWinery</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_Sign_Tavern">
+		<defName>Rustic_Sign_Scribe</defName>
+		<label>书记官招牌</label>
+		<description>羽毛笔图案的招牌, 代写书信、誊抄契约均可。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Signs/SignScribe</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<!--==================== 立式横幅 ====================-->
+	<ThingDef ParentName="Rustic_NonBuildableBanners">
+		<defName>Rustic_BannerMoonCult</defName>
+		<label>横幅(月之教团)</label>
+		<description>月之教团的秘纹长幡, 通常只会出现在他们的秘密集会处。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerMoonCult</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NonBuildableBanners">
+		<defName>Rustic_BannerSoren</defName>
+		<label>横幅(索伦)</label>
+		<description>索伦家的战旗, 双色斜纹在风中猎猎作响。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerSoren</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NonBuildableBanners">
+		<defName>Rustic_BannerAmboise</defName>
+		<label>横幅(安布瓦兹)</label>
+		<description>安布瓦兹家族的徽旗, 纹样古老得连族谱都说不清来历。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerAmboise</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NonBuildableBanners">
+		<defName>Rustic_BannerHesse</defName>
+		<label>横幅(黑森)</label>
+		<description>黑森伯国的军旗, 山地步兵走到哪儿就插到哪儿。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerHesse</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NonBuildableBanners">
+		<defName>Rustic_BannerOswin</defName>
+		<label>横幅(奥斯温)</label>
+		<description>奥斯温家族的遗旗, 边缘已经磨出了岁月的毛边。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerOswin</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerPlain</defName>
+		<label>横幅(素色)</label>
+		<description>没有任何纹章的素色长幡, 干净得可以由你添上任何故事。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerPlain</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerCrow</defName>
+		<label>横幅(乌鸦)</label>
+		<description>墨鸦纹章旗。乌鸦飞过战场, 从来不会饿着肚子。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerCrow</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerArrow</defName>
+		<label>横幅(箭矢)</label>
+		<description>箭矢纹章旗, 射手团的光荣与准头都绣在上面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerArrow</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerHand</defName>
+		<label>横幅(手掌)</label>
+		<description>张掌纹章旗, 誓言与交易都在这只手下完成。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerHand</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerAxe</defName>
+		<label>横幅(战斧)</label>
+		<description>双斧纹章旗, 斧头开口, 谈判结束。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerAxe</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerSun</defName>
+		<label>横幅(旭日)</label>
+		<description>旭日纹章旗, 阳光照到的地方都算它的领地。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerSun</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_BannerBase">
+		<defName>Rustic_BannerLindwurm</defName>
+		<label>横幅(林德虫)</label>
+		<description>双足飞龙纹章旗。传说猎到林德虫的人能换一筐金币。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Decoration/Banners/BannerLindwurm</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<!--==================== 战利品装饰 ====================-->
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_ChaliceSilver</defName>
+		<label>银圣杯</label>
+		<description>錾花银杯, 曾盛过誓言、美酒或别的什么。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/ChaliceSilver</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Beauty>26</Beauty>
+			<Mass>1</Mass>
+			<WorkToMake>4000</WorkToMake>
+		</statBases>
+		<costList>
+			<SilverBar>30</SilverBar>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_ChaliceGold</defName>
+		<label>金圣杯</label>
+		<description>镶宝金杯, 杯壁上的宝石像凝固的火。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/ChaliceGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Beauty>100</Beauty>
+			<Mass>1</Mass>
+			<WorkToMake>9000</WorkToMake>
+		</statBases>
+		<costList>
+			<GoldBar>3</GoldBar>
+			<Jade>10</Jade>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_BowlSilver</defName>
+		<label>银碗</label>
+		<description>光可鉴人的银碗, 盛什么都像盛宴。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/BowlSilver</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Beauty>26</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>4000</WorkToMake>
+		</statBases>
+		<costList>
+			<SilverBar>30</SilverBar>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_BowlGold</defName>
+		<label>金碗</label>
+		<description>沉甸甸的金碗, 摆着比用着更让人放心。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/BowlGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Beauty>60</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>9000</WorkToMake>
+		</statBases>
+		<costList>
+			<GoldBar>30</GoldBar>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_SkullGold</defName>
+		<label>黄金骷髅</label>
+		<description>纯金浇铸的头骨, 死亡被镀上了财富的颜色。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>220</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>15000</WorkToMake>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<costList>
+			<GoldBar>50</GoldBar>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_SkullJadeEmerald</defName>
+		<label>翡翠骷髅·碧</label>
+		<description>整块碧玉雕成的头骨。原为翡翠(Gems)名器, 本地以玉料复刻。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullEmerald</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>220</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>15000</WorkToMake>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<costList>
+			<Jade>50</Jade>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_SkullJadeSapphire</defName>
+		<label>翡翠骷髅·青</label>
+		<description>青玉头骨, 眼窝里盛着冷光。原为蓝宝石名器, 本地以玉料复刻。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullSapphire</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>249</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>15000</WorkToMake>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<costList>
+			<Jade>50</Jade>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_SkullJadeRuby</defName>
+		<label>翡翠骷髅·赤</label>
+		<description>赤玉头骨, 红得像是还在燃烧。原为红宝石名器, 本地以玉料复刻。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullRuby</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>288</Beauty>
+			<Mass>2</Mass>
+			<WorkToMake>15000</WorkToMake>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<costList>
+			<Jade>50</Jade>
+		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_LootDecorBase">
+		<defName>Rustic_Building_AncientCodex</defName>
+		<label>古籍抄本</label>
+		<description>金页羊皮的古老抄本, 内容无人能解, 光是摆着就显得学识渊博。</description>
+		<graphicData>
+			<texPath>Things/Building/Ruin/AncientCodex</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>60</Beauty>
+			<Mass>1</Mass>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<costList>
+			<GoldBar>50</GoldBar>
+		</costList>
+	</ThingDef>
+
+</Defs>

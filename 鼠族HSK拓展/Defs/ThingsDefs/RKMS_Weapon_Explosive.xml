@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="RK_ExoticGrenadeWeapon">
+		<defName>RK_GrenadeMuskmelon</defName>
+		<label>muskmelon grenades</label>
+		<description>A defensive grenade that can be thrown or filled with a projectile cartridge, causing the enemy to suffer from the resulting fragmentation. Looks like you need to knock it before you throw it.</description>
+		<recipeMaker>
+			<researchPrerequisite>Machining</researchPrerequisite>
+		</recipeMaker>
+		<tickerType>Normal</tickerType>
+		<graphicData>
+			<texPath>Item_Weapon/RK_GrenadePack</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconScale>1.2</uiIconScale>
+		<soundInteract>Interact_Grenade</soundInteract>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<Mass>1</Mass>
+			<RangedWeapon_Cooldown>2.2</RangedWeapon_Cooldown>
+			<WorkToMake>12000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>30</Steel>
+			<Chemfuel>65</Chemfuel>
+		
+				<ComponentIndustrial>2</ComponentIndustrial>
+</costList>
+		<weaponTags>
+			<li>RK_ExoticGrenadeT2</li>
+		</weaponTags>
+		<thingCategories>
+			<li>Grenades</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<verbs>
+			<li>
+				<verbClass>Verb_LaunchProjectile</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<range>17.9</range>
+				<forcedMissRadius>1.4</forcedMissRadius>
+				<warmupTime>1.5</warmupTime>
+				<noiseRadius>3</noiseRadius>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<soundCast>ThrowGrenade</soundCast>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<defaultProjectile>RK_Proj_Muskmelon</defaultProjectile>
+				<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>3.2</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<requiredDamageTypeToExplode>Flame</requiredDamageTypeToExplode>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticGrenadeWeapon">
+		<defName>RK_LauncherMuskmelon</defName>
+		<label>ratkin grenade launcher</label>
+		<description>A mini-caliber projectile launcher that can fire converted grenades. \n(this weapon can fire in a curved line)</description>
+		<recipeMaker>
+			<researchPrerequisite>Mortars</researchPrerequisite>
+		</recipeMaker>
+		<tickerType>Normal</tickerType>
+		<recoilPower>3</recoilPower>
+		<graphicData>
+			<texPath>Item_Weapon/RK_BombThrower</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Interact_Grenade</soundInteract>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<Mass>1</Mass>
+			<RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+			<WorkToMake>8000</WorkToMake>
+		</statBases>
+		<equippedAngleOffset>-30</equippedAngleOffset>
+		<costList>
+			<Steel>55</Steel>
+			<Chemfuel>50</Chemfuel>
+			<RK_GrenadeMuskmelon>1</RK_GrenadeMuskmelon>
+		
+				<ComponentIndustrial>3</ComponentIndustrial>
+</costList>
+		<weaponTags>
+			<li>RK_ExoticGrenadeT2</li>
+			<li>RK_ExoticLauncher</li>
+		</weaponTags>
+		<thingCategories>
+			<li>Grenades</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<verbs>
+			<li>
+				<!-- <verbClass>RatkinGeneExpanded.Verb_ShootAdvanced</verbClass> -->
+				<verbClass>Verb_LaunchProjectile</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<!-- <isMortar>true</isMortar> -->
+				<requireLineOfSight>true</requireLineOfSight>
+				<!-- <underRoofNeedLineOfSight>true</underRoofNeedLineOfSight> -->
+				<range>30.9</range>
+				<forcedMissRadius>2.2</forcedMissRadius>
+				<warmupTime>2.5</warmupTime>
+				<noiseRadius>3</noiseRadius>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<soundCast>ThrowGrenade</soundCast>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<defaultProjectile>RK_Proj_Muskmelon_launcher</defaultProjectile>
+				<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>3.2</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<requiredDamageTypeToExplode>Flame</requiredDamageTypeToExplode>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticGrenadeWeapon">
+		<defName>RK_GrenadeRatKing</defName>
+		<label>RatKing bombs</label>
+		<description>A homemade explosive so crude that only lunatics and gangsters are willing to play with it.</description>
+		<recipeMaker>
+			<researchPrerequisite>Machining</researchPrerequisite>
+			<recipeUsers Inherit="false">
+				<li>CraftingSpot</li>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<displayPriority>80000</displayPriority>
+		</recipeMaker>
+		<tickerType>Normal</tickerType>
+		<graphicData>
+			<texPath>Item_Weapon/RK_MouseKing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconScale>1.2</uiIconScale>
+		<soundInteract>Interact_Grenade</soundInteract>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<Mass>2</Mass>
+			<RangedWeapon_Cooldown>2.7</RangedWeapon_Cooldown>
+			<WorkToMake>7000</WorkToMake>
+		</statBases>
+		<costList>
+			<Steel>10</Steel>
+			<Chemfuel>85</Chemfuel>
+		
+				<ComponentIndustrial>2</ComponentIndustrial>
+</costList>
+		<weaponTags>
+			<li>RK_ExoticGrenadeT1</li>
+		</weaponTags>
+		<thingCategories>
+			<li>Grenades</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<verbs>
+			<li>
+				<verbClass>Verb_LaunchProjectile</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<range>9.9</range>
+				<forcedMissRadius>2.2</forcedMissRadius>
+				<warmupTime>2.3</warmupTime>
+				<noiseRadius>4</noiseRadius>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<soundCast>ThrowGrenade</soundCast>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<defaultProjectile>RK_Proj_RatKing</defaultProjectile>
+				<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>4</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<requiredDamageTypeToExplode>Flame</requiredDamageTypeToExplode>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<ThingDef Name="RK_ExoticGrenadeMuskmelon" ParentName="RK_ExoticGrenadeProjectile">
+		<defName>RK_Proj_Muskmelon</defName>
+		<label>muskmelon grenade</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<graphicData>
+			<texPath>Item_Weapon/RK_HandGrenade</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile>
+			<explosionRadius>1.9</explosionRadius>
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>40</damageAmountBase>
+			<explosionDelay>80</explosionDelay>
+			<speed>16</speed>
+		</projectile>
+		<comps>
+			<li Class="Meow.CompProperties_ExplodeFragment">
+				<splitProjectile>frag_Muskmelon</splitProjectile>
+				<explodeSplit>32</explodeSplit>
+				<explodeSplitRadius>2.7</explodeSplitRadius>
+				<explodeSplitForcedMiss>0.03</explodeSplitForcedMiss>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="BaseBulletExotic">
+		<defName>frag_Muskmelon</defName>
+		<label>muskmelon fragment</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<color>(254,247,58)</color>
+			<drawSize>0.55</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>4</damageAmountBase>
+			<armorPenetrationBase>0.22</armorPenetrationBase>
+			<stoppingPower>0.7</stoppingPower>
+			<speed>46</speed>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticGrenadeMuskmelon">
+		<defName>RK_Proj_Muskmelon_launcher</defName>
+		<projectile Class="Meow.PjtProps_BulletAdvanced">
+			<speed>33</speed>
+			<arcHeightFactor>4.5</arcHeightFactor>
+			<flyOverhead>true</flyOverhead>
+		</projectile>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticGrenadeProjectile">
+		<defName>RK_Proj_RatKing</defName>
+		<label>RatKing grenade</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<graphicData>
+			<texPath>Item_Weapon/RK_FireMouseKing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile>
+			<explosionRadius>2.3</explosionRadius>
+			<damageDef>BombRatKing</damageDef>
+			<damageAmountBase>60</damageAmountBase>
+			<speed>9</speed>
+			<explosionDelay>110</explosionDelay>
+		</projectile>
+	</ThingDef>
+
+	<DamageDef>
+		<defName>BombRatKing</defName>
+		<label>bomb</label>
+		<workerClass>DamageWorker_AddInjury</workerClass>
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<deathMessage>{0} has died in an explosion.</deathMessage>
+		<hediff>Shredded</hediff>
+		<hediffSolid>Crack</hediffSolid>
+		<harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+		<impactSoundType>Blunt</impactSoundType>
+		<armorCategory>Sharp</armorCategory>
+		<minDamageToFragment>15</minDamageToFragment>
+		<defaultDamage>80</defaultDamage>
+		<defaultStoppingPower>1.1</defaultStoppingPower>
+		<defaultArmorPenetration>0.14</defaultArmorPenetration>
+		<buildingDamageFactorImpassable>5</buildingDamageFactorImpassable>
+		<buildingDamageFactorPassable>4</buildingDamageFactorPassable>
+		<plantDamageFactor>4</plantDamageFactor>
+		<corpseDamageFactor>0.5</corpseDamageFactor>
+		<explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+		<explosionHeatEnergyPerCell>5</explosionHeatEnergyPerCell>
+		<explosionCellFleck>BlastDry</explosionCellFleck>
+		<explosionColorCenter>(1, 0.5, 0.3)</explosionColorCenter>
+		<explosionColorEdge>(0.6, 0.5, 0.4)</explosionColorEdge>
+		<soundExplosion>Explosion_Bomb</soundExplosion>
+		<combatLogRules>Damage_Bomb</combatLogRules>
+	</DamageDef>
+
+</Defs>

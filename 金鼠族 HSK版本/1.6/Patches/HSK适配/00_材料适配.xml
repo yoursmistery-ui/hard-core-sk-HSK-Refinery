@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 00_材料适配
+        说明: HSK 环境中,锻造/裁缝配方的贵金属按「冶炼合金」惯例使用
+              金锭(GoldBar)/银锭(SilverBar),原版金矿(Gold)/银(Silver)
+              作为原料仅存在于采矿/交易。此处将金鼠族固定配方成本中的
+              Silver/Gold 统一替换为 SilverBar/GoldBar,保持制造链路一致。
+        目标: 6 件 ThingDef + 1 个 TerrainDef(OA_RK_Floor 地毯)
+        ===================================================================== -->
+
+    <!-- ========== 头饰 (银饰) ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Hat_B"]/costList/Silver</xpath>
+        <value><SilverBar>13</SilverBar></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Hat_C"]/costList/Silver</xpath>
+        <value><SilverBar>11</SilverBar></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Hat_E"]/costList/Silver</xpath>
+        <value><SilverBar>15</SilverBar></value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_A"]/costList/Silver</xpath>
+        <value><SilverBar>3</SilverBar></value>
+    </Operation>
+
+    <!-- ========== 祭服 (金饰) ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Professional_Uniforms_B"]/costList/Gold</xpath>
+        <value><GoldBar>6</GoldBar></value>
+    </Operation>
+
+    <!-- ========== 登山杖 (银饰) ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Mountain_Stick"]/costList/Silver</xpath>
+        <value><SilverBar>90</SilverBar></value>
+    </Operation>
+
+    <!-- ========== 自清洁地毯 (银丝) ========== -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/TerrainDef[defName="OA_RK_Floor"]/costList/Silver</xpath>
+        <value><SilverBar>15</SilverBar></value>
+    </Operation>
+
+</Patch>

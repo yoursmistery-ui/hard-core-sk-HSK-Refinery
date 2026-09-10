@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_Beggars</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <defaultCharity>true</defaultCharity>
+    <affectedByPopulation>true</affectedByPopulation>
+    <hideInvolvedFactionsInfo>true</hideInvolvedFactionsInfo>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <questNameRules>
+      <rulesStrings>
+
+        <!-- 单人信封 -->
+        <li>questName(beggarCount==1)->kiiro [beggarSingle] [seekingSingle] [alms]</li>
+        <li>questName(beggarCount==1,childCount==1,priority=1)->young kiiro [beggarSingle] [seekingSingle] [alms]</li>
+
+        <!-- 多人信封 -->
+        <li>questName(beggarCount>=2)->kiiro [beggarPlural] [seekingPlural] [alms]</li>
+        <li>questName(beggarCount>=2,allChildren==true,priority=1)->young kiiro [beggarPlural] [seekingPlural] [alms]</li>
+
+        <!-- pieces -->
+        <li>beggarSingle->vagabond</li>
+        <li>beggarSingle->drifter</li>
+        <li>beggarSingle->traveler</li>
+
+        <li>beggarPlural->[beggarSingle]s</li>
+
+        <li>seekingSingle->seeks</li>
+        <li>seekingSingle->requests</li>
+        <li>seekingSingle->wishes for</li>
+        <li>seekingSingle->hopes for</li>
+        <li>seekingSingle->needs</li>
+        <li>seekingPlural->seek</li>
+        <li>seekingPlural->request</li>
+        <li>seekingPlural->wish for</li>
+        <li>seekingPlural->hope for</li>
+        <li>seekingPlural->need</li>
+
+        <li>alms->aid</li>
+        <li>alms->charity</li>
+        <li>alms->resources</li>
+
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+
+        <!-- misc -->
+        <li>groupLabelPlural->travelers</li>
+        <li>groupLabelPlural(allChildren==true,priority=1)->children</li>
+        <li>groupLabelSingle->traveler</li>
+        <li>groupLabelSingle(childCount>=1,priority=1)->child</li>
+		
+		<!-- 单复数 -->
+        <li>travelerInfo(beggarCount==1)->This [groupLabelSingle] belong</li>
+        <li>travelerInfo(beggarCount>=2)->These [groupLabelPlural] belongs</li>
+
+        <li>beggingForInfo->for x[requestedThingCount] [requestedThing_label]</li>
+
+        <li>traverObjective(beggarCount==1)->[beggars0_objective]</li>
+        <li>traverObjective(beggarCount>=2)->them</li>
+        
+        <!-- quest description -->
+        <li>questDescription->[approachInfo]. [requestInfo]. [claimInfo].\n\n[interactionInfo].\n\n[moveOnInfo].\n\n[travelerInfo] to kiiro faction.</li>
+		
+		<!-- approachInfo -->
+        <li>approachInfo(beggarCount==1)->A poor [groupLabelSingle] named [beggars0_nameDef] is approaching looking for help</li>
+        <li>approachInfo(beggarCount>=2)->A group of poor [groupLabelPlural] are approaching looking for help</li>
+        <li>approachInfo(beggarCount>=2,childCount==1,priority=1)->A group of poor [groupLabelPlural] including a child are approaching looking for help</li>
+        <li>approachInfo(beggarCount>=2,childCount>=2,allChildren==false,priority=1)->A group of poor [groupLabelPlural] including some children are approaching looking for help</li>
+		
+		<!-- requestInfo -->
+        <li>requestInfo(beggarCount==1)->[beggars0_nameDef] is begging [beggingForInfo]</li>
+        <li>requestInfo(beggarCount>=2)->The [groupLabelPlural] are begging [beggingForInfo]</li>
+		
+		<!-- claimInfo -->
+        <li>claimInfo(beggarCount==1,requestedThingDefName==Silver)->[beggars0_nameDef] wants the silver so they can buy back a friend who was recently kidnapped</li>
+        <li>claimInfo(beggarCount==1,requestedThingDefName==MedicineHerbal)->[beggars0_nameDef] needs the medicine to help a partner who is injured nearby</li>
+        <li>claimInfo(beggarCount==1,requestedThingDefName==Kiiro_CannedCatFood)->[beggars0_nameDef] wants canned food to prepare for the long journey ahead</li>
+
+        <li>claimInfo(beggarCount>=2,requestedThingDefName==Silver)->They want the silver so they can buy back a friend who was recently kidnapped</li>
+        <li>claimInfo(beggarCount>=2,requestedThingDefName==MedicineHerbal)->They need the medicine to attempt a life-saving operation on a fellow traveler who was attacked by mechanoids</li>
+        <li>claimInfo(beggarCount>=2,requestedThingDefName==Kiiro_CannedCatFood)->They want canned food to prepare for the long journey ahead</li>
+		
+		<!-- interactionInfo -->
+        <li>interactionInfo(beggarCount==1)->You can give items to [beggars0_nameDef] by selecting a colonist and right-clicking on [beggars0_objective]</li>
+        <li>interactionInfo(beggarCount>=2)->You can give items to the [groupLabelPlural] by selecting a colonist and right-clicking on [beggars0_nameDef]</li>
+		
+		<!-- moveOnInfo -->
+        <li>moveOnInfo(beggarCount==1)->[beggars0_nameDef] will move on after [visitDurationTicks_duration]</li>
+        <li>moveOnInfo(beggarCount>=2)->The [groupLabelPlural] will move on after [visitDurationTicks_duration]</li>
+
+      </rulesStrings>
+    </questDescriptionRules>
+    <questContentRules>
+      <rulesStrings>
+        
+        <!-- letters -->
+        <li>letterLabelBeggarsBetrayed->[groupLabelSingleOrPlural] betrayed</li>
+        <li>letterTextBeggarsBetrayed->The [groupLabelSingleOrPlural] who [wasWere] seeking your charity [hasHave] been betrayed. Colonists with charitable beliefs will be unhappy.</li>
+
+        <!-- pieces -->
+        <li>hasHave(beggarCount==1)->has</li>
+        <li>hasHave(beggarCount>=2)->have</li>
+
+        <li>wasWere(beggarCount==1)->was</li>
+        <li>wasWere(beggarCount>=2)->were</li>
+
+        <li>groupLabelSingleOrPlural(beggarCount==1)->traveler</li>
+        <li>groupLabelSingleOrPlural(beggarCount>=2)->travelers</li>
+
+      </rulesStrings>
+    </questContentRules>
+    <root Class="Kiiro_Event.QuestNode_Root_KiiroBeggars" />
+  </QuestScriptDef>
+
+</Defs>

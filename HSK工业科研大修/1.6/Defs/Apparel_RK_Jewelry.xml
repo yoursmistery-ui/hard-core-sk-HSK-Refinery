@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  珠宝首饰移植(2026-08-28 任务A): 源自 MO(3219596926) Apparel_Jewelry.xml,
+  defName 前缀 Rustic_, 内联中文; 配方不挂在 ThingDef 上,
+  统一放 Recipes_RK_Jewelry.xml(recipeUsers 单路径)。
+  贴图取自 MO Things/Pawn/Humanlike/Apparel/Jewelry/*, 已按同相对路径拷入。
+  注意: 按 AGENTS §3 种族穿戴锁铁律, 未向任何种族的 raceRestriction.apparelList
+  添加条目 → 这些珠宝不在任何种族白名单内 → 只有"没有 raceRestriction 限制"的
+  种族(智人种等)能穿; 鼠族/美狐等有独占白名单的种族默认穿不了(待后续按族开放)。
+  新增两个 ApparelLayerDef(原版无项链/戒指层), drawOrder 沿用 MO。
+  分类(2026-09-07): 项链挂 Meow_Amulet(护符)、戒指挂 Meow_Ring(指环),
+  两个 ThingCategoryDef 定义在 鼠族HSK拓展 Defs/MeowFramework/Base_Jewelry.xml,
+  跨 mod defName 引用加载完成后统一解析, 无需排序边。原先只挂 Apparel 大类,
+  在仓储分类树里散在"服饰"根部无子分组。
+============================================================================ -->
+
+	<ApparelLayerDef>
+		<defName>Rustic_NecklaceLayer</defName>
+		<label>项链层</label>
+		<drawOrder>301</drawOrder>
+	</ApparelLayerDef>
+
+	<ApparelLayerDef>
+		<defName>Rustic_RingLayer</defName>
+		<label>戒指层</label>
+		<drawOrder>302</drawOrder>
+	</ApparelLayerDef>
+
+	<!--========== 项链基类 ==========-->
+	<ThingDef ParentName="ApparelBase" Name="Rustic_NecklaceBase" Abstract="True">
+		<techLevel>Medieval</techLevel>
+		<smeltable>false</smeltable>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>0.5</Mass>
+			<EquipDelay>0.5</EquipDelay>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<useHitPoints>false</useHitPoints>
+		<thingCategories>
+			<li>Meow_Amulet</li>
+		</thingCategories>
+		<tradeTags>
+			<li>Rustic_Jewelry</li>
+		</tradeTags>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<bodyPartGroups>
+				<li>Neck</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Rustic_NecklaceLayer</li>
+			</layers>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<tags>
+				<li>Royal</li>
+				<li>Rustic_Jewelry</li>
+			</tags>
+			<canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+		</apparel>
+		<equippedStatOffsets>
+			<PawnBeauty>1</PawnBeauty>
+			<SocialImpact>0.1</SocialImpact>
+			<TradePriceImprovement>0.05</TradePriceImprovement>
+			<SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">-0.3</SlaveSuppressionOffset>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<!--========== 戒指基类 ==========-->
+	<ThingDef ParentName="Rustic_NecklaceBase" Name="Rustic_RingBase" Abstract="True">
+		<statBases>
+			<Mass>0.25</Mass>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>Meow_Ring</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups Inherit="False">
+				<li>MiddleFingers</li>
+			</bodyPartGroups>
+			<layers Inherit="False">
+				<li>Rustic_RingLayer</li>
+			</layers>
+			<tags Inherit="False">
+				<li>Royal</li>
+				<li>Rustic_Jewelry</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<!--========== 低档项链 (配方门槛 Craft_B1) ==========-->
+	<ThingDef ParentName="Rustic_NecklaceBase">
+		<defName>Rustic_Necklace_Citrine</defName>
+		<label>黄玉项链</label>
+		<description>镶嵌黄玉的项链,想提升社会地位的男女都会喜欢它带来的体面。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/TopazNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>8</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceBase">
+		<defName>Rustic_Necklace_Jade</defName>
+		<label>翡翠项链</label>
+		<description>如玉石般坚实而美丽的项链,为买得起它的人带来中等程度的财富。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/JadeNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>10</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceBase">
+		<defName>Rustic_Necklace_Amber</defName>
+		<label>紫水晶项链</label>
+		<description>带着紫水晶典雅紫泽的项链,因其沉稳贵气的美感而既亲切又贵重。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/AmethystNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>12</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceBase">
+		<defName>Rustic_Necklace_Onyx</defName>
+		<label>黑曜石项链</label>
+		<description>漆黑发亮的黑曜石项链,断面仍闪着微光,昭示着非同寻常的财富。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/OnyxNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>14</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<!--========== 高档项链 (配方门槛 NobleApparel) ==========-->
+	<ThingDef ParentName="Rustic_NecklaceBase" Name="Rustic_NecklaceRoyalBase" Abstract="True">
+		<equippedStatOffsets Inherit="False">
+			<PawnBeauty>2</PawnBeauty>
+			<SocialImpact>0.2</SocialImpact>
+			<TradePriceImprovement>0.10</TradePriceImprovement>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceRoyalBase">
+		<defName>Rustic_Necklace_Emerald</defName>
+		<label>绿宝石项链</label>
+		<description>金链上镶着一颗无瑕绿宝石,是贵族与富商的标配。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/EmeraldNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>90</MaxHitPoints>
+			<Beauty>20</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceRoyalBase">
+		<defName>Rustic_Necklace_Sapphire</defName>
+		<label>蓝宝石项链</label>
+		<description>熟悉的蓝色光辉从蓝宝石中透出,让佩戴者身旁的人不禁注目。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/SapphireNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>24</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_NecklaceRoyalBase">
+		<defName>Rustic_Necklace_Ruby</defName>
+		<label>红宝石项链</label>
+		<description>垂着数滴泪滴状红宝石的金链,财富与权势并存——戴它或抢它的人都不好惹。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/RubyNecklace</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>28</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<!--========== 低档戒指 ==========-->
+	<ThingDef ParentName="Rustic_RingBase">
+		<defName>Rustic_Ring_Citrine</defName>
+		<label>黄玉戒指</label>
+		<description>镶嵌黄玉的戒指,想提升社会地位的男女都会喜欢它带来的体面。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/TopazRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>8</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingBase">
+		<defName>Rustic_Ring_Jade</defName>
+		<label>翡翠戒指</label>
+		<description>如玉石般坚实而美丽的戒指,为买得起它的人带来中等程度的财富。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/JadeRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>10</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingBase">
+		<defName>Rustic_Ring_Amber</defName>
+		<label>紫水晶戒指</label>
+		<description>带着紫水晶典雅紫泽的戒指,因其沉稳贵气的美感而既亲切又贵重。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/AmethystRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>12</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingBase">
+		<defName>Rustic_Ring_Onyx</defName>
+		<label>黑曜石戒指</label>
+		<description>漆黑发亮的黑曜石戒指,断面仍闪着微光,昭示着非同寻常的财富。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/OnyxRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>14</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<!--========== 高档戒指 ==========-->
+	<ThingDef ParentName="Rustic_RingBase" Name="Rustic_RingRoyalBase" Abstract="True">
+		<equippedStatOffsets Inherit="False">
+			<PawnBeauty>2</PawnBeauty>
+			<SocialImpact>0.2</SocialImpact>
+			<TradePriceImprovement>0.10</TradePriceImprovement>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingRoyalBase">
+		<defName>Rustic_Ring_Emerald</defName>
+		<label>绿宝石戒指</label>
+		<description>金戒上镶着一颗无瑕绿宝石,常见于贵族与富商之手。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/EmeraldRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>90</MaxHitPoints>
+			<Beauty>20</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingRoyalBase">
+		<defName>Rustic_Ring_Sapphire</defName>
+		<label>蓝宝石戒指</label>
+		<description>熟悉的蓝色光辉从蓝宝石中透出,让佩戴者身旁的人不禁注目。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/SapphireRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>24</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="Rustic_RingRoyalBase">
+		<defName>Rustic_Ring_Ruby</defName>
+		<label>红宝石戒指</label>
+		<description>垂着数滴泪滴状红宝石的金戒,财富与权势并存——戴它或抢它的人都不好惹。</description>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Jewelry/RubyRing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<Beauty>28</Beauty>
+		</statBases>
+	</ThingDef>
+
+</Defs>

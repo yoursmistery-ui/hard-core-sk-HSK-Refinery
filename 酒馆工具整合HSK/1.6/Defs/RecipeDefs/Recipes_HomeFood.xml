@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+		<!--========================= MealBase =============================-->
+
+		<RecipeDef Name="TavCookMealBase" Abstract="True">
+			<workSpeedStat>CookSpeed</workSpeedStat>
+			<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+			<effectWorking>Cook</effectWorking>
+			<soundWorking>Recipe_CookMeal</soundWorking>
+			<workSkill>Cooking</workSkill>
+			<recipeUsers>
+				<li>Tav_Oven</li>
+			</recipeUsers>
+		</RecipeDef>
+
+		<RecipeDef>
+			<defName>Make_TavTallow</defName>
+			<label>提炼油脂</label>
+			<!-- 2026-08-29: 产物 TavTallow(尸蜡,已删) 改为 Core_SK 油脂 Tallow, 批次 15 与 HSK MakeTallow(生肉x1→15) 一致 -->
+			<description>把腐烂的尸体熬成油脂。过程漫长、脏乱且气味难闻,但能把废弃物变成有用的燃料和原料。</description>
+			<workerCounterClass>RecipeWorkerCounter_ButcherAnimals</workerCounterClass>
+			<jobString>Rendering tallow.</jobString>
+			<workAmount>4000</workAmount>
+			<workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+			<workSkill>Cooking</workSkill>
+			<efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+			<effectWorking>Cremate</effectWorking>
+			<soundWorking>Recipe_Cremate</soundWorking>
+			<uiIconThing>Tallow</uiIconThing>
+			<ingredients>
+				<li>
+					<filter>
+						<categories>
+							<li>Corpses</li>
+						</categories>
+						<specialFiltersToDisallow>
+							<li>AllowFresh</li>
+						</specialFiltersToDisallow>
+					</filter>
+					<count>1</count>
+				</li>
+			</ingredients>
+			<fixedIngredientFilter>
+				<categories>
+					<li>Corpses</li>
+				</categories>
+				<disallowedCategories>
+					<li>CorpsesMechanoid</li>
+				</disallowedCategories>
+				<specialFiltersToAllow>
+					<li>AllowRotten</li>
+				</specialFiltersToAllow>
+				<specialFiltersToDisallow>
+					<li>AllowFresh</li>
+				</specialFiltersToDisallow>
+			</fixedIngredientFilter>
+			<products>
+				<Tallow>15</Tallow>
+			</products>
+			<recipeUsers>
+				<li>Tav_Oven</li>
+			</recipeUsers>
+			<displayPriority>0</displayPriority>
+		</RecipeDef>
+
+		<!--========================= CornDough =============================-->
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornDough</defName>
+			<label>制作玉米面团</label>
+			<description>把玉米磨成生面团。</description>
+			<jobString>Making corn dough.</jobString>
+			<workAmount>1000</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawCorn</li>
+						</thingDefs>
+					</filter>
+					<count>40</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornDough>1</TavCornDough>
+			</products>
+		</RecipeDef>
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornDough_X4</defName>
+			<label>制作玉米面团 (x4)</label>
+			<description>把大量玉米磨成面团。</description>
+			<jobString>Making corn dough.</jobString>
+			<workAmount>2000</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawCorn</li>
+						</thingDefs>
+					</filter>
+					<count>160</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornDough>4</TavCornDough>
+			</products>
+		</RecipeDef>
+
+		<!--========================= MeatRice =============================-->
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavMeatRice</defName>
+			<label>制作肉饭</label>
+			<description>把肉和米饭一起烹制成丰盛的一餐。</description>
+			<jobString>Cooking meat and rice.</jobString>
+			<workAmount>500</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>MeatRaw</li>
+					</categories>
+				</filter>
+				<count>6</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>RawRice</li>
+					</thingDefs>
+				</filter>
+				<count>6</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+				<categories>
+					<li>MeatRaw</li>
+				</categories>
+		</fixedIngredientFilter>
+			<products>
+				<TavMeatRice>1</TavMeatRice>
+			</products>
+		</RecipeDef>
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavMeatRice_X4</defName>
+			<label>制作肉饭 (x4)</label>
+			<description>烹制一大批肉和米饭。</description>
+			<jobString>Cooking meat and rice.</jobString>
+			<workAmount>2000</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>MeatRaw</li>
+					</categories>
+				</filter>
+				<count>24</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>RawRice</li>
+					</thingDefs>
+				</filter>
+				<count>24</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+				<categories>
+					<li>MeatRaw</li>
+				</categories>
+		</fixedIngredientFilter>
+			<products>
+				<TavMeatRice>4</TavMeatRice>
+			</products>
+		</RecipeDef>
+
+		<!--========================= CornMush =============================-->
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornMush</defName>
+			<label>制作玉米糊</label>
+			<description>把玉米粉煮成温热的热粥。</description>
+			<jobString>Cooking corn mush.</jobString>
+			<workAmount>500</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawCorn</li>
+						</thingDefs>
+					</filter>
+					<count>12</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornMush>1</TavCornMush>
+			</products>
+		</RecipeDef>
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornMush_X4</defName>
+			<label>制作玉米糊 (x4)</label>
+			<description>煮一大批玉米糊。</description>
+			<jobString>Cooking corn mush.</jobString>
+			<workAmount>2000</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawCorn</li>
+						</thingDefs>
+					</filter>
+					<count>48</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornMush>4</TavCornMush>
+			</products>
+		</RecipeDef>
+
+		<!--========================= CornBread =============================-->
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornBread</defName>
+			<label>制作玉米面包</label>
+			<description>把玉米面团烤成温热松脆的面包。</description>
+			<jobString>Baking corn bread.</jobString>
+			<workAmount>500</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>TavCornDough</li>
+						</thingDefs>
+					</filter>
+					<count>1</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornBread>4</TavCornBread>
+			</products>
+		</RecipeDef>
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavCornBread_X4</defName>
+			<label>制作玉米面包 (x4)</label>
+			<description>烤一大批玉米面包。</description>
+			<jobString>Baking corn bread.</jobString>
+			<workAmount>2000</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>TavCornDough</li>
+						</thingDefs>
+					</filter>
+					<count>4</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavCornBread>16</TavCornBread>
+			</products>
+		</RecipeDef>
+
+		<!--========================= RiceBuns =============================-->
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavRiceBuns</defName>
+			<label>制作米包子</label>
+			<description>用面团和米烤制米包子。</description>
+			<jobString>Steaming rice buns.</jobString>
+			<workAmount>750</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>TavCornDough</li>
+						</thingDefs>
+					</filter>
+					<count>1</count>
+				</li>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawRice</li>
+						</thingDefs>
+					</filter>
+					<count>40</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavRiceBuns>8</TavRiceBuns>
+			</products>
+		</RecipeDef>
+
+		<RecipeDef ParentName="TavCookMealBase">
+			<defName>Make_TavRiceBuns_X4</defName>
+			<label>制作米包子 (x4)</label>
+			<description>烤制一大批米包子。</description>
+			<jobString>Steaming rice buns.</jobString>
+			<workAmount>3000</workAmount>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>TavCornDough</li>
+						</thingDefs>
+					</filter>
+					<count>4</count>
+				</li>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawRice</li>
+						</thingDefs>
+					</filter>
+					<count>160</count>
+				</li>
+			</ingredients>
+			<products>
+				<TavRiceBuns>32</TavRiceBuns>
+			</products>
+		</RecipeDef>
+
+</Defs>

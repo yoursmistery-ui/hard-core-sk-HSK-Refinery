@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): BlueprintUnlock_ClearTechprints.xml, BlueprintUnlock_EventIntegration.xml, BlueprintUnlock_Traders.xml -->
+<Patch><Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="Melee_Archotech"]/techprintCount</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="Bow_Archotech"]/techprintCount</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="SMG_Archotech"]/techprintCount</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="Blaster_weapons_Archotech"]/techprintCount</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravTrap"]/techprintCount</xpath>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravFieldCore"]/techprintCount</xpath>
+	</Operation>
+
+	<!-- v3 新增门控节点: 用存在性门控清 techprint (避免双重门控; 无该节点的自动跳过不报错) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Stargate_F1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Stargate_F1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="PoweredArmor"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="PoweredArmor"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Armor_E3"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Armor_E3"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="CataphractArmor"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="CataphractArmor"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="JumpPack"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="JumpPack"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Gunlink"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Gunlink"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Laser_weapons_E"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Laser_weapons_E"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Plasma_weapons_E"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Plasma_weapons_E"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Charge_weapons_E"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Charge_weapons_E"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Fortification_E1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Fortification_E1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Fortification_E2"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Fortification_E2"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Ion_gun_D1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Ion_gun_D1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipBasics"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipBasics"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipEngine"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipEngine"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipReactor"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipReactor"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipComputerCore"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipComputerCore"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipSensorCluster"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipSensorCluster"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="ShipCryptosleep"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="ShipCryptosleep"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Melee_Ultra"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Melee_Ultra"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Super_matter_E2"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Super_matter_E2"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="PlateArmor"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="PlateArmor"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Metallurgy_B5"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Metallurgy_B5"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Steel_B3"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Steel_B3"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Medicine_B2"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Medicine_B2"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Greatbow"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Greatbow"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Ballista_B1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Ballista_B1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+
+	<!-- ============================================================================
+	     v3.1 报错修复 (2026-08-23):
+	     1) 移除 Archotech 研究的残余 heldByFactionCategoryTags —— techprintCount 已删后
+	        残留该字段会触发 "requires no techprints but has heldByFactionCategoryTags"
+	        配置错误 (ResearchProjectDef.ErrorCheckAllDefs)。
+	     2) 移除 Core_SK 逆向配方 products 里的死引用 `Techprint_X_Archotech` ——
+	        原版不再为去 techprintCount 的研究自动生成 Techprint_* ThingDef, 该四配方
+	        products 交叉引用无一 ThingDef 存在 → "No verse.ThingDef named
+	        Techprint_Bow/SMG/Melee/Blaster_weapons_Archotech found"。
+	     全部 xpath 存在性门控 (Operation 级 MayRequire 已失效), 目标不存在整段跳过。
+	     ============================================================================ -->
+	<!-- 1) 清除 4 个 Archotech 研究的 heldByFactionCategoryTags 残留 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Melee_Archotech"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Melee_Archotech"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Bow_Archotech"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Bow_Archotech"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="SMG_Archotech"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="SMG_Archotech"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Blaster_weapons_Archotech"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Blaster_weapons_Archotech"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+
+	<!-- 1b) 清除 4 个同样被移除 techprintCount 的科技 heldByFactionCategoryTags 残留
+	     (CataphractArmor/JumpPack 原版 + OARK_Odyssey_GravTrap/GravFieldCore 金鼠族引力,
+	      techprintCount 已删后残留该字段会触发 "requires no techprints but has
+	      heldByFactionCategoryTags" 配置错误) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="CataphractArmor"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="CataphractArmor"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="JumpPack"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="JumpPack"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravTrap"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravTrap"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravFieldCore"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravFieldCore"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+
+	<!-- 2) 清除 Core_SK 逆向配方 products 里的死 Techprint_*_Archotech 产物引用 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechBow"]/products/Techprint_Bow_Archotech</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechBow"]/products/Techprint_Bow_Archotech</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechBlaster"]/products/Techprint_Blaster_weapons_Archotech</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechBlaster"]/products/Techprint_Blaster_weapons_Archotech</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechSMG"]/products/Techprint_SMG_Archotech</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechSMG"]/products/Techprint_SMG_Archotech</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechSword"]/products/Techprint_Melee_Archotech</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/RecipeDef[defName="ReverseEngineer_ArchotechSword"]/products/Techprint_Melee_Archotech</xpath>
+		</match>
+	</Operation>
+
+	<!-- ============================================================================
+	     v3.2 OARK Odyssey 引力类启动报错修复 (2026-08-23):
+	     OberoniaAurea.Odyssey 为【引力陷阱/力场核心】准备了 DiaBuyableTechPrintDef
+	     (可购买科技蓝图), 其 ResolveReferences 校验所引 researchProject 必须有
+	     techprintCount; 本 mod 已用蓝图门控取代其 techprint 并清掉 techprintCount,
+	     导致启动报 "[OARK] 研究项目 引力陷阱/力场核心 没有科研蓝图。"。
+	     → 移除这 2 个已过时的 DiaBuyableTechPrintDef (其购买科技蓝图已无意义,
+	       引力科技改由本蓝图门控解锁)。存在性门控: 未装 Odyssey/该 def 不存在时跳过。
+	     ============================================================================ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/OberoniaAurea.DiaBuyableTechPrintDef[defName="OARK_Odyssey_GravTrap"]</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/OberoniaAurea.DiaBuyableTechPrintDef[defName="OARK_Odyssey_GravTrap"]</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/OberoniaAurea.DiaBuyableTechPrintDef[defName="OARK_Odyssey_GravFieldCore"]</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/OberoniaAurea.DiaBuyableTechPrintDef[defName="OARK_Odyssey_GravFieldCore"]</xpath>
+		</match>
+	</Operation>
+
+	<!-- 同步清理这两个 OARK 引力研究的 heldByFactionCategoryTags 残留, 消除
+	     "requires no techprints but has heldByFactionCategoryTags" 配置噪音 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravTrap"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravTrap"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravFieldCore"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravFieldCore"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+
+	<!-- ============================================================================
+	     v3.2 新增门控节点 (2026-08-24): 可选追加 4 节点安全清 techprint/heldBy
+	     (当前均无 techprint, 纯防御; 目标不存在自动跳过不报错)
+	     ============================================================================ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravityApplication"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravityApplication"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravityApplication"]/heldByFactionCategoryTags</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="OARK_Odyssey_GravityApplication"]/heldByFactionCategoryTags</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D2"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D2"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D3"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D3"]/techprintCount</xpath>
+		</match>
+	</Operation><!-- v4.2 新增工业/中世纪门控节点: 存在性清除 techprint (防上游补 techprint 造成双门禁; 无该节点的自动跳过) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Machining"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Machining"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="MicroelectronicsBasics"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="MicroelectronicsBasics"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Metals_C1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Metals_C1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Fabrication"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Fabrication"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Glass_C1"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Glass_C1"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Batteries"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Batteries"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="LongBlades"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="LongBlades"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Armor_IronAge"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Armor_IronAge"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="GunPowderTech"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="GunPowderTech"]/techprintCount</xpath>
+		</match>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ResearchProjectDef[defName="Medieval_Cannons"]/techprintCount</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationRemove">
+			<xpath>/Defs/ResearchProjectDef[defName="Medieval_Cannons"]/techprintCount</xpath>
+		</match>
+	</Operation><!-- 1. 标准任务奖励池: 加蓝图选项 (weight 0.5, 相对现有 1~10 权重偏低) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingSetMakerDef[defName="Reward_ItemsStandard"]/root/options/li[1]/thingSetMaker/options</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingSetMakerDef[defName="Reward_ItemsStandard"]/root/options/li[1]/thingSetMaker/options</xpath>
+			<value>
+				<li>
+					<weight>0.5</weight>
+					<thingSetMaker Class="BlueprintUnlockHSK.ThingSetMaker_BlueprintReward"/>
+				</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- 2. Cybranian 盟友礼物: 加蓝图选项 (chance 0.25) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingSetMakerDef[defName="AlliesGift"]/root/options</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingSetMakerDef[defName="AlliesGift"]/root/options</xpath>
+			<value>
+				<li>
+					<chance>0.25</chance>
+					<thingSetMaker Class="BlueprintUnlockHSK.ThingSetMaker_BlueprintReward"/>
+				</li>
+			</value>
+		</match>
+	</Operation><!-- ===== 原版定居者漫游商人 (Outlander 派系, 工业档) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_CombatSupplier"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_CombatSupplier"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== 部落漫游商人 (Neolithic, 按需求#4 石器不卖但机制保留) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Neolithic_ShamanMerchant"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="Caravan_Neolithic_ShamanMerchant"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== 轨道商人 (太空档, 高档蓝图主要来源) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="Orbital_CombatSupplier"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="Orbital_CombatSupplier"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- ===== 鼠族王国商人 (RatkinRaceHSK, 存在性门控) ===== -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="RK_TraderKind_KingdomExotic"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="RK_TraderKind_KingdomExotic"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/TraderKindDef[defName="RK_TraderKind_KingdomCombatSupplier"]/stockGenerators</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/TraderKindDef[defName="RK_TraderKind_KingdomCombatSupplier"]/stockGenerators</xpath>
+			<value>
+				<li Class="BlueprintUnlockHSK.StockGenerator_BlueprintTrader"/>
+			</value>
+		</match>
+	</Operation></Patch>

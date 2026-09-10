@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- [2026-09-09 迁移] 本文件由 HSK修复整合 整体迁入 Ignorance Is Bliss,HSK 侧已移除。 -->
+<Patch>
+  <!-- 61_派系围攻资格 (2026-09-09)
+       根因: 1.6 的 FactionDef.canSiege 默认 false, RaidStrategyWorker_Siege.CanUseWith 最后一句
+       即 return faction.def.canSiege; 原版 OutlanderFactionBase 显式 true(Data/Core/.../Factions_Misc.xml:11),
+       但 Core_SK_CoreModule/Patches/AutoGenPatches/FactionDefs/Factions_Outlander.xml:10 把它改成 false,
+       导致出lander 全系(最常遇的袭击来源)永不出围攻; 库林/美狐海盗/新星同盟/捕食者 亦为 false。
+       本补丁只恢复 canSiege 开关, 不动权重曲线与 earliestRaidDays(siege 仍需 raid 点数 >=800 才有权重)。
+
+       写法: 每派系一个顶层 Conditional —— 已有 canSiege 节点则 Replace, 没有(值来自继承)则 Add。
+       (Outlander 系的 false 由 Core_SK 的 patch 写入, 补丁执行序上 Core_SK 在前, 此处多为 Replace 分支。)
+
+       未纳入: OA_RK_Faction(金鼠族)。它唯一的 Combat 组 disallowedStrategies 把 Siege/ImmediateAttack/
+       StageThenAttack/Sappers/Breaching 全禁, 仅留给 FactionalWar 的 SrFactionFirst(两派火并)用;
+       单开 canSiege 会出现"随机到围攻 -> 所有 maker CanGenerateFrom=false -> 生成 0 兵 -> 整场袭击静默消失"。
+       若要金鼠族能对玩家围攻, 须同时解它 maker 级禁令, 属改其设计, 待单独确认。 -->
+
+  <!-- ===== 出lander 系: 基类 + 各子类(子类可能只靠继承拿到 false, 故逐个兜底) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[@Name="OutlanderFactionBase"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[@Name="OutlanderFactionBase"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[@Name="OutlanderFactionBase"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="OutlanderCivil"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="OutlanderCivil"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="OutlanderCivil"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[@Name="OutlanderRoughBase"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[@Name="OutlanderRoughBase"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[@Name="OutlanderRoughBase"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="OutlanderRough"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="OutlanderRough"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="OutlanderRough"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="OutlanderRoughPig"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="OutlanderRoughPig"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="OutlanderRoughPig"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== 异种/HSK 派系 (选项2; 各自源文件显式写了 false) ===== -->
+  <!-- 库林战狐: 440 权重的 Combat 组全部允许 Siege, 开开关即生效 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Kurin_Faction"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Kurin_Faction"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Kurin_Faction"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <!-- 美狐海盗(Supremacist): 仅 commonality 10 的组允许 Siege, 能出兵但档位窄 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <!-- 新星同盟 / 捕食者: Core_SK 写 false, 战斗组无 Siege 禁令 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="NovaAlliance"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="NovaAlliance"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="NovaAlliance"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Predators"]/canSiege</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Predators"]/canSiege</xpath>
+      <value><canSiege>true</canSiege></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Predators"]</xpath>
+      <value><canSiege>true</canSiege></value>
+    </nomatch>
+  </Operation>
+</Patch>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ============================================================
+	     107_移除初鼠种基础耳/尾基因的白名单放行 → 改为加回白名单 (2026-08-27 修复)
+	     历史: 2026-08-26 曾把 RK_Gene_LargeEars/RK_Gene_ThinTail 从 whiteGeneListEndo 移除,
+	     理由是"松鼠等 RGE 变体会从白名单继承初鼠种基础耳/尾 → 双耳/双尾"。
+	     但该判断有误(已实证):
+	         - whiteGeneListEndo 只是"允许池", 不是"强制池", 并不会把基因注入 pawn。
+	         - 真正的双耳根源是 raceGenes(强制注入层), 已于 88_田鼠种族HSK基因适配.xml
+	           把这两个基因从 raceGenes 移除, 问题已解决。
+	         - whiteGeneListEndo 反倒被 onlyHaveRaceRestrictedGenesEndo 用作"合法基因白名单",
+	           若删掉 LargeEars/ThinTail, 则 genes 列表直接引用它们的可遗传异种人
+	           (金鸢尾兰鼠族 Ratkin_OA、默认 RK_XenoType_Ratkin) 生成时会因基因"非法"
+	           被过滤 → 出现"没有耳朵/尾巴基因"的小人。
+	     结论: 必须把 RK_Gene_LargeEars/RK_Gene_ThinTail 加回 whiteGeneListEndo。
+	         注意: 不要加回 generalSettings/raceGenes(强制层), 双耳问题由 88 号负责。
+	     ============================================================ -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/whiteGeneListEndo</xpath>
+		<value>
+			<li>RK_Gene_LargeEars</li>
+			<li>RK_Gene_ThinTail</li>
+		</value>
+	</Operation>
+</Patch>

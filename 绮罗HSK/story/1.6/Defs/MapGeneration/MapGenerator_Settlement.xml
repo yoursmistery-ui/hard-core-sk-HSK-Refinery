@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <MapGeneratorDef ParentName="MapCommonBase">
+    <defName>Kiiro_Settlement</defName>
+    <genSteps>
+      <li>RocksFromGrid</li>
+      <li>Kiiro_Settlement</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <MapGeneratorDef ParentName="Base_Player">
+    <defName>Kiiro_SettlementUnderAssault</defName>
+    <label>A kiiro village under plunder</label>
+    <genSteps>
+      <li>Kiiro_Settlement</li>
+      <li>Kiiro_Settlement_PlantGrowth</li>
+      <li>Kiiro_BurningFire</li>
+      <li>Kiiro_PriatesInSettlement</li>
+      <li>Kiiro_Settlement_Ally</li>
+      <li>Kiiro_SettlementFactionChange_Player_ValorScenario</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <GenStepDef>
+    <defName>Kiiro_Settlement</defName>
+    <order>1400</order>
+    <genStep Class="Kiiro_Event.GenStep_KiiroSettlement">
+      <count>1</count>
+      <nearMapCenter>true</nearMapCenter>
+      <prefabDefs>
+        <li>Kiiro_SettlementA_Empty</li>
+        <li>Kiiro_SettlementB_Empty</li>
+        <li>Kiiro_SettlementC_Empty</li>
+      </prefabDefs>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_PriatesInSettlement</defName>
+    <order>1600</order>
+    <genStep Class="Kiiro_Event.GenStep_PiratesInMapAndWalkInTrigger">
+      <expandedCell>10</expandedCell>
+      <triggerUnfogged>false</triggerUnfogged>
+      <defaultPointsRange>2000</defaultPointsRange>
+      <points_WalkIn>600</points_WalkIn>
+      <assaultColony>true</assaultColony>
+      <spawnInRect>true</spawnInRect>
+      <canTimeoutOrFlee_WalkIn>false</canTimeoutOrFlee_WalkIn>
+      <singalTag>PiratesInMapAndWalkInTrigger</singalTag>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_BurningFire</defName>
+    <order>1600</order>
+    <genStep Class="Kiiro_Event.GenStep_Burning">
+      <fireAmount>2</fireAmount>
+      <spawnInRect>true</spawnInRect>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_Settlement_Ally</defName>
+    <order>1600</order>
+    <genStep Class="AncotLibrary.GenStep_GenPawnAroundMapCenter_Assist">
+      <factionDef>Kiiro_Faction</factionDef>
+      <fixedPoint>2000</fixedPoint>
+      <spawnInRect>true</spawnInRect>
+      <allowFlee>false</allowFlee>
+      <contractCellPctOfInterestRect>0.3</contractCellPctOfInterestRect>
+      <pawnkindsRequired>
+        <li>
+          <pawnkindDef>Kiiro_Guerrilla</pawnkindDef>
+          <amount>4</amount>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_GuerrillaMedic</pawnkindDef>
+          <amount>1</amount>
+        </li>
+      </pawnkindsRequired>
+      <pawnkindsWithCommonality>
+        <li>
+          <pawnkindDef>Kiiro_WoundedSoldier</pawnkindDef>
+          <commonality>2</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_Guerrilla</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_GuerrillaMedic</pawnkindDef>
+          <commonality>1</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_Militia</pawnkindDef>
+          <commonality>4</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_MilitiaII</pawnkindDef>
+          <commonality>6</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_MilitiaIII</pawnkindDef>
+          <commonality>10</commonality>
+        </li>
+        <li>
+          <pawnkindDef>Kiiro_MilitiaIV</pawnkindDef>
+          <commonality>10</commonality>
+        </li>
+      </pawnkindsWithCommonality>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_SettlementFactionChange_Player_ValorScenario</defName>
+    <order>1600</order>
+    <genStep Class="AncotLibrary.GenStep_Signal_FactionChange">
+      <factionOriginal>Kiiro_Faction</factionOriginal>
+      <becomePlayer>true</becomePlayer>
+      <thoughtAddToPawn>Kiiro_HopeOfValor</thoughtAddToPawn>
+      <expandedCellPctOfInterestRect>-0.2</expandedCellPctOfInterestRect>
+      <draftPawn>true</draftPawn>
+      <triggerUnfogged>false</triggerUnfogged>
+      <pauseForced>true</pauseForced>
+      <singalTag>Signal_FactionChange</singalTag>
+      <dialogText>The villagers recognized her identity, and she decisively took command of the village.</dialogText>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_Settlement_PlantGrowth</defName>
+    <order>1600</order>
+    <genStep Class="AncotLibrary.GenStep_PlantGrowth">
+      <plants>
+        <li>Plant_Rice</li>
+        <li>Plant_Hops</li>
+        <li>Kiiro_Schizonepeta</li>
+      </plants>
+      <targetGrowth>0.8</targetGrowth>
+      <growthOffset>0.1</growthOffset>
+    </genStep>
+  </GenStepDef>
+
+
+</Defs>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- ============================================================
+	     Vanilla Ideology Expanded - Memes and Structures
+	     HSK 适配补丁 (本地改造版)
+	     ============================================================
+	     本 mod 在 HSK 环境中经核对为“干净”: 新增研究前置(CarpetMaking/Stonecutting)、
+	     材料类别(Stony)、职位服饰引用的均为 HSK/原版已存在 def,不引入新建筑建造成本、
+	     不新增服饰/科研节点,故无需重挂工作台或种族服饰表(详录 铁律 审计已确认)。
+	     唯一需处理的是 CombatExtended 适配: 血肉改造义肢的自带原版 fist 工具在 CE 下会被
+	     过滤(HediffCompProperties_VerbGiver 原版 Tool 不支持 CE),按 CE 铁律转为 ToolCE。
+	     ============================================================ -->
+
+	<!-- VME_FleshcraftedArmHediff : 拳套 fist (Blunt) → CE -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/HediffDef[defName="VME_FleshcraftedArmHediff"]/comps/li/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>fist</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>8.2</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.471</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- VME_FleshcraftedHandHediff : 拳套 fist (Blunt) → CE -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/HediffDef[defName="VME_FleshcraftedHandHediff"]/comps/li/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>fist</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>8.2</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.471</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+</Patch>

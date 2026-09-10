@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 鼠族冲击钻(2026-08-09): 工业采矿/钻井工具,鼠族电力锻造台打造;
+         贴图 Textures/Weapon/RK_ImpactDrill.png(用户图抠图→灰度,材质随钢/塑钢/金变色);
+         STL 工具属性与工具分类由 36 号补丁提供(MayRequire 门控)。 -->
+    <ThingDef ParentName="RK_MeleeWeapon">
+        <defName>RK_ImpactDrill</defName>
+        <label>鼠族冲击钻</label>
+        <description>工业冲击钻,采矿/钻井利器,也能应急近战。</description>
+        <graphicData>
+            <texPath>Weapon/RK_ImpactDrill</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <techLevel>Industrial</techLevel>
+        <weaponTags Inherit="false">
+            <li>RK_MeleeWeapon_Short</li>
+            <li>RK_WeaponTag_OneHand</li>
+        </weaponTags>
+        <statBases>
+            <WorkToMake>12000</WorkToMake>
+            <Mass>4</Mass>
+        </statBases>
+        <equippedAngleOffset>225</equippedAngleOffset>
+        <costStuffCount>60</costStuffCount>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <tools>
+            <li>
+                <label>bit</label>
+                <capacities>
+                    <li>Blunt</li>
+                </capacities>
+                <power>14</power>
+                <cooldownTime>1.8</cooldownTime>
+            </li>
+        </tools>
+        <comps>
+            <li Class="NewRatkin.CompProperties_WeaponGripType">
+                <gripTypes>
+                    <li>OneHand</li>
+                </gripTypes>
+            </li>
+        </comps>
+        <recipeMaker Inherit="False" IsNull="True" />
+    </ThingDef>
+</Defs>

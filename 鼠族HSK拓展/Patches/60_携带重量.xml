@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 60_携带重量.xml, 62_锻造台工作速度.xml -->
+<Patch><!-- 60_携带重量: 给鼠族背包/挎包/外套补充 CE CarryWeight 携带重量。
+	     放在 09 之后加载,避免被属性重做覆盖。 -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_CrossBack"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>10</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_Backpack"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>30</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_OutdoorBackpack"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>35</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="xiaokb"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>25</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="tybb"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>60</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="zsyg"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>8</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="yiliaob"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>10</CarryWeight></value>
+	</Operation>
+
+	<!-- 外套 / 披风 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="hsdy"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>12</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="maorongdayi"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>12</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="baonuanneiyi"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>8</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="fengyewaitao"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>8</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="gjhpf"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>15</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="sxpf"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>15</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="nwpf"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>10</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_OuterPlate"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>15</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RK_Vest"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>15</CarryWeight></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="fangdanjunfu"]/equippedStatOffsets</xpath>
+		<value><CarryWeight>15</CarryWeight></value>
+	</Operation><!-- 62_锻造台工作速度(2026-08-13 用户要求「把所有的鼠族锻造台上的装备改成吃锻造速度而非缝制速度」):
+	     鼠族锻造台(RK_FueledSmithy / RK_ElectricSmithy)上的装备配方,workSpeedStat 此前混用
+	     TailoringSpeed(缝制速度,装甲/盾牌 9 条)与 GeneralLaborSpeed(简单工作速度,武器/工具 27 条),
+	     导致锻造台工作吃不到锻造工具(锤子/钉头锤/大锤等)的 SmithingSpeed 加成。
+	     本补丁把这两类共 36 条鼠族锻造台配方全部改为 SmithingSpeed(锻造速度),与 Core_SK 的
+	     金属锻造(Recipes_Apparel / Recipes_Artifacts / Recipes_Ammo 等均为 SmithingSpeed)一致;
+	     同时把 9 条装甲/盾牌配方的 effectWorking/soundWorking 由 Tailor/Recipe_Tailor(缝制动画音效)
+	     改为 Smith/Recipe_Smith(锻造动画音效),与其余 27 条武器/工具配方一致。
+	     最终层补丁(62),后于 01/02/05/08 等配方定义层加载。-->
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Circlet" or defName="RKHSKExtra_Make_RK_Crusader" or defName="RKHSKFix_Make_RK_Apparel_Banner" or defName="RKHSKFix_Make_RK_AutoCrossBow" or defName="RKHSKFix_Make_RK_BFR" or defName="RKHSKFix_Make_RK_Crossbow" or defName="RKHSKFix_Make_RK_EnhanceCrossBow" or defName="RKHSKFix_Make_RK_Halberd" or defName="RKHSKFix_Make_RK_HeavyLance" or defName="RKHSKFix_Make_RK_HeavyShield" or defName="RKHSKFix_Make_RK_LightLance" or defName="RKHSKFix_Make_RK_LongSword" or defName="RKHSKFix_Make_RK_Mace" or defName="RKHSKFix_Make_RK_OneHanded" or defName="RKHSKFix_Make_RK_Plate" or defName="RKHSKFix_Make_RK_PlateHelmA" or defName="RKHSKFix_Make_RK_PlateHelmB" or defName="RKHSKFix_Make_RK_PlateHelmC" or defName="RKHSKFix_Make_RK_PrototypePulseRifle" or defName="RKHSKFix_Make_RK_Rifle" or defName="RKHSKFix_Make_RK_RoyalCrown" or defName="RKHSKFix_Make_RK_SniperRifle" or defName="RKHSKFix_Make_RK_Spear" or defName="RKHSKFix_Make_RK_TowerShield" or defName="RKHSKFix_Make_RK_TwoHanded" or defName="RKHSKFix_Make_RK_WoodenShield"]/workSpeedStat</xpath>
+		<value>
+			<workSpeedStat>SmithingSpeed</workSpeedStat>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>
+			Defs/RecipeDef[
+				defName="RKHSKFix_Make_RK_Apparel_Banner"
+				or defName="RKHSKFix_Make_RK_HeavyShield"
+				or defName="RKHSKFix_Make_RK_Plate"
+				or defName="RKHSKFix_Make_RK_PlateHelmA"
+				or defName="RKHSKFix_Make_RK_PlateHelmB"
+				or defName="RKHSKFix_Make_RK_PlateHelmC"
+				or defName="RKHSKFix_Make_RK_RoyalCrown"
+				or defName="RKHSKFix_Make_RK_TowerShield"
+				or defName="RKHSKFix_Make_RK_WoodenShield"
+			]/effectWorking
+		</xpath>
+		<value>
+			<effectWorking>Smith</effectWorking>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>
+			Defs/RecipeDef[
+				defName="RKHSKFix_Make_RK_Apparel_Banner"
+				or defName="RKHSKFix_Make_RK_HeavyShield"
+				or defName="RKHSKFix_Make_RK_Plate"
+				or defName="RKHSKFix_Make_RK_PlateHelmA"
+				or defName="RKHSKFix_Make_RK_PlateHelmB"
+				or defName="RKHSKFix_Make_RK_PlateHelmC"
+				or defName="RKHSKFix_Make_RK_RoyalCrown"
+				or defName="RKHSKFix_Make_RK_TowerShield"
+				or defName="RKHSKFix_Make_RK_WoodenShield"
+			]/soundWorking
+		</xpath>
+		<value>
+			<soundWorking>Recipe_Smith</soundWorking>
+		</value>
+	</Operation></Patch>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationSequence">
+		<operations>
+			<!-- ========== Holodeck_Basic ========== -->
+			<li Class="SK.PatchOperationReplaceExtended">
+				<xpath>Defs/ThingDef[defName="Holodeck_Basic"]</xpath>
+				<value Merge="true">
+					<costList DeepReplace="true">
+						<ComponentIndustrial>4</ComponentIndustrial>
+						<Electronics>4</Electronics>
+						<Glass>5</Glass>
+					</costList>
+					<stuffCategories DeepReplace="true">
+						<li>RuggedMetallic</li>
+					</stuffCategories>
+					<costStuffCount>120</costStuffCount>
+				</value>
+			</li>
+			<!-- ========== Holodeck_Standard ========== -->
+			<li Class="SK.PatchOperationReplaceExtended">
+				<xpath>Defs/ThingDef[defName="Holodeck_Standard"]</xpath>
+				<value Merge="true">
+					<costList DeepReplace="true">
+						<ComponentAdvanced>5</ComponentAdvanced>
+						<Electronics>6</Electronics>
+						<Microchips>2</Microchips>
+						<Glass>30</Glass>
+						<Plastic>60</Plastic>
+					</costList>
+					<stuffCategories DeepReplace="true">
+						<li>RuggedMetallic</li>
+					</stuffCategories>
+					<costStuffCount>170</costStuffCount>
+				</value>
+			</li>
+			<!-- ========== Holodeck_AI ========== -->
+			<li Class="SK.PatchOperationReplaceExtended">
+				<xpath>Defs/ThingDef[defName="Holodeck_AI"]</xpath>
+				<value Merge="true">
+					<costList DeepReplace="true">
+						<ComponentUltra>10</ComponentUltra>
+						<Microchips>4</Microchips>
+						<ReinforcedGlass>50</ReinforcedGlass>
+						<BioMicrochips>2</BioMicrochips>
+						<AIPersonaCore>1</AIPersonaCore>
+					</costList>
+					<stuffCategories DeepReplace="true">
+						<li>SolidMetallic</li>
+					</stuffCategories>
+					<costStuffCount>260</costStuffCount>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

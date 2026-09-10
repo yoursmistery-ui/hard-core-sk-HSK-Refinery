@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- RKGE 异种人型接入鼠族 PawnKind(HSK 基因体系适配版 2026-08-21) -->
+	<!-- 2026-08-22 修正: RKBasePawnKind 异种池已由 92_鼠族异种生成限制.xml ② 统一 Replace
+	     (初鼠0.88/鼠人0.04/实验白鼠0.03/废土鼠0.03/田鼠0.02),原 Add 追加会与 Replace 叠加成
+	     同异种两行 → 已删除,仅保留 RatkinPriest 专属池(牧师多为实验白鼠)。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/PawnKindDef[defName ="RatkinPriest"]</xpath>
+		<value>
+			<xenotypeSet Inherit="false">
+				<xenotypeChances>
+					<Ratkin_Squirrel>1.8</Ratkin_Squirrel>
+					<Ratkin_Hamster>1.2</Ratkin_Hamster>
+					<Ratkin_LabRat>8</Ratkin_LabRat>
+				</xenotypeChances>
+			</xenotypeSet>
+		</value>
+	</Operation>
+
+</Patch>

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 10_NPC服饰预算适配(2026-09-06)
+     根因: 金鼠族衣物 HSK 材料化后终态市值约 2000~7900 银,而 pawnKind 的 apparelMoney
+     仍是原版时代数值(900~1800)。原版 PawnApparelGenerator.CanUsePair 第一条
+     "pair.Price > moneyLeft 即淘汰" 会把整个 OARatkin_* 衣池筛空,导致 NPC
+     (路过的勘探队/宫廷侍从/卫兵/贵族/部分突击兵)生成时全裸。
+     修法 = 按各衣池终态市值区间抬预算,只影响 NPC 生成,不改衣物造价、不碰玩家经济。
+     ※ OA_RK_Colonist_A 由 PawnKinds.xml 直接改(specificApparelRequirements 强制
+       躯干 OnSkin 衣 + 750~1200,绕过价格门的硬保底),此处不重复处理。
+     预算已覆盖池下限、无需改动的 kind: Traveller(7000~9000)、Court_Member_D(10500~12500)、
+     Noble_B(2400~3600)、Noble_C/D(4500~9000)、Noble_E/F(9999999)、
+     Assault_A(6000~11000)、Assault_E(5000~7600)、Guard_Captain(3000~5500)。
+     详见 docs/维护详录_鼠族HSK拓展.md §7.16。 -->
+<Patch>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_B"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_B"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>4600</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_B"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>4600</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_C"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_C"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>4600</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Colonist_C"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>4600</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- 宫廷衣池 2075~7909 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_Exploration"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_Exploration"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_Exploration"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- 勘探队(路过的勘探队任务) -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member_B"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member_B"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>8500</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Elite_Court_Member_B"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>8500</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- 覆盖全池上限 7909 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_B"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_B"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>6000</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_B"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>6000</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- Industrial 池 2245~6922 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_C"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_C"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>6500</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Court_Member_C"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2600</min>
+          <max>6500</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- Technical 池 2245~7068 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Guard_Member"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Guard_Member"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Guard_Member"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>5600</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Noble_A"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Noble_A"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>4700</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Noble_A"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>2400</min>
+          <max>4700</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- Noble_Tier1 池 2115~4430 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_B"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_B"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>6800</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_B"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>6800</max>
+        </apparelMoney>
+      </value>
+    </nomatch>    <!-- 甲池 min 4575,原 4100 起有裸滚点 -->
+
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_C"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_C"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_C"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_D"]/apparelMoney</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_D"]/apparelMoney</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/PawnKindDef[defName="OA_RK_Assault_D"]</xpath>
+      <value>
+        <apparelMoney>
+          <min>4900</min>
+          <max>7000</max>
+        </apparelMoney>
+      </value>
+    </nomatch>
+  </Operation>
+</Patch>

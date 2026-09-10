@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- M79 GL -->
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_M79GL</defName>
+        <label>M79 GL</label>
+        <description>A launcher type weapon that fires 40mm concussive grenades.</description>
+        <graphicData>
+            <texPath>Things/Weapons/Launchers/M79</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>Interact_Rifle</soundInteract>
+        <statBases>
+            <MarketValue>1450</MarketValue>
+            <SightsEfficiency>1</SightsEfficiency>
+            <ShotSpread>0.17</ShotSpread>
+            <SwayFactor>1.8</SwayFactor>
+            <RangedWeapon_Cooldown>1.75</RangedWeapon_Cooldown>
+            <Bulk>8.1</Bulk>
+            <Mass>3.6</Mass>
+        </statBases>
+        <weaponTags>
+            <li>GLT1</li>
+            <li>Glaunchers</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+            <li>CE_AI_AOE</li>
+        </weaponTags>
+        <thingCategories>
+            <li>Glaunchers</li>
+        </thingCategories>
+        <generateCommonality>0.7</generateCommonality>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+                <warmupTime>1.52</warmupTime>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+                <minRange>4</minRange>
+                <noiseRadius>4</noiseRadius>
+                <!--<forcedMissRadius>2</forcedMissRadius>-->
+                <circularError>0.75</circularError>
+                <range>36</range>
+                <!-- grenades at 12.9 -->
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <soundCast>RF_ShotMilkorMGL</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+                <onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>1</magazineSize>
+                <reloadTime>2.5</reloadTime>
+                <ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+            </li>
+        </comps>
+        <modExtensions>
+            <li Class="CombatExtended.GunDrawExtension">
+                <DrawSize>0.9</DrawSize>
+            </li>
+        </modExtensions>
+        <smeltProducts>
+            <Rifle_Component>1</Rifle_Component>
+            <Weapon_Parts>2</Weapon_Parts>
+        </smeltProducts>
+    </ThingDef>
+    <!-- MILKOR MGL -->
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_MilkorMGL</defName>
+        <label>Milkor MGL</label>
+        <description>A launcher type weapon that fires 40mm concussive grenades at a higher rate than a human could.</description>
+        <graphicData>
+            <texPath>Things/Weapons/Launchers/MilkorMGL</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>InteractPTUR</soundInteract>
+        <statBases>
+            <MarketValue>2500</MarketValue>
+            <SightsEfficiency>1.2</SightsEfficiency>
+            <ShotSpread>0.15</ShotSpread>
+            <SwayFactor>1.7</SwayFactor>
+            <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+            <Bulk>8.60</Bulk>
+            <Mass>4.10</Mass>
+        </statBases>
+        <generateCommonality>0.7</generateCommonality>
+        <weaponTags>
+            <li>RKT1</li>
+            <li>Glaunchers</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+            <li>CE_AI_AOE</li>
+        </weaponTags>
+        <tradeTags>
+            <li>Exotic</li>
+        </tradeTags>
+        <thingCategories>
+            <li>Glaunchers</li>
+        </thingCategories>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+                <warmupTime>1.27</warmupTime>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+                <minRange>4</minRange>
+                <noiseRadius>4</noiseRadius>
+                <!--<forcedMissRadius>2</forcedMissRadius>-->
+                <circularError>0.75</circularError>
+                <range>52</range>
+                <!-- grenades at 12.9 -->
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <soundCast>RF_ShotMilkorMGL</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+                <onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>6</magazineSize>
+                <reloadTime>5.50</reloadTime>
+                <ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Heavy_Component>1</Heavy_Component>
+            <Weapon_Parts>5</Weapon_Parts>
+            <Plastic>5</Plastic>
+        </smeltProducts>
+    </ThingDef>
+    <!-- RPG-7 -->
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_RPG</defName>
+        <label>RPG-7</label>
+        <description>RPG Launcher.</description>
+        <graphicData>
+            <texPath>Things/Weapons/Launchers/RPG7</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.15,1.15)</drawSize>
+        </graphicData>
+        <soundInteract>InteractPTUR</soundInteract>
+        <statBases>
+            <MarketValue>2300</MarketValue>
+            <SightsEfficiency>1.5</SightsEfficiency>
+            <ShotSpread>0.1</ShotSpread>
+            <SwayFactor>1.5</SwayFactor>
+            <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+            <Bulk>8.5</Bulk>
+            <Mass>7</Mass>
+        </statBases>
+        <generateCommonality>0.7</generateCommonality>
+        <weaponTags>
+            <li>RKT2</li>
+            <li>Launchers</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+            <li>CE_AI_AOE</li>
+        </weaponTags>
+        <tradeTags>
+            <li>Exotic</li>
+        </tradeTags>
+        <thingCategories>
+            <li>Launchers</li>
+        </thingCategories>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_RPG7Grenade_HEAT</defaultProjectile>
+                <!--<forcedMissRadius>3</forcedMissRadius>-->
+                <circularError>1</circularError>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+                <warmupTime>2</warmupTime>
+                <noiseRadius>8</noiseRadius>
+                <minRange>5</minRange>
+                <range>65</range>
+                <!-- grenades at 12.9 -->
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <burstShotCount>1</burstShotCount>
+                <soundCast>ShotRPG</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+                <onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>1</magazineSize>
+                <reloadTime>4</reloadTime>
+                <ammoSet>AmmoSet_RPG7Grenade</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Launcher_Component>1</Launcher_Component>
+            <Weapon_Parts>5</Weapon_Parts>
+            <Plastic>5</Plastic>
+        </smeltProducts>
+    </ThingDef>
+    <!-- M5 RPG -->
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_M5_USCM</defName>
+        <label>M5 RPG</label>
+        <description>The M5 Rocket Propelled Grenade (RPG) is a portable, shoulder-fired, reloadable, semi-automatic unguided anti-armor rocket-propelled grenade launcher used by United States Colonial Marine Corps as their standard issue RPG. Able to load up to 4 rockets, the M5 RPG is the favorite anti-infantry toy of the USCM.</description>
+        <graphicData>
+            <texPath>Things/Weapons/Launchers/M5</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.15,1.15)</drawSize>
+        </graphicData>
+        <statBases>
+            <MarketValue>2600</MarketValue>
+            <SightsEfficiency>1.6</SightsEfficiency>
+            <ShotSpread>0.1</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+            <Bulk>10</Bulk>
+            <Mass>8</Mass>
+        </statBases>
+        <soundInteract>InteractPTUR</soundInteract>
+        <destroyOnDrop>false</destroyOnDrop>
+        <generateCommonality>0.7</generateCommonality>
+        <weaponTags>
+            <li>RKT2</li>
+            <li>Launchers</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+            <li>CE_AI_AOE</li>
+        </weaponTags>
+        <tradeTags>
+            <li>Exotic</li>
+        </tradeTags>
+        <thingCategories>
+            <li>Launchers</li>
+        </thingCategories>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_RPG7Grenade_HEAT</defaultProjectile>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+                <minRange>5</minRange>
+                <warmupTime>2.2</warmupTime>
+                <!--<forcedMissRadius>2</forcedMissRadius>-->
+                <circularError>0.75</circularError>
+                <noiseRadius>8</noiseRadius>
+                <range>70</range>
+                <!-- grenades at 12.9 -->
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <burstShotCount>1</burstShotCount>
+                <soundCast>USCM_shotM5</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+                <onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>1</magazineSize>
+                <reloadTime>4.5</reloadTime>
+                <ammoSet>AmmoSet_RPG7Grenade</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Launcher_Component>1</Launcher_Component>
+            <Weapon_Parts>6</Weapon_Parts>
+            <Plastic>5</Plastic>
+        </smeltProducts>
+    </ThingDef>
+    <!-- M72 LAW -->
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_LAW</defName>
+        <label>M72R LAW</label>
+        <description>A reloadable version of ancient single shot anti tank rocket launcher, with special armor piercing penetration rocket.</description>
+        <graphicData>
+            <texPath>Things/Weapons/Launchers/LAW</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.2,1.2)</drawSize>
+        </graphicData>
+        <soundInteract>InteractPTUR</soundInteract>
+        <statBases>
+            <MarketValue>1800</MarketValue>
+            <SightsEfficiency>1.05</SightsEfficiency>
+            <ShotSpread>0.15</ShotSpread>
+            <SwayFactor>1.5</SwayFactor>
+            <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+            <Bulk>6</Bulk>
+            <Mass>4</Mass>
+        </statBases>
+        <generateCommonality>0.7</generateCommonality>
+        <weaponTags>
+            <li>RKT2</li>
+            <li>Launchers</li>
+            <li>TierOneAdvanced</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+            <li>CE_AI_AOE</li>
+        </weaponTags>
+        <tradeTags>
+            <li>Exotic</li>
+        </tradeTags>
+        <thingCategories>
+            <li>Launchers</li>
+        </thingCategories>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_M72LAW</defaultProjectile>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+                <minRange>5</minRange>
+                <warmupTime>1</warmupTime>
+                <!--<forcedMissRadius>3</forcedMissRadius>-->
+                <circularError>1</circularError>
+                <range>72</range>
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <noiseRadius>8</noiseRadius>
+                <soundCast>LAW</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>12</muzzleFlashScale>
+                <onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>1</magazineSize>
+                <reloadTime>20</reloadTime>
+                <ammoSet>AmmoSet_M72LAW</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Launcher_Component>1</Launcher_Component>
+            <Weapon_Parts>3</Weapon_Parts>
+            <Plastic>6</Plastic>
+        </smeltProducts>
+    </ThingDef>
+
+</Defs>

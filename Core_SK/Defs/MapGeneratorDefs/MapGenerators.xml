@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!--
+  <GenStepDef>
+    <defName>Oilfield</defName>
+    <order>502</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>Oilfield</thingDef>
+			<allowInWaterBiome>false</allowInWaterBiome>
+			<minSpacing>25</minSpacing>
+      <extraNoBuildEdgeDist>4</extraNoBuildEdgeDist>
+      <countPer10kCellsRange>
+        <min>0.5</min>
+        <max>0.7</max>
+      </countPer10kCellsRange>
+      <clearSpaceSize>30</clearSpaceSize>
+      <terrainValidationRadius>4</terrainValidationRadius>
+      <terrainValidationDisallowed>
+        <li>Road</li>
+		<li>Mud</li>
+		<li>Marsh</li>
+		<li>MarshyTerrain</li>
+		<li>WaterDeep</li>
+		<li>WaterMovingChestDeep</li>
+		<li>WaterShallow</li>
+		<li>WaterMovingShallow</li>
+		<li>WaterOceanShallow</li>
+		<li>WaterOceanDeep</li>
+      </terrainValidationDisallowed>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>4</radius>
+          <affordance>Heavy</affordance>
+        </li>
+        <li Class="ScattererValidator_NoNonNaturalEdifices">
+          <radius>4</radius>
+        </li>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+
+  <GenStepDef>
+    <defName>MineralDeposits</defName>
+    <order>503</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>MineralDeposits</thingDef>
+			<allowInWaterBiome>false</allowInWaterBiome>
+			<minSpacing>25</minSpacing>
+      <extraNoBuildEdgeDist>4</extraNoBuildEdgeDist>
+      <countPer10kCellsRange>
+        <min>1.5</min>
+        <max>2.5</max>
+      </countPer10kCellsRange>
+      <clearSpaceSize>30</clearSpaceSize>
+      <terrainValidationRadius>4</terrainValidationRadius>
+      <terrainValidationDisallowed>
+        <li>Road</li>
+		<li>Mud</li>
+		<li>Marsh</li>
+		<li>MarshyTerrain</li>
+		<li>WaterDeep</li>
+		<li>WaterMovingChestDeep</li>
+		<li>WaterShallow</li>
+		<li>WaterMovingShallow</li>
+		<li>WaterOceanShallow</li>
+		<li>WaterOceanDeep</li>
+      </terrainValidationDisallowed>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>4</radius>
+          <affordance>Heavy</affordance>
+        </li>
+        <li Class="ScattererValidator_NoNonNaturalEdifices">
+          <radius>4</radius>
+        </li>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>RareMineralDeposits</defName>
+    <order>504</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>RareMineralDeposits</thingDef>
+			<allowInWaterBiome>false</allowInWaterBiome>
+			<minSpacing>25</minSpacing>
+      <extraNoBuildEdgeDist>4</extraNoBuildEdgeDist>
+      <countPer10kCellsRange>
+        <min>0.4</min>
+        <max>0.6</max>
+      </countPer10kCellsRange>
+      <clearSpaceSize>30</clearSpaceSize>
+      <terrainValidationRadius>4</terrainValidationRadius>
+      <terrainValidationDisallowed>
+        <li>Road</li>
+		<li>Mud</li>
+		<li>Marsh</li>
+		<li>MarshyTerrain</li>
+		<li>WaterDeep</li>
+		<li>WaterMovingChestDeep</li>
+		<li>WaterShallow</li>
+		<li>WaterMovingShallow</li>
+		<li>WaterOceanShallow</li>
+		<li>WaterOceanDeep</li>
+      </terrainValidationDisallowed>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>4</radius>
+          <affordance>Heavy</affordance>
+        </li>
+        <li Class="ScattererValidator_NoNonNaturalEdifices">
+          <radius>4</radius>
+        </li>
+      </validators>
+    </genStep>
+  </GenStepDef>
+-->
+	<GenStepDef>
+		<defName>AlgaeSpawn</defName>
+		<order>801</order>
+		<genStep Class="SK.GenStep_Algae"/>
+	</GenStepDef>
+
+  <GenStepDef>
+    <defName>ScatterAncientStargate</defName>
+    <order>1601</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>AncientStargate</thingDef>
+      <stuff>AlphaPoly</stuff>
+
+      <count>1</count>
+      <onlyOnStartingMap>true</onlyOnStartingMap>
+      <allowInWaterBiome>false</allowInWaterBiome>
+      <allowRoofed>false</allowRoofed>
+      <allowFoggedPositions>false</allowFoggedPositions>
+
+      <minEdgeDistPct>0.166667</minEdgeDistPct>
+      <minDistToPlayerStartPct>0.333</minDistToPlayerStartPct>
+
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>2</radius>
+          <affordance>Heavy</affordance>
+        </li>
+        <li Class="ScattererValidator_AvoidSpecialThings"/>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>ScatterWoodenDebris</defName>
+    <order>1602</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>WoodenDebris</thingDef>
+      <stuff>WoodLog</stuff>
+      <countPer10kCellsRange>2.56~3.2</countPer10kCellsRange>
+      <onlyOnStartingMap>true</onlyOnStartingMap>
+      <allowInWaterBiome>false</allowInWaterBiome>
+      <allowRoofed>false</allowRoofed>
+      <allowFoggedPositions>false</allowFoggedPositions>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>1</radius>
+          <affordance>Light</affordance>
+        </li>
+        <li Class="ScattererValidator_AvoidSpecialThings"/>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>ScatterCairns</defName>
+    <order>1603</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>Cairn</thingDef>
+      <stuff>BlocksLimestone</stuff>
+      <countPer10kCellsRange>3.2~4.48</countPer10kCellsRange>
+      <onlyOnStartingMap>true</onlyOnStartingMap>
+      <allowInWaterBiome>false</allowInWaterBiome>
+      <allowRoofed>false</allowRoofed>
+      <allowFoggedPositions>false</allowFoggedPositions>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>1</radius>
+          <affordance>Light</affordance>
+        </li>
+        <li Class="ScattererValidator_AvoidSpecialThings"/>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>ScatterCrashedShipWrecks</defName>
+    <order>1604</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>CrashedShipWreck</thingDef>
+      <countPer10kCellsRange>0.16~0.32</countPer10kCellsRange>
+      <onlyOnStartingMap>true</onlyOnStartingMap>
+      <allowInWaterBiome>false</allowInWaterBiome>
+      <allowRoofed>false</allowRoofed>
+      <allowFoggedPositions>false</allowFoggedPositions>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>2</radius>
+          <affordance>Light</affordance>
+        </li>
+        <li Class="ScattererValidator_AvoidSpecialThings"/>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>ScatterShipWrecks</defName>
+    <order>1605</order>
+    <genStep Class="GenStep_ScatterThings">
+      <thingDef>ShipWreck</thingDef>
+      <countPer10kCellsRange>0.16~0.48</countPer10kCellsRange>
+      <onlyOnStartingMap>true</onlyOnStartingMap>
+      <allowInWaterBiome>false</allowInWaterBiome>
+      <allowRoofed>false</allowRoofed>
+      <allowFoggedPositions>false</allowFoggedPositions>
+      <validators>
+        <li Class="ScattererValidator_Buildable">
+          <radius>2</radius>
+          <affordance>Light</affordance>
+        </li>
+        <li Class="ScattererValidator_AvoidSpecialThings"/>
+      </validators>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

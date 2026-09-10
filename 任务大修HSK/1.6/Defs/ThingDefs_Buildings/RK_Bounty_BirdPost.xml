@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- 信鸽柱:委托/通缉的收发枢纽。没建柱(或缺饲料)就收不到新委托、发不了单。
+	     骨架移植自 Medieval Overhaul DankPyon_BirdPost,喂食改用原版 CompRefuelable(免 MO DLL 依赖)。 -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RK_Bounty_BirdPost</defName>
+		<label>bird post</label>
+		<description>A trained carrier bird roosts here, flying letters between the colony and far-off factions. New bounties arrive by bird and must be collected in person, and warrants can only be dispatched from this post. The birds must be kept fed with animal feed or raw food, or they will refuse to fly.</description>
+		<researchPrerequisites>
+			<li>RK_MedievalComms</li>
+		</researchPrerequisites>
+		<thingClass>QuestBoardHSK.Building_RK_BirdPost</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Misc/BirdPost</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1.1875)</drawSize>
+			<drawOffset>(0,0,0.09375)</drawOffset>
+		</graphicData>
+		<uiIconPath>Things/Building/Misc/BirdPostIcon</uiIconPath>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>30</pathCost>
+		<fillPercent>0.15</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<statBases>
+			<MaxHitPoints>30</MaxHitPoints>
+			<WorkToBuild>750</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-5</Cleanliness>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<size>(1,1)</size>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+		</building>
+		<!-- 造价(2026-09-03 调):材质×30(金属/石/木) + 原始零部件×2 + 粗饲料×20 -->
+		<costList>
+			<ComponentMedieval>2</ComponentMedieval>
+			<Kibble>20</Kibble>
+		</costList>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Stony</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>0.45</fuelConsumptionRate>
+				<fuelCapacity>2</fuelCapacity>
+				<fuelFilter>
+					<categories>
+						<li>Animalfood</li>
+						<li>FoodRaw</li>
+					</categories>
+					<thingDefs>
+						<li>Hay</li>
+						<li>Kibble</li>
+					</thingDefs>
+				</fuelFilter>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<fuelIconPath>UI/EmptyMeat_Icon</fuelIconPath>
+			</li>
+		</comps>
+		<hasInteractionCell>true</hasInteractionCell>
+		<interactionCellOffset>(0,0,1)</interactionCellOffset>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>Misc</designationCategory>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+	</ThingDef>
+
+</Defs>

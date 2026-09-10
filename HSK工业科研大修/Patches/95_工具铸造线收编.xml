@@ -1,0 +1,59 @@
+<Patch>
+  <!-- 95_工具铸造线收编 (2026-08-30, 体系化收编批3)
+       目的: 给 Vile's Metallurgy 的 Cast_* 铸造工具配方补研究门控。
+       现状: 10 条配方(5 单件 + 5 批量)的 researchPrerequisite 全被源 mod 注释,
+       只受 Foundry 建造(Metallurgy_B4)间接门控。
+       方案: 统一挂 RKHSK_Tools_Medieval2(工具II, 前置=工具I+Metallurgy_B3),
+       铸造版作为工具II 的进阶产物(批量×3 是铸造线独有的效率优势)。
+       工具III 厨师刀/大剪的 STL 化已由源 mod 自行完成, 无需处理。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Foundry"]</xpath>
+    <match Class="PatchOperationSequence">
+      <success>Normal</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Handaxe"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Pickaxe"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Hammer"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Sickle"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Hoe"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Handaxe_Batch"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Pickaxe_Batch"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Hammer_Batch"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Sickle_Batch"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/RecipeDef[defName="Cast_Hoe_Batch"]</xpath>
+          <value><researchPrerequisite>RKHSK_Tools_Medieval2</researchPrerequisite></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

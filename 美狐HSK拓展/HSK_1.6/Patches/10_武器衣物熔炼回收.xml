@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        美狐 HSK 版本 · 10_武器衣物熔炼回收(2026-08-27)
+        目标: 武器可在熔炼炉回收为 Weapon_Parts(Core_SK 通用零件),
+              衣物/头饰可被 SmeltApparel 配方接收(smeltable=true)。
+        产物标准: 统一 Weapon_Parts, 按科技等级递进
+                  Industrial(含 Medieval/Neolithic) ×3 / Spacer ×5。
+        ===================================================================== -->
+
+    <!-- ────────── 武器熔炼产物 ×3(Industrial/Medieval/Neolithic) ────────── -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RifleCQB"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_Pistol"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RifleDefenceGrenade"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RifleMachinegun"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RifleOld"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RifleGrenade"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_Shotgun"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_AutoShotgun"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RiflePlasma"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_SniperPlasma"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_ShotgunPsychic"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RiflePsychic"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_PowerClaw"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_PowerHammer"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_RingedBlade"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_Tachi"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_Sappertool"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_EltexB"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_EltexA"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_EltexAxe"]</xpath>
+        <value><smeltProducts><Weapon_Parts>3</Weapon_Parts></smeltProducts></value>
+    </Operation>
+
+    <!-- ────────── 武器熔炼产物 ×5(Spacer) ────────── -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Miho_Weapon_PlasmaTachi"]</xpath>
+        <value><smeltProducts><Weapon_Parts>5</Weapon_Parts></smeltProducts></value>
+    </Operation>
+
+    <!-- ────────── 衣物/头饰可熔炼(按类别批量, not(smeltable) 防重复) ────────── -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[thingCategories/li[text()="Miho_Apparel"] and not(smeltable)]</xpath>
+        <value><smeltable>true</smeltable></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[thingCategories/li[text()="Miho_Headgear"] and not(smeltable)]</xpath>
+        <value><smeltable>true</smeltable></value>
+    </Operation>
+</Patch>

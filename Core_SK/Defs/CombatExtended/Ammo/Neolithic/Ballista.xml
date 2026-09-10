@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>AmmoBalistaBolts</defName>
+		<label>balista bolts</label>
+		<parent>AmmoMedieval</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberArrow</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_Balista</defName>
+		<label>balista bolts</label>
+		<ammoTypes>
+			<Ammo_BalistaBolt>Projectile_BalistaBolt</Ammo_BalistaBolt>
+			<Ammo_BalistaBolt_Explosive>Projectile_BalistaBolt_Explosive</Ammo_BalistaBolt_Explosive>
+		</ammoTypes>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="BalistaBallBase" ParentName="NeolithicAmmoBase" Abstract="True">
+		<description>A large crossbow-like weapon.</description>
+		<thingCategories>
+			<li>AmmoBalistaBolts</li>
+		</thingCategories>
+		<stackLimit>75</stackLimit>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting_FueledSmithy</li>
+			<li>CE_AutoEnableCrafting_ElectricSmithy</li>
+		</tradeTags>
+		<statBases>
+			<Mass>2</Mass>
+			<Bulk>2</Bulk>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Flammability>1</Flammability>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="BalistaBallBase">
+		<defName>Ammo_BalistaBolt</defName>
+		<label>balista bolt</label>
+		<graphicData>
+			<texPath>Things/Weapons/Melee/BallistaBolt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>1</MarketValue>
+		</statBases>
+		<ammoClass>BalistaBolt</ammoClass>
+        <generateAllowChance>1</generateAllowChance>
+        <spawnAsSiegeAmmo>true</spawnAsSiegeAmmo>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="BalistaBallBase">
+		<defName>Ammo_BalistaBolt_Explosive</defName>
+		<label>explosive balista bolt</label>
+		<graphicData>
+			<texPath>Things/Weapons/Melee/BallistaBolt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>7</MarketValue>
+		</statBases>
+		<ammoClass>ExplosiveArrow</ammoClass>
+		<generateAllowChance>0.15</generateAllowChance>
+        <spawnAsSiegeAmmo>true</spawnAsSiegeAmmo>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="BaseBallistaBoltProjectile" ParentName="SK_BaseBullet" Abstract="true">
+		<graphicData>
+			<texPath>Things/Projectile/BallistaBolt</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Stab</damageDef>
+			<speed>45</speed>
+            <suppressionFactor>5</suppressionFactor>
+            <dangerFactor>4</dangerFactor>
+            <airborneSuppressionFactor>7</airborneSuppressionFactor>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="BaseBallistaBoltProjectile">
+		<defName>Projectile_BalistaBolt</defName>
+		<label>ballista Bolt</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>50</damageAmountBase>
+			<!-- <armorPenetrationBase>0.7</armorPenetrationBase> -->
+			<armorPenetrationBlunt>160</armorPenetrationBlunt>
+			<armorPenetrationSharp>7</armorPenetrationSharp>
+			<preExplosionSpawnChance>0.33</preExplosionSpawnChance>
+			<preExplosionSpawnThingDef>Ammo_BalistaBolt</preExplosionSpawnThingDef>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="BaseBallistaBoltProjectile">
+		<defName>Projectile_BalistaBolt_Explosive</defName>
+		<label>explosive ballista Bolt</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>40</damageAmountBase>
+			<armorPenetrationBlunt>166</armorPenetrationBlunt>
+			<armorPenetrationSharp>6</armorPenetrationSharp>
+			<secondaryDamage>
+				<li>
+					<def>Bomb_Secondary</def>
+					<amount>25</amount>
+				</li>
+			</secondaryDamage>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="AmmoRecipeNeolithicBase">
+		<defName>MakeAmmo_BalistaBolt</defName>
+		<label>make metallic balista bolts x10</label>
+		<description>Craft 10 balista metallic bolts.</description>
+		<jobString>Making balista bolts.</jobString>
+		<targetCountAdjustment>10</targetCountAdjustment>
+		<workAmount>1500</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Wooden</li>
+					</categories>
+				</filter>
+				<count>2</count>
+			</li>
+			<li>
+				<filter>
+					<categories>
+						<li>Metallic</li>
+					</categories>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Wooden</li>
+				<li>Metallic</li>
+			</categories>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_BalistaBolt>10</Ammo_BalistaBolt>
+		</products>
+		<researchPrerequisite>Ballista_B1</researchPrerequisite>
+	</RecipeDef>
+
+	<RecipeDef ParentName="AmmoRecipeNeolithicBase">
+		<defName>MakeAmmo_BalistaBolt_Explosive</defName>
+		<label>make explosive balista bolts x10</label>
+		<description>Craft 10 balista explosive bolts.</description>
+		<jobString>Making balista bolts.</jobString>
+		<targetCountAdjustment>10</targetCountAdjustment>
+		<workAmount>4500</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Wooden</li>
+					</categories>
+				</filter>
+				<count>2</count>
+			</li>
+			<li>
+				<filter>
+					<categories>
+						<li>Metallic</li>
+					</categories>
+				</filter>
+				<count>5</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+						<li>Powder</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Wooden</li>
+				<li>Metallic</li>
+			</categories>
+			<thingDefs>
+				<li>FSX</li>
+				<li>Powder</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_BalistaBolt_Explosive>10</Ammo_BalistaBolt_Explosive>
+		</products>
+		<researchPrerequisite>Ballista_B1</researchPrerequisite>
+	</RecipeDef>
+
+</Defs>

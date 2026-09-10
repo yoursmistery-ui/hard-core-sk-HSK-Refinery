@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         56_造箭配方木板统一.xml (2026-09-06)
+         07 号已把 CE 五种箭矢(MakeAmmo_Arrow_*)改为指定木板清单;
+         本文件补齐仍用 Wooden 类别(=任意原木)的造箭配方, 统一改为
+         15 种木板(任意木板皆可):
+           Core_SK: MakeAmmo_Arrow_Explosive, MakeAmmo_Bolt_Metallic,
+                    MakeAmmo_Bolt_Venom, MakeAmmo_Bolt_Explosive,
+                    MakeAmmo_BalistaBolt, MakeAmmo_BalistaBolt_Explosive
+           HMC Vile's Pre-Industrial: MakeAmmo_Bolt_Bodkin
+         金属/火药/草药成分保持不变; 数量不变。
+         ============================================================ -->
+    <!-- Core_SK: 爆炸箭 x50 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Explosive"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>FSX</li>
+                                <li>Powder</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Arrow_Explosive"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                        <li>FSX</li>
+                        <li>Powder</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Core_SK: 金属制弩箭 x50 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Metallic"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Metallic"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>10</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Metallic"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Metallic"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Core_SK: 毒液弩箭 x50 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Venom"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Venom"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>7</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>MedicineHerbal</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Venom"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Venom"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                        <li>MedicineHerbal</li>
+                    </thingDefs>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Core_SK: 爆炸弩箭 x50 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Explosive"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>10</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>FSX</li>
+                                <li>Powder</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Explosive"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                        <li>FSX</li>
+                        <li>Powder</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Core_SK: 金属制固定式大型弩箭 x10 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Core_SK: 爆炸弩箭(床弩) x10 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt_Explosive"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>FSX</li>
+                                <li>Powder</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt_Explosive"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_BalistaBolt_Explosive"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                        <li>FSX</li>
+                        <li>Powder</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- Vile's Pre-Industrial: 穿甲弩箭 x50 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Bodkin"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Bodkin"]/ingredients</xpath>
+            <value>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>AcaciaPlank</li>
+                                <li>BambooPlank</li>
+                                <li>BirchPlank</li>
+                                <li>CecropiaPlank</li>
+                                <li>CypressPlank</li>
+                                <li>DragonwoodPlank</li>
+                                <li>MangrovePlank</li>
+                                <li>MaplePlank</li>
+                                <li>OakPlank</li>
+                                <li>PinePlank</li>
+                                <li>PoplarPlank</li>
+                                <li>RedWoodPlank</li>
+                                <li>TeakPlank</li>
+                                <li>WillowPlank</li>
+                                <li>WoodPlank</li>
+                            </thingDefs>
+                        </filter>
+                        <count>5</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <categories>
+                                <li>Metallic</li>
+                            </categories>
+                        </filter>
+                        <count>10</count>
+                    </li>
+                </ingredients>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Bodkin"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Bodkin"]/fixedIngredientFilter</xpath>
+            <value>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>AcaciaPlank</li>
+                        <li>BambooPlank</li>
+                        <li>BirchPlank</li>
+                        <li>CecropiaPlank</li>
+                        <li>CypressPlank</li>
+                        <li>DragonwoodPlank</li>
+                        <li>MangrovePlank</li>
+                        <li>MaplePlank</li>
+                        <li>OakPlank</li>
+                        <li>PinePlank</li>
+                        <li>PoplarPlank</li>
+                        <li>RedWoodPlank</li>
+                        <li>TeakPlank</li>
+                        <li>WillowPlank</li>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                    <categories>
+                        <li>Metallic</li>
+                    </categories>
+                </fixedIngredientFilter>
+            </value>
+        </match>
+    </Operation>
+</Patch>

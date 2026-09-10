@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffGiverSetDef[defName = "Human"]/hediffGivers</xpath>
+		<value>
+			<li Class="CommunicableDiseases.HediffGiver_CommunicateDiseaseDirect">
+				<hediff>Flu</hediff>
+				<diseaseDef>Flu</diseaseDef>
+				<diseaseFilth>Filth_FluGerms</diseaseFilth>
+				<germDropRate>32</germDropRate>
+				<humanlikeDisease>true</humanlikeDisease>
+				<animalDisease>false</animalDisease>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffGiverSetDef[defName = "Human"]/hediffGivers</xpath>
+		<value>
+			<li Class="CommunicableDiseases.HediffGiver_CommunicateDiseaseDirect">
+				<hediff>Plague</hediff>
+				<diseaseDef>Plague</diseaseDef>
+				<diseaseFilth>Filth_PlagueGerms</diseaseFilth>
+				<germDropRate>36</germDropRate>
+				<humanlikeDisease>true</humanlikeDisease>
+				<animalDisease>false</animalDisease>
+			</li>
+		</value>
+	</Operation>
+
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffGiverSetDef[defName = "Human"]/hediffGivers</xpath>
+		<value>
+			<li Class="CommunicableDiseases.HediffGiver_CommunicateDiseaseDirect">
+				<hediff>CommonCold</hediff>
+				<diseaseDef>CommonCold</diseaseDef>
+				<diseaseFilth>Filth_CommonColdGerms</diseaseFilth>
+				<germDropRate>34</germDropRate>
+				<humanlikeDisease>true</humanlikeDisease>
+				<animalDisease>false</animalDisease>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffGiverSetDef[defName = "Human"]/hediffGivers</xpath>
+		<value>
+			<li Class="CommunicableDiseases.HediffGiver_CommunicateDiseaseDirect">
+				<hediff>Measles</hediff>
+				<diseaseDef>Measles</diseaseDef>
+				<diseaseFilth>Filth_MeaslesGerms</diseaseFilth>
+				<germDropRate>30</germDropRate>
+				<humanlikeDisease>true</humanlikeDisease>
+				<animalDisease>false</animalDisease>
+			</li>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/HediffGiverSetDef[defName = "Human"]/hediffGivers</xpath>
+		<value>
+			<li Class="CommunicableDiseases.HediffGiver_CommunicateDiseaseDirect">
+				<hediff>Coronavirus</hediff>
+				<diseaseDef>Coronavirus</diseaseDef>
+				<diseaseFilth>Filth_CoronavirusGerms</diseaseFilth>
+				<germDropRate>39</germDropRate>
+				<humanlikeDisease>true</humanlikeDisease>
+				<animalDisease>false</animalDisease>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="SK.PatchOperationReplaceExtended">
+		<xpath>Defs/HediffDef[defName="Flu" or 
+			defName="Plague" or 
+			defName="CommonCold" or 
+			defName="Measles" or 
+			defName="Coronavirus"]</xpath>
+		<value>
+			<isInfection>true</isInfection>
+			<possiblePathways>
+				<SK_ContagiousGerms>Patient recently had contact with infectious germs</SK_ContagiousGerms>
+			</possiblePathways>
+		</value>
+	</Operation>
+
+	<Operation Class="SK.PatchOperationReplaceExtended">
+		<xpath>Defs/ThingDef[defName="Filth_CoronavirusGerms" or
+			defName="Filth_MeaslesGerms" or
+			defName="Filth_CommonColdGerms" or
+			defName="Filth_PlagueGerms" or
+			defName="Filth_FluGerms"]
+		</xpath>
+		<value>
+			<thingClass>CommunicableDiseases.Filth_Germ</thingClass>
+		</value>
+	</Operation>
+	
+</Patch>

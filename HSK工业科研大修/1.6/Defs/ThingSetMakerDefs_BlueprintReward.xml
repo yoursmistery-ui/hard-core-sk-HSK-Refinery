@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ============================================================================
+  蓝图奖励生成器 (参考定义)
+  ============================================================================
+  自定义 ThingSetMaker: 从门控清单随机选一张蓝图 (70% 优先「前置已满足」的)。
+  已由 Patches/BlueprintUnlock_EventIntegration.xml 注入到:
+    - Reward_ItemsStandard (标准任务奖励池, 覆盖 RimQuest 等全部任务)
+    - AlliesGift (Cybranian Events 盟友礼物)
+  如需手动加入其它奖励池, 复制本 def 的 root 到目标 ThingSetMakerDef 的
+  <li> 选项里即可 (ThingSetMaker_Sum 用 <chance>, RandomOption 用 <weight>)。
+  ============================================================================ -->
+<Defs>
+	<ThingSetMakerDef>
+		<defName>BlueprintReward</defName>
+		<root Class="BlueprintUnlockHSK.ThingSetMaker_BlueprintReward" />
+	</ThingSetMakerDef>
+</Defs>

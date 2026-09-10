@@ -1,0 +1,4531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- ============================================================================
+
+  科技蓝图·图纸书 (读书推进解锁 v5.0, 2026-09-10)
+
+  ============================================================================
+
+  全部蓝图书 = 原版 Book 体系 (ParentName=BookBase, thingClass=BlueprintBook 子类):
+
+    放书架/阅读/读后保留/带「已读 / 研读 X%」标记; 书名固定 = def.label (子类 override)。
+
+  阅读链接 = 原版 JobDefOf.Reading / JobDriver_Reading (娱乐活动; 自带动画/进度条/就坐)。
+
+  配置 = BlueprintTargetExtension:
+
+    - targetTech:     目标科技 defName
+
+    - tier:           1=中世纪 2=工业 3=太空 4=极致 5=超凡 (驱动门槛/倍率/商人权重)
+
+    - researchPoints: 保留字段 (商人定价/投放权重参考, 不直接加科研值)
+
+    - bookIndex:      系列序号 1..N (缺省按 defName 排序自动推导)
+
+    - minIntellect:   阅读门槛(智力等级); 0 = 按 tier → 4/8/12/16/20
+
+    - intellectMult:  读书智力经验倍率; 0 = 按 tier → 1.0/1.5/2.0/2.5/3.0
+
+    - joyFactor:      娱乐系数; 0 = 全局默认 0.25 (原版小说 1.0~2.5)
+
+    - readCost:       读完一本书所需累计 factor; 0 = 全局默认 5000 (≈一次强制阅读)
+
+    - finishOnUnlock: 进度满 1.0 时是否直接完成该研究 (默认 false = 只解锁研究权限; 并行通道书显式写 true)
+
+    - gate:           true=未读满不可研究(门控); false=只作并行推进通道, 不挡原版研究
+
+  系列 = 同一 targetTech 的全部蓝图书 (中世纪 1 本, 太空 2 本, 极致 3 本, 超凡 4 本)。
+
+  读完系列全部卷册 (进度 100%) → 解锁该科技的「研究权限」(变成可研究), 不再直接完成研究。
+
+  机制代码见 Source/BlueprintUnlockHSK.cs (BlueprintUnlockHSK.*)。
+
+  ============================================================================ -->
+
+<Defs>
+
+
+
+	<!-- ========== 蓝图书基类 (ParentName=BookBase, 见 Core Defs/Books/BookDefs.xml) ========== -->
+
+	<!-- 注意: 清空 BookBase 继承的 thingSetMakerTags, 防止蓝图书进原版普通奖励池 -->
+
+	<ThingDef ParentName="BookBase" Name="RK_BlueprintBookBase" Abstract="True">
+
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+
+		<label>blueprint book</label>
+
+		<description>A blueprint document. Reading it contributes to unlocking a technology series.</description>
+
+		<graphicData>
+
+			<texPath>Things/Item/Blueprints/Blueprint_New</texPath>
+
+			<graphicClass>Graphic_Single</graphicClass>
+
+			<drawSize>0.8</drawSize>
+
+		</graphicData>
+
+		<uiIconPath>Things/Item/Blueprints/Blueprint_New</uiIconPath>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<tradeTags>
+
+			<li>Exotic</li>
+
+			<li>Blueprint</li>
+
+		</tradeTags>
+
+		<!-- 注意: BookBase 父类已含 thingCategories Books, 列表默认合并会重复 → Inherit=False 只保留本列表 -->
+
+		<thingCategories Inherit="False">
+
+			<li>Books</li>
+
+			<li>RK_BlueprintBooks</li>
+
+		</thingCategories>
+
+		<thingSetMakerTags Inherit="False" />
+
+		<comps>
+
+			<li Class="CompProperties_Book">
+
+				<ageYearsRange>100~200</ageYearsRange>
+
+				<openGraphic>
+
+					<texPath>Things/Item/Blueprints/Blueprint_Old</texPath>
+
+					<graphicClass>Graphic_Single</graphicClass>
+
+					<drawSize>0.7</drawSize>
+
+				</openGraphic>
+
+				<verticalGraphic>
+
+					<texPath>Things/Item/Blueprints/Blueprint_Old</texPath>
+
+					<graphicClass>Graphic_Single</graphicClass>
+
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+
+				</verticalGraphic>
+
+				<doers>
+
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+
+				</doers>
+
+			</li>
+
+		</comps>
+
+	</ThingDef>
+
+
+
+	<!-- ===== 分档抽象基类 tier1 (RK_Schematic_Medieval): 挂对应可视子分类 ===== -->
+	<!-- 默认=中世纪未读卷轴 Blueprint_Medieval_Unread; 读过后 BlueprintBook.Graphic/UIIconOverride 自动切 Blueprint_Medieval_Read -->
+	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier1" Abstract="True">
+		<thingCategories Inherit="False">
+			<li>RK_Schematic_Medieval</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Blueprints/Blueprint_Medieval_Unread</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Medieval_Unread</uiIconPath>
+	</ThingDef>
+
+
+	<!-- ===== 分档抽象基类 tier2 (RK_Blueprint_Industrial): 挂对应可视子分类 ===== -->
+	<!-- 默认=工业未读卷轴 Blueprint_Industrial_Unread; 读过后 BlueprintBook.Graphic/UIIconOverride 自动切 Blueprint_Industrial_Read -->
+	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_Tier2" Abstract="True">
+		<thingCategories Inherit="False">
+			<li>RK_Blueprint_Industrial</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Blueprints/Blueprint_Industrial_Unread</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Industrial_Unread</uiIconPath>
+	</ThingDef>
+
+
+	<!-- ===== 高科技档共享基类 (tier3 太空 / tier4 极致 / tier5 超凡) ===== -->
+	<!-- 三档统一用 Blueprint_HighTech(紫色高科技图纸卷轴); 基类 Blueprint_New 属工业档, 不得再被继承 -->
+	<ThingDef ParentName="RK_BlueprintBookBase" Name="RK_BP_TierHighTech" Abstract="True">
+		<graphicData>
+			<texPath>Things/Item/Blueprints/Blueprint_Spacer_Unread</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/Blueprint_Spacer_Unread</uiIconPath>
+		<comps Inherit="False">
+			<li Class="CompProperties_Book">
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Blueprints/Blueprint_HighTech</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<!-- ===== 分档抽象基类 tier3 (RK_Blueprint_Spacer): 挂对应可视子分类 ===== -->
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier3" Abstract="True">
+		<thingCategories Inherit="False">
+			<li>RK_Blueprint_Spacer</li>
+		</thingCategories>
+	</ThingDef>
+
+
+	<!-- ===== 分档抽象基类 tier4 (RK_Blueprint_Ultra): 挂对应可视子分类 ===== -->
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier4" Abstract="True">
+		<thingCategories Inherit="False">
+			<li>RK_Blueprint_Ultra</li>
+		</thingCategories>
+	</ThingDef>
+
+
+	<!-- ===== 分档抽象基类 tier5 (RK_Blueprint_Archotech): 挂对应可视子分类 ===== -->
+	<ThingDef ParentName="RK_BP_TierHighTech" Name="RK_BP_Tier5" Abstract="True">
+		<thingCategories Inherit="False">
+			<li>RK_Blueprint_Archotech</li>
+		</thingCategories>
+	</ThingDef>
+
+<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_PlateArmor</defName>
+
+		<label>图纸书:板甲·暗黑时代</label>
+
+		<description>一份记载着【PlateArmor】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>PlateArmor</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_MetallurgyV</defName>
+
+		<label>图纸书:冶金术·精炼</label>
+
+		<description>一份记载着【Metallurgy_B5】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Metallurgy_B5</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_SteelIII</defName>
+
+		<label>图纸书:高级钢铁 III</label>
+
+		<description>一份记载着【Steel_B3】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Steel_B3</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_ToolsIII</defName>
+
+		<label>图纸书:中世纪工具 II</label>
+
+		<description>一份记载着【RKHSK_Tools_Medieval2】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>RKHSK_Tools_Medieval2</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_MedicineIV</defName>
+
+		<label>图纸书:医疗物资 IV</label>
+
+		<description>一份记载着【Medicine_B2】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Medicine_B2</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_Greatbow</defName>
+
+		<label>图纸书:长弓 I</label>
+
+		<description>一份记载着【Greatbow】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Greatbow</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier1">
+
+		<defName>SchematicBook_Ballista</defName>
+
+		<label>图纸书:攻城器械</label>
+
+		<description>一份记载着【Ballista_B1】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1000</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ballista_B1</targetTech>
+
+				<tier>1</tier>
+
+				<researchPoints>250</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<!-- ========== tier2 工业档 (2026-08-27 蓝图经济 v4.1: 电力工程I 走蓝图书制, 贴图取 MO 图纸卷轴) ========== -->
+
+	<ThingDef ParentName="RK_BP_Tier2">
+
+		<defName>Blueprint_Electricity</defName>
+
+		<label>蓝图:电力工程 I</label>
+
+		<description>一份记载着【电力工程】科技的图纸卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>1500</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Electricity</targetTech>
+
+				<tier>2</tier>
+
+				<researchPoints>400</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_OARK_Odyssey_GravTrap_I</defName>
+
+		<label>蓝图:引力陷阱 I</label>
+
+		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravTrap</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_OARK_Odyssey_GravTrap_II</defName>
+
+		<label>蓝图:引力陷阱 II</label>
+
+		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravTrap</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Armor_D1b_I</defName>
+
+		<label>蓝图:装甲 V I</label>
+
+		<description>一份记载着【Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Armor_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Armor_D1b_II</defName>
+
+		<label>蓝图:装甲 V II</label>
+
+		<description>一份记载着【Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Armor_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Laser_weapons_D_I</defName>
+
+		<label>蓝图:激光武器 I I</label>
+
+		<description>一份记载着【Laser_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Laser_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Laser_weapons_D_II</defName>
+
+		<label>蓝图:激光武器 I II</label>
+
+		<description>一份记载着【Laser_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Laser_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Plasma_weapons_D_I</defName>
+
+		<label>蓝图:等离子武器 I I</label>
+
+		<description>一份记载着【Plasma_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Plasma_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Plasma_weapons_D_II</defName>
+
+		<label>蓝图:等离子武器 I II</label>
+
+		<description>一份记载着【Plasma_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Plasma_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Charge_weapons_D_I</defName>
+
+		<label>蓝图:电荷武器 I I</label>
+
+		<description>一份记载着【Charge_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Charge_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Charge_weapons_D_II</defName>
+
+		<label>蓝图:电荷武器 I II</label>
+
+		<description>一份记载着【Charge_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Charge_weapons_D</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Rockets_D1b_I</defName>
+
+		<label>蓝图:火箭 III I</label>
+
+		<description>一份记载着【Rockets_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Rockets_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Rockets_D1b_II</defName>
+
+		<label>蓝图:火箭 III II</label>
+
+		<description>一份记载着【Rockets_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Rockets_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Rockets_D2b_I</defName>
+
+		<label>蓝图:火箭 IV I</label>
+
+		<description>一份记载着【Rockets_D2】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Rockets_D2</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Rockets_D2b_II</defName>
+
+		<label>蓝图:火箭 IV II</label>
+
+		<description>一份记载着【Rockets_D2】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Rockets_D2</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_OARK_Odyssey_GravityApplication_I</defName>
+
+		<label>蓝图:引力运用 I</label>
+
+		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravityApplication</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_OARK_Odyssey_GravityApplication_II</defName>
+
+		<label>蓝图:引力运用 II</label>
+
+		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravityApplication</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Ratkin_Armor_II_I</defName>
+
+		<label>蓝图:鼠族盔甲 II I</label>
+
+		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier3">
+
+		<defName>Blueprint_Ratkin_Armor_II_II</defName>
+
+		<label>蓝图:鼠族盔甲 II II</label>
+
+		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>2250</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D1</targetTech>
+
+				<tier>3</tier>
+
+				<researchPoints>500</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_OARK_Odyssey_GravFieldCore_I</defName>
+
+		<label>蓝图:力场核心 I</label>
+
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravFieldCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_OARK_Odyssey_GravFieldCore_II</defName>
+
+		<label>蓝图:力场核心 II</label>
+
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravFieldCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_OARK_Odyssey_GravFieldCore_III</defName>
+
+		<label>蓝图:力场核心 III</label>
+
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>OARK_Odyssey_GravFieldCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PoweredArmor_I</defName>
+
+		<label>蓝图:动力甲 I</label>
+
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>PoweredArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PoweredArmor_II</defName>
+
+		<label>蓝图:动力甲 II</label>
+
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>PoweredArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PoweredArmor_III</defName>
+
+		<label>蓝图:动力甲 III</label>
+
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>PoweredArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ArmorE3b_I</defName>
+
+		<label>蓝图:盔甲 VIII I</label>
+
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Armor_E3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ArmorE3b_II</defName>
+
+		<label>蓝图:盔甲 VIII II</label>
+
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Armor_E3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ArmorE3b_III</defName>
+
+		<label>蓝图:盔甲 VIII III</label>
+
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Armor_E3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Cataphract_I</defName>
+
+		<label>蓝图:重骑兵甲 I</label>
+
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>CataphractArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Cataphract_II</defName>
+
+		<label>蓝图:重骑兵甲 II</label>
+
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>CataphractArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Cataphract_III</defName>
+
+		<label>蓝图:重骑兵甲 III</label>
+
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>CataphractArmor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_JumpPack_I</defName>
+
+		<label>蓝图:跳跃背包 I</label>
+
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>JumpPack</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_JumpPack_II</defName>
+
+		<label>蓝图:跳跃背包 II</label>
+
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>JumpPack</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_JumpPack_III</defName>
+
+		<label>蓝图:跳跃背包 III</label>
+
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>JumpPack</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Gunlink_I</defName>
+
+		<label>蓝图:枪械连接器 I</label>
+
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Gunlink</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Gunlink_II</defName>
+
+		<label>蓝图:枪械连接器 II</label>
+
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Gunlink</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Gunlink_III</defName>
+
+		<label>蓝图:枪械连接器 III</label>
+
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Gunlink</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_LaserE_I</defName>
+
+		<label>蓝图:激光武器 II I</label>
+
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Laser_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_LaserE_II</defName>
+
+		<label>蓝图:激光武器 II II</label>
+
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Laser_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_LaserE_III</defName>
+
+		<label>蓝图:激光武器 II III</label>
+
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Laser_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PlasmaE_I</defName>
+
+		<label>蓝图:等离子武器 II I</label>
+
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Plasma_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PlasmaE_II</defName>
+
+		<label>蓝图:等离子武器 II II</label>
+
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Plasma_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_PlasmaE_III</defName>
+
+		<label>蓝图:等离子武器 II III</label>
+
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Plasma_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ChargeE_I</defName>
+
+		<label>蓝图:电荷武器 II I</label>
+
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Charge_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ChargeE_II</defName>
+
+		<label>蓝图:电荷武器 II II</label>
+
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Charge_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ChargeE_III</defName>
+
+		<label>蓝图:电荷武器 II III</label>
+
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Charge_weapons_E</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Shield_I</defName>
+
+		<label>蓝图:能量护盾 I</label>
+
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Shield_II</defName>
+
+		<label>蓝图:能量护盾 II</label>
+
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_Shield_III</defName>
+
+		<label>蓝图:能量护盾 III</label>
+
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_OrbitalShield_I</defName>
+
+		<label>蓝图:轨道护盾 I</label>
+
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_OrbitalShield_II</defName>
+
+		<label>蓝图:轨道护盾 II</label>
+
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_OrbitalShield_III</defName>
+
+		<label>蓝图:轨道护盾 III</label>
+
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Fortification_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_IonGun_I</defName>
+
+		<label>蓝图:离子卫星广播器 I</label>
+
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ion_gun_D1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_IonGun_II</defName>
+
+		<label>蓝图:离子卫星广播器 II</label>
+
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ion_gun_D1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_IonGun_III</defName>
+
+		<label>蓝图:离子卫星广播器 III</label>
+
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ion_gun_D1</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipBasics_I</defName>
+
+		<label>蓝图:星际飞行基础 I</label>
+
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipBasics</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipBasics_II</defName>
+
+		<label>蓝图:星际飞行基础 II</label>
+
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipBasics</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipBasics_III</defName>
+
+		<label>蓝图:星际飞行基础 III</label>
+
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipBasics</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipEngine_I</defName>
+
+		<label>蓝图:星舰引擎 I</label>
+
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipEngine</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipEngine_II</defName>
+
+		<label>蓝图:星舰引擎 II</label>
+
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipEngine</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipEngine_III</defName>
+
+		<label>蓝图:星舰引擎 III</label>
+
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipEngine</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipReactor_I</defName>
+
+		<label>蓝图:星舰反应堆 I</label>
+
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipReactor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipReactor_II</defName>
+
+		<label>蓝图:星舰反应堆 II</label>
+
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipReactor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipReactor_III</defName>
+
+		<label>蓝图:星舰反应堆 III</label>
+
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipReactor</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCore_I</defName>
+
+		<label>蓝图:星舰计算机核心 I</label>
+
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipComputerCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCore_II</defName>
+
+		<label>蓝图:星舰计算机核心 II</label>
+
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipComputerCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCore_III</defName>
+
+		<label>蓝图:星舰计算机核心 III</label>
+
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipComputerCore</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipSensors_I</defName>
+
+		<label>蓝图:星舰传感器阵列 I</label>
+
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipSensorCluster</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipSensors_II</defName>
+
+		<label>蓝图:星舰传感器阵列 II</label>
+
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipSensorCluster</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipSensors_III</defName>
+
+		<label>蓝图:星舰传感器阵列 III</label>
+
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipSensorCluster</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCrypto_I</defName>
+
+		<label>蓝图:低温休眠舱 I</label>
+
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipCryptosleep</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCrypto_II</defName>
+
+		<label>蓝图:低温休眠舱 II</label>
+
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipCryptosleep</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_ShipCrypto_III</defName>
+
+		<label>蓝图:低温休眠舱 III</label>
+
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>ShipCryptosleep</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_MeleeVI_I</defName>
+
+		<label>蓝图:近战武器 VI I</label>
+
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Ultra</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_MeleeVI_II</defName>
+
+		<label>蓝图:近战武器 VI II</label>
+
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Ultra</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_MeleeVI_III</defName>
+
+		<label>蓝图:近战武器 VI III</label>
+
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Ultra</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_SuperMatter_I</defName>
+
+		<label>蓝图:物质转化 III I</label>
+
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Super_matter_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_SuperMatter_II</defName>
+
+		<label>蓝图:物质转化 III II</label>
+
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Super_matter_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ultra_SuperMatter_III</defName>
+
+		<label>蓝图:物质转化 III III</label>
+
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Super_matter_E2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_III_I</defName>
+
+		<label>蓝图:鼠族盔甲 III I</label>
+
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_III_II</defName>
+
+		<label>蓝图:鼠族盔甲 III II</label>
+
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_III_III</defName>
+
+		<label>蓝图:鼠族盔甲 III III</label>
+
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D2</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_IV_I</defName>
+
+		<label>蓝图:鼠族盔甲 IV I</label>
+
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_IV_II</defName>
+
+		<label>蓝图:鼠族盔甲 IV II</label>
+
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier4">
+
+		<defName>Blueprint_Ratkin_Armor_IV_III</defName>
+
+		<label>蓝图:鼠族盔甲 IV III</label>
+
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>3375</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Ratkin_Armor_D3</targetTech>
+
+				<tier>4</tier>
+
+				<researchPoints>700</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Melee_Archotech_I</defName>
+
+		<label>蓝图:近战武器 VII I</label>
+
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Melee_Archotech_II</defName>
+
+		<label>蓝图:近战武器 VII II</label>
+
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Melee_Archotech_III</defName>
+
+		<label>蓝图:近战武器 VII III</label>
+
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Melee_Archotech_IV</defName>
+
+		<label>蓝图:近战武器 VII IV</label>
+
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Melee_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>4</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Bow_Archotech_I</defName>
+
+		<label>蓝图:弓术 III I</label>
+
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Bow_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Bow_Archotech_II</defName>
+
+		<label>蓝图:弓术 III II</label>
+
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Bow_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Bow_Archotech_III</defName>
+
+		<label>蓝图:弓术 III III</label>
+
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Bow_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Bow_Archotech_IV</defName>
+
+		<label>蓝图:弓术 III IV</label>
+
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Bow_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>4</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_SMG_Archotech_I</defName>
+
+		<label>蓝图:冲锋枪 III I</label>
+
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>SMG_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_SMG_Archotech_II</defName>
+
+		<label>蓝图:冲锋枪 III II</label>
+
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>SMG_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_SMG_Archotech_III</defName>
+
+		<label>蓝图:冲锋枪 III III</label>
+
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>SMG_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_SMG_Archotech_IV</defName>
+
+		<label>蓝图:冲锋枪 III IV</label>
+
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>SMG_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>4</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Blaster_weapons_Archotech_I</defName>
+
+		<label>蓝图:能量武器 II I</label>
+
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Blaster_weapons_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Blaster_weapons_Archotech_II</defName>
+
+		<label>蓝图:能量武器 II II</label>
+
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Blaster_weapons_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Blaster_weapons_Archotech_III</defName>
+
+		<label>蓝图:能量武器 II III</label>
+
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Blaster_weapons_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Blaster_weapons_Archotech_IV</defName>
+
+		<label>蓝图:能量武器 II IV</label>
+
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Blaster_weapons_Archotech</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>4</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Archotech_Stargate_I</defName>
+
+		<label>蓝图:星门 I</label>
+
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Stargate_F1</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>1</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Archotech_Stargate_II</defName>
+
+		<label>蓝图:星门 II</label>
+
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Stargate_F1</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>2</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Archotech_Stargate_III</defName>
+
+		<label>蓝图:星门 III</label>
+
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Stargate_F1</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>3</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+	<ThingDef ParentName="RK_BP_Tier5">
+
+		<defName>Blueprint_Archotech_Stargate_IV</defName>
+
+		<label>蓝图:星门 IV</label>
+
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+
+		<statBases>
+
+			<MarketValue>5063</MarketValue>
+
+		</statBases>
+
+		<modExtensions>
+
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+
+				<targetTech>Stargate_F1</targetTech>
+
+				<tier>5</tier>
+
+				<researchPoints>1000</researchPoints>
+
+				<bookIndex>4</bookIndex>
+
+			</li>
+
+		</modExtensions>
+
+	</ThingDef>
+
+
+
+
+	<!-- ========== v4.2 新增: 工业档门控蓝图 (2 本/系列, 2026-08-28) ========== -->
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Machining_I</defName>
+		<label>蓝图:机械加工 I</label>
+		<description>一份记载着【机械加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Machining</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Machining_II</defName>
+		<label>蓝图:机械加工 II</label>
+		<description>一份记载着【机械加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Machining</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_MicroelectronicsBasics_I</defName>
+		<label>蓝图:微电子学 I</label>
+		<description>一份记载着【微电子学】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>MicroelectronicsBasics</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_MicroelectronicsBasics_II</defName>
+		<label>蓝图:微电子学 II</label>
+		<description>一份记载着【微电子学】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>MicroelectronicsBasics</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Metals_C1_I</defName>
+		<label>蓝图:金属加工 I</label>
+		<description>一份记载着【金属加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Metals_C1</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Metals_C1_II</defName>
+		<label>蓝图:金属加工 II</label>
+		<description>一份记载着【金属加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Metals_C1</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Fabrication_I</defName>
+		<label>蓝图:精密制造 I</label>
+		<description>一份记载着【精密制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Fabrication</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Fabrication_II</defName>
+		<label>蓝图:精密制造 II</label>
+		<description>一份记载着【精密制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Fabrication</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Glass_C1_I</defName>
+		<label>蓝图:玻璃制造 I</label>
+		<description>一份记载着【玻璃制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Glass_C1</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Glass_C1_II</defName>
+		<label>蓝图:玻璃制造 II</label>
+		<description>一份记载着【玻璃制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Glass_C1</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Batteries_I</defName>
+		<label>蓝图:蓄电池 I</label>
+		<description>一份记载着【蓄电池】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Batteries</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Batteries_II</defName>
+		<label>蓝图:蓄电池 II</label>
+		<description>一份记载着【蓄电池】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Batteries</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_Electricity_II</defName>
+		<label>蓝图:电力工程 II</label>
+		<description>一份记载着【电力工程】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Electricity</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- ========== v4.2 新增: 中世纪档门控图纸书 (1 本/系列, 2026-08-28) ========== -->
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_LongBlades</defName>
+		<label>图纸书:利刃武器</label>
+		<description>一份记载着【利刃武器】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>LongBlades</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_Armor_IronAge</defName>
+		<label>图纸书:铁器护甲</label>
+		<description>一份记载着【铁器护甲】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Armor_IronAge</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_GunPowderTech</defName>
+		<label>图纸书:火药</label>
+		<description>一份记载着【火药】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>GunPowderTech</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_Medieval_Cannons</defName>
+		<label>图纸书:中世纪火炮</label>
+		<description>一份记载着【中世纪火炮】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Medieval_Cannons</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+
+	<!-- ============================================================================
+	     v5 补齐 (2026-09-10): 14 项此前无蓝图书的 HSK 自研科技
+	     gate=false → 不抢走原版研究路线, 只额外提供「读书直接完成该研究」的并行通道
+	     ============================================================================ -->
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticFences</defName>
+		<label>图纸书:围栏工</label>
+		<description>一份记载着【RK_Rustic_SimpleFences】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_SimpleFences</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticDoors</defName>
+		<label>图纸书:朴素门具</label>
+		<description>一份记载着【RK_Rustic_SimpleDoors】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_SimpleDoors</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticAdvDoors</defName>
+		<label>图纸书:加固门具</label>
+		<description>一份记载着【RK_Rustic_AdvancedDoors】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_AdvancedDoors</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticCastle</defName>
+		<label>图纸书:立柱与城堡工程</label>
+		<description>一份记载着【RK_Rustic_ColumnsAndCastle】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_ColumnsAndCastle</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticBookFurniture</defName>
+		<label>图纸书:学术陈设</label>
+		<description>一份记载着【RK_Rustic_BookFurniture】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_BookFurniture</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_MiningPrimitive</defName>
+		<label>图纸书:原始采矿</label>
+		<description>一份记载着【RK_Mining_Primitive】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Mining_Primitive</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_QuarryPrimitive</defName>
+		<label>图纸书:原始采石</label>
+		<description>一份记载着【RK_Quarry_Primitive】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Quarry_Primitive</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_QuarryMedieval</defName>
+		<label>图纸书:采石场</label>
+		<description>一份记载着【RK_Quarry_Medieval】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Quarry_Medieval</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_PrimitiveLighting</defName>
+		<label>图纸书:原始取火与照明</label>
+		<description>一份记载着【RK_PrimitiveLighting】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_PrimitiveLighting</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_Sericulture</defName>
+		<label>图纸书:蚕桑缫丝</label>
+		<description>一份记载着【RK_Sericulture】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Sericulture</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroDistillation</defName>
+		<label>蓝图:石化工业 I·常减压蒸馏</label>
+		<description>一份记载着【RK_Petro_AtmosphericDistillation】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_AtmosphericDistillation</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroRefining</defName>
+		<label>蓝图:石化工业 II·管道精炼</label>
+		<description>一份记载着【RK_Petro_Refining】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_Refining</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroSynthesis</defName>
+		<label>蓝图:石化工业 III·连续合成</label>
+		<description>一份记载着【RK_Petro_Synthesis】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_Synthesis</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier3">
+		<defName>Blueprint_TransportDrones</defName>
+		<label>蓝图:运输无人机</label>
+		<description>一份记载着【TransportDrones】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>2250</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>TransportDrones</targetTech>
+				<tier>3</tier>
+				<researchPoints>500</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

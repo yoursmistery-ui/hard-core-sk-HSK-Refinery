@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="UniversalFermenterBase" Class="UniversalFermenterSK.ThingDef_UF">
+		<defName>PicklingStation</defName>
+		<label>pickling station</label>
+		<description>A bench with spacious storage cabinets for picking and and fermenting foods.</description>
+		<graphicData>
+			<texPath>Things/Building/Production/FoodStuff/PicklingStation</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,1)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(1.7, 1.0, 0.85)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<stuffCategories>
+			<li>Stony</li>
+			<li>Bricks</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>120</costStuffCount>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<statBases>
+			<WorkToBuild>900</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Mass>100</Mass>
+		</statBases>
+		<size>(2,1)</size>
+		<designationCategory>Production</designationCategory>
+		<!--<interactionCellOffset>(0,0,-1)</interactionCellOffset>-->
+		<building>
+			<uninstallWork>900</uninstallWork>
+		</building>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+		</comps>
+		<tickerType>Rare</tickerType>
+		<!--<placeWorkers>
+			<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+		</placeWorkers>-->
+		<researchPrerequisites>
+			<li>Food_B2</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<!-- ThingDef_UF fields -->
+		<showProductIcon>true</showProductIcon>
+		<barOffset>(0.0, 0.25)</barOffset>
+		<barScale>(0.7, 0.7)</barScale>
+		<slotsCount>16</slotsCount>
+	</ThingDef>
+
+	<ThingDef ParentName="SK_WorkTable">
+		<defName>Fryer</defName>
+		<label>deep fryer</label>
+		<thingClass>SK.Building_WorkTable_HeatPushAdvanced</thingClass>
+		<description>A deep fryer filled with hot cooking oil. Requires power.</description>
+		<graphicData>
+			<texPath>Things/Building/Production/FoodStuff/Fryer</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<drawRotated>false</drawRotated>
+			<shadowData>
+				<volume>(0.8, 0.5, 0.8)</volume>
+				<offset>(0,0,0)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<costStuffCount>135</costStuffCount>
+		<costList>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<ElectronicComponents>3</ElectronicComponents>
+			<Mechanism>5</Mechanism>
+		</costList>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<statBases>
+			<WorkToBuild>1800</WorkToBuild>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<WorkTableWorkSpeedFactor>1.1</WorkTableWorkSpeedFactor>
+			<Mass>20</Mass>
+		</statBases>
+		<size>(1,1)</size>
+		<designationCategory>Production</designationCategory>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<recipes>
+			<li>MakePoutine</li>
+		</recipes>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="SK.CompProperties_IdlePower">
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<basePowerConsumption>200</basePowerConsumption>
+				<idlePowerFactor>0.1</idlePowerFactor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>10</heatPerSecond>
+				<heatPushMaxTemperature>35</heatPushMaxTemperature>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>CookingTools</li>
+				</linkableFacilities>
+			</li>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
+			
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<building>
+			<isMealSource>true</isMealSource>
+			<heatPerTickWhileWorking>0.6</heatPerTickWhileWorking>
+			<uninstallWork>250</uninstallWork>
+			<workTableRoomRole>Kitchen</workTableRoomRole>
+		</building>
+		<researchPrerequisites>
+			<li>Food_C6</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+	</ThingDef>
+
+
+</Defs>

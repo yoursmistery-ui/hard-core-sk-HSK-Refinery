@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Core SK</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+		<operations>
+
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
+				<value>
+					<li>PlayerGuild</li>
+				</value>
+			</li>
+			
+		</operations>
+		</match>
+    </Operation>	
+	
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>HMC Vile's Pre-Industrial Overhaul</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+		<operations>
+			
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/FactionDef[defName="ImperialLegion"]/apparelStuffFilter</xpath>
+				<value>
+					<apparelStuffFilter>
+						<categories>
+							<li>Leathers</li>
+						</categories>
+						<thingDefs>
+							<li>Flaxcloth</li>
+							<li>WoolDromedary</li>
+							<li>WoolAlpaca</li>
+							<li>WoolSheep</li>
+							<li>Bronze</li>
+							<li>WroughtIron</li>
+							<li>ForgedSteel</li>
+						</thingDefs>
+					</apparelStuffFilter>
+				</value>
+			</li>
+
+		</operations>
+		</match>
+    </Operation>	
+	
+	
+</Patch>	

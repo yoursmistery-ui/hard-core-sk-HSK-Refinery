@@ -1,0 +1,1703 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): A2_工业建筑与能量.xml, A4_配方与工作台归位.xml, A5_纳米科技配方.xml, A6_金鼠族缝纫台太空档.xml -->
+<Patch><!-- ============================================================
+         A2_工业建筑与能量.xml  (2026-08-27 自 HSK修复整合 04_设施与建筑.xml 迁入)
+         地热核电池调整 + 金属提炼厂占地修复 + 电解精炼厂设施加成 + 存储建筑数值加强。
+         ============================================================ -->
+    <!-- 来源: 13_地热核电池调整.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GeothermalGenerator"]/comps/li[compClass="CompPowerPlantSteam"]/basePowerConsumption</xpath>
+    <value>
+        <basePowerConsumption>-10000</basePowerConsumption>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="GeothermalGenerator"]/placeWorkers/li[text()="SK.PlaceWorker_NoNearGeothermalGenerator"]</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FissionBattery"]/comps/li[@Class="CompProperties_Battery"]/storedEnergyMax</xpath>
+    <value>
+        <storedEnergyMax>10000</storedEnergyMax>
+    </value>
+</Operation>
+
+    <!-- 来源: 14_金属提炼厂占地修复.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/size</xpath>
+    <value>
+        <size>(3,1)</size>
+    </value>
+</Operation>
+
+    <!-- 来源: 17_电解精炼厂设施加成.xml -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities/li[text()="ToolCabinet"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>ToolCabinet</li>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities/li[text()="Small_ToolCabinet"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>Small_ToolCabinet</li>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ElectricSmelter"]/comps/li[@Class="CompProperties_Facility"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectricSmelter"]/comps</xpath>
+        <value>
+            <li Class="CompProperties_Facility">
+                <statOffsets>
+                    <WorkTableWorkSpeedFactor>0.75</WorkTableWorkSpeedFactor>
+                </statOffsets>
+                <maxSimultaneous>3</maxSimultaneous>
+            </li>
+        </value>
+    </nomatch>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]/description</xpath>
+    <value>
+        <description>用电解从溶于溶液的矿石中提取金属，比热精炼的提取效率更高，但相当费电。⚠️ 必须与金属提炼厂(ElectricSmelter)连接才能获得 +75% 冶炼速度加成(连接后工作台速度恢复满速)；未连接时工作台速度仅为 25%，非常慢。附近放置工具柜可进一步提速。电力消耗 2000W。</description>
+    </value>
+</Operation>
+
+    <!-- 来源: 25_存储建筑数值加强.xml -->
+<Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_Fridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>6</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_Fridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 6 items. Does not function in temperatures above 100°C.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_SingleChestFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>7</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_SingleChestFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 7 items. Does not function in temperatures above 100°C.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_SingleWallFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>7</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_SingleWallFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 7 items. Does not function in temperatures above 100°C. Cannot support the roof.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_DoubleChestFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>10</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_DoubleChestFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 20 items. Does not function in temperatures above 100°C.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_DoubleWallFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>10</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_DoubleWallFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 20 items. Does not function in temperatures above 100°C. Cannot support the roof.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_LargeFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>14</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_LargeFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 28 items. Does not function in temperatures above 100°C.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_CorpseFridge"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>10</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="sbz_CorpseFridge"]/description</xpath>
+            <value>
+                <description>A fridge that can freeze up to 40 corpses. Does not function in temperatures above 100°C.</description>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_Pallet"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>9</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_DeepStorage_Skip"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>9</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_BigShelf"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>9</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_Hayloft"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>10</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="FabricHamperSingle"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>10</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="ClothingRack"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>9</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_VeryBigShelf"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>11</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_Medicine_Cabinet"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>11</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_WeaponsCabinet"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>11</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="SK_WeaponsLocker"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>11</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="Storage_AmmoContainer"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>11</maxItemsInCell>
+            </value>
+        </li>
+        <li Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="Storage_AmmoContainer"]/description</xpath>
+            <value>
+                <description>Stores ammo; prevents deterioration. Up to 11 items.</description>
+            </value>
+        </li>
+    </operations>
+</Operation><!-- ============================================================
+         A4_配方与工作台归位.xml  (2026-08-27 自 HSK修复整合 07_配方与工作台.xml 迁入)
+         锻造台配方重分配 + 锻造厂木板适配(含儿童真空服配方/无线电背包/望远镜归位) + 混凝土搅拌机
+         + 工作台配方归位 + 人类装备归位电动缝纫台 + 删除铸币 + 金银木锭 + 自密封紧固件。
+         壁炉/弩箭/锯木台/Vile皮革 段留在 HSK修复整合。
+         ============================================================ -->
+    <!-- 来源: 08_锻造台配方重分配.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_ColtPeacemaker"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_Pistolet"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_BrownBess"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_Charleville"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_Jezail"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_Springfield"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_SharpsCarbine"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGun_Winchester"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[@Name="AmmoRecipeBlackPowderBase"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildSwivelGun_Crate"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildGatling_Crate"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="BuildTsarCannon_Crate"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="Build3inOrdinanceRifle_Crate"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="Build200Pounder_Crate"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="RangedWeaponMedievalBase"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="ArmorMedievalBase"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[@Name="AmmoRecipeNeolithicBase"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+            <li>CraftingSpot</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MedievalShield"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="Make_CannonParts_Forged"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MedievalTimes_Cloak"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>LeatherworkerTable</li>
+            <li>HandTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="AmmoLightBoltBase"]/tradeTags</xpath>
+    <value>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_FueledSmithy</li>
+        </tradeTags>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="38CannonAmmoBase"]/tradeTags</xpath>
+    <value>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+            <li>CE_AutoEnableCrafting_FueledSmithy</li>
+        </tradeTags>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="Vile200PounderBase"]/tradeTags</xpath>
+    <value>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="Vile3inCannonBase"]/tradeTags</xpath>
+    <value>
+        <tradeTags>
+            <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+    </value>
+</Operation>
+
+    <!-- 来源: 11_锻造厂木板适配.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Finery"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>100</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Apparel_VacsuitChildren</defName>
+            <label>制造鼠族儿童真空服</label>
+            <description>HSK整合: 儿童真空服配方,材料与真空服一致、用量按儿童版缩减。</description>
+            <workAmount>30000</workAmount>
+            <workSpeedStat>TailoringSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <researchPrerequisite>Ratkin_Armor_D2</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_ElectricTailoringBench</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+            <displayPriority>49730</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentIndustrial</li>
+                        </thingDefs>
+                    </filter>
+                    <count>2</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>Steel</li>
+                        </thingDefs>
+                    </filter>
+                    <count>60</count>
+                </li>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>StrongMetallic</li>
+                            <li>RuggedMetallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>14</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentSpacer</li>
+                        </thingDefs>
+                    </filter>
+                    <count>4</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>SyntheticFibers</li>
+                        </thingDefs>
+                    </filter>
+                    <count>8</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>Compaste</li>
+                        </thingDefs>
+                    </filter>
+                    <count>20</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>Carbon</li>
+                        </thingDefs>
+                    </filter>
+                    <count>14</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>StrongMetallic</li>
+                    <li>RuggedMetallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>ComponentIndustrial</li>
+                    <li>Steel</li>
+                    <li>ComponentSpacer</li>
+                    <li>SyntheticFibers</li>
+                    <li>Compaste</li>
+                    <li>Carbon</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Apparel_VacsuitChildren>1</RK_Apparel_VacsuitChildren>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="CE_Apparel_RadioPack"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="false">
+            <workSpeedStat>TailoringSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Machining</soundWorking>
+            <recipeUsers>
+                <li>RK_ElectricTailoringBench</li>
+            </recipeUsers>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+            <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+            <researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+        </recipeMaker>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="Gun_BinocularsRadio"]</xpath>
+    <value>
+        <recipeMaker Inherit="false">
+            <workSpeedStat>SmithingSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>RK_ElectricTailoringBench</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+            <researchPrerequisite>Gunsmithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>5</Crafting>
+            </skillRequirements>
+        </recipeMaker>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TableMachining"]/recipes</xpath>
+    <value>
+        <recipes>
+            <li>SmashCorpseMechanoid</li>
+        </recipes>
+    </value>
+</Operation>
+
+    <!-- 来源: 27_混凝土搅拌机配方.xml -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="MakeReinforcedConcrete_Hand"]</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="MakeReinforcedConcrete_Electric"]</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ConcreteMixer"]/recipes</xpath>
+    <value>
+        <li>MixReinforcedConcrete</li>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="EConcreteMixer"]/recipes</xpath>
+    <value>
+        <li>MixReinforcedConcreteElectric</li>
+    </value>
+</Operation>
+
+
+    <!-- 来源: 29_工作台配方归位.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="BaseMeleeStun"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparel_SmokepopBelt"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="Ludeon.RimWorld.Odyssey">
+    <xpath>Defs/ThingDef[defName="Apparel_PackHunter"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakePsychicInsanityLance"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>MechWeaponCraftingWorkTable</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakePsychicShockLance"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>MechWeaponCraftingWorkTable</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakePsychicAnimalPulser"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>MechWeaponCraftingWorkTable</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="MakePsychicSoothePulser"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>MechWeaponCraftingWorkTable</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="RangedWeaponIndustrialBase"]/recipeMaker/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="glucocorticoid.timebombs">
+    <xpath>Defs/RecipeDef[defName="MakeDetonator_Simple"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="glucocorticoid.timebombs">
+    <xpath>Defs/RecipeDef[defName="MakeDetonator_Radio"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>ElectricSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="ViTech.MedievalOverhaul">
+    <xpath>Defs/RecipeDef[defName="MakePowder_medieval"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="ViTech.MedievalOverhaul">
+    <xpath>Defs/RecipeDef[defName="MakeSulfur_medieval"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="ViTech.MedievalOverhaul">
+    <xpath>Defs/RecipeDef[defName="MakeAmmo_Grapeshot"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakePowder"]</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeSulfur"]</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TableHeavyAmmunition"]/recipes</xpath>
+    <value>
+        <recipes>
+            <li>MakeNapalm</li>
+        </recipes>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.metallurgy">
+    <xpath>Defs/ThingDef[defName="StampMill"]/recipes</xpath>
+    <value>
+        <recipes>
+            <li>MakeSand_Hand</li>
+            <li>MakeSand_Hand_Chunk</li>
+            <li>MakeCrushedStone_Hand_Chunk</li>
+            <li>MakeCrushedStone_Hand</li>
+        </recipes>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.metallurgy">
+    <xpath>Defs/RecipeDef[defName="Extract_BogIron"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>FueledSmithy</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+
+    <!-- 来源: 31_人类装备归位电动缝纫台.xml -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="Apparel_Vacsuit"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Apparel_Vacsuit"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="Apparel_VacsuitHelmet"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Apparel_VacsuitHelmet"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="Apparel_VacsuitChildren"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Apparel_VacsuitChildren"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="Apparel_FirefoampopPack"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Apparel_FirefoampopPack"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="Gun_BinocularsRadio"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="Gun_BinocularsRadio"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationRemove" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="CE_Apparel_RadioPack"]/recipeMaker/recipeUsers</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="CE_Apparel_RadioPack"]/recipeMaker</xpath>
+    <value>
+        <recipeUsers Inherit="False">
+            <li>ElectricTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Apparel_VacsuitChildren"]/recipeUsers</xpath>
+    <value>
+        <recipeUsers>
+            <li>HyperTailoringBench</li>
+        </recipeUsers>
+    </value>
+</Operation>
+	
+
+    <!-- 来源: 36_删除铸币配方.xml -->
+<Operation Class="PatchOperationRemove" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCoins"]</xpath>
+</Operation>
+	
+<Operation Class="PatchOperationRemove" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MeltCoins"]</xpath>
+</Operation>
+	
+	
+<Operation Class="PatchOperationConditional" MayRequire="vitech.materialsscience">
+    <xpath>Defs/ThingDef/recipes/li[text()="MakeCoins" or text()="MeltCoins"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef/recipes/li[text()="MakeCoins" or text()="MeltCoins"]</xpath>
+    </match>
+</Operation>
+
+    <!-- 来源: 39_GoldToGoldBar.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OrnateDoor"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>25</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparel_ArmorHelmetReconPrestige"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>4</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparel_ArmorMarineHelmetPrestige"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>5</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparel_ArmorMarinePrestige"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>10</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Apparel_ArmorReconPrestige"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>9</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="AuxiliaryAI_Brawler"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="AuxiliaryAI_Commando"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="AuxiliaryAI_Sharpshooter"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ConstructorCore"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="DiplomatCore"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="DoctorCore"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FarmerCore"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MinerCore"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>3</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="TacticalCorneaImplant"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OrganicOptimizingNanobots"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>1</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MuscleStimulator"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MAAI_Chip"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>10</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/TerrainDef[defName="TikiFloorFancy"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>1</GoldBar>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="CONN_NeuromodBooster"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>15</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="CONN_PassionGiver"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>20</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="CONN_Reconditioner"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>15</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="CONN_TraitGiver"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>17</GoldBar>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="NeurotrainersClearer"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>15</GoldBar>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Officer"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Oriental"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Rifleman"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>2</GoldBar>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FBZX"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>1</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="JD_shield"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>5</GoldBar>
+    </value>
+</Operation>
+	
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="bjq"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>5</GoldBar>
+    </value>
+</Operation>
+	
+	
+	
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="huimie"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>50</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="nwtg"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>20</GoldBar>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="xinpian"]/costList/Gold</xpath>
+    <value>
+        <GoldBar>20</GoldBar>
+    </value>
+</Operation>
+
+
+    <!-- 来源: 40_SilverToSilverBar.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="ElectricTreePot"]/costList/Silver</xpath>
+    <value>
+        <SilverBar>100</SilverBar>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="InstinctOptimizingNanobots"]/costList/Silver</xpath>
+    <value>
+        <SilverBar>5</SilverBar>
+    </value>
+</Operation>
+
+	
+	
+
+
+    <!-- 来源: 41_WoodLogToWoodPlank.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="FermentingBarrel"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>30</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Brewery"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>50</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="PotteryDisplay"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>60</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="MartialArtsTarget"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>55</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="AnimalSleepingBox"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>8</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="RKFC_RL_PaintBase"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>35</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="RKFC_RL_CandleBase"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>5</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RL_Windmill"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>120</WoodPlank>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RL_Windmill_Power"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>120</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[@Name="RKFC_WallLightBase"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>5</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_GL_FlowerWall"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>25</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_GloomyDeco_Scarecrow"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>20</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_GloomyDeco_Tool"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>40</WoodPlank>
+    </value>
+</Operation>
+
+	
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RGK_FloorFence"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>1</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RGK_Flower"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>15</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RGK_Handrail"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>1</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RGK_HighWall"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>1</WoodPlank>
+    </value>
+</Operation>
+	
+	
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKFC_RGK_Wall"]/costList/WoodLog</xpath>
+    <value>
+        <WoodPlank>5</WoodPlank>
+    </value>
+</Operation>
+
+
+    <!-- 自密封紧固件(Make_ComponentSpacer)配方追加一个电子元件(ComponentIndustrial)。门控: 配方存在才追加。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentSpacer"]</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="Make_ComponentSpacer"]/ingredients</xpath>
+        <value>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </value>
+    </match>
+</Operation>
+
+    <!-- 自密封紧固件(ComponentSpacer)市场价值按配方成本反推修正: 25×35超合金 + 5×35贵金属 + 1×40工业组件 = 1090, ÷10产量 ×≈1.4~1.5 → 160 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ComponentSpacer"]/statBases/MarketValue</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="ComponentSpacer"]/statBases/MarketValue</xpath>
+        <value>
+            <MarketValue>160</MarketValue>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ComponentSpacer"]/statBases</xpath>
+        <value>
+            <MarketValue>160</MarketValue>
+        </value>
+    </nomatch>
+</Operation><!-- ============================================================
+         A5_纳米科技配方.xml  (2026-08-27 自 HSK修复整合 09_杂项.xml 迁入)
+         纳米科技框架与碳纳米管配方(原 37 号)。
+         ============================================================ -->
+    <!-- 来源: 37_纳米科技框架与碳纳米管配方.xml -->
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeNanotechFramework"]/label</xpath>
+    <value>
+        <label>Assemble nanotech framework x15</label>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeNanotechFramework"]/products/NanotechFramework</xpath>
+    <value>
+        <NanotechFramework>15</NanotechFramework>
+    </value>
+</Operation>
+
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/label</xpath>
+    <value>
+        <label>Synthesize carbon nanotubes x12</label>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/description</xpath>
+    <value>
+        <description>Nanotubes are created from polymers, rubber and coke.</description>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/workAmount</xpath>
+    <value>
+        <workAmount>4000</workAmount>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/soundWorking</xpath>
+    <value>
+        <soundWorking>Recipe_Smith</soundWorking>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Polymers</li>
+                    </thingDefs>
+                </filter>
+                <count>25</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Coke</li>
+                    </thingDefs>
+                </filter>
+                <count>25</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Rubber</li>
+                    </thingDefs>
+                </filter>
+                <count>15</count>
+            </li>
+        </ingredients>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/products/Carbon</xpath>
+    <value>
+        <Carbon>12</Carbon>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Polymers</li>
+                <li>Coke</li>
+                <li>Rubber</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</Operation>
+	
+<Operation Class="PatchOperationReplace" MayRequire="vitech.materialsscience">
+    <xpath>Defs/RecipeDef[defName="MakeCarbonNanotubes"]/researchPrerequisite</xpath>
+    <value>
+        <researchPrerequisite>Oil_Industry_C6</researchPrerequisite>
+    </value>
+</Operation><!-- =====================================================================
+         A6_金鼠族缝纫台太空档.xml  (2026-08-27)
+         承接「金鸢尾兰缝纫台」(OA_RK_Tailor)迁移 + 时代分档归位。
+         建筑本体已迁入本 mod Defs/ThingDefs/OA_RK_Tailor.xml, 升级为太空档(Apparel_D1)。
+
+         路由规则(用户 2026-08-27 拍板: 严格互斥, 一件只挂一个台; 人类装备不动):
+           1) 金鼠族「太空/极致」衣物/护甲/配件(研究前置 OA_RK_Apparel_III/IV) -> 只挂 OA_RK_Tailor
+           2) 金鼠族「太空前」衣物(前置 I/II) -> 只挂鼠族缝纫台(RK_ElectricTailoringBench/RK_HandTailoringBench)
+           3) 鼠族「太空/极致」装备(Ratkin_Armor_D1/D2/D3 线) -> 从先进纺织台/鼠族裁缝台摘除, 只挂 OA_RK_Tailor
+         实现:
+           - 改基类默认工作台(OARatkin_ApparelMakeableBase / OARatkin_UtilityMakeableBase)
+             由[ElectricTailoringBench,HyperTailoringBench,OA_RK_Tailor]三挂 -> [鼠族电动+手动裁缝台]
+             (= 金鼠族太空前装备的归宿, 同时把它们从人类台摘除)。
+           - 金鼠族太空件: 无自带 recipeUsers 者 Add recipeUsers Inherit="false"=[OA_RK_Tailor];
+             原本自带 FabricationBench 的太空件 Replace -> [OA_RK_Tailor]。
+           - 金鼠族太空前却自带 FabricationBench 的(军帽A/B/急救包) Replace -> [鼠族裁缝台]。
+           - 鼠族 27 条太空/极致配方 recipeUsers -> [OA_RK_Tailor] 已迁至 鼠族HSK拓展/54_太空装备归位金鼠缝纫台.xml
+             (这些 RecipeDef 由 鼠族 01/02 补丁 Add, 本 mod 先于 鼠族 加载时 def 尚不存在, 原地 Replace 报 Failed to find a node)。
+           - 二级菜单: 把 OA_RK_Tailor 归入 Core_SK SubCategory_Sewing(原在金鼠族08号, 现迁此)。
+         ===================================================================== -->
+    <!-- 0) 二级菜单: OA_RK_Tailor -> 纺织 SubCategory_Sewing -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Sewing"]</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Sewing"]/defNames</xpath>
+            <value><li>OA_RK_Tailor</li></value>
+        </match>
+    </Operation>
+
+    <!-- 1) 金鼠族可制衣物基类默认台 -> 鼠族缝纫台(太空前归宿 & 摘除人类台) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[@Name="OARatkin_ApparelMakeableBase"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>RK_ElectricTailoringBench</li>
+                <li>RK_HandTailoringBench</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[@Name="OARatkin_UtilityMakeableBase"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>RK_ElectricTailoringBench</li>
+                <li>RK_HandTailoringBench</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+
+    <!-- 2) 金鼠族太空件(无自带 recipeUsers) Add -> 只挂 OA_RK_Tailor -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_C"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_D"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Hat_E"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_A"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Sandwich_B"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_D"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_A"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_B"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_C"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_D"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Professional_Uniforms_E"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_A"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Belt_B"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Component_A"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Component_D"]/recipeMaker</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+
+    <!-- 3) 金鼠族太空件(原自带 FabricationBench) Replace -> 只挂 OA_RK_Tailor -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui_ACC"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_FangzhiBUGdehouzhui"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_New_Windbreaker_G"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false"><li>OA_RK_Tailor</li></recipeUsers>
+        </value>
+    </Operation>
+
+    <!-- 4) 金鼠族太空前却挂 FabricationBench 的 -> 归鼠族缝纫台 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_A"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>RK_ElectricTailoringBench</li>
+                <li>RK_HandTailoringBench</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Armor_Hat_B"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>RK_ElectricTailoringBench</li>
+                <li>RK_HandTailoringBench</li>
+            </recipeUsers>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_FirstAid"]/recipeMaker/recipeUsers</xpath>
+        <value>
+            <recipeUsers Inherit="false">
+                <li>RK_ElectricTailoringBench</li>
+                <li>RK_HandTailoringBench</li>
+            </recipeUsers>
+        </value>
+    </Operation></Patch>

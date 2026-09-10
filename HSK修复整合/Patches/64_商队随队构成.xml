@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 64_商队随队构成 (2026-09-09, 第二轮的后半)
+       只动" Trader 职位组"的驮兽与护卫编制, 不碰 Combat/设防组 → 不影响袭击编成。
+       两条硬约束(反编译 PawnGroupKindWorker_Trader 确认):
+         1) carriers 里的职位其 race 必须 packAnimal=true, 否则 Log.Error 后整支商队不出;
+         2) 驮兽候选会先按生物群系 allowedPackAnimals 过滤再 RandomElementByWeight, 候选被过滤空会抛异常
+            → 鼠族原自带表只有一种 Ratkin_KingHamster, 雪原/沙漠等群系不给它用就整队消失, 故一律补 2~3 种通用驮兽。
+       本文件只处理**上游 mod 的派系**(Rakinia 伟大王国=RatkinRaceHSK、太阳帝国=Royalty);
+       我们自己的派系(白玫瑰/中央同盟/仙慕之源/报国会/血鼠/北境/金鸢尾兰)直接改 def, 见
+       docs/10_外政与任务大修/派系商人货单差异化记录.md。
+       权重列都是"职位名=选择权重", 改写用 Replace(整列元素连名带值一起换)。 -->
+
+  <!-- ===== 鼠族基类(RatkinFactionBase): 只有驮仓鼠一种 → 补猛犸牛/毛茸马备选(同时也是生物群系保险) =====
+       伟大王国(Rakinia)与巡礼者/流浪商帮都从这条基类拿 Trader 组; 白玫瑰/中央同盟/血鼠自带
+       <pawnGroupMakers Inherit="False"> 自有组, 不受本条牵连。补丁按原始 XML 不解析继承, 故打基类 Name 节点。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/carriers</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/carriers</xpath>
+      <value>
+        <Muffalo>3</Muffalo>
+        <Horse_Wooly>2</Horse_Wooly>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== 太阳帝国: 商队护卫从"野战编制"改成仪仗/卫队为主(精锐只当点缀) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Empire_Fighter_Trooper</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Empire_Fighter_Trooper</xpath>
+          <value><Empire_Fighter_Trooper>20</Empire_Fighter_Trooper></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Empire_Fighter_Champion</xpath>
+          <value><Empire_Fighter_Champion>3</Empire_Fighter_Champion></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Empire_Fighter_Janissary</xpath>
+          <value><Empire_Fighter_Janissary>5</Empire_Fighter_Janissary></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Empire_Fighter_Cataphract</xpath>
+          <value><Empire_Fighter_Cataphract>0.5</Empire_Fighter_Cataphract></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/guards/Villager</xpath>
+          <value><Villager>6</Villager></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- ===== 太阳帝国: 驮兽改成象队为主(帝国仪仗), 牛驼降权 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/carriers/Elephant</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/carriers/Elephant</xpath>
+          <value><Elephant>6</Elephant></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/carriers/Muffalo</xpath>
+          <value><Muffalo>2</Muffalo></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[defName="Empire"]/pawnGroupMakers/li[kindDef="Trader"]/carriers/Dromedary</xpath>
+          <value><Dromedary>2</Dromedary></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- ===== 牲口(驮兽+货兽)压回 12 只以内 (2026-09-09 用户口径: 牲口不算人口, 上限 12) =====
+       估算修正: countRange 是"一叠里的数量"(Thing.stackCount), 一次生成只有 1 只棋子;
+       驮兽数 = ceil(棋子数/8) 由货单件数决定, 不动 thingDefCountRange(=买卖目录的种类数), 只压货兽 countRange。
+       实测超标只有这两家通用批发商队: Outlander 76件→10驮 + 9货兽 = 19; Neolithic 51件→7驮 + 9货兽 = 16。
+       压成 1~1(固定 1 头) → 11 / 8, 严格低于 12 且留抖动余量。牲畜商人本就是 3驮+10兽=12 卡线, 不动。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+      <value><countRange>1~1</countRange></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_Neolithic_BulkGoods"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_Neolithic_BulkGoods"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+      <value><countRange>1~1</countRange></value>
+    </match>
+  </Operation>
+
+  <!-- 牲畜商人自身: 2~4 / 2~5 / 1~3 → 均 9.5 头货兽, 加 3 头驮兽 = 12.5 超上限
+       三个 Animals 生成器的 countRange 统一压到 1~2(约 4~5 头), kindCountRange 不动 → 可买卖的兽种数不变 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_AnimalTrader"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_AnimalTrader"]/stockGenerators/li[@Class="StockGenerator_Animals"]/countRange</xpath>
+      <value><countRange>1~2</countRange></value>
+    </match>
+  </Operation>
+
+  <!-- ===== 分层(补丁侧): 鼠族基类 RatkinFactionBase → 伟大王国/巡礼者/流浪商帮
+       原编制几乎全是 180~240 战力兵种(加权均力≈184) → 商队只 3~6 名护卫, 排场过小;
+       把 70 战力的轻装佣兵抬到 65 → 均力≈124, 护卫 4~8, 人口 5~9。牲口侧不受影响(仍 <12)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinMercenaryLight</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinMercenaryLight</xpath>
+          <value><RatkinMercenaryLight>65</RatkinMercenaryLight></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinSoldier</xpath>
+          <value><RatkinSoldier>12</RatkinSoldier></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinCombatant</xpath>
+          <value><RatkinCombatant>10</RatkinCombatant></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinEliteGuardener</xpath>
+          <value><RatkinEliteGuardener>8</RatkinEliteGuardener></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards/RatkinDefender</xpath>
+          <value><RatkinDefender>15</RatkinDefender></value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- ===== 奴隶算"人"不算牲口: 镖局 5~7 / 销赃队 4~6 压到 3~5(只改第一个 Slaves 条目,
+       销赃队第二条带 respectPopulationIntent 随人口意图波动, 保留原义) → 大队极端抖动下人口仍 <20 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RatkinExotic_Free_company"]/stockGenerators/li[@Class="StockGenerator_Slaves"][1]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_RatkinExotic_Free_company"]/stockGenerators/li[@Class="StockGenerator_Slaves"][1]/countRange</xpath>
+      <value><countRange>3~5</countRange></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RatkinExotic_BanditFenceTeam"]/stockGenerators/li[@Class="StockGenerator_Slaves"][1]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Caravan_RatkinExotic_BanditFenceTeam"]/stockGenerators/li[@Class="StockGenerator_Slaves"][1]/countRange</xpath>
+      <value><countRange>3~5</countRange></value>
+    </match>
+  </Operation>
+</Patch>

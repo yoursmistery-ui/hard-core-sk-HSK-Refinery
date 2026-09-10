@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ==========================================================================
+	     Knights of Favonius 西风骑士团 武器/装甲 研究 (2026-08-26, 石化时代/后工业档)
+	     位置: Weapon_SK tab x=13 y=29 (Melee_C2 @ x=12 右侧, Melee_D1 @ x=18 左侧)
+	     前置: Melee_C2 (Core_SK 工业近战) + Oil_Industry_C6 (石化工业, 解锁合成纤维 SyntheticFibers)
+	     档位: 石化时代/后工业 (石化→太空前) = HiTechResearchBench 高级研究台 + 研究终端 LabTerminal
+	           写法照抄 RKHSK_Tools_Industrial2 (requiredResearchBuilding + SK.AdvancedResearchExtension 覆盖列表)
+	     ========================================================================== -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>RKHSK_FavoniusArmory</defName>
+		<label>西风骑士团武备</label>
+		<description>掌握蒙德石化工业锻造工艺，打造西风骑士团的制式近战武器与装甲——基础剑、细剑、西风之剑、大剑、长枪，以及配套的内衣、板甲与军官装甲。这些装备轻盈锋利，通用适配各类战士。</description>
+		<tab>Weapon_SK</tab>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Melee_C2</li>
+			<li>Oil_Industry_C6</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<modExtensions Inherit="False">
+			<li Class="SK.AdvancedResearchExtension">
+				<requiredResearchBuildings>
+					<li>HiTechResearchBench</li>
+				</requiredResearchBuildings>
+			</li>
+			<li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+		</modExtensions>
+		<researchViewX>14.00</researchViewX>
+		<researchViewY>29.00</researchViewY>
+	</ResearchProjectDef>
+
+</Defs>

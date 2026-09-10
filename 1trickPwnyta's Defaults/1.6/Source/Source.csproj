@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51AB4547-104E-4BDF-99E1-159DDB329E1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Defaults</RootNamespace>
+    <AssemblyName>Defaults</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="1.6">
+      <HintPath>..\..\..\..\..\RimWorld\RimWorld Code 1.6\1.6.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllowedAreas\AllowedArea.cs" />
+    <Compile Include="AllowedAreas\AllowedAreaUtility.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareFor.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForColonist.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForEntities.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForFriendlyFaction.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForGhouls.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForHostileFaction.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForNeutralFaction.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForNoFaction.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForPrisoner.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForSlave.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForTamedAnimal.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_DefaultCareForWildlife.cs" />
+    <Compile Include="PawnType.cs" />
+    <Compile Include="CompProperties_SpawnTracker.cs" />
+    <Compile Include="Comp_SpawnTracker.cs" />
+    <Compile Include="AllowedAreas\DefaultSettingsCategoryWorker_AllowedAreas.cs" />
+    <Compile Include="AllowedAreas\DefaultSettingWorker_AnimalsInheritAreaFromParent.cs" />
+    <Compile Include="AllowedAreas\DefaultSettingWorker_ChildrenInheritAreaFromParent.cs" />
+    <Compile Include="AllowedAreas\Dialog_AllowedAreas.cs" />
+    <Compile Include="AllowedAreas\Dialog_ColorPickerAllowedArea.cs" />
+    <Compile Include="AllowedAreas\Dialog_RenameAllowedArea.cs" />
+    <Compile Include="AllowedAreas\Patch_AreaManager.cs" />
+    <Compile Include="AllowedAreas\Patch_Faction.cs" />
+    <Compile Include="AllowedAreas\Patch_Hediff_Pregnant.cs" />
+    <Compile Include="AllowedAreas\Patch_MutantUtility.cs" />
+    <Compile Include="AllowedAreas\Patch_Pawn.cs" />
+    <Compile Include="AllowedAreas\Patch_Pawn_AgeTracker.cs" />
+    <Compile Include="AllowedAreas\Patch_Pawn_GuestTracker.cs" />
+    <Compile Include="AllowedAreas\Patch_PregnancyUtility.cs" />
+    <Compile Include="BabyFeeding\BabyFeedingOptions.cs" />
+    <Compile Include="BabyFeeding\DefaultSettingsCategoryWorker_BabyFeeding.cs" />
+    <Compile Include="BabyFeeding\Dialog_BabyFeedingSettings.cs" />
+    <Compile Include="BabyFeeding\Patch_Pawn_FoodRestrictionTracker.cs" />
+    <Compile Include="BabyFeeding\Patch_PregnancyUtility.cs" />
+    <Compile Include="Compatibility\BackwardCompatibilityUtility.cs" />
+    <Compile Include="Compatibility\Dialog_BetterWorkbenchAdditionalItems.cs" />
+    <Compile Include="Compatibility\ModCompatibilityUtility_AnimalControls.cs" />
+    <Compile Include="Compatibility\ModCompatibilityUtility_BetterWorkbench.cs" />
+    <Compile Include="Compatibility\ModCompatibilityUtility_FactionXenotypeRandomizer.cs" />
+    <Compile Include="Compatibility\ModCompatibilityUtility_Toddlers.cs" />
+    <Compile Include="Defs\DefaultSettingDef.cs" />
+    <Compile Include="Defs\DefaultSettingsCategoryDefOf.cs" />
+    <Compile Include="Defs\DefWithIcon.cs" />
+    <Compile Include="Defs\Scribe_Collections_Silent.cs" />
+    <Compile Include="Defs\Scribe_Defs_Silent.cs" />
+    <Compile Include="Defs\WorkPriorityConditionDef.cs" />
+    <Compile Include="Defs\WorkPriorityEffectDef.cs" />
+    <Compile Include="Fishing\DefaultSettingsCategoryWorker_Fishing.cs" />
+    <Compile Include="Fishing\Dialog_FishingZoneSettings.cs" />
+    <Compile Include="Fishing\FishingUtility.cs" />
+    <Compile Include="Fishing\FishingZoneOptions.cs" />
+    <Compile Include="Fishing\Patch_Designator_ZoneAdd.cs" />
+    <Compile Include="Fishing\Patch_Zone_Fishing.cs" />
+    <Compile Include="General\DefaultSettingWorker_SettingsBackupOptions.cs" />
+    <Compile Include="General\Dialog_SettingsBackupOptions.cs" />
+    <Compile Include="General\SettingsBackupOptions.cs" />
+    <Compile Include="General\SettingsBackupUtility.cs" />
+    <Compile Include="Misc\CaravanAutoSelect\DefaultSettingWorker_CaravanAutoSelect.cs" />
+    <Compile Include="Misc\CaravanAutoSelect\Patch_Dialog_FormCaravan.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_LockNorthUp.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ShowBasesExpandingIcons.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ShowExpandingLandmarks.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ShowImportantExpandingIcons.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ShowPlanetDayNight.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ShowWorldFeatures.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_ZoneVisibility.cs" />
+    <Compile Include="Misc\StartingXenotype\DefaultSettingWorker_StartingXenotype.cs" />
+    <Compile Include="Misc\StartingXenotype\Patch_Dialog_ChooseNewWanderers.cs" />
+    <Compile Include="Misc\StartingXenotype\Patch_Page_ConfigureStartingPawns.cs" />
+    <Compile Include="Misc\StartingXenotype\StartingXenotypeOptions.cs" />
+    <Compile Include="Misc\StartingXenotype\StartingXenotypeUtility.cs" />
+    <Compile Include="PlaySettings\DefaultSettingsCategoryWorker_PlaySettings.cs" />
+    <Compile Include="PlaySettings\Dialog_PlaySettings.cs" />
+    <Compile Include="Policies\DefaultPolicyAssignments.cs" />
+    <Compile Include="Policies\DefaultSettingWorker_DefaultPolicyAssignments.cs" />
+    <Compile Include="Policies\Dialog_DefaultPolicyAssignments.cs" />
+    <Compile Include="Policies\Patch_Faction.cs" />
+    <Compile Include="Policies\Patch_Pawn.cs" />
+    <Compile Include="Policies\Patch_Pawn_AgeTracker.cs" />
+    <Compile Include="Policies\Patch_Pawn_GuestTracker.cs" />
+    <Compile Include="StockpileZones\Buildings\DefaultSettingWorker_AllowRemovingFromOutfitStand.cs" />
+    <Compile Include="StockpileZones\Buildings\Patch_Building_OutfitStand.cs" />
+    <Compile Include="Storyteller\DefaultSettingWorker_Difficulty.cs" />
+    <Compile Include="Storyteller\DefaultSettingWorker_Permadeath.cs" />
+    <Compile Include="Storyteller\DefaultSettingWorker_Storyteller.cs" />
+    <Compile Include="Storyteller\StorytellerUtility.cs" />
+    <Compile Include="UI\Dialog_Input.cs" />
+    <Compile Include="UI\Dialog_TextField.cs" />
+    <Compile Include="UI\Dialog_MainSettings.cs" />
+    <Compile Include="General\DefaultSettingWorker_HideLoadDefault.cs" />
+    <Compile Include="General\DefaultSettingWorker_ShowDisabledInSearch.cs" />
+    <Compile Include="HarmonyPatchMod.cs" />
+    <Compile Include="Compatibility\ModCompatibilityUtility_NoPause.cs" />
+    <Compile Include="StockpileZones\Buildings\BuildingUtility.cs" />
+    <Compile Include="StockpileZones\Buildings\ZoneType_Building.cs" />
+    <Compile Include="Storyteller\NoPauseOptions.cs" />
+    <Compile Include="UI\Dialog_Common.cs" />
+    <Compile Include="UI\Dialog_AdditionalSettings.cs" />
+    <Compile Include="UI\Dialog_SelectOne.cs" />
+    <Compile Include="UI\Patch_Dialog_Options.cs" />
+    <Compile Include="UI\Patch_ThingFilterUI.cs" />
+    <Compile Include="UI\UIState_Ext.cs" />
+    <Compile Include="WorkbenchBills\BetterWorkbenchOptions.cs" />
+    <Compile Include="WorkbenchBills\CompatibilityPatch_ImprovedWorkbenches.cs" />
+    <Compile Include="WorkbenchBills\DefaultSettingWorker_BillAllowedSkillRange.cs" />
+    <Compile Include="WorkbenchBills\DefaultSettingWorker_BillIngredientSearchRadius.cs" />
+    <Compile Include="WorkbenchBills\DefaultSettingWorker_BillStoreMode.cs" />
+    <Compile Include="WorkbenchBills\DefaultSettingWorker_LimitBillsTo15.cs" />
+    <Compile Include="WorkbenchBills\PatchTargeted_BillStackLimit.cs" />
+    <Compile Include="Workers\DefaultSettingsCategoryWorker.cs" />
+    <Compile Include="Misc\DefaultSettingsCategoryWorker_Misc.cs" />
+    <Compile Include="Workers\DefaultSettingWorker.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_Segmented.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_IntRange.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_Slider.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_Dropdown.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_Checkbox.cs" />
+    <Compile Include="UI\Dialog_Select.cs" />
+    <Compile Include="Misc\Dialog_MiscSettings.cs" />
+    <Compile Include="UI\Dialog_SelectMany.cs" />
+    <Compile Include="DLCUtility.cs" />
+    <Compile Include="General\DefaultSettingsCategoryWorker_General.cs" />
+    <Compile Include="General\DefaultSettingWorker_HideSetAsDefault.cs" />
+    <Compile Include="General\Dialog_GeneralSettings.cs" />
+    <Compile Include="Patch_UIRoot_Entry.cs" />
+    <Compile Include="Policies\IPolicyDialog.cs" />
+    <Compile Include="Policies\VanillaPolicyStore.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="UI\Dialog_SettingsCategory_List.cs" />
+    <Compile Include="Misc\HostilityResponse\DefaultSettingWorker_HostilityResponse.cs" />
+    <Compile Include="Misc\MechWorkModes\DefaultSettingWorker_MechWorkMode.cs" />
+    <Compile Include="Misc\MechWorkModes\DefaultSettingWorker_WorkModeSecond.cs" />
+    <Compile Include="Misc\MechWorkModes\DefaultSettingWorker_WorkModeAdditional.cs" />
+    <Compile Include="Misc\MechWorkModes\DefaultSettingWorker_WorkModeFirst.cs" />
+    <Compile Include="Misc\MechWorkModes\Patch_MechanitorControlGroup.cs" />
+    <Compile Include="Misc\MechWorkModes\Patch_Pawn_MechanitorTracker.cs" />
+    <Compile Include="Defs\DefaultSettingsCategoryDef.cs" />
+    <Compile Include="Medicine\DefaultSettingsCategoryWorker_Medicine.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_MedCarryGuest.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_MedCarryAmount.cs" />
+    <Compile Include="Medicine\DefaultSettingWorker_MedCarry.cs" />
+    <Compile Include="Misc\PlantType\DefaultSettingWorker_PlantType.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_AutoHomeArea.cs" />
+    <Compile Include="PlaySettings\DefaultSettingWorker_AutoRebuild.cs" />
+    <Compile Include="Workers\DefaultSettingWorker_Options.cs" />
+    <Compile Include="Workers\IQuickOption.cs" />
+    <Compile Include="Workers\WorkerFactory.cs" />
+    <Compile Include="Workers\WorkPriorityConditionWorker.cs" />
+    <Compile Include="Workers\WorkPriorityEffectWorker.cs" />
+    <Compile Include="WorkPriorities\CompatibilityPatch_Pawn.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_AgainstIdeo.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Age.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Always.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Guest.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Passion.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Skill.cs" />
+    <Compile Include="WorkPriorities\Conditions\Condition_Slave.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_AgainstIdeo.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Age.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Always.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Guest.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Passion.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Skill.cs" />
+    <Compile Include="WorkPriorities\Conditions\WorkPriorityConditionWorker_Slave.cs" />
+    <Compile Include="WorkPriorities\DefaultSettingWorker_ManualPriorities.cs" />
+    <Compile Include="Policies\DefaultSettingsCategoryWorker_Policies.cs" />
+    <Compile Include="Policies\Dialog_Policies.cs" />
+    <Compile Include="Misc\PregnancyApproach\DefaultSettingWorker_PregnancyApproach.cs" />
+    <Compile Include="ResourceCategories\DefaultSettingsCategoryWorker_ResourceCategories.cs" />
+    <Compile Include="Rewards\DefaultSettingsCategoryWorker_Rewards.cs" />
+    <Compile Include="Schedule\DefaultSettingsCategoryWorker_Schedule.cs" />
+    <Compile Include="StockpileZones\DefaultSettingsCategoryWorker_Storage.cs" />
+    <Compile Include="StockpileZones\Buildings\Patch_Blueprint_Storage.cs" />
+    <Compile Include="StockpileZones\Buildings\PatchTargeted_Building_PostMake.cs" />
+    <Compile Include="Storyteller\DefaultSettingsCategoryWorker_Storyteller.cs" />
+    <Compile Include="Misc\TargetTemperature\DefaultSettingWorker_TargetTemp.cs" />
+    <Compile Include="Misc\TargetTemperature\DefaultSettingWorker_TargetTempCooler.cs" />
+    <Compile Include="Misc\TargetTemperature\DefaultSettingWorker_TargetTempHeater.cs" />
+    <Compile Include="Misc\TargetTemperature\Patch_CompTempControl.cs" />
+    <Compile Include="Misc\TargetTemperature\Patch_ThingComp.cs" />
+    <Compile Include="UI\Dialog_SettingsCategory.cs" />
+    <Compile Include="UI\UIUtility.cs" />
+    <Compile Include="Policies\FoodPolicies\Dialog_FoodPolicies.cs" />
+    <Compile Include="Policies\FoodPolicies\Patch_FoodRestrictionDatabase.cs" />
+    <Compile Include="Policies\DrugPolicies\Dialog_DrugPolicies.cs" />
+    <Compile Include="Policies\DrugPolicies\Patch_DrugPolicyDatabase.cs" />
+    <Compile Include="Policies\Patch_Dialog_InfoCard_Hyperlink.cs" />
+    <Compile Include="Policies\Patch_StatWorker.cs" />
+    <Compile Include="Policies\Patch_Dialog_ManagePolicies.cs" />
+    <Compile Include="Policies\PolicyUtility.cs" />
+    <Compile Include="Policies\ApparelPolicies\Dialog_ApparelPolicies.cs" />
+    <Compile Include="Policies\ApparelPolicies\Patch_OutfitDatabase.cs" />
+    <Compile Include="UI\Listing_StandardHighlight.cs" />
+    <Compile Include="WorkPriorities\DefaultSettingsCategoryWorker_WorkPriorities.cs" />
+    <Compile Include="WorkPriorities\Dialog_Rules.cs" />
+    <Compile Include="WorkPriorities\Dialog_WorkPriorities.cs" />
+    <Compile Include="WorkPriorities\Effects\Effect.cs" />
+    <Compile Include="WorkPriorities\Effects\Effect_Decrease.cs" />
+    <Compile Include="WorkPriorities\Effects\Effect_Increase.cs" />
+    <Compile Include="WorkPriorities\Effects\Effect_Logic.cs" />
+    <Compile Include="WorkPriorities\Effects\Effect_Value.cs" />
+    <Compile Include="WorkPriorities\Effects\WorkPriorityEffectWorker_Decrease.cs" />
+    <Compile Include="WorkPriorities\Effects\WorkPriorityEffectWorker_Increase.cs" />
+    <Compile Include="WorkPriorities\Effects\WorkPriorityEffectWorker_Logic.cs" />
+    <Compile Include="WorkPriorities\Effects\WorkPriorityEffectWorker_Value.cs" />
+    <Compile Include="WorkPriorities\Patch_ChoiceLetter_GrowthMoment.cs" />
+    <Compile Include="WorkPriorities\Patch_GameComponent_PawnDuplicator.cs" />
+    <Compile Include="WorkPriorities\Patch_GameInitData.cs" />
+    <Compile Include="WorkPriorities\Patch_Pawn.cs" />
+    <Compile Include="WorkPriorities\Patch_Pawn_IdeoTracker.cs" />
+    <Compile Include="WorkPriorities\Patch_Pawn_WorkSettings.cs" />
+    <Compile Include="WorkPriorities\PawnColumnWorker_RecalculateWorkPriorities.cs" />
+    <Compile Include="WorkPriorities\Rule.cs" />
+    <Compile Include="WorkPriorities\WorkPriorityUtility.cs" />
+    <Compile Include="WorkPriorities\WorkPriorityValue.cs" />
+    <Compile Include="WorldSettings\CompatibilityPatch_Planets_CreateWorldParams.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_LandmarkDensity.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_MapSize.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_OverallPopulation.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_OverallRainfall.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_OverallTemperature.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_PlanetCoverage.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_PlanetPollution.cs" />
+    <Compile Include="WorldSettings\DefaultSettingWorker_StartingSeason.cs" />
+    <Compile Include="WorldSettings\Dialog_MapSettings.cs" />
+    <Compile Include="Medicine\MedicineUtility.cs" />
+    <Compile Include="Medicine\Patch_Pawn.cs" />
+    <Compile Include="Medicine\Patch_PawnGenerator.cs" />
+    <Compile Include="PlaySettings\Patch_PlaySettings.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Medicine\DraggableResultUtility.cs" />
+    <Compile Include="Misc\HostilityResponse\HostilityResponseModeUtility.cs" />
+    <Compile Include="Misc\HostilityResponse\Patch_Pawn.cs" />
+    <Compile Include="Misc\HostilityResponse\Patch_PawnGenerator.cs" />
+    <Compile Include="Medicine\Dialog_MedicineSettings.cs" />
+    <Compile Include="Medicine\Patch_BackCompatibilityConverter_1_4.cs" />
+    <Compile Include="Medicine\Patch_PlaySettings.cs" />
+    <Compile Include="Misc\PlantType\Patch_Zone_Growing.cs" />
+    <Compile Include="Misc\PlantType\PlantTypeUtility.cs" />
+    <Compile Include="Policies\ReadingPolicies\Dialog_ReadingPolicies.cs" />
+    <Compile Include="Policies\ReadingPolicies\Patch_ReadingPolicyDatabase.cs" />
+    <Compile Include="Misc\PregnancyApproach\Patch_Pawn_RelationsTracker.cs" />
+    <Compile Include="ResourceCategories\Dialog_ResourceCategories.cs" />
+    <Compile Include="ResourceCategories\Listing_ResourceCategories.cs" />
+    <Compile Include="ResourceCategories\Patch_ResourceReadout.cs" />
+    <Compile Include="ResourceCategories\TreeNodeUtility.cs" />
+    <Compile Include="Rewards\Dialog_RewardsSettings.cs" />
+    <Compile Include="Rewards\Patch_FactionGenerator.cs" />
+    <Compile Include="Rewards\RewardPreference.cs" />
+    <Compile Include="Schedule\Dialog_ScheduleSettings.cs" />
+    <Compile Include="Schedule\Patch_Pawn.cs" />
+    <Compile Include="Schedule\Patch_Pawn_TimetableTracker.cs" />
+    <Compile Include="Schedule\PawnColumnWorker_SaveLoadSchedule.cs" />
+    <Compile Include="Schedule\Schedule.cs" />
+    <Compile Include="DefaultsMod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DefaultsSettings.cs" />
+    <Compile Include="StockpileZones\Designator_ZoneAddStockpile_Custom.cs" />
+    <Compile Include="StockpileZones\Dialog_RenameZoneType.cs" />
+    <Compile Include="StockpileZones\Dialog_StockpileZones.cs" />
+    <Compile Include="StockpileZones\Patch_DesignationCategoryDef.cs" />
+    <Compile Include="StockpileZones\Patch_Designator_ZoneAddStockpile.cs" />
+    <Compile Include="StockpileZones\Patch_Find.cs" />
+    <Compile Include="PatchTargeted_HiddenItemsManager.cs" />
+    <Compile Include="StockpileZones\Patch_QuickSearchFilter.cs" />
+    <Compile Include="StockpileZones\ZoneType.cs" />
+    <Compile Include="Storyteller\Dialog_Storyteller.cs" />
+    <Compile Include="Storyteller\Patch_Dialog_AnomalySettings.cs" />
+    <Compile Include="Storyteller\Patch_Page_SelectStoryteller.cs" />
+    <Compile Include="Storyteller\Patch_StorytellerUI.cs" />
+    <Compile Include="WorkbenchBills\BillTemplate.cs" />
+    <Compile Include="WorkbenchBills\BillUtility.cs" />
+    <Compile Include="WorkbenchBills\DefaultSettingsCategoryWorker_WorkbenchBills.cs" />
+    <Compile Include="WorkbenchBills\Dialog_Bill.cs" />
+    <Compile Include="WorkbenchBills\Dialog_BillMaker.cs" />
+    <Compile Include="WorkbenchBills\Dialog_RenameBillTemplate.cs" />
+    <Compile Include="WorkbenchBills\Dialog_WorkbenchBills.cs" />
+    <Compile Include="WorkbenchBills\Patch_Bill.cs" />
+    <Compile Include="WorkbenchBills\Patch_BillStack.cs" />
+    <Compile Include="WorkbenchBills\Patch_Bill_Production.cs" />
+    <Compile Include="WorkbenchBills\Patch_Dialog_BillConfig.cs" />
+    <Compile Include="WorkbenchBills\Patch_Thing.cs" />
+    <Compile Include="WorkbenchBills\WorkbenchBillStore.cs" />
+    <Compile Include="WorldSettings\DefaultSettingsCategoryWorker_World.cs" />
+    <Compile Include="WorldSettings\Dialog_WorldSettings.cs" />
+    <Compile Include="WorldSettings\FactionsUtility.cs" />
+    <Compile Include="WorldSettings\Patch_Page_CreateWorldParams.cs" />
+    <Compile Include="WorldSettings\Patch_WorldFactionsUIUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -ExecutionPolicy Bypass ..\..\Deploy-Experimental.ps1</PostBuildEvent>
+  </PropertyGroup>
+</Project>

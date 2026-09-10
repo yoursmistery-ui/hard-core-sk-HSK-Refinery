@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ============ HSK_ 自定义生活习性特性(commonality=0, 仅由本mod机制授予) ============ -->
+
+  <TraitDef>
+    <defName>HSK_NightOwl</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>night owl</label>
+        <description>{PAWN_nameDef} is most alive in the hours others sleep. The dark is not a wall for {PAWN_objective}; it is a workshop where {PAWN_possessive} hands work while the world rests.</description>
+        <degree>0</degree>
+        <statFactors>
+          <WorkSpeedGlobal>1.05</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>HSK_EarlyRiser</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_EarlyRiser</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>early riser</label>
+        <description>{PAWN_nameDef} greets the dawn before the world wakes. The quiet first light is where {PAWN_possessive} morning begins, sharp and clear.</description>
+        <degree>0</degree>
+        <statFactors>
+          <WorkSpeedGlobal>1.03</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>HSK_NightOwl</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_HealthNut</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>health nut</label>
+        <description>{PAWN_nameDef} treats the body as a temple. Fresh food, clean water, measured effort - {PAWN_pronoun} keeps {PAWN_possessive} body resilient against whatever the rim throws at it.</description>
+        <degree>0</degree>
+        <statOffsets>
+          <MentalBreakThreshold>0.12</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>HSK_Glutton</li>
+      <li>Gourmand</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_Glutton</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>glutton</label>
+        <description>{PAWN_nameDef} cannot resist a full plate, no matter the cost. Rations, preserves, the last of {PAWN_possessive} food - {PAWN_pronoun} eats it all, and the hunger returns quickly.</description>
+        <degree>0</degree>
+        <statOffsets>
+          <MentalBreakThreshold>-0.10</MentalBreakThreshold>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>HSK_HealthNut</li>
+      <li>Ascetic</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_Meditator</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>meditator</label>
+        <description>{PAWN_nameDef} sits in stillness and lets the noise of the colony fall away. What disturbs others merely passes over {PAWN_objective} like wind over stone.</description>
+        <degree>0</degree>
+        <statOffsets>
+          <MentalBreakThreshold>0.08</MentalBreakThreshold>
+          <PainShockThreshold>0.05</PainShockThreshold>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>Bloodlust</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_GymRat</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>gym rat</label>
+        <description>{PAWN_nameDef} spends every spare moment training. Iron discipline has turned {PAWN_possessive} body into a weapon, hard and unforgiving.</description>
+        <degree>0</degree>
+        <statFactors>
+          <MeleeDamageFactor>1.10</MeleeDamageFactor>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>Wimp</li>
+      <li>VTE_ThinSkinned</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_Bookworm</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>bookworm</label>
+        <description>{PAWN_nameDef} is never far from a book. {PAWN_possessive} mind, fed by constant study, reaches for answers faster than most.</description>
+        <degree>0</degree>
+        <statFactors>
+          <ResearchSpeed>1.10</ResearchSpeed>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>VTE_Dunce</li>
+      <li>Ignorant</li>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_Musician</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>musician</label>
+        <description>{PAWN_nameDef} fills the colony with music. Rhythms and melodies follow {PAWN_objective} through the day, softening even the hardest of lives.</description>
+        <degree>0</degree>
+        <statFactors>
+          <SocialImpact>1.05</SocialImpact>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+    </conflictingTraits>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>HSK_Tactician</defName>
+    <commonality>0</commonality>
+    <degreeDatas>
+      <li>
+        <label>tactician</label>
+        <description>{PAWN_nameDef} sees every situation as a board to be won. A love of games has sharpened {PAWN_possessive} mind into a precise instrument of planning.</description>
+        <degree>0</degree>
+        <statFactors>
+          <SocialImpact>1.03</SocialImpact>
+          <WorkSpeedGlobal>1.02</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+    </conflictingTraits>
+  </TraitDef>
+</Defs>

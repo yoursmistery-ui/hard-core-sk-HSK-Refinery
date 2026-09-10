@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- 鼠族二战军火 (2026-09-06 用户要求): 二战系枪械(云杉/杏梅/夹竹桃/灰叶枫/山毛榉/五月植物等)
+	     统一科研门槛, "刚好卡在工业电力阶段、石化之前"——
+	     前置=枪械基础(Gunsmithing), 档位=IndustrialBase 抽象
+	     (基础/高级研究台+研究终端设施, Core_SK 六档之前工业档)。
+	     注: 原并列 Electricity 已被删——Gunsmithing 前置链本身含电力工程 I(Electricity),
+	     ResearchTreeSK 09-06 报 "redundant prerequisites for 鼠族二战军火: 电力工程 I" 实锤
+	     (判定=prerequisites.SelectMany(Ancestors).Intersect(prerequisites)), 且运行态会自行 Remove;
+	     并列只造成每次启动一条警告, 门槛不变。留 Gunsmithing 即可。
+	     坐标 (12,34): 枪械带 Rifles_C1(10,34)/Sniper_rifles_C1(11,34) 右侧空位。 -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>RK_GW_Weapon</defName>
+		<label>鼠族二战军火</label>
+		<description>鼠族二战军火: 解锁鼠族各阵营的二战系栓动步枪、自动步枪、狙击枪与轻机枪(云杉、杏梅、夹竹桃、灰叶枫、山毛榉、五月植物),并配套 7.92×57mm 毛瑟弹药生产线。工业化与电力时代的军工水准,尚不依赖石化工业。</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Gunsmithing</li>
+		</prerequisites>
+		<researchViewX>10</researchViewX>
+		<researchViewY>32</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+</Defs>

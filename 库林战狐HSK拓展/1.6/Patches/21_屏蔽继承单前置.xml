@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 屏蔽继承的单数研究前置(AGENTS §3 单+复数并存告警):武器/服饰/假尾 recipeMaker 用复数 researchPrerequisites,
+       但父类 BaseHumanMakeableGun/ApparelBase 等注入单数 researchPrerequisite → ResearchTreeSK 报 "has both"。
+       对每个 def 的 recipeMaker Add <researchPrerequisite Inherit="False"/> 屏蔽继承单数,保留自有复数 Kurin 前置。
+       Conditional 门控(recipeMaker 存在才加,Biotech 缺失的 Mechanic_Charge_Rifle 自动跳过不报错)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Surigum"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Surigum"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_OnSkin_Vacsuit"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_OnSkin_Vacsuit"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_OnSkin_VacsuitChildren"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_OnSkin_VacsuitChildren"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_Waterfox_Armor"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_Waterfox_Armor"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kurin_FakeTail"]/recipeMaker</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Kurin_FakeTail"]/recipeMaker</xpath>
+      <value><researchPrerequisite Inherit="False" /></value>
+    </match>
+  </Operation>
+</Patch>

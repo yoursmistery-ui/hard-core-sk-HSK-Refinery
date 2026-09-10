@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_YE_YukiSakura</defName>
+		<label>"YukiSakura"Bolt-Action Rifle</label>
+		<description>The standard-issue rifle of the Yaezakura Empire Army.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/RK_YE_YukiSakura</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.0</drawSize>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<weaponTags Inherit="false">
+			<li>RK_YE_Rifle</li>
+		</weaponTags>
+		<statBases>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>2.5</Mass>
+			<Bulk>8</Bulk>
+			<AccuracyTouch>0.75</AccuracyTouch>
+			<AccuracyShort>0.80</AccuracyShort>
+			<AccuracyMedium>0.95</AccuracyMedium>
+			<AccuracyLong>0.90</AccuracyLong>
+			<RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>50</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<WoodPlank>40</WoodPlank>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>RK_YE_Weapon</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_YukiSakura</defaultProjectile>
+				<warmupTime>1.6</warmupTime>
+				<range>45</range>
+				<soundCast>RK_YE_YukiSakura</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>10</muzzleFlashScale>
+			</li>
+		</verbs>
+		<comps Inherit="False">
+			<li Class="RatkinWeapons.CompProperties_Bayonet" MayRequire="bbb.ratkinweapon.morefailure">
+				<cooldown>1800</cooldown>
+				<radius>14.9</radius>
+				<label>RK.BayonetLabel</label>
+				<description>RK.BayonetDescription</description>
+				<icon>UI/Abilities/RK_Bayonet</icon>
+			</li>
+			<li>
+				<compClass>CompEquippable</compClass>
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Styleable"/>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtWeaponGun</nameMaker>
+				<descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+				<minQualityForArtistic>Excellent</minQualityForArtistic>
+			</li>
+		</comps>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>bayonet</label>
+				<capacities>
+					<li>Cut</li>
+					<li>Stab</li>
+				</capacities>
+				<power>17</power>
+				<cooldownTime>2.3</cooldownTime>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Muzzle</linkedBodyPartsGroup>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

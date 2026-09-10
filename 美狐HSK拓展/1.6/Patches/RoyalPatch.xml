@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+			
+			<Operation Class="PatchOperationFindMod">
+			<mods>
+				<li>Royalty</li>
+			</mods>
+			<match Class="PatchOperationSequence">
+			<success>Always</success>	
+				<operations>
+				<!-- Guests -->
+					<li Class="PatchOperationAdd">
+						<xpath>/Defs/QuestScriptDef[defName="Util_ChooseRandomQuestLodgerKind"]/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_IsSet"]/node[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+						<value>
+							<li>
+								<factionDef>Miho_Faction_Megacorp</factionDef>
+								<pawnKinds>
+									<li>Miho_Soldier_Marksman</li>
+									<li>Miho_Soldier_Militia</li>
+									<li>Miho_Soldier_MilitiaGlasses</li>
+									<li>Miho_Soldier_TacticalMagi</li>
+									<li>Miho_Soldier_MilitiaCaptain</li>
+									<li>Miho_ColonistGlasses</li>
+									<li>Miho_Colonist</li>
+								</pawnKinds>
+							</li>
+							<li>
+								<factionDef>Miho_Faction_Supremacist</factionDef>
+								<pawnKinds>
+									<li>Miho_Soldier_Marksman</li>
+									<li>Miho_Soldier_Militia</li>
+									<li>Miho_Soldier_MilitiaGlasses</li>
+									<li>Miho_Soldier_TacticalMagi</li>
+									<li>Miho_Soldier_MilitiaCaptain</li>
+									<li>Miho_ColonistGlasses</li>
+									<li>Miho_Colonist</li>
+								</pawnKinds>
+							</li>
+						</value>
+					</li>
+					<!-- Mercenaries -->
+					<li Class="PatchOperationAdd">
+						<xpath>/Defs/QuestScriptDef[defName="Util_ChooseRandomQuestHelperKind"]/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_GetRandomPawnKindForFaction"]/choices</xpath>
+						<value>
+							<li>
+								<factionDef>Miho_Faction_Megacorp</factionDef>
+								<pawnKinds>
+									<li>Miho_Soldier_Marksman</li>
+									<li>Miho_Soldier_MilitiaMelee</li>
+									<li>Miho_Soldier_Militia</li>
+
+								</pawnKinds>
+							</li>
+							<li>
+								<factionDef>Miho_Faction_Supremacist</factionDef>
+								<pawnKinds>
+									<li>Miho_Soldier_Marksman</li>
+									<li>Miho_Soldier_MilitiaMelee</li>
+									<li>Miho_Soldier_Militia</li>
+
+								</pawnKinds>
+							</li> 
+						</value>
+					</li>
+				</operations>
+			</match>
+			</Operation>
+		
+</Patch>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==========================================================================
+	     战斗特性 2 件(复刻自 Medieval Overhaul Traits_Singular.xml 的战士/老兵两特性)
+		     铁律: 纯原版 TraitDef, 无 MO 自有类(MO 原文件本就只有 statOffsets/statFactors, 照抄改名);
+		     conflictingTraits 为本环境补充: 已有重叠特性 Brawler(近战)/Nimble(闪避)/Tough(减伤)/
+		     ShootingAccuracy(射击)/Core_SK Reaver(劫掠狂怒) → 防叠加;
+		     "deadshot" 经核对不存在于本环境 171 个 TraitDef, 射击类重叠由 ShootingAccuracy 覆盖;
+		     RK_Warrior 与 RK_Veteran 互斥(老兵档是战士档上位)。权重 0.2/0.1 保留。
+		     注: MO 原 Fighter 的 MentalBreakThreshold=-0.9 疑似上游笔误(Veteran 为 -0.15), 按"复刻"原则原样保留, 见交接报告。
+		     ========================================================================== -->
+
+	<TraitDef>
+		<defName>RK_Warrior</defName>
+		<commonality>0.2</commonality>
+		<conflictingTraits>
+			<li>Brawler</li>
+			<li>Nimble</li>
+			<li>Tough</li>
+			<li>ShootingAccuracy</li>
+			<li>Reaver</li>
+			<li>RK_Veteran</li>
+		</conflictingTraits>
+		<degreeDatas>
+			<li>
+				<label>战士</label>
+				<description>[PAWN_nameDef]是一名出色的战士。[PAWN_pronoun]懂得如何高效地使用武器，也懂得如何承受打击。</description>
+				<statOffsets>
+					<ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+					<AimingDelayFactor>-0.15</AimingDelayFactor>
+					<MeleeHitChance>4</MeleeHitChance>
+					<MeleeDodgeChance>6</MeleeDodgeChance>
+					<IncomingDamageFactor>-0.10</IncomingDamageFactor>
+					<PawnTrapSpringChance>-0.1</PawnTrapSpringChance>
+					<MentalBreakThreshold>-0.9</MentalBreakThreshold>
+					<PainShockThreshold>0.10</PainShockThreshold>
+				</statOffsets>
+				<statFactors>
+					<CertaintyLossFactor MayRequire="Ludeon.RimWorld.Ideology">0.05</CertaintyLossFactor>
+				</statFactors>
+			</li>
+		</degreeDatas>
+	</TraitDef>
+
+	<TraitDef>
+		<defName>RK_Veteran</defName>
+		<commonality>0.1</commonality>
+		<conflictingTraits>
+			<li>Brawler</li>
+			<li>Nimble</li>
+			<li>Tough</li>
+			<li>ShootingAccuracy</li>
+			<li>Reaver</li>
+			<li>RK_Warrior</li>
+		</conflictingTraits>
+		<degreeDatas>
+			<li>
+				<label>老兵</label>
+				<description>[PAWN_nameDef]是一名老兵。[PAWN_pronoun]亲历过无数足以击垮常人的惨烈战斗，尸山血海早已司空见惯。</description>
+				<statOffsets>
+					<ShootingAccuracyPawn>6</ShootingAccuracyPawn>
+					<AimingDelayFactor>-0.25</AimingDelayFactor>
+					<MeleeHitChance>8</MeleeHitChance>
+					<MeleeDodgeChance>12</MeleeDodgeChance>
+					<MedicalTendQuality>0.10</MedicalTendQuality>
+					<IncomingDamageFactor>-0.30</IncomingDamageFactor>
+					<MoveSpeed>0.3</MoveSpeed>
+					<PawnTrapSpringChance>-0.2</PawnTrapSpringChance>
+					<MentalBreakThreshold>-0.15</MentalBreakThreshold>
+					<PainShockThreshold>0.30</PainShockThreshold>
+				</statOffsets>
+				<statFactors>
+					<CertaintyLossFactor MayRequire="Ludeon.RimWorld.Ideology">0.25</CertaintyLossFactor>
+				</statFactors>
+			</li>
+		</degreeDatas>
+	</TraitDef>
+
+</Defs>

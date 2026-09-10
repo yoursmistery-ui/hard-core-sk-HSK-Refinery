@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <JobDef>
+        <defName>OAGene_Job_TakeIceCrystalOutOfCollector</defName>
+        <driverClass>OberoniaAureaGene.Snowstorm.JobDriver_TakeIceCrystalOutOfCollector</driverClass>
+        <reportString>从 TargetA 中提取风雪碎晶。</reportString>
+        <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    </JobDef>
+
+    <JoyGiverDef>
+        <defName>OAGene_RecallHometown</defName>
+        <giverClass>OberoniaAureaGene.Snowstorm.JoyGiver_RecallHometown</giverClass>
+        <baseChance>1</baseChance>
+        <pctPawnsEverDo>1</pctPawnsEverDo>
+        <jobDef>OAGene_RecallHometown</jobDef>
+        <joyKind>Meditative</joyKind>
+        <requireChair>false</requireChair>
+        <canDoWhileInBed>true</canDoWhileInBed>
+    </JoyGiverDef>
+
+    <JobDef>
+        <defName>OAGene_RecallHometown</defName>
+        <driverClass>OberoniaAureaGene.Snowstorm.JobDriver_RecallHometown</driverClass>
+        <reportString>回忆故乡。</reportString>
+        <joyDuration>4000</joyDuration>
+        <joyKind>Meditative</joyKind>
+        <taleOnCompletion>OAGene_RecalledHometown</taleOnCompletion>
+        <isCrawlingIfDowned>false</isCrawlingIfDowned>
+    </JobDef>
+
+</Defs>

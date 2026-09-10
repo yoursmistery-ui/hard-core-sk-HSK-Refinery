@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Charcoal"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MaxHitPoints>15</MaxHitPoints>
+				<MarketValue>2</MarketValue>
+				<DeteriorationRate>0.01</DeteriorationRate>
+				<Flammability>3</Flammability>
+				<MaxBurningTempCelsius>1000</MaxBurningTempCelsius>
+				<BurnDurationHours>1.3</BurnDurationHours>
+				<Mass>0.16</Mass>
+				<Bulk>0.16</Bulk>
+			</statBases>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Coal"]/statBases</xpath>
+		<value>
+			<statBases>
+				<MaxHitPoints>10</MaxHitPoints>
+				<MarketValue>2</MarketValue>
+				<DeteriorationRate>0.01</DeteriorationRate>
+				<Flammability>3</Flammability>
+				<MaxBurningTempCelsius>1900</MaxBurningTempCelsius>
+				<BurnDurationHours>1.8</BurnDurationHours>
+				<Mass>0.2</Mass>
+				<Bulk>0.2</Bulk>
+			</statBases>
+		</value>
+	</Operation>
+	
+	
+	
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="LeadBar"]/stuffProps/statFactors</xpath>
+		<value>
+			<Cleanliness>0.2</Cleanliness>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="GoldBar"]/stuffProps/statFactors</xpath>
+		<value>
+			<Cleanliness>1.8</Cleanliness>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="SilverBar"]/stuffProps/statFactors</xpath>
+		<value>
+			<Cleanliness>2.8</Cleanliness>
+		</value>
+	</Operation>
+    
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="CopperBar"]/stuffProps/statFactors</xpath>
+		<value>
+			<Cleanliness>3.2</Cleanliness>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CopperBar"]/stuffProps/statFactors/Beauty</xpath>
+		<value>
+			<Beauty>1.5</Beauty>
+		</value>
+	</Operation>
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CopperBar"]/statBases/StuffPower_Armor_Heat</xpath>
+		<value>
+			<StuffPower_Armor_Heat>0.03</StuffPower_Armor_Heat>
+		</value>
+	</Operation>
+	 <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CopperBar"]/statBases/StuffPower_Insulation_Cold</xpath>
+		<value>
+			<StuffPower_Insulation_Cold>-7.5</StuffPower_Insulation_Cold>
+		</value>
+	</Operation>
+     <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="CopperBar"]/statBases/StuffPower_Insulation_Heat</xpath>
+		<value>
+			<StuffPower_Insulation_Heat>-7.5</StuffPower_Insulation_Heat>
+		</value>
+	</Operation>
+    
+</Patch>

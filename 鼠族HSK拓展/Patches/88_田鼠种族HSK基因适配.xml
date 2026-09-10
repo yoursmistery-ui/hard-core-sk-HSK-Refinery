@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 88_田鼠种族HSK基因适配(RKGE 异种人型 × HSK 基因体系) -->
+    <!-- HSK 的 Ratkin raceGenes 强制给所有鼠族 大圆耳(RK_Gene_LargeEars)+细尾(RK_Gene_ThinTail),
+         与 RKGE 变体耳朵/尾巴基因(Ratkin_HamsterEars/Ratkin_SquirrelEars 等,
+         exclusionTags=Ears/Tail)互斥冲突,导致田鼠等异种生成时基因被跳过/叠加。
+         适配: 从 raceGenes 移除这两个基因 —— 普通鼠族(默认异种 RK_XenoType_Ratkin)的圆耳/细尾
+         由其异种基因提供(HSK 异种 genes 列表含这两项);田鼠等变体异种用自己的变体基因(经 RKGE
+         universalBodyAddons 渲染),两者不再冲突。
+         注: Sanguophage/Hussar/Genie/Starjack 异种鼠族将无耳朵(可接受,血族等变异体) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/generalSettings/raceGenes</xpath>
+        <value>
+            <raceGenes>
+                <li>RK_Gene_SmallBody</li>
+                <li>RK_Gene_Nimble</li>
+                <li>RK_Gene_PoorEyesight</li>
+                <li>RK_Gene_FragilePain</li>
+                <li>AptitudeStrong_Mining</li>
+                <li>AptitudeStrong_Plants</li>
+                <li>RK_Gene_GoodGardening</li>
+                <li>Skin_SheerWhite</li>
+                <li>Beard_NoBeardOnly</li>
+                <li>RK_Gene_CuteFace</li>
+            </raceGenes>
+        </value>
+    </Operation>
+
+	  <!-- 白名单补充: HSK raceRestriction 的 whiteGeneListEndo(内生基因可继承白名单)
+	       只列了 HSK 基础基因(含 RK_Gene_LargeEars/ThinTail, 供默认异种 RK_XenoType_Ratkin)。
+	       RKGE 变体异种(HouseMouse/LabRat/Vole 等, 均 inheritable=true)自带的变体耳/尾基因
+	       (Ratkin_Ears/Ratkin_Tail/Ratkin_LabRatEars/Ratkin_Prototype_Vole_Ears/Tail 等)
+	       不在白名单内, 会被 onlyHaveRaceRestrictedGenesEndo=true 过滤掉导致无法继承(异种无效)。
+	       追加全部 RKGE 鼠族变体 Ears/Tail 基因到白名单 —— 仅针对 defName=Ratkin, 其他种族不受影响。 -->
+	  <Operation Class="PatchOperationAdd">
+	    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/whiteGeneListEndo</xpath>
+	    <value MayRequire="Ludeon.RimWorld.Biotech">
+	      <li>Ratkin_Ears</li>
+	      <li>Ratkin_Tail</li>
+	      <li>Ratkin_LabRatEars</li>
+	      <li>Ratkin_Prototype_Vole_Ears</li>
+	      <li>Ratkin_Prototype_Vole_Tail</li>
+	      <li>Ratkin_HamsterEars</li>
+	      <li>Ratkin_SquirrelEars</li>
+	      <li>Ratkin_MoleEars</li>
+	      <li>Ratkin_VoleEars</li>
+	      <li>Ratkin_SquirrelTail</li>
+	      <li>Ratkin_MoleTail</li>
+	      <li>Ratkin_WREars</li>
+	      <li>Ratkin_WRTail</li>
+	    </value>
+	  </Operation>
+</Patch>

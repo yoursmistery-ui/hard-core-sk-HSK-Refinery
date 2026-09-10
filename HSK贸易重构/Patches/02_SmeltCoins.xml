@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+02_银令熔炼(2026-08-19 创建, 2026-08-20 改名: 银币→银令, 金币→金令)
+
+需求(用户): 在电熔炼器(ElectricSmelter)中加两条配方 —— 银令熔炼成银锭, 金令熔炼成金锭。
+
+机制: 这是"熔钱成材料"配方(消耗货币产材料), 与「货币只能贸易获得不能自产」不冲突
+  —— 银令仍不可制造, 只是可以熔成银锭(材料)使用。10 银令(SilverCoin MV=1)= 10 价值
+  → 1 银锭(SilverBar MV=5)= 5 价值, 熔炼损耗 50%(2026-08-21 复核仍为 50%)。
+  金令同理(2026-08-21 调整为与银一致 50%): 2 金令(GoldCoin MV=35)= 70 价值
+  → 1 金锭(GoldBar MV=35)= 35 价值, 熔炼损耗 50%。
+  (2026-08-20 曾临时改 100:1 后回滚: 银币重量不低, 10:1 更合理)
+
+挂载: 只用 recipeUsers(71 号教训: 配方挂载二选一, recipeUsers 或手动 Add, 不双写),
+后于 Core_SK(DLCModule 定义 SilverCoin / Core_SK 定义 SilverBar/GoldBar)加载。
+
+MayRequire=skyarkhangel.HSK.DLC: 银令/金令来自 Core_SK DLCModule, 缺依赖自动跳过不刷错。
+-->
+
+<Patch>
+
+  <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.HSK.DLC">
+    <xpath>Defs</xpath>
+    <value>
+      <RecipeDef>
+        <defName>RKImperialSmeltSilverCoins</defName>
+        <label>Smelt Silver Coins into Silver Bars</label>
+        <description>Smelt 10 imperial silver coins into 1 silver bar. Coins are melted down into crafting material.</description>
+        <jobString>Smelting silver coins.</jobString>
+        <workAmount>300</workAmount>
+        <workSpeedStat>SmeltingSpeed</workSpeedStat>
+        <effectWorking>Smelt</effectWorking>
+        <soundWorking>Recipe_Smelt</soundWorking>
+        <ingredients>
+          <li>
+            <filter>
+              <thingDefs>
+                <li>SilverCoin</li>
+              </thingDefs>
+            </filter>
+            <count>10</count>
+          </li>
+        </ingredients>
+        <fixedIngredientFilter>
+          <thingDefs>
+            <li>SilverCoin</li>
+          </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+          <SilverBar>1</SilverBar>
+        </products>
+        <workSkill>Crafting</workSkill>
+        <workSkillLearnFactor>0.8</workSkillLearnFactor>
+        <recipeUsers>
+          <li>ElectricSmelter</li>
+        </recipeUsers>
+      </RecipeDef>
+
+      <RecipeDef>
+        <defName>RKImperialSmeltGoldCoins</defName>
+        <label>Smelt Gold Coins into Gold Bars</label>
+        <description>Smelt 2 imperial gold coins into 1 gold bar. Coins are melted down into crafting material.</description>
+        <jobString>Smelting gold coins.</jobString>
+        <workAmount>300</workAmount>
+        <workSpeedStat>SmeltingSpeed</workSpeedStat>
+        <effectWorking>Smelt</effectWorking>
+        <soundWorking>Recipe_Smelt</soundWorking>
+        <ingredients>
+          <li>
+            <filter>
+              <thingDefs>
+                <li>GoldCoin</li>
+              </thingDefs>
+            </filter>
+            <count>2</count>
+          </li>
+        </ingredients>
+        <fixedIngredientFilter>
+          <thingDefs>
+            <li>GoldCoin</li>
+          </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+          <GoldBar>1</GoldBar>
+        </products>
+        <workSkill>Crafting</workSkill>
+        <workSkillLearnFactor>0.8</workSkillLearnFactor>
+        <recipeUsers>
+          <li>ElectricSmelter</li>
+        </recipeUsers>
+      </RecipeDef>
+    </value>
+  </Operation>
+
+</Patch>

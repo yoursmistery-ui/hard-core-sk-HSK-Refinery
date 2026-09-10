@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+	<ThingDef ParentName="RK_IndustrialRangeWeapon">
+		<defName>RK_KO_GoldenGarden</defName>
+		<label>"GoldenGarden" Grenade Gun</label>
+		<description>Fires 20×84 mm fragmentation grenades. With its extended effective range, it is capable of inflicting substantial casualties on massed enemy forces before they can close into direct engagement range.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/RK_KO_GoldenGarden</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>1.3</drawSize>
+		</graphicData>
+		<soundInteract>Interact_Grenade</soundInteract>
+		<statBases>
+			<WorkToMake>16000</WorkToMake>
+			<Mass>8</Mass>
+			<Bulk>20</Bulk>
+			<AccuracyTouch>0.85</AccuracyTouch>
+			<AccuracyShort>0.90</AccuracyShort>
+			<AccuracyMedium>0.95</AccuracyMedium>
+			<AccuracyLong>0.75</AccuracyLong>
+			<RangedWeapon_Cooldown>2.0</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<WoodPlank>10</WoodPlank>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>RK_KO_Weapon</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<equippedAngleOffset>45</equippedAngleOffset>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Grenade_GoldenGarden</defaultProjectile>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<forcedMissRadius>1.5</forcedMissRadius>
+				<warmupTime>2.0</warmupTime>
+				<range>35</range>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<soundCast>RK_KO_GoldenGarden</soundCast>
+				<soundCastTail>GunTail_Medium</soundCastTail>
+				<muzzleFlashScale>10</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+		</tools>
+	</ThingDef>
+</Defs>

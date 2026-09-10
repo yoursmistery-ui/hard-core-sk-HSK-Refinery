@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>MimiChips</defName>
+    <label>Mimi chips</label>
+    <description>A potato chip that was pretty popular in some cities back then. The recipe is super simple—you can make it yourself at home. Now it doesn’t have an original maker anymore; just small local factories following rough recipes. Quality varies—some are crispy, some soft, quite a difference. Kinda like a mini blind box when you eat it.</description>
+    <graphicData>
+      <texPath>Things/Misc/Chips</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+    </graphicData>
+    <soundInteract>Standard_Drop</soundInteract>
+    <soundDrop>Standard_Drop</soundDrop>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <stackLimit>3</stackLimit>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <MarketValue>26</MarketValue>
+      <Mass>0.05</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>1</DeteriorationRate>
+      <Nutrition>0.6</Nutrition>
+      <WorkToMake>450</WorkToMake>
+    </statBases>
+    <thingCategories>
+      <li>FoodMeals</li>
+    </thingCategories>
+    <ingestible>
+      <preferability>MealFine</preferability>
+      <foodType>Processed</foodType>
+      <joy>0.7</joy>
+      <joyKind>Gluttonous</joyKind>
+      <!-- <drugCategory>Any</drugCategory> -->
+      <baseIngestTicks>200</baseIngestTicks>
+      <canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+      <maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+      <defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+      <ingestSound>Ingest_Chips</ingestSound>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <chairSearchRadius>5</chairSearchRadius>
+      <optimalityOffsetHumanlikes>-300</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-1000</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <possessionCount>2</possessionCount>
+    <costList>
+      <RawPotatoes>9</RawPotatoes>
+      <Milk>3</Milk>
+    </costList>
+    <recipeMaker>
+      <researchPrerequisite>DrugProduction</researchPrerequisite>
+      <recipeUsers>
+        <li>ElectricStove</li>
+        <li>FueledStove</li>
+      </recipeUsers>
+      <workSpeedStat>CookSpeed</workSpeedStat>
+      <workSkill>Cooking</workSkill>
+      <skillRequirements>
+        <Cooking>6</Cooking>
+      </skillRequirements>
+      <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+      <displayPriority>1480</displayPriority>
+    </recipeMaker>
+    <tradeability>All</tradeability>
+    <tradeTags>
+      <li>ExoticMisc</li>
+      <li>MimiThings</li>
+    </tradeTags>
+  </ThingDef>
+</Defs>

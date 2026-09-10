@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="BuildingNaturalBase">
+		<defName>RK_RF_GuerrillaTunnel</defName>
+		<label>drill tunnel</label>
+		<description>It's a drilled transport pod. A powerful mining drill was used to create a pod that moved to the ground.</description>
+		<thingClass>RatkinFaction.Building_GuerrillaTunnelC</thingClass>
+		<graphicData>
+			<texPath>Things/Building/RK_GuerrillaTunnel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>4</drawSize>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.8</fillPercent>
+		<statBases>
+			<MaxHitPoints>840</MaxHitPoints>
+			<Flammability>0.0</Flammability>
+		</statBases>
+		<blockWind>false</blockWind>
+		<tickerType>Normal</tickerType>
+		<passability>PassThroughOnly</passability>
+		<killedLeavings>
+			<Steel>240</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+			<Chemfuel>75</Chemfuel>
+		</killedLeavings>
+	</ThingDef>
+
+	<ThingDef ParentName="EtherealThingBase">
+		<defName>RK_RF_GuerrillaTunnelSpawner</defName>
+		<label>tunnel</label>
+		<thingClass>RatkinFaction.GuerrillaTunnelSpawnerC</thingClass>
+		<tickerType>Normal</tickerType>
+		<drawerType>RealtimeOnly</drawerType>
+		<alwaysFlee>true</alwaysFlee>
+	</ThingDef>	
+
+</Defs>

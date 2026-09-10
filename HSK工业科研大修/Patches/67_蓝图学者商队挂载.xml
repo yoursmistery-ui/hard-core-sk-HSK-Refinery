@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 蓝图经济 v4.1: 蓝图学者商队挂载到 原版 OutlanderCivil + 鼠族 Rakinia 商队表
+     (xpath 存在性门控; TraderKindDef 本体在本 mod 1.6/Defs, Defs 阶段先于 Patches) -->
+<Patch>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/FactionDef[@Name="OutlanderFactionBase"]/caravanTraderKinds</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/FactionDef[@Name="OutlanderFactionBase"]/caravanTraderKinds</xpath>
+			<value><li>RK_TraderKind_BlueprintScholar</li></value>
+		</match>
+	</Operation>
+	<!-- 1.6 商队表都在派系抽象基类原始节点上(OutlanderFactionBase / RatkinFactionBase,
+	     补丁按原始 XML 操作不解析继承, 且属性谓词须 @Name) → 挂抽象节点, 全派系继承生效 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/FactionDef[@Name="RatkinFactionBase"]/caravanTraderKinds</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/FactionDef[@Name="RatkinFactionBase"]/caravanTraderKinds</xpath>
+			<value><li>RK_TraderKind_BlueprintScholar</li></value>
+		</match>
+	</Operation>
+</Patch>

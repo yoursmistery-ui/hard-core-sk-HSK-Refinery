@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村家具 · 桌 / 椅凳 / 床 全量移植(2026-08-29 · 第二批波次 3)
+     来源: Medieval Overhaul 1.6.2.2 Buildings_Furniture.xml 纯原版类 def 移植。
+     前缀统一 Rustic_; 基类改用原版 TableBase / FurnitureWithQualityBase / BedBase
+     (取代 MO 的 DankPyon_TableGatherSpotBase / ArtableFurnitureBase / BasicBedBase, 后者含 MO 专属属性)。
+     材料映射(2026-08-29 产业线改版)
+     drawSize 修正(2026-09-06): 全部非 1×1 家具补齐/改正 drawSize。本 mod 贴图按 128px/格绘制(RoundTable 64px/格), GraphicData 缺省 drawSize=(1,1) 格会把画布压进一格 → 内容与占地错位; 规则 drawSize=画布像素/每格像素, 逐贴图实测 alpha 边界定值。: 原木系(桌/凳/椅/床架)→ 原木类 stuff(WoodLogs+WYP Softwoods/Hardwoods/Ultrahardwoods);
+     乡村桌几 → 木板(Woody)+ 原始零部件 ComponentMedieval(铁加固系保留 Metallic, 无石材/塑料);
+     稻草床 → 原木 stuff + 干草 Hay; 毛皮床 → 皮革 stuff + 原木 WoodLog(固定劈木)。
+     研究分档(按用途, 见 09 计划 §二):
+       桌 16 / 椅凳 6 → ComplexFurniture(中世纪家具, 生活改善);
+       床 6 (稻草·原木·柳条) → Beds_A1(原始床, 生存刚需);
+       床 2 (毛皮) + 彩色床 6 → Beds_B1(中世纪床)。
+     ⚠ 全部为 stuffable 建筑, 均已显式写 uiIconPath(AGENTS §5: 缺失会在点选时每帧 NRE 卡死)。
+        MO 未提供 _MenuIcon, 统一取 _south / _north 方向图充当图标。 -->
+
+	<!--==================== 桌(中世纪 ComplexFurniture) ====================-->
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_LogTable1x2c</defName>
+		<label>原木长桌(1×2)</label>
+		<description>两段圆木对劈拼成的矮桌, 边角还留着斧痕。糙是糙了点, 摆上餐具照样能开饭。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogTable1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.1,2.2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogTable1x2_north</uiIconPath>
+		<size>(1,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>28</costStuffCount>
+		<statBases>
+			<MaxHitPoints>225</MaxHitPoints>
+			<WorkToBuild>2250</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>15</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_LogTable1x3c</defName>
+		<label>原木长桌(1×3)</label>
+		<description>三段拼的长桌, 够六七个人挨着坐。部落开宴席时, 这种桌子总是最先坐满。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogTable1x3</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,5)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogTable1x3_north</uiIconPath>
+		<size>(1,3)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>60</costStuffCount>
+		<statBases>
+			<MaxHitPoints>225</MaxHitPoints>
+			<WorkToBuild>3375</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>20</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_LogTable1x4c</defName>
+		<label>原木长桌(1×4)</label>
+		<description>一整条原木剖开做成的长桌。沉重、结实, 搬动一次要四个人。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogTable1x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,6)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogTable1x4_north</uiIconPath>
+		<size>(1,4)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>72</costStuffCount>
+		<statBases>
+			<MaxHitPoints>225</MaxHitPoints>
+			<WorkToBuild>4375</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>25</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_LogTable2x4c</defName>
+		<label>原木长桌(2×4)</label>
+		<description>两张长桌并作一张, 宽得能当案板用。宴席与议事都在这张桌上谈定。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogTable2x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogTable2x4_north</uiIconPath>
+		<size>(2,4)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>144</costStuffCount>
+		<statBases>
+			<MaxHitPoints>225</MaxHitPoints>
+			<WorkToBuild>6375</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>45</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_Table1x1c</defName>
+		<label>乡村小桌(1×1)</label>
+		<description>一张只够一人独坐的小桌。放在床边或角落, 摆一盏灯、一沓纸便算齐全。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTable1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTable1x1_north</uiIconPath>
+		<size>(1,1)</size>
+		<costStuffCount>15</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>38</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>2.5</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_ReinforcedTable1x1c</defName>
+		<label>铁加固小桌(1×1)</label>
+		<description>桌面边缘包了铁条的小桌, 比寻常木桌经得起磕碰, 也重上不少。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/ReinforcedRusticTable1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable1x1_north</uiIconPath>
+		<size>(1,1)</size>
+		<costStuffCount>15</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>3</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<WorkToBuild>625</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>5</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_Table1x2c</defName>
+		<label>乡村餐桌(1×2)</label>
+		<description>最常见的农家饭桌, 一家老小挤着刚好坐下。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTable1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTable1x2_north</uiIconPath>
+		<size>(1,2)</size>
+		<costStuffCount>28</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>3</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>750</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>5</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_ReinforcedTable1x2c</defName>
+		<label>铁加固餐桌(1×2)</label>
+		<description>铁件加固的餐桌, 拍桌子吵架也不会散架。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/ReinforcedRusticTable1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable1x2_north</uiIconPath>
+		<size>(1,2)</size>
+		<costStuffCount>28</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>4</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>1250</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>10</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_Table1x3c</defName>
+		<label>乡村长桌(1×3)</label>
+		<description>三格长的饭桌, 人多的家里总要备上一张。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTable1x3</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,5)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTable1x3_north</uiIconPath>
+		<size>(1,3)</size>
+		<costStuffCount>28</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>4</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>112</MaxHitPoints>
+			<WorkToBuild>1125</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>7.5</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_Table2x2c</defName>
+		<label>乡村方桌(2×2)</label>
+		<description>方方正正的四人桌, 四面都能坐人, 谈事时谁也不居上位。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTable2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTable2x2_north</uiIconPath>
+		<size>(2,2)</size>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>5</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>10</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_ReinforcedTable2x2c</defName>
+		<label>铁加固方桌(2×2)</label>
+		<description>包铁的四人桌, 沉稳厚重, 也好看些。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/ReinforcedRusticTable2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable2x2_north</uiIconPath>
+		<size>(2,2)</size>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>6</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Beauty>2</Beauty>
+			<Mass>15</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_RoundTable2x2c</defName>
+		<label>乡村圆桌(2×2)</label>
+		<description>圆桌没有首尾之分, 围坐的人一律平等——骑士们谈条件时偏爱它。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticRoundTable2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticRoundTable2x2_south</uiIconPath>
+		<size>(2,2)</size>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>5</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>10</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_Table2x4c</defName>
+		<label>乡村长桌(2×4)</label>
+		<description>能坐下十来号人的长桌, 厅堂里的主角。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTable2x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTable2x4_north</uiIconPath>
+		<size>(2,4)</size>
+		<costStuffCount>95</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>8</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>3000</WorkToBuild>
+			<Beauty>2</Beauty>
+			<Mass>20</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_ReinforcedTable2x4c</defName>
+		<label>铁加固长桌(2×4)</label>
+		<description>最气派的一张: 铁条包边, 四人抬不动。领主的长厅里少不了它。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/ReinforcedRusticTable2x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/ReinforcedRusticTable2x4_north</uiIconPath>
+		<size>(2,4)</size>
+		<costStuffCount>95</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>10</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>220</MaxHitPoints>
+			<WorkToBuild>6000</WorkToBuild>
+			<Beauty>4</Beauty>
+			<Mass>35</Mass>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_EndTable</defName>
+		<label>床头小几</label>
+		<description>摆在床边的矮几, 放水杯、油灯与随身杂物。坐着的人一伸手就够得着。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticEndTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticEndTable_south</uiIconPath>
+		<size>(1,1)</size>
+		<costStuffCount>30</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Beauty>3</Beauty>
+			<Mass>5</Mass><Comfort>0.05</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_TallEndTable</defName>
+		<label>高脚小几</label>
+		<description>腿脚更高的小几, 站着顺手, 坐着也顺手。讲究人家才备这个。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticTallEndTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticTallEndTable_south</uiIconPath>
+		<size>(1,1)</size>
+		<costStuffCount>35</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costList>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<WorkToBuild>1250</WorkToBuild>
+			<Beauty>3</Beauty>
+			<Mass>5</Mass><Comfort>0.05</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 椅凳(中世纪 ComplexFurniture) ====================-->
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_LogChair</defName>
+		<label>原木椅</label>
+		<description>一段圆木削平了当凳面, 四条腿直接插进去。坐上去硬, 但坐得住。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogChair1x1</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogChair1x1</uiIconPath>
+		<size>(1,1)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>2250</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Mass>5</Mass><Comfort>0.70</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_LogBench1x2c</defName>
+		<label>原木长凳(1×2)</label>
+		<description>两人并坐的长凳。挤一挤还能再加一个。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogBench1x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.1,2.2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogBench1x2_north</uiIconPath>
+		<size>(1,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>3375</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Mass>10</Mass><Comfort>0.70</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_LogBench1x3c</defName>
+		<label>原木长凳(1×3)</label>
+		<description>三人长凳, 长桌两侧各摆一条刚刚好。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogBench1x3</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.3,3.2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogBench1x3_north</uiIconPath>
+		<size>(1,3)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>70</costStuffCount>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>4500</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Mass>15</Mass><Comfort>0.70</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_LogBench1x4c</defName>
+		<label>原木长凳(1×4)</label>
+		<description>四条腿撑起的通长木凳, 宴席上最实用的座席。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogBench1x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.4,4.2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogBench1x4_north</uiIconPath>
+		<size>(1,4)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>95</costStuffCount>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>5625</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Mass>20</Mass><Comfort>0.70</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RoundStool</defName>
+		<label>乡村圆凳</label>
+		<description>一块圆木板加三条腿, 随手就能拎走。厨房、工坊、酒馆都少不了它。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticRoundStool</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticRoundStool_south</uiIconPath>
+		<size>(1,1)</size>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>25</costStuffCount>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>450</WorkToBuild>
+			<Beauty>0</Beauty>
+			<Mass>3</Mass><Comfort>0.50</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_DiningChair</defName>
+		<label>乡村餐椅</label>
+		<description>带靠背的餐椅, 坐久了也不至于腰酸。比起长凳, 它算得上体面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticChair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RusticChair_south</uiIconPath>
+		<size>(1,1)</size>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Beauty>8</Beauty>
+			<Mass>5</Mass><Comfort>0.70</Comfort>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 床 · 原始档(Beds_A1) ====================-->
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_StrawBed</defName>
+		<label>稻草床</label>
+		<description>麻布口袋塞满干草就是一张床。躺上去窸窣作响, 保暖却意外地好——穷人的过冬法子。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedStraw</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedStraw_south</uiIconPath>
+		<size>(1,2)</size>
+		<costStuffCount>45</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costList>
+			<Hay>45</Hay>
+		</costList>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>650</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>30</Mass><Comfort>0.70</Comfort><BedRestEffectiveness>0.95</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_StrawBedDouble</defName>
+		<label>稻草双人床</label>
+		<description>加宽版草垫, 两个人挤着睡更暖和。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedStrawDouble</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedStrawDouble_south</uiIconPath>
+		<size>(2,2)</size>
+		<costStuffCount>55</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costList>
+			<Hay>60</Hay>
+		</costList>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>1350</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>50</Mass><Comfort>0.70</Comfort><BedRestEffectiveness>0.95</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedLog</defName>
+		<label>原木床</label>
+		<description>木框上铺一层草垫, 比直接睡地上强得多。原始聚落里, 这已算讲究。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/LogSlabBed</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/LogSlabBed_south</uiIconPath>
+		<size>(1,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>30</Mass><Comfort>0.55</Comfort><BedRestEffectiveness>0.90</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedLogDouble</defName>
+		<label>原木双人床</label>
+		<description>双人宽的原木床架, 夫妻或同伴共用。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/DoubleLogSlabBed</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/DoubleLogSlabBed_south</uiIconPath>
+		<size>(2,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>85</costStuffCount>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>1350</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>50</Mass><Comfort>0.55</Comfort><BedRestEffectiveness>0.90</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedWicker</defName>
+		<label>柳条床</label>
+		<description>柳条编的床面略有弹性, 比木板柔和, 也透气。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedWicker</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedWicker_south</uiIconPath>
+		<size>(1,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>650</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>30</Mass><Comfort>0.65</Comfort><BedRestEffectiveness>0.95</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedWickerDouble</defName>
+		<label>柳条双人床</label>
+		<description>双人柳条床, 编工更密, 承重也更好。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedWickerDouble</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedWickerDouble_south</uiIconPath>
+		<size>(2,2)</size>
+		<stuffCategories Inherit="False">
+			<li>WoodLogs</li>
+			<li>Softwoods</li>
+			<li>Hardwoods</li>
+			<li>Ultrahardwoods</li>
+		</stuffCategories>
+		<costStuffCount>85</costStuffCount>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>1350</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>50</Mass><Comfort>0.65</Comfort><BedRestEffectiveness>0.95</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_A1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<!--==================== 床 · 中世纪档(Beds_B1) ====================-->
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedFur</defName>
+		<label>毛皮床</label>
+		<description>厚厚一层兽皮铺在床架上, 寒气几乎透不进来。冬夜里最能救命的一张床。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedFur</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedFur_south</uiIconPath>
+		<size>(1,2)</size>
+		<stuffCategories Inherit="False">
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>15</costStuffCount>
+		<costList>
+			<WoodLog>20</WoodLog>
+		</costList>
+		<statBases>
+			<MaxHitPoints>140</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+			<Beauty>1</Beauty>
+			<Mass>30</Mass><BedRestEffectiveness>1.0</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_B1</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="BlueprintUnlockHSK.CompProperties_FurBedCureHSK">
+				<cureHediffs>
+					<li>Hypothermia</li>
+				</cureHediffs>
+				<intervalTicks>4</intervalTicks>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BedBase">
+		<defName>Rustic_BedFurDouble</defName>
+		<label>毛皮双人床</label>
+		<description>双人毛皮床, 两张兽皮缝在一起, 暖得让人不想起身。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/BedFurDouble</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/BedFurDouble_south</uiIconPath>
+		<size>(2,2)</size>
+		<stuffCategories Inherit="False">
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<costList>
+			<WoodLog>35</WoodLog>
+		</costList>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>2</Beauty>
+			<Mass>50</Mass><BedRestEffectiveness>1.0</BedRestEffectiveness>
+		</statBases>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites>
+			<li>Beds_B1</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="BlueprintUnlockHSK.CompProperties_FurBedCureHSK">
+				<cureHediffs>
+					<li>Hypothermia</li>
+				</cureHediffs>
+				<intervalTicks>4</intervalTicks>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

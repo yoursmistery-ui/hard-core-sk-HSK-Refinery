@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ========== 普通陶瓷配方迁玻璃制造台 ===========
+		Core_SK MakeCeramics 原 recipeUsers = ElectricSmelter + Kiln
+		去掉电熔炼台, 改为 GlassworkTable(玻璃制造台), 保留 Kiln(窑) 以维持早期科技曲线
+		三级陶瓷统一在玻璃制造台工业 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/RecipeDef[defName="MakeCeramics"]/recipeUsers/li[text()="ElectricSmelter"]</xpath>
+		<value>
+			<li>GlassworkTable</li>
+		</value>
+	</Operation>
+
+	<!-- 玻璃制造台 recipes 直接挂载高级/军用陶瓷配方(双重保险, 确保工作台显示) -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="GlassworkTable"]/recipes</xpath>
+		<value>
+			<li>Miho_PastetoCeramic</li>
+			<li>Miho_PastetoMCeramic</li>
+		</value>
+	</Operation>
+</Patch>

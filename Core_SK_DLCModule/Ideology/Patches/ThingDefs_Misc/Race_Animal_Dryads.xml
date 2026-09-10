@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- ========== Base Dryad ========== -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="DryadBase"]/race</xpath>
+		<value>
+			<useMeatFrom>Elephant</useMeatFrom>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[@ParentName="DryadBase"]/race/useMeatFrom[text()="Dryad_Basic"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+	<xpath>Defs/ThingDef[not (@ParentName="DryadBase")]/race/useMeatFrom[text()="Dryad_Basic"]</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[not (@ParentName="DryadBase")]/race/useMeatFrom[text()="Dryad_Basic"]</xpath>
+			<value>
+				<useMeatFrom>Elephant</useMeatFrom>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- <Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[@Name="DryadBase"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="DryadBase"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.25</MeleeDodgeChance>
+			<MeleeCritChance>0.06</MeleeCritChance>
+			<MeleeParryChance>0.04</MeleeParryChance>
+		</value>
+	</Operation> --> <!-- Same as CE patch -->
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="DryadBase"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>2</cooldownTime>
+                    <surpriseAttack>
+                        <extraMeleeDamages>
+                        <li>
+                            <def>Stun</def>
+                            <amount>10</amount>
+                        </li>
+                        </extraMeleeDamages>
+                    </surpriseAttack>                    
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationBlunt>1</armorPenetrationBlunt>
+					<armorPenetrationSharp>1.5</armorPenetrationSharp>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>2</cooldownTime>
+                    <surpriseAttack>
+                        <extraMeleeDamages>
+                        <li>
+                            <def>Stun</def>
+                            <amount>10</amount>
+                        </li>
+                        </extraMeleeDamages>
+                    </surpriseAttack>                        
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationBlunt>1</armorPenetrationBlunt>
+					<armorPenetrationSharp>1.5</armorPenetrationSharp>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+                    <surpriseAttack>
+                        <extraMeleeDamages>
+                        <li>
+                            <def>Stun</def>
+                            <amount>10</amount>
+                        </li>
+                        </extraMeleeDamages>
+                    </surpriseAttack>                        
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
+					<armorPenetrationSharp>0.5</armorPenetrationSharp>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>2</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<armorPenetrationBlunt>2</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ========== Clawer ========== -->
+
+	<!-- Use CE? -->
+	<!-- <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Dryad_Clawer"]/statBases/MoveSpeed</xpath>
+		<value>
+			<MoveSpeed>6.4</MoveSpeed>
+            <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+			<MeleeDodgeChance>0.5</MeleeDodgeChance>
+			<MeleeCritChance>0.25</MeleeCritChance>
+			<MeleeParryChance>0.3</MeleeParryChance>
+		</value>
+	</Operation> -->
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Dryad_Clawer"]/tools</xpath>
+		<value>
+			<tools> <!-- Don't know if we also need an Inherit="False" --> 
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+						<li>Cut</li>
+					</capacities>
+					<power>18</power>
+					<cooldownTime>0.96</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<surpriseAttack>
+						<extraMeleeDamages>
+							<li>
+								<def>Stun</def>
+								<amount>20</amount>
+							</li>
+						</extraMeleeDamages>
+					</surpriseAttack>
+					<armorPenetrationBlunt>7</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+						<li>Cut</li>
+					</capacities>
+					<power>18</power>
+					<cooldownTime>0.96</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<surpriseAttack>
+						<extraMeleeDamages>
+							<li>
+								<def>Stun</def>
+								<amount>20</amount>
+							</li>
+						</extraMeleeDamages>
+					</surpriseAttack>
+					<armorPenetrationBlunt>7</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>28</power>
+					<cooldownTime>1.5</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<surpriseAttack>
+						<extraMeleeDamages>
+							<li>
+								<def>Stun</def>
+								<amount>20</amount>
+							</li>
+						</extraMeleeDamages>
+					</surpriseAttack>
+					<armorPenetrationSharp>9</armorPenetrationSharp>
+					<armorPenetrationBlunt>8</armorPenetrationBlunt>
+					<chanceFactor>0.3</chanceFactor>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>3.2</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.1</chanceFactor>
+					<armorPenetrationBlunt>8</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ========== Barkskin ========== -->
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>10</ArmorRating_Sharp>
+		</value>
+	</Operation>
+
+	<!-- CE added -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]/statBases/MeleeParryChance</xpath>
+	</Operation>
+
+	<!-- Same as CE -->
+	<!-- <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+            <ArmorRating_Blunt>15</ArmorRating_Blunt>
+		</value>
+	</Operation> -->
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Dryad_Berrymaker"]/comps/li[@Class="CompProperties_Spawner"]/spawnCount</xpath>
+		<value>
+			<spawnCount>15</spawnCount>
+		</value>
+	</Operation>
+
+	<!-- Same as CE -->
+	<!-- <Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]/comps</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]</xpath>
+			<value>
+				<comps />
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Dryad_Barkskin"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>400</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>600</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<MinArmorPct>0.75</MinArmorPct>
+			</li>
+		</value>
+	</Operation> -->
+
+</Patch>

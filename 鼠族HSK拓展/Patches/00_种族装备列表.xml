@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 鼠族HSK拓展 - 种族装备列表(整合内容全部加入鼠族) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/apparelList</xpath>
+        <value>
+            <li>junfu</li>
+            <li>fengye</li>
+            <li>gelusi</li>
+            <li>bjq</li>
+            <li>bjm</li>
+            <li>fangdanjunfu</li>
+            <li>fengyewaitao</li>
+            <li>gjhpf</li>
+            <li>beileimao</li>
+            <li>sxpf</li>
+            <li>hsdy</li>
+            <li>maorongdayi</li>
+            <li>baonuanneiyi</li>
+            <li>kamz</li>
+            <li>xiaokb</li>
+            <li>tybb</li>
+            <li>zsyg</li>
+            <li>yiliaob</li>
+            <li>yingwu</li>
+            <li>nwcq</li>
+            <li>nwcqB</li>
+            <li>nwpf</li>
+            <li>nwtg</li>
+            <li>baonuanneiyi_Child</li>
+            <li>maorongdayi_Child</li>
+            <li>kamz_Child</li>
+            <li>hjzjmz</li>
+            <li>hjzjmzB</li>
+            <li>hjzj</li>
+            <li>hjzjwj</li>
+            <li>xqzzj</li>
+            <li>xqzmj</li>
+            <li>kydcmz</li>
+            <li>kydc</li>
+            <li>MKSWWJ</li>
+            <li>MKSW</li>
+            <li>MKSWheat</li>
+            <li>xinpian</li>
+            <li>JD_shield</li>
+            <li>RKHSK_Favonius_Underarmour</li>
+            <li>RKHSK_Favonius_PlateArmour</li>
+            <li>RKHSK_Favonius_HeavySkirt</li>
+            <li>RKHSK_Favonius_OfficerArmour</li>
+            <li>Crusaders</li>
+            <li>Crusadershead</li>
+            <li>RK_Circlet</li>
+            <li>RK_Crusader</li>
+            <li>RK_Gambeson</li>
+            <li>RK_GambesonB</li>
+            <li>RK_GuardsmanA</li>
+            <li>RK_GuardsmanB</li>
+            <li>RK_MilUniform</li>
+            <li>RK_Officer</li>
+            <li>RK_Oriental</li>
+            <li>RK_OuterPlate</li>
+            <li>RK_Rifleman</li>
+            <li>RK_Scarf</li>
+            <li>RK_Sleeves</li>
+            <li>RK_Vest</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Ratkin"]/alienRace/raceRestriction/weaponList</xpath>
+        <value>
+            <li>FBZX</li>
+            <li>gfzd</li>
+            <li>huimie</li>
+        </value>
+    </Operation>
+    <!-- 背包渲染修复(原整合内容自带) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "RK_OutdoorBackpack"]/apparel</xpath>
+        <value>
+            <renderSkipFlags><li>None</li></renderSkipFlags>
+            <drawData><dataNorth><layer>99</layer></dataNorth></drawData>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "RK_Backpack"]/apparel</xpath>
+        <value>
+            <renderSkipFlags><li>None</li></renderSkipFlags>
+            <drawData><dataNorth><layer>99</layer></dataNorth></drawData>
+        </value>
+    </Operation>
+</Patch>

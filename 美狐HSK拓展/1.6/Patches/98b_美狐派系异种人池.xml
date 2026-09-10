@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 98b_美狐派系异种人池(2026-08-27) -->
+    <!-- 命名说明: 本文件刻意不叫 100_ —— AGENTS.md §3"1xx 是陷阱编号":
+         字符串序下 "100_" 首字符 1 < 9, 实际排在 98_/99_ **之前**, 并非最终层。
+         故取名 98b_, 紧跟同族的 98_美狐异种人白名单.xml(98 < 98b < 99)。 -->
+    <!-- ⚠ 与其它补丁的关系: 装 Odyssey 时 1.6/Patches/ModPatches/RemoveTrainers.xml
+         会 Replace `Defs/PawnKindDef[@Name="MihoBase"]/xenotypeSet` 并把 11 条 0 权重
+         原版异种人重新写回(本文件第⑥段的 Remove 被其覆盖, ModPatches/ 路径序在后)。
+         这些条目权重均为 0, 不影响抽取, 也**不会**产生智人种概率(非 0 权重合计仍=1),
+         仅可能在界面重新出现"智人种 0%"一类空行 → 属已知外观问题, 勿再当 bug 追。 -->
+    <!-- 问题: 美狐(美狐HSK拓展)的 FactionDef **全部没有 xenotypeSet**(Miho_Faction_Megacorp /
+         Miho_Faction_Supremacist 甚至 ParentName="FactionBase",而 FactionBase 本体无池)。
+         池为空 → RimWorld `XenotypeSet.get_BaselinerChance`(IL 实证:返回 1 − Σ池内 Baseliner
+         条目权重,即未被池覆盖的概率余量全部落到智人种)→ 美狐派系成员按人类默认异种人分布
+         生成,派系界面出现"智人种 100%"类条目。
+         对照: 美狐自身种族定义 Race_Miho.xml 的 raceRestriction/xenotypeList 已是纯美狐 6 条
+         (98_美狐异种人白名单.xml 最终层兜底),但那是"种族允许名单",不填派系池就无效。
+
+         写法(遵循 AGENTS.md §3): 一律顶层独立 PatchOperationConditional + xpath 存在性门控
+         (不用 1.6 已失效的 Operation 级 MayRequire,不用 FindMod+Sequence 嵌套);
+         已有 xenotypeSet → Replace 其 xenotypeChances;没有 → Add 整块 xenotypeSet(带 Inherit="False")。
+         权重合计一律严格 = 1.000,保证余量 0、不产生任何智人种概率。
+         异种人取值只用**无 DLC 门控**的 5 条(Xeno_CelestialMiho / _Arctic / _Desert / _Highland /
+         _Highmate);_Voidborn 需 Odyssey,若写进池并加 MayRequire,未装 Odyssey 时该条被 Def
+         节点级过滤掉 → 合计 < 1 → 余量又漏给智人种,故池中不启用。
+
+         权重依据(美狐自身 PawnKinds_Miho.xml 的分布): 平民 Xeno_CelestialMiho 0.66 / Arctic 0.16 /
+         Desert 0.12 / Highland 0.02 / Highmate 0.04;战斗职位 Highland 提到 0.40;圣诞商人 Arctic 0.60。
+         本补丁按派系性格取中: 普通派系沿用平民分布,至上主义(军国)提高 Highland,星舰乘员均衡。 -->
+
+    <!-- ① 抽象基类 MihoFactionBase: 兜底,今后继承它的新美狐派系自动带池。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[@Name="MihoFactionBase"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[@Name="MihoFactionBase"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[@Name="MihoFactionBase"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ② 玩家派系(魔法 / 无魔法): 沿用平民分布。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="Miho_PlayerColony"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="Miho_PlayerColony"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="Miho_PlayerColony"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="Miho_PlayerColonyNonMagic"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="Miho_PlayerColonyNonMagic"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="Miho_PlayerColonyNonMagic"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.66</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.16</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.02</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ③ 巨型企业 Megacorp: 都市系,初代美狐稍高、高原略增。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="Miho_Faction_Megacorp"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="Miho_Faction_Megacorp"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.64</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.14</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.06</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="Miho_Faction_Megacorp"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.64</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.14</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.12</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.06</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.04</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ④ 至上主义 Supremacist: 军国派系,高原(战斗向 0.40 的职位分布)显著抬高。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.50</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.12</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.08</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.28</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.02</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="Miho_Faction_Supremacist"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.50</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.12</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.08</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.28</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.02</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ⑤ 星舰乘员 GravshipCrew: 混编长途,分布均衡。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="Miho_GravshipCrew"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="Miho_GravshipCrew"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <Xeno_CelestialMiho>0.60</Xeno_CelestialMiho>
+                    <Xeno_CelestialMiho_Arctic>0.10</Xeno_CelestialMiho_Arctic>
+                    <Xeno_CelestialMiho_Desert>0.10</Xeno_CelestialMiho_Desert>
+                    <Xeno_CelestialMiho_Highland>0.10</Xeno_CelestialMiho_Highland>
+                    <Xeno_CelestialMiho_Highmate>0.10</Xeno_CelestialMiho_Highmate>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="Miho_GravshipCrew"]</xpath>
+            <value>
+                <xenotypeSet Inherit="False">
+                    <xenotypeChances>
+                        <Xeno_CelestialMiho>0.60</Xeno_CelestialMiho>
+                        <Xeno_CelestialMiho_Arctic>0.10</Xeno_CelestialMiho_Arctic>
+                        <Xeno_CelestialMiho_Desert>0.10</Xeno_CelestialMiho_Desert>
+                        <Xeno_CelestialMiho_Highland>0.10</Xeno_CelestialMiho_Highland>
+                        <Xeno_CelestialMiho_Highmate>0.10</Xeno_CelestialMiho_Highmate>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ⑥ 美狐职位池里的"0 权重原版异种人"条目清理(2026-08-27)。
+         PawnKinds_Miho.xml 的每个职位池里都跟着 11 条权重 0 的原版异种人
+         (Baseliner/Dirtmole/Genie/Hussar/Sanguophage/Neanderthal/Pigskin/Impid/Waster/Yttakin/Highmate),
+         对生成毫无影响,但会在派系/角色界面留下"智人种 0%"一类空行。
+         门控: 只处理**池内含 Xeno_CelestialMiho** 的池(即确认是美狐池),不误伤其它种族。
+         每个原版名一个顶层 Conditional(xpath 存在才 Remove),不用 union(AGENTS §3: xpath 不支持 A|B)。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Baseliner</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Baseliner</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Dirtmole</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Dirtmole</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Genie</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Genie</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Hussar</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Hussar</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Sanguophage</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Sanguophage</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Neanderthal</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Neanderthal</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Pigskin</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Pigskin</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Impid</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Impid</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Waster</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Waster</xpath>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Yttakin</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Yttakin</xpath>
+        </match>
+    </Operation>
+    <!-- Highmate = 原版天选者(Genetype 异种人),美狐自己的是 Xeno_CelestialMiho_Highmate,勿混 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Highmate</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/PawnKindDef[xenotypeSet/xenotypeChances/Xeno_CelestialMiho]/xenotypeSet/xenotypeChances/Highmate</xpath>
+        </match>
+    </Operation>
+
+</Patch>

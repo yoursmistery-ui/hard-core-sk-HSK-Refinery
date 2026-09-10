@@ -1,0 +1,1938 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+    <!-- 工具整合·第一段: 基础鼠族工具配方+关闭自动配方+木板材料+STL生存工具适配+新工具(剪刀/冲击钻/液压钳/电焊枪)创建+新工具CE近战。按原 01→45 顺序拼接, 未改动任何操作内部顺序。 -->
+    <!-- ───────── 来源: 01_工具配方.xml ───────── -->
+<!--工具配方与数值(2026-08-26 自 鼠族HSK拓展 01 号拆出): 鼠族中世纪/工业工具配方、statBases、tools 数值。钉头锤 RK_Mace 属武器序列,留在原 mod。-->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Cleaver"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Cleaver</defName>
+            <label>制造剁肉刀</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>5000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49720</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>Metallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>50</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodLog</li>
+                        </thingDefs>
+                    </filter>
+                    <count>25</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>3</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>Metallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodLog</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Cleaver>1</RK_Cleaver>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Cleaver"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>5000</WorkToMake>
+            <Mass>0.8</Mass>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Cleaver"]/tools/li[1]/power</xpath>
+    <value><power>6</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Cleaver"]/tools/li[2]/power</xpath>
+    <value><power>14</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Pickaxe</defName>
+            <label>制造鼠族矿镐</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>6000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49710</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>Metallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>70</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodLog</li>
+                        </thingDefs>
+                    </filter>
+                    <count>40</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>4</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>Metallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodLog</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Pickaxe>1</RK_Pickaxe>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>1.6</Mass>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/tools/li[1]/power</xpath>
+    <value><power>23</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/tools/li[2]/power</xpath>
+    <value><power>12</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Axe"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Axe</defName>
+            <label>制造斧头</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>6000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisites>
+                <li>Smithing</li>
+                <li>Food_Plants_A1</li>
+            </researchPrerequisites>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49700</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>Metallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>50</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodLog</li>
+                        </thingDefs>
+                    </filter>
+                    <count>40</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>3</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>Metallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodLog</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Axe>1</RK_Axe>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Axe"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>1.6</Mass>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Axe"]/tools/li[1]/power</xpath>
+    <value><power>9</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Axe"]/tools/li[2]/power</xpath>
+    <value><power>23</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Hockey"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Hockey</defName>
+            <label>制造锄头</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>6000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisites>
+                <li>Smithing</li>
+                <li>Food_Plants_A1</li>
+            </researchPrerequisites>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49690</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>Metallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>50</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodLog</li>
+                        </thingDefs>
+                    </filter>
+                    <count>40</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>3</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>Metallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodLog</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Hockey>1</RK_Hockey>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Hockey"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>1.6</Mass>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Hockey"]/tools/li[1]/power</xpath>
+    <value><power>20</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Hockey"]/tools/li[2]/power</xpath>
+    <value><power>16</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Dagger"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Dagger</defName>
+            <label>制造鼠族匕首</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>2500</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49200</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>StrongMetallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>25</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodPlank</li>
+                        </thingDefs>
+                    </filter>
+                    <count>15</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>3</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>StrongMetallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodPlank</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Dagger>1</RK_Dagger>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Dagger"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>2500</WorkToMake>
+            <Mass>0.8</Mass>
+            <Bulk>1</Bulk>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Dagger"]/tools/li[1]/power</xpath>
+    <value><power>14</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Dagger"]/tools/li[2]/power</xpath>
+    <value><power>10</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Dagger"]/tools/li[3]/power</xpath>
+    <value><power>7</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Fork"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Fork</defName>
+            <label>制造草叉</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>6000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49190</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>StrongMetallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>40</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodPlank</li>
+                        </thingDefs>
+                    </filter>
+                    <count>30</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>3</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>StrongMetallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodPlank</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Fork>1</RK_Fork>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Fork"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <Mass>1.6</Mass>
+            <Bulk>7</Bulk>
+            <MeleeCounterParryBonus>1.05</MeleeCounterParryBonus>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Fork"]/tools/li[1]/power</xpath>
+    <value><power>18</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/recipeMaker</xpath>
+    <value>
+        <recipeMaker Inherit="False" IsNull="True"/>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <RecipeDef>
+            <defName>RKHSKFix_Make_RK_Weapon_Maul</defName>
+            <label>制造小锤</label>
+            <description>HSK整合: 材料替换 + 制造物补全,数值按草案调整。</description>
+            <workAmount>8000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <researchPrerequisite>Smithing</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>10</Crafting>
+            </skillRequirements>
+            <recipeUsers>
+                <li>RK_FueledSmithy</li>
+                <li>RK_ElectricSmithy</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+            <displayPriority>49140</displayPriority>
+            <ingredients>
+                <li>
+                    <filter>
+                        <stuffCategoriesToAllow>
+                            <li>StrongMetallic</li>
+                        </stuffCategoriesToAllow>
+                    </filter>
+                    <count>70</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>WoodPlank</li>
+                        </thingDefs>
+                    </filter>
+                    <count>25</count>
+                </li>
+                <li>
+                    <filter>
+                        <thingDefs>
+                            <li>ComponentMedieval</li>
+                        </thingDefs>
+                    </filter>
+                    <count>2</count>
+                </li>
+            </ingredients>
+            <fixedIngredientFilter>
+                <stuffCategoriesToAllow>
+                    <li>StrongMetallic</li>
+                </stuffCategoriesToAllow>
+                <thingDefs>
+                    <li>WoodPlank</li>
+                    <li>ComponentMedieval</li>
+                </thingDefs>
+            </fixedIngredientFilter>
+            <products>
+                <RK_Weapon_Maul>1</RK_Weapon_Maul>
+            </products>
+        </RecipeDef>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/statBases</xpath>
+    <value>
+        <statBases>
+            <WorkToMake>8000</WorkToMake>
+            <Mass>1.8</Mass>
+            <Bulk>4.5</Bulk>
+        </statBases>
+    </value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/tools/li[1]/power</xpath>
+    <value><power>25</power></value>
+</Operation>
+
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/tools/li[2]/power</xpath>
+    <value><power>9</power></value>
+</Operation>
+    <!-- ───────── 来源: 08_工具VMS材料适配.xml ───────── -->
+<!--工具配方 Vile Materials Science 材料适配(2026-08-26 自 鼠族HSK拓展 08 号拆出)。-->
+<Operation Class="PatchOperationFindMod"><mods><li>vitech.materialsscience</li></mods><match Class="PatchOperationSequence"><success>Always</success><operations><li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Metallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>50</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>25</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cleaver"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>Metallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodLog</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Metallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>70</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Pickaxe"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>Metallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodLog</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Metallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>50</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Axe"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>Metallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodLog</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Metallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>50</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodLog</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Hockey"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>Metallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodLog</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>StrongMetallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>25</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>15</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Dagger"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>StrongMetallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodPlank</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>StrongMetallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>30</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Fork"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>StrongMetallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodPlank</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/ingredients</xpath>
+    <value>
+        <ingredients>
+            <li>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>StrongMetallic</li>
+                    </stuffCategoriesToAllow>
+                </filter>
+                <count>70</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>WoodPlank</li>
+                    </thingDefs>
+                </filter>
+                <count>25</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentMedieval</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>CarbonSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SpringSteel</li>
+                    </thingDefs>
+                </filter>
+                <count>6</count>
+            </li>
+        </ingredients>
+    </value>
+</li>
+<li Class="PatchOperationReplace">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Maul"]/fixedIngredientFilter</xpath>
+    <value>
+        <fixedIngredientFilter>
+            <stuffCategoriesToAllow>
+                <li>StrongMetallic</li>
+            </stuffCategoriesToAllow>
+            <thingDefs>
+                <li>WoodPlank</li>
+                <li>ComponentMedieval</li>
+                <li>CarbonSteel</li>
+                <li>SpringSteel</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+    </value>
+</li>
+</operations></match></Operation>
+    <!-- ───────── 来源: 12_工具配方关闭.xml ───────── -->
+<!--工具 recipeMaker 关闭(2026-08-26 自 鼠族HSK拓展 12 号拆出): RK_* 工具关闭基类自动配方。-->
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Axe"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]</xpath>
+        <value>
+            <recipeMaker Inherit="False" IsNull="True"/>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Cleaver"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]</xpath>
+        <value>
+            <recipeMaker Inherit="False" IsNull="True"/>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Dagger"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Fork"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]</xpath>
+        <value>
+            <recipeMaker Inherit="False" IsNull="True"/>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Hockey"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]</xpath>
+        <value>
+            <recipeMaker Inherit="False" IsNull="True"/>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/recipeMaker</xpath>
+        <match Class="PatchOperationRemove">
+            <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/recipeMaker</xpath>
+        </match>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]</xpath>
+        <value>
+            <recipeMaker Inherit="False" IsNull="True"/>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 24_工具木板化.xml ───────── -->
+<!--工具配方木板化(2026-08-26 自 鼠族HSK拓展 24 号拆出): 工具配方的木材投入统一改为任意木板。-->
+<!-- ───────── 来源: 27_生存工具适配.xml ───────── -->
+<!-- 生存工具Lite 适配(2026-08-08, 用户要求;2026-08-27 增补撬棍):
+         给鼠族工具(剁肉刀/矿镐/斧头/锄头/锤子/草叉/匕首/撬棍)加上 SurvivalToolsLite 工具属性,
+         写法与 SurvivalToolsLite 官方对原版 TFJ 工具的适配一致:
+         thingClass -> SurvivalToolsLite.SurvivalTool, statBases 加 ToolEffectivenessFactor,
+         挂 SurvivalToolProperties(baseWorkStatFactors + defaultSurvivalToolAssignmentTags)。
+         旧 equippedStatOffsets 的工作属性移除(由工具系统接管,避免重复加成);
+         草叉/匕首保留战斗属性,仅移除/不加工作偏移。
+         所有操作 MayRequire="skyarkhangel.SurvivalToolsLite",未装该 mod 时整体跳过。 -->
+
+    <!-- 剁肉刀 RK_Cleaver: 屠宰/烹饪 -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]/equippedStatOffsets</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <CookSpeed>1.0</CookSpeed>
+                    <ButcheryFleshSpeed>1.0</ButcheryFleshSpeed>
+                    <ButcheryFleshEfficiency>0.9</ButcheryFleshEfficiency>
+                    <MedicalOperationSpeed>0.8</MedicalOperationSpeed>
+                    <MedicalSurgerySuccessChance>0.8</MedicalSurgerySuccessChance>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Cook</li>
+                    <li>Tend</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- 矿镐 RK_Pickaxe: 采矿/钻井 -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/equippedStatOffsets</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <MiningSpeed>1.2</MiningSpeed>
+                    <MiningYieldDigging>1.0</MiningYieldDigging>
+                    <DeepDrillingSpeed>1.0</DeepDrillingSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Miner</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- 斧头 RK_Axe: 伐木 -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/equippedStatOffsets</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <TreeFellingSpeed>1.3</TreeFellingSpeed>
+                    <PlantHarvestingSpeed>0.7</PlantHarvestingSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- 锄头 RK_Hockey: 耕种 -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]/equippedStatOffsets</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <PlantWorkSpeed>1.3</PlantWorkSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+      <!-- 锤子 RK_Weapon_Maul: 建造/锻造/冶炼/简单工作/切石(2026-08-10 加强:
+           简单工作速度 GeneralLaborSpeed 1.15、熔炼 SmeltingSpeed 1.1→1.3、
+           切石 StonecuttingSpeed 1.15,切石需配合 48 号 StatPart 挂载才生效) -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/equippedStatOffsets</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                  <baseWorkStatFactors>
+                      <ConstructionSpeed>1.3</ConstructionSpeed>
+                      <SmithingSpeed>1.3</SmithingSpeed>
+                      <SmeltingSpeed>1.3</SmeltingSpeed>
+                      <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+                      <StonecuttingSpeed>1.15</StonecuttingSpeed>
+                  </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Constructor</li>
+                    <li>Crafter</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- 草叉 RK_Fork: 农收(保留战斗属性) -->
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/equippedStatOffsets/PlantWorkSpeed</xpath>
+    </Operation>
+    <Operation Class="PatchOperationRemove" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/equippedStatOffsets/PlantHarvestYield</xpath>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <PlantHarvestingSpeed>1.2</PlantHarvestingSpeed>
+                    <PlantWorkSpeed>1.1</PlantWorkSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- 匕首 RK_Dagger: 小刀类(屠宰/烹饪,保留战斗属性) -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <CookSpeed>1.1</CookSpeed>
+                    <ButcheryFleshSpeed>1.1</ButcheryFleshSpeed>
+                    <ButcheryFleshEfficiency>1.1</ButcheryFleshEfficiency>
+                    <MedicalOperationSpeed>0.85</MedicalOperationSpeed>
+                    <MedicalSurgerySuccessChance>0.85</MedicalSurgerySuccessChance>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Cook</li>
+                    <li>Tend</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 29_鼠族工具分类.xml ───────── -->
+<!-- 鼠族工具工具分类(2026-08-08, 用户要求):
+         7 件鼠族工具(RK_Cleaver/RK_Pickaxe/RK_Axe/RK_Hockey/RK_Weapon_Maul/RK_Fork/RK_Dagger)
+         已由 27 号补丁加上 STL 工具属性(thingClass SurvivalTool + SurvivalToolProperties),
+         但 thingCategories 仍只有 RKMeleeWeapon 武器分类,没有 SurvivalTools* 工具分类,
+        因此界面里显示为武器、不出现在工具分类下(与 STL 官方工具/大锤不一致)。
+        本补丁追加 SurvivalToolsMedieval 工具分类(中世纪工具,分类 Def 见
+        Defs/ThingCategoryDefs/中世纪工具分类.xml);8 件中世纪鼠族工具归「中世纪工具」,
+        新做的剪刀/冲击钻/液压钳归「工业工具」(SurvivalToolsIndustrial);
+        武器分类与战斗数据保留(草叉/匕首本就保留战斗属性)。
+         注意: 鼠族工具 def 的 thingCategories 来自抽象父类 RK_MeleeWeapon,
+         补丁阶段(继承解析前)原始 XML 中没有该节点,因此不能 Add 到 /thingCategories;
+        改为往 ThingDef 添加 <thingCategories> 元素,继承解析时 li 列表默认与父类合并
+         (仅 Inherit="false" 才整体替换),最终 = 父类武器分类 + SurvivalToolsMedieval。
+         MayRequire=skyarkhangel.SurvivalToolsLite 门控,未装 STL 时跳过。 -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Cleaver"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Pickaxe"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Axe"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Hockey"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Weapon_Maul"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Fork"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Dagger"]</xpath>
+        <value><thingCategories><li>SurvivalToolsMedieval</li></thingCategories></value>
+    </Operation>
+    <!-- ───────── 来源: 35_剪刀工具.xml ───────── -->
+<!-- 35_剪刀工具(2026-08-09 用户要求,2026-08-26 自 鼠族HSK拓展 迁入):
+         1) 新增 鼠族剪刀(RK_Scissors)配方,放在普通锻造台(FueledSmithy/ElectricSmithy,非鼠族台),
+            研究 近战武器 I(Smithing),缝纫工具;
+         3) 剪刀适配 SurvivalToolsLite(thingClass=SurvivalTool + SurvivalToolProperties
+            + 工具分类: 工业工具(SurvivalToolsIndustrial)),MayRequire 门控。
+         注: 原 35 号中的 钉头锤(RK_Mace)工具化部分随迁移剥离,保留在 鼠族HSK拓展(武器序列)。 -->
+
+    <!-- 剪刀配方: 普通锻造台 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <RecipeDef>
+                <defName>RKHSKFix_Make_RK_Scissors</defName>
+                <label>制造剪刀</label>
+                <description>HSK整合: 裁缝剪刀,锻造台打造,缝纫速度工具。</description>
+                <workAmount>3000</workAmount>
+                <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+                <workSkill>Crafting</workSkill>
+                <effectWorking>Smith</effectWorking>
+                <soundWorking>Recipe_Smith</soundWorking>
+                <researchPrerequisite>Metals_C3</researchPrerequisite>
+                <skillRequirements>
+                    <Crafting>5</Crafting>
+                </skillRequirements>
+                <recipeUsers>
+                    <li>FueledSmithy</li>
+                    <li>ElectricSmithy</li>
+                </recipeUsers>
+                <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <stuffCategoriesToAllow>
+                                <li>Metallic</li>
+                            </stuffCategoriesToAllow>
+                        </filter>
+                        <count>10</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Steel</li>
+                            </thingDefs>
+                        </filter>
+                        <count>10</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ComponentMedieval</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+                <products>
+                    <RK_Scissors>1</RK_Scissors>
+                </products>
+            </RecipeDef>
+        </value>
+    </Operation>
+
+    <!-- 剪刀 RK_Scissors: 缝纫/手术/屠宰/割除+收获/动物采集(挤奶/剪毛) 速度加成(STL 中割除 PlantsCut 与收获 GrowerHarvest 共用 PlantHarvestingSpeed) -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                  <baseWorkStatFactors>
+                      <TailoringSpeed>1.3</TailoringSpeed>
+                      <ButcheryFleshSpeed>1.2</ButcheryFleshSpeed>
+                      <MedicalOperationSpeed>1.1</MedicalOperationSpeed>
+                      <PlantHarvestingSpeed>1.3</PlantHarvestingSpeed>
+                      <AnimalGatherSpeed>1.2</AnimalGatherSpeed>
+                      <MedicalSurgerySuccessChance>1.05</MedicalSurgerySuccessChance>
+                      <PlantWorkSpeed>1.15</PlantWorkSpeed>
+                      <GeneralLaborSpeed>1.15</GeneralLaborSpeed>
+                        </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Crafter</li>
+                    <li>Cook</li>
+                    <li>Tend</li>
+                    <li>PlantWorker</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]</xpath>
+        <value><thingCategories><li>SurvivalToolsIndustrial</li></thingCategories></value>
+    </Operation>
+    <!-- ───────── 来源: 36_冲击钻.xml ───────── -->
+<!-- 36_冲击钻(2026-08-09 用户要求): 新增 冲击钻(RK_ImpactDrill),
+         后工业-后石化工具,普通电锻造台打造,研究 枪械(Machining);
+         采矿/钻井工具,STL 适配(thingClass=SurvivalTool + SurvivalToolProperties + SurvivalToolsIndustrial)。
+         后石化材料(集成电路/电子元件/碳聚物)直接在配方里给出,34 号不重复追加。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <RecipeDef>
+                <defName>RKHSKFix_Make_RK_ImpactDrill</defName>
+                <label>制造冲击钻</label>
+                <description>HSK整合: 工业冲击钻,采矿/钻井工具,普通电锻造台打造。</description>
+                <workAmount>12000</workAmount>
+                <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+                <workSkill>Crafting</workSkill>
+                <effectWorking>Smith</effectWorking>
+                <soundWorking>Recipe_Smith</soundWorking>
+                <researchPrerequisite>Metals_C3</researchPrerequisite>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+                <recipeUsers>
+                    <li>RK_ElectricSmithy</li>
+                </recipeUsers>
+                <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <stuffCategoriesToAllow>
+                                <li>Metallic</li>
+                            </stuffCategoriesToAllow>
+                        </filter>
+                        <count>60</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Steel</li>
+                            </thingDefs>
+                        </filter>
+                        <count>40</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ComponentIndustrial</li>
+                            </thingDefs>
+                        </filter>
+                        <count>4</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ElectronicComponents</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Electronics</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Carbon</li>
+                            </thingDefs>
+                        </filter>
+                        <count>3</count>
+                    </li>
+                </ingredients>
+                <products>
+                    <RK_ImpactDrill>1</RK_ImpactDrill>
+                </products>
+            </RecipeDef>
+        </value>
+    </Operation>
+
+    <!-- STL 适配 -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <MiningSpeed>1.5</MiningSpeed>
+                    <MiningYield>1.1</MiningYield>
+                    <DeepDrillingSpeed>1.2</DeepDrillingSpeed>
+                    <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Miner</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]</xpath>
+        <value><thingCategories><li>SurvivalToolsIndustrial</li></thingCategories></value>
+    </Operation>
+    <!-- ───────── 来源: 37_液压钳.xml ───────── -->
+<!-- 37_液压钳(2026-08-09 用户要求,2026-08-09 改锻造/制作/微电子): 新增 液压钳(RK_HydraulicPliers),
+         后工业-前石化工具,普通电锻造台打造,研究 枪械(Machining);
+         锻造/建造/零部件制作/微电子制造/武器制作/综合劳动 工具,
+         STL 适配(thingClass=SurvivalTool + SurvivalToolProperties + SurvivalToolsIndustrial)。
+         电子元件(ElectronicComponents)直接在配方里给出,34 号不重复追加。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <RecipeDef>
+                <defName>RKHSKFix_Make_RK_HydraulicPliers</defName>
+                <label>制造液压钳</label>
+                <description>HSK整合: 工业液压剪切钳,屠宰/收获工具,普通电锻造台打造。</description>
+                <workAmount>12000</workAmount>
+                <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+                <workSkill>Crafting</workSkill>
+                <effectWorking>Smith</effectWorking>
+                <soundWorking>Recipe_Smith</soundWorking>
+                <researchPrerequisite>Metals_C3</researchPrerequisite>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+                <recipeUsers>
+                    <li>RK_ElectricSmithy</li>
+                </recipeUsers>
+                <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <stuffCategoriesToAllow>
+                                <li>Metallic</li>
+                            </stuffCategoriesToAllow>
+                        </filter>
+                        <count>55</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Steel</li>
+                            </thingDefs>
+                        </filter>
+                        <count>35</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ComponentIndustrial</li>
+                            </thingDefs>
+                        </filter>
+                        <count>4</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ElectronicComponents</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+                <products>
+                    <RK_HydraulicPliers>1</RK_HydraulicPliers>
+                </products>
+            </RecipeDef>
+        </value>
+    </Operation>
+
+    <!-- STL 适配 -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                <baseWorkStatFactors>
+                    <SmithingSpeed>1.3</SmithingSpeed>
+                    <ConstructionSpeed>1.2</ConstructionSpeed>
+                    <ElectronicCraftingSpeed>1.2</ElectronicCraftingSpeed>
+                    <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+                </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Crafter</li>
+                    <li>Constructor</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]</xpath>
+        <value><thingCategories><li>SurvivalToolsIndustrial</li></thingCategories></value>
+    </Operation>
+    <!-- ───────── 来源: 39_新工具CE适配.xml ───────── -->
+<!-- 39_新工具 CE 适配(2026-08-09 用户反馈修复;2026-08-10 追加 电焊枪 RK_WeldingTorch):
+         问题: 查看 鼠族剪刀(RK_Scissors)/冲击钻(RK_ImpactDrill)/液压钳(RK_HydraulicPliers)/
+         电焊枪(RK_WeldingTorch)
+         信息卡时报 "Trying to get stat MeleeDamageAverage ... which has no support for Combat Extended"。
+         原因: RatkinRaceHSK 自带 CombatExtended_WeaponTools_Patch.xml,把鼠族旧武器 tools 全部替换为
+         CombatExtended.ToolCE;本 mod 新增的 3 件工具仍是普通 Verse.Tool。
+         CE 的 StatWorker_MeleeDamageAverage 要求 tools 全为 ToolCE(CE 武器自动补丁默认关闭,
+         enableWeaponAutopatcher=false,不会自动转换),普通 Tool 直接 Log.Error。
+         修复: 用 PatchOperationReplace 把这 3 件工具的 <tools> 整体替换为 ToolCE
+         (数值与 Defs/ThingDef 里的原工具一致,补 CE 破甲/打击部位字段)。
+         MayRequire=CETeam.CombatExtended 门控,未装 CE 时保留普通 Tool(原版近战逻辑)。
+         最终层补丁,直接 Operation 写法(项目铁律: 不用 FindMod+Sequence 嵌套)。 -->
+
+    <!-- 剪刀: 刃口 Cut -->
+    <Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+        <xpath>Defs/ThingDef[defName="RK_Scissors"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>blade</label>
+                    <capacities>
+                        <li>Cut</li>
+                    </capacities>
+                    <power>8</power>
+                    <cooldownTime>1</cooldownTime>
+                    <armorPenetrationSharp>2.5</armorPenetrationSharp>
+                    <armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+                    <linkedBodyPartsGroup>Blade</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- 冲击钻: 钻头 Blunt -->
+    <Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+        <xpath>Defs/ThingDef[defName="RK_ImpactDrill"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>bit</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>14</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationBlunt>5</armorPenetrationBlunt>
+                    <armorPenetrationSharp>0.5</armorPenetrationSharp>
+                    <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- 液压钳: 钳口 Blunt -->
+    <Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+        <xpath>Defs/ThingDef[defName="RK_HydraulicPliers"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>jaws</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>16</power>
+                    <cooldownTime>1.8</cooldownTime>
+                    <armorPenetrationBlunt>6</armorPenetrationBlunt>
+                    <armorPenetrationSharp>0.5</armorPenetrationSharp>
+                    <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+
+    <!-- 电焊枪: 焊嘴 Blunt -->
+    <Operation Class="PatchOperationReplace" MayRequire="CETeam.CombatExtended">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]/tools</xpath>
+        <value>
+            <tools>
+                <li Class="CombatExtended.ToolCE">
+                    <label>torch</label>
+                    <capacities>
+                        <li>Blunt</li>
+                    </capacities>
+                    <power>12</power>
+                    <cooldownTime>1.6</cooldownTime>
+                    <armorPenetrationBlunt>4</armorPenetrationBlunt>
+                    <armorPenetrationSharp>0.5</armorPenetrationSharp>
+                    <linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+                </li>
+            </tools>
+        </value>
+    </Operation>
+    <!-- ───────── 来源: 45_电焊枪.xml ───────── -->
+<!-- 45_电焊枪(2026-08-10 用户要求):
+         新增 电焊枪(RK_WeldingTorch),工业电子/零部件制造工具,普通电锻造台打造,
+         研究 金属加工 IV(Metals_C3),材料 金属+钢+普通零部件+电子元件(后工业-前石化);
+         STL 适配(thingClass=SurvivalTool + SurvivalToolProperties + SurvivalToolsIndustrial),
+         电子制造+30%/零部件制作+20%/锻造+15%/综合劳动+5%/制作品质+3%,
+         MayRequire 门控。CE 适配见 39 号。 -->
+
+    <!-- 配方 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <RecipeDef>
+                <defName>RKHSKFix_Make_RK_WeldingTorch</defName>
+                <label>制造电焊枪</label>
+                <description>HSK整合: 工业电焊枪,电子/零部件制造工具,普通电锻造台打造。</description>
+                <workAmount>12000</workAmount>
+                <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+                <workSkill>Crafting</workSkill>
+                <effectWorking>Smith</effectWorking>
+                <soundWorking>Recipe_Smith</soundWorking>
+                <researchPrerequisite>Metals_C3</researchPrerequisite>
+                <skillRequirements>
+                    <Crafting>8</Crafting>
+                </skillRequirements>
+                <recipeUsers>
+                    <li>RK_ElectricSmithy</li>
+                </recipeUsers>
+                <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <stuffCategoriesToAllow>
+                                <li>Metallic</li>
+                            </stuffCategoriesToAllow>
+                        </filter>
+                        <count>55</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Steel</li>
+                            </thingDefs>
+                        </filter>
+                        <count>30</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ComponentIndustrial</li>
+                            </thingDefs>
+                        </filter>
+                        <count>3</count>
+                    </li>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>ElectronicComponents</li>
+                            </thingDefs>
+                        </filter>
+                        <count>2</count>
+                    </li>
+                </ingredients>
+                <products>
+                    <RK_WeldingTorch>1</RK_WeldingTorch>
+                </products>
+            </RecipeDef>
+        </value>
+    </Operation>
+
+    <!-- STL 适配 -->
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]</xpath>
+        <value><thingClass>SurvivalToolsLite.SurvivalTool</thingClass></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]/statBases</xpath>
+        <value><ToolEffectivenessFactor>1</ToolEffectivenessFactor></value>
+    </Operation>
+    <Operation Class="PatchOperationAddModExtension" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.SurvivalToolProperties">
+                  <baseWorkStatFactors>
+                      <ElectronicCraftingSpeed>1.3</ElectronicCraftingSpeed>
+                      <SmithingSpeed>1.15</SmithingSpeed>
+                      <GeneralLaborSpeed>1.05</GeneralLaborSpeed>
+                      <SmeltingSpeed>1.2</SmeltingSpeed>
+                      <StonecuttingSpeed>1.15</StonecuttingSpeed>
+                  </baseWorkStatFactors>
+                <defaultSurvivalToolAssignmentTags>
+                    <li>Crafter</li>
+                </defaultSurvivalToolAssignmentTags>
+            </li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd" MayRequire="skyarkhangel.SurvivalToolsLite">
+        <xpath>Defs/ThingDef[defName="RK_WeldingTorch"]</xpath>
+        <value><thingCategories><li>SurvivalToolsIndustrial</li></thingCategories></value>
+    </Operation>
+</Patch>

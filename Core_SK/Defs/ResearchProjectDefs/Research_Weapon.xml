@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- Melee -->
+
+    <!-- DefOverwrite
+        Melee_B1
+    defName | Smithing
+    X/Y     | 4/29
+    
+        Melee_B2
+    defName | LongBlades
+    X/Y     | 5/29
+    -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Melee_C1</defName>
+		<label>Melee III</label>
+		<description>Guns for show, knives for a pro.</description>
+		<baseCost>1400</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>LongBlades</li>
+			<li>Metals_C1</li>
+		</prerequisites>
+		<researchViewX>8.00</researchViewX>
+		<researchViewY>29.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Melee_C2</defName>
+		<label>Melee IV</label>
+		<description>Stun settings are for people who can't commit</description>
+		<baseCost>800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Melee_C1</li>
+			<li>Electronics_C2</li>
+		</prerequisites>
+		<researchViewX>12.00</researchViewX>
+		<researchViewY>29.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Melee_D1</defName>
+		<label>Melee V</label>
+		<description>One, two! One, two! And through, and through. The charged blade went snicker-snack!</description>
+		<baseCost>1400</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Melee_C2</li>
+			<li>Components_D1</li>
+		</prerequisites>
+		<researchViewX>18.00</researchViewX>
+		<researchViewY>29.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Melee_E1</defName>
+		<label>Psychological weapon</label>
+		<description>Is it a melee if it has "lance" in a name?</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>Melee_D1</li>
+			<li>Components_D3</li>
+		</prerequisites>
+		<researchViewX>21.00</researchViewX>
+		<researchViewY>29.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+ 
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Melee_Archotech</defName>
+		<label>Melee VI</label>
+		<description>Is it a melee if it can shoot?</description>
+		<baseCost>20000</baseCost>
+		<techLevel>Archotech</techLevel>
+		<prerequisites>
+			<li>Melee_E1</li>
+		</prerequisites>
+        <techprintCount>1</techprintCount>
+        <techprintCommonality>0</techprintCommonality>
+        <techprintMarketValue>0</techprintMarketValue>
+        <heldByFactionCategoryTags>
+            <li>Mechanoids</li>
+        </heldByFactionCategoryTags>
+		<researchViewX>25.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+
+    <!-- Ranged -->
+
+	<ResearchProjectDef ParentName="PrimitiveBase">
+		<defName>Bow_A1</defName>
+		<label>Bows I</label>
+		<description>Why should you poke your enemies up close, when you can do it from distance?</description>
+		<baseCost>100</baseCost>
+		<techLevel>Neolithic</techLevel>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>30.00</researchViewY>
+		<tab>Weapon_SK</tab>
+		<tags>
+			<li>NorbalStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Bow_A2
+    defName | RecurveBow
+    X/Y     | 2/30
+    
+        Bow_B1
+    defName | Greatbow
+    X/Y     | 4/30
+    -->
+    
+	<ResearchProjectDef ParentName="MedievalBase">
+		<defName>Bow_B2</defName>
+		<label>Crossbows II</label>
+		<description>Better crossbows - better armor required.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>Greatbow</li>
+		</prerequisites>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>30.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+ 
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Bow_C1</defName>
+		<label>Crossbows III</label>
+		<description>History is a spiral.</description>
+		<baseCost>600</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Machining</li>
+		</prerequisites>
+		<researchViewX>9.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+ 
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Bow_Archotech</defName>
+		<label>Bows III</label>
+		<description>Told ya it's a spiral.</description>
+		<baseCost>20000</baseCost>
+		<techLevel>Archotech</techLevel>
+		<prerequisites>
+			<li>Bow_C1</li>
+		</prerequisites>
+        <techprintCount>1</techprintCount>
+        <techprintCommonality>0</techprintCommonality>
+        <techprintMarketValue>0</techprintMarketValue>
+        <heldByFactionCategoryTags>
+            <li>Mechanoids</li>
+        </heldByFactionCategoryTags>
+		<researchViewX>25.00</researchViewX>
+		<researchViewY>32.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Range_C1
+    defName | Machining
+    X/Y     | 8/30
+    
+        Pistols_C1
+    defName | Gunsmithing
+    X/Y     | 9/31
+    -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Pistols_C2</defName>
+		<label>Pistols II</label>
+		<description>Pew-pew_v_2.0</description>
+		<baseCost>800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Gunsmithing</li>
+		</prerequisites>
+		<researchViewX>10.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Shotgun_C1
+    defName | GasOperation
+    X/Y     | 9/32
+    
+        SMG_C1
+    defName | BlowbackOperation
+    X/Y     | 10/33
+    -->
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>SMG_C2</defName>
+		<label>SMG II</label>
+		<description>Be like Big Al, but a bit better</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>BlowbackOperation</li>
+		</prerequisites>
+		<researchViewX>11.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+ 
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>SMG_Archotech</defName>
+		<label>SMG III</label>
+		<description>Bullet hell is here.</description>
+		<baseCost>20000</baseCost>
+		<techLevel>Archotech</techLevel>
+		<prerequisites>
+			<li>SMG_C2</li>
+		</prerequisites>
+        <techprintCount>1</techprintCount>
+        <techprintCommonality>0</techprintCommonality>
+        <techprintMarketValue>0</techprintMarketValue>
+        <heldByFactionCategoryTags>
+            <li>Mechanoids</li>
+        </heldByFactionCategoryTags>
+		<researchViewX>25.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Rifles_C1</defName>
+		<label>Rifles I</label>
+		<description>Some people say you can use blood of your enemies as weapon oil with this guns</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Gunsmithing</li>
+		</prerequisites>
+		<researchViewX>10.00</researchViewX>
+		<researchViewY>34.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Sniper_rifles_C1</defName>
+		<label>Sniper rifles I</label>
+		<description>description</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Rifles_C1</li>
+		</prerequisites>
+		<researchViewX>11.00</researchViewX>
+		<researchViewY>34.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Grenade_C1</defName>
+		<label>Grenades I</label>
+		<description>Let it go, let it go
+			Can't hold it back anymore</description>
+		<baseCost>700</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Stones_C1</li>
+			<li>Machining</li>
+		</prerequisites>
+		<researchViewX>9.00</researchViewX>
+		<researchViewY>35.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>Grenade_C2</defName>
+		<label>Grenades II</label>
+		<description>O Lord, bless this Thy hand grenade, that with it Thou mayest blow Thine enemies to tiny bits, in Thy mercy.</description>
+		<baseCost>700</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Grenade_C1</li>
+		</prerequisites>
+		<researchViewX>10.00</researchViewX>
+		<researchViewY>35.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="IndustrialBase">
+		<defName>IED_C1</defName>
+		<label>IED I</label>
+		<description>description</description>
+		<baseCost>700</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Grenade_C2</li>
+		</prerequisites>
+		<researchViewX>11.00</researchViewX>
+		<researchViewY>35.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Range_C2</defName>
+		<label>Guns II</label>
+		<description>.50 - your enemies already dead</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>SMG_C2</li>
+			<li>Rifles_C1</li>
+			<li>Electronics_C2</li>
+		</prerequisites>
+		<researchViewX>12.00</researchViewX>
+		<researchViewY>30.00</researchViewY>
+		<tab>Weapon_SK</tab>
+		<tags>
+			<li>NovaStart</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Shotgun_C2</defName>
+		<label>Shotgun II</label>
+		<description>Heavy is good, heavy is reliable. If it doesn't work, you can always hit them with it.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>GasOperation</li>
+			<li>Range_C2</li>
+		</prerequisites>
+		<researchViewX>13.00</researchViewX>
+		<researchViewY>32.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Rifles_C2</defName>
+		<label>Rifles II</label>
+		<description>I love my gun</description>
+		<baseCost>1100</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Range_C2</li>
+		</prerequisites>
+		<researchViewX>13.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Rifles_C3</defName>
+		<label>Rifles III</label>
+		<description>Pocket Protectors</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Rifles_C2</li>
+		</prerequisites>
+		<researchViewX>14.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Sniper_rifles_C2
+    defName | PrecisionRifling
+    X/Y     | 14/32
+    
+        Heavy_C1
+    defName | HeavyTurrets
+    X/Y     | 13/33
+    
+        Heavy_C2
+    defName | MultibarrelWeapons
+    X/Y     | 14/33
+    -->
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Heavy_C3</defName>
+		<label>Heavy weapons III</label>
+		<description>It costs four hundred thousand dollars to fire this weapon...for twelve seconds.</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>MultibarrelWeapons</li>
+		</prerequisites>
+		<researchViewX>15.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Grenade_launchers_C1</defName>
+		<label>Grenade launchers I</label>
+		<description>What makes me a good Demoman?</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>HeavyTurrets</li>
+		</prerequisites>
+		<researchViewX>14.00</researchViewX>
+		<researchViewY>34.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Grenade_launchers_C2</defName>
+		<label>Grenade launchers II</label>
+		<description>If I were a bad Demoman, I wouldn't be sittin' here, discussin' it with you now would I?</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Grenade_launchers_C1</li>
+			<li>Turrets_31</li>
+		</prerequisites>
+		<researchViewX>15.00</researchViewX>
+		<researchViewY>34.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Rockets_C1</defName>
+		<label>Rockets I</label>
+		<description>If fighting is sure to result in victory, then you must fight!</description>
+		<baseCost>1400</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>HeavyTurrets</li>
+		</prerequisites>
+		<researchViewX>14.00</researchViewX>
+		<researchViewY>37.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Sniper_rifles_D1</defName>
+		<label>Sniper rifles III</label>
+		<description>description</description>
+		<baseCost>2100</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>PrecisionRifling</li>
+		</prerequisites>
+		<researchViewX>17.00</researchViewX>
+		<researchViewY>32.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Range_D1
+    defName | ChargedShot
+    X/Y     | 18/30
+    -->
+ 
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Blaster_weapons_Archotech</defName>
+		<label>Directed-energy weapon II</label>
+		<description>Remove your enemies from existence.</description>
+		<baseCost>20000</baseCost>
+		<techLevel>Archotech</techLevel>
+		<prerequisites>
+			<li>ChargedShot</li>
+		</prerequisites>
+        <techprintCount>1</techprintCount>
+        <techprintCommonality>0</techprintCommonality>
+        <techprintMarketValue>0</techprintMarketValue>
+        <heldByFactionCategoryTags>
+            <li>Mechanoids</li>
+        </heldByFactionCategoryTags>
+		<researchViewX>25.00</researchViewX>
+		<researchViewY>30.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Laser_weapons_D</defName> 
+		<label>Laser weapons I</label>
+		<description>description</description>
+		<baseCost>2200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>ChargedShot</li>
+		</prerequisites>
+		<researchViewX>19.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Plasma_weapons_D</defName> 
+		<label>Plasma weapons I</label>
+		<description>description</description>
+		<baseCost>2200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>ChargedShot</li>
+		</prerequisites>
+		<researchViewX>19.00</researchViewX>
+		<researchViewY>32.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Charge_weapons_D</defName> 
+		<label>Charge weapons I</label>
+		<description>description</description>
+		<baseCost>2200</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>ChargedShot</li>
+		</prerequisites>
+		<researchViewX>19.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Laser_weapons_E</defName> 
+		<label>Laser weapons II</label>
+		<description>Being a device that flouts conventional scientific consensus that the molecules composing the human body must be arranged 'just so', and not, for example, across a square-mile radius</description>
+		<baseCost>2400</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>Laser_weapons_D</li>
+			<li>Components_E1</li>
+		</prerequisites>
+		<researchViewX>22.00</researchViewX>
+		<researchViewY>31.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Plasma_weapons_E</defName>
+		<label>Plasma weapons II</label>
+		<description>Powerful weapon that produces an intense, energetic beam of heat in the tens of thousands of degrees centigrade</description>
+		<baseCost>2400</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>Plasma_weapons_D</li>
+			<li>Components_E1</li>
+		</prerequisites>
+		<researchViewX>22.00</researchViewX>
+		<researchViewY>32.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Charge_weapons_E</defName>
+		<label>Charge weapons II</label>
+		<description>description</description>
+		<baseCost>2400</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>Charge_weapons_D</li>
+			<li>Components_E1</li>
+		</prerequisites>
+		<researchViewX>22.00</researchViewX>
+		<researchViewY>33.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+
+    <!-- Turrets -->
+	<ResearchProjectDef ParentName="MedievalBase">
+		<defName>Ballista_B1</defName>
+		<label>Siege weapons</label>
+		<description>My turn</description>
+		<baseCost>500</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites>
+			<li>RecurveBow</li>
+			<li>Craft_B1</li>
+		</prerequisites>
+		<researchViewX>4.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+		<tags>
+			<li MayRequire="Solaris.RatkinRaceMod">RK_ResearchTag_IndustrialBasic</li>
+		</tags>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Turrets_31</defName>
+		<label>Turrets I</label>
+		<description>How am I going to stop some big mean mother hubbard from tearing me a structurally superfluous new behind?</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>HeavyTurrets</li>
+			<li>Ballista_B1</li>
+		</prerequisites>
+		<researchViewX>14.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Heavy_turrets_C1
+    defName | SniperTurret
+    X/Y     | 15/35
+    -->
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Heavy_turrets_C2</defName>
+		<label>Heavy turrets II</label>
+		<description>And if that don't work....</description>
+		<baseCost>1200</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>SniperTurret</li>
+		</prerequisites>
+		<researchViewX>16.00</researchViewX>
+		<researchViewY>35.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Heavy_turrets_C3</defName>
+		<label>Heavy turrets III</label>
+		<description>One crossed wire, one wayward pinch of potassium chlorate, one errant twitch...</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Heavy_turrets_C2</li>
+		</prerequisites>
+		<researchViewX>17.00</researchViewX>
+		<researchViewY>35.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Artillery_C1
+    defName | Mortars
+    X/Y     | 15/36
+    -->
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Artillery_C2</defName>
+		<label>Artillery II</label>
+		<description>Ultima ratio regis</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Grenade_launchers_C2</li>
+			<li>SniperTurret</li>
+			<li>Mortars</li>
+		</prerequisites>
+		<researchViewX>16.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+    <!-- DefOverwrite
+        Autoturrets_D1
+    defName | GunTurrets
+    X/Y     | 18/36
+    -->
+    
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Autoturrets_D2</defName>
+		<label>Autoturrets II</label>
+		<description>...use more gun.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GunTurrets</li>
+			<li>Heavy_turrets_C2</li>
+		</prerequisites>
+		<researchViewX>19.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Autoturrets_D3</defName>
+		<label>Autoturrets III</label>
+		<description>I told ya don't touch that darn thing</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Artillery_C2</li>
+			<li>Autoturrets_D2</li>
+		</prerequisites>
+		<researchViewX>20.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechLabStationBase">
+		<defName>Autoturrets_E1</defName>
+		<label>Autoturrets IV</label>
+		<description>We've got lightning guns. We can do anything.</description>
+		<baseCost>2500</baseCost>
+		<techLevel>Ultra</techLevel>
+		<prerequisites>
+			<li>Laser_weapons_E</li>
+			<li>Plasma_weapons_E</li>
+			<li>Charge_weapons_E</li>
+		</prerequisites>
+		<researchViewX>24.00</researchViewX>
+		<researchViewY>36.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechBase">
+		<defName>Rockets_C2</defName>
+		<label>Rockets II</label>
+		<description>Sun Tzu said that, and I'd say he knows a little more about fighting than you do, pal, because he invented it!</description>
+		<baseCost>1300</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Rockets_C1</li>
+			<li>SniperTurret</li>
+			<li>Grenade_launchers_C2</li>
+			<li>Mortars</li>
+		</prerequisites>
+		<researchViewX>16.00</researchViewX>
+		<researchViewY>37.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Rockets_D1</defName>
+		<label>Rockets III</label>
+		<description>And then he perfected it so that no living man could best him in the ring of honor!</description>
+		<baseCost>2100</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Rockets_C2</li>
+		</prerequisites>
+		<researchViewX>19.00</researchViewX>
+		<researchViewY>37.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="HitechMultiBase">
+		<defName>Rockets_D2</defName>
+		<label>Rockets IV</label>
+		<description>You will not be missed.</description>
+		<baseCost>2100</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Rockets_D1</li>
+		</prerequisites>
+		<researchViewX>20.00</researchViewX>
+		<researchViewY>37.00</researchViewY>
+		<tab>Weapon_SK</tab>
+	</ResearchProjectDef>
+
+</Defs>

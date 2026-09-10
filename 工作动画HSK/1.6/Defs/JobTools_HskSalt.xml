@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ============================================================================
+       HSK 采掘类工作适配(2026-09-06 用户点单)：盐矿铲 + 采石场镐。
+       两件都是"从石头里取东西"，但作业类型不同：
+         · 盐矿 = Core_SK 工作台 VG_SaltMine 上的账单 VG_Minesalt(DoBill) -> 铲子铲取岩盐
+         · 采石场 = Quarry mod 的独立作业 QRY_MineQuarry(非 DoBill、非原版 Mine) -> 镐头凿石
+       采石场不复用 JE_Tool_Pickaxe：老镐带 syncToMineHit，其挥砍曲线按原版挖矿的慢命中间隔
+       设计(ToolAnimator 3533 起无条件套用)，挂到 QRY 作业上会变成"长时间举着不动再猛砸"；
+       故另开一条自由节拍 def，贴图与几何沿用已调好的镐参数。
+       文件按字母序排在 JobTools_JobEffects.xml 之前 -> 匹配优先级高于台面通用工具。
+       全部复用现成贴图与 flecks，零新贴图、零 DLL 改动。
+       ============================================================================ -->
+
+  <!-- 盐铲: 双手握铲在盐矿台面上铲取岩盐，白色盐粒为主 + 少量石屑。
+       仅按工作台白名单 VG_SaltMine + 配方关键字 Minesalt 双重门控，其余台面活不受影响。 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_SaltSpade</defName>
+    <label>salt spade</label>
+    <idleScale>0.7</idleScale>
+    <idleAngle>150</idleAngle>
+    <jobDefs>
+      <li>DoBill</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>VG_SaltMine</li>
+    </workbenchDefs>
+    <recipeNameKeywords>
+      <li>Minesalt</li>
+    </recipeNameKeywords>
+    <texPath>Things/JobEffects/Tools/Shovel</texPath>
+    <handCount>2</handCount>
+    <handPosA>0.16</handPosA>
+    <handPosB>0.38</handPosB>
+    <swingStyle>Dig</swingStyle>
+    <scale>1.0</scale>
+    <reach>0.14</reach>
+    <period>0.7</period>
+    <windupAngle>50</windupAngle>
+    <stabDistance>0.24</stabDistance>
+    <strikeSound>JE_ShovelScoop</strikeSound>
+    <!-- 盐粒为主，带几点石屑 -->
+    <impactBitFleck>JE_SaltGrain</impactBitFleck>
+    <impactBitCount>8</impactBitCount>
+    <impactBitSpeed>3~7</impactBitSpeed>
+    <impactBitScale>0.5~0.85</impactBitScale>
+    <impactSpread>82</impactSpread>
+    <impactBitFleck2>JE_StoneShard</impactBitFleck2>
+    <impactBitCount2>2</impactBitCount2>
+    <impactBitSpeed2>3~6</impactBitSpeed2>
+    <impactBitScale2>0.28~0.45</impactBitScale2>
+    <impactSpread2>70</impactSpread2>
+    <impactDustFleck>DustPuff</impactDustFleck>
+  </JobEffects.JobToolDef>
+
+  <!-- 采石镐: Quarry mod 的 QRY_MineQuarry 作业，自由节拍的镐凿 —— 灰色石屑 + 石粉。
+       jobDefs 按 defName 字符串匹配，未安装 Quarry 时天然惰性，无需门控补丁。 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_QuarryPick</defName>
+    <label>quarry pick</label>
+    <idleScale>0.65</idleScale>
+    <jobDefs>
+      <li>QRY_MineQuarry</li>
+    </jobDefs>
+    <texPath>Things/JobEffects/Tools/Pickaxe</texPath>
+    <handCount>2</handCount>
+    <handPosA>0.15</handPosA>
+    <handPosB>0.38</handPosB>
+    <flipHead>true</flipHead>
+    <swingStyle>Chop</swingStyle>
+    <scale>0.95</scale>
+    <reach>0.14</reach>
+    <period>0.6</period>
+    <windupAngle>80</windupAngle>
+    <strikeAngle>-32</strikeAngle>
+    <followThroughAngle>18</followThroughAngle>
+    <browWipe>true</browWipe>
+    <strikeSound>JE_ChiselTick</strikeSound>
+    <impactBitFleck>JE_StoneShard</impactBitFleck>
+    <impactBitCount>7</impactBitCount>
+    <impactBitSpeed>5~12</impactBitSpeed>
+    <impactBitScale>0.32~0.55</impactBitScale>
+    <impactSpread>65</impactSpread>
+    <impactDustFleck>DustPuff</impactDustFleck>
+  </JobEffects.JobToolDef>
+
+</Defs>

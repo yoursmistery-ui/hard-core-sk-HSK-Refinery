@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+
+	<ThingDef ParentName="AnimalThingBase" Name="FishThingBase" Abstract="True">
+		<statBases>
+			<LeatherAmount>0</LeatherAmount>
+			<MeatAmount>70</MeatAmount>
+			<MoveSpeed>0.01</MoveSpeed>
+			<Wildness>0.99</Wildness>
+			<ComfyTemperatureMin>-5</ComfyTemperatureMin>
+			<MarketValue>100</MarketValue>
+		</statBases>
+		<race>
+			<thinkTreeMain>Animal</thinkTreeMain>
+			<thinkTreeConstant>AnimalConstant</thinkTreeConstant>
+			<herdMigrationAllowed>false</herdMigrationAllowed>
+			<hasGenders>true</hasGenders>
+			<manhunterOnDamageChance>0.0125</manhunterOnDamageChance>
+			<manhunterOnTameFailChance>0.005</manhunterOnTameFailChance>
+			<nameOnTameChance>0</nameOnTameChance>
+			<trainability>None</trainability>
+			<petness>0</petness>
+			<fleshType>Fish</fleshType>
+			<soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+			<litterSizeCurve>
+				<points>
+					<li>(0.5, 0)</li>
+					<li>(1, 1)</li>
+					<li>(3, 1)</li>
+					<li>(3.5, 0)</li>
+				</points>
+			</litterSizeCurve>
+			<lifeExpectancy>15</lifeExpectancy>
+			<lifeStageAges>
+				<li>
+					<def>AnimalBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>AnimalJuvenile</def>
+					<minAge>2</minAge>
+				</li>
+				<li>
+					<def>AnimalAdult</def>
+					<minAge>6</minAge><!--
+					<soundWounded>Pawn_Cobra_Wounded</soundWounded>
+					<soundDeath>Pawn_Cobra_Death</soundDeath>
+					<soundCall>Pawn_Cobra_Call</soundCall>
+					<soundAngry>Pawn_Cobra_Angry</soundAngry>-->
+				</li>
+			</lifeStageAges>
+		</race>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<capacities>
+					<li>Scratch</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>1.5</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>9</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+				<armorPenetrationSharp>2</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Birdlike</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<PawnKindDef Name="FishKindBase" Abstract="True">
+		<combatPower>30</combatPower>
+		<ecoSystemWeight>0.4</ecoSystemWeight>
+		<canArriveManhunter>false</canArriveManhunter>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.4</commonality>
+		<naturalBiomes>
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li>TemperateForest</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalRainforest</li>
+			<li>TropicalSwamp</li>
+			<li>AridShrubland</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- HYPNOSQUID - medium -->
+
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishSduiggles</defName>
+		<label>hypnosquid</label>
+		<description>Hypnosquid can be found in swamps and shallow waters. This species of squid is very intelligent and beautiful. And who would want to catch it after that? You? You're a monster!</description>
+		<statBases>
+			<Mass>8</Mass>
+		</statBases>
+		<race>
+			<body>Squid</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.35</maxPreyBodySize>
+			<baseBodySize>0.30</baseBodySize>
+			<baseHealthScale>0.30</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>CarnivoreAnimal</foodType>
+			<meatLabel>Fish meat</meatLabel>
+			<manhunterOnTameFailChance>0.005</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.25</manhunterOnDamageChance>
+			<gestationPeriodDays>22.0</gestationPeriodDays>
+		</race>
+		<tools Inherit="False">
+			<li Class="CombatExtended.ToolCE">
+				<capacities>
+					<li>ToxicBite</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1.85</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>12</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+				<armorPenetrationSharp>0.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>0.4</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishSduiggles</defName>
+		<label>hypnosquid</label>
+		<race>ThingDefFishSduiggles</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Hypnosquid</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Hypnosquid</texPath>
+					<drawSize>0.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.75</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Hypnosquid</texPath>
+					<drawSize>1.3</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.3</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.4</commonality>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li>TemperateForest</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalRainforest</li>
+			<li>TropicalSwamp</li>
+			<li>AridShrubland</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- SABERFISH - big game-->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefSaberfish</defName>
+		<label>saberfish</label>
+		<description>The saberfish, a marvel of aquatic absurdity, is nature's attempt at blending a sword and a fish – because who wouldn't want a fish armed with a blade? With its sleek body and fin-credible fencing skills, this underwater warrior is always ready for a duel or a daring seafood showdown.</description>
+		<statBases>
+			<Mass>30</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>1.4</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefSaberfish</defName>
+		<label>saberfish</label>
+		<race>ThingDefSaberfish</race>
+		<ecoSystemWeight>0.05</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Saberfish</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Saberfish</texPath>
+					<drawSize>1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Saberfish</texPath>
+					<drawSize>2</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>2</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.13</commonality>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li>TemperateForest</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalRainforest</li>
+			<li>TropicalSwamp</li>
+			<li>AridShrubland</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- REDFIN TUNA - large-->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefRedfinTuna</defName>
+		<label>redfin tuna</label>
+		<description>Meet the redfin tuna, the ocean's fiery fashionista that makes waves with its scarlet scales. This fish is like the aquatic runway model, effortlessly flaunting its vibrant hue and leaving other fish in awe of its underwater couture. It's not just a tuna, it's a marine maestro in the art of crimson chic, proving that swimming in style is always on the menu beneath the waves.</description>
+		<statBases>
+			<Mass>14</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.6</maxPreyBodySize>
+			<baseBodySize>1</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefRedfinTuna</defName>
+		<label>redfin tuna</label>
+		<race>ThingDefRedfinTuna</race>
+		<ecoSystemWeight>0.19</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/RedfinTuna</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/RedfinTuna</texPath>
+					<drawSize>0.9</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.9</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/RedfinTuna</texPath>
+					<drawSize>1.7</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.7</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.27</commonality>
+		<naturalBiomes Inherit="false">
+			<li>TropicalRainforest</li>
+			<li>TropicalSwamp</li>
+			<li>AridShrubland</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- Snackeral - tiny-->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishMashgon</defName>
+		<label>snackeral</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>2</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.15</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tools Inherit="False">
+			<li Class="CombatExtended.ToolCE">
+				<capacities>
+					<li>Scratch</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1.5</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>10</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+				<armorPenetrationSharp>0.2</armorPenetrationSharp>
+				<armorPenetrationBlunt>0.1</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishMashgon</defName>
+		<label>snackeral</label>
+		<race>ThingDefFishMashgon</race>
+		<ecoSystemWeight>0.8</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Snackeral</texPath>
+					<drawSize>0.4</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.4</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Snackeral</texPath>
+					<drawSize>0.6</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.6</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Snackeral</texPath>
+					<drawSize>0.8</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.8</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.8</commonality>
+		<breedQuantity>60</breedQuantity>
+		<breedingDurationInDays>2</breedingDurationInDays>
+		<naturalBiomes  Inherit="false">
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>AridShrubland</li>
+			<li>Desert</li>
+			<li>BorealArchipelago</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TundraArchipelago</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- Cuda - small-->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefCuda</defName>
+		<label>cuda</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>4</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.2</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefCuda</defName>
+		<label>cuda</label>
+		<race>ThingDefCuda</race>
+		<ecoSystemWeight>0.7</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Cuda</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Cuda</texPath>
+					<drawSize>0.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.75</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Cuda</texPath>
+					<drawSize>1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>false</livesInRiver>
+		<commonality>0.7</commonality>
+		<naturalBiomes Inherit="false">
+			<li>TropicalRainforest</li>
+			<li>TropicalSwamp</li>
+			<li>AridShrubland</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- ICE FLOUNDER - medium -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefIceFlounder</defName>
+		<label>ice flounder</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>7</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.3</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefIceFlounder</defName>
+		<label>ice flounder</label>
+		<race>ThingDefIceFlounder</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/IceFlounder</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/IceFlounder</texPath>
+					<drawSize>0.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.75</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/IceFlounder</texPath>
+					<drawSize>1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.45</commonality>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneForest</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneGrasslands</li>
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>BorealArchipelago</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>TundraArchipelago</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>ColdBogArchipelago</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- Eel - small  -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishSeasnake</defName>
+		<label>eel</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>4</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.2</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishSeasnake</defName>
+		<label>eel</label>
+		<race>ThingDefFishSeasnake</race>
+		<ecoSystemWeight>0.7</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Eeel</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Eeel</texPath>
+					<drawSize>0.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.75</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Eeel</texPath>
+					<drawSize>1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.7</commonality>
+		<naturalBiomes Inherit="false">
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>AridShrubland</li>
+			<li>Desert</li>
+			<li>ColdBog</li>
+			<li>BorealArchipelago</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TundraArchipelago</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- Alligar - large  -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishTailteeth</defName>
+		<label>alligar</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>10</Mass>
+		</statBases>
+		<race>
+			<leatherDef>Leather_Lizard</leatherDef>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.6</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishTailteeth</defName>
+		<label>alligar</label>
+		<race>ThingDefFishTailteeth</race>
+		<ecoSystemWeight>0.15</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Alligar</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Alligar</texPath>
+					<drawSize>0.9</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.9</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/Alligar</texPath>
+					<drawSize>1.4</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.4</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.22</commonality>
+		<breedQuantity>280</breedQuantity>
+		<breedingDurationInDays>6</breedingDurationInDays>
+		<naturalBiomes Inherit="false">
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>AridShrubland</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- breadmouth Bass - large  -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishBlueblade</defName>
+		<label>breadmouth bass</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>8</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.4</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tools Inherit="False">
+			<li Class="CombatExtended.ToolCE">
+				<capacities>
+					<li>Scratch</li>
+				</capacities>
+				<power>5</power>
+				<cooldownTime>1.5</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+				<surpriseAttack>
+					<extraMeleeDamages>
+						<li>
+							<def>Stun</def>
+							<amount>7</amount>
+						</li>
+					</extraMeleeDamages>
+				</surpriseAttack>
+				<armorPenetrationSharp>0.1</armorPenetrationSharp>
+				<armorPenetrationBlunt>0.1</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishBlueblade</defName>
+		<label>breadmouth bass</label>
+		<race>ThingDefFishBlueblade</race>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/BreadmouthBass</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/BreadmouthBass</texPath>
+					<drawSize>0.75</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.75</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/BreadmouthBass</texPath>
+					<drawSize>1.1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>false</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.45</commonality>
+		<breedQuantity>160</breedQuantity>
+		<breedingDurationInDays>4</breedingDurationInDays>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneForest</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneGrasslands</li>
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- Killer Catfish - big game  -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishKillerCatfish</defName>
+		<label>killer catfish</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>16</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.9</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishKillerCatfish</defName>
+		<label>killer catfish</label>
+		<race>ThingDefFishKillerCatfish</race>
+		<ecoSystemWeight>0.12</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/KillerCatfish</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/KillerCatfish</texPath>
+					<drawSize>1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/KillerCatfish</texPath>
+					<drawSize>1.6</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.6</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>false</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.12</commonality>
+		<naturalBiomes Inherit="false">
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+
+	<!-- DEATH STURGEON - Big Game -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefDeathSturgeon</defName>
+		<label>death sturgeon</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>20</Mass>
+		</statBases>
+		<race>
+			<leatherDef>Leather_Lizard</leatherDef>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>1.1</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+			<nameOnTameChance>0</nameOnTameChance>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefDeathSturgeon</defName>
+		<label>death sturgeon</label>
+		<race>ThingDefDeathSturgeon</race>
+		<ecoSystemWeight>0.13</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/DeathSturgeon</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/DeathSturgeon</texPath>
+					<drawSize>1.1</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>1.1</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/DeathSturgeon</texPath>
+					<drawSize>2</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>2</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>false</livesInOcean>
+		<livesInMarsh>false</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.13</commonality>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneForest</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneGrasslands</li>
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>Desert</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- sterling perch - tiny -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishSterlingPerch</defName>
+		<label>sterling perch</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>2</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.15</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishSterlingPerch</defName>
+		<label>sterling perch</label>
+		<race>ThingDefFishSterlingPerch</race>
+		<ecoSystemWeight>0.77</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/SterlingPerch</texPath>
+					<drawSize>0.4</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.4</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/SterlingPerch</texPath>
+					<drawSize>0.6</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.6</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/SterlingPerch</texPath>
+					<drawSize>0.85</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.85</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>false</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.77</commonality>
+		<naturalBiomes Inherit="false">
+			<li MayRequire="vileheathen.mountainsmeadows">Prairie</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneForest</li>
+			<li MayRequire="vileheathen.mountainsmeadows">MontaneGrasslands</li>
+			<li>SeaIce</li>
+			<li>IceSheet</li>
+			<li>Tundra</li>
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>AridShrubland</li>
+			<li>Desert</li>
+			<li>ColdBog</li>
+			<li>BorealArchipelago</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TundraArchipelago</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+
+	<!-- pinstripe bass - tiny -->
+	<ThingDef ParentName="FishThingBase">
+		<defName>ThingDefFishPinstripeBass</defName>
+		<label>pinstripe bass</label>
+		<description>lorem ipsum</description>
+		<statBases>
+			<Mass>4</Mass>
+		</statBases>
+		<race>
+			<body>Fish</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.20</maxPreyBodySize>
+			<baseBodySize>0.2</baseBodySize>
+			<baseHealthScale>0.45</baseHealthScale>
+			<baseHungerRate>0.07</baseHungerRate>
+			<foodType>OmnivoreAnimal</foodType>
+			<useMeatFrom>ThingDefFishSduiggles</useMeatFrom>
+			<meatColor>(221,123,23)</meatColor>
+			<manhunterOnTameFailChance>0.03</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.85</manhunterOnDamageChance>
+			<gestationPeriodDays>2.0</gestationPeriodDays>
+		</race>
+		<tradeTags />
+	</ThingDef>
+
+	<PawnKindDef ParentName="FishKindBase" Class="SK.PawnKindDef_FishSpecies">
+		<defName>PawnKindDefFishPinstripeBass</defName>
+		<label>pinstripe bass</label>
+		<race>ThingDefFishPinstripeBass</race>
+		<ecoSystemWeight>0.7</ecoSystemWeight>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/PinstripeBass</texPath>
+					<drawSize>0.5</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.5</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/PinstripeBass</texPath>
+					<drawSize>0.7</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.7</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/Fish/PinstripeBass</texPath>
+					<drawSize>0.9</drawSize>
+				</bodyGraphicData>
+				<dessicatedBodyGraphicData>
+					<texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSnake</texPath>
+					<drawSize>0.9</drawSize>
+				</dessicatedBodyGraphicData>
+			</li>
+		</lifeStages>
+		<livesInOcean>true</livesInOcean>
+		<livesInMarsh>true</livesInMarsh>
+		<livesInRiver>true</livesInRiver>
+		<commonality>0.7</commonality>
+		<naturalBiomes Inherit="false">
+			<li>BorealForest</li>
+			<li>TemperateForest</li>
+			<li>TropicalRainforest</li>
+			<li>AridShrubland</li>
+			<li>Desert</li>
+			<li>BorealArchipelago</li>
+			<li>BorealArchipelago_Fresh</li>
+			<li>DesertArchipelago</li>
+			<li>DesertArchipelago_Fresh</li>
+			<li>TemperateArchipelago</li>
+			<li>TemperateArchipelago_Fresh</li>
+			<li>TropicalArchipelago</li>
+			<li>TropicalArchipelago_Fresh</li>
+			<li>TundraArchipelago</li>
+			<li>TundraArchipelago_Fresh</li>
+			<li>ColdBogArchipelago</li>
+			<li>ColdBogArchipelago_Fresh</li>
+			<li>TemperateSwampArchipelago</li>
+			<li>TemperateSwampArchipelago_Fresh</li>
+			<li>TropicalSwampArchipelago</li>
+			<li>TropicalSwampArchipelago_Fresh</li>
+			<li>TemperateSwamp</li>
+			<li>TropicalSwamp</li>
+		</naturalBiomes>
+	</PawnKindDef>
+</Defs>

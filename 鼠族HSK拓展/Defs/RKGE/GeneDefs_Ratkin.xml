@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<GeneCategoryDef>
+		<defName>RatkinGene</defName>
+		<label>Ratkin Gene</label>
+		<displayPriorityInXenotype>850</displayPriorityInXenotype>
+	</GeneCategoryDef>
+
+	<GeneCategoryDef>
+		<defName>RatkinEarsGene</defName>
+		<label>Ratkin Ears Gene</label>
+		<displayPriorityInXenotype>851</displayPriorityInXenotype>
+	</GeneCategoryDef>
+
+	<GeneCategoryDef>
+		<defName>RatkinTailGene</defName>
+		<label>Ratkin Tail Gene</label>
+		<displayPriorityInXenotype>852</displayPriorityInXenotype>
+	</GeneCategoryDef>
+
+	<GeneDef Name="RatkinGeneEarsBase" Abstract="True">
+		<biostatCpx>0</biostatCpx>
+		<displayCategory>RatkinEarsGene</displayCategory>
+		<displayOrderInCategory>75</displayOrderInCategory>
+		<iconColor>(0.75, 0.75, 0.75)</iconColor>
+		<endogeneCategory>Ears</endogeneCategory>
+		<randomChosen>false</randomChosen>
+		<exclusionTags>
+			<li>Ears</li>
+		</exclusionTags>
+		<symbolPack>
+			<prefixSymbols>
+				<li>
+					<symbol>rat</symbol>
+				</li>
+				<li>
+					<symbol>squeak</symbol>
+				</li>
+				<li>
+					<symbol>whisk</symbol>
+				</li>
+			</prefixSymbols>
+			<suffixSymbols>
+				<li>
+					<symbol>rat</symbol>
+				</li>
+				<li>
+					<symbol>ear</symbol>
+				</li>
+				<li>
+					<symbol>squeak</symbol>
+				</li>
+			</suffixSymbols>
+		</symbolPack>
+	</GeneDef>
+
+	<GeneDef Name="RatkinGeneTailBase" Abstract="True">
+		<biostatCpx>0</biostatCpx>
+		<displayCategory>RatkinTailGene</displayCategory>
+		<displayOrderInCategory>1001</displayOrderInCategory>
+		<iconColor>(0.75, 0.75, 0.75)</iconColor>
+		<randomChosen>true</randomChosen>
+		<exclusionTags>
+			<li>Tail</li>
+		</exclusionTags>
+		<symbolPack>
+			<prefixSymbols>
+				<li>
+					<symbol>tail</symbol>
+				</li>
+				<li>
+					<symbol>rat</symbol>
+				</li>
+			</prefixSymbols>
+			<suffixSymbols>
+				<li>
+					<symbol>tail</symbol>
+				</li>
+				<li>
+					<symbol>rat</symbol>
+				</li>
+			</suffixSymbols>
+		</symbolPack>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_Ears</defName>
+		<label>Mouse ears</label>
+		<description>The Ratkin with this gene has mouse ears</description>
+		<iconPath>UI/Icons/Genes/Mouse_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_Tail</defName>
+		<label>Mouse tail</label>
+		<description>The Ratkin with this gene has a common mouse tail</description>
+		<iconPath>UI/Icons/Genes/Mouse_tail</iconPath>
+	</GeneDef>
+
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_LabRatEars</defName>
+		<iconColor>(0.9, 0.9, 0.9)</iconColor>
+		<label>LabRat ears</label>
+		<description>Ratkin with this gene have mouse ears that magically have a tag attached to them.</description>
+		<iconPath>UI/Icons/Genes/ICR_ear</iconPath>
+	</GeneDef>
+
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_WREars</defName>
+		<label>Waste rat ears</label>
+		<description>Ratkin with this gene have waste rat ears</description>
+		<iconPath>UI/Icons/Genes/WR_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_WRTail</defName>
+		<biostatMet>-1</biostatMet>
+    <capMods>
+      <li>
+        <capacity>Manipulation</capacity>
+        <postFactor>1.1</postFactor>
+      </li>
+    </capMods>
+		<label>Waste rat tail</label>
+		<description>Ratkin with this gene has a waste rat tail</description>
+		<iconPath>UI/Icons/Genes/WR_tail</iconPath>
+	</GeneDef>
+
+	<GeneDef>
+		<biostatCpx>0</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<iconColor>(1, 1, 1)</iconColor>
+		<defName>Ratkin_YunDanFengQing</defName>
+		<displayCategory>RatkinGene</displayCategory>
+		<displayOrderInCategory>33</displayOrderInCategory>
+		<suppressedTraits>
+			<li>
+				<def>Pyromaniac</def>
+			</li>
+			<li>
+				<def>Greedy</def>
+			</li>
+			<li>
+				<def>Gourmand</def>
+			</li>
+		</suppressedTraits>
+		<forcedTraits>
+			<li>
+				<def>RKTrait_YunDanFengQing</def>
+			</li>
+		</forcedTraits>
+		<socialFightChanceFactor>0.1</socialFightChanceFactor>
+		<aggroMentalBreakSelectionChanceFactor>0.5</aggroMentalBreakSelectionChanceFactor>
+		<label>Take it easy</label>
+		<description>What adversity needs is not to be overcome, but to be actively eliminated. Before that, I will always hold hope in my heart.</description>
+		<customEffectDescriptions>
+			<li>Don't care about the awful bedroom environment.</li>
+		</customEffectDescriptions>
+		<iconPath>UI/Icons/Genes/Vole_YunDanFengQing</iconPath>
+	</GeneDef>
+
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_Prototype_Vole_Ears</defName>
+		<iconColor>(1, 0.92, 0.65)</iconColor>
+		<biostatMet>6</biostatMet>
+		<label>Prototype Vole ears</label>
+		<description>The Ratkin with this gene has vole ears</description>
+		<iconPath>UI/Icons/Genes/prototype_vole_ears</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_Prototype_Vole_Tail</defName>
+		<iconColor>(1, 0.92, 0.65)</iconColor>
+		<biostatMet>6</biostatMet>
+		<label>Prototype Vole tail</label>
+		<description>The Ratkin with this gene has a vole tail</description>
+		<iconPath>UI/Icons/Genes/prototype_vole_tail</iconPath>
+	</GeneDef>
+
+  <GeneDef ParentName="GenePainBase">
+    <defName>Pain_Increased</defName>
+    <label>increased pain</label>
+    <labelShortAdj>pain-increased</labelShortAdj>
+    <description>Carriers of this gene experience more pain and are more sensitive to it than normal individuals.</description>
+    <iconPath>UI/Icons/Genes/WR_Frag</iconPath>
+    <displayOrderInCategory>30</displayOrderInCategory>
+    <painFactor>1.25</painFactor>
+    <biostatMet>2</biostatMet>
+  </GeneDef>
+
+	<GeneDef>
+		<defName>Ratkin_ShoShoShot</defName>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<displayCategory>Violence</displayCategory>
+		<iconColor>(1, 1, 1)</iconColor>
+		<displayOrderInCategory>33</displayOrderInCategory>
+		<forcedTraits>
+			<li>
+				<def>ShootingAccuracy</def>
+				<degree>-1</degree>
+			</li>
+		</forcedTraits>
+		<label>trigger-happy</label>
+		<description>Carriers of this gene tend to keep pressing the trigger continuously. They really dislike taking the time to aim carefully.</description>
+		<iconPath>UI/Icons/Genes/WR_Shoting</iconPath>
+	</GeneDef>
+
+	<GeneDef>
+		<defName>Ratkin_Sassy</defName>
+		<biostatCpx>0</biostatCpx>
+		<biostatMet>1</biostatMet>
+		<iconColor>(1, 1, 1)</iconColor>
+		<displayCategory>RatkinGene</displayCategory>
+		<displayOrderInCategory>33</displayOrderInCategory>
+		<label>Sassy</label>
+		<description>Carriers of this gene tend to behave rudely in social situations. When they speak, they often use sarcastic language, making it difficult for others to handle.</description>
+		<customEffectDescriptions>
+			<li>The probability of sarcasm or insult doubles.</li>
+		</customEffectDescriptions>
+		<iconPath>UI/Icons/Genes/WR_Gaki</iconPath>
+	</GeneDef>
+
+
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_HamsterEars</defName>
+		<label>Hamster ears</label>
+		<description>The Ratkin with this gene has hamster ears</description>
+		<iconPath>UI/Icons/Genes/Hamster_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_SquirrelEars</defName>
+		<iconColor>(0.9, 0.7, 0.7)</iconColor>
+		<label>Squirrel ears</label>
+		<description>Ratkin with this gene have squirrel ears</description>
+		<iconPath>UI/Icons/Genes/Squirrel_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_SquirrelTail</defName>
+		<iconColor>(0.9, 0.7, 0.7)</iconColor>
+		<label>Squirrel tail</label>
+		<description>Ratkin with this gene have squirrel tails</description>
+		<iconPath>UI/Icons/Genes/Squirrel_tail</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_MoleEars</defName>
+		<iconColor>(0.71, 0.71, 0.71)</iconColor>
+		<label>Mole ears</label>
+		<description>Ratkin with this gene have mole ears</description>
+		<iconPath>UI/Icons/Genes/Mole_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_MoleTail</defName>
+		<iconColor>(0.71, 0.71, 0.71)</iconColor>
+		<label>Mole tail</label>
+		<description>Ratkin with this gene has a mole tail</description>
+		<iconPath>UI/Icons/Genes/Mole_tail</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_VoleEars</defName>
+		<label>Vole ears</label>
+		<description>The Ratkin with this gene has vole ears</description>
+		<iconPath>UI/Icons/Genes/Vole_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_GuineaPigEars</defName>
+		<displayOrderInCategory>15</displayOrderInCategory>
+		<biostatMet>1</biostatMet>
+		<label>Guinea pig ears</label>
+		<description>The Ratkin with this gene has guinea pig ears.</description>
+		<iconPath>UI/Icons/Genes/GA_ear</iconPath>
+	</GeneDef>
+
+	<!-- 2026-08-31 海狸(Ratkin_Beaver)基因,移植自工坊 RKGE;Ratkin_INeedChop(伐木需求)因依赖
+	     RatkinGeneExpanded.Need_Chop 自定义类(本地 dll 无)故不移植 -->
+	<GeneDef ParentName="RatkinGeneEarsBase">
+		<defName>Ratkin_BREars</defName>
+		<label>Beaver ears</label>
+		<description>Ratkin with this gene have beaver ears</description>
+		<iconPath>UI/Icons/Genes/BR_ear</iconPath>
+	</GeneDef>
+
+	<GeneDef ParentName="RatkinGeneTailBase">
+		<defName>Ratkin_BRTail</defName>
+		<iconColor>(0.71, 0.71, 0.71)</iconColor>
+		<label>Beaver tail</label>
+		<description>Ratkin with this gene has a beaver tail</description>
+		<iconPath>UI/Icons/Genes/BR_tail</iconPath>
+	</GeneDef>
+
+	<GeneDef>
+		<defName>Ratkin_WaterproofFur</defName>
+		<label>waterproof fur</label>
+		<description>Carriers of this gene have waterproof fur. They won't be unhappy just because they get soaked through.</description>
+		<iconPath>UI/Icons/Genes/WaterproofFur</iconPath>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>0</biostatMet>
+	</GeneDef>
+
+	<GeneDef>
+		<defName>Ratkin_CarefullyShoot</defName>
+		<displayCategory>Violence</displayCategory>
+		<exclusionTags>
+			<li>RKGE_GeneAimingTimeBase</li>
+		</exclusionTags>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>0</biostatMet>
+		<iconColor>(1, 1, 1)</iconColor>
+		<displayOrderInCategory>134</displayOrderInCategory>
+		<forcedTraits>
+			<li>
+				<def>ShootingAccuracy</def>
+				<degree>1</degree>
+			</li>
+		</forcedTraits>
+		<label>careful shooter</label>
+		<description>Carriers of this gene take their time to aim carefully before shooting, which significantly improve the shooting accuracy but also increases the time needed for aiming.</description>
+		<iconPath>UI/Icons/Genes/CarefullyAiming</iconPath>
+	</GeneDef>
+
+  <GeneDef ParentName="GenePainBase">
+    <defName>Ratkin_Hyperactivity</defName>
+    <label>hyperactivity</label>
+    <labelShortAdj>hyperactivity</labelShortAdj>
+    <description>Carriers of this gene tend to be very active and are prone to getting tired of their work.</description>
+    <iconPath>UI/Icons/Genes/Squirrel_Hyperactivity</iconPath>
+    <displayOrderInCategory>30</displayOrderInCategory>
+		<statFactors>
+			<ResearchSpeedFactor>0.8</ResearchSpeedFactor>
+			<JoyFallRateFactor>1.15</JoyFallRateFactor>
+		</statFactors>
+		<statOffsets>
+			<GeneralLaborSpeed>-0.2</GeneralLaborSpeed>
+      <MoveSpeed>0.1</MoveSpeed>
+		</statOffsets>
+    <biostatMet>1</biostatMet>
+  </GeneDef>
+
+	<GeneDef>
+		<defName>Ratkin_FastTalking</defName>
+		<biostatCpx>1</biostatCpx>
+		<biostatMet>1</biostatMet>
+		<iconColor>(1, 1, 1)</iconColor>
+		<displayCategory>RatkinGene</displayCategory>
+		<displayOrderInCategory>33</displayOrderInCategory>
+		<label>Fast Talking</label>
+		<description>Carriers of this gene tend to speak too fast, which can cause some degree of communication difficulties.</description>
+		<iconPath>UI/Icons/Genes/Squirrel_Fasttalking</iconPath>    
+		<aptitudes>
+      <Social>-4</Social>
+    </aptitudes>
+    <statOffsets>
+      <SocialIdeoSpreadFrequencyFactor MayRequire="Ludeon.RimWorld.Ideology">2</SocialIdeoSpreadFrequencyFactor>
+			<SocialImpact>-0.2</SocialImpact>
+			<NegotiationAbility>0.03</NegotiationAbility>
+		</statOffsets>
+	</GeneDef>
+</Defs>

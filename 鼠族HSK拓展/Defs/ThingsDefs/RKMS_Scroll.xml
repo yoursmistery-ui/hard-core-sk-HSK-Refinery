@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="UnfinishedBase">
+		<defName>UnfinishedScroll</defName>
+		<label>unfinished scroll</label>
+		<description>The ancient secret is being restored in the hope that it will be reborn at some point in the future.</description>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Flammability>1.2</Flammability>
+		</statBases>
+		<graphicData>
+			<texPath>Item_Scroll/RK_UnfinishedBook</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories Inherit="false" />
+	</ThingDef>
+
+	<ThingCategoryDef>
+		<defName>RK_Scroll</defName>
+		<label>secret scroll</label>
+		<parent>Apparel</parent>
+	</ThingCategoryDef>
+
+
+	<ThingDef Name="RK_ExoticScrollBase" Abstract="True">
+		<thingClass>Apparel</thingClass>
+		<category>Item</category>
+		<drawerType>MapMeshOnly</drawerType>
+		<selectable>True</selectable>
+		<pathCost>1</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<techLevel>Medieval</techLevel>
+		<graphicData>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToMake>20000</WorkToMake>
+			<Mass>0.1</Mass>
+			<EquipDelay>0.1</EquipDelay>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<Beauty>3</Beauty>
+		</statBases>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<burnableByRecipe>false</burnableByRecipe>
+		<smeltable>false</smeltable>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+		</comps>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Intellectual</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<!-- 2026-08-23 挂鼠邦配饰研究(已移入 Apparel_SK) -->
+			<researchPrerequisite>MoustateJewerly</researchPrerequisite>
+			<recipeUsers Inherit="false">
+				<li>RK_HandMsWorkbench</li>
+				<li>RK_ElectricMsWorkbench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedScroll</unfinishedThingDef>
+			<skillRequirements>
+				<Intellectual>8</Intellectual>
+			</skillRequirements>
+		</recipeMaker>
+		<thingCategories>
+			<li>RK_Scroll</li>
+		</thingCategories>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+		</tradeTags>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfDamaged>false</careIfDamaged>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<scoreOffset>4</scoreOffset>
+			<wearPerDay>0</wearPerDay>
+			<layers>
+				<li>SecretsBook</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticScroll</li>
+			</tags>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+		</apparel>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_BaiGongDian</defName>
+		<label>百工典 (BaiGongDian)</label>
+		<description>Forging, sewing, construction, and processing are the pride of artisans, and this book serves as the best guide for craftsmen who aspire to further their knowledge. The book documents over a hundred different crafts, but that is only a small fraction of what it covers. The majority of its pages are dedicated to discussing the origins and applications of these techniques. Rather than simply recording production methods, the book's core philosophy encourages artisans to draw connections, apply theoretical knowledge, and think innovatively.
+This book is continually updated, and the essays it contains about technological development are highly regarded and eagerly discussed among craftsmen.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_百工典</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>21000</WorkToMake>
+		</statBases>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>23</RK_CanJuan>
+		</costList>
+		<equippedStatOffsets>
+			<WorkSpeedGlobal>0.1</WorkSpeedGlobal>
+			<FixBrokenDownBuildingSuccessChance>1</FixBrokenDownBuildingSuccessChance>
+			<ConstructSuccessChance>1</ConstructSuccessChance>
+			<GeneralLaborSpeed>0.35</GeneralLaborSpeed>
+			<ConstructionSpeed>0.55</ConstructionSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_BaiZhuZaliangJi</defName>
+		<label>百株杂粮集 (BaiZhuZaliangJi)</label>
+		<description>Legend has it that in the ancient world of Qiankun, there existed a monumental work known as the "Compendium of Materia Medica." This book documented the plants the author encountered throughout their life and numerous fundamental theories of medicine. The purpose of the book "Collection of a Hundred Miscellaneous Grains" is similar to that of the ancient tome, but it focuses solely on edible and material plants. The author, lacking expertise in medicine, refrained from delving into medical theories.
+In reality, the author of this book underestimated their own achievement. Even a hundred years later, the level of detail in this book remains difficult to surpass. However, the number of surviving copies of the book is relatively small.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_百株杂粮集</texPath>
+		</graphicData>
+		<statBases>
+			<WorkToMake>23000</WorkToMake>
+		</statBases>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>25</RK_CanJuan>
+		</costList>
+		<equippedStatOffsets>
+			<FoodPoisonChance>-0.35</FoodPoisonChance>
+			<PlantWorkSpeed>0.5</PlantWorkSpeed>
+			<DrugHarvestYield>0.15</DrugHarvestYield>
+			<PlantHarvestYield>0.35</PlantHarvestYield>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_DuShiJiuRenJi</defName>
+		<label>渡世救人集 (DuShiJiuRenJi)</label>
+		<description>Heaven and Earth are indifferent, treating all things as mere fodder. The uncertainties of the human world make suffering from diseases and plagues inevitable. According to legend, in ancient times, there was a female physician in the palace who could not bear to stand idly by while the city was plagued by illness. She made a resolute decision to secretly leave the court and dedicate herself to healing the people. How she managed to escape the depths of the palace remains unknown to this day. However, historical records do mention the existence of a rebel army during that time, dedicated to treating the sick and saving lives. Its leader was a blind, one-armed woman. This book is said to be her oral teachings, written down by others during her later years.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_渡世救人集</texPath>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>31</RK_CanJuan>
+		</costList>
+		<statBases>
+			<WorkToMake>28000</WorkToMake>
+		</statBases>
+		<equippedStatOffsets>
+			<MedicalTendSpeed>0.7</MedicalTendSpeed>
+			<MedicalTendQuality>0.5</MedicalTendQuality>
+			<MedicalTendQualityOffset>1</MedicalTendQualityOffset>
+			<MedicalOperationSpeed>0.5</MedicalOperationSpeed>
+			<MedicalSurgerySuccessChance>0.65</MedicalSurgerySuccessChance>
+			<DrugCookingSpeed>0.35</DrugCookingSpeed>
+			<DrugSynthesisSpeed>0.35</DrugSynthesisSpeed>
+			<DrugSellPriceImprovement>0.2</DrugSellPriceImprovement>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_TaoTieJing</defName>
+		<label>饕餮经 (TaoTieJing)</label>
+		<description>This book was written by a wandering traveler who had journeyed to various places since childhood. Its content is more down-to-earth compared to those extravagant recipe books. It introduces ingredients and cooking methods that are easily accessible to ordinary households. Additionally, it includes a fair amount of modern content related to food therapy, health preservation, and food safety regulations.
+The book has a large number of existing copies, including many variants and incorrect versions. It is important to exercise caution and discernment when selecting a copy, as it concerns knowledge that will be consumed and applied.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_饕餮经</texPath>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>17</RK_CanJuan>
+		</costList>
+		<statBases>
+			<WorkToMake>18000</WorkToMake>
+		</statBases>
+		<equippedStatOffsets>
+			<FoodPoisonChance>-1.2</FoodPoisonChance>
+			<CookSpeed>1</CookSpeed>
+			<EatingSpeed>3</EatingSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_ZhiGeZongYao</defName>
+		<label>止戈总要 (ZhiGeZongYao)</label>
+		<description>This book is a compilation of the '止戈' series. The initial volumes contain techniques of knife, spear, staff, and cudgel that are suitable for beginners to practice, as well as some unarmed martial arts. The later volumes detail more advanced techniques compared to the earlier ones. Additionally, the book includes supplementary volumes written by later generations in a similar style, which encompass maintenance and usage guides for bows, arrows, and modern firearms.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_止戈总要</texPath>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>34</RK_CanJuan>
+		</costList>
+		<statBases>
+			<WorkToMake>33000</WorkToMake>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeHitChance>35</MeleeHitChance>
+			<MeleeDodgeChance>35</MeleeDodgeChance>
+			<MoveSpeed>0.35</MoveSpeed>
+			<AimingDelayFactor>-0.35</AimingDelayFactor>
+			<ShootingAccuracyPawn>5</ShootingAccuracyPawn>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_ZhuFangBoWuZhi</defName>
+		<label>诸方博物志 (ZhuFangBoWuZhi)</label>
+		<description>The opening section of this book covers fascinating individuals, extraordinary objects, and peculiar events from both within and beyond the borders. After providing detailed descriptions of these topics, each chapter concludes with in-depth explanations of the underlying principles. The earlier volumes are written in a popular and humorous style, making them frequently used as teaching materials in private schools. However, the later volumes undergo a sudden change in writing style, adopting a more specialized and precise vocabulary. They require further study in order to comprehend the entire content.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_诸方博物志</texPath>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>36</RK_CanJuan>
+		</costList>
+		<statBases>
+			<WorkToMake>40000</WorkToMake>
+		</statBases>
+		<equippedStatOffsets>
+			<SocialImpact>0.35</SocialImpact>
+			<NegotiationAbility>0.35</NegotiationAbility>
+			<ResearchSpeed>1</ResearchSpeed>
+			<TradePriceImprovement>0.5</TradePriceImprovement>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_QiShiPu</defName>
+		<label>奇石谱 (QiShiPu)</label>
+		<description>This book documents numerous rare treasures and exotic stones, including methods for their mining, acquisition, and even their various uses. In the eyes of most people, this book may not hold much practical value compared to cookbooks or medical texts, as it offers limited assistance to the general public. The author is a contemporary member of the ratkin, and if you are fortunate enough, there might be a chance to meet he/she.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_奇石谱</texPath>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+			<RK_CanJuan>21</RK_CanJuan>
+		</costList>
+		<statBases>
+			<WorkToMake>20000</WorkToMake>
+		</statBases>
+		<equippedStatOffsets>
+			<MiningSpeed>0.75</MiningSpeed>
+			<MiningYield>0.42</MiningYield>
+			<DeepDrillingSpeed>0.5</DeepDrillingSpeed>
+		</equippedStatOffsets>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticScrollBase">
+		<defName>RK_TianFuLun</defName>
+		<label>天赋论 (TianFuLun)</label>
+		<description>"All things flow and pass, except for inherent freedom, enjoyed and governed by all
+			the people of the world."
+
+			This booklet is the most widely circulated book in contemporary Moustate society, and it
+			served as the inspiration for the formation of the Moustate social system. The author
+			was a human progressive thinker during the final period of the former dynasty, dedicated
+			to intellectual liberation and opposing exploitation. Prior to the major social
+			upheaval, he was assassinated by a hired thug secretly employed by the government. One
+			wonders what he would have thought upon learning that the catalyst for the great change
+			was a severe famine known as the 'Cataclysm.'
+
+			In reality, the original version of this book was not as thin as it appears now.
+			However, due to the imperial prohibition on the book at that time, much of its content
+			has been lost or remains difficult to find.</description>
+		<graphicData>
+			<texPath>Item_Scroll/RK_TianFuLun</texPath>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+		</statBases>
+		<costList>
+			<Cloth>5</Cloth>
+			<RK_CanJuan>1</RK_CanJuan>
+		</costList>
+		<equippedStatOffsets>
+			<SocialImpact>0.1</SocialImpact>
+			<NegotiationAbility>0.1</NegotiationAbility>
+		</equippedStatOffsets>
+	</ThingDef>
+</Defs>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_ThrumboFound</defName>
+    <rootSelectionWeight>1</rootSelectionWeight>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <rootMinPoints>0</rootMinPoints>
+    <autoAccept>true</autoAccept>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->thrumbo found</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The kiiro scouts from [kiiro_settlement_label] have recently been discovering traces left by thrumbo in the wild. After careful investigation, they have finally confirmed that a thrumbo herd has migrated near [kiiro_settlement_label].\n\nConsidering that you might be interested in these big guys, they have decided to share this information with you. The location of this thrumbo herd has now been marked on your map.\n\n"They may not stay in one place for too long. If you decide to go, it's best to be sooner."</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <defaultChallengeRating>1</defaultChallengeRating>
+    <!-- <questAvailableLetterDef>NewQuest_ThreatBig</questAvailableLetterDef> -->
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <!-- 距离 -->
+        <li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>3~6</value>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>ThrumboFound</modSettingSwitch>
+        </li>
+
+        <!-- 这个不用完全信任 -->
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>selectionWeight_ThrumboFound</name>
+          <value>8</value>
+        </li>
+        <li Class="QuestNode_Set">
+          <name>selectionWeight_ThrumboFound_Group</name>
+          <value>2</value>
+        </li>
+        <li Class="QuestNode_Set">
+          <name>selectionWeight_ThrumboFound_Join</name>
+          <value>2</value>
+        </li>
+
+        <!-- 下列node随机触发 -->
+        <li Class="QuestNode_RandomNode">
+          <nodes>
+            <!-- 敲击兽 -->
+            <li Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_Set">
+                  <name>sitePartsTags</name>
+                  <value>
+                    <li>
+                      <tag>Kiiro_ThrumboFound</tag>
+                    </li>
+                  </value>
+                </li>
+              </nodes>
+              <selectionWeight>$selectionWeight_ThrumboFound</selectionWeight>
+            </li>
+            <!-- 群聚敲击兽 -->
+            <li Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_Set">
+                  <name>sitePartsTags</name>
+                  <value>
+                    <li>
+                      <tag>Kiiro_ThrumboFound_Group</tag>
+                    </li>
+                  </value>
+                </li>
+              </nodes>
+              <selectionWeight>$selectionWeight_ThrumboFound_Group</selectionWeight>
+            </li>
+            <!-- 敲击兽加入 -->
+            <li Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_Set">
+                  <name>sitePartsTags</name>
+                  <value>
+                    <li>
+                      <tag>Kiiro_ThrumboFound_Join</tag>
+                    </li>
+                  </value>
+                </li>
+                <li Class="QuestNode_Letter">
+                  <inSignal>site.MapGenerated</inSignal>
+                  <letterDef>PositiveEvent</letterDef>
+                  <label>thrumbo join</label>
+                  <text>These thrumbo surprisingly turned out to be very friendly towards us. They slowly approached our caravan after seeing us... and then joined us! Now, these massive and furry creatures are our new friends.</text>
+                </li>
+              </nodes>
+              <selectionWeight>$selectionWeight_ThrumboFound_Join</selectionWeight>
+            </li>
+          </nodes>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_Thrumbo</tag>
+          <faction>Kiiro_Faction</faction>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <sitePartsTags>$sitePartsTags</sitePartsTags>
+        </li>
+
+        <!-- 生成在绮罗定居点附近 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+          <clampRangeBySiteParts>true</clampRangeBySiteParts>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+          <parms>
+            <hiddenSitePartsPossible>false</hiddenSitePartsPossible>
+          </parms>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <!-- 延迟一定时间后输出事件结束的信号 -->
+        <li Class="QuestNode_Delay">
+          <delayTicks>$(randInt(2,4)*60000)</delayTicks>
+          <outSignalComplete>QuestEndUnfinished</outSignalComplete>
+        </li>
+        <!-- 移除任务点 -->
+        <li Class="QuestNode_DestroyWorldObject">
+          <inSignal>QuestEndUnfinished</inSignal>
+          <worldObject>$site</worldObject>
+        </li>
+        <!-- 弹出任务失败的信封 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>QuestEndUnfinished</inSignal>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">Seems that the thrumbo herd near [kiiro_settlement_label] has migrated elsewhere.</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>Timeout</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

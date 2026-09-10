@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 焚书配方挂载(VBEE 移植): 营火 + 电动火葬台
+         与 VBEE 原版一致(挂 burnableByRecipe 的建筑),原版 BookBase 已设 burnableByRecipe=true
+         用 xpath 存在性门控,未装原版 def 时跳过 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Campfire"]/recipes</xpath>
+        <value>
+            <li>VanillaBooksExpandedExpanded_BurnBooks</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectricCrematorium"]/recipes</xpath>
+        <value>
+            <li>VanillaBooksExpandedExpanded_BurnBooks</li>
+        </value>
+    </Operation>
+</Patch>

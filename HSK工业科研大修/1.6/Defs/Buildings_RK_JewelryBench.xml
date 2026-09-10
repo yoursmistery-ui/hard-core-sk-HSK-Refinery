@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 珠宝台: 原版 Building_WorkTable, 一级分类=生产 Production。
+     上一版加载期 NullReferenceException(疑似 TableBase 继承链上节点组合问题),
+     现改为本 mod 已验证可加载的工作台骨架(RK_CraftTableBase 同构), 门槛 Craft_B1。 -->
+<ThingDef ParentName="BuildingBase">
+		<defName>RK_JewelryBench</defName>
+		<label>珠宝台</label>
+		<description>嵌着矿石与抛光轮的工匠台: 台面上摆着镊子、放大镜、丝线、磨料, 以及一排待镶的宝石。把宝石镶成项链与戒指, 是这里唯一正经的活计。</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<designationCategory>Production</designationCategory>
+		<techLevel>Medieval</techLevel>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.5</fillPercent>
+		<pathCost>70</pathCost>
+		<size>(3,1)</size>
+		<rotatable>true</rotatable>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Production/JewelryBench</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3.4,1.4)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/Production/JewelryBench_south</uiIconPath>
+		<uiIconScale>1.15</uiIconScale>
+		<statBases>
+			<WorkToBuild>4200</WorkToBuild>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Mass>35</Mass>
+			<Flammability>0.5</Flammability>
+			<Beauty>12</Beauty>
+		</statBases>
+		<costList>
+			<WroughtIron>25</WroughtIron>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<researchPrerequisites>
+			<li>Craft_B1</li>
+		</researchPrerequisites>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+	</ThingDef>
+</Defs>

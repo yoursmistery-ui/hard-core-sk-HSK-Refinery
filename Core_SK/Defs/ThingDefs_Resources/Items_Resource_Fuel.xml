@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>Tallow</defName>
+		<label>tallow</label>
+		<description>Pure non-edible fat that can be used to fuel simple buildings that don't require high burning temperature.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Tallow</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Standard_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>75</stackLimit>
+		<tickerType>Rare</tickerType>
+		<techLevel>Neolithic</techLevel>
+		<statBases>
+			<MaxHitPoints>5</MaxHitPoints>
+			<MarketValue>2</MarketValue>
+			<DeteriorationRate>0</DeteriorationRate>
+			<Flammability>2</Flammability>
+			<MaxBurningTempCelsius>300</MaxBurningTempCelsius>
+			<BurnDurationHours>0.6</BurnDurationHours>
+			<Mass>0.09</Mass>
+			<Bulk>0.1</Bulk>
+		</statBases>
+		<thingCategories>
+			<li>FuelCat</li>
+		</thingCategories>
+		<stuffProps>
+			<stuffAdjective>fuel</stuffAdjective>
+		</stuffProps>
+	</ThingDef>
+
+	<!--
+	<ThingDef ParentName="ResourceBase">
+		<defName>Chemfuel</defName>
+		<label>chemfuel</label>
+		<description>A volatile liquid chemical. Used to fuel engines, or to transmute into propellant for projectiles, or as an incendiary weapon.</description>
+		<possessionCount>20</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Resource/EthanolFuel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Standard_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>600</stackLimit>
+		<tickerType>Normal</tickerType>
+		<techLevel>Industrial</techLevel>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<intricate>true</intricate>
+	-->
+		<!-- Not returned to player when product made of this is smelted. -->
+	<!--
+		<statBases>
+			<MaxHitPoints>5</MaxHitPoints>
+			<MarketValue>6</MarketValue>
+			<DeteriorationRate>0.01</DeteriorationRate>
+			<Flammability>7</Flammability>
+			<MaxBurningTempCelsius>1200</MaxBurningTempCelsius>
+			<BurnDurationHours>0.7</BurnDurationHours>
+			<Mass>0.09</Mass>
+			<Bulk>0.1</Bulk>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>1.4</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.037</explosiveExpandPerStackcount>
+				<startWickOnDamageTaken>
+					<li>Flame</li>
+				</startWickOnDamageTaken>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+				<preExplosionSpawnChance>1</preExplosionSpawnChance>
+				<wickTicks>70~150</wickTicks>
+			</li>
+		</comps>
+		<allowedArchonexusCount>100</allowedArchonexusCount>
+		<thingCategories>
+			<li>FuelCat</li>
+		</thingCategories>
+		<stuffProps>
+			<stuffAdjective>fuel</stuffAdjective>
+		</stuffProps>
+	</ThingDef>
+	-->
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>Powder</defName>
+		<label>Gunpowder</label>
+		<description>Gunpowder, also known as black powder, is the earliest known chemical explosive. It is a mixture of Sulfur, Coal Ore and Nitre. The Sulfur and Coal Ore act as fuels, and the Nitre is an oxidizer.</description>
+		<graphicData>  
+			<texPath>Things/Item/Resource/Powder</texPath>
+			<graphicClass>Graphic_Single</graphicClass> 
+		</graphicData> 
+		<soundInteract>Standard_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<tickerType>Normal</tickerType>
+		<stackLimit>150</stackLimit>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MarketValue>25</MarketValue>
+			<MaxHitPoints>5</MaxHitPoints>
+			<DeteriorationRate>0.01</DeteriorationRate>
+			<Flammability>14</Flammability>
+			<Mass>0.03</Mass>
+			<Bulk>0.1</Bulk>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>2</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.2</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>5</min>
+					<max>10</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<thingCategories>
+			<li>ExplosivesCat</li>
+		</thingCategories> 
+	</ThingDef>
+
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>Napalm</defName>
+		<label>Napalm</label>
+		<description>Napalm is flammable liquid used in warfare. It is a mixture of a gelling agent and petroleum or a similar fuel.</description>
+		<graphicData>  
+			<texPath>Things/Item/Resource/NapalmCannister</texPath>
+			<graphicClass>Graphic_Single</graphicClass> 
+		</graphicData> 
+		<soundInteract>Standard_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>300</stackLimit>
+		<techLevel>Industrial</techLevel>
+		<statBases>
+			<MarketValue>5</MarketValue>
+			<MaxHitPoints>5</MaxHitPoints>
+			<DeteriorationRate>0.01</DeteriorationRate>
+			<Flammability>8</Flammability>
+			<Mass>0.06</Mass>
+			<Bulk>0.1</Bulk>
+			<Beauty>-6</Beauty>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>1.2</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.17</explosiveExpandPerStackcount>
+				<startWickOnDamageTaken>
+					<li>Flame</li>
+				</startWickOnDamageTaken>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+				<preExplosionSpawnChance>1</preExplosionSpawnChance>
+				<wickTicks>30~70</wickTicks>
+			</li>
+		</comps>
+		<thingCategories>
+			<li>FuelCat</li>
+			<li>ExplosivesCat</li>
+		</thingCategories> 
+	</ThingDef>
+
+</Defs>

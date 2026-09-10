@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): RKEarsTailPatch.xml, RKEarsTail_MechanismA.xml -->
+<Patch><!-- ============================================================
+	     RKEarsTailPatch (机制B通用补丁) — 2026-08-26 重构
+	     背景: 原版此文件往 RK_Race_Setting/universalBodyAddons 加鼠族耳朵/尾巴 li
+	     (机制B, Gene For 映射)。但在 HSK 环境 + 我mod机制A(RKEarsTail_MechanismA.xml)
+	     已给特殊耳/尾基因补 renderNodeProperties 后, 机制B的 li 与机制A叠加渲染出双耳。
+	     修复: 本文件改为【仅确保 RK_Race_Setting/universalBodyAddons 节点存在】
+	     (金鼠族等 mod 依赖该节点 Add, 见日志报错 "Failed to find a node")。
+	     耳朵/尾巴渲染全部改走机制A(RKEarsTail_MechanismA.xml), 不再写机制B的 li。
+	     注: 初鼠种耳朵由 RK_Gene_LargeEars 自带 renderNodeProperties 渲染, 不受本文件影响。
+	     ============================================================ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.RaceSettings[defName="RK_Race_Setting"]/universalBodyAddons</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.RaceSettings[defName="RK_Race_Setting"]</xpath>
+			<value>
+				<universalBodyAddons>
+				</universalBodyAddons>
+			</value>
+		</nomatch>
+	</Operation><!-- 特殊异种耳/尾基因 机制A渲染补丁(2026-08-26)
+	     改走 Biotech renderNodeProperties(同 RK_Gene_LargeEars/RK_Gene_ThinTail),
+	     绕开 HSK 下失效的 universalBodyAddons(机制B/Gene For)。
+	     texPath=Body/**(相对本mod Textures/); linkedBodyPartsGroup=RK_LeftEar/RK_RightEar/RK_Tail。
+	     LabRat 右耳复用 RK_Ear(ICR_EarRight 不存在,原版即复用 RK_EarRight)。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_Ears"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/RK_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/RK_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_SquirrelEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/SQ_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/SQ_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_HamsterEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/HA_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/HA_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_LabRatEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/ICR_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/RK_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_MoleEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/ML_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/ML_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_VoleEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/VO_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/VO_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_Prototype_Vole_Ears"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/VO_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/VO_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_WREars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/WR_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/WR_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_Tail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/RK_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_SquirrelTail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/SQ_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_MoleTail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/ML_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_Prototype_Vole_Tail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/RK_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_WRTail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/WR_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_GuineaPigEars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/GA_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/GA_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_BREars"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/BR_EarLeft</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_LeftEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(-0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, -0.25, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15,0.15, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+		<li Class="PawnRenderNodeProperties_EarHideByApparelTag">
+			<nodeClass>PawnRenderNode_AttachmentHead</nodeClass>
+			<texPath>Body/BR_EarRight</texPath>
+			<colorType>Skin</colorType>
+			<parentTagDef>Head</parentTagDef>
+			<linkedBodyPartsGroup>RK_RightEar</linkedBodyPartsGroup>
+			<useSkinShader>true</useSkinShader>
+			<useRottenColor>true</useRottenColor>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<hiddenUnderApparelTags>
+				<li>RK_ApparelTag_HideEar</li>
+			</hiddenUnderApparelTags>
+			<drawData>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>105</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(-0.02, 0, 0.16)</offset>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0.04, 0, 0.19)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.15, 0.15, 0.26)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.15, -0.25, 0.26)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/GeneDef[defName="Ratkin_BRTail"]</xpath>
+		<value>
+	<renderNodeProperties>
+		<li>
+			<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
+			<texPath>Body/BR_Tail</texPath>
+			<colorType>Skin</colorType>
+			<overrideMeshSize>(1, 1)</overrideMeshSize>
+			<parentTagDef>Body</parentTagDef>
+			<linkedBodyPartsGroup>RK_Tail</linkedBodyPartsGroup>
+			<rotDrawMode>Fresh, Rotting</rotDrawMode>
+			<drawData>
+				<scale>1.5</scale>
+				<childScale>1</childScale>
+				<scaleOffsetByBodySize>true</scaleOffsetByBodySize>
+				<defaultData>
+					<layer>-2</layer>
+				</defaultData>
+				<dataNorth>
+					<offset>(0, 0.15,-0.45)</offset>
+					<layer>90</layer>
+				</dataNorth>
+				<dataSouth>
+					<offset>(0, 0,0)</offset>
+				</dataSouth>
+				<dataEast>
+					<offset>(-0.37, 0,-0.29)</offset>
+				</dataEast>
+				<dataWest>
+					<offset>(0.37, 0,-0.29)</offset>
+				</dataWest>
+			</drawData>
+		</li>
+	</renderNodeProperties>
+		</value>
+	</Operation></Patch>

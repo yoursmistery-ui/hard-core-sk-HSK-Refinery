@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="80x256mmFuelBase">
+        <defName>Ammo_80x256mmFuel_Thermobaric</defName>
+        <label>80x256mm fuel cell (Thermobaric)</label>
+        <graphicData>
+            <texPath>Things/Ammo/FuelCell/Large</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <statBases>
+            <MarketValue>28.98</MarketValue>
+        </statBases>
+        <ammoClass>ThermobaricFuel</ammoClass>
+        <detonateProjectile>Bullet_80x256mmFuel_Thermobaric</detonateProjectile>
+        <comps>
+            <li Class="CompProperties_Explosive">
+                <explosiveRadius>2</explosiveRadius>
+                <damageAmountBase>5</damageAmountBase>
+                <explosiveDamageType>Thermobaric</explosiveDamageType>
+                <explosiveExpandPerStackcount>0.15</explosiveExpandPerStackcount>
+                <startWickHitPointsPercent>0.33</startWickHitPointsPercent>
+                <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+                <explodeOnKilled>True</explodeOnKilled>
+                <wickTicks>60~300</wickTicks>
+            </li>
+        </comps>
+    </ThingDef>
+    <ThingDef Class="CombatExtended.AmmoDef" ParentName="SK_BaseBullet">
+        <defName>Bullet_80x256mmFuel_Thermobaric</defName>
+        <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+        <label>80x256mm fuel shell (Thermobaric)</label>
+        <graphicData>
+            <texPath>Things/Projectile/InfernoCannonShot</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <projectile Class="CombatExtended.ProjectilePropertiesCE">
+            <damageDef>Thermobaric</damageDef>
+            <damageAmountBase>245</damageAmountBase>
+            <speed>60</speed>
+            <flyOverhead>false</flyOverhead>
+            <explosionRadius>4.5</explosionRadius>
+            <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+            <preExplosionSpawnChance>0.5</preExplosionSpawnChance>
+            <soundExplode>MortarIncendiary_Explode</soundExplode>
+            <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+            <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+            <soundAmbient>MortarRound_Ambient</soundAmbient>
+            <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            <ai_IsIncendiary>true</ai_IsIncendiary>
+            <alwaysFreeIntercept>false</alwaysFreeIntercept>
+            
+        </projectile>
+        <comps>
+            <li Class="CombatExtended.CompProperties_ExplosiveCE">
+                <damageAmountBase>150</damageAmountBase>
+                <explosiveDamageType>Thermobaric</explosiveDamageType>
+                <explosiveRadius>1.9</explosiveRadius>
+                <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <RecipeDef ParentName="ChargeAmmoRecipeBase">
+        <defName>MakeAmmo_80x256mmFuel_Thermobaric</defName>
+        <label>make 80x256mm fuel cell (Thermobaric) x5</label>
+        <description>Craft 5 80x256mm thermobaric fuel cells.</description>
+        <jobString>Making 80x256mm thermobaric fuel cells.</jobString>
+        <ingredients>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Prometheum</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>FSX</li>
+                    </thingDefs>
+                </filter>
+                <count>4</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>22</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>ComponentIndustrial</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <thingDefs>
+                <li>Prometheum</li>
+                <li>FSX</li>
+                <li>Steel</li>
+                <li>ComponentIndustrial</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <products>
+            <Ammo_80x256mmFuel_Thermobaric>5</Ammo_80x256mmFuel_Thermobaric>
+        </products>
+        <skillRequirements>
+            <Crafting>8</Crafting>
+        </skillRequirements>
+        <workAmount>8000</workAmount>
+    </RecipeDef>
+</Defs>

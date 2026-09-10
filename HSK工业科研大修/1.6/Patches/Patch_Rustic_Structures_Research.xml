@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 中世纪乡村结构 · 19 项建筑拆分 4 档解锁(HSK工业科研大修, 2026-09-03)
+       门禁规则 统一收敛为 RK_Rustic_SimpleFences / SimpleDoors / AdvancedDoors / ColumnsAndCastle
+       原状态: 5 项无 prereq(开局即解锁), 其余多挂 ComplexFurniture, 都铎墙/城堡墙挂 Stonecutting。
+       本补丁: 顶层 PatchOperationConditional(match=Replace/nomatch=Add)。
+         ⚠ Replace 语义 = 把 value 的"子节点"拼回被匹配节点位置 → value 必须保留 researchPrerequisites
+           完整外层(裸 <li> 会变成 ThingDef 的非法子节点, researchPrerequisites 整个被删, 2026-09-04 踩坑)。
+         ⚠ nomatch.Add 的 value 是新增子节点 → 同样裹 researchPrerequisites 外层。
+         ⚠ 两条分支 value 一律带 Inherit="False": 挡父类继承的旧 prereq(实例: CastleWallEmbrasures
+           父类 Rustic_CastleWallBase 挂 Stonecutting, 不挡则终态变成双前置)。
+       AGENTS.md §3 禁用 FindMod+Sequence → 一律顶层独立 Conditional;1.6 无 Operation 级 MayRequire(失效)。 -->
+
+  <!-- ① 围栏工 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_LogWall"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_LogWall"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_LogWall"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_TentWall"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_TentWall"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_TentWall"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_Palisade"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_Palisade"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_Palisade"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_EmbPalisade"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_EmbPalisade"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_EmbPalisade"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleFences</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <!-- ② 朴素门具（原 5 项无 prereq，本补丁 nomatch.Add）-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_RusticDoor"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_RusticDoor"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_RusticDoor"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_LogGate"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_LogGate"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_LogGate"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_Gate"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_Gate"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_Gate"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_SlabDoor"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_SlabDoor"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_SlabDoor"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_Frame_Log"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_Frame_Log"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_Frame_Log"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_SimpleDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <!-- ③ 加固门具 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_ReinfocedLogGate"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_ReinfocedLogGate"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_ReinfocedLogGate"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_RusticDoor1x2c"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_RusticDoor1x2c"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_RusticDoor1x2c"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_Gate1x2c"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_Gate1x2c"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_Gate1x2c"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_SlabDoor1x2c"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_SlabDoor1x2c"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_SlabDoor1x2c"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_AdvancedDoors</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <!-- ④ 立柱与城堡工程 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_LogColumn"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_LogColumn"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_LogColumn"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_RoyalColumn"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_RoyalColumn"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_RoyalColumn"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_DividerColumn"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_DividerColumn"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_DividerColumn"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_TudorWall"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_TudorWall"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_TudorWall"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_CastleWall"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_CastleWall"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_CastleWall"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Rustic_CastleWallEmbrasures"]/researchPrerequisites</xpath>
+    <match Class="PatchOperationReplace"><xpath>/Defs/ThingDef[defName="Rustic_CastleWallEmbrasures"]/researchPrerequisites</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>/Defs/ThingDef[defName="Rustic_CastleWallEmbrasures"]</xpath><value><researchPrerequisites Inherit="False"><li>RK_Rustic_ColumnsAndCastle</li></researchPrerequisites></value></nomatch>
+  </Operation>
+
+</Patch>

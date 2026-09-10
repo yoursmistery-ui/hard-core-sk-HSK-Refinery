@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Vile's Wood You Please</li>
+	</mods>
+	<nomatch Class="PatchOperationSequence">
+		<operations>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs</xpath>
+				<value>
+					<RecipeDef>
+						<defName>ExtractTreeBark_Hand</defName>
+						<label>extract bark for tannins</label>
+						<description>Remove tree bark to be used for tannins. The rest is kindling, though much is wasted.</description>
+						<jobString>Removing tree bark.</jobString>
+						<workAmount>900</workAmount>
+						<workSpeedStat>SmithingSpeed</workSpeedStat>
+						<effectWorking>MakeWoodPlanks_Hand</effectWorking>
+						<soundWorking>Sawing_Wood_Sound</soundWorking>
+						<ingredients>
+							<li>
+								<filter>
+									<thingDefs>
+										<li>WoodLog</li>
+										<li>RedWoodLog</li>
+									</thingDefs>
+								</filter>
+								<count>10</count>
+							</li>
+						</ingredients>
+						<fixedIngredientFilter>
+							<thingDefs>
+								<li>WoodLog</li>
+								<li>RedWoodLog</li>
+							</thingDefs>
+						</fixedIngredientFilter>
+						<products>
+							<TreeBark>20</TreeBark>
+							<Kindling>5</Kindling>
+						</products>
+						<skillRequirements>
+							<Crafting>2</Crafting>
+						</skillRequirements>
+						<workSkill>Crafting</workSkill>
+						<workSkillLearnFactor>0.8</workSkillLearnFactor>
+						<recipeUsers>
+							<li>TableSawmillHand</li>
+							<li>TableSawmillElectric</li>
+						</recipeUsers>
+					</RecipeDef>
+				</value>
+			</li>
+			
+		</operations>
+		</nomatch>
+    </Operation>	
+	
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Vile's Wood You Please</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs</xpath>
+				<value>
+					<RecipeDef>
+						<defName>ExtractTreeBark_Hand</defName>
+						<label>extract bark for tannins</label>
+						<description>Remove tree bark to be used for tannins. The rest is kindling, though much is wasted.</description>
+						<jobString>Removing tree bark.</jobString>
+						<workAmount>900</workAmount>
+						<workSpeedStat>SmithingSpeed</workSpeedStat>
+						<effectWorking>MakeWoodPlanks_Hand</effectWorking>
+						<soundWorking>Sawing_Wood_Sound</soundWorking>
+						<ingredients>
+							<li>
+								<filter>
+									<categories>
+										<li>Ultrahardwoods</li>
+										<li>Hardwoods</li>
+										<li>Softwoods</li>
+									</categories>
+								</filter>
+								<count>3</count>
+							</li>
+						</ingredients>
+						<fixedIngredientFilter>
+							<categories>
+								<li>Ultrahardwoods</li>
+								<li>Hardwoods</li>
+								<li>Softwoods</li>
+							</categories>
+						</fixedIngredientFilter>
+						<products>
+							<TreeBark>20</TreeBark>
+							<Kindling>5</Kindling>
+							<WoodLog>5</WoodLog>
+						</products>
+						<skillRequirements>
+							<Crafting>2</Crafting>
+						</skillRequirements>
+						<workSkill>Crafting</workSkill>
+						<workSkillLearnFactor>0.8</workSkillLearnFactor>
+						<recipeUsers>
+							<li>ChoppingBlock</li>
+							<li>LogSplittingSpot</li>
+						</recipeUsers>
+					</RecipeDef>
+				</value>
+			</li>
+		</operations>
+		</match>
+    </Operation>	
+	
+	
+	<!--
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Wood You Please</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+		<operations>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Pine"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Pine"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Willow"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Willow"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Cypress"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Cypress"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Poplar"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Poplar"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Maple"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Maple"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Teak"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Teak"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Drago"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Drago"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Birch"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Birch"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Oak"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Oak"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Acacia"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Acacia"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="SawPlanks_Mangrove"]/products</xpath>
+				<value>
+					<TreeBark>10</TreeBark>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MillPlanks_Mangrove"]/products</xpath>
+				<value>
+					<TreeBark>20</TreeBark>
+				</value>
+			</li>
+		</operations>
+		</match>
+    </Operation>	
+	-->
+</Patch>	

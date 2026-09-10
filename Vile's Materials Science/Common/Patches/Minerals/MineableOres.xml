@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Minerals</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+		<operations>
+
+	<!-- Sphalerite
+            <li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="MineableSilver"]/building</xpath>
+				<value>
+					<building>
+						<isResourceRock>true</isResourceRock>
+						<mineableThing>Sphalerite</mineableThing>
+						<mineableYield>75</mineableYield>
+						<mineableScatterCommonality>0.75</mineableScatterCommonality>
+						<mineableScatterLumpSizeRange>
+							<min>9</min>
+							<max>17</max>
+						</mineableScatterLumpSizeRange>
+					</building>
+				</value>
+			</li>
+-->
+ 
+           <!-- <li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Silver"
+				or defName="Peat"]/deepCommonality</xpath>
+				<value>
+					<deepCommonality>0.05</deepCommonality>
+				</value>
+			</li>-->
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/ThingDef[defName="Silver"
+				or defName="Peat"]/deepCommonality</xpath>	
+			</li>
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/ThingDef[defName="Silver"
+				or defName="Peat"]/deepLumpSizeRange</xpath>	
+			</li>
+ 			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Tin"]/deepCommonality</xpath>
+				<value>
+					<deepCommonality>0.9</deepCommonality> <!-- Not as important late-game-->
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Anglesite"]/deepCommonality</xpath>
+				<value>
+					<deepCommonality>1.4</deepCommonality>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Wolframite"]/deepCommonality</xpath>
+				<value>
+					<deepCommonality>1.0</deepCommonality>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Glowstone"
+				or defName="Coldstone"]/deepCommonality</xpath>
+				<value>
+					<deepCommonality>0.35</deepCommonality>
+				</value>
+			</li>
+		</operations>
+		</match>
+    </Operation>	
+</Patch>	

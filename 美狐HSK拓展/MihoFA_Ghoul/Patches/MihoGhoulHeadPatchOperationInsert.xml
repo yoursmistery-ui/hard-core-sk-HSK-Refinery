@@ -1,0 +1,77 @@
+﻿<Patch>
+<!-- 因美狐有獨立的食屍鬼臉部，不過會被FA覆蓋住造成無法出現，故額外創建一個食屍鬼頭部插件，當角色變換為食屍鬼時會覆蓋掉Miho的FA臉 -->
+  <Operation Class="PatchOperationInsert">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName = "Alien_Miho"]/alienRace/generalSettings/alienPartGenerator/bodyAddons/li[14]</xpath>
+	<order>Append</order>
+    <value>
+            <li>
+              <path>Miho/GhoulBlank/Head</path><!-- 在Miho FA的1.5檔案夾內放置GhoulBlank的空白圖檔，非食屍鬼狀態不會顯示 -->
+              <shaderType>Cutout</shaderType>
+			  <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <inFrontOfBody>false</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <colorChannel>skin</colorChannel>
+              <alignWithHead>true</alignWithHead>
+              <angle>0</angle>
+              <offsets>
+                <north>
+                  <layerOffset>-0.275</layerOffset>
+                  <bodyTypes>
+                    <Thin>(0,0)</Thin>
+                    <Female>(0,0)</Female>
+                    <Male>(0,0)</Male>
+
+                    <Child>(0,-0.028)</Child>
+                    <Baby>(0,-0.028)</Baby>
+                  </bodyTypes>
+				  <offset>(0,0)</offset>
+                </north>
+                <south>
+                  <layerOffset>-0.325</layerOffset>
+                  <bodyTypes>
+                    <Thin>(0,0)</Thin>
+                    <Female>(0,0)</Female>
+                    <Male>(0,0)</Male>
+
+                    <Child>(0,0.055)</Child>
+                    <Baby>(0,0.055)</Baby>
+                  </bodyTypes>
+				  <offset>(0,0)</offset>
+                </south>
+                <east>
+                  <layerOffset>-0.325</layerOffset>
+                  <bodyTypes>
+                    <Thin>(0,0)</Thin>
+                    <Female>(0,0)</Female>
+                    <Male>(0,0)</Male>
+
+                    <Child>(0.03,0.04)</Child>
+                    <Baby>(0.03,0.04)</Baby>
+                  </bodyTypes>
+				  <offset>(0,0)</offset>
+                </east>
+                <west>
+                  <layerOffset>-0.325</layerOffset>
+                  <bodyTypes>
+                    <Thin>(0,0)</Thin>
+                    <Female>(0,0)</Female>
+                    <Male>(0,0)</Male>
+
+                    <Child>(0.03,0.04)</Child>
+                    <Baby>(0.03,0.04)</Baby>
+                  </bodyTypes>
+				  <offset>(0,0)</offset>
+                </west>
+              </offsets>
+						<extendedGraphics>
+							<Hediff MayRequire="Ludeon.RimWorld.Anomaly" For="Ghoul">Miho/HeadGhoul/Head</Hediff>
+						</extendedGraphics>
+						<conditions>
+                          <BodyPart>
+						    <bodyPart>Head</bodyPart>
+                          </BodyPart>
+						</conditions>
+            </li>
+    </value>
+  </Operation>
+</Patch>

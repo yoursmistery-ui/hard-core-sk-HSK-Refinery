@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Rimefeller</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+
+				<!--ETHYLENE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="PolymerRefiner"]</xpath>
+					<value>
+						<label>Ethylene Refinery</label>
+						<description>Processes chemfuel into Ethyelene gas. The most efficiently-produced petrochemical</description>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/EthyleneRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(4,4)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1000</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>4</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryPolymer</compClass>
+								<Product>Polymers</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.5</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- COKE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="NapalmRefiner"]</xpath>
+					<value>
+						<label>Coke Refinery</label>
+						<description>Processes chemfuel into petroleum coke.</description>
+						<size>(2,2)</size>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/CokeRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(3,3)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1000</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>6</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryNapalm</compClass>
+								<Product>Coke</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.7</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- BUTADIENE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="NeutroamineRefiner"]</xpath>
+					<value>
+						<label>Butadiene Refinery</label>
+						<size>(3,3)</size>
+						<description>Processes chemfuel into butadiene.</description>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/ButadieneRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(4,4)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1200</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>6</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryNeutro</compClass>
+								<Product>Butadiene</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.9</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- XYLENE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="ParaffinRefiner"]</xpath>
+					<value>
+						<label>Xylene Refinery</label>
+						<description>Processes chemfuel into Xylene gas.</description>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/XyleneRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(3,3)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1500</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>6</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryNeutro</compClass>
+								<Product>Xylene</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.7</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- BENZENE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="SulphateRefiner"]</xpath>
+					<value>
+						<label>Benzene Refinery</label>
+						<size>(2,2)</size>
+						<description>Processes chemfuel into Benzene. Production is energy-efficient.</description>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/BenzeneRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(3,3)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>800</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>6</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryNapalm</compClass>
+								<Product>Sulphates</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.7</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- PROPYLENE -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="SyntheticAmmoniaRefiner"]</xpath>
+					<value>
+						<label>Propylene Refinery</label>
+						<description>Processes chemfuel into Propylene.</description>
+						<size>(3,3)</size>
+						<researchPrerequisites>
+							<li>Oil_Industry_C2</li>
+						</researchPrerequisites>
+						<graphicData>
+							<texPath>Things/Building/PropyleneRefinery</texPath>
+							<graphicClass>Graphic_Single</graphicClass>
+							<drawSize>(4,4)</drawSize>
+						</graphicData>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1200</basePowerConsumption>
+							</li>
+							<li Class="CompProperties_HeatPusher">
+								<compClass>CompHeatPusherPowered</compClass>
+								<heatPerSecond>6</heatPerSecond>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryNeutro</compClass>
+								<Product>Propylene</Product>
+								<StackSize>20</StackSize>
+								<BufferSize>50</BufferSize>
+								<ConsumeRate>1.7</ConsumeRate>
+							</li>
+						</comps>
+					</value>
+				</li>
+
+				<!-- POLYMER FIBER -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="HyperweaveRefiner"]</xpath>
+					<value>
+						<label>Polymer Fiber Refinery</label>
+						<description>Processes chemfuel into synthetic polymer fibers.</description>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>1000</basePowerConsumption>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryThreader</compClass>
+								<Product>SyntheticFibers</Product>
+								<StackSize>2</StackSize>
+								<BufferSize>100</BufferSize>
+								<ConsumeRate>1.5</ConsumeRate>
+							</li>
+						</comps>
+						<costList>
+							<ComponentAdvanced>10</ComponentAdvanced>
+							<Electronics>1</Electronics>
+							<Mechanism>10</Mechanism>
+							<Rubber>30</Rubber>
+						</costList>
+						<researchPrerequisites>
+							<li>AdvancedFabrication</li>
+						</researchPrerequisites>
+					</value>
+				</li>
+
+				<!-- HM FIBER -->
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ThingDef[defName="SynthreadRefiner"]</xpath>
+					<value>
+						<label>High-Modulus Fiber Refinery</label>
+						<description>Processes chemfuel into high-performance polymer fibers.</description>
+						<comps>
+							<li Class="CompProperties_Power">
+								<compClass>CompPowerTrader</compClass>
+								<basePowerConsumption>3000</basePowerConsumption>
+							</li>
+							<li Class="Rimefeller.CompProperties_Refinery">
+								<compClass>Rimefeller.CompRefineryThreader</compClass>
+								<Product>HMFibers</Product>
+								<StackSize>2</StackSize>
+								<BufferSize>120</BufferSize>
+								<ConsumeRate>1.5</ConsumeRate>
+							</li>
+						</comps>
+						<costList>
+							<ComponentSpacer>5</ComponentSpacer>
+							<Rubber>30</Rubber>
+							<Electronics>5</Electronics>
+							<AdvMechanism>3</AdvMechanism>
+						</costList>
+						<researchPrerequisites>
+							<li>Apparel_D1</li>
+						</researchPrerequisites>
+					</value>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+</Patch>	

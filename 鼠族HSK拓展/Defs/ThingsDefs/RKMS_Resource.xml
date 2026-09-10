@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="RKMSResourceBase" ParentName="ResourceBase" Abstract="True">
+		<!-- <thingClass>ThingWithComps</thingClass>
+		<category>Item</category>
+		<drawerType>MapMeshOnly</drawerType>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<useHitPoints>true</useHitPoints>
+		<selectable>true</selectable>
+		<altitudeLayer>Item</altitudeLayer>
+		<stackLimit>75</stackLimit>
+		<statBases>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+		</comps>
+		<alwaysHaulable>true</alwaysHaulable>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<rotatable>false</rotatable>
+		<pathCost>14</pathCost>
+		<allowedArchonexusCount>-1</allowedArchonexusCount> -->
+	</ThingDef>
+
+	<ThingCategoryDef>
+		<defName>RK_AncientSecrets</defName>
+		<label>ancient secrets</label>
+		<parent>Manufactured</parent>
+	</ThingCategoryDef>
+
+	<ThingDef ParentName="RKMSResourceBase">
+		<defName>RK_CanJuan</defName>
+		<label>Scroll piece</label>
+		<description>The scattered fragments of some ancient books appear to be the finished product of a unified printing, which means that if you collect enough of these things, you can hopefully piece together a readable one. They say there are some people out there who want this stuff, but don't let them catch you.</description>
+		<graphicData>
+			<texPath>Resource/RK_CanJuan</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<!-- <color>(162,157,152)</color> -->
+		</graphicData>
+		<stackLimit>50</stackLimit>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<burnableByRecipe>true</burnableByRecipe>
+		<minRewardCount>3</minRewardCount>
+		<statBases>
+			<MarketValue>50</MarketValue>
+			<Mass>0.1</Mass>
+			<Flammability>1</Flammability>
+			<DeteriorationRate>6</DeteriorationRate>
+			<Beauty>0</Beauty>
+		</statBases>
+		<!-- 2026-09-08 移除 stuffProps(Fabric)/StuffPower/BluntDamageMultiplier/colorGeneratorInTraderStock:
+		     残卷不应出现在织物选择里;8 本古籍配方全部 costList 直写,无任何 stuff 引用,摘除无副作用 -->
+		<thingCategories>
+			<li>RK_AncientSecrets</li>
+		</thingCategories>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+		</tradeTags>
+		<comps>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+		</comps>
+		<smeltable>false</smeltable>
+		<allowedArchonexusCount>5</allowedArchonexusCount>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RKMSResourceBase" Name="RKMSSellableLoot">
+		<defName>RK_LandDeed</defName>
+		<label>land deed</label>
+		<description>The yellowed papers are often stained with blood, and while these days they can no longer help you redeem any family property, many people buy them every year in the hope of finding some sort of spiritual solace from their ancestors.</description>
+		<graphicData>
+			<texPath>Resource/RK_LandDeed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stackLimit>10</stackLimit>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<burnableByRecipe>true</burnableByRecipe>
+		<minRewardCount>1</minRewardCount>
+		<statBases>
+			<MarketValue>100</MarketValue>
+			<SellPriceFactor>1.2</SellPriceFactor>
+			<Mass>0</Mass>
+			<Flammability>1</Flammability>
+			<DeteriorationRate>1</DeteriorationRate>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToMake>1</WorkToMake>
+			<Beauty>0</Beauty>
+		</statBases>
+		<thingCategories>
+			<li>ItemsMisc</li>
+		</thingCategories>
+		<smeltable>false</smeltable>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticValuable</li>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<techLevel>Medieval</techLevel>
+		<allowedArchonexusCount>2</allowedArchonexusCount>
+	</ThingDef>
+
+	<ThingDef ParentName="RKMSSellableLoot">
+		<defName>RK_Antique</defName>
+		<label>antique</label>
+		<description>These things are valuable, also very attractive to thieves who enter your house.</description>
+		<graphicData>
+			<texPath>Resource/RK_Antique</texPath>
+		</graphicData>
+		<stackLimit>10</stackLimit>
+		<minRewardCount>1</minRewardCount>
+		<statBases>
+			<MarketValue>275</MarketValue>
+			<SellPriceFactor>1.2</SellPriceFactor>
+			<DeteriorationRate>1</DeteriorationRate>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>1</Mass>
+			<Flammability>0.3</Flammability>
+			<Beauty>120</Beauty>
+		</statBases>
+	</ThingDef>
+
+</Defs>

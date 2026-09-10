@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 54_去重复CompPawnGizmo (2026-09-03)
+       现象: 读档时 CE 刷 "Kurin_Race / Alien_Miho has multiple CompPawnGizmo, duplicates has been deactivated"
+       根因: Core_SK_CoreModule Patches/Mods_CombatExtended/ThingDefs_Races/Races_Animal_Base.xml
+             给原版 ThingDef BasePawn(全体 Pawn XML 基类) Merge 注入 CompPawnGizmo
+             (连同 CompProperties_Inventory / CompProperties_TacticalManager),
+             → 所有种族经 XML 继承各得 1 份;
+             CE 运行时 RaceUtil.PatchHARs 又给 HAR 种族(AlienRace)注入第 2 份
+             → CompPawnGizmo.Initialize 查重 ErrorOnce(无害但每次读档刷屏)。
+       修复: 仅移除 BasePawn 上那份 CompPawnGizmo li(保留同批 Inventory/TacticalManager)。
+             HAR 种族只剩 CE 注入的 1 份 → 不再报;
+             动物/机械/人类等回到 CE 原版状态(CE 原版本就不给非 HAR 注入, 无功能回退风险)。
+       注: 1.6 Operation 级 MayRequire 失效 → 用 xpath 存在性门控(Conditional);
+           未装 CE / Core_SK_CoreModule 未注入时静默跳过。
+           补丁执行序: Core_SK_CoreModule(核心组) 先于本文件(内容末段) → 先 Add 后 Remove, 顺序安全。
+  -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[@Name="BasePawn"]/comps/li[compClass="CombatExtended.CompPawnGizmo"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[@Name="BasePawn"]/comps/li[compClass="CombatExtended.CompPawnGizmo"]</xpath>
+    </match>
+  </Operation>
+</Patch>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationSequence">
+		<success>Normal</success>
+		<operations>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/StorytellerDef[@Name="BaseStoryteller"]/comps</xpath>
+				<value>
+					<li Class="RatkinGeneExpanded.StorytellerCompProperties_CustomSiteNearby">
+						<incident>GiveQuest_WasteRatSite</incident>
+						<sitePartTag>RatkinWasterSite</sitePartTag>
+						<SpawnRange>4</SpawnRange>
+						<MinSpawnDist>2</MinSpawnDist>
+						<StartDelayTicks>60000</StartDelayTicks>
+						<MinIntervalTicks>18000</MinIntervalTicks>
+						<baseMtbDays>10</baseMtbDays>
+						<MaxCountPerMap>2</MaxCountPerMap>
+
+					</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+	<!-- 废土鼠营地任务: QuestNode_Root_CustomSiteNearby 生成的 Site 需要 CustomSiteComp,
+	     否则 RunInt 报 "site has no CustomSiteComp"。给基类 Site 注册该 comp(对普通站点无副作用)。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/WorldObjectDef[defName="Site"]/comps</xpath>
+		<value>
+			<li Class="RatkinGeneExpanded.WorldObjectCompProperties_CustomSite" />
+		</value>
+	</Operation>
+
+
+</Patch>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- HSK Mod Assistant 标记: 本地附加,专为 HSK 开发(NativeAddon)。
+	     写法与 Vanilla Skills Expanded / HSK修复整合 一致。
+	     1.6 起 Operation 级 MayRequire 失效 → 按 §3 铁律改用 xpath 存在性门控(Conditional)。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/NativeAddon</xpath>
+			<value>
+				<li>
+					<id>VanillaExpanded.Ideo.Dryads</id>
+				</li>
+			</value>
+		</match>
+	</Operation>
+</Patch>

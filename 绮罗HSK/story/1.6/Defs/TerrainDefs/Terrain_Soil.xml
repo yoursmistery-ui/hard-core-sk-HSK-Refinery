@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<TerrainDef>
+		<defName>Kiiro_SoilAgricultured</defName>
+		<label>Fertile soil</label>
+		<description>Soil enriched with fertilizer.</description>
+		<texturePath>Kiiro_Event/Terrain/SoilRich</texturePath>
+		<uiOrder>100</uiOrder>
+		<edgeType>FadeRough</edgeType>
+		<renderPrecedence>335</renderPrecedence>
+		<designationCategory>Kiiro_Furniture</designationCategory>
+		<constructEffect>ConstructDirt</constructEffect>
+		<pathCost>5</pathCost>
+		<layerable>true</layerable>
+		<statBases>
+			<Beauty>0</Beauty>
+			<WorkToBuild>120</WorkToBuild>
+		</statBases>
+		<costList>
+			<Kiiro_MantureBag>1</Kiiro_MantureBag>
+		</costList>
+		<affordances>
+			<li>Light</li>
+			<li>Medium</li>
+			<li>Heavy</li>
+			<li>GrowSoil</li>
+			<li>Diggable</li>
+		</affordances>
+		<generatedFilth>Filth_Dirt</generatedFilth>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<filthAcceptanceMask>
+			<li>Unnatural</li>
+		</filthAcceptanceMask>
+		<fertility>1.6</fertility>
+		<avoidWander>true</avoidWander>
+		<terrainAffordanceNeeded>GrowSoil</terrainAffordanceNeeded>
+		<takeFootprints>True</takeFootprints>
+		<tags>
+			<li>Kiiro_SoilAgricultured</li>
+		</tags>
+		<tools>
+			<li>
+				<label>dirt</label>
+				<capacities>
+					<li>KickMaterialInEyes</li>
+				</capacities>
+				<hediff>DirtInEyes</hediff>
+				<cooldownTime>1.5</cooldownTime>
+			</li>
+		</tools>
+	</TerrainDef>
+
+</Defs>

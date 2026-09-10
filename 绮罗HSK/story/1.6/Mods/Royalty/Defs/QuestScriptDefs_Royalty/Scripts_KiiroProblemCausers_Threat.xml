@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>Kiiro_ProblemCauser</defName>
+    <!-- <rootSelectionWeight>0.8</rootSelectionWeight> -->
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <rootMinPoints>0</rootMinPoints>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName(siteFaction==Pirate)->[problemCauserLabel] threat</li>
+        <li>questName(siteFaction==Mechanoids)->[problemCauserLabel] threat</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription(siteFaction==Pirate)->Pirates have established a temporary outpost near [kiiro_settlement_label] and deployed a [problemCauserLabel] inside to disrupt the residents of [kiiro_settlement_label].\n\nThe [problemCauserLabel] has been adjusted to increase power in the direction of [kiiro_settlement_label], and the kiiro residents in [kiiro_settlement_label] cannot endure the harsh conditions for too long.\n\nKiiros needs your help. Several kiiro guerrilla teams will distract the pirates at the temporary outpost, providing cover for your team to approach the [problemCauserLabel].</li>
+        <li>questDescription(siteFaction==Mechanoids)->A mech cluster containing a [problemCauserLabel] was airdropped near [kiiro_settlement_label].\n\nFor unknown reasons, the [problemCauserLabel] has concentrated its power in the direction of [kiiro_settlement_label], and the kiiro residents in [kiiro_settlement_label] cannot endure the harsh conditions for too long.\n\nKiiros needs your help. A kiiro special forces team will be on standby nearby and will assist your team when the cluster is activated.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <questAvailableLetterDef>NewQuest_ThreatBig</questAvailableLetterDef>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <!-- 距离 -->
+        <li Class="QuestNode_Set">
+          <name>siteDistRange</name>
+          <value>2~4</value>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>ProblemCauser</modSettingSwitch>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+        </li>
+
+        <!-- 调整远行队袭击点数（大地图威胁事件专用） -->
+        <!-- <li Class="QuestNode_SubScript"> -->
+        <!-- <def>Kiiro_Util_AdjustPointsForOutpost</def> -->
+        <!-- </li> -->
+
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+        </li>
+
+        <!-- 设置机械族权重 -->
+        <li Class="QuestNode_FactionExists">
+          <faction>Mechanoid</faction>
+          <node Class="QuestNode_Set">
+            <name>selectionWeightMechanoid</name>
+            <value>3</value>
+          </node>
+          <elseNode Class="QuestNode_Set">
+            <name>selectionWeightMechanoid</name>
+            <value>0</value>
+          </elseNode>
+        </li>
+
+        <!-- 设置海盗权重 -->
+        <li Class="QuestNode_FactionExists">
+          <faction>Pirate</faction>
+          <node Class="QuestNode_Set">
+            <name>selectionWeightPirate</name>
+            <value>1</value>
+          </node>
+          <elseNode Class="QuestNode_Set">
+            <name>selectionWeightPirate</name>
+            <value>0</value>
+          </elseNode>
+        </li>
+
+        <!-- 下列node随机触发 -->
+        <li Class="QuestNode_RandomNode">
+          <nodes>
+            <!-- 选取海盗派系 -->
+            <li Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_SubScript">
+                  <def>Kiiro_Util_AdjustPointsForOutpost</def>
+                </li>
+                <li Class="QuestNode_Set">
+                  <name>siteFaction</name>
+                  <value>Pirate</value>
+                </li>
+                <li Class="QuestNode_Set">
+                  <name>sitePartsTags</name>
+                  <value>
+                    <li>
+                      <tag>QuestConditionCauser</tag>
+                    </li>
+                    <li>
+                      <tag>Kiiro_ReinforcedOutpost</tag>
+                    </li>
+                    <li>
+                      <tag>Kiiro_PiratesDefendCentre</tag>
+                    </li>
+                  </value>
+                </li>
+              </nodes>
+              <selectionWeight>$selectionWeightPirate</selectionWeight>
+            </li>
+            <!-- 选取机械族派系 -->
+            <li Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_SubScript">
+                  <def>Kiiro_Util_AdjustPointsForMechCluster</def>
+                </li>
+                <li Class="QuestNode_Set">
+                  <name>siteFaction</name>
+                  <value>Mechanoids</value>
+                </li>
+                <li Class="QuestNode_Set">
+                  <name>sitePartsTags</name>
+                  <value>
+                    <li>
+                      <tag>QuestConditionCauser</tag>
+                    </li>
+                    <!-- 特战队集成在这里 -->
+                    <li>
+                      <tag>Kiiro_MechClusterForceNoConditionCauser</tag>
+                    </li>
+                    <!-- <li> -->
+                    <!-- <tag>Kiiro_SCSForces</tag> -->
+                    <!-- </li> -->
+                  </value>
+                </li>
+              </nodes>
+              <!-- 这个是之前设置的权重 -->
+              <selectionWeight>$selectionWeightMechanoid</selectionWeight>
+            </li>
+          </nodes>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_SettlementThreat</tag>
+          <faction>Kiiro_Faction</faction>
+        </li>
+
+        <li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+          <storeAs>sitePartDefs</storeAs>
+          <sitePartsTags>$sitePartsTags</sitePartsTags>
+        </li>
+
+        <!-- 生成在绮罗定居点附近 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>siteTile</storeAs>
+          <preferCloserTiles>true</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+          <clampRangeBySiteParts>true</clampRangeBySiteParts>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+        </li>
+
+        <li Class="QuestNode_GetDefaultSitePartsParams">
+          <tile>$siteTile</tile>
+          <faction>$siteFaction</faction>
+          <sitePartDefs>$sitePartDefs</sitePartDefs>
+          <storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+        </li>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_GenerateSite</def>
+          <parms>
+            <hiddenSitePartsPossible>false</hiddenSitePartsPossible>
+          </parms>
+        </li>
+
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$site</worldObjects>
+        </li>
+
+        <!-- 延迟一定时间后输出事件结束的信号 -->
+        <li Class="QuestNode_Delay">
+          <delayTicks>$(randInt(10,18)*60000)</delayTicks>
+          <outSignalComplete>QuestEndUnfinished</outSignalComplete>
+        </li>
+        <!-- 移除任务点 -->
+        <li Class="QuestNode_DestroyWorldObject">
+          <inSignal>QuestEndUnfinished</inSignal>
+          <worldObject>$site</worldObject>
+        </li>
+        <!-- 弹出任务失败的信封 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>QuestEndUnfinished</inSignal>
+          <!-- <inSignalDisable>site.MapGenerated</inSignalDisable> -->
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest failed：[problemCauserLabel]</label>
+                <text TKey="LetterTextQuestExpired">The kiiro residents of [kiiro_settlement_label], who could no longer bear the influence of [problemCauserLabel], have decided to evacuate.\n\n[kiiro_settlement_label] has been abandoned.</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>Timeout</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+        <!-- 超时未处理则移除附近定居点 -->
+        <li Class="QuestNode_DestroyWorldObject">
+          <inSignal>Timeout</inSignal>
+          <worldObject>$kiiro_settlement</worldObject>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>conditionCauser.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelSuccess">[problemCauserLabel] destroyed</label>
+                <letterDef>PositiveEvent</letterDef>
+                <text TKey="LetterTextSuccess">You have successfully destroyed the [problemCauserLabel] that was affecting [kiiro_settlement_label]! Your relationship with kiiros has increased by [goodWillRewardAbs].</text>
+              </li>
+              <li Class="Kiiro_Event.QuestNode_FactionGoodwillAffect">
+                <faction>Kiiro_Faction</faction>
+                <historyEvent>Kiiro_DestoryProblemCauser</historyEvent>
+                <goodwill>20</goodwill>
+              </li>
+              <li Class="QuestNode_Notify_PlayerRaidedSomeone">
+                <getRaidersFromMapParent>$site</getRaidersFromMapParent>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- [2026-09-09 迁移] 本文件由 HSK修复整合 整体迁入 Ignorance Is Bliss,HSK 侧已移除。 -->
+<Patch>
+  <!-- 63_派系商队菜单 (2026-09-09, 方案 docs/10_外政与任务大修/派系商队菜单整理方案.md P1/P2/P4)
+       目标: 让"来的商人一眼对得上派系"。只挂现成 TraderKindDef, 不新建 def。
+       方案核验补充(2026-09-09 复扫原始 Defs):
+         - Rakinia / Rakinia_WhiteRoseKingdom / Rakinia_CentralAlliance / Rakinia_Warlord 原始 XML **没有**自己的
+           caravanTraderKinds 节点, 五种王国商队全部来自 RatkinFactionBase / RatkinFactionBadBase 继承
+           → 派系侧重必须 Add 一份带 Inherit="False" 的独立表(挡父类列表), 不能按"改子类已有节点"来写。
+         - 权重只在 TraderKindDef 的 commonality 上(全局), 无"某派系内单独加权"字段
+           → 同一派系想让某类更常来 = 列表里多列一次(按条目累加权重), 本文件用这个办法做侧重, 不改全局 commonality。
+       门控: 跨 mod 引用一律 <li MayRequire="包ID">; 整块操作用 xpath 存在性 Conditional(1.6 Operation 级 MayRequire 失效)。
+       落位: HSK修复整合(loadAfter 全部内容 mod, 覆盖 Core_SK 的 Caravan_AnimalTrader 追加与 67 号蓝图学者挂载)。 -->
+
+  <!-- ===== P1-a 太阳帝国: 只补**陆上命名**的现成商 =====
+       原挂的 DeepSpaceMiningShip/CraftedGoodsTrader/CONN_BionicsTrader 均 orbital=true, 是轨道商,
+       挂进地面池会让信件出现"一队远行队…他们是矿物商船"这种命名错乱(2026-09-09 用户指出) → 撤掉。
+       它们继续留在轨道商人池(轨道事件按 orbital 标记全局抽签, 与本表无关), 不做任何改动。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Empire"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Empire"]/caravanTraderKinds</xpath>
+      <value>
+        <li>Caravan_Outlander_Exotic</li>
+        <li>Caravan_Outlander_CombatSupplier</li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== P1-c 帝国商人固定带帝国金币(GoldCoin 金色帝国硬币, 单价 35 银) =====
+       Core_SK_DLCModule 的 TradersUseCoins 补丁实测没进终态(Unified 里帝国商人只有 SilverCoin 750~1200),
+       故两分支都写: 有 GoldCoin 条目就改写数量, 没有就直接追加一条。只动帝国商人这一份货单。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/stockGenerators/li[thingDef="GoldCoin"]/countRange</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/stockGenerators/li[thingDef="GoldCoin"]/countRange</xpath>
+      <value><countRange>25~60</countRange></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/stockGenerators</xpath>
+      <value>
+        <li Class="StockGenerator_SingleDef">
+          <thingDef>GoldCoin</thingDef>
+          <countRange>25~60</countRange>
+        </li>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== P1-b 安卓飞地: 原自有 3 项与父类 OutlanderFactionBase 重复(权重翻倍)+温室货不对味 → 整块换成自建表 =====
+       义体改用本 mod 新建的**陆上**仿生义体行商(轨道义体商 orbital=true 不进地面池);
+       保留 蓝图学者(67 号挂在父类, Inherit=False 会挡掉, 故显式列回, 免削蓝图渠道); 去掉 奴隶商(意识形态门控恒 0)与 温室商 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="ChjAndroidEnclave"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="ChjAndroidEnclave"]/caravanTraderKinds</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="local.hskfixpack">RK_TraderKind_BionicsPeddler</li>
+          <li>Caravan_Outlander_BulkGoods</li>
+          <li>Caravan_Outlander_Exotic</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_TraderKind_BlueprintScholar</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== P2-a 库林战狐: 原本与出lander 同一菜单 → 换成"军械+稀有+艺术+牲畜"(刺客教团卖大众百货不对味) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Kurin_Faction"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="Kurin_Faction"]/caravanTraderKinds</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_Trader_Weaponsmith</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_Trader_ArtPatron</li>
+          <li>Caravan_Outlander_Exotic</li>
+          <li>Caravan_Outlander_CombatSupplier</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== P2-b 金鸢尾兰哨站: 太空档只有 2 种 → 启用同派系现成的 C 型(原本只挂在访客表) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="OA_RK_Faction"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="OA_RK_Faction"]/caravanTraderKinds</xpath>
+      <value>
+        <li MayRequire="local.ratkin.goldenhsk">OA_RK_Caravan_TraderGeneral_C</li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== P2-c 北境毛皮商: 雪原防寒线(毛皮/粗布/驮兽), 新建 def 在本 mod Defs/TraderKindDefs/ ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia_SnowRatkin"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia_SnowRatkin"]/caravanTraderKinds</xpath>
+      <value>
+        <li MayRequire="local.hskfixpack">RK_TraderKind_NorthernFurrier</li>
+        <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== P2-d 白玫瑰同盟: 无自有表 → 写一份(父类五样 + 现成未挂的服装贸易商 2 次加权) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia_WhiteRoseKingdom"]/caravanTraderKinds</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia_WhiteRoseKingdom"]</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomBulkGoods</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomCombatSupplier</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomExotic</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomFoodMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomTextileMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomDressMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomDressMerchant</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_TraderKind_BlueprintScholar</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== P4 血鼠(军阀): 与王国同菜单 → 独立表, 军械列两次(=权重 2×2)+巡回武器匠, 稀有只留一份 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia_Warlord"]/caravanTraderKinds</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia_Warlord"]</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="local.hskfixpack">RK_TraderKind_WarlordPurveyor</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomCombatSupplier</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomCombatSupplier</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_Trader_Weaponsmith</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_Trader_Armorsmith</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomBulkGoods</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomExotic</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== P5 伟大王国: 维图阿德主文化, 礼装线(资服商)挂上; 无自有表 → 写独立表 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia"]/caravanTraderKinds</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia"]</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomBulkGoods</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomCombatSupplier</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomExotic</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomFoodMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomTextileMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomDressMerchant</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_TraderKind_BlueprintScholar</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== P5 中央同盟: 中立商邦 → 织物/百货两列为重, 军械只留一份 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia_CentralAlliance"]/caravanTraderKinds</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia_CentralAlliance"]</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomTextileMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomTextileMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomBulkGoods</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomBulkGoods</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomFoodMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomDressMerchant</li>
+          <li MayRequire="Solaris.RatkinRaceMod">RK_TraderKind_KingdomCombatSupplier</li>
+          <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_TraderKind_BlueprintScholar</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!-- ===== P5 报国会(异域盗匪): 只有销赃队一种 → 补废墟拾荒商(脏货/文物线) ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="Rakinia_ExoticBandit"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/FactionDef[defName="Rakinia_ExoticBandit"]/caravanTraderKinds</xpath>
+      <value>
+        <li MayRequire="ratkinpatch.HSKIndustrialResearchOverhaul">RK_Trader_RuinScavenger</li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

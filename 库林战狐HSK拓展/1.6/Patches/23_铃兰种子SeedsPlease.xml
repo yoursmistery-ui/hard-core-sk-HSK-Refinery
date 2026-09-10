@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 铃兰(Plant_Convallaria)接入 SeedsPlease 种子系统(2026-09-06):
+       机制(Seeds.dll 反编译): SeedDef.ResolveReferences 把种子 def 设为植物的 blueprintDef,
+       WorkGiver_GrowerSowWithSeeds 按 blueprintDef 寻种子、播种消耗种子;
+       没有种子的植物回退原版免费播种, 且每次启动被 SeedsPlease.AddMissingSeeds 自动生成
+       占位种子(defName 恒为 Seed_Convallaria,套 psychoid 贴图/英文描述, 日志警告勿依赖自动种子)。
+       此处手工定义同名 Seed_Convallaria: 解析期即挂 blueprintDef + GetNamedSilentFail 命中同名,
+       自动生成双保险跳过;贴图复用 SeedsPlease 花卉种袋 Camellia(绿叶色调与铃兰匹配)。
+       配套萃取配方(合成纤维→种子)继承 ExtractSeed 挂 PlantProcessingTable,
+       researchPrerequisite=Kurin_Flower 与植物播种门槛一致。
+       门控: Operation 级 MayRequire 1.6 已失效, 用 xpath 存在性门控
+       (Seed_Psychoid 是 SeedsPlease ResourceBank [DefOf] 硬引用, 凡加载必存在);
+       SeedsPlease 缺失时整个 match 分支不执行, 无副作用。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/SeedsPlease.SeedDef[defName="Seed_Psychoid"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs</xpath>
+          <value>
+            <SeedsPlease.SeedDef ParentName="SeedBase">
+              <defName>Seed_Convallaria</defName>
+              <label>convallaria seeds</label>
+              <description>Sealed gene-engineered seeds of the glitterworld lily. Convallaria can only sprout in sterile hydroponics, and its large white petals can be processed into synthread, a fabric both soft and strong.</description>
+              <sources>
+                <li>Plant_Convallaria</li>
+              </sources>
+              <graphicData>
+                <texPath>Things/Item/Seeds/Camellia</texPath>
+              </graphicData>
+              <statBases>
+                <MarketValue>20</MarketValue>
+              </statBases>
+            </SeedsPlease.SeedDef>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs</xpath>
+          <value>
+            <RecipeDef ParentName="ExtractSeed">
+              <defName>ExtractSeed_Convallaria</defName>
+              <label>extract convallaria seeds</label>
+              <description>Extract seeds from synthread petals.</description>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>Synthread</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>Synthread</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <Seed_Convallaria>2</Seed_Convallaria>
+              </products>
+              <researchPrerequisite>Kurin_Flower</researchPrerequisite>
+            </RecipeDef>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

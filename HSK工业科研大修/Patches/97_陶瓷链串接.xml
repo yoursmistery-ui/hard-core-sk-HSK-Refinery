@@ -1,0 +1,17 @@
+<Patch>
+  <!-- 97_陶瓷链串接 (2026-08-30, 体系化收编批4)
+       陶瓷三线定案(以美狐/大修 Miho_Ceramics 线为 HSK 陶瓷锚):
+       Kiln 陶罐容器线(Neo~Medieval, Metallurgy) / Ceramics 釉面建材(Core_SK) / Miho 高科陶瓷(玻璃台) 天然串链,
+       本补丁仅消除一处研究空窗: MakeCeramics(SoftClay+GlassBatch→Ceramics) 原挂 Craft_B1,
+       但其原料 GlassBatch 在 Glass_B1 后才有产出 → 研究早就点了却造不出来。
+       改挂 Glass_B1, 与台(GlassworkTable, Patch_Ceramics_Glasswork 已接)、材料同节点。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeCeramics"]/researchPrerequisite</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/RecipeDef[defName="MakeCeramics"]/researchPrerequisite</xpath>
+      <value><researchPrerequisite>Glass_B1</researchPrerequisite></value>
+    </match>
+  </Operation>
+
+</Patch>

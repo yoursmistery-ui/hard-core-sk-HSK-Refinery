@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Remove superseded recipes and hide legacy production routes replaced by Materials Science. -->
+
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/RecipeDef[defName="MakeSynthreadCloth" or 
+				defName="MakeChitinPlating" or 
+				defName="MakeDevilstrand" or 
+				defName="MakeHyperweaveCloth" or 
+				@Name="MakeVelour"]</xpath>
+			</li>
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/RecipeDef[defName="MakeHexcell"
+                    or defName="MakeCarbon"
+                    or defName="MakeSyntheticFibers"
+                    or defName="MakeCarbonAlloy"]</xpath>
+			</li>
+
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/RecipeDef[defName="MakeKevlar"]/recipeUsers</xpath>
+			</li>
+
+			<li Class="PatchOperationRemove">
+				<xpath>Defs/RecipeDef[defName="MakeCompaste"]</xpath>
+			</li>
+
+			<!-- Legacy industrial RecipeDefs remain defined for compatibility but are not exposed by Materials Science worktables. -->
+		</operations>
+	</Operation>
+
+
+</Patch>

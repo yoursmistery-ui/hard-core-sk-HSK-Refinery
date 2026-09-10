@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RecipeDef>
+    <defName>AC_CookRatkinCake</defName>
+    <label>Baking a Ratkin Cake</label>
+    <description>Make a piece of cake with ratkin meat, coated with fat. The texture is quite greasy, but acceptable for some races. </description>
+    <jobString>Baking a ratkin cake. </jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <fixedIngredientFilter Inherit="false">
+	  <!-- null -->
+    </fixedIngredientFilter>
+	<recipeUsers>
+		<li>ElectricStove</li>
+		<li>FueledStove</li>
+		<li MayRequire="Solaris.FurnitureBase">RGK_FueledStove</li>
+		<li MayRequire="Solaris.FurnitureBase">GL_ElectricStove</li>
+		<li MayRequire="Solaris.FurnitureBase">GL_Bonfire</li>
+	</recipeUsers>
+    <workSkill>Cooking</workSkill>
+	<defaultIngredientFilter>
+	  <thingDefs Inherit="false">
+	    <li>Meat_Human</li>
+		<li>Leather_Human</li>
+	  </thingDefs>
+    </defaultIngredientFilter>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+			<li>Meat_Human</li>
+	      </thingDefs>
+        </filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <products>
+      <AC_RatkinCake>1</AC_RatkinCake>
+    </products>
+    <skillRequirements>
+      <Cooking>4</Cooking>
+    </skillRequirements>
+  </RecipeDef>
+  
+
+</Defs>

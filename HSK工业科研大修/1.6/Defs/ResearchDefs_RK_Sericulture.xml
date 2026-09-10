@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 蚕桑缫丝 · 工业自有科研节点(HSK工业科研大修, 2026-08-28 建, 2026-09-02 抬档工业)
+       丝绸重新定位为工业时代奢华织物(TIER3), 生产线(蚕匾架养蚕缫丝 + 纺织机织绸)随节点从
+       中世纪抬回工业档。ParentName="IndustrialBase"
+       (Core_SK: techLevel Industrial + SimpleResearchBench + LabTerminal 设施
+       + AdvancedResearchExtension[Simple,HiTech] + ResearchTreeSK),
+       前置 Apparel_B1(服装生产 II, 提供纺织机 TableLoom), 与邻排纺织线同页。
+       坐标落 Apparel_SK 行 Y=39 空位 X=5 (该行仅 X=1,4,8,12,18,21-24 被占)。 -->
+
+  <ResearchProjectDef ParentName="IndustrialBase">
+    <defName>RK_Sericulture</defName>
+    <label>蚕桑缫丝</label>
+    <description>掌握养蚕、缫丝与上机织绸的手艺。生丝织成的丝绸轻暖华贵、寒暑皆宜, 是工业时代的顶级奢华织物, 也是皇家衣饰与镶金家具的命脉。</description>
+    <tab>Apparel_SK</tab>
+    <baseCost>500</baseCost>
+    <prerequisites>
+      <li>Apparel_B1</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+    <researchViewY>39</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

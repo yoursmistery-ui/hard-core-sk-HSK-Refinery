@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 通用石化气管网 · 2介质(天然气/氨)x管/泵/阀=6建筑。氢气已并入天然气(2026-08-28)。管段用 Rimefeller 连通管线图集(改色)+linkType=Basic, 同介质 linkFlags 自动拼接。
+       氨节点泄漏原生 ToxGas。研究挂 RK_Petro_DeepCracking。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasPipe_NG</defName><label>天然气管</label>
+    <description>输送天然气的连通管道, 自动沿同介质管段/端口拼接走线。仅同介质成网, 两种气体各走各色线, 绝不混输。</description>
+    <thingClass>Building</thingClass><tickerType>Never</tickerType>
+    <graphicData><texPath>Things/Building/Linked/RK_Petro_GasPipe_NG_Atlas</texPath><graphicClass>Graphic_Single</graphicClass><linkType>Basic</linkType><linkFlags><li>Custom1</li></linkFlags><drawSize>(1,1)</drawSize><damageData><rect>(0,0.35,1,0.3)</rect></damageData></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasPipe_NG_MenuIcon</uiIconPath><uiIconScale>1.1</uiIconScale>
+    <size>(1,1)</size><altitudeLayer>Conduits</altitudeLayer><passability>Standable</passability><pathCost>0</pathCost><fillPercent>0</fillPercent>
+    <drawerType>MapMeshOnly</drawerType><rotatable>false</rotatable><neverMultiSelect>true</neverMultiSelect><clearBuildingArea>false</clearBuildingArea><coversFloor>false</coversFloor>
+    <building><isInert>true</isInert><isEdifice>false</isEdifice><ai_chillDestination>false</ai_chillDestination></building>
+    <statBases><MaxHitPoints>60</MaxHitPoints><WorkToBuild>260</WorkToBuild><Flammability>0.3</Flammability><Beauty>-1</Beauty></statBases>
+    <costList><Steel>10</Steel></costList>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Pipe</role><gasType>NaturalGas</gasType></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasValve_NG</defName><label>天然气阀门</label>
+    <description>切断/接通天然气管网的阀门, 关闭(熄灭)时该点从网络剔除, 用于分段或隔离供气管线。</description>
+    <thingClass>Building</thingClass><tickerType>Never</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_GasValve_NG</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasValve_NG</uiIconPath>
+    <size>(1,1)</size><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>20</pathCost><fillPercent>0.25</fillPercent>
+    <statBases><MaxHitPoints>70</MaxHitPoints><WorkToBuild>500</WorkToBuild><Flammability>0.3</Flammability><Beauty>-2</Beauty></statBases>
+    <costList><Steel>20</Steel><ComponentIndustrial>1</ComponentIndustrial></costList><rotatable>false</rotatable>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="CompProperties_Flickable"><commandTexture>Things/Building/RK_Petro_GasValve_NG</commandTexture><commandLabelKey>CommandDesignateOpenCloseValveLabelRimefeller</commandLabelKey><commandDescKey>CommandDesignateOpenCloseValveDescRimefeller</commandDescKey></li><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Valve</role><gasType>NaturalGas</gasType></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasPump_NG</defName><label>天然气气泵</label>
+    <description>加压输送天然气, 显著提升该介质管网的通量; 须通电并开启, 断电则网络退回低通量涓流。</description>
+    <thingClass>Building</thingClass><tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_GasPump_NG</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(2,1)</drawSize></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasPump_NG</uiIconPath>
+    <size>(2,1)</size><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>40</pathCost><fillPercent>0.45</fillPercent>
+    <hasInteractionCell>True</hasInteractionCell><interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <statBases><MaxHitPoints>120</MaxHitPoints><WorkToBuild>1200</WorkToBuild><Flammability>0.4</Flammability><Beauty>-3</Beauty></statBases>
+    <costList><Steel>60</Steel><ComponentIndustrial>2</ComponentIndustrial></costList><rotatable>false</rotatable>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="CompProperties_Power"><compClass>CompPowerTrader</compClass><basePowerConsumption>25</basePowerConsumption></li><li Class="CompProperties_Flickable"/><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Pump</role><gasType>NaturalGas</gasType></li></comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasPipe_NH3</defName><label>氨气管</label>
+    <description>输送氨气的连通管道, 自动沿同介质管段/端口拼接走线。仅同介质成网, 两种气体各走各色线, 绝不混输。</description>
+    <thingClass>Building</thingClass><tickerType>Never</tickerType>
+    <graphicData><texPath>Things/Building/Linked/RK_Petro_GasPipe_NH3_Atlas</texPath><graphicClass>Graphic_Single</graphicClass><linkType>Basic</linkType><linkFlags><li>Custom3</li></linkFlags><drawSize>(1,1)</drawSize><damageData><rect>(0,0.35,1,0.3)</rect></damageData></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasPipe_NH3_MenuIcon</uiIconPath><uiIconScale>1.1</uiIconScale>
+    <size>(1,1)</size><altitudeLayer>Conduits</altitudeLayer><passability>Standable</passability><pathCost>0</pathCost><fillPercent>0</fillPercent>
+    <drawerType>MapMeshOnly</drawerType><rotatable>false</rotatable><neverMultiSelect>true</neverMultiSelect><clearBuildingArea>false</clearBuildingArea><coversFloor>false</coversFloor>
+    <building><isInert>true</isInert><isEdifice>false</isEdifice><ai_chillDestination>false</ai_chillDestination></building>
+    <statBases><MaxHitPoints>60</MaxHitPoints><WorkToBuild>260</WorkToBuild><Flammability>0.3</Flammability><Beauty>-1</Beauty></statBases>
+    <costList><Steel>10</Steel></costList>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Pipe</role><gasType>Ammonia</gasType></li><li Class="BlueprintUnlockHSK.CompProperties_GasToxic"><amountPerCell>80</amountPerCell><radius>2</radius></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasValve_NH3</defName><label>氨气阀门</label>
+    <description>切断/接通氨气管网的阀门, 关闭(熄灭)时该点从网络剔除, 用于分段或隔离供气管线。</description>
+    <thingClass>Building</thingClass><tickerType>Never</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_GasValve_NH3</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasValve_NH3</uiIconPath>
+    <size>(1,1)</size><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>20</pathCost><fillPercent>0.25</fillPercent>
+    <statBases><MaxHitPoints>70</MaxHitPoints><WorkToBuild>500</WorkToBuild><Flammability>0.3</Flammability><Beauty>-2</Beauty></statBases>
+    <costList><Steel>20</Steel><ComponentIndustrial>1</ComponentIndustrial></costList><rotatable>false</rotatable>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="CompProperties_Flickable"><commandTexture>Things/Building/RK_Petro_GasValve_NH3</commandTexture><commandLabelKey>CommandDesignateOpenCloseValveLabelRimefeller</commandLabelKey><commandDescKey>CommandDesignateOpenCloseValveDescRimefeller</commandDescKey></li><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Valve</role><gasType>Ammonia</gasType></li><li Class="BlueprintUnlockHSK.CompProperties_GasToxic"><amountPerCell>80</amountPerCell><radius>2</radius></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasPump_NH3</defName><label>氨气气泵</label>
+    <description>加压输送氨气, 显著提升该介质管网的通量; 须通电并开启, 断电则网络退回低通量涓流。</description>
+    <thingClass>Building</thingClass><tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_GasPump_NH3</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(2,1)</drawSize></graphicData>
+    <uiIconPath>Things/Building/RK_Petro_GasPump_NH3</uiIconPath>
+    <size>(2,1)</size><altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>40</pathCost><fillPercent>0.45</fillPercent>
+    <hasInteractionCell>True</hasInteractionCell><interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <statBases><MaxHitPoints>120</MaxHitPoints><WorkToBuild>1200</WorkToBuild><Flammability>0.4</Flammability><Beauty>-3</Beauty></statBases>
+    <costList><Steel>60</Steel><ComponentIndustrial>2</ComponentIndustrial></costList><rotatable>false</rotatable>
+    <researchPrerequisites><li>RK_Petro_DeepCracking</li></researchPrerequisites><designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="CompProperties_Power"><compClass>CompPowerTrader</compClass><basePowerConsumption>25</basePowerConsumption></li><li Class="CompProperties_Flickable"/><li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Pump</role><gasType>Ammonia</gasType></li><li Class="BlueprintUnlockHSK.CompProperties_GasToxic"><amountPerCell>80</amountPerCell><radius>2</radius></li></comps>
+  </ThingDef>
+
+</Defs>

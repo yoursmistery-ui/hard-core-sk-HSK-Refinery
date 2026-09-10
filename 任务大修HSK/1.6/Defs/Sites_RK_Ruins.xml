@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  P1 · M2 废墟站点地图生成(2026-08-28)
+  做法: 不自建 SitePartDef / QuestScriptDef(风险高、且 RimQuest 已接管任务池),
+        而是用 VEF-KCSG 的 GenStepDef.linkWithSite 把"中世纪废墟"注入
+        **原版已有**的任务站点(土匪营地 / 藏宝处), 于是:
+          · 守卫、点数、奖励、任务脚本全部沿用原版 → 零自研任务代码
+          · 废墟里摆的是我们那批可搜刮容器(Rustic_Loot*), 容器又能直接产出蓝图书
+        → "接任务 → 打进去 → 搜刮 → 定向拿到未读蓝图书" 闭环成立。
+  布局只用本 mod 已有的建筑与原版脏污, 不引用任何 MO def / MO 类。
+  依赖 VEF(VanillaExpandedFrameworkLocal 已在场); 未装 VEF 时这些 def 会报缺类型 →
+  因此放到 Mods 条件子目录之前, 先用 Defs + 存在性核对, 若需彻底门控见文末注释。
+============================================================================ -->
+
+	<!-- ================= KCSG 符号 ================= -->
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_FilthDirt</defName>
+		<thing>Filth_Dirt</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_CastleWall_North</defName>
+		<thing>Rustic_CastleWall</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_TudorWall_North</defName>
+		<thing>Rustic_TudorWall</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_LogWall_North</defName>
+		<thing>Rustic_LogWall</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Palisade_North</defName>
+		<thing>Rustic_Palisade</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_TentWall_North</defName>
+		<thing>Rustic_TentWall</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_RuinedGate</defName>
+		<thing>Rustic_Gate</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Barrel</defName>
+		<thing>Rustic_LootBarrelClosed</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Sack</defName>
+		<thing>Rustic_LootSackClosed</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Crate</defName>
+		<thing>Rustic_LootCrate</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Shelf</defName>
+		<thing>Rustic_LootShelf</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Rack</defName>
+		<thing>Rustic_LootWeaponRack</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Bones</defName>
+		<thing>Rustic_LootBonePile</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Books</defName>
+		<thing>Rustic_LootBookPile</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Statue</defName>
+		<thing>Rustic_LootArmorStatue</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Cache</defName>
+		<thing>Rustic_LootTechCache</thing>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Reliquary_North</defName>
+		<thing>Rustic_LootReliquary</thing>
+		<rotation>North</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>RK_Sym_Column</defName>
+		<thing>Rustic_LogColumn</thing>
+	</KCSG.SymbolDef>
+
+	<!-- ================= 布局 1: 小废墟 7x7 ================= -->
+	<KCSG.StructureLayoutDef>
+		<defName>RK_Struct_SmallRuin</defName>
+		<spawnConduits>false</spawnConduits>
+		<layouts>
+			<li>
+				<li>RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,.,.,.,RK_Sym_FilthDirt,.,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,.,RK_Sym_Barrel,.,.,RK_Sym_Sack,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,RK_Sym_FilthDirt,.,RK_Sym_Bones,.,.,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,.,.,.,.,RK_Sym_Crate,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,.,RK_Sym_Column,.,RK_Sym_FilthDirt,.,RK_Sym_LogWall_North</li>
+				<li>RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North,.,RK_Sym_LogWall_North,RK_Sym_LogWall_North,RK_Sym_LogWall_North</li>
+			</li>
+		</layouts>
+	</KCSG.StructureLayoutDef>
+
+	<!-- ================= 布局 2: 中废墟 11x9 ================= -->
+	<KCSG.StructureLayoutDef>
+		<defName>RK_Struct_MediumRuin</defName>
+		<spawnConduits>false</spawnConduits>
+		<layouts>
+			<li>
+				<li>RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,.,.,RK_Sym_FilthDirt,.,.,.,.,RK_Sym_Shelf,.,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,.,RK_Sym_Barrel,.,RK_Sym_Crate,.,RK_Sym_FilthDirt,.,.,.,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,RK_Sym_FilthDirt,.,.,RK_Sym_Column,.,.,.,RK_Sym_Rack,RK_Sym_FilthDirt,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,.,.,.,.,RK_Sym_Bones,.,.,.,.,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,RK_Sym_Column,.,RK_Sym_Sack,.,.,.,.,.,RK_Sym_FilthDirt,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,.,.,.,.,.,RK_Sym_Cache,.,RK_Sym_Shelf,.,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,.,RK_Sym_FilthDirt,.,.,.,.,.,.,.,RK_Sym_TudorWall_North</li>
+				<li>RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_LogWall_North,.,RK_Sym_LogWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North,RK_Sym_TudorWall_North</li>
+			</li>
+		</layouts>
+	</KCSG.StructureLayoutDef>
+
+	<!-- ================= 布局 3: 圣物库(深藏, 高价值) 9x9 ================= -->
+	<KCSG.StructureLayoutDef>
+		<defName>RK_Struct_RelicVault</defName>
+		<spawnConduits>false</spawnConduits>
+		<layouts>
+			<li>
+				<li>RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,.,.,RK_Sym_FilthDirt,.,.,RK_Sym_Books,.,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,.,RK_Sym_Statue,.,.,.,.,RK_Sym_Crate,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,RK_Sym_FilthDirt,.,.,RK_Sym_Reliquary_North,.,.,.,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,.,.,.,.,.,RK_Sym_Column,.,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,.,RK_Sym_Cache,.,.,.,.,RK_Sym_Bones,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,RK_Sym_Column,.,.,.,.,RK_Sym_Statue,.,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,.,RK_Sym_FilthDirt,.,.,.,.,.,RK_Sym_CastleWall_North</li>
+				<li>RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_Palisade_North,.,RK_Sym_Palisade_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North,RK_Sym_CastleWall_North</li>
+			</li>
+		</layouts>
+	</KCSG.StructureLayoutDef>
+
+	<!-- ================= 注入原版任务站点 ================= -->
+	<!-- 波次6(2026-08-29): 原两个土匪营地 GenStepDef 合并为单池 —— GenStep_CustomStructureGen 对
+	     structureLayoutDefs 随机选一, 池 = P1 小/中废墟 + MO 小藏身处/匪徒废墟(布局在 HSK工业科研大修);
+	     另修复全部符号 thingDef→thing(旧写法在 VEF 里是静默 no-op, 废墟此前并不生成)。 -->
+	<GenStepDef>
+		<defName>RK_GenStep_Ruin_Camp</defName>
+		<linkWithSite>BanditCamp</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_Struct_SmallRuin</li>
+				<li>RK_Struct_MediumRuin</li>
+				<li>RK_MO_SmallHideout1c</li>
+				<li>RK_MO_SmallHideout2c</li>
+				<li>RK_MO_Medium_Ruin_Brigand1c</li>
+				<li>RK_MO_Medium_Ruin_Brigand2c</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+
+	<GenStepDef>
+		<defName>RK_GenStep_RelicVault_Stash</defName>
+		<linkWithSite>ItemStash</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_Struct_RelicVault</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+
+
+
+</Defs>

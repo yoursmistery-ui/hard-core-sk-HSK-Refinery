@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- =====================================================================
+        金鼠族 HSK 版本 · 09_家具与生产设施工业线适配(2026-08-26)
+        目标: 金鼠族家具/生产设施的解锁研究统一挂到 HSK 工业线
+              (Core_SK Industrial 档节点),不再依赖金鼠族自研节点
+              (OA_RK_Apparel_I)或 Spacer 档节点:
+              ① 缝纫台 + 布料精加工/回收设施 → Fabrication(服装生产 III)
+              ② 电路调控器(电网稳定) → Electrical_engineering_C2(电气网络 II)
+              ③ 光学柱(研究照明) → Research_table_C1(科学技术 III)
+              ④ 技术部地板(金属地板) → Metal_floor_C1(金属地板 III)
+              ⑤ 花糕机(金鼠族传统食物,补挂研究) → OA_RK_Oberonia_Aurea_Research_B
+        保留(已合理挂 HSK / 非工业线 / 非家具设施):
+              照明柱、自清洁地毯 → Construction_B3(建造 III, 2026-08-23 已适配)
+              基因储存箱 → 已迁移至鼠族家具拓展(local.ratkin.furniture, 2026-08-27)
+              凝光暖辉 → Medicine_D1(医疗线高级设施, 非家具/生产设施)
+              暴风雪营火/冰雪收集器 → 无门槛(篝火类/暴风雪扩展采集装置)
+              霸权旗 → Ideology 文化建筑; EMP 发生器 → 空投物; Odyssey 设施 → 剧情链
+        说明: 目标研究节点(Fabrication/Electrical_engineering_C2/
+              Research_table_C1/Metal_floor_C1)均由 Core_SK 定义, 本 mod
+              loadAfter skyarkhangel.HSK, 加载序安全, 无需门控。
+        ===================================================================== -->
+
+    <!-- ① 缝纫台本体(OA_RK_Tailor)已迁移至「HSK工业科研大修」并改挂 Apparel_D1(太空),
+         此处不再处理;仅保留布料精加工/回收设施(仍在本 mod)的工业线适配。 -->
+    <!-- 布料精加工设施 → 服装生产 III(Fabrication, Industrial) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Cloth_Processing"]/researchPrerequisites</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>Fabrication</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Cloth_Processing_B"]/researchPrerequisites</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>Fabrication</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+
+    <!-- ② 电路调控器 → 电气网络 II(Electrical_engineering_C2, Industrial) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_CircuitRegulator"]/researchPrerequisites</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>Electrical_engineering_C2</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+
+    <!-- ③ 光学柱 → 科学技术 III(Research_table_C1, Industrial) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="OA_RK_Zhuzi_New"]/researchPrerequisites</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>Research_table_C1</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+
+    <!-- ④ 技术部地板 → 金属地板 III(Metal_floor_C1, Industrial) -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/TerrainDef[defName="OA_RK_Floor_Jishu"]/researchPrerequisites</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>Metal_floor_C1</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+
+    <!-- ⑤ 花糕机 → 金鼠族传统食物(补挂研究, 与花糕配方同线) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="OA_OberoniaCakeProducter"]</xpath>
+        <value>
+            <researchPrerequisites>
+                <li>OA_RK_Oberonia_Aurea_Research_B</li>
+            </researchPrerequisites>
+        </value>
+    </Operation>
+
+</Patch>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 2026-09-06 性能治理: Core_SK 冰漩涡 SK.Events.IceVortex tickerType=Normal(每 tick 跑)
+       在 ~1000TPS 超速档实测成为 tickTop 常客(单窗口聚合 0.05~0.15ms,事件持续 0.7~2.7 天)。
+       降为 Rare 档(每 250 tick 一次 ≈ 超速档下每秒 4 次): 冻气气场/游走逻辑按 4Hz 更新
+       对一个 Ethereal 事件物在行为上不可感知, tick 成本降 ~98%。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="IceVortex"]/tickerType</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="IceVortex"]/tickerType</xpath>
+      <value>
+        <tickerType>Rare</tickerType>
+      </value>
+    </match>
+  </Operation>
+</Patch>

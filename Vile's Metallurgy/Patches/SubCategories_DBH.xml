@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Dubs Bad Hygiene</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="SK.PatchOperationReplaceExtended">
+					<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Pipes"]</xpath>
+					<value>
+						<defNames Merge="True">
+							<li>sewagePipeStuff</li>
+							<li>sewagePipeStuffAqueduct</li>
+							<li>airPipe</li>
+							<li>plumbingValve</li>
+						</defNames>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>	

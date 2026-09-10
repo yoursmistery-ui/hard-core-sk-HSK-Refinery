@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Celsius</li>
+	</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+
+					<li Class="PatchOperationAdd">
+						<xpath>Defs/ThingDef[defName="Hearth" or defName="OpenHearth"]/statBases</xpath>
+						<value>
+							<MaxTemp>44</MaxTemp>
+						</value>	
+					</li>
+							
+			</operations>
+		</match>
+    </Operation>	
+
+	
+</Patch>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 2026-08-17: 从文化风格拆出的独立家具挂到 HSK 已有二级菜单:
+	     - 电视 → 娱乐 的「电视」(SubCategory_TV)
+	     - 燃料炉灶 → 温度 的「燃料加热器」(SubCategory_FueledHeaters,与火炉 Building_Heater 同组)
+	     - 电力炉灶 → 温度 的「加热器」(SubCategory_Heaters,与电力加热器 Heater 同组) -->
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_TV"]/defNames</xpath>
+		<value>
+			<li>RKFC_GL_TubeTelevision</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_FueledHeaters"]/defNames</xpath>
+		<value>
+			<li>RKFC_RGK_Fireplace</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Heaters"]/defNames</xpath>
+		<value>
+			<li>RKFC_RGK_FireplaceE</li>
+		</value>
+	</Operation>
+</Patch>

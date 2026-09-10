@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 特殊事件提频(2026-09-08 用户要求): 外星种族/生产 flavored 特殊事件 baseChance 翻倍档,
+       鼠族流浪商队叙事者冷却 45→15 天。加人类(WandererJoin_Kurin / RK_Incident_PriestJoin /
+       RK_Incident_VagabondJoin)与天降美狐(调度器直调)不动。
+       HSK修复整合最后加载, Conditional+Replace 对上游现值覆盖; 上游若改值, 本补丁仍取当前值减半前基准见注释。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/baseChance</xpath>
+      <value><baseChance>0.8</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/baseChance</xpath>
+      <value><baseChance>1.0</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RatkinTunnel_Guerrilla"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RatkinTunnel_Guerrilla"]/baseChance</xpath>
+      <value><baseChance>0.6</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_WanderingTrader"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_WanderingTrader"]/baseChance</xpath>
+      <value><baseChance>2</baseChance></value>
+    </match>
+  </Operation>
+  <!-- 鼠族流浪商队: 三个原版叙事者组件的冷却 45 天 → 15 天(匹配所有带该 incident 的 comp) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StorytellerDef/comps/li[incident="RK_Incident_WanderingTrader"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/StorytellerDef/comps/li[incident="RK_Incident_WanderingTrader"]/minRefireDays</xpath>
+      <value><minRefireDays>15</minRefireDays></value>
+    </match>
+  </Operation>
+  <!-- HSK 工业科研大修 flavored 事件 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_BlueprintGift"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_BlueprintGift"]/baseChance</xpath>
+      <value><baseChance>0.7</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_RuinCache"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_RuinCache"]/baseChance</xpath>
+      <value><baseChance>0.8</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_ElephantsWander"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_ElephantsWander"]/baseChance</xpath>
+      <value><baseChance>0.8</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_PolarBearWanders"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_PolarBearWanders"]/baseChance</xpath>
+      <value><baseChance>0.55</baseChance></value>
+    </match>
+  </Operation>
+  <!-- minRefireDays 冷却放宽(触发间隔真闸门) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentPodCrash"]/minRefireDays</xpath>
+      <value><minRefireDays>12</minRefireDays></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="AgentTravelerGroup"]/minRefireDays</xpath>
+      <value><minRefireDays>12</minRefireDays></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_BlueprintGift"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_BlueprintGift"]/minRefireDays</xpath>
+      <value><minRefireDays>12</minRefireDays></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_RuinCache"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_RuinCache"]/minRefireDays</xpath>
+      <value><minRefireDays>8</minRefireDays></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_ElephantsWander"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_ElephantsWander"]/minRefireDays</xpath>
+      <value><minRefireDays>20</minRefireDays></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="RK_Incident_PolarBearWanders"]/minRefireDays</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="RK_Incident_PolarBearWanders"]/minRefireDays</xpath>
+      <value><minRefireDays>20</minRefireDays></value>
+    </match>
+  </Operation>
+  <!-- 商队整体提频(2026-09-08): Core_SK 已把 TraderCaravanArrival 提到 5, 再提到 8;
+       玩家在用叙事者 OA_RK_Penoy 的 FactionArrival 类目权重 1.38 → 2.8(商队+访客),
+       类目内商队 baseChance 占比最高, 提权即显著多遇各派系商队。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/IncidentDef[defName="TraderCaravanArrival"]/baseChance</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/IncidentDef[defName="TraderCaravanArrival"]/baseChance</xpath>
+      <value><baseChance>8</baseChance></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StorytellerDef[defName="OA_RK_Penoy"]/comps/li[categoryWeights]/categoryWeights/FactionArrival</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/StorytellerDef[defName="OA_RK_Penoy"]/comps/li[categoryWeights]/categoryWeights/FactionArrival</xpath>
+      <value><FactionArrival>2.8</FactionArrival></value>
+    </match>
+  </Operation>
+</Patch>

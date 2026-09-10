@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 核心装置（HSK工业科研大修, 2026-08-29 v3 精简）
+       工作台配方一律走 RecipeDef 的 recipeUsers 单路径(见 Recipes_RK_Petro.xml)。
+       研究挂本线三节点 RK_Petro_AtmosphericDistillation / Refining / Synthesis(见 ResearchDefs_RK_Petro.xml)。
+       已删: 深度裂解厂/精馏塔/催化重整/燃气锅炉/氨合成塔/中性胺合成塔/原油裂解炼油厂(v3 精简, 产物由 Rimefeller 精炼厂体系承接)。
+       供水: 装置挂 Dubs Bad Hygiene 原生 CompProperties_Pipe(mode=Water) + CompProperties_WaterStorage(500 L),
+       靠卫生供水管网自动补水(未装卫生时 Def 级 MayRequire 整节点跳过)。 -->
+
+  <ThingDef ParentName="BenchBase">
+    <defName>RK_Petro_DistillationColumn</defName>
+    <label>常减压蒸馏塔</label>
+    <description>炼油首段装置。将原油按沸点分馏为化合燃料、天然气与沥青三种主馏分，比例恒定（50/30/20）。通过选择不同档位的加工账单控制单批处理量（10→80 原油桶/档）。运行期间会累积少量炼油油泥，需定期清理。</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_DistillationColumn</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(4,5)</drawSize></graphicData>
+    <size>(3,3)</size>
+    <uiIconPath>Things/Building/RK_Petro_DistillationColumn</uiIconPath><uiIconScale>1.8</uiIconScale>
+    <costList><Steel>250</Steel><Plasteel>60</Plasteel><ComponentIndustrial>8</ComponentIndustrial></costList>
+    <researchPrerequisites><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <statBases><WorkToBuild>9000</WorkToBuild><MaxHitPoints>300</MaxHitPoints><Flammability>0.4</Flammability><Cleanliness>-3</Cleanliness></statBases>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>50</pathCost><fillPercent>0.5</fillPercent>
+    <designationCategory>Rimefeller</designationCategory>
+    <comps><li Class="CompProperties_Power"><compClass>CompPowerTrader</compClass><basePowerConsumption>400</basePowerConsumption></li><li Class="CompProperties_Flickable"/><li Class="CompProperties_Breakdownable"/><li Class="CompProperties_MoteEmitter"><mote>Mote_SmokeFlake</mote><emissionInterval>150</emissionInterval><ticksSinceLastEmittedMaxOffset>150</ticksSinceLastEmittedMaxOffset><offsetMin>(-0.5, 0, 1.2)</offsetMin><offsetMax>(0.5, 0, 2.2)</offsetMax></li><li Class="DubsBadHygiene.CompProperties_Pipe" MayRequire="Dubwise.DubsBadHygiene"><mode>Water</mode></li><li Class="DubsBadHygiene.CompProperties_WaterStorage" MayRequire="Dubwise.DubsBadHygiene"><WaterStorageCap>500</WaterStorageCap></li><li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.4</litersPerWorkSecond></li><li Class="BlueprintUnlockHSK.CompProperties_WasteAccumulator"><wasteDef>RK_Petro_OilySludge</wasteDef><stackSize>1</stackSize><progressPerRareTick>0.4</progressPerRareTick><maxProgress>100</maxProgress><maxStored>25</maxStored></li></comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_GasGenerator</defName>
+    <label>燃气发电机</label>
+    <description>接入天然气管网后自动从储罐抽取天然气发电，无需人工搬运燃料。管网流量不足时出力下降。</description>
+    <thingClass>Building</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData><texPath>Things/Building/RK_Petro_GasGenerator</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(4,3)</drawSize></graphicData>
+    <size>(4,3)</size>
+    <uiIconPath>Things/Building/RK_Petro_GasGenerator_south</uiIconPath><uiIconScale>0.9</uiIconScale>
+    <costList><Steel>150</Steel><ComponentIndustrial>4</ComponentIndustrial></costList>
+    <researchPrerequisites><li>RK_Petro_AtmosphericDistillation</li></researchPrerequisites>
+    <statBases><WorkToBuild>4500</WorkToBuild><MaxHitPoints>200</MaxHitPoints><Flammability>0.5</Flammability></statBases>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>50</pathCost><fillPercent>0.5</fillPercent>
+    <designationCategory>Power</designationCategory>
+    <comps>
+      <li Class="CompProperties_Power"><compClass>CompPowerPlant</compClass><basePowerConsumption>-1500</basePowerConsumption><transmitsPower>true</transmitsPower></li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable"><fuelConsumptionRate>22</fuelConsumptionRate><fuelCapacity>100</fuelCapacity><fuelFilter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></fuelFilter><consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasPort"><role>Sink</role><gasType>NaturalGas</gasType></li>
+      <li Class="CompProperties_Glower"><glowRadius>3</glowRadius><glowColor>(220,120,40,0)</glowColor></li>
+      <li Class="CompProperties_MoteEmitter"><mote>RK_Mote_GasGenSteam</mote><emissionInterval>38</emissionInterval><ticksSinceLastEmittedMaxOffset>38</ticksSinceLastEmittedMaxOffset><offsetMin>(-0.6, 0, 1.3)</offsetMin><offsetMax>(0.6, 0, 2.3)</offsetMax></li>
+      <li Class="CompProperties_MoteEmitter"><mote>RK_Mote_GasGenSteam</mote><emissionInterval>52</emissionInterval><ticksSinceLastEmittedMaxOffset>52</ticksSinceLastEmittedMaxOffset><offsetMin>(-0.25, 0, 1.1)</offsetMin><offsetMax>(0.35, 0, 1.9)</offsetMax></li>
+    <li Class="DubsBadHygiene.CompProperties_Pipe" MayRequire="Dubwise.DubsBadHygiene"><mode>Water</mode></li><li Class="DubsBadHygiene.CompProperties_WaterStorage" MayRequire="Dubwise.DubsBadHygiene"><WaterStorageCap>500</WaterStorageCap></li><li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.4</litersPerWorkSecond></li></comps>
+  </ThingDef>
+
+  <!-- 天然气发电机放大蒸汽 mote: 独立复制原版 Mote_SmokeFlake(贴图 Things/Mote/Smoke, 无 Abstract/Name 不可被继承),
+       换成更白的蒸汽色 + 放大 growthRate + 延长寿命 + 略提上升加速度, 让烟团更大更明显; 无 DBH / 无新贴图依赖。 -->
+  <ThingDef>
+    <defName>RK_Mote_GasGenSteam</defName>
+    <label>天然气机蒸汽</label>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData><graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Mote/Smoke</texPath>
+      <color>(225, 235, 250)</color>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.3</fadeInTime>
+      <solidTime>3.2</solidTime>
+      <fadeOutTime>6</fadeOutTime>
+      <growthRate>1.1</growthRate>
+      <acceleration>(0,0,0.0022)</acceleration>
+    </mote>
+  </ThingDef>
+
+</Defs>

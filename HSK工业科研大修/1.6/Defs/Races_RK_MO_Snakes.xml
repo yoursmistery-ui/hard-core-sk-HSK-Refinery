@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  战斗蛇(2026-09-10 波次7): 移植自 MO 3219596926 Races_Snakes.xml 的两种洞穴蛇:
+    RK_MO_LargeCobraCave      = MO DankPyon_LargeCobraCave(眼镜蛇, 毒咬)
+    RK_MO_GiantConstrictorCave= MO DankPyon_GiantConstrictorCave(巨蟒, 绞杀/噬咬)
+  裁剪: 砍掉 EggLayer/受精蛋/皮革/驯养/`useMeatFrom` 等 MO 专属依赖 —— 本批蛇只作
+  "蛇窟战斗敌人", 由 KCSG 符号按 pawnkind 投放, 不做养殖经济。body 用原版 Snake,
+  毒咬用原版 ToxicBite 伤害(1.6 内核自带, 零搬运)。贴图按 MO 同相对路径拷入本 mod
+  Textures/Things/Pawn/Animal/{CaveCobra,CaveGiantConstrictor}。
+  注: 无 meatDef/leatherDef 时引擎会自动为动物生成 Meat_/Leather_ 变体, 无需自建。
+============================================================================ -->
+	<!-- ================= 洞穴眼镜蛇 ================= -->
+	<ThingDef ParentName="AnimalThingBase">
+		<defName>RK_MO_LargeCobraCave</defName>
+		<label>洞穴眼镜蛇</label>
+		<description>盘踞在幽深蛇窟里的巨型眼镜蛇, 受惊时会立起脖颈。它的毒牙注入的毒素能迅速放倒一名成年人。</description>
+		<statBases>
+			<MoveSpeed>4.5</MoveSpeed>
+			<MarketValue>350</MarketValue>
+			<ComfyTemperatureMin>0</ComfyTemperatureMin>
+			<ComfyTemperatureMax>60</ComfyTemperatureMax>
+			<Wildness>0.9</Wildness>
+		</statBases>
+		<uiIconScale>1.5</uiIconScale>
+		<tools>
+			<li>
+				<label>毒牙</label>
+				<capacities>
+					<li>ToxicBite</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+			</li>
+			<li>
+				<label>头槌</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>3</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>Snake</body>
+			<predator>true</predator>
+			<maxPreyBodySize>0.8</maxPreyBodySize>
+			<baseBodySize>0.55</baseBodySize>
+			<baseHungerRate>0.1</baseHungerRate>
+			<baseHealthScale>0.9</baseHealthScale>
+			<foodType>CarnivoreAnimal, OvivoreAnimal</foodType>
+			<manhunterOnTameFailChance>0.1</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>0.5</manhunterOnDamageChance>
+			<nameOnTameChance>1</nameOnTameChance>
+			<lifeExpectancy>30</lifeExpectancy>
+			<lifeStageAges>
+				<li>
+					<def>AnimalBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>AnimalJuvenile</def>
+					<minAge>0.15</minAge>
+				</li>
+				<li>
+					<def>AnimalAdult</def>
+					<minAge>0.5</minAge>
+					<soundWounded>Pawn_Cobra_Wounded</soundWounded>
+					<soundDeath>Pawn_Cobra_Death</soundDeath>
+					<soundCall>Pawn_Cobra_Call</soundCall>
+					<soundAngry>Pawn_Cobra_Angry</soundAngry>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="AnimalKindBase">
+		<defName>RK_MO_LargeCobraCave</defName>
+		<label>洞穴眼镜蛇</label>
+		<race>RK_MO_LargeCobraCave</race>
+		<defaultFactionType>MedievalKingdom</defaultFactionType>
+		<combatPower>90</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveCobra</texPath>
+					<drawSize>1.05</drawSize>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveCobra</texPath>
+					<drawSize>1.6</drawSize>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveCobra</texPath>
+					<drawSize>2.1</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+
+	<!-- ================= 洞穴巨蟒 ================= -->
+	<ThingDef ParentName="AnimalThingBase">
+		<defName>RK_MO_GiantConstrictorCave</defName>
+		<label>洞穴巨蟒</label>
+		<description>蛇窟里最古老的住户, 体型大得能整吞一名成年人。鳞甲厚重, 受伤后极其凶暴, 是王国邪教圈养的最后一道防线。</description>
+		<statBases>
+			<MoveSpeed>5.2</MoveSpeed>
+			<MarketValue>3000</MarketValue>
+			<ComfyTemperatureMin>0</ComfyTemperatureMin>
+			<ComfyTemperatureMax>60</ComfyTemperatureMax>
+			<Wildness>0.95</Wildness>
+		</statBases>
+		<uiIconScale>1.6</uiIconScale>
+		<tools>
+			<li>
+				<capacities>
+					<li>Bite</li>
+				</capacities>
+				<power>22</power>
+				<cooldownTime>2.5</cooldownTime>
+				<linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+			</li>
+			<li>
+				<label>头槌</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>
+			</li>
+		</tools>
+		<race>
+			<body>Snake</body>
+			<predator>true</predator>
+			<maxPreyBodySize>3</maxPreyBodySize>
+			<baseBodySize>3.65</baseBodySize>
+			<baseHungerRate>0.5</baseHungerRate>
+			<baseHealthScale>6</baseHealthScale>
+			<foodType>CarnivoreAnimal, OvivoreAnimal</foodType>
+			<manhunterOnTameFailChance>0.5</manhunterOnTameFailChance>
+			<manhunterOnDamageChance>1</manhunterOnDamageChance>
+			<nameOnTameChance>1</nameOnTameChance>
+			<lifeExpectancy>200</lifeExpectancy>
+			<lifeStageAges>
+				<li>
+					<def>AnimalBaby</def>
+					<minAge>0</minAge>
+				</li>
+				<li>
+					<def>AnimalJuvenile</def>
+					<minAge>0.75</minAge>
+				</li>
+				<li>
+					<def>AnimalAdult</def>
+					<minAge>1.332</minAge>
+					<soundWounded>Pawn_Cobra_Wounded</soundWounded>
+					<soundDeath>Pawn_Cobra_Death</soundDeath>
+					<soundCall>Pawn_Cobra_Call</soundCall>
+					<soundAngry>Pawn_Cobra_Angry</soundAngry>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+		</race>
+	</ThingDef>
+
+	<PawnKindDef ParentName="AnimalKindBase">
+		<defName>RK_MO_GiantConstrictorCave</defName>
+		<label>洞穴巨蟒</label>
+		<race>RK_MO_GiantConstrictorCave</race>
+		<defaultFactionType>MedievalKingdom</defaultFactionType>
+		<combatPower>450</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveGiantConstrictor</texPath>
+					<drawSize>2.05</drawSize>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveGiantConstrictor</texPath>
+					<drawSize>3.7</drawSize>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Animal/CaveGiantConstrictor</texPath>
+					<drawSize>4.55</drawSize>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+	</PawnKindDef>
+</Defs>

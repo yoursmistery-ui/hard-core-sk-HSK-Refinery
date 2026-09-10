@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 仿生义体行商(陆上版): 轨道的 CONN_BionicsTrader(orbital=true) 不能进地面商队池, 否则信件出现
+       "远行队…他们是轨道义体商"这类命名错乱(2026-09-09)。这份只借它的义体货单, 规模按地面商队收窄,
+       不写 orbital → 只可能作为地面远行队出现, 轨道池不受影响。挂给安卓飞地(ChjAndroidEnclave, 63 号补丁)。 -->
+  <TraderKindDef MayRequire="doug.conn">
+    <defName>RK_TraderKind_BionicsPeddler</defName>
+    <label>仿生义体行商</label>
+    <commonality>1</commonality>
+    <stockGenerators>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>SilverCoin</thingDef>
+        <countRange>800~1600</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentIndustrial</thingDef>
+        <countRange>10~30</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Steel</thingDef>
+        <countRange>150~350</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Plasteel</thingDef>
+        <countRange>40~120</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineIndustrial</thingDef>
+        <countRange>8~20</countRange>
+      </li>
+      <!-- 义体本身: 人工体部件(安装需医疗椅/手术, 与轨道版同一 tradeTag) -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>CONN_BodyPartsArtificial</tradeTag>
+        <thingDefCountRange>3~7</thingDefCountRange>
+        <countRange>1~2</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>HiTechArmor</tradeTag>
+        <countRange>1~2</countRange>
+      </li>
+      <li Class="StockGenerator_Animals">
+        <maxWildness>0.70</maxWildness>
+        <tradeTagsSell>
+          <li>AnimalFarm</li>
+        </tradeTagsSell>
+        <tradeTagsBuy>
+          <li>AnimalExotic</li>
+        </tradeTagsBuy>
+        <kindCountRange>1~2</kindCountRange>
+        <countRange>2~4</countRange>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>CONN_BodyPartsArtificial</tag>
+      </li>
+      <li Class="StockGenerator_BuyTradeTag">
+        <tag>Art</tag>
+      </li>
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+    </stockGenerators>
+  </TraderKindDef>
+
+</Defs>

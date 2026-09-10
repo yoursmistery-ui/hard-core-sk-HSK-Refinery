@@ -1,0 +1,708 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村地形地板
+     来源: Medieval Overhaul 1.6.2.2 TerrainDefs 全套移植(2026-08-27), 排除犁过的土(MO 犁土 PlaceWorker 依赖 DLL)。
+     材料映射: BlocksClay→Ceramics, IronIngot→WroughtIron, DarkWood→WoodLog, Clay→SoftClay, Straw→Hay (HSK 无 TileCeramics/Straw ThingDef)。
+     defName 前缀 Rustic_; 研究沿用原版 Stonecutting; designatorDropdown 改名 Rustic_Floor_*。 -->
+
+	<!--==================== 石砖纹样基类 ====================-->
+	<TerrainDef Abstract="True" ParentName="FloorBase" Name="Rustic_Floor_TileStoneBase">
+		<renderPrecedence>220</renderPrecedence>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<pollutionColor>(1, 1, 1, 1)</pollutionColor>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>1100</WorkToBuild>
+			<Beauty>1</Beauty>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<uiOrder>2060</uiOrder>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_HerringboneTile</defName>
+		<label>乡村鱼骨纹石砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="Rustic_Floor_TileStoneBase" Name="Rustic_Floor_HerringboneBase">
+		<description>鱼骨纹拼花石砖, 城堡殿堂的经典铺地。好看, 但铺起来格外磨人。</description>
+		<texturePath>Terrain/HerringboneTile</texturePath>
+		<designatorDropdown>Rustic_Floor_HerringboneTile</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Sandstone</defName>
+		<label>砂岩鱼骨纹石砖</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Granite</defName>
+		<label>花岗岩鱼骨纹石砖</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Limestone</defName>
+		<label>石灰岩鱼骨纹石砖</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Slate</defName>
+		<label>板岩鱼骨纹石砖</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Marble</defName>
+		<label>大理石鱼骨纹石砖</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_HerringboneBase">
+		<defName>Rustic_Floor_Herringbone_Clay</defName>
+		<label>陶砖鱼骨纹石砖</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_WindmillTile</defName>
+		<label>乡村风车纹石砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="Rustic_Floor_TileStoneBase" Name="Rustic_Floor_WindmillBase">
+		<description>风车纹拼花石砖, 旋转的方形花纹让大厅更显气派。铺工繁复, 请备好耐心。</description>
+		<texturePath>Terrain/WindmillTile</texturePath>
+		<designatorDropdown>Rustic_Floor_WindmillTile</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Sandstone</defName>
+		<label>砂岩风车纹石砖</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Granite</defName>
+		<label>花岗岩风车纹石砖</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Limestone</defName>
+		<label>石灰岩风车纹石砖</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Slate</defName>
+		<label>板岩风车纹石砖</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Marble</defName>
+		<label>大理石风车纹石砖</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_WindmillBase">
+		<defName>Rustic_Floor_Windmill_Clay</defName>
+		<label>陶砖风车纹石砖</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_CobblestoneTile</defName>
+		<label>乡村鹅卵石砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="Rustic_Floor_TileStoneBase" Name="Rustic_Floor_TileCobblestone">
+		<description>粗砌横纹鹅卵石砖, 乡野城堡的踏实选择。好看, 但铺装费时。</description>
+		<texturePath>Terrain/CobblestoneTile</texturePath>
+		<designatorDropdown>Rustic_Floor_CobblestoneTile</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Sandstone</defName>
+		<label>砂岩鹅卵石砖</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Granite</defName>
+		<label>花岗岩鹅卵石砖</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Limestone</defName>
+		<label>石灰岩鹅卵石砖</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Slate</defName>
+		<label>板岩鹅卵石砖</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Marble</defName>
+		<label>大理石鹅卵石砖</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileCobblestone">
+		<defName>Rustic_Floor_CobbleStone_Clay</defName>
+		<label>陶砖鹅卵石砖</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_VersaillesTile</defName>
+		<label>乡村凡尔赛纹石砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="Rustic_Floor_TileStoneBase" Name="Rustic_Floor_TileVersailles">
+		<description>凡尔赛纹拼花石砖, 宫廷规格的体面地面。铺装极费工时。</description>
+		<texturePath>Terrain/VersaillesTile</texturePath>
+		<designatorDropdown>Rustic_Floor_VersaillesTile</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Sandstone</defName>
+		<label>砂岩凡尔赛纹石砖</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Granite</defName>
+		<label>花岗岩凡尔赛纹石砖</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Limestone</defName>
+		<label>石灰岩凡尔赛纹石砖</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Slate</defName>
+		<label>板岩凡尔赛纹石砖</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Marble</defName>
+		<label>大理石凡尔赛纹石砖</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_TileVersailles">
+		<defName>Rustic_Floor_Versailles_Clay</defName>
+		<label>陶砖凡尔赛纹石砖</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<!--==================== 鹅卵石散铺 ====================-->
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_Cobblestone</defName>
+		<label>乡村鹅卵石路面</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="FloorBase" Name="Rustic_Floor_CobblestoneBase">
+		<renderPrecedence>220</renderPrecedence>
+		<description>粗粗垒起的鹅卵石路面, 雨后略显滑, 但踏实了几百年。</description>
+		<texturePath>Terrain/Cobblestone</texturePath>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<pollutionColor>(1, 1, 1, 1)</pollutionColor>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>1100</WorkToBuild>
+			<Beauty>1</Beauty>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<designatorDropdown>Rustic_Floor_Cobblestone</designatorDropdown>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<uiOrder>2060</uiOrder>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Sandstone</defName>
+		<label>砂岩鹅卵石</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Granite</defName>
+		<label>花岗岩鹅卵石</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Limestone</defName>
+		<label>石灰岩鹅卵石</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Slate</defName>
+		<label>板岩鹅卵石</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Marble</defName>
+		<label>大理石鹅卵石</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CobblestoneBase">
+		<defName>Rustic_Floor_Cobblestone_Clay</defName>
+		<label>陶砖鹅卵石</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<!--==================== 废墟石砖 ====================-->
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_RuinedStoneTile</defName>
+		<label>废墟石砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="FloorBase" Name="Rustic_Floor_RuinedStoneTile">
+		<renderPrecedence>220</renderPrecedence>
+		<description>残缺拼接的旧石砖, 带着风雨和战火的包浆, 别有一番古意。</description>
+		<texturePath>Terrain/RuinedStoneTile</texturePath>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<pollutionColor>(1, 1, 1, 1)</pollutionColor>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>1100</WorkToBuild>
+			<Beauty>1</Beauty>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<designatorDropdown>Rustic_Floor_RuinedStoneTile</designatorDropdown>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+		<uiOrder>2060</uiOrder>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Sandstone</defName>
+		<label>废墟砂岩石砖</label>
+		<color>(126,104,94)</color>
+		<costList><BlocksSandstone>4</BlocksSandstone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Granite</defName>
+		<label>废墟花岗岩砖</label>
+		<color>(105,95,97)</color>
+		<costList><BlocksGranite>4</BlocksGranite></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Limestone</defName>
+		<label>废墟石灰岩砖</label>
+		<color>(158,153,135)</color>
+		<costList><BlocksLimestone>4</BlocksLimestone></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Slate</defName>
+		<label>废墟板岩石砖</label>
+		<color>(100,100,100)</color>
+		<costList><BlocksSlate>4</BlocksSlate></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Marble</defName>
+		<label>废墟大理石砖</label>
+		<color>(132,135,132)</color>
+		<costList><BlocksMarble>4</BlocksMarble></costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RuinedStoneTile">
+		<defName>Rustic_Floor_RuinedStoneTile_Clay</defName>
+		<label>废墟陶砖</label>
+		<color>(132, 99, 81)</color>
+		<costList><Ceramics>4</Ceramics></costList>
+	</TerrainDef>
+
+	<!--==================== 陶瓷砖 ====================-->
+	<TerrainDef Abstract="true" ParentName="FloorBase" Name="Rustic_CeramicFloorBase">
+		<pollutionTintColor>(0.95, 0.95, 0.93, 1)</pollutionTintColor>
+		<isPaintable>false</isPaintable>
+		<statBases>
+			<WorkToBuild>5000</WorkToBuild>
+			<Beauty>4</Beauty>
+			<CleaningTimeFactor>0.8</CleaningTimeFactor>
+		</statBases>
+		<researchPrerequisites>
+			<li>Stonecutting</li>
+		</researchPrerequisites>
+		<tags>
+			<li>FineFloor</li>
+		</tags>
+		<costList>
+			<Ceramics>20</Ceramics>
+		</costList>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<uiOrder>2080</uiOrder>
+		<renderPrecedence>220</renderPrecedence>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_Lys</defName>
+		<label>百合纹地砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="true" ParentName="Rustic_CeramicFloorBase" Name="Rustic_Floor_Lys_Base">
+		<description>素雅百合纹彩釉地砖, 低调里透着旧贵族的讲究。</description>
+		<designatorDropdown>Rustic_Floor_Lys</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_Red</defName>
+		<label>赤色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_Red</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_Blue</defName>
+		<label>青色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_Blue</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_Green</defName>
+		<label>绿色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_Green</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_Brown</defName>
+		<label>褐色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_Brown</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_Black</defName>
+		<label>黑色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_Black</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Lys_Base">
+		<defName>Rustic_Floor_Lys_White</defName>
+		<label>白色百合地砖</label>
+		<texturePath>Terrain/CeramicFloors/Lys/Lys_White</texturePath>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_DiamondLys</defName>
+		<label>菱花地砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="true" ParentName="Rustic_Floor_Lys_Base" Name="Rustic_Floor_DiamondLys_Base">
+		<designatorDropdown>Rustic_Floor_DiamondLys</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_Red</defName>
+		<label>赤色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_Red</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_Blue</defName>
+		<label>青色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_Blue</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_Green</defName>
+		<label>绿色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_Green</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_Brown</defName>
+		<label>褐色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_Brown</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_Black</defName>
+		<label>黑色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_Black</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_DiamondLys_Base">
+		<defName>Rustic_Floor_DiamondLys_White</defName>
+		<label>白色菱花地砖</label>
+		<texturePath>Terrain/CeramicFloors/DiamondLys/DiamondLys_White</texturePath>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_CircleLys</defName>
+		<label>团花地砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="true" ParentName="Rustic_Floor_Lys_Base" Name="Rustic_Floor_CircleLys_Base">
+		<designatorDropdown>Rustic_Floor_CircleLys</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_Red</defName>
+		<label>赤色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_Red</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_Blue</defName>
+		<label>青色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_Blue</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_Green</defName>
+		<label>绿色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_Green</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_Brown</defName>
+		<label>褐色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_Brown</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_Black</defName>
+		<label>黑色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_Black</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CircleLys_Base">
+		<defName>Rustic_Floor_CircleLys_White</defName>
+		<label>白色团花地砖</label>
+		<texturePath>Terrain/CeramicFloors/CircleLys/CircleLys_White</texturePath>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_CheckeredLysStar</defName>
+		<label>格星花砖</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="true" ParentName="Rustic_Floor_Lys_Base" Name="Rustic_Floor_CheckeredLysStar_Base">
+		<designatorDropdown>Rustic_Floor_CheckeredLysStar</designatorDropdown>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CheckeredLysStar_Base">
+		<defName>Rustic_Floor_CheckeredLysStar_Red</defName>
+		<label>红蓝格星花砖</label>
+		<texturePath>Terrain/CeramicFloors/CheckeredLysStar/CheckeredLysStar_RedBlue</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CheckeredLysStar_Base">
+		<defName>Rustic_Floor_CheckeredLysStar_Blue</defName>
+		<label>绿红格星花砖</label>
+		<texturePath>Terrain/CeramicFloors/CheckeredLysStar/CheckeredLysStar_GreenRed</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CheckeredLysStar_Base">
+		<defName>Rustic_Floor_CheckeredLysStar_Green</defName>
+		<label>蓝褐格星花砖</label>
+		<texturePath>Terrain/CeramicFloors/CheckeredLysStar/CheckeredLysStar_BlueBrown</texturePath>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_CheckeredLysStar_Base">
+		<defName>Rustic_Floor_CheckeredLysStar_Brown</defName>
+		<label>黑白格星花砖</label>
+		<texturePath>Terrain/CeramicFloors/CheckeredLysStar/CheckeredLysStar_BlackWhite</texturePath>
+	</TerrainDef>
+
+	<!--==================== 铁地砖 ====================-->
+	<TerrainDef ParentName="TileMetalBase">
+		<defName>Rustic_IronTile</defName>
+		<label>铁地砖</label>
+		<description>铆接铁板地砖, 粗犷硬朗, 还带一点清洁速度加成。</description>
+		<renderPrecedence>240</renderPrecedence>
+		<color>(0.3, 0.3, 0.3)</color>
+		<statBases>
+			<WorkToBuild>800</WorkToBuild>
+			<Beauty>0</Beauty>
+			<Cleanliness>0.1</Cleanliness>
+			<CleaningTimeFactor>0.65</CleaningTimeFactor>
+		</statBases>
+		<costList>
+			<WroughtIron>7</WroughtIron>
+		</costList>
+	</TerrainDef>
+
+	<!--==================== 木地板与夯土 ====================-->
+	<TerrainDef ParentName="FloorBase">
+		<defName>Rustic_DarkWoodPlankFloor</defName>
+		<label>深色木地板</label>
+		<description>深色木地板, 温暖居家。铺得快, 烧得也快。</description>
+		<renderPrecedence>250</renderPrecedence>
+		<texturePath>Terrain/Surfaces/WoodFloor</texturePath>
+		<burnedDef>BurnedWoodPlankFloor</burnedDef>
+		<color>(112,91,76)</color>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughSoftLight</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>85</WorkToBuild>
+			<Flammability>0.22</Flammability>
+		</statBases>
+		<costList>
+			<WoodLog>3</WoodLog>
+		</costList>
+		<constructEffect>ConstructWood</constructEffect>
+		<designationHotKey>Misc9</designationHotKey>
+		<uiOrder>2000</uiOrder>
+	</TerrainDef>
+
+	<TerrainDef ParentName="FloorBase">
+		<defName>Rustic_EarthenFloor</defName>
+		<label>夯土地面</label>
+		<description>黏土拌草屑夯平的地面, 手感粗粝却可靠, 乡间民居与城堡内室都用得起。</description>
+		<renderPrecedence>250</renderPrecedence>
+		<texturePath>Terrain/EarthenFloor</texturePath>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughSoftLight</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>85</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<costList>
+			<SoftClay>2</SoftClay>
+			<Hay>1</Hay>
+		</costList>
+		<constructEffect>ConstructWood</constructEffect>
+		<designationHotKey>Misc9</designationHotKey>
+		<uiOrder>1999</uiOrder>
+	</TerrainDef>
+
+	<DesignatorDropdownGroupDef>
+		<defName>Rustic_Floor_RusticWoodFloor</defName>
+		<label>乡村木地板</label>
+	</DesignatorDropdownGroupDef>
+	<TerrainDef Abstract="True" ParentName="FloorBase" Name="Rustic_Floor_RusticWoodFloorBase">
+		<renderPrecedence>250</renderPrecedence>
+		<description>宽木板拼成的地板, 踩着有归家的暖意——只是同样怕火。</description>
+		<texturePath>Terrain/RusticWoodFloor</texturePath>
+		<burnedDef>BurnedWoodPlankFloor</burnedDef>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<pollutionColor>(1, 1, 1, 1)</pollutionColor>
+		<isPaintable>true</isPaintable>
+		<statBases>
+			<WorkToBuild>85</WorkToBuild>
+			<Flammability>0.22</Flammability>
+		</statBases>
+		<constructEffect>ConstructWood</constructEffect>
+		<designatorDropdown>Rustic_Floor_RusticWoodFloor</designatorDropdown>
+		<uiOrder>2001</uiOrder>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RusticWoodFloorBase">
+		<defName>Rustic_Floor_RusticWoodFloor_Wood</defName>
+		<label>乡村木地板</label>
+		<color>(108,78,55)</color>
+		<costList>
+			<WoodLog>3</WoodLog>
+		</costList>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_RusticWoodFloorBase">
+		<defName>Rustic_Floor_RusticWoodFloor_DarkWood</defName>
+		<label>乡村深色木地板</label>
+		<color>(112,91,76)</color>
+		<costList>
+			<WoodLog>3</WoodLog>
+		</costList>
+	</TerrainDef>
+
+	<!--==================== 匪巢泥土(不可建造, 地图生成用) ====================-->
+	<TerrainDef Abstract="True" ParentName="FloorBase" Name="Rustic_Floor_Hideout">
+		<renderPrecedence>220</renderPrecedence>
+		<description>被无数脚掌踩实的泥地。</description>
+		<texturePath>Terrain/Surfaces/Soil</texturePath>
+		<pollutionShaderType MayRequire="Ludeon.RimWorld.Biotech">TerrainFadeRoughLinearBurn</pollutionShaderType>
+		<pollutionOverlayTexturePath>Terrain/Surfaces/PollutionFloorSmooth</pollutionOverlayTexturePath>
+		<pollutionColor>(1, 1, 1, 1)</pollutionColor>
+		<isPaintable>false</isPaintable>
+		<edgeType>FadeRough</edgeType>
+		<statBases>
+			<Beauty>-3</Beauty>
+			<BeautyOutdoors>0</BeautyOutdoors>
+			<Cleanliness>-1</Cleanliness>
+		</statBases>
+		<affordances>
+			<li>Bridgeable</li>
+			<li>Light</li>
+			<li>Medium</li>
+			<li>Heavy</li>
+			<li>GrowSoil</li>
+			<li>Diggable</li>
+		</affordances>
+		<designatorDropdown Inherit="False"/>
+		<designationCategory Inherit="False"/>
+		<uiOrder>2060</uiOrder>
+		<takeFootprints>True</takeFootprints>
+		<tools>
+			<li>
+				<label>泥土</label>
+				<capacities>
+					<li>KickMaterialInEyes</li>
+				</capacities>
+				<hediff>DirtInEyes</hediff>
+				<cooldownTime>1.5</cooldownTime>
+			</li>
+		</tools>
+	</TerrainDef>
+
+	<TerrainDef ParentName="Rustic_Floor_Hideout">
+		<defName>Rustic_Floor_Soil</defName>
+		<label>踩实泥地</label>
+	</TerrainDef>
+
+</Defs>

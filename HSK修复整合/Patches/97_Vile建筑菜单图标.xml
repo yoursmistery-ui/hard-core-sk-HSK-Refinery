@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 2026-09-09 自 鼠族HSK拓展/Patches 迁入(非鼠族主题,归类本整合);贴图随迁至本 mod Textures/UI/VileBuildings -->
+    <!-- 97_Vile建筑菜单图标(2026-08-28 用户要求): 火坑/电解精炼厂等建筑在建筑师菜单贴图溢出格子。
+         根因(反编译 GenUI.IconDrawScale): def 无 uiIconPath 时, 菜单图标 = 地图贴图 × (drawSize/size),
+         Vile 这批建筑 drawSize 远大于占地(电解精炼厂 1x1 画 3.1、冶炼炉 3x1 画 4), 图标撑爆相邻格。
+         修法: 注入预裁剪 uiIconPath(本 mod Textures/UI/VileBuildings, 内容居中占 ~88%),
+         有 uiIconPath 后缩放因子恒为 uiIconScale=1; 地图绘制 drawSize 不动, 游戏内观感不变。
+         贴图源优先取 HSK修复整合 覆盖版(与地图显示一致)。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FirePit"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/FirePit</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="WaterWheel"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/WaterWheel</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SteamEngine"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/SteamEngine</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="StampMill"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/StampMill</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="CementationFurnace"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/CementationFurnace</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectrolyticRefinery"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/ElectrolyticRefinery</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="InductionFurnace"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/InductionFurnace</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ChemistryLab"]</xpath>
+        <value><uiIconPath>UI/VileBuildings/ChemistryLab</uiIconPath><uiIconScale>1</uiIconScale></value>
+    </Operation>
+</Patch>

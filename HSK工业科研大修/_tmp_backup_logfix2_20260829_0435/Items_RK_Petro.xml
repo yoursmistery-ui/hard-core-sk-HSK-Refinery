@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 新增中间物/产物（并入 HSK工业科研大修, 2026-08-28）
+       氨=SyntheticAmmonia、中性胺=Neutroamine、乙烯=Polymers、苯=Sulphates、二甲苯=Xylene、
+       丙烯=Propylene、丁二烯=Butadiene、化合燃料=Chemfuel、原油桶=OilBarrel、沥青=Asphalt 均为现成 def, 不重造。
+       本文件只补真正缺的: 甲苯/石脑油/裂解混合气/合成烯/合成酰胺/天然气。(氢气已并入天然气, 2026-08-28) -->
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_NaturalGas</defName>
+    <label>天然气</label>
+    <description>常减压蒸馏与裂解产生的可燃气体，主要成分为甲烷。可作燃气发电/锅炉的燃料，也是合成氨与胺化反应的唯一原料气(本线氢气已并入天然气，两者等价通用)。压缩罐装后便于搬运，但受击会剧烈爆炸。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_NaturalGas</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>1.5</MarketValue><Mass>0.1</Mass><Flammability>1.0</Flammability><Beauty>-4</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>			<li>RK_PetroLiquid</li>
+		</thingCategories>
+    <tradeability>Sellable</tradeability>
+    <comps><li Class="CompProperties_Explosive"><explosiveRadius>2.2</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>70</min><max>150</max></wickTicks><startWickHitPointsPercent>0.4</startWickHitPointsPercent></li></comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_Naphtha</defName>
+    <label>石脑油</label>
+    <description>常压蒸馏得到的轻质馏分，是催化重整制芳烃与深度裂解制烯烃的主要进料。易燃。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_Naphtha</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>2.5</MarketValue><Mass>0.25</Mass><Flammability>1.0</Flammability><Beauty>-4</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>
+			<li>RK_PetroLiquid</li>
+		</thingCategories>
+    <comps><li Class="CompProperties_Explosive"><explosiveRadius>1.6</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>60</min><max>120</max></wickTicks><startWickHitPointsPercent>0.35</startWickHitPointsPercent></li></comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_MixedGas</defName>
+    <label>裂解混合气</label>
+    <description>深度裂解产生的未经分离的混合气体，含多种烯烃与芳烃前驱体，须送入精馏塔分馏为三烯三苯。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_MixedGas</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>3</MarketValue><Mass>0.15</Mass><Flammability>1.0</Flammability><Beauty>-4</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>
+			<li>RK_PetroLiquid</li>
+		</thingCategories>
+    <comps><li Class="CompProperties_Explosive"><explosiveRadius>2.0</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>60</min><max>130</max></wickTicks><startWickHitPointsPercent>0.35</startWickHitPointsPercent></li></comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_Toluene</defName>
+    <label>甲苯</label>
+    <description>石油重整与精馏得到的芳香烃，无色易燃液体。是制取苯、炸药前驱与多种溶剂的原料。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_Toluene</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>4</MarketValue><Mass>0.2</Mass><Flammability>1.0</Flammability><Beauty>-2</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>
+			<li>RK_PetroLiquid</li>
+		</thingCategories>
+    <comps><li Class="CompProperties_Explosive"><explosiveRadius>1.5</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>60</min><max>120</max></wickTicks><startWickHitPointsPercent>0.35</startWickHitPointsPercent></li></comps>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_Synthylene</defName>
+    <label>合成烯</label>
+    <description>原油裂解得到的合成烯烃颗粒，是石化工作台聚合树脂与纤维的基础单体。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_Synthylene</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <statBases><MarketValue>3.5</MarketValue><Mass>0.15</Mass><Flammability>0.6</Flammability><Beauty>0</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>
+			<li>RK_PetroLiquid</li>
+		</thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_Synthamide</defName>
+    <label>合成酰胺</label>
+    <description>原油裂解得到的合成酰胺纤维料，用于石化工作台合成高性能纤维与橡胶。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_Synthamide</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>150</stackLimit>
+    <statBases><MarketValue>4</MarketValue><Mass>0.15</Mass><Flammability>0.5</Flammability><Beauty>0</Beauty></statBases>
+    <thingCategories><li>Manufactured</li>
+			<li>RK_PetroLiquid</li>
+		</thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>RK_Petro_GasCylinder</defName>
+    <label>便携气瓶</label>
+    <description>可反复充装的压缩天然气钢瓶。在天然气储罐上用「灌装气瓶」指令充装, 放到燃气锅炉/发电机旁即可被自动虹吸作燃料, 用于尚未铺设管网的点位。满瓶受击仍会爆炸。</description>
+    <graphicData><texPath>Things/Item/Resource/RK_Petro_GasCylinder</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <uiIconPath>Things/Item/Resource/RK_Petro_GasCylinder</uiIconPath>
+    <stackLimit>1</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases><MarketValue>30</MarketValue><Mass>8</Mass><Flammability>0.6</Flammability><Beauty>-2</Beauty></statBases>
+    <thingCategories><li>Manufactured</li></thingCategories>
+    <tradeability>Sellable</tradeability>
+    <comps>
+      <li Class="BlueprintUnlockHSK.CompProperties_GasCylinder"><capacity>150</capacity></li>
+      <li Class="CompProperties_Explosive"><explosiveRadius>2.4</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><wickTicks><min>70</min><max>150</max></wickTicks><startWickHitPointsPercent>0.4</startWickHitPointsPercent></li>
+    </comps>
+  </ThingDef>
+
+	<ThingCategoryDef>
+		<defName>RK_PetroLiquid</defName>
+		<label>石化液体材料</label>
+		<parent>Manufactured</parent>
+	</ThingCategoryDef>
+</Defs>

@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+	<TraderKindDef Name="ExoticRatkinTraderBase" Abstract="True">
+		<label>exotic trader</label>
+		<stockGenerators>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticValuable</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Caravan_RatkinExotic_BulkGoods</defName>
+		<label>bulk goods trader</label>
+		<commonality>2</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>2500</min>
+					<max>5000</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentIndustrial</thingDef>
+				<countRange>
+					<min>30</min>
+					<max>40</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentSpacer</thingDef>
+				<countRange>
+					<min>-10</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Jade</thingDef>
+				<countRange>
+					<min>50</min>
+					<max>100</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Steel</thingDef>
+				<countRange>
+					<min>250</min>
+					<max>400</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>
+					<min>250</min>
+					<max>400</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>RawRice</thingDef>
+				<countRange>
+					<min>700</min>
+					<max>1750</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Chemfuel</thingDef>
+				<countRange>
+					<min>250</min>
+					<max>400</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>FoodRaw</categoryDef>
+				<excludedCategories>
+					<li>EggsFertilized</li>
+				</excludedCategories>
+				<thingDefCountRange>
+					<min>3</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<totalPriceRange>
+					<min>150</min>
+					<max>600</max>
+				</totalPriceRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>BuildingsFurniture</categoryDef>
+				<thingDefCountRange>
+					<min>3</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>1</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<maxWildness>0.70</maxWildness>
+				<tradeTagsSell>
+					<li>AnimalFarm</li>
+					<li>AnimalPet</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>
+					<min>1</min>
+					<max>1</max>
+				</kindCountRange>
+				<countRange>
+					<min>2</min>
+					<max>4</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<maxWildness>0.70</maxWildness>
+				<tradeTagsSell>
+					<li>AnimalRatkin</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalRatkin</li>
+				</tradeTagsBuy>
+				<kindCountRange>
+					<min>1</min>
+					<max>1</max>
+				</kindCountRange>
+				<countRange>
+					<min>2</min>
+					<max>4</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Drugs</categoryDef>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_MultiDef">
+				<thingDefs>
+					<li>Kibble</li>
+					<li>Pemmican</li>
+					<li>RawRice</li>
+				</thingDefs>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Art</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>MusicalInstrument</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Caravan_RatkinExotic_DressMerchant</defName>
+		<label>dress merchant</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>1800</min>
+					<max>4000</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>Clothes</tradeTag>
+				<countRange>10~20</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>
+					<min>250</min>
+					<max>400</max>
+				</countRange>
+			</li>	
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>DevilstrandCloth</thingDef>
+				<countRange>
+					<min>75</min>
+					<max>150</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticApparel</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>Textiles</categoryDef>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_SellableApparel</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Caravan_RatkinExotic_CombatSupplier</defName>
+		<label>combat supplier</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>1200</min>
+					<max>3000</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_MarketValue">
+				<tradeTag>WeaponRanged</tradeTag>
+				<countRange>2~4</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticRangeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticMeleeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Category">
+				<categoryDef>WeaponsMelee</categoryDef>
+				<thingDefCountRange>
+					<min>2</min>
+					<max>4</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>3</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticArmor</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>1</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>MedicineIndustrial</thingDef>
+				<countRange>
+					<min>10</min>
+					<max>20</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>MortarShell</tradeTag>
+				<thingDefCountRange>
+					<min>-1</min>
+					<max>2</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>10</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<tradeTagsSell>
+					<li>AnimalFighter</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalUncommon</li>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>
+					<min>1</min>
+					<max>2</max>
+				</kindCountRange>
+				<countRange>
+					<min>1</min>
+					<max>3</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuySingleDef">
+				<thingDef>Gold</thingDef>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticArmor</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticMeleeWeapon</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticRangeWeapon</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Caravan_RatkinExotic_Free_company</defName>
+		<label>free company</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>1200</min>
+					<max>3000</max>
+				</countRange>
+			</li>
+			<!-- <li Class="RatkinGeneExpanded.StockGenerator_HumanPawn"> -->
+			<li Class="StockGenerator_Slaves">
+				<countRange>5~7</countRange>
+				<slaveKindDef>RatkinExoticMercenary</slaveKindDef>
+				<!-- <minAge>9</minAge>
+				<maxAge>30</maxAge> -->
+			</li>			
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentIndustrial</thingDef>
+				<countRange>
+					<min>6</min>
+					<max>10</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>TechHediff</tradeTag>
+				<thingDefCountRange>
+					<min>3</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>1</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticRangeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticMeleeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>5</min>
+					<max>8</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>Artifact</tradeTag>
+				<thingDefCountRange>
+					<min>2</min>
+					<max>2</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>1</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Animals">
+				<tradeTagsSell>
+					<li>AnimalUncommon</li>
+					<li>AnimalFighter</li>
+				</tradeTagsSell>
+				<tradeTagsBuy>
+					<li>AnimalExotic</li>
+				</tradeTagsBuy>
+				<kindCountRange>
+					<min>3</min>
+					<max>3</max>
+				</kindCountRange>
+				<countRange>
+					<min>1</min>
+					<max>3</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticArmor</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticMeleeWeapon</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticRangeWeapon</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Caravan_RatkinExotic_BanditFenceTeam</defName>
+		<label>fence team</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>2200</min>
+					<max>4500</max>
+				</countRange>
+			</li>
+			<!-- <li Class="RatkinGeneExpanded.StockGenerator_HumanPawn"> -->
+			<li Class="StockGenerator_Slaves">
+				<countRange>4~6</countRange>
+				<slaveKindDef>RatkinExoticGuerrilla</slaveKindDef>
+				<!-- <minAge>9</minAge>
+				<maxAge>30</maxAge> -->
+			</li>
+			<li Class="StockGenerator_Slaves">
+				<respectPopulationIntent>true</respectPopulationIntent>
+				<countRange>-1~2</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticBanditApparel</tradeTag>
+				<thingDefCountRange>
+					<min>2</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticBanditHat</tradeTag>
+				<thingDefCountRange>
+					<min>2</min>
+					<max>5</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>ComponentIndustrial</thingDef>
+				<countRange>
+					<min>6</min>
+					<max>10</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticRangeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>3</min>
+					<max>5</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_ExoticMeleeWeapon</tradeTag>
+				<thingDefCountRange>
+					<min>1</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>2</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuySlaves" />
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Art</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>MusicalInstrument</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticArmor</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticMeleeWeapon</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_ExoticRangeWeapon</tag>
+			</li>
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>RK_SellableApparel</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Visitor_RatkinExotic_RareGoods</defName>
+		<label>rarity collector</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>1800</min>
+					<max>4000</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>DevilstrandCloth</thingDef>
+				<countRange>
+					<min>75</min>
+					<max>200</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Jade</thingDef>
+				<countRange>
+					<min>35</min>
+					<max>100</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>RK_CanJuan</thingDef>
+				<countRange>
+					<min>3</min>
+					<max>10</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Art</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+
+	<TraderKindDef ParentName="ExoticRatkinTraderBase">
+		<defName>Visitor_RatkinExotic_Vendor</defName>
+		<label>vendor</label>
+		<commonality>1</commonality>
+		<stockGenerators>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Silver</thingDef>
+				<countRange>
+					<min>400</min>
+					<max>1600</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Cloth</thingDef>
+				<countRange>
+					<min>300</min>
+					<max>400</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>Jade</thingDef>
+				<countRange>
+					<min>5</min>
+					<max>15</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_Tag">
+				<tradeTag>RK_Jewelry</tradeTag>
+				<thingDefCountRange>
+					<min>1</min>
+					<max>3</max>
+				</thingDefCountRange>
+				<countRange>
+					<min>1</min>
+					<max>1</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_BuyExpensiveSimple" />
+			<li Class="StockGenerator_BuyTradeTag">
+				<tag>Art</tag>
+			</li>
+		</stockGenerators>
+	</TraderKindDef>
+
+</Defs>

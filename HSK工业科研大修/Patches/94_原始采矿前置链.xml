@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 让 Core_SK 采矿 I (Mining_B1) 前置本 mod 的原始采矿 (RK_Mining_Primitive),
+       使科技树读起来是 原始采矿(Neolithic) → 采矿 I(Medieval) → 采矿 II(Industrial)。
+       Mining_B1 原始 XML 无 <prerequisites> 节点 (§3 铁律: PatchOperation 只看原始 XML 不解析继承),
+       直接 PatchOperationAdd 追加 <prerequisites>。Neolithic 是 Medieval 的更低位阶, 不产生 techlevel 越级。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ResearchProjectDef[defName="Mining_B1"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>/Defs/ResearchProjectDef[defName="Mining_B1"]/prerequisites</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>/Defs/ResearchProjectDef[defName="Mining_B1"]/prerequisites</xpath>
+        <value>
+          <li>RK_Mining_Primitive</li>
+        </value>
+      </match>
+      <nomatch Class="PatchOperationAdd">
+        <xpath>/Defs/ResearchProjectDef[defName="Mining_B1"]</xpath>
+        <value>
+          <prerequisites>
+            <li>RK_Mining_Primitive</li>
+          </prerequisites>
+        </value>
+      </nomatch>
+    </match>
+  </Operation>
+
+</Patch>

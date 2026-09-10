@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionDef Class="RatkinGeneExpanded.RKFactionDefExtended"  ParentName="RatkinFactionBase">
+		<defName>Rakinia_Waster</defName>
+		<label>Waste rat</label>
+		<pawnSingular>rat</pawnSingular>
+		<pawnsPlural>rats</pawnsPlural>
+    <leaderTitle>boss</leaderTitle>
+		<fixedIdeoName>Hakimiism</fixedIdeoName>
+		<fixedIdeoLeaderTitleMale>Big Kimi</fixedIdeoLeaderTitleMale>
+		<fixedIdeoLeaderTitleFemale>Big Kimi</fixedIdeoLeaderTitleFemale>
+		<fixedIdeoMemberName>Hakimi</fixedIdeoMemberName>
+		<fixedIdeoAdjective>Hissing</fixedIdeoAdjective>
+		<fixedIdeoWorshipRoomLabel>Meow Den</fixedIdeoWorshipRoomLabel>
+		<fixedIdeoDescription>When facing difficulties, don't be afraid. Instead, be brave enough to hiss them.</fixedIdeoDescription>
+		<AnimalHolyBeasts>
+			<li>Cat</li>
+		</AnimalHolyBeasts>
+		<weaponPreceptReplace>true</weaponPreceptReplace>
+		<fixedIdeoWeaponNoble>RangedLight</fixedIdeoWeaponNoble>
+		<fixedIdeoWeaponDespised>Neolithic</fixedIdeoWeaponDespised>
+    <ignoreDistanceRelationEffect>true</ignoreDistanceRelationEffect>
+    
+		<categoryTag>Outlander</categoryTag>
+		<settlementGenerationWeight>0</settlementGenerationWeight>
+		<requiredCountAtGameStart>1</requiredCountAtGameStart>
+		<maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
+		<configurationListOrderPriority>2000</configurationListOrderPriority>
+		<displayInFactionSelection>false</displayInFactionSelection>
+		<fixedName>Waste Rat</fixedName>
+    <canGenerateQuestSites>true</canGenerateQuestSites>
+		<factionIconPath>Misc/RK_WasteGangicon</factionIconPath>
+		<techLevel>Industrial</techLevel>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(0,35)</li>
+        <li>(70, 50)</li>
+        <li>(700, 100)</li>
+        <li>(1300, 150)</li>
+        <li>(100000, 10000)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+		<backstoryFilters Inherit="False">
+			<li>
+				<categories>
+					<li>Offworld</li>
+				</categories>
+			</li>
+		</backstoryFilters>
+		<hidden>true</hidden>
+		<rescueesCanJoin>true</rescueesCanJoin>
+		<autoFlee>false</autoFlee>
+		<apparelStuffFilter>
+			<thingDefs>
+				<li>Cloth</li>
+				<li>Steel</li>
+			</thingDefs>
+		</apparelStuffFilter>
+		<xenotypeSet Inherit="False">
+			<xenotypeChances>
+				<Ratkin_Waster>1</Ratkin_Waster>
+			</xenotypeChances>
+		</xenotypeSet>
+		<basicMemberKind>RatkinWaster</basicMemberKind>
+		<allowedCultures Inherit="False">
+			<li>RatkiniaWasterCulture</li>
+		</allowedCultures>
+    <requiredMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Individualist</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">PainIsVirtue</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">HighLife</li>
+    </requiredMemes>
+		<disallowedMemes Inherit="False">
+			<li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">MaleSupremacy</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">FemaleSupremacy</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibal</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Darkness</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">TreeConnection</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">AnimalPersonhood</li>
+		</disallowedMemes>
+    <raidsForbidden>true</raidsForbidden>
+    <raidCommonalityFromPointsCurve>
+      <points>
+        <li>(0, 0)</li>
+      </points>
+    </raidCommonalityFromPointsCurve>
+    <pawnGroupMakers Inherit="False">
+      <li>
+        <kindDef>Combat</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <RatkinWaster>1</RatkinWaster>
+          <RatkinWaster>1</RatkinWaster>
+        </options>
+      </li>
+      <li>
+        <kindDef>Settlement</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <RatkinWaster>1</RatkinWaster>
+          <RatkinWaster>1</RatkinWaster>
+        </options>
+      </li>
+    </pawnGroupMakers>
+		<baseTraderKinds Inherit="False">
+			<li>RKMD_Base_Waster</li>
+		</baseTraderKinds>
+	</FactionDef>
+
+  <TraderKindDef>
+    <defName>RKMD_Base_Waster</defName>
+    <stockGenerators>
+      <!-- Resources -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Silver</thingDef>
+        <countRange>420~1000</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentIndustrial</thingDef>
+        <countRange>11~42</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ComponentSpacer</thingDef>
+        <countRange>-1~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Steel</thingDef>
+        <countRange>100~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>WoodLog</thingDef>
+        <countRange>200~300</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Titanium</thingDef>
+        <countRange>30~50</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Uranium</thingDef>
+        <countRange>40~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Cloth</thingDef>
+        <countRange>400~600</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <countRange>100~200</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Neutroamine</thingDef>
+        <countRange>22~120</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Chemfuel</thingDef>
+        <countRange>200~500</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Chocolate</thingDef>
+        <countRange>75~220</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Meowpaw</thingDef>
+        <countRange>28~80</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MimiChips</thingDef>
+        <countRange>38~120</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Beer</thingDef>
+        <countRange>12~130</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MedicineIndustrial</thingDef>
+        <countRange>6~20</countRange>
+      </li>
+      <li Class="StockGenerator_ReinforcedBarrels">
+        <countRange>-3~2</countRange>
+      </li>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>MortarShell</tradeTag>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <countRange>-20~20</countRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Shell_Deadlife</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>Textiles</categoryDef>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <totalPriceRange>100~300</totalPriceRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Leather_Dread</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>ResourcesRaw</categoryDef>
+        <thingDefCountRange>2~4</thingDefCountRange>
+        <totalPriceRange>30~100</totalPriceRange>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Bioferrite</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">GravlitePanel</li>
+          <li MayRequire="Ludeon.RimWorld.Odyssey">BlocksVacstone</li>
+        </excludedThingDefs>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>FoodRaw</categoryDef>
+        <thingDefCountRange>2~4</thingDefCountRange>
+        <totalPriceRange>550~600</totalPriceRange>
+        <excludedCategories>
+          <li>EggsFertilized</li>
+        </excludedCategories>
+      </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>FoodMeals</categoryDef>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <countRange>6~20</countRange>
+      </li>
+      <li Class="StockGenerator_MultiDef">
+        <thingDefs>
+          <li>Kibble</li>
+          <li>Pemmican</li>
+        </thingDefs>
+      </li>
+
+      <!-- Drugs -->
+      <li Class="StockGenerator_Category">
+        <categoryDef>Drugs</categoryDef>
+        <thingDefCountRange>3~4</thingDefCountRange>
+        <totalPriceRange>700~1500</totalPriceRange>
+      </li>
+
+
+      <!-- Books -->
+      <li Class="StockGenerator_Category">
+        <categoryDef>Books</categoryDef>
+        <excludedThingDefs>
+          <li MayRequire="Ludeon.RimWorld.Anomaly">Tome</li> <!-- only available in Anomaly, handled seperately -->
+        </excludedThingDefs>
+        <thingDefCountRange>2</thingDefCountRange>
+        <countRange>-1~2</countRange>
+      </li>  
+      
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="StockGenerator_Tomes">
+        <countRange>-2~1</countRange>
+      </li>
+
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Schematic</thingDef>
+        <countRange>1~1</countRange>
+      </li>
+
+      <!-- Weapons -->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>WeaponRanged</tradeTag>
+        <countRange>1~3</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <weaponTag>RK_GangWeapon</weaponTag>
+        <countRange>2~6</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <weaponTag>IndustrialMelee</weaponTag>
+        <countRange>2~3</countRange>
+      </li>
+
+      <!-- Apparel -->
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>RK_JiraiApparel</tradeTag>
+        <countRange>5~8</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Clothing</tradeTag>
+        <countRange>2~4</countRange>
+      </li>
+
+      <!-- Implants -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>TechHediff</tradeTag>
+        <thingDefCountRange>2~4</thingDefCountRange>
+        <countRange>1~1</countRange>
+      </li>
+
+      <!-- Buildings -->
+      <li Class="StockGenerator_Category">
+        <categoryDef>BuildingsFurniture</categoryDef>
+        <thingDefCountRange>3~4</thingDefCountRange>
+        <countRange>-3~1</countRange>
+      </li>
+      <li Class="StockGenerator_MarketValue">
+        <tradeTag>Art</tradeTag>
+        <countRange>-5~2</countRange>
+      </li>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>Television</tradeTag>
+        <thingDefCountRange>1~2</thingDefCountRange>
+        <countRange>-3~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Telescope</thingDef>
+        <countRange>-1~1</countRange>
+      </li>
+
+      <!-- Exotic -->
+      <li Class="StockGenerator_Tag">
+        <tradeTag>Artifact</tradeTag>
+        <thingDefCountRange>1~4</thingDefCountRange>
+        <countRange>0~1</countRange>
+      </li>
+      <li Class="StockGenerator_Tag">
+        <tradeTag>ExoticMisc</tradeTag>
+        <thingDefCountRange>1~4</thingDefCountRange>
+        <countRange>1~2</countRange>
+        <excludedThingDefs>
+          <li>Luciferium</li> <!-- already handled by drugs -->
+          <li>ComponentSpacer</li> <!-- already handled by single def -->
+        </excludedThingDefs>
+        <customCountRanges>
+          <MedicineUltratech>2~15</MedicineUltratech>
+          <Hyperweave>50~200</Hyperweave>
+        </customCountRanges>
+      </li>
+
+      <!-- Genepacks -->
+      <li MayRequire="Ludeon.RimWorld.Biotech" Class="StockGenerator_SingleDef">
+        <thingDef>Genepack</thingDef>
+        <countRange>-6~2</countRange>
+      </li>
+
+      <!-- Serums -->
+      <li MayRequire="Ludeon.RimWorld.Anomaly" Class="StockGenerator_Tag">
+        <tradeTag>Serum</tradeTag>
+        <thingDefCountRange>4~4</thingDefCountRange>
+        <countRange>-5~1</countRange>
+        <excludedThingDefs>
+          <li>VoidsightSerum</li>
+        </excludedThingDefs>
+      </li>
+
+      <!-- Slaves -->
+      <li Class="RatkinGeneExpanded.StockGenerator_Pawn">
+        <respectPopulationIntent>false</respectPopulationIntent>
+        <countRange>2~5</countRange>
+				<kindDef>RatkinWaster</kindDef>
+      </li>
+
+      <!-- Animals -->
+      <li Class="StockGenerator_Animals">
+        <tradeTagsSell>
+          <li>Cat</li>
+        </tradeTagsSell>
+        <tradeTagsBuy>
+          <li>AnimalUncommon</li>
+          <li>AnimalExotic</li>
+					<li>AnimalPet</li>
+        </tradeTagsBuy>
+        <kindCountRange>1~1</kindCountRange>
+        <countRange>2~3</countRange>
+        <createMatingPair>
+          <li>AnimalPet</li>
+        </createMatingPair>
+      </li>
+
+      <!-- Archite capsule2 -->
+      <li MayRequire="Ludeon.RimWorld.Biotech" Class="StockGenerator_SingleDef">
+        <thingDef>ArchiteCapsule</thingDef>
+        <countRange>-3~2</countRange> <!-- 50% chance for 1~2 -->
+      </li>
+
+      <!-- Deathrest capacity serum -->
+      <li MayRequire="Ludeon.RimWorld.Biotech" Class="StockGenerator_SingleDef">
+        <thingDef>DeathrestCapacitySerum</thingDef>
+        <countRange>-7~1</countRange>
+      </li>
+
+      <!-- Buying -->
+      <li Class="StockGenerator_BuyExpensiveSimple" />
+      <li Class="StockGenerator_BuyTradeTag"><tag>Art</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireCommon</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>ImplantEmpireRoyal</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MusicalInstrument</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>UtilitySpecial</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>RK_Apparel</tag></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>MimiThings</tag></li>
+
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shell_Deadlife</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>VoidSculpture</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Shard</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>Bioferrite</thingDef></li>
+      <li Class="StockGenerator_BuySingleDef" MayRequire="Ludeon.RimWorld.Anomaly"><thingDef>RevenantSpine</thingDef></li>
+      
+    </stockGenerators>
+  </TraderKindDef>
+
+
+</Defs>

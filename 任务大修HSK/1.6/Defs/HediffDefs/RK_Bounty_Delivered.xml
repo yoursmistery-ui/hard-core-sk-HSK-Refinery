@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- 送达目标(十期):被押送到家的通缉目标双腿被捆缚,一天内无法移动(到期自动挣脱恢复)。
+	     替代 SW 原生的 DamageLegsUntilIncapableOfMoving(永久致残)。 -->
+	<HediffDef>
+		<defName>RK_Bounty_Delivered</defName>
+		<label>bound legs</label>
+		<labelNoun>bound legs</labelNoun>
+		<description>The target's legs were bound by the bounty hunters for transport. They cannot walk; the bindings will hold for about one day before wearing off.</description>
+		<isBad>true</isBad>
+		<hediffClass>HediffWithComps</hediffClass>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>60000</disappearsAfterTicks>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<label>bound</label>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-1.0</offset>
+					</li>
+				</capMods>
+				<painOffset>0.05</painOffset>
+			</li>
+		</stages>
+	</HediffDef>
+
+</Defs>

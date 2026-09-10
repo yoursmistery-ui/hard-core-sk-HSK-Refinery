@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperation.Context">
+		<xpath>Defs/ThingDef[defName="Human" and @Name="SK_Human"]</xpath>
+		<operations>
+			<!-- <li Class="PatchOperation.LogXML" /> -->
+			<li Class="PatchOperationAdd">
+				<xpath>/ThingDef</xpath>
+				<value>
+					<comps>
+						<li>
+							<compClass>FacialAnimation.DrawFaceGraphicsComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.HeadControllerComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.EyeballControllerComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.LidControllerComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.BrowControllerComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.MouthControllerComp</compClass>
+						</li>
+						<li>
+							<compClass>FacialAnimation.FacialAnimationControllerComp</compClass>
+						</li>
+					</comps>
+				</value>
+			</li>
+			<!-- <li Class="PatchOperation.LogXML" /> -->
+		</operations>
+	</Operation>
+</Patch>

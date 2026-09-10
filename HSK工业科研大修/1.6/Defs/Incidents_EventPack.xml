@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- 事件迁移 (BlueprintUnlockHSK v4.1): 游学者遗落蓝图 + 稀有巨兽路过(MO GenericWandersIn 无依赖版) -->
+	<IncidentDef>
+		<defName>RK_Incident_BlueprintGift</defName>
+		<label>scholar's lost blueprint</label>
+		<category>Misc</category>
+		<targetTags><li>Map_PlayerHome</li></targetTags>
+		<workerClass>BlueprintUnlockHSK.IncidentWorker_BlueprintGift</workerClass>
+		<baseChance>0.35</baseChance>
+		<minRefireDays>30</minRefireDays>
+		<earliestDay>15</earliestDay>
+		<letterLabel>游学者的馈赠</letterLabel>
+		<letterText>一位游学者在驿亭匆匆歇脚, 走时遗落了一份文献: {0}。\n\n看起来是值得研读的东西——若研究尚未解锁, 研读它或许能解开尘封的知识。</letterText>
+	</IncidentDef>
+
+	<IncidentDef>
+		<defName>RK_Incident_ElephantsWander</defName>
+		<label>rare elephants pass</label>
+		<category>Misc</category>
+		<targetTags><li>Map_PlayerHome</li></targetTags>
+		<workerClass>BlueprintUnlockHSK.IncidentWorker_RareBeastWandersIn</workerClass>
+		<baseChance>0.5</baseChance>
+		<minRefireDays>45</minRefireDays>
+		<letterLabel>稀有巨兽: 象群路过</letterLabel>
+		<letterText>一群{0}闯入了本地区。它们体型惊人、性情不定——猎杀危险, 但象牙与厚皮价值不菲; 有耐心的驯兽者或许能留下一头种兽。</letterText>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.RareBeastProperties">
+				<kindDef>Elephant</kindDef>
+				<min>2</min><max>4</max>
+			</li>
+		</modExtensions>
+	</IncidentDef>
+
+	<IncidentDef>
+		<defName>RK_Incident_PolarBearWanders</defName>
+		<label>a rare polar bear roams in</label>
+		<category>Misc</category>
+		<targetTags><li>Map_PlayerHome</li></targetTags>
+		<workerClass>BlueprintUnlockHSK.IncidentWorker_RareBeastWandersIn</workerClass>
+		<baseChance>0.35</baseChance>
+		<minRefireDays>45</minRefireDays>
+		<letterLabel>稀有巨兽: 白熊出没</letterLabel>
+		<letterText>一头{0}游荡到了暖季的地界。它暴躁而强壮, 熊皮与熊掌是猎人眼中的大货——但正面遭遇足以要命。</letterText>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.RareBeastProperties">
+				<kindDef>PolarBear</kindDef>
+				<min>1</min><max>1</max>
+			</li>
+		</modExtensions>
+	</IncidentDef>
+
+	<!-- M1: 废墟遗栈(可搜刮容器投放入口, 长期作为补充渠道; M2 的 KCSG 站点+任务将成为主渠道) -->
+	<IncidentDef>
+		<defName>RK_Incident_RuinCache</defName>
+		<label>ruin supply cache</label>
+		<category>Misc</category>
+		<targetTags><li>Map_PlayerHome</li></targetTags>
+		<workerClass>BlueprintUnlockHSK.IncidentWorker_RuinCache</workerClass>
+		<baseChance>0.4</baseChance>
+		<minRefireDays>18</minRefireDays>
+		<earliestDay>10</earliestDay>
+		<letterLabel>废墟遗栈</letterLabel>
+		<letterText>一支早已散伙的商队在地图边缘留下了{0}件还能翻找的东西: 木桶、麻袋、板条箱, 甚至一具立着的旧铠甲。
+
+搜刮它们需要一名小人去"打开", 里面可能剩着物资, 也可能夹着前人来不及带走的图纸。</letterText>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.RuinCacheProperties">
+				<count>3~6</count>
+				<clusterRadius>5</clusterRadius>
+				<buildings>
+					<li>Rustic_LootBarrelClosed</li>
+					<li>Rustic_LootSackClosed</li>
+					<li>Rustic_LootCrate</li>
+					<li>Rustic_LootShelf</li>
+					<li>Rustic_LootWeaponRack</li>
+					<li>Rustic_LootBonePile</li>
+					<li>Rustic_LootBookPile</li>
+					<li>Rustic_LootArmorStatue</li>
+					<li>Rustic_LootTechCache</li>
+				</buildings>
+			</li>
+		</modExtensions>
+	</IncidentDef>
+</Defs>

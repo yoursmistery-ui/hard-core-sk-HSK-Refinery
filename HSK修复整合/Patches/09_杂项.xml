@@ -1,0 +1,798 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         09_杂项.xml  (2026-08-22 按大类合并; 2026-08-27 拆分)
+         合并自 12 个补丁: 06_ModAssistant标记.xml, 10_Compulsion精神崩溃游荡.xml, 19_奥德赛特化武器屏蔽.xml, 20_SeedsPlease琥珀棕榈适配.xml, 22_皮革形容词冲突修复.xml, 23_老人背景暴力禁用剥离.xml, 24_奥德赛独特武器点射修复.xml, 37_纳米科技框架与碳纳米管配方.xml, 48_异种人种族白名单.xml, 56_艺术描述语法修复.xml, 57_心灵长枪护甲修复.xml, 60_CE零护甲Belt装备修复.xml
+         ⚠ 2026-08-27 工业内容迁移: 纳米科技框架与碳纳米管配方(37) 已迁至 工业科研大修 A5_纳米科技配方.xml。
+         ModAssistant + Compulsion + 奥德赛屏蔽/点射 + SeedsPlease + 皮革形容词 + 老人背景 + 异种白名单 + 艺术描述 + CE 零护甲。
+         ============================================================ -->
+    <!-- 来源: 06_ModAssistant标记.xml —— 2026-08-28 标记改粉色: 从共享蓝色 NativeAddon 迁到独立类别 HSKFixPack -->
+    <!-- 类别颜色定义见 Defs/ModTypeDefs/HSK修复整合标记.xml (AMA.ModTypeDef color=255,105,180); order=7 排序位不变 -->
+    <!-- 1.6 起 Operation 级 MayRequire 失效, 改用 PatchOperationConditional 门控 settings def 是否存在 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators</xpath>
+        <value>
+            <HSKFixPack>
+                <li>
+                    <id>local.hskfixpack</id>
+                </li>
+            </HSKFixPack>
+        </value>
+    </match>
+</Operation>
+
+    <!-- 来源: 10_Compulsion精神崩溃游荡.xml -->
+<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+    <xpath>Defs/ThinkTreeDef[defName="MeltdownMentalStates"]/thinkRoot/subNodes/li[@Class="ThinkNode_ConditionalMentalState" and state="Compulsion"]/subNodes/li[@Class="ThinkNode_Priority"]/subNodes/li[@Class="SK.JobGiver_Compulsion"]</xpath>
+    <value>
+        <li Class="JobGiver_WanderAnywhere">
+            <maxDanger>Deadly</maxDanger>
+        </li>
+    </value>
+</Operation>
+
+    <!-- 来源: 19_奥德赛特化武器屏蔽.xml -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_Revolver_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_Revolver_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_BoltActionRifle_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_BoltActionRifle_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_ChainShotgun_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_ChainShotgun_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_HeavySMG_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_HeavySMG_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_LMG_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_LMG_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_AssaultRifle_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_AssaultRifle_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_SniperRifle_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_SniperRifle_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_Minigun_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_Minigun_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bow_Great_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Bow_Great_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_ChargeRifle_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_ChargeRifle_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_ChargeLance_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_ChargeLance_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_HellcatRifle_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_HellcatRifle_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_BeamRepeater_Unique"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_BeamRepeater_Unique"]/thingSetMakerTags</xpath>
+        <value>
+            <thingSetMakerTags Inherit="False" />
+        </value>
+    </match>
+</Operation>
+
+    <!-- 来源: 20_SeedsPlease琥珀棕榈适配.xml -->
+<Operation Class="PatchOperationConditional" MayRequire="notfood.seedsplease,vanillaexpanded.ideo.dryads">
+    <xpath>Defs/SeedsPlease.SeedDef[defName="Seed_VDE_AmbrosiaPalm"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <SeedsPlease.SeedDef ParentName="SeedBase">
+                <defName>Seed_VDE_AmbrosiaPalm</defName>
+                <label>Ambrosia palm seeds</label>
+                <sources>
+                    <li>VDE_AmbrosiaPalm</li>
+                </sources>
+                <graphicData>
+                    <texPath>Things/Item/Seeds/Ambrosia</texPath>
+                    <graphicClass>Graphic_StackCount</graphicClass>
+                </graphicData>
+            </SeedsPlease.SeedDef>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+<Operation Class="PatchOperationConditional" MayRequire="notfood.seedsplease,vanillaexpanded.ideo.dryads">
+    <xpath>Defs/RecipeDef[defName="ExtractSeed_VDE_AmbrosiaPalm"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <RecipeDef ParentName="ExtractSeed">
+                <defName>ExtractSeed_VDE_AmbrosiaPalm</defName>
+                <label>Extract ambrosia palm seeds</label>
+                <description>Extract seeds from ambrosia fruit.</description>
+                <ingredients>
+                    <li>
+                        <filter>
+                            <thingDefs>
+                                <li>Ambrosia</li>
+                            </thingDefs>
+                        </filter>
+                        <count>25</count>
+                    </li>
+                </ingredients>
+                <fixedIngredientFilter>
+                    <thingDefs>
+                        <li>Ambrosia</li>
+                    </thingDefs>
+                </fixedIngredientFilter>
+                <products>
+                    <Seed_VDE_AmbrosiaPalm>3</Seed_VDE_AmbrosiaPalm>
+                </products>
+            </RecipeDef>
+        </value>
+    </nomatch>
+</Operation>
+
+    <!-- 来源: 22_皮革形容词冲突修复.xml -->
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_FinishedRed"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_FinishedRed"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>embossed red leather</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_FinishedRed"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>embossed red leather</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_FinishedBlack"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_FinishedBlack"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>patent leather</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_FinishedBlack"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>patent leather</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_NubuckYellow"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_NubuckYellow"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>yellow nubuck</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_NubuckYellow"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>yellow nubuck</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_UpholsteryBordeaux"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryBordeaux"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>bordeaux upholstery leather</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryBordeaux"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>bordeaux upholstery leather</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_UpholsteryGray"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryGray"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>gray upholstery leather</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryGray"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>gray upholstery leather</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    
+    
+<Operation Class="PatchOperationConditional" MayRequire="vitech.leathertanning">
+    <xpath>Defs/ThingDef[defName="Leather_UpholsteryBrown"]/stuffProps/stuffAdjective</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryBrown"]/stuffProps/stuffAdjective</xpath>
+        <value>
+            <stuffAdjective>oxblood upholstery leather</stuffAdjective>
+        </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Leather_UpholsteryBrown"]/stuffProps</xpath>
+        <value>
+            <stuffAdjective>oxblood upholstery leather</stuffAdjective>
+        </value>
+    </nomatch>
+</Operation>
+
+    <!-- 来源: 23_老人背景暴力禁用剥离.xml -->
+<Operation Class="PatchOperationConditional" MayRequire="DimonSever000.ElderhoodBackstory">
+    <xpath>Defs/BackstoryDef[defName="Elderhood_RepentantKiller"]/workDisables/li[text()="Violent"]</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/BackstoryDef[defName="Elderhood_RepentantKiller"]/workDisables/li[text()="Violent"]</xpath>
+    </match>
+</Operation>
+
+    <!-- 来源: 24_奥德赛独特武器点射修复.xml -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_Minigun_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_Minigun_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+        <value>
+            <aimedBurstShotCount>10</aimedBurstShotCount>
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_AssaultRifle_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_AssaultRifle_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+        <value>
+            <aimedBurstShotCount>2</aimedBurstShotCount>
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_ChargeRifle_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_ChargeRifle_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+        <value>
+            <aimedBurstShotCount>2</aimedBurstShotCount>
+        </value>
+    </match>
+</Operation>
+
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gun_HeavySMG_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="Gun_HeavySMG_Unique"]/comps/li[@Class="CombatExtended.CompProperties_FireModes"]/aimedBurstShotCount</xpath>
+        <value>
+            <aimedBurstShotCount>2</aimedBurstShotCount>
+        </value>
+    </match>
+</Operation>
+
+    <!-- 来源: 48_异种人种族白名单.xml -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Human"]/alienRace/raceRestriction/xenotypeList</xpath>
+    <value>
+        <xenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Baseliner</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+        </xenotypeList>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/alienRace/raceRestriction/xenotypeList</xpath>
+    <value>
+        <xenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Baseline_Nova</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+        </xenotypeList>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/alienRace/raceRestriction/xenotypeList</xpath>
+    <value>
+        <xenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Baseline_Dova</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+        </xenotypeList>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/alienRace/raceRestriction/xenotypeList</xpath>
+    <value>
+        <xenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Baseline_Norbal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+        </xenotypeList>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/alienRace/raceRestriction/xenotypeList</xpath>
+    <value>
+        <xenotypeList>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Baseline_Orassan</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+        </xenotypeList>
+    </value>
+</Operation>
+
+  
+  
+<!-- Ratkin 异种人白名单(2026-08-27 归属修正): Ratkin_OA 的正确归属是金鼠族 mod 自己的
+     Biotech_Race_Patch.xml(它已把 Ratkin_OA 加入 xenotypeList), 本修复包不再充当 Ratkin_OA 的来源。
+     HSK修复整合 local.hskfixpack loadAfter 金鼠族 local.ratkin.goldenhsk, 若此处无条件 Replace 会把
+     金鼠族自带异种抹掉 → OA_RK_Faction / OA_RK_* 职位池(全部指向 Ratkin_OA)被种族白名单拒绝 → 回退智人种。
+     故以"名单里是否已有 Ratkin_OA"门控: 金鼠族在场(已加)→ 命中→让位不覆盖; 未装金鼠族→nomatch→用基线
+     Replace 兜底排除原版异种。xpath 存在性门控(AGENTS §3: 1.6 Operation 级 MayRequire 已失效)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/xenotypeList/li[normalize-space(text())="Ratkin_OA"]</xpath>
+    <nomatch Class="PatchOperationReplace">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/xenotypeList</xpath>
+        <value>
+            <xenotypeList>
+                <li MayRequire="Ludeon.RimWorld.Biotech">RK_XenoType_Ratkin</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech,local.ratkin.clothesweapons">Ratkin_Squirrel</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech,local.ratkin.clothesweapons">Ratkin_Hamster</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech,local.ratkin.clothesweapons">Ratkin_LabRat</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech,local.ratkin.clothesweapons">Ratkin_Waster</li>
+                <li MayRequire="Ludeon.RimWorld.Biotech,local.ratkin.clothesweapons">Ratkin_Vole</li>
+                <li>OAGene_SnowRatkin</li>
+            </xenotypeList>
+        </value>
+    </nomatch>
+</Operation>
+
+
+    <!-- 来源: 56_艺术描述语法修复.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TaleDef[defName="MentalStateSelfHarm"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>pawn_nameFull-&gt;{PAWN_nameFull}</li>
+        <li>pawn_nameShortDef-&gt;{PAWN_nameDef}</li>
+        <li>pawn_possessive-&gt;{PAWN_possessive}</li>
+        <li>pawn_pronoun-&gt;{PAWN_pronoun}</li>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TaleDef[defName="MentalStateApathy"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>pawn_nameFull-&gt;{PAWN_nameFull}</li>
+        <li>pawn_nameShortDef-&gt;{PAWN_nameDef}</li>
+        <li>pawn_possessive-&gt;{PAWN_possessive}</li>
+        <li>pawn_pronoun-&gt;{PAWN_pronoun}</li>
+    </value>
+</Operation>
+    
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/TaleDef[defName="MentalStateCompulsion"]/rulePack/rulesStrings</xpath>
+    <value>
+        <li>pawn_nameFull-&gt;{PAWN_nameFull}</li>
+        <li>pawn_nameShortDef-&gt;{PAWN_nameDef}</li>
+        <li>pawn_possessive-&gt;{PAWN_possessive}</li>
+        <li>pawn_pronoun-&gt;{PAWN_pronoun}</li>
+    </value>
+</Operation>
+
+    <!-- 来源: 57_心灵长枪护甲修复.xml -->
+<Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="Apparel_PsychicShockLance" or defName="Apparel_PsychicInsanityLance" or defName="Apparel_ShardPsychicShockLance" or defName="Apparel_ShardPsychicInsanityLance" or defName="Apparel_BiomutationLance"]/statBases</xpath>
+    <value>
+        <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+        <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+        <ArmorRating_Heat>0.1</ArmorRating_Heat>
+    </value>
+</Operation>
+
+    <!-- 来源: 60_CE零护甲Belt装备修复.xml -->
+<Operation Class="PatchOperationAdd" MayRequire="CETeam.CombatExtended">
+    <xpath>Defs/ThingDef[defName="OrbitalTargeterBombardment" or defName="OrbitalTargeterPowerBeam" or defName="OrbitalTargeterMechCluster" or defName="TornadoGenerator" or defName="Apparel_PackJump" or defName="Apparel_PackBroadshield" or defName="Apparel_CerebrexNode"]/statBases</xpath>
+    <value>
+        <ArmorRating_Sharp>0.1</ArmorRating_Sharp>
+        <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+        <ArmorRating_Heat>0.1</ArmorRating_Heat>
+    </value>
+</Operation>
+
+    <!-- Hospitality 海盗派系警告消除(2026-08-23): "The enemy of my enemy is my friend" 删除了海盗系 permanentEnemy(基类 PirateBandBase 与 Pirate 同节点,连带被删), 运行时 CanEverBeNonHostile=true, Hospitality 据此要求海盗派系必须有 Peaceful 访客组。给 Pirate/CannibalPirate/PirateYttakin/PirateWaster 补 Peaceful 组(结盟后即可接待海盗访客)。不含 Operation 级 MayRequire(1.6 已失效,且本补丁不依赖任何 mod)。 -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/FactionDef[defName="Pirate" or defName="CannibalPirate" or defName="PirateYttakin" or defName="PirateWaster"]/pawnGroupMakers</xpath>
+    <value>
+        <li>
+            <kindDef>Peaceful</kindDef>
+            <options>
+                <Pirate>20</Pirate>
+                <Drifter>10</Drifter>
+                <Scavenger>10</Scavenger>
+            </options>
+        </li>
+    </value>
+</Operation>
+
+    <!-- RPG Inventory 槽位新增/修正(2026-08-25 首版;2026-08-27 追加两个层级槽位并修正重叠):
+         ItemSlotRKScarf   层 OuterClothing / 部位 Neck      → (1,1)
+         ItemSlotRKBackpack 层 kuabao(斜挎包) / 部位 Shoulders → (6,4)  ← 2026-08-27 由 (5,4) 右移一列
+           原因: (5,4) 与 CE 自带的 ItemSlotShouldersCEBackpack(层 Backpack, validationOrder 3291)同坐标;
+                 Slots.MakePreps 按 validationOrder 升序填格, 998 先占位 → 3291 报 "are overlaping" 且不入网格数组,
+                 但两个槽都在 currentSlots 里按 offsets[xPos,yPos] 绘制 → 同一格叠画, CE 背包槽显示异常。
+         ItemSlotRKBackPack 层 BackPack(背包, RAE 8 件) / 部位 Shoulders → (5,1)  ← 新增, 与肩部(5,2)/CE背包(5,4)同列
+         ItemSlotRKYaodai   层 yaodai(腰带包, zsyg) / 部位 Torso          → (6,5)  ← 新增
+         四处目标坐标均为原 placeholder 空位(placeholder=true → Valid=false 永不匹配物品, 被真槽顶替后 hidden 不渲染, 无重叠)。
+         ⚠ 注意 ApparelLayerDef `Backpack`(CE, drawOrder 220) 与 `BackPack`(RAE, drawOrder 250) 是两个不同 def(大小写敏感),
+           中文 label 都是「背包」, 必须各配一个槽, 不能只靠 CE 补丁。
+         因 Operation 级 MayRequire 在 1.6 已失效, 用 xpath 存在性门控: 未装 RPG Inventory 时该节点不存在, 整段跳过。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>1</xPos>
+                <yPos>1</yPos>
+                <validationOrder>999</validationOrder>
+                <defName>ItemSlotRKScarf</defName>
+                <label>颈部</label>
+                <apparelLayers><li>OuterClothing</li></apparelLayers>
+                <bodyPartGroups><li>Neck</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>6</xPos>
+                <yPos>4</yPos>
+                <validationOrder>998</validationOrder>
+                <defName>ItemSlotRKBackpack</defName>
+                <label>腰部配件</label>
+                <apparelLayers><li>kuabao</li></apparelLayers>
+                <bodyPartGroups><li>Shoulders</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>5</xPos>
+                <yPos>1</yPos>
+                <validationOrder>997</validationOrder>
+                <defName>ItemSlotRKBackPack</defName>
+                <label>背包</label>
+                <apparelLayers><li>BackPack</li></apparelLayers>
+                <bodyPartGroups><li>Shoulders</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>6</xPos>
+                <yPos>5</yPos>
+                <validationOrder>996</validationOrder>
+                <defName>ItemSlotRKYaodai</defName>
+                <label>腰带包</label>
+                <apparelLayers><li>yaodai</li></apparelLayers>
+                <bodyPartGroups><li>Torso</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+        </value>
+    </match>
+</Operation>
+
+    <!-- RPG Inventory 通用层级槽位批量补全(2026-08-27 用户要求「剩下的尽量做通用的, 美狐特有的就不做」):
+         828 件可穿戴服饰中, 补完后仅剩 19 件无槽, 全部是美狐专用层 Miho_Under(11)/Miho_Special(8), 按要求不做。
+         (核对时踩过的坑: _tmp/rpg_slot_check.py 早期版本用 '<layers>' 正则解析, 不容忍 <layers Inherit="False"> /
+          <apparel ...> 这类带属性的节点, 把 RK_Apparel_Vacsuit(实际 layers = Middle+Shell+BackPack, 已落躯干外套槽)
+          和 Ratkin/Alien_Miho(种族 def 的 apparel 渲染覆盖节点 bodyTypeFallback/individualPaths, 根本不是服饰)
+          误判成"缺 layers 的缺陷 def"。正则统一改成 '<tag(?:\s[^>]*)?>' 后归零, 无需改任何 def。)
+         其余 26 件通用服饰按"部位就近 + 可同时穿着的不挤同一格"分成六组, 全部放进新增列 xPos=7
+         (列 0 的内衣/耳饰槽在本环境无任何服饰匹配 → simplified 视图整列折叠, 所以 8 列定义净宽仍是 7 格, 恰好等于 mod 默认 rpgTabWidth 706)。
+         validationOrder 4000+ 高于所有既有槽 → 只接住"没有任何既有槽认领"的物品, 不抢现有槽的归属。
+         另: CE 弹药带 Apparel_Bandolier 是 Webbing 层 + Torso 部位, 而 CE 绑带槽只写 Shoulders → 不新增格, 改为给该槽追加 Torso。
+         全部沿用 xpath 存在性门控(Operation 级 MayRequire 在 1.6 已失效)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs</xpath>
+        <value>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>0</yPos>
+                <validationOrder>4000</validationOrder>
+                <defName>ItemSlotRKOnHead</defName>
+                <label>头部披挂</label>
+                <apparelLayers><li>OnHead</li></apparelLayers>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>1</yPos>
+                <validationOrder>4010</validationOrder>
+                <defName>ItemSlotRKNeckWear</defName>
+                <label>颈饰</label>
+                <apparelLayers><li>Neck</li><li>Amulet</li><li>Belt</li></apparelLayers>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>2</yPos>
+                <validationOrder>4020</validationOrder>
+                <defName>ItemSlotRKHandJewel</defName>
+                <label>手饰</label>
+                <apparelLayers><li>Ring</li><li>Wrist</li></apparelLayers>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>3</yPos>
+                <validationOrder>4030</validationOrder>
+                <defName>ItemSlotRKSecretsBook</defName>
+                <label>秘籍</label>
+                <apparelLayers><li>SecretsBook</li></apparelLayers>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>4</yPos>
+                <validationOrder>4040</validationOrder>
+                <defName>ItemSlotRKArmMiddle</defName>
+                <label>手臂夹层</label>
+                <apparelLayers><li>Middle</li><li>xinpianA</li><li>OARatkin_Middle_Layer</li></apparelLayers>
+                <bodyPartGroups><li>Arms</li><li>Torso</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+            <Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+                <xPos>7</xPos>
+                <yPos>5</yPos>
+                <validationOrder>4050</validationOrder>
+                <defName>ItemSlotRKOuterWear</defName>
+                <label>外层配件</label>
+                <apparelLayers><li>OuterClothing</li></apparelLayers>
+                <bodyPartGroups><li>Arms</li><li>Shoulders</li><li>Torso</li></bodyPartGroups>
+            </Sandy_Detailed_RPG_Inventory.ItemSlotDef>
+        </value>
+    </match>
+</Operation>
+
+    <!-- RPG Inventory 美狐专用层并入已有槽(2026-09-04 用户要求「并入原有层级」):
+         2026-08-27 批量补槽时按「美狐特有的就不做」把 Miho_Under(内衣 11 件)/Miho_Special(特殊穿戴 8 件)留成无槽,
+         现用户指出美狐圣诞装等内衣不进装备栏。
+         不改衣服 <layers>: Miho_Under 被 14 个 PawnKinds_Miho 的 specificApparelRequirements(apparelLayer Miho_Under)
+         引用用于给美狐 NPC 生成内衣, 换层会掉装且改渲染优先级(drawOrder Miho_Under=-5 / Miho_Special=999)。
+         改为把 Miho 层「追加」进两个已有槽的 apparelLayers → 复用原有格, 不新开列、不改 19 件 def:
+           - Miho_Under  → ItemSlotLegsUnderwear(0,4 原版内衣列, 层 Underwear / 部位 Legs): 11 件内衣均含 Legs → 全收。
+             该列此前因无服饰匹配被 simplified 视图折叠, 现由美狐内衣激活(内衣归内衣列, 属"原有层级"非新列)。
+           - Miho_Special → ItemSlotEyeCover(6,0 护眼格, 层 EyeCover, 无 bodyPartGroups): 放大镜/眼镜/口罩等 8 件全收;
+             EyeCover 与 Overhead(帽子)是不同层, 美狐仍可帽子+眼镜同穿。列 6 本就可见 → 零宽度变化。
+         Operation 级 MayRequire 1.6 已失效, 沿用 xpath 存在性门控(目标槽不存在即整段跳过)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotLegsUnderwear']/apparelLayers</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotLegsUnderwear']/apparelLayers</xpath>
+        <value>
+            <li>Miho_Under</li>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotEyeCover']/apparelLayers</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotEyeCover']/apparelLayers</xpath>
+        <value>
+            <li>Miho_Special</li>
+        </value>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotShouldersCEWebbing']/bodyPartGroups</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/Sandy_Detailed_RPG_Inventory.ItemSlotDef[defName='ItemSlotShouldersCEWebbing']/bodyPartGroups</xpath>
+        <value>
+            <li>Torso</li>
+        </value>
+    </match>
+</Operation>
+
+<!-- 帝国贵族武器预算修正(2026-08-27): Vile's Materials Science 将 Empire_Royal_* 的 weaponMoney 统一改为 11620~20000,
+     而 Core_SK 重做的皇家剑(单分子剑/宙斯锤/等离子剑, UltratechMelee/Bladelink tag)市场价约 11800,
+     高于 min 导致 "Cheapest weapon ... could end up weaponless" 警告。将 min 提升到 12000(高于最便宜武器 11800),
+     保留 Vile 的 max=20000。补丁 loadAfter vitech.materialsscience, 保证覆盖其值。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/PawnKindDef[defName="Empire_Royal_Yeoman" or defName="Empire_Royal_Acolyte" or defName="Empire_Royal_Knight" or defName="Empire_Royal_Praetor" or defName="Empire_Royal_Baron" or defName="Empire_Royal_Count" or defName="Empire_Royal_Duke" or defName="Empire_Royal_Consul" or defName="Empire_Royal_Stellarch"]</xpath>
+    <match Class="PatchOperationReplace">
+        <xpath>Defs/PawnKindDef[defName="Empire_Royal_Yeoman" or defName="Empire_Royal_Acolyte" or defName="Empire_Royal_Knight" or defName="Empire_Royal_Praetor" or defName="Empire_Royal_Baron" or defName="Empire_Royal_Count" or defName="Empire_Royal_Duke" or defName="Empire_Royal_Consul" or defName="Empire_Royal_Stellarch"]/weaponMoney</xpath>
+        <value>
+            <weaponMoney>12000~20000</weaponMoney>
+        </value>
+    </match>
+</Operation>
+
+</Patch>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Patch>
+
+<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Vile's Biomes: From The Ground Up</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+		<operations>
+			<!-- <li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_Juniper"]/plant/harvestedThingDef</xpath>
+				<value>
+					<harvestedThingDef>WoodLog</harvestedThingDef>
+				</value>
+			</li> -->
+
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_TreeWillow"]/plant/harvestYield</xpath>
+				<value>
+					<harvestYield>4</harvestYield> 
+				</value>
+			</li>
+
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_TreeDwarfWillow"]/plant/harvestYield</xpath>
+				<value>
+					<harvestYield>16</harvestYield>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Plant_TreeAcacia"]/plant</xpath> 
+				<value>
+					<harvestedThingDef>AcaciaLog</harvestedThingDef>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/ThingDef[defName="Plant_TreeAcacia"]/plant/harvestYield</xpath>
+				<value>
+					<harvestYield>6</harvestYield> <!-- was 75 -->
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Plant_TreeSpruce"]/plant</xpath> 
+				<value>
+					<harvestedThingDef>Firewood_Spruce</harvestedThingDef>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ThingDef[defName="Plant_TreeDwarfWillow"]/plant</xpath> 
+				<value>
+					<harvestedThingDef>Firewood_Willow</harvestedThingDef>
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs</xpath> 
+				<value>
+					<ThingDef ParentName="FirewoodBase">
+						<defName>Firewood_Acacia</defName>
+						<label>acacia firewood</label>
+						<graphicData>
+							<color>(145,107,90)</color>
+						</graphicData>
+						<description>Green firewood used for fuel. 
+Burn rate: 1.9 hrs</description>
+						<statBases>
+							<BurnDurationHours>1.9</BurnDurationHours>
+						</statBases>
+						<recipeMaker>
+								<workAmount>900</workAmount>
+						</recipeMaker>
+						<costList>
+							<AcaciaLog>3</AcaciaLog>
+						</costList>
+					</ThingDef>
+	
+				</value>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs</xpath> 
+				<value>
+					<ThingDef ParentName="FirewoodSeasonedBase">
+						<defName>FirewoodSeasoned_Acacia</defName>
+						<label>acacia firewood, seasoned</label>
+						<graphicData>
+							<color>(145,107,90)</color>
+						</graphicData>
+						<description>Seasoned firewood used for fuel. 
+Burn rate: 2.6 hrs</description>
+						<statBases>
+							<BurnDurationHours>2.6</BurnDurationHours>
+						</statBases>
+					</ThingDef>
+	
+				</value>
+			</li>
+			
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MakeFlourFromSeeds"]/ingredients/li/filter/thingDefs</xpath> 
+				<value>
+					<li>Seed_Acacia</li>
+				</value>
+			</li>
+
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/RecipeDef[defName="MakeFlourFromSeeds"]/fixedIngredientFilter/thingDefs</xpath> 
+				<value>
+					<li>Seed_Acacia</li>
+				</value>
+			</li>
+
+
+
+		</operations>
+	</match>
+    </Operation>
+
+</Patch>

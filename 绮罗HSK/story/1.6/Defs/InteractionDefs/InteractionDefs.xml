@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <InteractionDef>
+    <defName>Kiiro_MerchantGift</defName>
+    <label>Merchant Gift</label>
+    <workerClass>Kiiro_Event.InteractionWorker_MerchantGift</workerClass>
+    <symbol>Kiiro_Event/Mote/SpeechSymbols/Gift</symbol>
+    <recipientThought>Kiiro_MerchantGift_Received</recipientThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] talked with [RECIPIENT_nameDef]happily, and [INITIATOR_nameDef] send [RECIPIENT_nameDef] a gift.</li>
+        <li>r_logentry->[INITIATOR_nameDef] have had a great conversastion with [RECIPIENT_nameDef], therefore [INITIATOR_nameDef] gifted a personal item to [RECIPIENT_nameDef].</li>
+        <li>r_logentry->[INITIATOR_nameDef] gifted [RECIPIENT_nameDef] a local specialty.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+
+
+
+  <InteractionDef>
+    <defName>Kiiro_MerchantPeddle</defName>
+    <label>Merchant Peddling</label>
+    <workerClass>Kiiro_Event.InteractionWorker_MerchantPeddle</workerClass>
+    <symbol>Kiiro_Event/Mote/SpeechSymbols/Peddle</symbol>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry->[INITIATOR_nameDef] tried to sell products to[RECIPIENT_nameDef] who gladly bought it.</li>
+        <li>r_logentry->[INITIATOR_nameDef] tricked [RECIPIENT_nameDef] into buying an item with own pockets money.</li>
+        <li>r_logentry->[RECIPIENT_nameDef] buyed form [INITIATOR_nameDef] their favoring items with their own pockets money.</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+
+
+</Defs>

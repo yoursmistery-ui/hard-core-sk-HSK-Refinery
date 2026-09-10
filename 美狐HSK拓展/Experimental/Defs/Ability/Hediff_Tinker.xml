@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_Start_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (행성 적응중)</label>
+		<comps>
+            <li Class="HediffCompProperties_Disappears">
+                 <disappearsAfterTicks>5500~6500</disappearsAfterTicks>
+            </li>
+        	<li Class="MoharHediffs.HediffCompProperties_PostRemoveTrigger_HediffAdd">
+	 		    	<triggeredHediff>
+			    		<li>Miho_Tinker_I_Hediff</li>
+			    		<li>Miho_Skill_I_Repair_Hediff</li>
+			    	</triggeredHediff>
+	        </li>		
+		</comps>
+	</HediffDef>
+	
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_I_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (I)</label>
+		<comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.066</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+			<li Class="MoharHediffs.HediffCompProperties_HediffNullifier">
+				<hediffToNullify>
+					<li>Miho_Summoner_Start_Hediff</li>
+					<li>Miho_Shamaness_Start_Hediff</li>
+					<li>Miho_Temptress_Start_Hediff</li>
+					<li>Miho_Tinker_Start_Hediff</li>
+				</hediffToNullify>
+			</li>  
+			
+		</comps>
+    <stages>
+      <li>
+        <label>a</label>
+        <minSeverity>0</minSeverity>
+        <becomeVisible>true</becomeVisible>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Tinker_II_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+				</li>
+				</hediffGivers>
+        <statOffsets>
+          <GlobalLearningFactor>0.2</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>b</label>
+        <minSeverity>0.03</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.2</GlobalLearningFactor>
+        </statOffsets>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Skill_II_Accuracy_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+					<partsToAffect>
+						<li>Brain</li>
+					</partsToAffect>
+				</li>
+				</hediffGivers>
+      </li>
+      <li>
+        <label>c</label>
+        <minSeverity>0.2</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.2</GlobalLearningFactor>
+        </statOffsets>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Skill_II_Armor_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+					<partsToAffect>
+						<li>Brain</li>
+					</partsToAffect>
+				</li>
+				</hediffGivers>
+      </li>
+      <li>
+        <label>d</label>
+        <minSeverity>0.3</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.2</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+	</HediffDef>
+	
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_II_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (II)</label>
+		<comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.033</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+			<li Class="MoharHediffs.HediffCompProperties_HediffNullifier">
+				<hediffToNullify>
+					<li>Miho_Summoner_Start_Hediff</li>
+					<li>Miho_Shamaness_Start_Hediff</li>
+					<li>Miho_Temptress_Start_Hediff</li>
+					<li>Miho_Tinker_Start_Hediff</li>
+				</hediffToNullify>
+			</li>  			
+		</comps>
+    <stages>
+      <li>
+        <label>a</label>
+        <minSeverity>0</minSeverity>
+        <becomeVisible>true</becomeVisible>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Tinker_III_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+				</li>
+				</hediffGivers>
+        <statOffsets>
+          <GlobalLearningFactor>0.4</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>b</label>
+        <minSeverity>0.03</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.4</GlobalLearningFactor>
+        </statOffsets>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Skill_III_Overclock_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+					<partsToAffect>
+						<li>Brain</li>
+					</partsToAffect>
+				</li>
+				</hediffGivers>
+      </li>
+      <li>
+        <label>c</label>
+        <minSeverity>0.2</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.4</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+      <li>
+        <label>d</label>
+        <minSeverity>0.3</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.4</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+	</HediffDef>
+
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_III_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (III)</label>
+		<comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.022</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+			<li Class="MoharHediffs.HediffCompProperties_HediffNullifier">
+				<hediffToNullify>
+					<li>Miho_Summoner_Start_Hediff</li>
+					<li>Miho_Shamaness_Start_Hediff</li>
+					<li>Miho_Temptress_Start_Hediff</li>
+					<li>Miho_Tinker_Start_Hediff</li>
+				</hediffToNullify>
+			</li>  			
+		</comps>
+    <stages>
+      <li>
+        <label>a</label>
+        <minSeverity>0</minSeverity>
+        <becomeVisible>true</becomeVisible>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Tinker_IV_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+				</li>
+				</hediffGivers>
+        <statOffsets>
+          <GlobalLearningFactor>0.6</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+      <li>
+        <label>b</label>
+        <minSeverity>0.03</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.6</GlobalLearningFactor>
+
+        </statOffsets>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Skill_IV_BulletHell_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+					<partsToAffect>
+						<li>Brain</li>
+					</partsToAffect>
+				</li>
+				</hediffGivers>
+      </li>
+      <li>
+        <label>c</label>
+        <minSeverity>0.2</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.6</GlobalLearningFactor>
+
+        </statOffsets>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Skill_IV_RepairAdv_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+					<partsToAffect>
+						<li>Brain</li>
+					</partsToAffect>
+				</li>
+				</hediffGivers>
+      </li>
+      <li>
+        <label>d</label>
+        <minSeverity>0.3</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.6</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+    </stages>
+	</HediffDef>
+
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_IV_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (IV)</label>
+		<comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.022</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+			<li Class="MoharHediffs.HediffCompProperties_HediffNullifier">
+				<hediffToNullify>
+					<li>Miho_Summoner_Start_Hediff</li>
+					<li>Miho_Shamaness_Start_Hediff</li>
+					<li>Miho_Temptress_Start_Hediff</li>
+					<li>Miho_Tinker_Start_Hediff</li>
+				</hediffToNullify>
+			</li>  
+		</comps>
+    <stages>
+      <li>
+        <label>a</label>
+        <minSeverity>0</minSeverity>
+        <becomeVisible>true</becomeVisible>
+				<hediffGivers>
+				<li Class="HediffGiver_Random">
+					<hediff>Miho_Tinker_V_Hediff</hediff>
+					<mtbDays>0.01</mtbDays>
+				</li>
+				</hediffGivers>
+        <statOffsets>
+          <GlobalLearningFactor>0.8</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+      <li>
+        <label>b</label>
+        <minSeverity>0.03</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.8</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+      <li>
+        <label>c</label>
+        <minSeverity>0.2</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.8</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+      <li>
+        <label>d</label>
+        <minSeverity>0.3</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <capMods>
+        </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>0.8</GlobalLearningFactor>
+
+        </statOffsets>
+      </li>
+    </stages>
+	</HediffDef>
+	
+    <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Tinker_V_Hediff</defName>
+		<description>땜장이</description>
+		<label>땜장이 (V)</label> <!-- Preyposter -->
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Agneyastra</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <label>a</label>
+        <minSeverity>0</minSeverity>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <GlobalLearningFactor>1</GlobalLearningFactor>
+        </statOffsets>
+      </li>
+    </stages>
+	</HediffDef>
+	
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_I_Repair_Hediff</defName>
+		<description>수리</description>
+		<label>수리</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Repair</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_II_Armor_Hediff</defName>
+		<description>장갑</description>
+		<label>장갑</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Armor</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_II_Accuracy_Hediff</defName>
+		<description>포술</description>
+		<label>포술</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Accuracy</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_III_Overclock_Hediff</defName>
+		<description>오버</description>
+		<label>오버</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Overclock</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_IV_BulletHell_Hediff</defName>
+		<description>탄지</description>
+		<label>탄지</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_BulletHell</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_IV_RepairAdv_Hediff</defName>
+		<description>수리2</description>
+		<label>수리2</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_RepairAdv</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+
+<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Skill_V_Agneyastra_Hediff</defName>
+		<description>아그니</description>
+		<label>아그니</label>
+		<comps>
+      <li Class="HediffCompProperties_GiveAbility">
+        <abilityDef>Miho_Ability_Agneyastra</abilityDef>
+      </li>
+		</comps>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+</HediffDef>
+</Defs>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef Name="Kiiro_MealBase" ParentName="MealBaseIngredientless" Abstract="true">
+    <stackLimit>25</stackLimit>
+    <rotatable>false</rotatable>
+    <statBases>
+      <Mass>0.2</Mass>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <chairSearchRadius>25</chairSearchRadius>
+      <tableDesired>false</tableDesired>
+    </ingestible>
+  </ThingDef>
+  
+  <ThingDef ParentName="OrganicProductBase">
+    <defName>Kiiro_CuringFood</defName>
+    <label>jerky</label>
+    <description>Cured meat. Not a delicious food, it's salty, however it could be preserved for long. It's portable and provides feeling of fullness. Won't cause food poisoning.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <thingCategories>
+      <li>Foods</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Kiiro_Event/Items/CuringSnack</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <statBases>
+      <MarketValue>5.2</MarketValue>
+      <Mass>0.1</Mass>
+      <Flammability>0.6</Flammability>
+      <WorkToMake>1200</WorkToMake>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Nutrition>0.5</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>6</optimalityOffsetHumanlikes>
+      <tasteThought>Kiiro_AteCuringSnack</tasteThought>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>Kiiro_Satiety</hediffDef>
+          <severity>1.0</severity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>45</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+      </li>
+    </comps>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+  
+  <!-- 小鱼干 -->
+  <ThingDef ParentName="Kiiro_MealBase" MayRequire="Ludeon.RimWorld.Odyssey">
+    <defName>Kiiro_DriedFish</defName>
+    <label>dried fish</label>
+    <description>Made by slicing fresh fish, salting, and then drying. Although highly nutritious, its not suitable as a staple food. Have a long shelf life.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <thingCategories>
+      <li>Foods</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/DriedFish</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <stackLimit>10</stackLimit>
+    <statBases>
+      <MarketValue>5.8</MarketValue>
+      <Mass>0.2</Mass>
+      <Flammability>0.6</Flammability>
+      <WorkToMake>1200</WorkToMake>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Nutrition>0.4</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealSimple</preferability>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>6</optimalityOffsetHumanlikes>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>30</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+      </li>
+    </comps>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+  
+  <!-- 烤鱼串 -->
+  <ThingDef ParentName="Kiiro_MealBase" MayRequire="Ludeon.RimWorld.Odyssey">
+    <defName>Kiiro_GrilledFish</defName>
+    <label>grilled fish</label>
+    <description>Fish skewered on a branch and roasted over fire. Crispy on the outside and tender on the inside.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <thingCategories>
+      <li>Foods</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Kiiro_Event/Meal/GrilledFish</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <stackLimit>10</stackLimit>
+    <statBases>
+      <MarketValue>10</MarketValue>
+      <Mass>0.3</Mass>
+      <Flammability>0.6</Flammability>
+      <WorkToMake>1200</WorkToMake>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Nutrition>0.5</Nutrition>
+    </statBases>
+    <ingestible>
+      <foodType>Meal</foodType>
+      <preferability>MealFine</preferability>
+      <tasteThought>AteFineMeal</tasteThought>
+      <ingestEffect>EatVegetarian</ingestEffect>
+      <ingestSound>Meal_Eat</ingestSound>
+      <optimalityOffsetHumanlikes>6</optimalityOffsetHumanlikes>
+      <optimalityOffsetFeedingAnimals>-75</optimalityOffsetFeedingAnimals>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>3</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Ingredients">
+        <noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+      </li>
+    </comps>
+    <allowedArchonexusCount>10</allowedArchonexusCount>
+  </ThingDef>
+
+</Defs>

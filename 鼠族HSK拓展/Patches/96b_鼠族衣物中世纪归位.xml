@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- ============================================================ -->
+  <!--  96b_鼠族衣物中世纪归位.xml (2026-09-07)                     -->
+  <!--  需求: 工业档衣物节点过挤, 把 15 件中世纪题材衣物移回中世纪,  -->
+  <!--  拆成 3 个新科技节点(均前置 B1, 基础研究台可研究):           -->
+  <!--   ▸ B1d 传统华服 (6,43) ┽ C1: 华服/冬袄/行商服饰/方头巾/发簪 -->
+  <!--   ▸ B1e 教会礼服 (6,46) ┽ B2A: 修女服/修女头纱/十字军长裙/   -->
+  <!--     褶边连衣裙/玫瑰发饰                                      -->
+  <!--   ▸ B1f 御寒装 (6,48) ┽ B2B+C1: 御寒披袍/保暖长衣/披风/      -->
+  <!--     御寒帽/羊毛衫                                            -->
+  <!--  坐标铁律: 该区域中世纪档列边界 x≤6(工业档从 x=7 起),        -->
+  <!--  三个节点必须全放 x=6 列, 否则渲染混进工业簇(2026-09-07)。   -->
+  <!--  所选 15 件制造台均为手动裁缝台(RK_HandTailoringBench,       -->
+  <!--  随 B1 解锁), 中世纪档即可开工; 物品自带 techLevel 全部       -->
+  <!--  已是 Medieval, 无越级问题。                                  -->
+  <!-- ============================================================ -->
+
+  <!-- 1. 新增三个中世纪节点 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs</xpath>
+    <value>
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B1d</defName>
+        <label>鼠族衣物I·传统华服</label>
+        <description>鼠族传统衣冠: 华服/冬袄/行商服饰/方头巾/发簪。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>6.00</researchViewX>
+        <researchViewY>43.00</researchViewY>
+        <baseCost>300</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B1</li>
+        </prerequisites>
+        <techLevel>Medieval</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B1e</defName>
+        <label>鼠族衣物I·教会礼服</label>
+        <description>鼠族教会与典礼服饰: 修女服/修女头纱/十字军长裙/褶边连衣裙/玫瑰发饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>6.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+        <baseCost>300</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B1</li>
+        </prerequisites>
+        <techLevel>Medieval</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B1f</defName>
+        <label>鼠族衣物I·御寒装</label>
+        <description>鼠族御寒衣物: 御寒披袍/毛绒保暖长衣/披风/御寒帽/羊毛衫。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>6.00</researchViewX>
+        <researchViewY>48.00</researchViewY>
+        <baseCost>300</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B1</li>
+        </prerequisites>
+        <techLevel>Medieval</techLevel>
+      </ResearchProjectDef>
+    </value>
+  </Operation>
+
+  <!-- 2. B1d 传统华服 ┽ 5 件自 C1(民用日常) 移入, ThingDef recipeMaker 层 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Huafu"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1d</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Ao"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1d</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_TraderAttire"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1d</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_Kerchief"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1d</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[defName="RK_ZanZi"]/recipeMaker/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1d</researchPrerequisite></value>
+  </Operation>
+
+  <!-- 3. B1e 教会礼服 ┽ 5 件自 B2A(礼服装) 移入, 独立 RecipeDef 层 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_SistersDerss"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1e</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_SistersVeil"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1e</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Crusader"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1e</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_FrillOnepiece"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1e</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_HairCorsage"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1e</researchPrerequisite></value>
+  </Operation>
+
+  <!-- 4. B1f 御寒装 ┽ 3 件自 B2B(冬暖装) + 2 件自 C1(民用日常) 移入, 独立 RecipeDef 层 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_WinterRobe"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1f</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_baonuanneiyi"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1f</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_WhiteCloak"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1f</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_WoolenHat"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1f</researchPrerequisite></value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_Cardigan"]/researchPrerequisite</xpath>
+    <value><researchPrerequisite>Ratkin_Apparel_B1f</researchPrerequisite></value>
+  </Operation>
+
+  <!-- 5. B2A 描述同步(移出 5 件后剩余清单) -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/description</xpath>
+    <value><description>鼠族衣物 II: 侦探裙/侦探帽/振袖/单色外套/科研服/发带。</description></value>
+  </Operation>
+
+</Patch>

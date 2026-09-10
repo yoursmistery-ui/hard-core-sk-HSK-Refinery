@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>Kiiro_TradeWithMerchant</defName>
+    <driverClass>Kiiro_Event.JobDriver_TradeWithKiiroMerchant</driverClass>
+    <reportString>trading with TargetA.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_TradeWithMerchant_Owner</defName>
+    <driverClass>Kiiro_Event.JobDriver_TradeAtMerchant_Owner</driverClass>
+    <reportString>trading with TargetA.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_WanderCashierRoom</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>wandering.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <carryThingAfterJob>true</carryThingAfterJob>
+    <dropThingBeforeJob>false</dropThingBeforeJob>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_OrganizeShelf</defName>
+    <driverClass>Kiiro_Event.JobDriver_OrganizeShelf</driverClass>
+    <reportString>organizing TargetA.</reportString>
+  </JobDef>
+
+  <!-- 使用腌制小食口袋 -->
+  <JobDef>
+    <defName>Kiiro_UseCuringSnackBag</defName>
+    <driverClass>Kiiro_Event.JobDriver_UseCuringSnackBag</driverClass>
+    <reportString>Using curing snack bag.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_DealWithCustomer</defName>
+    <driverClass>Kiiro_Event.JobDriver_DealWithCustomerQueued</driverClass>
+    <reportString>check out.</reportString>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_DealWithMerchant</defName>
+    <driverClass>Kiiro_Event.JobDriver_DealWithMerchant</driverClass>
+    <reportString>shopping.</reportString>
+    <joyDuration>4000</joyDuration>
+    <joyKind>Kiiro_Shopping</joyKind>
+  </JobDef>
+
+  <JobDef>
+    <defName>Kiiro_GoToDeliverMan</defName>
+    <driverClass>Kiiro_Event.JobDriver_GoToDeliverMan</driverClass>
+    <reportString>go to TargetA.</reportString>
+  </JobDef>
+
+</Defs>

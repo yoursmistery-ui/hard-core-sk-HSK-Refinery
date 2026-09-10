@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <packageId>co.uk.epicguru.meleeanimation</packageId>
+  <name>近战动画HSK</name>
+  <author>Epicguru (HSK 本地整合 by ratkin)</author>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>【HSK 本地整合 2026-09-01】Melee Animation 原版本地化（工坊 2944488802 精简，仅 1.6）。小人近战攻击时播放全身骨骼动画（挥砍/横扫/突刺），含处决、决斗、独特技能与绳索。
+
+* 装备近战武器（或近战副武器）的小人攻击时会有完整骨骼动画！
+* 征召近战小人可右键处决/套索敌人。
+* 放置决斗点（杂项栏）可让小人友好切磋。
+* 裁缝台制作绳索装备后克制枪手。
+
+与工作动画HSK/近战挥砍动画HSK 分工：本 mod 管战斗动画（AttackMelee），工作动画HSK 管工作 job 动画；近战挥砍动画HSK 的剑气特效保留（挂在攻击命中事件）。
+原版内容 GPL v3 开源（LICENSE 保留），仅本机整合使用。
+
+【性能补丁 2026-09-06】内含 Patch_RatkinPerf/1.6（zz.AM.RatkinPerfPatch.dll，独立 Harmony 补丁，可整体移除）：P1 全图扫描节流保底40tick；P2 与 Yayo's Animation 双开时短路本 mod 闲暇挥舞动画；P3 渲染热路径 GetAnimator 免锁直查。设置页汉化在 HSK附属mod汉化 的 补译_co_uk_epicguru_meleeanimation。建议进 mod 设置关闭"总是动画武器"（AnimateAtIdle）以大幅降低人口密集时的开销。
+
+【击退修复 2026-09-11】内含 Patch_KnockbackFix/1.6（zz.AM.KnockbackFix.dll，独立 Harmony 补丁，可整体移除）：修 AM_KnockbackFlyer 在"向西击退（Punt）"时飞行时长算出 0 → 坐标被写成 Invalid(-2147483648, 0, -2147483648) 引发的整串红字（Thing.set_Position NRE / de-register out of bounds / Region out of bounds / Cannot deregister drawable while drawing is in progress），以及被踹飞单位卡住·消失·不动的后果。根因是 KnockbackFlyer.GetCellsFromTo 的循环方向写反使落点恒等于起点，SpawnSetup 遂把 ticksFlightTime 覆盖成 0，RecomputePosition 里 0f/0 得 NaN。三层修复：① KnockbackFlyer.SpawnSetup 后置把 ticksFlightTime 保底抬到 1；② PawnFlyer.RecomputePosition 前置做 NaN 兜底；③ 接管 KnockbackFlyer.GetEndCell 落点计算，把"循环方向写反"的缺陷本身修掉——向西击退不再原地落下，也能真的把目标踹出去（顺带不再把落点定在实心格上）。不改 AM 原始 dll、不改任何 XML 数值，详见 dll 头注释。</description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>projectjedi.lightsabers</li>
+    <li>erdelf.humanoidalienraces</li>
+    <li>Krkr.rule56</li>
+    <li>ceteam.combatextended</li>
+    <li>Nals.FacialAnimation</li>
+    <!-- 注意: 未声明 taranchuk.performanceoptimizer — PO 在 HSK 属 EndMod 组(永远最后),
+         内容 mod 不能声明排它之后。PO 兼容补丁(zz.AM.PerformanceOptimizerPatch.dll)
+         靠 zz. 文件名排序天然在 PO 之后加载, 无需 loadAfter。 -->
+  </loadAfter>
+</ModMetaData>

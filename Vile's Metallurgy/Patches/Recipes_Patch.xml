@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Core SK</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+			<operations>
+			<li Class="PatchOperationReplace">
+				<xpath>Defs/RecipeDef[defName="Make_AshFromFecalSludge"]/recipeUsers</xpath>
+				<value>
+					<recipeUsers>
+						 <li>ElectricCrematorium</li>
+		  				 <li>BurnPit</li>
+					</recipeUsers>
+				</value>
+			</li>
+
+	<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="MakeCharcoal_Hand" or defName="MakeCharcoal_Electric"]/label</xpath>
+				<value>
+					<label>make charcoal (x10)</label>
+				</value>
+		</li>
+			<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="MakeCharcoal_Hand" or defName="MakeCharcoal_Electric"]/products/Charcoal</xpath>
+				<value>
+					<Charcoal>10</Charcoal>
+				</value>
+		</li>	
+			
+		
+		<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="MakeActivatedCarbon"]/recipeUsers</xpath>
+				<value>
+					<recipeUsers>
+						<li>meditable</li>
+						<li>DrugLab</li>
+					</recipeUsers>
+				</value>
+		</li>
+		<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="MakeCeramics"]/recipeUsers</xpath>
+				<value>
+					<recipeUsers>
+						<li>ElectricSmelter</li>
+					</recipeUsers>
+				</value>
+		</li>
+		<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="MakeCeramics"]/researchPrerequisite</xpath>
+				<value>
+					<researchPrerequisite>Metals_C1</researchPrerequisite>
+				</value>
+		</li>
+		
+		
+		<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="SmeltWeapon"]/researchPrerequisite</xpath>
+				<value>
+					<researchPrerequisite>Metallurgy_B4</researchPrerequisite>
+				</value>
+		</li>
+		
+		<li Class="PatchOperationReplace">
+			<xpath>Defs/RecipeDef[defName="Make_CannonParts_Forged"]/workAmount</xpath>
+				<value>
+					<workAmount>3000</workAmount>
+				</value>
+		</li>
+		</operations>
+		</match>
+    </Operation>	
+</Patch>	

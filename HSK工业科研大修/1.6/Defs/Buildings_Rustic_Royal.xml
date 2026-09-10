@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 皇家家具与贵族座椅/吧台
+     来源: Medieval Overhaul 1.6.2.2 Buildings_Furniture_Royal + Buildings_Furniture(贵族椅/吧台) 纯原版类 def 移植(2026-08-27)。
+     皇家书架构入 Buildings_Rustic_Book.xml; RoyalChest 未移植, 都铎床 linkableFacilities 已剔除该引用。
+     剥离 MO 床铺疗愈 comp(依赖 DLL)及其 tickerType; Silk→Cloth; 研究 RoyalRusticFurniture→ComplexFurniture;
+     菜单统一挂 Furniture 下"皇家家具"子分类。
+     08-28 HSK 材料体系适配: costList 里的 Gold(在 HSK=金矿)→GoldBar(金锭), 逐件补 ComponentMedieval(中世纪零部件);
+     Silver(银矿)→SilverBar(银锭) 的同类误用一并修正于 Decor/Book/QuestChain/Structures。 -->
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RoyalCloset</defName>
+		<label>皇家衣柜</label>
+		<description>镶金的大衣柜, 衣物收纳得整整齐齐。摆在床附近还能提升些许舒适度。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalCloset</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>3</drawSize>
+		</graphicData>
+		<thingClass>Building</thingClass>
+		<uiIconScale>0.65</uiIconScale>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<size>(1,1)</size>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.6</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<thingCategories>
+			<li>BuildingsMisc</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>140</MaxHitPoints>
+			<WorkToBuild>14500</WorkToBuild>
+			<Mass>45</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>30</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<pathCost>50</pathCost>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<GoldBar>30</GoldBar>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.1</Comfort>
+				</statOffsets>
+				<maxDistance>5</maxDistance>
+				<maxSimultaneous>1</maxSimultaneous>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RoyalArmchair</defName>
+		<label>皇家扶手椅</label>
+		<description>奢华宽大的软垫扶手椅, 消遣放松的典范。可在餐桌、工作台等处使用。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalArmchair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<damageData>
+				<rectN>(0,0,1,0.703125)</rectN>
+				<rectS>(0.09375,0,0.84375,1)</rectS>
+				<rectE>(0,0,0.84375,0.625)</rectE>
+				<rectW>(0.15625,0,0.84375,0.625)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.3, 0.33, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<uiIconScale>0.9</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>14000</WorkToBuild>
+			<Mass>18</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>30</Beauty>
+			<Comfort>0.95</Comfort>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories Inherit="False">
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>110</costStuffCount>
+		<costList>
+			<GoldBar>30</GoldBar>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<pathCost>30</pathCost>
+		<fillPercent>0.40</fillPercent>
+		<designationHotKey>Misc8</designationHotKey>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<building>
+			<isSittable>true</isSittable>
+			<destroySound>BuildingDestroyed_Soft_Small</destroySound>
+		</building>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RoyalThrone</defName>
+		<label>皇家王座</label>
+		<description>为国王或女王而制的华贵座椅, 是权柄的象征。锦缎、雕花与贵金属一样不缺。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/SimpleThrone</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2.5,2.5)</drawSize>
+			<shadowData>
+				<volume>(0.5,0.35,0.4)</volume>
+			</shadowData>
+			<damageData>
+				<rect>(0.2,0,2, 0.6, 0.6)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.75</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>22000</WorkToBuild>
+			<Mass>40</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>45</Beauty>
+			<Comfort>0.95</Comfort>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+			<li>Stony</li>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>125</costStuffCount>
+		<costList>
+			<RK_Silk>50</RK_Silk>
+			<ComponentMedieval>3</ComponentMedieval>
+		</costList>
+		<pathCost>30</pathCost>
+		<fillPercent>0.40</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<building>
+			<isSittable>true</isSittable>
+			<paintable>true</paintable>
+			<destroySound>BuildingDestroyed_Soft_Small</destroySound>
+		</building>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<thingSetMakerTags>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableGatherSpotBase">
+		<defName>Rustic_RoyalTable2x2c</defName>
+		<label>皇家餐桌 (2x2)</label>
+		<description>贴金裹绸的方桌, 四人对坐正好谈成一桩生意。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalTable2x2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<size>(2,2)</size>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>15000</WorkToBuild>
+			<Mass>15</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>25</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">15</StyleDominance>
+		</statBases>
+		<costList>
+			<GoldBar>50</GoldBar>
+			<RK_Silk>50</RK_Silk>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<costStuffCount>50</costStuffCount>
+		<rotatable>false</rotatable>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableGatherSpotBase">
+		<defName>Rustic_RoyalTable2x4c</defName>
+		<label>皇家长桌 (2x4)</label>
+		<description>能坐下整厅宾客的镀金长桌, 宴饮与议事两相宜。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalTable2x4</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,6)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>30000</WorkToBuild>
+			<Mass>20</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>50</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">30</StyleDominance>
+		</statBases>
+		<size>(2,4)</size>
+		<costStuffCount>95</costStuffCount>
+		<costList>
+			<GoldBar>100</GoldBar>
+			<RK_Silk>100</RK_Silk>
+			<ComponentMedieval>3</ComponentMedieval>
+		</costList>
+		<building>
+			<buildingSizeCategory>Medium</buildingSizeCategory>
+		</building>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableBase">
+		<defName>Rustic_RoyalEndTable</defName>
+		<label>皇家床头桌</label>
+		<description>描金的小床头柜, 让紧邻的床铺更舒适。须贴在床头一侧, 同一张床放多个不叠加。</description>
+		<surfaceType>Item</surfaceType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalEndTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(0.3, 0.6, 0.3)</volume>
+			</shadowData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>10000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>30</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<pathCost>30</pathCost>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<costStuffCount>30</costStuffCount>
+		<costList>
+			<GoldBar>20</GoldBar>
+			<ComponentMedieval>1</ComponentMedieval>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.1</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<mustBePlacedAdjacentCardinalToBedHead>true</mustBePlacedAdjacentCardinalToBedHead>
+			</li>
+		</comps>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<castEdgeShadows>false</castEdgeShadows>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>Rustic_RoyalDresser</defName>
+		<label>皇家梳妆台</label>
+		<description>金框镶边的雅致梳妆台, 为附近所有床铺提供舒适加成。同一张床放多个不叠加。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalDresser</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,1)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>42</pathCost>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<GoldBar>40</GoldBar>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<statBases>
+			<MaxHitPoints>130</MaxHitPoints>
+			<Mass>25</Mass>
+			<WorkToBuild>24000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">10</StyleDominance>
+		</statBases>
+		<size>(2,1)</size>
+		<designationHotKey>Misc12</designationHotKey>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.10</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>6</maxDistance>
+			</li>
+		</comps>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="ArtableBedBase">
+		<defName>Rustic_RoyalTudorBed</defName>
+		<label>皇家都铎大床</label>
+		<description>嵌金镂花的华贵大床, 出身不凡者的安眠之所。舒适、美观, 本身即是一件艺术品, 可睡两人。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RoyalTudorBed</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4.05,4.05)</drawSize>
+			<damageData>
+				<rect>(0,0.05,2,1.95)</rect>
+			</damageData>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>Rustic_RoyalEndTable</li>
+					<li>Rustic_RoyalDresser</li>
+					<li>Rustic_RoyalCloset</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<statBases>
+			<MaxHitPoints>220</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<WorkToBuild>60000</WorkToBuild>
+			<Mass>85</Mass>
+			<Beauty>100</Beauty>
+			<BedRestEffectiveness>1.15</BedRestEffectiveness>
+			<Comfort>0.95</Comfort>
+			<ImmunityGainSpeedFactor>1.07</ImmunityGainSpeedFactor>
+			<SurgerySuccessChanceFactor>1</SurgerySuccessChanceFactor>
+			<StyleDominance MayRequire="Ludeon.RimWorld.Ideology">30</StyleDominance>
+		</statBases>
+		<size>(2,2)</size>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>120</costStuffCount>
+		<costList>
+			<GoldBar>70</GoldBar>
+			<RK_Silk>200</RK_Silk>
+			<ComponentMedieval>4</ComponentMedieval>
+		</costList>
+		<building>
+			<bed_showSleeperBody>False</bed_showSleeperBody>
+			<bed_healPerDay/>
+		</building>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<fillPercent>0.5</fillPercent>
+		<pathCost>42</pathCost>
+		<leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+		<staticSunShadowHeight>0.17</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<designationHotKey>Misc4</designationHotKey>
+		<techLevel>Medieval</techLevel>
+		<constructionSkillPrerequisite>9</constructionSkillPrerequisite>
+		<uiIconScale>0.75</uiIconScale>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>Rustic_RusticNobleChair</defName>
+		<label>乡村贵族椅</label>
+		<description>一把体面又舒适的高背椅, 餐桌旁、工作台边都撑得起场面。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RusticNobleChair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<damageData>
+				<rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+				<rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+				<rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+				<rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.23, 0.26, 0.23)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>12000</WorkToBuild>
+			<Mass>7</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>12</Beauty>
+			<Comfort>0.72</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>
+		<costList>
+			<ComponentMedieval>2</ComponentMedieval>
+		</costList>
+		<pathCost>30</pathCost>
+		<designationHotKey>Misc7</designationHotKey>
+		<fillPercent>0.35</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="TableGatherSpotBase">
+		<defName>Rustic_RusticCounter1x3c</defName>
+		<label>吧台 (1x3)</label>
+		<description>三尺长的木吧台, 麦酒与流言都在此交接。</description>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Counter</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5,3)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>10</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>1</Beauty>
+		</statBases>
+		<size>(3,1)</size>
+		<costStuffCount>60</costStuffCount>
+		<costList>
+			<ComponentMedieval>1</ComponentMedieval>
+		</costList>
+		<designationCategory>Furniture</designationCategory>
+		<researchPrerequisites Inherit="False">
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+</Defs>

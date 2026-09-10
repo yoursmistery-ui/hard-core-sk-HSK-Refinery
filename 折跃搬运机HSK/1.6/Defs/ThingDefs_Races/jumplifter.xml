@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <ThingDef ParentName="LightMechanoid">
+      <defName>Mech_JumpLifter</defName>
+      <label>jump lifter</label>
+      <description>A small hauling mechanoid equipped with a micro jump drive. It can momentarily form a wormhole between its current location and destination, allowing for short-range teleportation. Due to the limitations of the jump drive, it cannot be used for long-distance travel such as with caravans, but it can perform successive jumps across most colony-sized distances. Lacking a ranged weapon, it can make only weak melee attacks.</description>
+      <statBases>
+        <MoveSpeed>5.2</MoveSpeed>
+      </statBases>
+      <race>
+        <mechEnabledWorkTypes>
+          <li>Hauling</li>
+        </mechEnabledWorkTypes>
+        <lifeStageAges>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>0</minAge>
+            <soundWounded>Pawn_Mech_Lifter_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Lifter_Death</soundDeath>
+            <soundCall>Pawn_Mech_Lifter_Call</soundCall>
+          </li>
+          <li>
+            <def>MechanoidFullyFormed</def>
+            <minAge>100</minAge>
+            <soundWounded>Pawn_Mech_Lifter_Wounded</soundWounded>
+            <soundDeath>Pawn_Mech_Lifter_Death</soundDeath>
+            <soundCall>Pawn_Mech_Lifter_Call</soundCall>
+          </li>
+        </lifeStageAges>
+        <waterCellCost>1</waterCellCost>
+      </race>
+      <comps>
+        <li Class="AutoBlink.CompProperties_AutoBlink">
+          <!-- <gizmoIconPath></gizmoIconPath> -->
+          <blinkIntervalTicks>60</blinkIntervalTicks>
+          <delayAfterEligibleTicks>4</delayAfterEligibleTicks>
+          <cellsBeforeTarget>3</cellsBeforeTarget>
+          <maxDistanceToBlink>400</maxDistanceToBlink>
+          <minDistanceToBlink>10</minDistanceToBlink>
+          <postBlinkStanceTicks>0</postBlinkStanceTicks>
+          <excludedJobDefs>
+            <li>GotoWander</li>
+            <li>Carried</li>
+          </excludedJobDefs>
+
+          <preBlinkSoundDefs>
+            <li>AutoBlink_Skip_Small</li>
+          </preBlinkSoundDefs>
+          <postBlinkSoundDefs>
+            <li>AutoBlink_Skip_Exit_Small</li>
+          </postBlinkSoundDefs>
+
+          <preBlinkEffecterDefs>
+            <li>Skip_Entry</li>
+          </preBlinkEffecterDefs>
+
+          <postBlinkEffecterDefs>
+            <li>Skip_ExitNoDelay</li>
+          </postBlinkEffecterDefs>
+
+          <preBlinkMoteDefs/>
+          <postBlinkMoteDefs/>
+
+        </li>
+      </comps>
+    </ThingDef>
+    
+    <PawnKindDef ParentName="NonCombatLightMechanoidKind">
+      <defName>Mech_JumpLifter</defName>
+      <label>jump lifter</label>
+      <race>Mech_JumpLifter</race>
+      <lifeStages>
+        <li>
+          <bodyGraphicData>
+            <texPath>Things/Pawn/Mechanoid/Jump_Lifter</texPath>
+            <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Jump_Lifter</maskPath>
+            <shaderType>CutoutWithOverlay</shaderType>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.1</drawSize>
+          </bodyGraphicData>
+        </li>
+        <li>
+          <bodyGraphicData>
+            <texPath>Things/Pawn/Mechanoid/Jump_Lifter_Ancient</texPath>
+            <maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Jump_Lifter</maskPath>
+            <shaderType>CutoutWithOverlay</shaderType>
+            <graphicClass>Graphic_Multi</graphicClass>
+            <drawSize>1.1</drawSize>
+          </bodyGraphicData>
+        </li>
+      </lifeStages>
+    </PawnKindDef>
+
+</Defs>

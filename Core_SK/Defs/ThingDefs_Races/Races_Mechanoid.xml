@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ============================ Mechanoids ========================== -->
+
+	<!--  ReplaceExtended into BaseMechanoid-->
+	<!-- 	<ThingDef ParentName="BasePawn" Name="SK_BaseMechanoid" Abstract="True">
+		<statBases>
+			<MarketValue>1200</MarketValue>
+			<Mass>70</Mass>
+			<PsychicSensitivity>0.5</PsychicSensitivity>
+			<ToxicResistance>1</ToxicResistance>
+			<Flammability>0</Flammability>
+			<ComfyTemperatureMin>-100</ComfyTemperatureMin>
+			<ComfyTemperatureMax>450</ComfyTemperatureMax>
+			<MeatAmount>0</MeatAmount>
+			<SmokeSensitivity>0</SmokeSensitivity>
+			<ArmorRating_Heat>0.8</ArmorRating_Heat>
+			<GermResistance>1.0</GermResistance>
+			<GermContainment>1.0</GermContainment>
+			<NightVisionEfficiency>1</NightVisionEfficiency>
+			<BandwidthCost MayRequire="Ludeon.RimWorld.Biotech">1</BandwidthCost>
+			<ControlTakingTime MayRequire="Ludeon.RimWorld.Biotech">12</ControlTakingTime>
+			<ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+			<MechEnergyLossPerHP MayRequire="Ludeon.RimWorld.Biotech">0.33</MechEnergyLossPerHP>
+			<WastepacksPerRecharge MayRequire="Ludeon.RimWorld.Biotech">5</WastepacksPerRecharge>
+			<WorkSpeedGlobal MayRequire="Ludeon.RimWorld.Biotech">0.5</WorkSpeedGlobal>
+		</statBases>
+		<receivesSignals>true</receivesSignals>
+		<tradeability>None</tradeability>
+		<race>
+			<fleshType>Mechanoid</fleshType>
+			<needsRest>false</needsRest>
+			<hasGenders>false</hasGenders>
+			<foodType>None</foodType>
+			<lifeExpectancy>2500</lifeExpectancy>
+			<hediffGiverSets>
+				<li>MechanoidStandard</li>
+			</hediffGiverSets>
+			<bloodDef>Filth_MachineBits</bloodDef>
+			<nameGenerator MayRequire="Ludeon.RimWorld.Biotech">NamerMech</nameGenerator>
+			<soundCallIntervalRange>1000~2000</soundCallIntervalRange>
+			<soundCallIntervalFriendlyFactor>2</soundCallIntervalFriendlyFactor>
+			<thinkTreeConstant MayRequire="Ludeon.RimWorld.Biotech">MechConstant</thinkTreeConstant>
+		</race>
+		<comps>
+			<li Class="CompProperties_CanBeDormant" />
+			<li Class="CompProperties_WakeUpDormant">
+				<wakeUpOnDamage>true</wakeUpOnDamage>
+				<wakeUpCheckRadius>30</wakeUpCheckRadius>
+				<wakeUpSound>MechanoidsWakeUp</wakeUpSound>
+			</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech" Class="CompProperties_OverseerSubject">
+				<needsOverseerEffect>MechUncontrolled</needsOverseerEffect>
+				<delayUntilFeralCheck>60000</delayUntilFeralCheck>
+				<feralMtbDays>10</feralMtbDays>
+				<feralCascadeRadialDistance>25</feralCascadeRadialDistance>
+			</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech" Class="CompProperties_MechRepairable" />
+			<li>
+				<compClass>CombatExtended.CompAmmoGiver</compClass>
+			</li>
+		</comps>
+	</ThingDef> -->
+
+	<!-- Centipede - abstract -->
+	<ThingDef Abstract="True" Name="MechCentipede" ParentName="BaseMechanoid">
+		<description>Heavy combat mechanoids that glide on dozens of tiny legs. Their thick carpace and firepower makes them very effective against bunched-up static defenders. They are somewhat vulnerable to mobile hit-and-run tactics.</description>
+		<statBases />
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>50</power>
+				<cooldownTime>3.5</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>16</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>MechanicalCentipede</body>
+			<baseBodySize>1.1</baseBodySize>
+			<baseHealthScale>4.4</baseHealthScale>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+			<mechWeightClass>Heavy</mechWeightClass>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>10</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>19</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>14</texOverrideIndex>
+					<spawnChance>0.5</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<butcherProducts>
+			<Plasteel>8</Plasteel>
+			<DepletedUranium>9</DepletedUranium>
+			<CarbonAlloy>6</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>QuadrupedLow</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- Centipede - blaster -->
+	<ThingDef ParentName="MechCentipede">
+		<defName>Mech_CentipedeBlaster</defName>
+		<label>centipede blaster</label>
+	</ThingDef>
+
+	<!-- Centipede - minigun -->
+	<ThingDef ParentName="MechCentipede">
+		<defName>Mech_CentipedeGunner</defName>
+		<label>centipede gunner</label>
+	</ThingDef>
+
+	<!-- Centipede - burner -->
+	<ThingDef ParentName="MechCentipede">
+		<defName>Mech_CentipedeBurner</defName>
+		<label>centipede burner</label>
+	</ThingDef>
+
+	<!-- Scyther -->
+	<ThingDef ParentName="BaseMechanoid">
+		<defName>Mech_Scyther</defName>
+		<label>Scyther</label>
+		<description>Scythers are fast, spindly, armored human-sized combat Mechanoids. They usually carry one primary ranged weapon, and their bodies are adorned with two articulated blades to make them deadly in melee combat. They don't use cover. They are best handled by concentrated, overwhelming force.</description>
+		<statBases>
+			<Mass>130</Mass>
+			<MoveSpeed>3.9</MoveSpeed>
+			<ArmorRating_Blunt>6</ArmorRating_Blunt>
+			<ArmorRating_Sharp>4</ArmorRating_Sharp>
+			<MeatAmount>0</MeatAmount>
+			<CarryWeight>120</CarryWeight>
+			<CarryBulk>60</CarryBulk>
+			<MaxHitPoints>200</MaxHitPoints>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<ShootingAccuracyPawn>1.8</ShootingAccuracyPawn>
+			<MeleeDodgeChance>0.08</MeleeDodgeChance>
+			<MeleeCritChance>0.18</MeleeCritChance>
+			<MeleeParryChance>0.09</MeleeParryChance>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">2</BandwidthCost>
+		</statBases>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>left blade</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>43</power>
+				<cooldownTime>1.65</cooldownTime>
+				<linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>25.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>45.4</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>left blade</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>1.33</cooldownTime>
+				<linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>40</armorPenetrationSharp>
+				<armorPenetrationBlunt>20</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>right blade</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>43</power>
+				<cooldownTime>1.65</cooldownTime>
+				<linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>25.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>45.4</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>right blade</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>24</power>
+				<cooldownTime>1.33</cooldownTime>
+				<linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>40</armorPenetrationSharp>
+				<armorPenetrationBlunt>20</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>5.9</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>1.875</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>Scyther</body>
+			<baseBodySize>1.1</baseBodySize>
+			<baseHealthScale>3.2</baseHealthScale>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scyther_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scyther_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>18</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>15</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<butcherProducts>
+			<Plasteel>4</Plasteel>
+			<DepletedUranium>5</DepletedUranium>
+			<CarbonAlloy>4</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Humanoid</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- Stalker -->
+	<!-- 	<ThingDef Name="LancerMechanoidWalker" ParentName="BaseMechanoid">
+		<defName>Mech_Lancer</defName>
+		<label>Lancer</label>
+		<description>Lancer are agile, lanky, human-sized combat Mechanoids. They usually carry one primary ranged weapon, and their bodies are adorned with two articulated blades to make them deadly in melee combat. They don't use cover. Best handled by concentrated, overwhelming force.</description>
+		<statBases>
+			<Mass>90</Mass>
+			<MoveSpeed>5.3</MoveSpeed>
+			<ArmorRating_Blunt>6</ArmorRating_Blunt>
+			<ArmorRating_Sharp>4</ArmorRating_Sharp>
+			<MeatAmount>0</MeatAmount>
+			<CarryWeight>120</CarryWeight>
+			<CarryBulk>60</CarryBulk>
+			<MaxHitPoints>200</MaxHitPoints>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<ShootingAccuracyPawn>2.6</ShootingAccuracyPawn>
+			<MeleeDodgeChance>0.1</MeleeDodgeChance>
+			<MeleeCritChance>0.15</MeleeCritChance>
+			<MeleeParryChance>0.22</MeleeParryChance>
+			<NightVisionEfficiency>0.9</NightVisionEfficiency>
+			<BandwidthCost MayRequire="Ludeon.Rimworld.Biotech">3</BandwidthCost>
+		</statBases>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>left fist</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>1.21</cooldownTime>
+				<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+				<armorPenetrationSharp>11</armorPenetrationSharp>
+				<armorPenetrationBlunt>8.688</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>right fist</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>1.21</cooldownTime>
+				<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+				<armorPenetrationSharp>11</armorPenetrationSharp>
+				<armorPenetrationBlunt>8.688</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>11</power>
+				<cooldownTime>1.85</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>9.625</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>Lancer</body>
+			<baseBodySize>1.0</baseBodySize>
+			<baseHealthScale>2.8</baseHealthScale>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scyther_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.RimWorld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+					<soundCall>Pawn_Mech_Scyther_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>11</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>12</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<butcherProducts>
+			<Plasteel>4</Plasteel>
+			<DepletedUranium>5</DepletedUranium>
+			<CarbonAlloy>3</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Humanoid</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef> -->
+
+	<!-- New 1.1 update mechanoid. Temp. based on Lancer -->
+	<ThingDef ParentName="BaseMechanoid">
+		<defName>Mech_Pikeman</defName>
+		<label>Pikeman</label>
+		<description>A clunky multi-legged combat mechanoid specialized as a long-range weapons platform. While effective at distance, it is weak in close-range fights and in melee combat.\n\nVeterans of mechanoid wars know that often, the safest place to be around a pikeman is touching it.</description>
+		<statBases />
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>left fist</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>1.71</cooldownTime>
+				<linkedBodyPartsGroup>FrontLeftLeg</linkedBodyPartsGroup>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>6</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>right fist</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>14</power>
+				<cooldownTime>1.71</cooldownTime>
+				<linkedBodyPartsGroup>FrontRightLeg</linkedBodyPartsGroup>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>6</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>1.85</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>12</armorPenetrationBlunt>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>Pikeman</body>
+			<baseBodySize>1.0</baseBodySize>
+			<baseHealthScale>2.8</baseHealthScale>
+			<lifeStageAges Inherit="False">
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Pikeman_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Pikeman_Death</soundDeath>
+					<soundCall>Pawn_Mech_Pikeman_Call</soundCall>
+				</li>
+				<li MayRequire="Ludeon.Rimworld.Biotech">
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Pikeman_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Pikeman_Death</soundDeath>
+					<soundCall>Pawn_Mech_Pikeman_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+			<detritusLeavings>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>11</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>16</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>1</texOverrideIndex>
+					<spawnChance>0.1</spawnChance>
+				</li>
+			</detritusLeavings>
+		</race>
+		<butcherProducts>
+			<Plasteel>4</Plasteel>
+			<DepletedUranium>5</DepletedUranium>
+			<CarbonAlloy>3</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Humanoid</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- Termite -->
+
+	<ThingDef ParentName="BaseMechanoid">
+		<defName>Mech_Termite</defName>
+		<label>termite</label>
+		<description>A medium-sized mechanoid. Termites specialize in burrowing, digging, and breaking through defensive structures. Defenders need to decide whether to try to eliminate the termite before it can dig through their defenses, or take it where it emerges.</description>
+		<statBases />
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>25</power>
+				<cooldownTime>2.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<armorPenetrationBlunt>13.5</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>MechanicalTermite</body>
+			<baseBodySize>1.6</baseBodySize>
+			<baseHealthScale>2.16</baseHealthScale>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Termite_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Termite_Death</soundDeath>
+					<soundCall>Pawn_Mech_Termite_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+		</race>
+		<butcherProducts>
+			<Plasteel>3</Plasteel>
+			<CarbonAlloy>2</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>QuadrupedLow</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- Crawler -->
+	<ThingDef ParentName="BaseMechanoid">
+		<defName>Mech_Crawler</defName>
+		<label>Crawler</label>
+		<description>Crawlers are small spider-like Mechanoids. While not particularly sturdy, their speed, size and numbers more than make up for it. A tiny plasma cutter at their front allows them to cut through metal like butter. Their favorite passtime is open surgery.</description>
+		<statBases>
+			<Mass>20</Mass>
+			<MoveSpeed>6.2</MoveSpeed>
+			<ArmorRating_Blunt>4</ArmorRating_Blunt>
+			<ArmorRating_Sharp>3</ArmorRating_Sharp>
+			<MeleeDodgeChance>0.4</MeleeDodgeChance>
+			<MeleeCritChance>0.05</MeleeCritChance>
+			<MeleeParryChance>0.15</MeleeParryChance>
+		</statBases>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<!--<id>leftbladecut</id>-->
+				<label>left blade</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>1.3</cooldownTime>
+				<linkedBodyPartsGroup>LeftBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>8.85</armorPenetrationSharp>
+				<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<!--<id>rightbladecut</id>-->
+				<label>right blade</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>1.3</cooldownTime>
+				<linkedBodyPartsGroup>RightBlade</linkedBodyPartsGroup>
+				<armorPenetrationSharp>8.85</armorPenetrationSharp>
+				<armorPenetrationBlunt>1.5</armorPenetrationBlunt>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>4</power>
+				<cooldownTime>5.65</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<chanceFactor>0.2</chanceFactor>
+				<armorPenetrationSharp>0</armorPenetrationSharp>
+				<armorPenetrationBlunt>1.875</armorPenetrationBlunt>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+		<race>
+			<intelligence>ToolUser</intelligence>
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<body>Scyther</body>
+			<baseBodySize>0.45</baseBodySize>
+			<baseHealthScale>0.38</baseHealthScale>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Centipede_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Centipede_Death</soundDeath>
+					<soundCall>Pawn_Mech_Centipede_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+		</race>
+		<comps>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>230</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>480</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<Repairable>false</Repairable>
+				<!-- 				<RepairIngredients>
+					<Plasteel>2</Plasteel>
+					<CarbonAlloy>2</CarbonAlloy>
+				</RepairIngredients>
+				<RepairTime>300</RepairTime>
+				<RepairValue>200</RepairValue> -->
+				<CanOverHeal>true</CanOverHeal>
+				<MaxOverHeal>23</MaxOverHeal>
+				<MinArmorPct>0.5</MinArmorPct>
+				<!-- <MinArmorValueSharp>10</MinArmorValueSharp>
+				<MinArmorValueBlunt>22</MinArmorValueBlunt>
+				<MinArmorValueHeat>0.2</MinArmorValueHeat>
+				<MinArmorValueElectric>0.1</MinArmorValueElectric> -->
+			</li>
+		</comps>
+		<butcherProducts>
+			<Plasteel>2</Plasteel>
+			<CarbonAlloy>2</CarbonAlloy>
+		</butcherProducts>
+		<modExtensions>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>QuadrupedLow</bodyShape>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

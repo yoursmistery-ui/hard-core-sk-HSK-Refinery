@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): 94_鼠族弓类CE适配.xml, 95_鼠族火器CE适配.xml, 96_钉头锤恢复武器.xml -->
+<Patch><Operation Class="PatchOperationConditional">
+		<xpath>Defs/CombatExtended.AmmoSetDef[defName="AmmoSet_Arrow"]</xpath>
+		<match Class="PatchOperationSequence">
+			<success>Normal</success>
+			<operations>
+
+				<!-- ========== 鼠族角弓 RK_HornBow ========== -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="RK_HornBow"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li Class="CombatExtended.VerbPropertiesCE">
+								<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>Projectile_StreamlinedArrow_Stone</defaultProjectile>
+								<warmupTime>1.0</warmupTime>
+								<range>26.6</range>
+								<soundCast>Bow_Recurve</soundCast>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_HornBow"]</xpath>
+					<value>
+						<comps>
+							<li Class="CombatExtended.CompProperties_AmmoUser">
+								<magazineSize>1</magazineSize>
+								<reloadTime>1.2</reloadTime>
+								<ammoSet>AmmoSet_StreamlinedArrow</ammoSet>
+							</li>
+							<li Class="CombatExtended.CompProperties_FireModes">
+								<noSnapshot>True</noSnapshot>
+							</li>
+						</comps>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_HornBow"]/statBases</xpath>
+					<value>
+						<SightsEfficiency>0.9</SightsEfficiency>
+						<ShotSpread>1.2</ShotSpread>
+						<SwayFactor>1.5</SwayFactor>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_HornBow"]/weaponTags</xpath>
+					<value>
+						<li>CE_Bow</li>
+					</value>
+				</li>
+
+				<!-- ========== 鼠族大弓 RK_Daikyuu ========== -->
+				<li Class="PatchOperationReplace">
+					<xpath>Defs/ThingDef[defName="RK_Daikyuu"]/verbs</xpath>
+					<value>
+						<verbs>
+							<li Class="CombatExtended.VerbPropertiesCE">
+								<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+								<hasStandardCommand>true</hasStandardCommand>
+								<defaultProjectile>Projectile_Arrow_Stone</defaultProjectile>
+								<warmupTime>1.3</warmupTime>
+								<range>33.6</range>
+								<soundCast>Bow_Recurve</soundCast>
+							</li>
+						</verbs>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_Daikyuu"]</xpath>
+					<value>
+						<comps>
+							<li Class="CombatExtended.CompProperties_AmmoUser">
+								<magazineSize>1</magazineSize>
+								<reloadTime>1.8</reloadTime>
+								<ammoSet>AmmoSet_Arrow</ammoSet>
+							</li>
+							<li Class="CombatExtended.CompProperties_FireModes">
+								<noSnapshot>True</noSnapshot>
+							</li>
+						</comps>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_Daikyuu"]/statBases</xpath>
+					<value>
+						<SightsEfficiency>0.95</SightsEfficiency>
+						<ShotSpread>0.8</ShotSpread>
+						<SwayFactor>1.5</SwayFactor>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="RK_Daikyuu"]/weaponTags</xpath>
+					<value>
+						<li>CE_Bow</li>
+					</value>
+				</li>
+
+			</operations>
+		</match>
+	</Operation><!-- ============ 工业火器组(依赖 CE 本体) ============ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/CombatExtended.AmmoSetDef[defName="AmmoSet_9x19mmPara"]</xpath>
+		<match Class="PatchOperationSequence">
+			<success>Normal</success>
+			<operations>
+
+				<!-- 连珠枪: 半自动步枪 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_LianzhuRifle</defName>
+					<statBases>
+						<SightsEfficiency>1.0</SightsEfficiency>
+						<ShotSpread>0.4</ShotSpread>
+						<SwayFactor>1.1</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.0</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+						<warmupTime>1.0</warmupTime>
+						<range>48</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>Rifle</soundCast>
+						<soundCastTail>GunTail_Medium</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>8</magazineSize>
+						<reloadTime>2.6</reloadTime>
+						<ammoSet>AmmoSet_303British</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+				<!-- 繁花冲锋枪: 连发 SMG -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_ExoticSMG</defName>
+					<statBases>
+						<SightsEfficiency>0.8</SightsEfficiency>
+						<ShotSpread>0.5</ShotSpread>
+						<SwayFactor>1.2</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>0.9</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+						<warmupTime>0.6</warmupTime>
+						<range>32</range>
+						<burstShotCount>6</burstShotCount>
+						<ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+						<soundCast>ExoticMG2</soundCast>
+						<soundCastTail>GunTail_Medium</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>30</magazineSize>
+						<reloadTime>2.2</reloadTime>
+						<ammoSet>AmmoSet_9x19mmPara</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiUseBurstMode>TRUE</aiUseBurstMode>
+						<aiAimMode>AimedShot</aiAimMode>
+						<aimedBurstShotCount>3</aimedBurstShotCount>
+					</FireModes>
+				</li>
+
+				<!-- 匣式手枪: 全自动手枪 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_ExoticPistol</defName>
+					<statBases>
+						<SightsEfficiency>0.9</SightsEfficiency>
+						<ShotSpread>0.4</ShotSpread>
+						<SwayFactor>1.1</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.0</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+						<warmupTime>0.7</warmupTime>
+						<range>26</range>
+						<burstShotCount>8</burstShotCount>
+						<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+						<soundCast>Shot_HeavySMG</soundCast>
+						<soundCastTail>GunTail_Light</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>16</magazineSize>
+						<reloadTime>2.0</reloadTime>
+						<ammoSet>AmmoSet_9x19mmPara</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiUseBurstMode>TRUE</aiUseBurstMode>
+						<aiAimMode>AimedShot</aiAimMode>
+						<aimedBurstShotCount>4</aimedBurstShotCount>
+					</FireModes>
+				</li>
+
+				<!-- 舀油枪: 轻机枪 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_ExoticLMG</defName>
+					<statBases>
+						<SightsEfficiency>1.0</SightsEfficiency>
+						<ShotSpread>0.5</ShotSpread>
+						<SwayFactor>1.3</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.1</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+						<warmupTime>1.4</warmupTime>
+						<range>54</range>
+						<burstShotCount>10</burstShotCount>
+						<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+						<soundCast>ExoticMG1</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>9</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>60</magazineSize>
+						<reloadTime>4.0</reloadTime>
+						<ammoSet>AmmoSet_303British</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiUseBurstMode>TRUE</aiUseBurstMode>
+						<aiAimMode>AimedShot</aiAimMode>
+						<aimedBurstShotCount>5</aimedBurstShotCount>
+					</FireModes>
+				</li>
+
+				<!-- 墙枪: 反器材(原 Meow 爆炸火箭弹头) → 保留爆炸特性, 配 40mm HE 榴弹 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_WallGun</defName>
+					<statBases>
+						<SightsEfficiency>1.2</SightsEfficiency>
+						<ShotSpread>0.6</ShotSpread>
+						<SwayFactor>1.6</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>2.0</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+						<warmupTime>2.2</warmupTime>
+						<range>45</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>Shot_ChargeBlaster</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>14</muzzleFlashScale>
+						<targetParams>
+							<canTargetLocations>true</canTargetLocations>
+						</targetParams>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>4</magazineSize>
+						<reloadTime>3.5</reloadTime>
+						<ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+				<!-- 神机弩: 四管火箭(爆弹映射 40mm 榴弹) -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_ShenJiNu</defName>
+					<statBases>
+						<SightsEfficiency>0.9</SightsEfficiency>
+						<ShotSpread>0.8</ShotSpread>
+						<SwayFactor>1.5</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.5</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+						<warmupTime>2.0</warmupTime>
+						<range>45</range>
+						<burstShotCount>4</burstShotCount>
+						<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+						<soundCast>Bow_Large</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>12</muzzleFlashScale>
+						<targetParams>
+							<canTargetLocations>true</canTargetLocations>
+						</targetParams>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>4</magazineSize>
+						<reloadTime>4.0</reloadTime>
+						<ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+			</operations>
+		</match>
+	</Operation>
+
+	<!-- ============ 前装火铳族(依赖 HMC Vile's Pre-Industrial 的 .69 米尼弹) ============ -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/CombatExtended.AmmoSetDef[defName="AmmoSet_69Musket"]</xpath>
+		<match Class="PatchOperationSequence">
+			<success>Normal</success>
+			<operations>
+
+				<!-- 鼠族火铳: 单发前装滑膛枪 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_Flintlock</defName>
+					<statBases>
+						<SightsEfficiency>0.5</SightsEfficiency>
+						<ShotSpread>1.2</ShotSpread>
+						<SwayFactor>1.3</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.5</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_69Musket_Lead</defaultProjectile>
+						<warmupTime>1.0</warmupTime>
+						<range>34</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>RK_Musket</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>12</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>1</magazineSize>
+						<reloadTime>2.2</reloadTime>
+						<ammoSet>AmmoSet_69Musket</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+				<!-- 鼠族鸟铳: 更好枪托的前装枪, 用鹿弹 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_BirdShot</defName>
+					<statBases>
+						<SightsEfficiency>0.6</SightsEfficiency>
+						<ShotSpread>1.0</ShotSpread>
+						<SwayFactor>1.3</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.4</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_69Musket_Buck</defaultProjectile>
+						<warmupTime>1.1</warmupTime>
+						<range>36</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>RK_Musket</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>12</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>1</magazineSize>
+						<reloadTime>2.5</reloadTime>
+						<ammoSet>AmmoSet_69Musket</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+				<!-- 双铳: 袖珍双管手铳, 两发 -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_TwinsBoom</defName>
+					<statBases>
+						<SightsEfficiency>0.3</SightsEfficiency>
+						<ShotSpread>1.5</ShotSpread>
+						<SwayFactor>1.6</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>1.8</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_69Musket_Lead</defaultProjectile>
+						<warmupTime>0.6</warmupTime>
+						<range>20</range>
+						<burstShotCount>2</burstShotCount>
+						<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+						<soundCast>RK_Musket</soundCast>
+						<soundCastTail>GunTail_Light</soundCastTail>
+						<muzzleFlashScale>12</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>2</magazineSize>
+						<reloadTime>3.5</reloadTime>
+						<ammoSet>AmmoSet_69Musket</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+				<!-- 三眼炮: 自制霰弹枪, 用鹿弹(保持 Neolithic 档, 不越级用工业 12Gauge) -->
+				<li Class="CombatExtended.PatchOperationMakeGunCECompatible">
+					<defName>RK_TribleMusket</defName>
+					<statBases>
+						<SightsEfficiency>0.4</SightsEfficiency>
+						<ShotSpread>1.6</ShotSpread>
+						<SwayFactor>1.4</SwayFactor>
+					</statBases>
+					<Properties>
+						<recoilAmount>2.2</recoilAmount>
+						<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+						<hasStandardCommand>true</hasStandardCommand>
+						<defaultProjectile>Bullet_69Musket_Buck</defaultProjectile>
+						<warmupTime>0.9</warmupTime>
+						<range>28</range>
+						<burstShotCount>1</burstShotCount>
+						<soundCast>RK_Musket</soundCast>
+						<soundCastTail>GunTail_Heavy</soundCastTail>
+						<muzzleFlashScale>14</muzzleFlashScale>
+					</Properties>
+					<AmmoUser>
+						<magazineSize>1</magazineSize>
+						<reloadTime>3.5</reloadTime>
+						<ammoSet>AmmoSet_69Musket</ammoSet>
+					</AmmoUser>
+					<FireModes>
+						<aiAimMode>AimedShot</aiAimMode>
+					</FireModes>
+				</li>
+
+			</operations>
+		</match>
+	</Operation><!-- 鼠族钉头锤 RK_Mace 恢复为纯近战武器(用户要求 2026-08-21):
+         撤销 35_剪刀与钉头锤工具 / 56_生存工具全面补强 对 RK_Mace 的工具化:
+         thingClass=SurvivalToolsLite.SurvivalTool、statBases/ToolEffectivenessFactor、
+         modExtensions SurvivalToolProperties、thingCategories=SurvivalToolsMedieval
+         全部移除,回退继承 RK_MeleeWeapon 基类(标准近战武器)。
+         RK_Mace 已是单手武器(weaponTags 含 RK_WeaponTag_OneHand/OneHandMelee/OneHandMeleeAttack
+         + CE_OneHandedWeapon,CompProperties_WeaponGripType OneHand),保持不动。
+         条件保护: 仅当 STL 工具属性存在(35 号 MayRequire SurvivalToolsLite 生效)时执行,
+         避免 Failed to find a node。 -->
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="RK_Mace"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]</xpath>
+        <match Class="PatchOperationSequence">
+            <success>Normal</success>
+            <operations>
+                <!-- 1) thingClass 回退继承 RK_MeleeWeapon -->
+                <li Class="PatchOperationRemove">
+                    <xpath>Defs/ThingDef[defName="RK_Mace"]/thingClass</xpath>
+                </li>
+                <!-- 2) 工具效能因子 -->
+                <li Class="PatchOperationRemove">
+                    <xpath>Defs/ThingDef[defName="RK_Mace"]/statBases/ToolEffectivenessFactor</xpath>
+                </li>
+                <!-- 3) STL 工具属性(工作速度加成/工具分配) -->
+                <li Class="PatchOperationRemove">
+                    <xpath>Defs/ThingDef[defName="RK_Mace"]/modExtensions/li[@Class="SurvivalToolsLite.SurvivalToolProperties"]</xpath>
+                </li>
+                <!-- 4) 工具分类(回退继承,不再显示为工具) -->
+                <li Class="PatchOperationRemove">
+                    <xpath>Defs/ThingDef[defName="RK_Mace"]/thingCategories</xpath>
+                </li>
+            </operations>
+        </match>
+    </Operation></Patch>

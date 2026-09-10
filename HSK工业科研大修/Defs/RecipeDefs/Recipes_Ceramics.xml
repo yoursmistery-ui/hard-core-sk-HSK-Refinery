@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- ========== 高级陶瓷配方 (玻璃制造台, 普通陶瓷本体+5金属) =========== -->
+	<RecipeDef>
+		<defName>Miho_PastetoCeramic</defName>
+		<label>make high grade ceramic</label>
+		<description>Refines ordinary ceramics with metal into high grade ceramics.</description>
+		<jobString>Refining high grade ceramics.</jobString>
+		<workAmount>2400</workAmount>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<soundWorking>Interact_Repair</soundWorking>
+		<recipeUsers>
+			<li>GlassworkTable</li>
+		</recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Ceramics</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Ceramics</li>
+				<li>Steel</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Miho_Ceramics>20</Miho_Ceramics>
+		</products>
+		<skillRequirements>
+			<Crafting>6</Crafting>
+		</skillRequirements>
+		<workSkill>Crafting</workSkill>
+		<workSkillLearnFactor>0.8</workSkillLearnFactor>
+		<researchPrerequisite>Glass_C1</researchPrerequisite>
+	</RecipeDef>
+
+	<!-- ========== 军用陶瓷配方 (玻璃制造台) =========== -->
+	<RecipeDef>
+		<defName>Miho_PastetoMCeramic</defName>
+		<label>make military grade ceramic</label>
+		<description>Fuses soft clay, carbon and components into military grade ballistic ceramics.</description>
+		<jobString>Making military grade ceramics.</jobString>
+		<workAmount>4000</workAmount>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<soundWorking>Recipe_Smelt</soundWorking>
+		<recipeUsers>
+			<li>GlassworkTable</li>
+		</recipeUsers>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SoftClay</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Carbon</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>SoftClay</li>
+				<li>Carbon</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Miho_MilitaryGradeBalisticCeramics>20</Miho_MilitaryGradeBalisticCeramics>
+		</products>
+		<skillRequirements>
+			<Crafting>8</Crafting>
+		</skillRequirements>
+		<workSkill>Crafting</workSkill>
+		<workSkillLearnFactor>0.8</workSkillLearnFactor>
+		<researchPrerequisite>Glass_C1</researchPrerequisite>
+	</RecipeDef>
+</Defs>

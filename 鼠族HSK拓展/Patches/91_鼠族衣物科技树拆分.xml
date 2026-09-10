@@ -1,0 +1,889 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- ============================================================ -->
+  <!--  91_鼠族衣物科技树拆分.xml                                  -->
+  <!--  把 B1/B2A/C1/C2 超载节点按品类拆分出 9 个独立科技节点      -->
+  <!--  每节点 5-10 件衣物/装备, 统一按品类归类管理               -->
+  <!-- ============================================================ -->
+
+  <!-- 1. 新增研究节点定义 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs</xpath>
+    <value>
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B1b</defName>
+        <label>鼠族衣物I·头脸配饰</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>7.00</researchViewX>
+        <researchViewY>45.00</researchViewY>
+        <baseCost>300</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B1</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B2B</defName>
+        <label>鼠族衣物II·冬暖装</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>9</researchViewX>
+        <researchViewY>45</researchViewY>
+        <baseCost>400</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B2A</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B2C</defName>
+        <label>鼠族衣物II·职业装备</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>14.00</researchViewX>
+        <researchViewY>45.00</researchViewY>
+        <baseCost>450</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B2B</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="MedievalBase">
+        <defName>Ratkin_Apparel_B2D</defName>
+        <label>鼠族衣物II·软甲防御</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>15.00</researchViewX>
+        <researchViewY>45.00</researchViewY>
+        <baseCost>500</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_B2C</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>Ratkin_Apparel_C1M1</defName>
+        <label>鼠族军服·A区</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>10.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+        <baseCost>800</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_C1</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>Ratkin_Apparel_C1M2</defName>
+        <label>鼠族军服·B区</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>11.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+        <baseCost>800</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_C1M1</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>Ratkin_Apparel_C1M3</defName>
+        <label>鼠族军服·C区</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>12.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+        <baseCost>800</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_C1M2</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>Ratkin_Apparel_C1M4</defName>
+        <label>鼠族军服·D区</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>15.00</researchViewX>
+        <researchViewY>46.00</researchViewY>
+        <baseCost>800</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_C1M3</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+      <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>Ratkin_Apparel_C2b</defName>
+        <label>鼠族装备·军用大衣</label>
+        <description>鼠族特色服饰。</description>
+        <tab>Apparel_SK</tab>
+        <researchViewX>11.00</researchViewX>
+        <researchViewY>45.00</researchViewY>
+        <baseCost>1000</baseCost>
+        <prerequisites>
+          <li>Ratkin_Apparel_C2</li>
+        </prerequisites>
+        <techLevel>Industrial</techLevel>
+      </ResearchProjectDef>
+
+    </value>
+  </Operation>
+
+  <!-- 2. 重命名被拆分的主管线节点 label, 体现拆分后语义 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]/label</xpath>
+    <value>
+      <label>鼠族衣物I·日常衣装</label>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/label</xpath>
+    <value>
+      <label>鼠族衣物II·礼服装</label>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/label</xpath>
+    <value>
+      <label>鼠族衣物III·民用日常</label>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C2"]/label</xpath>
+    <value>
+      <label>鼠族装备·头部防御</label>
+    </value>
+  </Operation>
+
+  <!-- 3. 配方研究引用迁移: 把各品类配方改到新节点 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_Bandage"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_EyeMask"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_Respirator"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_WeijingA"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_BigBeard"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_MedalHonor"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_YaoBao"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_Kuabao"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_WorkApron"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_LargePipe"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_WhiteCoat"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_WhiteCloak"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_baonuanneiyi"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_WinterRobe"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_xiaokb"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_yiliaob"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_ExplorerWear"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_ExplorerHat"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2B</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_ResearchGlasses"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_GlassesB"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_GlassesR"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_Monocle"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_ChefHat"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_ChefSuit"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_MaidA"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_MaidB"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_GuardUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_GuardHat"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Gambeson"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2D</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RK_GambesonB"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2D</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RK_OuterPlate"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2D</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Vest"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2D</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKRAE_Make_RK_Rainproof"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_B2D</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_AF_Fez"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_AF_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_EU_BerndorfHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_EU_Hechtgrau"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_IR_AdrianHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_IR_CuirassierArmor"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_IR_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KB_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KB_Sappenpanzer"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KB_Stahlhelm"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M1</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KO_KnightArmor"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KO_KnightHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KO_KnightUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KP_AdrianHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_KP_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_LR_BrodieHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_LR_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_LS_Fez"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_LS_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M2</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_MR_BrodieHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_MR_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_NK_Fez"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_NK_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_NR_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_NR_ServiceCap"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_PK_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_PK_Kepi"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_RR_Furazhka"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_RR_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M3</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_SA_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_SA_Kepi"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_SD_Budyonovka"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_SD_Gimnastyorka"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_VK_AdrianHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_VK_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_WR_BrodieHelmet"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_WR_FieldUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_YE_InfantryUniform"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_YE_ServiceCap"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1M4</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKFix_Make_RK_OutdoorBackpack"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_fengye"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_fengyewaitao"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_junfu"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_yingwu"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKVictoria_Make_zsyg"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKExtra_Make_RA_PaladinArmor"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="RKHSKGW_Make_RK_WR_TrenchCoat"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C2b</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="MakePolyester"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Fabrication</researchPrerequisite>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName="OA_RK_Make_Hecheng"]/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Fabrication</researchPrerequisite>
+    </value>
+  </Operation>
+
+  <!-- ============================================================ -->
+    <!-- ============================================================ -->
+    <!-- ============================================================ -->
+  <!--  科技坐标恢复(原 105_科技坐标上移.xml, 2026-08-23 两轮修订)   -->
+  <!--  坑: 1xx 文件名按字符串序排在 32/52/91 之前, 独立文件时       -->
+  <!--      目标节点尚未 Add, Replace 全部失败。按铁律并入本文件     -->
+  <!--      末尾(91 > 52 > 32, 此时所有研究节点均已存在)。          -->
+  <!--  背景(2026-08-23): ResearchTreeSK 坐标冲突检测为全局(跨 tab) -->
+  <!--      。105 段误写 y25~29 撞 Craft_SK/VileMS/Mechtech 8 处;   -->
+  <!--      首轮修至 y32~36 悬在原版服饰(y39~44)上方, 用户反馈      -->
+  <!--      "太往上"。本轮恢复 Add 段原始布局 y41~47:              -->
+  <!--      盔甲 D y41 / 主链 y43 / C2b y45 / 细分 y46 / 军服 y47,  -->
+  <!--      与原版服饰区紧邻不悬空, 全局零冲突已验证。              -->
+  <!--  仅影响科研树 UI 显示位置, 不影响研究功能/前置关系。        -->
+  <!-- ============================================================ -->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_B1"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_B1"]/researchViewX</xpath>
+    <value><researchViewX>3.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_B2"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_B2"]/researchViewX</xpath>
+    <value><researchViewX>4.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/researchViewY</xpath>
+    <value><researchViewY>41.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/researchViewX</xpath>
+    <value><researchViewX>19.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D3"]/researchViewY</xpath>
+    <value><researchViewY>41.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D3"]/researchViewX</xpath>
+    <value><researchViewX>21.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D2"]/researchViewY</xpath>
+    <value><researchViewY>41.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Armor_D2"]/researchViewX</xpath>
+    <value><researchViewX>23.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1"]/researchViewX</xpath>
+    <value><researchViewX>5.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2A"]/researchViewX</xpath>
+    <value><researchViewX>7.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1"]/researchViewX</xpath>
+    <value><researchViewX>9.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C2"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C2"]/researchViewX</xpath>
+    <value><researchViewX>10.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_Uniform"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_Uniform"]/researchViewX</xpath>
+    <value><researchViewX>11.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C3"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C3"]/researchViewX</xpath>
+    <value><researchViewX>13.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C5"]/researchViewY</xpath>
+    <value><researchViewY>43.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C5"]/researchViewX</xpath>
+    <value><researchViewX>15.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C2b"]/researchViewY</xpath>
+    <value><researchViewY>45.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C2b"]/researchViewX</xpath>
+    <value><researchViewX>11.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1b"]/researchViewY</xpath>
+    <value><researchViewY>45.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B1b"]/researchViewX</xpath>
+    <value><researchViewX>7.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2B"]/researchViewY</xpath>
+    <value><researchViewY>45.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2B"]/researchViewX</xpath>
+    <value><researchViewX>9.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2C"]/researchViewY</xpath>
+    <value><researchViewY>45.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2C"]/researchViewX</xpath>
+    <value><researchViewX>14.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2D"]/researchViewY</xpath>
+    <value><researchViewY>45.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2D"]/researchViewX</xpath>
+    <value><researchViewX>15.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M1"]/researchViewY</xpath>
+    <value><researchViewY>46.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M1"]/researchViewX</xpath>
+    <value><researchViewX>10.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M2"]/researchViewY</xpath>
+    <value><researchViewY>46.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M2"]/researchViewX</xpath>
+    <value><researchViewX>11.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M3"]/researchViewY</xpath>
+    <value><researchViewY>46.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M3"]/researchViewX</xpath>
+    <value><researchViewX>12.00</researchViewX></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M4"]/researchViewY</xpath>
+    <value><researchViewY>46.00</researchViewY></value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ResearchProjectDef[defName="Ratkin_Apparel_C1M4"]/researchViewX</xpath>
+    <value><researchViewX>15.00</researchViewX></value>
+  </Operation>
+
+</Patch>

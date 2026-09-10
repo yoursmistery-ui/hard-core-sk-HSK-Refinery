@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+	<mods>
+		<li>Core SK</li>
+	</mods>
+	<match Class="PatchOperationSequence">
+	<success>Always</success>
+			<operations>
+			
+			<li Class="PatchOperationAdd">	
+				<xpath>Defs</xpath>
+				<value>
+					<CombatExtended.AmmoCategoryDef>
+						<defName>BroadheadArrow</defName>
+						<label>broadhead arrow</label>
+						<description>An arrow with a wide cutting head for hunting and causing grievous wounds, at the cost of armor penetration.</description>
+						<advanced>true</advanced>
+					</CombatExtended.AmmoCategoryDef>
+					<CombatExtended.AmmoCategoryDef>
+						<defName>BodkinArrow</defName>
+						<label>bodkin arrow</label>
+						<description>An arrow with a narrow metal head for improved armor penetration but reduced stopping power.</description>
+						<advanced>true</advanced>
+					</CombatExtended.AmmoCategoryDef>
+				</value>
+			</li>
+				
+			<!-- specialized quarrels -->
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/CombatExtended.AmmoSetDef[defName="AmmoSet_Bolt"]/ammoTypes</xpath>
+				<value>
+					<Ammo_Bolt_Broadhead>Projectile_BroadheadBolt</Ammo_Bolt_Broadhead>
+					<Ammo_Bolt_Bodkin>Projectile_BodkinBolt</Ammo_Bolt_Bodkin>
+				</value>
+			</li>
+				
+			<!-- explosive quarrels -->
+			<li Class="PatchOperationReplace">	
+				<xpath>Defs/ThingDef[defName="Ammo_Bolt_Explosive"]/label</xpath>
+				<value>
+					<label>explosive quarrel</label>
+				</value>
+			</li>
+			<li Class="PatchOperationReplace">	
+				<xpath>Defs/RecipeDef[defName="MakeAmmo_Bolt_Explosive"]/label</xpath>
+				<value>
+					<label>make explosive quarrels x50</label>
+				</value>
+			</li>
+			
+				
+		
+				
+		</operations>
+		</match>
+    </Operation>	
+</Patch>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 让 Core_SK 家具I (ComplexFurniture, Medieval) 前置本 mod 的原始木工石艺 (RK_PrimitiveCrafts),
+       科技树读起来是 原始木工石艺(Neolithic) → 家具I(Medieval) → 家具II。
+       ComplexFurniture 原始 XML 无 <prerequisites> → 用 Conditional 兜底(有则 Add li, 无则 Add 整个 prerequisites)。
+       Neolithic 低于 Medieval, 不产生 techlevel 越级。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ResearchProjectDef[defName="ComplexFurniture"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>/Defs/ResearchProjectDef[defName="ComplexFurniture"]/prerequisites</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>/Defs/ResearchProjectDef[defName="ComplexFurniture"]/prerequisites</xpath>
+        <value>
+          <li>RK_PrimitiveCrafts</li>
+        </value>
+      </match>
+      <nomatch Class="PatchOperationAdd">
+        <xpath>/Defs/ResearchProjectDef[defName="ComplexFurniture"]</xpath>
+        <value>
+          <prerequisites>
+            <li>RK_PrimitiveCrafts</li>
+          </prerequisites>
+        </value>
+      </nomatch>
+    </match>
+  </Operation>
+
+</Patch>

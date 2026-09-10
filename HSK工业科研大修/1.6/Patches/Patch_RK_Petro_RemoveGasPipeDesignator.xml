@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 石化管网 · 建筑菜单加"拆除气体管道"下拉分组 (2026-09-01)
+       背景: 边缘化工(Rimefeller) 分类自带一个"拆除管道"(Designator_RemovePipeline), 但那只认
+             Rimefeller 自己的输油管 (PipeType.Oil), 拆不了本 mod 的天然气/氨气/沥青管网;
+             玩家只能一个个点拆除, 管网一长极难清理。
+       做法: 往 DesignationCategoryDef(Rimefeller).specialDesignatorClasses 追加一个
+             BlueprintUnlockHSK.Designator_RemoveGasPipeGroup (Designator_Dropdown 子类),
+             由游戏 Activator.CreateInstance 无参构造, 点开后列出三种介质的拆除工具。
+       门控: 1.6 起 Operation 级 MayRequire 已失效, 一律用 xpath 存在性门控 — 没装 Rimefeller_SK
+             (无该分类) 时整段静默跳过, 不报错。
+       注意: 不要往 Misc 之类分类做兜底 Add — 原版 Misc/生产等分类的 specialDesignatorClasses
+             节点存在性不一致, Add 到不存在的 list 节点会报 Failed to find a node。 -->
+<Patch>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/DesignationCategoryDef[defName="Rimefeller"]/specialDesignatorClasses</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/DesignationCategoryDef[defName="Rimefeller"]/specialDesignatorClasses</xpath>
+      <value>
+        <li>BlueprintUnlockHSK.Designator_RemoveGasPipeGroup</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

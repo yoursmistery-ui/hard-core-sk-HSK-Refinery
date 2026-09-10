@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingDef ParentName="BuildingBase">
+        <defName>OAGene_IceCrystalCollector</defName>
+        <label>Wind and snow crystal collector</label>
+        <description>A simple insulation collection device that can collect rare broken crystals from wind and snow in special weather conditions.\nWhen there are multiple collectors within a radius of 15 grids, the collection efficiency will be greatly reduced.</description>
+        <thingClass>OberoniaAureaGene.Snowstorm.Building_IceCrystalCollector</thingClass>
+        <tickerType>Long</tickerType>
+        <size>(1,1)</size>
+        <graphicData>
+            <texPath>Things/Building/OAGene_IceCrystalCollector</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <drawSize>(1.25,1.25)</drawSize>
+        </graphicData>
+        <uiIconScale>0.8</uiIconScale>
+        <!--castEdgeShadows>true</castEdgeShadows>
+        <staticSunShadowHeight>0.20</staticSunShadowHeight-->
+        <building>
+            <ai_chillDestination>false</ai_chillDestination>
+        </building>
+        <drawerType>RealtimeOnly</drawerType>
+        <altitudeLayer>Building</altitudeLayer>
+        <passability>PassThroughOnly</passability>
+        <fillPercent>0.5</fillPercent>
+        <pathCost>50</pathCost>
+        <designationCategory>Misc</designationCategory>
+        <uiOrder>115</uiOrder>
+        <canOverlapZones>false</canOverlapZones>
+		<rotatable>false</rotatable>
+        <defaultPlacingRot>North</defaultPlacingRot>
+        <thingCategories>
+            <li>BuildingsPower</li>
+        </thingCategories>
+        <minifiedDef>MinifiedThing</minifiedDef>
+        <statBases>
+            <MaxHitPoints>100</MaxHitPoints>
+            <WorkToBuild>10800</WorkToBuild>
+            <Flammability>0.5</Flammability>
+            <Beauty>-14</Beauty>
+            <Mass>25</Mass>
+        </statBases>
+		<stuffCategories>
+			<li>Stony</li>
+			<li>Woody</li>
+			<li>Metallic</li>
+		</stuffCategories>
+		<costStuffCount>60</costStuffCount>
+        <placeWorkers>
+            <li>PlaceWorker_NotUnderRoof</li>
+        </placeWorkers>
+        <comps>
+            <li Class="CompProperties_Breakdownable"/>
+        </comps>
+    </ThingDef>
+
+</Defs>

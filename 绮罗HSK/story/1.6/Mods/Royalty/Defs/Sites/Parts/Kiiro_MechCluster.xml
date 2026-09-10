@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef ParentName="SitePart_MechCluster" MayRequire="Ludeon.RimWorld.Royalty">
+    <defName>Kiiro_MechClusterForceNoConditionCauser</defName>
+    <label>mech cluster</label>
+    <workerClass>SitePartWorker_MechCluster</workerClass>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags Inherit="False">
+      <li>Kiiro_MechClusterForceNoConditionCauser</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef ParentName="GenStep_MechCluster">
+    <defName>Kiiro_MechClusterForceNoConditionCauser</defName>
+    <linkWithSite>Kiiro_MechClusterForceNoConditionCauser</linkWithSite>
+    <genStep Class="GenStep_MechCluster">
+      <forceNoConditionCauser>true</forceNoConditionCauser>
+      <extraRangeToRectOfInterest>0</extraRangeToRectOfInterest>      <!-- Close to the thing we are guarding -->
+    </genStep>
+  </GenStepDef>
+
+  <!-- 集成起来的特战队，怕分摊点数 -->
+  <GenStepDef>
+    <defName>Kiiro_SCSForcesAtConditionCauser</defName>
+    <linkWithSite>Kiiro_MechClusterForceNoConditionCauser</linkWithSite>
+    <order>470</order>
+    <genStep Class="Kiiro_Event.GenStep_KiiroSCSForces">
+    </genStep>
+  </GenStepDef>
+
+</Defs>

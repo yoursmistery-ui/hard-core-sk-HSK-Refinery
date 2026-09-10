@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 废墟 · 遗迹 · 户外残骸 · 蛇卵 · 邪教藏身处 · 地窖(2026-08-29 · 第二批波次 5)
+     来源: Medieval Overhaul 1.6.2.2 Buildings_Ruins / Ruined_Outdoors / RuinsSnake /
+     Misc_Hideouts / UnderEmpire 纯原版类 def 移植。
+     前缀统一 Rustic_; 基类一律改原版 BuildingBase(取代 MO 的 DankPyon_BuildingBase 等)。
+     ⚠ 这批是**场景物件, 不可建造**: 无 designationCategory、无 researchPrerequisites、
+        不入任何二级菜单, 仅供波次 6 的 KCSG 废墟布局摆放, 或由事件/任务站点生成。
+     ⚠ 因此不需要 uiIconPath(AGENTS §5 的图标铁律只约束"可建造且 stuffable"的建筑)。
+     已跳过(本 mod 早已移植): QuestFinder / CultPedestal / CultOrb / AncientReliquary
+        → 对应 RK_QuestFinder / RK_OldPedestal / RK_AncientOrb / Rustic_LootReliquary。
+     ⚠ MO 无独立"堵塞门" def: 那是 KCSG 布局层面用碎石与门框堵入口的做法, 随波次 6 一并实现。 -->
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedRusticDoor</defName>
+		<label>坍塌的乡村门</label>
+		<description>半扇歪斜的木门还挂在合页上, 推开时吱呀作响, 谁也不知道门后还剩什么。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedRusticDoor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedSlabDoor</defName>
+		<label>破损的石板门</label>
+		<description>厚重的石板门裂了一道缝, 卡在石槽里再也推不动。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedSlabDoor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>320</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedGate</defName>
+		<label>锁死的大门</label>
+		<description>被木板与铁条从内侧封死的大门。有人曾拼命不想让外面的东西进来。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/LockedGate</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedColumn</defName>
+		<label>断柱</label>
+		<description>齐腰折断的石柱, 柱身上的雕纹还看得出当年的讲究。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedColumn</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.20</fillPercent>
+		<statBases>
+			<MaxHitPoints>105</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_Ruined_AncientColumn</defName>
+		<label>断裂的古柱</label>
+		<description>更古老的一根断柱, 石质已被风雨啃出蜂窝般的孔洞。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedAncientColumn1x1</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<Beauty>50</Beauty>
+			<Mass>7</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedStool</defName>
+		<label>破圆凳</label>
+		<description>三条腿缺了一条的圆凳, 翻倒在角落里。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedStool</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.20</fillPercent>
+		<statBases>
+			<MaxHitPoints>35</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBedWicker</defName>
+		<label>破柳条床</label>
+		<description>柳条床面塌了半边, 草垫从破口里漏出来。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBedWicker</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(1,2)</size>
+		<fillPercent>0.4</fillPercent>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Beauty>1</Beauty>
+			<Mass>20</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBedWickerDouble</defName>
+		<label>破柳条双人床</label>
+		<description>双人柳条床整个塌了下去, 只剩框架还撑着形状。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBedWickerDouble</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<fillPercent>0.4</fillPercent>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>2</Beauty>
+			<Mass>40</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_WoodenDebris</defName>
+		<label>木料废墟</label>
+		<description>一堆横七竖八的断梁碎板, 寸步难行。清理干净要花不少工夫。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/WoodenDebris</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Mass>40</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedCloset</defName>
+		<label>破衣橱</label>
+		<description>柜门半掩的破衣橱, 里面早已空空如也。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedCloset</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBookshelf</defName>
+		<label>破书架</label>
+		<description>歪斜的书架, 残留的几册书页早已受潮粘成一团。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBookshelf</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_EmptyBucket</defName>
+		<label>空木桶</label>
+		<description>一只底朝天的空桶。不知是被踢翻的, 还是被人倒空后丢弃的。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/EmptyBucket</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<statBases>
+			<MaxHitPoints>25</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedCrate1x1c</defName>
+		<label>破板条箱</label>
+		<description>散了架的板条箱, 木板朝四面支棱着。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedCrate1x1</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<statBases>
+			<MaxHitPoints>25</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedTable1x2c</defName>
+		<label>破长桌</label>
+		<description>塌了一条腿的长桌, 桌面裂成两半。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/Ruined1x2Table</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(1,2)</size>
+		<statBases>
+			<MaxHitPoints>25</MaxHitPoints>
+			<Mass>5</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedTable2x4c</defName>
+		<label>破大长桌</label>
+		<description>曾经能坐十人的长桌, 如今只剩一副骨架。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/Ruined2x4Table</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,4)</size>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>20</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedRugGrizzlyBear3x3c</defName>
+		<label>破损的灰熊地毯</label>
+		<description>一张硕大的灰熊皮, 边缘已经朽烂。剥下它的人大概很得意过一阵子。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBearRug3x3</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(3,3)</size>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Beauty>5</Beauty>
+			<Mass>9</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBonePile1x1c</defName>
+		<label>小骸骨堆</label>
+		<description>零散的一小堆骨头, 看不出属于什么。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinBonePile1x1</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.2</fillPercent>
+		<statBases>
+			<MaxHitPoints>30</MaxHitPoints>
+			<Mass>5</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBonePile1x2c</defName>
+		<label>骸骨堆</label>
+		<description>横七竖八的一堆骸骨, 有些还带着咬痕。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinBonePile1x2</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,1)</size>
+		<fillPercent>0.2</fillPercent>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBonePile2x2c</defName>
+		<label>大骸骨堆</label>
+		<description>堆积成片的大型骸骨堆, 空气中总有一股挥之不去的味道。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinBonePile2x2</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<fillPercent>0.2</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBust</defName>
+		<label>破损的半身像</label>
+		<description>鼻子被敲掉的石雕半身像, 已认不出雕的是谁。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedBust</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedCandles</defName>
+		<label>残烛</label>
+		<description>烧到只剩烛根的几枝蜡烛, 蜡油淌了一桌。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedCandles</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>20</MaxHitPoints>
+			<Beauty>5</Beauty>
+			<Mass>0.2</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedCandleStand</defName>
+		<label>倒塌的烛架</label>
+		<description>歪倒在地上的烛架, 蜡油早已凝固成白色的瘤。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedCandleStand</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.15</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Beauty>10</Beauty>
+			<Mass>0.2</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedStewPot</defName>
+		<label>破炖锅</label>
+		<description>底朝天的铁锅, 锅底残留着一层说不清年代的焦垢。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinStewPot</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,1)</size>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedAnvil</defName>
+		<label>废弃铁砧</label>
+		<description>裂了口子的铁砧。最后一位铁匠放下锤子, 就再没回来。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedAnvil</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Mass>30</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedHearth</defName>
+		<label>塌毁的壁炉</label>
+		<description>炉膛塌了半边的壁炉, 烟道被碎砖堵死。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedHearth</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,1)</size>
+		<passability>Impassable</passability>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedMineShaft</defName>
+		<label>废弃矿井</label>
+		<description>被木架封住的矿道入口, 支架已朽, 往下看只有一片黑。再挖开需要时日, 也可能需要胆量。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/RuinedMineShaft</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(3,3)</size>
+		<passability>Impassable</passability>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_StoneDebris</defName>
+		<label>碎石堆</label>
+		<description>一大堆垮塌的碎石, 完全堵死了去路。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/StoneDebris</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>320</MaxHitPoints>
+			<Beauty>-20</Beauty>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_StoneDebrisSmall</defName>
+		<label>小碎石堆</label>
+		<description>一小堆碎石, 绕两步也就过去了。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SmallStoneDebris</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>Impassable</passability>
+		<fillPercent>1</fillPercent>
+		<statBases>
+			<MaxHitPoints>220</MaxHitPoints>
+			<Beauty>-20</Beauty>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_Cellar</defName>
+		<label>地窖</label>
+		<description>半埋在地下的石砌地窖, 冬暖夏凉。中世纪人家用它存菜、存冰, 也存些不想被人看见的东西。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Production/IceCellar/IceCellar</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>Standable</passability>
+		<fillPercent>0.1</fillPercent>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedBatteringRam</defName>
+		<label>废弃攻城锤</label>
+		<description>攻城锤的残骸, 顶棚的兽皮早已烂光, 只剩一副沉重的木架。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RuinedBatteringRam</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(4,3)</size>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>1000</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RuinedSiegeTower</defName>
+		<label>废弃攻城塔</label>
+		<description>烧焦的攻城塔骨架, 孤零零立在城下, 成了乌鸦的落脚处。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RuinedSiegeTower</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(3,3)</size>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>1000</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientFootman</defName>
+		<label>古代步兵遗骸</label>
+		<description>一具披甲的遗骸, 靠着墙坐了不知多少年。铠甲下的东西早已归于尘土。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/FootmanRemains</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.25</fillPercent>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RustedHauberk</defName>
+		<label>锈蚀的锁甲</label>
+		<description>一件锈成褐色的锁子甲, 拎起来会掉渣。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RustedHauberk</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RustedHelmet</defName>
+		<label>锈蚀的头盔</label>
+		<description>凹陷变形的铁盔, 面甲内侧有一道很深的划痕。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RustedHelm</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_RustedSwords</defName>
+		<label>锈蚀的剑</label>
+		<description>几柄锈死的剑插在地上, 剑柄的缠绳早已烂尽。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RustedSwords</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientRuinedBanner</defName>
+		<label>残破的古代旗帜</label>
+		<description>挂在杆上的破旗, 只剩几缕布条, 看不出原本的纹章。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RuinedBanner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientRuinedCart</defName>
+		<label>废弃的推车</label>
+		<description>轮子散了架的货运推车, 车板上还留着几道深深的车辙印。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/Cart_Ruined</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientRuinedCrate</defName>
+		<label>废弃的板条箱</label>
+		<description>被撬开的板条箱, 里面什么也没剩下。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RuinedCrate</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientRuinedBarrel</defName>
+		<label>废弃的木桶</label>
+		<description>箍圈松脱的木桶, 桶板向外翻着, 像一朵开败的花。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Ruins/RuinedBarrel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_HatchedClutch</defName>
+		<label>孵化的蛇卵</label>
+		<description>一堆已经孵空的蛇卵, 蛋壳破口边缘整齐得让人不舒服。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/SnakeLair/HatchedClutchLarge</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(2,2)</size>
+		<fillPercent>0.2</fillPercent>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_HatchedClutchSmall</defName>
+		<label>小蛇卵窝</label>
+		<description>一小窝破碎的蛇卵。附近多半还有活物。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/SnakeLair/HatchedClutchSmall</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<fillPercent>0.2</fillPercent>
+		<statBases>
+			<MaxHitPoints>10</MaxHitPoints>
+			<Mass>10</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_CultBook</defName>
+		<label>邪教典籍</label>
+		<description>一本用不知什么皮装订的书, 书页边缘发黑。上面的字像是写了又擦、擦了又写。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/CultistsBook/CultistsBook</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>3</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Rustic_AncientReliquaryEmpty</defName>
+		<label>空置的古圣物龛</label>
+		<description>一具被洗劫一空的古代圣物龛。龛内积了厚厚一层灰, 中间那块没灰的方形印子说明这里原本放着什么。</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Art/AncientReliquaryEmpty</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<size>(3,2)</size>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<statBases>
+			<MaxHitPoints>350</MaxHitPoints>
+			<Beauty>400</Beauty>
+			<Mass>100</Mass>
+		</statBases>
+		<selectable>true</selectable>
+		<tickerType>Normal</tickerType>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+	</ThingDef>
+
+</Defs>

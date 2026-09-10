@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <packageId>Jaxe.RimHUD</packageId>
+  <name>RimHUD(HSK 本地版 · Misc Robots 适配)</name>
+  <author>HSK 修复整合(基于 Jaxe)</author>
+  <description>本地独立版 RimHUD,与工坊版同 packageId(Jaxe.RimHUD),避免重复加载。
+
+本版为 HSK 本地版,在保留 RimHUD 全部原版功能(Mod Version 1.17.5)的基础上,增加对
+Misc Robots(robots.misc,Haplo.Miscellaneous.Robots)机器人的 HUD 适配:
+
+- 电量条(RK_HR_Battery): 机器人电量百分比,标签为「电量」(机器人的电量实际就是休息需求,
+  原版 HUD 只显示成「休息」条);tooltip 附「充电中」提示;
+- 状态(RK_HR_Status): 充电中 / 睡眠模式 / 工作中;
+- 专精(RK_HR_VSE_Expertise): Vanilla Skills Expanded(vanillaexpanded.skills)专精列表,
+  单专精直接显示名称、多专精显示数量,悬停逐条显示「名称 — 等级描述」;
+  47 个专精中文名兜底(DefInjected,已注入则自动跳过);
+- 护甲厚度(RK_HR_Armor): 对任何 pawn(敌人/己方/动物)显示穿着护甲合计的
+  锐 / 钝 / 热 护甲值(原版 ArmorRating_Sharp/Blunt/Heat;CE 下由 Combat Extended 的
+  StatWorker 计算成护甲厚度,与 CE 角色卡护甲面板同源),悬停逐件列出明细;
+  CE / 非 CE 通用;
+- 集成预设「Robots」「VSE」「Armor」: RimHUD 布局预设列表中出现,一键切换为
+  机器人 / 技能拓展 / 护甲 专用布局(「Robots」需装 Misc Robots、「VSE」需装
+  Vanilla Skills Expanded,未装对应 mod 时预设自动隐藏);
+- HSK Mod Assistant 原生附加标记(local.rimhudrobotsfix 已并入本 id)。
+
+使用说明:
+- 若工坊版 RimHUD(1508850027)仍在订阅中,请在本 mod 的 ModsConfig 中只保留一份
+  Jaxe.RimHUD(建议取消订阅工坊版,或停用工坊版仅启用本本地版)。
+- 本版带 RimHUD.dll 本体(1.17.5)与适配程序集 RimHUDRobotsAdapt.dll。
+- 非机器人单位选中时,电量/状态部件自动不绘制;无 VSE 或无专精时专精部件不绘制,
+  可放心加入任何布局。
+- 未启用 Misc Robots / Vanilla Skills Expanded 时对应适配零副作用(RimHUD 本体功能不受影响)。</description>
+  <supportedVersions>
+    <li>1.1</li>
+    <li>1.2</li>
+    <li>1.3</li>
+    <li>1.4</li>
+    <li>1.5</li>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>skyarkhangel.HSK</packageId>
+      <displayName>Core SK</displayName>
+      <downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+    </li>
+    <li>
+      <packageId>DimonSever000.ModIndicator.Specific</packageId>
+      <displayName>HSK Autosort and Mod Assistant</displayName>
+        <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+			</li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Haplo.Miscellaneous.Robots</li>
+    <li>skyarkhangel.HSK</li>
+    <li>DimonSever000.ModIndicator.Specific</li>
+  </loadAfter>
+</ModMetaData>

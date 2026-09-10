@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 香瓜手雷 + 鼠族榴弹发射器 CE 适配(2026-09-06)
+     - RK_LauncherMuskmelon: 单发榴弹枪, 走 AmmoSet_40x46mmGrenade(照 RK_EU_Zundkraut 口径)
+     - RK_GrenadeMuskmelon: 手掷破片雷, 转 CE AmmoDef/AmmoThing + Verb_ShootCEOneUse(同 95_鼠王炸弹)
+     - RK_Proj_Muskmelon: Projectile_Explosive→ProjectileCE_Explosive; Meow.CompProperties_ExplodeFragment→CE CompProperties_Fragments
+     - frag_Muskmelon: 破片弹转 CE(CE 的 CompFragments 会把破片硬转成 ProjectileCE, 否则 InvalidCast) -->
+<Patch>
+
+  <!-- ========== 榴弹发射器 RK_LauncherMuskmelon → CE 40mm 榴弹枪 ========== -->
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>RK_LauncherMuskmelon</defName>
+    <statBases>
+      <SightsEfficiency>1.0</SightsEfficiency>
+      <ShotSpread>0.12</ShotSpread>
+      <SwayFactor>1.6</SwayFactor>
+      <Bulk>9</Bulk>
+    </statBases>
+    <Properties>
+      <recoilAmount>2.5</recoilAmount>
+      <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+      <warmupTime>2.5</warmupTime>
+      <range>35</range>
+      <burstShotCount>1</burstShotCount>
+      <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+      <minRange>5</minRange>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+      <soundCast>ThrowGrenade</soundCast>
+      <soundCastTail>GunTail_Heavy</soundCastTail>
+      <muzzleFlashScale>12</muzzleFlashScale>
+    </Properties>
+    <AmmoUser>
+      <magazineSize>1</magazineSize>
+      <reloadTime>3.5</reloadTime>
+      <ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+    </AmmoUser>
+    <FireModes>
+      <aiAimMode>AimedShot</aiAimMode>
+    </FireModes>
+  </Operation>
+
+  <!-- ========== 破片弹 frag_Muskmelon → CE 弹(CE CompFragments 硬转 ProjectileCE) ========== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="frag_Muskmelon"]</xpath>
+    <value>
+      <thingClass>CombatExtended.ProjectileCE</thingClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="frag_Muskmelon"]/projectile</xpath>
+    <value>
+      <projectile Class="CombatExtended.ProjectilePropertiesCE">
+        <damageDef>Bullet</damageDef>
+        <damageAmountBase>4</damageAmountBase>
+        <armorPenetrationSharp>4</armorPenetrationSharp>
+        <armorPenetrationBlunt>1</armorPenetrationBlunt>
+        <speed>46</speed>
+      </projectile>
+    </value>
+  </Operation>
+
+  <!-- ========== 手雷弹体 RK_Proj_Muskmelon → CE 爆炸弹 + CE 破片 ========== -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_Muskmelon"]/thingClass</xpath>
+    <value>
+      <thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_Muskmelon"]/projectile</xpath>
+    <value>
+      <projectile Class="CombatExtended.ProjectilePropertiesCE">
+        <explosionRadius>1.9</explosionRadius>
+        <damageDef>Bomb</damageDef>
+        <damageAmountBase>40</damageAmountBase>
+        <armorPenetrationSharp>6</armorPenetrationSharp>
+        <armorPenetrationBlunt>3</armorPenetrationBlunt>
+        <speed>16</speed>
+        <explosionDelay>80</explosionDelay>
+      </projectile>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_Muskmelon"]/comps/li[@Class="Meow.CompProperties_ExplodeFragment"]</xpath>
+    <value>
+      <li Class="CombatExtended.CompProperties_Fragments">
+        <fragments>
+          <frag_Muskmelon>32</frag_Muskmelon>
+        </fragments>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- ========== 香瓜手雷本体 RK_GrenadeMuskmelon → CE AmmoDef/AmmoThing 手雷 ========== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeMuskmelon"]</xpath>
+    <value>
+      <thingClass>CombatExtended.AmmoThing</thingClass>
+      <stackLimit>50</stackLimit>
+      <resourceReadoutPriority>First</resourceReadoutPriority>
+      <detonateProjectile>RK_Proj_Muskmelon</detonateProjectile>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeMuskmelon"]</xpath>
+    <attribute>Class</attribute>
+    <value>CombatExtended.AmmoDef</value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeMuskmelon"]/comps/li[@Class="CompProperties_Explosive"]</xpath>
+    <value>
+      <li Class="CombatExtended.CompProperties_ExplosiveCE">
+        <explosiveRadius>3.2</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <damageAmountBase>40</damageAmountBase>
+        <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+    <defName>RK_GrenadeMuskmelon</defName>
+    <statBases>
+      <Bulk>2</Bulk>
+      <SightsEfficiency>1.0</SightsEfficiency>
+    </statBases>
+    <Properties>
+      <label>投掷香瓜手雷</label>
+      <verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+      <hasStandardCommand>true</hasStandardCommand>
+      <range>17.9</range>
+      <minRange>2.9</minRange>
+      <warmupTime>1.5</warmupTime>
+      <noiseRadius>3</noiseRadius>
+      <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+      <soundCast>ThrowGrenade</soundCast>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+      </targetParams>
+      <defaultProjectile>RK_Proj_Muskmelon</defaultProjectile>
+      <onlyManualCast>false</onlyManualCast>
+      <ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+      <ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+    </Properties>
+    <weaponTags>
+      <li>CE_AI_Grenade</li>
+      <li>CE_OneHandedWeapon</li>
+    </weaponTags>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="RK_GrenadeMuskmelon"]</xpath>
+    <value>
+      <tools>
+        <li Class="CombatExtended.ToolCE">
+          <label>grenade</label>
+          <capacities>
+            <li>Blunt</li>
+          </capacities>
+          <power>5</power>
+          <cooldownTime>1.5</cooldownTime>
+          <armorPenetrationBlunt>1.4</armorPenetrationBlunt>
+          <linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+        </li>
+      </tools>
+    </value>
+  </Operation>
+
+  <!-- ========== RK_Proj_Muskmelon_launcher(发射器遗留弹) 同步 CE 化 ==========
+       它 ParentName=RK_ExoticGrenadeMuskmelon 且自带 projectile Class=Meow.PjtProps_BulletAdvanced;
+       上方把父级(同节点 def RK_Proj_Muskmelon)的 projectile 改成 ProjectilePropertiesCE 后,
+       RimWorld 继承深度合并会把 CE 专属 armorPenetrationSharp/Blunt 灌进 Meow 类节点 → 解析崩
+       ("armorPenetrationSharp doesn't correspond to any field in type PjtProps_BulletAdvanced"),
+       整文件 def 加载失败。该弹已被发射器 CE 化(改走 Bullet_40x46mmGrenade_HE)弃用,
+       此处仅把它自身 projectile 同步 CE 化,显式覆盖父级全部字段,消除继承冲突、保住 def 可解析。 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_Proj_Muskmelon_launcher"]/projectile</xpath>
+    <value>
+      <projectile Class="CombatExtended.ProjectilePropertiesCE">
+        <speed>33</speed>
+        <arcHeightFactor>4.5</arcHeightFactor>
+        <shadowSize>0.4</shadowSize>
+        <explosionRadius>1.9</explosionRadius>
+        <damageDef>Bomb</damageDef>
+        <damageAmountBase>40</damageAmountBase>
+        <armorPenetrationSharp>6</armorPenetrationSharp>
+        <armorPenetrationBlunt>3</armorPenetrationBlunt>
+        <explosionDelay>80</explosionDelay>
+        <flyOverhead>true</flyOverhead>
+      </projectile>
+    </value>
+  </Operation>
+
+</Patch>

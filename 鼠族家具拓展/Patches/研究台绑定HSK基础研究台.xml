@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ============================================================================
+	     鼠族研究台 → 绑定 HSK 基础研究台 (2026-09-11)
+	     ============================================================================
+	     症状: 鼠族家具拓展的「鼠族研究台」(RKFC_RGK_SimpleResearchBench) 建好后,
+	           在 HSK 科技树里点任何项目都不认它 —— 小人接了研究活跑向它也没法开工,
+	           它实际等同于一个普通装饰桌。
+
+	     ── 根因(反编译实证 Verse.ResearchProjectDef)──
+	     HSK 六档科技门槛靠 requiredResearchBuilding + SK.AdvancedResearchExtension
+	     双轨声明(见 Core_SK/Defs/ResearchProjectDefs/Research_Abstract.xml):
+	         MedievalBase    = requiredResearchBuilding: SimpleResearchBench
+	         IndustrialBase  = requiredResearchBuilding: SimpleResearchBench
+	         HitechBase      = requiredResearchBuilding: HiTechResearchBench
+	     原版判定 CanBeResearchedAt 首行:
+	         if (requiredResearchBuilding != null && bench.def != requiredResearchBuilding) return false;
+	     → **只有 def 恰好等于 SimpleResearchBench / HiTechResearchBench /
+	       PrimitiveResearchBench 的建筑能研究**。鼠族台是独立 defName,与三者都不等
+	       → 每个 HSK 科技都返回 false。
+	     同时 WorkGiver_Researcher 走 ThingRequestGroup.ResearchBench
+	     (Verse.ThingRequestGroupUtility: typeof(Building_ResearchBench).IsAssignableFrom(thingClass))
+	     —— 鼠族台 thingClass 已是 Building_ResearchBench,所以扫描**找得到**它,
+	     但 HasJobOnThing 里 CanBeResearchedAt 恒 false → 有活也不去干。
+	     这正是"看着像研究台、实际小人无视"的成因。
+
+	     ── 为什么不能改用 SK.AdvancedResearchExtension 反向覆盖 ──
+	     该扩展挂在 ResearchProjectDef(项目)侧,只能**放行更多研究台**,不能让某个
+	     研究台**主动加入**白名单。要绑定,只能让鼠族台在所有 HSK 项目的判定里
+	     "看起来就是基础研究台"。
+
+	     ── 修法 ──
+	     ⚠ 不能把 requiredResearchBuilding 改成鼠族台 defName —— 那会**夺走**原版
+	       SimpleResearchBench 的基础档地位(原版台反而全废),也违背"绑定"语义。
+	     ✅ 正解 = 让鼠族台**成为** HSK 基础研究台:`ParentName` 改为 Core_SK 的
+	       研究台抽象基类 `ResearchBase`,从而在代码层面与原版 SimpleResearchBench
+	       同构(同为 ResearchBase 子类、同带 ResearchSpeedFactor 工作速度报告 comp、
+	       同属研究台)。这是 Core_SK 自己给外部 mod 留的扩展点
+	       (Core_SK/Patches/!DummyAbstracts.xml 把抽象基类以 SK.<Name>Dummy 暴露)。
+
+	     ── 为何不直接换 ParentName 了事 ──
+	     换父类会丢原 `BenchBase` 的东西(interactionCellIcon / noRightClickDraftAttack
+	     / buildingTags / workTableRoomRole),故 value 里逐项补回。
+	     ⚠ comps 必须用 PatchOperationReplace(不是 Add) —— Add 是**追加子节点**,
+	       本 def 自带一个 comps(CompProperties_AffectedByFacilities) →
+	       会变成两个 comps 节点,报 duplicate/解析异常。
+	       Replace 才是"清掉旧节点、按 value 重建",配合 Inherit="False" 挡父类继承。
+	     新 comps 内容:
+	       - CompProperties_ReportWorkSpeed / ResearchSpeedFactor ← 研究台的**身份核心**
+	         (决定 UI 是否显示"研究速度"、按研究速度而非工作速度结算);原 mod 缺此,
+	         即使能点开也不显示进度;
+	       - CompProperties_AffectedByFacilities 白名单补 HSK 科研设施 FileCabinet /
+	         LabTerminal,否则后期档位科技要求设施时鼠族台仍不够格;
+	         同时保留原 mod 自带的 RKFC_GL_Bookshelf 书架联动。
+	     researchPrerequisites / thingClass / statBases / graphicData 等原 def 自带字段
+	     全部保留不动(Replace 只动被匹配的节点,不影响兄弟字段)。
+	     ============================================================================ -->
+
+	<!-- ① 归属 HSK 研究台抽象基类: 与原版 SimpleResearchBench 同构
+	     (SK.ResearchBaseDummy → ResearchBase → StandardBuilding → BuildingBase) -->
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]</xpath>
+		<attribute>ParentName</attribute>
+		<value>SK.ResearchBaseDummy</value>
+	</Operation>
+
+	<!-- ② 补回原 BenchBase 提供的字段(换父类后丢失) -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]</xpath>
+		<value>
+			<interactionCellIcon>DiningChair</interactionCellIcon>
+			<noRightClickDraftAttack>true</noRightClickDraftAttack>
+			<building>
+				<buildingTags>
+					<li>Production</li>
+				</buildingTags>
+				<workTableRoomRole>Laboratory</workTableRoomRole>
+				<workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+				<paintable>true</paintable>
+				<uninstallWork>360</uninstallWork>
+			</building>
+		</value>
+	</Operation>
+
+	<!-- ③ comps 全量重建(Replace 语义: 删旧节点 + 按 value 重建; Inherit=False 挡父类)
+	     ⚠ 本 def 自带 comps,必须 Replace 而非 Add,否则两个 comps 节点并存 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]/comps</xpath>
+		<value>
+			<comps Inherit="False">
+				<li Class="CompProperties_ReportWorkSpeed">
+					<workSpeedStat>ResearchSpeedFactor</workSpeedStat>
+				</li>
+				<li Class="CompProperties_AffectedByFacilities">
+					<linkableFacilities>
+						<li>RKFC_GL_Bookshelf</li>
+						<li>FileCabinet</li>
+						<li>LabTerminal</li>
+					</linkableFacilities>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+
+	<!-- ④ placeWorkers 全量重建(本 def 无此节点 → 用 Replace 会失败,改用 Conditional:
+	     match 分支 Replace 清旧(若将来父类/DLC 带进来), nomatch 分支 Add) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]/placeWorkers</xpath>
+		<match Class="PatchOperationReplace">
+			<value>
+				<placeWorkers>
+					<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+					<li>PlaceWorker_ShowFacilitiesConnections</li>
+					<li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+				</placeWorkers>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<value>
+				<placeWorkers>
+					<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+					<li>PlaceWorker_ShowFacilitiesConnections</li>
+					<li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+				</placeWorkers>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- ⑤ 挂进 HSK「研究台」二级菜单(原版三台之外追加鼠族台) -->
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ResearchBenches"]/defNames</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ResearchBenches"]/defNames</xpath>
+				<value>
+					<li>RKFC_RGK_SimpleResearchBench</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+</Patch>

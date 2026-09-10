@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 合并自(保持原执行序): 22_盾甲金属配方.xml, 24_锻造台木板适配.xml, 26_十字军长裙金属配方.xml --><Patch><!-- 盾牌/盔甲金属配方(2026-08-08, 用户要求):
+         鼠族板甲/板甲头盔/重盾/塔盾/十字军护甲/十字军护盔/格鲁斯之铠
+         的配方只保留金属材质,移除全部零部件(ComponentMedieval/ComponentIndustrial)、
+         木板(WoodPlank)与布料(Cloth),品质只由金属决定。
+         最终层补丁(22),覆盖 01/02/05/08/15/16 对这几条配方的材料改动。 -->
+
+    <!---->
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Arbalest"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <stuffCategoriesToAllow> <li>StrongMetallic</li> </stuffCategoriesToAllow> </filter> <count>30</count> </li>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>30</count> </li>
+<li> <filter> <thingDefs> <li>ComponentMedieval</li> </thingDefs> </filter> <count>6</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Arbalest"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<stuffCategoriesToAllow> <li>StrongMetallic</li> </stuffCategoriesToAllow> <thingDefs> <li>ComponentMedieval</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Crossbow"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>25</count> </li>
+<li> <filter> <thingDefs> <li>Steel</li> </thingDefs> </filter> <count>25</count> </li>
+<li> <filter> <thingDefs> <li>ComponentMedieval</li> </thingDefs> </filter> <count>4</count> </li>
+<li> <filter> <thingDefs> <li>ComponentIndustrial</li> </thingDefs> </filter> <count>2</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Crossbow"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<thingDefs> <li>Steel</li><li>ComponentMedieval</li><li>ComponentIndustrial</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_EnhanceCrossBow"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>20</count> </li>
+<li> <filter> <thingDefs> <li>Steel</li> </thingDefs> </filter> <count>30</count> </li>
+<li> <filter> <thingDefs> <li>ComponentMedieval</li> </thingDefs> </filter> <count>4</count> </li>
+<li> <filter> <thingDefs> <li>ComponentIndustrial</li> </thingDefs> </filter> <count>4</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_EnhanceCrossBow"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<thingDefs> <li>Steel</li><li>ComponentMedieval</li><li>ComponentIndustrial</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_AutoCrossBow"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>15</count> </li>
+<li> <filter> <thingDefs> <li>Steel</li> </thingDefs> </filter> <count>35</count> </li>
+<li> <filter> <thingDefs> <li>ComponentMedieval</li> </thingDefs> </filter> <count>4</count> </li>
+<li> <filter> <thingDefs> <li>ComponentIndustrial</li> </thingDefs> </filter> <count>3</count> </li>
+<li> <filter> <thingDefs> <li>Mechanism</li> </thingDefs> </filter> <count>2</count> </li>
+<li> <filter> <thingDefs> <li>Compaste</li> </thingDefs> </filter> <count>15</count> </li>
+<li> <filter> <thingDefs> <li>SyntheticFibers</li> </thingDefs> </filter> <count>6</count> </li>
+<li> <filter> <thingDefs> <li>Plastic</li> </thingDefs> </filter> <count>10</count> </li>
+<li> <filter> <thingDefs> <li>Rubber</li> </thingDefs> </filter> <count>3</count> </li>
+<li> <filter> <thingDefs> <li>Weapon_Parts</li> </thingDefs> </filter> <count>4</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_AutoCrossBow"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<thingDefs> <li>Steel</li><li>ComponentMedieval</li><li>ComponentIndustrial</li><li>Mechanism</li><li>Compaste</li><li>SyntheticFibers</li><li>Plastic</li><li>Rubber</li><li>Weapon_Parts</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Rifle"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>30</count> </li>
+<li> <filter> <thingDefs> <li>Steel</li> </thingDefs> </filter> <count>45</count> </li>
+<li> <filter> <thingDefs> <li>ComponentIndustrial</li> </thingDefs> </filter> <count>3</count> </li>
+<li> <filter> <thingDefs> <li>Weapon_Parts</li> </thingDefs> </filter> <count>2</count> </li>
+<li> <filter> <thingDefs> <li>Rifle_Component</li> </thingDefs> </filter> <count>1</count> </li>
+<li> <filter> <thingDefs> <li>Compaste</li> </thingDefs> </filter> <count>20</count> </li>
+<li> <filter> <thingDefs> <li>SyntheticFibers</li> </thingDefs> </filter> <count>8</count> </li>
+<li> <filter> <thingDefs> <li>Plastic</li> </thingDefs> </filter> <count>14</count> </li>
+<li> <filter> <thingDefs> <li>Rubber</li> </thingDefs> </filter> <count>4</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Rifle"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<thingDefs> <li>Steel</li><li>ComponentIndustrial</li><li>Weapon_Parts</li><li>Rifle_Component</li><li>Compaste</li><li>SyntheticFibers</li><li>Plastic</li><li>Rubber</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SniperRifle"]/ingredients</xpath>
+        <value>
+            <ingredients>
+<li> <filter> <thingDefs> <li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs> </filter> <count>30</count> </li>
+<li> <filter> <thingDefs> <li>Steel</li> </thingDefs> </filter> <count>60</count> </li>
+<li> <filter> <thingDefs> <li>ComponentIndustrial</li> </thingDefs> </filter> <count>5</count> </li>
+<li> <filter> <thingDefs> <li>Weapon_Parts</li> </thingDefs> </filter> <count>3</count> </li>
+<li> <filter> <thingDefs> <li>Sniper_Component</li> </thingDefs> </filter> <count>1</count> </li>
+<li> <filter> <thingDefs> <li>Compaste</li> </thingDefs> </filter> <count>25</count> </li>
+<li> <filter> <thingDefs> <li>SyntheticFibers</li> </thingDefs> </filter> <count>10</count> </li>
+<li> <filter> <thingDefs> <li>Plastic</li> </thingDefs> </filter> <count>16</count> </li>
+<li> <filter> <thingDefs> <li>Rubber</li> </thingDefs> </filter> <count>5</count> </li>
+</ingredients>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationReplace">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SniperRifle"]/fixedIngredientFilter</xpath>
+        <value>
+            <fixedIngredientFilter>
+<thingDefs> <li>Steel</li><li>ComponentIndustrial</li><li>Weapon_Parts</li><li>Sniper_Component</li><li>Compaste</li><li>SyntheticFibers</li><li>Plastic</li><li>Rubber</li><li>AcaciaPlank</li><li>BambooPlank</li><li>BirchPlank</li><li>CecropiaPlank</li><li>CypressPlank</li><li>DragonwoodPlank</li><li>MangrovePlank</li><li>MaplePlank</li><li>OakPlank</li><li>PinePlank</li><li>PoplarPlank</li><li>RedWoodPlank</li><li>TeakPlank</li><li>WillowPlank</li><li>WoodPlank</li></thingDefs>
+</fixedIngredientFilter>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_WoodenShield"]/stuffCategories</xpath>
+        <value>
+            <li>SoftwoodLumber</li><li>HardwoodLumber</li><li>UltrahardwoodLumber</li><li>EngineeredLumber</li>
+        </value>
+    </Operation>
+
+<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RK_LightLance"]/stuffCategories</xpath>
+        <value>
+            <li>SoftwoodLumber</li><li>HardwoodLumber</li><li>UltrahardwoodLumber</li><li>EngineeredLumber</li>
+        </value>
+    </Operation><!-- 鼠族十字军长裙金属配方(2026-08-08, 用户要求):
+         RK_Crusader 是中世纪装甲(ThingDef: costStuffCount 90 + stuffCategories Metallic,
+         配钢铁 40 + 恶魔布 20),23_衣物皮毛配方 误将其归为衣物改为 HF 布×20,
+         与产品金属材质不匹配导致配方异常。
+         此处恢复金属为主: 金属材质×90(品质由金属决定) + 钢铁×40 + 布料×20(内衬,固定材料)。
+         最终层补丁(26),覆盖 23/08 对该配方的改动。 -->
+    </Patch>

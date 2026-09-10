@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗贴身层基础修改-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_OnSkinBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.8</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗贴身层基础修改-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_OnSkinBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>1.5</Bulk>
+			<WornBulk>1</WornBulk>
+		</value>
+	</Operation>
+
+	<!-- 绮罗T恤衫 绮罗T恤衫（短款） 绮罗背心 绮罗水手服（款一） 绮罗水手服（款二） 绮罗可爱连帽衫  绮罗运动背心 绮罗针织毛衣 绮罗工作衬衫 的材料系数 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_TShirt" or 
+		defName="Kiiro_TShirtShort" or 
+		defName="Kiiro_Waistcoat" or 
+		defName="Kiiro_SailorSuit" or 
+		defName="Kiiro_SailorSuitII" or 
+		defName="Kiiro_Hoodie" or 
+		defName="Kiiro_RunningShirt" or 
+		defName="Kiiro_KnittedSweater" or 
+		defName="Kiiro_WorkerShirt"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗蕾丝连衣裙 绮罗蕾丝连衣裙（短款） 绮罗工作围裙 绮罗休闲背带裙 绮罗休闲背带裤 绮罗露肩高腰裙 的材料系数 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_LaceDress" or 
+		defName="Kiiro_LaceDressShort" or 
+		defName="Kiiro_GardenerDress" or 
+		defName="Kiiro_CasualDress" or 
+		defName="Kiiro_SuspenderTrousers" or 
+		defName="Kiiro_HighWaistedDress"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 夜行衣 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Stealth"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>10</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Stealth"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>10</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Stealth"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>24</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗影袭者战服 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_StealthII"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_StealthII"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>10</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_StealthII"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>18</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_StealthII"
+		]/equippedStatOffsets/Ancot_RangeDodgeChance</xpath>
+		<value>
+			<Ancot_RangeDodgeChance>0.24</Ancot_RangeDodgeChance>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_StealthII"
+		]/equippedStatOffsets/MeleeDodgeChance</xpath>
+		<value>
+			<MeleeDodgeChance>0.6</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗游击队服 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_GuerrillaUniform"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_GuerrillaUniform"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>3.5</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_GuerrillaUniform"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>3</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗军礼服 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_DressUniform"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_DressUniform"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>4.5</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_DressUniform"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>3</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗勇者甲胄 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_ValorArmor"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>36</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_ValorArmor"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>88</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_ValorArmor"]</xpath>
+		<value>
+			<modExtensions>
+				<li Class="CombatExtended.PartialArmorExt">
+					<stats>
+					<li>
+					<ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+					<parts>
+					<li>Shoulder</li>
+					</parts>
+					</li>
+					<li>
+					<ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+					<parts>
+					<li>Shoulder</li>
+					</parts>
+					</li>
+
+					<li>
+					<ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+					<parts>
+					<li>Leg</li>
+					</parts>
+					</li>
+					<li>
+					<ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+					<parts>
+					<li>Leg</li>
+					</parts>
+					</li>
+	
+					<li>
+					<ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+					<parts>
+					<li>Neck</li>
+					</parts>
+					</li>
+					<li>
+					<ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+					<parts>
+					<li>Neck</li>
+					</parts>
+					</li>
+					</stats>
+				</li>
+			</modExtensions>
+		</value>
+	</Operation>
+</Patch>

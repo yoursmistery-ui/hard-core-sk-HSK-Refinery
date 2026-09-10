@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	
+		<Operation Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/label</xpath>
+			<value>			
+				<label>lucerne hammer</label>
+			</value>
+		</Operation>
+		<Operation Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/description</xpath>
+			<value>			
+				<description>TYPE: 2H Offensive Anti-Armor
+TIER: Late Medieval
+++ Great penetration / may bypass armor
+- Poor lethality
+- Mediocre defense
+				
+A type of polarm / warhammer with a sharp spike for penetrating armor and a hammer for causing concussions. It can be used defensively as a spear to limiting effect. Very effective against armor, but doesn't inflict the most deadly wounds.</description>
+			</value>
+		</Operation>
+		<Operation Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/costStuffCount</xpath>
+			<value>			
+				<costStuffCount>50</costStuffCount>
+			</value>
+		</Operation>
+		<Operation Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]</xpath>
+			<value>			
+				<costList>
+					<ComponentMedieval>7</ComponentMedieval>
+					<WoodLog>20</WoodLog>
+				</costList>
+			</value>
+		</Operation>
+		
+		<Operation Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/tools</xpath>
+			<value>
+				<tools>
+					<li Class="CombatExtended.ToolCE">
+					<label>pommel</label>
+					<capacities>
+						<li>Poke</li>
+					</capacities>
+					<power>5</power>
+					<cooldownTime>1.3</cooldownTime>
+					<chanceFactor>0.1</chanceFactor>
+					<armorPenetrationBlunt>5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>point</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>14</power>
+					<cooldownTime>1.6</cooldownTime>
+					<chanceFactor>0.75</chanceFactor>
+					<armorPenetrationBlunt>4</armorPenetrationBlunt>
+					<armorPenetrationSharp>4.5</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Stab</li>
+					</capacities>
+					<power>12</power>
+					<cooldownTime>1.7</cooldownTime>
+					<chanceFactor>1</chanceFactor>
+					<armorPenetrationBlunt>8</armorPenetrationBlunt>
+					<armorPenetrationSharp>6.3</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>17</power>
+					<cooldownTime>1.8</cooldownTime>
+					<chanceFactor>1</chanceFactor>
+					<armorPenetrationBlunt>12</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+				</li>
+				</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/statBases</xpath>
+		<value>
+			<statBases>
+				<WorkToMake>8100</WorkToMake>
+				<Bulk>8</Bulk>
+				<Mass>3</Mass>
+				<MeleeCounterParryBonus>1.0</MeleeCounterParryBonus>
+			</statBases>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/equippedStatOffsets</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>1.0</MeleeCritChance>
+				<MeleeParryChance>0.25</MeleeParryChance>
+				<MeleeDodgeChance>0.7</MeleeDodgeChance>
+			</equippedStatOffsets>
+			
+		</value>
+	</Operation>
+				
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/thingCategories</xpath>
+		<value>
+			<thingCategories>
+				<li>SharpMelee</li>
+			</thingCategories>	
+		</value>
+	</Operation>				
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/stuffCategories</xpath>
+		<value>
+			<stuffCategories>
+				<li>StrongMetallic</li>
+			</stuffCategories>
+		</value>
+	</Operation>	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Warhammer"]/graphicData</xpath>
+		<value>			
+			<graphicData>
+				<texPath>Things/Weapons/LucerneHammer</texPath>
+				<graphicClass>Graphic_Single</graphicClass>
+			</graphicData>
+		</value>
+	</Operation>			
+				
+		<!-- quarterstaff -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/label</xpath>
+		<value>			
+			<label>quarterstaff</label>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/description</xpath>
+		<value>			
+			<description>TYPE: 2H Defensive Blunt
+TIER: Early Medieval
++ Very High stun chance
++ High defense
++ Quick
+- No armor penetration
+- Very low lethality (this can be a feature)
+
+A two-handed staff made of hardwood and with metal tips. It's not the deadliest weapon, but it's easy to use and dodge with and a skilled user can knock an oppenent down. Often a practice weapon.</description>
+		</value>
+	</Operation>
+		
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+				<label>tip</label>
+				<capacities>
+					<li>Poke</li>
+				</capacities>
+				<power>5</power>
+				<cooldownTime>1.5</cooldownTime>
+				<chanceFactor>0.33</chanceFactor>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>11</power>
+				<cooldownTime>1.2</cooldownTime>
+				<chanceFactor>1.33</chanceFactor>
+				<armorPenetrationBlunt>5</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Head</linkedBodyPartsGroup>
+			</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/statBases</xpath>
+		<value>
+			<statBases>
+				<WorkToMake>4800</WorkToMake>
+				<Bulk>7</Bulk>
+				<Mass>3</Mass>
+				<MeleeCounterParryBonus>1.1</MeleeCounterParryBonus>
+			</statBases>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/equippedStatOffsets</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>1.3</MeleeCritChance>
+				<MeleeDodgeChance>0.9</MeleeDodgeChance>
+				<MeleeParryChance>0.5</MeleeParryChance>
+			</equippedStatOffsets>
+			
+		</value>
+	</Operation>
+				
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/thingCategories</xpath>
+		<value>
+			<thingCategories>
+				<li>BluntMelee</li>
+			</thingCategories>	
+		</value>
+	</Operation>				
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/stuffCategories</xpath>
+		<value>
+			<stuffCategories>
+				<li>Woody</li>
+			</stuffCategories>
+		</value>
+	</Operation>	
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]/graphicData</xpath>
+		<value>			
+			<graphicData>
+				<texPath>Things/Weapons/QuarterStaff</texPath>
+				<graphicClass>Graphic_Single</graphicClass>
+			</graphicData>
+		</value>
+	</Operation>			
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MeleeWeapon_Axe"]</xpath>
+		<value>			
+			<costList>
+				<ComponentMedieval>4</ComponentMedieval>
+			</costList>
+		</value>
+	</Operation>	
+
+</Patch>	

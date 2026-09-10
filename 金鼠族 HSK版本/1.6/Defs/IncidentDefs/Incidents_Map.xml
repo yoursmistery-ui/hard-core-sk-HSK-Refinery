@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+
+    <IncidentDef>
+        <defName>OAGene_ExtremeSnowstorm</defName>
+        <label>极端暴风雪</label>
+        <category>ThreatBig</category>
+        <baseChance>0</baseChance>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <workerClass>IncidentWorker_MakeGameCondition</workerClass>
+        <gameCondition>OAGene_ExtremeSnowstorm</gameCondition>
+        <letterLabel>极端暴风雪</letterLabel>
+        <letterDef>OAGene_SnowstormStart</letterDef>
+        <durationDays>2.5~6.0</durationDays>
+    </IncidentDef>
+
+<IncidentDef Name="OAGene_Snowstorm_MapIncident" Abstract="True">
+        <category>Misc</category>
+        <baseChance>0</baseChance>
+        <targetTags>
+            <li>Map_PlayerHome</li>
+        </targetTags>
+    </IncidentDef>
+
+    
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormMaliceRaid</defName>
+        <label>暴风雪袭击</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormMaliceRaid</workerClass>
+        <category>ThreatBig</category>
+        <pointsScaleable>true</pointsScaleable>
+        <tale>Raid</tale>
+        <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    </IncidentDef>
+
+    
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormMaliceRaid_Reinforce</defName>
+        <label>暴风雪袭击</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormMaliceRaid_Reinforce</workerClass>
+        <category>ThreatBig</category>
+        <pointsScaleable>true</pointsScaleable>
+        <tale>Raid</tale>
+        <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    </IncidentDef>
+
+    
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormMaliceRaid_Hard</defName>
+        <label>隐隐约约的人影</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormMaliceRaid_Hard</workerClass>
+        <category>ThreatBig</category>
+        <pointsScaleable>true</pointsScaleable>
+        <tale>Raid</tale>
+        <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_AfterSnowstormTraderCaravanArrival</defName>
+        <label>风雪后的商队</label>
+        <category>FactionArrival</category>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_AfterSnowstormTraderCaravanArrival</workerClass>
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_AffectedMerchant</defName>
+        <label>Merchants in distress amidst the snowstorm</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_AffectedMerchant</workerClass>
+        <category>FactionArrival</category>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>The Fallen in the Blizzard</letterLabel>
+        <letterText>A person who appeared to be a businessman struggled and struggled to reach this point, but he no longer had the strength to continue moving forward.\nThe wind and snow are about to engulf his last life force, and the goods he carries will also be buried in the wind and snow with him.\n\nUnless someone loves wealth more than life.</letterText>
+        <pointsScaleable>true</pointsScaleable>
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormThrumboWanderIn</defName>
+        <label>Unicorn in the wind and snow</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormThrumboWanderIn</workerClass>
+        <letterDef>PositiveEvent</letterDef>
+        <letterLabel>Unicorn in the wind and snow</letterLabel>
+        <letterText>A massive percussion beast arrived here, seemingly eager to find a place to shelter from the blizzard, and ultimately chose your colony.\n\nIn order to stay in your colony, this percussion beast has been domesticated on its own and has made efforts to appear obedient. Perhaps taking it in would be a good idea.\n\nJust don't let it enter your barn.</letterText>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_CommunicationTowerCollapse</defName>
+        <label>Signal tower collapse</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_CommunicationTowerCollapse</workerClass>
+        <letterDef>NegativeEvent</letterDef>
+        <letterLabel>Signal tower collapse</letterLabel>
+        <letterText>A signal tower in the distance emitted flashes of strong light, followed by a loud bang and then no more sound. These signal towers, which have been in disrepair for many years, are not reliable in themselves, so their damage seems so natural in such extreme snowstorms.\n\nNo one will try to repair the signal tower in this kind of snowstorm. The communication station can only resume normal operation after the snowstorm.</letterText>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormPrecursor_AnimalFlee</defName>
+        <label>Animals Escape</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormPrecursor_AnimalFlee</workerClass>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>Animals Escape</letterLabel>
+        <letterText>Perhaps sensing some warning signs, the animals began to flee from this area.</letterText>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_HuskyMigration</defName>
+        <label>Snow Dog Migration</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_HuskyMigration</workerClass>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>Snow Dog Migration</letterLabel>
+        <letterText>A small group of Huskies are rushing in one direction, perhaps intending to return to their own tribe before the next snowstorm.</letterText>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_Trader_SnowstormCultistArrival</defName>
+        <label>Windstorm Cultists</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormCultistArrival</workerClass>
+        <category>FactionArrival</category>
+        <letterDef>NeutralEvent</letterDef>
+        <letterLabel>Windstorm Cultists</letterLabel>
+        <letterText>A group of believers who kept chanting loudly came to this place. They will endlessly praise the 'God of Wind and Snow' in their mouths, without caring whether it will disturb your colonizers, until they voluntarily leave or are driven away by you.\n\nThis group of believers regards Windstorm Crystals as a gift from the God of Wind and Snow, so if you have Windstorm Crystals, they will be very willing to purchase them.</letterText>
+        <requireColonistsPresent>True</requireColonistsPresent>
+    </IncidentDef>
+
+</Defs>

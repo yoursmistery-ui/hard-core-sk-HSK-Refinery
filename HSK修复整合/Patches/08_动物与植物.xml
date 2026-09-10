@@ -1,0 +1,4947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         08_动物与植物.xml  (2026-08-22 按大类合并)
+         合并自 6 个补丁: 35_动物屠宰产生皮.xml, 46_腌肉允许人肉.xml, 52_憎恶可屠宰.xml, 61_鱼类分类修复.xml, 62_鲶鱼屠宰配方.xml, 64_药草芦荟种植修复.xml
+         动物屠宰产生皮 + 腌肉人肉 + 憎恶屠宰 + 鱼类分类/鲶鱼屠宰 + 药草芦荟。
+         ============================================================ -->
+    <!-- 来源: 35_动物屠宰产生皮.xml -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Dova"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Nova"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Orassan"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alpaca"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Alpaca"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alpaca"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Alpaca"]/race</xpath>
+        <value>
+            <leatherDef>Hide_SoftHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alpaca"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Alpaca"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Alpaca"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_SoftHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alphabeaver"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Alphabeaver"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alphabeaver"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Alphabeaver"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alphabeaver"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Alphabeaver"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Alphabeaver"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Animal_Desiri"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Animal_Desiri_Desert"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateOne"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Animal_Desiri_TemperateTwo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Animal_Desiri_Urban"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Barghest"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Barghest"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Barghest"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Barghest"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Barghest"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Barghest"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Barghest"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Grizzly"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Bear_Grizzly"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Grizzly"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Bear_Grizzly"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Grizzly"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Bear_Grizzly"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Bear_Grizzly"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Polar"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Bear_Polar"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Polar"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Bear_Polar"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bear_Polar"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Bear_Polar"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Bear_Polar"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Behir"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Behir"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Behir"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Behir"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ImmunogenicHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Behir"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Behir"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Behir"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ImmunogenicHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bison"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Bison"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bison"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Bison"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bison"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Bison"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Bison"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomalope"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Boomalope"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomalope"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Boomalope"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomalope"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Boomalope"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Boomalope"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomrat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Boomrat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomrat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Boomrat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Boomrat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Boomrat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Boomrat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Buffalo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Buffalo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Buffalo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Buffalo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Buffalo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Buffalo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Buffalo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Capybara"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Capybara"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Capybara"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Capybara"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Capybara"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Capybara"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Capybara"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Caribou"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Caribou"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Caribou"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Caribou"]/race</xpath>
+        <value>
+            <leatherDef>Hide_SoftHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Caribou"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Caribou"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Caribou"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_SoftHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cassowary"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cassowary"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cassowary"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cassowary"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cassowary"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cassowary"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cassowary"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chicken"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Chicken"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chicken"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Chicken"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chicken"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Chicken"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Chicken"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chinchilla"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Chinchilla"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chinchilla"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Chinchilla"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chinchilla"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Chinchilla"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Chinchilla"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chipmunk"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Chipmunk"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chipmunk"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Chipmunk"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RodentSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chipmunk"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Chipmunk"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Chipmunk"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RodentSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cobra"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cobra"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cobra"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cobra"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cobra"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cobra"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cobra"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cougar"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cougar"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cougar"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cougar"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cougar"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cougar"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cougar"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cow"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cow"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cow"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cow"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cow"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cow"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cow"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Deer"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Deer"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Deer"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Deer"]/race</xpath>
+        <value>
+            <leatherDef>Hide_SoftHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Deer"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Deer"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Deer"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_SoftHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Donkey"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Donkey"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Donkey"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Donkey"]/race</xpath>
+        <value>
+            <leatherDef>Hide_SoftHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Donkey"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Donkey"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Donkey"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_SoftHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Dromedary"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Dromedary"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Dromedary"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Dromedary"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Dromedary"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Dromedary"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Dromedary"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Duck"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Duck"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Duck"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Duck"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Duck"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Duck"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Duck"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elephant"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Elephant"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elephant"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Elephant"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elephant"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Elephant"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Elephant"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elk"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Elk"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elk"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Elk"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Elk"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Elk"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Elk"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Emu"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Emu"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Emu"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Emu"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Emu"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Emu"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Emu"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ermine"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Ermine"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ermine"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Ermine"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ermine"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Ermine"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Ermine"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="FRaptor"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="FRaptor"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="FRaptor"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FRaptor"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ImmunogenicHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="FRaptor"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="FRaptor"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="FRaptor"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ImmunogenicHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Feenix"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Feenix"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Feenix"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Feenix"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Feenix"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Feenix"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Feenix"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fishercat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Fishercat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fishercat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Fishercat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fishercat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Fishercat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Fishercat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Arctic"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Fox_Arctic"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Arctic"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Fox_Arctic"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Arctic"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Fox_Arctic"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Fox_Arctic"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Fennec"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Fox_Fennec"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Fennec"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Fox_Fennec"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Fennec"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Fox_Fennec"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Fox_Fennec"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Red"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Fox_Red"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Red"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Fox_Red"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fox_Red"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Fox_Red"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Fox_Red"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gazelle"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Gazelle"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gazelle"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Gazelle"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gazelle"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Gazelle"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Gazelle"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GermanShepherd"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="GermanShepherd"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GermanShepherd"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GermanShepherd"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GermanShepherd"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="GermanShepherd"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="GermanShepherd"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Goat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Goat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Goat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Goat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goose"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Goose"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goose"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Goose"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Goose"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Goose"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Goose"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GreenWyvern"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="GreenWyvern"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GreenWyvern"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GreenWyvern"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GreenWyvern"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="GreenWyvern"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="GreenWyvern"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GuineaPig"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="GuineaPig"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GuineaPig"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GuineaPig"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GuineaPig"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="GuineaPig"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="GuineaPig"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Hare"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Hare"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RodentSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Hare"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Hare"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RodentSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+		
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RodentSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Hare" and @ParentName="SK_HareThingBase"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RodentSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+		
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Horse"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Horse"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Horse"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Horse"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse_Wooly"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Horse_Wooly"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse_Wooly"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Horse_Wooly"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Horse_Wooly"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Horse_Wooly"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Horse_Wooly"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Human"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Human"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Human"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Human"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Human"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Human"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Human"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Husky"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Husky"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Husky"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Husky"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Husky"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Husky"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Husky"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ibex"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Ibex"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ibex"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Ibex"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ibex"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Ibex"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Ibex"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Iguana"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Iguana"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Iguana"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Iguana"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Iguana"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Iguana"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Iguana"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Jaguar"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Jaguar"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Jaguar"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Jaguar"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Jaguar"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Jaguar"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Jaguar"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kirin"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Kirin"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kirin"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Kirin"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Kirin"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Kirin"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Kirin"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LabradorRetriever"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="LabradorRetriever"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LabradorRetriever"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="LabradorRetriever"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LabradorRetriever"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="LabradorRetriever"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="LabradorRetriever"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lacosdile"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Lacosdile"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lacosdile"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Lacosdile"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lacosdile"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Lacosdile"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Lacosdile"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lynx"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Lynx"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lynx"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Lynx"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Lynx"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Lynx"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Lynx"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mammoth"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Mammoth"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mammoth"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Mammoth"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mammoth"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Mammoth"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Mammoth"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Meerkat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Meerkat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Meerkat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Meerkat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Meerkat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Meerkat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Meerkat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megabadger"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Megabadger"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megabadger"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Megabadger"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megabadger"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Megabadger"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Megabadger"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megasloth"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Megasloth"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megasloth"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Megasloth"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megasloth"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Megasloth"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Megasloth"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mink"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Mink"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mink"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Mink"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mink"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Mink"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Mink"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Monkey"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Monkey"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Monkey"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Monkey"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Monkey"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Monkey"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Monkey"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muffalo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Muffalo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muffalo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Muffalo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muffalo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Muffalo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Muffalo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mutant_Ogre"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Mutant_Ogre"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mutant_Ogre"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Mutant_Ogre"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mutant_Ogre"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Mutant_Ogre"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Mutant_Ogre"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Nightling"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Nightling"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Nightling"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Nightling"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ImmunogenicHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Nightling"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Nightling"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Nightling"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ImmunogenicHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Norbal"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Okapi"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Okapi"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Okapi"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Okapi"]/race</xpath>
+        <value>
+            <leatherDef>Hide_SoftHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Okapi"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Okapi"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Okapi"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_SoftHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ostrich"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Ostrich"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ostrich"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Ostrich"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ostrich"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Ostrich"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Ostrich"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PandaBear"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="PandaBear"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PandaBear"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="PandaBear"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PandaBear"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="PandaBear"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="PandaBear"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panther"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Panther"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panther"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Panther"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panther"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Panther"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Panther"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Pig"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Pig"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Pig"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Pig"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Pig"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Pig"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Pig"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ptarmigan"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Ptarmigan"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ptarmigan"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Ptarmigan"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Ptarmigan"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Ptarmigan"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Ptarmigan"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Raccoon"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Raccoon"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Raccoon"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Raccoon"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Raccoon"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Raccoon"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Raccoon"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Rat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RodentSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Rat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RodentSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HumanSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HumanSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhino_Wooly"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Rhino_Wooly"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhino_Wooly"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rhino_Wooly"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhino_Wooly"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Rhino_Wooly"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rhino_Wooly"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhinoceros"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Rhinoceros"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhinoceros"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rhinoceros"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rhinoceros"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Rhinoceros"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rhinoceros"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rimwolf"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Rimwolf"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rimwolf"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Rimwolf"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Rimwolf"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Rimwolf"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Rimwolf"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaLion"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="SeaLion"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaLion"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SeaLion"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaLion"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="SeaLion"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="SeaLion"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Seal"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Seal"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Seal"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Seal"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Seal"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Seal"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Seal"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Sheep"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Sheep"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Sheep"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Sheep"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Sheep"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Sheep"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Sheep"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SmilodonPop"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="SmilodonPop"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SmilodonPop"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SmilodonPop"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SmilodonPop"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="SmilodonPop"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="SmilodonPop"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snork"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Snork"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snork"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Snork"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snork"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Snork"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Snork"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SnowLeopard"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="SnowLeopard"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SnowLeopard"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SnowLeopard"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SnowLeopard"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="SnowLeopard"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="SnowLeopard"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Snowhare"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Snowhare"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Snowhare"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Snowhare"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+		
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+		
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Snowhare" and @ParentName="SK_HareThingBase"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+		
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SpottedHyena"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="SpottedHyena"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SpottedHyena"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SpottedHyena"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SpottedHyena"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="SpottedHyena"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="SpottedHyena"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Squirrel"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Squirrel"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Squirrel"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Squirrel"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RodentSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Squirrel"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Squirrel"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Squirrel"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RodentSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefFishBlueblade"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefFishKillerCatfish"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefIceFlounder"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefRedfinTuna"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefSaberfish"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Thrumbo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Thrumbo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Thrumbo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Thrumbo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Thrumbo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Thrumbo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Thrumbo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tiger"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Tiger"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tiger"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Tiger"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tiger"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Tiger"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Tiger"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tortoise"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Tortoise"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tortoise"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Tortoise"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tortoise"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Tortoise"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Tortoise"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Toxalope"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Toxalope"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Toxalope"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Toxalope"]/race</xpath>
+        <value>
+            <leatherDef>Hide_PorousHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Toxalope"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Toxalope"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Toxalope"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_PorousHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Turkey"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Turkey"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Turkey"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Turkey"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Turkey"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Turkey"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Turkey"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Walrus"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Walrus"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Walrus"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Walrus"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WaterproofSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Walrus"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Walrus"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Walrus"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WaterproofSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Warg"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Warg"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Warg"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Warg"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Warg"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Warg"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Warg"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WasteRat"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="WasteRat"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WasteRat"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="WasteRat"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ImmunogenicHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WasteRat"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="WasteRat"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="WasteRat"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ImmunogenicHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WhiteTiger"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="WhiteTiger"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WhiteTiger"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="WhiteTiger"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WhiteTiger"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="WhiteTiger"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="WhiteTiger"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WildBoar"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="WildBoar"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WildBoar"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="WildBoar"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WildBoar"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="WildBoar"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="WildBoar"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Arctic"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Wolf_Arctic"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Arctic"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Wolf_Arctic"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Arctic"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Wolf_Arctic"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wolf_Arctic"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Timber"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Wolf_Timber"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Timber"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Wolf_Timber"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Timber"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Wolf_Timber"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wolf_Timber"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Yak"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Yak"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Yak"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Yak"]/race</xpath>
+        <value>
+            <leatherDef>Hide_StockHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Yak"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Yak"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Yak"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_StockHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="YorkshireTerrier"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="YorkshireTerrier"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="YorkshireTerrier"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="YorkshireTerrier"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="YorkshireTerrier"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="YorkshireTerrier"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="YorkshireTerrier"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+
+    <!-- 来源: Vile鞣制1.6适配/zz_UserFix_LeatherGradesAndAnimalHides.xml 补全 28 种动物(2026-08-22 整合) --><Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alligator"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Alligator"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alligator"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Alligator"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Alligator"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Alligator"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Alligator"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AlphaThrumbo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="AlphaThrumbo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AlphaThrumbo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="AlphaThrumbo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AlphaThrumbo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="AlphaThrumbo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="AlphaThrumbo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Armadillo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Armadillo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Armadillo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Armadillo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_DurableHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Armadillo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Armadillo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Armadillo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_DurableHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Badger"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Badger"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Badger"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Badger"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Badger"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Badger"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Badger"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BogHound"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="BogHound"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BogHound"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="BogHound"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BogHound"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="BogHound"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="BogHound"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullfrog"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Bullfrog"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullfrog"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Bullfrog"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bullfrog"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Bullfrog"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Bullfrog"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat_Scimitar"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Cat_Scimitar"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat_Scimitar"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Cat_Scimitar"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cat_Scimitar"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Cat_Scimitar"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Cat_Scimitar"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ColossusToad"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ColossusToad"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ColossusToad"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ColossusToad"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ColossusToad"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ColossusToad"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ColossusToad"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Flamingo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Flamingo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Flamingo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Flamingo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Flamingo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Flamingo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Flamingo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gorilla"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Gorilla"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gorilla"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Gorilla"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Gorilla"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Gorilla"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Gorilla"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Heron"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Heron"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Heron"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Heron"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Heron"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Heron"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Heron"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hippo"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Hippo"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hippo"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Hippo"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Hippo"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Hippo"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Hippo"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mastodon"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Mastodon"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mastodon"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Mastodon"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Mastodon"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Mastodon"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Mastodon"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megavole"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Megavole"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megavole"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Megavole"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Megavole"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Megavole"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Megavole"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MonitorLizard"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="MonitorLizard"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MonitorLizard"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="MonitorLizard"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MonitorLizard"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="MonitorLizard"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="MonitorLizard"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Moose"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Moose"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Moose"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Moose"]/race</xpath>
+        <value>
+            <leatherDef>Hide_HeavyHide</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Moose"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Moose"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Moose"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_HeavyHide</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muskox"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Muskox"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muskox"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Muskox"]/race</xpath>
+        <value>
+            <leatherDef>Hide_WarmFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Muskox"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Muskox"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Muskox"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_WarmFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Otter"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Otter"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Otter"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Otter"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Otter"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Otter"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Otter"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panda"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Panda"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panda"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Panda"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RichFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Panda"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Panda"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Panda"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RichFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Peacock"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Peacock"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Peacock"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Peacock"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Peacock"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Peacock"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Peacock"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Penguin"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Penguin"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Penguin"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Penguin"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Penguin"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Penguin"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Penguin"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Porcupine"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Porcupine"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Porcupine"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Porcupine"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Porcupine"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Porcupine"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Porcupine"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PrairieDog"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="PrairieDog"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PrairieDog"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="PrairieDog"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PrairieDog"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="PrairieDog"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="PrairieDog"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaTurtle"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="SeaTurtle"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaTurtle"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="SeaTurtle"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SeaTurtle"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="SeaTurtle"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="SeaTurtle"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Swan"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Swan"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Swan"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Swan"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Swan"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Swan"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Swan"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Vulture"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Vulture"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Vulture"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Vulture"]/race</xpath>
+        <value>
+            <leatherDef>Hide_ExoticSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Vulture"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Vulture"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Vulture"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_ExoticSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Great"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Wolf_Great"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Great"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Wolf_Great"]/race</xpath>
+        <value>
+            <leatherDef>Hide_RuggedFurPelt</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolf_Great"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Wolf_Great"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wolf_Great"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_RuggedFurPelt</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolverine"]/race/leatherDef</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="Wolverine"]/race/leatherDef</xpath>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolverine"]/race</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Wolverine"]/race</xpath>
+        <value>
+            <leatherDef>Hide_LightAnimalSkin</leatherDef>
+        </value>
+    </match>
+</Operation>
+	
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Wolverine"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Wolverine"]/race</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="Wolverine"]</xpath>
+            <value>
+                <race>
+                    <leatherDef>Hide_LightAnimalSkin</leatherDef>
+                </race>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+
+    <!-- 来源: 46_腌肉允许人肉.xml -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="SaltMeat"]/fixedIngredientFilter/specialFiltersToDisallow/li[text()="HumanlikeMeat"]</xpath>
+</Operation>
+
+	
+	
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="SaltMeat"]/defaultIngredientFilter/disallowedThingDefs/li[text()="Meat_Human"]</xpath>
+</Operation>
+
+
+    <!-- 来源: 52_憎恶可屠宰.xml -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="ButcherCorpseFlesh"]/fixedIngredientFilter/disallowedThingDefs/li[text()="Corpse_Abomination"]</xpath>
+</Operation>
+    
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="Abomination"]/statBases/MeatAmount</xpath>
+    <value>
+        <MeatAmount>70</MeatAmount>
+    </value>
+</Operation>
+
+    <!-- 来源: 61_鱼类分类修复.xml -->
+<Operation Class="PatchOperationReplace" MayRequire="Ludeon.RimWorld.Odyssey">
+    <xpath>Defs/ThingCategoryDef[defName="Fish"]/parent</xpath>
+    <value>
+        <parent>MeatRaw</parent>
+    </value>
+</Operation>
+
+    <!-- 来源: 62_鲶鱼屠宰配方.xml -->
+<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Odyssey">
+    <xpath>/Defs</xpath>
+    <value>
+        <RecipeDef MayRequire="Ludeon.RimWorld.Odyssey">
+            <defName>RKHSKButcherFish</defName>
+            <researchPrerequisite>Pemmican</researchPrerequisite>
+            <label>process fish</label>
+            <description>Processes caught fish into raw fish meat.</description>
+            <jobString>Processing fish.</jobString>
+            <workerCounterClass>RecipeWorkerCounter_ButcherAnimals</workerCounterClass>
+            <workAmount>200</workAmount>
+            <workSpeedStat>ButcheryFleshSpeed</workSpeedStat>
+            <workSkill>Cooking</workSkill>
+            <efficiencyStat>ButcheryFleshEfficiency</efficiencyStat>
+            <effectWorking>ButcherFlesh</effectWorking>
+            <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+            <workSkillLearnFactor>0.4</workSkillLearnFactor>
+            <uiIconThing>Meat_ThingDefFishSduiggles</uiIconThing>
+            <ingredients>
+                <li>
+                    <filter>
+                        <categories>
+                            <li>Fish</li>
+                        </categories>
+                    </filter>
+                    <count>1</count>
+                </li>
+            </ingredients>
+            <products>
+                <Meat_ThingDefFishSduiggles>10</Meat_ThingDefFishSduiggles>
+            </products>
+            <fixedIngredientFilter>
+                <categories>
+                    <li>Fish</li>
+                </categories>
+            </fixedIngredientFilter>
+            <recipeUsers>
+                <li>ButcherSpot</li>
+                <li>TableButcher</li>
+                <li>TableKitchen</li>
+                <li MayRequire="local.ratkin.furniture">RKFC_GL_TableButcher</li>
+            </recipeUsers>
+        </RecipeDef>
+    </value>
+</Operation>
+
+    <!-- 来源: 64_药草芦荟种植修复.xml -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_Healroot"]/plant</xpath>
+    <value>
+        <harvestedThingDef>MedicineHerbal</harvestedThingDef>
+    </value>
+</Operation>
+
+  
+  
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Plant_HealrootWild"]/plant</xpath>
+    <value>
+        <sowTags>
+            <li>Ground</li>
+            <li>Hydroponic</li>
+        </sowTags>
+        <sowMinSkill>5</sowMinSkill>
+    </value>
+</Operation>
+
+
+    <!-- 来源: Vile's Leather Tanning/Animals_leatherAmount_Normal.xml 的 Amuse Bouche 鱼量覆盖。
+         该补丁用普通 Replace 打 statBases/LeatherAmount(节点由 FishThingBase 继承或 Amuse Bouche 后置补丁补),
+         在 1.6 下报 Failed to find a node。本地按其设计意图代管: 这两条鱼的 LeatherAmount 归一为 1。
+         三步存在性门控与文件既有 leatherDef 写法一致(先删同类节点再补, 无 statBases 时整块补)。 -->
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases/LeatherAmount</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases/LeatherAmount</xpath>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+        <value>
+            <LeatherAmount>1</LeatherAmount>
+        </value>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]/statBases</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefFishTailteeth"]</xpath>
+            <value>
+                <statBases>
+                    <LeatherAmount>1</LeatherAmount>
+                </statBases>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases/LeatherAmount</xpath>
+    <match Class="PatchOperationRemove">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases/LeatherAmount</xpath>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+    <match Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+        <value>
+            <LeatherAmount>1</LeatherAmount>
+        </value>
+    </match>
+</Operation>
+<Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+    <match Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]/statBases</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="ThingDefDeathSturgeon"]</xpath>
+            <value>
+                <statBases>
+                    <LeatherAmount>1</LeatherAmount>
+                </statBases>
+            </value>
+        </nomatch>
+    </match>
+</Operation>
+
+
+</Patch>

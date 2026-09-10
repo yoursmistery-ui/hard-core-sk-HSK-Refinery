@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 金属锭追加科技档类(2026-09-02): 每锭 Conditional 双路——thingCategories 节点存在则 Add li,
+       不存在(如 VMS 塑料系原始 def 无节点, 类别由 HSK 加载期补丁建)则整节点 Add。
+       2026-09-03 增加继承去重: 祖先(Name 链)已归档同档的子锭跳过(分类经 XML 继承从父类获得,
+       补丁会造成合并后 duplicate thingCategory config error)。
+       由 _tmp/材料门控/gen_tier_categories.py 生成, 勿手改; 新锭需重跑。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ABS"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="ABS"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="ABS"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AerMet"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AerMet"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AerMet"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Aerographene"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Aerographene"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Aerographene"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AlnicoAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AlnicoAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AlnicoAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AlphaPoly"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AlphaPoly"]/thingCategories</xpath>
+      <value><li>RK_Bar_Ultra</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AlphaPoly"]</xpath>
+      <value><thingCategories><li>RK_Bar_Ultra</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AluminiumBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AluminiumBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AluminiumBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AnodizedAluminiumRed"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AnodizedAluminiumRed"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AnodizedAluminiumRed"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BetaPoly"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="BetaPoly"]/thingCategories</xpath>
+      <value><li>RK_Bar_Ultra</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="BetaPoly"]</xpath>
+      <value><thingCategories><li>RK_Bar_Ultra</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Bronze"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bronze"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Bronze"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CarbonAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CarbonAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CarbonAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CarbonSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CarbonSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CarbonSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Carborundum"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Carborundum"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Carborundum"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CastIron"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CastIron"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CastIron"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Chromium"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Chromium"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Chromium"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Cobalt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Cobalt"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Cobalt"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CopperBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CopperBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Neolithic</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CopperBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Neolithic</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CrucibleSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CrucibleSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CrucibleSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CupronickelAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CupronickelAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CupronickelAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DepletedUranium"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="DepletedUranium"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="DepletedUranium"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="FerrosiliconAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="FerrosiliconAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="FerrosiliconAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Fiberglass"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Fiberglass"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Fiberglass"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ForgedSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="ForgedSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="ForgedSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GoldBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GoldBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GoldBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LeadBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LeadBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Neolithic</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LeadBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Neolithic</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Manganese"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Manganese"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Manganese"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MaxametSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="MaxametSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="MaxametSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Molybdenum"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Molybdenum"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Molybdenum"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="NickelBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="NickelBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="NickelBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Nimonic"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Nimonic"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Nimonic"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="NitinolAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="NitinolAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="NitinolAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PigIron"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PigIron"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PigIron"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plasteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plasteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plasteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plastic"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plastic"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plastic"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Plexiglass"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plexiglass"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Plexiglass"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PobediteAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PobediteAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PobediteAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Polycarbonate"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Polycarbonate"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Polycarbonate"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PureSilver"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PureSilver"]/thingCategories</xpath>
+      <value><li>RK_Bar_Neolithic</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PureSilver"]</xpath>
+      <value><thingCategories><li>RK_Bar_Neolithic</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Pyromet"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Pyromet"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Pyromet"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SilverBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SilverBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SilverBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Solder"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Solder"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Solder"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SpringSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SpringSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SpringSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Steel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Steel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Steel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SteelBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SteelBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SteelBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="StelliteAlloy"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="StelliteAlloy"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="StelliteAlloy"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tennalum"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Tennalum"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Tennalum"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="TinBar"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="TinBar"]/thingCategories</xpath>
+      <value><li>RK_Bar_Neolithic</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="TinBar"]</xpath>
+      <value><thingCategories><li>RK_Bar_Neolithic</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Titanium"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Titanium"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Titanium"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Tungsten"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Tungsten"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Tungsten"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Vanadium"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Vanadium"]/thingCategories</xpath>
+      <value><li>RK_Bar_Spacer</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Vanadium"]</xpath>
+      <value><thingCategories><li>RK_Bar_Spacer</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WootzSteel"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="WootzSteel"]/thingCategories</xpath>
+      <value><li>RK_Bar_Medieval</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="WootzSteel"]</xpath>
+      <value><thingCategories><li>RK_Bar_Medieval</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="WroughtIron"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="WroughtIron"]/thingCategories</xpath>
+      <value><li>RK_Bar_Neolithic</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="WroughtIron"]</xpath>
+      <value><thingCategories><li>RK_Bar_Neolithic</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Yautjavium"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Yautjavium"]/thingCategories</xpath>
+      <value><li>RK_Bar_Ultra</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Yautjavium"]</xpath>
+      <value><thingCategories><li>RK_Bar_Ultra</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Zinc"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Zinc"]/thingCategories</xpath>
+      <value><li>RK_Bar_Industrial</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Zinc"]</xpath>
+      <value><thingCategories><li>RK_Bar_Industrial</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+</Patch>

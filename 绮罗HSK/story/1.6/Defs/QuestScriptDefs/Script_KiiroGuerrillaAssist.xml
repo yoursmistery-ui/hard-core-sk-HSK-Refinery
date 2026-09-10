@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_GuerrillaAssist</defName>
+    <isRootSpecial>false</isRootSpecial>
+    <!-- <autoAccept>false</autoAccept> -->
+    <!-- <defaultHidden>true</defaultHidden> -->
+    <expireDaysRange>0.2~0.5</expireDaysRange>
+    <rootSelectionWeight>0.4</rootSelectionWeight>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->[aThe] kiiro guerrilla [alms]</li>
+
+        <li>aThe->A group of</li>
+        <li>aThe->A team</li>
+        <li>aThe->A crowd of</li>
+
+        <li>alms->asking for help</li>
+        <li>alms->in need of help</li>
+        <li>alms->seeking for help</li>
+        <li>alms->need help</li>
+
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->A group of kiiro guerrillas who are being pursued by the enemy have retreated near [map_definite], they ask you for helping them stop the enemy in [map_definite], and want to stop here for a short time to get some respite. The group of [enemyFaction_pawnsPlural] is composed of: \n\n[raid/raidPawnKinds]</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_SubScript">
+          <def>Util_RandomizePointsChallengeRating</def>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>GuerrillaAssist</modSettingSwitch>
+        </li>
+
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_Guerrilla</tag>
+          <faction>$faction</faction>
+        </li>
+
+        <!-- Get raider faction -->
+        <li Class="QuestNode_GetFaction">
+          <allowEnemy>true</allowEnemy>
+          <mustBePermanentEnemy>true</mustBePermanentEnemy>
+          <storeAs>enemyFaction</storeAs>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>permitFaction</name>
+          <value>Kiiro_Faction</value>
+        </li>
+
+        <!-- 海盗点数 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>currentPoints</storeAs>
+          <curve>
+            <points>
+              <li>   35,  1000</li>
+              <li>  400,  1000</li>
+              <li> 1000,  1000</li>
+              <li> 2000,  2000</li>
+              <li> 3000,  2500</li>
+              <li> 4000,  3000</li>
+              <li> 5000,  4000</li>
+              <li>10000, 6000</li>
+            </points>
+          </curve>
+        </li>
+
+        <!-- 游击队人数 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>GuerrillaCount</storeAs>
+          <curve>
+            <points>
+              <li>   35,  2</li>
+              <li>  400,  2</li>
+              <li> 1000,  2</li>
+              <li> 2000,  3</li>
+              <li> 3000,  3</li>
+              <li> 4000,  2</li>
+              <li> 5000,  3</li>
+              <li>10000, 5</li>
+            </points>
+          </curve>
+        </li>
+
+        <!-- 伤兵人数 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>InjuredCount</storeAs>
+          <curve>
+            <points>
+              <li>   35,  1</li>
+              <li>  400,  2</li>
+              <li> 1000,  2</li>
+              <li> 2000,  2</li>
+              <li> 3000,  3</li>
+              <li> 4000,  4</li>
+              <li> 5000,  4</li>
+              <li> 10000, 5</li>
+            </points>
+          </curve>
+        </li>
+
+        <!-- 军医人数 -->
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$points</value>
+          <storeAs>MedicCount</storeAs>
+          <curve>
+            <points>
+              <li>   35,  0</li>
+              <li>  400,  1</li>
+              <li> 1000,  1</li>
+              <li> 2000,  1</li>
+              <li> 3000,  1</li>
+              <li> 4000,  1</li>
+              <li> 5000,  1</li>
+              <li>10000, 2</li>
+            </points>
+          </curve>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>laborersDurationDays</name>
+          <value>2</value>
+        </li>
+
+        <!-- 游击队 -->
+        <li Class="QuestNode_LoopCount">          <!--循环执行-->
+          <loopCount>$GuerrillaCount</loopCount>
+          <node Class="QuestNode_GeneratePawn">
+            <kindDef>Kiiro_Guerrilla</kindDef>
+            <faction>$permitFaction</faction>
+            <addToList>Guerrilla</addToList>
+            <allowAddictions>false</allowAddictions>
+            <biocodeWeaponChance>0</biocodeWeaponChance>
+            <biocodeApparelChance>0</biocodeApparelChance>
+            <allowPregnant>false</allowPregnant>
+          </node>
+        </li>
+
+        <!-- 伤兵 -->
+        <li Class="QuestNode_LoopCount">          <!--循环执行-->
+          <loopCount>$InjuredCount</loopCount>
+          <node Class="QuestNode_GeneratePawn">
+            <kindDef>Kiiro_Guerrilla</kindDef>
+            <faction>$permitFaction</faction>
+            <addToList>GuerrillaInjuried</addToList>
+            <allowAddictions>false</allowAddictions>
+            <biocodeWeaponChance>0</biocodeWeaponChance>
+            <biocodeApparelChance>0</biocodeApparelChance>
+            <allowPregnant>false</allowPregnant>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_AddInjury">
+          <pawns>$GuerrillaInjuried</pawns>
+          <addToList>Guerrilla</addToList>
+        </li>
+
+        <li Class="QuestNode_LoopCount">          <!--军医-->
+          <loopCount>$MedicCount</loopCount>
+          <node Class="QuestNode_GeneratePawn">
+            <kindDef>Kiiro_GuerrillaMedic</kindDef>
+            <faction>$permitFaction</faction>
+            <addToList>Guerrilla</addToList>
+            <allowAddictions>false</allowAddictions>
+            <biocodeWeaponChance>0</biocodeWeaponChance>
+            <biocodeApparelChance>0</biocodeApparelChance>
+            <allowPregnant>false</allowPregnant>
+          </node>
+        </li>
+
+        <!-- 禁用工作 -->
+        <li Class="QuestNode_WorkDisabled">
+          <pawns>$Guerrilla</pawns>
+          <disabledWorkTags>
+            <li>Artistic</li>
+            <li>Intellectual</li>
+            <li>Hunting</li>
+            <li>Animals</li>
+            <li>ManualSkilled</li>            <!-- 包含建筑 -->
+          </disabledWorkTags>
+        </li>
+
+        <!-- Give on duty thought -->
+        <!-- <li Class="QuestNode_AddMemoryThought">
+          <pawns>$Guerrilla</pawns>
+          <def>Kiiro_OnDuty</def>
+        </li> -->
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="QuestNode_GetWalkInSpot" />
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <!-- <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li> -->
+
+        <li Class="Kiiro_Event.QuestNode_RewardOnlyGoodwill_Guerrilla">
+        </li>
+
+        <li Class="QuestNode_ExtraFaction">
+          <faction>$permitFaction</faction>
+          <pawns>$Guerrilla</pawns>
+          <factionType>HomeFaction</factionType>
+          <inSignalsRemovePawn>
+            <li>Guerrilla.RanWild</li>
+            <li>Guerrilla.BecameMutant</li>
+          </inSignalsRemovePawn>
+        </li>
+        <li Class="QuestNode_JoinPlayer">
+          <pawns>$Guerrilla</pawns>
+          <joinPlayer>True</joinPlayer>
+          <makePrisoners>False</makePrisoners>
+        </li>
+        <li Class="QuestNode_LeaveOnCleanup">
+          <pawns>$Guerrilla</pawns>
+          <sendStandardLetter>false</sendStandardLetter>
+          <inSignalRemovePawn>Guerrilla.RanWild</inSignalRemovePawn>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>delayTicks</name>
+          <value>$(roundToTicksRough(randInt(1200,1800)))</value>
+        </li>
+        <li Class="QuestNode_Delay">
+          <delayTicks>$delayTicks</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <!-- 边缘进入，这个可用/但是这个方法会弹人员到达信封 -->
+              <li Class="QuestNode_PawnsArrive">
+                <pawns>$Guerrilla</pawns>
+                <arrivalMode>EdgeWalkIn</arrivalMode>
+              </li>
+              <!-- Lock their apparel -->
+              <li Class="QuestNode_SetAllApparelLocked">
+                <pawns>$Guerrilla</pawns>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>GuerrillaArrived</outSignals>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Raid arrives -->
+        <!-- Note that the joiner has a delay, so the raid needs an even longer delay -->
+        <li Class="QuestNode_Set">
+          <name>raidDelayTicks</name>
+          <value>$(roundToTicksRough(randInt(3600, 4800)))</value>
+        </li>
+        <li Class="QuestNode_Delay">
+          <delayTicks>$raidDelayTicks</delayTicks>
+          <node Class="QuestNode_SubScript">
+            <def>Util_Raid</def>
+            <prefix>raid</prefix>
+            <parms>
+              <inSignal>$inSignal</inSignal>
+              <map>$map</map>
+              <points>$currentPoints</points>
+              <enemyFaction>$enemyFaction</enemyFaction>
+              <walkInSpot>$walkInSpot</walkInSpot>
+              <arrivalMode>EdgeWalkIn</arrivalMode>
+              <customLetterLabel TKey="LetterLabelChasing">{BASELABEL} chasing kiiro guerrilla</customLetterLabel>
+              <customLetterText TKey="LetterTextChasing">{BASETEXT}\nThese [enemyFaction_pawnsPlural] is coming for kiiro guerrillas.</customLetterText>
+            </parms>
+          </node>
+        </li>
+
+        
+
+        <li Class="Kiiro_Event.QuestNode_ExtraInspectStringAddOn">
+          <pawns>$Guerrilla</pawns>
+          <extraInspectString>leave in {0}.</extraInspectString>          <!--于{0}后离开。-->
+          <delayTicks>$($laborersDurationDays * 60000+$delayTicks)</delayTicks>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>stayTicks</name>
+          <value>$($laborersDurationDays * 60000+$delayTicks)</value>
+        </li>
+
+        <!-- laborers leave after their duration expires. Only if stayTicks >= 0 -->
+        <li Class="QuestNode_GreaterOrEqual">
+          <value1>$stayTicks</value1>
+          <value2>0</value2>
+          <node Class="QuestNode_Delay">
+            <delayTicks>$stayTicks</delayTicks>
+            <node Class="QuestNode_Sequence">
+              <nodes>
+                <li Class="QuestNode_AnyPawnAlive">
+                  <pawns>$Guerrilla</pawns>
+                  <node Class="QuestNode_Letter">
+                    <label TKey="LetterLabelHelpersLeaving">kiiro guerrilla leave</label>
+                    <text TKey="LetterTextHelpersLeaving">The kiiro guerrillas have finished their rectification, and they will leave now.</text>
+                    <lookTargets>$Guerrilla</lookTargets>
+                    <filterDeadPawnsFromLookTargets>true</filterDeadPawnsFromLookTargets>
+                  </node>
+                </li>
+                <li Class="QuestNode_Leave">
+                  <pawns>$Guerrilla</pawns>
+                  <sendStandardLetter>false</sendStandardLetter>
+                  <inSignalRemovePawn>Guerrilla.RanWild</inSignalRemovePawn>
+                </li>
+                <li Class="QuestNode_SendSignals">
+                  <outSignals>GuerrillaLeft</outSignals>
+                </li>
+              </nodes>
+            </node>
+          </node>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>GuerrillaLeft</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="Kiiro_Event.QuestNode_FactionGoodwillAffect">
+                <faction>Kiiro_Faction</faction>
+                <goodwill>$goodwillReward</goodwill>
+                <historyEvent>Kiiro_GuerrillaAssistFinish</historyEvent>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_End">
+          <inSignal>GuerrillaLeft</inSignal>
+          <outcome>Success</outcome>
+        </li>
+
+        <!-- - - - - - - -  -->
+        <!--      End       -->
+        <!-- - - - - - - -  -->
+
+        <!-- End if the permit's faction becomes hostile -->
+        <li Class="QuestNode_Signal">
+          <inSignal>permitFaction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <letterDef>NegativeEvent</letterDef>
+                <label TKey="LetterLabelQuestExpired">Relation with kiiro guerrilla broke down</label>
+                <text TKey="LetterTextQuestExpired">due to we are now hostile to kiiro, our relation with kiiro guerrilla broke down and now they treat us as enemy.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

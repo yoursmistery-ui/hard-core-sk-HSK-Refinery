@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗暗器飞刀 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Apparel_ThrowingKnives"]/statBases</xpath>
+		<value>
+			<Bulk>0.5</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingKnives"]/costList/Kiiro_ThrowingKnife</xpath>
+		<value>
+			<Kiiro_ThrowingKnife>6</Kiiro_ThrowingKnife>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingKnives"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoDef</xpath>
+		<value>
+			<ammoDef>Kiiro_ThrowingKnife</ammoDef>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingKnives"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>6</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingKnives"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>throw knife</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>True</onlyManualCast>
+					<warmupTime>0.1</warmupTime>
+					<range>11.9</range>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<defaultProjectile>KiiroProjectile_ThrowingKnife</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗暗器飞镖 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Apparel_ThrowingCrossKnives"]/statBases</xpath>
+		<value>
+			<Bulk>0.5</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingCrossKnives"]/costList/Kiiro_ThrowingCrossKnives</xpath>
+		<value>
+			<Kiiro_ThrowingCrossKnives>15</Kiiro_ThrowingCrossKnives>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingCrossKnives"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoDef</xpath>
+		<value>
+			<ammoDef>Kiiro_ThrowingCrossKnives</ammoDef>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingCrossKnives"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>15</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ThrowingCrossKnives"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>throw boomerang</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>True</onlyManualCast>
+					<warmupTime>0.1</warmupTime>
+					<range>15.9</range>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<defaultProjectile>KiiroProjectile_ThrowingCrossKnives</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗袖箭 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Apparel_ChainAttacker"]/statBases</xpath>
+		<value>
+			<Bulk>0.5</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ChainAttacker"]/costList/Steel</xpath>
+		<value>
+			<Arrow_BlowGun_Arrow>7</Arrow_BlowGun_Arrow>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ChainAttacker"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoDef</xpath>
+		<value>
+			<ammoDef>Arrow_BlowGun_Arrow</ammoDef>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ChainAttacker"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>7</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_ChainAttacker"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>launch arrows</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>True</onlyManualCast>
+					<warmupTime>0.1</warmupTime>
+					<range>18.9</range>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<defaultProjectile>Projectile_KiiroBlowGun_Arrow</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<!-- 移除毒药瓶 -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_PoisonBottleDeadly" or defName="Kiiro_Apparel_PoisonBottleParalytic"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/AlienRace.AlienBackstoryDef[defName="Kiiro_BackstoryAdult_35"]/possessions</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Kiiro_Race"]/alienRace/raceRestriction/apparelList/li[.="Kiiro_Apparel_PoisonBottleDeadly"]</xpath>
+	</Operation>
+	
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName="Kiiro_Race"]/alienRace/raceRestriction/apparelList/li[.="Kiiro_Apparel_PoisonBottleParalytic"]</xpath>
+	</Operation>
+	
+	<!-- 绮罗背弩 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Apparel_DorsalCrossbow"]/statBases</xpath>
+		<value>
+			<Bulk>6</Bulk>
+			<WornBulk>3</WornBulk>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_DorsalCrossbow"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoDef</xpath>
+		<value>
+			<ammoDef>Ammo_KiiroDorsalCrossbow_Steel</ammoDef>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_DorsalCrossbow"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>1</ammoCountToRefill>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_DorsalCrossbow"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>fire</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>false</onlyManualCast>
+					<warmupTime>0.2</warmupTime>
+					<range>21.9</range>
+					<soundCast>Bow_Large</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<defaultProjectile>Projectile_KiiroDorsalCrossbow_Steel</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗木柄手榴弹 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFrag"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>throw Frag grenade</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>false</onlyManualCast>
+					<range>14</range>
+					<warmupTime>0.5</warmupTime>
+					<noiseRadius>2</noiseRadius>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<defaultProjectile>KiiroProjectile_GrenadeFrag</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFrag"]/costList/Kiiro_GrenadeFrag</xpath>
+		<value>
+			<Kiiro_GrenadeFrag>5</Kiiro_GrenadeFrag>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFrag"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>5</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗烟雾腰带 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeSmoke"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>throw smoke grenade</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>false</onlyManualCast>
+					<range>14</range>
+					<warmupTime>0.5</warmupTime>
+					<noiseRadius>2</noiseRadius>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<defaultProjectile>KiiroProjectile_GrenadeSmoke</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeSmoke"]/costList/Kiiro_GrenadeSmoke</xpath>
+		<value>
+			<Kiiro_GrenadeSmoke>5</Kiiro_GrenadeSmoke>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeSmoke"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>5</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗闪光腰带 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFlash"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>throw flash grenade</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>false</onlyManualCast>
+					<range>14</range>
+					<warmupTime>0.5</warmupTime>
+					<noiseRadius>2</noiseRadius>
+					<soundCast>ThrowGrenade</soundCast>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+					<defaultProjectile>KiiroProjectile_GrenadeFlash</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFlash"]/costList/Kiiro_GrenadeFlash</xpath>
+		<value>
+			<Kiiro_GrenadeFlash>5</Kiiro_GrenadeFlash>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_GrenadeFlash"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoCountToRefill</xpath>
+		<value>
+			<ammoCountToRefill>5</ammoCountToRefill>
+		</value>
+	</Operation>
+	
+	<!-- 原型单兵火箭筒 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_PT_RPG"]</xpath>
+		<value>
+			<descriptionHyperlinks><CombatExtended.AmmoSetDef>AmmoSet_KiiroRocket</CombatExtended.AmmoSetDef></descriptionHyperlinks>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_PT_RPG"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<label>launch rocket</label>
+					<verbClass>CombatExtended.Verb_LaunchProjectileStaticCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<onlyManualCast>false</onlyManualCast>
+					<warmupTime>0.2</warmupTime>
+					<range>39.9</range>
+					<soundCast>InfernoCannon_Fire</soundCast>
+					<muzzleFlashScale>14</muzzleFlashScale>
+					<defaultProjectile>Bullet_KiiroRocket_Frag</defaultProjectile>
+					<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+					<drawHighlightWithLineOfSight>true</drawHighlightWithLineOfSight>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_PT_RPG"]/comps/li[@Class="CompProperties_ApparelReloadable"]/ammoDef</xpath>
+		<value>
+			<ammoDef>Ammo_KiiroRocket_Frag</ammoDef>
+		</value>
+	</Operation>
+	
+	<!--绮罗便携自动发射器的弹药-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[@Name="Kiiro_AutoLauncherBase"]/costList</xpath>
+		<value>
+			<costList>
+				<Steel>70</Steel>
+				<ComponentIndustrial>2</ComponentIndustrial>
+			</costList>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Kiiro_AutoEMPLauncherPack"]</xpath>
+		<value>
+			<costList>
+				<Ammo_KiiroPTGrenades_EMP>10</Ammo_KiiroPTGrenades_EMP>
+			</costList>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Kiiro_AutoHE_FRAGLauncherPack"]</xpath>
+		<value>
+			<costList>
+				<Ammo_KiiroPTGrenades_HE>10</Ammo_KiiroPTGrenades_HE>
+			</costList>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Kiiro_AutoSmokeLauncherPack"]</xpath>
+		<value>
+			<costList>
+				<Ammo_KiiroPTGrenades_Smoke>10</Ammo_KiiroPTGrenades_Smoke>
+			</costList>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_Apparel_PT_RPG"]/costList</xpath>
+		<value>
+			<costList>
+				<Steel>60</Steel>
+				<Plasteel>20</Plasteel>
+				<ComponentIndustrial>4</ComponentIndustrial>
+				<Ammo_KiiroRocket_Frag>1</Ammo_KiiroRocket_Frag>
+			</costList>
+		</value>
+	</Operation>
+	
+	<!-- 给机巧背包添加体积 -->
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_AutoCrossBowPack" or 
+		defName="Kiiro_AutoCrossBowIIPack"
+		]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+			<WornBulk>3</WornBulk>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_AutoEMPLauncherPack" or 
+		defName="Kiiro_AutoHE_FRAGLauncherPack" or 
+		defName="Kiiro_AutoSmokeLauncherPack"
+		]/statBases</xpath>
+		<value>
+			<Bulk>10</Bulk>
+			<WornBulk>4</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 修改穿云弩背包造价 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_AutoCrossBowPack"
+		]</xpath>
+		<value>
+			<costList>
+			  <WoodLog>60</WoodLog>
+			  <Steel>30</Steel>
+			  <Ammo_KiiroAutoCrossBow_Steel>20</Ammo_KiiroAutoCrossBow_Steel>
+			</costList>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_AutoCrossBowIIPack"
+		]</xpath>
+		<value>
+			<costList>
+			  <WoodLog>60</WoodLog>
+			  <Steel>30</Steel>
+			  <Ammo_KiiroAutoCrossBowII_Steel>40</Ammo_KiiroAutoCrossBowII_Steel>
+			</costList>
+		</value>
+	</Operation>
+</Patch>

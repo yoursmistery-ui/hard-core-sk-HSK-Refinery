@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- 燃煤/燃料发电机接 DBH 供水 (2026-08-30, 二次迭代)
+
+       用户要求: 燃煤发电机(CoalPowerPlant)与燃料发电机(ChemfuelPoweredGenerator)两台接水;
+       蒸汽发电机(WoodFiredGenerator)保持 HSK 原生接法不动(Core_SK_CoreModule 自带 Sewage+Water comp)。
+
+       写法与石化线自建设置(RK_Petro_GasGenerator 等)同一套:
+         DubsBadHygiene.CompProperties_Pipe(mode=Water) + CompProperties_WaterStorage
+         + BlueprintUnlockHSK.CompProperties_NeedsWater(低频轮询水箱, 缺水拨闸停机、回升自启)。
+       CompPipe 对"第一个 CompRefuelable 的 fuelFilter 非空"的机器会放弃给 CompRefuelable 补水
+       (两台的第一个 CompRefuelable 是 SK.CompFueled, 必然命中)——无碍: 本补丁走 CompWaterStorage
+       管网灌水, 不依赖 CompPipe.refuel 路径, 已由石化线自建设置实机验证。
+
+       水量按额定发电量 |basePowerConsumption| 折算(与蒸汽机原生档一致):
+         耗水 L/s = 功率 / 3750 ; 水箱容量 L = 功率 / 3 (约 20 分钟满负荷续航)。
+         燃煤 2000W → 0.53 / 650
+         化合燃料 3500W → 0.93 / 1150
+
+       门控: 1.6 起 Operation 级 MayRequire 失效 → 顶层 PatchOperationConditional 以 DBH 特有
+             def(GasBoiler)存在性门控; 未装卫生时 match 整体跳过, 两台退回纯烧燃料不接水。
+             本 mod About 已 loadAfter Dubwise.DubsBadHygiene + skyarkhangel.HSK.Core, 保证执行时
+             Core_SK_CoreModule 对两台的整体替换均已入树。 -->
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GasBoiler"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- 燃煤发电机 2000W → 0.53 / 650 -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="CoalPowerPlant"]/comps</xpath>
+          <value>
+            <li Class="DubsBadHygiene.CompProperties_Pipe"><mode>Water</mode></li>
+            <li Class="DubsBadHygiene.CompProperties_WaterStorage"><WaterStorageCap>650</WaterStorageCap></li>
+            <li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.53</litersPerWorkSecond></li>
+          </value>
+        </li>
+
+        <!-- 化合燃料发电机 3500W → 0.93 / 1150 -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName="ChemfuelPoweredGenerator"]/comps</xpath>
+          <value>
+            <li Class="DubsBadHygiene.CompProperties_Pipe"><mode>Water</mode></li>
+            <li Class="DubsBadHygiene.CompProperties_WaterStorage"><WaterStorageCap>1150</WaterStorageCap></li>
+            <li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.93</litersPerWorkSecond></li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

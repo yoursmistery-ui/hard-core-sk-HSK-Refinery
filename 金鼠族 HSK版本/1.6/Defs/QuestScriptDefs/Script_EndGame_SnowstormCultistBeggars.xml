@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <QuestScriptDef>
+        <defName>OAGene_SnowstormCultistBeggars</defName>
+        <isRootSpecial>true</isRootSpecial>
+        <autoAccept>true</autoAccept>
+        <defaultCharity>true</defaultCharity>
+        <rootSelectionWeight>0</rootSelectionWeight>
+        <hideInvolvedFactionsInfo>true</hideInvolvedFactionsInfo>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName(beggarCount==1)->颤抖的教徒</li>
+                <li>questName(beggarCount>=2)->颤抖的教徒们</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+                <li>questDescription->你的一个殖民者注意到，镇子的边缘隐约出现了一个人影。\n\n那个身影在暴风雪中不停的颤抖着，口中一直在念叨着“神的旨意”“罪人”“神选”之类的晦涩难明的词语。当他走近时，你的殖民者们才意识到这个人其实是一名风雪教徒。\n\n这个风雪教徒向你的殖民者讨要100枚风雪碎晶，但是并没有告诉你们原因。你可以选择将这些风雪碎晶交付给这个教徒，也可以选择无视他，任由他在风雪里颤抖。\n\n这个教徒可能只是一个狂信徒，但也许他的到来有着更多的深层意义，而这没人知道。</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <questContentRules>
+            <rulesStrings>
+                <li>letterLabelBeggarsBetrayed->[groupLabelSingleOrPlural]被出卖</li>
+                <li>letterTextBeggarsBetrayed->前来寻求你们帮助的[groupLabelSingleOrPlural]已被出卖，抱有仁爱信仰的殖民者会不满。</li>
+                <li>hasHave(beggarCount==1)-></li>
+                <li>hasHave(beggarCount>=2)-></li>
+                <li>wasWere(beggarCount==1)-></li>
+                <li>wasWere(beggarCount>=2)-></li>
+                <li>groupLabelSingleOrPlural(beggarCount==1)->风雪教徒</li>
+                <li>groupLabelSingleOrPlural(beggarCount>=2)->风雪教徒</li>
+            </rulesStrings>
+        </questContentRules>
+        <root Class="OberoniaAureaGene.Snowstorm.QuestNode_Root_EndGame_SnowstormCultistBeggars" />
+    </QuestScriptDef>
+
+</Defs>

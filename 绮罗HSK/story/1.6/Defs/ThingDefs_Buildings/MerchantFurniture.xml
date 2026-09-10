@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 达到满额评价需要600点货物储量，都为传奇的话需要214点基础 -->
+  <ThingDef Name="Kiiro_FurnitureBase" ParentName="ArtableFurnitureBase" Abstract="true">
+    <thingClass>Kiiro_Event.Building_GoodsShelf</thingClass>
+    <designationCategory>Kiiro_Furniture</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+    <tickerType>Long</tickerType>
+    <building>
+      <buildingTags>
+        <li>Kiiro_GoodsShelf</li>
+      </buildingTags>
+    </building>
+  </ThingDef>
+
+  <!-- =================================================================================================================================== -->
+
+  <!-- 板条小木盒 -->
+  <ThingDef Name="Kiiro_WoodBoxSmall" ParentName="Kiiro_FurnitureBase" Abstract="true">
+    <description>A wooden box.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxSmallA/WoodBoxSmallA</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.6,2.6)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <shadowData>
+        <volume>(0.5, 0.4, 0.5)</volume>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!-- <altitudeLayer>BuildingOnTop</altitudeLayer> -->
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <!-- <castEdgeShadows>true</castEdgeShadows> -->
+    <pathCost>42</pathCost>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>10</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>5</Mass>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>6</Kiiro_MerchantCapacity>
+      <Beauty>-5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <!-- <staticSunShadowHeight>0.5</staticSunShadowHeight> -->
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+    </comps>
+    <uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxSmall">
+    <defName>Kiiro_WoodBoxSmallA</defName>
+    <label>woodenbox small A</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxSmallA/WoodBoxSmallA</texPath>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.7</goodsDrawSize>
+        <goodsGroup>1</goodsGroup>
+        <goodsInGroupOffset>(0.1,-0.05,0)</goodsInGroupOffset>
+        <goodsOffset>
+          <drawOffsetSouth>(0,0.05,0.2)</drawOffsetSouth>
+          <drawOffsetWest>(0,0.05,0.2)</drawOffsetWest>
+          <drawOffsetNorth>(0,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0,0.05,0.2)</drawOffsetEast>
+        </goodsOffset>
+        <graphicData_shelfAdditional>
+          <texPath>Kiiro_Event/Buildings/WoodBoxSmallA/WoodBoxSmallAAD</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(2.6,2.6)</drawSize>
+          <drawOffset>(0,0,0.2)</drawOffset>
+        </graphicData_shelfAdditional>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxSmall">
+    <defName>Kiiro_WoodBoxSmallB</defName>
+    <label>woodenbox small B</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxSmallB/WoodBoxSmallB</texPath>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxSmall">
+    <defName>Kiiro_WoodBoxSmallDouble</defName>
+    <label>woodbox pile</label>
+    <description>A pile of wood boxes.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxSmallDouble/WoodBoxSmallDouble</texPath>
+    </graphicData>
+    <costStuffCount>20</costStuffCount>
+    <statBases>
+      <Mass>10</Mass>
+      <WorkToBuild>1800</WorkToBuild>
+      <Kiiro_MerchantCapacity>12</Kiiro_MerchantCapacity>
+      <Beauty>-12</Beauty>
+      <Cleanliness>-2</Cleanliness>
+    </statBases>
+    <uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxSmall">
+    <defName>Kiiro_WoodBoxSmallStack</defName>
+    <label>small woodboxes Stack</label>
+    <description>Stacked small woodboxes.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxSmallStack/WoodBoxSmallStack</texPath>
+      <shadowData>
+        <volume>(1.8, 0.4, 1.0)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(2,1)</size>
+    <costStuffCount>60</costStuffCount>
+    <statBases>
+      <Mass>15</Mass>
+      <WorkToBuild>2400</WorkToBuild>
+      <Kiiro_MerchantCapacity>18</Kiiro_MerchantCapacity>
+      <Beauty>-20</Beauty>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <uiIconScale>1.0</uiIconScale>
+  </ThingDef>
+
+
+  <!-- =================================================================================================================================== -->
+
+  <!-- 板条小木箱 -->
+  <ThingDef Name="Kiiro_WoodBoxA" ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_WoodBoxA</defName>
+    <label>woodbox A</label>
+    <description>A wooden box.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxA/WoodBoxA</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.8,2.8)</drawSize>
+      <drawOffset>(0,0,0.22)</drawOffset>
+      <shadowData>
+        <volume>(0.5, 0.4, 0.5)</volume>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!-- <altitudeLayer>BuildingOnTop</altitudeLayer> -->
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>42</pathCost>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>20</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>5</Mass>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>8</Kiiro_MerchantCapacity>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>240000~480000</organizeInterval>
+      </li>
+    </comps>
+    <uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxA">
+    <defName>Kiiro_WoodBoxB</defName>
+    <label>woodbox B</label>
+    <!-- <description>一个板条小木箱。</description> -->
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxB/WoodBoxB</texPath>
+    </graphicData>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Kiiro_WoodBoxA">
+    <defName>Kiiro_WoodBoxStack</defName>
+    <label>woodbox stack</label>
+    <description>stacked woodboxes.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxStack/WoodBoxStack</texPath>
+      <shadowData>
+        <volume>(1.8, 0.4, 1.0)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(2,1)</size>
+    <costStuffCount>40</costStuffCount>
+    <statBases>
+      <Mass>15</Mass>
+      <WorkToBuild>2400</WorkToBuild>
+      <Kiiro_MerchantCapacity>18</Kiiro_MerchantCapacity>
+      <Beauty>-20</Beauty>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <uiIconScale>1.0</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_WoodBoxA">
+    <defName>Kiiro_WoodBoxStackBig</defName>
+    <label>many wood boxes</label>
+    <description>Many piled up boxes.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WoodBoxStack_Big/WoodBoxStack_Big</texPath>
+      <shadowData>
+        <volume>(2.0, 0.4, 2.0)</volume>
+      </shadowData>
+    </graphicData>
+    <size>(2,2)</size>
+    <costStuffCount>100</costStuffCount>
+    <statBases>
+      <Mass>45</Mass>
+      <WorkToBuild>6400</WorkToBuild>
+      <Kiiro_MerchantCapacity>56</Kiiro_MerchantCapacity>
+      <Beauty>-30</Beauty>
+      <Cleanliness>-8</Cleanliness>
+    </statBases>
+    <uiIconScale>1.0</uiIconScale>
+  </ThingDef>
+
+
+  <!-- =================================================================================================================================== -->
+
+  <ThingDef Name="Kiiro_GoodsShelf_Medium" ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_GoodsShelf_Medium</defName>
+    <label>trilayer shelf</label>
+    <description>A shelf.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/GoodsShelf_Medium/GoodsShelf_Medium</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.125,3.125)</drawSize>
+      <drawOffset>(0,0,0.3)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!-- <altitudeLayer>BuildingOnTop</altitudeLayer> -->
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>60</costStuffCount>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>20</Kiiro_MerchantCapacity>
+      <Beauty>10</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>480000~960000</organizeInterval>
+      </li>
+    </comps>
+    <uiIconScale>1.0</uiIconScale>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Kiiro_GoodsShelf_Medium">
+    <defName>Kiiro_GoodsShelf_MediumFull</defName>
+    <label>goods shelf</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/GoodsShelf_MediumFull/GoodsShelf_MediumFull</texPath>
+    </graphicData>
+    <costStuffCount>100</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>32</Mass>
+      <WorkToBuild>3600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>32</Kiiro_MerchantCapacity>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+  </ThingDef>
+
+  <!-- =简单展台============================================================================================================================== -->
+  <!-- <ThingDef ParentName="Kiiro_GoodsShelf_Medium">
+    <defName>Kiiro_SimpleStand</defName>
+    <label>简单展台</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/SimpleStand/SimpleStand</texPath>
+    </graphicData>
+    <costStuffCount>220</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>32</Mass>
+      <WorkToBuild>3600</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>32</Kiiro_MerchantCapacity>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+  </ThingDef> -->
+
+
+  <ThingDef Name="Kiiro_DisplayShelf" ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_DisplayShelf</defName>
+    <label>display shelf</label>
+    <description>A display shelf.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelf/DisplayShelf</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,2.4)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>40</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>24</Kiiro_MerchantCapacity>
+      <Beauty>20</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>3</goodsGroup>
+        <groupOffset_Horizontal>(0.6, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.6, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.1,-0.05,0)</goodsInGroupOffset>
+        <goodsLayer>2</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.6,0.05,0.2)</drawOffsetSouth>
+          <drawOffsetWest>(-0.3,0.05,1.0)</drawOffsetWest>
+          <drawOffsetNorth>(0.6,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0.3,0.05,-0.3)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,0.01,0.5)</drawOffsetSouth>
+          <drawOffsetWest>(0.6,0.01,0)</drawOffsetWest>
+          <drawOffsetNorth>(0,-0.01,0.5)</drawOffsetNorth>
+          <drawOffsetEast>(-0.6,0.01,0)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+    <uiIconScale>1.0</uiIconScale>
+    <drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_DisplayShelfSide</defName>
+    <label>display shelf (single-sided)</label>
+    <description>A single-sided display shelf.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelfSide/DisplayShelfSide</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,2.4)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>30</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>16</Kiiro_MerchantCapacity>
+      <Beauty>20</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>3</goodsGroup>
+        <groupOffset_Horizontal>(0.6, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.6, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.1,-0.05,0)</goodsInGroupOffset>
+        <goodsLayer>1</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.6,0.05,0.2)</drawOffsetSouth>
+          <drawOffsetWest>(-0.0,0.05,1.0)</drawOffsetWest>
+          <drawOffsetNorth>(0.6,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0.0,0.05,-0.3)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,0.01,0.5)</drawOffsetSouth>
+          <drawOffsetWest>(0.6,0.01,0)</drawOffsetWest>
+          <drawOffsetNorth>(0,-0.01,0.5)</drawOffsetNorth>
+          <drawOffsetEast>(-0.6,0.01,0)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+    <uiIconScale>1.0</uiIconScale>
+    <drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_DisplayShelfCorner</defName>
+    <label>display shelf (corner)</label>
+    <description>A Display shelf.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelfCorner/DisplayShelfCorner</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,2.4)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>20</costStuffCount>
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>12</Kiiro_MerchantCapacity>
+      <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+    </comps>
+    <uiIconScale>0.5</uiIconScale>
+    <drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_DisplayShelfEnd</defName>
+    <label>display shelf (end)</label>
+    <description>A Display shelf.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelfEnd/DisplayShelfEnd</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.4,2.4)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <!-- <altitudeLayer>BuildingOnTop</altitudeLayer> -->
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <pathCost>42</pathCost>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>20</costStuffCount>
+    <defaultPlacingRot>East</defaultPlacingRot>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>12</Kiiro_MerchantCapacity>
+      <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <uiOrder>2070</uiOrder>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+    </building>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>1</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>1</goodsGroup>
+        <groupOffset_Horizontal>(0.6, 0, 0)</groupOffset_Horizontal>
+        <groupOffset_Vertical>(0.6, 0, 0)</groupOffset_Vertical>
+        <goodsInGroupOffset>(0.1,-0.05,0)</goodsInGroupOffset>
+        <goodsLayer>2</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.3,0.05,0.5)</drawOffsetSouth>
+          <drawOffsetWest>(-0.18,0.05,0.2)</drawOffsetWest>
+          <drawOffsetNorth>(-0.3,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0.18,0.05,0.2)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0.6,0.01,0)</drawOffsetSouth>
+          <drawOffsetWest>(0,-0.01,0.5)</drawOffsetWest>
+          <drawOffsetNorth>(0.6,0.01,0)</drawOffsetNorth>
+          <drawOffsetEast>(0,0.01,0.5)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+    <uiIconScale>0.5</uiIconScale>
+    <drawerType>MapMeshAndRealTime</drawerType>
+  </ThingDef>
+
+
+  <!-- <ThingDef ParentName="Kiiro_DisplayShelf">
+    <defName>Kiiro_DisplayShelfVertical</defName>
+    <label>竖式展柜</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelfVertical/DisplayShelfVertical</texPath>
+      <drawOffset>(0,0,1.0)</drawOffset>
+      <drawOffsetNorth>(0,-1.0,0.7)</drawOffsetNorth>
+    </graphicData>
+    <costStuffCount>80</costStuffCount>
+    <passability>Standable</passability>
+    <pathCost>0</pathCost>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>20</Kiiro_MerchantCapacity>
+      <Beauty>10</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <uiIconScale>0.5</uiIconScale>
+    <comps Inherit="false">
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>4</goodsAmountPerGroup>
+        <goodsDrawSize>0.5</goodsDrawSize>
+        <goodsGroup>1</goodsGroup>
+        <goodsInGroupOffset>(0.13,-0.05,0)</goodsInGroupOffset>
+        <goodsLayer>2</goodsLayer>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.2,0.05,0.7)</drawOffsetSouth>
+          <drawOffsetWest>(-0.3,0.05,1.2)</drawOffsetWest>
+          <drawOffsetNorth>(0.7,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0.3,0.05,0)</drawOffsetEast>
+        </goodsOffset>
+        <layerOffset>
+          <drawOffsetSouth>(0,0.2,0.6)</drawOffsetSouth>
+          <drawOffsetWest>(0.6,0.2,0)</drawOffsetWest>
+          <drawOffsetNorth>(0,0.2,0.3)</drawOffsetNorth>
+          <drawOffsetEast>(-0.2,0.2,0.3)</drawOffsetEast>
+        </layerOffset>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+
+
+  <!-- <ThingDef ParentName="Kiiro_DisplayShelf">
+    <defName>Kiiro_DisplayShelfSide</defName>
+    <label>展示货架（侧）</label>
+    <description>一个展示货架。</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelf_Side/DisplayShelf_Side</texPath>
+      <drawOffsetNorth>(0,0,-0.2)</drawOffsetNorth>
+    </graphicData>
+    <costStuffCount>180</costStuffCount>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <Mass>15</Mass>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Kiiro_MerchantCapacity>15</Kiiro_MerchantCapacity>
+      <Beauty>5</Beauty>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="Kiiro_DisplayShelfEnd">
+    <defName>Kiiro_DisplayShelf_SideCorner</defName>
+    <label>展示货架（边角）</label>
+    <description>一个展示货架。</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/DisplayShelf_SideCorner/DisplayShelf_SideCorner</texPath>
+      <drawOffsetNorth>(0,0,-0.2)</drawOffsetNorth>
+      <drawOffsetWest>(0,0,-0.2)</drawOffsetWest>
+    </graphicData>
+  </ThingDef> -->
+
+
+
+  <ThingDef ParentName="Kiiro_OnWallBase">
+    <defName>Kiiro_WallRack</defName>
+    <label>kiiro wall rack</label>
+    <description>A wall rack for merchant, need to be placed on the wall.</description>
+    <thingClass>Kiiro_Event.Building_GoodsShelf</thingClass>
+    <rotatable>true</rotatable>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings/WallRack/WallRack</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.125,3.125)</drawSize>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+      <drawOffsetSouth>(0,-2.0,0)</drawOffsetSouth>
+    </graphicData>
+    <uiIconPath>Kiiro_Event/Buildings/WallRack/WallRack_MenuIcon</uiIconPath>
+    <uiIconScale>1.5</uiIconScale>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <size>(2,1)</size>
+    <costList>
+      <Steel>5</Steel>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>15</costStuffCount>
+    <statBases>
+      <WorkToBuild>330</WorkToBuild>
+      <MaxHitPoints>35</MaxHitPoints>
+      <Kiiro_MerchantCapacity>8</Kiiro_MerchantCapacity>
+      <Mass>1</Mass>
+    </statBases>
+    <passability>Standable</passability>
+    <terrainAffordanceNeeded IsNull="True" />
+    <pathCost>0</pathCost>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <drawerType>RealtimeOnly</drawerType>
+    <building>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+    <placeWorkers>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <comps>
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>2</goodsAmountPerGroup>
+        <goodsDrawSize>0.5</goodsDrawSize>
+        <goodsGroup>1</goodsGroup>
+        <goodsInGroupOffset>(0.8,-0.01,0)</goodsInGroupOffset>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.4,-1.95,-0.3)</drawOffsetSouth>
+          <drawOffsetWest>(-0.5,0.05,0.55)</drawOffsetWest>
+          <drawOffsetNorth>(0.4,0.05,0.7)</drawOffsetNorth>
+          <drawOffsetEast>(0.5,0.05,-0.25)</drawOffsetEast>
+        </goodsOffset>
+        <graphicData_shelfAdditional>
+          <texPath>Kiiro_Event/Buildings/WallRack/WallRackAD</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>(3.125,3.125)</drawSize>
+          <drawOffset>(0,1.0,0)</drawOffset>
+        </graphicData_shelfAdditional>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+  <!-- =可连接件========================================================================================================= -->
+  <!-- <ThingDef ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_LinkedStand</defName>
+    <label>简单柜台</label>
+    <description>。</description>
+    <graphicData>
+        <texPath>Kiiro_Event/Buildings/LinkedStand/LinkedStand</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <linkType>CornerFiller</linkType>
+        <linkFlags>
+            <li>Custom1</li>
+        </linkFlags>
+        <damageData>
+            <rect>(0.35,0.1,0.3,0.7)</rect>
+        </damageData>
+    </graphicData>
+    <uiIconPath>Kiiro_Event/Buildings/LinkedStand/LinkedStand_UI</uiIconPath>
+    <costList>
+			<Steel>10</Steel>
+		</costList>
+    <statBases>
+        <Mass>1</Mass>
+        <Beauty>2</Beauty>
+        <Kiiro_MerchantCapacity>5</Kiiro_MerchantCapacity>
+    </statBases>
+    <pathCost>80</pathCost>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <rotatable>false</rotatable>
+    <defaultPlacingRot>North</defaultPlacingRot>
+    <building>
+        <isPlaceOverableWall>true</isPlaceOverableWall>
+        <ai_chillDestination>false</ai_chillDestination>
+        <ai_neverTrashThis>true</ai_neverTrashThis>
+        <blueprintGraphicData>
+            <texPath>Kiiro_Event/Buildings/LinkedStand/LinkedStand_BluePrint</texPath>
+            <linkType>CornerFiller</linkType>
+            <drawOffset>(0,0,0.10)</drawOffset>
+            <linkFlags>
+                <li>Custom1</li>
+            </linkFlags>
+        </blueprintGraphicData>
+    </building>
+    <comps Inherit="False">
+      <li Class="Kiiro_Event.CompProperties_NeedOrganize">
+        <organizeInterval>120000~240000</organizeInterval>
+      </li>
+      <li Class="Kiiro_Event.CompProperties_DisplayGoods">
+        <goodsAmountPerGroup>4</goodsAmountPerGroup>
+        <goodsDrawSize>0.6</goodsDrawSize>
+        <goodsGroup>1</goodsGroup>
+        <goodsInGroupOffset>(0.1,-0.05,0)</goodsInGroupOffset>
+        <goodsOffset>
+          <drawOffsetSouth>(-0.15,0.05,0.2)</drawOffsetSouth>
+          <drawOffsetWest>(0,0.05,0.4)</drawOffsetWest>
+          <drawOffsetNorth>(0.15,0.05,0.2)</drawOffsetNorth>
+          <drawOffsetEast>(0,0.05,0.1)</drawOffsetEast>
+        </goodsOffset>
+      </li>
+    </comps>
+</ThingDef> -->
+
+</Defs>

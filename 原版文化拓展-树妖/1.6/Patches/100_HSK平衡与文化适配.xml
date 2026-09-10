@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- HSK/CE 适配: 觉醒树妖(VDE_AwakenedDryad_*)原用 AnimalThingBase 自带原版 tools,
+	     不被 CE 的 DryadBase 补丁覆盖,CE 下会被过滤导致无法近战/信息卡报错。
+	     此处按 §7 CE 铁律转为 CombatExtended.ToolCE 并补 RacePropertiesExtensionCE + CE 近战属性。
+	     armorPenetration 以 CE 官方树妖基线(力量5=sharp0.07/blunt0.288)线性外推。 -->
+
+	<!-- ===== VDE_AwakenedDryad_Carrier : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Carrier"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Carrier"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Carrier"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.244</MeleeDodgeChance>
+			<MeleeCritChance>0.122</MeleeCritChance>
+			<MeleeParryChance>0.092</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Clawer : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Clawer"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>25</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.35</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.437</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>25</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.35</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.437</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>13</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.3</chanceFactor>
+					<armorPenetrationSharp>0.182</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.747</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.1</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Clawer"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Clawer"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.184</MeleeDodgeChance>
+			<MeleeCritChance>0.092</MeleeCritChance>
+			<MeleeParryChance>0.062</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Barkskin : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.184</MeleeDodgeChance>
+			<MeleeCritChance>0.092</MeleeCritChance>
+			<MeleeParryChance>0.062</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Woodmaker : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Woodmaker"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Woodmaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Woodmaker"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.232</MeleeDodgeChance>
+			<MeleeCritChance>0.116</MeleeCritChance>
+			<MeleeParryChance>0.086</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Medicinemaker : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Medicinemaker"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Medicinemaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Medicinemaker"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.159</MeleeDodgeChance>
+			<MeleeCritChance>0.079</MeleeCritChance>
+			<MeleeParryChance>0.049</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Berrymaker : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Berrymaker"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Berrymaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Berrymaker"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.166</MeleeDodgeChance>
+			<MeleeCritChance>0.083</MeleeCritChance>
+			<MeleeParryChance>0.053</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Stonedigger : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Stonedigger"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Stonedigger"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Stonedigger"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.232</MeleeDodgeChance>
+			<MeleeCritChance>0.116</MeleeCritChance>
+			<MeleeParryChance>0.086</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Nectarmaker : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Nectarmaker"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Nectarmaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Nectarmaker"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.172</MeleeDodgeChance>
+			<MeleeCritChance>0.086</MeleeCritChance>
+			<MeleeParryChance>0.056</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Spitter : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Spitter"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Spitter"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Spitter"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.196</MeleeDodgeChance>
+			<MeleeCritChance>0.098</MeleeCritChance>
+			<MeleeParryChance>0.068</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== VDE_AwakenedDryad_Gaubricmaker : 近战工具转 CE ===== -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Gaubricmaker"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right claw</label>
+					<capacities>
+						<li>Scratch</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+					<armorPenetrationSharp>0.112</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.46</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<capacities>
+						<li>Bite</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+					<chanceFactor>0.9</chanceFactor>
+					<armorPenetrationSharp>0.126</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.517</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>4</power>
+					<cooldownTime>1.1</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+					<armorPenetrationSharp>0</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.23</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Gaubricmaker"]</xpath>
+		<value>
+			<li Class="CombatExtended.RacePropertiesExtensionCE">
+				<bodyShape>Quadruped</bodyShape>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Gaubricmaker"]/statBases</xpath>
+		<value>
+			<MeleeDodgeChance>0.16</MeleeDodgeChance>
+			<MeleeCritChance>0.08</MeleeCritChance>
+			<MeleeParryChance>0.05</MeleeParryChance>
+		</value>
+	</Operation>
+
+	<!-- ===== 2026-08-28 第二批: 远程 CE 化 + 护甲 mm 化 ===== -->
+
+	<!-- VDE_Dryad_Spitter(未觉醒): Verb_Shoot → CE。CE 下原版 armorPenetrationBase 按 mm 解读,
+	     弹体与 verb 需换 CE 类,否则伤害按原版护甲公式结算,对 CE 目标失真。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_Dryad_Spitter"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<accuracyTouch>1</accuracyTouch>
+					<accuracyShort>0.8</accuracyShort>
+					<accuracyMedium>0.75</accuracyMedium>
+					<accuracyLong>0.5</accuracyLong>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>VDE_AcidBolt</defaultProjectile>
+					<warmupTime>2.2</warmupTime>
+					<burstShotCount>1</burstShotCount>
+					<minRange>2</minRange>
+					<range>19.9</range>
+					<soundCast>VDE_AcidBolt</soundCast>
+					<muzzleFlashScale>0</muzzleFlashScale>
+					<label>acidic spit</label>
+					<commonality>0.8</commonality>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+
+	<!-- VDE_AwakenedDryad_Spitter(觉醒): 同上 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Spitter"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<accuracyTouch>1</accuracyTouch>
+					<accuracyShort>0.8</accuracyShort>
+					<accuracyMedium>0.75</accuracyMedium>
+					<accuracyLong>0.5</accuracyLong>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>VDE_AcidBolt</defaultProjectile>
+					<warmupTime>2</warmupTime>
+					<burstShotCount>1</burstShotCount>
+					<minRange>2</minRange>
+					<range>24.9</range>
+					<soundCast>VDE_AcidBolt</soundCast>
+					<muzzleFlashScale>0</muzzleFlashScale>
+					<label>acidic spit</label>
+					<commonality>0.8</commonality>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+
+	<!-- VDE_AcidBolt 弹体: ProjectileProperties → ProjectilePropertiesCE,AP 0.75(原版%) → 2mm(Heat)。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AcidBolt"]/projectile</xpath>
+		<value>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<flyOverhead>false</flyOverhead>
+				<damageDef>VDE_AcidSpit</damageDef>
+				<damageAmountBase>2</damageAmountBase>
+				<armorPenetrationBase>2</armorPenetrationBase>
+				<stoppingPower>1.1</stoppingPower>
+				<speed>40</speed>
+			</projectile>
+		</value>
+	</Operation>
+
+	<!-- VDE_Dryad_Stonedigger(未觉醒): 原版 % 护甲在 CE 下按 mm 解读,0.85/0.75 ≈ 无甲。
+	     按 CE 官方树皮档(原版 0.70/0.40 → 10/15mm)同级甲壳处理。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_Dryad_Stonedigger"]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>10</ArmorRating_Sharp>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_Dryad_Stonedigger"]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>15</ArmorRating_Blunt>
+		</value>
+	</Operation>
+
+	<!-- VDE_AwakenedDryad_Barkskin(觉醒): 同树皮档 10/15mm;血量档位高于原版树皮,
+	     耐久按官方写法加 CE ArmorDurability(原版树皮 400,此处 450)。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>10</ArmorRating_Sharp>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>15</ArmorRating_Blunt>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VDE_AwakenedDryad_Barkskin"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_ArmorDurability">
+				<Durability>450</Durability>
+				<Regenerates>true</Regenerates>
+				<RegenInterval>600</RegenInterval>
+				<RegenValue>5</RegenValue>
+				<MinArmorPct>0.5</MinArmorPct>
+			</li>
+		</value>
+	</Operation>
+
+</Patch>

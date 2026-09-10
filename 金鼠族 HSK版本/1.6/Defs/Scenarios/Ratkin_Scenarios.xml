@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>OAGene_Scenario_Snow</defName>
+		<label>The orphan of the snowstorm</label>
+		<description>After the blizzard, a helpless child struggled to climb out of the snow pile, but apart from the dazzling white snow, there was nothing else in the place.\nBlizzards continue to visit this barren land irregularly, forcing naive children to learn independence. Without familiar relatives and a town with smoke rising from cooking, this child was left with only two snow dogs she had encountered by chance. This was her only comfort in this helpless world.\nThis blizzard took away countless lives, but only the three of them remained. Is this luck or misfortune?\nThe answer is only known by herself and the gods.\n\nAttention: This is a high difficulty script with special weather phenomena, and it is not recommended for new players to try.\nAttention: This script will result in extreme blizzard weather and may also lead to cold wave blizzards, which can cause a significant drop in temperature. Please choose carefully.\nStarting with a cold plain and attempting to survive with a snow dog will provide the best immersion experience.\nIt is not recommended to use cultural ceremony recruitment.</description>
+		<scenario>
+			<summary>Apart from the dazzling white snow, there is nothing else in this place.</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_PlayerFaction</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+					<pawnCount>1</pawnCount>
+				</li>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+					<def>ConfigurePawnsXenotypes</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+					<xenotypeCounts>
+						<li>
+							<requiredAtStart>True</requiredAtStart>
+							<xenotype>OAGene_SnowRatkin</xenotype>
+							<allowedDevelopmentalStages>Baby, Child, Adult</allowedDevelopmentalStages>
+						</li>
+					</xenotypeCounts>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+				</li>
+				<li Class="OberoniaAureaGene.Snowstorm.ScenPart_SnowstormStory">
+					<def>OAGene_Snowstorm_SnowstormStory</def>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>WoodLog</thingDef>
+					<count>100</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Pemmican</thingDef>
+					<count>200</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>20</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MealSimple</thingDef>
+					<count>3</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RawPotatoes</thingDef>
+					<count>100</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_WoodenShield</thingDef>
+					<quality>Poor</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MeleeWeapon_Knife</thingDef>
+					<stuff>Steel</stuff>
+					<quality>Normal</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>OAGene_SnowstormCloak</thingDef>
+					<stuff>Cloth</stuff>
+					<quality>Normal</quality>
+				</li>
+				<li Class="ScenPart_PawnFilter_Age">
+					<def>PawnFilter_Age</def>
+					<allowedAgeRange>13~14</allowedAgeRange>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>RawPotatoes</thingDef>
+					<count>200</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Steel</thingDef>
+					<count>50</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>WoodLog</thingDef>
+					<count>100</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<!--li Class="ScenPart_StartingResearch">
+					<def>StartingResearch</def>
+					<project>RatkinClothing</project>
+				</li-->
+				<li Class="ScenPart_StatFactor">
+					<def>StatFactor</def>
+					<stat>Insulation_Cold</stat>
+					<factor>0.5</factor>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>Nimble</trait>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>Faith</trait>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>OAGene_ExtremeSnowSurvivor</trait>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SnowstormPrecursor</incident>
+					<intervalDays>40</intervalDays>
+					<minDays>28</minDays>
+					<maxDays>52</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_Trader_SnowstormCultistArrival</incident>
+					<intervalDays>36</intervalDays>
+					<minDays>22</minDays>
+					<maxDays>54</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_IceRain</incident>
+					<intervalDays>46</intervalDays>
+					<minDays>30</minDays>
+					<maxDays>60</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_PermaGameCondition">
+					<def>PermanentGameCondition</def>
+					<gameCondition>OAGene_Snowstorm</gameCondition>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_HuskyMigration</incident>
+					<intervalDays>22</intervalDays>
+					<minDays>22</minDays>
+					<maxDays>26</maxDays>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SuperColdSnap</incident>
+					<intervalDays>22</intervalDays>
+					<minDays>14</minDays>
+					<maxDays>18</maxDays>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_IceCrystalFlowerSea</incident>
+					<intervalDays>30.06147</intervalDays>
+					<minDays>54</minDays>
+					<maxDays>162</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SnowstormCamp</incident>
+					<intervalDays>33.86451</intervalDays>
+					<minDays>32</minDays>
+					<maxDays>92</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_DisableIncident">
+					<def>DisableIncident</def>
+					<incident>HeatWave</incident>
+				</li>
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>距离那场暴风雪已经过去了两年。\n\n在那一天之前，我明明有着幸福而无忧无虑的生活，然而那场暴风雪毁了那一切。\n若不是两只雪地犬将我从雪地中挖出，那么我恐怕早已经死在了积雪的掩埋之下。在获救后，当时的我迷失了所有的方向，最终为了活下去而不得不离开原地，开始了四处的游荡。\n\n如今我抵达了这里，这一路上我收获了很多的东西，然而却再也没有像在家时那样开心过。就在昨日，我学会了如何辨别方向，并明白了我身处何地，也许回家的日子就在不远了。
+					</text>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+	<ScenarioDef ParentName="ScenarioBase">
+		<defName>OAGene_Scenario_Snow_Legacy</defName>
+		<label>The orphan of the blizzard: frontier ruins</label>
+		<description>Surviving the blizzard is only the first trial. This time, scattered across the frozen frontier are the wrecks of fallen ratkin settlements — the gold-gilded halls of Moustate, the blood-red banners of the Warlord, and the jade crypts of the lost state.\nA lone snow-ratkin orphan, barely a child, must not only weather the endless snowstorms but also decide the fate of these ruins: to carve out an independent kingdom, or to deliver the ancient relics to one of the ratkin powers in exchange for shelter.\n\nAttention: This is a high difficulty script with extreme blizzard weather and severe cold snaps. Not recommended for new players.\nBeginning on a cold plain with a snow dog and scavenging from ruins will provide the best immersion.\nIt is not recommended to use cultural ceremony recruitment.</description>
+		<scenario>
+			<summary>Beyond the dazzling white snow, the wrecked settlements of three ratkin powers lie half-buried.</summary>
+			<playerFaction>
+				<def>PlayerFaction</def>
+				<factionDef>RK_PlayerFaction</factionDef>
+			</playerFaction>
+			<parts>
+				<li Class="ScenPart_GameStartDialog">
+					<def>GameStartDialog</def>
+					<text>那场暴风雪已经过去了两年，我靠着两只雪地犬侥幸活了下来。\n\n可这片雪原远比我想象的辽阔。我一路走来，看见了鼠邦的金色残墙、军阀染血的赤旗，还有失落古国散落的玉片——他们都曾在这片土地上繁盛过，如今只剩下被积雪掩埋的废墟。\n\n我握着一块残缺的地契与一件古国遗物，它可能是财富，也可能是祸端。是自立为王，还是将它们献给某一方势力换取庇护？\n\n答案，只有我自己知道。
+					</text>
+				</li>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+					<def>ConfigPage_ConfigureStartingPawns</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+					<pawnCount>1</pawnCount>
+				</li>
+				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns_Xenotypes">
+					<def>ConfigurePawnsXenotypes</def>
+					<pawnChoiceCount>1</pawnChoiceCount>
+					<xenotypeCounts>
+						<li>
+							<requiredAtStart>True</requiredAtStart>
+							<xenotype>OAGene_SnowRatkin</xenotype>
+							<allowedDevelopmentalStages>Baby, Child, Adult</allowedDevelopmentalStages>
+						</li>
+					</xenotypeCounts>
+				</li>
+				<li Class="ScenPart_PlayerPawnsArriveMethod">
+					<def>PlayerPawnsArriveMethod</def>
+				</li>
+				<li Class="OberoniaAureaGene.Snowstorm.ScenPart_SnowstormStory">
+					<def>OAGene_Snowstorm_SnowstormStory</def>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>WoodLog</thingDef>
+					<count>100</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Pemmican</thingDef>
+					<count>150</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>Silver</thingDef>
+					<count>30</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MealSimple</thingDef>
+					<count>3</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RawPotatoes</thingDef>
+					<count>100</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_LandDeed</thingDef>
+					<count>1</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_Antique</thingDef>
+					<count>1</count>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>RK_WoodenShield</thingDef>
+					<quality>Poor</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>MeleeWeapon_Knife</thingDef>
+					<stuff>Steel</stuff>
+					<quality>Normal</quality>
+				</li>
+				<li Class="ScenPart_StartingThing_Defined">
+					<def>StartingThing_Defined</def>
+					<thingDef>OAGene_SnowstormCloak</thingDef>
+					<stuff>Cloth</stuff>
+					<quality>Normal</quality>
+				</li>
+				<li Class="ScenPart_PawnFilter_Age">
+					<def>PawnFilter_Age</def>
+					<allowedAgeRange>13~14</allowedAgeRange>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>RawPotatoes</thingDef>
+					<count>200</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Steel</thingDef>
+					<count>80</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>WoodLog</thingDef>
+					<count>100</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>DevilstrandCloth</thingDef>
+					<count>10</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_ScatterThingsAnywhere">
+					<def>ScatterThingsAnywhere</def>
+					<thingDef>Jade</thingDef>
+					<count>15</count>
+					<allowRoofed>True</allowRoofed>
+				</li>
+				<li Class="ScenPart_StatFactor">
+					<def>StatFactor</def>
+					<stat>Insulation_Cold</stat>
+					<factor>0.5</factor>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>Nimble</trait>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>Faith</trait>
+				</li>
+				<li Class="ScenPart_ForcedTrait">
+					<def>ForcedTrait</def>
+					<chance>1</chance>
+					<context>PlayerStarter</context>
+					<trait>OAGene_ExtremeSnowSurvivor</trait>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SnowstormPrecursor</incident>
+					<intervalDays>40</intervalDays>
+					<minDays>28</minDays>
+					<maxDays>52</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_Trader_SnowstormCultistArrival</incident>
+					<intervalDays>36</intervalDays>
+					<minDays>22</minDays>
+					<maxDays>54</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_IceRain</incident>
+					<intervalDays>46</intervalDays>
+					<minDays>30</minDays>
+					<maxDays>60</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_PermaGameCondition">
+					<def>PermanentGameCondition</def>
+					<gameCondition>OAGene_Snowstorm</gameCondition>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_HuskyMigration</incident>
+					<intervalDays>22</intervalDays>
+					<minDays>22</minDays>
+					<maxDays>26</maxDays>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SuperColdSnap</incident>
+					<intervalDays>22</intervalDays>
+					<minDays>14</minDays>
+					<maxDays>18</maxDays>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_IceCrystalFlowerSea</incident>
+					<intervalDays>30.06147</intervalDays>
+					<minDays>54</minDays>
+					<maxDays>162</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_CreateIncident">
+					<def>CreateIncident</def>
+					<incident>OAGene_SnowstormCamp</incident>
+					<intervalDays>33.86451</intervalDays>
+					<minDays>32</minDays>
+					<maxDays>92</maxDays>
+					<repeat>True</repeat>
+				</li>
+				<li Class="ScenPart_DisableIncident">
+					<def>DisableIncident</def>
+					<incident>HeatWave</incident>
+				</li>
+			</parts>
+		</scenario>
+	</ScenarioDef>
+
+</Defs>

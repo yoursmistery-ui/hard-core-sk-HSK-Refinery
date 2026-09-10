@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 配方（并入 HSK工业科研大修, 2026-08-28）
+       全部走 recipeUsers 单路径挂到 RK_Petro_* 建筑; 每条给 researchPrerequisite 与建筑同档, 避免 duplicate unlocked。
+       乙烯=Polymers 苯=Sulphates 二甲苯=Xylene 丙烯=Propylene 丁二烯=Butadiene 氨=SyntheticAmmonia 中性胺=Neutroamine 合成纤维=SyntheticFibers。 -->
+
+  <!-- ===== 常减压蒸馏塔: 5 档转化比例(玩家挂哪个 bill = 选哪档) ===== -->
+  <RecipeDef><defName>RK_Recipe_Distill_T1</defName><label>蒸馏·一档(重留底)</label><description>低转化深度: 多沥青与石脑油, 少燃油。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill>
+    <effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers>
+    <researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>5</Chemfuel><RK_Petro_NaturalGas>2</RK_Petro_NaturalGas><RK_Petro_Naphtha>3</RK_Petro_Naphtha><Asphalt>12</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T2</defName><label>蒸馏·二档</label><description>偏低转化。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>8</Chemfuel><RK_Petro_NaturalGas>3</RK_Petro_NaturalGas><RK_Petro_Naphtha>4</RK_Petro_Naphtha><Asphalt>9</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T3</defName><label>蒸馏·三档(平衡)</label><description>平衡转化。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>11</Chemfuel><RK_Petro_NaturalGas>4</RK_Petro_NaturalGas><RK_Petro_Naphtha>5</RK_Petro_Naphtha><Asphalt>6</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T4</defName><label>蒸馏·四档</label><description>偏高转化: 多燃油/气, 少沥青。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>14</Chemfuel><RK_Petro_NaturalGas>5</RK_Petro_NaturalGas><RK_Petro_Naphtha>6</RK_Petro_Naphtha><Asphalt>3</Asphalt></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Distill_T5</defName><label>蒸馏·五档(深裂解)</label><description>最高转化: 燃油/气最多, 沥青几乎不剩。</description><jobString>蒸馏中。</jobString>
+    <workAmount>1200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DistillationColumn</li></recipeUsers><researchPrerequisite>RK_Petro_AtmosphericDistillation</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>OilBarrel</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>OilBarrel</li></thingDefs></fixedIngredientFilter>
+    <products><Chemfuel>17</Chemfuel><RK_Petro_NaturalGas>6</RK_Petro_NaturalGas><RK_Petro_Naphtha>7</RK_Petro_Naphtha><Asphalt>1</Asphalt></products>
+  </RecipeDef>
+
+  <!-- ===== 深度裂解厂 ===== -->
+  <RecipeDef><defName>RK_Recipe_DeepCrack</defName><label>深度裂解·制混合气</label><description>将天然气、石脑油与沥青深度裂解为裂解混合气。</description><jobString>裂解中。</jobString>
+    <workAmount>2000</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_DeepCracker</li></recipeUsers><researchPrerequisite>RK_Petro_DeepCracking</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>RK_Petro_Naphtha</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>Asphalt</li></thingDefs></filter><count>10</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_NaturalGas</li><li>RK_Petro_Naphtha</li><li>Asphalt</li></thingDefs></fixedIngredientFilter>
+    <products><RK_Petro_MixedGas>20</RK_Petro_MixedGas></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_CrackSynth</defName><label>裂解·制合成烯/酰胺</label><description>将化合燃料裂解为合成烯与合成酰胺单体。</description><jobString>裂解中。</jobString>
+    <workAmount>1800</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_OilCracker</li></recipeUsers><researchPrerequisite>RK_Petro_DeepCracking</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>Chemfuel</li></thingDefs></filter><count>20</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>Chemfuel</li></thingDefs></fixedIngredientFilter>
+    <products><RK_Petro_Synthylene>10</RK_Petro_Synthylene><RK_Petro_Synthamide>5</RK_Petro_Synthamide></products>
+  </RecipeDef>
+
+  <!-- ===== 精馏塔: 三烯 / 三苯 ===== -->
+  <RecipeDef><defName>RK_Recipe_Frac_Olefins</defName><label>精馏·三烯</label><description>分馏裂解混合气得乙烯、丙烯、丁二烯。</description><jobString>精馏中。</jobString>
+    <workAmount>2200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_FractionatingColumn</li></recipeUsers><researchPrerequisite>RK_Petro_FractionationReform</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>RK_Petro_MixedGas</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_MixedGas</li></thingDefs></fixedIngredientFilter>
+    <products><Polymers>5</Polymers><Propylene>3</Propylene><Butadiene>2</Butadiene></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_Frac_Aromatics</defName><label>精馏·三苯</label><description>分馏裂解混合气得苯、甲苯、二甲苯。</description><jobString>精馏中。</jobString>
+    <workAmount>2200</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_FractionatingColumn</li></recipeUsers><researchPrerequisite>RK_Petro_FractionationReform</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>RK_Petro_MixedGas</li></thingDefs></filter><count>10</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_MixedGas</li></thingDefs></fixedIngredientFilter>
+    <products><Sulphates>4</Sulphates><RK_Petro_Toluene>3</RK_Petro_Toluene><Xylene>3</Xylene></products>
+  </RecipeDef>
+
+  <RecipeDef><defName>RK_Recipe_PetroRubber</defName><label>聚合·合成橡胶</label><description>以丁二烯与苯共聚为合成橡胶，供轮胎、密封件与管材使用。</description><jobString>聚合中。</jobString>
+    <workAmount>1700</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_ChemWorkbench</li></recipeUsers><researchPrerequisite>RK_Petro_Polymerization</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>Butadiene</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>Sulphates</li></thingDefs></filter><count>4</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>Butadiene</li><li>Sulphates</li></thingDefs></fixedIngredientFilter>
+    <products><Rubber>12</Rubber></products>
+  </RecipeDef>
+
+  <!-- ===== 催化重整装置 ===== -->
+  <RecipeDef><defName>RK_Recipe_Reform</defName><label>催化重整·芳烃+天然气</label><description>石脑油重整为苯/甲苯/二甲苯并副产天然气。</description><jobString>重整中。</jobString>
+    <workAmount>2600</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_CatalyticReformer</li></recipeUsers><researchPrerequisite>RK_Petro_FractionationReform</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>RK_Petro_Naphtha</li></thingDefs></filter><count>20</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_Naphtha</li></thingDefs></fixedIngredientFilter>
+    <products><Sulphates>6</Sulphates><RK_Petro_Toluene>6</RK_Petro_Toluene><Xylene>6</Xylene><RK_Petro_NaturalGas>8</RK_Petro_NaturalGas></products>
+  </RecipeDef>
+
+  <!-- ===== 氨合成塔 ===== -->
+  <RecipeDef><defName>RK_Recipe_Ammonia</defName><label>合成氨</label><description>天然气高温高压合成氨。</description><jobString>合成中。</jobString>
+    <workAmount>2000</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_AmmoniaReactor</li></recipeUsers><researchPrerequisite>RK_Petro_Ammoniation</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></filter><count>20</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></fixedIngredientFilter>
+    <products><SyntheticAmmonia>15</SyntheticAmmonia></products>
+  </RecipeDef>
+
+  <!-- ===== 中性胺合成塔 ===== -->
+  <RecipeDef><defName>RK_Recipe_Neutroamine</defName><label>合成中性胺</label><description>氨、天然气与乙烯经胺化合成中性胺。</description><jobString>胺化中。</jobString>
+    <workAmount>2600</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_NeutroamineSynthesizer</li></recipeUsers><researchPrerequisite>RK_Petro_Ammoniation</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>SyntheticAmmonia</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>RK_Petro_NaturalGas</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>Polymers</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>SyntheticAmmonia</li><li>RK_Petro_NaturalGas</li><li>Polymers</li></thingDefs></fixedIngredientFilter>
+    <products><Neutroamine>10</Neutroamine></products>
+  </RecipeDef>
+
+  <!-- ===== 石化工作台(纤维/树脂/橡胶) ===== -->
+  <RecipeDef><defName>RK_Recipe_PetroFiber</defName><label>聚合·合成纤维</label><description>以合成烯/酰胺与丙烯聚合为合成纤维。</description><jobString>聚合中。</jobString>
+    <workAmount>1600</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_ChemWorkbench</li></recipeUsers><researchPrerequisite>RK_Petro_Polymerization</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>RK_Petro_Synthylene</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>RK_Petro_Synthamide</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>RK_Petro_Synthylene</li><li>RK_Petro_Synthamide</li></thingDefs></fixedIngredientFilter>
+    <products><SyntheticFibers>15</SyntheticFibers></products>
+  </RecipeDef>
+  <RecipeDef><defName>RK_Recipe_PetroResin</defName><label>聚合·塑料/树脂</label><description>以乙烯与苯聚合为塑料(Plasteel)。</description><jobString>聚合中。</jobString>
+    <workAmount>1800</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_ChemWorkbench</li></recipeUsers><researchPrerequisite>RK_Petro_Polymerization</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>Polymers</li></thingDefs></filter><count>10</count></li>
+      <li><filter><thingDefs><li>Sulphates</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>Polymers</li><li>Sulphates</li></thingDefs></fixedIngredientFilter>
+    <products><Plasteel>15</Plasteel></products>
+  </RecipeDef>
+
+  <!-- ===== 原油裂解炼油厂: 制超织物 ===== -->
+  <RecipeDef><defName>RK_Recipe_CrackWeave</defName><label>裂解·制超织物</label><description>将化合燃料深度裂解重组为超织物(Hyperweave)纤维。</description><jobString>裂解中。</jobString>
+    <workAmount>2000</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_OilCracker</li></recipeUsers><researchPrerequisite>RK_Petro_DeepCracking</researchPrerequisite>
+    <ingredients><li><filter><thingDefs><li>Chemfuel</li></thingDefs></filter><count>25</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>Chemfuel</li></thingDefs></fixedIngredientFilter>
+    <products><Hyperweave>10</Hyperweave></products>
+  </RecipeDef>
+
+  <!-- ===== 石化工作台: 合成医药产品 ===== -->
+  <RecipeDef><defName>RK_Recipe_PetroMedicine</defName><label>合成·医药产品</label><description>以中性胺、合成酰胺与苯为基料合成高级医药产品。</description><jobString>合成中。</jobString>
+    <workAmount>1500</workAmount><workSpeedStat>GeneralLaborSpeed</workSpeedStat><workSkill>Crafting</workSkill><effectWorking>Cook</effectWorking><soundWorking>Recipe_Machining</soundWorking>
+    <recipeUsers><li>RK_Petro_ChemWorkbench</li></recipeUsers><researchPrerequisite>RK_Petro_Polymerization</researchPrerequisite>
+    <ingredients>
+      <li><filter><thingDefs><li>Neutroamine</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>RK_Petro_Synthamide</li></thingDefs></filter><count>5</count></li>
+      <li><filter><thingDefs><li>Sulphates</li></thingDefs></filter><count>3</count></li>
+    </ingredients>
+    <fixedIngredientFilter><thingDefs><li>Neutroamine</li><li>RK_Petro_Synthamide</li><li>Sulphates</li></thingDefs></fixedIngredientFilter>
+    <products><MedicineIndustrial>8</MedicineIndustrial></products>
+  </RecipeDef>
+
+</Defs>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- HSK Mod Assistant 标记: 环世界(核心,原版游戏内容)标记
+         2026-08-14 由 默认可选 改为 环世界 Core 标记(用户要求);
+         改用 MayRequire 门控(本环境 PatchOperationFindMod 不生效,与鼠族 mod 07 号一致) -->
+    <Operation Class="PatchOperationAdd" MayRequire="DimonSever000.ModIndicator.Specific">
+        <xpath>Defs/AMA.ModListerSettingsDef[defName="ModListerSettingsDef"]/modIndicators/Core</xpath>
+        <value>
+            <li>
+                <id>HSK.Core.CHS</id>
+            </li>
+        </value>
+    </Operation>
+</Patch>

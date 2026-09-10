@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- 2026-09-02 通缉扩展:派系报复 + 悬赏猎人。baseChance=0 不进自然池,
+       由 BountyRadioManager 经 Find.Storyteller.incidentQueue 定向投递(随存档持久化)。 -->
+
+  <IncidentDef>
+    <defName>RK_Bounty_Retaliation</defName>
+    <label>bounty retaliation</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>QuestBoardHSK.IncidentWorker_RK_Retaliation</workerClass>
+    <category>ThreatBig</category>
+    <baseChance>0</baseChance>
+  </IncidentDef>
+
+  <IncidentDef>
+    <defName>RK_Bounty_Hunter</defName>
+    <label>bounty hunter dispatch</label>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+    </targetTags>
+    <workerClass>QuestBoardHSK.IncidentWorker_RK_BountyHunter</workerClass>
+    <category>FactionArrival</category>
+    <baseChance>0</baseChance>
+  </IncidentDef>
+
+</Defs>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ModMetaData>
+    <name>鼠族HSK拓展</name>
+    <author>Codex</author>
+    <supportedVersions><li>1.6</li></supportedVersions>
+    <packageId>local.ratkin.clothesweapons</packageId>
+    <description>
+鼠族HSK拓展: 独立整合了原「Ratkin clothes 维多利亚的港湾」全部装备/武器,不再依赖原mod。
+- 鼠族 89 件装备 数值/配方改造(材料替换 + 制造物补全 + 数值草案)
+- 鼠族衣物 III 8件改为前石油工业材料(钢铁替代复合粘剂/人造纤维/塑料/合成橡胶),数值 +25%
+- 骑士装甲/骑士头盔制造改至鼠族电力裁缝台+先进纺织工作台;鼠族装甲/骑士头盔属性强化(不超过骑士装甲),鼠族背包增加容量与负重
+- 科研重构: 贵族服饰→鼠族贵族服饰;侦察装甲→鼠族盔甲III(依赖盔甲II,填补极致时代);金属加工II→鼠族中世纪装甲;鼠族衣物IV(后石化,依赖石油化工V,含石化产物+毛类,数值完善)
+- 工作台按 Core SK 惯例: 太空护甲→先进纺织工作台,近战→机械武器制作台,枪械→高级武器制作台;CE 修复 huimie/FBZX 近战工具
+- 拓展装备 44 件(极致武器 + 太空装甲 + 军服/贵族装/背包/护盾)独立整合,研究并入 HSK 科技树
+- 极致武器(高分子剑刃/无尽之息/黄昏毁灭者/赤炎链锯)绑定新研究「近战武器 VI」,数值取 V/VI 档中间值
+  近战武器 VII 依赖近战武器 VI,研究树不断层
+- 文化(Ideology)职位适配: 领袖/道德指导者/各专家 + Vanilla Ideology Expanded 职位都能穿鼠族服饰
+- CE 适配: 按 HSK 的 Combat Extended(CE Continued)独立适配,含光储能弹/压缩机炮弹弹药
+本 mod 为 Core SK 适配版,需要 Core SK(skyarkhangel.HSK)与 RatkinRaceHSK(Solaris.RatkinRaceMod)。
+请禁用旧版 RatkinRaceHSK_MaterialFix 与原「维多利亚的港湾」mod。
+
+整合内容(2026-08-21):
+- Ratkin GreatWar(browncofe.RCG): 已精简至 40 件代表衣物(每国制服+头盔)+ 18 件代表武器
+- Ratkin Manuscripts - OrderState(browncofe.RCKO): 精简至 骑士制服/头盔/装甲 + 黄金园榴弹铳
+- 科技适配: 已并入 HSK 科技树(衣物→鼠族衣物III/近战→锻造/枪械→制枪),显式配方+工作台挂载
+- CE 适配: 保留枪械已按 CE 标准弹药适配(303British/9x19mmPara/12Gauge/50BMG/40mm)
+- 平衡: 步枪精度/射程对齐 HSK 档位
+⚠️ 若同时订阅了创意工坊原版「Ratkin GreatWar」「Ratkin Manuscripts - OrderState」或「Ratkin: Promised land Ruleless Moustate」,请务必取消订阅,否则 defName 冲突导致异常。
+整合内容(2026-08-21 追加): Ratkin Moustate 鼠邦(EoralMilk.RatkinMoustate)东亚风格阵营扩展,含东方服饰/武器/基因/发型/饰品系统/派系/建筑,Meow Framework + Ratkin Gene Expanded 已内置整合(无需单独安装)。
+
+整合内容(2026-08-22): Ratkin Faction+ 鼠族军阀(fxz.ratkinfaction)整体并入本 mod —— 敌对派系「鼠族军阀 Rakinia_Warlord」(含 4 个 PawnKind、军阀出身、地道袭击事件、钻探机建筑、鼠鼠蛋糕/烘焙配方/食人思想、战地牧师)、军阀 CE 弹匣适配、军阀装备接入 81/82 号二战枪械池(102 号补丁)。
+⚠️ 若仍订阅创意工坊「Ratkin Faction+」,请取消订阅并删除 Mods 目录下的 Ratkin Faction+ 文件夹,否则 defName(Rakinia_Warlord/RatkinWarlord 等)冲突。
+整合内容(2026-08-26): 鼠族异种人(松鼠/仓鼠/实验鼠/废土鼠/田鼠等 RGE 变体)耳/尾贴图渲染修复 —— 特殊异种基因改走 Biotech renderNodeProperties(机制A,同初鼠种 RK_Gene_LargeEars)可靠渲染,不再依赖 HSK 下失效的 HAR universalBodyAddons(机制B,Gene For);并恢复 RGE 原版基因分组显示(GeneCategoryDef: 鼠族基因/鼠族耳朵基因/鼠族尾巴基因),异种人基因属可遗传端基因、显示在「系谱基因」栏(原版逻辑正确)。
+
+整合内容(2026-08-26 追加): 融合三个社区 mod —— ①Ratkin Hair Plus(RPowder.RatkinHairPlus): 双马尾 I~IV + 长发 I 共 5 个新发型;②Ratkin Hairstyle Expanded(MoManaCha.RKHairExpanded): 单马尾长发/卢卡/侧马尾/法式辫/双马尾共 5 个新发型(均入 RK_Style 分类,贴图统一缩放至 256 基准与鼠族原版发型一致);③鼠族名称扩展 RatkinNamePlus(TheWWworld.RatkinNamePlus): 植物名/花名大词库 —— RK_FirstName_ElfStyle 合并至 1235 行(植物名 1024 + 原版精灵名 232),RK_Noun_Prefix/Postfix_Flower 扩充至 507 行(补回原版 报春花/蓝铃花/鸢尾花),RK_Last_Single 追加 23 个新词。人物名生成经 RatkinRaceHSK 的 NamerPerson_RatkinKingdom 规则生效(本 mod loadAfter 覆盖同名语言文件)。媒体文件: 三社区 mod 的 About 预览图/图标已存档至 About 目录(Preview_RatkinHairPlus/Preview_RatkinHairExpanded/Preview_RatkinNamePlus/ModIcon_RatkinHairExpanded),不影响游戏加载(仅存素材)。
+⚠️ 若仍订阅创意工坊上述三个原 mod,请取消订阅,否则发型 defName 重复报错。
+
+整合内容(2026-08-26 追加): 西风骑士团装备(markamell.favoiusweaponandarmour, Steam 3768887719)—— 整合 6 把近战武器(西风基础剑/西风骑士细剑/西风之剑/西风大剑/西风长枪/西风书)+ 4 件装甲(西风骑士内衣/板甲/重裙/军官板甲),**石化时代(后工业)档**适配: 石化材料(工业零件/合成纤维 SyntheticFibers)、**全部统一在鼠族电力锻造台(RK_ElectricSmithy)制造**、新研究「西风骑士团武备」(Weapon_SK x=13 y=29, 前置工业近战 Melee_C2 + 石化工业 Oil_Industry_C6, 高级研究台+研究终端)。**西风书**: 修女/传教士手持工具, 单手, 近战钝/锐甲穿透均 1, 大幅灵能属性(灵能敏感+0.5/灵能熵回复+0.2/冥想专注+0.15)与社交属性(社交影响+0.3)。**装甲为通用装甲**(人类/鼠族均可穿, 不入鼠族专属限制)。全部 CE 适配(ToolCE + Bulk + 单/双手 tag + CE 护甲值)。**体型适配**: 内置 FavoniusBodyScale.dll 按持有者 baseBodySize 1:1 缩放武器渲染(人类 1.0 不变,鼠族 0.8 → 武器 0.8 倍),只影响西风武器。
+⚠️ 若仍订阅创意工坊原「Knights of Favonius - Weapon and Armour」,请取消订阅,否则贴图/内容重复。
+
+整合内容(2026-09-06): 一战鼠鼠 GreatWar 增强 —— 反方「同盟国」(Rakinia_CentralAlliance) 设为敌对派系(naturalEnemy, 与正方「协约国」对立); 补齐全部 37 件二战军服的 CE 适配(Bulk/WornBulk + 原版 % 护甲换成 CE mm); 精选新增 4 枪(白蔷薇卡宾枪 / 土人参左轮 · 山毛榉狙击 / 五月草轻机枪, 映射 303British · 9mmPara · 7.92Mauser 现成弹)、2 近战(铅头警棍 / 战壕锤)、8 衣甲(正反两方旗舰制服 · 装具 · 防弹盾衣 · 迷彩盔罩), 全部 CE 化并入两派系兵种装备池。
+    </description>
+    <modDependencies>
+        <li><packageId>Solaris.RatkinRaceMod</packageId><displayName>NewRatkinPlus</displayName><steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</steamWorkshopUrl></li>
+        <li><packageId>skyarkhangel.HSK</packageId><displayName>Core SK</displayName><downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl></li>
+        <li><packageId>DimonSever000.ModIndicator.Specific</packageId><displayName>HSK Autosort and Mod Assistant</displayName>    <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+			</li>
+        </modDependencies>
+    <loadAfter>
+        <li>Solaris.RatkinRaceMod</li>
+        <li>skyarkhangel.HSK</li>
+        <li>skyarkhangel.SurvivalToolsLite</li>
+        <li>ViTech.HCSKWood</li>
+        <li>CETeam.CombatExtended</li>
+        <li>Ludeon.RimWorld.Ideology</li>
+        <li>VanillaExpanded.VMemesE</li>
+        <li>VanillaExpanded.Ideo.Dryads</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+        </loadAfter>
+    <loadBefore>
+        <li>local.ratkin.goldenhsk</li>
+        <li>local.ratkin.furniture</li>
+    </loadBefore>
+</ModMetaData>

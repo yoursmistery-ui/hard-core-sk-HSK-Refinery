@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Northern ornate clothing added in 1.6. -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_OrnatedNomadic"]/statBases</xpath>
+		<value><Bulk>2</Bulk><WornBulk>0</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_OrnatedNomadic"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>2</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_OrnatedNomadic"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>6</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_OnSkin_OrnatedNomadic"]/costList</xpath>
+		<value>
+			<costList>
+				<Leather_Thrumbo>75</Leather_Thrumbo>
+				<Miho_Ebony_SilkCloth>25</Miho_Ebony_SilkCloth>
+				<SyntheticFibers>12</SyntheticFibers>
+				<ComponentIndustrial>4</ComponentIndustrial>
+			</costList>
+		</value>
+	</Operation>
+
+	<!-- New eyewear follows the CE bulk and dodge conventions of existing glasses. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Special_RoundGlasses"]/equippedStatOffsets/MeleeDodgeChance</xpath>
+		<value><MeleeDodgeChance>-0.3</MeleeDodgeChance></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Special_RoundGlasses"]/statBases</xpath>
+		<value><Bulk>0.5</Bulk><WornBulk>0</WornBulk></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Special_SunGlasses"]/statBases/ArmorRating_Sharp</xpath>
+		<value><ArmorRating_Sharp>2</ArmorRating_Sharp></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Special_SunGlasses"]/statBases/ArmorRating_Blunt</xpath>
+		<value><ArmorRating_Blunt>4</ArmorRating_Blunt></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Apparel_Special_SunGlasses"]/statBases</xpath>
+		<value><Bulk>0.5</Bulk><WornBulk>0</WornBulk></value>
+	</Operation>
+</Patch>

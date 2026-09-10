@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <MentalBreakDef>
+        <defName>OAGene_LostInMemory</defName>
+        <workerClass>OberoniaAureaGene.Snowstorm.MentalBreakWorker_LostInMemory</workerClass>
+        <mentalState>OAGene_LostInMemory</mentalState>
+        <baseCommonality>0</baseCommonality>
+        <intensity>Minor</intensity>
+        <requiredTrait>OAGene_ExtremeSnowSurvivor</requiredTrait>
+    </MentalBreakDef>
+
+    <MentalStateDef ParentName="BaseMentalState">
+        <defName>OAGene_LostInMemory</defName>
+        <stateClass>MentalState_WanderOwnRoom</stateClass>
+        <workerClass>OberoniaAureaGene.Snowstorm.MentalStateWorker_LostInMemory</workerClass>
+        <label>陷入回忆</label>
+        <category>Misc</category>
+        <colonistsOnly>true</colonistsOnly>
+        <minTicksBeforeRecovery>1250</minTicksBeforeRecovery>
+        <maxTicksBeforeRecovery>1500</maxTicksBeforeRecovery>
+        <recoveryMtbDays>0.166</recoveryMtbDays>
+        <recoverFromSleep>true</recoverFromSleep>
+        <moodRecoveryThought>OAGene_Thought_LostInMemory_Temp</moodRecoveryThought>
+        <blockNormalThoughts>true</blockNormalThoughts>
+        <nameColor>(0.65, 0.9, 0.93)</nameColor>
+        <recoveryMessage>{0} 从回忆中恢复过来。</recoveryMessage>
+        <beginLetterLabel>陷入了一段回忆之中</beginLetterLabel>
+        <beginLetter>{0}陷入了一段回忆之中。</beginLetter>
+        <beginLetterDef>NegativeEvent</beginLetterDef>
+        <baseInspectLine>精神状态：陷入回忆</baseInspectLine>
+        <allowBeatfire>true</allowBeatfire>
+        <escapingPrisonersIgnore>true</escapingPrisonersIgnore>
+    </MentalStateDef>
+
+</Defs>

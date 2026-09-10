@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/graphicPaths/body</xpath>
+    <value>
+      <body>
+        <path>Ratkin/Body/Naked_Thin</path>
+        <ageGraphics>
+        <HumanlikeAdult>Ratkin/Body/Naked_Thin</HumanlikeAdult>
+        <HumanlikeTeenager>Ratkin/Body/Naked_Thin</HumanlikeTeenager>
+        <HumanlikePreTeenager MayRequire="Ludeon.RimWorld.Biotech">Ratkin/Body/Naked_Thin</HumanlikePreTeenager>
+        <HumanlikeChild>Ratkin/Body/Naked_Child</HumanlikeChild>
+        <HumanlikeBaby>Ratkin/Body/Naked_Baby</HumanlikeBaby>
+        </ageGraphics>
+        <bodytypeGraphics>
+          <Thin>Ratkin/Body/Naked_Thin</Thin>
+          <Child MayRequire="Ludeon.RimWorld.Biotech">Ratkin/Body/Naked_Child</Child>
+          <Baby MayRequire="Ludeon.RimWorld.Biotech">Ratkin/Body/Naked_Baby</Baby>
+        </bodytypeGraphics>
+      </body>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/generalSettings/alienPartGenerator/headTypes</xpath>
+    <value>
+      <headTypes>
+        <li>RatkinNormal</li>
+        <li>RatkinWide</li>
+        <li>RatkinPointy</li>
+        <li>RatkinNarrow</li>
+      </headTypes>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/graphicPaths/head</xpath>
+    <value>
+      <head>Ratkin/Heads/</head>
+    </value>
+  </Operation>
+</Patch>

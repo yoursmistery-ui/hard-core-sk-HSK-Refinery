@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ==========================================================================
+	     Knights of Favonius 西风骑士团 装甲整合 (2026-08-26, 后工业档)
+	     来源: Steam 创意工坊 3768887719 "Knights of Favonius - Weapon and Armour"
+	     适配: 整合 4 件装甲 —— 通用装甲(人类/鼠族均可穿), 不入 79 号鼠族专属限制。
+	     - 父类 ApparelMakeableBase (通用服装基类, 同原mod)
+	     - 后工业材料 (ComponentIndustrial/SyntheticFibers)
+	     - CE 适配: 护甲值按 HSK CE mm 值 + Bulk/WornBulk + CarryBulk/CarryWeight
+	     - 工作台: 裁缝台 (HandTailoringBench/ElectricTailoringBench) + 锻造台(板甲)
+	     - 研究: RKHSK_FavoniusArmory (后工业档)
+	     - 贴图: Textures/Things/Apparel/Favonius/ (含各体型 _Fat/_Thin/_Female/_Male 变体)
+	     ========================================================================== -->
+
+	<!-- ============ Favonius Underarmour 西风骑士内衣 (OnSkin) ============ -->
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>RKHSK_Favonius_Underarmour</defName>
+		<label>西风骑士内衣</label>
+		<description>西风骑士团制式内衬制服，由分层束腰上衣、骑兵长裤与结实军靴组成。既适合日常巡逻，也足以承受守护蒙德的重任。</description>
+		<graphicData>
+			<texPath>Things/Apparel/Favonius/FavoniusUnderarmour/KOFU</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<tradeability>Sellable</tradeability>
+		<costList>
+			<Cloth>60</Cloth>
+			<SyntheticFibers>20</SyntheticFibers>
+		</costList>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToMake>5000</WorkToMake>
+			<Mass>1</Mass>
+			<Bulk>4</Bulk>
+			<WornBulk>2</WornBulk>
+			<Insulation_Cold>15</Insulation_Cold>
+			<ArmorRating_Sharp>4</ArmorRating_Sharp>
+			<ArmorRating_Blunt>3</ArmorRating_Blunt>
+			<ArmorRating_Heat>1</ArmorRating_Heat>
+			<Flammability>0.3</Flammability>
+		</statBases>
+		<equippedStatOffsets>
+			<CarryBulk>5</CarryBulk>
+			<CarryWeight>5</CarryWeight>
+		</equippedStatOffsets>
+		<thingCategories>
+			<li>BodySuitsCat</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Favonius/FavoniusUnderarmour/KOFU</wornGraphicPath>
+			<layers>
+				<li>OnSkin</li>
+			</layers>
+			<tags>
+				<li>MedievalMilitary</li>
+				<li>MedievalArmorBasic</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<colorGenerator Class="ColorGenerator_StandardApparel"/>
+		<tradeTags>
+			<li>Clothing</li>
+			<li>Armor</li>
+		</tradeTags>
+	</ThingDef>
+
+	<!-- ============ Favonius Plate armour 西风骑士板甲 (Shell) ============ -->
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>RKHSK_Favonius_PlateArmour</defName>
+		<label>西风骑士板甲</label>
+		<description>由肩甲、胸甲、背甲、护臂与胫甲组成的轻量板甲。在不牺牲西风骑士敏捷性的前提下提供可靠防护。</description>
+		<graphicData>
+			<texPath>Things/Apparel/Favonius/FavoniusPlateArmour/KOFAP</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<tradeability>Sellable</tradeability>
+		<costList>
+			<Steel>100</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+			<SyntheticFibers>30</SyntheticFibers>
+		</costList>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<WorkToMake>13000</WorkToMake>
+			<Mass>5</Mass>
+			<Bulk>20</Bulk>
+			<WornBulk>10</WornBulk>
+			<Insulation_Cold>10</Insulation_Cold>
+			<ArmorRating_Sharp>12</ArmorRating_Sharp>
+			<ArmorRating_Blunt>10</ArmorRating_Blunt>
+			<ArmorRating_Heat>6</ArmorRating_Heat>
+			<Flammability>0.0</Flammability>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.1</MoveSpeed>
+			<CarryBulk>20</CarryBulk>
+			<CarryWeight>20</CarryWeight>
+		</equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>FullArmorCat</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Favonius/FavoniusPlateArmour/KOFAP</wornGraphicPath>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>MedievalMilitary</li>
+				<li>MedievalArmorDecent</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<colorGenerator Class="ColorGenerator_StandardApparel"/>
+		<tradeTags>
+			<li>Armor</li>
+		</tradeTags>
+	</ThingDef>
+
+	<!-- ============ Favonius Heavy skirt 西风重裙 (Middle, 女性) ============ -->
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>RKHSK_Favonius_HeavySkirt</defName>
+		<label>西风重裙</label>
+		<description>专为西风骑士团女性骑士设计的加固裙甲，多层布料叠层提供额外防护，同时保持骑士应有的优雅风范。</description>
+		<graphicData>
+			<texPath>Things/Apparel/Favonius/FavoniusHS/KOFHS</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<tradeability>Sellable</tradeability>
+		<costList>
+			<Cloth>150</Cloth>
+			<SyntheticFibers>20</SyntheticFibers>
+		</costList>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<WorkToMake>8000</WorkToMake>
+			<Mass>1</Mass>
+			<Bulk>6</Bulk>
+			<WornBulk>3</WornBulk>
+			<Insulation_Cold>15</Insulation_Cold>
+			<ArmorRating_Sharp>6</ArmorRating_Sharp>
+			<ArmorRating_Blunt>6</ArmorRating_Blunt>
+			<ArmorRating_Heat>3</ArmorRating_Heat>
+			<Flammability>0.1</Flammability>
+		</statBases>
+		<equippedStatOffsets>
+			<CarryBulk>8</CarryBulk>
+			<CarryWeight>8</CarryWeight>
+		</equippedStatOffsets>
+		<thingCategories>
+			<li>PantsCat</li>
+		</thingCategories>
+		<apparel>
+			<gender>Female</gender>
+			<bodyPartGroups>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Favonius/FavoniusHS/KOFHS</wornGraphicPath>
+			<layers>
+				<li>Middle</li>
+			</layers>
+			<tags>
+				<li>MedievalMilitary</li>
+				<li>MedievalArmorBasic</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<colorGenerator Class="ColorGenerator_StandardApparel"/>
+		<tradeTags>
+			<li>Clothing</li>
+			<li>Armor</li>
+		</tradeTags>
+	</ThingDef>
+
+	<!-- ============ Favonius Officer plate armour 西风军官板甲 (Shell) ============ -->
+	<ThingDef ParentName="ApparelMakeableBase">
+		<defName>RKHSK_Favonius_OfficerArmour</defName>
+		<label>西风军官板甲</label>
+		<description>远比精工板甲更为华丽——只授予长期忠诚奉献的西风骑士团军官。它是荣誉、职责与蒙德骑士理想的象征。</description>
+		<graphicData>
+			<texPath>Things/Apparel/Favonius/FavoniusOfficerPlateArmour/KOFOPA</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Industrial</techLevel>
+		<tradeability>Sellable</tradeability>
+		<costList>
+			<Steel>100</Steel>
+			<ComponentIndustrial>10</ComponentIndustrial>
+			<SyntheticFibers>40</SyntheticFibers>
+			<GoldBar>2</GoldBar>
+		</costList>
+		<statBases>
+			<MaxHitPoints>600</MaxHitPoints>
+			<WorkToMake>15000</WorkToMake>
+			<Mass>6</Mass>
+			<Bulk>24</Bulk>
+			<WornBulk>12</WornBulk>
+			<Insulation_Cold>15</Insulation_Cold>
+			<ArmorRating_Sharp>16</ArmorRating_Sharp>
+			<ArmorRating_Blunt>14</ArmorRating_Blunt>
+			<ArmorRating_Heat>10</ArmorRating_Heat>
+			<Flammability>0.0</Flammability>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.15</MoveSpeed>
+			<SocialImpact>0.1</SocialImpact>
+			<TradePriceImprovement>0.15</TradePriceImprovement>
+			<CarryBulk>25</CarryBulk>
+			<CarryWeight>25</CarryWeight>
+		</equippedStatOffsets>
+		<thingCategories Inherit='False'>
+			<li>FullArmorCat</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+				<li>Feet</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Things/Apparel/Favonius/FavoniusOfficerPlateArmour/KOFOPA</wornGraphicPath>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>MedievalMilitary</li>
+				<li>MedievalArmorDecent</li>
+				<li>Royal</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+		</apparel>
+		<recipeMaker Inherit="False" IsNull="True" />
+		<colorGenerator Class="ColorGenerator_StandardApparel"/>
+		<tradeTags>
+			<li>Armor</li>
+		</tradeTags>
+	</ThingDef>
+
+</Defs>

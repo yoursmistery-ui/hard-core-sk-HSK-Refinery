@@ -1,0 +1,497 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+	<ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>RK_ScrewDriver</defName>
+		<label>screw driver</label>
+		<description>A common tool found in modern cities, it can help you quickly disassemble troublesome objects; in extreme cases, it can also serve as a convenient weapon.</description>
+		<techLevel>Industrial</techLevel>
+		<costStuffCount>25</costStuffCount>
+		<statBases>
+			<WorkToMake>1200</WorkToMake>
+			<Mass>0.35</Mass>
+			<Bulk>2</Bulk>
+		</statBases>
+		<soundInteract>Interact_Crowbar</soundInteract>
+		<recipeMaker>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>1</Crafting>
+			</skillRequirements>
+			<displayPriority>437</displayPriority>
+		</recipeMaker>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+		<weaponTags>
+			<li>IndustrialMelee</li>
+			<li>RK_ScrewDriver</li>
+		</weaponTags>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>point</label>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>8</power>
+				<cooldownTime>1.2</cooldownTime>
+				<armorPenetrationSharp>4.5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<equippedAngleOffset>20</equippedAngleOffset>
+		<equippedStatOffsets>
+			<FixBrokenDownBuildingSuccessChance>0.15</FixBrokenDownBuildingSuccessChance>
+			<ConstructSuccessChance>0.25</ConstructSuccessChance>
+			<HackingSpeed>0.2</HackingSpeed>
+			<MechRepairSpeed>0.2</MechRepairSpeed>
+		</equippedStatOffsets>
+		<graphicData>
+			<texPath>Things/Weapon/RK_ScrewDriver</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.9</drawSize>
+		</graphicData>
+		<tradeTags>
+			<li>MimiThings</li>
+		</tradeTags>
+	</ThingDef>
+	<ThingDef ParentName="BaseHumanMakeableGun" Name="RKMD_MachinePistol">
+		<defName>RKMD_MachinePistol</defName>
+		<label>ratkin machine pistol</label>
+		<description>A submachine gun that is small enough even for ratkins. The regular version is semi-automatic, but it's not difficult to convert it to fully automatic mode. For other races, it would be impossible to use this small-sized gun normally.</description>
+		<graphicData>
+			<texPath>Things/Weapon/RK_SingleSMG</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.6</drawSize>
+		</graphicData>
+		<uiIconScale>0.8</uiIconScale>
+		<soundInteract>Interact_SMG</soundInteract>
+		<weaponClasses>
+			<li>RangedLight</li>
+			<li>ShortShots</li>
+		</weaponClasses>
+		<weaponTags Inherit="False">
+			<li>RK_GangWeapon</li>
+		</weaponTags>
+		<recipeMaker>
+			<researchPrerequisite>BlowbackOperation</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+			<displayPriority>410</displayPriority>
+		</recipeMaker>
+		<statBases>
+			<WorkToMake>10000</WorkToMake>
+			<Mass>1.5</Mass>
+			<AccuracyTouch>0.90</AccuracyTouch>
+			<AccuracyShort>0.65</AccuracyShort>
+			<AccuracyMedium>0.35</AccuracyMedium>
+			<AccuracyLong>0.15</AccuracyLong>
+			<RangedWeapon_Cooldown>0.9</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>25</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_RKMD_MachinePistol</defaultProjectile>
+				<warmupTime>0.8</warmupTime>
+				<range>18.9</range>
+				<burstShotCount>6</burstShotCount>
+				<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+				<soundCast>Shot_MachinePistol</soundCast>
+				<soundCastTail>GunTail_Light</soundCastTail>
+				<muzzleFlashScale>7</muzzleFlashScale>
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>grip</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>1.3</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<comps>
+			<li Class="Meow.CompProperties_SmallWeapon">
+				<maxBodySizeToUse>0.85</maxBodySizeToUse>
+			</li>
+		</comps>
+	</ThingDef>
+	<ThingDef ParentName="RKMD_MachinePistol">
+		<defName>RKMD_DualMachinePistol</defName>
+		<label>ratkin dual machine pistol</label>
+		<description>Nea Hahahahaha~</description>
+		<graphicData>
+			<graphicClass>Graphic_Random</graphicClass>
+			<texPath>Things/Weapon/RK_DoubleSMG</texPath>
+		</graphicData>
+		<recipeMaker Inherit="False">
+			<recipeUsers Inherit="false">
+				<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>0</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<statBases>
+			<WorkToMake>10</WorkToMake>
+			<Mass>3</Mass>
+			<AccuracyTouch>0.90</AccuracyTouch>
+			<AccuracyShort>0.51</AccuracyShort>
+			<AccuracyMedium>0.2</AccuracyMedium>
+			<AccuracyLong>0.08</AccuracyLong>
+			<RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+		</statBases>
+		<costList Inherit="False">
+			<RKMD_MachinePistol>2</RKMD_MachinePistol>
+		</costList>
+		<verbs Inherit="False">
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_RKMD_MachinePistol</defaultProjectile>
+				<warmupTime>0.7</warmupTime>
+				<range>18.9</range>
+				<burstShotCount>12</burstShotCount>
+				<ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+				<soundCast>Shot_MachinePistol</soundCast>
+				<soundCastTail>GunTail_Light</soundCastTail>
+				<muzzleFlashScale>7</muzzleFlashScale>
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef ParentName="BaseHumanMakeableGun" Name="RK_HuntingRifle">
+		<defName>RK_HuntingRifle</defName>
+		<label>ratkin hunting rifle</label>
+		<description>A single-shot rifle with ammunition of a sufficient caliber for Ratkin was adopted. This weapon did not use the standard Ratkin-style arrow-shaped bullets. Instead, it used specially made large-caliber Damm bullets, which were sufficient to kill some large animals with a single shot within a certain range.</description>
+		<graphicData>
+			<texPath>Things/Weapon/RK_HuntingRifle</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<statBases>
+			<WorkToMake>32000</WorkToMake>
+			<Mass>6</Mass>
+			<AccuracyTouch>0.62</AccuracyTouch>
+			<AccuracyShort>0.77</AccuracyShort>
+			<AccuracyMedium>0.9</AccuracyMedium>
+			<AccuracyLong>0.77</AccuracyLong>
+			<RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+		</statBases>
+		<costList>
+			<Steel>125</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<Chemfuel>75</Chemfuel>
+		</costList>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>7</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_RK_Hunting</defaultProjectile>
+				<warmupTime>2.3</warmupTime>
+				<range>41.9</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>RK_HuntingRifle</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<!-- <forcedMissRadius>0</forcedMissRadius> -->
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>2.5</cooldownTime>
+				<armorPenetrationBlunt>4.2</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>barrel</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>16</power>
+				<cooldownTime>2.7</cooldownTime>
+				<armorPenetrationBlunt>5.6</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<weaponTags Inherit="False">
+			<li>RK_GangWeapon</li>
+		</weaponTags>
+		<comps>
+			<li Class="RatkinGeneExpanded.CompProperties_WeaponDrawExt">
+				<invertNorth>true</invertNorth>
+				<invertEast>false</invertEast>
+				<invertSouth>true</invertSouth>
+				<invertWest>false</invertWest>
+			</li>
+			<li Class="RatkinGeneExpanded.CompProperties_IsHuntingWeapon"/>
+		</comps>
+		<equippedAngleOffset>45</equippedAngleOffset>
+	</ThingDef>
+	<ThingDef ParentName="BaseBullet">
+		<defName>Frag_HuntingRifle</defName>
+		<label>bullet fragment</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+			<shaderType>TransparentPostLight</shaderType>
+			<color>(254,227,128)</color>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>4</damageAmountBase>
+			<speed>30</speed>
+		</projectile>
+		<tradeTags>
+			<li>MimiThings</li>
+		</tradeTags>
+	</ThingDef>
+	<ThingDef ParentName="RK_HuntingRifle">
+		<defName>RK_HuntingRifle_toxic</defName>
+		<label>ratkin toxic rifle</label>
+		<description>Some post-apocalyptic gang members have modified large-caliber hunting rifles. Basically, they have added a detachable external magazine to the hunting rifle. Moreover, this magazine can contaminate the ammunition loaded in it, causing considerable toxin damage when the bullet hits the target.</description>
+		<graphicData>
+			<texPath>Things/Weapon/RK_PoisonRifle</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<statBases>
+			<WorkToMake>9700</WorkToMake>
+			<Mass>6.8</Mass>
+			<AccuracyTouch>0.6</AccuracyTouch>
+			<AccuracyShort>0.74</AccuracyShort>
+			<AccuracyMedium>0.85</AccuracyMedium>
+			<AccuracyLong>0.72</AccuracyLong>
+			<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+		</statBases>
+		<costList Inherit="False">
+			<Steel>25</Steel>
+			<RK_HuntingRifle>1</RK_HuntingRifle>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite Inherit="false"/>
+			<researchPrerequisites>
+				<li>ToxGas</li>
+			</researchPrerequisites>
+		</recipeMaker>
+		<verbs Inherit="False">
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_RKMD_Toxic</defaultProjectile>
+				<warmupTime>2.45</warmupTime>
+				<range>41.9</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>RK_HuntingRifle</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<!-- <forcedMissRadius>0</forcedMissRadius> -->
+			</li>
+		</verbs>
+	</ThingDef>
+	<ThingDef ParentName="BaseBullet">
+		<defName>Frag_ToxicRifle</defName>
+		<label>bullet fragment</label>
+		<graphicData>
+			<texPath>Things/Projectile/Bullet_Small</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.66</drawSize>
+			<shaderType>TransparentPostLight</shaderType>
+			<color>(163,255,138)</color>
+		</graphicData>
+		<projectile>
+			<damageDef>Bullet_ToxicBullet</damageDef>
+			<damageAmountBase>2</damageAmountBase>
+			<speed>28</speed>
+		</projectile>
+	</ThingDef>
+	<DamageDef ParentName="Bullet">
+		<defName>Bullet_ToxicBullet</defName>
+		<label>bullet</label>
+		<additionalHediffs>
+			<li>
+				<hediff>ToxicBuildup</hediff>
+				<severityPerDamageDealt>0.015</severityPerDamageDealt>
+				<victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+				<inverseStatScaling>true</inverseStatScaling>
+				<victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+			</li>
+		</additionalHediffs>
+		<impactSoundType>Toxic</impactSoundType>
+		<damageEffecter>Impact_Toxic</damageEffecter>
+	</DamageDef>
+	<ThingDef ParentName="RK_HuntingRifle">
+		<defName>RK_SharpHunter</defName>
+		<label>sharp hunter</label>
+		<description>The shooter rifle, modified from a single-shot shotgun, is equipped with a high-magnification sniper scope produced by the ratkin, optimized rifling, and a more comfortable stock, making this weapon even more lethal than its original form.</description>
+		<graphicData>
+			<texPath>Things/Weapon/RK_SharpHunter</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Interact_Rifle</soundInteract>
+		<statBases>
+			<WorkToMake>17000</WorkToMake>
+			<Mass>7.2</Mass>
+			<AccuracyTouch>0.41</AccuracyTouch>
+			<AccuracyShort>0.68</AccuracyShort>
+			<AccuracyMedium>0.75</AccuracyMedium>
+			<AccuracyLong>0.92</AccuracyLong>
+			<RangedWeapon_Cooldown>1.7</RangedWeapon_Cooldown>
+		</statBases>
+		<costList Inherit="False">
+			<Steel>25</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<RK_HuntingRifle>1</RK_HuntingRifle>
+		</costList>
+		<recipeMaker>
+			<skillRequirements Inherit="False">
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>PrecisionRifling</researchPrerequisite>
+		</recipeMaker>
+		<verbs Inherit="False">
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_RK_Hunting</defaultProjectile>
+				<warmupTime>3.7</warmupTime>
+				<range>46.9</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>RK_HuntingRifle</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<!-- <forcedMissRadius>0</forcedMissRadius> -->
+			</li>
+		</verbs>
+		<weaponTags>
+			<li>RK_GangWeaponSniper</li>
+		</weaponTags>
+	</ThingDef>
+	<ThingDef ParentName="BaseHumanMakeableGun">
+		<defName>RK_CrazySting</defName>
+		<label>ratkin crazy sting</label>
+		<description>A gas pistol that fires special projectiles. The projectiles contain virulent toxins bred from luciferium, which will cause the target to contract and suffer from maniacal syndrome upon impact. This weapon has a very short range but produces almost no firing sound, making it often used in assassinations among certain post-apocalyptic gangs.</description>
+		<graphicData>
+			<texPath>Things/Weapon/RK_CrazySting</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Interact_Autopistol</soundInteract>
+		<statBases>
+			<WorkToMake>30000</WorkToMake>
+			<Mass>1</Mass>
+			<AccuracyTouch>0.97</AccuracyTouch>
+			<AccuracyShort>0.92</AccuracyShort>
+			<AccuracyMedium>0.48</AccuracyMedium>
+			<AccuracyLong>0.3</AccuracyLong>
+			<RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+			<HuntingStealth>1</HuntingStealth>
+		</statBases>
+		<equippedStatOffsets>
+			<HuntingStealth>1</HuntingStealth>
+		</equippedStatOffsets>
+		<costList>
+			<Steel>55</Steel>
+			<ComponentIndustrial>5</ComponentIndustrial>
+			<Luciferium>2</Luciferium>
+		</costList>
+		<recipeMaker>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<verbs>
+			<li>
+				<verbClass>Verb_Shoot</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_CrazySting</defaultProjectile>
+				<warmupTime>0.85</warmupTime>
+				<range>24.9</range>
+				<burstShotCount>1</burstShotCount>
+				<soundCast>RK_CrazySting</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<!-- <forcedMissRadius>0</forcedMissRadius> -->
+			</li>
+		</verbs>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>stock</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>6</power>
+				<cooldownTime>1.5</cooldownTime>
+				<armorPenetrationBlunt>3</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>barrel</label>
+				<capacities>
+					<li>RKMD_CrazySting</li>
+				</capacities>
+				<power>4</power>
+				<cooldownTime>1.5</cooldownTime>
+				<chanceFactor>5</chanceFactor>
+				<armorPenetrationSharp>5</armorPenetrationSharp>
+				<armorPenetrationBlunt>4</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<weaponTags Inherit="False">
+			<li>RK_GangWeapon</li>
+		</weaponTags>
+		<equippedAngleOffset>45</equippedAngleOffset>
+	</ThingDef>
+	<DamageDef ParentName="Bullet">
+		<defName>RKMD_BulletCrazy</defName>
+		<label>sting</label>
+		<additionalHediffs>
+			<li>
+				<hediff>ScariaInfection</hediff>
+				<severityPerDamageDealt>0.18</severityPerDamageDealt>
+				<victimSeverityScaling>ToxicResistance</victimSeverityScaling>
+				<inverseStatScaling>true</inverseStatScaling>
+				<victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+			</li>
+		</additionalHediffs>
+		<applyAdditionalHediffsIfHuntingForFood>false</applyAdditionalHediffsIfHuntingForFood>
+		<impactSoundType>Bullet</impactSoundType>
+	</DamageDef>
+	<ToolCapacityDef>
+		<defName>RKMD_CrazySting</defName>
+		<label>sting</label>
+	</ToolCapacityDef>
+	<ManeuverDef>
+		<defName>RKMD_CrazySting</defName>
+		<requiredCapacity>RKMD_CrazySting</requiredCapacity>
+		<verb>
+			<verbClass>Verb_MeleeAttackDamage</verbClass>
+			<meleeDamageDef>RKMD_BulletCrazy</meleeDamageDef>
+		</verb>
+		<logEntryDef>MeleeAttack</logEntryDef>
+		<combatLogRulesHit>Maneuver_Poke_MeleeHit</combatLogRulesHit>
+		<combatLogRulesDeflect>Maneuver_Poke_MeleeDeflect</combatLogRulesDeflect>
+		<combatLogRulesMiss>Maneuver_Poke_MeleeMiss</combatLogRulesMiss>
+		<combatLogRulesDodge>Maneuver_Poke_MeleeDodge</combatLogRulesDodge>
+	</ManeuverDef>
+</Defs>

@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="BaseMihoBalista" Abstract="True">
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<thingClass>Bullet</thingClass>
+		<label>bullet</label>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+	</ThingDef>
+	
+
+  <ThingDef ParentName="BaseMihoicGun">
+    <defName>Miho_Weapon_HeavyPlasma</defName>
+    <label>미호 플라즈마 돌격포 포탑</label>
+    <description>본래 진지 파괴용으로 제작된 플라즈마 야포를 포탑 위에 올려놓았습니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/HeavyPlasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.75</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>Miho_HeavyPlasma</researchPrerequisite>
+
+      <skillRequirements>
+        <Crafting>15</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_Factory</li>
+      </recipeUsers>    
+      <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>205000</WorkToMake>
+      <Mass>100</Mass>
+      <AccuracyTouch>0.3</AccuracyTouch>
+      <AccuracyShort>0.32</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>4.5</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.9</MoveSpeed>	
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <Miho_HeatCeramics>300</Miho_HeatCeramics>
+
+      <Miho_PlasmaSample>8</Miho_PlasmaSample>
+      <ComponentIndustrial>30</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+	</costList>
+    <verbs>
+
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forcedMissRadius>3</forcedMissRadius>
+        <defaultProjectile>Miho_Weapon_HeavyPlasma_Proj</defaultProjectile>
+        <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+
+        <warmupTime>4</warmupTime>
+        <range>23.9</range>
+        <soundAiming>Miho_Charging</soundAiming>
+
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>Miho_CannonPlasma</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+		
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasalPlasma</li>
+    </weaponTags>
+    <tools>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Miho_Weapon_HeavyPlasma_Proj</defName>
+    <label>plasma</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/MihoPlasma</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.25</drawSize>
+    </graphicData>
+		<projectile>
+			<damageDef>MihoPlasma</damageDef>
+			<damageAmountBase>45</damageAmountBase>
+			<armorPenetrationBase>0.6</armorPenetrationBase>
+			<stoppingPower>24</stoppingPower>
+			<speed>40</speed>
+			<explosionRadius>2.2</explosionRadius>
+			<flyOverhead>false</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+		</projectile>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Bolter</defName>
+    <label>미호 속사포 포탑</label>
+    <description>47mm탄을 사용하는 고관통 속사포를 감싼 포탑입니다. 작아보여도, 변방계에서는 과잉화력입니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/FastCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.75</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>Miho_HeavyWarDrone</researchPrerequisite>
+
+      <skillRequirements>
+        <Crafting>10</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_Factory</li>
+      </recipeUsers>    
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>155000</WorkToMake>
+      <Mass>90</Mass>
+      <AccuracyTouch>0.32</AccuracyTouch>
+      <AccuracyShort>0.5</AccuracyShort>
+      <AccuracyMedium>0.85</AccuracyMedium>
+      <AccuracyLong>0.7</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.75</MoveSpeed>	
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Chemfuel>100</Chemfuel>
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <Steel>200</Steel>
+
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+	</costList>
+    <verbs>
+
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forcedMissRadius>0.9</forcedMissRadius>
+        <defaultProjectile>Miho_Weapon_Bolter_Proj</defaultProjectile>
+        <warmupTime>4</warmupTime>
+        <range>44.9</range>
+       <minRange>7.9</minRange>
+
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>Miho_KineticCannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+		
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasal</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>동축기관총</label>
+						<description>동축기관총으로 드론에 근접하는 적들을 갈겨버립니다.</description>
+						<thingDef>Miho_Weapon_Bolter_CoGun</thingDef>
+						<transformCooldown>60</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Bolter_CoGun</defName>
+    <label>미호 속사포 포탑 (동축기관총)</label>
+    <description>7.7mm 구경의 동축기관총은 근접하는 적들에게 치명적인 상처를 입혀줍니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/FastCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.75</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+      </recipeUsers>    
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>155000</WorkToMake>
+      <Mass>90</Mass>
+      <AccuracyTouch>0.6</AccuracyTouch>
+      <AccuracyShort>0.65</AccuracyShort>
+      <AccuracyMedium>0.3</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>1.25</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.75</MoveSpeed>	
+
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Chemfuel>100</Chemfuel>
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <Steel>200</Steel>
+
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+	</costList>
+    <verbs>
+      <li>
+        <targetParams>
+          <canTargetLocations>false</canTargetLocations>
+        </targetParams>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Miho_Weapon_Machinegun_Proj</defaultProjectile>
+        <warmupTime>0.5</warmupTime>
+        <range>14.9</range>
+        <burstShotCount>10</burstShotCount>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <soundCast>Miho_SevenSevenRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasaNone</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>철갑탄 장전</label>
+						<description>중장갑에 유효한 철갑소이탄을 장전합니다.</description>
+						<thingDef>Miho_Weapon_Bolter</thingDef>
+						<transformCooldown>60</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Miho_Weapon_Bolter_Proj</defName>
+    <label>shell</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.8</drawSize>
+
+    </graphicData>
+    <projectile>
+      <damageDef>MihoGunshot</damageDef>
+	  <explosionRadius>1</explosionRadius>
+	  <flyOverhead>false</flyOverhead>
+      <damageAmountBase>68</damageAmountBase>
+      <armorPenetrationBase>0.8</armorPenetrationBase>
+      <speed>56</speed>
+    </projectile>
+  </ThingDef>
+
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_RailgunOff</defName>
+    <label>시험용 소형 백이포</label>
+    <description>백이포(White barbarian cannon)는 미호들의 역공학 기술의 정점이며 두개의 플라즈마 엔진으로 작동됩니다. 본래 궤도거주지나 전함에 탑재되는 크기지만, 미호 공학자들의 연구 끝에 드론에 장착될 정도로 소형화 되었습니다. 사격시 엄청난 반동을 견뎌야 하기 때문에 드론을 고정시켜야 합니다.</description>
+    <techLevel>Industrial</techLevel>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/RailgunOff</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>2.65</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+    <statBases>
+      <WorkToMake>342000</WorkToMake>
+      <Mass>99.5</Mass>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisite>Miho_ExperimentalCannon</researchPrerequisite>
+      <skillRequirements>
+        <Crafting>16</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_Factory</li>
+      </recipeUsers>    
+    </recipeMaker>
+    <costList>
+      <Miho_HeatCeramics>150</Miho_HeatCeramics>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <ComponentSpacer>12</ComponentSpacer>
+      <Miho_PlasmaSample>8</Miho_PlasmaSample>
+      <Uranium>150</Uranium>
+
+    </costList>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.42</MoveSpeed>	
+
+		</equippedStatOffsets>
+    <weaponTags Inherit="False">
+      <li>MihoSapsal</li>
+    </weaponTags>
+
+    <tools>
+      <li>
+        <label>handle</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>포격 모드</label>
+						<description>열화 우라늄탄을 발사할 준비를 합니다.</description>
+						<thingDef>Miho_Weapon_RailgunOn</thingDef>
+						<transformCooldown>1500</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+    <weaponClasses>
+      <li>Ranged</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_RailgunOn</defName>
+    <label>시험용 소형 백이포 (포격 모드)</label>
+    <description>백이포(White barbarian cannon)는 미호들의 역공학 기술의 정점이며 두개의 플라즈마 엔진으로 작동됩니다. 본래 궤도거주지나 전함에 탑재되는 크기지만, 미호 공학자들의 연구 끝에 드론에 장착될 정도로 소형화 되었습니다. 사격시 엄청난 반동을 견뎌야 하기 때문에 드론을 고정시켜야 합니다.</description>
+    <techLevel>Industrial</techLevel>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/RailgunOn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>2.65</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_ChargeRifle</soundInteract>
+    <statBases>
+      <WorkToMake>342000</WorkToMake>
+      <Mass>99.5</Mass>
+      <AccuracyTouch>0.6</AccuracyTouch>
+      <AccuracyShort>0.7</AccuracyShort>
+      <AccuracyMedium>0.9</AccuracyMedium>
+      <AccuracyLong>0.98</AccuracyLong>
+      <RangedWeapon_Cooldown>5</RangedWeapon_Cooldown>
+    </statBases>
+    <recipeMaker>
+      <researchPrerequisites>
+	  </researchPrerequisites>
+      <skillRequirements>
+        <Crafting>16</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False">
+      </recipeUsers>
+    </recipeMaker>
+    <costList>
+      <Miho_HeatCeramics>150</Miho_HeatCeramics>
+      <Uranium>150</Uranium>
+
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <ComponentSpacer>12</ComponentSpacer>
+      <Miho_PlasmaSample>8</Miho_PlasmaSample>
+
+    </costList>
+    <verbs>
+
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Miho_Weapon_RailgunOn_Proj</defaultProjectile>
+        <warmupTime>5.5</warmupTime>
+        <range>500</range>
+       <minRange>7.9</minRange>
+        <soundAiming>Miho_ChargingBig</soundAiming>
+
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>Miho_KineticCannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+		
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+    </verbs>
+		<equippedStatOffsets>
+			<MoveSpeed>-2.2</MoveSpeed>	
+
+		</equippedStatOffsets>
+    <weaponTags Inherit="False">
+      <li>MihoSapsal</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>이동 모드</label>
+						<description>포격 모드를 풉니다.</description>
+						<thingDef>Miho_Weapon_RailgunOff</thingDef>
+						<transformCooldown>3000</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+    <weaponClasses>
+      <li>Ranged</li>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+  </ThingDef>
+  	<ThingDef ParentName="BaseMihoBalista">
+		<defName>Miho_Weapon_RailgunOn_Proj</defName>
+		<label>Incendary Depleted Uranium</label>
+		<graphicData>
+			<texPath>Things/Projectile/UraniumShot</texPath>
+			<drawSize>(1.1,1.1)</drawSize>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>KhajiitFromNewRatkin.Projectile_BallistaBoltAP</thingClass>
+		<projectile Class="KhajiitFromNewRatkin.ProjectileProperties_BallistaBoltAP">
+			<shockWaveDef>Miho_ShockWaveHeavy</shockWaveDef>
+			<maxPenetrationCount>20</maxPenetrationCount>
+			<damageReduceRate>0.1</damageReduceRate>
+			<damageDef>MihoGunshot</damageDef>
+			<damageAmountBase>310</damageAmountBase>
+			<armorPenetrationBase>1</armorPenetrationBase>
+			<stoppingPower>10</stoppingPower>
+			<speed>125</speed>
+			<explosionRadius>1.9</explosionRadius>
+			<alwaysFreeIntercept>true</alwaysFreeIntercept>
+			<flyOverhead>false</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>Explosion_Bomb</soundExplode>
+		</projectile>
+	</ThingDef>
+
+	<DamageDef>
+		<defName>Miho_ShockWaveHeavy</defName>
+		<label>shockwave</label>
+		<workerClass>DamageWorker_AddInjury</workerClass>
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<deathMessage>{0} has died in an shock wave.</deathMessage>
+		<hediff>Crack</hediff>
+		<hediffSolid>Crack</hediffSolid>
+		<harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+		<impactSoundType>Blunt</impactSoundType>
+		<armorCategory>Blunt</armorCategory>
+		<minDamageToFragment>4</minDamageToFragment>
+		<defaultDamage>20</defaultDamage>
+		<defaultStoppingPower>4</defaultStoppingPower>
+		<defaultArmorPenetration>0.30</defaultArmorPenetration>
+		<buildingDamageFactor>4</buildingDamageFactor>
+		<plantDamageFactor>4</plantDamageFactor>
+		<explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionCellFleck>BlastDry</explosionCellFleck>
+		<explosionColorCenter>(0.8, 0.8, 0.8,0.3)</explosionColorCenter>
+		<explosionColorEdge>(1, 1, 1, 0.1)</explosionColorEdge>
+		<soundExplosion>Explosion_Bomb</soundExplosion>
+		<combatLogRules>Damage_Bomb</combatLogRules>
+	</DamageDef>
+	
+	
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Machinegun</defName>
+    <label>미호 거치 기관총</label>
+    <description>중형 드론에 장착된 6.5mm 탄환을 발사하는 중거리 포탑입니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/Machinegun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.05</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>Miho_Weapon</researchPrerequisite>
+
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_TableMachining</li>
+	 <li>Miho_Factory</li>
+
+      </recipeUsers>    
+      <skillRequirements>
+        <Crafting>4</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>25000</WorkToMake>
+      <Mass>15</Mass>
+      <AccuracyTouch>0.1</AccuracyTouch>
+      <AccuracyShort>0.25</AccuracyShort>
+      <AccuracyMedium>0.33</AccuracyMedium>
+      <AccuracyLong>0.21</AccuracyLong>
+      <RangedWeapon_Cooldown>1.25</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Chemfuel>60</Chemfuel>
+      <Steel>100</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Miho_Weapon_Machinegun_Proj</defaultProjectile>
+        <warmupTime>0.5</warmupTime>
+        <range>25.9</range>
+        <burstShotCount>5</burstShotCount>
+        <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+        <soundCast>Miho_SevenSevenRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoSapsalGunBasic</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+        </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Miho_Weapon_Machinegun_Proj</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>MihoGunshot</damageDef>
+      <damageAmountBase>11</damageAmountBase>
+      <armorPenetrationBase>0.12</armorPenetrationBase>
+      <speed>70</speed>
+    </projectile>
+  </ThingDef>
+  
+
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_MeatChopper</defName>
+    <label>미호 대공포</label>
+    <description>13.2mm탄을 쏘는 2연장 대공포 입니다. 고기 다지는 용도로도 좋습니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/MeatChopper</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.28</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>Miho_HeavyWeapon</researchPrerequisite>
+
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_Factory</li>
+
+      </recipeUsers>     
+      <skillRequirements>
+        <Crafting>7</Crafting>
+      </skillRequirements>
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>125000</WorkToMake>
+      <Mass>75</Mass>
+      <AccuracyTouch>0.15</AccuracyTouch>
+      <AccuracyShort>0.15</AccuracyShort>
+      <AccuracyMedium>0.35</AccuracyMedium>
+      <AccuracyLong>0.45</AccuracyLong>
+      <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+    </statBases>
+    <costList>
+      <Chemfuel>100</Chemfuel>
+      <Steel>200</Steel>
+      <Miho_MilitaryGradeBalisticCeramics>75</Miho_MilitaryGradeBalisticCeramics>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Miho_Weapon_MeatChopper_Proj</defaultProjectile>
+        <warmupTime>1.4</warmupTime>
+        <range>44.9</range>
+        <burstShotCount>8</burstShotCount>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <soundCast>Miho_HeavyRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoSapsalGun</li>
+      <li>MihoBulgasal</li>
+
+	  
+    </weaponTags>
+    <tools>
+    </tools>
+		<equippedStatOffsets>
+
+		</equippedStatOffsets>
+        <comps>
+        </comps>
+  </ThingDef>
+  <ThingDef ParentName="BaseBullet">
+    <defName>Miho_Weapon_MeatChopper_Proj</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>MihoGunshot</damageDef>
+      <damageAmountBase>17</damageAmountBase>
+      <armorPenetrationBase>0.15</armorPenetrationBase>
+      <speed>70</speed>
+    </projectile>
+  </ThingDef>
+  
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Urban</defName>
+    <label>미호 어반워페어 포탑</label>
+    <description>6.5mm 구경의 체인건을 장착한 시가전에 적합한 다재다능한 포탑입니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/UrbanTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.5</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <researchPrerequisite>Miho_HeavyWarDrone</researchPrerequisite>
+
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_Factory</li>
+
+      </recipeUsers>    
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>155000</WorkToMake>
+      <Mass>90</Mass>
+      <AccuracyTouch>0.3</AccuracyTouch>
+      <AccuracyShort>0.35</AccuracyShort>
+      <AccuracyMedium>0.1</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>0.75</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.65</MoveSpeed>
+			
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Chemfuel>75</Chemfuel>
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+
+	</costList>
+    <verbs>
+      <li>
+        <targetParams>
+          <canTargetLocations>false</canTargetLocations>
+        </targetParams>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Miho_Weapon_Urban_Proj</defaultProjectile>
+        <warmupTime>0.25</warmupTime>
+        <range>14.9</range>
+        <burstShotCount>27</burstShotCount>
+        <ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+        <soundCast>Miho_DefenceRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>5</muzzleFlashScale>
+      </li>
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasal</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>백린 점착 폭탄</label>
+						<description>살가죽을 쉽게 녹여버리는 백린탄을 박격포로 발사합니다.</description>
+						<thingDef>Miho_Weapon_Urban_WP</thingDef>
+						<transformCooldown>60</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Urban_WP</defName>
+    <label>미호 어반워페어 포탑 (백린 점착 폭탄)</label>
+    <description>50mm 백린 점착 폭탄을 장착했습니다. 적의 끔찍한 비명소리를 듣길 좋아하는 미호들도 있다는군요. 일반적인 도수운반 박격포의 사거리의 3분의 1 입니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/UrbanTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.5</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+      </recipeUsers>    
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>155000</WorkToMake>
+      <Mass>90</Mass>
+      <AccuracyTouch>0.2</AccuracyTouch>
+      <AccuracyShort>0.2</AccuracyShort>
+      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.65</MoveSpeed>	
+
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Chemfuel>75</Chemfuel>
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+
+	</costList>
+    <verbs>
+            <li>
+        <requireLineOfSight>false</requireLineOfSight>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forcedMissRadius>6</forcedMissRadius>
+        <defaultProjectile>Miho_Weapon_Urban_WP_Proj</defaultProjectile>
+        <warmupTime>8</warmupTime>
+        <range>166</range>
+       <minRange>14.9</minRange>
+
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>Miho_Mortar</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+		
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+	  
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasal</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>지진 폭탄</label>
+						<description>공성용 지진 폭탄을 장착합니다.</description>
+						<thingDef>Miho_Weapon_Urban_Thump</thingDef>
+						<transformCooldown>60</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+  </ThingDef>
+  
+
+  
+  <ThingDef ParentName="BaseHumanMakeableGun">
+    <defName>Miho_Weapon_Urban_Thump</defName>
+    <label>미호 어반워페어 포탑 (지진 폭탄)</label>
+    <description>50mm 지진 폭탄을 장착했습니다. 지진폭탄은 움직이는 타겟보다 구조물에 훨씬 효과적입니다. 일반적인 도수운반 박격포의 사거리의 3분의 1 입니다.</description>
+    <graphicData>
+      <texPath>Things/WeaponSpecial/UrbanTurret</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.5</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+    </graphicData>
+		<equippedAngleOffset>45</equippedAngleOffset>
+
+    <soundInteract>Interact_Rifle</soundInteract>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>12</Crafting>
+      </skillRequirements>
+      <recipeUsers Inherit="False"> 
+      </recipeUsers>    
+    </recipeMaker>
+    <statBases>
+      <WorkToMake>155000</WorkToMake>
+      <Mass>90</Mass>
+      <AccuracyTouch>0.2</AccuracyTouch>
+      <AccuracyShort>0.2</AccuracyShort>
+      <AccuracyMedium>0.2</AccuracyMedium>
+      <AccuracyLong>0.1</AccuracyLong>
+      <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+    </statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>-0.65</MoveSpeed>	
+
+		</equippedStatOffsets>
+		
+    <costList>
+
+      <Chemfuel>75</Chemfuel>
+      <Miho_MilitaryGradeBalisticCeramics>200</Miho_MilitaryGradeBalisticCeramics>
+      <ReinforcedBarrel>1</ReinforcedBarrel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+
+	</costList>
+    <verbs>
+            <li>
+        <requireLineOfSight>false</requireLineOfSight>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <forcedMissRadius>6</forcedMissRadius>
+        <defaultProjectile>Miho_Weapon_Urban_Thump_Proj</defaultProjectile>
+        <warmupTime>8</warmupTime>
+        <range>166</range>
+       <minRange>14.9</minRange>
+
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>3</ticksBetweenBurstShots>
+        <soundCast>Miho_Mortar</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>20</muzzleFlashScale>
+		
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+        </targetParams>
+      </li>
+	  
+    </verbs>
+    <weaponTags Inherit="False"> 
+      <li>MihoBulgasalNon</li>
+    </weaponTags>
+    <tools>
+    </tools>
+        <comps>
+			<li Class="ItemFormChange.CompPropertiesFormChange">
+				<sharedComps>
+					<li>RimWorld.CompQuality</li>
+					<li>RimWorld.CompArt</li>
+				</sharedComps>
+				<transformData>
+					<li>
+						<label>체인건</label>
+						<description>시가전에 최적화된 체인건으로 무기를 전환합니다.</description>
+						<thingDef>Miho_Weapon_Urban</thingDef>
+						<transformCooldown>60</transformCooldown>
+					</li>
+				</transformData>
+			</li>
+        </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>Miho_Weapon_Urban_Proj</defName>
+    <label>bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>MihoGunshot</damageDef>
+      <damageAmountBase>8</damageAmountBase>
+      <armorPenetrationBase>0.1</armorPenetrationBase>
+      <speed>70</speed>
+    </projectile>
+  </ThingDef>
+  
+   <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>Miho_Weapon_Urban_WP_Proj</defName>
+    <label>phosphorus sticky bomb</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/WPBomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.5</drawSize>
+
+    </graphicData>
+    <projectile>
+      <damageDef>MihoGunshot</damageDef>
+	  <explosionRadius>2.8</explosionRadius>
+	  <flyOverhead>true</flyOverhead>
+      <damageAmountBase>32</damageAmountBase>
+      <armorPenetrationBase>0.55</armorPenetrationBase>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<explosionDelay>120</explosionDelay>
+      <speed>25</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseGrenadeProjectile">
+    <defName>Miho_Weapon_Urban_Thump_Proj</defName>
+    <label>earthquake bomb</label>
+    <thingClass>Projectile_Explosive</thingClass>
+
+    <graphicData>
+      <texPath>Things/Projectile/ThumpBomb</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	    <drawSize>1.5</drawSize>
+
+    </graphicData>
+    <projectile>
+      <damageDef>Thump</damageDef>
+	  <explosionRadius>4.5</explosionRadius>
+	  <flyOverhead>true</flyOverhead>
+      <damageAmountBase>14</damageAmountBase>
+      <armorPenetrationBase>0.02</armorPenetrationBase>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <stoppingPower>3</stoppingPower>
+
+      <speed>25</speed>
+    </projectile>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+		<defName>Miho_Weapon_Drill</defName>
+		<label>데몰리셔 드릴</label>
+    <techLevel>Industrial</techLevel>
+		<description>자연을 정복할려면 이정도는 되어야죠. 굴착속도가 매우 빨라집니다.</description>
+		<graphicData>
+			<texPath>Things/WeaponMelee/MihoDrill</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+            <shaderType>CutoutComplex</shaderType>
+	    <drawSize>1.35</drawSize>
+        <drawOffsetEast>(0, 1, 0)</drawOffsetEast>
+        <drawOffsetWest>(0, 1, 0)</drawOffsetWest>
+        <drawOffsetSouth>(0, 1, 0)</drawOffsetSouth>
+        <drawOffsetNorth>(0, 1, 0)</drawOffsetNorth>
+
+		</graphicData>
+    <weaponTags>
+      <li>MihoDrill</li>
+    </weaponTags>
+    <costList>
+      <Miho_MilitaryGradeBalisticCeramics>250</Miho_MilitaryGradeBalisticCeramics>
+      <ComponentIndustrial>25</ComponentIndustrial>
+    </costList>
+		<equippedStatOffsets>
+			<MiningSpeed>5</MiningSpeed>
+			<MeleeHitChance>-1</MeleeHitChance>	
+		</equippedStatOffsets>
+    <costStuffCount>250</costStuffCount>
+		<statBases>
+			<WorkToMake>105000</WorkToMake>
+			<Mass>75</Mass>
+		</statBases>
+		<stuffCategories>
+			<li>Metallic</li>
+		</stuffCategories>
+    <tools>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>4</power>
+        <armorPenetration>0.6</armorPenetration>
+        <cooldownTime>0.2</cooldownTime>
+      </li>
+    </tools>
+		<recipeMaker>
+      <researchPrerequisite>Miho_HeavyWeapon</researchPrerequisite>
+      <recipeUsers Inherit="False"> 
+	 <li>Miho_TableMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+	</ThingDef>
+
+</Defs>

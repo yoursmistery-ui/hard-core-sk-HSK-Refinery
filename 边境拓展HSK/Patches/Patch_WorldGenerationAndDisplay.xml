@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PlanetLayerDef[defName="Surface"]/worldGenSteps</xpath>
+    <value>
+      <li>BordersOfTheRim_ClusterFactionSettlements</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/MapGeneratorDef[defName="Base_Faction"]/genSteps</xpath>
+    <value>
+      <li>BordersOfTheRim_TieredSettlementMaps</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PlanetLayerDef[defName="Surface"]/worldDrawLayers</xpath>
+    <value>
+      <li>BordersOfTheRim.WorldDrawLayer_Territories</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/PlanetLayerDef[defName="Surface"]/worldTabs</xpath>
+    <value>
+      <li>BordersOfTheRim.WITab_Territory</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/WorldObjectDef[@Name="StaticWorldObjectBase"]/inspectorTabs</xpath>
+    <value>
+      <li>BordersOfTheRim.WITab_Territory</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
+    <value>
+      <li Class="BordersOfTheRim.WorldObjectCompProperties_TerritoryRole" />
+      <li Class="BordersOfTheRim.WorldObjectCompProperties_TerritorialMissionTarget" />
+      <li Class="BordersOfTheRim.WorldObjectCompProperties_PlayerConquest" />
+    </value>
+  </Operation>
+</Patch>

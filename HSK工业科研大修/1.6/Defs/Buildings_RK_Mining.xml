@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- ===== 矿井(移植自 MO 原矿井定义,去 MO DLL:虫灾 comp 与宝石暴击已删除,二期需自研) ===== -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RK_MineShaft</defName>
+		<uiIconPath>Things/Building/Production/MineShaft_MenuIcon</uiIconPath>
+		<label>矿井</label>
+		<description>架设在岩层地面上的结实平台,配有原始升降机。与采掘点一样只能建在可打磨的岩石地面上,因此石料采掘只能挖出脚下这片地面所属的岩种碎块,此外还能持续产出煤、矿石、黏土与盐。</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/MineShaft</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3.8,3.8)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<costList>
+			<WroughtIron>60</WroughtIron>
+			<ComponentIndustrial>10</ComponentIndustrial>
+			<WoodPlank>120</WoodPlank>
+		</costList>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>150</costStuffCount>
+		<designationCategory>Production</designationCategory>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>true</useHitPoints>
+		<statBases>
+			<WorkToBuild>6000</WorkToBuild>
+			<MaxHitPoints>500</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-15</Cleanliness>
+		</statBases>
+		<rotatable>false</rotatable>
+		<size>(3,3)</size>
+		<passability>Standable</passability>
+		<pathCost>50</pathCost>
+		<hasInteractionCell>true</hasInteractionCell>
+		<interactionCellOffset>(0,0,0)</interactionCellOffset>
+		<terrainAffordanceNeeded>SmoothableStone</terrainAffordanceNeeded>
+		<surfaceType>Item</surfaceType>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<designationHotKey>Misc3</designationHotKey>
+		<placeWorkers>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<comps>
+			<!-- HSK 自家虫灾机制(Core_SK CompProperties_CreatesInfestations,用于其资源开采建筑),
+			     替代 MO 的 CompCreatesInfestations_Mine(在 MO DLL 里) -->
+			<li Class="CompProperties_CreatesInfestations" />
+		</comps>
+		<researchPrerequisites>
+			<li>Mining_C1</li>
+		</researchPrerequisites>
+		<techLevel>Industrial</techLevel>
+	</ThingDef>
+
+	<!-- ===== 采掘点(移植自 MO 原采矿点定义,删除 MO 采矿工具设施联动) ===== -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RK_MiningSpot</defName>
+		<uiIconPath>Things/Building/Production/MiningSpot</uiIconPath>
+		<label>采掘点</label>
+		<description>一处可供徒手采掘的原始矿点。由于缺乏工具, 这里的产出速度只有一半, 是原始时代最早探明地下资源的零成本手段。</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/MiningSpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1,1)</drawSize>
+			<drawRotated>false</drawRotated>
+		</graphicData>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+			<WorkTableWorkSpeedFactor>0.5</WorkTableWorkSpeedFactor>
+		</statBases>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<useHitPoints>false</useHitPoints>
+		<size>(1,1)</size>
+		<designationCategory>Production</designationCategory>
+		<passability>Standable</passability>
+		<hasInteractionCell>true</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<terrainAffordanceNeeded>SmoothableStone</terrainAffordanceNeeded>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<comps>
+			<li Class="CompProperties_ReportWorkSpeed">
+				<workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
+			</li>
+		</comps>
+		<designationHotKey>Misc1</designationHotKey>
+		<placeWorkers>
+			<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>RK_Mining_Primitive</li>
+		</researchPrerequisites>
+		<techLevel>Neolithic</techLevel>
+	</ThingDef>
+
+</Defs>

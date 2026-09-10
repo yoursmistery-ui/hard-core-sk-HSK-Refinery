@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <StatDef>
+        <defName>VSE_ArmorPenetrationFactor</defName>
+        <label>armor penetration factor</label>
+        <description>A multiplier applied to armor penetration of attacks by this pawn.</description>
+        <category>PawnCombat</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <minValue>0</minValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+    </StatDef>
+    <StatDef>
+        <defName>VSE_MeleeCooldownFactor</defName>
+        <label>melee cooldown factor</label>
+        <description>A multiplier applied to the cooldown of melee attacks by this pawn.</description>
+        <category>PawnCombat</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <minValue>0</minValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+    </StatDef>
+    <StatDef>
+        <defName>VSE_AttackOnFailChanceFactor</defName>
+        <label>attack on tame fail chance factor</label>
+        <description>A modifier applied to the chance for failed taming attempts to result in animals attacking this pawn.</description>
+        <category>PawnWork</category>
+        <defaultBaseValue>1</defaultBaseValue>
+        <minValue>0</minValue>
+        <hideAtValue>1</hideAtValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+    </StatDef>
+    <StatDef>
+        <defName>VSE_ArtQuality</defName>
+        <label>art quality bonus</label>
+        <description>A bonus to the quality of art produced by this pawn.</description>
+        <category>PawnWork</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <minValue>0</minValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+        <disableIfSkillDisabled>Artistic</disableIfSkillDisabled>
+    </StatDef>
+	<StatDef>
+        <defName>VSE_CraftingQuality</defName>
+        <label>crafting quality bonus</label>
+        <description>A bonus to the quality of non-art crafts produced by this pawn.</description>
+        <category>PawnWork</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <minValue>0</minValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+        <disableIfSkillDisabled>Crafting</disableIfSkillDisabled>
+    </StatDef>
+    <StatDef>
+        <defName>VSE_ConstructQuality</defName>
+        <label>construction quality bonus</label>
+        <description>A bonus added to the quality of things built by this pawn.</description>
+        <category>PawnWork</category>
+        <defaultBaseValue>0</defaultBaseValue>
+        <minValue>0</minValue>
+        <hideAtValue>0</hideAtValue>
+        <toStringStyle>PercentOne</toStringStyle>
+        <toStringStyleUnfinalized>PercentOne</toStringStyleUnfinalized>
+        <disableIfSkillDisabled>Construction</disableIfSkillDisabled>
+    </StatDef>
+    <StatDef>
+      <defName>VSE_RecruitRate</defName>
+      <label>recruitment rate</label>
+      <description>How fast this pawn can recruit prisoners to the colony.</description>
+      <category>PawnSocial</category>
+      <defaultBaseValue>1</defaultBaseValue>
+      <minValue>0</minValue>
+      <toStringStyle>PercentOne</toStringStyle>
+      <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+      <disableIfSkillDisabled>Social</disableIfSkillDisabled>
+      <statFactors>
+        <li>NegotiationAbility</li>
+      </statFactors>
+    </StatDef>
+    <StatDef>
+      <defName>VSE_PeaceTalksChance</defName>
+      <label>peace talks success chance</label>
+      <description>How likely this pawn is to succeed at peace talks.</description>
+      <category>PawnSocial</category>
+      <defaultBaseValue>1</defaultBaseValue>
+      <minValue>0</minValue>
+      <toStringStyle>PercentOne</toStringStyle>
+      <toStringStyleUnfinalized>PercentTwo</toStringStyleUnfinalized>
+      <disableIfSkillDisabled>Social</disableIfSkillDisabled>
+      <statFactors>
+        <li>NegotiationAbility</li>
+      </statFactors>
+    </StatDef>
+</Defs>

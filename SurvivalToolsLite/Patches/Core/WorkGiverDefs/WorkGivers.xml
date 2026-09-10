@@ -1,0 +1,101 @@
+<Patch>
+
+    <!-- Mine -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="Mine"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>MiningSpeed</li>
+                    <li>MiningYieldDigging</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Construct -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[workType="Construction"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>ConstructionSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+	
+    <!-- Smith -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[workType="Smithing"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>SmithingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Growing -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="GrowerHarvest"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Plant Cutting -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="PlantsCut"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantHarvestingSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+	
+    <!-- Plant Sowing -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="GrowerSow"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>PlantWorkSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+
+    <!-- Medical Operations 
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="DoBillsMedicalHumanOperation" or defName="DoBillsMedicalAnimalOperation"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>MedicalOperationSpeed</li>
+                    <li>MedicalSurgerySuccessChance</li>
+                </requiredStats>
+            </li>
+        </value>
+    </Operation>
+-->
+    <!-- Cooking 
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/WorkGiverDef[defName="DoBillsCook"]</xpath>
+        <value>
+            <li Class="SurvivalToolsLite.WorkGiverExtension">
+                <requiredStats>
+                    <li>CookSpeed</li>
+                </requiredStats>
+            </li>
+        </value>
+	</Operation>
+-->
+</Patch>

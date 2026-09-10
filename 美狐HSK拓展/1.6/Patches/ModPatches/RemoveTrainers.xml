@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/RecipeDef[@Name = "CookMealBase"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+        <value>
+        <li>RawPosMoss</li>
+        <li>RawPosFlower</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+	
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/BiomeDef[defName = "Tundra"]/wildPlants</xpath>
+        <value>
+          <Plant_PosFlower_Wild>0.075</Plant_PosFlower_Wild>
+
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/BiomeDef[defName = "BorealForest"]/wildPlants</xpath>
+        <value>
+          <Plant_PosFlower_Wild>0.05</Plant_PosFlower_Wild>
+
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/BiomeDef[defName = "ColdBog"]/wildPlants</xpath>
+        <value>
+          <Plant_PosFlower_Wild>0.06</Plant_PosFlower_Wild>
+
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/BiomeDef[defName = "TemperateForest"]/wildPlants</xpath>
+        <value>
+          <Plant_PosFlower_Wild>0.02</Plant_PosFlower_Wild>
+
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/BiomeDef[defName = "TemperateSwamp"]/wildPlants</xpath>
+        <value>
+          <Plant_PosFlower_Wild>0.025</Plant_PosFlower_Wild>
+        </value>
+      </li>
+
+    </operations>
+  </Operation>
+
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Odyssey</li>
+    </mods>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/PawnKindDef[@Name="MihoBase"]/xenotypeSet</xpath>
+      <value>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Xeno_CelestialMiho MayRequire="Ludeon.RimWorld.Biotech">0.62</Xeno_CelestialMiho>
+        <Xeno_CelestialMiho_Arctic MayRequire="Ludeon.RimWorld.Biotech">0.18</Xeno_CelestialMiho_Arctic>
+        <Xeno_CelestialMiho_Desert MayRequire="Ludeon.RimWorld.Biotech">0.12</Xeno_CelestialMiho_Desert>
+        <Xeno_CelestialMiho_Highland MayRequire="Ludeon.RimWorld.Biotech">0.04</Xeno_CelestialMiho_Highland>
+        <Xeno_CelestialMiho_Voidborn MayRequire="Ludeon.RimWorld.Biotech">0.04</Xeno_CelestialMiho_Voidborn>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">0</Baseliner>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+        <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+        <Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+        <Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+        <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+        <Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+      </xenotypeChances>
+    </xenotypeSet>
+      </value>
+    </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Odyssey</li>
+    </mods>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/PawnKindDef[defName="Miho_Colonist"]/xenotypeSet</xpath>
+      <value>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Xeno_CelestialMiho MayRequire="Ludeon.RimWorld.Biotech">0.62</Xeno_CelestialMiho>
+        <Xeno_CelestialMiho_Arctic MayRequire="Ludeon.RimWorld.Biotech">0.18</Xeno_CelestialMiho_Arctic>
+        <Xeno_CelestialMiho_Desert MayRequire="Ludeon.RimWorld.Biotech">0.12</Xeno_CelestialMiho_Desert>
+        <Xeno_CelestialMiho_Highland MayRequire="Ludeon.RimWorld.Biotech">0.04</Xeno_CelestialMiho_Highland>
+        <Xeno_CelestialMiho_Voidborn MayRequire="Ludeon.RimWorld.Biotech">0.04</Xeno_CelestialMiho_Voidborn>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">0</Baseliner>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+        <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+        <Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+        <Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+        <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+        <Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+      </xenotypeChances>
+    </xenotypeSet>
+      </value>
+    </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Odyssey</li>
+    </mods>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/PawnKindDef[@Name="MihoMilBase"]/xenotypeSet</xpath>
+      <value>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Xeno_CelestialMiho MayRequire="Ludeon.RimWorld.Biotech">0.64</Xeno_CelestialMiho>
+        <Xeno_CelestialMiho_Arctic MayRequire="Ludeon.RimWorld.Biotech">0.18</Xeno_CelestialMiho_Arctic>
+        <Xeno_CelestialMiho_Desert MayRequire="Ludeon.RimWorld.Biotech">0.12</Xeno_CelestialMiho_Desert>
+        <Xeno_CelestialMiho_Highland MayRequire="Ludeon.RimWorld.Biotech">0.04</Xeno_CelestialMiho_Highland>
+        <Xeno_CelestialMiho_Voidborn MayRequire="Ludeon.RimWorld.Biotech">0.02</Xeno_CelestialMiho_Voidborn>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">0</Baseliner>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0</Dirtmole>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0</Genie>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0</Hussar>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0</Neanderthal>
+        <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0</Pigskin>
+        <Impid MayRequire="Ludeon.RimWorld.Biotech">0</Impid>
+        <Waster MayRequire="Ludeon.RimWorld.Biotech">0</Waster>
+        <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0</Yttakin>
+        <Highmate MayRequire="Ludeon.RimWorld.Biotech">0</Highmate>
+      </xenotypeChances>
+    </xenotypeSet>
+      </value>
+    </match>
+	</Operation>
+	
+
+  <Operation Class="PatchOperationSequence">
+    <success>Always</success>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "Apparel_PsychicShockLance"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">2</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "Apparel_PsychicInsanityLance"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">2</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "AIPersonaCore"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">10</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "MechSerumHealer"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">3</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "PsychicAnimalPulser"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">2</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "PsychicSoothePulser"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">2</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "TechprofSubpersonaCore"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">3</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "MechSerumResurrector"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">6</RoyalFavorValue>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "ThrumboHorn"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">0.25</RoyalFavorValue>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+  
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Anomaly</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "GoldenCube"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">4</RoyalFavorValue>
+        </value>
+    </match>
+	</Operation>
+	
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Odyssey</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "AlphaThrumboHorn"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">2</RoyalFavorValue>
+        </value>
+    </match>
+	</Operation>
+
+	<Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Ludeon.RimWorld.Odyssey</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "SentienceCatalyst"]/statBases</xpath>
+        <value>
+           <RoyalFavorValue MayRequire="Ludeon.RimWorld.Royalty">1</RoyalFavorValue>
+        </value>
+    </match>
+	</Operation>
+</Patch>

@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!--绮罗中世纪远程武器=-->
+	<!--绮罗柳叶飞刀-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingKnife"]</xpath>
+		<value>
+			<thingClass>CombatExtended.AmmoThing</thingClass>
+			<stackLimit>75</stackLimit>
+			<resourceReadoutPriority>First</resourceReadoutPriority>
+			<techLevel>Medieval</techLevel>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingKnife"]</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.AmmoDef</value>
+	</Operation>
+	
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_ThrowingKnife</defName>
+		<statBases>
+			<Mass>0.1</Mass>
+			<Bulk>0.2</Bulk>
+			<MarketValue>2</MarketValue>
+			<RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.04</ShotSpread>
+			<SwayFactor>0.9</SwayFactor>
+		</statBases>
+		<Properties>
+			<label>Throw Throwing Knife</label>
+			<recoilAmount>0.25</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<range>15.9</range>
+			<warmupTime>0.1</warmupTime>
+			<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+			<soundCast>ThrowGrenade</soundCast>
+			<defaultProjectile>KiiroProjectile_ThrowingKnife</defaultProjectile>
+		</Properties>
+		<weaponTags>
+			<li>CE_OneHandedWeapon</li>
+			<li>Kiiro_ThrowingKnife</li>
+			<li>Kiiro_Darts</li>
+			<li>Kiiro_MedievalRangeWeapon</li>
+		</weaponTags>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingKnife"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.2</cooldownTime>
+					<armorPenetrationSharp>3.5</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.75</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<!--删除绮罗柳叶飞刀制作-->
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingKnife"]/costList</xpath>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingKnife"]/recipeMaker</xpath>
+		<value>
+			<recipeMaker Inherit="false" IsNull="true"/>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingKnife"]/smeltable</xpath>
+		<value>
+			<smeltable>false</smeltable>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗柳叶飞刀投射物 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingKnife"]/projectile</xpath>
+		<value>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<damageDef>ArrowHighVelocity</damageDef>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>2</armorPenetrationBlunt>
+				<damageAmountBase>12</damageAmountBase>
+				<stoppingPower>0.2</stoppingPower>
+				<speed>85</speed>
+			</projectile>
+		</value>
+	</Operation>
+	
+	<!-- 兼容性考量 -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingKnife"]/thingClass</xpath>
+	</Operation>
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingKnife"]/comps</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingKnife"]</xpath>
+				<value>
+					<comps />
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+	
+	<!--绮罗星镖-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]</xpath>
+		<value>
+			<thingClass>CombatExtended.AmmoThing</thingClass>
+			<stackLimit>75</stackLimit>
+			<resourceReadoutPriority>First</resourceReadoutPriority>
+			<techLevel>Medieval</techLevel>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.AmmoDef</value>
+	</Operation>
+	
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_ThrowingCrossKnives</defName>
+		<statBases>
+			<Mass>0.1</Mass>
+			<Bulk>0.2</Bulk>
+			<MarketValue>2</MarketValue>
+			<RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.04</ShotSpread>
+			<SwayFactor>1</SwayFactor>
+		</statBases>
+		<Properties>
+			<label>Throw boomerang</label>
+			<recoilAmount>0.25</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<range>17.9</range>
+			<warmupTime>0.1</warmupTime>
+			<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+			<soundCast>ThrowGrenade</soundCast>
+			<defaultProjectile>KiiroProjectile_ThrowingCrossKnives</defaultProjectile>
+		</Properties>
+		<weaponTags>
+			<li>CE_OneHandedWeapon</li>
+			<li>Kiiro_ThrowingKnife</li>
+			<li>Kiiro_Darts</li>
+			<li>Kiiro_MedievalRangeWeapon</li>
+		</weaponTags>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.2</cooldownTime>
+					<armorPenetrationSharp>3.5</armorPenetrationSharp>
+					<armorPenetrationBlunt>1.75</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<!--删除绮罗星镖制作-->
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]/costList</xpath>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]/recipeMaker</xpath>
+		<value>
+			<recipeMaker Inherit="false" IsNull="true"/>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Kiiro_ThrowingCrossKnives"]/smeltable</xpath>
+		<value>
+			<smeltable>false</smeltable>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗绮罗星镖投射物 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingCrossKnives"]/projectile</xpath>
+		<value>
+			<projectile Class="CombatExtended.ProjectilePropertiesCE">
+				<damageDef>ArrowHighVelocity</damageDef>
+				<armorPenetrationSharp>6</armorPenetrationSharp>
+				<armorPenetrationBlunt>2</armorPenetrationBlunt>
+				<damageAmountBase>6</damageAmountBase>
+				<stoppingPower>0.1</stoppingPower>
+				<speed>85</speed>
+				<pelletCount>3</pelletCount>
+				<spreadMult>65</spreadMult>
+			</projectile>
+		</value>
+	</Operation>
+	
+	<!-- 兼容性考量 -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingCrossKnives"]/thingClass</xpath>
+	</Operation>
+	
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingCrossKnives"]/comps</xpath>
+				<success>Invert</success>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName="KiiroProjectile_ThrowingCrossKnives"]</xpath>
+				<value>
+					<comps />
+				</value>
+			</li>
+		</operations>
+	</Operation>
+	
+	<!-- 绮罗吹箭筒 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_BlowGun</defName>
+		<statBases>
+			<Bulk>0.25</Bulk>
+			<ShotSpread>0.5</ShotSpread>
+			<SwayFactor>1.0</SwayFactor>
+			<SightsEfficiency>1</SightsEfficiency>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_KiiroBlowGun_Paralytic</defaultProjectile>
+			<warmupTime>1.2</warmupTime>
+			<range>22.9</range>
+			<soundCast>Bow_Large</soundCast>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>1</magazineSize>
+			<AmmoGenPerMagOverride>3</AmmoGenPerMagOverride>
+			<reloadTime>2</reloadTime>
+			<ammoSet>AmmoSet_KiiroBlowGun</ammoSet>
+		</AmmoUser>
+		<FireModes />
+		<weaponTags>
+			<li>CE_OneHandedWeapon</li>
+			<li>Kiiro_MedievalRangeWeapon</li>
+		</weaponTags>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_BlowGun"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>blowgun barrel</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>5</power>
+					<cooldownTime>1.5</cooldownTime>
+					<armorPenetrationBlunt>1.25</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗反曲弓 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_RecurveBow</defName>
+		<statBases>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<ShotSpread>0.8</ShotSpread>
+			<SwayFactor>1.8</SwayFactor>
+			<Bulk>3.25</Bulk>
+			<RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_StreamlinedArrow_Stone</defaultProjectile>
+			<warmupTime>1.3</warmupTime>
+			<range>25.9</range>
+			<soundCast>Bow_Recurve</soundCast>
+		</Properties>
+		<AmmoUser>
+			<ammoSet>AmmoSet_Arrow</ammoSet>
+			<AmmoGenPerMagOverride>4</AmmoGenPerMagOverride>
+		</AmmoUser>
+		<FireModes />
+		<AllowWithRunAndGun>false</AllowWithRunAndGun>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_RecurveBow"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>limb</label>
+					<capacities>
+						<li>Blunt</li>
+						<li>Poke</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.7</cooldownTime>
+					<armorPenetrationBlunt>0.65</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- 绮罗猎人短弓 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_HunterBow</defName>
+		<statBases>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<ShotSpread>0.8</ShotSpread>
+			<SwayFactor>1.7</SwayFactor>
+			<Bulk>2.7</Bulk>
+			<RangedWeapon_Cooldown>0.4</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_StreamlinedArrow_Stone</defaultProjectile>
+			<warmupTime>0.7</warmupTime>
+			<range>20.9</range>
+			<soundCast>Bow_Recurve</soundCast>
+		</Properties>
+		<AmmoUser>
+			<ammoSet>AmmoSet_Arrow</ammoSet>
+			<AmmoGenPerMagOverride>4</AmmoGenPerMagOverride>
+		</AmmoUser>
+		<FireModes />
+		<AllowWithRunAndGun>false</AllowWithRunAndGun>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_HunterBow"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>limb</label>
+					<capacities>
+						<li>Blunt</li>
+						<li>Poke</li>
+					</capacities>
+					<power>7</power>
+					<cooldownTime>1.4</cooldownTime>
+					<armorPenetrationBlunt>0.65</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- 绮罗长弓 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_LongBow</defName>
+		<statBases>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<ShotSpread>0.8</ShotSpread>
+			<SwayFactor>2</SwayFactor>
+			<Bulk>5.00</Bulk>
+			<RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_GreatArrow_Stone</defaultProjectile>
+			<warmupTime>1.8</warmupTime>
+			<range>34.9</range>
+			<soundCast>Bow_Large</soundCast>
+		</Properties>
+		<AmmoUser>
+			<ammoSet>AmmoSet_GreatArrow</ammoSet>
+			<AmmoGenPerMagOverride>4</AmmoGenPerMagOverride>
+		</AmmoUser>
+		<FireModes />
+		<AllowWithRunAndGun>false</AllowWithRunAndGun>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_LongBow"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>limb</label>
+					<capacities>
+						<li>Blunt</li>
+						<li>Poke</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>1.7</cooldownTime>
+					<armorPenetrationBlunt>0.65</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗十字弩 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_CrossBow</defName>
+		<statBases>
+			<Bulk>6</Bulk>
+			<ShotSpread>0.4</ShotSpread>
+			<SwayFactor>1</SwayFactor>
+			<SightsEfficiency>1</SightsEfficiency>
+			<RangedWeapon_Cooldown>0</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_CrossbowBolt_Steel</defaultProjectile>
+			<warmupTime>0.2</warmupTime>
+			<range>28.9</range>
+			<soundCast>Bow_Large</soundCast>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>1</magazineSize>
+			<AmmoGenPerMagOverride>3</AmmoGenPerMagOverride>
+			<reloadTime>2</reloadTime>
+			<ammoSet>AmmoSet_CrossbowBolt</ammoSet>
+		</AmmoUser>
+		<FireModes />
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_CrossBow"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>limb</label>
+					<capacities>
+						<li>Blunt</li>
+						<li>Poke</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>0.65</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- 绮罗连弩 -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Kiiro_RepeatingCrossbow</defName>
+		<statBases>
+			<Bulk>3</Bulk>
+			<ShotSpread>0.4</ShotSpread>
+			<SwayFactor>1.10</SwayFactor>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<RangedWeapon_Cooldown>0.3</RangedWeapon_Cooldown>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Projectile_CrossbowBolt_Steel</defaultProjectile>
+			<warmupTime>0.2</warmupTime>
+			<range>24.9</range>
+			<burstShotCount>5</burstShotCount>
+			<soundCast>Bow_Large</soundCast>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>10</magazineSize>
+			<reloadTime>4</reloadTime>
+			<ammoSet>AmmoSet_CrossbowBolt</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>3</aimedBurstShotCount>
+			<aiUseBurstMode>TRUE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_RepeatingCrossbow"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>limb</label>
+					<capacities>
+						<li>Blunt</li>
+						<li>Poke</li>
+					</capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>0.65</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+</Patch>

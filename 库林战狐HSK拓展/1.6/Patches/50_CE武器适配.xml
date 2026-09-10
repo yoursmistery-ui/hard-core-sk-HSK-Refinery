@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<!-- ==================================================================
+	 50_CE武器适配.xml — 库林战狐 枪械/近战/炮塔 CE 适配
+	 规则: AGENTS.md §7 + docs/08_铁律/CE适配铁律.md
+	 弹药映射(docs/06_弹药/HSK弹药清单.csv, 全部复用 CE 原版弹种):
+	   电荷枪 → AmmoSet_6x24mmCharged | 霰弹 → AmmoSet_12Gauge
+	   步枪/卡宾/狙击 → AmmoSet_303British | 火厢车炮塔 → AmmoSet_40x46mmGrenade
+	 Kurin_Bullet_* 原版弹头 def 保留不删(CE 下不再被引用)。
+	 ================================================================== -->
+
+	<!-- ================= Kurin 电荷步枪 → 6x24mmCharged ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.1</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_6x24mmCharged_Ion</defaultProjectile>
+					<warmupTime>1.0</warmupTime>
+					<range>60</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_Charge_Rifle</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>20</magazineSize>
+					<reloadTime>3.0</reloadTime>
+					<ammoSet>AmmoSet_6x24mmCharged</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/statBases</xpath>
+		<value>
+			<Bulk>10</Bulk>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.08</ShotSpread>
+			<SwayFactor>1.1</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/weaponTags</xpath>
+		<value>
+			<li>CE_AI_AR</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Rifle"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 电荷霰弹枪 → 12Gauge(原 Kurin.Verb_Shoot_ShotGun 整节点替换, 鹿弹自带弹丸散布) ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.9</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+					<warmupTime>0.8</warmupTime>
+					<range>16</range>
+					<burstShotCount>2</burstShotCount>
+					<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_Charge_Shotgun</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>8</magazineSize>
+					<reloadTime>3.0</reloadTime>
+					<ammoSet>AmmoSet_12Gauge</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>FALSE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]/statBases</xpath>
+		<value>
+			<Bulk>10</Bulk>
+			<SightsEfficiency>0.7</SightsEfficiency>
+			<ShotSpread>0.2</ShotSpread>
+			<SwayFactor>1.3</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Charge_Shotgun"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 霰弹枪 → 12Gauge ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.6</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_12Gauge_Buck</defaultProjectile>
+					<warmupTime>0.7</warmupTime>
+					<range>14</range>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>Kurin_Shot_Shotgun</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>6</magazineSize>
+					<reloadTime>2.6</reloadTime>
+					<ammoSet>AmmoSet_12Gauge</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>FALSE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+			<SightsEfficiency>0.7</SightsEfficiency>
+			<ShotSpread>0.22</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Shotgun"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 突击步枪 → .303British ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.2</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+					<warmupTime>0.9</warmupTime>
+					<range>38</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_Tactical_Rifle</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>25</magazineSize>
+					<reloadTime>2.8</reloadTime>
+					<ammoSet>AmmoSet_303British</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.1</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/weaponTags</xpath>
+		<value>
+			<li>CE_AI_AR</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Assault_Rifle"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 卡宾枪 → .303British ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.1</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+					<warmupTime>0.8</warmupTime>
+					<range>30</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_Tactical_Rifle</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>15</magazineSize>
+					<reloadTime>2.5</reloadTime>
+					<ammoSet>AmmoSet_303British</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/statBases</xpath>
+		<value>
+			<Bulk>7</Bulk>
+			<SightsEfficiency>0.9</SightsEfficiency>
+			<ShotSpread>0.11</ShotSpread>
+			<SwayFactor>1.1</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/weaponTags</xpath>
+		<value>
+			<li>CE_AI_AR</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Carbine"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 狙击步枪(快射 DMR) → .303British ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.5</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_303British_FMJ</defaultProjectile>
+					<warmupTime>1.4</warmupTime>
+					<range>55</range>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>Kurin_Shot_Tactical_Rifle</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>9</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>10</magazineSize>
+					<reloadTime>2.4</reloadTime>
+					<ammoSet>AmmoSet_303British</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiAimMode>AimedShot</aiAimMode>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/statBases</xpath>
+		<value>
+			<Bulk>9</Bulk>
+			<SightsEfficiency>1.5</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/weaponTags</xpath>
+		<value>
+			<li>CE_AI_SR</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Sniper_Rifle"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ============ Kurin 机械师电荷步枪(Biotech, 电荷→6x24mmCharged; 保留其 mech 工作 equippedStatOffsets) ============ -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>1.3</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_6x24mmCharged_Ion</defaultProjectile>
+					<warmupTime>1.2</warmupTime>
+					<range>45</range>
+					<burstShotCount>3</burstShotCount>
+					<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_MechanicWeapon</soundCast>
+					<soundCastTail>GunTail_Medium</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>12</magazineSize>
+					<reloadTime>3.5</reloadTime>
+					<ammoSet>AmmoSet_6x24mmCharged</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+					<aimedBurstShotCount>2</aimedBurstShotCount>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]/statBases</xpath>
+		<value>
+			<Bulk>12</Bulk>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.09</ShotSpread>
+			<SwayFactor>1.4</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Mechanic_Charge_Rifle"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>stock</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Stock</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>barrel</label>
+					<capacities><li>Blunt</li><li>Poke</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<armorPenetrationSharp>8</armorPenetrationSharp>
+					<linkedBodyPartsGroup>Barrel</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- ================= 仪仗长戟(双手) → ToolCE ================= -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Polearm"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>point</label>
+					<capacities><li>Stab</li></capacities>
+					<power>17</power>
+					<cooldownTime>1.3</cooldownTime>
+					<armorPenetrationSharp>15</armorPenetrationSharp>
+					<armorPenetrationBlunt>3</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities><li>Cut</li></capacities>
+					<power>16</power>
+					<cooldownTime>1.3</cooldownTime>
+					<armorPenetrationSharp>13</armorPenetrationSharp>
+					<armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Polearm"]/weaponTags</xpath>
+		<value>
+			<weaponTags Inherit="False">
+				<li>Kurin_Weapons</li>
+				<li>Kurin_Ceremonial_Polearm</li>
+				<li>RK_WeaponTag_TwoHand</li>
+				<li>RK_WeaponTag_TwoHandMelee</li>
+			</weaponTags>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Polearm"]/statBases</xpath>
+		<value>
+			<Bulk>12</Bulk>
+			<MeleeCounterParryBonus>0.55</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Polearm"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.1</MeleeCritChance>
+				<MeleeParryChance>0.15</MeleeParryChance>
+				<Suppressability>-4</Suppressability>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+
+	<!-- ================= 仪仗巨剑(双手) → ToolCE =================
+	     TODO(编排方处理): 本 def 同时有 researchPrerequisite LongBlades 与
+	     researchPrerequisites Kurin_CombatT2, 双字段并存告警属科研侧修复范围。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Sword"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities><li>Cut</li></capacities>
+					<power>34</power>
+					<cooldownTime>4.0</cooldownTime>
+					<armorPenetrationSharp>22</armorPenetrationSharp>
+					<armorPenetrationBlunt>8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>flat side</label>
+					<capacities><li>Blunt</li></capacities>
+					<power>9</power>
+					<cooldownTime>2</cooldownTime>
+					<armorPenetrationBlunt>3.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Sword"]/weaponTags</xpath>
+		<value>
+			<weaponTags Inherit="False">
+				<li>Kurin_Weapons</li>
+				<li>Kurin_Ceremonial_Sword</li>
+				<li>RK_WeaponTag_TwoHand</li>
+				<li>RK_WeaponTag_TwoHandMelee</li>
+			</weaponTags>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Sword"]/statBases</xpath>
+		<value>
+			<Bulk>14</Bulk>
+			<MeleeCounterParryBonus>0.2</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_MeleeWeapon_Ceremonial_Sword"]</xpath>
+		<value>
+			<equippedStatOffsets>
+				<MeleeCritChance>0.15</MeleeCritChance>
+				<MeleeParryChance>0.1</MeleeParryChance>
+				<Suppressability>-4</Suppressability>
+			</equippedStatOffsets>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 飞刀(苏力昆): 近战 ToolCE 化, 投掷 verb 保留原版弹道 =================
+	     csv 无对应投掷弹种 → 按铁律做纯近战 ToolCE; 原 Verb_Shoot 投掷弹(Kurin_Bullet_Surigum)
+	     在 CE 下仍按原版弹道出伤, 与 CE 伤害体系并存, 手感待游戏内核验。
+	     TODO verify in-game: 投掷弹是否需在 CE 下禁用/是否显示异常。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Surigum"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>blade</label>
+					<capacities><li>Stab</li><li>Cut</li></capacities>
+					<power>8</power>
+					<cooldownTime>1.0</cooldownTime>
+					<armorPenetrationSharp>10</armorPenetrationSharp>
+					<armorPenetrationBlunt>2</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Point</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Surigum"]/statBases</xpath>
+		<value>
+			<Bulk>2</Bulk>
+			<MeleeCounterParryBonus>0.1</MeleeCounterParryBonus>
+			<SightsEfficiency>0.6</SightsEfficiency>
+			<ShotSpread>0.5</ShotSpread>
+			<SwayFactor>0.6</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_Gun_Surigum"]/weaponTags</xpath>
+		<value>
+			<li>CE_OneHandedWeapon</li>
+		</value>
+	</Operation>
+
+	<!-- ================= Kurin 火厢车炮塔(玄武铳/Hwacha) CE 化 =================
+	     参考 美狐HSK拓展 1.6 可部署炮 CE 模式: thingClass→Building_TurretGunCE,
+	     移除 WoodLog 燃料弹(Refuelable), 枪体改 AmmoUser 走 CE 弹药体系。
+	     火箭箭头无 CE 对应弹种 → 就近映射 40x46mm 榴弹(HE, 保留爆炸/区域压制特性)。
+	     TODO verify in-game: 连射量/装填/占领AI 与火焰附加效果需游戏内调平。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_FireTurret"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="Kurin_FireTurret"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_FireTurret"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.6</AimingAccuracy>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kurin_boxlauncher"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<recoilAmount>2.0</recoilAmount>
+					<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_40x46mmGrenade_HE</defaultProjectile>
+					<minRange>6</minRange>
+					<warmupTime>2.4</warmupTime>
+					<range>38</range>
+					<burstShotCount>6</burstShotCount>
+					<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+					<soundCast>Kurin_Shot_Hwatcha</soundCast>
+					<soundCastTail>GunTail_Heavy</soundCastTail>
+					<muzzleFlashScale>12</muzzleFlashScale>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_boxlauncher"]</xpath>
+		<value>
+			<comps>
+				<li Class="CombatExtended.CompProperties_AmmoUser">
+					<magazineSize>20</magazineSize>
+					<reloadTime>6.0</reloadTime>
+					<ammoSet>AmmoSet_40x46mmGrenade</ammoSet>
+				</li>
+				<li Class="CombatExtended.CompProperties_FireModes">
+					<aiUseBurstMode>TRUE</aiUseBurstMode>
+					<aiAimMode>AimedShot</aiAimMode>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_boxlauncher"]/statBases</xpath>
+		<value>
+			<Bulk>30</Bulk>
+			<SightsEfficiency>1.0</SightsEfficiency>
+			<ShotSpread>0.2</ShotSpread>
+			<SwayFactor>1.6</SwayFactor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kurin_boxlauncher"]</xpath>
+		<value>
+			<weaponTags>
+				<li>TurretGun</li>
+				<li>CE_AI_Launcher</li>
+				<li>CE_AI_AOE</li>
+			</weaponTags>
+		</value>
+	</Operation>
+
+</Patch>

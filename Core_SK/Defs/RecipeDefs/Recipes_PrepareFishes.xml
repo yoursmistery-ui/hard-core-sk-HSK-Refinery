@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--===== Campfire meal =====-->
+  
+  <RecipeDef>
+    <defName>GrillFishCampfire</defName>
+    <label>grill fish</label>
+    <description>Grills a fish so it can be eaten. Tasty and crunchy!</description>
+    <jobString>Grilling fish.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <workAmount>720</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+		  <categories>
+			<li>CorpsesFish</li>
+			<li>Fish</li>
+		  </categories>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <products>
+      <MealFine>1</MealFine>
+    </products>
+    <fixedIngredientFilter>
+		<categories>
+			<li>CorpsesFish</li>
+			<li>Fish</li>
+		</categories>
+		<specialFiltersToDisallow>
+			<li>AllowRotten</li>
+		</specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <recipeUsers>
+      <li>Campfire</li>
+      <li>TableGrill</li>
+      <li>FueledStove</li>
+      <li>ElectricStove</li>
+    </recipeUsers>
+    <workSkill>Cooking</workSkill>
+	<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+	<researchPrerequisite>Food_00</researchPrerequisite>
+	<allowMixingIngredients>true</allowMixingIngredients>
+	<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>GrillFishCampfireBulk</defName>
+    <label>grill fish x4</label>
+    <description>Grills a fish so it can be eaten. Tasty and crunchy!</description>
+    <jobString>Grilling fish.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_CookMeal</soundWorking>
+    <workAmount>1800</workAmount>
+	<allowMixingIngredients>true</allowMixingIngredients>
+    <ingredients>
+      <li>
+        <filter>
+		  <categories>
+			<li>CorpsesFish</li>
+			<li>Fish</li>
+		  </categories>
+        </filter>
+        <count>8</count>
+      </li>
+    </ingredients>
+    <products>
+      <MealFine>4</MealFine>
+    </products>
+    <fixedIngredientFilter>
+	  <categories>
+		<li>CorpsesFish</li>
+		<li>Fish</li>
+	  </categories>
+	  <specialFiltersToDisallow>
+		<li>AllowRotten</li>
+	  </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <recipeUsers>
+		<li>ElectricStove_Pro</li>
+    </recipeUsers>
+    <workSkill>Cooking</workSkill>
+	<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+	<researchPrerequisite>PackagedSurvivalMeal</researchPrerequisite>
+	<allowMixingIngredients>true</allowMixingIngredients>
+	<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+  </RecipeDef>
+
+</Defs>

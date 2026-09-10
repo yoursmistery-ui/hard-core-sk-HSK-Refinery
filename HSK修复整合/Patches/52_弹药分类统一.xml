@@ -1,0 +1,210 @@
+<Patch>
+  <!-- 52_弹药分类统一 (2026-08-30, 体系化收编批1)
+       目的: 收拢黑火药弹药分类树 + 修 PI 包内两处分类错挂/孤儿 + 按"大件铸造/小件锻造"去除双轨配方。
+       事实依据: CE 的 AmmoCategories_Medieval.xml 已 .bak 停用(让位 PI, 无 defName 冲突);
+       PI 三个中类(AmmoMusket/AmmoHollowBase/AmmoBlackPowderCartridge)直挂 Ammo 根导致黑火药体系散在 4 枝;
+       Ammo_44Rimfire 的抽象基类 44RimfireBase thingCategories 错挂 Ammo5070Govt(05_44Rimfire.xml);
+       AmmoTsarGrapeshot 分类无任何 item 引用(AmmoSet_TsarGrapeshot 实际用 Ammo_Grapeshot→AmmoCannonballSmall);
+       铸造配方基类 AmmoRecipeBlackPowder_Cast(Metallurgy, Inherit="False" 自持 Foundry)不受大修 A2 FueledSmithy patch 波及。
+       所有操作顶层独立 Conditional 门控(1.6 Operation 级 MayRequire 失效)。 -->
+
+  <!-- 1) 新建黑火药中类(挂在 CE Ammo 根下) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs</xpath>
+    <value>
+      <ThingCategoryDef>
+        <defName>AmmoBlackPowder</defName>
+        <label>黑火药弹药</label>
+        <parent>Ammo</parent>
+      </ThingCategoryDef>
+    </value>
+  </Operation>
+
+  <!-- 2) PI 三个黑火药中类从 Ammo 根收拢到 AmmoBlackPowder(口径节点跟随中类) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingCategoryDef[defName="AmmoMusket"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingCategoryDef[defName="AmmoMusket"]/parent</xpath>
+      <value><parent>AmmoBlackPowder</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingCategoryDef[defName="AmmoHollowBase"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingCategoryDef[defName="AmmoHollowBase"]/parent</xpath>
+      <value><parent>AmmoBlackPowder</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingCategoryDef[defName="AmmoBlackPowderCartridge"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingCategoryDef[defName="AmmoBlackPowderCartridge"]/parent</xpath>
+      <value><parent>AmmoBlackPowder</parent></value>
+    </match>
+  </Operation>
+
+  <!-- 3) 修 44Rimfire 错挂: 抽象基类 44RimfireBase 的 thingCategories Ammo5070Govt → Ammo44Rimfire -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[@Name="44RimfireBase"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[@Name="44RimfireBase"]/thingCategories</xpath>
+      <value>
+        <thingCategories>
+          <li>Ammo44Rimfire</li>
+        </thingCategories>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- 4) 删孤儿分类 AmmoTsarGrapeshot(无 item 引用, 真实弹头 Ammo_Grapeshot 挂 AmmoCannonballSmall) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingCategoryDef[defName="AmmoTsarGrapeshot"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/ThingCategoryDef[defName="AmmoTsarGrapeshot"]</xpath>
+    </match>
+  </Operation>
+
+  <!-- 5) 双轨配方去重(D1: 大件铸造/小件锻造) -->
+  <!-- 5a) 小口径留锻造(FueledSmithy, 大修 A2 已接管), 删铸造版 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="CastAmmo_MinieBall"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="CastAmmo_MinieBall"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="CastAmmo_69Musket_Lead"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="CastAmmo_69Musket_Lead"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="CastAmmo_69Musket_Buck"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="CastAmmo_69Musket_Buck"]</xpath>
+    </match>
+  </Operation>
+  <!-- 5b) 炮弹留铸造(Foundry, Metallurgy_B4), 删锻造版; Ammo_Grapeshot 无铸造配方故 MakeAmmo_Grapeshot 保留 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeAmmo_38mmCannonball"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="MakeAmmo_38mmCannonball"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeAmmo_200Pounder_Shell"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="MakeAmmo_200Pounder_Shell"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeAmmo_200Pounder_GreekFire"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="MakeAmmo_200Pounder_GreekFire"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeAmmo_3inCannon_Shell"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="MakeAmmo_3inCannon_Shell"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeAmmo_3inCannon_Canister"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="MakeAmmo_3inCannon_Canister"]</xpath>
+    </match>
+  </Operation>
+
+  <!-- 5c) 删除锻造版后, 剥离 AmmoDef 上失效的 CE_AutoEnableCrafting* 标签。
+       CE AmmoInjector 按 "Make"+defName 找配方(上文已删), 保留标签即每帧刷 "found no recipe named MakeAmmo_..."。
+       用 Inherit="False" 在具体 AmmoDef 上整体覆盖继承的 tradeTags: 只留 AmmoBase 的 CE_AmmoInjector/CE_Ammo(控制 menuHidden/销毁)
+       与 CE_AutoEnableTrade(商队可交易), 去掉 CE_AutoEnableCrafting*; 弹药改由 Vile's Metallurgy Foundry 铸造配方生产。
+       不碰 38CannonAmmoBase 基类(Grapeshot 与其共用, 且 MakeAmmo_Grapeshot 保留)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_38mmCannonball"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_38mmCannonball"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Shell"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Shell"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Canister"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_3inCannon_Canister"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_Shell"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_Shell"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_GreekFire"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Ammo_200Pounder_GreekFire"]</xpath>
+      <value>
+        <tradeTags Inherit="False">
+          <li>CE_AmmoInjector</li>
+          <li>CE_Ammo</li>
+          <li>CE_AutoEnableTrade</li>
+        </tradeTags>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- 6) CannonParts 双配方二选一: 留铸造 Cast_CannonParts(补研究 GunPowderTech), 删锻造 Make_CannonParts_Forged -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="Cast_CannonParts"]</xpath>
+    <match Class="PatchOperationConditional">
+      <xpath>/Defs/ResearchProjectDef[defName="GunPowderTech"]</xpath>
+      <match Class="PatchOperationAdd">
+        <xpath>/Defs/RecipeDef[defName="Cast_CannonParts"]</xpath>
+        <value>
+          <researchPrerequisite>GunPowderTech</researchPrerequisite>
+        </value>
+      </match>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="Make_CannonParts_Forged"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>/Defs/RecipeDef[defName="Make_CannonParts_Forged"]</xpath>
+    </match>
+  </Operation>
+
+</Patch>

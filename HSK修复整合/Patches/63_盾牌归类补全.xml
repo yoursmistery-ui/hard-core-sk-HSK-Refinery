@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 63_盾牌归类补全 (2026-09-10)
+       问题: 盾牌分类(ShieldCat, 由 58 号收进 按穿戴位置→配饰腰背)只收了 10 件 CE 的 Shield 层盾牌,
+             鼠族侧 4 件真盾(塔盾/藤牌/障牌/能量力盾)没挂进来 —— 它们分别走 Belt / OuterClothing 层,
+             判定依据是 NewRatkin.ApparelShieldTowerSecond / RatkinGeneExpanded.NewShield + isShield=true。
+       动作: ① 4 件真盾补挂 ShieldCat; ② 顺手修用途轴: 盾牌被判成"日常便服"(HSK_U_Daily)的改回战斗护甲,
+             能量护盾装置(低护盾背包/重型护盾单元)改回战术装备;
+             ③ 树里另两个汉化后也叫"盾牌"的 0 成员节点 Shields(CE) / VFEC_Shields(VEF) 收编为 ShieldCat 子节点;
+               Shields 改名"护盾装置"(见 Languages/.../ThingCategoryDef/服饰三轴分类.xml)并挂入 6 件能量护盾装置,
+               使"盾牌"成为唯一入口(实体盾直挂 + 护盾装置子节点)。允许一件装备同时挂多个分类。
+       门控: 全部顶层独立 PatchOperationConditional(xpath 存在性), 目标缺失时静默跳过。
+       注意: RK_SashiMono(指物旗)虽继承 NewShield 类, 但 isShield=false 且无格挡数值, 属军旗不是盾牌, 不收。
+             自带护盾 comp 的护甲/战甲(各类 Power Armor、RK_BattleSuit、麦克斯韦/纳米合金/矿业动力服、
+             美狐两件、白日盾胸甲、融合护盾芯片、Bu Dong)本质是护甲不是盾, 不收进盾牌。 -->
+
+  <!-- ① 塔盾: 补挂盾牌 + 日常便服→战斗护甲 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories</xpath>
+      <value><li>ShieldCat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TowerShield"]</xpath>
+      <value><thingCategories><li>ShieldCat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TowerShield"]/thingCategories</xpath>
+      <value><li>HSK_U_Combat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TowerShield"]</xpath>
+      <value><thingCategories><li>HSK_U_Combat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ② 藤牌: 补挂盾牌 + 日常便服→战斗护甲 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories</xpath>
+      <value><li>ShieldCat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TengPai"]</xpath>
+      <value><thingCategories><li>ShieldCat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TengPai"]/thingCategories</xpath>
+      <value><li>HSK_U_Combat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_TengPai"]</xpath>
+      <value><thingCategories><li>HSK_U_Combat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ③ 障牌 / ④ 能量力盾: 补挂盾牌 (用途已是战斗护甲) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RK_ZhangPai"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_ZhangPai"]/thingCategories</xpath>
+      <value><li>ShieldCat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RK_ZhangPai"]</xpath>
+      <value><thingCategories><li>ShieldCat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="JD_shield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="JD_shield"]/thingCategories</xpath>
+      <value><li>ShieldCat</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="JD_shield"]</xpath>
+      <value><thingCategories><li>ShieldCat</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ⑤ 能量护盾装置: 日常便服→战术装备 (不是盾牌, 只修用途轴) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories</xpath>
+      <value><li>HSK_U_Tac</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]</xpath>
+      <value><thingCategories><li>HSK_U_Tac</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    <match Class="PatchOperationRemove">
+      <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories/li[text()="HSK_U_Daily"]</xpath>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories</xpath>
+      <value><li>HSK_U_Tac</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]</xpath>
+      <value><thingCategories><li>HSK_U_Tac</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+
+  <!-- ⑥ 两个同名空节点收编进盾牌: Shields(CE)→"护盾装置"子节点, VFEC_Shields(VEF)暂空归档在盾牌下 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="Shields"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="Shields"]/parent</xpath>
+      <value><parent>ShieldCat</parent></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingCategoryDef[defName="VFEC_Shields"]/parent</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingCategoryDef[defName="VFEC_Shields"]/parent</xpath>
+      <value><parent>ShieldCat</parent></value>
+    </match>
+  </Operation>
+
+  <!-- ⑦ 能量护盾装置补挂 护盾装置(Shields); 它们同时保留原有的 战术装备/配饰腰背 等分类 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_ShieldBelt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_ShieldBelt"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_ShieldBelt"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_ShieldGuardian"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_ShieldGuardian"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_ShieldGuardian"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_PersonalNanoShield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PersonalNanoShield"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PersonalNanoShield"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_PackBroadshield"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OARK_Apparel_GravShieldBelt"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]/thingCategories</xpath>
+      <value><li>Shields</li></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="Apparel_HeavyShield"]</xpath>
+      <value><thingCategories><li>Shields</li></thingCategories></value>
+    </nomatch>
+  </Operation>
+</Patch>

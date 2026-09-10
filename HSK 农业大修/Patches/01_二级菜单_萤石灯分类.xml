@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 把两盏萤石太阳灯挂进 Core_SK 的"萤石灯具"二级菜单(与 GlowstoneLamp 同格)。
+         1.6 Operation 级 MayRequire 已失效, 按 iron rule 用 xpath 存在性门控(Conditional)。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_GlowstoneLights"]/defNames</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_GlowstoneLights"]/defNames</xpath>
+            <value>
+                <li>GAYUKI_SteamSunLamp</li>
+                <li>GAYUKI_SmallSteamSunLamp</li>
+            </value>
+        </match>
+    </Operation>
+</Patch>

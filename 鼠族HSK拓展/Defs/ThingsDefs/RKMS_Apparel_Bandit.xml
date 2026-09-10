@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef Name="RK_ExoticBanditApparel"
+		ParentName="RK_ExoticApparelMakeableBase" Abstract="true">
+		<recipeMaker Inherit="False">
+			<researchPrerequisite>Ratkin_Apparel_B2C</researchPrerequisite>
+		</recipeMaker>
+		<tradeability>All</tradeability>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticBanditApparel</li>
+			<li>RK_SellableApparel</li>
+		</tradeTags>
+		<apparel>
+			<tags Inherit="False">
+			</tags>
+		</apparel>
+	</ThingDef>
+	<ThingDef Name="RK_ExoticBanditHat"
+		ParentName="RK_ExoticHatMakeableBase" Abstract="true">
+		<recipeMaker Inherit="False">
+			<researchPrerequisite>Ratkin_Apparel_C2</researchPrerequisite>
+		</recipeMaker>
+		<tradeability>All</tradeability>
+		<tradeTags Inherit="false">
+			<li>RK_ExoticBanditHat</li>
+			<li>RK_SellableApparel</li>
+		</tradeTags>
+		<apparel>
+			<tags Inherit="False">
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticBanditApparel">
+		<defName>RK_XiangMaClothing</defName>
+		<label>ratkin robber clothing</label>
+		<description>Of course, not everyone can be comfortable with farming, and the ratkins are no exception.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_Bandit</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<Steel>60</Steel>
+		
+				<ComponentMedieval>3</ComponentMedieval>
+</costList>
+		<costStuffCount>85</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>210</MaxHitPoints>
+			<WorkToMake>14500</WorkToMake>
+			<Mass>2.5</Mass>
+			<StuffEffectMultiplierArmor>0.25</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.75</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.4</StuffEffectMultiplierInsulation_Heat>
+			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+			<EquipDelay>1.8</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>1.0</MeleeDodgeChance>
+			<AimingDelayFactor>-0.1</AimingDelayFactor>
+			<MoveSpeed>0.1</MoveSpeed>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_Bandit</wornGraphicPath>
+			<layers>
+				<li>OnSkin</li>
+			</layers>
+			<tags Inherit="False">
+				<li>RK_ExoticBandit</li>
+				<li>RK_ExoticBanditBoss</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticBanditApparel">
+		<defName>RK_BanCoat</defName>
+		<label>ratkin rogue's coat</label>
+		<description>A roughly made fur coat with a lining filled with musty and dirty animal fur and cotton.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanCoat</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costStuffCount>50</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>110</MaxHitPoints>
+			<WorkToMake>3500</WorkToMake>
+			<Mass>1.7</Mass>
+			<StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>1.5</StuffEffectMultiplierInsulation_Cold>
+			<Insulation_Cold>12</Insulation_Cold>
+			<EquipDelay>2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<SocialImpact>-0.15</SocialImpact>
+			<NegotiationAbility>-0.15</NegotiationAbility>
+			<!-- <TradePriceImprovement>-0.2</TradePriceImprovement> -->
+			<PainShockThreshold>0.05</PainShockThreshold>
+		</equippedStatOffsets>
+		<apparel>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Worker</li>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_BanCoat</wornGraphicPath>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticBandit</li>
+			</tags>
+		</apparel>
+	
+		<costList>
+				<ComponentMedieval>3</ComponentMedieval>
+		</costList></ThingDef>
+
+	<ThingDef ParentName="RK_ExoticBanditApparel">
+		<defName>RK_BanleaderCoat</defName>
+		<label>ratkin bandit chief fur coat</label>
+		<description>Those who wear this dirty and rugged fur coat are often tough and ruthless characters.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_Banleader</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costStuffCount>180</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>230</MaxHitPoints>
+			<WorkToMake>12000</WorkToMake>
+			<Mass>2.2</Mass>
+			<StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>3</StuffEffectMultiplierInsulation_Cold>
+			<Insulation_Cold>12</Insulation_Cold>
+			<EquipDelay>2.5</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<SocialImpact>0.2</SocialImpact>
+			<NegotiationAbility>0.25</NegotiationAbility>
+			<TradePriceImprovement>0.4</TradePriceImprovement>
+			<PainShockThreshold>0.12</PainShockThreshold>
+		</equippedStatOffsets>
+		<apparel>
+			<shellRenderedBehindHead>true</shellRenderedBehindHead>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Worker</li>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_Banleader</wornGraphicPath>
+			<layers>
+				<li>Shell</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticBanditBoss</li>
+				<li>RoyalTier5</li>
+			</tags>
+		</apparel>
+	
+		<costList>
+				<ComponentMedieval>3</ComponentMedieval>
+		</costList></ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticBanditHat">
+		<defName>RK_Hahoetal</defName>
+		<label>ratkin hahoetal mask</label>
+		<description>It used to be a ceremonial mask used for rituals, but now it is worn as a face-covering mask by certain armed organizations.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_Hahoetal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+		
+				<ComponentIndustrial>3</ComponentIndustrial>
+</costList>
+		<costStuffCount>20</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToMake>6000</WorkToMake>
+			<Mass>0.1</Mass>
+			<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.1</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>0.2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.05</MoveSpeed>
+			<PainShockThreshold>0.1</PainShockThreshold>
+			<SocialImpact>-0.2</SocialImpact>
+			<ToxicEnvironmentResistance>0.4</ToxicEnvironmentResistance>
+			<AimingDelayFactor>0.3</AimingDelayFactor>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>UpperHead</li>
+				<li>Eyes</li>
+				<li>Mouth</li>
+				<li>Teeth</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Item_Apparel/RK_Hahoetal</wornGraphicPath>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<tags Inherit="False">
+				<li>RK_ExoticBerserker</li>
+			</tags>
+			<drawData>
+				<dataSouth>
+					<layer>3</layer>
+					<offset>(0,0.2,0)</offset>
+				</dataSouth>
+			</drawData>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ExoticBanditHat">
+		<defName>RK_BlackMask</defName>
+		<label>ratkin black mask</label>
+		<description>A black face mask, beneath which anyone's face could be.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanBlackMask</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costStuffCount>20</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>65</MaxHitPoints>
+			<WorkToMake>1000</WorkToMake>
+			<Mass>0.02</Mass>
+			<StuffEffectMultiplierArmor>0</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.1</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>0.2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<PainShockThreshold>0.05</PainShockThreshold>
+			<SocialImpact>-0.2</SocialImpact>
+			<NegotiationAbility>-0.15</NegotiationAbility>
+			<TradePriceImprovement>-0.4</TradePriceImprovement>
+			<ToxicEnvironmentResistance>0.5</ToxicEnvironmentResistance>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Mouth</li>
+				<li>Teeth</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Item_Apparel/RK_BanBlackMask</wornGraphicPath>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<tags Inherit="False">
+				<li>RK_ExoticMask</li>
+			</tags>
+		</apparel>
+	
+		<costList>
+				<ComponentIndustrial>3</ComponentIndustrial>
+		</costList></ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticBanditHat"
+		Name="RK_ZhaMian" Abstract="true">
+		<defName>RK_ZhaMian</defName>
+		<label>ratkin hanafuda mask</label>
+		<description>The practice of using traditional cards as masks is popular among some violent groups of ratkins, and seems to have originated as a game in which cards were placed on the head to guess the colors</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_null</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<DevilstrandCloth>5</DevilstrandCloth>
+		
+				<ComponentIndustrial>3</ComponentIndustrial>
+</costList>
+		<costStuffCount>20</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToMake>6000</WorkToMake>
+			<Mass>0.1</Mass>
+			<StuffEffectMultiplierArmor>0.1</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.1</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>0.2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.05</MoveSpeed>
+			<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+			<SocialImpact>-0.1</SocialImpact>
+			<TradePriceImprovement>-0.4</TradePriceImprovement>
+			<ToxicEnvironmentResistance>0.2</ToxicEnvironmentResistance>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>UpperHead</li>
+				<li>Eyes</li>
+				<li>Mouth</li>
+				<li>Teeth</li>
+			</bodyPartGroups>
+			<wornGraphicPath>Item_Apparel/nullmask</wornGraphicPath>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<tags Inherit="False">
+				<li>RK_ExoticZhaMian</li>
+			</tags>			
+			<drawData>
+				<dataSouth>
+					<layer>3</layer>
+					<offset>(0,0.2,0)</offset>
+				</dataSouth>
+			</drawData>
+		</apparel>
+
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Hei</defName>
+		<label>ratkin impermanence hanafuda</label>
+		<description>Impermanence of all things, purity of the six senses.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanHei</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanHei</wornGraphicPath>
+			<tags>
+				<li>RoyalCombatGear</li>
+				<li>RK_ExoticImpermanence</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Bai</defName>
+		<label>ratkin impermanence hanafuda</label>
+		<description>Impermanence of all things, purity of the six senses.</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanBai</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanBai</wornGraphicPath>
+			<tags>
+				<li>RoyalCombatGear</li>
+				<li>RK_ExoticImpermanence</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Hi</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanHi</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanHi</wornGraphicPath>
+			<tags>
+				<li>RoyalCombatGear</li>
+				<li>RK_ExoticBanditBoss</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Ran</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanRan</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanRan</wornGraphicPath>
+			<tags>
+				<li>RK_ExoticBandit</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Kiku</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanKiku</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanKiku</wornGraphicPath>
+			<tags>
+				<li>RK_ExoticBandit</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Ume</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanUme</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanUme</wornGraphicPath>
+			<tags>
+				<li>RK_ExoticBandit</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Sakura</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanSakura</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanSakura</wornGraphicPath>
+			<tags>
+				<li>RK_ExoticBandit</li>
+				<li>RoyalCombatGear</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_ZhaMian">
+		<defName>RK_ZhaMian_Tsuki</defName>
+		<graphicData>
+			<texPath>Item_Apparel/RK_BanTsuki</texPath>
+		</graphicData>
+		<apparel>
+			<wornGraphicPath>Item_Apparel/RK_BanTsuki</wornGraphicPath>
+			<tags>
+				<li>RoyalCombatGear</li>
+				<li>RK_ExoticBanditElite</li>
+			</tags>
+		</apparel>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticBanditApparel">
+		<defName>RK_JiuHulu</defName>
+		<label>ratkin booze gourd</label>
+		<description>Fill up! Fill up! (This gourd contains a mixture of spirits and stimulants, one bite can make the rat addicted, if there is no special hobby, I suggest you either sell or throw or smash it in place, so as not to know nothing about the rat to take a bite.)</description>
+		<graphicData>
+			<texPath>Item_Apparel/RK_HuLu</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<costList>
+			<WoodPlank>12</WoodPlank>
+			<Beer>20</Beer>
+			<GoJuice>15</GoJuice>
+		
+				<ComponentMedieval>2</ComponentMedieval>
+</costList>
+		<techLevel>Medieval</techLevel>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToMake>5000</WorkToMake>
+			<Mass>0.5</Mass>
+			<EquipDelay>0.1</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MoveSpeed>0.7</MoveSpeed>
+			<PainShockThreshold>0.5</PainShockThreshold>
+			<MentalBreakThreshold>-0.1</MentalBreakThreshold>
+
+			<ShootingAccuracyPawn>-2</ShootingAccuracyPawn>
+			<RangedCooldownFactor>0.1</RangedCooldownFactor>
+			<AimingDelayFactor>1</AimingDelayFactor>
+			<SocialImpact>-0.9</SocialImpact>
+			<TradePriceImprovement>-1</TradePriceImprovement>
+			<ToxicEnvironmentResistance>0.5</ToxicEnvironmentResistance>
+			<NegotiationAbility>-0.9</NegotiationAbility>
+		</equippedStatOffsets>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<bodyPartGroups>
+				<li>Shoulders</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<wornGraphicPath>Item_Apparel/RK_HuLu</wornGraphicPath>
+			<layers>
+				<li>BackPack</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticBerserker</li>
+			</tags>
+		</apparel>
+		
+		<comps>
+			<li Class="CompProperties_CauseHediff_Apparel">
+				<hediff>GoJuiceAddiction</hediff>
+			</li>
+		</comps>
+	
+		<recipeMaker>
+			<researchPrerequisite>Ratkin_Apparel_B1b</researchPrerequisite>
+		</recipeMaker></ThingDef>
+
+</Defs>

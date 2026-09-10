@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <QuestScriptDef>
+        <defName>OAGene_OpportunitySite_IceCrystalFlowerSea</defName>
+        <autoAccept>true</autoAccept>
+        <isRootSpecial>true</isRootSpecial>
+        <defaultChallengeRating>1</defaultChallengeRating>
+        <rootSelectionWeight>0</rootSelectionWeight>
+        <minRefireDays>50</minRefireDays>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName->冰晶花海</li>
+                <li>questName->晶莹剔透的花海</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+                <li>questDescription->我们的殖民者在观察周围的时候，意外的在不远处发现了一片闪烁着的泛光。在通过仔细观察之后，我们确定了那里盛开着大量的碎晶花。\n\n由于距离过远，这些碎晶花无法对我们的殖民地造成影响。若是我们不去管他，那么这些碎晶花将会在十余日后自行融化，而如果我们选择去将这些花给割除，那么我们将会收获一大批能够贩卖给稀有品商人的风雪碎晶。</li>
+            </rulesStrings>
+        </questDescriptionRules>
+        <root Class="QuestNode_Sequence">
+            <nodes>
+
+                <li Class="OberoniaAureaGene.Snowstorm.QuestNode_IsSnowstoryScenario" />
+
+                <li Class="QuestNode_GetMap" />
+                <li Class="OberoniaAurea_Frame.QuestNode_GetNearTile">
+                    <storeAs>flowerSeaTile</storeAs>
+                    <minDist>4</minDist>
+                    <maxDist>6</maxDist>
+                </li>
+                <li Class="QuestNode_GenerateWorldObject">
+                    <def>OAGene_IceCrystalFlowerSea</def>
+                    <tile>$flowerSeaTile</tile>
+                    <storeAs>flowerSea</storeAs>
+                </li>
+                <li Class="QuestNode_Set">                    <!-- 花海消失时限 -->
+                    <name>flowerSeaTimeout</name>
+                    <value>$(randInt(16,20)*60000)</value>
+                </li>
+                <li Class="QuestNode_WorldObjectTimeout">
+                    <worldObject>$flowerSea</worldObject>
+                    <isQuestTimeout>true</isQuestTimeout>
+                    <delayTicks>$flowerSeaTimeout</delayTicks>
+                    <destroyOnCleanup>true</destroyOnCleanup>
+                </li>
+                <li Class="QuestNode_SpawnWorldObjects">
+                    <worldObjects>$flowerSea</worldObjects>
+                </li>
+                <li Class="QuestNode_Signal">
+                    <inSignal>flowerSea.Destroyed</inSignal>
+                    <node Class="QuestNode_End">
+                        <outcome>Success</outcome>
+                        <sendStandardLetter>true</sendStandardLetter>
+                    </node>
+                </li>
+            </nodes>
+        </root>
+    </QuestScriptDef>
+
+</Defs>

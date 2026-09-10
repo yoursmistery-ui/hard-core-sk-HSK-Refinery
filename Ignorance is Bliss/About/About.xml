@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ModMetaData>
+	<name>Ignorance Is Bliss</name>
+	<author>Dametri, GwinnBleidd</author>
+	<supportedVersions>
+		<li>1.4</li>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>dame.ignorance</packageId>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
+		</li>
+		<li>
+			<packageId>skyarkhangel.HSK</packageId>
+			<displayName>Core SK</displayName>
+		</li>
+		<li>
+			<packageId>Solaris.RatkinRaceMod</packageId>
+			<displayName>Ratkin Race</displayName>
+		</li>
+		<li>
+			<packageId>local.ratkin.clothesweapons</packageId>
+			<displayName>鼠族HSK拓展</displayName>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Royalty</li>
+		<li>ghxx.techadvancing</li>
+		<li>skyarkhangel.HSK</li>
+		<li>skyarkhangel.HSK.Core</li>
+		<li>ratkinpatch.HSKIndustrialResearchOverhaul</li>
+		<!-- 2026-09-09 补丁迁入配套: 补丁 xpath 目标/MayRequire 引用 def 所在 mod,必须在其后加载 -->
+		<li>Solaris.RatkinRaceMod</li>
+		<li>local.ratkin.clothesweapons</li>
+		<li>local.ratkin.goldenhsk</li>
+		<li>miho.fortifiedoutremer</li>
+		<li>Seioch.Kurin.HAR</li>
+		<li>ChJees.Androids</li>
+		<li>skyarkhangel.skynet</li>
+		<li>local.hskfixpack</li>
+	</loadAfter>
+	<description>【HSK 改造版】统一托管「袭击」与「贸易/来访」的派系科技档准入。\n\n■ 这个 mod 现在做什么\n1) 派系科技档准入(袭击 + 商队 + 访客,统一一套规则)\n   · 以「玩家当前科技档」为基准,只允许科技档不超过 玩家档+1 的派系生成事件,\n     下限不设限(低科技派系照来)。\n   · 玩家科技档 = Faction.OfPlayer.def.techLevel,由 Tech Advancing 实时改写,\n     研究推进后自动跟着涨,无需手动维护。\n2) 帝国 / 机械族 可单独豁免科技档限制(设置里开关)。\n3) 任务型威胁可替换为档内派系(设置里开关)。\n\n■ 推荐设置(Mod Settings)\n   · 科技算法       = Actual colonist tech level   ← 必须选这个才会跟随 Tech Advancing\n   · NumTechsAhead  = 1     (最多高玩家 1 档)\n   · NumTechsBehind = -1    (低科技不限,-1 = any)\n   这套组合 = 所有派系档位落在 [无限制, 玩家档+1]。\n\n■ 随附的 HSK 袭击/财富挂钩(2026-09-09 由 HSK修复整合 整体迁入,HSK 侧已移除)\n   · 固定门槛大敌:机械族 Industrial+/60万财富,虫族 Industrial+/30万财富,\n     天网 Spacer+/120万财富,美狐海盗 Industrial+(仅科技档,无财富门槛)。\n   · 后期增援 EnableAfterDaysPassed 120 → 400 天。\n   · 财富挂钩:中心空投概率(除数 200 万、上限 0.12)、双倍袭击概率(封顶 0.35)、\n     袭击间隔(2500 万财富时最多 -25%)、高档派系权重(每 200 万财富 +100%,最多 +200%)。\n   · 事件型大敌门槛:心灵/枯萎者飞船需 Industrial+;天网 3 事件需 Spacer+ 且财富 200 万。\n   · 禁用 Core_SK 的 Mod 设置页,防止上述锁定数值被游戏内改回。\n\n■ 依赖\n   Harmony(必需)、Tech Advancing(提供动态玩家科技档)、Core_SK(袭击调度与设置类型)。\n   无 Core_SK 时随附的袭击/财富挂钩部分不生效,科技档准入照常工作。</description>
+</ModMetaData>

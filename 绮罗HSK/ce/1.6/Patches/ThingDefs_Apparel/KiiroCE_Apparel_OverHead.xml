@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 绮罗头饰层基础修改-重量 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_OverheadBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.4</Mass>
+		</value>
+	</Operation>
+	<!-- 绮罗头饰层基础修改-体积 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_OverheadBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>1.5</Bulk>
+			<WornBulk>0.5</WornBulk>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗防毒面具 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_GasMask"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>2.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗黑色圆顶礼帽 绮罗学士帽 绮罗针织洋帽 绮罗白色贝雷帽 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Melonik" or 
+		defName="Kiiro_GraduationCap" or 
+		defName="Kiiro_SunHatGauze" or 
+		defName="Kiiro_Beret"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>3</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗毛绒兜帽 绮罗儿童通学帽 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_WinterHats" or 
+		defName="KiiroKid_SchoolCap"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>4</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗浪客斗笠 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_RainHat"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>3.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗矿工帽 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MinerHat"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>3</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗护目镜+额头 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Goggle" or 
+		defName="Kiiro_GoggleII"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>3</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_Goggle" or 
+		defName="Kiiro_GoggleII"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>1.5</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗军用头盔(A,B,军医) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MilitaryHelmet" or 
+		defName="Kiiro_MilitaryHelmetII" or 
+		defName="Kiiro_MilitaryHelmetMedic"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>4.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MilitaryHelmet" or 
+		defName="Kiiro_MilitaryHelmetII" or 
+		defName="Kiiro_MilitaryHelmetMedic"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>4</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_MilitaryHelmet" or 
+		defName="Kiiro_MilitaryHelmetII" or 
+		defName="Kiiro_MilitaryHelmetMedic"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>6</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗魅影兜帽 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_PhantomHood"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>10</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_PhantomHood"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>14</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_PhantomHood"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>24</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗影袭者围巾 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_CounterScarf"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>6</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_CounterScarf"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>4</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_CounterScarf"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>6</ArmorRating_Blunt>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_CounterScarf"
+		]/equippedStatOffsets/Ancot_RangeDodgeChance</xpath>
+		<value>
+			<Ancot_RangeDodgeChance>0.06</Ancot_RangeDodgeChance>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_CounterScarf"
+		]/equippedStatOffsets/MeleeDodgeChance</xpath>
+		<value>
+			<MeleeDodgeChance>0.4</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!-- 绮罗勇者头冠 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_ValorTiara"
+		]/statBases/ArmorRating_Sharp</xpath>
+		<value>
+			<ArmorRating_Sharp>32</ArmorRating_Sharp>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_ValorTiara"
+		]/statBases/ArmorRating_Blunt</xpath>
+		<value>
+			<ArmorRating_Blunt>80</ArmorRating_Blunt>
+		</value>
+	</Operation>
+</Patch>

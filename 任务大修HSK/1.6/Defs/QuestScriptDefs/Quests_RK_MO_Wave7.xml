@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  波次7 清剿链任务(2026-09-10): 邪教藏身处 T1/T2/T3 + 蛇窟(终局)
+  结构 1:1 套用族色委托/波次6(纯原版 QuestNode, 无 VEF 依赖),
+  经 RimQuest QuestGiverDefs 池自动刷出(不进悬赏板); T1/T2/T3/蛇 按 rootMinPoints
+  400/1000/1700/2400 逐级出现实现"情报递进", 蛇窟为终点。
+  站点派系 = 与委托人敌对的现有派系(族色机制, 满足"挂现有敌对派系"决策); 布局守卫符号
+  (RK_Sym_Pawn_Cultist_*/RK_Sym_Pawn_Snake*) spawnPartOfFaction=true 随站点派系生成, 敌我判定统一。
+  奖励 = 银币+好感+哨站战利品(波次6 可搜刮容器→蓝图书闭环)。
+  注: 任务不进自然刷出池(rootSelectionWeight=0), 只由 RimQuest QuestGiverDefs 指定后自动发布。
+============================================================================ -->
+	<QuestScriptDef>
+		<defName>RK_MO_OpportunitySite_CultHideout_T1</defName>
+		<rootSelectionWeight>0</rootSelectionWeight>
+		<rootMinPoints>400</rootMinPoints>
+		<canGiveRoyalFavor>false</canGiveRoyalFavor>
+		<expireDaysRange>6~12</expireDaysRange>
+		<questNameRules>
+			<rulesStrings>
+				<li>questName-&gt;[asker_faction_name]的委托: 清剿废弃藏身处</li>
+			</rulesStrings>
+		</questNameRules>
+		<questDescriptionRules>
+			<rulesStrings>
+				<li>questDescription-&gt;[asker_nameFull]，[asker_faction_leaderTitle]，向我们发来消息: 王国境内有一伙披着王国甲胄行邪教之实的叛徒，一处由邪教新信徒把守的废弃小藏身处。缴获的粗浅卷宗里画着古怪祭坛与更深处的地道。。
+
+[asker_nameDef]请求我们铲除这里——杀光全部敌人与炮塔。据[asker_label]称，[sitePart0_description]。
+
+事成之后，[asker_faction_name]除支付银币、提升友好度外，哨站里的战利品(含那些可搜刮的箱柜)也归我们处置。</li>
+			</rulesStrings>
+		</questDescriptionRules>
+		<root Class="QuestNode_Sequence">
+			<nodes>
+				<li Class="QuestNode_SubScript">
+					<def>Util_RandomizePointsChallengeRating</def>
+					<parms><pointsFactorTwoStar>1.5</pointsFactorTwoStar><pointsFactorThreeStar>2</pointsFactorThreeStar></parms>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_AdjustPointsForDistantFight</def>
+				</li>
+				<li Class="QuestNode_GetMap"><canBeSpace>true</canBeSpace></li>
+				<li Class="QuestNode_GetPawn">
+					<storeAs>asker</storeAs>
+					<mustBeFactionLeader>true</mustBeFactionLeader>
+					<allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+					<hostileWeight>0.15</hostileWeight>
+				</li>
+				<li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+					<storeAs>sitePartDefs</storeAs>
+					<storeFactionAs>siteFaction</storeFactionAs>
+					<mustBeHostileToFactionOf>$asker</mustBeHostileToFactionOf>
+					<sitePartsTags>
+						<li><tag>RK_MO_CultHideout_T1</tag></li>
+					</sitePartsTags>
+				</li>
+				<li Class="QuestNode_GetSiteTile">
+					<storeAs>siteTile</storeAs>
+					<preferCloserTiles>true</preferCloserTiles>
+				</li>
+				<li Class="QuestNode_GetDefaultSitePartsParams">
+					<tile>$siteTile</tile>
+					<faction>$siteFaction</faction>
+					<sitePartDefs>$sitePartDefs</sitePartDefs>
+					<storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+				</li>
+				<li Class="QuestNode_GetSiteThreatPoints">
+					<storeAs>sitePoints</storeAs>
+					<sitePartsParams>$sitePartsParams</sitePartsParams>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_GetDefaultRewardValueFromPoints</def>
+					<parms><points>$sitePoints</points></parms>
+				</li>
+				<li Class="QuestNode_Multiply">
+					<value1>$rewardValue</value1>
+					<value2>1.75</value2>
+					<storeAs>rewardValue</storeAs>
+				</li>
+				<li Class="QuestNode_SubScript"><def>Util_GenerateSite</def></li>
+				<li Class="QuestNode_SpawnWorldObjects"><worldObjects>$site</worldObjects></li>
+				<li Class="QuestNode_WorldObjectTimeout">
+					<worldObject>$site</worldObject>
+					<isQuestTimeout>true</isQuestTimeout>
+					<delayTicks>$(randInt(12,28)*60000)</delayTicks>
+					<inSignalDisable>site.MapGenerated</inSignalDisable>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Letter">
+								<label>任务过期: [resolvedQuestName]</label>
+								<text>邪教徒警觉起来转移了据点。任务 [resolvedQuestName] 已失败。</text>
+							</li>
+							<li Class="QuestNode_End"><outcome>Fail</outcome></li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_Signal">
+					<inSignal>site.AllEnemiesDefeated</inSignal>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Notify_PlayerRaidedSomeone"><getRaidersFromMapParent>$site</getRaidersFromMapParent></li>
+							<li Class="QuestNode_GiveRewards">
+								<parms><allowGoodwill>true</allowGoodwill><allowRoyalFavor>false</allowRoyalFavor></parms>
+								<addCampLootReward>true</addCampLootReward>
+								<customLetterLabel>酬金已到</customLetterLabel>
+								<customLetterText>敌人已被肃清。来自 [asker_faction_name] 的报酬已经送达; 哨站里搜出的卷宗或许正指向邪教更深处的巢穴。</customLetterText>
+							</li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_End"><inSignal>site.AllEnemiesDefeated</inSignal><outcome>Success</outcome></li>
+			</nodes>
+		</root>
+	</QuestScriptDef>
+	<QuestScriptDef>
+		<defName>RK_MO_OpportunitySite_CultHideout_T2</defName>
+		<rootSelectionWeight>0</rootSelectionWeight>
+		<rootMinPoints>1000</rootMinPoints>
+		<canGiveRoyalFavor>false</canGiveRoyalFavor>
+		<expireDaysRange>6~12</expireDaysRange>
+		<questNameRules>
+			<rulesStrings>
+				<li>questName-&gt;[asker_faction_name]的委托: 清剿地下巢穴</li>
+			</rulesStrings>
+		</questNameRules>
+		<questDescriptionRules>
+			<rulesStrings>
+				<li>questDescription-&gt;[asker_nameFull]，[asker_faction_leaderTitle]，向我们发来消息: 王国境内有一伙披着王国甲胄行邪教之实的叛徒，从外围藏身处搜出的卷宗把坐标指向此处。盘踞这里的侍僧披着锁子甲, 地下摆满了祭坛与陪葬坑。。
+
+[asker_nameDef]请求我们铲除这里——杀光全部敌人与炮塔。据[asker_label]称，[sitePart0_description]。
+
+事成之后，[asker_faction_name]除支付银币、提升友好度外，哨站里的战利品(含那些可搜刮的箱柜)也归我们处置。</li>
+			</rulesStrings>
+		</questDescriptionRules>
+		<root Class="QuestNode_Sequence">
+			<nodes>
+				<li Class="QuestNode_SubScript">
+					<def>Util_RandomizePointsChallengeRating</def>
+					<parms><pointsFactorTwoStar>1.5</pointsFactorTwoStar><pointsFactorThreeStar>2</pointsFactorThreeStar></parms>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_AdjustPointsForDistantFight</def>
+				</li>
+				<li Class="QuestNode_GetMap"><canBeSpace>true</canBeSpace></li>
+				<li Class="QuestNode_GetPawn">
+					<storeAs>asker</storeAs>
+					<mustBeFactionLeader>true</mustBeFactionLeader>
+					<allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+					<hostileWeight>0.15</hostileWeight>
+				</li>
+				<li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+					<storeAs>sitePartDefs</storeAs>
+					<storeFactionAs>siteFaction</storeFactionAs>
+					<mustBeHostileToFactionOf>$asker</mustBeHostileToFactionOf>
+					<sitePartsTags>
+						<li><tag>RK_MO_CultHideout_T2</tag></li>
+					</sitePartsTags>
+				</li>
+				<li Class="QuestNode_GetSiteTile">
+					<storeAs>siteTile</storeAs>
+					<preferCloserTiles>true</preferCloserTiles>
+				</li>
+				<li Class="QuestNode_GetDefaultSitePartsParams">
+					<tile>$siteTile</tile>
+					<faction>$siteFaction</faction>
+					<sitePartDefs>$sitePartDefs</sitePartDefs>
+					<storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+				</li>
+				<li Class="QuestNode_GetSiteThreatPoints">
+					<storeAs>sitePoints</storeAs>
+					<sitePartsParams>$sitePartsParams</sitePartsParams>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_GetDefaultRewardValueFromPoints</def>
+					<parms><points>$sitePoints</points></parms>
+				</li>
+				<li Class="QuestNode_Multiply">
+					<value1>$rewardValue</value1>
+					<value2>1.75</value2>
+					<storeAs>rewardValue</storeAs>
+				</li>
+				<li Class="QuestNode_SubScript"><def>Util_GenerateSite</def></li>
+				<li Class="QuestNode_SpawnWorldObjects"><worldObjects>$site</worldObjects></li>
+				<li Class="QuestNode_WorldObjectTimeout">
+					<worldObject>$site</worldObject>
+					<isQuestTimeout>true</isQuestTimeout>
+					<delayTicks>$(randInt(12,28)*60000)</delayTicks>
+					<inSignalDisable>site.MapGenerated</inSignalDisable>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Letter">
+								<label>任务过期: [resolvedQuestName]</label>
+								<text>邪教徒警觉起来转移了据点。任务 [resolvedQuestName] 已失败。</text>
+							</li>
+							<li Class="QuestNode_End"><outcome>Fail</outcome></li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_Signal">
+					<inSignal>site.AllEnemiesDefeated</inSignal>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Notify_PlayerRaidedSomeone"><getRaidersFromMapParent>$site</getRaidersFromMapParent></li>
+							<li Class="QuestNode_GiveRewards">
+								<parms><allowGoodwill>true</allowGoodwill><allowRoyalFavor>false</allowRoyalFavor></parms>
+								<addCampLootReward>true</addCampLootReward>
+								<customLetterLabel>酬金已到</customLetterLabel>
+								<customLetterText>敌人已被肃清。来自 [asker_faction_name] 的报酬已经送达; 哨站里搜出的卷宗或许正指向邪教更深处的巢穴。</customLetterText>
+							</li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_End"><inSignal>site.AllEnemiesDefeated</inSignal><outcome>Success</outcome></li>
+			</nodes>
+		</root>
+	</QuestScriptDef>
+	<QuestScriptDef>
+		<defName>RK_MO_OpportunitySite_CultHideout_T3</defName>
+		<rootSelectionWeight>0</rootSelectionWeight>
+		<rootMinPoints>1700</rootMinPoints>
+		<canGiveRoyalFavor>false</canGiveRoyalFavor>
+		<expireDaysRange>6~12</expireDaysRange>
+		<questNameRules>
+			<rulesStrings>
+				<li>questName-&gt;[asker_faction_name]的委托: 清剿邪教主殿</li>
+			</rulesStrings>
+		</questNameRules>
+		<questDescriptionRules>
+			<rulesStrings>
+				<li>questDescription-&gt;[asker_nameFull]，[asker_faction_leaderTitle]，向我们发来消息: 王国境内有一伙披着王国甲胄行邪教之实的叛徒，邪教的主殿, 花岗岩深处的祭堂。披板甲的得道者在此护卫圣物与典籍, 卷宗暗示最深处关着更可怕的东西。。
+
+[asker_nameDef]请求我们铲除这里——杀光全部敌人与炮塔。据[asker_label]称，[sitePart0_description]。
+
+事成之后，[asker_faction_name]除支付银币、提升友好度外，哨站里的战利品(含那些可搜刮的箱柜)也归我们处置。</li>
+			</rulesStrings>
+		</questDescriptionRules>
+		<root Class="QuestNode_Sequence">
+			<nodes>
+				<li Class="QuestNode_SubScript">
+					<def>Util_RandomizePointsChallengeRating</def>
+					<parms><pointsFactorTwoStar>1.5</pointsFactorTwoStar><pointsFactorThreeStar>2</pointsFactorThreeStar></parms>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_AdjustPointsForDistantFight</def>
+				</li>
+				<li Class="QuestNode_GetMap"><canBeSpace>true</canBeSpace></li>
+				<li Class="QuestNode_GetPawn">
+					<storeAs>asker</storeAs>
+					<mustBeFactionLeader>true</mustBeFactionLeader>
+					<allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+					<hostileWeight>0.15</hostileWeight>
+				</li>
+				<li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+					<storeAs>sitePartDefs</storeAs>
+					<storeFactionAs>siteFaction</storeFactionAs>
+					<mustBeHostileToFactionOf>$asker</mustBeHostileToFactionOf>
+					<sitePartsTags>
+						<li><tag>RK_MO_CultHideout_T3</tag></li>
+					</sitePartsTags>
+				</li>
+				<li Class="QuestNode_GetSiteTile">
+					<storeAs>siteTile</storeAs>
+					<preferCloserTiles>true</preferCloserTiles>
+				</li>
+				<li Class="QuestNode_GetDefaultSitePartsParams">
+					<tile>$siteTile</tile>
+					<faction>$siteFaction</faction>
+					<sitePartDefs>$sitePartDefs</sitePartDefs>
+					<storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+				</li>
+				<li Class="QuestNode_GetSiteThreatPoints">
+					<storeAs>sitePoints</storeAs>
+					<sitePartsParams>$sitePartsParams</sitePartsParams>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_GetDefaultRewardValueFromPoints</def>
+					<parms><points>$sitePoints</points></parms>
+				</li>
+				<li Class="QuestNode_Multiply">
+					<value1>$rewardValue</value1>
+					<value2>1.75</value2>
+					<storeAs>rewardValue</storeAs>
+				</li>
+				<li Class="QuestNode_SubScript"><def>Util_GenerateSite</def></li>
+				<li Class="QuestNode_SpawnWorldObjects"><worldObjects>$site</worldObjects></li>
+				<li Class="QuestNode_WorldObjectTimeout">
+					<worldObject>$site</worldObject>
+					<isQuestTimeout>true</isQuestTimeout>
+					<delayTicks>$(randInt(12,28)*60000)</delayTicks>
+					<inSignalDisable>site.MapGenerated</inSignalDisable>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Letter">
+								<label>任务过期: [resolvedQuestName]</label>
+								<text>邪教徒警觉起来转移了据点。任务 [resolvedQuestName] 已失败。</text>
+							</li>
+							<li Class="QuestNode_End"><outcome>Fail</outcome></li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_Signal">
+					<inSignal>site.AllEnemiesDefeated</inSignal>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Notify_PlayerRaidedSomeone"><getRaidersFromMapParent>$site</getRaidersFromMapParent></li>
+							<li Class="QuestNode_GiveRewards">
+								<parms><allowGoodwill>true</allowGoodwill><allowRoyalFavor>false</allowRoyalFavor></parms>
+								<addCampLootReward>true</addCampLootReward>
+								<customLetterLabel>酬金已到</customLetterLabel>
+								<customLetterText>敌人已被肃清。来自 [asker_faction_name] 的报酬已经送达; 哨站里搜出的卷宗或许正指向邪教更深处的巢穴。</customLetterText>
+							</li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_End"><inSignal>site.AllEnemiesDefeated</inSignal><outcome>Success</outcome></li>
+			</nodes>
+		</root>
+	</QuestScriptDef>
+	<QuestScriptDef>
+		<defName>RK_MO_OpportunitySite_SnakeLair</defName>
+		<rootSelectionWeight>0</rootSelectionWeight>
+		<rootMinPoints>2400</rootMinPoints>
+		<canGiveRoyalFavor>false</canGiveRoyalFavor>
+		<expireDaysRange>6~12</expireDaysRange>
+		<questNameRules>
+			<rulesStrings>
+				<li>questName-&gt;[asker_faction_name]的委托: 清剿蛇窟(终局)</li>
+			</rulesStrings>
+		</questNameRules>
+		<questDescriptionRules>
+			<rulesStrings>
+				<li>questDescription-&gt;[asker_nameFull]，[asker_faction_leaderTitle]，向我们发来消息: 王国境内有一伙披着王国甲胄行邪教之实的叛徒，主殿卷宗记载的大蛇之眠——邪教用活人喂出的蛇窟。眼镜蛇与巨蟒盘踞在废矿井般的巢穴里, 是这条清剿链的终点。。
+
+[asker_nameDef]请求我们铲除这里——杀光全部敌人与炮塔。据[asker_label]称，[sitePart0_description]。
+
+事成之后，[asker_faction_name]除支付银币、提升友好度外，哨站里的战利品(含那些可搜刮的箱柜)也归我们处置。</li>
+			</rulesStrings>
+		</questDescriptionRules>
+		<root Class="QuestNode_Sequence">
+			<nodes>
+				<li Class="QuestNode_SubScript">
+					<def>Util_RandomizePointsChallengeRating</def>
+					<parms><pointsFactorTwoStar>1.5</pointsFactorTwoStar><pointsFactorThreeStar>2</pointsFactorThreeStar></parms>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_AdjustPointsForDistantFight</def>
+				</li>
+				<li Class="QuestNode_GetMap"><canBeSpace>true</canBeSpace></li>
+				<li Class="QuestNode_GetPawn">
+					<storeAs>asker</storeAs>
+					<mustBeFactionLeader>true</mustBeFactionLeader>
+					<allowPermanentEnemyFaction>false</allowPermanentEnemyFaction>
+					<hostileWeight>0.15</hostileWeight>
+				</li>
+				<li Class="QuestNode_GetSitePartDefsByTagsAndFaction">
+					<storeAs>sitePartDefs</storeAs>
+					<storeFactionAs>siteFaction</storeFactionAs>
+					<mustBeHostileToFactionOf>$asker</mustBeHostileToFactionOf>
+					<sitePartsTags>
+						<li><tag>RK_MO_SnakeLair</tag></li>
+					</sitePartsTags>
+				</li>
+				<li Class="QuestNode_GetSiteTile">
+					<storeAs>siteTile</storeAs>
+					<preferCloserTiles>true</preferCloserTiles>
+				</li>
+				<li Class="QuestNode_GetDefaultSitePartsParams">
+					<tile>$siteTile</tile>
+					<faction>$siteFaction</faction>
+					<sitePartDefs>$sitePartDefs</sitePartDefs>
+					<storeSitePartsParamsAs>sitePartsParams</storeSitePartsParamsAs>
+				</li>
+				<li Class="QuestNode_GetSiteThreatPoints">
+					<storeAs>sitePoints</storeAs>
+					<sitePartsParams>$sitePartsParams</sitePartsParams>
+				</li>
+				<li Class="QuestNode_SubScript">
+					<def>Util_GetDefaultRewardValueFromPoints</def>
+					<parms><points>$sitePoints</points></parms>
+				</li>
+				<li Class="QuestNode_Multiply">
+					<value1>$rewardValue</value1>
+					<value2>1.75</value2>
+					<storeAs>rewardValue</storeAs>
+				</li>
+				<li Class="QuestNode_SubScript"><def>Util_GenerateSite</def></li>
+				<li Class="QuestNode_SpawnWorldObjects"><worldObjects>$site</worldObjects></li>
+				<li Class="QuestNode_WorldObjectTimeout">
+					<worldObject>$site</worldObject>
+					<isQuestTimeout>true</isQuestTimeout>
+					<delayTicks>$(randInt(12,28)*60000)</delayTicks>
+					<inSignalDisable>site.MapGenerated</inSignalDisable>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Letter">
+								<label>任务过期: [resolvedQuestName]</label>
+								<text>邪教徒警觉起来转移了据点。任务 [resolvedQuestName] 已失败。</text>
+							</li>
+							<li Class="QuestNode_End"><outcome>Fail</outcome></li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_Signal">
+					<inSignal>site.AllEnemiesDefeated</inSignal>
+					<node Class="QuestNode_Sequence">
+						<nodes>
+							<li Class="QuestNode_Notify_PlayerRaidedSomeone"><getRaidersFromMapParent>$site</getRaidersFromMapParent></li>
+							<li Class="QuestNode_GiveRewards">
+								<parms><allowGoodwill>true</allowGoodwill><allowRoyalFavor>false</allowRoyalFavor></parms>
+								<addCampLootReward>true</addCampLootReward>
+								<customLetterLabel>酬金已到</customLetterLabel>
+								<customLetterText>敌人已被肃清。来自 [asker_faction_name] 的报酬已经送达; 哨站里搜出的卷宗或许正指向邪教更深处的巢穴。</customLetterText>
+							</li>
+						</nodes>
+					</node>
+				</li>
+				<li Class="QuestNode_End"><inSignal>site.AllEnemiesDefeated</inSignal><outcome>Success</outcome></li>
+			</nodes>
+		</root>
+	</QuestScriptDef>
+</Defs>

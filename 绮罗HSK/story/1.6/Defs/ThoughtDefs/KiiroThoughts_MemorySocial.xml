@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>Kiiro_MerchantGift_Received</defName>
+    <thoughtClass>Thought_MemorySocialCumulative</thoughtClass>
+    <stackLimit>10</stackLimit>
+    <stackLimitForSameOtherPawn>3</stackLimitForSameOtherPawn>
+    <maxCumulatedOpinionOffset>30</maxCumulatedOpinionOffset>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <socialTargetDevelopmentalStageFilter>Baby, Child, Adult</socialTargetDevelopmentalStageFilter>
+    <stages>
+      <li>
+        <label>merchant gift</label>
+        <baseOpinionOffset>5</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>Kiiro_MerchantGift_ReceivedMood</thoughtToMake>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Kiiro_MerchantGift_ReceivedMood</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.8</stackedEffectMultiplier>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>gift received</label>
+        <description>A gift from merchant... find a time to go a shop~</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

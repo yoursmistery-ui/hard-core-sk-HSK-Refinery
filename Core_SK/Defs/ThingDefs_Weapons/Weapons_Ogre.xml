@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef Name="BaseMutantMelee" Abstract="True">
+		<category>Item</category>
+		<thingClass>ThingWithComps</thingClass>
+		<equipmentType>Primary</equipmentType>
+		<pathCost>10</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<selectable>True</selectable>
+		<graphicData>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>1</DeteriorationRate>
+			<SellPriceFactor>0.70</SellPriceFactor>
+		</statBases>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<techLevel>Industrial</techLevel>
+		<weaponTags>
+			<li>Ogre</li>
+		</weaponTags>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li>
+				<compClass>CompEquippable</compClass>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtWeaponMelee</nameMaker>
+				<descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+				<minQualityForArtistic>Excellent</minQualityForArtistic>
+			</li>
+		</comps>
+		<inspectorTabs>
+			<li>ITab_Art</li>
+		</inspectorTabs>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseMutantMelee">
+		<defName>Sunderer</defName>
+		<label>Sunder</label>
+		<!-- <menuHidden>false</menuHidden> -->
+		<description>A massive cleaver.</description>
+		<destroyOnDrop>false</destroyOnDrop>
+		<graphicData>
+			<texPath>Things/Weapons/Ogre/Sunderer</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>InteractMelee</soundInteract>
+		<tradeability>Sellable</tradeability>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+		</stuffCategories>
+		<costStuffCount>90</costStuffCount>
+		<statBases>
+			<Bulk>30.00</Bulk>
+			<Mass>32.00</Mass>
+			<MeleeCounterParryBonus>0.1</MeleeCounterParryBonus>
+		</statBases>
+		<equippedAngleOffset>-65</equippedAngleOffset>
+		<equippedStatOffsets>
+			<MeleeCritChance>0.4</MeleeCritChance>
+			<MeleeParryChance>0.1</MeleeParryChance>
+			<MeleeDodgeChance>0.1</MeleeDodgeChance>
+		</equippedStatOffsets>
+		<tools>
+			<li Class="CombatExtended.ToolCE">
+				<label>handle</label>
+				<capacities>
+					<li>Poke</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>2.2</cooldownTime>
+				<chanceFactor>0.1</chanceFactor>
+				<armorPenetrationBlunt>7</armorPenetrationBlunt>
+				<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+			</li>
+			<li Class="CombatExtended.ToolCE">
+				<label>edge</label>
+				<capacities>
+					<li>Cut</li>
+				</capacities>
+				<power>42</power>
+				<cooldownTime>3.0</cooldownTime>
+				<chanceFactor>1.33</chanceFactor>
+				<armorPenetrationBlunt>24</armorPenetrationBlunt>
+				<armorPenetrationSharp>5.60</armorPenetrationSharp>
+				<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+			</li>
+		</tools>
+		<thingCategories>
+			<li>HeavyMelee</li>
+		</thingCategories>
+	</ThingDef>
+
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_SawGun</defName>
+        <label>saw gun</label>
+         <graphicData>
+            <texPath>Things/Weapons/Ogre/SawGun</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>InteractPTUR</soundInteract>
+        <statBases>
+            <MarketValue>2600</MarketValue>
+            <SightsEfficiency>0.60</SightsEfficiency>
+            <ShotSpread>0.10</ShotSpread>
+            <SwayFactor>2.5</SwayFactor>
+            <RangedWeapon_Cooldown>4.7</RangedWeapon_Cooldown>
+            <Bulk>67.50</Bulk>
+            <Mass>63.00</Mass>
+        </statBases>
+        <weaponTags>
+            <li>OGR1</li>
+            <li>OgreHeavy</li>
+            <li>CE_AI_Rifle</li>
+        </weaponTags>
+        <thingCategories>
+            <li>MachineGun</li>
+        </thingCategories>
+        <tradeability>Sellable</tradeability>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <recoilPattern>Mounted</recoilPattern>
+                <recoilAmount>0.9</recoilAmount>
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_30x173mm_FMJ</defaultProjectile>
+				<minRange>2</minRange>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<ai_AvoidFriendlyFireRadius>3</ai_AvoidFriendlyFireRadius>
+                <warmupTime>1.20</warmupTime>
+                <range>60</range>
+                <burstShotCount>5</burstShotCount>
+                <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+                <soundCast>35mm_shot</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>9</muzzleFlashScale>
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+				<onlyManualCast>true</onlyManualCast>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+                <aimedBurstShotCount>2</aimedBurstShotCount>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>20</magazineSize>
+                <reloadTime>5.00</reloadTime>
+                <ammoSet>AmmoSet_30x173mm</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Heavy_Component>1</Heavy_Component>
+            <Weapon_Parts>10</Weapon_Parts>
+			<Plastic>8</Plastic>
+        </smeltProducts>
+    </ThingDef>
+
+    <ThingDef ParentName="BaseGun_Heavy">
+        <defName>Gun_RocketLance</defName>
+        <label>rocket lance</label>        
+        <graphicData>
+            <texPath>Things/Weapons/Ogre/RocketLance</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <soundInteract>InteractPTUR</soundInteract>
+        <statBases>
+            <MarketValue>2600</MarketValue>
+            <SightsEfficiency>0.7</SightsEfficiency>
+            <ShotSpread>0.15</ShotSpread>
+            <SwayFactor>2.5</SwayFactor>
+            <RangedWeapon_Cooldown>4</RangedWeapon_Cooldown>
+            <Bulk>70.60</Bulk>
+            <Mass>62.00</Mass>
+        </statBases>
+        <weaponTags>
+            <li>OGR2</li>
+            <li>OgreLaunchers</li>
+            <li>CE_AI_Rifle</li>
+            <li>CE_AI_Launcher</li>
+        </weaponTags>
+        <thingCategories>
+            <li>Launchers</li>
+        </thingCategories>
+        <tradeability>Sellable</tradeability>
+        <verbs>
+            <li Class="CombatExtended.VerbPropertiesCE">
+                <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+                <hasStandardCommand>true</hasStandardCommand>
+                <defaultProjectile>Bullet_SPG9Rocket_Frag</defaultProjectile>
+                <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+                <warmupTime>1.20</warmupTime>
+                <noiseRadius>8</noiseRadius>
+				<!--<forcedMissRadius>3</forcedMissRadius>-->
+				<circularError>1.2</circularError>
+				<minRange>5</minRange>
+				<ai_AvoidFriendlyFireRadius>5</ai_AvoidFriendlyFireRadius>
+                <range>50</range>
+                <!-- grenades at 12.9 -->
+                <targetParams>
+                    <canTargetLocations>true</canTargetLocations>
+                </targetParams>
+                <soundCast>InfernoCannon_Fire</soundCast>
+                <soundCastTail>GunTail_Heavy</soundCastTail>
+                <muzzleFlashScale>14</muzzleFlashScale>
+            </li>
+        </verbs>
+        <comps>
+            <li Class="CombatExtended.CompProperties_FireModes">
+                <aiUseBurstMode>FALSE</aiUseBurstMode>
+                <aiAimMode>AimedShot</aiAimMode>
+            </li>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+                <magazineSize>5</magazineSize>
+                <reloadTime>6.50</reloadTime>
+                <ammoSet>AmmoSet_SPG9Rocket</ammoSet>
+            </li>
+        </comps>
+        <smeltProducts>
+            <Heavy_Component>1</Heavy_Component>
+            <Weapon_Parts>13</Weapon_Parts>
+			<Plastic>7</Plastic>
+        </smeltProducts>
+    </ThingDef>
+</Defs>

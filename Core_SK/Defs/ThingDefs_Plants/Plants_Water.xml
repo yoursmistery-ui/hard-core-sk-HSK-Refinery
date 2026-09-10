@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="SK_DeciduousPlantBase">
+		<defName>PlantAlgae</defName>
+		<label>Algae</label>
+		<description>Algae are avascular, mostly aquatic plants, commonly known as seaweed. They grow in both sea and fresh water.</description>
+		<thingClass>SK.Plant_Algae</thingClass>
+		<selectable>True</selectable>
+		<statBases>
+			<Beauty>3</Beauty>
+			<BeautyOutdoors>3</BeautyOutdoors>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Nutrition>0.35</Nutrition>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Plant/PlantAlgae</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<pathCost>5</pathCost>
+		<hideAtSnowOrSandDepth>0.1</hideAtSnowOrSandDepth>
+		<ingestible>
+			<preferability>NeverForNutrition</preferability>
+			<foodType>Plant</foodType>
+		</ingestible>
+		<plant>
+			<leaflessGraphicPath>Things/Plant/PlantAlgae_Leafless</leaflessGraphicPath>
+			<maxMeshCount>9</maxMeshCount>
+			<harvestTag>Standard</harvestTag>
+			<harvestedThingDef>RawAlgae</harvestedThingDef>
+			<harvestMinGrowth>0.4</harvestMinGrowth>
+			<harvestFailable>false</harvestFailable>
+			<harvestYield>5</harvestYield>
+			<fertilityMin>0.01</fertilityMin>
+			<topWindExposure>0.1</topWindExposure>
+			<growDays>4</growDays>
+			<fertilitySensitivity>0.1</fertilitySensitivity>
+			<visualSizeRange>0.4~1.1</visualSizeRange>
+		</plant>
+	</ThingDef>
+
+</Defs>

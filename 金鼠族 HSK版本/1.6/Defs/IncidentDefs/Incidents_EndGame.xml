@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <IncidentDef ParentName="GiveQuestBase">
+        <defName>OAGene_GiveQuest_EndGameHomecoming</defName>
+        <label>长路归乡</label>
+        <questScriptDef>OAGene_EndGame_Homecoming</questScriptDef>
+        <baseChance>0</baseChance>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_EndGame_SnowstormPrecursor</defName>
+        <label>A sudden drop in temperature（END）</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_MakeGameCondition_EndGameCondition</workerClass>
+        <gameCondition>OAGene_EndGame_SnowstormPrecursor</gameCondition>
+        <letterLabel>A sudden drop in temperature</letterLabel>
+        <letterDef>ThreatSmall</letterDef>
+        <durationDays>0.5</durationDays>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_EndGame_ExtremeSnowstorm</defName>
+        <label>Extreme blizzard（END）</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_MakeGameCondition_EndGameSnowstorm</workerClass>
+        <gameCondition>OAGene_EndGame_ExtremeSnowstorm</gameCondition>
+        <letterLabel>Extreme blizzard</letterLabel>
+        <letterDef>ThreatBig</letterDef>
+        <durationDays>20</durationDays>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_EndGame_SnowstormFanaticalCultis</defName>
+        <label>Fanatical Windstorm Believers</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormFanaticalCultis</workerClass>
+        <category>ThreatBig</category>
+        <pointsScaleable>true</pointsScaleable>
+        <tale>Raid</tale>
+        <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    </IncidentDef>
+
+    <IncidentDef ParentName="OAGene_Snowstorm_MapIncident">
+        <defName>OAGene_SnowstormCultistRaid</defName>
+        <label>Fanatical Windstorm Believers</label>
+        <workerClass>OberoniaAureaGene.Snowstorm.IncidentWorker_SnowstormCultistRaid</workerClass>
+        <category>ThreatBig</category>
+        <pointsScaleable>true</pointsScaleable>
+        <tale>Raid</tale>
+        <ignoreRecentSelectionWeighting>true</ignoreRecentSelectionWeighting>
+    </IncidentDef>
+
+    <IncidentDef ParentName="GiveQuestBase">
+        <defName>OAGene_SnowstormCultistBeggars</defName>
+        <label>Trembling believers</label>
+        <questScriptDef>OAGene_SnowstormCultistBeggars</questScriptDef>
+        <targetTags Inherit="false">
+            <li>Map_PlayerHome</li>
+        </targetTags>
+        <baseChance>0</baseChance>
+    </IncidentDef>
+
+</Defs>

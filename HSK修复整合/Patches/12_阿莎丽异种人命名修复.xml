@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 根因修复"Could not get new name (first rule pack: NamerFactionOutlander)"(2026-08-31):
+       AsariRace 上游把 Baseline_Asari 异种人的 nameMaker 误写成派系名包 NamerFactionOutlander
+       (作者从派系 def 的 factionNameMaker 复制),且 chanceToUseNameMaker=1,
+       每个阿莎丽异种人 pawn 都走派系包取人名;人名唯一性校验(!NameTriple.UsedThisGame,
+       与全世界所有 pawn 名逐个比对)连续拒绝,耗尽 NameGenerator 重试上限
+       (1.6=150,HSKFixPack NameGeneratorMaxTriesFix 已放宽到 1000,但治标不治本)后报错,
+       pawn 落得派系风格人名。92号补丁给人类异种池留 Asari 0.002 点缀后偶发暴露(轨道商队奴隶等)。
+       修复: 改指 mod 自带人名包 NamerPersonAsari(RulePacks_NameMakers_Asari.xml,
+       First_Asari/Last_Asari 词库,中英双语在 Languages/*/Strings/Names/)。 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/XenotypeDef[defName="Baseline_Asari"]/nameMaker</xpath>
+    <value>
+      <nameMaker>NamerPersonAsari</nameMaker>
+    </value>
+  </Operation>
+</Patch>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Unique plasma traits must test against CE heat armor, not blunt armor. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/DamageDef[defName="MihoMeltyPlasma" or defName="MihoFieryPlasma"]/armorCategory</xpath>
+		<value>
+			<armorCategory>Heat</armorCategory>
+		</value>
+	</Operation>
+
+	<!-- Odyssey unique anti-materiel rifle: 13.7 mm is represented by HSK .50 BMG. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Miho_Weapon_RifleOld_Unique</defName>
+		<statBases>
+			<MarketValue>2200</MarketValue>
+			<RangedWeapon_Cooldown>0.55</RangedWeapon_Cooldown>
+			<SightsEfficiency>3.00</SightsEfficiency>
+			<ShotSpread>0.018</ShotSpread>
+			<SwayFactor>1.60</SwayFactor>
+			<Bulk>14</Bulk>
+			<Mass>7.5</Mass>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_50BMG_FMJ</defaultProjectile>
+			<warmupTime>3.25</warmupTime>
+			<range>90</range>
+			<minRange>3.9</minRange>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>Miho_KineticRifleBolt</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>5</magazineSize>
+			<reloadTime>4.8</reloadTime>
+			<ammoSet>AmmoSet_50BMG</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>false</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_SR</li>
+			<li>Bipod_DMR</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Odyssey unique compact LMG. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Miho_Weapon_RifleDefence_Unique</defName>
+		<statBases>
+			<MarketValue>2400</MarketValue>
+			<RangedWeapon_Cooldown>0.32</RangedWeapon_Cooldown>
+			<SightsEfficiency>0.90</SightsEfficiency>
+			<ShotSpread>0.12</ShotSpread>
+			<SwayFactor>1.10</SwayFactor>
+			<Bulk>9.5</Bulk>
+			<Mass>5.1</Mass>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.75</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_556x45mmNATO_FMJ</defaultProjectile>
+			<warmupTime>0.75</warmupTime>
+			<range>32</range>
+			<burstShotCount>7</burstShotCount>
+			<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+			<soundCast>Miho_DefenceRifle</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>48</magazineSize>
+			<reloadTime>5.2</reloadTime>
+			<ammoSet>AmmoSet_556x45mmNATO</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>3</aimedBurstShotCount>
+			<aiUseBurstMode>true</aiUseBurstMode>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>Bipod_LMG</li>
+			<li>MG2</li>
+			<li>MachineGun</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Odyssey unique experimental plasma rifle. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Miho_Weapon_RiflePlasma_Unique</defName>
+		<statBases>
+			<MarketValue>3600</MarketValue>
+			<RangedWeapon_Cooldown>0.32</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.35</SightsEfficiency>
+			<ShotSpread>0.14</ShotSpread>
+			<SwayFactor>1.20</SwayFactor>
+			<Bulk>9</Bulk>
+			<Mass>5.5</Mass>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.20</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_Plasma</defaultProjectile>
+			<warmupTime>1.6</warmupTime>
+			<soundAiming>Miho_Charging</soundAiming>
+			<range>52</range>
+			<burstShotCount>4</burstShotCount>
+			<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+			<soundCast>Miho_RiflePlasmaGun</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>40</magazineSize>
+			<reloadTime>4.5</reloadTime>
+			<ammoSet>AmmoSet_PlasmaBolt</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aimedBurstShotCount>2</aimedBurstShotCount>
+			<aiUseBurstMode>false</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>CE_AI_Rifle</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Odyssey 47 mm ship cannon. It keeps its barrel-wear fuel component. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="Miho_ShipCannon"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Miho_Turret_ShipGun"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.65</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<!-- Verb_ShootCE is not recognized by the vanilla 1.6 radius place worker. -->
+	<Operation Class="PatchOperationRemove">
+		<!-- placeWorkers is declared on this abstract parent, before XML inheritance is resolved. -->
+		<xpath>Defs/ThingDef[@Name="Miho_ShipCannon"]/placeWorkers/li[.="PlaceWorker_ShowTurretRadius"]</xpath>
+	</Operation>
+
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Miho_BuildingWeapon_ShipGun</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.45</RangedWeapon_Cooldown>
+			<SightsEfficiency>2.40</SightsEfficiency>
+			<ShotSpread>0.06</ShotSpread>
+			<SwayFactor>0.45</SwayFactor>
+			<Bulk>80</Bulk>
+			<Mass>200</Mass>
+		</statBases>
+		<Properties>
+			<recoilAmount>3.2</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_90mmCannonShell_HE</defaultProjectile>
+			<warmupTime>0.88</warmupTime>
+			<range>75</range>
+			<minRange>5</minRange>
+			<burstShotCount>3</burstShotCount>
+			<ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+			<soundCast>Miho_KineticCannon</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>20</muzzleFlashScale>
+			<consumeFuelPerShot>1</consumeFuelPerShot>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>6</magazineSize>
+			<reloadTime>7.5</reloadTime>
+			<ammoSet>AmmoSet_90mmCannonShell</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>true</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>TurretGun</li>
+		</weaponTags>
+	</Operation>
+
+	<!-- Armed Odyssey shuttle rocket pod; ammunition is represented by shuttle fuel. -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>Miho_MechWeapon_LightRocketTurret</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>10</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.80</SightsEfficiency>
+			<ShotSpread>0.30</ShotSpread>
+			<SwayFactor>0.10</SwayFactor>
+			<Bulk>40</Bulk>
+			<Mass>10</Mass>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_80mmRocket_HE</defaultProjectile>
+			<range>100</range>
+			<minRange>28.9</minRange>
+			<requireLineOfSight>true</requireLineOfSight>
+			<soundCast>Miho_Rocket</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<burstShotCount>8</burstShotCount>
+			<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+			<muzzleFlashScale>9</muzzleFlashScale>
+			<defaultCooldownTime>600</defaultCooldownTime>
+			<consumeFuelPerShot>15</consumeFuelPerShot>
+		</Properties>
+		<FireModes>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+		<weaponTags>
+			<li>NoSwitch</li>
+		</weaponTags>
+	</Operation>
+</Patch>

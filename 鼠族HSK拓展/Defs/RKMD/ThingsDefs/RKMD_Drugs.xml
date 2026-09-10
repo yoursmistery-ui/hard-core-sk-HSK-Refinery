@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>Meowpaw</defName>
+    <label>Meowpaw</label>
+    <description>Mimi Brand high-caffeine energy drink with a pink Meow Paw logo — it packs a strong punch! One sip instantly perks you up, keeping your mind sharp and focus maxed out.</description>
+    <descriptionHyperlinks>
+      <HediffDef>MeowpawHigh</HediffDef>
+      <HediffDef>MeowpawTolerance</HediffDef>
+      <HediffDef>MeowpawAddiction</HediffDef>
+      <HediffDef>ChemicalDamageSevere</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <texPath>Things/Misc/Meowpaw</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.88</drawSize>
+    </graphicData>
+    <stackLimit>36</stackLimit>
+    <rotatable>false</rotatable>
+    <statBases>
+      <WorkToMake>700</WorkToMake>
+      <MarketValue>17</MarketValue>
+      <Mass>0.33</Mass>
+      <DeteriorationRate>6</DeteriorationRate>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+    <ingestible>
+      <foodType>Fluid, Processed</foodType>
+      <joyKind>Chemical</joyKind>
+      <joy>0.5</joy>
+      <baseIngestTicks>130</baseIngestTicks>
+      <nurseable>true</nurseable>
+      <drugCategory>Social</drugCategory>
+      <ingestSound>Ingest_Meowpaw</ingestSound>
+      <chairSearchRadius>0</chairSearchRadius>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.18,0,0)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+      <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Drink {0}</ingestCommandString>
+      <ingestReportString>Drinking {0}.</ingestReportString>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MeowpawHigh</hediffDef>
+          <severity>0.75</severity>
+          <toleranceChemical>Meowpaw</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+          <need>Rest</need>
+          <offset>0.25</offset>
+          <toleranceChemical>Meowpaw</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MeowpawTolerance</hediffDef>
+          <toleranceChemical>Meowpaw</toleranceChemical>
+          <severity>0.03</severity>
+          <divideByBodySize>true</divideByBodySize>
+          <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+        </li>
+      </outcomeDoers>
+    </ingestible>
+    <recipeMaker>
+      <researchPrerequisite>DrugProduction</researchPrerequisite>
+      <recipeUsers>
+        <li>ElectricStove</li>
+        <li>FueledStove</li>
+      </recipeUsers>
+      <workSpeedStat>DrugCookingSpeed</workSpeedStat>
+      <workSkill>Cooking</workSkill>
+      <skillRequirements>
+        <Cooking>6</Cooking>
+      </skillRequirements>
+      <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+      <displayPriority>1460</displayPriority>
+    </recipeMaker>
+    <costList>
+      <PsychoidLeaves>4</PsychoidLeaves>
+      <RawBerries>3</RawBerries>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Meowpaw</chemical>
+        <addictiveness>0.02</addictiveness>
+        <minToleranceToAddict>0.15</minToleranceToAddict>
+        <existingAddictionSeverityOffset>0.15</existingAddictionSeverityOffset>
+        <needLevelOffset>0.9</needLevelOffset>
+        <listOrder>115</listOrder>
+      </li>
+    </comps>
+    <tradeability>All</tradeability>
+    <tradeTags>
+      <li>MimiThings</li>
+    </tradeTags>
+  </ThingDef>
+  
+  <HediffDef>
+    <defName>MeowpawHigh</defName>
+    <label>high on Meowpaw</label>
+    <labelNoun>a Meowpaw high</labelNoun>
+    <description>Active Meowpaw in the bloodstream. Generates a mild euphoric effect.</description>
+    <hediffClass>Hediff_High</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-3.0</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+      <stages>
+        <li>
+          <painFactor>0.85</painFactor>
+          <capMods>
+            <li>
+              <capacity>Consciousness</capacity>
+              <offset>0.10</offset>
+            </li>
+          </capMods>
+          <statFactors>
+            <RestFallRateFactor>0.8</RestFallRateFactor>
+          </statFactors>
+        </li>
+      </stages>
+  </HediffDef>
+  
+  <ThoughtDef>
+    <defName>MeowpawHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>MeowpawHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>Meowpaw high</label>
+        <description>Drinking that Meowpaw made me feel great. I love having this energy!</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <ChemicalDef>
+    <defName>Meowpaw</defName>
+    <label>Meowpaw</label>
+    <addictionHediff>MeowpawAddiction</addictionHediff>
+    <geneOverdoseChanceFactorResist>0.5</geneOverdoseChanceFactorResist>
+    <geneOverdoseChanceFactorImmune>0</geneOverdoseChanceFactorImmune>
+  </ChemicalDef>
+
+  <NeedDef ParentName="DrugAddictionNeedBase">
+    <defName>Chemical_Meowpaw</defName>
+    <needClass>Need_Chemical</needClass>
+    <label>Meowpaw</label>
+    <description>Because of a Meowpaw addiction, this person needs to regularly consume the drug to avoid withdrawal symptoms.</description>
+    <fallPerDay>0.333</fallPerDay>
+    <listPriority>45</listPriority>
+  </NeedDef>
+
+
+  <HediffDef ParentName="AddictionBase">
+    <defName>MeowpawAddiction</defName>
+    <label>Meowpaw addiction</label>
+    <description>A chemical addiction to Meowpaw. Long-term presence of Meowpaw has caused neurological adaptations at the cellular level, so the brain can no longer function properly without the drug.
+\nWithout regular doses of Meowpaw, withdrawal symptoms will begin. However, extended abstinence will force the brain to adapt back to its normal state, resolving the addiction.</description>
+    <hediffClass>Hediff_Addiction</hediffClass>
+    <chemicalNeed>Chemical_Meowpaw</chemicalNeed>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.105</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+      <li>
+        <label>withdrawal</label>
+        <statOffsets>
+          <RestFallRateFactor>0.3</RestFallRateFactor>
+        </statOffsets>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>Wander_Psychotic</mentalState>
+            <mtbDays>10</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <ThoughtDef>
+    <defName>MeowpawWithdrawal</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>MeowpawAddiction</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <visible>false</visible>
+      </li>
+      <li>
+        <label>Meowpaw withdrawal</label>
+        <description>Without Meowpaw's encouragement, I wouldn't want to do anything at all.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+  <HediffDef ParentName="DrugToleranceBase">
+    <defName>MeowpawTolerance</defName>
+    <label>Meowpaw tolerance</label>
+    <description>A built-up tolerance to Meowpaw. The more severe this tolerance is, the more Meowpaw it takes to get the same effect.</description>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.12</severityPerDay>
+      </li>
+      <li Class="HediffCompProperties_DrugEffectFactor">
+        <chemical>Meowpaw</chemical>
+      </li>
+    </comps>
+  </HediffDef>
+
+
+</Defs>

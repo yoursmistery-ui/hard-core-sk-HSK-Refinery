@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="SK_PlantBase">
+		<defName>Plant_GiantLeaf</defName>
+		<label>giant leaf</label>
+		<description>A giant and very impressive leaf. Gathering water and mineral elements from the ground, it can be prepared as a soup.</description>
+		<selectable>True</selectable>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Beauty>5</Beauty>
+			<BeautyOutdoors>5</BeautyOutdoors>
+			<Nutrition>0.4</Nutrition>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Plant/PlantGiantLeaf</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+		</graphicData>
+		<hideAtSnowOrSandDepth>0.8</hideAtSnowOrSandDepth>
+		<plant>
+			<maxMeshCount>1</maxMeshCount>
+			<harvestTag>Standard</harvestTag>
+			<harvestedThingDef>RawGiantLeaf</harvestedThingDef>
+			<harvestMinGrowth>0.4</harvestMinGrowth>
+			<harvestFailable>false</harvestFailable>
+			<harvestYield>5</harvestYield>
+			<visualSizeRange>0.6~1.5</visualSizeRange>
+			<growDays>6</growDays>
+			<growMinGlow>0.3</growMinGlow>
+			<topWindExposure>0.3</topWindExposure>
+			<fertilityMin>0.3</fertilityMin>
+			<fertilitySensitivity>0.9</fertilitySensitivity>
+			<wildOrder>1</wildOrder>
+		</plant>
+	</ThingDef>
+
+	<ThingDef ParentName="StumpChoppedBase">
+		<defName>ChoppedStumpBig</defName>
+		<label>big chopped stump</label>
+		<description>A big stump left behind after a tree has been felled. The stump can be extracted but yields very little usable wood. Left outdoors, the stump will deteriorate in time.</description>
+		<statBases>
+		  <Beauty>0</Beauty>
+		  <DeteriorationRate>6</DeteriorationRate>
+		</statBases>
+		<graphicData>
+		  <texPath>Things/Trees/Stumps/Chopped/Big/ChoppedBig</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <shaderType>CutoutPlant</shaderType>
+		  <shadowData>
+			<volume>(0.15, 0.1, 0.15)</volume>
+			<offset>(0,0,-0.2)</offset>
+		  </shadowData>
+		</graphicData>
+		<plant>
+		  <harvestWork>180</harvestWork>
+		</plant>
+	</ThingDef>
+
+	<ThingDef ParentName="StumpSmashedBase">
+		<defName>SmashedStumpBig</defName>
+		<label>big smashed stump</label>
+		<description>The remnants of a big tree destroyed by damage. It's ugly. The stump can be extracted but yields very little usable wood. Left outdoors, the stump will deteriorate in time.</description>
+		<statBases>
+		  <Beauty>-8</Beauty>
+		  <DeteriorationRate>1</DeteriorationRate>
+		</statBases>
+		<graphicData>
+		  <texPath>Things/Trees/Stumps/Smashed/Big/SmashedBig</texPath>
+		  <graphicClass>Graphic_Single</graphicClass>
+		  <shaderType>CutoutPlant</shaderType>
+		  <shadowData>
+			<volume>(0.15, 0.15, 0.15)</volume>
+			<offset>(0,0,-0.2)</offset>
+		  </shadowData>
+		</graphicData>
+		<plant>
+		  <harvestWork>220</harvestWork>
+		</plant>
+	</ThingDef>
+
+  <ThingDef ParentName="StumpChoppedBase">
+    <defName>ChoppedBirchStump</defName>
+    <label>chopped birch stump</label>
+    <description>A stump left behind after a birch tree has been felled. The stump can be extracted but yields very little usable wood. Left outdoors, the stump will deteriorate in time.</description>
+    <graphicData>
+      <texPath>Things/Trees/Stumps/Chopped/Birch/ChoppedBirch</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="StumpSmashedBase">
+    <defName>SmashedBirchStump</defName>
+    <label>smashed birch stump</label>
+    <description>The remnants of a birch tree destroyed by damage. It's ugly. The stump can be extracted but yields very little usable wood. Left outdoors, the stump will deteriorate in time.</description>
+    <graphicData>
+      <texPath>Things/Trees/Stumps/Smashed/Birch/SmashedBirch</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+</Defs>

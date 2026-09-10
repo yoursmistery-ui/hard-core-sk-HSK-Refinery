@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- =====================================================================
+  科技配置骨架 (ConfigTemplate)
+  =====================================================================
+  本文件是「科技配置统一到本 mod」的占位模板, 当前**不会被游戏加载**
+  (本目录非 Defs/Patches, RimWorld 不会扫描)。
+  数值 = 之前锁定在 TechAdvancing(科技进步) 里的那一套(2026-08-23),
+  机制代码接入后, 由本 mod 的设置/代码读取这些值。
+
+  锁定语义:
+  - 规则A=1       → 当前科技等级的全部研究 100% 完成才升到下一级
+  - 规则B阈值=99  → 规则B要求完成度 >99%(≈100%), 防止 75% 时提前跳级
+  - 消耗倍率=300  → 所有研究点数需求 ×3
+  ===================================================================== -->
+<TechConfigSkeleton>
+
+	<!-- ============ 科技推进规则 (原 TechAdvancing 规则A/B) ============ -->
+	<techProgression>
+		<!-- 规则A: 研完 X 级及以下全部科技 → 科技等级 = X + ruleA
+		     ruleA=1 即"必须 100% 研究完成才进入下一等级" -->
+		<ruleA>1</ruleA>
+
+		<!-- 规则B: 某级完成度 > ruleBThreshold% → 科技等级 = 该级 + ruleBOffset
+		     ruleBThreshold=99 ≈ 严格100% (滑块上限99) -->
+		<ruleBThreshold>99</ruleBThreshold>
+		<ruleBOffset>0</ruleBOffset>
+
+		<!-- 基础科技等级: 0=石器部落 1=自动检测 2=工业殖民地 -->
+		<baseTechlevelMode>1</baseTechlevelMode>
+
+		<!-- 殖民地成员科技限制: 1=只有部落成员时科技锁死中世纪(不升太空) -->
+		<needTechColonists>0</needTechColonists>
+	</techProgression>
+
+	<!-- ============ 研究消耗 ============ -->
+	<researchCost>
+		<!-- 全局研究消耗倍率(%): 300 = 所有研究 ×3 -->
+		<globalMultiplierPct>300</globalMultiplierPct>
+
+		<!-- 低等级研究折扣(%/级): 研究低于自身科技等级的研究, 成本×(1-n%)^级差 -->
+		<lowerTechDiscountPct>20</lowerTechDiscountPct>
+
+		<!-- 越级研究成本: 高 N 级 → ×(1+0.5N), 默认封顶 ×2.0; 1=移除封顶 -->
+		<disableHigherTechCostCap>0</disableHigherTechCostCap>
+
+		<!-- 高等级研究超级昂贵: 1=越级研究再 ×fac×2^N -->
+		<makeHigherResearchesSuperExpensive>0</makeHigherResearchesSuperExpensive>
+		<higherTechExpensiveFac>10</higherTechExpensiveFac>
+	</researchCost>
+
+	<!-- ============ 100% 完成度的计数口径 ============ -->
+	<completionCounting>
+		<!-- 1=计算 100% 时排除非 Main 研究选项卡的项目 -->
+		<ignoreNonMainTreeTechs>0</ignoreNonMainTreeTechs>
+		<!-- 1=排除需要科技蓝图(Techprint)的研究及其前置 -->
+		<ignoreResearchNeedingTechprints>0</ignoreResearchNeedingTechprints>
+	</completionCounting>
+
+</TechConfigSkeleton>

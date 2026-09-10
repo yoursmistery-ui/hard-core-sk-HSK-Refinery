@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- ==================== 원시연구  ========================= -->
+	<!-- ==================== 중세연구  ========================= -->
+	<!-- ==================== 현대연구  ========================= -->
+	<!-- ==================== 미래연구  ========================= -->
+	
+
+
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_BasicFactory</defName>
+		<label>미호 기초 공장</label>
+		<description>세라믹을 생산할 수 있는 기본적인 기술을 배웁니다.</description>
+		<baseCost>800</baseCost>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>7</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 기초 공업</li>
+
+        <li>subject_story->美狐们从“恒星”那里学到了基础工业技术</li>
+        <li>subject_story->努力学习陶器的制作技术</li>
+        <li>subject_story->建起了高耸的熔炉</li>
+        <li>subject_story->用超能力缝制零件</li>
+
+        <li>subject_gerund->构建美狐工业体系</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_HeavyFactory</defName>
+		<label>미호 중공업</label>
+		<description>무기, 갑옷, 전투드론, 뭐든지 대량생산 할 수 있습니다.</description>
+		<baseCost>1000</baseCost>
+    <prerequisites>
+      <li>Miho_BasicFactory</li>
+      <li>Machining</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>9</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 중공업</li>
+
+        <li>subject_story->美狐们从“恒星”那里学到了重工业技术</li>
+        <li>subject_story->在没有副核心的情况下造出了机械体</li>
+        <li>subject_story->把定居点的所有零件都投进了自动工厂</li>
+
+        <li>subject_gerund->建设美狐重工业</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Craft_SK</tab>
+		<defName>Miho_MechHack</defName>
+		<label>메카나이트 해킹</label>
+		<description>눈에 보이지 않을정도로 조그만 메카노이드들을 해킹할 수 있는 기술을 배웁니다. 바이러스 같은것도 생체 메카나이트로 볼 수 있겠죠. 이 기술의 주 목적은 미호들의 초능력 혈청을 변형시키는 것 입니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>2500</baseCost>
+    <prerequisites>
+      <li>Miho_HeavyFactory</li>
+      <li>MultiAnalyzer</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>18</researchViewX>
+		<researchViewY>18</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->메크해킹</li>
+
+        <li>subject_story->分析了机械素</li>
+        <li>subject_story->搭建了新型电子显微镜</li>
+        <li>subject_story->掌握了分子级别的骇入</li>
+
+        <li>subject_gerund->分子级骇入</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Craft_SK</tab>
+		<defName>Miho_MechCore</defName>
+		<label>대형 메카나이트 코어</label>
+		<description>완벽한 메카나이트 순환이 가능한 코어를 제작할 수 있는 기술을 개발합니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>4000</baseCost>
+    <prerequisites>
+      <li>Miho_HeavyFactory</li>
+      <li>MultiAnalyzer</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>18</researchViewX>
+		<researchViewY>20</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->机械素核心</li>
+
+        <li>subject_story->观察了机械素们的运动</li>
+        <li>subject_story->设计了新型液压泵</li>
+        <li>subject_story->规划了机械素引擎</li>
+
+        <li>subject_gerund->完美循环核心的制造</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	
+	<ResearchProjectDef>
+		<tab>Craft_SK</tab>
+		<defName>Miho_Persona</defName>
+		<label>조화객관환원이론</label>
+		<description>기계장치에 양자적 영혼을 심어줄수있는 기술을 배웁니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>12000</baseCost>
+    <prerequisites>
+      <li>Miho_MechHack</li>
+      <li>Electronics_D1</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>19</researchViewX>
+		<researchViewY>18</researchViewY>
+		
+    <generalRules>
+      <rulesStrings>
+        <li>subject->조화객관환원이론</li>
+
+        <li>subject_story->讨论了量子化的灵魂</li>
+        <li>subject_story->记录了部族民对超越者的崇拜</li>
+        <li>subject_story->有助于高级机械体的人工智能</li>
+
+        <li>subject_gerund->Orch OR</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Craft_SK</tab>
+		<defName>Miho_Celestial</defName>
+		<label>초월질량엮기</label>
+		<description>페르소나 AI에게 도움받는 대형 합금 생산소 입니다. 중성자별의 핵과 이종물질을 합금하여 만드는 "천상비늘"을 제작 할 수 있게 됩니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>20000</baseCost>
+    <prerequisites>
+      <li>Miho_Persona</li>
+      <li>Components_E1</li>
+    </prerequisites>
+		<techLevel>Ultra</techLevel>
+		<researchViewX>22</researchViewX>
+		<researchViewY>18</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->초월질량엮기</li>
+
+        <li>subject_story->得到超越者的帮助才得以完成</li>
+        <li>subject_story->制出了致密得超乎想象的金属</li>
+
+        <li>subject_gerund->建造超新星熔炉</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_Drone</defName>
+		<label>미호 초급 메카노이드</label>
+		<description>초급적인 메카노이드들을 개발할 수 있는 기술입니다.</description>
+		<baseCost>1000</baseCost>
+    <prerequisites>
+      <li>Miho_BasicFactory</li>
+      <li>BasicMechtech</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>14</researchViewX>
+		<researchViewY>28</researchViewY>
+		
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 기초 메카노이드</li>
+
+        <li>subject_story->制作了用于第一产业的机械体</li>
+        <li>subject_story->取代了简单劳动，实现了革新</li>
+
+        <li>subject_gerund->美狐机械工程学</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_GuardDrone</defName>
+		<label>미호 포탑 메카노이드</label>
+		<description>메카노이드와 포탑을 연결하는 기술입니다.</description>
+		<baseCost>1500</baseCost>
+    <prerequisites>
+      <li>Miho_Drone</li>
+      <li>Turrets_31</li>
+      <li>Miho_Weapon</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>16</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 포탑 메카노이드</li>
+
+        <li>subject_story->为了管控人类，造出了可怕的东西</li>
+        <li>subject_story->不过是装上了自动炮塔，却成了战争的革新</li>
+
+        <li>subject_gerund->美狐机械炮塔</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_LightWarDrone</defName>
+		<label>미호 전쟁 메카노이드</label>
+		<description>본격적인 전쟁에 쓰이는 메카노이드들을 개발 할 수 있는 기술입니다.</description>
+		<baseCost>4000</baseCost>
+    <prerequisites>
+      <li>Miho_GuardDrone</li>
+      <li>StandardMechtech</li>
+      <li>Mortars</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>17</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 전쟁 메카노이드</li>
+
+        <li>subject_story->需要复杂的中型战车</li>
+        <li>subject_story->复合装甲与滑膛炮在机械体战争中十分有效</li>
+
+        <li>subject_gerund->美狐中型战车</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_CommandDrone</defName>
+		<label>싸이베이스 드론</label>
+		<description>초능력과 접목된 메카노이드들을 개발 할 수 있는 기술입니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>4000</baseCost>
+    <prerequisites>
+      <li>Miho_LightWarDrone</li>
+      <li>Miho_Persona</li>
+      <li>HighMechtech</li>
+    </prerequisites>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 초능력 메카노이드</li>
+
+        <li>subject_story->因战场上狐狸们阵亡过多而开发</li>
+        <li>subject_story->本为替代狐狸们而造，却太过昂贵</li>
+
+        <li>subject_gerund->美狐超能力战车</li>
+      </rulesStrings>
+    </generalRules>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>21</researchViewX>
+		<researchViewY>27</researchViewY>
+	</ResearchProjectDef>
+	
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_HeavyWarDrone</defName>
+		<label>미호 대형 전쟁 메카노이드</label>
+		<description>경전차 대용의 메카노이드를 개발합니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<baseCost>6000</baseCost>
+    <prerequisites>
+      <li>Miho_LightWarDrone</li>
+      <li>HighMechtech</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>20</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 미사일 시스템</li>
+
+        <li>subject_story->需要强大的火力</li>
+        <li>subject_story->二、三、开火！把它们轰成碎片！</li>
+
+        <li>subject_gerund->狐狸们的炮兵</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Buildings_SK</tab>
+		<defName>Miho_HeavyWarBattery</defName>
+		<label>메카노이드 중형 포대</label>
+		<description>집속탄 포대를 장착한 메카노이드를 개발합니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<baseCost>6000</baseCost>
+    <prerequisites>
+      <li>Miho_HeavyWarDrone</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>21</researchViewX>
+		<researchViewY>28</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 더 많은 미사일 시스템</li>
+
+        <li>subject_story->需要更多、更多的火力</li>
+        <li>subject_story->二、三、开火！把它们轰成碎片！</li>
+
+        <li>subject_gerund->狐狸们更多的炮兵</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Weapon_SK</tab>
+		<defName>Miho_HeavyPlasma</defName>
+		<label>보병 합동 작전</label>
+		<description>효과적인 전술 체계를 개발합니다.</description>
+		<baseCost>4000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>Miho_PlasmaWeapon</li>
+      <li>Miho_HeavyWarDrone</li>
+    </prerequisites>
+        <hiddenPrerequisites>
+        </hiddenPrerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>21</researchViewX>
+		<researchViewY>38</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 보병합동</li>
+
+        <li>subject_story->要高效对抗帝国军，就需要与机械体有机协同</li>
+        <li>subject_story->开发了装有护盾的战车</li>
+
+        <li>subject_gerund->研发步兵协同机械体</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	
+	<ResearchProjectDef>
+		<tab>Weapon_SK</tab>
+		<defName>Miho_Weapon</defName>
+		<label>미호 무기</label>
+		<description>간단한 미호들의 무기를 제작 할 수 있습니다.</description>
+		<baseCost>200</baseCost>
+    <prerequisites>
+      <li>BlowbackOperation</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>11</researchViewX>
+		<researchViewY>38</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->소이철갑탄</li>
+
+        <li>subject_story->为熔化装甲板下了不少功夫</li>
+        <li>subject_story->结合了燃烧弹与穿甲弹的优点</li>
+
+        <li>subject_gerund->研发燃烧穿甲弹</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Weapon_SK</tab>
+		<defName>Miho_HeavyWeapon</defName>
+		<label>미호 정밀 무기</label>
+		<description>정밀한 미호들의 무기를 제작 할 수 있습니다.</description>
+		<baseCost>1000</baseCost>
+    <prerequisites>
+      <li>Miho_Weapon</li>
+      <li>PrecisionRifling</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>16</researchViewX>
+		<researchViewY>38</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 차세대 무기</li>
+
+        <li>subject_story->需要更多火力</li>
+        <li>subject_story->用精密部件制造了大规模杀伤性武器</li>
+
+        <li>subject_gerund->研发次世代武器</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Weapon_SK</tab>
+		<defName>Miho_VerminControlWeapon</defName>
+		<label>해수구제</label>
+		<description>언제나 그랬듯이. 못생기고 도움 안되는 동물들은 해수였습니다. 그런 친구들 죽이기에 좋은 무기가 있죠.</description>
+		<baseCost>500</baseCost>
+    <prerequisites>
+      <li>Miho_Weapon</li>
+      <li>GasOperation</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>12</researchViewX>
+		<researchViewY>38</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->자동 산탄총</li>
+
+        <li>subject_story->为清除那些不太灵光的朋友而开发</li>
+        <li>subject_story->有效地减少了敌对个体</li>
+
+        <li>subject_gerund->研发害兽防治霰弹枪</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Weapon_SK</tab>
+		<defName>Miho_PlasmaWeapon</defName>
+		<label>미호 플라즈마 무기</label>
+		<description>플라즈마상태의 원소를 이용하는 미호들의 무기를 제작 할 수 있습니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>2500</baseCost>
+    <prerequisites>
+      <li>Miho_HeavyWeapon</li>
+      <li>ChargedShot</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>19</researchViewX>
+		<researchViewY>38</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 플라즈마 무기</li>
+
+        <li>subject_story->需要更强、更多的火力</li>
+        <li>subject_story->出于对火力的渴望，模仿了恒星</li>
+
+        <li>subject_gerund->研发等离子武器</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_ApparelBasic</defName>
+		<label>미호 문화</label>
+		<description>미호들의 문화를 배웁니다.</description>
+		<baseCost>200</baseCost>
+    <prerequisites>
+          <li>Apparel_B1</li>
+        </prerequisites>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>5</researchViewX>
+		<researchViewY>46</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 문화</li>
+
+        <li>subject_story->真是难以形容的一种文化</li>
+        <li>subject_story->沉溺于朴素的自恋，结果变得更可爱了</li>
+
+        <li>subject_gerund->探访狐狸们的文化</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_ApparelAdvanced</defName>
+		<label>미호 고급의복</label>
+		<description>복잡한 미호들의 의복을 제작 할 수 있습니다.</description>
+		<baseCost>400</baseCost>
+        <prerequisites>
+      <li>Miho_Silk</li>
+      <li>ComplexClothing</li>
+    </prerequisites>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>7</researchViewX>
+		<researchViewY>47</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->미호 고급의복</li>
+
+        <li>subject_story->优秀的设计多了起来，沉醉于美丽的狐狸也多了起来</li>
+        <li>subject_story->优秀的设计多了起来，沉醉于可爱的狐狸也多了起来</li>
+
+        <li>subject_gerund->发展中的狐狸服饰</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_Silk</defName>
+		<label>화현비단</label>
+		<description>부드럽고 열기에 강한 비단을 생산할수 있습니다.</description>
+		<baseCost>1500</baseCost>
+        <prerequisites>
+      <li>Miho_ApparelBasic</li>
+      <li>Fabric_Plants_B1</li>
+    </prerequisites>
+		<techLevel>Medieval</techLevel>
+		<researchViewX>6</researchViewX>
+		<researchViewY>47</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->화현비단</li>
+
+        <li>subject_story->培育出了顶级的丝绸</li>
+        <li>subject_story->因不着火，军用性能也很出色</li>
+
+        <li>subject_gerund->火弦桑的种植</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+
+	
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_ApparelEltex</defName>
+		<label>미호 엘텍스 의복</label>
+		<description>초능력치의 한계를 높혀주는 엘텍스 의복을 제작할 수 있습니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+
+		<baseCost>2500</baseCost>
+        <prerequisites>
+      <li>Miho_ApparelAdvanced</li>
+      <li>MicroelectronicsBasics</li>
+    </prerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>17</researchViewX>
+		<researchViewY>47</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->마법 의복</li>
+
+        <li>subject_story->发现了神经温度下降的奇异现象</li>
+        <li>subject_story->辅助了机械素超能力</li>
+
+        <li>subject_gerund->狐狸们的魔法服饰</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_ApparelAssassin</defName>
+		<label>미호 암살자 의복</label>
+		<description>신체 능력을 강화시킬수 있는 암살자 의복을 제작할 수 있습니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>3000</baseCost>
+        <prerequisites>
+      <li>Miho_ApparelEltex</li>
+    </prerequisites>
+        <hiddenPrerequisites>
+           <li>Miho_MechHack</li>
+           <li>ReconArmor</li>
+        </hiddenPrerequisites>
+		<techLevel>Spacer</techLevel>
+		<researchViewX>18</researchViewX>
+		<researchViewY>47</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->퍼라이어 전투 의복</li>
+
+        <li>subject_story->超能力被抑制，换来身体能力提升</li>
+
+        <li>subject_gerund->超能力抑制法</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<tab>Apparel_SK</tab>
+		<defName>Miho_ApparelSorcerees</defName>
+		<label>미호 마법사 의복</label>
+		<description>메카나이트-마법 능력을 강화시킬수 있는 마법사 의복을 제작할 수 있습니다.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+		<baseCost>6000</baseCost>
+        <prerequisites>
+      <li>Miho_ApparelAssassin</li>
+      <li>Miho_Persona</li>
+    </prerequisites>
+
+		<techLevel>Spacer</techLevel>
+		<researchViewX>20</researchViewX>
+		<researchViewY>47</researchViewY>
+    <generalRules>
+      <rulesStrings>
+        <li>subject->마법사 의복</li>
+
+        <li>subject_story->高阶超能力者委托了功能性服饰</li>
+
+        <li>subject_gerund->高阶超能力服饰</li>
+      </rulesStrings>
+    </generalRules>
+	</ResearchProjectDef>
+</Defs>

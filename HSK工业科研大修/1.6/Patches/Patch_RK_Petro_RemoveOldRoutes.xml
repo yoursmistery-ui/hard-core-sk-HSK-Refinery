@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 石化工业线 v3 · 旧来源路线清理 + 二级菜单归位(合并自 Patch_RK_Petro_RemoveOldRoutes / Patch_RK_Petro_SubCategory, 保持原执行序)
+       v3 依据: 三烯二苯来源改由 Rimefeller 精炼厂体系(Vile 改造)承接, 合成氨/中性胺改由本 mod 两台 clone 精炼厂承接,
+       故删除 Core_SK 的无机物转化器/化学工作站旧路线与天然中性胺配方。
+       全部用 PatchOperationConditional 做 xpath 存在性门控(1.6 起 Operation 级 MayRequire 已失效), 目标不存在即静默跳过。
+       子分类 defNames 只列 v3 现存建筑, 已删建筑(深度裂解厂/精馏塔/催化重整/氨合成塔/中性胺合成塔/原油裂解/卧式罐)一律不再引用。 -->
+<Patch>
+
+  <!--==================== 一、删旧来源路线 ====================-->
+
+  <!-- 无机物转化器 MatterConverter: 删 ConvertToPolymers(乙烯) / ConvertToSulphates(苯) 旧路 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MatterConverter"]/recipes/li[text()="ConvertToPolymers"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="MatterConverter"]/recipes/li[text()="ConvertToPolymers"]</xpath></match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MatterConverter"]/recipes/li[text()="ConvertToSulphates"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="MatterConverter"]/recipes/li[text()="ConvertToSulphates"]</xpath></match>
+  </Operation>
+
+  <!-- 化学工作站 ChemistryLab: 删 MakeAmmonia(氨) 旧路(改由合成氨精炼厂产) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ChemistryLab"]/recipes/li[text()="MakeAmmonia"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>Defs/ThingDef[defName="ChemistryLab"]/recipes/li[text()="MakeAmmonia"]</xpath></match>
+  </Operation>
+
+  <!-- 删天然中性胺配方 MakeNaturalNeutroamine(中性胺唯一工业来源改为中性胺精炼厂) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="MakeNaturalNeutroamine"]</xpath>
+    <match Class="PatchOperationRemove"><xpath>Defs/RecipeDef[defName="MakeNaturalNeutroamine"]</xpath></match>
+  </Operation>
+
+  <!--==================== 二、二级菜单归位(ArchitectSense) ====================-->
+
+  <!-- 炼化厂子分类: 蒸馏塔 + 两台 clone 精炼厂 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Refinery"]/defNames</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Refinery"]/defNames</xpath>
+      <value>
+        <li>RK_Petro_AmmoniaRefinery</li>
+        <li>RK_Petro_NeutroRefinery</li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- 石化储存子分类: 三座立式罐 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_FuelStorages"]/defNames</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_FuelStorages"]/defNames</xpath>
+      <value>
+        <li>RK_Petro_AsphaltTankVertical</li>
+        <li>RK_Petro_NaturalGasTankVertical</li>
+        <li>RK_Petro_AmmoniaTankVertical</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

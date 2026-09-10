@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <QuestScriptDef ParentName="OAFrame_HospitalityRefugeeBase">
+        <defName>OAGene_SnowstormStrugglers</defName>
+        <autoAccept>true</autoAccept>
+        <defaultChallengeRating>2</defaultChallengeRating>
+        <isRootSpecial>true</isRootSpecial>
+        <hideInvolvedFactionsInfo>false</hideInvolvedFactionsInfo>
+        <questNameRules>
+            <rulesStrings>
+                <li>questName(lodgerCount==1)->[lodgerAdj][asker_nameDef]</li>
+                <li>questName(lodgerCount==1)->[athe][lodgerAdj][lodgerSingle]</li>
+                <li>questName(lodgerCount>=2)->[lodgerAdj][lodgerPlural]</li>
+
+                <li>lodgerAdj->风雪中的</li>
+                <li>lodgerAdj->暴风雪的</li>
+                <li>lodgerAdj->于风雪中的</li>
+                <li>lodgerSingle->落难</li>
+                <li>lodgerSingle->幸存者</li>
+                <li>lodgerPlural->落难者们</li>
+                <li>lodgerPlural->幸存者们</li>
+            </rulesStrings>
+        </questNameRules>
+        <questDescriptionAndNameRules>
+            <rulesStrings>
+                <li>lodgersLabel->求生者</li>
+                <li>lodgersLabelPlural->求生者们</li>
+            </rulesStrings>
+        </questDescriptionAndNameRules>
+        <questDescriptionRules>
+            <rulesStrings>
+
+                <li>questDescription->[approachInfo][claimInfo][asker_nameDef]在你们的殖民地附近旅行时遭遇了突发的极端暴风雪，并险些被冻死在野外之中。而当这伙旅行者们濒临绝望的时候，他们意外的发现了你们的殖民地，并蹒跚着抵达了这里。\n如今他们已经抵达你的殖民地，并请求你允许他们在[map_definite]躲避，以让[lodgersPronoun]活过这场暴风雪。\n\n作为回报， [lodgersPronoun][offer] 在此期间内免费为你工作和战斗。\n\n[joinInfo][lodgersPronoun]可能会在过后酬谢你对[lodgersObjective]的帮助。\n\n[travelerInfo]属于[asker_factionName]。 如果你选择杀害、逮捕、出售或者采割[lodgersObjective]，将产生十分严重的外交后果。</li>
+
+                <li>approachInfo(lodgerCount==1)->名叫[asker_nameDef]的绝望的[faction_pawnSingular]正在靠近。</li>
+                <li>approachInfo(lodgerCount==2)->[asker_nameDef]和其他绝望的[faction_pawnSingular]正在靠近。</li>
+                <li>approachInfo(lodgerCount==2,childCount==1,priority=1)->[asker_nameDef]正带着一个孩子靠近。</li>
+                <li>approachInfo(lodgerCount>=3)->[lodgerCount]名绝望的[faction_pawnsPlural]正在靠近， 他们的领袖是[asker_nameDef]。</li>
+                <li>approachInfo(lodgerCount>=3,childCount==1,priority=1)->[lodgerCount]名穷途末路的[faction_pawnsPlural]正带着一个孩子靠近。他们的领袖是[asker_nameDef]。</li>
+                <li>approachInfo(lodgerCount>=3,childCount>=2,priority=1)->[lodgerCount]名穷途末路的[faction_pawnsPlural]正带着一些孩子靠近。他们的领袖是[asker_nameDef]。</li>
+                <li>approachInfo(lodgerCount>=3,allButOneChildren==true,priority=2)->[asker_nameDef]带着处于他保护下的[lodgersCountMinusOne]名孩子正在靠近。</li>
+
+                <li>claimInfo(lodgerCount==1)->[asker_nameDef]声称[asker_possessive]独自一人迷失在风雪中。</li>
+                <li>claimInfo(lodgerCount>=2)->他们声称在最近一次袭击中失去了家园。</li>
+
+            </rulesStrings>
+        </questDescriptionRules>
+        <questContentRules>
+            <rulesStrings>
+
+                <li>lodgersLeavingLetterText->暴风雪结束了，[asker_nameDef]感谢你允许{FACTION_leaderObjective}在[questDurationTicks_duration]里待在[map_definite]。 {FACTION_leaderPronoun}现在正与{FACTION_leaderPossessive}的伙伴们一同前进。\n\n[asker_nameDef]说{FACTION_leaderPronoun}永远不会忘记你做的这些事。</li>
+
+            </rulesStrings>
+        </questContentRules>
+        <root Class="OberoniaAureaGene.Snowstorm.QuestNode_Root_SnowstormStrugglers" />
+    </QuestScriptDef>
+
+</Defs>

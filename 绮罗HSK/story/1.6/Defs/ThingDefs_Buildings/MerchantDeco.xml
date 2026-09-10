@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 壁挂式建筑的父类 -->
+  <ThingDef Abstract="True" Name="Kiiro_OnWallBase" ParentName="BuildingBase">
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>Standable</passability>
+    <selectable>true</selectable>
+    <fillPercent>0.20</fillPercent>
+    <pathCost>0</pathCost>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <designationCategory>Kiiro_Furniture</designationCategory>
+    <!-- <uiOrder>2800</uiOrder> -->
+    <rotatable>false</rotatable>
+    <uiIconOffset>(0, 0.03)</uiIconOffset>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>300</WorkToBuild>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Kiiro_OnWallBase">
+    <defName>Kiiro_MerchantSign</defName>
+    <label>Shop Sign</label>
+    <description>A simple shop sign drawn of shop logo.\n\n Pattern could be changed.</description>
+    <rotatable>true</rotatable>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings_Deco/Sign/Sign</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.125,3.125)</drawSize>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+      <!-- <shaderType>CutoutComplex</shaderType> -->
+      <drawOffsetSouth>(0,-2.0,0)</drawOffsetSouth>
+    </graphicData>
+    <uiIconPath>Kiiro_Event/Buildings_Deco/Sign/Sign_MenuIcon</uiIconPath>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <costList>
+      <Steel>5</Steel>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <costStuffCount>10</costStuffCount>
+    <statBases>
+      <WorkToBuild>330</WorkToBuild>
+      <MaxHitPoints>35</MaxHitPoints>
+      <Mass>1</Mass>
+    </statBases>
+    <!-- <uiOrder>2991</uiOrder> -->
+    <passability>Standable</passability>
+    <terrainAffordanceNeeded IsNull="True" />
+    <pathCost>0</pathCost>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <drawerType>RealtimeOnly</drawerType>
+    <building>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+    <placeWorkers>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <comps>
+      <li Class="AncotLibrary.CompProperties_AdditionalGraphicSwitch">
+        <gizmoDesc>choose the pattern on sign.</gizmoDesc>
+        <additionalGraph>
+          <li>
+            <label>plank</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/A</textPath>
+          </li>
+          <li>
+            <label>leaf</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/B</textPath>
+          </li>
+          <li>
+            <label>herb bottle</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/C</textPath>
+          </li>
+          <li>
+            <label>bow</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/D</textPath>
+          </li>
+          <li>
+            <label>diamond</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/E</textPath>
+          </li>
+          <li>
+            <label>anvil</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/F</textPath>
+          </li>
+          <li>
+            <label>brick</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/G</textPath>
+          </li>
+          <li>
+            <label>wool ball</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/H</textPath>
+          </li>
+          <li>
+            <label>map</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/I</textPath>
+          </li>
+          <li>
+            <label>pocket watch</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/J</textPath>
+          </li>
+          <li>
+            <label>book</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/K</textPath>
+          </li>
+          <li>
+            <label>bread</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/L</textPath>
+          </li>
+          <li>
+            <label>fish</label>
+            <textPath>Kiiro_Event/Buildings_Deco/Sign/Pattern/M</textPath>
+          </li>
+        </additionalGraph>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+
+
+  <!-- =========================================================================================== -->
+  <!-- 立牌 -->
+  <ThingDef Name="Kiiro_SignStanding" ParentName="Kiiro_FurnitureBase">
+    <defName>Kiiro_SignStanding</defName>
+    <label>Shop Signboard A</label>
+    <description>A shop signboard listing main sellings.\n\nOn table could be placed.</description>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings_Deco/SignStanding/SignStanding</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.8,2.8)</drawSize>
+      <drawOffset>(0,0,0.18)</drawOffset>
+      <shadowData>
+        <volume>(0.5, 0.4, 0.5)</volume>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <clearBuildingArea>false</clearBuildingArea>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <pathCost>10</pathCost>
+    <costList>
+      <Kiiro_Paper>2</Kiiro_Paper>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>10</costStuffCount>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>1</Mass>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <designationHotKey>Misc12</designationHotKey>
+    <!-- <uiOrder>2070</uiOrder> -->
+    <surfaceType>Item</surfaceType>
+    <canOverlapZones>false</canOverlapZones>
+    <placeWorkers>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>Kiiro_Furniture</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+      <isEdifice>false</isEdifice>
+      <canPlaceOverWall>false</canPlaceOverWall>
+    </building>
+    <uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+
+
+  <ThingDef ParentName="Kiiro_SignStanding">
+    <defName>Kiiro_SignStandingII</defName>
+    <label>Shop Signboard B</label>
+    <graphicData>
+      <texPath>Kiiro_Event/Buildings_Deco/SignStanding_II/SignStanding</texPath>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+  </ThingDef>
+
+</Defs>

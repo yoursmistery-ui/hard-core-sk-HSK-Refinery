@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- Core_SK owns ThingDef AlphaPoly; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_0_UltraTech.xml. -->
+	
+	<!-- Core_SK owns ThingDef BetaPoly; Materials Science changes are applied by Common/Patches/Core_SK_Overlap/ThingDefs_Resources/Alloys_0_UltraTech.xml. -->
+	
+	<!-- YAUTJAVIUM -->
+	
+	<ThingDef ParentName="ResourceBase">
+		<defName>Yautjavium</defName>
+		<label>yautjavium</label>
+		<description>TIER 5 - Ultra Tech
+>>> Optimal	Workshops, Light Armor
+>> Suitable	Bladed weapons
+X Inadvisable 	Durability
+			
+Tools Recommended: Cooking Tools (highest), Farm Tools
+	
+This lightweight, exotic alloy is refined at the molecular level and it can hold an edge as such. No blade is sharper than one made of Yautjavian alloy and no metal armor is harder, but it's not an invincible material.</description>
+		<graphicData>
+			<texPath>Things/Item/Material/Yautjavium</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(218,230,26)</color>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Metal_Drop</soundDrop>
+		<stackLimit>600</stackLimit>
+		<techLevel>Ultra</techLevel>
+		<statBases>
+			<MarketValue>80</MarketValue>
+			<StuffPower_Armor_Blunt>1.7</StuffPower_Armor_Blunt>
+			<StuffPower_Armor_Sharp>1.85</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Heat>0.25</StuffPower_Armor_Heat>
+			<StuffPower_Insulation_Cold>0</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>0</StuffPower_Insulation_Heat>
+			<SharpDamageMultiplier>2.4</SharpDamageMultiplier>
+			<BluntDamageMultiplier>1.5</BluntDamageMultiplier>
+			<DeteriorationRate>0</DeteriorationRate>
+			<Flammability>0</Flammability>
+			<Mass>0.25</Mass>
+			<Bulk>0.35</Bulk>
+		</statBases>
+		<useHitPoints>true</useHitPoints>
+		<slagDef>ChunkSlagSteel</slagDef>
+		<thingCategories>
+			<li>USLDBar</li>
+			<li>LightBar</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<stuffProps>
+			<stuffAdjective>Yautjavian</stuffAdjective>
+			<categories>
+				<li>Metallic</li>
+				<li>StrongMetallic</li>
+				<li>RuggedMetallic</li>
+				<li>SolidMetallic</li>
+				<li>CorrosionResistant</li>
+				<li>RareMetallic</li>
+				<li>LightMaterial</li>
+			</categories>
+			<constructEffect>ConstructMetal</constructEffect>
+			<color>(218,230,26)</color>
+			<commonality>0.5</commonality> 
+			<soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+			<soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+			<soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+			<statFactors>
+				<MaxHitPoints>3.5</MaxHitPoints>
+				<Beauty>2</Beauty>
+				<Flammability>0</Flammability>
+				<WorkToMake>4.5</WorkToMake>
+				<WorkToBuild>4.5</WorkToBuild>
+				<DoorOpenSpeed>1.4</DoorOpenSpeed>
+				<MeleeWeapon_CooldownMultiplier>0.6</MeleeWeapon_CooldownMultiplier>
+				<MoveSpeed>0.7</MoveSpeed>
+				<MarketValue>1</MarketValue>
+				<BedRestEffectiveness>1.35</BedRestEffectiveness>
+				<ImmunityGainSpeedFactor>1.4</ImmunityGainSpeedFactor>
+				<WorkTableWorkSpeedFactor>1.8</WorkTableWorkSpeedFactor>
+				<MeleePenetrationFactor>1.9</MeleePenetrationFactor>
+				<Mass>0.6</Mass>
+                 <Cleanliness>3.5</Cleanliness>
+                <WornBulk>0.8</WornBulk>
+                <EquipDelay>0.33</EquipDelay>
+			</statFactors>
+		</stuffProps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<modExtensions>
+		    <li Class="SurvivalToolsLite.StuffPropsTool">
+                <toolStatFactors>
+                    <TreeFellingSpeed>2</TreeFellingSpeed>
+					<PlantHarvestingSpeed>2.1</PlantHarvestingSpeed>
+					<PlantWorkSpeed>2.1</PlantWorkSpeed>
+					<MiningSpeed>1.5</MiningSpeed>
+					<MiningYieldDigging>1.7</MiningYieldDigging>
+					<ConstructionSpeed>2</ConstructionSpeed>
+					<SmithingSpeed>2</SmithingSpeed>
+					<CookSpeed>2.3</CookSpeed>
+					<ButcheryFleshSpeed>2.3</ButcheryFleshSpeed>
+                </toolStatFactors>
+            </li>
+		</modExtensions>
+	</ThingDef>
+	
+	<!-- Mesochitin -->
+	<!--
+	<ThingDef ParentName="ResourceBase">
+		<defName>Mesochitin</defName>
+		<label>mesochitin</label>
+		<description>This silicon-based material is made of quasi-organic matter which must be assembled by nanites. It's hardened form has a resin-like appearance, fluctuating between blue and black hues. It's one of the strongest and toughest known materials, insulated well, and is relatively easy to form due to nanotechnology</description>
+		<graphicData>
+			<texPath>Things/Item/HCS</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<color>(53,76,94)</color>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Metal_Drop</soundDrop>
+		<stackLimit>600</stackLimit>
+		<techLevel>Ultra</techLevel>
+		<statBases>
+			<MarketValue>50</MarketValue>
+			<StuffPower_Armor_Blunt>2.2</StuffPower_Armor_Blunt>
+			<StuffPower_Armor_Sharp>1.6</StuffPower_Armor_Sharp>
+			<StuffPower_Armor_Heat>0.17</StuffPower_Armor_Heat>
+			<StuffPower_Insulation_Cold>20</StuffPower_Insulation_Cold>
+			<StuffPower_Insulation_Heat>20</StuffPower_Insulation_Heat>
+			<SharpDamageMultiplier>1.5</SharpDamageMultiplier>
+			<BluntDamageMultiplier>1.5</BluntDamageMultiplier>
+			<DeteriorationRate>0</DeteriorationRate>
+			<Flammability>0</Flammability>
+			<Mass>0.30</Mass>
+			<Bulk>0.35</Bulk>
+		</statBases>
+		<useHitPoints>true</useHitPoints>
+		<slagDef>ChunkSlagSteel</slagDef>
+		<thingCategories>
+			<li>SLDBar</li>
+			<li>ForgedBar</li>
+		</thingCategories>
+		<smeltable>true</smeltable>
+		<stuffProps>
+			<stuffAdjective>mesochitin</stuffAdjective>
+			<categories>
+				<li>Metallic</li>
+				<li>StrongMetallic</li>
+				<li>RuggedMetallic</li>
+				<li>ForgedMetallic</li>
+			</categories>
+			<constructEffect>ConstructMetal</constructEffect>
+			<color>(53,76,94)</color>
+			<commonality>0.6</commonality> 
+			<soundImpactBullet>BulletImpact_Metal</soundImpactBullet>
+			<soundMeleeHitSharp>MeleeHit_Metal_Sharp</soundMeleeHitSharp>
+			<soundMeleeHitBlunt>MeleeHit_Metal_Blunt</soundMeleeHitBlunt>
+			<statFactors>
+				<MaxHitPoints>4</MaxHitPoints>
+				<Beauty>1</Beauty>
+				<Flammability>0</Flammability>
+				<WorkToMake>1.8</WorkToMake>
+				<WorkToBuild>1.8</WorkToBuild>
+				<DoorOpenSpeed>0.9</DoorOpenSpeed>
+				<MeleeWeapon_CooldownMultiplier>0.7</MeleeWeapon_CooldownMultiplier>
+				<MoveSpeed>0.7</MoveSpeed>
+				<MarketValue>1</MarketValue>
+				<BedRestEffectiveness>0.8</BedRestEffectiveness>
+				<ImmunityGainSpeedFactor>0.8</ImmunityGainSpeedFactor>
+				<WorkTableWorkSpeedFactor>1</WorkTableWorkSpeedFactor>
+				<MeleePenetrationFactor>1.6</MeleePenetrationFactor>
+				<Mass>0.75</Mass>
+			</statFactors>
+		</stuffProps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<modExtensions>
+		    <li Class="SurvivalToolsLite.StuffPropsTool">
+                <toolStatFactors>
+                    <TreeFellingSpeed>1.7</TreeFellingSpeed>
+					<PlantHarvestingSpeed>1.7</PlantHarvestingSpeed>
+					<PlantWorkSpeed>1.7</PlantWorkSpeed>
+					<MiningSpeed>1.7</MiningSpeed>
+					<MiningYieldDigging>1.7</MiningYieldDigging>
+					<ConstructionSpeed>1.7</ConstructionSpeed>
+					<CookSpeed>1.7</CookSpeed>
+					<ButcheryFleshSpeed>1.7</ButcheryFleshSpeed>
+                </toolStatFactors>
+            </li>
+		</modExtensions>
+	</ThingDef>
+	-->
+</Defs>

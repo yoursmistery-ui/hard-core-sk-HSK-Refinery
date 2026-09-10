@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef Class="RatkinGeneExpanded.CustomFilthDef" Name="BaseClothingFilth" Abstract="True">
+    <thingClass>RatkinGeneExpanded.CustomFilth</thingClass>
+    <category>Filth</category>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <drawerType>MapMeshOnly</drawerType>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <onGroundRandomRotateAngle>0</onGroundRandomRotateAngle>
+    </graphicData>
+    <statBases>
+      <Beauty>-5</Beauty>
+      <Cleanliness>0</Cleanliness>
+    </statBases>
+    <filth>
+      <rainWashes>false</rainWashes>
+      <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
+      <cleaningSound>Interact_CleanFilth</cleaningSound>
+    </filth>
+  </ThingDef>
+
+  <ThingDef Class="RatkinGeneExpanded.CustomFilthDef" ParentName="BaseClothingFilth">
+    <defName>DirtyClothing_RK_Jirai</defName>
+    <label>dirty clothes</label>
+    <graphicData>
+      <texPath>Apparel/RK_Jirai_Filth</texPath>
+    </graphicData>
+    <thingToSpawn>RK_Jirai</thingToSpawn>
+    <stuffDef>Cloth</stuffDef>
+  </ThingDef>
+</Defs>

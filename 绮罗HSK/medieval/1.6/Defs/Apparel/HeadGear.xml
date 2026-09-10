@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="KME_Kiiro_MetalicHelmetBase" ParentName="Kiiro_OverheadBase" Abstract="True">
+        <smeltable>true</smeltable>
+        <recipeMaker Inherit="False">
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+                <li>Kiiro_FueledSmithy</li>
+                <li>Kiiro_ElectricSmithy</li>
+            </recipeUsers>
+            <displayPriority>250</displayPriority>
+            <unfinishedThingDef>UnfinishedMetallicTechArmor</unfinishedThingDef>
+            <researchPrerequisite>Kiiro_Process</researchPrerequisite>
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                    <li MayRequire="Ludeon.RimWorld.Anomaly">Bioferrite</li>
+                    <li MayRequire="Ludeon.RimWorld.Odyssey">Obsidian</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+        </recipeMaker>
+        <stuffCategories>
+            <li>Metallic</li>
+        </stuffCategories>
+        <statBases>
+            <ArmorRating_Sharp MayRequire="CETeam.CombatExtended">1</ArmorRating_Sharp>
+            <ArmorRating_Blunt MayRequire="CETeam.CombatExtended">2</ArmorRating_Blunt>
+        </statBases>
+        <apparel>
+			<renderSkipFlags>
+				<li>Ancot_HairAhoge</li>
+				<li>Ancot_Ear</li>
+			</renderSkipFlags>
+            <useWornGraphicMask>false</useWornGraphicMask>
+            <developmentalStageFilter>Adult</developmentalStageFilter>
+            <bodyPartGroups>
+				<li>UpperHead</li>
+            </bodyPartGroups>
+            <tags>
+                <li>KME_Kiiro_helmet</li>
+                <li>Kiiro_GuerrillaHelmet</li>
+            </tags>
+        </apparel>
+	</ThingDef>
+
+    <!-- 绮罗水锅盔 -->
+    <ThingDef ParentName="KME_Kiiro_MetalicHelmetBase">
+        <defName>KME_Kiiro_Helmet_Kettle</defName>
+        <label>kiiro Kettle helmet</label>
+        <description>It may be a helmet modified from the iron pot in the village, specially designed to protect Kiiro's ears, and the brim can block the sun, so that the vision when shooting is clearer.</description>
+        <graphicData>
+			<texPath>Apparel/OverHead/Kettle/Kettle</texPath>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/OverHead/Kettle/Kettle</wornGraphicPath>
+            <tags>
+                <li>KME_Kiiro_helmet_ranged</li>
+            </tags>
+        </apparel>
+
+        <costStuffCount>40</costStuffCount>
+        <statBases>
+            <WorkToMake>3200</WorkToMake>
+            <MaxHitPoints>100</MaxHitPoints>
+            <Mass>2</Mass>
+
+            <Bulk MayRequire="CETeam.CombatExtended">2</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">1</WornBulk>
+
+            <EquipDelay>2</EquipDelay>
+
+            <StuffEffectMultiplierArmor>0.5</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <RangedCooldownFactor>-0.05</RangedCooldownFactor>
+		    <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+			<AimingDelayFactor>-0.1</AimingDelayFactor>
+        </equippedStatOffsets>
+    </ThingDef>
+    
+    <!-- 绮罗莫里翁盔 -->
+    <ThingDef ParentName="KME_Kiiro_MetalicHelmetBase">
+        <defName>KME_Kiiro_Helmet_Morion</defName>
+        <label>kiiro Morion helmet</label>
+        <description>The helmets, modeled after those of the early outsiders, were shaped to fit the head of the Kiiros, and these outsiders brought to Earth horses and firearms.</description>
+        <graphicData>
+			<texPath>Apparel/OverHead/Morion/Morion</texPath>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/OverHead/Morion/Morion</wornGraphicPath>
+            <tags>
+                <li>KME_Kiiro_helmet_melee</li>
+            </tags>
+        </apparel>
+        
+        <costStuffCount>50</costStuffCount>
+        <statBases>
+            <WorkToMake>3200</WorkToMake>
+            <MaxHitPoints>150</MaxHitPoints>
+
+            <Mass>2</Mass>
+            <Bulk MayRequire="CETeam.CombatExtended">2</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">1</WornBulk>
+
+            <EquipDelay>2</EquipDelay>
+            <StuffEffectMultiplierArmor>0.6</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+            <MeleeCooldownFactor>-0.05</MeleeCooldownFactor>
+            <MeleeHitChance>3</MeleeHitChance>
+        </equippedStatOffsets>
+    </ThingDef>
+    
+    <!-- 绮罗护鼻盔 -->
+    <ThingDef ParentName="KME_Kiiro_MetalicHelmetBase">
+        <defName>KME_Kiiro_Helmet_Nasal</defName>
+        <label>kiiro Nasal helmet</label>
+        <description>The helmet used by the guards in the village can make the wearer feel the weight of responsibility, and those Kiiros will always talk about their premature adventure times.</description>
+        <graphicData>
+			<texPath>Apparel/OverHead/Nasal/Nasal</texPath>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/OverHead/Nasal/Nasal</wornGraphicPath>
+            <tags>
+                <li>KME_Kiiro_helmet_melee</li>
+            </tags>
+        </apparel>
+        
+        <costStuffCount>60</costStuffCount>
+        <statBases>
+            <WorkToMake>3200</WorkToMake>
+            <MaxHitPoints>200</MaxHitPoints>
+            <Mass>3</Mass>
+            <EquipDelay>3</EquipDelay>
+            <Bulk MayRequire="CETeam.CombatExtended">2</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">1</WornBulk>
+            <StuffEffectMultiplierArmor>0.7</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.5</StuffEffectMultiplierInsulation_Heat>
+            <ArmorRating_Sharp>0.2</ArmorRating_Sharp>
+            <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+            <ArmorRating_Heat>0.1</ArmorRating_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+            <PainShockThreshold>0.1</PainShockThreshold>
+            <MeleeDodgeChance>-3</MeleeDodgeChance>
+        </equippedStatOffsets>
+    </ThingDef>
+</Defs>

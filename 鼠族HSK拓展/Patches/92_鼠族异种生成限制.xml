@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 92_鼠族异种生成限制(移除原版异种,仅鼠族异种人) -->
+    <!-- 需求: 鼠族(异种人型)仅生成鼠族对应的异种人 —— 初鼠族(RK_XenoType_Ratkin)、
+         松鼠(Ratkin_Squirrel)、仓鼠(Ratkin_Hamster)、实验鼠(Ratkin_LabRat)、废土鼠(Ratkin_Waster)、
+         田鼠(Ratkin_Vole)这些 RKGE 变体;去掉原版异种(Sanguophage/Hussar/Genie/Starjack、
+         Dirtmole/Waster/Neanderthal/Pigskin/Impid/Yttakin 等)。仅改鼠族,不影响其他种族。
+         基础 mod (RatkinRaceHSK) 的 Ratkin_XenotypeGeneration_Patch 把 raceRestriction
+         整体 Replace 成 whiteGeneListEndo(不含 xenotypeList),并把派系/PawnKind 异种池
+         写入大量原版异种 —— 故须在本 mod(最末层)覆盖。
+         注意: 原版废土异种 defName 为 Waster,鼠族废土鼠为 Ratkin_Waster,勿混淆。
+         2026-08-23: 家鼠已删除,原有权重按 6:4 拆分给松鼠/仓鼠。
+         2026-08-24: ⑨ 新增变体异种人基因白名单全面补充(修复"添加派系界面智人种 0%"——
+         部落鼠/雪鼠/松鼠等 8 种异种人的特色基因不在 HSK whiteGeneListEndo 内,
+         endogene 限制判定异种无效 → 回退智人种 Baseliner);⑥ 玩家派系池补入部落鼠/雪鼠。
+         另: RKGE 专属派系已自带鼠族异种池 —— Rakinia_Exotic=松鼠+仓鼠+实验鼠,
+         Rakinia_ExoticAncient=田鼠, Rakinia_Waster=废土鼠,故本补丁不动它们;
+         本补丁仅差异化普通王国系/朝圣者/商队/玩家四大派系池。
+         ★2026-08-27 定论(勿再按"智人种 0%"追因): 反编译 RimWorldWin64 的
+         `RimWorld.XenotypeSet.get_BaselinerChance` = 1 − Σ(池内非 Baseliner 权重)(负值截 0),
+         派系界面那条"智人种 X%"就是把这块余量显式画出来的固定行。池合计恰为 1.000 时
+         恒显示"智人种 0%",**属正常显示,不代表会生成智人种**(好战王国/白玫瑰/中央同盟/
+         异域鼠邦 四族池合计均为 1.000,已用游戏导出的 Unified.xml 逐个核对)。
+         真会漏智人种的三种情形: ①池合计<1; ②条目引用不存在的 XenotypeDef(权重落空);
+         ③派系压根没有 xenotypeSet(美狐全族如此 → 见 美狐HSK拓展/1.6/Patches/98b_美狐派系异种人池.xml)。 -->
+
+    <!-- ① 硬白名单: raceRestriction/xenotypeList 仅列鼠族异种
+         (初鼠族/松鼠/仓鼠/实验鼠/废土鼠/田鼠 + 部落鼠/雪鼠 共 8 条)。
+         （基类契约: SK 运行时补丁把 raceRestriction 整体替换后已无 xenotypeList 节点,
+           故用 Conditional 兜底 —— 存在则 Replace,不存在则 Add。） -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/xenotypeList</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/xenotypeList</xpath>
+            <value>
+                <xenotypeList>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">RK_XenoType_Ratkin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Squirrel</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Hamster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_LabRat</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Waster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Vole</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Beaver</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_GuineaPig</li>
+                    <li>OAGene_SnowRatkin</li>
+                </xenotypeList>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction</xpath>
+            <value>
+                <xenotypeList>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">RK_XenoType_Ratkin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Squirrel</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Hamster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_LabRat</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Waster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Vole</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_Beaver</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Ratkin_GuineaPig</li>
+                    <li>OAGene_SnowRatkin</li>
+                </xenotypeList>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ②b 锁死基础 mod 的鼠族职位抽象基类(2026-08-27 加固)。
+         根源: RatkinRaceHSK/1.6/Defs/PawnKindDef_Ratkin/PawnKinds_Player.xml 的
+         `<PawnKindDef Name="RKBasePawnKind" Abstract="True">` 自带
+         `useFactionXenotypes=false` + 11 键池(初鼠族 0.7 + Sanguophage 0.1 + 9 条原版各 0.02),
+         全部鼠族职位都继承它 → 一旦②的 [count(*)=4] 判定漏掉(基础 mod 更新改键数即漏),
+         这些职位就直接生成人类异种人。②b 按 @Name 精确命中基类本身整体 Replace,
+         与 ② 结果一致但不再依赖"键数=4"这个脆弱特征。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                </xenotypeChances>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- ②a 翻转 RKBasePawnKind.useFactionXenotypes=false→true(2026-09-07)。
+         基类默认 false 时职位池优先、派系 xenotypeSet 全部空转,③~⑥ 与各派系主题池
+         均不生效;翻转后派系池生效,职位池(②/②b)退为无派系/无池派系的兜底。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/useFactionXenotypes</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]/useFactionXenotypes</xpath>
+            <value>
+                <useFactionXenotypes>true</useFactionXenotypes>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/PawnKindDef[@Name="RKBasePawnKind"]</xpath>
+            <value>
+                <useFactionXenotypes>true</useFactionXenotypes>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ② 上游压在鼠族职位池上的"初鼠族 + 4 条原版"混合池 → 换回本地纯鼠族池。
+         ★2026-08-22: 最早用 [Sanguophage][Hussar][Genie] 只查键名,误伤 Core_SK 10-11 键人类池。
+         ★2026-08-28(HSK 8/27 差分后重写): 差分给 Core_SK 的 DovaColonist/NovaColonist/Nova/
+           Norbalperson/SK_BasePlayerPawnKindOrassan 这 5 个人类玩家职位补了
+           `useFactionXenotypes=false`,它们的 4 键池 {Sanguophage,Hussar,Genie,Starjack} 从此真正生效;
+           旧的 [count(*)=4] 选择器会把这些人类池一并换成鼠族池 → 人类殖民者出鼠族异种人。
+           同时上游 Ratkin_XenotypeGeneration_Patch 把鼠族池改成 5 键(Ratkin 0.88 + 上述 4 键各 0.03),
+           count=4 又不再命中鼠族池。两头都错。
+           现改为强制含 [RK_XenoType_Ratkin]:人类池不含初鼠族键 → 永不误伤;不加 count 上限 →
+           上游以后再加键仍能兜住。RKBasePawnKind 抽象基另由 ②b 按 @Name 锁死。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PawnKindDef/xenotypeSet/xenotypeChances[RK_XenoType_Ratkin][Sanguophage][Hussar][Genie][Starjack]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/PawnKindDef/xenotypeSet/xenotypeChances[RK_XenoType_Ratkin][Sanguophage][Hussar][Genie][Starjack]</xpath>
+            <value>
+                <xenotypeChances>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                </xenotypeChances>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- ③ 王国系(所有 ParentName=RatkinFactionBase 的王国学派系继承此池):
+         2026-09-07 重调: 生产/日常侧重(河狸/松鼠),不混军事系。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[@Name="RatkinFactionBase"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.84</RK_XenoType_Ratkin>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Beaver>
+                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Squirrel>
+            </xenotypeChances>
+        </value>
+    </Operation>
+
+    <!-- ④ 朝圣者派系: 2026-09-07 重调,学术侧重(实验鼠)。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[defName="RK_Faction_Pilgrims"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.82</RK_XenoType_Ratkin>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.12</Ratkin_LabRat>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Beaver>
+            </xenotypeChances>
+        </value>
+    </Operation>
+
+    <!-- ⑤ 商队派系: 2026-09-09 重调 —— 徘徊游商/普通商队的成员(含入队招募候选)均吃此池,
+         扩入异种鼠但只留 4 种主力(松鼠/仓鼠/实验白鼠/田鼠);废土鼠为敌系(天然敌对派系专属),
+         不放入友方商队;行商耐用侧重保留(田鼠)+仓鼠护卫,合计 1.000。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[defName="RK_Faction_Caravan"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.73</RK_XenoType_Ratkin>
+                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.10</Ratkin_Vole>
+                <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Hamster>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_LabRat>
+                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Squirrel>
+            </xenotypeChances>
+        </value>
+    </Operation>
+
+    <!-- ⑥ 玩家派系(RK_PlayerFactionBase 基类的 xenotypeSet 已被 RatkinRaceHSK 的
+         HSK_Generated 补丁整体移除并改写到具体子类 RK_PlayerFaction 上,故不能打基类;
+         改为对三个具体玩家派系分别处理: RK_PlayerFaction 有 xenotypeSet 直接 Replace,
+         RK_EscapeFaction/RK_ExileFaction 继承的基类已无该节点,须 Add 创建。
+         初鼠族主导 + 四种变体均衡撒布,丰富多样。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[defName="RK_PlayerFaction"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <!-- 2026-09-07 重调: 玩家池最丰富(5 种),变体合计 0.32 -->
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.68</RK_XenoType_Ratkin>
+                <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Beaver>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_LabRat>
+                <Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Waster>
+                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Vole>
+            </xenotypeChances>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="RK_EscapeFaction"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="RK_EscapeFaction"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="RK_EscapeFaction"]</xpath>
+            <value>
+                <xenotypeSet>
+                    <xenotypeChances>
+                        <!-- 2026-09-07 重调: 与 match 分支同池 -->
+                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/FactionDef[defName="RK_ExileFaction"]/xenotypeSet/xenotypeChances</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/FactionDef[defName="RK_ExileFaction"]/xenotypeSet/xenotypeChances</xpath>
+            <value>
+                <xenotypeChances>
+                    <!-- 2026-09-07 重调: 职位池退为兜底(见 ②a),通用配比 5 种 -->
+                    <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                    <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                    <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                    <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                    <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                </xenotypeChances>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/FactionDef[defName="RK_ExileFaction"]</xpath>
+            <value>
+                <xenotypeSet>
+                    <xenotypeChances>
+                        <!-- 2026-09-07 重调: 与 match 分支同池 -->
+                        <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.78</RK_XenoType_Ratkin>
+                        <Ratkin_Beaver MayRequire="Ludeon.RimWorld.Biotech">0.07</Ratkin_Beaver>
+                        <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Squirrel>
+                        <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_Hamster>
+                        <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Vole>
+                    </xenotypeChances>
+                </xenotypeSet>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- ⑦ 人类异种人白名单(Human 只允许原版+DLC 异种人,禁止鼠族异种人):
+         HAR(AlienRaces)的 HumansAreAliensToo 把 Human 改成 AlienRace 并给 xenotypeList,
+         Core_SK 的人类定义含 Baseline_Nova/Dova/Norbal/Orassan(其它种族基线异种人),
+         RatkinRaceHSK 的 HumansAreAlienToo_Patch 还会 Add RK_XenoType_Ratkin(初鼠族)
+         → 人类会随机到鼠族/其它种族异种人。这里在最终层统一 Replace 为纯净白名单
+         (原版 Biotech + Odyssey 异种人),与 HSK修复整合 09_杂项 的人类白名单一致并兜底。
+         注意: 该节点由 HAR/Core_SK 提供,若缺失(无 HAR 环境)则 Conditional 跳过。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ThingDef[defName="Human"]/alienRace/raceRestriction/xenotypeList</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="Human"]/alienRace/raceRestriction/xenotypeList</xpath>
+            <value>
+                <xenotypeList>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Baseliner</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+                </xenotypeList>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- ⑧ 阿莎丽(Alien_Asari)异种人限制 —— 2026-08-22 暂存本文件(用户指示:
+         "人种的先放在这里,后面再改";AsariRace=skyarkhangel.asarirace,依赖 HAR+HSK)。
+         需求: 阿莎丽 = 本mod种族(Baseline_Asari)+ 原版+DLC 异种人,极低点缀
+         (基线 0.98 主导,原版异种各 0.002)。AsariRace 自身白名单=[Baseline_Asari]
+         (纯基线),派系/PawnKind 池=[Baseline_Asari 999] → 连原版异种人也出不来。
+         这里: 白名单扩展 + 池权重调整。不含 Baseliner(无基因异种人,对异星种族无意义,
+         Core_SK/鼠族池均不含)。人类侧已由 AsariRace 自动 blackXenotypeList=Baseline_Asari,不动。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Asari"]/alienRace/raceRestriction/xenotypeList</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Asari"]/alienRace/raceRestriction/xenotypeList</xpath>
+            <value>
+                <xenotypeList>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Baseline_Asari</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Sanguophage</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Dirtmole</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Hussar</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Waster</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Pigskin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Neanderthal</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Impid</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Genie</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech">Yttakin</li>
+                    <li MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">Starjack</li>
+                </xenotypeList>
+            </value>
+        </match>
+    </Operation>
+    <!-- ⑧b 阿莎丽派系/PawnKind 池: 基线 0.98 主导 + 原版异种 0.002 极低点缀。
+         池节点均为 AsariRace 自有(Inherit="False"),直接 Replace。 -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[defName="AsariHunters"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <Baseline_Asari MayRequire="Ludeon.RimWorld.Biotech">0.98</Baseline_Asari>
+                <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.002</Sanguophage>
+                <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.002</Dirtmole>
+                <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.002</Hussar>
+                <Waster MayRequire="Ludeon.RimWorld.Biotech">0.002</Waster>
+                <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.002</Pigskin>
+                <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.002</Neanderthal>
+                <Impid MayRequire="Ludeon.RimWorld.Biotech">0.002</Impid>
+                <Genie MayRequire="Ludeon.RimWorld.Biotech">0.002</Genie>
+                <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.002</Yttakin>
+                <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.002</Starjack>
+            </xenotypeChances>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/FactionDef[defName="AsariPlayerColony"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <Baseline_Asari MayRequire="Ludeon.RimWorld.Biotech">0.98</Baseline_Asari>
+                <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.002</Sanguophage>
+                <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.002</Dirtmole>
+                <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.002</Hussar>
+                <Waster MayRequire="Ludeon.RimWorld.Biotech">0.002</Waster>
+                <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.002</Pigskin>
+                <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.002</Neanderthal>
+                <Impid MayRequire="Ludeon.RimWorld.Biotech">0.002</Impid>
+                <Genie MayRequire="Ludeon.RimWorld.Biotech">0.002</Genie>
+                <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.002</Yttakin>
+                <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.002</Starjack>
+            </xenotypeChances>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/PawnKindDef[@Name="SK_BasePlayerPawnKindAsari"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <Baseline_Asari MayRequire="Ludeon.RimWorld.Biotech">0.98</Baseline_Asari>
+                <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.002</Sanguophage>
+                <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.002</Dirtmole>
+                <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.002</Hussar>
+                <Waster MayRequire="Ludeon.RimWorld.Biotech">0.002</Waster>
+                <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.002</Pigskin>
+                <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.002</Neanderthal>
+                <Impid MayRequire="Ludeon.RimWorld.Biotech">0.002</Impid>
+                <Genie MayRequire="Ludeon.RimWorld.Biotech">0.002</Genie>
+                <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.002</Yttakin>
+                <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.002</Starjack>
+            </xenotypeChances>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/PawnKindDef[@Name="AsariVillagerBase"]/xenotypeSet/xenotypeChances</xpath>
+        <value>
+            <xenotypeChances>
+                <Baseline_Asari MayRequire="Ludeon.RimWorld.Biotech">0.98</Baseline_Asari>
+                <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.002</Sanguophage>
+                <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.002</Dirtmole>
+                <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.002</Hussar>
+                <Waster MayRequire="Ludeon.RimWorld.Biotech">0.002</Waster>
+                <Pigskin MayRequire="Ludeon.RimWorld.Biotech">0.002</Pigskin>
+                <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.002</Neanderthal>
+                <Impid MayRequire="Ludeon.RimWorld.Biotech">0.002</Impid>
+                <Genie MayRequire="Ludeon.RimWorld.Biotech">0.002</Genie>
+                <Yttakin MayRequire="Ludeon.RimWorld.Biotech">0.002</Yttakin>
+                <Starjack MayRequire="Ludeon.RimWorld.Biotech,Ludeon.RimWorld.Odyssey">0.002</Starjack>
+            </xenotypeChances>
+        </value>
+    </Operation>
+
+    <!-- ⑨ 鼠族变体异种人基因白名单全面补充(2026-08-24) —— 修复"智人种 0%" -->
+    <!-- 背景: RatkinRaceHSK 给 Ratkin 配置 onlyHaveRaceRestrictedGenesEndo=true +
+         whiteGeneListEndo(内源基因白名单,12 个 HSK 基础基因)。88 号补丁已追加 RKGE
+         耳/尾自定义基因,金鼠族 HSK_基因白名单.xml 已给 Ratkin_OA 异种人补过白名单。
+         但 92 号池里的变体异种人(松鼠/仓鼠/实验鼠/废土鼠/田鼠/部落鼠/雪鼠)其余基因
+         (发色 Hair_*/技能 Aptitude*/速度 MoveSpeed_*/自定义 OAGene_* 等)不在白名单内
+         → 被 endogene 限制判定异种无效 → 派系生成回退智人种(Baseliner),
+         添加派系界面显示"智人种 0%"。
+         处理: 将 92 号池 8 种异种人用到的、现有白名单缺失的基因全部追加到
+         whiteGeneListEndo(仅针对 defName=Ratkin)。重复追加无害。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Ratkin"]/alienRace/raceRestriction/whiteGeneListEndo</xpath>
+        <value>
+            <!-- 雪鼠(OAGene_SnowRatkin)继承自 OAGene_XenoRatkinBase 抽象基类的原版发色 -->
+            <li>Hair_DarkBlack</li>
+            <li>Hair_DarkBrown</li>
+            <!-- 雪鼠(OAGene_SnowRatkin)特色基因 -->
+            <li>OAGene_SnowRatkinEar</li>
+            <li>MoveSpeed_VeryQuick</li>
+            <li>OAGene_AgilityAction</li>
+            <li>MaxTemp_SmallDecrease</li>
+            <li>OAGene_HeatSleepy</li>
+            <li>OAGene_SpecificHemogen</li>
+            <li>Hair_SnowWhite</li>
+            <li>OAGene_Suspicious</li>
+            <li>OAGene_BloodCellsAutophagy</li>
+            <li>AptitudeRemarkable_Melee</li>
+            <li>AptitudePoor_Plants</li>
+            <li>AptitudePoor_Social</li>
+            <!-- 松鼠(Ratkin_Squirrel)缺失基因 -->
+            <li>MoveSpeed_Quick</li>
+            <li>KindInstinct</li>
+            <li>Body_Thin</li>
+            <li>Hair_ReddishBrown</li>
+            <li>Hair_BrightRed</li>
+            <li>AptitudeStrong_Melee</li>
+            <li>AptitudeTerrible_Mining</li>
+            <li>AptitudeRemarkable_Plants</li>
+            <li>AptitudeTerrible_Animals</li>
+            <li>AptitudeTerrible_Artistic</li>
+            <li>AptitudeTerrible_Intellectual</li>
+            <li>AptitudeTerrible_Social</li>
+            <!-- 仓鼠(Ratkin_Hamster)缺失基因 -->
+            <li>WoundHealing_SuperFast</li>
+            <li>Superclotting</li>
+            <li>PsychicAbility_Deaf</li>
+            <li>Mood_Sanguine</li>
+            <li>Aggression_Aggressive</li>
+            <li>MeleeDamage_Strong</li>
+            <li>Sleepy</li>
+            <li>Robust</li>
+            <li>Pain_Reduced</li>
+            <li>Learning_Slow</li>
+            <li>Unstoppable</li>
+            <li>AptitudePoor_Construction</li>
+            <li>AptitudeTerrible_Plants</li>
+            <li>AptitudeTerrible_Crafting</li>
+            <!-- 实验鼠(Ratkin_LabRat)缺失基因 -->
+            <li>PsychicAbility_Enhanced</li>
+            <li>Aggression_DeadCalm</li>
+            <li>Instability_Mild</li>
+            <li>AptitudePoor_Melee</li>
+            <li>AptitudeTerrible_Construction</li>
+            <li>AptitudeRemarkable_Medicine</li>
+            <li>AptitudeStrong_Social</li>
+            <li>AptitudeStrong_Intellectual</li>
+            <!-- 废土鼠(Ratkin_Waster)缺失基因 -->
+            <li>Immunity_Strong</li>
+            <li>Mood_Pessimist</li>
+            <li>ToxicEnvironmentResistance_Partial</li>
+            <li>Pain_Increased</li>
+            <li>Ratkin_ShoShoShot</li>
+            <li>Ratkin_Sassy</li>
+            <li>Hair_Pink</li>
+            <li>Hair_LightPurple</li>
+            <li>PollutionRush</li>
+            <li>AptitudeStrong_Shooting</li>
+            <!-- 田鼠(Ratkin_Vole)缺失基因 -->
+            <li>Ratkin_YunDanFengQing</li>
+            <li>TotalHealing</li>
+            <li>DiseaseFree</li>
+            <li>StrongStomach</li>
+            <!-- 2026-08-25: 补充 纯白皮肤(RK_Skin_PureWhite) —— 实验鼠/废土鼠/田鼠
+                 三异种人共用此内源皮肤基因,此前漏加 → 三异种判定无效 →
+                 生成回退智人种(Baseliner),添加派系界面显示"智人种 0%"。
+                 中央同盟/白玫瑰协约/好战王国/军阀/绿林鼠邦 池内均有实验鼠,故全部受影响。 -->
+            <li>RK_Skin_PureWhite</li>
+            <!-- 2026-08-27: 金鼠族异种人 Ratkin_OA 的 genes 列表仍有 4 个基因不在白名单 →
+                 在 onlyHaveRaceRestrictedGenesEndo=true 下整族被判"基因非法"。
+                 前两个是原版 Biotech 天赋基因, 后两个是金鼠族自有基因, 按各自 packageId 门控
+                 (Def 节点级 MayRequire 在 1.6 仍然有效, 与 Operation 级不同)。 -->
+            <li MayRequire="Ludeon.RimWorld.Biotech">AptitudePoor_Mining</li>
+            <li MayRequire="Ludeon.RimWorld.Biotech">AptitudeStrong_Artistic</li>
+            <li MayRequire="local.ratkin.goldenhsk">RK_OA_gene_Social</li>
+            <li MayRequire="local.ratkin.goldenhsk">OA_RK_Gene_ColdAdaptation</li>
+            <!-- 2026-08-31 新增家鼠(Ratkin_Beaver)/豚鼠(Ratkin_GuineaPig)用到的内源基因 -->
+            <li>PsychicAbility_Dull</li>
+            <li>Mood_Optimist</li>
+            <li>Beard_NoBeardOnly</li>
+            <li>Hair_Gray</li>
+            <li>Hair_DarkSaturatedReddish</li>
+            <li>Hair_MidBlack</li>
+            <li>Hair_DarkBlack</li>
+            <li>Hair_SnowWhite</li>
+            <li>Hair_LightOrange</li>
+            <li>AptitudeStrong_Cooking</li>
+            <li>AptitudeStrong_Mining</li>
+            <li>AptitudeStrong_Crafting</li>
+            <li>AptitudeStrong_Animals</li>
+            <li>AptitudeStrong_Social</li>
+            <li>AptitudePoor_Animals</li>
+            <li>AptitudePoor_Intellectual</li>
+            <li>AptitudePoor_Mining</li>
+            <li>AptitudeTerrible_Melee</li>
+            <li>AptitudeTerrible_Construction</li>
+            <li>MinTemp_SmallDecrease</li>
+            <li>MeleeDamage_Weak</li>
+            <li>Beauty_Pretty</li>
+            <li>KindInstinct</li>
+            <li>RK_Gene_FragilePain</li>
+            <li>Ratkin_GuineaPigEars</li>
+            <!-- 海狸(Ratkin_Beaver)内源基因 -->
+            <li>Ratkin_BREars</li>
+            <li>Ratkin_BRTail</li>
+            <li>Ratkin_WaterproofFur</li>
+            <li>Ratkin_CarefullyShoot</li>
+            <li>Hair_ReddishBrown</li>
+            <li>Hair_SandyBlonde</li>
+            <li>AptitudeStrong_Plants</li>
+            <li>AptitudeStrong_Construction</li>
+            <li>AptitudeStrong_Shooting</li>
+            <li>AptitudePoor_Artistic</li>
+        </value>
+    </Operation>
+
+</Patch>

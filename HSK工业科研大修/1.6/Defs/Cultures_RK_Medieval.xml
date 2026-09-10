@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- ==========================================================================
+	     中世纪文化移植(复刻自 Medieval Overhaul CultureDefs/Cultures.xml + 1.6/Mods/Ideology 花样层)
+		     铁律: 纯原版 CultureDef/StyleCategoryDef/ThingStyleDef, 无 memes/precepts, 无 MO DLL 引用;
+		     namer 全部指向原版 Rustican 系列(已在 all_defnames.txt 核实存在):
+		       NamerIdeoRustican / NamerDeityRustican / DeityTypeMakerRustican /
+		       LeaderTitleMaker_Rustican / NamerFestivalRustican; 地方标签 OriginSpacer 原版存在。
+		     styleItemTags(Rural/NoBeard/BeardRural/NoTattoo)与原版 Rustican 文化同款, 安全。
+		     thingStyleCategories 挂本文件新建 RK_StyleCat_Medieval(li 级 MayRequire Ideology 仍有效, 保留)。
+		     MO 的 ThingStyleDef 全量核查后仅 1 件(Altar_Grand 花样, 非"服饰花样 40+"), 已一并移植。
+		     ⚠ 绝对不写 raceRestriction.apparelList / FactionDef.categoryTag(见 AGENTS §3)。
+		     贴图: WorldObjects/Castle.png + Building/BuildingStyles/EmperorFace_{north,south,east}.png
+		       (Graphic_Multi 缺 _west 自动镜像 _east)。
+		     ========================================================================== -->
+
+	<!-- ===== 文化 1: 旧界民(仿 MO 旧界民文化) ===== -->
+	<CultureDef>
+		<defName>RK_Culture_OldWorlder</defName>
+		<label>旧界民</label>
+		<description>边疆世界外邦人中常见的古老文化传承——农耕、行会与骑士精神的遗风，坚韧而务实。</description>
+		<ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoRustican</ideoNameMaker>
+		<deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityRustican</deityNameMaker>
+		<deityTypeMaker MayRequire="Ludeon.RimWorld.Ideology">DeityTypeMakerRustican</deityTypeMaker>
+		<leaderTitleMaker MayRequire="Ludeon.RimWorld.Ideology">LeaderTitleMaker_Rustican</leaderTitleMaker>
+		<festivalNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerFestivalRustican</festivalNameMaker>
+		<allowedPlaceTags>
+			<li>OriginSpacer</li>
+		</allowedPlaceTags>
+		<iconPath>World/WorldObjects/Expanding/Town</iconPath>
+		<thingStyleCategories>
+			<li MayRequire="Ludeon.RimWorld.Ideology">
+				<category>RK_StyleCat_Medieval</category>
+				<priority>2</priority>
+			</li>
+		</thingStyleCategories>
+		<styleItemTags>
+			<li>
+				<tag>Rural</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoBeard</tag>
+				<baseWeight>10</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>BeardRural</tag>
+				<baseWeight>0.25</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoTattoo</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+		</styleItemTags>
+	</CultureDef>
+
+	<!-- ===== 文化 2: 沙邦集市(仿 MO 沙漠文化) ===== -->
+	<CultureDef>
+		<defName>RK_Culture_Desert</defName>
+		<label>沙邦集市</label>
+		<description>以布匹丝绸集市闻名的边疆沙漠文化，以眩目的色彩与喧嚣的商路著称。</description>
+		<ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoRustican</ideoNameMaker>
+		<deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityRustican</deityNameMaker>
+		<deityTypeMaker MayRequire="Ludeon.RimWorld.Ideology">DeityTypeMakerRustican</deityTypeMaker>
+		<leaderTitleMaker MayRequire="Ludeon.RimWorld.Ideology">LeaderTitleMaker_Rustican</leaderTitleMaker>
+		<festivalNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerFestivalRustican</festivalNameMaker>
+		<allowedPlaceTags>
+			<li>OriginSpacer</li>
+		</allowedPlaceTags>
+		<iconPath>World/WorldObjects/Expanding/Town</iconPath>
+		<thingStyleCategories>
+			<li MayRequire="Ludeon.RimWorld.Ideology">
+				<category>RK_StyleCat_Medieval</category>
+				<priority>2</priority>
+			</li>
+		</thingStyleCategories>
+		<styleItemTags>
+			<li>
+				<tag>Rural</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoBeard</tag>
+				<baseWeight>10</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>BeardRural</tag>
+				<baseWeight>0.25</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoTattoo</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+		</styleItemTags>
+	</CultureDef>
+
+	<!-- ===== 花样分类(仿 MO 旧界花样分类, 仪式音效/特效指原版 Rustic) ===== -->
+	<StyleCategoryDef>
+		<defName>RK_StyleCat_Medieval</defName>
+		<label>中世纪古韵</label>
+		<iconPath>WorldObjects/Castle</iconPath>
+		<soundOngoingRitual>RitualSustainer_Rustic</soundOngoingRitual>
+		<ritualVisualEffectDef>Rustic</ritualVisualEffectDef>
+		<thingDefStyles>
+			<li>
+				<thingDef>Altar_Grand</thingDef>
+				<styleDef>RK_Style_Medieval_AltarGrand</styleDef>
+			</li>
+		
+			<li>
+				<thingDef>Rustic_Building_ChaliceSilver</thingDef>
+				<styleDef>RK_Style_Medieval_ChaliceSilver</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_ChaliceGold</thingDef>
+				<styleDef>RK_Style_Medieval_ChaliceGold</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_BowlSilver</thingDef>
+				<styleDef>RK_Style_Medieval_BowlSilver</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_BowlGold</thingDef>
+				<styleDef>RK_Style_Medieval_BowlGold</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_SkullGold</thingDef>
+				<styleDef>RK_Style_Medieval_SkullGold</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_SkullJadeEmerald</thingDef>
+				<styleDef>RK_Style_Medieval_SkullJadeEmerald</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_SkullJadeSapphire</thingDef>
+				<styleDef>RK_Style_Medieval_SkullJadeSapphire</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_SkullJadeRuby</thingDef>
+				<styleDef>RK_Style_Medieval_SkullJadeRuby</styleDef>
+			</li>
+			<li>
+				<thingDef>Rustic_Building_AncientCodex</thingDef>
+				<styleDef>RK_Style_Medieval_AncientCodex</styleDef>
+			</li>
+		</thingDefStyles>
+	</StyleCategoryDef>
+
+	<!-- ===== 花样本体(= MO 唯一 ThingStyleDef(大帝面孔祭坛花样), 贴图 EmperorFace) ===== -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_AltarGrand</defName>
+		<graphicData>
+			<texPath>Building/BuildingStyles/EmperorFace</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(8,8)</drawSize>
+			<shadowData>
+				<volume>(2.4, 1, 1.6)</volume>
+			</shadowData>
+		</graphicData>
+	</ThingStyleDef>
+
+
+	<!-- 银圣杯 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_ChaliceSilver</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/ChaliceSilver</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 金圣杯 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_ChaliceGold</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/ChaliceGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 银碗 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_BowlSilver</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/BowlSilver</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 金碗 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_BowlGold</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/BowlGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 黄金骷髅 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_SkullGold</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullGold</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 翡翠骷髅·碧 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_SkullJadeEmerald</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullEmerald</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 翡翠骷髅·青 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_SkullJadeSapphire</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullSapphire</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 翡翠骷髅·赤 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_SkullJadeRuby</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/SkullRuby</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+
+	<!-- 古籍抄本 的中世纪古韵花样(复用原贴图, 供文化风格选择) -->
+	<ThingStyleDef>
+		<defName>RK_Style_Medieval_AncientCodex</defName>
+		<graphicData>
+			<texPath>Things/Building/Ruin/AncientCodex</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingStyleDef>
+</Defs>

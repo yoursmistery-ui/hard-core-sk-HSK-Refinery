@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  蓝图委托台 (2026-08-28 v4.2) — 定向获取蓝图的专用任务入口
+  与探秘桌同一事件驱动范式 (玩家点击 gizmo + 消耗残页情报 + 天数冷却, 零 tick)。
+  点击「发布蓝图委托」→ 记下玩家当前最卡的档位 → 生成一条原版藏宝处(ItemStash)任务,
+  其藏宝箱保底投放一本对应档蓝图书 (见 BlueprintUnlockHSK.CompBlueprintCommissionHSK
+  + Patch_ItemStash)。贴图 4 向(2026-08-28 v11): 横桌 N/S + 竖桌 E/W, Graphic_Multi
+  自动加载 RK_BlueprintCommissionBoard_{north,east,south,west}.png (3x1 占地)。
+============================================================================ -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RK_BlueprintCommissionBoard</defName>
+		<label>蓝图委托台</label>
+		<description>一张摊着委托契约、印章与线人名单的案台。学者们在这里挂出求购研究蓝图的重金委托——只要你把攒下的残页情报登记上去, 很快就会有线人指认出一处藏宝点, 里面替你塞好了一份你眼下正缺的蓝图。\n\n卡在哪一项科技上, 委托就更容易给出那一项对应的蓝图书。</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<size>(3,1)</size>
+		<rotatable>true</rotatable>
+		<tickerType>Never</tickerType>
+		<designationCategory>Misc</designationCategory>
+		<uiOrder>2150</uiOrder>
+		<graphicData>
+			<texPath>Things/Item/Blueprints/SchematicScroll/RK_BlueprintCommissionBoard</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,1)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Blueprints/SchematicScroll/RK_BlueprintCommissionBoard_north</uiIconPath>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>4000</WorkToBuild>
+			<Mass>40</Mass>
+			<Flammability>0.4</Flammability>
+			<Beauty>8</Beauty>
+		</statBases>
+		<costList>
+			<WroughtIron>30</WroughtIron>
+			<ComponentMedieval>4</ComponentMedieval>
+		</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="BlueprintUnlockHSK.CompProperties_BlueprintCommissionHSK"/>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.CommissionProperties">
+				<noteCost>2</noteCost>
+				<questPoints>600</questPoints>
+				<minDaysBetween>2</minDaysBetween>
+			</li>
+		</modExtensions>
+	</ThingDef>
+</Defs>

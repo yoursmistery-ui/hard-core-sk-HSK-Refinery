@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- 乡村娱乐建筑(骰子杯/塔罗桌/战棋桌 + JoyGiver + JobDef)
+     来源: Medieval Overhaul 1.6.2.2 纯原版类 def 移植(2026-08-27), 前缀统一改为 Rustic_,
+     RawWood→Woody/WoodLog, Clay→SoftClay, Linen→Cloth, 研究 RusticFurniture→ComplexFurniture。
+     2026-09-06 材料对齐乡村家具产业线定案: 选材截断为 Woody(木板), 固定 WoodLog→ComponentMedieval
+     (塔罗 2×2→5 / 战棋 2×3→6); 骰子杯本无固定木材成本, 仅截断选材。
+-->
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_CupAndDice</defName>
+		<label>骰子杯</label>
+		<description>骨骰与皮杯的赌运小戏, 消遣脑力的入门娱乐。</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/CupAndDice</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(0.65, 0.25, 0.6)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.09375,0.296875,0.796875,0.703125)</rect>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<minTechLevelToBuild>Medieval</minTechLevelToBuild>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+		</building>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>7000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>4</Beauty>
+			<JoyGainFactor>1</JoyGainFactor>
+		</statBases>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>70</costStuffCount>
+		<pathCost>30</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc2</designationHotKey>
+	</ThingDef>
+
+	
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_Tarocco</defName>
+		<label>塔罗牌桌</label>
+		<description>摊牌占卜的双人对局, 输赢都在牌面上。</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/Tarocco</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<shadowData>
+				<volume>(1.6, 0.3, 1.6)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+			<buildingSizeCategory>Medium</buildingSizeCategory>
+			<paintable>true</paintable>
+		</building>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>10000</WorkToBuild>
+			<Mass>30</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>0</Beauty>
+			<JoyGainFactor>1.3</JoyGainFactor>
+		</statBases>
+		<size>(2,2)</size>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>50</costStuffCount>
+		<costList>
+			<Cloth>50</Cloth>
+			<ComponentMedieval>5</ComponentMedieval>
+		</costList>
+		<pathCost>42</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc5</designationHotKey>
+		<canOverlapZones>false</canOverlapZones>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<uiIconScale>0.9</uiIconScale>
+	</ThingDef>
+
+	
+<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>Rustic_RimWar</defName>
+		<label>战棋桌</label>
+		<description>微缩军队与沙盘的推演棋局, 费脑子也费时间。</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/RimWar</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<staticSunShadowHeight>0.2</staticSunShadowHeight>
+		<castEdgeShadows>True</castEdgeShadows>
+		<altitudeLayer>Building</altitudeLayer>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+			<buildingSizeCategory>Medium</buildingSizeCategory>
+			<paintable>true</paintable>
+		</building>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>12000</WorkToBuild>
+			<Mass>60</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>0</Beauty>
+			<JoyGainFactor>1.3</JoyGainFactor>
+		</statBases>
+		<size>(2,3)</size>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>80</costStuffCount>
+		<costList>
+			<Cloth>80</Cloth>
+			<ComponentMedieval>6</ComponentMedieval>
+		</costList>
+		<pathCost>42</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc3</designationHotKey>
+		<canOverlapZones>false</canOverlapZones>
+		<placeWorkers>
+			<li>PlaceWorker_NeverAdjacentUnstandable</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+	</ThingDef>
+	
+
+<JoyGiverDef>
+		<defName>Rustic_Play_CupAndDice</defName>
+		<giverClass>JoyGiver_InteractBuildingSitAdjacent</giverClass>
+		<baseChance>2</baseChance>
+		<thingDefs>
+			<li>Rustic_CupAndDice</li>
+		</thingDefs>
+		<jobDef>Rustic_Play_CupAndDice</jobDef>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+
+	
+<JoyGiverDef>
+		<defName>Rustic_Play_Tarocco</defName>
+		<giverClass>JoyGiver_InteractBuildingSitAdjacent</giverClass>
+		<baseChance>4</baseChance>
+		<thingDefs>
+			<li>Rustic_Tarocco</li>
+		</thingDefs>
+		<jobDef>Rustic_Play_Tarocco</jobDef>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+
+	
+<JoyGiverDef>
+		<defName>Rustic_Play_RimWar</defName>
+		<giverClass>JoyGiver_PlayBilliards</giverClass>
+		<baseChance>4</baseChance>
+		<thingDefs>
+			<li>Rustic_RimWar</li>
+		</thingDefs>
+		<jobDef>Rustic_Play_RimWar</jobDef>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<requiredCapacities>
+			<li>Sight</li>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</JoyGiverDef>
+	
+
+<JobDef>
+		<defName>Rustic_Play_CupAndDice</defName>
+		<driverClass>JobDriver_SitFacingBuilding</driverClass>
+		<reportString>playing cup and dice.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyMaxParticipants>4</joyMaxParticipants>
+		<joySkill>Intellectual</joySkill>
+		<joyXpPerTick>0.0018</joyXpPerTick>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<taleOnCompletion>PlayedGame</taleOnCompletion>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	
+<JobDef>
+		<defName>Rustic_Play_Tarocco</defName>
+		<driverClass>JobDriver_SitFacingBuilding</driverClass>
+		<reportString>playing tarocco.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyMaxParticipants>4</joyMaxParticipants>
+		<joySkill>Intellectual</joySkill>
+		<joyXpPerTick>0.004</joyXpPerTick>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<taleOnCompletion>PlayedGame</taleOnCompletion>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	
+<JobDef>
+		<defName>Rustic_Play_RimWar</defName>
+		<driverClass>JobDriver_PlayBilliards</driverClass>
+		<reportString>playing rim of war.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyMaxParticipants>4</joyMaxParticipants>
+		<joySkill>Intellectual</joySkill>
+		<joyXpPerTick>0.008</joyXpPerTick>
+		<joyKind>Gaming_Cerebral</joyKind>
+		<taleOnCompletion>PlayedGame</taleOnCompletion>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+	
+	
+</Defs>

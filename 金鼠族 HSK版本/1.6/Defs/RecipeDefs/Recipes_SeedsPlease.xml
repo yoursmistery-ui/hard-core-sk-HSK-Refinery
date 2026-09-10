@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- SeedsPlease 种子提取配方(2026-08-22 新增): 植物处理台上用风雪碎晶提取种子 -->
+  <!-- 参照 SeedsPlease 标准 ExtractSeed: 4 原料 → 3 种子,研究前置 OA_RK_Oberonia_Aurea_Research -->
+
+  <RecipeDef MayRequire="notfood.SeedsPlease">
+    <defName>ExtractSeedOAGeneIceCrystalFlower</defName>
+    <label>extract ice crystal flower seeds</label>
+    <description>Extract ice crystal flower seeds from blizzard shattered crystals.</description>
+    <jobString>Extracting seeds.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <workSkill>Cooking</workSkill>
+    <workAmount>600</workAmount>
+    <recipeUsers>
+      <li>PlantProcessingTable</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>OAGene_IceCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>OAGene_IceCrystal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SeedOAGeneIceCrystalFlower>3</SeedOAGeneIceCrystalFlower>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+  <RecipeDef MayRequire="notfood.SeedsPlease">
+    <defName>ExtractSeedOAGeneSnowyCrystalTree</defName>
+    <label>extract snowy crystal tree seeds</label>
+    <description>Extract snowy crystal tree seeds from blizzard shattered crystals.</description>
+    <jobString>Extracting seeds.</jobString>
+    <workSpeedStat>CookSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <workSkill>Cooking</workSkill>
+    <workAmount>600</workAmount>
+    <recipeUsers>
+      <li>PlantProcessingTable</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>OAGene_IceCrystal</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>OAGene_IceCrystal</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SeedOAGeneSnowyCrystalTree>3</SeedOAGeneSnowyCrystalTree>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+  <!-- 金鸢尾兰 A/B/C + 杂交水稻种子(2026-08-23 手写收录,替代 SeedsPlease 自动生成;提取材料=植物收成物,与原自动生成一致;补研究前置 OA_RK_Oberonia_Aurea_Research) -->
+  <SeedsPlease.SeedDef ParentName="SeedBase">
+    <defName>Seed_Oberonia_Aurea</defName>
+    <label>金鸢尾兰种子（观赏）</label>
+    <sources>
+      <li>Plant_Oberonia_Aurea</li>
+    </sources>
+  </SeedsPlease.SeedDef>
+
+  <RecipeDef ParentName="ExtractSeed">
+    <defName>ExtractSeed_Oberonia_Aurea</defName>
+    <label>提取金鸢尾兰种子（观赏）</label>
+    <description>从金鸢尾兰花中提取金鸢尾兰种子。</description>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Oberonia_Aurea</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Oberonia_Aurea</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Seed_Oberonia_Aurea>3</Seed_Oberonia_Aurea>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+  <SeedsPlease.SeedDef ParentName="SeedBase">
+    <defName>Seed_Oberonia_Aurea_B</defName>
+    <label>金鸢尾兰种子（生产）</label>
+    <sources>
+      <li>Plant_Oberonia_Aurea_B</li>
+    </sources>
+  </SeedsPlease.SeedDef>
+
+  <RecipeDef ParentName="ExtractSeed">
+    <defName>ExtractSeed_Oberonia_Aurea_B</defName>
+    <label>提取金鸢尾兰种子（生产）</label>
+    <description>从金鸢尾兰花中提取金鸢尾兰种子。</description>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Oberonia_Aurea</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Oberonia_Aurea</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Seed_Oberonia_Aurea_B>3</Seed_Oberonia_Aurea_B>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+  <SeedsPlease.SeedDef ParentName="SeedBase">
+    <defName>Seed_OA_RK_Rice</defName>
+    <label>金鸢尾兰杂交水稻种子</label>
+    <sources>
+      <li>OA_RK_Rice</li>
+    </sources>
+  </SeedsPlease.SeedDef>
+
+  <RecipeDef ParentName="ExtractSeed">
+    <defName>ExtractSeed_OA_RK_Rice</defName>
+    <label>提取金鸢尾兰杂交水稻种子</label>
+    <description>从大米中提取金鸢尾兰杂交水稻种子。</description>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawRice</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawRice</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Seed_OA_RK_Rice>3</Seed_OA_RK_Rice>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+  <SeedsPlease.SeedDef ParentName="SeedBase">
+    <defName>Seed_Oberonia_Aurea_C</defName>
+    <label>金鸢尾兰种子（增产）</label>
+    <sources>
+      <li>Plant_Oberonia_Aurea_C</li>
+    </sources>
+  </SeedsPlease.SeedDef>
+
+  <RecipeDef ParentName="ExtractSeed">
+    <defName>ExtractSeed_Oberonia_Aurea_C</defName>
+    <label>提取金鸢尾兰种子（增产）</label>
+    <description>从金鸢尾兰花中提取金鸢尾兰种子。</description>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Oberonia_Aurea</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Oberonia_Aurea</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Seed_Oberonia_Aurea_C>3</Seed_Oberonia_Aurea_C>
+    </products>
+    <researchPrerequisite>OA_RK_Oberonia_Aurea_Research</researchPrerequisite>
+  </RecipeDef>
+
+</Defs>

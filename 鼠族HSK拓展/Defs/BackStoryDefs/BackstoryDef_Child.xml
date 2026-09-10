@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<AlienRace.AlienBackstoryDef Name="BaseMoustateBackStory" ParentName="BaseRatkinBackStory"
+		Abstract="True">
+		<spawnCategories Inherit="false">
+			<li>MoustateBackStory</li>
+		</spawnCategories>
+		<bodyTypeMale>Thin</bodyTypeMale>
+		<bodyTypeFemale>Thin</bodyTypeFemale>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Farmer</defName>
+		<title>Moustate rural child</title>
+		<titleShort>rural child</titleShort>
+		<description>[PAWN_nameDef] grew up in the countryside, helping parents with farming and cultivating resilience and diligence. [PAWN_possessive] rural upbringing gave [PAWN_pronoun] a deep understanding and appreciation of the natural world.</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Animals>1</Animals>
+			<Plants>3</Plants>
+			<Mining>1</Mining>
+		</skillGains>
+		<workDisables>
+			<li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateRural</li>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateUneducated</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Literary</defName>
+		<title>Moustate scholarly scion</title>
+		<titleShort>scholarly scion</titleShort>
+		<description>[PAWN_nameDef] was born into an academic family and received a rigorous education from an early age, becoming proficient in literature and scholarship. The background as an academic scion endowed [PAWN_pronoun] with outstanding knowledge and a solid intellectual foundation.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Intellectual</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>-2</Melee>
+			<Animals>-3</Animals>
+			<Plants>-2</Plants>
+			<Mining>-3</Mining>
+			<Intellectual>6</Intellectual>
+			<Social>4</Social>
+		</skillGains>
+		<spawnCategories>
+			<li>MoustateMilitia</li>
+			<li>MoustateNoble</li>
+			<li>MoustateArtist</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Orphan</defName>
+		<title>Moustate orphaned survivor</title>
+		<titleShort>orphaned survivor</titleShort>
+		<description>[PAWN_nameDef] became an orphan due to unfortunate circumstances, facing a challenging life. Through strong willpower and intelligence, [PAWN_nameDef] overcame adversity and grew into a brave and independent individual.</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Intellectual>2</Intellectual>
+			<Cooking>2</Cooking>
+			<Medicine>2</Medicine>
+			<Artistic>-2</Artistic>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateMaster</li>
+			<li>MoustateNoble</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Artistic</defName>
+		<title>Moustate artistic prodigy</title>
+		<titleShort>artistic prodigy</titleShort>
+		<description>[PAWN_nameDef] displayed exceptional artistic talent from a young age and received guidance and training from renowned masters. The background as an artistic prodigy made [PAWN_nameDef] skilled in painting, music, or other art forms. [PAWN_nameDef] wants to use [PAWN_possessive] talent to bring beauty to the world.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Artistic</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Shooting>-2</Shooting>
+			<Melee>-5</Melee>
+			<Intellectual>2</Intellectual>
+			<Artistic>8</Artistic>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName>TorturedArtist</defName>
+				<chance>25</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>MoustateMilitia</li>
+			<li>MoustateNoble</li>
+			<li>MoustateArtist</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_ShepherdBoy</defName>
+		<title>Moustate shepherd boy</title>
+		<titleFemale>Moustate shepherd girl</titleFemale>
+		<titleShort>shepherd boy</titleShort>
+		<titleShortFemale>shepherd girl</titleShortFemale>
+		<description>[PAWN_nameDef] grew up with all kinds of animals and knew their habits intimately.</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Melee>1</Melee>
+			<Animals>3</Animals>
+			<Cooking>1</Cooking>
+			<Plants>1</Plants>
+			<Artistic>-2</Artistic>
+			<Intellectual>-2</Intellectual>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateRural</li>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Affluence</defName>
+		<title>Moustate heir of affluence</title>
+		<titleShort>heir of affluence</titleShort>
+		<description>Being born into a wealthy family, [PAWN_nameDef] enjoys a life of abundance and prosperity. The background as an heir of affluence exposes [PAWN_pronoun] to refined culture and education, while also placing [PAWN_pronoun] under the expectations and responsibilities of wealth and family.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Social</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Cooking>-2</Cooking>
+			<Plants>-2</Plants>
+			<Intellectual>3</Intellectual>
+			<Artistic>3</Artistic>
+			<Social>5</Social>
+		</skillGains>
+		<workDisables>
+			<li>Cleaning</li>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateMilitia</li>
+			<li>MoustateNoble</li>
+			<li>MoustateArtist</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Mischievous</defName>
+		<title>Moustate mischievous imp</title>
+		<titleShort>mischievous imp</titleShort>
+		<description>[PAWN_nameDef] is a mischievous and playful child, often causing trouble, but always managing to get out of it. [PAWN_nameDef] is quick-witted, curious, and brings joy and surprises to those around [PAWN_pronoun].</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Melee>2</Melee>
+			<Animals>1</Animals>
+			<Plants>1</Plants>
+			<Mining>1</Mining>
+			<Cooking>1</Cooking>
+			<Social>2</Social>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<workDisables>
+			<li>Intellectual</li>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateRural</li>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateUneducated</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_MartialOrphan</defName>
+		<title>Moustate orphan of the martial world</title>
+		<titleShort>orphan of the martial world</titleShort>
+		<description>[PAWN_nameDef] is an orphan who grew up in the martial world, without any family to rely on. Through arduous cultivation and martial arts training, [PAWN_pronoun] becomes a brave and skilled child. [PAWN_pronoun] is still searching for [PAWN_possessive] true identity in the martial world.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Caring</li>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>4</Melee>
+			<Medicine>2</Medicine>
+			<Artistic>-4</Artistic>
+			<Social>2</Social>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateUneducated</li>
+			<li>MoustateMaster</li>
+			<li>MoustateNoble</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_MartialHeir</defName>
+		<title>Moustate heir of martial arts</title>
+		<titleShort>heir of martial arts</titleShort>
+		<description>[PAWN_nameDef] is an orphan who grew up in the martial world, without any family to rely on. Through arduous cultivation and martial arts training, [PAWN_pronoun] becomes a brave and skilled child. [PAWN_pronoun] is still searching for [PAWN_possessive] true identity in the martial world.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Caring</li>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>8</Melee>
+			<Cooking>-2</Cooking>
+			<Plants>-2</Plants>
+			<Animals>-2</Animals>
+			<Mining>-2</Mining>
+			<Artistic>-2</Artistic>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<forcedTraitsChance>
+			<li>
+				<defName>Brawler</defName>
+				<chance>50</chance>
+			</li>
+		</forcedTraitsChance>
+		<spawnCategories>
+			<li>MoustateBandit</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateMaster</li>
+			<li>MoustateNoble</li>
+			<li>MoustateDaWang</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_MartialStudent</defName>
+		<title>Moustate disciple of martial sect</title>
+		<titleShort>disciple of martial sect</titleShort>
+		<description>[PAWN_nameDef], adopted by a certain sect since childhood, was regarded as a cherished disciple by [PAWN_pronoun] master, who diligently taught [PAWN_pronoun] various martial arts techniques. [PAWN_nameDef] senior martial brothers were also incredibly kind, often accompanying [PAWN_pronoun] on herb-gathering trips... Until one fateful day, a rival sect entangled with bandits resorted to firearms, turning this isolated place into ruins.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Caring</li>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>4</Melee>
+			<Medicine>2</Medicine>
+			<Intellectual>1</Intellectual>
+			<Social>3</Social>
+			<Mining>-2</Mining>
+			<Animals>-2</Animals>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateMaster</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_GiftedHealer</defName>
+		<title>Moustate gifted healer</title>
+		<titleShort>gifted healer</titleShort>
+		<description>[PAWN_nameDef] is a naturally talented medical practitioner. Under the guidance of renowned physicians, [PAWN_pronoun] studies medicine and becomes proficient in herbal medicine and acupuncture. [PAWN_nameDef] uses [PAWN_possessive] medical skills to save lives and help those in need.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Caring</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Medicine>8</Medicine>
+			<Intellectual>3</Intellectual>
+			<Social>3</Social>
+			<Cooking>2</Cooking>
+			<Plants>2</Plants>
+			<Mining>-4</Mining>
+			<Animals>-4</Animals>
+		</skillGains>
+		<workDisables>
+			<li>Violent</li>
+		</workDisables>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-1">Nerves</defName>
+				<chance>100</chance>
+			</li>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateHealer</li>
+			<li>MoustateNoble</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_SchoolBoy</defName>
+		<title>Moustate schoolboy</title>
+		<titleFemale>Moustate schoolgirl</titleFemale>
+		<titleShort>schoolboy</titleShort>
+		<titleShortFemale>schoolgirl</titleShortFemale>
+		<description>[PAWN_nameDef]'s parents sent [PAWN_pronoun] to a boarding school at a young age to learn etiquette and the art of interacting with others. By [PAWN_possessive]'s early years, [PAWN_pronoun] had already acquired considerable knowledge in hospitality. [PAWN_nameDef] has become indispensable in attending to the master's daily life and work.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Cleaning</li>
+			<li>Caring</li>
+			<li>Intellectual</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>-3</Melee>
+			<Animals>-3</Animals>
+			<Plants>-3</Plants>
+			<Intellectual>3</Intellectual>
+			<Social>5</Social>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateMaster</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_RefugeesWard</defName>
+		<title>Moustate ward of the refugees</title>
+		<titleShort>refugees ward</titleShort>
+		<description>During a severe famine, where even rats resorted to cannibalism, [PAWN_nameDef] was discovered amidst a group of plundered refugee caravans. At that time, [PAWN_pronoun] was abandoned by the roadside, perhaps because the attackers still possessed a trace of humanity or because an infant did not satisfy their hunger. [PAWN_nameDef] managed to escape the ordeal and was subsequently found and adopted by the local defenders.</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Melee>3</Melee>
+			<Animals>-1</Animals>
+			<Plants>-1</Plants>
+			<Social>3</Social>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateMaster</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_MassacreSurvivor</defName>
+		<title>Moustate massacre survivor</title>
+		<titleShort>massacre survivor</titleShort>
+		<description>In that era, it was all too common for besieged settlements to suffer the calamity of extermination. After five days and nights of slaughter, the marauding army set the place ablaze and departed. [PAWN_nameDef] emerged from an outhouse, fortunate enough to gather some clothing and food before the flames consumed everything. Without looking back, [PAWN_pronoun] left.</description>
+		<slot>Childhood</slot>
+		<skillGains>
+			<Animals>1</Animals>
+			<Plants>1</Plants>
+			<Intellectual>3</Intellectual>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateMaster</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_MightProdigy</defName>
+		<title>Moustate child prodigy?</title>
+		<titleShort>child prodigy?</titleShort>
+		<description>At less than a year old, [PAWN_nameDef] began speaking, and before reaching the age of three, [PAWN_pronoun] could recite books and poems backward. [PAWN_nameDef] was a renowned prodigious child in the surrounding villages. If [PAWN_pronoun] doesn't fade into obscurity like everyone else when grown up, [PAWN_pronoun] might become someone great... or so they say.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Intellectual</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Intellectual>8</Intellectual>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateMaster</li>
+			<li>MoustateNoble</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Bully</defName>
+		<title>Moustate child bully</title>
+		<titleShort>child bully</titleShort>
+		<description>[PAWN_nameDef] is the nightmare of the children in the village. The parents of these children have approached [PAWN_nameDef]'s parents multiple times seeking resolution, but [PAWN_possessive] parents response has always been, 'Even if you adults fight my child one-on-one, you'll be left black and blue!'
+In reality, this is indeed true. [PAWN_nameDef] has not hesitated to physically harm adults, leaving them injured or disabled on more than one occasion.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>5</Melee>
+			<Social>-5</Social>
+		</skillGains>
+		<workDisables>
+			<li>Cleaning</li>
+			<li>Caring</li>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Minion</defName>
+		<title>Moustate conformist minion</title>
+		<titleShort>conformist minion</titleShort>
+		<description>[PAWN_nameDef] is one of the book boys of the local scholar. The scholar is always babbling about concepts like 'equality and peace' and 'freedom and self-improvement,' but [PAWN_pronoun] doesn't understand any of it. [PAWN_pronoun] just nods along whenever the scholar rants about these things, and that's the end of it. For [PAWN_pronoun], the only things that matter are the meals and bedroom provided by the scholar, and occasionally pocketing some embezzled silver coins after helping with errands.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Cleaning</li>
+			<li>Caring</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>5</Melee>
+			<Social>4</Social>
+		</skillGains>
+		<workDisables>
+		</workDisables>
+		<spawnCategories>
+			<li>MoustateWorker</li>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_Pretty</defName>
+		<title>Moustate pretty youth</title>
+		<titleShort>pretty youth</titleShort>
+		<description>[PAWN_nameDef] is indeed a well-known pretty youth. Despite being young, numerous adults vie for the chance to visit and seek a betrothal for their children. However, [PAWN_nameDef] harbors a strong aversion towards love and marriage due to [PAWN_pronoun]'s parents being victims of arranged marriages.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Cleaning</li>
+			<li>Caring</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Social>6</Social>
+		</skillGains>
+		<forcedTraitsChance>
+			<li>
+				<defName Degree="2">Beauty</defName>
+				<chance>35</chance>
+			</li>
+			<li>
+				<defName Degree="1">Beauty</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraitsChance>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="0">Beauty</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateWorker</li>
+			<li>MoustateMaster</li>
+			<li>MoustateNoble</li>
+			<li>MoustateScholar</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_ShadowPuppet</defName>
+		<title>Moustate shadow puppet child</title>
+		<titleShort>shadow puppet child</titleShort>
+		<description>As [PAWN_pronoun] traveled far and wide with [PAWN_pronoun]'s master, [PAWN_nameDef] never anticipated this outcome. With the emergence of new ideas, the once-popular shadow puppet plays, which told old stories, fell out of favor. After months without income, they found refuge in a dilapidated temple. In the harsh cold, with no trees left to chop for firewood, the master, driven to madness, set ablaze the cherished shadow puppets after burning the last of the withered branches.
+'Warm, so warm!' the master exclaimed with tears, laughing manically, and suddenly collapsed, lifeless."</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Cleaning</li>
+			<li>Caring</li>
+			<li>Artistic</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Social>2</Social>
+			<Intellectual>2</Intellectual>
+			<Artistic>4</Artistic>
+		</skillGains>
+		<spawnCategories>
+			<li>MoustateBandit</li>
+			<li>MoustateMilitia</li>
+			<li>MoustateDefender</li>
+			<li>MoustateSoldier</li>
+			<li>MoustateWorker</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+
+	<AlienRace.AlienBackstoryDef ParentName="BaseMoustateBackStory">
+		<defName>Moustate_Child_SengitaiBoy</defName>
+		<title>Moustate SenGiTai student</title>
+		<titleShort>SenGiTai student</titleShort>
+		<description>[PAWN_nameDef] completed his education in a private school set up by the SenGiTai Team, in addition to receiving training from a swordsman master.</description>
+		<slot>Childhood</slot>
+		<requiredWorkTags>
+			<li>Caring</li>
+			<li>Violent</li>
+		</requiredWorkTags>
+		<skillGains>
+			<Melee>3</Melee>
+			<Medicine>2</Medicine>
+			<Shooting>2</Shooting>
+			<Social>1</Social>
+			<Animals>-2</Animals>
+		</skillGains>
+		<disallowedTraitsChance>
+			<li>
+				<defName Degree="-2">Nerves</defName>
+				<chance>100</chance>
+			</li>
+		</disallowedTraitsChance>
+		<spawnCategories>
+			<li>MoustateSenGiTai</li>
+			<li>MoustateMaster</li>
+		</spawnCategories>
+	</AlienRace.AlienBackstoryDef>
+
+
+</Defs>

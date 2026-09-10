@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+  <ThingDef ParentName="BenchBase">
+    <defName>Miho_Factory</defName>
+    <label>미호 공장</label>
+    <description>굉장한 생산률의 메카나이트 프린팅 공장입니다.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData>
+			<texPath>Things/Building/MihoDroneFactory/MihoDroneFactory</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(9.9,9.9)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <costList>
+      <Miho_MilitaryGradeBalisticCeramics>100</Miho_MilitaryGradeBalisticCeramics>
+      <Steel>150</Steel>
+	   <ComponentIndustrial>10</ComponentIndustrial>
+	   <ComponentSpacer>1</ComponentSpacer>
+
+    </costList>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>17500</WorkToBuild>
+      <MaxHitPoints>300</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Cleanliness>-2</Cleanliness>
+    </statBases>
+    <size>(5,5)</size>
+    <designationCategory>MihoBuilding</designationCategory>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-3)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+    <recipes>
+      <li>Miho_FlowertoHiveFac</li>
+      <li>Miho_FlowertoHiveTwoFac</li>
+
+      <li>Miho_Pipe</li>
+
+      <li>Miho_DroneLegFac</li>
+      <li>Miho_DroneChassisFac</li>
+      <li>Miho_DroneArmorFac</li>
+
+      <li>Miho_PsychicButterflyPortFac</li>
+      <li>Miho_PsychicHealPortFac</li>
+      <li>Miho_PsychicRepairPortFac</li>
+
+	  
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>150.0</fuelConsumptionRate>
+        <fuelCapacity>200.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>Miho_HeavyFactory</li>
+    </researchPrerequisites>
+    <designationHotKey>Misc7</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+  
+
+  <RecipeDef>
+    <defName>Miho_Pipe</defName>
+    <label>태양화 담배 제작</label>
+    <description>태양화 담배 제작합니다.</description>
+    <jobString>태양화 담배 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>800</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+        <li>WoodLog</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_PositiveFlower_Pipe>8</Miho_PositiveFlower_Pipe>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Miho_FlowertoHiveFac</defName>
+    <label>메카나이트 반사군체 제작 x4</label>
+    <description>메카나이트 반사군체을 제작합니다.</description>
+    <jobString>메카나이트 반사군체 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>9900</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_Ceramics</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+
+          </thingDefs>
+        </filter>
+        <count>300</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_Ceramics</li>
+        <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+        <li>ComponentSpacer</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_MechCore>4</Miho_MechCore>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Miho_FlowertoHiveTwoFac</defName>
+    <label>메카나이트 반사군체 제작</label>
+    <description>메카나이트 반사군체을 제작합니다.</description>
+    <jobString>메카나이트 반사군체 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>4400</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_Ceramics</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+          </thingDefs>
+        </filter>
+        <count>75</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_Ceramics</li>
+        <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+        <li>ComponentIndustrial</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_MechCore>1</Miho_MechCore>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+
+  
+  <RecipeDef>
+    <defName>Miho_DroneLegFac</defName>
+    <label>드론 다리 제작</label>
+    <description>드론 다리를 제작합니다.</description>
+    <jobString>드론 다리 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>4200</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_Ceramics</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_MilitaryGradeBalisticCeramics</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_Ceramics</li>
+        <li>Miho_MilitaryGradeBalisticCeramics</li>
+        <li>ComponentIndustrial</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_DroneLeg>1</Miho_DroneLeg>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Miho_DroneChassisFac</defName>
+    <label>드론 차대 제작</label>
+    <description>드론 차대를 제작합니다.</description>
+    <jobString>드론 차대 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>16750</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>250</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Steel</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_DroneChassis>1</Miho_DroneChassis>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
+  <RecipeDef>
+    <defName>Miho_DroneArmorFac</defName>
+    <label>드론 장갑판 제작</label>
+    <description>드론 장갑판을 제작합니다.</description>
+    <jobString>드론 장갑판 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>4650</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_MilitaryGradeBalisticCeramics</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Steel</li>
+        <li>Miho_MilitaryGradeBalisticCeramics</li>
+        <li>Plasteel</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_DroneArmor>2</Miho_DroneArmor>
+    </products>
+    <skillRequirements>
+      <Crafting>5</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
+
+  <RecipeDef>
+    <defName>Miho_PsychicAmpFac</defName>
+    <label>초능력 증진기 제작</label>
+    <description>초능력 증진기를 제작합니다.</description>
+    <jobString>초능력 증진기 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>125000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>16</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RawPosFlower</li>
+            <li>RawPosFlower_Dust</li>
+        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <PsychicAmplifier>1</PsychicAmplifier>
+    </products>
+    <skillRequirements>
+      <Crafting>12</Crafting>
+      <Intellectual>10</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+
+  </RecipeDef>
+  
+
+  <RecipeDef>
+    <defName>Miho_PsychicButterflyPortFac</defName>
+    <label>해킹 포트 - 칼날나비때 소환 제작</label>
+    <description>해킹 포트를 제작합니다.</description>
+    <jobString>해킹 포트 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>45000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_HeatCeramics</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PsychicAmplifier</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_HeatCeramics</li>
+        <li>PsychicAmplifier</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_Butterfly_Port>1</Miho_Butterfly_Port>
+    </products>
+    <skillRequirements>
+      <Intellectual>10</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <researchPrerequisite>Miho_MechHack</researchPrerequisite>
+
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Miho_PsychicHealPortFac</defName>
+    <label>해킹 포트 - 치유의 손길 제작</label>
+    <description>해킹 포트를 제작합니다.</description>
+    <jobString>해킹 포트 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>45000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_HeatCeramics</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PsychicAmplifier</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_HeatCeramics</li>
+        <li>PsychicAmplifier</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_Heal_Port>1</Miho_Heal_Port>
+    </products>
+    <skillRequirements>
+      <Intellectual>10</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <researchPrerequisite>Miho_MechHack</researchPrerequisite>
+
+  </RecipeDef>
+
+
+  <RecipeDef>
+    <defName>Miho_PsychicRepairPortFac</defName>
+    <label>해킹 포트 - 야전수리 제작</label>
+    <description>해킹 포트를 제작합니다.</description>
+    <jobString>해킹 포트 제작중.</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+
+	
+    <workAmount>45000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Miho_HeatCeramics</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PsychicAmplifier</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Miho_HeatCeramics</li>
+        <li>PsychicAmplifier</li>
+
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Miho_Repair_Port>1</Miho_Repair_Port>
+    </products>
+    <skillRequirements>
+      <Intellectual>10</Intellectual>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <researchPrerequisite>Miho_MechHack</researchPrerequisite>
+
+  </RecipeDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Miho_Silkfarm</defName>
+		<label>미호 화현 누애 둥지</label>
+		<description>약초를 갉아 먹고 비단을 만드는 누애 둥지입니다.</description>
+		<descriptionHyperlinks>
+			<ThingDef>Miho_Ebony_SilkCloth</ThingDef>
+		</descriptionHyperlinks>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/MihoSilk/MihoSilk</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5.5,5.5)</drawSize>
+			<damageData>
+					<cornerTL>Damage/Corner</cornerTL>
+					<cornerTR>Damage/Corner</cornerTR>
+					<cornerBL>Damage/Corner</cornerBL>
+					<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<pathCost>100</pathCost>
+		<blockWind>true</blockWind>
+		<fillPercent>1.0</fillPercent>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>4500</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>-0</Beauty>
+			<Mass>60</Mass>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<canOverlapZones>false</canOverlapZones>
+		<size>(2,2)</size>
+		<costList>
+			<WoodLog>75</WoodLog>
+			<Miho_Ceramics>50</Miho_Ceramics>
+
+		</costList>
+		<comps>
+			<li Class="FuPoSpa.CompProperties_FuelPoweredSpawner">
+				<requiresPower>false</requiresPower>
+				<requiresFuel>true</requiresFuel>
+				<thingToSpawn>Miho_Ebony_SilkCloth</thingToSpawn>
+				<spawnCount>75</spawnCount>
+				<spawnIntervalRange><min>400000</min><max>600000</max></spawnIntervalRange>
+				<writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
+				<showMessageIfOwned>true</showMessageIfOwned>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>4.0</fuelConsumptionRate>
+				<fuelCapacity>40.0</fuelCapacity>
+				<fuelFilter>
+				  <thingDefs>
+					<li>MedicineHerbal</li>
+				  </thingDefs>
+				</fuelFilter>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+		</comps>
+
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>MihoBuilding</designationCategory>
+		<designationHotKey>Misc1</designationHotKey>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>Miho_Silk</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+	</ThingDef>
+	
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>Miho_StoneCutter</defName>
+		<label>미호 세라믹 반죽기</label>
+		<description>돌 덩어리를 가공후 반죽까지 자동으로 해주는 기계장치 입니다.</description>
+		<descriptionHyperlinks>
+			<ThingDef>Miho_Ebony_SilkCloth</ThingDef>
+		</descriptionHyperlinks>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/MihoStonecutter/MihoStonecutter</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2.35,2.35)</drawSize>
+			<damageData>
+					<cornerTL>Damage/Corner</cornerTL>
+					<cornerTR>Damage/Corner</cornerTR>
+					<cornerBL>Damage/Corner</cornerBL>
+					<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<pathCost>100</pathCost>
+		<blockWind>true</blockWind>
+		<fillPercent>1.0</fillPercent>
+		<rotatable>false</rotatable>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>5500</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>-0</Beauty>
+			<Mass>60</Mass>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<canOverlapZones>false</canOverlapZones>
+		<size>(2,2)</size>
+		<costList>
+            <ComponentIndustrial>2</ComponentIndustrial>
+			<Miho_Ceramics>100</Miho_Ceramics>
+            <Steel>20</Steel>
+
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>250</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="FuPoSpa.CompProperties_FuelPoweredSpawner">
+				<requiresPower>true</requiresPower>
+				<requiresFuel>true</requiresFuel>
+				<thingToSpawn>Miho_CeramicsPaste</thingToSpawn>
+				<spawnCount>100</spawnCount>
+				<spawnIntervalRange><min>59999</min><max>60001</max></spawnIntervalRange>
+				<writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
+				<showMessageIfOwned>true</showMessageIfOwned>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>3.3</fuelConsumptionRate>
+				<fuelCapacity>10.0</fuelCapacity>
+				<fuelFilter>
+				  <thingDefs>
+					<li>ChunkGranite</li>
+					<li>ChunkSandstone</li>
+					<li>ChunkLimestone</li>
+					<li>ChunkSlate</li>
+					<li>ChunkMarble</li>
+				  </thingDefs>
+				</fuelFilter>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+		</comps>
+
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>MihoBuilding</designationCategory>
+		<designationHotKey>Misc1</designationHotKey>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>Miho_HeavyFactory</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="BuildingBase">
+		<defName>Miho_GeoWeb</defName>
+		<label>미호 대지연결망</label>
+		<description>광활한 대지속에서 비활성화된 메카나이트를 모으기 위한 건물입니다. 불순물들을 거르기 위해 세라믹 필터를 사용하고 있습니다.</description>
+		<graphicData>
+			<texPath>Things/Building/MihoDust/MihoDust</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(5.5,5.5)</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Building/MihoDust/MihoDustIcon</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<building>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<designationCategory>MihoBuilding</designationCategory>
+		<costList>
+			<Miho_Ceramics>200</Miho_Ceramics>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<researchPrerequisites>
+			<li>Miho_HeavyFactory</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>250</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>4</glowRadius>
+				<glowColor>(155,66,175,0)</glowColor>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>1</fuelConsumptionRate>
+				<fuelCapacity>30.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Miho_Ceramics</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<minimumFueledThreshold>0.1</minimumFueledThreshold>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+			</li>
+			<li Class="FuPoSpa.CompProperties_FuelPoweredSpawner">
+				<thingToSpawn>RawPosFlower_Dust</thingToSpawn>
+				<requiresFuel>true</requiresFuel>
+				<requiresPower>true</requiresPower>
+				<spawnCount>100</spawnCount>
+				<spawnIntervalRange>180000</spawnIntervalRange>
+				<writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
+				<spawnMaxAdjacent>10</spawnMaxAdjacent>
+				<spawnForbidden>false</spawnForbidden>
+				<saveKeysPrefix>dust</saveKeysPrefix>
+			</li>
+			<li Class="OLB.CompProperties_Decorate">
+				<mote>
+					<li>
+						<label>MoteDust</label>
+						<moteDef>Miho_MoteDust</moteDef>
+						<condition>
+							<ifPowered>true</ifPowered>
+							<ifFueled>true</ifFueled>
+						</condition>
+						<origin>BuildingCenter</origin>
+						<transformation>
+							<scale>5.5~5.5</scale>
+						</transformation>
+						<graceTicks>80</graceTicks>
+						<coexistsWithOther>true</coexistsWithOther>
+					</li>
+					<li>
+						<label>MoteWeb</label>
+						<moteDef>Miho_MoteWeb</moteDef>
+						<condition>
+							<ifPowered>true</ifPowered>
+							<ifFueled>true</ifFueled>
+						</condition>
+						<origin>BuildingCenter</origin>
+						<transformation>
+							<scale>5.5~5.5</scale>
+						</transformation>
+						<graceTicks>80</graceTicks>
+						<coexistsWithOther>true</coexistsWithOther>
+					</li>
+				</mote>
+			</li>
+		</comps>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Flammability>0.5</Flammability>
+			<Beauty>-20</Beauty>
+			<Mass>20</Mass>
+			<WorkToBuild>10000</WorkToBuild>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<size>(2,2)</size>
+		<fillPercent>1.0</fillPercent>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<passability>Impassable</passability>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<tradeability>Sellable</tradeability>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+
+		<tradeTags>
+			<li>ExoticBuilding</li>
+		</tradeTags>
+    <placeWorkers>
+      <li>PlaceWorker_NotUnderRoof</li>
+    </placeWorkers>
+	</ThingDef>
+	
+	<ThingDef ParentName="MoteBase">
+		<defName>Miho_MoteDust</defName>
+		<graphicData>
+			<texPath>Things/Building/MihoDust/MihoMDust</texPath>
+			<color>(1, 1, 1)</color>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote>
+			<fadeInTime>0.50</fadeInTime>
+			<solidTime>4</solidTime>
+			<fadeOutTime>.6</fadeOutTime>
+			<growthRate>0.01</growthRate>
+		</mote>
+	</ThingDef>
+	<ThingDef ParentName="MoteBase">
+		<defName>Miho_MoteWeb</defName>
+		<graphicData>
+			<texPath>Things/Building/MihoDust/MihoMWeb</texPath>
+			<color>(1, 1, 1)</color>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<mote>
+			<fadeInTime>0.50</fadeInTime>
+			<solidTime>4</solidTime>
+			<fadeOutTime>.6</fadeOutTime>
+			<growthRate>0.01</growthRate>
+		</mote>
+	</ThingDef>
+
+</Defs>

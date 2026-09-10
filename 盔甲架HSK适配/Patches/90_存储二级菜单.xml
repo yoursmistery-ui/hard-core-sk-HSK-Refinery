@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- 把三种盔甲架并入 HSK 存储二级菜单「服饰纺织品」(SubCategory_ApparelStorage, designationCategory=ASFstorage)。
+         用 PatchOperationConditional 做 xpath 存在性门控(1.6 起 Operation 级 MayRequire 已失效),Core_SK 缺失时安全跳过。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ApparelStorage"]/defNames</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ApparelStorage"]/defNames</xpath>
+            <value>
+                <li>ArmorRacks_ArmorRack</li>
+                <li>ArmorRacks_MechanizedArmorRack</li>
+                <li>ArmorRacks_MendingArmorRack</li>
+            </value>
+        </match>
+    </Operation>
+</Patch>

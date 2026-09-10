@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- 48. 鼠族王国(Rakinia)对普通鼠族开局改中立(2026-08-28 用户要求):
+	     "The enemy of my enemy is my friend"(arpomo6.hmpc.teomeimf)把 Rakinia 一并塞进
+	     "对所有未列入 permanentEnemyToEveryoneExcept 的派系永久敌对"名单 → 四个鼠族开局剧本
+	     (RK_PlayerFaction / OA_RK_PlayerFaction / OA_RK_PlayerFaction_B)与鼠族王国一律开局敌对。
+	     本补丁把这三个鼠族玩家派系追加进 Rakinia 的 permanentEnemyToEveryoneExcept → 普通鼠族开局中立(可结盟)。
+	     保持敌对(不加入):离乡流亡 RK_ExileFaction / 逃亡者 RK_EscapeFaction(敌对派系事件玩法);
+	     意外放逐 RK_PlayerExoticFaction 自带 Meow.FactionDefExtended.InitAllyTo 已同盟,无需处理。
+	     xpath 存在性门控:未装 teomeimf 时该节点不存在,PatchOperationTest 失败整段跳过 → 零影响。
+	     本 mod 已 loadAfter arpomo6.hmpc.teomeimf,补丁在 teomeimf 建节点之后执行。 -->
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/FactionDef[defName="Rakinia"]/permanentEnemyToEveryoneExcept</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/FactionDef[defName="Rakinia"]/permanentEnemyToEveryoneExcept</xpath>
+				<value>
+					<li>RK_PlayerFaction</li>
+					<li>OA_RK_PlayerFaction</li>
+					<li>OA_RK_PlayerFaction_B</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+</Patch>

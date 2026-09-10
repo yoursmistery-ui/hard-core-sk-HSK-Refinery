@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ 宝石采集分流（2026-08-30 用户拍板：原本掉粗糙宝石的地方，把粗糙宝石那份掉落量的 20%
+ 转成 HSK工业科研大修 的 5 档成品宝石，按稀有度加权：黄玉40/紫水晶25/祖母绿15/蓝宝石12/红宝石8。
+ 宝石晶体点(方解石/石英/紫水晶/红蓝宝/金刚等)。数值按每个 def 自己声明的原始 DropProbability 换算，粗糙宝石那一份打 0.8 折，
+ 不新增总掉落量。所有操作套 PatchOperationConditional 存在性门控（1.6 Operation 级 MayRequire 已失效），
+ @Name 基类节点用属性谓词（PatchOperation 不解析继承）。
+-->
+<Patch>
+
+  <!-- AmethystCrystal ← StaticMinerals.xml 原粗糙宝石 p=3 → 留 2.4 + 分流 0.6 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AmethystCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="AmethystCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>2.4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="AmethystCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="AmethystCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.24</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.15</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.09</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.072</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.048</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- BigAmethystCrystal ← BigMinerals.xml 原粗糙宝石 p=10 → 留 8 + 分流 2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BigAmethystCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="BigAmethystCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BigAmethystCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="BigAmethystCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.8</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.5</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.3</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.24</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.16</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- BigQuartzCrystal ← BigMinerals.xml 原粗糙宝石 p=5 → 留 4 + 分流 1 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BigQuartzCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="BigQuartzCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="BigQuartzCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="BigQuartzCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.4</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.25</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.15</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.12</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.08</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- CalciteCrystal ← StaticMinerals.xml 原粗糙宝石 p=0.5 → 留 0.4 + 分流 0.1 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CalciteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="CalciteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CalciteCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CalciteCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.04</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.025</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.015</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.012</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.008</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- CassiteriteCrystal ← StaticMinerals.xml 原粗糙宝石 p=1 → 留 0.8 + 分流 0.2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CassiteriteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="CassiteriteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="CassiteriteCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="CassiteriteCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.08</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.05</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.03</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.024</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.016</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- DiamondCrystal ← StaticMinerals.xml 原粗糙宝石 p=10 → 留 8 + 分流 2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DiamondCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="DiamondCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="DiamondCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="DiamondCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.8</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.5</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.3</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.24</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.16</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- EmeraldCrystal ← StaticMinerals.xml 原粗糙宝石 p=6 → 留 4.8 + 分流 1.2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="EmeraldCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="EmeraldCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>4.8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="EmeraldCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="EmeraldCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.48</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.3</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.18</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.144</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.096</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- IndicoliteCrystal ← StaticMinerals.xml 原粗糙宝石 p=7 → 留 5.6 + 分流 1.4 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="IndicoliteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="IndicoliteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>5.6</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="IndicoliteCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="IndicoliteCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.56</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.35</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.21</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.168</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.112</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- LodestoneCrystal ← StaticMinerals.xml 原粗糙宝石 p=0.2 → 留 0.16 + 分流 0.04 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LodestoneCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="LodestoneCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.16</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LodestoneCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LodestoneCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.016</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.01</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.006</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.0048</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.0032</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- MagnetiteCrystal ← StaticMinerals.xml 原粗糙宝石 p=0.5 → 留 0.4 + 分流 0.1 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MagnetiteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="MagnetiteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MagnetiteCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="MagnetiteCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.04</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.025</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.015</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.012</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.008</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- MalachiteDeposit ← StaticMinerals.xml 原粗糙宝石 p=2 → 留 1.6 + 分流 0.4 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MalachiteDeposit"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="MalachiteDeposit"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>1.6</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="MalachiteDeposit"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="MalachiteDeposit"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.16</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.1</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.06</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.048</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.032</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- QuartzCrystal ← StaticMinerals.xml 原粗糙宝石 p=1 → 留 0.8 + 分流 0.2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="QuartzCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="QuartzCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="QuartzCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="QuartzCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.08</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.05</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.03</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.024</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.016</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- RubelliteCrystal ← StaticMinerals.xml 原粗糙宝石 p=5 → 留 4 + 分流 1 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RubelliteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="RubelliteCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RubelliteCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RubelliteCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.4</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.25</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.15</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.12</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.08</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- RubyCrystal ← StaticMinerals.xml 原粗糙宝石 p=6 → 留 4.8 + 分流 1.2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RubyCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="RubyCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>4.8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RubyCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="RubyCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.48</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.3</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.18</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.144</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.096</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- SapphireCrystal ← StaticMinerals.xml 原粗糙宝石 p=6 → 留 4.8 + 分流 1.2 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SapphireCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="SapphireCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>4.8</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SapphireCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SapphireCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.48</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.3</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.18</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.144</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.096</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- SchorlCrystal ← StaticMinerals.xml 原粗糙宝石 p=3 → 留 2.4 + 分流 0.6 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SchorlCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="SchorlCrystal"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>2.4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SchorlCrystal"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SchorlCrystal"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.24</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.15</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.09</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.072</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.048</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- UraniniteDeposit ← StaticMinerals.xml 原粗糙宝石 p=0.5 → 留 0.4 + 分流 0.1 给成品宝石 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="UraniniteDeposit"]/randomlyDropResources/li[ResourceDefName="RoughGem"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="UraniniteDeposit"]/randomlyDropResources/li[ResourceDefName="RoughGem"]/DropProbability</xpath>
+      <value><DropProbability>0.4</DropProbability></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="UraniniteDeposit"]/randomlyDropResources</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="UraniniteDeposit"]/randomlyDropResources</xpath>
+      <value>
+        <li><ResourceDefName>RKGem_Citrine</ResourceDefName><DropProbability>0.04</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>2</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Amber</ResourceDefName><DropProbability>0.025</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>3</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Emerald</ResourceDefName><DropProbability>0.015</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>5</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Sapphire</ResourceDefName><DropProbability>0.012</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>6</MinMiningSkill></li>
+        <li><ResourceDefName>RKGem_Ruby</ResourceDefName><DropProbability>0.008</DropProbability><CountPerDrop>1</CountPerDrop><MinMiningSkill>8</MinMiningSkill></li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

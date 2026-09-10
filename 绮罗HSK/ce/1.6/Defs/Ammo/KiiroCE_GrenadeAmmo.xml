@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>AmmoKiiroPTGrenades</defName>
+		<label>Kiiro PT Grenades</label>
+		<parent>AmmoGrenades</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberGrenade</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_KiiroPTGrenades</defName>
+		<label>Kiiro PT Grenades</label>
+		<ammoTypes>
+			<Ammo_KiiroPTGrenades_HE>Bullet_KiiroPTGrenades_HE</Ammo_KiiroPTGrenades_HE>
+			<Ammo_KiiroPTGrenades_HE_TFuzed>Bullet_KiiroPTGrenades_HE_TFuzed</Ammo_KiiroPTGrenades_HE_TFuzed>
+			<Ammo_KiiroPTGrenades_HEDP>Bullet_KiiroPTGrenades_HEDP</Ammo_KiiroPTGrenades_HEDP>
+			<Ammo_KiiroPTGrenades_EMP>Bullet_KiiroPTGrenades_EMP</Ammo_KiiroPTGrenades_EMP>
+			<Ammo_KiiroPTGrenades_Smoke>Bullet_KiiroPTGrenades_Smoke</Ammo_KiiroPTGrenades_Smoke>
+		</ammoTypes>
+		<similarTo>AmmoSet_LauncherGrenade</similarTo>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="KiiroPTGrenadesBase" ParentName="MediumAmmoBase" Abstract="True">
+		<description>A type of grenade developed by the Kiiro race for the prototype series of weapons, used for various individual launchers.</description>
+		<statBases>
+			<Mass>0.375</Mass>
+			<Bulk>0.46</Bulk>
+		</statBases>
+		<menuHidden>false</menuHidden>
+		<!-- Toggled by AmmoInjector.cs -->
+		<destroyOnDrop>false</destroyOnDrop>
+		<!-- Toggled by AmmoInjector.cs -->
+		<tradeTags Inherit="false">
+		</tradeTags>
+		<thingCategories>
+			<li>AmmoKiiroPTGrenades</li>
+		</thingCategories>
+		<stackLimit>500</stackLimit>
+		<cookOffFlashScale>20</cookOffFlashScale>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTGrenadesBase">
+		<defName>Ammo_KiiroPTGrenades_HE</defName>
+		<label>Kiiro PT Grenades (HE)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/GrenadeLauncher/HE</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>2.87</MarketValue>
+		</statBases>
+		<ammoClass>GrenadeHE</ammoClass>
+		<detonateProjectile>Bullet_KiiroPTGrenades_HE</detonateProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTGrenadesBase">
+		<defName>Ammo_KiiroPTGrenades_HE_TFuzed</defName>
+		<label>Kiiro PT Grenades (HE Time-Fuzed)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/GrenadeLauncher/AIR</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>3.84</MarketValue>
+		</statBases>
+		<ammoClass>GrenadeHETF</ammoClass>
+		<detonateProjectile>Bullet_KiiroPTGrenades_HE</detonateProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTGrenadesBase">
+		<defName>Ammo_KiiroPTGrenades_HEDP</defName>
+		<label>Kiiro PT Grenades (HEDP)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/GrenadeLauncher/DP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>2.71</MarketValue>
+		</statBases>
+		<ammoClass>GrenadeHEDP</ammoClass>
+		<detonateProjectile>Bullet_KiiroPTGrenades_HE</detonateProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTGrenadesBase">
+		<defName>Ammo_KiiroPTGrenades_EMP</defName>
+		<label>Kiiro PT Grenades (EMP)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/GrenadeLauncher/EMP</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>5.09</MarketValue>
+		</statBases>
+		<ammoClass>GrenadeEMP</ammoClass>
+		<generateAllowChance>0.5</generateAllowChance>
+		<detonateProjectile>Bullet_KiiroPTGrenades_EMP</detonateProjectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroPTGrenadesBase">
+		<defName>Ammo_KiiroPTGrenades_Smoke</defName>
+		<label>Kiiro PT Grenades (Smoke)</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/GrenadeLauncher/SMK</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>2.35</MarketValue>
+		</statBases>
+		<ammoClass>Smoke</ammoClass>
+		<generateAllowChance>0</generateAllowChance>
+		<detonateProjectile>Bullet_KiiroPTGrenades_Smoke</detonateProjectile>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+
+	<ThingDef Name="BaseKiiroPTGrenadesBullet" ParentName="BaseExplosiveBullet" Abstract="true">
+		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/LauncherShot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(0.5,0.5)</drawSize>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<speed>62</speed>
+			<dropsCasings>true</dropsCasings>
+			<casingMoteDefname>Fleck_GrenadeLauncherAmmoCasings</casingMoteDefname>
+			<casingFilthDefname>Filth_GrenadeLauncherAmmoCasings</casingFilthDefname>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGrenadesBullet">
+		<defName>Bullet_KiiroPTGrenades_HE</defName>
+		<label>Kiiro PT Grenades (HE)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>1.5</explosionRadius>
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>23</damageAmountBase>
+			<applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+		</projectile>
+		<comps>
+			<li Class="CombatExtended.CompProperties_Fragments">
+				<fragments>
+					<Fragment_Small>40</Fragment_Small>
+				</fragments>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGrenadesBullet">
+		<defName>Bullet_KiiroPTGrenades_HE_TFuzed</defName>
+		<thingClass>CombatExtended.ProjectileCE_Bursting</thingClass>
+		<label>Kiiro PT Grenades (HE Time-Fuzed)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>1.5</explosionRadius>
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>23</damageAmountBase>
+			<applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+			<aimHeightOffset>1.4</aimHeightOffset>
+			<armingDelay>2</armingDelay>
+		</projectile>
+		<comps>
+			<li Class="CombatExtended.CompProperties_Fragments">
+				<fragments>
+					<Fragment_Small>40</Fragment_Small>
+				</fragments>
+				<fragAngleRange>-89~-5</fragAngleRange>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGrenadesBullet">
+		<defName>Bullet_KiiroPTGrenades_HEDP</defName>
+		<thingClass>CombatExtended.BulletCE</thingClass>
+		<label>Kiiro PT Grenades (HEDP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bullet</damageDef>
+			<damageAmountBase>36</damageAmountBase>
+			<armorPenetrationSharp>76</armorPenetrationSharp>
+			<armorPenetrationBlunt>5.942</armorPenetrationBlunt>
+		</projectile>
+		<comps>
+			<li Class="CombatExtended.CompProperties_ExplosiveCE">
+				<damageAmountBase>19</damageAmountBase>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveRadius>1</explosiveRadius>
+				<applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+			</li>
+			<li Class="CombatExtended.CompProperties_Fragments">
+				<fragments>
+					<Fragment_Small>20</Fragment_Small>
+				</fragments>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGrenadesBullet">
+		<defName>Bullet_KiiroPTGrenades_EMP</defName>
+		<label>Kiiro PT Grenades (EMP)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>1.9</explosionRadius>
+			<damageDef>EMP</damageDef>
+			<damageAmountBase>23</damageAmountBase>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="BaseKiiroPTGrenadesBullet">
+		<defName>Bullet_KiiroPTGrenades_Smoke</defName>
+		<label>Kiiro PT Grenades (Smoke)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>6</explosionRadius>
+			<damageDef>Smoke</damageDef>
+			<suppressionFactor>0.0</suppressionFactor>
+			<dangerFactor>0.0</dangerFactor>
+			<postExplosionGasType>BlindSmoke</postExplosionGasType>
+			<preExplosionSpawnChance>1</preExplosionSpawnChance>
+			<postExplosionSpawnThingDef>KiiroProjectile_Smoke_Releasing</postExplosionSpawnThingDef>
+		</projectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="LauncherAmmoRecipeBase">
+		<defName>Make_KiiroPTGrenades_HE</defName>
+		<label>make Kiiro PT HE grenades x100</label>
+		<description>Craft 100 Kiiro PT HE grenades.</description>
+		<jobString>Making Kiiro PT HE grenades.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>76</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>9</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGrenades_HE>100</Ammo_KiiroPTGrenades_HE>
+		</products>
+		<workAmount>12400</workAmount>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef ParentName="LauncherAmmoRecipeBase">
+		<defName>Make_KiiroPTGrenades_HE_TFuzed</defName>
+		<label>make Kiiro PT HE Time-Fuzed grenades x100</label>
+		<description>Craft 100 Kiiro PT HE Time-Fuzed grenades.</description>
+		<jobString>Making Kiiro PT HE Time-Fuzed grenades.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>76</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>9</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGrenades_HE_TFuzed>100</Ammo_KiiroPTGrenades_HE_TFuzed>
+		</products>
+		<workAmount>14200</workAmount>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef ParentName="LauncherAmmoRecipeBase">
+		<defName>Make_KiiroPTGrenades_HEDP</defName>
+		<label>make Kiiro PT HEDP grenades x100</label>
+		<description>Craft 100 Kiiro PT HEDP grenades.</description>
+		<jobString>Making Kiiro PT HEDP grenades.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>76</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>7</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGrenades_HEDP>100</Ammo_KiiroPTGrenades_HEDP>
+		</products>
+		<workAmount>11600</workAmount>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef ParentName="LauncherAmmoRecipeBase">
+		<defName>Make_KiiroPTGrenades_EMP</defName>
+		<label>make Kiiro PT EMP grenades x100</label>
+		<description>Craft 100 Kiiro PT EMP grenades.</description>
+		<jobString>Making Kiiro PT EMP grenades.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>76</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>11</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGrenades_EMP>100</Ammo_KiiroPTGrenades_EMP>
+		</products>
+		<workAmount>14200</workAmount>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef ParentName="LauncherAmmoRecipeBase">
+		<defName>Make_KiiroPTGrenades_Smoke</defName>
+		<label>make Kiiro PT smoke grenades x100</label>
+		<description>Craft 100 Kiiro PT smoke grenades.</description>
+		<jobString>Making Kiiro PT smoke grenades.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>76</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Prometheum</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Prometheum</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroPTGrenades_Smoke>100</Ammo_KiiroPTGrenades_Smoke>
+		</products>
+		<workAmount>10000</workAmount>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+	
+	<!-- 原型单兵火箭筒的火箭弹 -->
+	<ThingCategoryDef>
+		<defName>KiiroRocketFrag</defName>
+		<label>Kiiro Rockets</label>
+		<parent>AmmoRockets</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberRocket</iconPath>
+	</ThingCategoryDef>
+	
+	<!-- ==================== AmmoSet ========================== -->
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_KiiroRocket</defName>
+		<label>Kiiro Rocket</label>
+		<ammoTypes>
+			<Ammo_KiiroRocket_Frag>Bullet_KiiroRocket_Frag</Ammo_KiiroRocket_Frag>
+		</ammoTypes>
+	</CombatExtended.AmmoSetDef>
+		
+	<!-- ==================== Ammo ========================== -->
+	<ThingDef Class="CombatExtended.AmmoDef" Name="KiiroRocketBase" ParentName="MediumAmmoBase" Abstract="True">
+		<description>A type of rocket developed by the Kiiro race, sacrificing armor-piercing capability and explosive power to increase the range of damage.</description>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+		</statBases>
+		<menuHidden>false</menuHidden>
+		<!-- Toggled by AmmoInjector.cs -->
+		<destroyOnDrop>false</destroyOnDrop>
+		<!-- Toggled by AmmoInjector.cs -->
+		<tradeTags Inherit="false">
+		</tradeTags>
+		<thingCategories>
+			<li>KiiroRocketFrag</li>
+		</thingCategories>
+		<stackLimit>25</stackLimit>
+		<cookOffFlashScale>40</cookOffFlashScale>
+		<cookOffSound>MortarBomb_Explode</cookOffSound>
+	</ThingDef>
+	
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="KiiroRocketBase">
+		<defName>Ammo_KiiroRocket_Frag</defName>
+		<label>Kiiro Rocket</label>
+		<graphicData>
+			<texPath>Things/KiiroAmmo/Rocket/Frag</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>65</MarketValue>
+			<Mass>6</Mass>
+			<Bulk>15.5</Bulk>
+		</statBases>
+		<ammoClass>RocketFrag</ammoClass>
+		<detonateProjectile>Bullet_KiiroRocket_Frag</detonateProjectile>
+	</ThingDef>
+	
+	<!-- ================== Projectiles ================== -->
+	<ThingDef Name="BaseKiiroRocket" ParentName="BaseBulletCE" Abstract="true">
+		<graphicData>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<speed>45</speed>
+			<soundAmbient>RocketPropelledLoop_Small</soundAmbient>
+		</projectile>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseKiiroRocket">
+		<defName>Bullet_KiiroRocket_Frag</defName>
+		<label>Kiiro Rocket</label>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket/SPG9/Frag</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>65</damageAmountBase>
+			<explosionRadius>4</explosionRadius>
+			<explosionDamageFalloff>false</explosionDamageFalloff>
+		</projectile>
+	</ThingDef>
+	
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>Make_KiiroRocket_Frag</defName>
+		<label>make Kiiro rockets x5</label>
+		<description>Craft 5 Kiiro rockets.</description>
+		<jobString>Making Kiiro rockets.</jobString>
+		<researchPrerequisites>
+		<li>Kiiro_Grenades</li>
+		<li>CE_Launchers</li>
+		</researchPrerequisites>
+		<workAmount>12000</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>8</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_KiiroRocket_Frag>5</Ammo_KiiroRocket_Frag>
+		</products>
+		<recipeUsers Inherit="false">
+			<li>Kiiro_MachiningBench</li>
+		</recipeUsers>
+	</RecipeDef>
+	
+	<!--===== 照明弹 =====-->
+	<CombatExtended.AmmoCategoryDef>
+		<defName>FlareWarhead</defName>
+		<label>flare shell</label>
+		<labelShort>flare shell</labelShort>
+		<description>flare shell.</description>
+	</CombatExtended.AmmoCategoryDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="81mmMortarShellBaseCraftableBase">
+		<defName>KiiroShell_FlareCE</defName>
+		<label>81mm mortar shell (Flare)</label>
+		<description>flare shell made by the Kiiro race.</description>
+		<graphicData>
+			<texPath>Kiiro/Items/Resources/Ammo/FlareShell</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>55</MarketValue>
+			<Mass>5.27</Mass>
+			<Bulk>8.17</Bulk>
+		</statBases>
+		<ammoClass>FlareWarhead</ammoClass>
+		<detonateProjectile>KiiroBullet_Shell_FlareCE</detonateProjectile>
+	</ThingDef>
+
+	<ThingDef ParentName="Base81mmMortarShell">
+		<defName>KiiroBullet_Shell_FlareCE</defName>
+		<label>81mm mortar shell (Flare)</label>
+		<graphicData>
+			<texPath>Things/Projectile/ShellHighExplosive</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Smoke</damageDef>
+			<explosionRadius>0.1</explosionRadius>
+			<flyOverhead>true</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>Kiiro_GrenadeDrop</soundExplode>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+			<postExplosionSpawnThingDef>KiiroProjectile_Flare_Releasing</postExplosionSpawnThingDef>
+		</projectile>
+	</ThingDef>
+
+	<RecipeDef ParentName="AmmoRecipeBase">
+		<defName>MakeKiiroShell_FlareCE</defName>
+		<label>make 81mm Flare mortar shells x5</label>
+		<description>Craft 5 81mm Flare mortar shells.</description>
+		<jobString>Making 81mm Flare mortar shells.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>60</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Chemfuel</li>
+				<li>ComponentIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<KiiroShell_FlareCE>5</KiiroShell_FlareCE>
+		</products>
+		<workAmount>9000</workAmount>
+	</RecipeDef>
+</Defs>

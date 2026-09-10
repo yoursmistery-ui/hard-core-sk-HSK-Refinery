@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <AbilityGroupDef>
+    <defName>Miho_TinkerAdvanced</defName>
+    <cooldownTicks>30000</cooldownTicks>
+  </AbilityGroupDef>
+  
+  <AbilityGroupDef>
+    <defName>Miho_SuperGun</defName>
+    <cooldownTicks>3600000</cooldownTicks>
+  </AbilityGroupDef>
+ 
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_Repair</defName>
+    <label>야전수리</label>
+    <description>드론을 패널티 없이 바로 수리합니다.</description>
+    <iconPath>Icon/Abilities/MihoRepair</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_Heal</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_Repair_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Repair_Hediff</defName>
+		<description>Repair</description>
+		<label>Repair</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_Repair_HediffTwo</defName>
+    <label>수리중</label>
+    <description>메카나이트-초능력을 이용한 수리를 받고 있습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+	<li Class="MoharRegeneration.HediffCompProperties_Regeneration">
+
+				<CheckingTicksPeriod>120</CheckingTicksPeriod>
+
+				<!-- Tending -->
+				<BloodLossTendingParams>
+					<TreatmentLabel>blood loss tending</TreatmentLabel>
+
+					<PeriodBase>400~1200</PeriodBase>
+					<HealingQuality>.5 ~1</HealingQuality>
+
+					<HungerCost>.01</HungerCost>
+					<RestCost>0</RestCost>
+
+					<!-- <MoteDef>Mote_TendingBloodloss</MoteDef> -->
+				</BloodLossTendingParams>
+
+				<!-- Hediff removal -->
+				<PhysicalInjuryRegenParams>
+					<TreatmentLabel>organ healing</TreatmentLabel>
+
+					<PeriodBase>120~300</PeriodBase>
+					<HealingQuality>.05~.15</HealingQuality>
+					<TargetedHediffDefs>
+						<li>Bite</li>
+						<li>Bruise</li>
+						<li>Burn</li>
+						<li>ChemicalBurn</li>
+						<li>Crush</li>
+						<li>Crack</li>
+						<li>Cut</li>
+						<li>ExecutionCut</li>
+						<li>Frostbite</li>
+						<li>Gunshot</li>
+						<li>Shredded</li>
+						<li>Scratch</li>
+						<li>Stab</li>
+						<li>SurgicalCut</li>
+					</TargetedHediffDefs>
+
+					<HungerCost>.03</HungerCost>
+					<RestCost>0</RestCost>
+
+				</PhysicalInjuryRegenParams>
+			</li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <ImmunityGainSpeed>25</ImmunityGainSpeed>
+          <InjuryHealingFactor>8</InjuryHealingFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_Armor</defName>
+    <label>메카나이트 경화 장갑</label>
+    <description>드론 내부의 메카나이트를 경화시켜 추가 방어력을 제공합니다.</description>
+    <iconPath>Icon/Abilities/MihoArmor</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_FanofKnives</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_Armor_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Armor_Hediff</defName>
+		<description>Armor</description>
+		<label>Armor</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_Armor_HediffTwo</defName>
+    <label>메카나이트 경화 장갑</label>
+    <description>메카나이트-초능력을 이용하여 방어력을 향상시켰습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-4</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+      <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.25</ArmorRating_Blunt>
+          <IncomingDamageFactor>-0.15</IncomingDamageFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_Accuracy</defName>
+    <label>홀로그램 포술</label>
+    <description>3차원적인 포격 본능을 도입해 더욱 높은 명중률을 선 보일 수 있습니다.</description>
+    <iconPath>Icon/Abilities/MihoHolographic</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.1</Ability_PsyfocusCost>
+      <Ability_EntropyGain>30</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_FanofKnives</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_Accuracy_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Accuracy_Hediff</defName>
+		<description>Accuracy</description>
+		<label>Accuracy</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_Accuracy_HediffTwo</defName>
+    <label>홀로그램 포술</label>
+    <description>메카나이트-초능력을 이용하여 명중률을 향상시켰습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-4</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <ShootingAccuracyPawn>12</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_Overclock</defName>
+    <label>오버클럭</label>
+    <description>"압도적인 힘으로!" 드론의 의식을 향상시킵니다. 열량소모도 극심해 집니다.</description>
+    <iconPath>Icon/Abilities/MihoOver</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.25</Ability_PsyfocusCost>
+      <Ability_EntropyGain>60</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_TinkerAdvanced</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_Overclock_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_Overclock_Hediff</defName>
+		<description>Overclock</description>
+		<label>Overclock</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_Overclock_HediffTwo</defName>
+    <label>오버클럭</label>
+    <description>메카나이트-초능력을 이용하여 의식을 향상시켰습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-4</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <HungerRateMultiplier>25</HungerRateMultiplier>
+        </statOffsets>
+ <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>0.50</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.25</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+  
+
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_BulletHell</defName>
+    <label>탄막지옥</label>
+    <description>장전속도를 급도로 상승시켜 꼼꼼한 화망을 구성하게 합니다.</description>
+    <iconPath>Icon/Abilities/MihoBulletHell</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.3</Ability_PsyfocusCost>
+      <Ability_EntropyGain>80</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_TinkerAdvanced</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_BulletHell_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_BulletHell_Hediff</defName>
+		<description>BulletHell</description>
+		<label>BulletHell</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_BulletHell_HediffTwo</defName>
+    <label>탄막지옥</label>
+    <description>메카나이트-초능력을 이용하여 장전속도를 향상시켰습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-4</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <RangedWeapon_Cooldown>-0.25</RangedWeapon_Cooldown>
+          <AimingDelayFactor>-0.5</AimingDelayFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_RepairAdv</defName>
+    <label>긴급쾌속수리</label>
+    <description>받는 데미지가 4배가 되는 대신, 최고의 속도로 드론을 회복시킵니다.</description>
+    <iconPath>Icon/Abilities/MihoRepairADV</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.25</Ability_PsyfocusCost>
+      <Ability_EntropyGain>60</Ability_EntropyGain>
+
+    </statBases>
+        <groupDef>Miho_Heal</groupDef>
+
+    <verbProperties>
+      <warmupTime>1</warmupTime>
+      <targetParams>
+        <onlyTargetColonists>True</onlyTargetColonists>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_RepairAdv_Hediff</hediffDef>
+        <onlyBrain>False</onlyBrain>
+        <psychic>False</psychic>
+        <applicableToMechs>False</applicableToMechs>
+        <goodwillImpact>5</goodwillImpact>
+      </li>
+    </comps>
+  </AbilityDef>
+
+
+	<HediffDef ParentName="Miho_Hidden_Hediff_Base">
+		<defName>Miho_RepairAdv_Hediff</defName>
+		<description>Repairadv</description>
+		<label>Repairadv</label>
+		<minSeverity>0</minSeverity>
+
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>false</showHoursToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+
+      </li>
+    </stages>
+	</HediffDef>
+
+  <HediffDef ParentName="Miho_Hidden_Hediff_Base">
+    <defName>Miho_RepairAdv_HediffTwo</defName>
+    <label>긴급 쾌속 수리중</label>
+    <description>메카나이트-초능력을 이용한 수리를 받고 있습니다.</description>
+    <isBad>false</isBad>
+   <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-24</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+	<li Class="MoharRegeneration.HediffCompProperties_Regeneration">
+
+				<CheckingTicksPeriod>120</CheckingTicksPeriod>
+
+				<!-- Tending -->
+				<BloodLossTendingParams>
+					<TreatmentLabel>blood loss tending</TreatmentLabel>
+
+					<PeriodBase>120~120</PeriodBase>
+					<HealingQuality>.5 ~1</HealingQuality>
+
+					<HungerCost>.01</HungerCost>
+					<RestCost>0</RestCost>
+
+					<!-- <MoteDef>Mote_TendingBloodloss</MoteDef> -->
+				</BloodLossTendingParams>
+
+				<!-- Hediff removal -->
+				<PhysicalInjuryRegenParams>
+					<TreatmentLabel>organ healing</TreatmentLabel>
+
+					<PeriodBase>120~120</PeriodBase>
+					<HealingQuality>.1~.25</HealingQuality>
+					<TargetedHediffDefs>
+						<li>Bite</li>
+						<li>Bruise</li>
+						<li>Burn</li>
+						<li>ChemicalBurn</li>
+						<li>Crush</li>
+						<li>Crack</li>
+						<li>Cut</li>
+						<li>ExecutionCut</li>
+						<li>Frostbite</li>
+						<li>Gunshot</li>
+						<li>Shredded</li>
+						<li>Scratch</li>
+						<li>Stab</li>
+						<li>SurgicalCut</li>
+					</TargetedHediffDefs>
+
+					<HungerCost>.4</HungerCost>
+					<RestCost>0</RestCost>
+
+				</PhysicalInjuryRegenParams>
+			</li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>true</becomeVisible>
+        <statOffsets>
+          <ImmunityGainSpeed>25</ImmunityGainSpeed>
+          <IncomingDamageFactor>3</IncomingDamageFactor>
+          <InjuryHealingFactor>100</InjuryHealingFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <AbilityDef ParentName="MihoWordOfBase">
+    <defName>Miho_Ability_Agneyastra</defName>
+    <label>46cm 백이포 -아그네야스트라-</label>
+    <description>"천지의 온갖 원소로 만들어져 스스로 불꽃을 뿜어내며 그 무섭게 반짝이며 빛나는 거대한 창이 쏘아졌을 때 30만 대군도 한 순간에 다 죽어버린다." - 라마야나</description>
+    <jobDef>CastAbilityOnThing</jobDef>
+    <iconPath>Icon/Abilities/MihoAgni</iconPath>
+    <hotKey>Misc12</hotKey>
+    <statBases>
+      <Ability_PsyfocusCost>0.5</Ability_PsyfocusCost> <!-- Minimum cost -->
+      <Ability_Duration>6000</Ability_Duration>
+    </statBases>
+        <groupDef>Miho_SuperGun</groupDef>
+
+    <verbProperties>
+      <warmupTime>0.5</warmupTime>
+      <range>500</range>
+      <drawAimPie>False</drawAimPie>
+      <requireLineOfSight>False</requireLineOfSight>
+      <targetParams>
+        <neverTargetHostileFaction>false</neverTargetHostileFaction>
+
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetHumans>true</canTargetHumans>
+        <canTargetMechs>true</canTargetMechs>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="CompProperties_AbilityGiveHediff">
+        <compClass>CompAbilityEffect_GiveHediff</compClass>
+        <hediffDef>Miho_Ability_Agneyastra_Skyfaller_Hediff</hediffDef>
+        <onlyBrain>True</onlyBrain>
+        <onlyApplyToSelf>false</onlyApplyToSelf>
+        <replaceExisting>true</replaceExisting>
+      </li>
+    </comps>
+  </AbilityDef>
+  
+	<HediffDef>
+		<defName>Miho_Ability_Agneyastra_Skyfaller_Hediff</defName>
+		<hediffClass>Hediff_High</hediffClass>
+		<label>Miho_Ability_Agneyastra_Skyfaller</label>
+		<description>explosion.</description>
+		<defaultLabelColor>(0.2,1,0.2)</defaultLabelColor>
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<initialSeverity>0.1</initialSeverity>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>600</disappearsAfterTicks>
+			</li>
+			<li Class="HediffCompProperties_Effecter">
+				<stateEffecter>Miho_SkyTarget</stateEffecter>
+				<severityIndices>0~5</severityIndices>
+			</li>
+			<li Class="MoharHediffs.HediffCompProperties_Spawner">
+				<thingToSpawn>Miho_Ability_Agneyastra_Skyfaller</thingToSpawn>
+				<spawnCount>1</spawnCount>
+				<minDaysB4Next>0.002</minDaysB4Next>
+				<maxDaysB4Next>0.003</maxDaysB4Next>
+				<randomGrace>0</randomGrace>
+				<spawnMaxAdjacent>40</spawnMaxAdjacent>
+				<spawnForbidden>false</spawnForbidden>
+				<spawnVerb>production</spawnVerb>
+			</li>
+		</comps>
+			<stages>
+				<li>
+					<becomeVisible>false</becomeVisible>
+				</li>
+			</stages>
+	</HediffDef>
+	
+	<ThingDef ParentName="SkyfallerBase">
+		<defName>Miho_Ability_Agneyastra_Skyfaller</defName>
+		<label>Agneyastra</label>
+		<size>(1, 1)</size>
+		<graphicData>
+			<texPath>Things/Projectile/Agni</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+			<drawSize>(5, 8)</drawSize>
+		</graphicData>
+		<skyfaller>
+			<shadowSize>(1.5, 1.5)</shadowSize>
+			<explosionRadius>21.9</explosionRadius>
+			<explosionDamage>MihoPlasmaAgni</explosionDamage>
+			<explosionDamageFactor>2</explosionDamageFactor>
+			<rotateGraphicTowardsDirection>true</rotateGraphicTowardsDirection>
+			<anticipationSound>Miho_MortarAmbient</anticipationSound>
+			<anticipationSoundTicks>360</anticipationSoundTicks>
+		</skyfaller>
+	</ThingDef>
+
+  <DamageDef>
+    <defName>MihoPlasmaAgni</defName>
+    <label>plasma</label>
+    <additionalHediffs>
+      <li>
+        <hediff>Miho_Plasma_Hediff</hediff>
+        <severityPerDamageDealt>0.016</severityPerDamageDealt>
+        <victimSeverityScalingByInvBodySize>true</victimSeverityScalingByInvBodySize>
+      </li>
+    </additionalHediffs>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <isExplosive>true</isExplosive>
+    <deathMessage>{0} has been melted.</deathMessage>
+    <hediff>Burn</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Blunt</impactSoundType>
+    <armorCategory>Blunt</armorCategory>
+    <minDamageToFragment>15</minDamageToFragment>
+    <defaultDamage>500</defaultDamage>
+    <buildingDamageFactor>10</buildingDamageFactor>
+    <plantDamageFactor>4</plantDamageFactor>
+    <explosionAffectOutsidePartsOnly>false</explosionAffectOutsidePartsOnly>
+    <explosionHeatEnergyPerCell>1000</explosionHeatEnergyPerCell>
+    <explosionCellFleck>MihoAgniBlastDry</explosionCellFleck>
+    <explosionColorCenter>(1, 0.5, 0.3)</explosionColorCenter>
+    <explosionColorEdge>(0.6, 0.5, 0.4)</explosionColorEdge>
+    <soundExplosion>Miho_ExplosionAgni</soundExplosion>
+    <combatLogRules>Damage_Flame</combatLogRules>
+  </DamageDef>
+  
+  <FleckDef ParentName="FleckBase">
+    <defName>MihoAgniBlastDry</defName>
+    <graphicData>
+      <texPath>Things/Mote/BlastDry</texPath>
+      <shaderType>TransparentPostLight</shaderType>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0</solidTime>
+    <fadeOutTime>2</fadeOutTime>
+  </FleckDef>
+  
+
+  <SoundDef>
+		<defName>Miho_MortarAmbient</defName>
+		<context>MapOnly</context>
+		<maxSimultaneous>1</maxSimultaneous>
+		<subSounds>
+			<li>
+				<grains>
+				<li Class="AudioGrain_Folder">
+					<clipFolderPath>Weapon/Artillery/MortarRound_Ambient</clipFolderPath>
+				</li>
+				</grains>
+				<volumeRange>17.17392~17.17392</volumeRange>
+				<pitchRange>0.95~1.05</pitchRange>
+        <distRange>300~500</distRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+  <SoundDef>
+    <defName>Miho_ExplosionAgni</defName>  
+    <context>MapOnly</context>
+    <eventNames />  
+    <maxSimultaneous>2</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Folder">
+            <clipFolderPath>Gun/MihoAgni</clipFolderPath>
+          </li>
+        </grains>      
+        <volumeRange><min>130</min><max>155</max></volumeRange>
+        <distRange>300~500</distRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+	
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_Miho_SkyTarget</defName>
+		<graphicData>
+			<texPath>Things/Projectile/AgniMote</texPath>
+			<shaderType>MoteGlow</shaderType>
+			<color>(1, 1, 0)</color>
+		</graphicData>
+		<thingClass>MoteThrownAttached</thingClass>
+		<altitudeLayer>MetaOverlays</altitudeLayer>
+		<mote>
+			<fadeInTime>0.25</fadeInTime>
+			<solidTime>0</solidTime>
+			<fadeOutTime>0.25</fadeOutTime>
+			<attachedDrawOffset>(0, 0, 0.3)</attachedDrawOffset>
+		</mote>
+	</ThingDef>
+	
+	<EffecterDef>
+		<defName>Miho_SkyTarget</defName>
+		<children>
+			<li>
+				<subEffecterClass>SubEffecter_DrifterEmoteChance</subEffecterClass>
+				<scale>2</scale>
+				<chancePerTick>0.06</chancePerTick>
+				<moteDef>Mote_Miho_SkyTarget</moteDef>
+			</li>
+		</children>
+	</EffecterDef>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalRepair</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_Repair_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Repair_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalRepair</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_Repair_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Repair_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalAccuracy</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_Accuracy_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Accuracy_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalAccuracy</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_Accuracy_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Accuracy_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalArmor</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_Armor_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Armor_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalArmor</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_Armor_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Armor_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalOverclock</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_Overclock_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Overclock_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalOverclock</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_Overclock_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_Overclock_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalBulletHell</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_BulletHell_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_BulletHell_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalBulletHell</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_BulletHell_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_BulletHell_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>SapsalRepairAdv</defName>
+		<targetRace>Alien_Miho_Mech_Sapsal</targetRace>
+		<hediffDefs>
+			<li>Miho_RepairAdv_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_RepairAdv_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+   <CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+		<defName>BulgasalRepairAdv</defName>
+		<targetRace>Alien_Miho_Mech_Bulgasal</targetRace>
+		<hediffDefs>
+			<li>Miho_RepairAdv_Hediff</li>
+		</hediffDefs>
+		<makeHediffDefs>
+			<li>Miho_RepairAdv_HediffTwo</li>
+
+		</makeHediffDefs>
+		<tickMultiflier>120</tickMultiflier>
+		<hediffSeverity>1</hediffSeverity>
+
+	</CheckHediffMakeHediff.CheckHediffMakeHediffDef>
+	
+</Defs>

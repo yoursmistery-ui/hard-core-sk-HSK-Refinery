@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 2026-09-06 恢复代码硬引用的最小 def 集。
+     2026-09-08 处决动作还原: Executions.xml(AnimExecutionBase + 22 个 AM_Execution_*)已恢复,
+     故本文件不再重复 AnimExecutionBase / AM_Execution_Fail(避免抽象 Name 与 defName 冲突)。
+     仅保留决斗 def: zAnimationMod.dll 启动时 GetNamed 查找 AM_Duel_WinFriendlyDuel(_Reject)。
+     决斗玩法入口仍关闭(DuelSpot / 决斗 JoyGiver 已删),这些 def 不会被触发。 -->
+<Defs>
+
+  <AM.AnimDef Name="AnimDuelBase" Abstract="True">
+    <label>Duel</label>
+    <type>Duel</type>
+    <jobString>Dueling [OTHER].</jobString>
+    <pawnCount>2</pawnCount>
+    <cellData>
+      <li>
+        <type>PawnStart</type>
+        <position>(0, 0)</position>
+        <pawnIndex>0</pawnIndex>
+      </li>
+      <li>
+        <type>PawnStart</type>
+        <position>(1, 0)</position>
+        <pawnIndex>1</pawnIndex>
+      </li>
+    </cellData>
+    <canEditProbability>false</canEditProbability>
+  </AM.AnimDef>
+
+  <AM.AnimDef ParentName="AnimDuelBase" Name="AnimDuelFriendlyWin">
+    <defName>AM_Duel_WinFriendlyDuel</defName>
+    <label>Win Friendly Duel</label>
+    <data>Duel_FriendlyEnd.json</data>
+    <jobString>Deafeating [OTHER] in a duel!</jobString>
+    <type>Other</type>
+    <weaponFilter Class="AM.Reqs.AnyWeapon"/> <!-- Allow anything to do this. Duel logic will handle weapon filtering -->
+    <handsVisibility>
+      <li>
+        <pawnIndex>0</pawnIndex>
+        <showMainHand>true</showMainHand>
+        <showAltHand>true</showAltHand>
+      </li>
+      <li>
+        <pawnIndex>1</pawnIndex>
+        <showMainHand>true</showMainHand>
+        <showAltHand>true</showAltHand>
+      </li>
+    </handsVisibility>
+  </AM.AnimDef>
+
+  <AM.AnimDef ParentName="AnimDuelFriendlyWin">
+    <defName>AM_Duel_WinFriendlyDuel_Reject</defName>
+    <data>Duel_FriendlyRejectedEnd.json</data>
+  </AM.AnimDef>
+
+</Defs>

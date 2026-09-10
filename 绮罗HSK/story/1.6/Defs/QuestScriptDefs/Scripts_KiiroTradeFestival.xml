@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Kiiro_TradeFestival</defName>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <isRootSpecial>true</isRootSpecial>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->trade festival</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->questDesc</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <!-- <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist> -->
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_MerchantCountAtLeast">
+          <count>4</count>
+        </li>
+
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_TradeFestival</tag>
+          <faction>$faction</faction>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>durationDays</name>
+          <value>8</value>
+        </li>
+
+        <li Class="QuestNode_Set">
+          <name>randomFactor</name>
+          <value>$(randInt(0,3))</value>
+        </li>
+
+        <li Class="QuestNode_EvaluateSimpleCurve">
+          <value>$randomFactor</value>
+          <storeAs>offsetValue</storeAs>
+          <curve>
+            <points>
+              <li>0,  0.75</li>
+              <li>1,  0.8</li>
+              <li>2,  0.85</li>
+              <li>3,  0.9</li>
+            </points>
+          </curve>
+        </li>
+
+        <li Class="QuestNode_Letter">
+          <label TKey="LetterLabel_FestivalStart">Trade Festival</label>
+          <text TKey="LetterDesc_FestivalStart">The annual Trade Festival has begun! During the festival, Kiiro shops in the colony will sell goods at discounted prices and purchase items at favorable rates. Friendly faction caravans will also visit more frequently.\n\nThe festival will last for [durationDays] days.</text>
+          <relatedFaction>$faction</relatedFaction>
+          <letterDef>PositiveEvent</letterDef>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_MerchantTradePriceOffset">
+          <tradePriceOffset>$(1-$offsetValue)</tradePriceOffset>
+        </li>
+
+        <li Class="QuestNode_LoopCount">
+          <loopCount>$(randInt(3,8))</loopCount>
+          <node Class="AncotLibrary.QuestNode_IncidentQueue">
+            <incidentDef>TraderCaravanArrival</incidentDef>
+            <incidentDelayTicks>$(randInt(0,16) * 15000 + randInt(0,16) * 13000)</incidentDelayTicks>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_TradeFestivalAlert">
+          <label>Trade Festival: {0}</label>
+          <explanation>The Kiiro merchants in the colony are hosting a Trade Festival. During the festival, trade prices with the shops will be adjusted by {0}, and caravans will visit more frequently.\n\nRemaining time of the festival: {{0}}.</explanation>
+          <insignalDisable>QuestEnd</insignalDisable>
+        </li>
+
+        <li Class="QuestNode_Delay">
+          <delayTicks>$($durationDays * 60000)</delayTicks>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="Kiiro_Event.QuestNode_MerchantTradePriceOffset">
+                <tradePriceOffset>0</tradePriceOffset>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>QuestEnd</outSignals>
+              </li>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabel_FestivalEnd">Trade Festival end</label>
+                <text TKey="LetterDesc_FestivalEnd">This year's Trade Festival has ended. Trade with the merchants will return to normal prices.</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Success</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabel_FactionHostile">Trade Festival end</label>
+                <text TKey="LetterDesc_FactionHostile">The Trade Festival has ended due to the relationship with the Kiiro became hostile.</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>QuestEnd</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

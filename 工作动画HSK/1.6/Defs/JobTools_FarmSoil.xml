@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ============================================================================
+       HSK 地形改造 / 肥化地块 (FertileFields terraforming) — NEW TOOLS.
+
+       地形改造地块(挖塘取泥、铺表土、造田、排涝…)在 HSK 里不是"挖地"工作，而是走
+       普通建筑流程：蓝图 -> FinishFrame。地块 def 的 thingClass 是
+       FertileFields.Building_Terraform(Core_SK 43 块 + HMC 泥炭/粘土 5 块 + BFTG 的 Terraform_*
+       土壤地块 40 余块 + 任何后续追加都继承同一基类)，且都带 FertileFields.Terrain modExtension。
+       它们没有材料
+       (Stuff 为空)，所以在加 terraformOnly 门禁之前会掉进焊枪的 "None" 桶 —— 小人对着
+       一块泥地举着电焊枪冒弧光。现在铲/锤/焊枪一律跳过这类框架，由下面两把专用工具接手。
+
+       jobDefs 按 defName 字符串匹配、terraformOnly 靠 thingClass 判定，两者在未安装
+       FertileFields 的环境里都不会命中任何东西 -> 工具天然惰性，无需 PatchOperationFindMod。
+       文件名以 F 开头排在 JobTools_JobEffects.xml 之前(字母序=def 序=匹配优先级)。
+
+       同文件内顺序有意义：关键词更窄的上肥叉必须排在开荒铲之前，否则会被开荒铲抢先命中。
+       ============================================================================ -->
+
+  <!-- 上肥叉 / 翻土叉: the fertilise plots — Core_SK's Topsoil-DirtFert(肥化表土) and
+       SoilRich-SoilTilled(精耕土地), plus BFTG's FertileFields soil work (Terraform_EnrichSoil
+       耗 6 肥料、EnrichWithAsh 草木灰调 pH、FertileFrom* 堆肥养地). Drives the fork into the bed
+       and levers it over so the manure is turned INTO the soil: dark clods plus pale fertiliser
+       grains scatter, and a little litter settles at the work spot. Narrower than the spade below
+       (keyword list), so it must stay first. -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_SoilFertilizer</defName>
+    <handCount>2</handCount>
+    <handPosA>0.15</handPosA>
+    <handPosB>0.34</handPosB>
+    <jobDefs>
+      <li>FinishFrame</li>
+    </jobDefs>
+    <terraformOnly>true</terraformOnly>
+    <buildEntityNameKeywords>
+      <li>DirtFert</li>
+      <li>SoilTilled</li>
+      <li>Enrich</li>
+      <li>Fertile</li>
+    </buildEntityNameKeywords>
+    <texPath>Things/JobEffects/Tools/Fork</texPath>
+    <swingStyle>Dig</swingStyle>
+    <scale>1.05</scale>
+    <reach>0.16</reach>
+    <period>0.7</period>
+    <windupAngle>50</windupAngle>
+    <stabDistance>0.24</stabDistance>
+    <strikeSound>JE_TrowelScoop</strikeSound>
+    <impactBitFleck>JE_SoilClod</impactBitFleck>
+    <impactBitCount>6</impactBitCount>
+    <impactBitSpeed>3~7</impactBitSpeed>
+    <impactBitScale>0.35~0.6</impactBitScale>
+    <impactSpread>82</impactSpread>
+    <!-- pale fertiliser grains thrown wider and finer than the soil -->
+    <impactBitFleck2>JE_SaltGrain</impactBitFleck2>
+    <impactBitCount2>6</impactBitCount2>
+    <impactBitSpeed2>2~5</impactBitSpeed2>
+    <impactBitScale2>0.3~0.5</impactBitScale2>
+    <impactSpread2>96</impactSpread2>
+    <impactDustFleck>DustPuff</impactDustFleck>
+    <restFleck>JE_ChipRest</restFleck>
+    <idleScale>0.7</idleScale>
+    <idleAngle>150</idleAngle>
+  </JobEffects.JobToolDef>
+
+  <!-- 开荒铲 / 地形改造铲: every other terraform plot (取沙、取砾、取泥炭、铺表土、造田、
+       排水成沼泽…). Two-handed dig into hardpan — heavy soil clods, a few stone chips for
+       the rocky conversions, ground dust on each strike, and spoil left on the ground.
+       Slower and heavier than the FillIn shovel because a whole plot of terrain is being
+       moved, not a hole closed. -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_TerraformSpade</defName>
+    <handCount>2</handCount>
+    <handPosA>0.16</handPosA>
+    <handPosB>0.38</handPosB>
+    <jobDefs>
+      <li>FinishFrame</li>
+    </jobDefs>
+    <terraformOnly>true</terraformOnly>
+    <texPath>Things/JobEffects/Tools/Shovel</texPath>
+    <swingStyle>Dig</swingStyle>
+    <scale>1.12</scale>
+    <reach>0.15</reach>
+    <period>0.82</period>
+    <windupAngle>60</windupAngle>
+    <stabDistance>0.26</stabDistance>
+    <strikeSound>JE_ShovelScoop</strikeSound>
+    <impactBitFleck>JE_SoilClod</impactBitFleck>
+    <impactBitCount>8</impactBitCount>
+    <impactBitSpeed>3~7</impactBitSpeed>
+    <impactBitScale>0.35~0.65</impactBitScale>
+    <impactSpread>85</impactSpread>
+    <impactBitFleck2>JE_StoneShard</impactBitFleck2>
+    <impactBitCount2>3</impactBitCount2>
+    <impactBitSpeed2>4~9</impactBitSpeed2>
+    <impactBitScale2>0.3~0.5</impactBitScale2>
+    <impactSpread2>70</impactSpread2>
+    <impactDustFleck>DustPuff</impactDustFleck>
+    <restFleck>JE_ChipRest</restFleck>
+    <idleScale>0.66</idleScale>
+    <idleAngle>150</idleAngle>
+  </JobEffects.JobToolDef>
+
+</Defs>

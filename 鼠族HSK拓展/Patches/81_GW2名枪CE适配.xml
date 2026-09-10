@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- GW2 名枪 4 把的 CE 适配(2026-09-06):
+         杏梅栓动=7.92×57毛瑟(2026-09-06 晚: 本环境已自创 AmmoSet_792x57mmMauser,由 303British 归位)
+         / 夹竹桃栓动=7.92×57毛瑟(原 7.62×54R,同上归位)
+         灰叶枫自动步枪=7.92×57毛瑟(原 7.62×54R,同上归位) / 火百合冲锋枪=9×19帕拉贝鲁姆
+         格式照抄 80_RAE新增服饰HSK适配.xml 的 PatchOperationMakeGunCECompatible -->
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_NR_Mume</defName>
+        <statBases>
+            <SightsEfficiency>1.0</SightsEfficiency>
+            <ShotSpread>0.11</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <Bulk>8</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.0</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile>
+            <warmupTime>1.6</warmupTime>
+            <range>45</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_KB_Fichte</soundCast>
+            <soundCastTail>GunTail_Medium</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>2.5</reloadTime>
+            <ammoSet>AmmoSet_792x57mmMauser</ammoSet>
+        </AmmoUser>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_LS_Zakkum</defName>
+        <statBases>
+            <SightsEfficiency>1.05</SightsEfficiency>
+            <ShotSpread>0.10</ShotSpread>
+            <SwayFactor>1.4</SwayFactor>
+            <Bulk>9</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.1</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile>
+            <warmupTime>1.7</warmupTime>
+            <range>48</range>
+            <burstShotCount>1</burstShotCount>
+            <soundCast>RK_KB_Fichte</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>5</magazineSize>
+            <reloadTime>2.6</reloadTime>
+            <ammoSet>AmmoSet_792x57mmMauser</ammoSet>
+        </AmmoUser>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_SD_Klyon</defName>
+        <statBases>
+            <SightsEfficiency>0.95</SightsEfficiency>
+            <ShotSpread>0.14</ShotSpread>
+            <SwayFactor>1.6</SwayFactor>
+            <Bulk>10</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>1.6</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_792x57mmMauser_FMJ</defaultProjectile>
+            <warmupTime>1.8</warmupTime>
+            <range>37</range>
+            <burstShotCount>5</burstShotCount>
+            <soundCast>RK_SD_Klyon</soundCast>
+            <soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>10</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>15</magazineSize>
+            <reloadTime>4.2</reloadTime>
+            <ammoSet>AmmoSet_792x57mmMauser</ammoSet>
+        </AmmoUser>
+    </Operation>
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+        <defName>RK_VK_Gloriosa</defName>
+        <statBases>
+            <SightsEfficiency>0.8</SightsEfficiency>
+            <ShotSpread>0.13</ShotSpread>
+            <SwayFactor>1.2</SwayFactor>
+            <Bulk>6</Bulk>
+        </statBases>
+        <Properties>
+            <recoilAmount>0.6</recoilAmount>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+            <hasStandardCommand>true</hasStandardCommand>
+            <defaultProjectile>Bullet_9x19mmPara_FMJ</defaultProjectile>
+            <warmupTime>0.4</warmupTime>
+            <range>20</range>
+            <burstShotCount>8</burstShotCount>
+            <soundCast>RK_VK_Gloriosa</soundCast>
+            <soundCastTail>GunTail_Light</soundCastTail>
+            <muzzleFlashScale>8</muzzleFlashScale>
+        </Properties>
+        <AmmoUser>
+            <magazineSize>35</magazineSize>
+            <reloadTime>3.8</reloadTime>
+            <ammoSet>AmmoSet_9x19mmPara</ammoSet>
+        </AmmoUser>
+    </Operation>
+</Patch>

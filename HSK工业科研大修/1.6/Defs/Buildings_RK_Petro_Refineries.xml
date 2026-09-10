@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- 石化工业线 · 管道精炼厂(v3 新增, 2026-08-29)
+       背景: Vile's MS 的 Petrochemical_Patch.xml 把 Rimefeller 的 SyntheticAmmoniaRefiner 改成
+       丙烯厂(Product=Propylene)、NeutroamineRefiner 改成丁二烯厂(Product=Butadiene), 于是
+       合成氨 / 中性胺 两条工业来源被抽空。本文件按"clone Rimefeller + 现成贴图"补回:
+       机制完全沿用 Rimefeller.CompRefinery(单进料=化合燃料管道网, 单产物, Buffer 满吐相邻卸货湾),
+       不写门控 DLL, 开关走 ResourceConsole 的 Bill_Refinery(原生)。
+       贴图直接引用 Rimefeller 现成单图(本 mod loadAfter Dubwise.Rimefeller), 不出新图。
+       造价一律 costList(不走 stuffCategories) —— 规避 stuffable 建筑缺 uiIconPath 的每帧 NRE 铁律坑。 -->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_AmmoniaRefinery</defName>
+    <label>合成氨精炼厂</label>
+    <description>哈伯法连续合成装置。从化合燃料管网抽取原料, 高温高压裂解重整出合成氨, 产物以罐装形态吐到紧邻的卸货湾。产量由控制台上的精炼账单开关控制。</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData><texPath>Rimefeller/Things/Building/syntheticAmmoniaRefinery</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(3,3)</drawSize></graphicData>
+    <uiIconPath>Rimefeller/Things/Building/syntheticAmmoniaRefinery</uiIconPath><uiIconScale>1.2</uiIconScale>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>60</pathCost><fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones><rotatable>false</rotatable><blockWind>false</blockWind><castEdgeShadows>false</castEdgeShadows>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Rimefeller</designationCategory>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <costList><Steel>180</Steel><ComponentIndustrial>10</ComponentIndustrial><ElectronicComponents>2</ElectronicComponents><Mechanism>5</Mechanism></costList>
+    <statBases><WorkToBuild>14000</WorkToBuild><MaxHitPoints>250</MaxHitPoints><Flammability>0.6</Flammability><Beauty>-8</Beauty><Cleanliness>-20</Cleanliness><Mass>40</Mass></statBases>
+    <researchPrerequisites><li>RK_Petro_Synthesis</li></researchPrerequisites>
+    <building><ai_chillDestination>false</ai_chillDestination><relatedBuildCommands><li>RefineryLoadingBay</li></relatedBuildCommands></building>
+    <comps>
+      <li Class="CompProperties_Power"><compClass>CompPowerTrader</compClass><basePowerConsumption>1200</basePowerConsumption></li>
+      <li Class="CompProperties_Flickable"/><li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_HeatPusher"><compClass>CompHeatPusherPowered</compClass><heatPerSecond>5</heatPerSecond></li>
+      <li Class="CompProperties_Explosive"><explosiveRadius>6</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><destroyThingOnExplosionSize>2</destroyThingOnExplosionSize><startWickHitPointsPercent>0.333</startWickHitPointsPercent><preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef><preExplosionSpawnChance>1</preExplosionSpawnChance><wickTicks><min>70</min><max>150</max></wickTicks></li>
+      <li Class="Rimefeller.CompProperties_Refinery">
+        <compClass>Rimefeller.CompRefineryNeutro</compClass>
+        <Product>SyntheticAmmonia</Product>
+        <StackSize>2</StackSize>
+        <BufferSize>40</BufferSize>
+        <ConsumeRate>2</ConsumeRate>
+      </li>
+      <li Class="DubsBadHygiene.CompProperties_Pipe" MayRequire="Dubwise.DubsBadHygiene"><mode>Water</mode></li>
+      <li Class="DubsBadHygiene.CompProperties_WaterStorage" MayRequire="Dubwise.DubsBadHygiene"><WaterStorageCap>500</WaterStorageCap></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.6</litersPerWorkSecond></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>RK_Petro_NeutroRefinery</defName>
+    <label>中性胺精炼厂</label>
+    <description>从化合燃料管网抽取原料, 经胺化与重结晶连续产出中性胺 —— 药品、消敏剂与弹药装药的关键原料。产物以袋装形态吐到紧邻的卸货湾。产量由控制台上的精炼账单开关控制。</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <graphicData><texPath>Rimefeller/Things/Building/neutroRefinery</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(3,3)</drawSize></graphicData>
+    <uiIconPath>Rimefeller/Things/Building/neutroRefinery</uiIconPath><uiIconScale>1.2</uiIconScale>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer><passability>PassThroughOnly</passability><pathCost>60</pathCost><fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones><rotatable>false</rotatable><blockWind>false</blockWind><castEdgeShadows>false</castEdgeShadows>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Rimefeller</designationCategory>
+    <constructionSkillPrerequisite>9</constructionSkillPrerequisite>
+    <costList><Steel>200</Steel><SyntheticFibers>25</SyntheticFibers><Glass>25</Glass><ElectronicComponents>6</ElectronicComponents><ComponentSpacer>5</ComponentSpacer></costList>
+    <statBases><WorkToBuild>16000</WorkToBuild><MaxHitPoints>250</MaxHitPoints><Flammability>0.6</Flammability><Beauty>-8</Beauty><Cleanliness>-20</Cleanliness><Mass>40</Mass></statBases>
+    <researchPrerequisites><li>RK_Petro_Synthesis</li></researchPrerequisites>
+    <building><ai_chillDestination>false</ai_chillDestination><relatedBuildCommands><li>RefineryLoadingBay</li></relatedBuildCommands></building>
+    <comps>
+      <li Class="CompProperties_Power"><compClass>CompPowerTrader</compClass><basePowerConsumption>2500</basePowerConsumption></li>
+      <li Class="CompProperties_Flickable"/><li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_HeatPusher"><compClass>CompHeatPusherPowered</compClass><heatPerSecond>6</heatPerSecond></li>
+      <li Class="CompProperties_Explosive"><explosiveRadius>6</explosiveRadius><explosiveDamageType>Flame</explosiveDamageType><destroyThingOnExplosionSize>2</destroyThingOnExplosionSize><startWickHitPointsPercent>0.333</startWickHitPointsPercent><preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef><preExplosionSpawnChance>1</preExplosionSpawnChance><wickTicks><min>70</min><max>150</max></wickTicks></li>
+      <li Class="Rimefeller.CompProperties_Refinery">
+        <compClass>Rimefeller.CompRefineryNeutro</compClass>
+        <Product>Neutroamine</Product>
+        <StackSize>1</StackSize>
+        <BufferSize>25</BufferSize>
+        <ConsumeRate>0.6</ConsumeRate>
+      </li>
+      <li Class="DubsBadHygiene.CompProperties_Pipe" MayRequire="Dubwise.DubsBadHygiene"><mode>Water</mode></li>
+      <li Class="DubsBadHygiene.CompProperties_WaterStorage" MayRequire="Dubwise.DubsBadHygiene"><WaterStorageCap>500</WaterStorageCap></li>
+      <li Class="BlueprintUnlockHSK.CompProperties_NeedsWater"><litersPerWorkSecond>0.6</litersPerWorkSecond></li>
+    </comps>
+  </ThingDef>
+
+</Defs>

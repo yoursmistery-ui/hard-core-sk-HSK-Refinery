@@ -1,0 +1,88 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+    <!-- 32_研究线重排(2026-08-09 方案定稿;2026-08-10 鼠族衣物II 合并重排):
+         1) 鼠族衣物 II 基础(B2A)与 制服(B2B)合并为单一节点 鼠族衣物 II(B2A 存续,不再创建 B2B,删除外部定义的 B2),
+            全部 II 级配方集中在合并节点,前置直接改为 鼠族衣物 I(B1);
+         2) 原 II·装备 10 件独立为新节点 鼠族衣物 III 装备(Ratkin_Apparel_C2),前置 鼠族衣物 III;
+         3) 鼠族电动缝纫台(RK_ElectricTailoringBench)解锁研究由 鼠族衣物 II 移至 鼠族衣物 III(C1);
+         4) 新增 鼠族盔甲 II(Ratkin_Armor_B2,前置 鼠族盔甲 I);
+         5) 鼠族盔甲 I 左移一格(4,43)->(3,43),鼠族盔甲 II 移至其原节点(4,43),改横向排列;
+         6) 鼠族衣物 V(C5)位置 (17,43)->(15,43),回到后工业列,不再显示为太空时代节点;
+         7) 原 鼠族盔甲 II(D1)改号 鼠族盔甲 III,原 鼠族盔甲 III(D2)改号 鼠族盔甲 IV。 -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs</xpath>
+    <value>
+        <ResearchProjectDef ParentName="MedievalBase">
+            <defName>Ratkin_Apparel_B2A</defName>
+            <label>鼠族衣物 II</label>
+            <description>鼠族衣物 II: 解锁探险家外套/单色外套/褶边连衣裙/修女礼服与头纱/软甲(棉甲)A·B/十字军长裙/冬季外袍/毛绒保暖长衣/皮革斜挎包/鼠族医疗包,以及厨师帽/厨师服/作战服/眼镜/科研服/纯白外套/守卫制服A·B/军用/军官/步兵制服/外板甲/工作背心等中世纪基础衣物、制服与工作服。</description>
+            <baseCost>300</baseCost>
+            <techLevel>Medieval</techLevel>
+            <prerequisites><li>Ratkin_Apparel_B1</li></prerequisites>
+            <researchViewX>7.00</researchViewX>
+            <researchViewY>43.00</researchViewY>
+            <tab>Apparel_SK</tab>
+        </ResearchProjectDef>
+        <ResearchProjectDef ParentName="IndustrialBase">
+            <defName>Ratkin_Apparel_C2</defName>
+            <label>鼠族衣物 III 装备</label>
+            <description>鼠族衣物独立装备节点(后工业-前石化): 解锁军用头盔/头环/小鼠耳饰/户外背包/优雅贝雷帽/枫叶军服与毛绒小西服/骑士军服/腰挂包等护甲与配件,前置鼠族衣物 III。</description>
+            <baseCost>800</baseCost>
+            <techLevel>Industrial</techLevel>
+            <prerequisites><li>Ratkin_Apparel_C1</li></prerequisites>
+            <researchViewX>10.00</researchViewX>
+            <researchViewY>43.00</researchViewY>
+            <tab>Apparel_SK</tab>
+        </ResearchProjectDef>
+        <ResearchProjectDef ParentName="MedievalBase">
+            <defName>Ratkin_Armor_B2</defName>
+            <label>鼠族盔甲 II</label>
+            <description>鼠族盔甲线重排·II: 解锁战旗/十字军护甲与轻型护盔/格鲁斯之铠/鼠族塔盾,前置鼠族盔甲 I,与人类盔甲科技独立。</description>
+            <baseCost>300</baseCost>
+            <techLevel>Medieval</techLevel>
+            <prerequisites><li>Ratkin_Armor_B1</li></prerequisites>
+            <researchViewX>4</researchViewX>
+            <researchViewY>44</researchViewY>
+            <tab>Apparel_SK</tab>
+        </ResearchProjectDef>
+        <ResearchProjectDef ParentName="HitechMultiBase">
+            <defName>Ratkin_Armor_D3</defName>
+            <label>鼠族盔甲 IV</label>
+            <description>鼠族盔甲 III 拆分·骑士(极致): 解锁骑士装甲/骑士头盔,前置鼠族盔甲 III。</description>
+            <baseCost>1500</baseCost>
+            <techLevel>Ultra</techLevel>
+            <prerequisites><li>Ratkin_Armor_D1</li></prerequisites>
+            <researchViewX>21.00</researchViewX>
+            <researchViewY>41.00</researchViewY>
+            <tab>Apparel_SK</tab>
+        </ResearchProjectDef>
+    </value>
+</Operation>
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_D1"]/label</xpath>
+    <value><label>鼠族盔甲 III</label></value>
+</Operation>
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_D2"]/label</xpath>
+    <value><label>鼠族盔甲 V</label></value>
+</Operation>
+<!-- 鼠族衣物II 层级合并: 删除原 鼠族衣物 II(B2) 空壳节点(B2B 已不再创建,无需删除) -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Apparel_B2"]</xpath>
+</Operation>
+<!-- 鼠族电动缝纫台解锁研究: 鼠族衣物 II -> 鼠族衣物 III -->
+<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RK_ElectricTailoringBench"]/researchPrerequisites</xpath>
+    <value>
+        <researchPrerequisites>
+            <li>Ratkin_Apparel_C1</li>
+        </researchPrerequisites>
+    </value>
+</Operation>
+<!-- 鼠族衣物 V 位置回到后工业列(17,43)->(15,43) -->
+<!-- 鼠族盔甲 I 左移一格(4,43)->(3,43) -->
+<!-- 移除遗留空节点 鼠族中世纪装甲(内容已并入盔甲 II,无配方引用) -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/ResearchProjectDef[defName="Ratkin_Armor_Medieval"]</xpath>
+</Operation>
+</Patch>

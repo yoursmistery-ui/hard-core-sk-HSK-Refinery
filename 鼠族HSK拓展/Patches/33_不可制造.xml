@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 合并自(保持原执行序): 33_不可制造.xml, 34_材料基调补全.xml --><Patch><!-- 33_不可制造(2026-08-09 方案定稿): 以下物品无研究/无科技归属,一律不可制造,
+         只能通过贸易或 NPC 掉落获取;移除其 RecipeDef(隐藏儿童件由 13/21 号处理,魔术棒本就无配方)。 -->
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HeadBand"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SantaHat"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SantaRobe"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SantaSack"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Sack"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_BFR"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Bolter"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Arbalest"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_RatHolicGun"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Weapon_Gunlance"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Scarf"]</xpath>
+</Operation>
+<Operation Class="PatchOperationRemove">
+    <xpath>Defs/RecipeDef[defName="RKHSKExtra_Make_RK_Sleeves"]</xpath>
+</Operation><!-- 34_材料基调补全(2026-08-09 方案定稿): 按分层材料基调给已有配方补固定材料,
+         用量按 服装/护甲/武器 调整;中世纪木板已在 24 号等配方中,不再重复。 -->
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Rifle"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_SniperRifle"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Electronics</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Carbon</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_PrototypePulseRifle"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Electronics</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Carbon</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_junfu"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_fengye"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_fengyewaitao"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_zsyg"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>2</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_yingwu"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>2</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_FBZX"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>BiosyntheticMaterial</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_huimie"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>BiosyntheticMaterial</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_EarCostume"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>2</count>
+        </li>
+    </value>
+</Operation>
+<Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_BFR"]/ingredients</xpath>
+    <value>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Electronics</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>ElectronicComponents</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+        <li>
+            <filter>
+                <thingDefs>
+                    <li>Carbon</li>
+                </thingDefs>
+            </filter>
+            <count>3</count>
+        </li>
+    </value>
+</Operation></Patch>

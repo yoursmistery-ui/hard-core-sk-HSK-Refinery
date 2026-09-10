@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="RK_ExoticShield">
+		<defName>RK_TengPai</defName>
+		<label>ratkin cane shield</label>
+		<description>A simple shield woven from vines and treated with herbs to make it more
+			defensive.
+			Children can easily make it, careful not to get caught on fire.</description>
+		<graphicData>
+			<texPath>Item_Shield/RK_TengPai</texPath>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>Ratkin_Armor_B1</researchPrerequisite>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers Inherit="false">
+				<li>RK_ElectricTailoringBench</li>
+				<li>RK_HandTailoringBench</li>
+				<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+				<Crafting>1</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costStuffCount>10</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costList>
+			<WoodPlank>50</WoodPlank>
+			<MedicineHerbal>1</MedicineHerbal>
+			<Steel>10</Steel>
+			<ComponentMedieval>3</ComponentMedieval>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<LeadBar>20</LeadBar>
+		</costList>
+		<techLevel>Neolithic</techLevel>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToMake>7000</WorkToMake>
+			<Mass>1.2</Mass>
+			<ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+			<ArmorRating_Heat>-0.2</ArmorRating_Heat>
+			<Flammability>1.8</Flammability>
+			<EquipDelay>0.5</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<!-- <MeleeDodgeChance>-3</MeleeDodgeChance> -->
+			<Flammability>0.15</Flammability>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<layers>
+				<li>OuterClothing</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticLightShield</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="CompProperties_Art">
+				<nameMaker>NamerArtWeaponMelee</nameMaker>
+				<descriptionMaker>ArtDescription_WeaponMelee</descriptionMaker>
+				<minQualityForArtistic>Awful</minQualityForArtistic>
+			</li>
+			<li Class="RatkinGeneExpanded.CompProperties_ShieldInfos">
+				<isShield>true</isShield>
+				<canUseRangedWeapon>false</canUseRangedWeapon>
+				<useStuffColor>false</useStuffColor>
+			</li>
+		</comps>
+	</ThingDef>
+
+
+	<ThingDef ParentName="RK_ExoticShield">
+		<defName>RK_ZhangPai</defName>
+		<label>ratkin barrier board</label>
+		<description>The specially crafted shield of the exotic ratkin, capable of serving as a roadblock, shield, and rifle mount. It's surprising to have such a versatile item!</description>
+		<graphicData>
+			<texPath>Item_Shield/RK_ZhangPai</texPath>
+		</graphicData>
+		<recipeMaker>
+			<researchPrerequisite>Ratkin_Armor_B1</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>5</Crafting>
+			</skillRequirements>
+		</recipeMaker>
+		<costStuffCount>10</costStuffCount>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costList>
+			<WoodPlank>75</WoodPlank>
+			<Steel>45</Steel>
+			<ComponentMedieval>3</ComponentMedieval>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<LeadBar>20</LeadBar>
+		</costList>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToMake>17000</WorkToMake>
+			<Mass>5</Mass>
+			<ArmorRating_Sharp>0.75</ArmorRating_Sharp>
+			<ArmorRating_Blunt>0.45</ArmorRating_Blunt>
+			<ArmorRating_Heat>0.1</ArmorRating_Heat>
+			<Flammability>0.9</Flammability>
+			<EquipDelay>1.2</EquipDelay>
+		</statBases>
+		<equippedStatOffsets>
+			<MeleeDodgeChance>-3.0</MeleeDodgeChance>
+			<RangedCooldownFactor>0.1</RangedCooldownFactor>
+			<AimingDelayFactor>0.2</AimingDelayFactor>
+			<MoveSpeed>-0.32</MoveSpeed>
+			<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+				<li>Neck</li>
+				<li>Shoulders</li>
+				<li>Arms</li>
+				<li>Legs</li>
+			</bodyPartGroups>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags>
+			<layers>
+				<li>OuterClothing</li>
+			</layers>
+			<tags>
+				<li>RK_ExoticHeavyShield</li>
+				<li>RK_ExoticShooterShield</li>
+			</tags>
+		</apparel>
+		<comps>
+			<li Class="RatkinGeneExpanded.CompProperties_ShieldInfos">
+				<isShield>true</isShield>
+				<canUseRangedWeapon>true</canUseRangedWeapon>
+				<useStuffColor>false</useStuffColor>
+			</li>
+		</comps>
+	</ThingDef>
+</Defs>

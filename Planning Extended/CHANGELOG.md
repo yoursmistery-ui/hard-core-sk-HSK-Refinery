@@ -1,0 +1,163 @@
+# Changelog
+
+## 1.17.0
+- Added support for different plan grabbing positions when pasting a plan, defaults to Center
+- Added support for drawing a plan from a center point, default key binding is the ALT key
+- Added new shapes and shape variants
+  - Padded Line Variant: Can be used to draw closed walls that are neither horizontal nor vertical
+  - Rounded Rectangle: A rectangle with rounded corners, provides Outline and Filled variants
+  - Fill Shape: Can be used to fill an enclosed area with the selected plan tiles
+  - Fill Color Shape: Clicking on a single plan tile will paint all connected plan tiles of the same color with the selected color
+    - Fill Color All Variant: Will recolor all tiles indepdent of the clicked plan tile type
+    - Fill Color Same Variant: Will recolor only tiles of the same plan tile type
+- Changed key bindings of Replace / Skip plan mode to B key
+- Changed mouse attached text when adding or painting a plan to support the new options
+- Improved the diagonal line snapping
+- Improved shape modifier re-calculation to only apply when necessary
+- Fixed Shape update not applying when pressing / releasing shape modifier key without changing the dragged area
+- Fixed usage of DrawStyleCategory in Designator
+  - Fixes dragging on designators where it is not supposed to happen, such as `PastePlanDesignator`
+  - Fixes creating two undo-redo operations when using the `PastePlanDesignator`
+
+## 1.16.0
+- Added saving and restoring plan visibility per plan type
+- Added option to set default plan visibility on startup (visible, invisible, last saved)
+- Added button to open plan blueprint folder in settings (on Windows)
+- Added missing Russian translations using AI
+- Improved spacing in settings
+
+## 1.15.0
+- Adapted vanilla plan converter to RimWorld v1.6
+
+## 1.14.0
+- Added support for RimWorld 1.6
+- Each RimWorld version now has its own project, so changes will only affect the latest version
+
+## 1.13.1
+- Fixed wrong folder name for the Chinese translation
+
+## 1.13.0
+- Added Chinese language support (thanks to WYX-K)
+
+## 1.12.0
+- Orientation of doors now takes placement of floors into account
+
+## 1.11.0
+- Added Spanish language support
+- Fixed case where default texture set is not set to 'Round'
+
+## 1.10.0
+- Added support for RimWorld 1.5
+- Changed default texture set to 'Round'
+
+## 1.9.1
+- Fixed removal of planning designations when canceling orders
+
+## 1.9.0
+- Added new shapes: pentagons, ellipses
+- Added diagonal option for rectangle resulting in rhombus
+- Added filled shapes
+
+## 1.8.0
+- Added new shapes: triangles, hexagons, octagons
+- Added new shape dimensions modifiers
+  - equilateral triangle
+  - regular hexagon
+- Added shape rotation for
+  - triangles: north, east, south, west
+  - hexagons: horizontal, vertical
+- Added German language support
+
+## 1.7.3
+- Fixed plans not being drawn when outside visible area
+- Fixed disappearing vanilla plans while loading a map
+
+## 1.7.2
+- Added missing Russian translations
+
+## 1.7.1
+- Fixed missing shape translations
+
+## 1.7.0
+- Added point shape (useful helper to measure distances or add doors)
+- Line shape now supports two types
+  - Simple Line: draw a line from A to B
+  - Line Grid
+- Added grid support for rectangles
+- Added shape modifier key
+  - Simple Line: draws a horizontal or vertical line
+  - other shapes: applies square modfier
+- Fixed missing map boundaries while pasting a plan
+- Fixed shape variants not remembering options
+- Fixed missing translations
+
+## 1.6.1
+- Added Russian language support
+
+## 1.6.0
+- Fixed sound not playing on 'Plan xxx' button click
+- Added custom keybinding for color picker
+- Added option to skip instead of replace as default
+- Added 'Paint Plan' designator
+- Changing texture set also changes 'Plan xxx' icon accordingly
+
+## 1.5.1
+- Fixed vertical doors not always working when using undo-redo-system
+- Added vanilla RimWorld plan converter
+
+## 1.5.0
+- Support of vertical doors
+- Maps are now automatically updated (old plans, vertical doors)
+- Added button to convert plans from MorePlanning mod
+
+## 1.4.1
+- Moved designators to its own category to avoid conflict with MorePlanning mod
+
+## 1.4.0
+- Fixed NoOverwriteMode not reacting to correct button
+- Added support of NoOverwriteMode when pasting a plan
+- Updated dashed and round designations
+
+## 1.3.0
+- Added quick selection of last loaded plans by right clicking 'load plan' designator
+- Added selection of opacity, texture and visibility for each plan type individually
+- Added custom keybinding for PlanDoors/Floors/Objects/Walls designators
+- Removed top right icon from PlanDoors/Floors/Objects/Walls designators
+
+## 1.2.0
+- Added saving / loading / deleting of plans
+- Refactored shape code
+  - Added shape variants
+  - Added potential shape options
+- Reworked the interaction with the 'plan xxx' designator buttons
+  - Left click opens color dialog (can force Ctrl+click in options)
+  - Right click opens shape selection
+- Added 'Remove (count) xxx plans' on right click to 'Remove Plan' designator (including Undo/Redo support)
+- Last selected color is now saved and loaded for each plan type
+- Improved Plan Visibility
+  - Added 'Toggle Visibility' designator
+  - Added global shortcut
+  - Plans should now become visible on all plan interactions
+- Added Plan Opacity
+  - Controllable when left clicking the newly added 'Change Appearance' designator
+  - Opacity is saved and loaded for each plan type separately
+- Added Plan TextureSets
+  - Controllable when right clicking the newly added 'Change Appearance' designator
+  - Texture set is saved and loaded for each plan type separately
+- Added sounds to undo / redo clicks
+
+## 1.1.0
+- Replaced various icons
+- Fixed using Cancel tool removes plan designations
+- Fixed using 'Remove plan designator' throws error message
+- Added option in settings to display extra cut designator
+- Added option in settings to enable/disable persistent plans (plans will / won't be removed after a finished task)
+- Added toggle in the bottom right to switch plan visibility
+
+## 1.0.0
+- Initial Version
+- Draw colored designations, such as walls, doors, objects and floors
+- Optionally skip (don't overwrite) already placed plan designations
+- Use different shapes, e.g. rectangle, area, cross
+- Copy / Cut / Paste your plans
+- Undo / Redo your planned actions

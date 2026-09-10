@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>RK_BayonetAttack</defName>
+    <driverClass>RatkinWeapons.JobDriver_Bayonet</driverClass>
+    <reportString>向TargetA发起刺刀冲锋。</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <carryThingAfterJob>true</carryThingAfterJob>
+    <dropThingBeforeJob>true</dropThingBeforeJob>
+  </JobDef>
+
+  <HediffDef>
+    <defName>RK_BayonetCharge</defName>
+    <label>刺刀冲锋</label>
+    <description>白刃冲锋中。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0, 0, 0)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>300</disappearsAfterTicks>
+        <showRemainingTime>false</showRemainingTime>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath"/>
+      <li Class="RatkinWeapons.HediffCompProperties_Bayonet"/>
+      <li Class="HediffCompProperties_Effecter">
+        <stateEffecter>Berserk</stateEffecter>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <becomeVisible>false</becomeVisible>
+        <statFactors>
+          <MoveSpeed>1.50</MoveSpeed>
+          <StaggerDurationFactor MayRequire="Ludeon.RimWorld.Biotech">0.25</StaggerDurationFactor>
+        </statFactors>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
+
+  <SoundDef>
+    <defName>RK_BayonetSound</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>5</maxSimultaneous>
+    <maxVoices>5</maxVoices>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>RK_Bayonet</clipPath>
+          </li>
+        </grains>
+        <pitchRange>
+          <min>0.75</min>
+          <max>1.25</max>
+        </pitchRange>
+        <volumeRange>20</volumeRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+
+</Defs>

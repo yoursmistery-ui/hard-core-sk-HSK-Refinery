@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	
+<ThingDef ParentName="RFF_TerraformBasicBase">
+		<defName>Terraform_TilledHtoV</defName>
+		<label>Make plowed soil vertical</label>
+		<description>Change orientation of plowed soil rows. Aesthetic change only.</description>
+		<uiIconPath>UI/Icons/Terraforming/TilledSoilV</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>SoilTilled</li>
+				</above>
+				<result>SoilTilledV</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>10</WorkToBuild>
+		</statBases>
+	</ThingDef>
+<ThingDef ParentName="RFF_TerraformBasicBase">
+		<defName>Terraform_TilledVtoH</defName>
+		<label>Make plowed soil horizontal</label>
+		<description>Change orientation of plowed soil rows. Aesthetic change only.</description>
+		<uiIconPath>UI/Icons/Terraforming/TilledSoilH</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>SoilTilledV</li>
+				</above>
+				<result>SoilTilled</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>10</WorkToBuild>
+		</statBases>
+	</ThingDef>
+
+	
+	
+	<ThingDef ParentName="RFF_TerraformBasicBase">
+		<defName>Terraform_ToPackedDirt</defName>
+		<label>Packed dirt</label>
+		<description>Rudimentary raods. Roadimentary, even.</description>
+		<uiIconPath>UI/Icons/Terraforming/PackedDirt</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>Soil</li>
+					<li>SavannaSoil</li>
+					<li>SoilRich</li>
+					<li>MossyTerrain</li>
+					<li>VolcanicSoil</li>
+					<li>RedClaySoil</li>
+					<li>LeachedSoil</li>
+					<li>WeakSoil</li>
+				</above>
+				<result>PackedDirt</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>400</WorkToBuild>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="RFF_TerraformBasicBase">
+		<defName>Terraform_FillQuarry</defName>
+		<label>Reclaim Soil</label>
+		<description>Reclaim soil from an retired quarry.</description>
+		<uiIconPath>UI/Icons/Terraforming/UndevelopedSoil</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>QRY_ReclaimedSoil</li>
+				</above>
+				<result>RockySoil</result>
+			</li>
+		</modExtensions>
+		<costList>		
+			<CrushedStone>6</CrushedStone>
+			<SandResource>4</SandResource>
+		</costList>
+		<statBases>
+			<WorkToBuild>400</WorkToBuild>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="RFF_TerraformBasicBase">
+		<defName>Terraform_FillStone</defName>
+		<label>Break up stone</label>
+		<description>Break up solid stone into gravel.</description>
+		<uiIconPath>UI/Icons/Terraforming/Gravel</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>Sandstone_Smooth</li>
+					<li>Sandstone_Rough</li>
+					<li>Sandstone_RoughHewn</li>
+					<li>Granite_Smooth</li>
+					<li>Granite_Rough</li>
+					<li>Granite_RoughHewn</li>
+					<li>Limestone_Smooth</li>
+					<li>Limestone_Rough</li>
+					<li>Limestone_RoughHewn</li>
+					<li>Slate_Smooth</li>
+					<li>Slate_Rough</li>
+					<li>Slate_RoughHewn</li>
+					<li>Marble_Smooth</li>
+					<li>Marble_Rough</li>
+					<li>Marble_RoughHewn</li>	
+					<li>ZF_BasaltBase_Smooth</li>
+					<li>ZF_BasaltBase_Rough</li>
+					<li>ZF_BasaltBase_RoughHewn</li>
+					<li>ZF_ClaystoneBase_Smooth</li>
+					<li>ZF_ClaystoneBase_Rough</li>
+					<li>ZF_ClaystoneBase_RoughHewn</li>
+					<li>ZF_MudstoneBase_Smooth</li>
+					<li>ZF_MudstoneBase_Rough</li>
+					<li>ZF_MudstoneBase_RoughHewn</li>	
+					</above>
+				<result>Gravel</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>400</WorkToBuild>
+		</statBases>
+	</ThingDef>
+	
+	<!--MISC -->
+	<ThingDef ParentName="RFF_TerraformBasicBase">	 
+	<defName>Terraform_SandToDesertSand</defName>
+	<label>Coarse Sand To Desert Sand</label>
+	<description>Fine grade sand is harder to walk on and build on.\n +4 Gravel</description>
+	<uiIconPath>UI/Icons/Terraforming/DesertSand</uiIconPath>
+	<modExtensions>
+		<li Class="FertileFields.Terrain">
+			<above>
+				<li>Sand</li>
+			</above>
+			<result>SoftSand</result>
+			<products>
+				<CrushedStone>4</CrushedStone>
+			</products>
+		</li>
+	</modExtensions>
+	<costList>
+		<SandResource>4</SandResource>
+	</costList>
+	<statBases>
+		<WorkToBuild>960</WorkToBuild>
+	</statBases>
+	<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+</ThingDef>		
+<ThingDef ParentName="RFF_TerraformBasicBase">	 
+	<defName>Terraform_MakeDesertPavement</defName>
+	<label>Fabricate Desert Pavement</label>
+	<description>There are several theories as to how desert pavement is formed. You can also do it yourself if you want.</description>
+	<uiIconPath>UI/Icons/Terraforming/DesertPavement</uiIconPath>
+	<modExtensions>
+		<li Class="FertileFields.Terrain">
+			<above>
+				<li>Sand</li>
+				<li>SoftSand</li>
+			</above>
+			<result>DesertPavement</result>
+		</li>
+	</modExtensions>
+	<costList>
+		<CrushedStone>12</CrushedStone>
+	</costList>
+	<statBases>
+		<WorkToBuild>1220</WorkToBuild>
+	</statBases>
+	<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+</ThingDef>	 
+	
+<ThingDef ParentName="RFF_TerraformBasicBase">	 
+	<defName>Terraform_IceToFrozenSnow</defName>
+	<label>Ice to Frozen Snow</label>
+	<description>Frozen snow is easier to walk on than ice and makes decent foundation.</description>
+	<uiIconPath>UI/Icons/Terraforming/FrozenSnow</uiIconPath>
+	<modExtensions>
+		<li Class="FertileFields.Terrain">
+			<above>
+				<li>Ice</li>
+				<li>IceClear</li>
+			</above>
+			<result>FrozenSnow</result>
+		</li>
+	</modExtensions>
+	<costList></costList>
+	<statBases>
+		<WorkToBuild>960</WorkToBuild>
+	</statBases>
+</ThingDef>	 
+<ThingDef ParentName="RFF_TerraformBasicBase">	 
+	<defName>Terraform_ResurfaceIce</defName>
+	<label>Resurface Ice</label>
+	<description>If you had some ice skates, it wouldn't be so hard to traverse. Looks pretty though.</description>
+	<uiIconPath>UI/Icons/Terraforming/IceClear</uiIconPath>
+	<modExtensions>
+		<li Class="FertileFields.Terrain">
+			<above>
+				<li>Ice</li>
+				<li>FrozenSnow</li>
+			</above>
+			<result>IceClear</result>
+		</li>
+	</modExtensions>
+	<costList></costList>
+	<statBases>
+		<WorkToBuild>960</WorkToBuild>
+	</statBases>
+</ThingDef>	 
+	
+<ThingDef ParentName="RFF_TerraformAdvancedBase">
+	<defName>Terraform_ShallowToDeepWater</defName>
+	<label>Shallow to Deep Water</label>
+	<description>Work: 900\n +4 Gravel\n +8 Dirt\m +12 Clay\n +20 Sand\n\n Placing impassable terrain on the map is overpowered and potentially game-breaking. Use with caution!</description>
+	<uiIconPath>UI/Icons/Terraforming/WaterShallow-WaterDeep</uiIconPath>
+	<modExtensions>
+		<li Class="FertileFields.Terrain">
+			<above>
+				<li>WaterShallow</li>
+				<li>WaterMovingShallow</li>
+				<li>WaterOceanShallow</li>
+			</above>
+			<result>WaterDeep</result>
+			<products>
+				<CrushedStone>4</CrushedStone>
+				<Dirt>8</Dirt>
+				<SoftClay>12</SoftClay>
+				<SandResource>20</SandResource>
+			</products>
+		</li>
+	</modExtensions>
+	<statBases>
+		<WorkToBuild>54000</WorkToBuild>
+	</statBases>
+	<terrainAffordanceNeeded>ShallowWater</terrainAffordanceNeeded>
+</ThingDef>
+	
+	<ThingDef ParentName="RFF_TerraformAdvancedBase">
+		<defName>Terraform_DeepToShallowWater</defName>
+		<label>Deep to Shallow Water</label>
+		<description>Work:80</description>
+		<uiIconPath>UI/Icons/Terraforming/WaterDeep-WaterShallow</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>WaterDeep</li>
+					<li>WaterMovingChestDeep</li>
+					<li>WaterOceanDeep</li>
+				</above>
+				<result>WaterShallow</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>4800</WorkToBuild>
+		</statBases>
+		<costList>
+			<CrushedStone>4</CrushedStone>
+			<Dirt>8</Dirt>
+			<SoftClay>12</SoftClay>
+			<SandResource>20</SandResource>
+		</costList>
+		<terrainAffordanceNeeded>DeepWater</terrainAffordanceNeeded>
+	</ThingDef>
+	
+	<ThingDef ParentName="RFF_TerraformAdvancedBase">
+		<defName>Terraform_WaterToSand</defName>
+		<label>Shallow Water to Sand</label>
+		<description>Work: 80</description>
+		<uiIconPath>UI/Icons/Terraforming/WaterShallow-Sand</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>WaterShallow</li>
+					<li>WaterMovingShallow</li>
+					<li>WaterOceanShallow</li>
+				</above>
+				<result>SoftSand</result>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>4800</WorkToBuild>
+		</statBases>
+		<costList>
+			<CrushedStone>8</CrushedStone>
+			<Dirt>2</Dirt>
+			<SoftClay>4</SoftClay>
+			<SandResource>24</SandResource>
+		</costList>
+		<terrainAffordanceNeeded>ShallowWater</terrainAffordanceNeeded>
+	</ThingDef>
+	
+	<ThingDef ParentName="RFF_TerraformAdvancedBase">
+		<defName>Terraform_SandToWater</defName>
+		<label>Sand to Shallow Water</label>
+		<description>Coarse / Desert Sand\n Work: 73\n  +8 Gravel\n +2 Silt\n +4 Clay\n +24 Sand</description>
+		<uiIconPath>UI/Icons/Terraforming/Sand-WaterShallow</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>Sand</li>
+					<li>SoftSand</li>
+				</above>
+				<near>
+					<li>WaterShallow</li>
+					<li>WaterMovingShallow</li>
+					<li>WaterOceanShallow</li>
+				</near>
+				<result>WaterShallow</result>
+				<products>
+					<CrushedStone>8</CrushedStone>
+					<Dirt>2</Dirt>
+					<SoftClay>4</SoftClay>
+					<SandResource>24</SandResource>
+				</products>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>4380</WorkToBuild>
+		</statBases>	</ThingDef>
+	
+	<ThingDef ParentName="RFF_TerraformAdvancedBase">
+		<defName>Terraform_MarshySoilToWater</defName>
+		<label>Marshy Soil to Shallow Water</label>
+		<description>Swamp / Black / Bog Water\n Work: 120\n +4 Silt\n +4 Clay\n +2 Peat</description>
+		<uiIconPath>UI/Icons/Terraforming/Marsh-WaterShallow</uiIconPath>
+		<modExtensions>
+			<li Class="FertileFields.Terrain">
+				<above>
+					<li>MarshyTerrain</li>
+				</above>
+				<result>WaterShallow</result>
+				<products>
+					<Dirt>4</Dirt>
+					<SoftClay>4</SoftClay>
+					<Peat>2</Peat>
+				</products>
+			</li>
+		</modExtensions>
+		<statBases>
+			<WorkToBuild>7200</WorkToBuild>
+		</statBases>
+		<costList>
+			<CrushedStone>8</CrushedStone>
+			<SandResource>12</SandResource>
+		</costList>
+	</ThingDef>
+		
+</Defs>

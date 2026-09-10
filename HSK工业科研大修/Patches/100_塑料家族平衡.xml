@@ -1,0 +1,93 @@
+<Patch>
+  <!-- 塑料家族平衡(2026-08-31 用户要求)
+       背景: 聚丙烯/聚氯乙烯与塑料(HDPE)可塑成品集合 +0/−0 完全重合, ABS/玻璃纤维只多 4 件耐腐蚀设备。
+       ① 四个耐腐蚀设备(化学工作站/水冷装置/电解精炼厂/冷却液管)材质门加 Plastic —— 塑料家族全员可造,
+          ABS/玻璃纤维不再独占耐腐蚀设备,整族(塑料/聚丙烯/聚氯乙烯/ABS/玻璃纤维)能力档同为"塑料级";
+       ② 数值拉开生态位: 塑料=基准(最廉·清洁 1.5), 聚丙烯=最轻减重·耐疲劳(Blunt 略让),
+          聚氯乙烯=耐用·耐热·利防略降(脆), ABS=抗冲击·美观, 玻璃纤维=利刃·绝缘(均维持原值)。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/Mass</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/Mass</xpath>
+      <value><Mass>0.30</Mass></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/MaxHitPoints</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/MaxHitPoints</xpath>
+      <value><MaxHitPoints>1.35</MaxHitPoints></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/Cleanliness</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PPPlastic"]/stuffProps/statFactors/Cleanliness</xpath>
+      <value><Cleanliness>1.0</Cleanliness></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PPPlastic"]/statBases/StuffPower_Armor_Blunt</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PPPlastic"]/statBases/StuffPower_Armor_Blunt</xpath>
+      <value><StuffPower_Armor_Blunt>1.5</StuffPower_Armor_Blunt></value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PVCPlastic"]/stuffProps/statFactors/MaxHitPoints</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PVCPlastic"]/stuffProps/statFactors/MaxHitPoints</xpath>
+      <value><MaxHitPoints>1.55</MaxHitPoints></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PVCPlastic"]/statBases/StuffPower_Armor_Heat</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PVCPlastic"]/statBases/StuffPower_Armor_Heat</xpath>
+      <value><StuffPower_Armor_Heat>0.14</StuffPower_Armor_Heat></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="PVCPlastic"]/statBases/StuffPower_Armor_Sharp</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName="PVCPlastic"]/statBases/StuffPower_Armor_Sharp</xpath>
+      <value><StuffPower_Armor_Sharp>0.66</StuffPower_Armor_Sharp></value>
+    </match>
+  </Operation>
+
+  <!-- 四个耐腐蚀设备材质门 + Plastic -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="ChemistryLab"]/stuffCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="ChemistryLab"]/stuffCategories</xpath>
+      <value><li>Plastic</li></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="ElectrolyticRefinery"]/stuffCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="ElectrolyticRefinery"]/stuffCategories</xpath>
+      <value><li>Plastic</li></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="CoolingWater"]/stuffCategories</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="CoolingWater"]/stuffCategories</xpath>
+      <value><li>Plastic</li></value>
+    </match>
+  </Operation>
+  <!-- coolingPipe 的材质门继承自 ValveBase,按深合并规则给本 def 追加整块 stuffCategories(结果=并集) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThingDef[defName="coolingPipe"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="coolingPipe"]</xpath>
+      <value>
+        <stuffCategories>
+          <li>Plastic</li>
+        </stuffCategories>
+      </value>
+    </match>
+  </Operation>
+</Patch>

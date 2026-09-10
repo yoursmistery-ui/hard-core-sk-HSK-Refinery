@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Patch>
+	<!--
+		RaceUtil (CombatExtended.Compatibility.RaceUtil.PatchHARs) already injects
+		RacePropertiesExtensionCE(Humanoid), CompProperties_Suppressable, CompProperties_Inventory
+		and CompPawnGizmo into every HAR race (including Alien_Miho) at runtime.
+		Do NOT re-add CompProperties_Suppressable / RacePropertiesExtensionCE here, otherwise the
+		duplicate RacePropertiesExtensionCE makes CE inject a second CompPawnGizmo and spam
+		"Alien_Miho has multiple CompPawnGizmo, duplicates has been deactivated".
+		Only keep CompProperties_ArmorDurability, which RaceUtil does NOT provide.
+		The remove below is a harmless safety net: if any XML copy of CompPawnGizmo ever exists,
+		strip it so the runtime injector leaves exactly one instance.
+		(2026-08-26 修正匹配值: XML 里 comp 用 @Class 属性定义 <li Class="CombatExtended.CompProperties_PawnGizmo"/>,
+		旧写法 compClass="...CompProperties_PawnGizmo" 永不命中。compClass 子节点是运行时序列化产物,
+		PatchOperation 操作原始 XML,须匹配 @Class 属性。)
+	-->
+	<Operation Class="PatchOperationConditional"><xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/comps/li[@Class="CombatExtended.CompProperties_PawnGizmo"]</xpath><match Class="PatchOperationRemove"><xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/comps/li[@Class="CombatExtended.CompProperties_PawnGizmo"]</xpath></match></Operation><Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/comps</xpath>
+			<value>
+				<li Class="CombatExtended.CompProperties_ArmorDurability">
+					<Durability>500</Durability>
+					<Regenerates>true</Regenerates>
+					<RegenInterval>600</RegenInterval>
+					<RegenValue>5</RegenValue>
+					<MinArmorPct>0.5</MinArmorPct>
+				</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]</xpath>
+			<value>
+				<comps>
+					<li Class="CombatExtended.CompProperties_ArmorDurability">
+						<Durability>500</Durability>
+						<Regenerates>true</Regenerates>
+						<RegenInterval>600</RegenInterval>
+						<RegenValue>5</RegenValue>
+						<MinArmorPct>0.5</MinArmorPct>
+					</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/statBases/MeleeDodgeChance</xpath>
+		<value>
+			<MeleeDodgeChance>0.5</MeleeDodgeChance>
+			<Suppressability>1</Suppressability>
+			<SmokeSensitivity>0.5</SmokeSensitivity>
+			<AimingAccuracy>0.75</AimingAccuracy>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>left fist</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>1</power>
+					<cooldownTime>1.26</cooldownTime>
+					<linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+					<armorPenetrationBlunt>0.250</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>right fist</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>1</power>
+					<cooldownTime>1.26</cooldownTime>
+					<linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+					<armorPenetrationBlunt>0.250</armorPenetrationBlunt>
+				</li>
+				<li Class="CombatExtended.ToolCE">
+					<label>head</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>2</power>
+					<cooldownTime>4.49</cooldownTime>
+					<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+					<chanceFactor>0.2</chanceFactor>
+					<armorPenetrationBlunt>0.625</armorPenetrationBlunt>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+
+	<!-- 2026-09-03: 终态发现 Alien_Miho 的 tools 为「继承的原版 li + 本补丁 ToolCE」混合(11 li/3 ToolCE),
+	     导致 CE RaceUtil 仍选中本族注入第二份 CompPawnGizmo(与 BasePawn 继承的那份重复)。清理无 Class 的原版 li。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/tools/li[not(@Class)]</xpath>
+		<match Class="PatchOperationRemove">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/tools/li[not(@Class)]</xpath>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/damageMultipliers</xpath>
+		<value>
+			<li>
+				<damageDef>PrometheumFlame</damageDef>
+				<multiplier>0.25</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame_Secondary</damageDef>
+				<multiplier>0.25</multiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Alien_Miho"]/alienRace/raceRestriction/whiteApparelList</xpath>
+		<value>
+			<li>CE_Apparel_TacVest</li>
+			<li>CE_Apparel_Backpack</li>
+			<li>CE_Apparel_TribalBackpack</li>
+			<li>CE_Apparel_BallisticShield</li>
+			<!--<li>CE_Apparel_MeleeShield</li>
+			<li>CE_Apparel_GasMask</li>
+			-->
+			</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/GeneDef[defName="Ears_Arctic_Miho"]/statOffsets</xpath>
+		<value>
+			<CarryWeight>10</CarryWeight>
+		</value>
+	</Operation>
+</Patch>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- ============================================================================
+       研究动画按研究台档位分档轮换(2026-09-06 用户点单"能不能轮换,不同等级用不同动画")。
+       HSK 六档研究台(AGENTS §6)都是 Research 作业,靠 workbenchDefs 按台子 defName 精确命中,
+       每档一个不同道具/动作,随科技档从"凿石记契"一路升级到"数据终端"。
+       本文件字母序 HskR < JobE -> 排在通用 JE_Tool_Notepad(无 workbenchDefs、认领所有 Research)之前,
+       优先命中这六台;不在这六台的 Research(或 SuperviseResearch/Rimatomics 等)仍回落到原挠头动画,零回归。
+       贴图/fleck/动作全部复用现成(Chisel/TeachersBook/Notepad/TestTubeA1/Spyglass/HackDevice + JE_Lightbulb/JE_Glyph),
+       零新贴图、零 DLL 改动。研究安静,一律不配 strikeSound。
+       六条 def 门控的台子互不相同 -> 彼此无冲突,书写顺序不影响结果。
+
+       【2026-09-06 重定位】只有中世纪档(大书)需要调:首版照搬教学书 scale 0.85 / reach 0.2,
+       书本 quad 高 0.85 格、只前伸 0.14 格,正好压在躯干上;背面朝向时 Read 还把前伸量再乘 0.30,
+       书落到腰臀位置。按 ToolAnimator 的 Read 公式
+         hold = drawLoc + dir*(reach*(朝北0.30/其余0.70)),  z += scale*(0.05 + lift*0.30) + holdRaise
+       只改 JE_Tool_Research_Med 三个数: scale 0.85→0.62、reach 0.2→0.45、holdRaise 0→0.12。
+       其余五档(凿/记事本/试管/观测镜/终端)用户确认无问题, 保持首版参数不动。
+       后续仍嫌贴人/太远, 只动 reach(前后)/scale(大小)/holdRaise(高低), 无需改 DLL。
+
+       【2026-09-10 朝向变体】Read 风格是"屏幕竖直、不随朝向旋转"的(ToolAnimator Read 分支),
+       背对镜头时书页/写字板正面照旧, 违和。框架新增两个字段(JobToolDef.MaterialFor 回退链):
+         texPathNorth    : 背视(朝北)专用, 优先于 texPathNorthSouth
+         texPathEastWest : 东西侧视专用(朝西自动镜像), 优先于 texPathProfile
+       未设这两个字段的工具行为与旧版逐字节一致(零回归); 旧 texPathNorthSouth/texPathProfile 仍是回退链一环。
+       本次只给两档 Read 补图(大书/写字板各一张背视 + 一张侧视)。
+       注:Prim(Stab)/High(Stir)/Ultra(Stir) 的单手道具贴图自带 baseAngle 随作业方向旋转,
+       本来就会转, 无"固定角度"问题, 故不配朝向图; Space(望远镜,Hold)同属屏幕竖直类,
+       但其姿势特殊(holdEyeAnchor 锚眼 + 65° 倾角), 待实测后再定。
+
+       【2026-09-11 朝向位置(方案B)】只换贴图不够: Read 分支原只有「朝北 / 非朝北」二值,
+       且判的是**作业方向 dir** 而非人物朝向 —— 东西侧身跟朝南共用同一套前伸量, 而人物侧身时
+       屏幕横向被压窄 -> 书被顶出胸口 = "位置飘 / 离手"。现框架新增 4 个**可选**字段
+       (默认值等于旧行为, 其余 147 档零回归; 只作用于 swingStyle=Read):
+         reachEastWest       东西向专用前伸(绝对值/格; 负数=沿用 reach*0.70)。越小越贴身
+         holdLateralEastWest 东西向沿人物左右轴的侧移(正=右手侧, 朝西自动镜像)。把道具拉回胸前
+         holdLateralNorth    朝北时的同轴侧移(通常 0, 用来避开身体轮廓)
+         volScaleProfile     侧身额外缩放(1=不变; 侧身时同样大小显得更大 -> 压到 0.85~0.95)
+         reachSouth          朝南(正面)前伸(绝对值/格; 负数=沿用 reach*0.70)。正面人物满宽,
+                             取值应**介于**朝北(0.30x)与侧身之间, 不必收到侧身那么紧
+         volScaleSouth       朝南额外缩放(1=不变)
+       判据改为干净的 bodyFacing。本次给 Med/Ind 填了 reachEastWest/volScaleProfile/reachSouth/
+       volScaleSouth 初值,
+       侧移先留 0; 若侧身仍飘, 再调 holdLateralEastWest(±0.05 起步)。
+       ============================================================================ -->
+
+  <!-- 原始档 PrimitiveResearchBench:石契凿刻 —— 单手持凿往石/泥板上一下下刻记号(Stab),偶尔头顶灯泡 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_Prim</defName>
+    <label>stone tally chisel</label>
+    <handCount>1</handCount>
+    <handPosA>0.30</handPosA>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>PrimitiveResearchBench</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/Chisel</texPath>
+    <swingStyle>Stab</swingStyle>
+    <scale>0.8</scale>
+    <reach>0.12</reach>
+    <period>1.5</period>
+    <stabDistance>0.16</stabDistance>
+    <stabStrikePhase>0.5</stabStrikePhase>
+    <idleScale>0.8</idleScale>
+    <headFleck>JE_Lightbulb</headFleck>
+    <headInterval>3.5</headInterval>
+    <headScale>0.7</headScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 中世纪档 SimpleResearchBench:翻开大书研读(Read —— 举起读到、放下抄记、循环) -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_Med</defName>
+    <label>scholar tome</label>
+    <handCount>2</handCount>
+    <handPosA>0.1</handPosA>
+    <handPosB>0.9</handPosB>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>SimpleResearchBench</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/TeachersBook</texPath>
+    <!-- 2026-09-10 朝向变体:Read 风格是"屏幕竖直、不随朝向旋转"的(见 ToolAnimator Read 分支),
+         摊开的书在背对镜头时仍显示书页正面, 非常违和。补两张视角图:
+           texPathNorth    = 书的封面/书背(复用正视图轮廓, 尺寸锚点完全一致)
+           texPathEastWest = 书的侧缘(白书页 + 棕封面边), 朝西时框架自动镜像 -->
+    <texPathNorth>Things/JobEffects/Tools/TeachersBookNorth</texPathNorth>
+    <texPathEastWest>Things/JobEffects/Tools/TeachersBookEastWest</texPathEastWest>
+    <swingStyle>Read</swingStyle>
+    <bookGripHalfWidth>0.44</bookGripHalfWidth>
+    <bookGripDrop>0.29</bookGripDrop>
+    <scale>0.62</scale>
+    <reach>0.45</reach>
+    <!-- ⚠⚠ 举起读书时的上抬量(占 scale 的比例, 默认 0.30)。
+         **+z = 屏幕上方 = 远离相机**, 所以这一项是把书往**人物身后**推 —— 它就是
+         "书被身体完全挡住、只剩两只手"的元凶(0.62*0.30 = 0.186 格)。压到 0.15 保留举起感。 -->
+    <readLiftRise>0.22</readLiftRise>
+    <!-- 前伸(绝对值/格, 屏幕下方 = 靠近相机): 必须**大于**上抬总量
+         0.62*(0.06+0.22)+0.06 ≈ 0.234, 书才会露在身前。要"夸张/外伸"就加大这两个数,
+         只要仍大于上抬总量就不会被身体吃掉。 -->
+    <reachEastWest>0.38</reachEastWest>
+    <reachSouth>0.46</reachSouth>
+    <volScaleProfile>0.92</volScaleProfile>
+    <volScaleSouth>0.97</volScaleSouth>
+    <holdRaise>0.06</holdRaise>
+    <period>5</period>
+    <idleScale>0.75</idleScale>
+    <headFleck>JE_Lightbulb</headFleck>
+    <headInterval>3.0</headInterval>
+    <headScale>0.7</headScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 前工业档 LabTerminal:伏案记事本(Read),比大书轻、翻页更勤 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_Ind</defName>
+    <label>field notebook</label>
+    <handCount>2</handCount>
+    <handPosA>0.14</handPosA>
+    <handPosB>0.86</handPosB>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>LabTerminal</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/Notepad</texPath>
+    <!-- 朝向变体:同大书(Read 风格), 背视 = 写字板背面(棕板 + 夹子背面), 侧视 = 板厚侧缘 -->
+    <texPathNorth>Things/JobEffects/Tools/NotepadNorth</texPathNorth>
+    <texPathEastWest>Things/JobEffects/Tools/NotepadEastWest</texPathEastWest>
+    <swingStyle>Read</swingStyle>
+    <bookGripHalfWidth>0.30</bookGripHalfWidth>
+    <bookGripDrop>0.28</bookGripDrop>
+    <scale>0.8</scale>
+    <reach>0.18</reach>
+    <!-- 同大书: 上抬 0.8*0.30=0.24 格会把记事本顶到躯干后面 -> 压到 0.15(实抬 0.168 格) -->
+    <readLiftRise>0.22</readLiftRise>
+    <!-- 前伸必须 > 上抬总量 0.8*(0.06+0.22)=0.224 才露得出来; 同样往大了给 -->
+    <reachEastWest>0.30</reachEastWest>
+    <reachSouth>0.34</reachSouth>
+    <volScaleProfile>0.93</volScaleProfile>
+    <volScaleSouth>0.98</volScaleSouth>
+    <period>4.5</period>
+    <idleScale>0.75</idleScale>
+    <headFleck>JE_Lightbulb</headFleck>
+    <headInterval>3.2</headInterval>
+    <headScale>0.7</headScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 后工业档 HiTechResearchBench:手持试管轻晃化验(Stir),小半径画圈 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_High</defName>
+    <label>sample test tube</label>
+    <handCount>1</handCount>
+    <handPosA>0.36</handPosA>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>HiTechResearchBench</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/TestTubeA1</texPath>
+    <swingStyle>Stir</swingStyle>
+    <scale>0.72</scale>
+    <reach>0.15</reach>
+    <period>0.85</period>
+    <stirRadius>0.1</stirRadius>
+    <idleScale>0.7</idleScale>
+    <headFleck>JE_Lightbulb</headFleck>
+    <headInterval>2.8</headInterval>
+    <headScale>0.7</headScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 太空档 MultiAnalyzer:举望远镜/观测镜对空分析(Hold,目镜钉在眼上、镜筒斜指天) -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_Space</defName>
+    <label>analysis scope</label>
+    <handCount>1</handCount>
+    <handPosA>0.10</handPosA>
+    <handPosB>0.40</handPosB>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>MultiAnalyzer</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/Spyglass</texPath>
+    <swingStyle>Hold</swingStyle>
+    <holdEyeAnchor>true</holdEyeAnchor>
+    <holdAngleOffset>65</holdAngleOffset>
+    <scale>0.85</scale>
+    <reach>0.12</reach>
+    <holdRaise>0</holdRaise>
+    <period>3</period>
+    <idleScale>0.7</idleScale>
+    <headFleck>JE_Lightbulb</headFleck>
+    <headInterval>3.0</headInterval>
+    <headScale>0.7</headScale>
+  </JobEffects.JobToolDef>
+
+  <!-- 极致档 LabStation:手持数据终端扫读(Stir 微幅 + 字符/电火花),科技顶档的终端感 -->
+  <JobEffects.JobToolDef>
+    <defName>JE_Tool_Research_Ultra</defName>
+    <label>lab data terminal</label>
+    <alwaysInFront>true</alwaysInFront>
+    <handCount>1</handCount>
+    <handPosA>0.32</handPosA>
+    <jobDefs>
+      <li>Research</li>
+    </jobDefs>
+    <workbenchDefs>
+      <li>LabStation</li>
+    </workbenchDefs>
+    <texPath>Things/JobEffects/Tools/HackDevice</texPath>
+    <swingStyle>Stir</swingStyle>
+    <scale>0.85</scale>
+    <reach>0.15</reach>
+    <period>0.6</period>
+    <windupAngle>8</windupAngle>
+    <stirRadius>0.05</stirRadius>
+    <tipGlowOffset>(0, -0.25)</tipGlowOffset>
+    <tipGlowFleck>JE_HackSpark</tipGlowFleck>
+    <tipGlowInterval>0.18</tipGlowInterval>
+    <tipGlowScale>0.6</tipGlowScale>
+    <headFleck>JE_Glyph</headFleck>
+    <headInterval>1.2</headInterval>
+    <headScale>0.6</headScale>
+  </JobEffects.JobToolDef>
+
+</Defs>

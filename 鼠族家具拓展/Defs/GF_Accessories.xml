@@ -1,0 +1,1540 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Street_Lamp_L</defName>
+		<label>Street lamp</label>
+		<description>It's a street lamp.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Street_LampE</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/GL_Street_Lamp_Icon</uiIconPath>
+		<uiIconScale>1.25</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<constructEffect>ConstructMetal</constructEffect>
+		<tickerType>Normal</tickerType>
+		<fillPercent>0.2</fillPercent>
+		<selectable>true</selectable>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2</fuelConsumptionRate>
+				<fuelCapacity>50.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>16</glowRadius>
+				<glowColor>(214,148,94,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>450</WorkToBuild> <Beauty>5</Beauty> <Bulk>13</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C3</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Street_Lamp</defName>
+		<label>Street lamp E</label>
+		<description>It's a street lamp. It lights the way in the dark. Works as electricity.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Street_LampE</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawRotated>false</drawRotated>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/GL_Street_Lamp_Icon</uiIconPath>
+		<uiIconScale>1.25</uiIconScale>
+		<rotatable>false</rotatable>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<constructEffect>ConstructMetal</constructEffect>
+		<tickerType>Normal</tickerType>
+		<fillPercent>0.2</fillPercent>
+		<selectable>true</selectable>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<comps>      
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>100</basePowerConsumption>
+				<powerUpgrades>
+					<li>
+						<researchProject>ColoredLights</researchProject>
+						<factor>0.5</factor>
+					</li>
+				</powerUpgrades>
+			</li>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>24</glowRadius>
+				<glowColor>(214,148,94,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+		</comps>
+		<designationCategory>Accessories</designationCategory>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>450</WorkToBuild> <Beauty>5</Beauty> <Bulk>13</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C3</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Street_Lamp_Seven</defName>
+		<label>Street lamp</label>
+		<description>It's a street lamp. It lights the way in the dark.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Lamp_SevenE</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<uiIconPath>Things/Building/Furniture/GL_Lamp_Seven_Icon</uiIconPath>
+		<uiIconScale>1.25</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<constructEffect>ConstructMetal</constructEffect>
+		<tickerType>Normal</tickerType>
+		<fillPercent>0.15</fillPercent>
+		<selectable>true</selectable>
+		<rotatable>true</rotatable>
+		<building>
+			<isEdifice>true</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2</fuelConsumptionRate>
+				<fuelCapacity>50.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>16</glowRadius>
+				<glowColor>(214,148,94,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<designationHotKey>Misc6</designationHotKey>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>450</WorkToBuild> <Beauty>5</Beauty> <Bulk>13</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C3</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Street_Lamp_SevenE</defName>
+		<label>Street lamp E</label>
+		<description>It's a street lamp. It lights the way in the dark. Works as electricity.</description>
+		<category>Building</category>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Lamp_SevenE</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<rect>(0.35,0.35,0.3,0.3)</rect>
+			</damageData>
+		</graphicData>		
+		<drawerType>RealtimeOnly</drawerType>
+		<uiIconPath>Things/Building/Furniture/GL_Lamp_Seven_Icon</uiIconPath>
+		<uiIconScale>1.25</uiIconScale>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>8</pathCost>
+		<constructEffect>ConstructMetal</constructEffect>
+		<tickerType>Normal</tickerType>
+		<fillPercent>0.15</fillPercent>
+		<selectable>true</selectable>
+		<building>
+			<isEdifice>true</isEdifice>
+		</building>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>PlaceWorker_GlowRadius</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>100</basePowerConsumption>
+				<powerUpgrades>
+					<li>
+						<researchProject>ColoredLights</researchProject>
+						<factor>0.5</factor>
+					</li>
+				</powerUpgrades>
+			</li>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>	
+			<li Class="CompProperties_Glower">
+				<glowRadius>24</glowRadius>
+				<glowColor>(214,148,94,0)</glowColor>
+				<colorPickerEnabled>true</colorPickerEnabled>
+				<darklightToggle>true</darklightToggle>
+			</li>
+			</comps>
+		<rotatable>true</rotatable>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Accessories</designationCategory>
+		<designationHotKey>Misc6</designationHotKey>
+		<destroyable>true</destroyable>
+		<tradeability>None</tradeability>
+		<clearBuildingArea>false</clearBuildingArea>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Flammability>1.0</Flammability> <MaxHitPoints>60</MaxHitPoints> <WorkToBuild>450</WorkToBuild> <Beauty>5</Beauty> <Bulk>13</Bulk> <Mass>3</Mass> <StyleDominance MayRequire="Ludeon.RimWorld.Ideology">4</StyleDominance></statBases><researchPrerequisites><li>Light_C3</li></researchPrerequisites><costList><Glass>5</Glass> <ComponentIndustrial>3</ComponentIndustrial> <ElectronicComponents>1</ElectronicComponents></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_RGK_SimpleResearchBench</defName>
+		<label>simple research bench</label>
+		<description>A simple bench with writing implements and simple measurement devices. Researchers work here to discover new things.</description>
+		<thingClass>Building_ResearchBench</thingClass>		
+		<size>(3,1)</size>
+		<costStuffCount>150</costStuffCount>
+		<graphicData>
+			<texPath>Things/Building/Production/RGK_reserch</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>4</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_GL_Bookshelf</li>
+				</linkableFacilities>
+			</li>
+		</comps>					
+		<fillPercent>0.5</fillPercent>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
+		<designationCategory>Accessories</designationCategory>
+		<surfaceType>Item</surfaceType>
+		<designationHotKey>Misc8</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Bulk>200</Bulk> <Mass>200</Mass> <MaxHitPoints>120</MaxHitPoints> <WorkToBuild>1900</WorkToBuild> <Flammability>1.0</Flammability> <ResearchSpeedFactor>0.7</ResearchSpeedFactor></statBases><researchPrerequisites><li>Research_table_B1</li></researchPrerequisites><stuffCategories><li>StrongMetallic</li> <li>Woody</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>8</ComponentMedieval> <Mechanism>2</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_GL_TableButcher</defName>
+		<label>butcher table</label>
+		<description>A heavy table for butchering dead creatures into pieces of raw meat.</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/GL_TableButcher</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<costStuffCount>40</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(2,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>60</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<recipes>
+			<li>ButcherCorpseFlesh</li>
+			<li>CookCatFood</li>
+			<li>CookMealSimple</li>
+			<li>GrindingCoffeeBeans</li>
+			<li>HalfCoconut</li>
+			<li>MakeAntidoteSimple</li>
+			<li MayRequire="jamaicancastle.rf.fertilefields">MakeCompost</li>
+			<li>MakeFishingBait</li>
+			<li>MakeHerbMedicine</li>
+			<li>MakeSilage</li>
+			<li>MakeTincture</li>
+			<li>MakeTinctureBulk</li>
+			<li>MakeTinctureHealroot</li>
+			<li>Make_Kibble</li>
+			<li>Make_Pemmican</li>
+			<li>Make_PemmicanBulk</li>
+			<li>Makesoymilk</li>
+			<li>MinceLimbs</li>
+			<li>MinceOrgans</li>
+			<li MayRequire="Ludeon.RimWorld.Odyssey">ProcessSmallFish</li>
+				<li>SaltMeat</li>
+		</recipes>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<designationHotKey>Misc3</designationHotKey>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Mass>500</Mass> <WorkToBuild>800</WorkToBuild> <MaxHitPoints>140</MaxHitPoints> <Flammability>0</Flammability> <Cleanliness>-15</Cleanliness></statBases><researchPrerequisites><li>Pemmican</li></researchPrerequisites><stuffCategories><li>Woody</li> <li>Stony</li> <li>Bricks</li> <li>HardwoodLumber</li> <li>UltrahardwoodLumber</li> <li>Plastic</li></stuffCategories><costList><ComponentMedieval>8</ComponentMedieval></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_RGK_FueledStove</defName>
+		<label>fueled stove</label>
+		<description>A wood-fueled stove with an attached countertop for preparing meals.</description>
+		<thingClass>Building_WorkTable_HeatPush</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/RGK_Countertop</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>		
+		<costStuffCount>125</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(2,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<recipes>
+			<li MayRequire="fxz.ratkinfaction">AC_CookRatkinCake</li>
+			<li>BrewCoffeeSingle</li>
+			<li>BrewTea</li>
+			<li>CookGruel</li>
+			<li>CookHeartyStew</li>
+			<li>CookMealFine</li>
+			<li>CookMealFine_MeatVile</li>
+			<li>CookMealFine_VegVile</li>
+			<li>CookMealLavish</li>
+			<li>CookMealLavish_MeatVile</li>
+			<li>CookMealLavish_VegVile</li>
+			<li>CookMeatSoup</li>
+			<li>CookPaint</li>
+			<li>CookPaintDye</li>
+			<li>CookRoastedMeat</li>
+			<li>CookScrambledEggs</li>
+			<li>CookSoup</li>
+			<li>GrillFishCampfire</li>
+			<li>MakeCandles</li>
+			<li>MakeCheeseGrilled</li>
+			<li>MakeFishOil</li>
+			<li>MakeMapleSyrup</li>
+			<li>MakePotatoesCheese</li>
+			<li>MakeRushlight</li>
+			<li>MakeSeafoodChowder</li>
+			<li>MakeSpaghettiBolognese</li>
+			<li>MakeTallow</li>
+			<li>MakeTurpentine</li>
+			<li>MakeVegetables</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFood</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFoodBulk</li>
+			<li MayRequire="Solaris.RatkinRaceMod">RK_Recipe_Hardtack</li>
+			<li MayRequire="Solaris.RatkinRaceMod">RK_Recipe_HardtackBulk</li>
+		</recipes>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>50.0</fuelConsumptionRate>
+				<fuelCapacity>75.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fuelFilter>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>4</heatPerSecond>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_GL_Cupboard</li>
+					<li>RKFC_GL_TablewareShelf</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<building>
+			<isMealSource>true</isMealSource>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<heatPerTickWhileWorking>0.10</heatPerTickWhileWorking>
+			<workTableRoomRole>Kitchen</workTableRoomRole>
+			<workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+		</building>
+		<designationHotKey>Misc8</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Mass>200</Mass> <WorkToBuild>1200</WorkToBuild> <MaxHitPoints>180</MaxHitPoints> <Flammability>1.0</Flammability> <WorkTableWorkSpeedFactor>0.9</WorkTableWorkSpeedFactor> <Cleanliness>2</Cleanliness></statBases><researchPrerequisites><li>Food_B4</li></researchPrerequisites><stuffCategories><li>StrongMetallic</li></stuffCategories><costList><ComponentMedieval>10</ComponentMedieval> <Mechanism>5</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_GL_ElectricStove</defName>
+		<label>electric stove</label>
+		<description>A electric stove with an attached countertop for preparing meals.</description>
+		<thingClass>Building_WorkTable_HeatPush</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/RGK_Countertop</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(4,4)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>		
+		<costStuffCount>135</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(2,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<recipes>
+			<li MayRequire="fxz.ratkinfaction">AC_CookRatkinCake</li>
+			<li>BrewCoffeeSingle</li>
+			<li>BrewTea</li>
+			<li>CookGruel</li>
+			<li>CookHeartyStew</li>
+			<li>CookMealFine</li>
+			<li>CookMealFine_MeatVile</li>
+			<li>CookMealFine_VegVile</li>
+			<li>CookMealLavish</li>
+			<li>CookMealLavish_MeatVile</li>
+			<li>CookMealLavish_VegVile</li>
+			<li>CookMeatSoup</li>
+			<li>CookPaint</li>
+			<li>CookPaintDye</li>
+			<li>CookRoastedMeat</li>
+			<li>CookScrambledEggs</li>
+			<li>CookSoup</li>
+			<li>GrillFishCampfire</li>
+			<li>MakeCheeseGrilled</li>
+			<li>MakeCoconutCurry</li>
+			<li>MakeHealthyBroth</li>
+			<li>MakeHotandSourSoup</li>
+			<li>MakeKebab</li>
+			<li>MakeMakiRolls</li>
+			<li>MakeMapleSyrup</li>
+			<li>MakeMushroomMadness</li>
+			<li>MakePastaPrimavera</li>
+			<li>MakePelmeni</li>
+			<li>MakePho</li>
+			<li>MakePilaf</li>
+			<li>MakePotatoesCheese</li>
+			<li>MakeRamen</li>
+			<li>MakeSamosas</li>
+			<li>MakeSeafoodChowder</li>
+			<li>MakeSpaghettiBolognese</li>
+			<li>MakeTacos</li>
+			<li>MakeVegetables</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFood</li>
+			<li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFoodBulk</li>
+			<li MayRequire="Solaris.RatkinRaceMod">RK_Recipe_Hardtack</li>
+			<li MayRequire="Solaris.RatkinRaceMod">RK_Recipe_HardtackBulk</li>
+		</recipes>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<basePowerConsumption>350</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>3</heatPerSecond>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>RKFC_GL_Cupboard</li>
+					<li>RKFC_GL_TablewareShelf</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<building>
+			<isMealSource>true</isMealSource>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<heatPerTickWhileWorking>0.10</heatPerTickWhileWorking>
+			<workTableRoomRole>Kitchen</workTableRoomRole>
+			<workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+		</building>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<designationHotKey>Misc8</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <Mass>500</Mass> <WorkToBuild>2200</WorkToBuild> <MaxHitPoints>160</MaxHitPoints> <Flammability>1.0</Flammability> <WorkTableWorkSpeedFactor>1.1</WorkTableWorkSpeedFactor></statBases><researchPrerequisites><li>Food_C1</li></researchPrerequisites><stuffCategories><li>StrongMetallic</li></stuffCategories><costList><ComponentIndustrial>10</ComponentIndustrial> <ElectronicComponents>5</ElectronicComponents> <Mechanism>5</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_Bonfire</defName>
+		<label>bonfire</label>
+		<description>요리가 가능한 화톳불입니다.</description>    
+		<thingClass>Building_WorkTable_HeatPush</thingClass>
+		<category>Building</category>		
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<minifiedDef>MinifiedThing</minifiedDef>	
+		<graphicData>
+			<texPath>Things/Building/Production/GL_FurnaceBase</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<uiIconPath>UI/Icon/GL_Texture_Furnace</uiIconPath>
+		<uiIconScale>1</uiIconScale>
+		<altitudeLayer>Building</altitudeLayer>
+		<tickerType>Normal</tickerType>
+		<fillPercent>0.20</fillPercent>
+		<selectable>true</selectable>
+		<costStuffCount/>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>3.0</fuelConsumptionRate>
+				<fuelCapacity>75.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>25</heatPerSecond>
+				<heatPushMaxTemperature>25</heatPushMaxTemperature>
+			</li>
+			</comps>
+		<designationCategory>Accessories</designationCategory>
+		<designationHotKey>Misc6</designationHotKey>
+		<size>(2,2)</size>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<surfaceType>Item</surfaceType>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<recipes>
+			<li>CookMealSimple</li><li>CookMealFine</li><li>CookMealLavish</li><li>CookMealSurvival</li><li>CookMealSimpleBulk</li><li>CookMealFineBulk</li><li>CookMealLavishBulk</li><li>CookMealSurvivalBulk</li><li>Make_Pemmican</li><li>Make_PemmicanBulk</li><li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFood</li><li MayRequire="Ludeon.RimWorld.Biotech">Make_BabyFoodBulk</li></recipes>
+		<building>
+			<isMealSource>true</isMealSource>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<heatPerTickWhileWorking>0.10</heatPerTickWhileWorking>
+			<workTableRoomRole>Kitchen</workTableRoomRole>
+			<workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+		</building>
+		<passability>PassThroughOnly</passability>
+		<pathCost>15</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,0)</interactionCellOffset>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>20</MaxHitPoints> <WorkToBuild>300</WorkToBuild> <Flammability>0</Flammability> <WorkTableWorkSpeedFactor>0.7</WorkTableWorkSpeedFactor> <MeditationFocusStrength>0</MeditationFocusStrength> <Mass>20</Mass></statBases><costList><WoodLog>20</WoodLog></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_GL_FueledSmithy</defName>
+		<label>fueled smithy</label>
+		<description>A wood-fueled station for smithing non-mechanical weapons and tools.</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/GL_Smithy</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>3.7</drawSize>
+			<shadowData>
+				<volume>(2.8, 0.35, 0.59)</volume>
+				<offset>(0, 0, 0.08)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<costStuffCount>220</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(3,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
+		<comps>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>80.0</fuelConsumptionRate>
+				<fuelCapacity>50.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fuelFilter>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>4</glowRadius>
+				<glowColor>(210,110,50)</glowColor>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<statBases><SellPriceFactor>0.70</SellPriceFactor> <Mass>1000</Mass> <WorkToBuild>1700</WorkToBuild> <MaxHitPoints>250</MaxHitPoints> <Flammability>1.0</Flammability> <Cleanliness>-12</Cleanliness> <OutdoorWorkRateFactor>1.0</OutdoorWorkRateFactor></statBases><researchPrerequisites><li>Craft_B1</li></researchPrerequisites><stuffCategories><li>RuggedMetallic</li> <li>Stony</li> <li>Bricks</li></stuffCategories><costList><ComponentMedieval>12</ComponentMedieval> <Mechanism>8</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="BenchBase">
+		<defName>RKFC_GL_ElectricSmithy</defName>
+		<label>electric smithy</label>
+		<description>An electric-powered station for smithing non-mechanical weapons and tools.</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/GL_Smithy</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>3.7</drawSize>
+			<shadowData>
+				<volume>(2.8, 0.35, 0.59)</volume>
+				<offset>(0, 0, 0.08)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<costStuffCount>155</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(3,1)</size>
+		<designationCategory>Accessories</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<basePowerConsumption>210</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>4</heatPerSecond>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>4</glowRadius>
+				<glowColor>(210,110,50)</glowColor>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<statBases><SellPriceFactor>0.70</SellPriceFactor> <Mass>20</Mass> <WorkToBuild>3750</WorkToBuild> <MaxHitPoints>260</MaxHitPoints> <Flammability>1.0</Flammability> <Cleanliness>-5</Cleanliness> <OutdoorWorkRateFactor>1.0</OutdoorWorkRateFactor></statBases><researchPrerequisites><li>Metals_C1</li></researchPrerequisites><stuffCategories><li>RuggedMetallic</li></stuffCategories><costList><ComponentIndustrial>12</ComponentIndustrial> <ElectronicComponents>5</ElectronicComponents> <Mechanism>5</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FenceWallRelatedCommandsBase">
+		<defName>RKFC_RGK_VentWall</defName>
+		<label>vent wall</label>
+		<thingClass>Building_Vent</thingClass>
+		<category>Building</category>
+		<description>It's a wall where air can come in and out.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/RGK_VentWall</texPath>
+			<shaderType>CutoutComplex</shaderType>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/RGK_VentWall_MenuIcon</uiIconPath>
+		<costStuffCount>35</costStuffCount>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		
+		<tickerType>Rare</tickerType>
+		<rotatable>true</rotatable>
+		<selectable>true</selectable>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1</staticSunShadowHeight>
+		<blockLight>true</blockLight>		
+		<placeWorkers>
+			<li>PlaceWorker_Vent</li>
+		</placeWorkers>
+		<blockWind>true</blockWind>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_VentWall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+			<supportsWallAttachments>true</supportsWallAttachments>
+			<canPlaceOverWall>true</canPlaceOverWall>
+		</building>
+		<designationCategory>Structure</designationCategory>
+		<designationHotKey>Misc3</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <WorkToBuild>700</WorkToBuild> <MaxHitPoints>100</MaxHitPoints> <Flammability>1.0</Flammability></statBases><researchPrerequisites><li>AirConditioning</li></researchPrerequisites><stuffCategories><li>StrongMetallic</li></stuffCategories><costList><ComponentIndustrial>3</ComponentIndustrial> <Mechanism>1</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FenceWallRelatedCommandsBase">
+		<designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GL_VentWall</defName>
+		<label>vent wall</label>
+		<thingClass>Building_Vent</thingClass>
+		<category>Building</category>
+		<description>It's a wall where air can come in and out.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/GL_VentWall</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/GL_VentWall_MenuIcon</uiIconPath>
+		<costStuffCount>35</costStuffCount>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		
+		<tickerType>Rare</tickerType>
+		<rotatable>true</rotatable>
+		<selectable>true</selectable>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1</staticSunShadowHeight>
+		<blockLight>true</blockLight>		
+		<placeWorkers>
+			<li>PlaceWorker_Vent</li>
+		</placeWorkers>
+		<blockWind>true</blockWind>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_VentWall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<supportsWallAttachments>true</supportsWallAttachments>
+		</building>
+		<designationHotKey>Misc3</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <WorkToBuild>700</WorkToBuild> <MaxHitPoints>100</MaxHitPoints> <Flammability>1.0</Flammability></statBases><researchPrerequisites><li>AirConditioning</li></researchPrerequisites><stuffCategories><li>StrongMetallic</li></stuffCategories><costList><ComponentIndustrial>3</ComponentIndustrial> <Mechanism>1</Mechanism></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FenceWallRelatedCommandsBase">
+		<defName>RKFC_RGK_WindowWall</defName>
+		<label>window wall</label>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<description>A window through which light can pass through.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/WindowWall</texPath>
+			<shaderType>CutoutComplex</shaderType>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/WindowWall_MeunuIcon</uiIconPath>
+		<costStuffCount>15</costStuffCount>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		
+		<selectable>true</selectable>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1</staticSunShadowHeight>
+		<blockLight>false</blockLight>		
+		<placeWorkers>
+			<li>PlaceWorker_Vent</li>
+		</placeWorkers>
+		<blockWind>true</blockWind>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<supportsWallAttachments>true</supportsWallAttachments>
+		</building>
+		<designationCategory>Structure</designationCategory>
+		<designationHotKey>Misc3</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>600</MaxHitPoints> <MarketValue>15.2</MarketValue> <WorkToBuild>150</WorkToBuild> <Flammability>0</Flammability> <Beauty>1</Beauty></statBases><researchPrerequisites><li>Construction_B3</li></researchPrerequisites><stuffCategories><li>Glass</li></stuffCategories><costList><ComponentIndustrial>1</ComponentIndustrial></costList></ThingDef>
+  <ThingDef ParentName="RKFC_FenceWallRelatedCommandsBase">
+		<designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GL_WindowWall</defName>
+		<label>window wall</label>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<description>A window through which light can pass through.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/GL_WindowWall</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/GL_WindowWall_MeunuIcon</uiIconPath>
+		<costStuffCount>15</costStuffCount>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		
+		<selectable>true</selectable>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1</staticSunShadowHeight>
+		<blockLight>false</blockLight>		
+		<placeWorkers>
+			<li>PlaceWorker_Vent</li>
+		</placeWorkers>
+		<blockWind>true</blockWind>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<building>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<isInert>true</isInert>
+			<ai_chillDestination>false</ai_chillDestination>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<supportsWallAttachments>true</supportsWallAttachments>
+		</building>
+		<designationHotKey>Misc3</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>600</MaxHitPoints> <MarketValue>15.2</MarketValue> <WorkToBuild>150</WorkToBuild> <Flammability>0</Flammability> <Beauty>1</Beauty></statBases><researchPrerequisites><li>Construction_B3</li></researchPrerequisites><stuffCategories><li>Glass</li></stuffCategories><costList><ComponentIndustrial>1</ComponentIndustrial></costList></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_WoodFence</defName>
+		<label>fence</label>
+		<description>A fence to trap livestock or protect it from outside beasts.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<replaceTags>
+			<li>Wall</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Linked/RGK_WoodFence</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Asymmetric</linkType>
+			<linkFlags>
+				<li>Fences</li>
+			</linkFlags>
+			<asymmetricLink>
+				<linkFlags>
+					<li>Wall</li>
+					<li>Rock</li>
+				</linkFlags>
+				<linkToDoors>true</linkToDoors>
+				<drawDoorBorderEast>
+					<color>(0,0,0)</color>
+					<size>(0.04, 0.77)</size>
+					<offset>(0.5, 0, -0.08)</offset>
+				</drawDoorBorderEast>
+				<drawDoorBorderWest>
+					<color>(0,0,0)</color>
+					<size>(0.04, 0.77)</size>
+					<offset>(-0.5, 0, -0.08)</offset>
+				</drawDoorBorderWest>
+			</asymmetricLink>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+				<offset>(0,0,-0.23)</offset>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/RGK_WoodFenceIco</uiIconPath>
+		<costStuffCount>1</costStuffCount>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<passability>PassThroughOnly</passability>
+		<pathCost>80</pathCost>
+		<blockWind>false</blockWind>
+		<fillPercent>0.25</fillPercent>
+		<drawStyleCategory>Defenses</drawStyleCategory>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+		<castEdgeShadows>true</castEdgeShadows>
+		<building Inherit="False">
+			<isInert>true</isInert>
+			<isFence>true</isFence>
+			<isPlaceOverableWall>true</isPlaceOverableWall>
+			<ai_chillDestination>false</ai_chillDestination>
+			<ai_neverTrashThis>true</ai_neverTrashThis>
+			<relatedBuildCommands>
+				<li>PenMarker</li>
+				<li>RKFC_RGK_Door</li>
+			</relatedBuildCommands>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RKG_WoodFence_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<paintable>true</paintable>
+		</building>
+		<designationCategory>Structure</designationCategory>
+		<uiOrder>2020</uiOrder>
+		<designationHotKey>Misc3</designationHotKey>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>40</MaxHitPoints> <WorkToBuild>70</WorkToBuild> <Flammability>1.0</Flammability></statBases><stuffCategories><li>Metallic</li> <li>Woody</li> <li>Stony</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="RKFC_WallRelatedCommandsBase">
+		<defName>RKFC_GL_FlowerWall</defName>
+		<label>Flower wall</label>
+		<description>Wall decorated with flowers.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Linked/GL_FlowerWall</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>Basic</linkType>
+			<linkFlags>
+				<li>Custom3</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/GL_FlowerWall_MenuIcon</uiIconPath>
+		<statBases>
+			<Beauty>10</Beauty>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>850</WorkToBuild>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<costList>
+			<WoodLog>25</WoodLog>
+		</costList>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>35</pathCost>
+		<blockWind>false</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.5</fillPercent>
+		<constructEffect>ConstructWood</constructEffect>
+		<drawStyleCategory>Walls</drawStyleCategory>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>Structure</designationCategory>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>false</blockLight>
+		<canOverlapZones>false</canOverlapZones>
+		<building>
+			<isInert>true</isInert>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+			<supportsWallAttachments>true</supportsWallAttachments>
+		</building>
+		<designationHotKey>Misc3</designationHotKey>
+	<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+  <ThingDef ParentName="DoorBase">
+		<defName>RKFC_RGK_Door</defName>
+		<label>fence door</label>
+		<description>Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of.</description>
+		<thingClass>Building_Door</thingClass>
+		<uiOrder>2030</uiOrder>
+		<graphicData>
+			<texPath>Things/Building/Furniture/WoodFenceGate_Mover</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shadowData>
+				<volume>(0.3, 0.5, 0.3)</volume>
+			</shadowData>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/WoodFenceGate_icon</uiIconPath>
+		<costStuffCount>15</costStuffCount>
+		<holdsRoof>false</holdsRoof>
+		<blockWeather>true</blockWeather>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<blockWind>false</blockWind>
+		<designationHotKey>Misc12</designationHotKey>
+		<building Inherit="False">
+			<isInert>true</isInert>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<soundDoorOpenPowered>Door_OpenPowered</soundDoorOpenPowered>
+			<soundDoorClosePowered>Door_ClosePowered</soundDoorClosePowered>
+			<soundDoorOpenManual>Door_FenceGateManual</soundDoorOpenManual>
+			<soundDoorCloseManual>Door_FenceGateManual</soundDoorCloseManual>
+			<blueprintClass>Blueprint_Door</blueprintClass>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Furniture/RKG_WoodGate_Blueprint_Atlas</texPath>
+				<graphicClass>Graphic_Multi</graphicClass>
+			</blueprintGraphicData>
+			<ai_chillDestination>false</ai_chillDestination>
+			<paintable>true</paintable>
+			<canExchangeVacuum>true</canExchangeVacuum>
+			<relatedBuildCommands>
+				<li>RKFC_RGK_WoodFence</li>
+				<li>PenMarker</li>
+			</relatedBuildCommands>
+			<preferConnectingToFences>true</preferConnectingToFences>
+		</building>
+		<designationCategory>Structure</designationCategory>
+	<statBases><SellPriceFactor>0.70</SellPriceFactor> <MaxHitPoints>20</MaxHitPoints> <Flammability>1.0</Flammability> <WorkToBuild>500</WorkToBuild> <DoorOpenSpeed>1.15</DoorOpenSpeed></statBases><stuffCategories><li>Metallic</li> <li>Woody</li></stuffCategories></ThingDef>
+  <ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_DoorFrame</defName>
+		<label>door frame</label>
+		<description>It is a frame to decorate the door.</description>
+		<thingClass>Building</thingClass>
+		<altitudeLayer>PawnUnused</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>180</MaxHitPoints>
+			<WorkToBuild>2200</WorkToBuild>
+			<Flammability>0.2</Flammability>
+			<Mass>10</Mass>
+			<Beauty>25</Beauty>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Building/Furniture/GL_DoorFrame</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<drawSize>(3.25,3.25)</drawSize>
+		</graphicData>
+		<uiIconScale>1.75</uiIconScale>
+		<uiIconOffset>(0,0.15)</uiIconOffset>
+		<uiIconPath>Things/Building/Furniture/GL_DoorFrame_south</uiIconPath>
+		<stuffCategories Inherit="False">
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>45</costStuffCount>		
+		<costList>
+			<Steel>15</Steel>
+		</costList>
+		<designationHotKey>Misc12</designationHotKey>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<clearBuildingArea>false</clearBuildingArea>
+		<designationCategory>Structure</designationCategory>
+		<tradeability>None</tradeability>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+	<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+
+
+	<!-- 2026-08-14: 从文化风格移除后恢复为独立物品的墙(古典结构菜单) -->
+
+<ThingDef ParentName="RKFC_WallRelatedCommandsBase">
+		<defName>RKFC_RGK_Wall</defName>
+		<label>wall</label>
+		<description>An impassable wall. Capable of holding up a roof.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<noRightClickDraftAttack>true</noRightClickDraftAttack>
+		<replaceTags>
+			<li>Wall</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Linked/GL_Wall</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/GL_Wall_MenuIcon</uiIconPath>
+		<statBases>
+			<Flammability>1.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		<SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>380</MaxHitPoints><WorkToBuild>270</WorkToBuild></statBases>
+		<costList>
+			<WoodLog>5</WoodLog>
+		</costList>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<drawStyleCategory>Walls</drawStyleCategory>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<designationCategory>Structure</designationCategory>
+		<uiOrder>2000</uiOrder>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>true</blockLight>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+		<building>
+			<paintable>true</paintable>
+			<isInert>true</isInert>
+			<isWall>true</isWall>
+			<isPlaceOverableWall>true</isPlaceOverableWall>
+			<ai_chillDestination>false</ai_chillDestination>
+			<supportsWallAttachments>true</supportsWallAttachments>
+			<isStuffableAirtight>true</isStuffableAirtight>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+		</building>
+		<comps>
+			<li Class="CompProperties_MeditationFocus">
+				<statDef>MeditationFocusStrength</statDef>
+				<focusTypes>
+					<li>Minimal</li>
+				</focusTypes>
+			</li>
+		</comps>
+		
+	<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+
+<ThingDef ParentName="RKFC_WallRelatedCommandsBase">
+		<designationCategory Inherit="False" IsNull="True"/><generateCommonality>0</generateCommonality><defName>RKFC_GL_Wall</defName>
+		<label>wall</label>
+		<description>An impassable wall. Capable of holding up a roof.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<noRightClickDraftAttack>true</noRightClickDraftAttack>
+		<replaceTags>
+			<li>Wall</li>
+		</replaceTags>
+		<graphicData>
+			<texPath>Things/Building/Linked/GL_Wall</texPath>
+			<graphicClass>Graphic_Appearances</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Linked/GL_Wall_MenuIcon</uiIconPath>
+		<statBases>
+			<Flammability>1.0</Flammability>
+			<MeditationFocusStrength>0.22</MeditationFocusStrength>
+		<SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>380</MaxHitPoints><WorkToBuild>270</WorkToBuild></statBases>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		<li>Bricks</li></stuffCategories>
+		<costStuffCount>6</costStuffCount>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<drawStyleCategory>Walls</drawStyleCategory>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<useStuffTerrainAffordance>true</useStuffTerrainAffordance>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<uiOrder>2000</uiOrder>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>true</blockLight>
+		<canOverlapZones>false</canOverlapZones>
+		<fertility>0</fertility>
+		<building>
+			<paintable>true</paintable>
+			<isInert>true</isInert>
+			<isWall>true</isWall>
+			<isPlaceOverableWall>true</isPlaceOverableWall>
+			<ai_chillDestination>false</ai_chillDestination>
+			<supportsWallAttachments>true</supportsWallAttachments>
+			<isStuffableAirtight>true</isStuffableAirtight>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/RGK_Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+		</building>
+		<comps>
+			<li Class="CompProperties_MeditationFocus">
+				<statDef>MeditationFocusStrength</statDef>
+				<focusTypes>
+					<li>Minimal</li>
+				</focusTypes>
+			</li>
+		</comps>
+		
+	<researchPrerequisites><li>Construction_B1</li></researchPrerequisites></ThingDef>
+
+<ThingDef ParentName="DoorBase"><defName>RKFC_RGK_DoorOld</defName><label>antique door</label><description>Divides rooms. Simple doors must be manually opened, which slows people down. The amount of slowdown depends on what the door is made of.</description><thingClass>Building_Door</thingClass><statBases><SellPriceFactor>0.70</SellPriceFactor><MaxHitPoints>180</MaxHitPoints><Flammability>1.0</Flammability><WorkToBuild>400</WorkToBuild></statBases><graphicData><texPath>Things/Building/Furniture/DoorOld_Mover</texPath><graphicClass>Graphic_Single</graphicClass><damageData><enabled>false</enabled></damageData></graphicData><uiIconPath>Things/Building/Furniture/DoorOld_MenuIcon</uiIconPath><stuffCategories Inherit="False"><li>Woody</li></stuffCategories><costStuffCount>10</costStuffCount><costList><ComponentMedieval>1</ComponentMedieval></costList><designationHotKey>Misc12</designationHotKey><building><blueprintGraphicData><texPath>Things/Building/Furniture/DoorOld_Blueprint_Atlas</texPath></blueprintGraphicData></building><designationCategory>Structure</designationCategory></ThingDef>
+
+	<!-- ============ 从鼠族HSK拓展迁入: 工案(手工/电动) ============ -->
+	<ThingDef ParentName="BenchBase">
+		<defName>RK_HandMsWorkbench</defName>
+		<label>hand workbench</label>
+		<description>A low workbench that sits on the floor and processes what you need.</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/RK_GongAn</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>4.5</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
+		<costStuffCount>45</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>2000</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<WorkTableWorkSpeedFactor>0.50</WorkTableWorkSpeedFactor>
+		</statBases>
+		<size>(3,2)</size>
+		<designationCategory>Production</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
+		<comps>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<!-- 2026-08-23 解锁与鼠族手工裁缝台同步: 鼠族衣物I -->
+		<researchPrerequisites>
+			<li>Ratkin_Apparel_B1</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BenchBase">
+		<defName>RK_ElectricMsWorkbench</defName>
+		<label>electric workbench</label>
+		<description>A workbench with modern power tools and inspectors to get the job done more accurately and quickly.</description>
+		<thingClass>Building_WorkTable</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/RK_GongAnEl</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>4.5</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<costList>
+			<Steel>65</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<costStuffCount>65</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>2500</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<size>(3,2)</size>
+		<designationCategory>Production</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+			<unpoweredWorkTableWorkSpeedFactor>0.50</unpoweredWorkTableWorkSpeedFactor>
+		</building>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<basePowerConsumption>120</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<!-- 2026-08-23 解锁与鼠族电动缝纫台同步: 鼠族衣物III(32号电动裁缝台同节点) -->
+			<li>Ratkin_Apparel_C1</li>
+		</researchPrerequisites>
+	</ThingDef>
+</Defs>

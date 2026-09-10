@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<RulePackDef>
+		<defName>RatkinExoticStateNameUtility</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>RK_FirstName->[RK_Noun_Prefix_Flower]</li>				
+				<li>RK_FirstName->[RK_First_ElfStyle]</li>
+				<li>RK_LastName(p=3)->[RK_Noun_Prefix_Nut]</li>				
+				<li>RK_LastName(p=2)->[RK_Noun_Prefix_Iron][RK_Noun_Postfix_Ironlike]</li>								
+				<li>RK_LastName->Royal[RK_Noun_Postfix_BodyPart]</li>			
+				<li>RK_LastName->Wild[RK_Noun_Postfix_BodyPart]</li>
+				<li>RK_LastName->[RK_Noun_Prefix_Nature][RK_Noun_Postfix_Mover]</li>
+				<li>RK_LastName->[RK_Last_Single]</li>
+			</rulesStrings>
+			<rulesFiles>
+				<li>RK_Noun_Prefix_Action->Names/Noun/RK_Noun_Prefix_Action</li>
+				<li>RK_Noun_Prefix_Actor->Names/Noun/RK_Noun_Prefix_Actor</li>
+				<li>RK_Noun_Prefix_BodyPart->Names/Noun/RK_Noun_Prefix_BodyPart</li>
+				<li>RK_Noun_Prefix_Color->Names/Noun/RK_Noun_Prefix_Color</li>
+				<li>RK_Noun_Prefix_Flower->Names/Noun/RK_Noun_Prefix_Flower</li>
+				<li>RK_Noun_Prefix_Herb->Names/Noun/RK_Noun_Prefix_Herb</li>
+				<li>RK_Noun_Prefix_Iron->Names/Noun/RK_Noun_Prefix_Iron</li>
+				<li>RK_Noun_Prefix_Mover->Names/Noun/RK_Noun_Prefix_Mover</li>
+				<li>RK_Noun_Prefix_Nature->Names/Noun/RK_Noun_Prefix_Nature</li>
+				<li>RK_Noun_Prefix_Personality->Names/Noun/RK_Noun_Prefix_Personality</li>
+				<li>RK_Noun_Prefix_Star->Names/Noun/RK_Noun_Prefix_Star</li>
+				<li>RK_Noun_Prefix_Taker->Names/Noun/RK_Noun_Prefix_Taker</li>
+				<li>RK_Noun_Prefix_Weapon->Names/Noun/RK_Noun_Prefix_Weapon</li>
+				<li>RK_Noun_Prefix_Nut->Names/Noun/RK_Noun_Prefix_Nut</li>
+
+				<li>RK_Noun_Postfix_Action->Names/Noun/RK_Noun_Postfix_Action</li>
+				<li>RK_Noun_Postfix_Actor->Names/Noun/RK_Noun_Postfix_Actor</li>
+				<li>RK_Noun_Postfix_BodyPart->Names/Noun/RK_Noun_Postfix_BodyPart</li>
+				<li>RK_Noun_Postfix_Color->Names/Noun/RK_Noun_Postfix_Color</li>
+				<li>RK_Noun_Postfix_Flower->Names/Noun/RK_Noun_Postfix_Flower</li>
+				<li>RK_Noun_Postfix_Herb->Names/Noun/RK_Noun_Postfix_Herb</li>
+				<li>RK_Noun_Postfix_Iron->Names/Noun/RK_Noun_Postfix_Iron</li>
+				<li>RK_Noun_Postfix_Mover->Names/Noun/RK_Noun_Postfix_Mover</li>
+				<li>RK_Noun_Postfix_Nature->Names/Noun/RK_Noun_Postfix_Nature</li>
+				<li>RK_Noun_Postfix_Personality->Names/Noun/RK_Noun_Postfix_Personality</li>
+				<li>RK_Noun_Postfix_Ironlike->Names/Noun/RK_Noun_Postfix_Ironlike</li>
+				<li>RK_Noun_Postfix_Star->Names/Noun/RK_Noun_Postfix_Star</li>
+				<li>RK_Noun_Postfix_Taker->Names/Noun/RK_Noun_Postfix_Taker</li>
+				<li>RK_Noun_Postfix_Weapon->Names/Noun/RK_Noun_Postfix_Weapon</li>
+				<li>RK_Noun_Postfix_Nut->Names/Noun/RK_Noun_Postfix_Nut</li>
+				<li>RK_Noun_Postfix_Bloom->Names/Noun/RK_Noun_Postfix_Bloom</li>
+				
+				<li>RK_First_ElfStyle->Names/RK_FirstName_ElfStyle</li>
+				<li>RK_Last_Single->Names/RK_Last_Single</li>
+				
+			</rulesFiles>
+		</rulePack>
+	</RulePackDef>
+	
+
+	<RulePackDef>
+		<defName>NamerPerson_RatkinExoticState</defName>
+		<include>
+			<li>RatkinExoticStateNameUtility</li>
+		</include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name(p=7)->[RK_LastName][RK_FirstName]</li>
+				<li>r_name(p=1)->[RK_Noun_Prefix_Flower]</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+
+	<RulePackDef>
+		<defName>RatkinExoticBanditNameUtility</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>bang->练</li>
+				<li>bang->段</li>
+				<li>bang->星</li>
+				<li>bang->洪</li>
+
+				<li>hood->扶持</li>
+				<li>hood->大刀</li>
+				<li>hood->忠勇</li>
+				<li>hood->勇武</li>
+				<li>hood->宣义</li>
+				<li>hood->金钟</li>
+				<li>hood->报国</li>
+				<li>hood->平安</li>
+				<li>hood->返乡</li>
+
+				<li>du->鹞子</li>
+				<li>du->青矶</li>
+				<li>du->不越</li>
+				<li>du->鹰愁</li>
+				<li>du->鲲落</li>
+
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>NamerFaction_RatkinExoticBandit</defName>
+		<include>
+			<li>RatkinExoticBanditNameUtility</li>
+		</include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name->[bang]帮</li>
+				<li>r_name->[hood]团</li>
+				<li>r_name->[hood]寨</li>
+				<li>r_name->[hood]会</li>
+
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	
+
+	<RulePackDef>
+		<defName>RatkinExoticPlaceNameUtility</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>landend->洲</li>
+				<li>landend->乡</li>
+				<li>landend->城</li>
+				<li>landend->家</li>
+
+				<li>landnar->川</li>
+				<li>landnar->林</li>
+				<li>landnar->山</li>
+				<li>landnar->溪</li>
+
+				<li>landdynasty->夏</li>
+				<li>landdynasty->商</li>
+				<li>landdynasty->周</li>
+				<li>landdynasty->秦</li>
+				<li>landdynasty->汉</li>
+				<li>landdynasty->晋</li>
+				<li>landdynasty->隋</li>
+				<li>landdynasty->唐</li>
+				<li>landdynasty->宋</li>
+				<li>landdynasty->元</li>
+				<li>landdynasty->明</li>
+				<li>landdynasty->清</li>
+				<li>landdynasty->辽</li>
+				<li>landdynasty->金</li>
+				<li>landdynasty->鲜</li>
+				<li>landdynasty->和</li>
+				<li>landdynasty->越</li>
+
+				<li>landwish->平</li>
+				<li>landwish->安</li>
+				<li>landwish->宁</li>
+				<li>landwish->兴</li>
+				<li>landwish->昌</li>
+				<li>landwish->吉</li>
+				<li>landwish->香</li>
+				<li>landwish->丰</li>
+				<li>landwish->长</li>
+				<li>landwish->永</li>
+
+				<li>landmoral->仁</li>
+				<li>landmoral->义</li>
+				<li>landmoral->礼</li>
+				<li>landmoral->智</li>
+				<li>landmoral->信</li>
+				<li>landmoral->德</li>
+				<li>landmoral->艺</li>
+				<li>landmoral->善</li>
+				<li>landmoral->良</li>
+				<li>landmoral->勇</li>
+				<li>landmoral->武</li>
+				<li>landmoral->文</li>
+				<li>landmoral->春</li>
+				<li>landmoral->秋</li>
+				<li>landmoral->和</li>
+
+				<li>landcount->二</li>
+				<li>landcount->三</li>
+				<li>landcount->五</li>
+				<li>landcount->九</li>
+				<li>landcount->十</li>
+				<li>landcount->廿</li>
+				<li>landcount->卅</li>
+				<li>landcount->百</li>
+				<li>landcount->千</li>
+				<li>landcount->万</li>
+
+				<li>landwish->安</li>
+				<li>landwish->宁</li>
+				<li>landwish->兴</li>
+				<li>landwish->昌</li>
+				<li>landwish->吉</li>
+				<li>landwish->香</li>
+				<li>landwish->丰</li>
+				<li>landwish->长</li>
+				<li>landwish->永</li>
+
+				<li>landwishend->安</li>
+				<li>landwishend->宁</li>
+				<li>landwishend->兴</li>
+				<li>landwishend->昌</li>
+
+				<li>landdir->南</li>
+				<li>landdir->北</li>
+				<li>landdir->东</li>
+				<li>landdir->西</li>
+				<li>landdir->头</li>
+				<li>landdir->中</li>
+				<li>landdir->口</li>
+
+				<li>landloc->道</li>
+				<li>landloc->道口</li>
+				<li>landloc->湾子</li>
+				<li>landloc->街</li>
+				<li>landloc->路</li>
+				<li>landloc->巷</li>
+				<li>landloc->桥</li>
+				<li>landloc->门</li>
+				<li>landloc->园</li>
+				<li>landloc->庵</li>
+				<li>landloc->庙</li>
+				<li>landloc->院</li>
+				<li>landloc->屯</li>
+				<li>landloc->里</li>
+				<li>landloc->庄</li>
+				<li>landloc->家</li>
+
+				<li>landbig->山</li>
+				<li>landbig->河</li>
+				<li>landbig->湖</li>
+				<li>landbig->海</li>
+				<li>landbig->江</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+	
+
+	<RulePackDef>
+		<defName>NamerFaction_RatkinExoticState</defName>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name(p=2)->[land] of [ofThing]</li>
+				<li>r_name(p=2)->The [land] of [ofThing]</li>
+				<!-- <li>r_name-></li> -->
+
+				<li>land(p=3)->Homeland</li>
+				<li>land(p=2)->Beginning</li>
+				<li>land(p=2)->Home</li>
+				<li>land->乐土</li>
+				<li>land->桃园</li>
+
+				<li>ofThing->万民</li>
+				<li>ofThing->良辰</li>
+				<li>ofThing->吴越</li>
+				<li>ofThing->巴蜀</li>
+				<li>ofThing->塞北</li>
+				<li>ofThing->齐鲁</li>
+				<li>ofThing->朝日</li>
+				<li>ofThing->微月</li>
+				<li>ofThing->仙慕</li>
+				<li>ofThing->忠良</li>
+				<li>ofThing->青云</li>
+				<li>ofThing->千秋</li>
+				<li>ofThing->长望</li>
+				<li>ofThing->长晴</li>
+				<li>ofThing->长明</li>
+				<li>ofThing->甲子</li>
+				<li>ofThing->木槿</li>
+				<li>ofThing->牡丹</li>
+				<li>ofThing->落樱</li>
+				<li>ofThing->天地</li>
+				<li>ofThing->无治</li>
+				<li>ofThing->无垠</li>
+				<li>ofThing->天佑</li>
+				<li>ofThing->黎明</li>
+				<li>ofThing->永晴</li>
+				<li>ofThing->永兴</li>
+				<li>ofThing->岱峤</li>
+				<li>ofThing->蓬莱</li>
+				<!-- <li>ofThing->Gentle Wind</li>
+				<li>ofThing->Spark</li>
+				<li>ofThing->Star Rest</li>
+				<li>ofThing->Justice</li> -->
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+
+	<RulePackDef>
+		<defName>NamerSettlement_RatkinExoticState</defName>
+		<include>
+			<li>RatkinExoticPlaceNameUtility</li>
+		</include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name->[landwish][landend]</li>
+				<li>r_name->[landwish][landnar]</li>
+				<li>r_name->[landmoral][landnar]</li>
+				<li>r_name->[landmoral][landend]</li>
+				<li>r_name->[landmoral][landmoral][landend]</li>
+				<li>r_name->[landcount][landmoral][landend]</li>
+				<li>r_name->[landcount][landmoral][landloc]</li>
+				<li>r_name->[landmoral][landmoral][landloc]</li>
+				<li>r_name->[landbig][landdir]</li>
+				<li>r_name->[landmoral][landwish][landloc]</li>
+				<li>r_name->[landdynasty][landwish][landloc]</li>
+				<li>r_name->[landdynasty][landbig][landwishend]</li>
+
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>NamerSettlement_RatkinExoticBandit</defName>
+		<include>
+			<li>RatkinExoticPlaceNameUtility</li>
+			<li>RatkinExoticBanditNameUtility</li>
+		</include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_name(p=1)->[du]渡</li>
+				<li>r_name(p=3)->[hood][banditplace]</li>
+				<li>r_name(p=3)->[landwish][landnar][banditplace]</li>
+				<li>r_name(p=3)->[landmoral][landend][banditplace]</li>
+
+				<li>banditplace->寨</li>
+				<li>banditplace->团</li>
+				<li>banditplace->会</li>
+
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+</Defs>

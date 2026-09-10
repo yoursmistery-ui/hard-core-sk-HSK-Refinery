@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 合并自(保持原执行序): Ideo_BiosculpterPod_Patch.xml, Ideo_Precept_Patch.xml, Ideology_Patch.xml -->
+<Patch><Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="BiosculpterPod"]/comps/li[compClass = "CompBiosculpterPod_MedicCycle"]/durationDays</xpath>
+        <value>
+            <durationDays>4</durationDays>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="BiosculpterPod"]/comps/li[compClass = "CompBiosculpterPod_RegenerationCycle"]/durationDays</xpath>
+        <value>
+            <durationDays>8.2</durationDays>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="BiosculpterPod"]/comps/li[@Class="CompProperties_BiosculpterPod_AgeReversalCycle"]/durationDays</xpath>
+        <value>
+            <durationDays>5.6</durationDays>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="BiosculpterPod"]/comps/li[@Class="CompProperties_BiosculpterPod_PleasureCycle"]/durationDays</xpath>
+        <value>
+            <durationDays>2.2</durationDays>
+        </value>
+    </Operation><Operation Class="PatchOperationAdd">
+        <xpath>Defs/PreceptDef[defName="Skullspike_Disapproved"]/conflictingMemes</xpath>
+        <value>
+            <li>OAGene_TerritorialHegemony</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/PreceptDef[defName="IdeoDiversity_Respected" or defName="IdeoDiversity_Approved" or defName="IdeoDiversity_Exalted"]/conflictingMemes</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/PreceptDef[defName="IdeoDiversity_Respected" or defName="IdeoDiversity_Approved" or defName="IdeoDiversity_Exalted"]/conflictingMemes</xpath>
+            <value>
+                <li>OAGene_TerritorialHegemony</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/PreceptDef[defName="IdeoDiversity_Respected" or defName="IdeoDiversity_Approved" or defName="IdeoDiversity_Exalted"]</xpath>
+            <value>
+                <conflictingMemes>
+                    <li>OAGene_TerritorialHegemony</li>
+                </conflictingMemes>
+            </value>
+        </nomatch>
+    </Operation>
+
+
+    <!--Operation Class="PatchOperationConditional">
+        <xpath>Defs/PreceptDef[defName="IdeoDiversity_Exalted"]/conflictingMemes</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/PreceptDef[defName="IdeoDiversity_Exalted"]/conflictingMemes</xpath>
+            <value>
+                <li>OAGene_TerritorialHegemony</li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/PreceptDef[defName="IdeoDiversity_Exalted"]</xpath>
+            <value>
+                <conflictingMemes>
+                    <li>OAGene_TerritorialHegemony</li>
+                </conflictingMemes>
+            </value>
+        </nomatch>
+    </Operation-->
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/PreceptDef[defName = "Corpses_DontCare"]/associatedMemes</xpath>
+        <value>
+            <li>OAGene_TerritorialHegemony</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/PreceptDef[defName = "Corpses_DontCare"]/requiredMemes</xpath>
+        <value>
+            <li>OAGene_TerritorialHegemony</li>
+        </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/PreceptDef[defName = "IdeoRole_ShootingSpecialist" or defName = "IdeoRole_MeleeSpecialist"]/requiredMemes</xpath>
+        <value>
+            <li>OAGene_TerritorialHegemony</li>
+        </value>
+    </Operation><Operation Class="PatchOperationConditional">
+        <xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingCount" and thingDef="Column"]</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingCount" and thingDef="Column"]</xpath>
+            <value>
+                <li Class="RoomRequirement_ThingAnyOfCount">
+                    <things>
+                        <li>Column</li>
+                        <li>OA_RK_Zhuzi</li>
+                    </things>
+                    <count>4</count>
+                </li>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/PreceptDef[defName="IdeoBuilding"]/buildingRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount" and things/li="Column"]/things</xpath>
+            <value>
+                <li>OA_RK_Zhuzi</li>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThoughtDef[@Name="IdeoLeaderResentmentBase"]/thoughtClass</xpath>
+        <value>
+            <thoughtClass>OberoniaAurea.Thought_OAIdeoLeaderResentment</thoughtClass>
+        </value>
+    </Operation>
+
+    <Operation Class="OberoniaAurea_Frame.PatchOperationCheckDLC">
+        <Anomaly>true</Anomaly>
+        <match Class="PatchOperationAdd">
+            <xpath>Defs/MemeDef[defName="Inhuman"]/requireOne</xpath>
+            <value>
+                <li>
+                    <li>OARK_Birthday_Ignore</li>
+                </li>
+            </value>
+        </match>
+    </Operation></Patch>

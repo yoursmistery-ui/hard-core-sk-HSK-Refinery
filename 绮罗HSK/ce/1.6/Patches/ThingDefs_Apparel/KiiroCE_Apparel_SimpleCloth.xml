@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- 粗制衣物父类 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_SimpleBase"
+		]/statBases/Mass</xpath>
+		<value>
+			<Mass>0.5</Mass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_SimpleBase"
+		]/statBases</xpath>
+		<value>
+			<Bulk>0.2</Bulk>
+			<WornBulk>0.2</WornBulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		@Name="Kiiro_SimpleBase"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>1</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	
+	<!-- 粗制外套  -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_SimpleCoat"
+		]/statBases/StuffEffectMultiplierArmor</xpath>
+		<value>
+			<StuffEffectMultiplierArmor>1.5</StuffEffectMultiplierArmor>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+		defName="Kiiro_SimpleCoat"
+		]/statBases</xpath>
+		<value>
+			<Bulk>3</Bulk>
+			<WornBulk>1.5</WornBulk>
+		</value>
+	</Operation>
+</Patch>

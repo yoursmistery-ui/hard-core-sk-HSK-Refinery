@@ -1,0 +1,507 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Defs>
+	<!-- 娱乐/温度 整合与改造:
+	     1) Gloomy Vanilla Overhaul (1883678698) 新增: 门框挂帘(装饰) + 骰子桌(娱乐)
+	     2) 从「鼠族风格(花匠文化)」拆出的独立家具: 象棋桌/台球桌(→娱乐 古典娱乐)、电视(→娱乐 电视)、
+	        炉灶燃料+电力(→温度,对标 Building_Heater 火炉 与 Heater 电力加热器) -->
+
+	<!-- ============ 娱乐 古典娱乐 子分类 ============ -->
+	<ArchitectSense.DesignationSubCategoryDef>
+		<defName>RKFC_SubCategory_ClassicJoy</defName>
+		<label>ratkin recreation</label>
+		<description>Ratkin style classical games and recreation furniture.</description>
+		<defNames>
+			<li>RKFC_GL_ChessTable</li>
+			<li>RKFC_GL_BilliardsTable</li>
+			<li>RKFC_GL_DiceTable</li>
+			<li>RKMS_ChineseChessTable</li>
+		</defNames>
+		<designationCategory>Joy</designationCategory>
+		<debug>false</debug>
+		<order>15</order>
+	</ArchitectSense.DesignationSubCategoryDef>
+
+	<!-- ============ 象棋桌(独立,娱乐) ============ -->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_GL_ChessTable</defName>
+		<label>chess table</label>
+		<description>The ancient game of kings. Fun for a few hours here and there, even playing alone. It trains intellectual skills.</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/RGK_ChessTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(0.65, 0.25, 0.6)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.09375,0.296875,0.796875,0.703125)</rect>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>true</rotatable>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<minTechLevelToBuild>Medieval</minTechLevelToBuild>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+		</building>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>4</Beauty>
+			<JoyGainFactor>1</JoyGainFactor>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>70</costStuffCount>
+		<pathCost>30</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc2</designationHotKey>
+		<researchPrerequisites><li>Enjoyment_A1</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 台球桌(独立,娱乐,对标原版 BilliardsTable) ============ -->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_GL_BilliardsTable</defName>
+		<label>billiards table</label>
+		<description>A soft-topped bounded table for playing a variety of billiards-type games, and even trains hand-eye coordination.</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/GF_BilliardsTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<castEdgeShadows>true</castEdgeShadows>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<rotatable>true</rotatable>
+		<fillPercent>0.40</fillPercent>
+		<size>(2,3)</size>
+		<building>
+			<joyKind>Gaming_Dexterity</joyKind>
+		</building>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>4000</WorkToBuild>
+			<Mass>8</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>10</Beauty>
+			<JoyGainFactor>1</JoyGainFactor>
+		</statBases>
+		<stuffCategories>
+			<li>StrongMetallic</li>
+			<li>Woody</li>
+			<li>Precious</li>
+			<li>Plastic</li>
+		</stuffCategories>
+		<costStuffCount>70</costStuffCount>
+		<costList>
+			<Cloth>60</Cloth>
+		</costList>
+		<pathCost>30</pathCost>
+		<passability>PassThroughOnly</passability>
+		<placeWorkers>
+			<li>PlaceWorker_NeverAdjacentUnstandable</li>
+		</placeWorkers>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc3</designationHotKey>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<researchPrerequisites><li>Enjoyment_A1</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 骰子桌(整合 Gloomy Vanilla Overhaul) ============ -->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKFC_GL_DiceTable</defName>
+		<label>dice table</label>
+		<description>A table designed for playing dice games. A great way to test your luck.</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/Gloomy_DiceTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(4,4)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>true</rotatable>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<size>(2,1)</size>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+		</building>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>8000</WorkToBuild>
+			<Mass>40</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>2</Beauty>
+			<JoyGainFactor>1.2</JoyGainFactor>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<costList>
+			<Cloth>25</Cloth>
+		</costList>
+		<pathCost>70</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+		<researchPrerequisites><li>Enjoyment_A1</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 显像管电视(独立,娱乐) ============ -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_TubeTelevision</defName>
+		<label>tube television</label>
+		<description>A cathode ray tube display for showing moving pictures with sound. Even on the rimworlds, there is often an old transmitter running something at least marginally interesting.</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/RGK_TV</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,3)</drawSize>
+			<shadowData>
+				<volume>(0.5, 0.3, 0.4)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<rotatable>true</rotatable>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<thingCategories>
+			<li>BuildingsJoy</li>
+		</thingCategories>
+		<statBases>
+			<WorkToBuild>10000</WorkToBuild>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Mass>14</Mass>
+			<Flammability>1.0</Flammability>
+			<JoyGainFactor>1.2</JoyGainFactor>
+		</statBases>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<costList>
+			<Steel>80</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<pathCost>42</pathCost>
+		<passability>PassThroughOnly</passability>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<building>
+			<joyKind>Television</joyKind>
+			<spawnedConceptLearnOpportunity>TVForSickPeople</spawnedConceptLearnOpportunity>
+			<boughtConceptLearnOpportunity>TVForSickPeople</boughtConceptLearnOpportunity>
+			<watchBuildingStandDistanceRange>2~4</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>5</watchBuildingStandRectWidth>
+			<watchBuildingInSameRoom>true</watchBuildingInSameRoom>
+			<effectWatching>WatchingTelevision</effectWatching>
+		</building>
+		<placeWorkers>
+			<li>PlaceWorker_WatchArea</li>
+		</placeWorkers>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<basePowerConsumption>200</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+		</comps>
+		<tradeTags>
+			<li>Television</li>
+		</tradeTags>
+		<designationCategory>Joy</designationCategory>
+		<designationHotKey>Misc4</designationHotKey>
+		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+		<uiIconScale>0.64</uiIconScale>
+		<researchPrerequisites><li>TubeTelevision</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 门框挂帘(整合 Gloomy Vanilla Overhaul,装饰) ============ -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RKFC_GL_Curtains</defName>
+		<label>door frame curtains</label>
+		<description>Curtains for a door frame, it is only a decor, not a door.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<passability>PassThroughOnly</passability>
+		<canOverlapZones>true</canOverlapZones>
+		<graphicData>
+			<texPath>Things/Building/Furniture/DoorFrameCurtain</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>3.25,3.25</drawSize>
+		</graphicData>
+		<fillPercent>0.15</fillPercent>
+		<castEdgeShadows>false</castEdgeShadows>
+		<uiIconPath>Things/Building/Furniture/DoorFrameCurtainUI</uiIconPath>
+		<uiIconScale>1.5</uiIconScale>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<techLevel>Medieval</techLevel>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<statBases>
+			<SellPriceFactor>0.70</SellPriceFactor>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<WorkToBuild>200</WorkToBuild>
+			<Mass>10</Mass>
+			<Beauty>5</Beauty>
+		</statBases>
+		<clearBuildingArea>false</clearBuildingArea>
+		<tradeability>None</tradeability>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>Accessories</designationCategory>
+		<building>
+			<isEdifice>false</isEdifice>
+		</building>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<researchPrerequisites><li>ComplexFurniture</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 炉灶·燃料版(独立,温度,对标 Building_Heater 火炉) ============ -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_Fireplace</defName>
+		<label>ratkin fireplace</label>
+		<description>A warm ratkin fireplace that heats the room by burning wood.</description>
+		<thingClass>Building_Heater</thingClass>
+		<category>Building</category>
+		<thingCategories>
+			<li>BuildingsTemperature</li>
+		</thingCategories>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<drawerType>RealtimeOnly</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Fireplace2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+			<drawOffsetSouth>(0,-1,0)</drawOffsetSouth>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<uiIconPath>Things/Building/Furniture/RGK_Fireplace2_south</uiIconPath>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<uiIconScale>1.5</uiIconScale>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<passability>Impassable</passability>
+		<tickerType>Normal</tickerType>
+		<fillPercent>1.0</fillPercent>
+		<statBases>
+			<SellPriceFactor>0.70</SellPriceFactor>
+			<Beauty>15</Beauty>
+			<Mass>15</Mass>
+			<MaxHitPoints>310</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Flammability>0</Flammability>
+		</statBases>
+		<selectable>true</selectable>
+		<costList>
+			<WoodLog>60</WoodLog>
+		</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>3.0</fuelConsumptionRate>
+				<fuelCapacity>75.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>1</initialFuelPercent>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_FireOverlay">
+				<fireSize>0.9</fireSize>
+				<offset>(0, 0.1, 0)</offset>
+			</li>
+			<li Class="CompProperties_HeatPusher">
+				<heatPerSecond>25</heatPerSecond>
+				<heatPushMaxTemperature>25</heatPushMaxTemperature>
+			</li>
+		</comps>
+		<designationHotKey>Misc6</designationHotKey>
+		<size>(2,1)</size>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Temperature</designationCategory>
+		<researchPrerequisites><li>Temperature_control_B1</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 炉灶·电力版(独立,温度,对标 Heater 电力加热器) ============ -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>RKFC_RGK_FireplaceE</defName>
+		<label>electric ratkin fireplace</label>
+		<description>A warm ratkin fireplace that heats the room using electricity.</description>
+		<thingClass>Building_Heater</thingClass>
+		<category>Building</category>
+		<drawerType>RealtimeOnly</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/RGK_Fireplace2</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<drawOffsetNorth>(0,0,0)</drawOffsetNorth>
+			<drawOffsetSouth>(0,-1,0)</drawOffsetSouth>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<thingCategories>
+			<li>BuildingsTemperature</li>
+		</thingCategories>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<uiIconPath>Things/Building/Furniture/RGK_Fireplace2_south</uiIconPath>
+		<uiIconOffset>(0, 0.15)</uiIconOffset>
+		<uiIconScale>1.5</uiIconScale>
+		<altitudeLayer>Pawn</altitudeLayer>
+		<passability>Impassable</passability>
+		<tickerType>Rare</tickerType>
+		<fillPercent>1.0</fillPercent>
+		<statBases>
+			<SellPriceFactor>0.70</SellPriceFactor>
+			<Beauty>15</Beauty>
+			<Mass>15</Mass>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Flammability>0</Flammability>
+		</statBases>
+		<selectable>true</selectable>
+		<costList>
+			<Steel>25</Steel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<costStuffCount>80</costStuffCount>
+		<stuffCategories>
+			<li>Stony</li>
+		</stuffCategories>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<placeWorkers>
+			<li>PlaceWorker_Heater</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>175</basePowerConsumption>
+				<shortCircuitInRain>true</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Commands/OnOff</commandTexture>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>10</glowRadius>
+				<glowColor>(252,187,113,0)</glowColor>
+			</li>
+			<li Class="CompProperties_TempControl">
+				<energyPerSecond>21</energyPerSecond>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<designationHotKey>Misc6</designationHotKey>
+		<size>(2,1)</size>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<designationCategory>Temperature</designationCategory>
+		<researchPrerequisites><li>AirConditioning</li></researchPrerequisites>
+	</ThingDef>
+
+	<!-- ============ 从鼠族HSK拓展迁入: 鼠族中式象棋(娱乐) ============ -->
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>RKMS_ChineseChessTable</defName>
+		<label>chinese chess table</label>
+		<description>This is a background set in the ancient world of the game, in addition to the most basic rules and gameplay, there are many later invented gameplay, but no matter how to change, this is still the earliest kind of two-person game style.</description>
+		<graphicData>
+			<texPath>Things/Building/Joy/ChineseChessTable</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shadowData>
+				<volume>(0.65, 0.25, 0.6)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.09375,0.296875,0.796875,0.703125)</rect>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>true</rotatable>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<fillPercent>0.40</fillPercent>
+		<minTechLevelToBuild>Medieval</minTechLevelToBuild>
+		<building>
+			<joyKind>Gaming_Cerebral</joyKind>
+			<paintable>true</paintable>
+		</building>
+		<researchPrerequisites>
+			<li>ComplexFurniture</li>
+		</researchPrerequisites>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>6000</WorkToBuild>
+			<Mass>5</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>4</Beauty>
+			<JoyGainFactor>1</JoyGainFactor>
+		</statBases>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>70</costStuffCount>
+		<pathCost>30</pathCost>
+		<passability>PassThroughOnly</passability>
+		<designationCategory>Joy</designationCategory>
+	</ThingDef>
+
+</Defs>

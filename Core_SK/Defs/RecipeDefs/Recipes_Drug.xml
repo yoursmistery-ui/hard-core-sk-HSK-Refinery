@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<RecipeDef>
+		<defName>VG_BulkIbuprofen</defName>
+		<label>make four Ibuprofen (x4)</label>
+		<description>Make bulk Ibuprofen from Neutroamine. Production: 4.</description>
+		<jobString>Crafting Ibuprofen.</jobString>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<workSkill>Medicine</workSkill>
+		<workAmount>720</workAmount>
+		<soundWorking>Recipe_Drug</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Neutroamine</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Neutroamine</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<VG_Ibuprofen>4</VG_Ibuprofen>
+		</products>
+		<skillRequirements>
+			<Medicine>10</Medicine>
+		</skillRequirements>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+		<researchPrerequisite>PenoxycylineProduction</researchPrerequisite>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>MakeActivatedCarbon</defName>
+		<label>Make activated carbon</label>
+		<description>Make activated carbon pills from coal. Produces 9.</description>
+		<jobString>Making activated carbon</jobString>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Drug</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>780</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Charcoal</li>
+						<li>Coal</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Charcoal</li>
+				<li>Coal</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<ActivatedCarbon>9</ActivatedCarbon>
+		</products>
+		<researchPrerequisite>DrugProduction</researchPrerequisite>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<workSkill>Medicine</workSkill>
+		<recipeUsers>
+			<li>Kiln</li>
+			<li>meditable</li>
+			<li>DrugLab</li>
+		</recipeUsers>
+		<skillRequirements>
+			<Medicine>3</Medicine>
+			<Crafting>5</Crafting>
+		</skillRequirements>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>MakeNaturalNeutroamine</defName>
+		<label>make natural neutroamine</label>
+		<description>Make neutroamine from natural ingredients. Produces 1.</description>
+		<jobString>Crafting Neutroamine.</jobString>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<workSkill>Medicine</workSkill>
+		<workAmount>700</workAmount>
+		<soundWorking>Recipe_Drug</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>NeutroPetals</li>
+					</thingDefs>
+				</filter>
+				<count>8</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Hypericum</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>NeutroPetals</li>
+				<li>Hypericum</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Neutroamine>1</Neutroamine>
+		</products>
+		<skillRequirements>
+			<Medicine>6</Medicine>
+			<Crafting>3</Crafting>
+		</skillRequirements>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+		<researchPrerequisite>Drugs_C2</researchPrerequisite>
+	</RecipeDef>
+
+</Defs>

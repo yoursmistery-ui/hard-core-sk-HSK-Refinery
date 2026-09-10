@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>Kiiro_PriatesDefendCentre</defName>
+    <label>priates</label>
+    <description>A group of priates.</description>
+    <workerClass>Kiiro_Event.SitePartWorker_HostileFaction</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/SleepingPawns</expandingIconTexture>
+    <arrivedLetter>There are a few priates in this area.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <defaultHidden>true</defaultHidden>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>400</minThreatPoints>
+    <tags>
+      <li>Kiiro_MineralThreat</li>
+      <li>Kiiro_PriatesDefendCentre</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_PriatesDefendCentre</defName>
+    <linkWithSite>Kiiro_PriatesDefendCentre</linkWithSite>
+    <order>1600</order>
+    <genStep Class="Kiiro_Event.GenStep_Pirates" />
+  </GenStepDef>
+
+
+
+  <SitePartDef>
+    <defName>Kiiro_AmbushEdge</defName>
+    <label>ambush</label>
+    <description>An ambush.</description>
+    <workerClass>SitePartWorker_Ambush</workerClass>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Ambush</expandingIconTexture>
+    <defaultHidden>true</defaultHidden>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <tags>
+      <li>Kiiro_AmbushEdge</li>
+      <li>Kiiro_MineralThreat</li>
+    </tags>
+    <excludesTags>
+      <li>MechCluster</li>
+      <li>MechClusterForceNoConditionCauser</li>
+      <li>SleepingMechanoids</li>
+      <li>Manhunters</li>
+    </excludesTags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_AmbushEdge</defName>
+    <linkWithSite>Kiiro_AmbushEdge</linkWithSite>
+    <order>1600</order>
+    <genStep Class="GenStep_Ambush_Edge" />
+  </GenStepDef>
+
+
+
+  <SitePartDef>
+    <defName>Kiiro_ReinforcedOutpost</defName>
+    <label>reinforced outpost</label>
+    <description>A reinforced outpost.</description>
+    <workerClass>Kiiro_Event.SitePartWorker_ReinforcedOutpost</workerClass>
+    <siteTexture>World/WorldObjects/Sites/Outpost</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Outpost</expandingIconTexture>
+    <applyFactionColorToSiteTexture>true</applyFactionColorToSiteTexture>
+    <showFactionInInspectString>true</showFactionInInspectString>
+    <requiresFaction>true</requiresFaction>
+    <minFactionTechLevel>Industrial</minFactionTechLevel>
+    <arrivedLetter>There is a enemy reinforced outpost in this area.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>300</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Kiiro_ReinforcedOutpost</li>
+    </tags>
+    <excludesTags>
+      <li>MechCluster</li>
+      <li>MechClusterForceNoConditionCauser</li>
+      <li>SleepingMechanoids</li>
+      <li>Manhunters</li>
+    </excludesTags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_ReinforcedOutpost</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost</linkWithSite>
+    <order>470</order>
+    <genStep Class="Kiiro_Event.GenStep_ReinforcedOutpost">
+      <widthRange>
+        <min>3</min>
+        <max>4</max>
+      </widthRange>
+      <guardsCountRange>
+        <min>1</min>
+        <max>1</max>
+      </guardsCountRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_GuerrillaForces</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost</linkWithSite>
+    <order>470</order>
+    <genStep Class="Kiiro_Event.GenStep_KiiroGuerrillaForces">
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_TurretsPower</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost</linkWithSite>
+    <order>471</order>
+    <genStep Class="GenStep_Power" />
+  </GenStepDef>
+
+
+
+  <SitePartDef Name="Outpost">
+    <defName>Kiiro_Outpost</defName>
+    <label>outpost</label>
+    <description>A small, guarded outpost.</description>
+    <workerClass>SitePartWorker_Outpost</workerClass>
+    <siteTexture>World/WorldObjects/Sites/Outpost</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Outpost</expandingIconTexture>
+    <applyFactionColorToSiteTexture>true</applyFactionColorToSiteTexture>
+    <showFactionInInspectString>true</showFactionInInspectString>
+    <requiresFaction>true</requiresFaction>
+    <approachOrderString>Attack {0}</approachOrderString>
+    <approachingReportString>Attacking {0}</approachingReportString>
+    <arrivedLetter>There is an enemy outpost in this area.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>300</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Kiiro_Outpost</li>
+      <li>Kiiro_MineralThreat</li>
+    </tags>
+    <excludesTags>
+      <li>MechCluster</li>
+      <li>MechClusterForceNoConditionCauser</li>
+      <li>SleepingMechanoids</li>
+      <li>Manhunters</li>
+    </excludesTags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_Outpost</defName>
+    <linkWithSite>Kiiro_Outpost</linkWithSite>
+    <order>450</order>
+    <genStep Class="GenStep_Outpost"/>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>OutpostPower</defName>
+    <linkWithSite>Kiiro_Outpost</linkWithSite>
+    <order>451</order>
+    <genStep Class="GenStep_Power"/>
+  </GenStepDef>
+
+
+
+  <!-- 营救任务的地图：敌方 -->
+  <SitePartDef>
+    <defName>Kiiro_ReinforcedOutpost_Rescue</defName>
+    <label>reinforced outpost</label>
+    <description>A reinforced outpost.</description>
+    <workerClass>Kiiro_Event.SitePartWorker_ReinforcedOutpost</workerClass>
+    <siteTexture>World/WorldObjects/Sites/Outpost</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Outpost</expandingIconTexture>
+    <applyFactionColorToSiteTexture>true</applyFactionColorToSiteTexture>
+    <showFactionInInspectString>true</showFactionInInspectString>
+    <requiresFaction>true</requiresFaction>
+    <minFactionTechLevel>Industrial</minFactionTechLevel>
+    <arrivedLetter>There is a enemy reinforced outpost in this area.</arrivedLetter>
+    <arrivedLetterDef>NegativeEvent</arrivedLetterDef>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <minThreatPoints>300</minThreatPoints>
+    <minMapSize>(150,1,150)</minMapSize>
+    <tags>
+      <li>Kiiro_ReinforcedOutpost_Rescue</li>
+    </tags>
+    <excludesTags>
+      <li>MechCluster</li>
+      <li>MechClusterForceNoConditionCauser</li>
+      <li>SleepingMechanoids</li>
+      <li>Manhunters</li>
+    </excludesTags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>Kiiro_ReinforcedOutpost_Rescue</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost_Rescue</linkWithSite>
+    <order>470</order>
+    <genStep Class="Kiiro_Event.GenStep_ReinforcedOutpost">
+      <widthRange>
+        <min>3</min>
+        <max>4</max>
+      </widthRange>
+      <guardsCountRange>
+        <min>1</min>
+        <max>1</max>
+      </guardsCountRange>
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_GuerrillaForces_OneEnter</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost_Rescue</linkWithSite>
+    <order>470</order>
+    <genStep Class="Kiiro_Event.GenStep_KiiroGuerrillaForce_OneEnter">
+    </genStep>
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>Kiiro_TurretsPower_Rescue</defName>
+    <linkWithSite>Kiiro_ReinforcedOutpost_Rescue</linkWithSite>
+    <order>471</order>
+    <genStep Class="GenStep_Power" />
+  </GenStepDef>
+
+</Defs>

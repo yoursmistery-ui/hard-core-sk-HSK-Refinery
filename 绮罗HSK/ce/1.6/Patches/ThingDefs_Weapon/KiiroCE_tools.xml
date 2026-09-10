@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!--绮罗鹤嘴锄-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Pickaxe"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>7</power>
+					<cooldownTime>1.6</cooldownTime>
+					<armorPenetrationBlunt>0.8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>15</power>
+					<cooldownTime>2.5</cooldownTime>
+					<armorPenetrationSharp>2.45</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_Pickaxe"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.2</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Pickaxe"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.20</MeleeCritChance>
+			<MeleeParryChance>0.75</MeleeParryChance>
+			<MeleeDodgeChance>0.40</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗鹤嘴锄 绮罗伐木斧 绮罗锄头的体积-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Pickaxe" or defName="Kiiro_Axe" or defName="Kiiro_Hoe"]/statBases</xpath>
+		<value>
+			<Bulk>8</Bulk>
+		</value>
+	</Operation>
+	
+	<!--绮罗伐木斧-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Axe"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>7</power>
+					<cooldownTime>1.6</cooldownTime>
+					<armorPenetrationBlunt>0.8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>16</power>
+					<cooldownTime>2.5</cooldownTime>
+					<armorPenetrationSharp>2</armorPenetrationSharp>
+					<armorPenetrationBlunt>2.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_Axe"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.2</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Axe"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.30</MeleeCritChance>
+			<MeleeParryChance>0.75</MeleeParryChance>
+			<MeleeDodgeChance>0.40</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗锄头-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Hoe"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>7</power>
+					<cooldownTime>1.6</cooldownTime>
+					<armorPenetrationBlunt>0.8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>14</power>
+					<cooldownTime>1.8</cooldownTime>
+					<armorPenetrationSharp>1.5</armorPenetrationSharp>
+					<armorPenetrationBlunt>2</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_Hoe"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.2</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Hoe"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.10</MeleeCritChance>
+			<MeleeParryChance>0.60</MeleeParryChance>
+			<MeleeDodgeChance>0.30</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗木工锤-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Hammer"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>16</power>
+					<cooldownTime>1.8</cooldownTime>
+					<armorPenetrationBlunt>5.5</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_Hammer"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Hammer"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.40</MeleeCritChance>
+			<MeleeParryChance>0.50</MeleeParryChance>
+			<MeleeDodgeChance>0.30</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗木工锤的体积-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Hammer"]/statBases</xpath>
+		<value>
+			<Bulk>6</Bulk>
+		</value>
+	</Operation>
+	
+	<!--绮罗菜刀-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_KitchenKnife"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>10</power>
+					<cooldownTime>1.2</cooldownTime>
+					<armorPenetrationSharp>1.3</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.2</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_KitchenKnife"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.3</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_KitchenKnife"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.60</MeleeCritChance>
+			<MeleeParryChance>0.20</MeleeParryChance>
+			<MeleeDodgeChance>0.50</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗菜刀的体积-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_KitchenKnife"]/statBases</xpath>
+		<value>
+			<Bulk>2</Bulk>
+		</value>
+	</Operation>
+	
+	<!--绮罗锅铲-->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="Kiiro_Slice"]/tools</xpath>
+		<value>
+			<tools>
+				<li Class="CombatExtended.ToolCE">
+					<label>handle</label>
+					<capacities>
+						<li>Blunt</li>
+					</capacities>
+					<power>8</power>
+					<cooldownTime>1.5</cooldownTime>
+					<armorPenetrationBlunt>0.8</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Handle</linkedBodyPartsGroup>
+				</li>
+
+				<li Class="CombatExtended.ToolCE">
+					<label>edge</label>
+					<capacities>
+						<li>Cut</li>
+					</capacities>
+					<power>10</power>
+					<cooldownTime>1.2</cooldownTime>
+					<armorPenetrationSharp>1.2</armorPenetrationSharp>
+					<armorPenetrationBlunt>0.2</armorPenetrationBlunt>
+					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
+				</li>
+			</tools>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[
+			defName="Kiiro_Slice"
+			]/statBases
+		</xpath>
+		<value>
+			<MeleeCounterParryBonus>0.2</MeleeCounterParryBonus>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Slice"
+			]/equippedStatOffsets
+		</xpath>
+		<value>
+			<MeleeCritChance>0.20</MeleeCritChance>
+			<MeleeParryChance>0.50</MeleeParryChance>
+			<MeleeDodgeChance>0.50</MeleeDodgeChance>
+		</value>
+	</Operation>
+	
+	<!--绮罗锅铲的体积-->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Kiiro_Slice"]/statBases</xpath>
+		<value>
+			<Bulk>3.5</Bulk>
+		</value>
+	</Operation>
+</Patch>

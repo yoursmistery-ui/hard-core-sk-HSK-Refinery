@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============ 碗橱碗碟架适配所有屠宰灶台 (2026-08-16) ============
+         用户要求「古典家具的碗碟柜之类的,能给所有的屠宰/灶台加工作速度,
+         无论古典还是 HSK 的」。
+         古典工作速度设施(均在鼠族家具拓展内):
+           RKFC_GL_Cupboard(碗橱)      +10% WorkTableWorkSpeedFactor, maxDistance 3
+           RKFC_GL_TablewareShelf(碗碟架) +15% WorkTableWorkSpeedFactor, maxDistance 2
+         现状:
+           - 鼠族柴火灶 RKFC_RGK_FueledStove / 电灶 RKFC_GL_ElectricStove 已链接这两个设施;
+           - 鼠族古典屠宰台 RKFC_GL_TableButcher 只链接 ToolCabinet,缺古典设施;
+           - HSK 屠宰/灶台(TableButcher/ButcherSpot/TableKitchen/FueledStove/
+             ElectricStove/ElectricStove_Pro/Canningstove)只链接 CookingTools(HSK 自带),
+             缺古典设施;
+           - 鼠族篝火 RKFC_GL_Bonfire 无 CompProperties_AffectedByFacilities,需整体添加。
+         本补丁(最终层): 给上述台全部补上两个古典设施的链接,使古典碗橱/碗碟架
+         对 古典+HSK 所有屠宰台/灶台 生效(设施 maxSimultaneous=1,每台需各配一个)。
+         ⚠️ 写法: 已有 AffectedByFacilities 的用 PatchOperationAdd 追加 li;
+         篝火无该 comp,用 PatchOperationAdd 在 comps 末尾追加整个 li。
+         无 MayRequire 门控(设施定义在鼠族家具拓展内,始终存在)。 -->
+    <!-- 1) HSK 屠宰台/厨房案桌 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="TableButcher"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ButcherSpot"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="TableKitchen"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <!-- 2) HSK 灶台 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FueledStove"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectricStove"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="ElectricStove_Pro"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Canningstove"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <!-- 3) 鼠族古典屠宰台: 已有 linkableFacilities(ToolCabinet),追加 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RKFC_GL_TableButcher"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+        <value>
+            <li>RKFC_GL_Cupboard</li>
+            <li>RKFC_GL_TablewareShelf</li>
+        </value>
+    </Operation>
+    <!-- 4) 鼠族篝火: 无 AffectedByFacilities,整体添加(篝火可做饭,属灶台类) -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="RKFC_GL_Bonfire"]/comps</xpath>
+        <value>
+            <li Class="CompProperties_AffectedByFacilities">
+                <linkableFacilities>
+                    <li>RKFC_GL_Cupboard</li>
+                    <li>RKFC_GL_TablewareShelf</li>
+                </linkableFacilities>
+            </li>
+        </value>
+    </Operation>
+</Patch>

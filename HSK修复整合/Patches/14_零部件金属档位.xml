@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 零部件金属档位门控(2026-09-02, "材料档≥零部件档"下限门控, 与衣物 StuffTechGate 同规则)。
+       HSK 零部件配方是显式 RecipeDef, 金属槽用自建类别(SLDBar/HCMBar/PRSBar/USLDBar/USLDHBar/RARBar),
+       槽内混档是泄漏源。对每条配方: ①金属槽 ingredient.filter Add disallowedThingDefs(收料硬门槛)
+       ②fixedIngredientFilter Add disallowedThingDefs(账单硬边界) ③已有 defaultIngredientFilter 的
+       把禁入项追加进既有 disallowedThingDefs(账单默认, 原版范式: thingDefs 先应用、disallowed 后应用胜出)。
+       门控基线: MedievalBronze=Medieval / 导线·机械件·电子件=Industrial / ComponentUltra=Spacer;
+       高级组件(USLDBar 全员≥工业)与原版 ComponentIndustrial(固定钢)不动; 贵金属槽 PRSBar(金银)按
+       配方设计保留。档位权威源: _tmp/材料门控/stuffs_tier.csv + Unified.xml 槽位反查。 -->
+
+  <!-- 中世纪零件(金属变体): 槽 SLDBar/HCMBar/PRSBar, 基线 Medieval → 禁熟铁(原始) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentMedievalBronze"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentMedievalBronze"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li></disallowedThingDefs></value>
+  </Operation>
+
+  <!-- 导线×2: 槽 HCMBar, 基线 Industrial → 禁铜/金(中世纪) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Hand"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Hand"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Hand"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+    <value><li>CopperBar</li><li>GoldBar</li></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Electric"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Electric"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeWires_Electric"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+    <value><li>CopperBar</li><li>GoldBar</li></value>
+  </Operation>
+
+  <!-- 机械件×2: 槽 SLDBar, 基线 Industrial → 禁原始+中世纪档(熟铁/青铜/锻焊钢/乌兹钢/坩埚钢) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Hand"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li><li>Bronze</li><li>ForgedSteel</li><li>WootzSteel</li><li>CrucibleSteel</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Hand"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li><li>Bronze</li><li>ForgedSteel</li><li>WootzSteel</li><li>CrucibleSteel</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Hand"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Hand"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+      <value><li>Bronze</li></value>
+    </match>
+    <!-- VMS Core_SK_Overlap 已 Remove 掉本节点: 在仍存在的 defaultIngredientFilter 下重建 disallowedThingDefs -->
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Hand"]/defaultIngredientFilter</xpath>
+      <value><disallowedThingDefs><li>Bronze</li></disallowedThingDefs></value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Electric"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li><li>Bronze</li><li>ForgedSteel</li><li>WootzSteel</li><li>CrucibleSteel</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Electric"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>WroughtIron</li><li>Bronze</li><li>ForgedSteel</li><li>WootzSteel</li><li>CrucibleSteel</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Electric"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Electric"]/defaultIngredientFilter/disallowedThingDefs</xpath>
+      <value><li>Bronze</li></value>
+    </match>
+    <!-- VMS Core_SK_Overlap 已 Remove 掉本节点: 在仍存在的 defaultIngredientFilter 下重建 disallowedThingDefs -->
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/RecipeDef[defName="MakeSimpleMechanism_Electric"]/defaultIngredientFilter</xpath>
+      <value><disallowedThingDefs><li>Bronze</li></disallowedThingDefs></value>
+    </nomatch>
+  </Operation>
+
+  <!-- 电子件: 槽 HCMBar, 基线 Industrial → 禁铜/金; 固定点名 SilverBar 不动 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeElectronicComponents"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="MakeElectronicComponents"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>CopperBar</li><li>GoldBar</li></disallowedThingDefs></value>
+  </Operation>
+
+  <!-- 极致零件: 基线 Spacer → RARBar 禁工业+中世纪+原始档成员, USLDHBar 禁贫铀(工业); PRSBar 金银槽保留 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentUltra"]/ingredients/li[1]/filter</xpath>
+    <value><disallowedThingDefs><li>Titanium</li><li>Chromium</li><li>NickelBar</li><li>Cobalt</li><li>AluminiumBar</li><li>CopperBar</li><li>TinBar</li><li>Manganese</li><li>Zinc</li><li>PureSilver</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentUltra"]/ingredients/li[2]/filter</xpath>
+    <value><disallowedThingDefs><li>DepletedUranium</li></disallowedThingDefs></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RecipeDef[defName="Make_ComponentUltra"]/fixedIngredientFilter</xpath>
+    <value><disallowedThingDefs><li>Titanium</li><li>Chromium</li><li>NickelBar</li><li>Cobalt</li><li>AluminiumBar</li><li>CopperBar</li><li>TinBar</li><li>Manganese</li><li>Zinc</li><li>PureSilver</li><li>DepletedUranium</li></disallowedThingDefs></value>
+  </Operation>
+</Patch>

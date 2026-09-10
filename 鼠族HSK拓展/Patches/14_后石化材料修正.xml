@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 合并自(保持原执行序): 14_后石化材料修正.xml, 15_材料丰富调整.xml, 16_装甲盾牌与贵族材料.xml --><Patch><!-- 后石化材料修正(鼠族衣物 IV / Ratkin_Apparel_C3):
+         古堡夫人长裙(bjq)、古堡夫人蕾丝头饰(bjm)、白湛女王披风(nwpf)、
+         宫廷长裙(nwcq)、宫廷长裙B款(nwcqB)原本研究已挂在后石化节点,
+         但配方仍是中世纪材料(布 + 原始零部件),与同档石化配方不一致。
+         统一改为后工业/石油时代材料: 普通零部件 + 复合粘剂 + 人造纤维 + 塑料 + 橡胶。 -->
+
+    <!-- 古堡夫人蕾丝头饰 bjm -->
+    <!-- 古堡夫人长裙 bjq -->
+    <!-- 白湛女王披风 nwpf -->
+    <!-- 宫廷长裙 nwcq -->
+    <!-- 宫廷长裙B款 nwcqB -->
+    <!-- ============ 第一部分: 鼠族衣物 III(C1) 前工业化材料(最终) ============
+         布/皮革 + 毛 + 钢/木板 + 原始零部件,数量略减,种类更丰富;
+         每件加 普通零部件 x2;粘合剂(Compaste)只加在背包/卫花使制服/工作服;
+         银锭只加在贵族服饰(皇家披袍),普通服饰不加。 -->
+    <!-- 装甲/盾牌补充材料 + 贵族服饰补银(2026-08-07):
+         1) 鼠族盔甲(中世纪 + D1/D2)与鼠族中世纪盾: 追加 普通零部件 x3 + 木板;
+         2) 鼠族衣物 IV 贵族装 8 件: 追加 银锭 x1(银只加在贵族服饰)。 -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_Plate"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_PlateHelmA"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_PlateHelmB"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_PlateHelmC"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_Crusaders"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_Crusadershead"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_gelusi"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_HeavyShield"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_TowerShield"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKFix_Make_RK_WoodenShield"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>ComponentIndustrial</li>
+<li>WoodPlank</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_bjq"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_bjm"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_nwpf"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_nwcq"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_nwcqB"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_nwtg"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_fangdanjunfu"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation>
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/RecipeDef[defName="RKHSKVictoria_Make_gjhpf"]/fixedIngredientFilter/thingDefs</xpath>
+        <value>
+<li>SilverBar</li>
+        </value>
+    </Operation></Patch>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  [SYR] Processor Framework 1.6 融合搬运(2026-08-28 任务B, packageId
+  syrchalis.processor.framework → 已内置本 mod, 不要再单独安装 PF 本体!):
+  - defName 与 PF 原版保持一致(BarrelProcessor/FillProcessor/EmptyProcessor/
+    PF_Fill/PF_Empty/PF_Honk), MO 移植机器引用的
+    ProcessorFramework.CompProperties_Processor / ProcessDef 类型不受影响;
+  - 中文 label/description 内联(AGENTS §4);
+  - 按用户要求「酒类不做」: 不搬 PF 自带的 Beer/Test 两个 ProcessDef,
+    BarrelProcessor.processes 留空 → 发酵桶是"机制模板"通用发酵器;
+  - 不搬 PF_Patches.xml(它会拆原版 FermentingBarrel/改 Brewery 造价,
+    与 HSK 自带酿造链冲突);
+  - 不搬 0Harmony.dll(Harmony mod 已提供, 防 AGENTS §5 同名装配冲突);
+  - ProcessorFramework.dll 已拷入 1.6/Assemblies/。
+============================================================================ -->
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>BarrelProcessor</defName>
+		<label>发酵桶</label>
+		<description>通用发酵桶: 不局限于某一种发酵物, 任何支持发酵流程的配方都能在这里自动完成——投入原料, 等待时间, 取回产物。</description>
+		<thingClass>ProcessorFramework.Building_ColorCoded</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Production/BarrelProcessor</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<rect>(0.05,0.1,0.9,0.9)</rect>
+			</damageData>
+			<shadowData>
+				<volume>(0.75, 0.35, 0.33)</volume>
+			</shadowData>
+		</graphicData>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.45</fillPercent>
+		<pathCost>60</pathCost>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<statBases>
+			<WorkToBuild>600</WorkToBuild>
+			<Mass>10</Mass>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<costList>
+			<Steel>10</Steel>
+		</costList>
+		<costStuffCount>30</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+		</stuffCategories>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<capacity>25</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<dropIngredients>false</dropIngredients>
+				<showProductIcon>true</showProductIcon>
+				<barOffset>(0.0, 0.25)</barOffset>
+				<barScale>(1.0, 1.0)</barScale>
+				<colorCoded>false</colorCoded>
+				<processes />
+			</li>
+			<li Class="CompProperties_Forbiddable"/>
+		</comps>
+		<tickerType>Rare</tickerType>
+		<rotatable>true</rotatable>
+		<designationCategory>Production</designationCategory>
+		<researchPrerequisites>
+			<li>Brewing</li>
+		</researchPrerequisites>
+		<uiIconPath>Things/Building/Production/BarrelProcessor_north</uiIconPath>
+	</ThingDef>
+
+	<JobDef>
+		<defName>FillProcessor</defName>
+		<driverClass>ProcessorFramework.JobDriver_FillProcessor</driverClass>
+		<reportString>正在装填 TargetA。</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	<JobDef>
+		<defName>EmptyProcessor</defName>
+		<driverClass>ProcessorFramework.JobDriver_EmptyProcessor</driverClass>
+		<reportString>正在从 TargetA 取出产物。</reportString>
+		<suspendable>false</suspendable>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+	<ReservationLayerDef>
+		<defName>PF_Fill</defName>
+	</ReservationLayerDef>
+
+	<ReservationLayerDef>
+		<defName>PF_Empty</defName>
+	</ReservationLayerDef>
+
+	<WorkGiverDef>
+		<defName>EmptyProcessor</defName>
+		<label>清空处理器</label>
+		<giverClass>ProcessorFramework.WorkGiver_EmptyProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>取出产物</verb>
+		<gerund>正在取出产物</gerund>
+		<priorityInType>20</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>FillProcessor</defName>
+		<label>装填处理器</label>
+		<giverClass>ProcessorFramework.WorkGiver_FillProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>装填</verb>
+		<gerund>正在装填</gerund>
+		<priorityInType>19</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<SoundDef>
+		<defName>PF_Honk</defName>
+		<maxSimultaneous>5</maxSimultaneous>
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>UI/DebugGoose/Honk</clipPath>
+					</li>
+				</grains>
+				<volumeRange>30~40</volumeRange>
+				<pitchRange>0.9~1.1</pitchRange>
+			</li>
+		</subSounds>
+	</SoundDef>
+
+</Defs>

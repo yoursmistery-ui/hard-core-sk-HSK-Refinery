@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 石化工业线 v3 · 精炼厂卸货湾(RefineryLoadingBay)适配(2026-08-29)
+       背景1: CompRefinery 用 GenPlace.TryPlaceThing(Direct) 强吐产物, 不经存储过滤器, 故产物落地本身不受 filter 限制;
+              但原版 fixedStorageSettings 只列 8 种(Vile 改造后实际产物为 Polymers/Coke/Butadiene/Xylene/Sulphates/
+              Propylene/SyntheticFibers/HMFibers + 本 mod 的 SyntheticAmmonia/Neutroamine), 未列出的产物不被卸货湾认领,
+              小人会把它们当外来物搬走 → 这里补齐过滤器, 让卸货湾成为全部精炼产物的专属料斗。
+       背景2: 卸货湾是 CompRefinery 按 defName(DubDef.RefineryLoadingBay)硬找的建筑, 不能自建同功能替代品,
+              因此"精炼厂出料口"的视觉统一走换皮: 贴图为 Vanilla Chemfuel Expanded(2792917473) 的 DeepchemDrain 漏斗图。
+       全部操作 = 顶层 PatchOperationConditional(xpath 存在性门控), 目标 def 不在即静默跳过。 -->
+<Patch>
+
+  <!-- 换皮: 出料口漏斗图(仅在 Rimefeller 卸货湾存在时) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/graphicData/texPath</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/graphicData/texPath</xpath>
+      <value><texPath>Things/Building/RK_Petro_RefineryOutlet</texPath></value>
+    </match>
+  </Operation>
+
+  <!-- 产物过滤器补齐: 每种产物一个独立 Conditional, match 内同时补 fixed / default 两处 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Coke"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>Coke</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>Coke</li></value></li>
+            </operations>
+          </match>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Butadiene"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>Butadiene</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>Butadiene</li></value></li>
+            </operations>
+          </match>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Xylene"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>Xylene</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>Xylene</li></value></li>
+            </operations>
+          </match>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="Propylene"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>Propylene</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>Propylene</li></value></li>
+            </operations>
+          </match>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="SyntheticFibers"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>SyntheticFibers</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>SyntheticFibers</li></value></li>
+            </operations>
+          </match>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="HMFibers"]</xpath>
+          <match Class="PatchOperationSequence">
+            <operations>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/fixedStorageSettings/filter/thingDefs</xpath><value><li>HMFibers</li></value></li>
+              <li Class="PatchOperationAdd"><xpath>Defs/ThingDef[defName="RefineryLoadingBay"]/building/defaultStorageSettings/filter/thingDefs</xpath><value><li>HMFibers</li></value></li>
+            </operations>
+          </match>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

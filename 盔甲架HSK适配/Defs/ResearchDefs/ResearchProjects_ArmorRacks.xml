@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- HSK 三档自锁科技链:入口借挂 ComplexFurniture,后续逐级自锁。
+         Parent 继承 Core_SK 抽象基类,自动带入 techLevel/研究台门槛/SK.AdvancedResearchExtension/ResearchTreeSKModExtension。 -->
+
+    <!-- 一档:中世纪 —— 解锁普通盔甲架 -->
+    <ResearchProjectDef ParentName="MedievalBase">
+        <defName>ArmorRacks_BasicRackResearch</defName>
+        <label>organized storage racks</label>
+        <description>Build armor racks to keep sets of apparel neatly organized and free from deteriorating.</description>
+        <baseCost>600</baseCost>
+        <prerequisites>
+            <li>ComplexFurniture</li>
+        </prerequisites>
+        <!-- 中世纪档 → 中世纪列(X 3-6);独立泳道 Y=18 避免与储物/家具行拥挤 -->
+        <researchViewX>5</researchViewX>
+        <researchViewY>18</researchViewY>
+    </ResearchProjectDef>
+
+    <!-- 二档:工业 —— 解锁电动(机械)盔甲架 -->
+    <ResearchProjectDef ParentName="IndustrialBase">
+        <defName>ArmorRacks_MechanizedArmorRackResearch</defName>
+        <label>mechanized armor rack</label>
+        <description>Produce mechanized armor racks that help your colonists quickly change apparel to respond to emergencies.</description>
+        <baseCost>1200</baseCost>
+        <prerequisites>
+            <li>ArmorRacks_BasicRackResearch</li>
+        </prerequisites>
+        <!-- 工业档 → 工业列(X 7-16) -->
+        <researchViewX>10</researchViewX>
+        <researchViewY>18</researchViewY>
+    </ResearchProjectDef>
+
+    <!-- 三档:太空 —— 解锁修复盔甲架 -->
+    <ResearchProjectDef ParentName="HitechMultiBase">
+        <defName>ArmorRacks_MendingArmorRackResearch</defName>
+        <label>mending armor rack</label>
+        <description>Produce mending armor racks that repair stored equipment via mechanites, in addition to other benefits.</description>
+        <baseCost>2400</baseCost>
+        <prerequisites>
+            <li>ArmorRacks_MechanizedArmorRackResearch</li>
+        </prerequisites>
+        <!-- 太空档 → 太空列起始(X 17);链 X 递增 5<10<17 -->
+        <researchViewX>17</researchViewX>
+        <researchViewY>18</researchViewY>
+    </ResearchProjectDef>
+
+</Defs>

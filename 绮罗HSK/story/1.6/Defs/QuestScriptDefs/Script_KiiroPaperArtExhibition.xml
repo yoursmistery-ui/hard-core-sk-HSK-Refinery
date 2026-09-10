@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <QuestScriptDef>
+    <defName>Kiiro_OpportunitySite_PaperArtExhibition</defName>
+    <rootSelectionWeight>1</rootSelectionWeight>
+    <!-- <rootMinProgressScore>10</rootMinProgressScore> -->
+    <autoAccept>true</autoAccept>
+    <!-- <expireDaysRange>1~3</expireDaysRange> -->
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->paper art exhibition</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->The kiiro residents of [kiiro_settlement_label] are hosting a paper art exhibition nearby.\n\nPaper art, as an ancient and traditional art form of kiiros, has slowly declined over time. However, the kiiro paper artists, who are committed to preserving this craft, are not content with this situation. They carry the dream of revitalizing paper art and hope to draw attention and appreciation for this traditional skill through touring paper art exhibitions.\n\nAs a friend of kiiros, the paper artists also look forward to your participation.\n\nWhile you may not be familiar with kiiro paper art, art is not confined to form, and they also hope to exchange artistic insights with you.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <layerWhitelist>
+      <li>Surface</li>
+    </layerWhitelist>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <li Class="QuestNode_Set">          <!--设置地点距离-->
+          <name>siteDistRange</name>
+          <value>1~3</value>
+        </li>
+
+        <li Class="QuestNode_GetMap" />
+
+        <li Class="Kiiro_Event.QuestNode_ModSettingOn">          <!--事件开关-->
+          <modSettingSwitch>OpportunitySite_PaperArtExhibition</modSettingSwitch>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_IsKiiroFactionSatisfied">
+          <needFactionInteractionOpen>true</needFactionInteractionOpen>
+          <!-- <needFactionNotHostile>true</needFactionNotHostile> -->
+          <needFactionAlly>true</needFactionAlly>
+          <needTotalTrust>true</needTotalTrust>
+        </li>
+
+        <!-- 任务唯一性 -->
+        <li Class="QuestNode_QuestUnique">
+          <tag>Kiiro_OpportunitySite_PaperArtExhibition</tag>
+          <faction>$siteFaction</faction>
+        </li>
+
+        <!-- 获取附近绮罗定居点信息 -->
+        <li Class="Kiiro_Event.QuestNode_GetNearbyKiiroSettlement">
+          <allowActiveTradeRequest>false</allowActiveTradeRequest>
+          <maxTileDistance>8</maxTileDistance>
+          <storeAs>kiiro_settlement</storeAs>
+        </li>
+
+        <li Class="QuestNode_GetPlayerFaction">
+          <storeAs>playerFaction</storeAs>
+        </li>
+
+        <!-- 生成在绮罗定居点附近 -->
+        <li Class="Kiiro_Event.QuestNode_GetSiteTile">
+          <storeAs>tile</storeAs>
+          <preferCloserTiles>false</preferCloserTiles>
+          <nearKiiroSettlementTile>true</nearKiiroSettlementTile>
+        </li>
+
+        <li Class="QuestNode_GenerateWorldObject">
+          <def>Kiiro_PaperArtExhibition</def>
+          <tile>$tile</tile>
+          <faction>Kiiro_Faction</faction>
+          <storeAs>Kiiro_PaperArtExhibition</storeAs>
+        </li>
+        <li Class="QuestNode_SpawnWorldObjects">
+          <worldObjects>$Kiiro_PaperArtExhibition</worldObjects>
+          <tile>$tile</tile>
+        </li>
+
+        <!-- 5到8天 -->
+        <li Class="QuestNode_Set">
+          <name>timeoutTicks</name>
+          <value>$(randInt(5,8)*60000)</value>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$Kiiro_PaperArtExhibition</worldObject>
+          <delayTicks>$timeoutTicks</delayTicks>
+          <isQuestTimeout>true</isQuestTimeout>
+          <inSignalDisable>Kiiro_PaperArtExhibition.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">Quest expired: [resolvedQuestName]</label>
+                <text TKey="LetterTextQuestExpired">Kiiro's paper art exhibition has come to an end. The paper artists were slightly disappointed by your absence, but they believe there will be opportunities in the future.</text>
+              </li>
+              <li Class="QuestNode_SendSignals">
+                <outSignals>Timeout</outSignals>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="Kiiro_Event.QuestNode_GetKiiroFaction">
+          <storeAs>faction</storeAs>
+        </li>
+        <!-- 派系敌对则结束任务 -->
+        <li Class="QuestNode_Signal">
+          <inSignal>faction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelQuestExpired">[resolvedQuestName] failed</label>
+                <text TKey="LetterTextQuestExpired">Due to the hostile relationship with the kiiros, [resolvedQuestName] cannot be completed further.</text>
+              </li>
+              <li Class="QuestNode_DestroyWorldObject">
+                <worldObject>$Kiiro_PaperArtExhibition</worldObject>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_End">
+          <inSignal>Kiiro_PaperArtExhibition.Resolved</inSignal>
+          <outcome>Success</outcome>
+        </li>
+      </nodes>
+    </root>
+  </QuestScriptDef>
+</Defs>

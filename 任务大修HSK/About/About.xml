@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>任务大修·HSK</name>
+    <author>local</author>
+    <packageId>local.hsk.questoverhaul</packageId>
+    <supportedVersions>
+        <li>1.6</li>
+    </supportedVersions>
+    <modDependencies>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+        </li>
+        <li>
+            <packageId>skyarkhangel.HSK</packageId>
+            <displayName>Core SK</displayName>
+            <downloadUrl>https://github.com/skyarkhangel/Hardcore-SK</downloadUrl>
+        </li>
+        <li>
+            <packageId>Solaris.RatkinRaceMod</packageId>
+            <displayName>NewRatkinPlus (RatkinRaceHSK)</displayName>
+            <downloadUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</downloadUrl>
+        </li>
+        <li>
+            <packageId>DimonSever000.ModIndicator.Specific</packageId>
+            <displayName>HSK Autosort and Mod Assistant</displayName>
+            <downloadUrl>https://rimworld.example/DimonSever000.ModIndicator.Specific</downloadUrl>
+        </li>
+    </modDependencies>
+    <loadAfter>
+        <li>brrainz.harmony</li>
+        <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+        <li>Albion.GoExplore</li>
+        <li>skyarkhangel.HSK</li>
+        <li>skyarkhangel.HSK.Core</li>
+        <li>skyarkhangel.HSK.DLC</li>
+        <li>Solaris.RatkinRaceMod</li>
+        <li>ceteam.combatextended</li>
+        <li>qwerty19106.researchtreesk</li>
+        <!-- 族色委托引用了下列 mod 的派系 def 与特产物品 def。
+             跨 mod 的 defName 引用在全部 mod 加载完成后统一解析,不需要排序边;
+             只有"本 mod 用 Patch 修改对方 def"才必须 loadAfter。
+             (原 <li>miho.fortifiedoutremer</li> 已删除: 美狐 loadAfter HSK工业科研大修
+              loadAfter 本 mod,再反向依赖会构成循环依赖,导致 ModConfig 报"加载顺序错误"。) -->
+        <li>local.ratkin.clothesweapons</li>
+        <li>local.ratkin.goldenhsk</li>
+        <li>ViTech.MedievalOverhaul</li>
+        <li>ChJees.Androids</li>
+        <li>DARKkai.RatkinBackStoryExpanded.HSK</li>
+        <li>skyarkhangel.asarirace</li>
+        <li>vitech.metallurgy</li>
+        <li>DimonSever000.ModIndicator.Specific</li>
+        <li>skyarkhangel.RimThemesLite</li>
+    </loadAfter>
+    <loadBefore>
+        <li>local.hskfixpack</li>
+        <li>AITranslation.Pack</li>
+        <li>trinity.runtimegcfixed</li>
+        <li>gwinnbleidd.mothballedanddeadpawns</li>
+        <li>dubwise.dubsperformanceanalyzer.steam</li>
+        <li>mlie.wikirim</li>
+        <li>dimonsever000.wiki.specific</li>
+        <li>taranchuk.performanceoptimizer</li>
+        <li>krkr.rocketman</li>
+        <li>vr.missilegirl</li>
+    </loadBefore>
+    <description>
+任务大修·HSK(2026-08-28 新建): 整合 RimQuest(Mlie.RimQuest 任务板框架) + Simple Warrants(pb3n.SimpleWarrants 通缉/授权玩法) 两个工坊 mod 为一个本地 mod, 并按 HSK 全派系/种族拓展族色委托。真合并(B 方案): 两框架 DLL+Defs 已并入本 mod, 原工坊版请勿再启用(避免撞 def)。工业大修等原 loadAfter Mlie.RimQuest 已改指本 packageId。
+内容: RimQuest 任务板(玩家自建委托)+ QuestGiver/JobDefs; Simple Warrants 通缉(4 类 QuestScriptDef + WantedReasons + Sites + Settlement 挂 WarrantRequest comp); 迁入 HSK工业科研大修 的废墟探索据点 Sites_RK_Ruins.xml。
+
+Simple Warrants 中文补译已完成(2026-08-28): 109 个 Keyed 键 + 4 个 TKey 句柄 + DefInjected(MainButtonDef/IncidentDef/SitePartDef/RulePackDef 48 条索引/QuestScriptDef 8 条规则),零缺译。
+
+族色委托(2026-08-28 首批): 按 77 派系(剔除 2 个虫族 Animal 档)铺 75 条清剿委托 —— 骨架深拷贝原版 Script_BanditCamp.xml,族色体现在 ①RimQuest.QuestGiverDef 按 factions 定向发布 ②奖励含该族特产(ThingSetMakerDef,取自定义该族的物品池,按科技档回退原版池) ③文案用派系名变量。奖励=银币(GiveRewards)+好感(allowGoodwill)+族特色道具(AddItemsReward)。rootSelectionWeight=0 不进原版随机池。
+待办: 另两类族色委托(取回/供给)、RimQuest QuestGiverDef 是否优先于 techLevels 默认档需游戏内实测。
+
+悬赏公告牌(2026-08-28): QuestBoardHSK.dll —— 给鼠族家具拓展的公告牌(RKFC_RL_Board)挂 QuestBoardHSK.CompProperties_BountyBoard comp(补丁 03_悬赏公告牌.xml,xpath 存在性门控),选中公告牌点"查看悬赏榜"打开 Dialog_BountyBoard: 左侧可接/已接悬赏列表(搜索+派系+人种筛选,Biotech 异种人标签),右侧复用 SimpleWarrants.Warrant.Draw 详情卡(自带接受/拒绝,接受即生成原版任务进任务主标签页)。UI 全部走原版 Widgets 与 ColoredText/GenUI 标准色,自动适配 RimThemesLite 主题。
+
+悬赏无线电(2026-08-29): SW 生成的新通缉不再直接登榜,先进"待接收"队列(BountyRadioManager GameComponent 随存档 scribe),信件提示后须派殖民者右键通讯台执行「接收悬赏通讯」(JobDef RK_Bounty_ReceiveRadio,约 8 秒操作)才入榜。呼叫太空商人通话后有 50% 概率(冷却 12h)由商队频道夹带一条悬赏。Harmony 补丁三枚: WarrantsManager.HandleAvailableWarrants/PopulateWarrants postfix 截获新单、Building_CommsConsole.GetFloatMenuOptions 前置接收项、TradeShip.TryOpenComms postfix 商队夹带。悬赏板建筑盘点: 全环境仅鼠族家具拓展公告牌 RKFC_RL_Board 一块。
+限流与期限(2026-08-29): 全局一周(7 天)最多生成一条悬赏(GenerateRandomWarrant 冷却短路,含商队夹带);待接收播报 7 天过期作废(每 120 tick 低频清理);榜上悬赏 15 天有效期(SW 原规则)在列表行与详情卡显示倒计时,≤2 天红字警示。
+四期(2026-08-29): 公告牌本体也可右键「接收悬赏通讯」(Thing.GetFloatMenuOptions postfix + HasComp 门控,早期无通讯台时的入口;JobDriver 目标泛化为 Building);悬赏榜弹窗新增「无线电」页签(查看待接收队列,详情卡只读);弹窗列表 LINQ 改签名+30tick 缓存(性能铁律)。
+五期(2026-08-29 性能与降频): 撤掉 SW 每 tick 热路径上的 Harmony 捕获补丁,周期生成改由 BountyRadioManager 每 60 tick 轮询(seen 集合识别新单,读档首扫登记基线防误截);开局积压封顶 2 条;商队夹带概率 50%→25%、冷却 12h→24h;过期清理 120→600 tick。
+悬赏体系六期(2026-08-31 科技门槛/预付/关系倍率): ①生成端:悬赏目标必须来自世界NPC派系(可见/未灭/非玩家),且目标派系与发布方科技档相差一级以内,违规即弃——封死"原始时代悬赏极致时代天网";②奖励重写:赏金=角色身价×科技惩罚(目标档低于本方×0.5)×派系关系倍率(关系0最低×1.0,+100→×1.5,−100→×1.4),SW 的 30% 尸体酬金概率与财富缩放设置保留;③发出端:目标档高于我方两级以上直接拦截;预付手续费按被通缉方科技档 500(原始)~5000(极致/极超),越级(目标>我方档)费用×2,银不足拦截,交付酬劳仍按原机制在完成时收取;④发单激怒:SW 固定 -80 好感改为按职位(派系领袖+40、王室头衔 seniority/25)与身价(÷150)分级,clamp 12~110;⑤海报卡新增 被通缉方派系·科技档/我方关系·倍率/科技惩罚 行;任务名重写为「悬赏令:通缉/猎杀/寻回/驯捕 ×××」并补目标派系描述;⑥受雇成功率:玩家发布的悬赏由NPC派系执行,成功率随被通缉方科技档线性 66%(原始)→33%(极致),海报卡对我方发单显示该行,低于50%红字。
+悬赏体系七期(2026-08-31 成败事件故事化+入口修复): ⑦成功:替换 SW 付款弹窗(MakeWarrantDialog)为故事版——猎手交割+支付/拒付/宽限三选项语义照搬,文案三变体×生死附加句;失败:HandleFactionsTakenWarrants 前置快照+后置 diff 补发故事信(弃单回池/好感结算保留 SW 原样);接单方(玩家交货)成功改 QuestNode_Signal 故事信(PositiveEvent)+End(Success),两条过期失败分支换 RK_Bounty.Tale_TakeFail_* 故事信(NegativeEvent),四脚本(Pawn/Animal/Tame/Artifact)各有专属长文;⚠ 关键修复:本程序集此前没有 PatchAll 引导与 GameComponent 注册,六期全部补丁一直是死代码——新增 StaticConstructorOnStartup PatchAll + Game.FinalizeInit postfix 注册 BountyRadioManager。
+悬赏体系八期(2026-08-31 执行进度故事信+变体扩充): ⑧我方发单的执行全程不再是黑箱——BountyRadioManager 每 60 tick diff takenWarrants(仅我方发单):新被接单 → 接单故事信,历时 35% → 追踪信、70% → 接火信(各两变体,NeutralEvent),进度按通缉 loadID 存档持久化,读档基线静默登记不补发,弃单回池/成败出局自动清跟踪(回池再接单重走流程);⑨发单成功/失败故事变体池 3 → 5(夜袭/内应、走漏风声/天时不济)。零新增 Harmony 热路径,全部走既有低频轮询。
+    </description>
+</ModMetaData>

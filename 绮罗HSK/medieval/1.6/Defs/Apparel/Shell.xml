@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="KME_CloakBase" ParentName="Kiiro_ShellBase" Abstract="true">
+
+        <recipeMaker Inherit="False">
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+
+            <skillRequirements>
+                <Crafting>8</Crafting>
+            </skillRequirements>
+            <defaultIngredientFilter>
+                <categories>
+                    <li>Root</li>
+                </categories>
+                <disallowedThingDefs>
+                    <li>Gold</li>
+                    <li>Silver</li>
+                    <li>Jade</li>
+                    <li>Uranium</li>
+                    <li MayRequire="Ludeon.RimWorld.Anomaly">Bioferrite</li>
+                    <li MayRequire="Ludeon.RimWorld.Odyssey">Obsidian</li>
+                </disallowedThingDefs>
+            </defaultIngredientFilter>
+            <effectWorking>Tailor</effectWorking>
+            <soundWorking>Recipe_Tailor</soundWorking>
+            <recipeUsers>
+                <li>Kiiro_TailoringBench</li>
+                <li>Kiiro_HandleTailoringBench</li>
+            </recipeUsers>
+            <unfinishedThingDef>UnfinishedArmor</unfinishedThingDef>
+            <researchPrerequisites>
+                <li>Kiiro_Apparel_I</li>
+                <li>Kiiro_Process</li>
+            </researchPrerequisites>
+        </recipeMaker>
+        
+        <stuffCategories>
+            <li>Fabric</li>
+            <li>Leathery</li>
+        </stuffCategories>
+
+        <tradeTags>
+            <li>Clothing</li>
+            <li>Armor</li>
+        </tradeTags>
+
+        <apparel>
+            <useWornGraphicMask>false</useWornGraphicMask>
+            <developmentalStageFilter>Adult</developmentalStageFilter>
+            <layers>
+                <!-- <li>Middle</li> -->
+            </layers>
+            <bodyPartGroups>
+				<li>Torso</li>
+				<li>Shoulders</li>
+			</bodyPartGroups>
+            <tags>
+                <li>KME_Kiiro_cloak</li>
+            </tags>
+        </apparel>
+
+        <statBases>
+            <WorkToMake>6000</WorkToMake>
+            <MaxHitPoints>200</MaxHitPoints>
+            <Mass>1</Mass>
+            <Bulk MayRequire="CETeam.CombatExtended">1</Bulk>
+			<WornBulk MayRequire="CETeam.CombatExtended">0.5</WornBulk>
+            <EquipDelay>1</EquipDelay>
+        </statBases>
+    </ThingDef>
+
+    <!-- 绮罗罩袍 -->
+    <ThingDef ParentName="KME_CloakBase">
+        <defName>KME_Kiiro_Cloak_Cape</defName>
+        <label>kiiro cape</label>
+        <description>A burqa that covers the upper body, bright colors can raise morale.</description>
+        <graphicData>
+            <texPath>Apparel/Shell/Cape/Cape</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+        </graphicData>
+        <apparel>
+            <wornGraphicPath>Apparel/Shell/Cape/Cape</wornGraphicPath>
+            <tags>
+                <li>Kiiro_DailyCoat</li>
+            </tags>
+        </apparel>
+
+        <costStuffCount>100</costStuffCount>
+        <statBases>
+            <StuffEffectMultiplierArmor>0.2</StuffEffectMultiplierArmor>
+            <StuffEffectMultiplierInsulation_Cold>0.3</StuffEffectMultiplierInsulation_Cold>
+            <StuffEffectMultiplierInsulation_Heat>0.2</StuffEffectMultiplierInsulation_Heat>
+			<Insulation_Cold>5</Insulation_Cold>
+			<Insulation_Heat>3</Insulation_Heat>
+        </statBases>
+        <equippedStatOffsets>
+            <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+            <PainShockThreshold>0.1</PainShockThreshold>
+            <MeleeDodgeChance>3</MeleeDodgeChance>
+        </equippedStatOffsets>
+    </ThingDef>
+</Defs>

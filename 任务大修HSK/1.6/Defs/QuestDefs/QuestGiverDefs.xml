@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Industrial and higher give even-chance of all quests.  -->
+  <RimQuest.QuestGiverDef>
+    <defName>RQ_StandardQuestGiver</defName>
+    <techLevels>
+      <li>Industrial</li>
+      <li>Spacer</li>
+      <li>Ultra</li>
+      <li>Archotech</li>
+    </techLevels>
+    <maxOptions>4</maxOptions>
+    <anyQuest>true</anyQuest>
+    <!-- 波次7(2026-09-10): 工业及以上也能刷出邪教清剿链(按点数逐级出现) -->
+    <questsScripts>
+      <RK_MO_OpportunitySite_CultHideout_T1>3</RK_MO_OpportunitySite_CultHideout_T1>
+      <RK_MO_OpportunitySite_CultHideout_T2>2</RK_MO_OpportunitySite_CultHideout_T2>
+      <RK_MO_OpportunitySite_CultHideout_T3>1</RK_MO_OpportunitySite_CultHideout_T3>
+      <RK_MO_OpportunitySite_SnakeLair>1</RK_MO_OpportunitySite_SnakeLair>
+    </questsScripts>
+  </RimQuest.QuestGiverDef>
+  <!-- Medieval quest givers are uninterested in peace talks, but they will often mention stashes and prisoners.-->
+  <RimQuest.QuestGiverDef>
+    <defName>RQ_MedievalQuestGiver</defName>
+    <techLevels>
+      <li>Medieval</li>
+    </techLevels>
+    <quests />
+    <questsScripts>
+      <OpportunitySite_BanditCamp>5</OpportunitySite_BanditCamp>
+      <OpportunitySite_ItemStash>4</OpportunitySite_ItemStash>
+      <OpportunitySite_DownedRefugee>4</OpportunitySite_DownedRefugee>
+      <OpportunitySite_PrisonerWillingToJoin>4</OpportunitySite_PrisonerWillingToJoin>
+      <OpportunitySite_PeaceTalks>1</OpportunitySite_PeaceTalks>
+      <!-- 波次7(2026-09-10): 邪教清剿链自动刷出池(按点数逐级出现) -->
+      <RK_MO_OpportunitySite_CultHideout_T1>3</RK_MO_OpportunitySite_CultHideout_T1>
+      <RK_MO_OpportunitySite_CultHideout_T2>2</RK_MO_OpportunitySite_CultHideout_T2>
+      <RK_MO_OpportunitySite_CultHideout_T3>1</RK_MO_OpportunitySite_CultHideout_T3>
+      <RK_MO_OpportunitySite_SnakeLair>1</RK_MO_OpportunitySite_SnakeLair>
+    </questsScripts>
+  </RimQuest.QuestGiverDef>
+  <!-- Tribal quest givers are more likely to want bandit camps eradicated. -->
+  <RimQuest.QuestGiverDef>
+    <defName>RQ_TribalQuestGiver</defName>
+    <factions>
+      <li>TribeCivil</li>
+      <li>TribeRough</li>
+    </factions>
+    <quests />
+    <questsScripts>
+      <OpportunitySite_BanditCamp>8</OpportunitySite_BanditCamp>
+      <OpportunitySite_ItemStash>4</OpportunitySite_ItemStash>
+      <OpportunitySite_PeaceTalks>3</OpportunitySite_PeaceTalks>
+      <OpportunitySite_DownedRefugee>1</OpportunitySite_DownedRefugee>
+      <OpportunitySite_PrisonerWillingToJoin>1</OpportunitySite_PrisonerWillingToJoin>
+    </questsScripts>
+  </RimQuest.QuestGiverDef>
+  <!-- Neolithic quest givers are the same as tribal ones -->
+  <RimQuest.QuestGiverDef>
+    <defName>RQ_NeolithicQuestGiver</defName>
+    <techLevels>
+      <li>Neolithic</li>
+    </techLevels>
+    <quests />
+    <questsScripts>
+      <OpportunitySite_BanditCamp>10</OpportunitySite_BanditCamp>
+      <OpportunitySite_ItemStash>5</OpportunitySite_ItemStash>
+      <OpportunitySite_PeaceTalks>3</OpportunitySite_PeaceTalks>
+      <OpportunitySite_DownedRefugee>1</OpportunitySite_DownedRefugee>
+      <OpportunitySite_PrisonerWillingToJoin>1</OpportunitySite_PrisonerWillingToJoin>
+    </questsScripts>
+  </RimQuest.QuestGiverDef>
+  <!-- Animals, undefined types will only have item stash and downed refugees. -->
+  <RimQuest.QuestGiverDef>
+    <defName>RQ_AnimalQuestGiver</defName>
+    <techLevels>
+      <li>Animal</li>
+      <li>Neolithic</li>
+    </techLevels>
+    <quests />
+    <questsScripts>
+      <OpportunitySite_ItemStash>1</OpportunitySite_ItemStash>
+      <OpportunitySite_DownedRefugee>1</OpportunitySite_DownedRefugee>
+    </questsScripts>
+  </RimQuest.QuestGiverDef>
+</Defs>

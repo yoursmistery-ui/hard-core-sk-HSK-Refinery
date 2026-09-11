@@ -72,6 +72,17 @@
 //     不算可用 → 该原料判 short → 整体不判脏化、不重建、不刷日志(与腌制肉类
 //     缺盐的既有处理一致);region lister 缺登记仍单独自愈补上。
 //
+// 2026-09-10 脏化判定改由原版裁决(用户实测「烹饪：烤肉」仍刷
+//   'likely region/reachability staleness'+无效重建):
+//   - 实例: pawn 风铃草,候选 SaltedMeat@(159,0,141)(lister=True,dist=6),rootReg=ok,
+//     TerrainChangeTracer 记录为零 → 镜像统计判「每条原料候选充足」→ 判脏化 → 重建(依旧无效)。
+//   - 教训: 本诊断的逐原料统计是原版选择逻辑的近似镜像,口径差异不可能穷尽
+//     (NoMix 分桶、CountRequiredOfFor 按 def 的需求量、营养/件数单位、fixed vs 材料白名单…)。
+//   - 改法: 统计充足时不再直接判脏化,而是把全部合格候选喂给原版私有静态
+//     WorkGiver_DoBill.TryFindBestBillIngredientsInSet 裁决 —— 原版说能凑齐(=候选存在却
+//     没被真实搜索的 BFS 看见)才判脏化并请求重建;原版说凑不齐即合法缺料,静默不重建;
+//     反射拿不到该函数时同样保守不判脏化。rootReg==null 仍是直接证据,照旧重建。
+//
 // 编译: 并入 HSKFixPack.dll(与其余 Source/*.cs 一起,系统 csc,C#5)。
 using System;
 using System.Collections.Generic;
@@ -103,7 +114,6 @@ namespace ReloadRegistryFix
                 {
                     harmony.Patch(finalizeLoading,
                         postfix: new HarmonyMethod(AccessTools.Method(typeof(ReloadRegistryFixInit), "FinalizeLoadingPostfix")));
-                    Log.Message("[ReloadRegistryFix] patched ScribeLoader.FinalizeLoading (load-time registry repair)");
                 }
                 else
                 {
@@ -115,7 +125,6 @@ namespace ReloadRegistryFix
                 {
                     harmony.Patch(tryFindIngredients,
                         postfix: new HarmonyMethod(AccessTools.Method(typeof(ReloadRegistryFixInit), "BillIngredientsPostfix")));
-                    Log.Message("[ReloadRegistryFix] patched WorkGiver_DoBill.TryFindBestBillIngredients (on-fail registry self-heal, " + BillFailCooldownTicks + "t cooldown/map)");
                 }
                 else
                 {
@@ -290,10 +299,102 @@ namespace ReloadRegistryFix
 
         private static readonly List<Verse.AI.ReservationManager.Reservation> tmpResEntries = new List<Verse.AI.ReservationManager.Reservation>();
 
-        // 同一条 bill 的诊断日志去重(6000 tick ≈ 100 秒): 真缺料等非脏化情况默认静默,
-        // 脏化/动手释放也最多每 100 秒重报一次,根治刷屏。
-        private static readonly Dictionary<Bill, int> lastDiagLog = new Dictionary<Bill, int>();
-        private const int DiagLogCooldownTicks = 6000;
+        // —— 脏化裁决(2026-09-10)——
+        // 本诊断的逐原料统计始终是原版选择逻辑的"近似镜像",已多次因口径差异误判脏化
+        // (缺盐当脏化 08-17 / 半径外 08-25 / NoMix 分桶与营养单位 09-08 / 今日本档
+        //  "烹饪：烤肉 + SaltedMeat 6 格远" 仍误判)。原版真正的判据在私有静态
+        // WorkGiver_DoBill.TryFindBestBillIngredientsInSet(availableThings, bill, chosen,
+        // rootCell, alreadySorted, missingIngredients) 里 —— 它自己会算 NoMix 分桶、
+        // CountRequiredOfFor 的按 def 需求量、营养/件数单位、fixed vs bill.ingredientFilter。
+        // ∴ 只有当"把全部合格候选直接喂给原版选择函数、原版认为能凑齐"而真实搜索仍失败时,
+        //   才认定是 region/可达性脏化(候选没被 BFS 看见);原版说凑不齐 = 合法缺料,静默不重建。
+        private static MethodInfo setIngredientsFn;
+        private static bool setIngredientsFnResolved;
+        private static readonly List<Thing> oraclePool = new List<Thing>();
+        private static readonly List<ThingCount> oracleChosen = new List<ThingCount>();
+        private static readonly List<IngredientCount> oracleMissing = new List<IngredientCount>();
+        private const int OraclePoolCap = 240;
+
+        // 把全部合格候选直接交给原版的选择函数裁决:能凑齐 = 候选确实存在却没被真实搜索的
+        // BFS 看见 → 才是 region/可达性脏化;不能凑齐 = 合法缺料(口径差异由原版自己负责)。
+        private static bool OracleClaimsSatisfied(Bill bill, Pawn pawn, Thing billGiver, Map map,
+            float searchRadius, float radiusSq)
+        {
+            if (!setIngredientsFnResolved)
+            {
+                setIngredientsFnResolved = true;
+                setIngredientsFn = AccessTools.Method(typeof(WorkGiver_DoBill), "TryFindBestBillIngredientsInSet");
+            }
+            if (setIngredientsFn == null)
+            {
+                return false; // 拿不到原版函数 → 保守:不判脏化、不重建
+            }
+            List<IngredientCount> ings = bill.recipe.ingredients;
+            List<Thing> allThings = map.listerThings.AllThings;
+            oraclePool.Clear();
+            oracleChosen.Clear();
+            oracleMissing.Clear();
+            for (int i = 0; i < allThings.Count && oraclePool.Count < OraclePoolCap; i++)
+            {
+                Thing t = allThings[i];
+                if (t == null || t.Destroyed || !t.Spawned || t is Mote)
+                {
+                    continue;
+                }
+                if (!IsIngredientCandidateFor(t, ings, bill))
+                {
+                    continue;
+                }
+                if ((t.Position - billGiver.Position).LengthHorizontalSquared >= radiusSq)
+                {
+                    continue;
+                }
+                if (!t.def.EverHaulable || t.IsForbidden(pawn) || !pawn.CanReserve(t))
+                {
+                    continue;
+                }
+                oraclePool.Add(t);
+            }
+            if (oraclePool.Count == 0)
+            {
+                return false;
+            }
+            try
+            {
+                object[] args = new object[] { oraclePool, bill, oracleChosen,
+                    GetRootCell(billGiver, pawn), false, oracleMissing };
+                return (bool)setIngredientsFn.Invoke(null, args);
+            }
+            catch (Exception e)
+            {
+                Log.Warning("[ReloadRegistryFix] oracle failed: " + e.Message);
+                return false;
+            }
+        }
+
+        private static bool IsIngredientCandidateFor(Thing t, List<IngredientCount> ings, Bill bill)
+        {
+            bool matchesSlot = false;
+            for (int i = 0; i < ings.Count; i++)
+            {
+                if (ings[i].filter != null && ings[i].filter.Allows(t))
+                {
+                    matchesSlot = true;
+                    break;
+                }
+            }
+            return matchesSlot && bill.IsFixedOrAllowedIngredient(t);
+        }
+
+        private static IntVec3 GetRootCell(Thing billGiver, Pawn pawn)
+        {
+            Building building = billGiver as Building;
+            if (building != null && building.def.hasInteractionCell)
+            {
+                return building.InteractionCell;
+            }
+            return pawn.Position;
+        }
 
         // 预留的 Job 是否仍是 claimant 的当前/队列任务(任务结束时原版会同步释放
         // 预留 → 不匹配即泄漏;jobs==null 无法判定时保守视为合法)
@@ -449,7 +550,6 @@ namespace ReloadRegistryFix
                     rootCell = building.InteractionCell;
                 }
                 Region rootReg = rootCell.GetRegion(map);
-                string rootRegState = (rootReg != null) ? "ok" : "NULL";
 
                 List<Verse.AI.ReservationManager.Reservation> resList = map.reservationManager.ReservationsReadOnly;
                 List<Thing> allThings = map.listerThings.AllThings;
@@ -611,60 +711,23 @@ namespace ReloadRegistryFix
                 }
 
                 // region 脏化判定: 根 Region 缺失(rootReg==null = 区域网格没建),
-                // 或【每条原料】都有足够「未禁止+可预留+可达+搜索可发现」候选但搜索仍失败
-                // (region 链接/BFS 到不了原料所在 region)。
-                bool staleness = rootReg == null || !anyIngredientShort;
-
-                // 日志去重: 同一条 bill 6000 tick 内只输出一次(真缺料/被占/不可达默认静默)
-                int now = Find.TickManager.TicksGame;
-                bool alreadyLogged = false;
-                int lastLog;
-                if (lastDiagLog.TryGetValue(bill, out lastLog) && now - lastLog < DiagLogCooldownTicks)
+                // 或【每条原料】都有足够「未禁止+可预留+可达+搜索可发现」候选、且**原版自己的选择
+                // 函数也认为这批候选能凑齐**,而真实搜索仍失败(BFS 没走到候选所在 region)。
+                // 2026-09-10:本档「烹饪：烤肉」在镜像统计充足时被判脏化、请求 region 重建,而重建
+                // 从来无效 —— 镜像统计与原版口径(NoMix 分桶 / CountRequiredOfFor 按 def 需求量 /
+                // 营养与件数单位 / fixed vs 材料白名单)总有差异,∴ 一律交给原版函数裁决。
+                bool staleness = rootReg == null;
+                if (!staleness && !anyIngredientShort)
                 {
-                    alreadyLogged = true;
-                }
-                else
-                {
-                    lastDiagLog[bill] = now;
-                }
-                if (lastDiagLog.Count > 48)
-                {
-                    // 清理已冷却完毕的旧记录(量小,简单遍历)
-                    List<Bill> dead = new List<Bill>();
-                    foreach (KeyValuePair<Bill, int> kv in lastDiagLog)
-                    {
-                        if (now - kv.Value >= DiagLogCooldownTicks)
-                        {
-                            dead.Add(kv.Key);
-                        }
-                    }
-                    for (int i = 0; i < dead.Count; i++)
-                    {
-                        lastDiagLog.Remove(dead[i]);
-                    }
+                    staleness = OracleClaimsSatisfied(bill, pawn, billGiver, map, searchRadius, radiusSq);
                 }
 
+                // 静默执行(2026-09-10 用户口径:正式 DLL 不留周期日志):
+                // 释放泄漏预留 / 补 region lister 登记 / 请求 region 重建都照常做,
+                // 不再逐条打诊断日志;真正修到东西时由 RepairMap 的 repaired 事件行(仅 repair>0 时)体现。
                 if (staleness)
                 {
                     RegionRepairMapComponent.RequestRebuild(map);
-                }
-                if (!alreadyLogged)
-                {
-                    if (staleReleased > 0 || reRegistered > 0)
-                    {
-                        // 实际动手(释放泄漏预留 / 补 region lister 登记)后,下次搜索应即恢复
-                        Log.Warning("[ReloadRegistryFix/bill] bill '" + bill.Label + "' (pawn " + pawn.LabelShort +
-                            "): released " + staleReleased + " stale reservations, re-registered " + reRegistered +
-                            " region-lister entries (rootReg=" + rootRegState + ")" + FormatNames(notes));
-                    }
-                    else if (staleness)
-                    {
-                        Log.Warning("[ReloadRegistryFix/diag] bill '" + bill.Label + "' (pawn " + pawn.LabelShort +
-                            ") failed, but every ingredient has search-findable+reachable+unforbidden+reservable candidates" +
-                            " → likely region/reachability staleness (rootReg=" + rootRegState + "), requesting region rebuild" +
-                            FormatNames(notes) + "\n" + TerrainChangeTracer.Dump());
-                    }
-                    // else: 真缺料/被占/不可达/不可见 → 静默(游戏内 bill 界面会显示 Missing materials)
                 }
                 return staleness;
             }

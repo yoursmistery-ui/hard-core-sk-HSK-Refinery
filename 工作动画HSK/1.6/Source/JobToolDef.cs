@@ -431,6 +431,86 @@ namespace JobEffects
         // (idle hip) draw is unaffected. Falls back to texPath when unset.
         public string texPathNorthSouth;
 
+        // Optional DEDICATED north-facing (back-on) art, for props whose front and back views
+        // genuinely differ and cannot share one sprite — an open book shows PAGES facing the
+        // camera (south) but the cover/back facing away (north). Takes precedence over
+        // texPathNorthSouth (which is shared by both north and south); south is unaffected and
+        // still resolves through texPathNorthSouth -> texPath. Falls back when unset.
+        public string texPathNorth;
+
+        // Optional PROFILE (east/west) art for the ACTIVE tool draw — the side view of a prop
+        // whose body is wider than it is thick (a book reads as a narrow spine edge-on). Drawn
+        // mirrored for the west facing, like the tool sprite itself. Takes precedence over
+        // texPathProfile (which is scoped to the rosary pose); falls back through it to texPath.
+        public string texPathEastWest;
+
+        // --- Per-facing PLACEMENT for the Read style (2026-09-11) --------------------------------
+        // The Read branch used to branch on a single "facing north?" test, so EAST and WEST fell
+        // through to exactly the same numbers as SOUTH. A pawn seen in profile is anatomically
+        // much narrower across the screen, so a book pushed out by the front-on reach floats off
+        // the body — the prop looked right only facing north. These four fields split the
+        // placement by clean body facing. EVERY default reproduces the old behaviour exactly, so
+        // a tool that sets none of them is byte-identical to before (zero regression).
+        // All of them are scoped to SwingStyle.Read; no other style reads them.
+
+        // Profile (east/west) forward reach, as an ABSOLUTE distance in cells (not a multiplier).
+        // Negative = unset, fall back to reach * 0.70 (the old shared front-on value).
+        // Side-on the body's screen width collapses, so this normally wants to be SMALLER than
+        // the south-facing reach or the prop hangs out past the chest.
+        public float reachEastWest = -1f;
+
+        // Profile (east/west) lateral nudge along the pawn's own left/right axis, in cells.
+        // Positive pushes toward the pawn's right-hand side, negative toward the left; WEST is
+        // mirrored automatically so both profiles read the same. Use it to pull the prop in
+        // toward the chest / belly so the hands can plausibly hold it.
+        public float holdLateralEastWest = 0f;
+
+        // North (back-to-camera) lateral nudge, same axis. The north branch already tucks the
+        // prop in (0.30x) and drops it (-0.05), so 0 is usually right; use it when the prop
+        // still clips out from behind the body silhouette.
+        public float holdLateralNorth = 0f;
+
+        // Profile (east/west) extra size multiplier applied on top of scale (and the read lift
+        // pop). 1 = unchanged. Side-on a prop reads visually larger against the narrow body, so
+        // 0.85-0.95 usually sits better; the narrow east/west art helps here too.
+        public float volScaleProfile = 1f;
+
+        // South (front-on, facing the camera) forward reach, absolute cells like reachEastWest.
+        // Negative = unset, fall back to reach * 0.70. The front-on view shows the pawn at full
+        // width, so this normally sits BETWEEN the tucked-north value and the profile value —
+        // it should not need pulling in as far as reachEastWest.
+        public float reachSouth = -1f;
+
+        // South extra size multiplier, same convention as volScaleProfile (1 = unchanged). Use it
+        // to keep the prop visually consistent with the profile view once that one is scaled down.
+        public float volScaleSouth = 1f;
+
+        // North (back-to-camera) forward reach, absolute cells like reachEastWest/reachSouth.
+        // Negative = unset, fall back to reach * 0.30 (the old tucked value). NOTE THE AXIS:
+        // north's "forward" points AWAY from the camera, so raising this slides the prop
+        // UP-SCREEN — past the shoulders and clear of the torso silhouette — which is what a
+        // read pose wants once neverUnderBody has stopped the body from swallowing it.
+        public float reachNorth = -1f;
+
+        // Read style only. This framework normally buries the WHOLE draw stack (tool + hands +
+        // forearms) UNDER the body sprite when the pawn faces north, mirroring vanilla's "a held
+        // item rides behind the back" rule. That is right for a weapon and wrong for a book: the
+        // pawn holds it UP IN FRONT of the chest, so on a north-facing pawn the body simply eats
+        // it — and because the north branch never reads reachEastWest/reachSouth, tuning those
+        // looks like it did nothing at all. Set true to keep this tool's stack drawn OVER the
+        // body in every facing. Default false = byte-for-byte the old behaviour.
+        public bool neverUnderBody = false;
+
+        // How far the prop rides UP-SCREEN on the "lift it up to read" phase, as a fraction of
+        // scale. NOTE THE AXIS: +z is UP-SCREEN / AWAY FROM THE CAMERA in this draw space, so this
+        // pushes the prop BEHIND the pawn's torso — crank it too high and the book vanishes behind
+        // the body while the hands (drawn from the same hold point) stay put, which reads as "the
+        // prop flew off". 0.30 was the hardcoded default and is too much for the big research
+        // tomes at their scale; 0.12-0.18 keeps the lift readable without burying the prop.
+        // Negative values drop the prop DOWN-SCREEN (toward the camera) as it lifts.
+        public float readLiftRise = 0.30f;
+        // ---------------------------------------------------------------------------------------
+
         // For frame-animated tools (Hold style): list of texture paths, played in order once
         // per job activation, then frozen on the final frame until the job ends.
         public List<string> frameTexPaths;
@@ -899,6 +979,63 @@ namespace JobEffects
             }
         }
 
+        // Dedicated north (back-on) art; falls back to the shared north/south art, then texPath.
+        private Material cachedNorthMat;
+        public Material NorthMaterial
+        {
+            get
+            {
+                if (texPathNorth.NullOrEmpty()) return NorthSouthMaterial;
+                if (cachedNorthMat == null)
+                    cachedNorthMat = MaterialPool.MatFrom(texPathNorth, ShaderDatabase.Cutout);
+                return cachedNorthMat ?? NorthSouthMaterial;
+            }
+        }
+
+        // Dedicated profile (east/west) art for the ACTIVE tool; falls back to the rosary-scoped
+        // profile art, then texPath.
+        private Material cachedEastWestMat;
+        public Material EastWestMaterial
+        {
+            get
+            {
+                if (texPathEastWest.NullOrEmpty()) return ProfileMaterial;
+                if (cachedEastWestMat == null)
+                    cachedEastWestMat = MaterialPool.MatFrom(texPathEastWest, ShaderDatabase.Cutout);
+                return cachedEastWestMat ?? ProfileMaterial;
+            }
+        }
+
+        /// <summary>
+        /// Resolve the ACTIVE tool sprite for a body facing, most specific art first:
+        ///   north     -> texPathNorth -> texPathNorthSouth -> texPath
+        ///   south     -> texPathNorthSouth -> texPath
+        ///   east/west -> texPathEastWest -> texPathProfile -> texPath
+        /// Every step is optional, so a tool that sets none of them resolves to texPath exactly as
+        /// before — this is a pure widening of the welder's north/south-only override.
+        /// </summary>
+        public Material MaterialFor(Rot4 facing)
+        {
+            if (facing == Rot4.North) return NorthMaterial;
+            if (facing == Rot4.East || facing == Rot4.West) return EastWestMaterial;
+            return NorthSouthMaterial;   // south (and any non-cardinal fallback) = front/back view
+        }
+
+        /// <summary>
+        /// Whether this facing would actually swap the sprite (i.e. the tool authored art for it).
+        /// Callers use this to leave the alt / strike sprite choice alone for tools with no
+        /// facing-specific art — otherwise MaterialFor would hand back the plain texPath material
+        /// and silently undo the alt/strike swap.
+        /// </summary>
+        public bool HasFacingArt(Rot4 facing)
+        {
+            if (facing == Rot4.North)
+                return !texPathNorth.NullOrEmpty() || !texPathNorthSouth.NullOrEmpty();
+            if (facing == Rot4.East || facing == Rot4.West)
+                return !texPathEastWest.NullOrEmpty() || !texPathProfile.NullOrEmpty();
+            return !texPathNorthSouth.NullOrEmpty();
+        }
+
         // Empty-flask art for holdPour (shown after the halfway inversion); falls back to Material.
         private Material cachedPourEmptyMat;
         public Material PourEmptyMaterial
@@ -1153,7 +1290,9 @@ namespace JobEffects
             _ = MaterialTransparent;
             // Facing / pose overrides.
             _ = NorthSouthMaterial;
+            _ = NorthMaterial;
             _ = ProfileMaterial;
+            _ = EastWestMaterial;
             _ = PourEmptyMaterial;
             // Secondary sprites.
             _ = MalletMaterial;

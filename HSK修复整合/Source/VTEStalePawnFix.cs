@@ -41,7 +41,7 @@ namespace VTEStalePawnFix
                 Harmony harmony = new Harmony("local.hskvtestalereffix");
                 harmony.Patch(exposeData, prefix: new HarmonyMethod(
                     typeof(VTEStalePawnFixInit).GetMethod("Prefix", BindingFlags.Static | BindingFlags.NonPublic)));
-                Log.Message("[VTEStalePawnFix] patched TraitsManager.ExposeData");
+                // 挂载确认不打日志(用户口径:正式 DLL 零启动噪声),失败仍报 Error
             }
             catch (Exception e)
             {

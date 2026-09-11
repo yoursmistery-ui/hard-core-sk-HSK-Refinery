@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ A6_冰柜入存储冷藏 (2026-09-10 用户要求)
+
+ 背景: 冰柜 Rustic_IceChest 原先 designationCategory=Temperature(温度分类), 用户要求放进
+       「存储」分类下的二级菜单。
+ 机制: 建筑师二级菜单由 Core_SK 的 ArchitectSense 提供, 定义在
+       Core_SK/Defs/DesignationSubCategoryDefs/SubCategories_Storage.xml。
+       其中「冷藏」(SubCategory_Refrigerators, order 80) 收录 sbz 系列电冰箱;
+       冰柜与它们同类, 直接往 defNames 追加本件即可 —— 与 sbz_Fridge 同一情形
+       (sbz_Fridge 自身 designationCategory 仍是 Temperature, 一样被该子菜单收录)。
+ 门控: 套 PatchOperationConditional 存在性门控(1.6 起 Operation 级 MayRequire 已失效)。
+       目标 def 由 Core_SK 提供, 本 mod 的 About 已 loadAfter skyarkhangel.HSK,
+       补丁执行时必然已存在; 若将来 Core_SK 改名, 此补丁静默跳过而不报错。
+
+ 配套改动(同一批, 见 Buildings_Rustic_IceChest.xml):
+   · designationCategory  Temperature -> ASFstorage
+   · 研究            Temperature_control_B1 -> 新建独立节点 RK_Rustic_IceChest「中世纪冰箱」
+   · uiIconPath      IceChest_south -> 自造 IceChest_ico(原图 74% 是透明留白, 图标显得极小)
+   · 补 AdaptiveStorage.GraphicsDef(缺则绘图层每帧 NRE, 建筑不可见)
+-->
+<Patch>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Refrigerators"]/defNames</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_Refrigerators"]/defNames</xpath>
+      <value>
+        <li>Rustic_IceChest</li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

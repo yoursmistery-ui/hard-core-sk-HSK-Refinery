@@ -2,27 +2,41 @@
 
 <!-- ============================================================================
 
-  科技蓝图·图纸书 (书籍化 v4, 2026-08-27)
+  科技蓝图·图纸书 (读书推进解锁 v5.0, 2026-09-10)
 
   ============================================================================
 
   全部蓝图书 = 原版 Book 体系 (ParentName=BookBase, thingClass=BlueprintBook 子类):
 
-    放书架/阅读/读后保留/带「已读」标记; 书名固定 = def.label (子类 override)。
+    放书架/阅读/读后保留/带「已读 / 研读 X%」标记; 书名固定 = def.label (子类 override)。
+
+  阅读链接 = 原版 JobDefOf.Reading / JobDriver_Reading (娱乐活动; 自带动画/进度条/就坐)。
 
   配置 = BlueprintTargetExtension:
 
-    - targetTech:    目标科技 defName
+    - targetTech:     目标科技 defName
 
-    - tier:          1=中世纪 2=工业 3=太空 4=极致 5=超凡
+    - tier:           1=中世纪 2=工业 3=太空 4=极致 5=超凡 (驱动门槛/倍率/商人权重)
 
-    - researchPoints: 保留字段 (商人定价/投放权重参考, 不再直接加科研值)
+    - researchPoints: 保留字段 (商人定价/投放权重参考, 不直接加科研值)
 
     - bookIndex:      系列序号 1..N (缺省按 defName 排序自动推导)
 
+    - minIntellect:   阅读门槛(智力等级); 0 = 按 tier → 4/8/12/16/20
+
+    - intellectMult:  读书智力经验倍率; 0 = 按 tier → 1.0/1.5/2.0/2.5/3.0
+
+    - joyFactor:      娱乐系数; 0 = 全局默认 0.25 (原版小说 1.0~2.5)
+
+    - readCost:       读完一本书所需累计 factor; 0 = 全局默认 5000 (≈一次强制阅读)
+
+    - finishOnUnlock: 进度满 1.0 时是否直接完成该研究 (默认 false = 只解锁研究权限; 并行通道书显式写 true)
+
+    - gate:           true=未读满不可研究(门控); false=只作并行推进通道, 不挡原版研究
+
   系列 = 同一 targetTech 的全部蓝图书 (中世纪 1 本, 太空 2 本, 极致 3 本, 超凡 4 本)。
 
-  集齐系列全部读完 → 科技解锁 → 可开始研究 (不做中间科研值)。
+  读完系列全部卷册 (进度 100%) → 解锁该科技的「研究权限」(变成可研究), 不再直接完成研究。
 
   机制代码见 Source/BlueprintUnlockHSK.cs (BlueprintUnlockHSK.*)。
 
@@ -111,6 +125,7 @@
 				<doers>
 
 					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
 
 				</doers>
 
@@ -176,6 +191,7 @@
 				</verticalGraphic>
 				<doers>
 					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
 				</doers>
 			</li>
 		</comps>
@@ -211,7 +227,7 @@
 
 		<label>图纸书:板甲·暗黑时代</label>
 
-		<description>一份记载着【PlateArmor】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【PlateArmor】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -245,7 +261,7 @@
 
 		<label>图纸书:冶金术·精炼</label>
 
-		<description>一份记载着【Metallurgy_B5】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Metallurgy_B5】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -279,7 +295,7 @@
 
 		<label>图纸书:高级钢铁 III</label>
 
-		<description>一份记载着【Steel_B3】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Steel_B3】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -313,7 +329,7 @@
 
 		<label>图纸书:中世纪工具 II</label>
 
-		<description>一份记载着【RKHSK_Tools_Medieval2】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【RKHSK_Tools_Medieval2】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -347,7 +363,7 @@
 
 		<label>图纸书:医疗物资 IV</label>
 
-		<description>一份记载着【Medicine_B2】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Medicine_B2】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -381,7 +397,7 @@
 
 		<label>图纸书:长弓 I</label>
 
-		<description>一份记载着【Greatbow】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Greatbow】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -415,7 +431,7 @@
 
 		<label>图纸书:攻城器械</label>
 
-		<description>一份记载着【Ballista_B1】科技的图纸书。研读后计入该科技进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ballista_B1】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -451,7 +467,7 @@
 
 		<label>蓝图:电力工程 I</label>
 
-		<description>一份记载着【电力工程】科技的图纸卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【电力工程】科技的图纸卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -485,7 +501,7 @@
 
 		<label>蓝图:引力陷阱 I</label>
 
-		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -519,7 +535,7 @@
 
 		<label>蓝图:引力陷阱 II</label>
 
-		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravTrap】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -553,7 +569,7 @@
 
 		<label>蓝图:装甲 V I</label>
 
-		<description>一份记载着【Armor_D1】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -587,7 +603,7 @@
 
 		<label>蓝图:装甲 V II</label>
 
-		<description>一份记载着【Armor_D1】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -621,7 +637,7 @@
 
 		<label>蓝图:激光武器 I I</label>
 
-		<description>一份记载着【Laser_weapons_D】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Laser_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -655,7 +671,7 @@
 
 		<label>蓝图:激光武器 I II</label>
 
-		<description>一份记载着【Laser_weapons_D】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Laser_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -689,7 +705,7 @@
 
 		<label>蓝图:等离子武器 I I</label>
 
-		<description>一份记载着【Plasma_weapons_D】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Plasma_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -723,7 +739,7 @@
 
 		<label>蓝图:等离子武器 I II</label>
 
-		<description>一份记载着【Plasma_weapons_D】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Plasma_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -757,7 +773,7 @@
 
 		<label>蓝图:电荷武器 I I</label>
 
-		<description>一份记载着【Charge_weapons_D】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Charge_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -791,7 +807,7 @@
 
 		<label>蓝图:电荷武器 I II</label>
 
-		<description>一份记载着【Charge_weapons_D】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Charge_weapons_D】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -825,7 +841,7 @@
 
 		<label>蓝图:火箭 III I</label>
 
-		<description>一份记载着【Rockets_D1】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Rockets_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -859,7 +875,7 @@
 
 		<label>蓝图:火箭 III II</label>
 
-		<description>一份记载着【Rockets_D1】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Rockets_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -893,7 +909,7 @@
 
 		<label>蓝图:火箭 IV I</label>
 
-		<description>一份记载着【Rockets_D2】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Rockets_D2】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -927,7 +943,7 @@
 
 		<label>蓝图:火箭 IV II</label>
 
-		<description>一份记载着【Rockets_D2】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Rockets_D2】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -961,7 +977,7 @@
 
 		<label>蓝图:引力运用 I</label>
 
-		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -995,7 +1011,7 @@
 
 		<label>蓝图:引力运用 II</label>
 
-		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravityApplication】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1029,7 +1045,7 @@
 
 		<label>蓝图:鼠族盔甲 II I</label>
 
-		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。研读后计入该科技进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1063,7 +1079,7 @@
 
 		<label>蓝图:鼠族盔甲 II II</label>
 
-		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。研读后计入该科技进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1097,7 +1113,7 @@
 
 		<label>蓝图:力场核心 I</label>
 
-		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1131,7 +1147,7 @@
 
 		<label>蓝图:力场核心 II</label>
 
-		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1165,7 +1181,7 @@
 
 		<label>蓝图:力场核心 III</label>
 
-		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【OARK_Odyssey_GravFieldCore】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1199,7 +1215,7 @@
 
 		<label>蓝图:动力甲 I</label>
 
-		<description>一份记载着【PoweredArmor】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1233,7 +1249,7 @@
 
 		<label>蓝图:动力甲 II</label>
 
-		<description>一份记载着【PoweredArmor】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1267,7 +1283,7 @@
 
 		<label>蓝图:动力甲 III</label>
 
-		<description>一份记载着【PoweredArmor】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【PoweredArmor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1301,7 +1317,7 @@
 
 		<label>蓝图:盔甲 VIII I</label>
 
-		<description>一份记载着【Armor_E3】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1335,7 +1351,7 @@
 
 		<label>蓝图:盔甲 VIII II</label>
 
-		<description>一份记载着【Armor_E3】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1369,7 +1385,7 @@
 
 		<label>蓝图:盔甲 VIII III</label>
 
-		<description>一份记载着【Armor_E3】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Armor_E3】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1403,7 +1419,7 @@
 
 		<label>蓝图:重骑兵甲 I</label>
 
-		<description>一份记载着【CataphractArmor】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1437,7 +1453,7 @@
 
 		<label>蓝图:重骑兵甲 II</label>
 
-		<description>一份记载着【CataphractArmor】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1471,7 +1487,7 @@
 
 		<label>蓝图:重骑兵甲 III</label>
 
-		<description>一份记载着【CataphractArmor】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【CataphractArmor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1505,7 +1521,7 @@
 
 		<label>蓝图:跳跃背包 I</label>
 
-		<description>一份记载着【JumpPack】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1539,7 +1555,7 @@
 
 		<label>蓝图:跳跃背包 II</label>
 
-		<description>一份记载着【JumpPack】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1573,7 +1589,7 @@
 
 		<label>蓝图:跳跃背包 III</label>
 
-		<description>一份记载着【JumpPack】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【JumpPack】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1607,7 +1623,7 @@
 
 		<label>蓝图:枪械连接器 I</label>
 
-		<description>一份记载着【Gunlink】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1641,7 +1657,7 @@
 
 		<label>蓝图:枪械连接器 II</label>
 
-		<description>一份记载着【Gunlink】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1675,7 +1691,7 @@
 
 		<label>蓝图:枪械连接器 III</label>
 
-		<description>一份记载着【Gunlink】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Gunlink】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1709,7 +1725,7 @@
 
 		<label>蓝图:激光武器 II I</label>
 
-		<description>一份记载着【Laser_weapons_E】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1743,7 +1759,7 @@
 
 		<label>蓝图:激光武器 II II</label>
 
-		<description>一份记载着【Laser_weapons_E】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1777,7 +1793,7 @@
 
 		<label>蓝图:激光武器 II III</label>
 
-		<description>一份记载着【Laser_weapons_E】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Laser_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1811,7 +1827,7 @@
 
 		<label>蓝图:等离子武器 II I</label>
 
-		<description>一份记载着【Plasma_weapons_E】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1845,7 +1861,7 @@
 
 		<label>蓝图:等离子武器 II II</label>
 
-		<description>一份记载着【Plasma_weapons_E】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1879,7 +1895,7 @@
 
 		<label>蓝图:等离子武器 II III</label>
 
-		<description>一份记载着【Plasma_weapons_E】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Plasma_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1913,7 +1929,7 @@
 
 		<label>蓝图:电荷武器 II I</label>
 
-		<description>一份记载着【Charge_weapons_E】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1947,7 +1963,7 @@
 
 		<label>蓝图:电荷武器 II II</label>
 
-		<description>一份记载着【Charge_weapons_E】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -1981,7 +1997,7 @@
 
 		<label>蓝图:电荷武器 II III</label>
 
-		<description>一份记载着【Charge_weapons_E】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Charge_weapons_E】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2015,7 +2031,7 @@
 
 		<label>蓝图:能量护盾 I</label>
 
-		<description>一份记载着【Fortification_E1】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2049,7 +2065,7 @@
 
 		<label>蓝图:能量护盾 II</label>
 
-		<description>一份记载着【Fortification_E1】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2083,7 +2099,7 @@
 
 		<label>蓝图:能量护盾 III</label>
 
-		<description>一份记载着【Fortification_E1】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E1】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2117,7 +2133,7 @@
 
 		<label>蓝图:轨道护盾 I</label>
 
-		<description>一份记载着【Fortification_E2】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2151,7 +2167,7 @@
 
 		<label>蓝图:轨道护盾 II</label>
 
-		<description>一份记载着【Fortification_E2】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2185,7 +2201,7 @@
 
 		<label>蓝图:轨道护盾 III</label>
 
-		<description>一份记载着【Fortification_E2】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Fortification_E2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2219,7 +2235,7 @@
 
 		<label>蓝图:离子卫星广播器 I</label>
 
-		<description>一份记载着【Ion_gun_D1】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2253,7 +2269,7 @@
 
 		<label>蓝图:离子卫星广播器 II</label>
 
-		<description>一份记载着【Ion_gun_D1】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2287,7 +2303,7 @@
 
 		<label>蓝图:离子卫星广播器 III</label>
 
-		<description>一份记载着【Ion_gun_D1】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ion_gun_D1】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2321,7 +2337,7 @@
 
 		<label>蓝图:星际飞行基础 I</label>
 
-		<description>一份记载着【ShipBasics】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2355,7 +2371,7 @@
 
 		<label>蓝图:星际飞行基础 II</label>
 
-		<description>一份记载着【ShipBasics】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2389,7 +2405,7 @@
 
 		<label>蓝图:星际飞行基础 III</label>
 
-		<description>一份记载着【ShipBasics】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipBasics】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2423,7 +2439,7 @@
 
 		<label>蓝图:星舰引擎 I</label>
 
-		<description>一份记载着【ShipEngine】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2457,7 +2473,7 @@
 
 		<label>蓝图:星舰引擎 II</label>
 
-		<description>一份记载着【ShipEngine】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2491,7 +2507,7 @@
 
 		<label>蓝图:星舰引擎 III</label>
 
-		<description>一份记载着【ShipEngine】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipEngine】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2525,7 +2541,7 @@
 
 		<label>蓝图:星舰反应堆 I</label>
 
-		<description>一份记载着【ShipReactor】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2559,7 +2575,7 @@
 
 		<label>蓝图:星舰反应堆 II</label>
 
-		<description>一份记载着【ShipReactor】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2593,7 +2609,7 @@
 
 		<label>蓝图:星舰反应堆 III</label>
 
-		<description>一份记载着【ShipReactor】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipReactor】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2627,7 +2643,7 @@
 
 		<label>蓝图:星舰计算机核心 I</label>
 
-		<description>一份记载着【ShipComputerCore】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2661,7 +2677,7 @@
 
 		<label>蓝图:星舰计算机核心 II</label>
 
-		<description>一份记载着【ShipComputerCore】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2695,7 +2711,7 @@
 
 		<label>蓝图:星舰计算机核心 III</label>
 
-		<description>一份记载着【ShipComputerCore】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipComputerCore】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2729,7 +2745,7 @@
 
 		<label>蓝图:星舰传感器阵列 I</label>
 
-		<description>一份记载着【ShipSensorCluster】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2763,7 +2779,7 @@
 
 		<label>蓝图:星舰传感器阵列 II</label>
 
-		<description>一份记载着【ShipSensorCluster】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2797,7 +2813,7 @@
 
 		<label>蓝图:星舰传感器阵列 III</label>
 
-		<description>一份记载着【ShipSensorCluster】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipSensorCluster】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2831,7 +2847,7 @@
 
 		<label>蓝图:低温休眠舱 I</label>
 
-		<description>一份记载着【ShipCryptosleep】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2865,7 +2881,7 @@
 
 		<label>蓝图:低温休眠舱 II</label>
 
-		<description>一份记载着【ShipCryptosleep】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2899,7 +2915,7 @@
 
 		<label>蓝图:低温休眠舱 III</label>
 
-		<description>一份记载着【ShipCryptosleep】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【ShipCryptosleep】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2933,7 +2949,7 @@
 
 		<label>蓝图:近战武器 VI I</label>
 
-		<description>一份记载着【Melee_Ultra】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -2967,7 +2983,7 @@
 
 		<label>蓝图:近战武器 VI II</label>
 
-		<description>一份记载着【Melee_Ultra】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3001,7 +3017,7 @@
 
 		<label>蓝图:近战武器 VI III</label>
 
-		<description>一份记载着【Melee_Ultra】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Ultra】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3035,7 +3051,7 @@
 
 		<label>蓝图:物质转化 III I</label>
 
-		<description>一份记载着【Super_matter_E2】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3069,7 +3085,7 @@
 
 		<label>蓝图:物质转化 III II</label>
 
-		<description>一份记载着【Super_matter_E2】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3103,7 +3119,7 @@
 
 		<label>蓝图:物质转化 III III</label>
 
-		<description>一份记载着【Super_matter_E2】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Super_matter_E2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3137,7 +3153,7 @@
 
 		<label>蓝图:鼠族盔甲 III I</label>
 
-		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3171,7 +3187,7 @@
 
 		<label>蓝图:鼠族盔甲 III II</label>
 
-		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3205,7 +3221,7 @@
 
 		<label>蓝图:鼠族盔甲 III III</label>
 
-		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D2】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3239,7 +3255,7 @@
 
 		<label>蓝图:鼠族盔甲 IV I</label>
 
-		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。研读后计入该科技进度 (第 1/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 1/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3273,7 +3289,7 @@
 
 		<label>蓝图:鼠族盔甲 IV II</label>
 
-		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。研读后计入该科技进度 (第 2/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 2/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3307,7 +3323,7 @@
 
 		<label>蓝图:鼠族盔甲 IV III</label>
 
-		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。研读后计入该科技进度 (第 3/3 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Ratkin_Armor_D3】科技的蓝图。读完可推进该科技解锁进度 (第 3/3 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3341,7 +3357,7 @@
 
 		<label>蓝图:近战武器 VII I</label>
 
-		<description>一份记载着【Melee_Archotech】科技的蓝图。研读后计入该科技进度 (第 1/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3375,7 +3391,7 @@
 
 		<label>蓝图:近战武器 VII II</label>
 
-		<description>一份记载着【Melee_Archotech】科技的蓝图。研读后计入该科技进度 (第 2/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3409,7 +3425,7 @@
 
 		<label>蓝图:近战武器 VII III</label>
 
-		<description>一份记载着【Melee_Archotech】科技的蓝图。研读后计入该科技进度 (第 3/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3443,7 +3459,7 @@
 
 		<label>蓝图:近战武器 VII IV</label>
 
-		<description>一份记载着【Melee_Archotech】科技的蓝图。研读后计入该科技进度 (第 4/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Melee_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3477,7 +3493,7 @@
 
 		<label>蓝图:弓术 III I</label>
 
-		<description>一份记载着【Bow_Archotech】科技的蓝图。研读后计入该科技进度 (第 1/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3511,7 +3527,7 @@
 
 		<label>蓝图:弓术 III II</label>
 
-		<description>一份记载着【Bow_Archotech】科技的蓝图。研读后计入该科技进度 (第 2/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3545,7 +3561,7 @@
 
 		<label>蓝图:弓术 III III</label>
 
-		<description>一份记载着【Bow_Archotech】科技的蓝图。研读后计入该科技进度 (第 3/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3579,7 +3595,7 @@
 
 		<label>蓝图:弓术 III IV</label>
 
-		<description>一份记载着【Bow_Archotech】科技的蓝图。研读后计入该科技进度 (第 4/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Bow_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3613,7 +3629,7 @@
 
 		<label>蓝图:冲锋枪 III I</label>
 
-		<description>一份记载着【SMG_Archotech】科技的蓝图。研读后计入该科技进度 (第 1/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3647,7 +3663,7 @@
 
 		<label>蓝图:冲锋枪 III II</label>
 
-		<description>一份记载着【SMG_Archotech】科技的蓝图。研读后计入该科技进度 (第 2/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3681,7 +3697,7 @@
 
 		<label>蓝图:冲锋枪 III III</label>
 
-		<description>一份记载着【SMG_Archotech】科技的蓝图。研读后计入该科技进度 (第 3/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3715,7 +3731,7 @@
 
 		<label>蓝图:冲锋枪 III IV</label>
 
-		<description>一份记载着【SMG_Archotech】科技的蓝图。研读后计入该科技进度 (第 4/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【SMG_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3749,7 +3765,7 @@
 
 		<label>蓝图:能量武器 II I</label>
 
-		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。研读后计入该科技进度 (第 1/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3783,7 +3799,7 @@
 
 		<label>蓝图:能量武器 II II</label>
 
-		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。研读后计入该科技进度 (第 2/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3817,7 +3833,7 @@
 
 		<label>蓝图:能量武器 II III</label>
 
-		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。研读后计入该科技进度 (第 3/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3851,7 +3867,7 @@
 
 		<label>蓝图:能量武器 II IV</label>
 
-		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。研读后计入该科技进度 (第 4/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Blaster_weapons_Archotech】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3885,7 +3901,7 @@
 
 		<label>蓝图:星门 I</label>
 
-		<description>一份记载着【Stargate_F1】科技的蓝图。研读后计入该科技进度 (第 1/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 1/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3919,7 +3935,7 @@
 
 		<label>蓝图:星门 II</label>
 
-		<description>一份记载着【Stargate_F1】科技的蓝图。研读后计入该科技进度 (第 2/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 2/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3953,7 +3969,7 @@
 
 		<label>蓝图:星门 III</label>
 
-		<description>一份记载着【Stargate_F1】科技的蓝图。研读后计入该科技进度 (第 3/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 3/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -3987,7 +4003,7 @@
 
 		<label>蓝图:星门 IV</label>
 
-		<description>一份记载着【Stargate_F1】科技的蓝图。研读后计入该科技进度 (第 4/4 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【Stargate_F1】科技的蓝图。读完可推进该科技解锁进度 (第 4/4 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 
 		<statBases>
 
@@ -4020,7 +4036,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Machining_I</defName>
 		<label>蓝图:机械加工 I</label>
-		<description>一份记载着【机械加工】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【机械加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Machining</targetTech>
@@ -4033,7 +4049,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Machining_II</defName>
 		<label>蓝图:机械加工 II</label>
-		<description>一份记载着【机械加工】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【机械加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Machining</targetTech>
@@ -4046,7 +4062,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_MicroelectronicsBasics_I</defName>
 		<label>蓝图:微电子学 I</label>
-		<description>一份记载着【微电子学】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【微电子学】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>MicroelectronicsBasics</targetTech>
@@ -4059,7 +4075,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_MicroelectronicsBasics_II</defName>
 		<label>蓝图:微电子学 II</label>
-		<description>一份记载着【微电子学】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【微电子学】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>MicroelectronicsBasics</targetTech>
@@ -4072,7 +4088,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Metals_C1_I</defName>
 		<label>蓝图:金属加工 I</label>
-		<description>一份记载着【金属加工】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【金属加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Metals_C1</targetTech>
@@ -4085,7 +4101,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Metals_C1_II</defName>
 		<label>蓝图:金属加工 II</label>
-		<description>一份记载着【金属加工】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【金属加工】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Metals_C1</targetTech>
@@ -4098,7 +4114,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Fabrication_I</defName>
 		<label>蓝图:精密制造 I</label>
-		<description>一份记载着【精密制造】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【精密制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Fabrication</targetTech>
@@ -4111,7 +4127,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Fabrication_II</defName>
 		<label>蓝图:精密制造 II</label>
-		<description>一份记载着【精密制造】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【精密制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Fabrication</targetTech>
@@ -4124,7 +4140,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Glass_C1_I</defName>
 		<label>蓝图:玻璃制造 I</label>
-		<description>一份记载着【玻璃制造】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【玻璃制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Glass_C1</targetTech>
@@ -4137,7 +4153,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Glass_C1_II</defName>
 		<label>蓝图:玻璃制造 II</label>
-		<description>一份记载着【玻璃制造】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【玻璃制造】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Glass_C1</targetTech>
@@ -4150,7 +4166,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Batteries_I</defName>
 		<label>蓝图:蓄电池 I</label>
-		<description>一份记载着【蓄电池】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 1/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【蓄电池】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 1/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Batteries</targetTech>
@@ -4163,7 +4179,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Batteries_II</defName>
 		<label>蓝图:蓄电池 II</label>
-		<description>一份记载着【蓄电池】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【蓄电池】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Batteries</targetTech>
@@ -4176,7 +4192,7 @@
 	<ThingDef ParentName="RK_BP_Tier2">
 		<defName>Blueprint_Electricity_II</defName>
 		<label>蓝图:电力工程 II</label>
-		<description>一份记载着【电力工程】科技的蓝图卷宗。研读后计入该科技解锁进度 (第 2/2 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【电力工程】科技的蓝图卷宗。读完可推进该科技解锁进度 (第 2/2 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Electricity</targetTech>
@@ -4191,7 +4207,7 @@
 	<ThingDef ParentName="RK_BP_Tier1">
 		<defName>SchematicBook_LongBlades</defName>
 		<label>图纸书:利刃武器</label>
-		<description>一份记载着【利刃武器】科技的图纸书。研读后计入该科技解锁进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【利刃武器】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>LongBlades</targetTech>
@@ -4204,7 +4220,7 @@
 	<ThingDef ParentName="RK_BP_Tier1">
 		<defName>SchematicBook_Armor_IronAge</defName>
 		<label>图纸书:铁器护甲</label>
-		<description>一份记载着【铁器护甲】科技的图纸书。研读后计入该科技解锁进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【铁器护甲】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Armor_IronAge</targetTech>
@@ -4217,7 +4233,7 @@
 	<ThingDef ParentName="RK_BP_Tier1">
 		<defName>SchematicBook_GunPowderTech</defName>
 		<label>图纸书:火药</label>
-		<description>一份记载着【火药】科技的图纸书。研读后计入该科技解锁进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【火药】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>GunPowderTech</targetTech>
@@ -4230,7 +4246,7 @@
 	<ThingDef ParentName="RK_BP_Tier1">
 		<defName>SchematicBook_Medieval_Cannons</defName>
 		<label>图纸书:中世纪火炮</label>
-		<description>一份记载着【中世纪火炮】科技的图纸书。研读后计入该科技解锁进度 (第 1/1 卷), 集齐系列全部卷册后解锁研究, 书保留在书架不消耗。</description>
+		<description>一份记载着【中世纪火炮】科技的图纸书。读完可推进该科技解锁进度 (第 1/1 卷); 读满该系列即解锁并完成该研究。书不消耗, 保留在书架。</description>
 		<modExtensions>
 			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
 				<targetTech>Medieval_Cannons</targetTech>
@@ -4241,5 +4257,275 @@
 		</modExtensions>
 	</ThingDef>
 
-</Defs>
 
+	<!-- ============================================================================
+	     v5 补齐 (2026-09-10): 14 项此前无蓝图书的 HSK 自研科技
+	     gate=false → 不抢走原版研究路线, 只额外提供「读书直接完成该研究」的并行通道
+	     ============================================================================ -->
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticFences</defName>
+		<label>图纸书:围栏工</label>
+		<description>一份记载着【RK_Rustic_SimpleFences】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_SimpleFences</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticDoors</defName>
+		<label>图纸书:朴素门具</label>
+		<description>一份记载着【RK_Rustic_SimpleDoors】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_SimpleDoors</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticAdvDoors</defName>
+		<label>图纸书:加固门具</label>
+		<description>一份记载着【RK_Rustic_AdvancedDoors】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_AdvancedDoors</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticCastle</defName>
+		<label>图纸书:立柱与城堡工程</label>
+		<description>一份记载着【RK_Rustic_ColumnsAndCastle】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_ColumnsAndCastle</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_RusticBookFurniture</defName>
+		<label>图纸书:学术陈设</label>
+		<description>一份记载着【RK_Rustic_BookFurniture】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Rustic_BookFurniture</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_MiningPrimitive</defName>
+		<label>图纸书:原始采矿</label>
+		<description>一份记载着【RK_Mining_Primitive】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Mining_Primitive</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_QuarryPrimitive</defName>
+		<label>图纸书:原始采石</label>
+		<description>一份记载着【RK_Quarry_Primitive】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Quarry_Primitive</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_QuarryMedieval</defName>
+		<label>图纸书:采石场</label>
+		<description>一份记载着【RK_Quarry_Medieval】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Quarry_Medieval</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_PrimitiveLighting</defName>
+		<label>图纸书:原始取火与照明</label>
+		<description>一份记载着【RK_PrimitiveLighting】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_PrimitiveLighting</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier1">
+		<defName>SchematicBook_Sericulture</defName>
+		<label>图纸书:蚕桑缫丝</label>
+		<description>一份记载着【RK_Sericulture】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1000</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Sericulture</targetTech>
+				<tier>1</tier>
+				<researchPoints>250</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroDistillation</defName>
+		<label>蓝图:石化工业 I·常减压蒸馏</label>
+		<description>一份记载着【RK_Petro_AtmosphericDistillation】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_AtmosphericDistillation</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroRefining</defName>
+		<label>蓝图:石化工业 II·管道精炼</label>
+		<description>一份记载着【RK_Petro_Refining】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_Refining</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier2">
+		<defName>Blueprint_PetroSynthesis</defName>
+		<label>蓝图:石化工业 III·连续合成</label>
+		<description>一份记载着【RK_Petro_Synthesis】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>1500</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RK_Petro_Synthesis</targetTech>
+				<tier>2</tier>
+				<researchPoints>400</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<ThingDef ParentName="RK_BP_Tier3">
+		<defName>Blueprint_TransportDrones</defName>
+		<label>蓝图:运输无人机</label>
+		<description>一份记载着【TransportDrones】科技的图纸卷宗。读完即直接完成该研究 (原版研究路线不受影响)。书不消耗, 保留在书架。</description>
+		<statBases>
+			<MarketValue>2250</MarketValue>
+		</statBases>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>TransportDrones</targetTech>
+				<tier>3</tier>
+				<researchPoints>500</researchPoints>
+				<gate>false</gate>
+				<finishOnUnlock>true</finishOnUnlock>
+				<bookIndex>1</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

@@ -291,7 +291,10 @@ namespace BlueprintUnlockHSK
                     continue;
                 }
                 byTier.Add(all[i]);
-                if (tracker == null || !tracker.IsRead(all[i].defName))
+                // v6: 进度改为「按卷」记录, 无法再从 defName 判断某本书是否读过;
+                // 改判「该系列科技是否还没解锁」—— 没解锁 = 这本书还有用。
+                if (tracker == null || string.IsNullOrEmpty(be.targetTech)
+                    || !tracker.IsTechUnlocked(be.targetTech))
                 {
                     unread.Add(all[i]);
                 }

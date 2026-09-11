@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  邪教徒兜帽(2026-09-10 波次7): 移植自 MO 3219596926 Head_Apparel.xml 的
+  DankPyon_Headgear_CultistHood。只做外观/护头小件: 不挂任何配方(仅供兵种生成与战利品),
+  不新增 ApparelLayerDef —— 直接用原版 Overhead 层(替换 MO 自造 DankPyon_Hood 层, 避免依赖)。
+  贴图: MO Textures/Things/Pawn/Humanlike/Apparel/Headgear/CultistHood/* 已按同相对路径拷入本 mod。
+  thingCategories 不写 → 不会出现在任何仓储分类, 仅作为生成物存在(符合"场景敌人专属装束")。
+============================================================================ -->
+	<ThingDef ParentName="ApparelBase">
+		<defName>RK_MO_Apparel_CultistHood</defName>
+		<label>邪教徒兜帽</label>
+		<description>厚实带衬的兜帽, 只露出双眼, 是某个在中世纪王国阴影下活动的邪教的标记。能挡风并提供少量钝击防护。</description>
+		<techLevel>Medieval</techLevel>
+		<smeltable>false</smeltable>
+		<graphicData>
+			<texPath>Things/Pawn/Humanlike/Apparel/Headgear/CultistHood/CultistHood</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<Mass>0.15</Mass>
+			<Flammability>0.5</Flammability>
+			<DeteriorationRate>0.5</DeteriorationRate>
+			<StuffEffectMultiplierArmor>0.3</StuffEffectMultiplierArmor>
+			<StuffEffectMultiplierInsulation_Cold>0.5</StuffEffectMultiplierInsulation_Cold>
+			<StuffEffectMultiplierInsulation_Heat>0.1</StuffEffectMultiplierInsulation_Heat>
+			<EquipDelay>0.8</EquipDelay>
+		</statBases>
+		<apparel>
+			<wornGraphicPath>Things/Pawn/Humanlike/Apparel/Headgear/CultistHood/CultistHood</wornGraphicPath>
+			<bodyPartGroups>
+				<li>UpperHead</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>RK_MO_Cultist</li>
+			</tags>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<canBeDesiredForIdeo>false</canBeDesiredForIdeo>
+			<canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+		</apparel>
+	</ThingDef>
+</Defs>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         22_托盘可存全部食物.xml  (2026-09-10)
+         修复: 通用托盘/散装货架(锻焊钢托盘等)存不进"烹饪食品/罐头"等成品食物。
+         根因: Core_SK 的 SK_Pallet / PalletSmall / PalletRack / SK_DeepStorage_Skip
+               的 building/fixedStorageSettings/filter/categories 白名单只逐个列了
+               FoodRaw、CookingSupplies、LuxuryStuffs、SweetMeals、Alcohol、Energetics、
+               Animalfood 等 Foods 子分类, 唯独漏了 FoodMeals(简单/精致/奢侈餐, 含金鸢尾兰食品)
+               与 Preserves(罐头)。ASF"储存筛选"页里这些分类显示为可勾选, 但 fixedStorageSettings
+               是硬上限 → 勾了也存不进, 表现为"托盘不能存所有食物"。
+         修法: 给"已收 FoodRaw 的散装存储"补挂 Foods 根分类, 一次覆盖整棵食物子树
+               (含 FoodMeals/Preserves/Spoilage 及各 mod 新增的 Foods 后代)。只追加, 不动现有条目。
+         门控: Conditional 谓词 categories/li="FoodRaw" and not(categories/li="Foods")
+               —— 只命中缺 Foods 的通用散装存储, 天然排除货架/武器柜/药柜等专用存储, 且幂等。
+         ============================================================ -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef/building/fixedStorageSettings/filter[categories/li="FoodRaw" and not(categories/li="Foods")]</xpath>
+        <match Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef/building/fixedStorageSettings/filter[categories/li="FoodRaw" and not(categories/li="Foods")]/categories</xpath>
+            <value>
+                <li>Foods</li>
+            </value>
+        </match>
+    </Operation>
+</Patch>

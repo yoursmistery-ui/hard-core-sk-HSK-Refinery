@@ -39,6 +39,18 @@
 ⚠️ 若仍订阅创意工坊原「Knights of Favonius - Weapon and Armour」,请取消订阅,否则贴图/内容重复。
 
 整合内容(2026-09-06): 一战鼠鼠 GreatWar 增强 —— 反方「同盟国」(Rakinia_CentralAlliance) 设为敌对派系(naturalEnemy, 与正方「协约国」对立); 补齐全部 37 件二战军服的 CE 适配(Bulk/WornBulk + 原版 % 护甲换成 CE mm); 精选新增 4 枪(白蔷薇卡宾枪 / 土人参左轮 · 山毛榉狙击 / 五月草轻机枪, 映射 303British · 9mmPara · 7.92Mauser 现成弹)、2 近战(铅头警棍 / 战壕锤)、8 衣甲(正反两方旗舰制服 · 装具 · 防弹盾衣 · 迷彩盔罩), 全部 CE 化并入两派系兵种装备池。
+
+名称池优化(2026-09-11): 全池清理 + 扩充 + 接线。
+【第一阶段】三大名称池各 +100 条(全部去重、保持 UTF-8 BOM):
+- RK_FirstName_ElfStyle(女性/精灵名) 1235 → 1335 行: 花木园艺名 60 + 音译精灵名 40
+- RK_Last_Single(单字姓氏/称号) 68 → 168 行: 金属宝石称号(之誓/之护/之壁/之盾/之怒) + XX者名号 + 鼠系萌名(仓鼠/绒鼠/鼠王…) + 绰号小名(饭团/麻薯/小机灵…)
+- RK_Noun_Prefix_Flower / RK_Noun_Postfix_Flower(花名词缀) 507 → 607 行: 草药野菜 60 + 针叶阔叶树 40;并清掉 17 个历史重复 → 590 行
+【第二阶段】审计发现人名规则 NamerPerson_RatkinKingdom 实际只用到 7 个词库,另有 9 个词库(Color/Herb/Star/Weapon/Actor/Personality/Taker/Action/Bloom)在 rulesFiles 里声明过却从未被任何 rulesStrings 引用(占了位、不干活;扩了也不会出现在游戏里)。
+本次把 15 个 Noun 词库全部扩充并接线,使整个词库都真正参与人名生成:
+- 生效池加满至 120 条: Nut(坚果果实) / Iron(金属矿物) / Ironlike(器物志向) / BodyPart(鼠族部位) / Nature(天象地貌) / Mover(行者)
+- 闲置池扩至 50 条上下并启用: Color(颜色) / Herb(香草) / Star(星宿) / Weapon(兵器) / Actor(身份) / Personality(志向) / Taker(传音者) / Action(举动) / Bloom(花部)
+- 新增 11 条姓氏/名字规则(DefInjected 覆盖 RatkinKingdomNameUtility,原有 8 条权重原样保留),新名字会出现「白尾/玄牙/银心」「钢铁剑/秘银盾」「巡夜者/采药者」「花语者/御风者」「北斗/长庚」「薄荷/迷迭香」这类组合
+说明: 规则覆盖只作用于简体中文;英文语系仍走原规则(词库已就位,将来补英文规则即可复用)。
     </description>
     <modDependencies>
         <li><packageId>Solaris.RatkinRaceMod</packageId><displayName>NewRatkinPlus</displayName><steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=1578693166</steamWorkshopUrl></li>

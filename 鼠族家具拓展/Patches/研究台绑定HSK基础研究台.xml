@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- ============================================================================
+	     鼠族研究台 → 绑定 HSK「基础研究台」地位 (2026-09-11 重写)
+	     ============================================================================
+	     症状: 鼠族家具拓展的「鼠族研究台」(RKFC_RGK_SimpleResearchBench) 建好后,
+	           在科技树里点任何项目都不认它, 小人接了研究活跑向它也没法开工。
+
+	     ── 根因(反编译实证)──
+	     ① 原版判定 Verse.ResearchProjectDef.CanBeResearchedAt 首行:
+	            if (requiredResearchBuilding != null && bench.def != requiredResearchBuilding)
+	                return false;
+	        比的是 **def 本身**, 与研究台的血缘/父类无关 → 「改 ParentName 让它变成
+	        研究台子类」在机制上完全无效, 鼠族台恒被拒绝。
+	     ② 唯一的后门是 Core_SK 的 Harmony Postfix
+	        SK.Patch_ResearchProjectDef_CanBeResearchedAt:
+	            if (__result || !HasModExtension<AdvancedResearchExtension>()) return;
+	            if (list 为空 || !list.Contains(bench.def)) return;
+	            __result = true;      // 只把 false 救成 true, 不会反向拒绝
+	        → 科技侧必须挂 SK.AdvancedResearchExtension, 且 requiredResearchBuildings
+	          列表里 **真的写着鼠族台 defName**, 鼠族台才被接受。
+	     ③ Core_SK 六档门槛就声明在这两个地方
+	        (Core_SK/Defs/ResearchProjectDefs/Research_Abstract.xml):
+	            PrimitiveBase        = PrimitiveResearchBench + ext[Primitive,Simple,HiTech]
+	            MedievalBase         = SimpleResearchBench    + ext[Simple,HiTech]
+	            IndustrialBase       = SimpleResearchBench(+设施 LabTerminal) + ext[Simple,HiTech]
+	            HitechBase           = HiTechResearchBench(+LabTerminal) + ext[HiTech]
+	            HitechMultiBase      = HiTechResearchBench(+MultiAnalyzer) + ext[HiTech]
+	            HitechLabStationBase = HiTechResearchBench(+LabStation)    + ext[HiTech]
+	        Core_SK 自己的具体节点、以及 Core_SK_CoreModule/AutoGenPatches 把原版科技
+	        重挂的 SK.<Tier>BaseDummy, **都不自建 modExtensions**, 一律继承抽象基类
+	        (已核: Research_Buildings/Animal/Craft.xml 里 modExtensions 计数 = 0)。
+	        → **补丁在继承解析之前作用于原始 XML**, 所以只要把鼠族台写进抽象基类的
+	          列表, 全部继承该基类的科技(原版重挂 + HSK 自有 + 工业大修 + 所有以 HSK
+	          基类为父的第三方科技)一次性全部生效, 无需逐个列举科技节点。
+
+	     ── 本补丁采取的口径 ──
+	     用户 2026-09-11 选定: **等同基础研究台** —— 原版基础研究台能研究的档位,
+	     鼠族台也能研究; 先进/高级/极致档(只认高级研究台)仍然必须用高级研究台。
+	     实现 = 把鼠族台 defName 追加进「列表里已含 SimpleResearchBench」的
+	     requiredResearchBuildings。用两条互斥的操作覆盖两种情况:
+	       ① 抽象基类(@Name, 覆盖全部继承者 —— 这是主力, 与加载顺序无关)
+	       ② 具体节点且硬写了自己的列表(如 美狐 Miho_ResearchBench.xml 那种写法)
+	     只含 HiTechResearchBench 的列表(高级/极致档)不带 SimpleResearchBench,
+	     故不会被命中 → 档位门槛不被破坏。
+
+	     ── 下面 ③④ 是配套的「让鼠族台确实是个合格研究台」──
+	     ③ comps 重建: 研究台的**身份核心**是 CompProperties_ReportWorkSpeed 且
+	        workSpeedStat 指 ResearchSpeedFactor(原 mod 从 BenchBase 继承的是
+	        WorkTableWorkSpeedFactor, 工作台口径, 面板显示的工作速度不对);
+	        同时 AffectedByFacilities 白名单补齐 HSK 科研设施 FileCabinet/LabTerminal,
+	        否则前工业/太空档要求设施时它仍不够格(IndustrialBase 就要 LabTerminal)。
+	        ⚠ 必须 Inherit="False": 不写会与父类列表合并出第二个 ReportWorkSpeed;
+	        ⚠ 且必须列全, 否则丢掉原 mod 自带的 RKFC_GL_Bookshelf 书架联动。
+	     ④ placeWorkers: 对齐原版研究台(交互点防重叠 + 画线连书架)。
+	     研究速度本身不靠 comps, 由 JobDriver_Research 读台子的 statBases
+	     ResearchSpeedFactor(本 def 自带 0.7, 原版基础台 0.75), 无需改动。
+	     ============================================================================ -->
+
+	<!-- ① 抽象档位基类: 凡列表中已含 SimpleResearchBench(基础研究台)的基类,
+	     追加鼠族台 → 所有继承者一并接受。只含 HiTechResearchBench 的基类不命中。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ResearchProjectDef[@Name]/modExtensions/li[@Class="SK.AdvancedResearchExtension"]/requiredResearchBuildings[li="SimpleResearchBench"]</xpath>
+		<value>
+			<li>RKFC_RGK_SimpleResearchBench</li>
+		</value>
+	</Operation>
+
+	<!-- ② 具体节点且硬写了自有列表(不继承抽象基类)的情况, 同样补齐。
+	     @Name 与本条 not(@Name) 互斥, 不会重复追加。 -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ResearchProjectDef[not(@Name)]/modExtensions/li[@Class="SK.AdvancedResearchExtension"]/requiredResearchBuildings[li="SimpleResearchBench"]</xpath>
+		<value>
+			<li>RKFC_RGK_SimpleResearchBench</li>
+		</value>
+	</Operation>
+
+	<!-- ③ comps 全量重建(Replace: 删旧节点 + 按 value 重建; Inherit="False" 挡父类继承)
+	     ⚠ 本 def 自带 comps(仅 AffectedByFacilities/Bookshelf), 必须 Replace 而非 Add,
+	       否则出现两个 comps 节点; 不用 Inherit="False" 会与 BenchBase 的
+	       ReportWorkSpeed(WorkTableWorkSpeedFactor) 合并出重复条目。 -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]/comps</xpath>
+		<value>
+			<comps Inherit="False">
+				<li Class="CompProperties_ReportWorkSpeed">
+					<workSpeedStat>ResearchSpeedFactor</workSpeedStat>
+				</li>
+				<li Class="CompProperties_AffectedByFacilities">
+					<linkableFacilities>
+						<li>RKFC_GL_Bookshelf</li>
+						<li>FileCabinet</li>
+						<li>LabTerminal</li>
+					</linkableFacilities>
+				</li>
+			</comps>
+		</value>
+	</Operation>
+
+	<!-- ④ placeWorkers: 本 def 原始 XML 无此节点 → 走 nomatch 的 Add。
+	     ⚠ Conditional 的 match/nomatch 是各自独立作用于整份 XML 的操作, 两边都必须
+	       自带 xpath(旧版漏写 → 报 PatchOperationAdd(xpath=""): '' is an invalid
+	       expression, 整个操作失败)。Inherit="False" 使最终列表与 value 完全一致,
+	       避免与 BenchBase 的 PlaceWorker_ReportWorkSpeedPenalties 合并出重复。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]/placeWorkers</xpath>
+		<match Class="PatchOperationReplace">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]/placeWorkers</xpath>
+			<value>
+				<placeWorkers Inherit="False">
+					<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+					<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+					<li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+				</placeWorkers>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RKFC_RGK_SimpleResearchBench"]</xpath>
+			<value>
+				<placeWorkers Inherit="False">
+					<li>PlaceWorker_ReportWorkSpeedPenalties</li>
+					<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+					<li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+				</placeWorkers>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<!-- ⑤ 挂进 HSK「研究台」二级菜单(原版三台之外追加鼠族台)。
+	     Test 门控: 未装 ArchitectSense/HSK 时静默跳过, Sequence 设 Always 不报错。 -->
+	<Operation Class="PatchOperationSequence">
+		<success>Always</success>
+		<operations>
+			<li Class="PatchOperationTest">
+				<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ResearchBenches"]/defNames</xpath>
+			</li>
+			<li Class="PatchOperationAdd">
+				<xpath>Defs/ArchitectSense.DesignationSubCategoryDef[defName="SubCategory_ResearchBenches"]/defNames</xpath>
+				<value>
+					<li>RKFC_RGK_SimpleResearchBench</li>
+				</value>
+			</li>
+		</operations>
+	</Operation>
+
+</Patch>

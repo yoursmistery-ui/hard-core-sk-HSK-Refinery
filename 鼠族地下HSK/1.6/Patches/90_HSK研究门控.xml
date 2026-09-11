@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 三个研究节点是原 mod 自带；这里只补 HSK 研究台硬门槛和 ResearchTreeSK 扩展。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundExperimentalWeapon"]</xpath>
+    <value>
+      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>LabTerminal</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundAssaultWeapons"]</xpath>
+    <value>
+      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>LabTerminal</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundGuerrillaEquipments"]</xpath>
+    <value>
+      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <modExtensions Inherit="False">
+        <li Class="SK.AdvancedResearchExtension">
+          <requiredResearchBuildings>
+            <li>LabTerminal</li>
+          </requiredResearchBuildings>
+        </li>
+        <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
+      </modExtensions>
+    </value>
+  </Operation>
+</Patch>

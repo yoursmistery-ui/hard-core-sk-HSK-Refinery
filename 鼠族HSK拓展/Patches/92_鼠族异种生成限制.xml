@@ -159,14 +159,18 @@
         </value>
     </Operation>
 
-    <!-- ⑤ 商队派系: 2026-09-07 重调,行商耐用侧重(田鼠)+仓鼠护卫。 -->
+    <!-- ⑤ 商队派系: 2026-09-09 重调 —— 徘徊游商/普通商队的成员(含入队招募候选)均吃此池,
+         扩入异种鼠但只留 4 种主力(松鼠/仓鼠/实验白鼠/田鼠);废土鼠为敌系(天然敌对派系专属),
+         不放入友方商队;行商耐用侧重保留(田鼠)+仓鼠护卫,合计 1.000。 -->
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/FactionDef[defName="RK_Faction_Caravan"]/xenotypeSet/xenotypeChances</xpath>
         <value>
             <xenotypeChances>
-                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.80</RK_XenoType_Ratkin>
-                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.12</Ratkin_Vole>
+                <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.73</RK_XenoType_Ratkin>
+                <Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.10</Ratkin_Vole>
                 <Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Hamster>
+                <Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.05</Ratkin_LabRat>
+                <Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.04</Ratkin_Squirrel>
             </xenotypeChances>
         </value>
     </Operation>

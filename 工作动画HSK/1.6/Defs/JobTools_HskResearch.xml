@@ -18,6 +18,40 @@
        只改 JE_Tool_Research_Med 三个数: scale 0.85→0.62、reach 0.2→0.45、holdRaise 0→0.12。
        其余五档(凿/记事本/试管/观测镜/终端)用户确认无问题, 保持首版参数不动。
        后续仍嫌贴人/太远, 只动 reach(前后)/scale(大小)/holdRaise(高低), 无需改 DLL。
+
+       【2026-09-10 朝向变体】Read 风格是"屏幕竖直、不随朝向旋转"的(ToolAnimator Read 分支),
+       背对镜头时书页/写字板正面照旧, 违和。框架新增两个字段(JobToolDef.MaterialFor 回退链):
+         texPathNorth    : 背视(朝北)专用, 优先于 texPathNorthSouth
+         texPathEastWest : 东西侧视专用(朝西自动镜像), 优先于 texPathProfile
+       未设这两个字段的工具行为与旧版逐字节一致(零回归); 旧 texPathNorthSouth/texPathProfile 仍是回退链一环。
+       本次只给两档 Read 补图(大书/写字板各一张背视 + 一张侧视)。
+       注:Prim(Stab)/High(Stir)/Ultra(Stir) 的单手道具贴图自带 baseAngle 随作业方向旋转,
+       本来就会转, 无"固定角度"问题, 故不配朝向图; Space(望远镜,Hold)同属屏幕竖直类,
+       但其姿势特殊(holdEyeAnchor 锚眼 + 65° 倾角), 待实测后再定。
+
+       【2026-09-11 朝向位置(方案B)】只换贴图不够: Read 分支原只有「朝北 / 非朝北」二值,
+       且判的是**作业方向 dir** 而非人物朝向 —— 东西侧身跟朝南共用同一套前伸量, 而人物侧身时
+       屏幕横向被压窄 -> 书被顶出胸口 = "位置飘 / 离手"。现框架新增 4 个**可选**字段
+       (默认值等于旧行为, 其余 147 档零回归; 只作用于 swingStyle=Read):
+         reachEastWest       东西向专用前伸(绝对值/格; 负数=沿用 reach*0.70)。越小越贴身
+         holdLateralEastWest 东西向沿人物左右轴的侧移(正=右手侧, 朝西自动镜像)。把道具拉回胸前
+         holdLateralNorth    朝北时的同轴侧移(通常 0, 用来避开身体轮廓)
+         volScaleProfile     侧身额外缩放(1=不变; 侧身时同样大小显得更大 -> 压到 0.85~0.95)
+         reachSouth          朝南(正面)前伸(绝对值/格; 负数=沿用 reach*0.70)。正面人物满宽,
+                             取值应**介于**朝北(0.30x)与侧身之间, 不必收到侧身那么紧
+         volScaleSouth       朝南额外缩放(1=不变)
+       判据改为干净的 bodyFacing。本次给 Med/Ind 填了 reachEastWest/volScaleProfile/reachSouth/
+       volScaleSouth 初值,
+       侧移先留 0; 若侧身仍飘, 再调 holdLateralEastWest(±0.05 起步)。
+
+       【2026-09-11 之二 朝北"隐形"根治】用户实测「书四个朝向都看不到 / 调参完全没生效」。
+       根因: `SetDrawAltitudes` 照搬原版「朝北手持物背在身后」, 把**整栈**(道具+手+前臂+副手+面罩)
+       压到 `AltitudeForLayer(-10)` 且 `currentRenderQueue = UnderBodyQueueFor(pawn)`, 身体完全遮住;
+       而 Read 的 north 分支**只读 reach*0.30**, 我加的 reachEastWest/reachSouth 在朝北时压根不参与
+       -> 调了等于没调。新增 2 个可选字段(默认=旧行为, 零回归):
+         reachNorth      朝北专用前伸(绝对值/格; 负数=沿用 reach*0.30)。⚠ 朝北的"前"是**远离相机**,
+                         所以这个值越大, 书越往**屏幕上方**走(胸口 -> 肩线以上), 不是往左右
+         neverUnderBody  只给 Read 用: true = 该道具整栈在**所有朝向**都画在身体上面(不再埋到身下)
        ============================================================================ -->
 
   <!-- 原始档 PrimitiveResearchBench:石契凿刻 —— 单手持凿往石/泥板上一下下刻记号(Stab),偶尔头顶灯泡 -->
@@ -59,12 +93,44 @@
       <li>SimpleResearchBench</li>
     </workbenchDefs>
     <texPath>Things/JobEffects/Tools/TeachersBook</texPath>
+    <!-- 2026-09-10 朝向变体:Read 风格是"屏幕竖直、不随朝向旋转"的(见 ToolAnimator Read 分支),
+         摊开的书在背对镜头时仍显示书页正面, 非常违和。补两张视角图:
+           texPathNorth    = 书的封面/书背(复用正视图轮廓, 尺寸锚点完全一致)
+           texPathEastWest = 书的侧缘(白书页 + 棕封面边), 朝西时框架自动镜像 -->
+    <texPathNorth>Things/JobEffects/Tools/TeachersBookNorth</texPathNorth>
+    <texPathEastWest>Things/JobEffects/Tools/TeachersBookEastWest</texPathEastWest>
     <swingStyle>Read</swingStyle>
     <bookGripHalfWidth>0.44</bookGripHalfWidth>
     <bookGripDrop>0.29</bookGripDrop>
-    <scale>0.62</scale>
+    <scale>0.68</scale>
     <reach>0.45</reach>
-    <holdRaise>0.12</holdRaise>
+    <!-- ⚠⚠ 举起读书时的上抬量(占 scale 的比例, 默认 0.30)。
+         **+z = 屏幕上方 = 远离相机**, 所以这一项是把书往**人物身后**推 —— 它就是
+         "书被身体完全挡住、只剩两只手"的元凶(0.62*0.30 = 0.186 格)。压到 0.15 保留举起感。 -->
+    <readLiftRise>0.22</readLiftRise>
+    <!-- 侧身前伸(绝对值/格, 屏幕右/左 = 人物正前方): 09-11 实测 0.38 只比原值 0.315 多挪
+         0.065 格 ≈ 14 像素, 肉眼"看不出变化" -> 直接给足到 0.65(比身体半宽 0.35 + 头偏移
+         0.15 + 书半宽 0.23 = 0.73 略小, 书紧邻身体外侧、完全离开脸)。
+         ⚠ 手臂是"软臂"(肩->手心的曲线), 手会跟着拉到 0.85 格外, 会明显变长 —— 再往上加
+         就成面条了, 到 0.7 左右是上限。 -->
+    <reachEastWest>0.65</reachEastWest>
+    <!-- ⚠ 朝南的"前伸"= dir 指向南 = 屏幕**下方**(不是"靠近相机")。用户 09-11 选定: 朝南要
+         书**垂在身前、靠近台面** -> 就要给大值(0.46 x 216px ≈ 99px, 书落到身前偏下)。
+         反过来说: 想"举在胸前"才该取小值(0.15~0.20), 别搞反。 -->
+    <reachSouth>0.46</reachSouth>
+    <!-- ⚠⚠ 朝北专用前伸 + 永不埋到身体下面(2026-09-11)。
+         原版规则是「朝北时手持物背在身后」, 本框架照搬 -> 整栈(道具+手+前臂)被压到身体图层下。
+         但书是「举在胸前读」的, 朝北时身体直接把书吃掉了; 而**朝北分支根本不读 reachEastWest/
+         reachSouth**(只走 reach*0.30), 所以之前调那些数看起来「完全没生效」。
+         neverUnderBody=true 让 Read 道具在**所有朝向**都画在身体上面; reachNorth 再把书往
+         屏幕上方(远离相机 = 朝北的前方)推出去, 从胸口抬到肩线以上。 -->
+    <neverUnderBody>true</neverUnderBody>
+    <reachNorth>0.28</reachNorth>
+    <!-- 侧身缩放: 原来是 0.92"侧身显得大所以压一点"; 用户要"夸张", 不再压 -> 1.0, 侧视和正视同尺寸 -->
+    <volScaleProfile>1</volScaleProfile>
+    <!-- 朝南缩放: 书从"掉到腰胯"抬回胸前, 尺寸保持正视原大小 -->
+    <volScaleSouth>1</volScaleSouth>
+    <holdRaise>0.06</holdRaise>
     <period>5</period>
     <idleScale>0.75</idleScale>
     <headFleck>JE_Lightbulb</headFleck>
@@ -86,11 +152,24 @@
       <li>LabTerminal</li>
     </workbenchDefs>
     <texPath>Things/JobEffects/Tools/Notepad</texPath>
+    <!-- 朝向变体:同大书(Read 风格), 背视 = 写字板背面(棕板 + 夹子背面), 侧视 = 板厚侧缘 -->
+    <texPathNorth>Things/JobEffects/Tools/NotepadNorth</texPathNorth>
+    <texPathEastWest>Things/JobEffects/Tools/NotepadEastWest</texPathEastWest>
     <swingStyle>Read</swingStyle>
     <bookGripHalfWidth>0.30</bookGripHalfWidth>
     <bookGripDrop>0.28</bookGripDrop>
-    <scale>0.8</scale>
+    <scale>0.85</scale>
     <reach>0.18</reach>
+    <!-- 同大书: 上抬 0.8*0.30=0.24 格会把记事本顶到躯干后面 -> 压到 0.15(实抬 0.168 格) -->
+    <readLiftRise>0.22</readLiftRise>
+    <!-- 同大书: 记事本比书窄(侧视 57x166), 前伸给 0.55 让它离开脸; 朝南同样垂在身前(0.34) -->
+    <reachEastWest>0.55</reachEastWest>
+    <reachSouth>0.34</reachSouth>
+    <!-- 同大书: 朝北不再埋到身下, 并往屏幕上方推(0.8*(-0.05+0.22*lift)+0 -> 净值 0.22~0.40 格) -->
+    <neverUnderBody>true</neverUnderBody>
+    <reachNorth>0.26</reachNorth>
+    <volScaleProfile>1</volScaleProfile>
+    <volScaleSouth>1</volScaleSouth>
     <period>4.5</period>
     <idleScale>0.75</idleScale>
     <headFleck>JE_Lightbulb</headFleck>

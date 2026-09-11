@@ -13,7 +13,15 @@
         → 结论: 制冷/开关全部交给 ASF 与 Refuelable, 自研 comp 只剩"随室温调消耗"一件事。
      冰块过期: 双重 —— ①装进冰柜作为燃料被消耗(fuelConsumptionRate);
                         ②冰块本身 CompProperties_Rottable 20 天腐坏, 囤着也会烂。
-     研究: Temperature_control_B1(中世纪温度控制II, 用户拍板冰柜走中世纪档)。 -->
+     ⚠ ASF 铁律(2026-09-10 踩坑): 凡 ParentName="AdaptiveStorageBase" 的建筑**必须**配一个
+       <AdaptiveStorage.GraphicsDef>(targetDef 指本 def), 否则 StorageRenderer.CurrentGraphic 恒为 null,
+       绘图层每帧抛 NullReferenceException → 整个建筑画不出来(表现就是"贴图透明")。见本文件末尾。
+     研究: 自有独立节点 RK_Rustic_IceChest「中世纪冰箱」(2026-09-10 用户要求从 Temperature_control_B1 拆出,
+           Buildings_SK 存储行 Y=12 X=8, 前置 = 温度控制 II + 存储 III)。
+     分类: designationCategory = ASFstorage(存储); 并在 ArchitectSense 二级菜单归入「冷藏」
+           (补丁 Patches/A6_冰柜入存储冷藏.xml 把本件加进 SubCategory_Refrigerators.defNames)。
+     图标: uiIconPath 改指自造 IceChest_ico —— 原 IceChest_south 是 512x384 画布而箱体只占 246x160 居中,
+           加上 IconDrawScale 在设了 uiIconPath 时会跳过 drawSize/Size 补偿, 图标只有格子宽度的不到一半。 -->
 
 	<!--==================== 冰块 ====================-->
 
@@ -77,7 +85,8 @@
 				<cornerBR>Damage/Corner</cornerBR>
 			</damageData>
 		</graphicData>
-		<uiIconPath>Things/Building/Misc/IceChest_south</uiIconPath>
+		<!-- 自造图标: IceChest_south 的画布 74% 是透明留白, 直接当图标会小一半 -->
+		<uiIconPath>Things/Building/Misc/IceChest_ico</uiIconPath>
 		<statBases>
 			<MaxHitPoints>100</MaxHitPoints>
 			<WorkToBuild>1000</WorkToBuild>
@@ -85,17 +94,23 @@
 			<Mass>10</Mass>
 		</statBases>
 		<tickerType>Normal</tickerType>
+		<!-- 材料: 2026-09-10 用户要求追加 普通零部件(ComponentIndustrial) ×4。
+		     ⚠ 注意 ComponentIndustrial 在 HSK 属**后工业**材料(研究链在 金属加工 IV/前石化),
+		        与本件的 温度控制II+存储III(中世纪档) 节点不同档 —— 用户明确拍板要这个, 非疏漏。
+		        (同档参照: SK_BigShelf 2×1/存储III = 原始零部件×4; RootCellar 3×3 = 原始零部件×10。) -->
 		<costList>
 			<Hay>40</Hay>
 			<WroughtIron>10</WroughtIron>
+			<ComponentIndustrial>4</ComponentIndustrial>
 		</costList>
 		<stuffCategories>
 			<li>Woody</li>
 		</stuffCategories>
 		<costStuffCount>50</costStuffCount>
-		<designationCategory>Temperature</designationCategory>
+		<!-- 存储分类(ArchitectSense 二级菜单「冷藏」由 Patches/A6_冰柜入存储冷藏.xml 挂入) -->
+		<designationCategory>ASFstorage</designationCategory>
 		<researchPrerequisites>
-			<li>Temperature_control_B1</li>
+			<li>RK_Rustic_IceChest</li>
 		</researchPrerequisites>
 		<thingCategories>
 			<li>BuildingsNeatStorage</li>
@@ -168,7 +183,32 @@
 		</products>
 		<ingredients />
 		<fixedIngredientFilter />
-		<researchPrerequisite>Temperature_control_B1</researchPrerequisite>
+		<researchPrerequisite>RK_Rustic_IceChest</researchPrerequisite>
 	</RecipeDef>
+
+	<!--==================== ASF 绘图层(必需, 缺了建筑不可见) ====================-->
+
+	<!-- ⚠ 缺这一段 → StorageRenderer.CurrentGraphic 恒为 null → 绘图层每帧抛
+	     NullReferenceException(StorageRenderer.UpdateBuildingGraphicAtIndex) → 建筑画不出来。
+	     照 [sbz] Fridge / Reel存储HSK适配 的写法: targetDef 指本件, graphics 里放本体贴图。
+	     注: VisibleBaseGraphic 默认 false(showBaseGraphic 未设时 GetValueOrDefault() = false),
+	     所以建筑只画这里定义的图, 不会与 def 自带 graphicData 重复绘制。
+	     showContainedItems=false: 箱子有盖, 存进去的粮菜不该画在盖子上(书架/集装箱同理)。 -->
+	<AdaptiveStorage.GraphicsDef>
+		<defName>RK_RusticIceChestASF</defName>
+		<targetDef>Rustic_IceChest</targetDef>
+		<graphics>
+			<li>
+				<graphicData>
+					<texPath>Things/Building/Misc/IceChest</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<shaderType>CutoutComplex</shaderType>
+					<drawSize>(4,3)</drawSize>
+					<drawRotated>false</drawRotated>
+				</graphicData>
+			</li>
+		</graphics>
+		<showContainedItems>false</showContainedItems>
+	</AdaptiveStorage.GraphicsDef>
 
 </Defs>

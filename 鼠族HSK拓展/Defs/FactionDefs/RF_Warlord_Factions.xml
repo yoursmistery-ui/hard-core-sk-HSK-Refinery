@@ -140,16 +140,17 @@
 					<RatkinMerchant>15</RatkinMerchant>
 					<RatkinNoble>8</RatkinNoble>
 				</traders>
-				<carriers>
-					<Ratkin_KingHamster>6</Ratkin_KingHamster>
-				</carriers>
-				<guards>
-					<RatkinCombatantWarlord>8</RatkinCombatantWarlord>
-					<RatkinDefenderWarlord>8</RatkinDefenderWarlord>
-					<RatkinMercenaryLight>15</RatkinMercenaryLight>
-					<RatkinEliteGuardener>10</RatkinEliteGuardener>
-					<RatkinDefender>10</RatkinDefender>
-				</guards>
+									<carriers>
+						<Ratkin_KingHamster>6</Ratkin_KingHamster>
+						<Muffalo>3</Muffalo>
+					</carriers>
+									<guards>
+						<RatkinCombatantWarlord>50</RatkinCombatantWarlord>
+						<RatkinDefenderWarlord>30</RatkinDefenderWarlord>
+						<RatkinMercenaryLight>15</RatkinMercenaryLight>
+						<RatkinEliteGuardener>5</RatkinEliteGuardener>
+						<RatkinSoldier>5</RatkinSoldier>
+					</guards>
 			</li>
 			<li>
 				<kindDef>Settlement</kindDef>
@@ -178,11 +179,13 @@
 		</allowedCultures>
 		<xenotypeSet>
 			<xenotypeChances>
-				<!-- 2026-09-07 重调: 军国主义战力侧重(仓鼠近战蛮兵/废土鼠射手/雪鼠机动) -->
-				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.76</RK_XenoType_Ratkin>
+				<!-- 2026-09-09 用户修正: 军阀弃用废土鼠(污染鼠已有专属派系 Rakinia_Waster),
+				     改走常规鼠族变体小幅优化: 仓鼠近战蛮兵0.14(保留)+田鼠战斗全能0.08
+				     (承接原废土鼠份额)+雪鼠机动0.06(微升),初鼠0.72,合计 1.000。 -->
+				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.72</RK_XenoType_Ratkin>
 				<Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.14</Ratkin_Hamster>
-				<Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.06</Ratkin_Waster>
-				<OAGene_SnowRatkin>0.04</OAGene_SnowRatkin>
+				<Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Vole>
+				<OAGene_SnowRatkin>0.06</OAGene_SnowRatkin>
 			</xenotypeChances>
 		</xenotypeSet>
 	</FactionDef>

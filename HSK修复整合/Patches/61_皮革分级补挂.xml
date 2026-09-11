@@ -1,49 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-  <!-- 补挂 Vile 皮革分级(Hell Bent for Leather Tanning): 4 个游离在等级体系外的皮革材料。
-       Vile 的 ThingCategories.xml 只覆盖了常见兽皮, 漏了这几个(含原版熊/驼/豚鼠皮与义体人皮)。
+  <!-- 补挂 Vile 皮革分级(Hell Bent for Leather Tanning): 游离在等级体系外的皮革材料。
+       注(2026-09-09): Core_SK 已删 Leather_Bear/Camel/GuineaPig(熊/驼→Leather_Heavy, 豚鼠→Leather_Light,
+       Vile ThingCategories 已覆盖 Heavy/Light 分级), 原 3 个补挂为死代码已移除; 仅剩 Android 系义体人皮。
        分级口径同 Vile: A高科技 > B全粒面(大型兽/牲畜好皮) > C头层 > D二层(小型廉价毛皮) > E低端(人皮系)。
-       只挂等级类(不挂 Leathers 根), 避免"既在根又在子类"重复; Inherit=False 挡 LeatherBase 父类合并去重。
-       2026-09-09。 -->
-
-  <!-- 熊皮: 大型兽厚毛皮, 同 Wolf/Panthera/Heavy → B -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>Defs/ThingDef[defName="Leather_Bear"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_Bear"]/thingCategories</xpath>
-      <value><li>LeathersB</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_Bear"]</xpath>
-      <value><thingCategories Inherit="False"><li>LeathersB</li></thingCategories></value>
-    </nomatch>
-  </Operation>
-
-  <!-- 驼皮: 牲畜皮革, 同 Pig/Plain/Light → B -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>Defs/ThingDef[defName="Leather_Camel"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_Camel"]/thingCategories</xpath>
-      <value><li>LeathersB</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_Camel"]</xpath>
-      <value><thingCategories Inherit="False"><li>LeathersB</li></thingCategories></value>
-    </nomatch>
-  </Operation>
-
-  <!-- 豚鼠毛皮: 小型廉价宠物毛皮, 同 Chinchilla → D -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>Defs/ThingDef[defName="Leather_GuineaPig"]/thingCategories</xpath>
-    <match Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_GuineaPig"]/thingCategories</xpath>
-      <value><li>LeathersD</li></value>
-    </match>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>Defs/ThingDef[defName="Leather_GuineaPig"]</xpath>
-      <value><thingCategories Inherit="False"><li>LeathersD</li></thingCategories></value>
-    </nomatch>
-  </Operation>
+       只挂等级类(不挂 Leathers 根), 避免"既在根又在子类"重复; Inherit=False 挡 LeatherBase 父类合并去重。 -->
 
   <!-- 义体人皮: 人源合成皮, 同 Leather_Human → E -->
   <Operation Class="PatchOperationConditional">

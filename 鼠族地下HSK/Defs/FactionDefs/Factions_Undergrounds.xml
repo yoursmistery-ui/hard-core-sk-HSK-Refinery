@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- 派系 -->
+    <FactionDef Name="RKU_FactionBase" ParentName="FactionBase">
+        <defName>RKU_Faction</defName>
+        <label>鼠族游击队</label>
+		<description>地鼠游击队派系</description>
+        <colorSpectrum>
+			<li>(1, 1, 1)</li>
+		</colorSpectrum>
+        <pawnSingular>ratkin</pawnSingular>
+		<pawnsPlural>Ratkins</pawnsPlural>
+        <categoryTag>RKU_Faction</categoryTag>
+		<canSiege>true</canSiege>
+        <humanlikeFaction>true</humanlikeFaction>
+        <canMakeRandomly>true</canMakeRandomly>
+        <leaderTitle>Partisan regional commander</leaderTitle>
+        <leaderForceGenerateNewPawn>true</leaderForceGenerateNewPawn>
+        <fixedLeaderKinds>
+            <li>RKU_Commissar</li>
+        </fixedLeaderKinds>
+        <!-- 派系创建 -->
+        <requiredCountAtGameStart>1</requiredCountAtGameStart>
+        <maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
+        <configurationListOrderPriority>999</configurationListOrderPriority>
+        <backstoryCategories>
+			    <li>Offworld</li>
+		    </backstoryCategories>
+        <factionIconPath>UI/Icons/RKU_Faction</factionIconPath>
+        <settlementTexturePath>UI/Icons/RKU_Faction</settlementTexturePath>
+        <!-- 地鼠派系命名规则 -->
+        <factionNameMaker>NamerFaction_RKU</factionNameMaker>
+        <!-- <fixedName>鼠族游击队</fixedName> -->
+        <!-- 地鼠定居点命名规则 -->
+        <settlementNameMaker>NamerSettlement_RKU</settlementNameMaker>
+        <techLevel>Industrial</techLevel>
+        <melaninRange>0~0.3</melaninRange>
+        <hidden>false</hidden>
+        <canStageAttacks>true</canStageAttacks>
+        <autoFlee>true</autoFlee>
+
+        <!-- 派系有关的事件频率，数值越小频率越高 -->
+        <listOrderPriority>40</listOrderPriority>
+
+        <!-- 商人类型 -->
+        <caravanTraderKinds>
+            <li>Caravan_RKU_Guerrilla</li>
+        </caravanTraderKinds>
+        <visitorTraderKinds>
+          <li>Visitor_Outlander_Standard</li>
+        </visitorTraderKinds>
+        <baseTraderKinds>
+          <li>Base_Outlander_Standard</li>
+        </baseTraderKinds>
+        <canRequestOrbitalTrader>false</canRequestOrbitalTrader>
+
+        <!-- 鼠鼠传统 -->
+        <allowedCultures>
+          <li>RatkiniaTraditionCulture_Und</li>
+        </allowedCultures>
+        <xenotypeSet>
+          <xenotypeChances>
+            <RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">1</RK_XenoType_Ratkin>
+            <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0</Sanguophage>
+          </xenotypeChances>
+        </xenotypeSet>
+        
+        <!-- 叙述 -->
+        <ideoDescription>
+		这些地下的鼠族来源于十年前被王国击败的革命军残余，他们曾经掌握了包括首都在内的，王国一半的领土。但革命军的组织因为生化鼠疫的肆虐和领导层的变质而四分五裂，大半的部队脱离组织，成为了军阀。十年过去了，大大小小的军阀、贵族仍然在这些混乱的地区肆虐，只有革命军东线的一支部队仍旧保持着当年的编制。他们占据了一处王国的载具工厂，生产钻地机以进行地下游击战。这支部队以拯救平民，结束内战为目标，但他们人数不足，装备落后，势单力薄。</ideoDescription>
+
+        <apparelStuffFilter>
+          <!-- 补药头巾 -->
+        </apparelStuffFilter>
+
+        <!-- 固定的模因 -->
+        <forcedMemes>
+            <li MayRequire="Ludeon.RimWorld.Ideology">Tunneler</li>
+            <li MayRequire="Ludeon.RimWorld.Ideology">RKU_SharedBurdens</li>
+        </forcedMemes>
+        <fixedIdeo>true</fixedIdeo>
+        <ideoName>鼠族游击队</ideoName>
+        <hiddenIdeo>true</hiddenIdeo>
+
+        <!-- 禁用的模因 -->
+        <disallowedRaidAgeRestrictions>
+            <li>Children</li>
+        </disallowedRaidAgeRestrictions>
+
+        <disallowedMemes>
+          <li MayRequire="Ludeon.RimWorld.Ideology">Structure_Animist</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">Nudism</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">Blindsight</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">HighLife</li>
+		    </disallowedMemes>
+
+        <structureMemeWeights>
+          <Structure_Ideological MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Ideological>
+		    </structureMemeWeights>
+
+        <!-- 袭击点，目前数据和帝国佬一样 -->
+        <maxPawnCostPerTotalPointsCurve>
+            <points>
+                <li>(35,     15)</li>
+                <li>(100,   120)</li>
+                <li>(1000,  500)</li>
+                <li>(2000,  800)</li>
+                <li>(4000, 1000)</li>
+            </points>
+        </maxPawnCostPerTotalPointsCurve>
+
+        <pawnGroupMakers>
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>20</commonality>
+				<maxTotalPoints>1000</maxTotalPoints>
+				<options>
+					<RKU_Commissar>1</RKU_Commissar>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>2</RKU_Invader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<maxTotalPoints>3000</maxTotalPoints>
+				<options>
+					<RKU_Commissar>1</RKU_Commissar>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>2</RKU_Invader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>25</commonality>
+				<maxTotalPoints>8000</maxTotalPoints>
+				<options>
+					<RKU_EliteScout>1</RKU_EliteScout>
+					<RKU_Commissar>1</RKU_Commissar>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>2</RKU_Invader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>30</commonality>
+				<maxTotalPoints>12000</maxTotalPoints>
+				<options>
+					<RKU_EliteScout>1</RKU_EliteScout>
+					<RKU_EliteCommissar>1</RKU_EliteCommissar>
+					<RKU_EliteInvader>2</RKU_EliteInvader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Combat</kindDef>
+				<commonality>25</commonality>
+				<options>
+					<RKU_EliteScout>2</RKU_EliteScout>
+					<RKU_Commissar>2</RKU_Commissar>
+					<RKU_Invader>2</RKU_Invader>
+				</options>
+			</li>
+            <li>
+				<kindDef>Peaceful</kindDef>
+				<options>
+					<RKU_Commissar>1</RKU_Commissar>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>2</RKU_Invader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Settlement</kindDef>
+				<options>
+					<RKU_Commissar>2</RKU_Commissar>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>1</RKU_Invader>
+				</options>
+			</li>
+			<li>
+				<kindDef>Trader</kindDef>
+				<traders>
+					<RKU_Commissar>1</RKU_Commissar>
+				</traders>
+				<carriers>
+					<Ratkin_KingHamster>1</Ratkin_KingHamster>
+				</carriers>
+				<guards>
+					<RKU_Scout>2</RKU_Scout>
+					<RKU_Invader>1</RKU_Invader>
+				</guards>
+			</li>
+        </pawnGroupMakers>
+        
+    </FactionDef>
+
+    <!-- 文化 -->
+    <CultureDef>
+		<defName>RatkiniaTraditionCulture_Und</defName>
+		<label>Ratkinia culture</label>
+		<description>The cultures of ratkinia.</description>
+		<ideoNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerIdeoCorunan</ideoNameMaker>
+		<deityNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerDeityCorunan</deityNameMaker>
+		<deityTypeMaker MayRequire="Ludeon.RimWorld.Ideology">DeityTypeMakerCorunan</deityTypeMaker>
+		<festivalNameMaker MayRequire="Ludeon.RimWorld.Ideology">NamerFestivalCorunan</festivalNameMaker>
+		<leaderTitleMaker MayRequire="Ludeon.RimWorld.Ideology">LeaderTitleMaker_Corunan</leaderTitleMaker>
+		<allowedPlaceTags>
+			<li>OriginTribal</li>
+		</allowedPlaceTags>
+		<thingStyleCategories>
+			<li MayRequire="Ludeon.RimWorld.Ideology">
+				<category>Floristian</category>
+				<priority>5</priority>
+			</li>
+		</thingStyleCategories>
+		<iconPath>UI/Cultures/RK_DefaultColony</iconPath>
+		<iconColor>(1.0, 1.0, 1.0)</iconColor>
+		<styleItemTags>
+			<li>
+				<tag>RK_Style</tag>
+				<baseWeight>0</baseWeight>
+				<weightFactor>0</weightFactor>
+			</li>
+			<li>
+				<tag>Urban</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>Rural</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoBeard</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+			<li>
+				<tag>NoTattoo</tag>
+				<baseWeight>1</baseWeight>
+				<weightFactor>1</weightFactor>
+			</li>
+		</styleItemTags>
+	</CultureDef>
+</Defs>

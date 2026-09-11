@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- 炉渣：冶铁链统一的副产物载体（贴图复用原生渣块 Things/Item/Chunk/Slag）
-       来源见 Patches/98_冶铁链统一.xml（高炉/炼铁炉/精炼炉多产物）
-       去向见 Recipes_RK_Metallurgy.xml（矿渣混凝土 / 回炉再炼） -->
+  <!-- 炉渣：冶铁链的副产物（贴图 2026-09-11 改为独占文件夹 + 堆叠三档）
+       来源见 Patches/98_冶铁链统一.xml（高炉/块炼炉/精炼炉/铸造厂多产物）
+       去向见 Recipes_RK_Metallurgy.xml（矿渣混凝土 / 回炉再炼 / 碾碎成砂） -->
   <ThingDef ParentName="ResourceBase">
     <defName>RK_Met_Slag</defName>
     <label>炉渣</label>
-    <description>冶炼与锻造铁料时排出的熔融废渣，冷却后结成灰黑色硬块。
+    <description>冶炼与锻造铁料时排出的熔融废渣，冷却后结成灰黑色多孔硬块。
 
-它不是垃圾。磨碎掺砂可以拌出矿渣混凝土，回炉还能再榨出一点生铁。高炉、炼铁炉和精炼炉每出一批铁料都会产生它——炼得越勤，渣堆得越快，这是产业的固有代价，而不是炉子老了。</description>
+它不是垃圾。磨碎过筛可以当砂用，掺矿渣拌混凝土比砂石的更结实，回炉还能再榨出一点生铁。
+高炉、块炼炉、精炼炉和铸造厂每出一批铁料都会产生它——炼得越勤，渣堆得越快，这是产业的固有代价，而不是炉子老了。</description>
     <graphicData>
-      <texPath>Things/Item/Chunk/Slag</texPath>
-      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Item/Chunk/SlagHSK</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <statBases>
       <MarketValue>0.15</MarketValue>

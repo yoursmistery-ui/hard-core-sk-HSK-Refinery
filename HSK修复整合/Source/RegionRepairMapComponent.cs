@@ -112,9 +112,7 @@ namespace ReloadRegistryFix
             try
             {
                 map.regionAndRoomUpdater.RebuildAllRegionsAndRooms();
-                Log.Message("[ReloadRegistryFix] rebuilt regions for map " + map.Tile +
-                    " (attempt " + attempts + ", next gap " + AllowedGap(attempts) +
-                    "t; region/reachability staleness recovery; bill ingredient search should resume)");
+                // 2026-09-10 静默: 重建是带退避的周期动作,正式 DLL 不留周期日志;失败仍报 Warning
             }
             catch (Exception e)
             {

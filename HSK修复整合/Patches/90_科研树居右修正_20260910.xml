@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- ============================================================
+       90_科研树居右修正_20260910.xml  (2026-09-10)
+       处理 ResearchTreeSK 启动告警: "research nodes not positioned
+       to the right of their prerequisites"(前置须严格居左列)。
+       全部为安全单点右移(+1 列, Y 不变): 落点已对终态 Unified
+       (2026-09-10 00:37) 静态校验为空、且各节点子节点均在右侧,
+       无级联。修正后黄警 19 → 6(剩余为医药/电子/地板/Kurin衣物
+       分支锚点, 需连坐右移, 单独立项)。
+       糖果/Food_C4 撞点(y 50→49)在 01_科技与名字.xml 内处理。
+       ============================================================ -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Apparel_C5"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Apparel_C5"]/researchViewX</xpath>
+      <value><researchViewX>14.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="BasicMechtech"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="BasicMechtech"]/researchViewX</xpath>
+      <value><researchViewX>13.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Beds_C3"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Beds_C3"]/researchViewX</xpath>
+      <value><researchViewX>12.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Cultivation_C3"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Cultivation_C3"]/researchViewX</xpath>
+      <value><researchViewX>12.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Fish_C1"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Fish_C1"]/researchViewX</xpath>
+      <value><researchViewX>12.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="FlakArmor"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="FlakArmor"]/researchViewX</xpath>
+      <value><researchViewX>14.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]/researchViewX</xpath>
+      <value><researchViewX>13.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Kurin_Turret"]/researchViewX</xpath>
+      <value><researchViewX>13.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="MoisturePump"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="MoisturePump"]/researchViewX</xpath>
+      <value><researchViewX>12.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Research_table_C2"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Research_table_C2"]/researchViewX</xpath>
+      <value><researchViewX>13.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="SmokepopBelt"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="SmokepopBelt"]/researchViewX</xpath>
+      <value><researchViewX>14.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="Tables_C2"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="Tables_C2"]/researchViewX</xpath>
+      <value><researchViewX>13.00</researchViewX></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ResearchProjectDef[defName="ToxGas"]</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ResearchProjectDef[defName="ToxGas"]/researchViewX</xpath>
+      <value><researchViewX>11.00</researchViewX></value>
+    </match>
+  </Operation>
+</Patch>

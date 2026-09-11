@@ -414,7 +414,7 @@
     <xpath>Defs/ThingDef[defName="CarbonAlloy"]/graphicData</xpath>
     <value>
       <graphicData>
-      <texPath>Things/Item/Material/Nanocomposite</texPath>
+      <texPath>Things/Item/Material/NanocompositeAlloy</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
       </graphicData>
     </value>
@@ -490,7 +490,7 @@
     <xpath>Defs/ThingDef[defName="Aerographene"]/graphicData</xpath>
     <value>
       <graphicData>
-      <texPath>Things/Item/Material/Aerographene</texPath>
+      <texPath>Things/Item/Material/AerographeneHSK</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
       </graphicData>
     </value>
@@ -603,13 +603,14 @@
     </value>
   </Operation>
 
-<Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
+  <!-- 雅特加合金: 三档堆叠(1/满堆/中间) 用独占文件夹 YautjaviumAlloy,
+       避免与 Vile 同名文件夹被 GetAllInFolder 合并成 6 张(a,a,b,b,c,c)导致档位错乱 -->
+  <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
     <xpath>Defs/ThingDef[defName="Yautjavium"]/graphicData</xpath>
     <value>
       <graphicData>
-      <texPath>Things/Item/Material/Yautjavium/Yautjavium</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <color>(218,230,26)</color>
+      <texPath>Things/Item/Material/YautjaviumAlloy</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
       </graphicData>
     </value>
   </Operation>

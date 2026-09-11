@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>RKU_DrillerGun</defName>
+    <label>钻地炮塔</label>
+    <description>钻地炮塔，游击队总是喜欢把货舱改造成武器。</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+    <graphicData>
+      <texPath>Buildings/DrillerGun/DrillerGun_Base</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <shadowData>
+        <volume>(0.27,0.25,0.27)</volume>
+        <offset>(0,0,0)</offset>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>Buildings/DrillerGun/DrillerGun_MenuIcon</uiIconPath>
+    <uiIconScale>0.90</uiIconScale>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>220</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <WorkToBuild>1800</WorkToBuild>
+      <Mass>8</Mass>
+      <Beauty>-20</Beauty>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+       <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>90</fuelCapacity>       <!-- 30 bursts -->
+        <fuelMultiplier>0.5</fuelMultiplier>  <!-- 2 steel per burst, 180 per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.62</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <Steel>70</Steel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>RKU_UndergroundAssaultWeapons</li>
+    </researchPrerequisites>
+    <building>
+      <combatPower>45</combatPower>
+      <ai_combatDangerous>true</ai_combatDangerous>
+      <turretGunDef>Gun_DrillerGun</turretGunDef>
+      <turretBurstCooldownTime>4.8</turretBurstCooldownTime>
+      <turretTopDrawSize>1.8</turretTopDrawSize>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <designationHotKey>Misc2</designationHotKey>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_DrillerGun</defName>
+    <label>driller gun bullet</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>12</damageAmountBase>
+      <speed>70</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseWeaponTurret">
+    <defName>Gun_DrillerGun</defName>
+    <label>driller gun</label>
+    <description>A simple automatic gun made to be mounted on a driller turret.</description>
+    <graphicData>
+      <texPath>Buildings/DrillerGun/DrillerGun_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.77</AccuracyTouch>
+      <AccuracyShort>0.70</AccuracyShort>
+      <AccuracyMedium>0.45</AccuracyMedium>
+      <AccuracyLong>0.24</AccuracyLong>
+      <RangedWeapon_Cooldown>4.8</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Mass>5</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Bullet_DrillerGun</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>28.9</range>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <burstShotCount>3</burstShotCount>
+        <soundCast>GunShotA</soundCast>
+        <soundCastTail>GunTail_Light</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>RKU_DrillerGunBullet</defName>
+    <label>driller gun projectile</label>
+    <thingClass>RatkinUnderground.RKU_DrillerGunBullet</thingClass>
+    <graphicData>
+      <texPath>Buildings/InMap/RKU_BunkerBusterProjectile</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <building>
+      <groundSpawnerSustainedEffecter>EmergencePointSustained2X2</groundSpawnerSustainedEffecter>
+      <groundSpawnerCompleteEffecter>EmergencePointComplete2X2</groundSpawnerCompleteEffecter>
+    </building>
+    <projectile>
+      <speed>6</speed>
+      <arcHeightFactor>0</arcHeightFactor>
+      <shadowSize>1</shadowSize>
+      <damageDef>Bomb</damageDef>
+      <explosionRadius>0</explosionRadius>
+      <flyOverhead>true</flyOverhead>
+      <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+      <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+      <soundAmbient>MortarRound_Ambient</soundAmbient>
+    </projectile>
+  </ThingDef>
+</Defs>
+

@@ -262,7 +262,7 @@ namespace JobEffects
         private int index;
         private string bodyType = "Male";
 
-        private bool autoAdvance = true;
+        private bool autoAdvance = false;   // off by default: this dialog doubles as the live tuner
         private float interval = 1f;      // seconds between tools when auto-advancing
         private float sinceAdvance;
 
@@ -281,7 +281,9 @@ namespace JobEffects
             SelectTool(0);
         }
 
-        public override Vector2 InitialSize => new Vector2(360f, 430f);
+        // Taller than the old 430 so the LIVE TUNE block (one slider row per geometry field) fits
+        // under the existing controls. The window is draggable and RimWorld clamps it on screen.
+        public override Vector2 InitialSize => new Vector2(410f, 780f);
 
         private JobToolDef Current => tools[index];
 
@@ -357,6 +359,11 @@ namespace JobEffects
             l.CheckboxLabeled("Effects (debris / glints)", ref fx,
                 "Live A/B of the particle layer for this model only — does not change your saved settings.");
             ToolAnimator.GalleryEffects = fx;
+
+            // Dev-only live tuner: sliders straight onto the selected tool's swing geometry. The
+            // frozen model's facing follows GalleryFacing (see FacingRow above), so this one window
+            // gives facing + numbers together and every drag shows up on the next frame.
+            ToolTuner.Draw(Current, l);
 
             l.End();
         }

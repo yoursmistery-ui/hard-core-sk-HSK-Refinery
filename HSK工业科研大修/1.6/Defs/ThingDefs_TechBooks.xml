@@ -1,0 +1,2808 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- ============================================================================
+
+  科技典籍 (Tech Treatise) —— 读书推进解锁 v5.4, 2026-09-10
+
+  ============================================================================
+
+  「普通书」外观 (原版科技图解书 Schematic 的贴图与尺寸, 父类见下方 RK_TechBookBase) 的科技解锁书:
+
+    · 单本读完即「解锁该科技的研究权限」(standalone=true) —— 与「读满整套蓝图」的主路径
+
+      互相独立, 谁先满足谁放行 (BlueprintUnlockTracker.GetTechProgress 取两者较大值)。
+
+      ⚠ 放行 ≠ 直接完成研究: 放行后玩家仍需正常立项、花科研点研究 (finishOnUnlock=false)。
+
+    · bookIndex = 「该科技蓝图卷数 + 1」, 生成时写死 —— 不依赖 C# 的 defName 推导兜底。
+
+    · 产出途径 = 原版刷书池 (任务奖励书籍堆 / 商队书籍 / 书商库存) 的低概率替换,
+
+      见 Source/BlueprintUnlockHSK.cs 的 Patch_BookMakeRandom。
+
+      def 自身 pickWeight=0 → 不会被原版加权池直接抽中; 只由补丁按「未解锁 + 档位合适」投放。
+
+    · tradeability=Sellable: 商人库存不生成 (保持稀有), 但玩家可把它卖给商人。
+
+    · 覆盖 54 项门控科技, 每项 1 本, 目标科技刷出时动态挑 (不固定对应关系) ——
+
+      XML 里的 targetTech 只是「默认指向」, 实际投放由 PickRandomTechBook 按未解锁池随机选。
+
+  手感调节: 概率 = BlueprintTargetExtension.TechBookLootChance (默认 0.10);
+
+            门槛 / 智力倍率 / readCost 与蓝图书共用同一套 tier 默认值。
+
+  ============================================================================ -->
+
+<Defs>
+
+	<!-- ===== 典籍基类 (外观 = 原版科技图解书 Schematic) ===== -->
+	<!-- ⚠ 原版 Schematic 只有 defName、没有 Name 属性 → 不能当 ParentName 引用:
+	     写 ParentName="Schematic" 会报 "Could not find parent node named Schematic",
+	     并让下面全部 def 加载失败 (实测 2026-09-10, Unified.xml 里一本都没有)。
+	     这里自建同外观的抽象基类, 贴图 / 尺寸与原版 Schematic 一致。 -->
+	<ThingDef ParentName="BookBase" Name="RK_TechBookBase" Abstract="True">
+		<label>tech treatise</label>
+		<graphicData>
+			<texPath>Things/Item/Book/Schematic/Schematic</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.8</drawSize>
+		</graphicData>
+		<uiIconPath>Things/Item/Book/Schematic/Schematic</uiIconPath>
+	</ThingDef>
+
+	<!-- tier1 · Armor_IronAge -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Armor_IronAge</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Armor_IronAge</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Ballista_B1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Ballista_B1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Ballista_B1</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Greatbow -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Greatbow</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Greatbow</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · GunPowderTech -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_GunPowderTech</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>GunPowderTech</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · LongBlades -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_LongBlades</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>LongBlades</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Medicine_B2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Medicine_B2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Medicine_B2</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Medieval_Cannons -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Medieval_Cannons</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Medieval_Cannons</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Metallurgy_B5 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Metallurgy_B5_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Metallurgy_B5</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · PlateArmor -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_PlateArmor</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>PlateArmor</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · RKHSK_Tools_Medieval2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_RKHSK_Tools_Medieval2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>RKHSK_Tools_Medieval2</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier1 · Steel_B3 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Steel_B3_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Steel_B3</targetTech>
+				<tier>1</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>2</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Batteries -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Batteries</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Batteries</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Electricity -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Electricity</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Electricity</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Fabrication -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Fabrication</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Fabrication</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Glass_C1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Glass_C1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Glass_C1</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Machining -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Machining</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Machining</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · Metals_C1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Metals_C1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Metals_C1</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier2 · MicroelectronicsBasics -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_MicroelectronicsBasics</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>MicroelectronicsBasics</targetTech>
+				<tier>2</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Armor_D1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Armor_D1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Armor_D1</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Charge_weapons_D -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Charge_weapons_D</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Charge_weapons_D</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Laser_weapons_D -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Laser_weapons_D</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Laser_weapons_D</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · OARK_Odyssey_GravTrap -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_OARK_Odyssey_GravTrap</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>OARK_Odyssey_GravTrap</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · OARK_Odyssey_GravityApplication -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_OARK_Odyssey_GravityApplication</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>OARK_Odyssey_GravityApplication</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Plasma_weapons_D -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Plasma_weapons_D</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Plasma_weapons_D</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Ratkin_Armor_D1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Ratkin_Armor_D1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Ratkin_Armor_D1</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Rockets_D1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Rockets_D1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Rockets_D1</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier3 · Rockets_D2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Rockets_D2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1200</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Rockets_D2</targetTech>
+				<tier>3</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>3</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Armor_E3 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Armor_E3_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Armor_E3</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · CataphractArmor -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_CataphractArmor</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>CataphractArmor</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Charge_weapons_E -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Charge_weapons_E</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Charge_weapons_E</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Fortification_E1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Fortification_E1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Fortification_E1</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Fortification_E2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Fortification_E2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Fortification_E2</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Gunlink -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Gunlink</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Gunlink</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Ion_gun_D1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Ion_gun_D1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Ion_gun_D1</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · JumpPack -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_JumpPack</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>JumpPack</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Laser_weapons_E -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Laser_weapons_E</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Laser_weapons_E</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Melee_Ultra -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Melee_Ultra</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Melee_Ultra</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · OARK_Odyssey_GravFieldCore -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_OARK_Odyssey_GravFieldCore</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>OARK_Odyssey_GravFieldCore</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Plasma_weapons_E -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Plasma_weapons_E</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Plasma_weapons_E</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · PoweredArmor -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_PoweredArmor</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>PoweredArmor</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Ratkin_Armor_D2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Ratkin_Armor_D2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Ratkin_Armor_D2</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Ratkin_Armor_D3 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Ratkin_Armor_D3_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Ratkin_Armor_D3</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipBasics -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipBasics</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipBasics</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipComputerCore -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipComputerCore</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipComputerCore</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipCryptosleep -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipCryptosleep</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipCryptosleep</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipEngine -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipEngine</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipEngine</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipReactor -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipReactor</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipReactor</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · ShipSensorCluster -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_ShipSensorCluster</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>ShipSensorCluster</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier4 · Super_matter_E2 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Super_matter_E2_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>1800</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Super_matter_E2</targetTech>
+				<tier>4</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>4</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier5 · Blaster_weapons_Archotech -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Blaster_weapons_Archotech</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>2500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Blaster_weapons_Archotech</targetTech>
+				<tier>5</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>5</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier5 · Bow_Archotech -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Bow_Archotech</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>2500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Bow_Archotech</targetTech>
+				<tier>5</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>5</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier5 · Melee_Archotech -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Melee_Archotech</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>2500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Melee_Archotech</targetTech>
+				<tier>5</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>5</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier5 · SMG_Archotech -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_SMG_Archotech</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>2500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>SMG_Archotech</targetTech>
+				<tier>5</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>5</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+	<!-- tier5 · Stargate_F1 -->
+	<ThingDef ParentName="RK_TechBookBase">
+		<defName>TechBook_Stargate_F1_Treatise</defName>
+		<label>tech treatise</label>
+		<description>一本泛黄的科技典籍: 记载着某门学问的原理与做法。与成套的研究蓝图不同 —— 这一本只要从头读到尾, 就能摸清它记载那项研究的门路, 之后便可正式立项研究。各派系的商队与远行者偶尔会带出这类书。</description>
+		<thingClass>BlueprintUnlockHSK.BlueprintBook</thingClass>
+		<tradeability>Sellable</tradeability>
+		<statBases>
+			<MarketValue>2500</MarketValue>
+		</statBases>
+		<thingCategories Inherit="False">
+			<li>RK_TechBooks</li>
+		</thingCategories>
+		<thingSetMakerTags Inherit="False" />
+		<comps Inherit="False">
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+			<li Class="CompProperties_Book">
+				<pickWeight>0</pickWeight>
+				<ageYearsRange>100~200</ageYearsRange>
+				<openGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Open</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>0.7</drawSize>
+				</openGraphic>
+				<verticalGraphic>
+					<texPath>Things/Item/Book/Schematic/Schematic_Vertical</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<addTopAltitudeBias>true</addTopAltitudeBias>
+				</verticalGraphic>
+				<doers>
+					<li Class="BlueprintUnlockHSK.BlueprintBookProperties" />
+					<li Class="BookOutcomeProperties_GainResearch" />
+				</doers>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="BlueprintUnlockHSK.BlueprintTargetExtension">
+				<targetTech>Stargate_F1</targetTech>
+				<tier>5</tier>
+				<standalone>true</standalone>
+				<gate>true</gate>
+				<!-- v6: 生成时从「本科技的卷池」随机取 1~2 卷绑定 (同一科技) -->
+				<randomVolume>true</randomVolume>
+				<bookIndex>5</bookIndex>
+			</li>
+		</modExtensions>
+	</ThingDef>
+
+</Defs>

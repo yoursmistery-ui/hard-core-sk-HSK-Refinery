@@ -19,6 +19,13 @@
 //      整体短路(等效闲暇动画关闭),消除双动画系统叠加的闲暇小人;
 //      不影响 AM 的攻击/处决/决斗/移动动画本体,Yayo 本体分毫不动。
 //  P3【GetAnimator 免锁】渲染热路径锁消除(详见下)。
+//  P7【隐形小人 parms 兜底·2026-09-10 增补】修"隐形敌人(Horaxian 等)一进 AM 近战
+//      动画就每帧刷 NullReferenceException at PawnRenderNodeWorker_Body_Tattoo.CanDrawNow":
+//      AM 强制接管绘制时用的是原版留下的 default PawnDrawParms,其中 parms.pawn 为 null。
+//      详见文末 Patch_DrawParmsPawnGuard。
+//  P8【AM 警告同类去重·2026-09-10 增补】把 AM.Core.Warn 的重复刷屏压成"同类只打一次"
+//      (如处决伤害分摊的 "Failed to find any hit for X dmg ..." 几乎每帧一条),顺带省掉
+//      每次 Verse.Log.Warning 的 ExtractStackTrace 开销。详见文末 Patch_WarnDedupe。
 //
 // 只对 AM 侧做手脚;补丁可整体移除,不残留任何状态。加载即生效,无需额外配置。
 // 实现:对 zAnimationMod 全部字符串反射访问(AccessTools),编译期零依赖;
@@ -48,6 +55,7 @@ namespace AM.RatkinPerfPatch
 		public const string MapPawnProcessorType = "AM.Processing.MapPawnProcessor";
 		private const string IdleControllerCompType = "AM.Idle.IdleControllerComp";
 		private const string PatchMasterType = "AM.Patches.PatchMaster";
+		private const string RenderPawnAtPatchType = "AM.Patches.Patch_PawnRenderer_RenderPawnAt";
 
 		static RatkinPerfMain()
 		{
@@ -103,6 +111,62 @@ namespace AM.RatkinPerfPatch
 			else
 			{
 				Log.Error("[AM.Perf] FAILED to find " + PatchMasterType + ".GetAnimator");
+			}
+
+			// P7: 隐形小人 PawnDrawParms.pawn 兜底(挂在 AM 的私有 MakeDrawArgs 上)
+			// 独立 try/catch:挂不上只降级警告,不影响已生效的 P1-P3。
+			try
+			{
+				Type rpraType = AccessTools.TypeByName(RenderPawnAtPatchType);
+				MethodBase makeDrawArgs = rpraType != null ? AccessTools.Method(rpraType, "MakeDrawArgs") : null;
+				if (makeDrawArgs == null)
+				{
+					Log.Warning("[AM.Perf] P7 skipped: " + RenderPawnAtPatchType + ".MakeDrawArgs 未找到(AM 版本变动?),隐形小人 NRE 兜底未生效");
+				}
+				else
+				{
+					// 校验签名与本地前缀 (Pawn pawn, ref PawnDrawParms parms) 对得上,防 AM 改签名后挂错
+					// (注:本机 0Harmony 的 AccessTools 无 GetParameterTypes,用 BCL 反射)
+					ParameterInfo[] pis = ((MethodInfo)makeDrawArgs).GetParameters();
+					bool sigOk = pis != null && pis.Length == 3
+						&& pis[1].ParameterType == typeof(Pawn)
+						&& pis[2].ParameterType == typeof(PawnDrawParms).MakeByRefType();
+					if (!sigOk)
+					{
+						Log.Warning("[AM.Perf] P7 skipped: MakeDrawArgs 签名与预期不符,隐形小人 NRE 兜底未生效");
+					}
+					else
+					{
+						HarmonyInstance.Patch(makeDrawArgs, prefix: new HarmonyMethod(typeof(Patch_DrawParmsPawnGuard), "Prefix"));
+						Log.Message("[AM.Perf] Patched " + RenderPawnAtPatchType + ".MakeDrawArgs (parms.pawn guard)");
+					}
+				}
+			}
+			catch (Exception e7)
+			{
+				Log.Warning("[AM.Perf] P7 init failed, keep original MakeDrawArgs: " + e7);
+			}
+
+			// P8: AM 警告同类去重(挂 AM.Core.Warn(string))
+			try
+			{
+				Type coreType = AccessTools.TypeByName(CoreType);
+				MethodBase warn = coreType != null
+					? AccessTools.Method(coreType, "Warn", new Type[] { typeof(string) }, null)
+					: null;
+				if (warn == null)
+				{
+					Log.Warning("[AM.Perf] P8 skipped: " + CoreType + ".Warn(string) 未找到,AM 警告仍逐条打印");
+				}
+				else
+				{
+					HarmonyInstance.Patch(warn, prefix: new HarmonyMethod(typeof(Patch_WarnDedupe), "Prefix"));
+					Log.Message("[AM.Perf] Patched " + CoreType + ".Warn (同类警告只打印首次)");
+				}
+			}
+			catch (Exception e8)
+			{
+				Log.Warning("[AM.Perf] P8 init failed, keep original Warn: " + e8);
 			}
 
 			// P5(2026-09-06 已移除): 曾置 MapPawnProcessor.LogPerformanceToDesktop=true 向桌面
@@ -396,6 +460,115 @@ namespace AM.RatkinPerfPatch
 				__result = null;
 				return false;
 			}
+		}
+	}
+
+	// ── P7 隐形小人的 PawnDrawParms.pawn 兜底(2026-09-10 增补)───────
+	// 症状: 隐形敌人(带 HediffComp_Invisibility 且尚未对玩家显形,如异常体的
+	//   HoraxianInvisibility)进入 AM 近战动画期间,每帧刷
+	//   System.NullReferenceException at Verse.PawnRenderNodeWorker_Body_Tattoo.CanDrawNow
+	//   (AM.Core.Error 捕获,伴随 "Rendering exception when doing animation Execution: ...")。
+	// 链路(反编译 Assembly-CSharp + zAnimationMod 确认):
+	//   ① 渲染阶段原版 PawnRenderer.ParallelGetPreRenderResults 开头就对
+	//      pawn.IsHiddenFromPlayer()(非玩家派系 + 隐形 hediff 未显形)直接 return,
+	//      此时 preRenderResults 只有 valid=true/draw=false,parms 保持 default,
+	//      即 parms.pawn == null;而 RenderPawnAt 因 !results.draw 提前 return,
+	//      末尾的 results = default 也不会执行 → 这份空 parms 一直挂在 results 里。
+	//   ② AM 在 Update 绘制阶段(AnimRenderer.DrawPawns)置 AllowNext=true 后直接调
+	//      RenderPawnAt,其前缀(Priority 800)强制 valid/draw=true、useCached=false,
+	//      再用这份 results.parms 走 renderTree.ParallelPreDraw;AM 的私有 MakeDrawArgs
+	//      只改 posture/flags/facing/matrix,只有 HeadStandalone 分支写 parms.pawn。
+	//   ③ 渲染树里首个无条件解引用 parms.pawn 的节点就是 Body_Tattoo
+	//      (parms.pawn.style?.BodyTattoo;基类 Body.CanDrawNow 在 posture==Standing
+	//      时提前 return 不碰 pawn),于是稳定抛在这一帧。
+	// 修法: 只把 parms.pawn 补成 AM 传进来的那个 pawn(就是本 renderer 自己的小人,
+	//   与原版 GetDrawParms 里 result.pawn = pawn 完全一致),其它字段一律不动。
+	//   default 的 parms.tint alpha=0 正好让"对玩家隐藏的小人"继续不可见,与原版意图一致;
+	//   对正常已预渲染的小人 parms.pawn 非空,本前缀零改动。
+	// 开销: 每次 AM 接管绘制多一次空引用比较,无分配、无日志。回退: 删本类与注册即可。
+	public static class Patch_DrawParmsPawnGuard
+	{
+		// 原签名 private static void MakeDrawArgs(AnimRenderer, Pawn pawn, ref PawnDrawParms parms)
+		// (该类型内 MakeDrawArgs 无重载,按名取不会撞重载歧义)
+		public static void Prefix(Pawn pawn, ref PawnDrawParms parms)
+		{
+			if (parms.pawn == null)
+			{
+				parms.pawn = pawn;
+			}
+		}
+	}
+	// ── P8 AM 警告同类去重(2026-09-10 增补)─────────────────────
+	// 症状: AM 的 [MeleeAnim] 警告会按帧/按小人重复刷屏,典型是处决伤害分摊失败时
+	//   "Failed to find any hit for 5.28 dmg that would not kill, down or amputate part on
+	//   XXX. Will keep trying for the remaining 14.16 dmg."
+	//   (AM.Outcome.OutcomeUtility.Damage 对随机部位试 5 次,每次落空都可能打一条,伤害数字还变)。
+	// 这类日志本身不是故障,但 Verse.Log.Warning 每次都要走 ExtractStackTrace,
+	//   刷屏既污染日志又白烧堆栈提取与错误窗口重绘,所以顺手做减法。
+	// 做法: 挂在 AM.Core.Warn(string)(该方法无重载)前缀上,按"语义前缀"去重——
+	//   取消息开头到第一个数字字符为止作为键(数字/小数/小人名都在数字之后,天然被排除),
+	//   首次放行让 AM 原样打印,之后再命中同一键直接 return false 跳过整条日志。
+	//   键集合上限 512,超上限后不再去重(改回原行为),避免无界增长,也不吞掉新种类警告。
+	// 只作用于 Warn;AM.Core.Error(如 "Failed to find random verb")一律不动。
+	// 开销: 仅在实际打印时一次子串 + 一次 HashSet 查找,无周期性逻辑。回退: 删本类与注册。
+	public static class Patch_WarnDedupe
+	{
+		private const int MaxKeys = 512;
+
+		private const int MinKeyLength = 4;
+
+		private const int MaxKeyLength = 96;
+
+		private static HashSet<string> seen;
+
+		public static bool Prefix(string msg)
+		{
+			if (string.IsNullOrEmpty(msg))
+			{
+				return true;
+			}
+			if (seen == null)
+			{
+				seen = new HashSet<string>();
+			}
+			if (seen.Count >= MaxKeys)
+			{
+				return true;
+			}
+			string key = NormalizeKey(msg);
+			if (key.Length == 0)
+			{
+				return true;
+			}
+			if (seen.Add(key))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		// "Failed to find any hit for 5.28 dmg ..." -> "Failed to find any hit for"
+		private static string NormalizeKey(string msg)
+		{
+			int cut = msg.Length;
+			for (int i = 0; i < msg.Length; i++)
+			{
+				char c = msg[i];
+				if (c >= '0' && c <= '9')
+				{
+					cut = i;
+					break;
+				}
+			}
+			if (cut < MinKeyLength)
+			{
+				cut = msg.Length < MaxKeyLength ? msg.Length : MaxKeyLength;
+			}
+			if (cut > MaxKeyLength)
+			{
+				cut = MaxKeyLength;
+			}
+			return msg.Substring(0, cut).TrimEnd();
 		}
 	}
 	}

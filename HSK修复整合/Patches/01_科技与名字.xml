@@ -14,14 +14,41 @@
             </prerequisites>
         </value>
     </Operation>
+    <!-- ⚠ 2026-09-11 修订: Concrete_C2 的直接前置里**去掉 Electricity**。
+         原因: 同日给 Concrete_C1 补了 Electricity 前置后, C2 的直接前置列表
+         [Concrete_C1, Electricity] 就出现了**冗余前置** —— Electricity 已是
+         Concrete_C1 的祖先, ResearchTreeSK.CheckPrerequisites() 会判定它冗余,
+         刷一条黄字 "redundant prerequisites for 混凝土 II: 电力工程 I" 并在运行时
+         把它从列表里删掉。语义上原本靠"前置的祖先"就已满足, 这里直接写清楚,
+         既消掉告警, 行为与 RTSK 自愈后的结果完全一致。 -->
     <Operation Class="PatchOperationReplace" MayRequire="skyarkhangel.HSK">
         <xpath>Defs/ResearchProjectDef[defName="Concrete_C2"]/prerequisites</xpath>
         <value>
             <prerequisites>
                 <li>Concrete_C1</li>
-                <li>Electricity</li>
             </prerequisites>
         </value>
+    </Operation>
+    <!-- ========== 建筑材料(Concrete_C1) 补电力前置 (2026-09-10) ========== -->
+    <!-- 电动木材加工机 TableSawmillElectric(耗电 600W)被 Vile's Wood You Please 把
+         ThingDef 的 researchPrerequisites 改成 Concrete_C1, 而 Concrete_C1 自身只要求
+         Stonecutting, 导致没研究电力就能造这台电动设备(其配方也不显示电力要求)。
+         此处给"建筑材料"研究补上 Electricity 前置, 该研究整条线(含电动混凝土搅拌机)
+         一并要求电力。前置 X 核验: Electricity 在 Buildings_SK (6,15), Concrete_C1 在
+         Craft_SK (7,23), 6 严格小于 7, 不触发 ResearchTreeSK "not positioned to the
+         right of prerequisites"。
+         用 Conditional 做存在性门控, 因 1.6 起 Operation 级 MayRequire 已失效。 -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>Defs/ResearchProjectDef[defName="Concrete_C1"]/prerequisites</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>Defs/ResearchProjectDef[defName="Concrete_C1"]/prerequisites</xpath>
+            <value>
+                <prerequisites>
+                    <li>Stonecutting</li>
+                    <li>Electricity</li>
+                </prerequisites>
+            </value>
+        </match>
     </Operation>
     <!-- ========== 金属加工 II/III/IV 右移一格(2026-08-23) ========== -->
     <!-- 用户要求: Metals_C1/C2/C3(金属加工 II/III/IV)整体右移一格;
@@ -117,9 +144,11 @@
         <xpath>Defs/ResearchProjectDef[defName="Bakery_C1"]/researchViewY</xpath>
         <value><researchViewY>50.00</researchViewY></value>
     </Operation>
+    <!-- 2026-09-10: Food_C4(糖果/甜品) 50→49 —— 撞 Fish_C1(钓鱼 II)(11,50),
+         终态 Unified 全树唯一重复坐标; (11,49) 已核空闲。 -->
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/ResearchProjectDef[defName="Food_C4"]/researchViewY</xpath>
-        <value><researchViewY>50.00</researchViewY></value>
+        <value><researchViewY>49.00</researchViewY></value>
     </Operation>
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/ResearchProjectDef[defName="Brewing"]/researchViewY</xpath>

@@ -144,6 +144,46 @@
     </products>
   </RecipeDef>
 
+  <!-- 炉渣 → 砂（低门槛去处，2026-09-11 新增）
+       用户要求："中世纪的熔炼要有废物产出" —— 但原有的两个去处（矿渣混凝土需 Concrete_C1、
+       回炉再炼需 Metallurgy_B3）都被研究卡住，中世纪出了渣只能干堆着。
+       这里补一条零研究的出路：上切石台把渣碾碎过筛当砂用（现实里矿渣砂也是这么来的）。
+       顺带把 40 渣压成 25 砂 = 体积减半，给最早期的渣场一个消化口。 -->
+  <RecipeDef>
+    <defName>RK_Met_CrushSlagToSand</defName>
+    <label>碾碎炉渣取砂</label>
+    <description>把冷却的炉渣块摊在切石台上敲碎、碾细、过筛，筛出铁粒挑走，剩下的玻璃质碎屑就是不错的矿渣砂——掺进混凝土里比河砂还结实。
+
+这是最早就用得上的处置办法：不用任何研究，只要有一张切石台，渣场就不会白白占着仓库。</description>
+    <jobString>碾碎炉渣。</jobString>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <workAmount>800</workAmount>
+    <workSkill>Crafting</workSkill>
+    <effectWorking>CutStone</effectWorking>
+    <soundWorking>Recipe_MakeStoneBlocks</soundWorking>
+    <recipeUsers>
+      <li>TableStonecutter</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>RK_Met_Slag</li>
+          </thingDefs>
+        </filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>RK_Met_Slag</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SandResource>25</SandResource>
+    </products>
+  </RecipeDef>
+
   <!-- 炉渣回炉：榨出残余生铁（不改原版 ExtractMetalFromSlag，它吃的是战损渣块） -->
   <RecipeDef>
     <defName>RK_Met_ReSmeltSlag</defName>

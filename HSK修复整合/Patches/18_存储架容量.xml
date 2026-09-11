@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <!-- ============================================================
+         18_存储架容量.xml
+           (2026-09-10 由 18_织物架存储容量.xml 更名扩编)
+           (2026-09-10 晚 追加 ASF 排布压紧, 修容量加大后衣物贴图越界)
+
+         A. 架类存储建筑每格容量加强:
+              TextileRack  织物架   (1x1, 存 Textiles)    8 → 12
+              ClothingRack 衣架     (2x1, 存 Apparel)     7 → 12
+
+         B. 排布压紧(防越界): 两架均走 Adaptive Storage Framework,
+            同格内第 N 件物品会沿 stackOffset 逐件累积偏移, 容量加大后
+            总跨度越出架子范围(衣架 11x0.23 = 2.53 格, 明显挂出界)。
+            按比例加 stackOffsetFactor, 让 12 件的总跨度 = 原容量时的跨度:
+              ClothingRack 原 7 件 x0.23      = 1.38 格 → factor 0.55
+                           (11 x 0.23 x 0.55 = 1.39 格)
+              TextileRack  原 8 件 x0.2 x0.5  = 0.70 格
+                           → factor 0.22 (11 x 0.2 x 0.22 = 0.48 格, 比原容量更紧一档)
+            注: stackOffsetFactor 是 stackOffset 的乘数(ASF GraphicsDef 文档),
+                同时作用于 East/West 分量, 侧向朝向一并收紧。
+
+         xpath 存在性门控: Core_SK 未加载 / def 缺失时该条整体跳过。
+         ============================================================ -->
+
+    <!-- == A. 容量 == -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef[defName="TextileRack"]/building/maxItemsInCell</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>/Defs/ThingDef[defName="TextileRack"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>12</maxItemsInCell>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/ThingDef[defName="ClothingRack"]/building/maxItemsInCell</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>/Defs/ThingDef[defName="ClothingRack"]/building/maxItemsInCell</xpath>
+            <value>
+                <maxItemsInCell>12</maxItemsInCell>
+            </value>
+        </match>
+    </Operation>
+
+    <!-- == B1. 衣架 itemGraphics: c0 左格 == -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c0/rows/r0/stackOffsetFactor</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c0/rows/r0/stackOffsetFactor</xpath>
+            <value>
+                <stackOffsetFactor>0.55</stackOffsetFactor>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c0/rows/r0</xpath>
+            <value>
+                <stackOffsetFactor>0.55</stackOffsetFactor>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- == B2. 衣架 itemGraphics: c1 右格 == -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c1/rows/r0/stackOffsetFactor</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c1/rows/r0/stackOffsetFactor</xpath>
+            <value>
+                <stackOffsetFactor>0.55</stackOffsetFactor>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="ClothingRackASF"]/itemGraphics/columns/c1/rows/r0</xpath>
+            <value>
+                <stackOffsetFactor>0.55</stackOffsetFactor>
+            </value>
+        </nomatch>
+    </Operation>
+
+    <!-- == B3. 织物架 itemGraphics: c0 (已有 0.5, 收紧到 0.22) == -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="TextileRackASF"]/itemGraphics/columns/c0/rows/r0/stackOffsetFactor</xpath>
+        <match Class="PatchOperationReplace">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="TextileRackASF"]/itemGraphics/columns/c0/rows/r0/stackOffsetFactor</xpath>
+            <value>
+                <stackOffsetFactor>0.22</stackOffsetFactor>
+            </value>
+        </match>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/AdaptiveStorage.GraphicsDef[defName="TextileRackASF"]/itemGraphics/columns/c0/rows/r0</xpath>
+            <value>
+                <stackOffsetFactor>0.22</stackOffsetFactor>
+            </value>
+        </nomatch>
+    </Operation>
+</Patch>

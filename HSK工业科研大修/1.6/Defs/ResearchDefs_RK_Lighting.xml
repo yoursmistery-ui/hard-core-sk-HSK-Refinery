@@ -7,8 +7,10 @@
        ParentName="PrimitiveBase"(Core_SK: techLevel Neolithic + PrimitiveResearchBench +
        SK.AdvancedResearchExtension[Primitive,Simple,HiTech] + ResearchTreeSKModExtension + ClassicStart),
        与 RK_Mining_Primitive / RK_Quarry_Primitive 同法。
-       坐标落 Buildings_SK 照明行 Y=9 空位 X=2(该行 X=3,4 为 Light_B1/B2 中世纪档,
-       X=8~12 为工业档); 全局跨 tab 检测 (2,9) 无占用(脚本 _tmp/scan_research_coords.py)。 -->
+       坐标(2026-09-10 用户改版, 由 (2,9) 左移到 (0,9)): 仍在 Buildings_SK 照明行 Y=9,
+       摆到整行最左端、Light_B1/B2(中世纪档, X=3,4)与工业档(X=8~12)之前,
+       视觉上"原始取火"居于照明链起点。X=0 这列有先例(Wooden_floor_A1(0,4)/VBE_Writing(0,6) 等),
+       按运行时终态 Unified.xml 查重确认 (0,9) 空闲(脚本 _tmp/check_coord_unified.py)。 -->
 
   <ResearchProjectDef ParentName="PrimitiveBase">
     <defName>RK_PrimitiveLighting</defName>
@@ -16,7 +18,7 @@
     <description>钻木取火、束枝为炬。原始聚落最早学会把黑夜推开一寸——篝火可驱兽也可照明, 火把能持在手里或挂在墙上, 大柴堆能烧上一整夜。光虽微弱、热虽有限, 却让守夜与夜作成为常态, 也为后来油灯与蜡烛的精细工艺留出了门路。</description>
     <tab>Buildings_SK</tab>
     <baseCost>200</baseCost>
-    <researchViewX>2.00</researchViewX>
+    <researchViewX>0.00</researchViewX>
     <researchViewY>9.00</researchViewY>
   </ResearchProjectDef>
 

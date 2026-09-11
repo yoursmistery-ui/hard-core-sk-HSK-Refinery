@@ -1121,6 +1121,13 @@ namespace JobEffects
             // draws the ENTIRE stack OVER it. No per-part or per-draw-direction split. (Was keyed partly
             // off the draw direction dir.z, which made held-pose tools tuck under inconsistently.)
             bool north = pawn != null && pawn.Rotation == Rot4.North;
+            // Per-tool opt-out from the north tuck. A prop held UP IN FRONT of the chest (a book
+            // being read) has nothing to tuck away: on a north-facing pawn the torso simply eats
+            // it, and because the north branch of the swing geometry never reads the other
+            // facings' reach values, tuning those looks like it did nothing. Those tools keep the
+            // whole stack over the body in every facing. Weapons-on-the-back, the welder mask and
+            // the rest keep the classic behaviour (neverUnderBody defaults to false).
+            if (north && tool != null && tool.neverUnderBody) north = false;
             if (north)
             {
                 // NORTH: bury the whole stack BELOW the bare body sprite. The body skin draws at
@@ -1885,12 +1892,19 @@ namespace JobEffects
                 if (fromStrike <= snipHold || fromStrike >= 1f - snipLead)
                     mat = QueueAdjust(tool.StrikeMaterial);
             }
-            // North/South override (welder straight view): front-on / back-on facings swap to the
-            // dedicated art; east/west profile keeps texPath. Keyed off the BODY facing (clean
-            // cardinal), so diagonal bead re-aim never flips it. More specific than alt, so it wins.
-            if (!tool.texPathNorthSouth.NullOrEmpty()
-                && (bodyFacing == Rot4.North || bodyFacing == Rot4.South))
-                mat = QueueAdjust(tool.NorthSouthMaterial);
+            // Per-facing art override (welder straight view, book cover-vs-pages, wide-prop
+            // profile): keyed off the BODY facing (clean cardinal), so diagonal bead re-aim never
+            // flips it. More specific than alt / strike, so it wins. Guarded by HasFacingArt so a
+            // tool that authors no facing art keeps whatever alt/strike sprite was picked above —
+            // MaterialFor would otherwise hand back the plain texPath material and undo it.
+            if (tool.HasFacingArt(bodyFacing))
+            {
+                // Keep the previous pick if the facing lookup comes back empty: a missing variant
+                // must never blank the tool out entirely (that reads as "the book vanished" and
+                // sends you hunting through the swing geometry for a texture problem).
+                Material facingMat = QueueAdjust(tool.MaterialFor(bodyFacing));
+                if (facingMat != null) mat = facingMat;
+            }
             // Scratch draws no tool sprite (research / book-writing "thinking" pose) — it only
             // positions the hand against the head — so it must run even with no material.
             if (mat == null && tool.swingStyle != SwingStyle.Scratch) return;
@@ -2524,18 +2538,45 @@ namespace JobEffects
             // than any circular motion. Screen-upright at every facing, like Hold.
             if (tool.swingStyle == SwingStyle.Read)
             {
-                bool facingNorth = dir.z > 0.45f;
+                // Facing-aware placement (2026-09-11). The old branch keyed off a single
+                // "facing north?" test taken from the WORK direction, so EAST and WEST fell
+                // through to exactly the south numbers — and a pawn seen in profile is far
+                // narrower across the screen, so the prop floated off the body. Now keyed off
+                // the clean BODY facing (the work dir can point diagonally into a corner bench)
+                // and split four ways. Every new field defaults to the old value, so a tool
+                // that authors none of them draws exactly as before.
+                bool north = bodyFacing == Rot4.North;
+                bool profile = bodyFacing == Rot4.East || bodyFacing == Rot4.West;
                 float lift = ReadLift(phase);
-                float fwd = tool.reach * (facingNorth ? 0.30f : 0.70f);
+                float fwd;
+                if (profile && tool.reachEastWest >= 0f) fwd = tool.reachEastWest;
+                else if (north && tool.reachNorth >= 0f) fwd = tool.reachNorth;
+                else if (!north && !profile && tool.reachSouth >= 0f) fwd = tool.reachSouth;
+                else fwd = tool.reach * (north ? 0.30f : 0.70f);
                 Vector3 hold = drawLoc + dir * fwd;
-                hold.z += tool.scale * ((facingNorth ? -0.05f : 0.06f) + lift * 0.30f) + tool.holdRaise;
+                // +z is UP-SCREEN / away from the camera: the lift term pushes the prop BEHIND the
+                // torso, so it is the usual culprit when "the book is hidden by the pawn but the
+                // hands are fine". Tool-tunable now (readLiftRise); 0.30 was the hardcoded default.
+                hold.z += tool.scale * ((north ? -0.05f : 0.06f) + lift * tool.readLiftRise) + tool.holdRaise;
+                // Lateral nudge along the pawn's own left/right axis: profile views use it to
+                // pull the prop back in toward the chest, north to clear the body silhouette.
+                // West mirrors so both profiles read the same. Zero = old behaviour.
+                float lat = profile ? tool.holdLateralEastWest : (north ? tool.holdLateralNorth : 0f);
+                if (lat != 0f)
+                {
+                    Vector3 fvecR = bodyFacing.FacingCell.ToVector3(); fvecR.y = 0f;
+                    if (fvecR.sqrMagnitude < 0.01f) fvecR = new Vector3(0f, 0f, -1f);
+                    Vector3 klatR = Vector3.Cross(Vector3.up, fvecR.normalized).normalized;
+                    hold += klatR * (lat * (bodyFacing == Rot4.West ? -1f : 1f));
+                }
                 hold.y = currentToolY;
                 // Raised: a slow scanning sway (eyes running over the page). Lowered: a faster,
                 // tighter wobble that reads as the pen scratching out a note.
                 float ang = lift > 0.5f ? Mathf.Sin(animTime * 1.8f) * 2.2f
                                         : Mathf.Sin(animTime * 7f) * 1.2f;
                 Quaternion hrot = Quaternion.AngleAxis(ang + tool.holdAngleOffset, Vector3.up);
-                float bs = tool.scale * (1f + lift * 0.06f);
+                float sizeMul = profile ? tool.volScaleProfile : (north ? 1f : tool.volScaleSouth);
+                float bs = tool.scale * (1f + lift * 0.06f) * sizeMul;
                 Matrix4x4 hm = Matrix4x4.Translate(hold)
                     * Matrix4x4.Rotate(hrot)
                     * Matrix4x4.Scale(new Vector3(bs, 1f, bs));

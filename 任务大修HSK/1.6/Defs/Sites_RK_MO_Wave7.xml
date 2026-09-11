@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+<!-- ============================================================================
+  波次7 站点定义(2026-09-10): 邪教三级藏身处 + 蛇窟(终局)
+  做法同 BanditCamp: 自定义 SitePartDef(ParentName=Outpost) + 三段 GenStepDef
+    (order400 GenStep_Outpost 打底/刷哨站卫队 / order401 GenStep_Power / order460 KCSG 覆盖邪教/蛇窟布局)
+  敌人: 站点派系在任务脚本里用 VEF QuestNode_GetFaction 固定为 MedievalKingdom(现有敌对派系),
+    + 布局内的 RK_Sym_Pawn_Cultist_*/RK_Sym_Pawn_Snake*(守卫符号, 见 HSK工业科研大修)。
+  布局 defName 全部来自 HSK工业科研大修 StructureLayouts_MO_DankPyon_Structure_Cultist_*.xml / Big_Snake.xml。
+============================================================================ -->
+	<!-- ===== 废弃藏身处 (RK_MO_CultHideout_T1) ===== -->
+	<SitePartDef ParentName="Outpost">
+		<defName>RK_MO_CultHideout_T1</defName>
+		<label>废弃藏身处</label>
+		<description>一处由邪教新信徒把守的废弃小藏身处。缴获的粗浅卷宗里画着古怪祭坛与更深处的地道。</description>
+		<tags Inherit="False">
+			<li>RK_MO_CultHideout_T1</li>
+		</tags>
+	</SitePartDef>
+	<GenStepDef>
+		<defName>RK_MO_Base_1</defName><linkWithSite>RK_MO_CultHideout_T1</linkWithSite><order>400</order><genStep Class="GenStep_Outpost"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_Power_1</defName><linkWithSite>RK_MO_CultHideout_T1</linkWithSite><order>401</order><genStep Class="GenStep_Power"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_KCSG_1</defName>
+		<linkWithSite>RK_MO_CultHideout_T1</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_MO_1T_Hideout1_South</li>
+				<li>RK_MO_1T_Hideout1_North</li>
+				<li>RK_MO_1T_Hideout2_South</li>
+				<li>RK_MO_1T_Hideout2_North</li>
+				<li>RK_MO_1T_Hideout3_South</li>
+				<li>RK_MO_1T_Hideout3_North</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+	<!-- ===== 地下巢穴 (RK_MO_CultHideout_T2) ===== -->
+	<SitePartDef ParentName="Outpost">
+		<defName>RK_MO_CultHideout_T2</defName>
+		<label>地下巢穴</label>
+		<description>从外围藏身处搜出的卷宗把坐标指向此处。盘踞在这里的侍僧披着锁子甲, 地下摆满了祭坛与陪葬坑。</description>
+		<tags Inherit="False">
+			<li>RK_MO_CultHideout_T2</li>
+		</tags>
+	</SitePartDef>
+	<GenStepDef>
+		<defName>RK_MO_Base_2</defName><linkWithSite>RK_MO_CultHideout_T2</linkWithSite><order>400</order><genStep Class="GenStep_Outpost"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_Power_2</defName><linkWithSite>RK_MO_CultHideout_T2</linkWithSite><order>401</order><genStep Class="GenStep_Power"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_KCSG_2</defName>
+		<linkWithSite>RK_MO_CultHideout_T2</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_MO_2T_Hideout1_South</li>
+				<li>RK_MO_2T_Hideout1_North</li>
+				<li>RK_MO_2T_Hideout2_East</li>
+				<li>RK_MO_2T_Hideout2_West</li>
+				<li>RK_MO_2T_Hideout3_South</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+	<!-- ===== 邪教主殿 (RK_MO_CultHideout_T3) ===== -->
+	<SitePartDef ParentName="Outpost">
+		<defName>RK_MO_CultHideout_T3</defName>
+		<label>邪教主殿</label>
+		<description>邪教的主殿, 一座花岗岩深处的祭堂。披着板甲的得道者在此护卫他们的圣物与典籍; 卷宗暗示最深处关着更可怕的东西。</description>
+		<tags Inherit="False">
+			<li>RK_MO_CultHideout_T3</li>
+		</tags>
+	</SitePartDef>
+	<GenStepDef>
+		<defName>RK_MO_Base_3</defName><linkWithSite>RK_MO_CultHideout_T3</linkWithSite><order>400</order><genStep Class="GenStep_Outpost"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_Power_3</defName><linkWithSite>RK_MO_CultHideout_T3</linkWithSite><order>401</order><genStep Class="GenStep_Power"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_KCSG_3</defName>
+		<linkWithSite>RK_MO_CultHideout_T3</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_MO_3T_Hideout1_South</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+	<!-- ===== 蛇窟(终局) (RK_MO_SnakeLair) ===== -->
+	<SitePartDef ParentName="Outpost">
+		<defName>RK_MO_SnakeLair</defName>
+		<label>蛇窟(终局)</label>
+		<description>主殿卷宗上记载的大蛇之眠——邪教用活人喂出的蛇窟。成群的洞穴眼镜蛇与巨蟒盘踞在废矿井般的巢穴里, 是这条清剿链的终点。</description>
+		<tags Inherit="False">
+			<li>RK_MO_SnakeLair</li>
+		</tags>
+	</SitePartDef>
+	<GenStepDef>
+		<defName>RK_MO_Base_4</defName><linkWithSite>RK_MO_SnakeLair</linkWithSite><order>400</order><genStep Class="GenStep_Outpost"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_Power_4</defName><linkWithSite>RK_MO_SnakeLair</linkWithSite><order>401</order><genStep Class="GenStep_Power"/>
+	</GenStepDef>
+	<GenStepDef>
+		<defName>RK_MO_KCSG_4</defName>
+		<linkWithSite>RK_MO_SnakeLair</linkWithSite>
+		<order>460</order>
+		<genStep Class="KCSG.GenStep_CustomStructureGen">
+			<structureLayoutDefs>
+				<li>RK_MO_Big_SnakeRuin</li>
+			</structureLayoutDefs>
+		</genStep>
+	</GenStepDef>
+</Defs>

@@ -1,7 +1,47 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 
-  <NamerFaction_RatkinExoticState.rulePack.rulesStrings>  
+  <!-- 鼠族HSK拓展(2026-09-11): 接管 RatkinKingdomNameUtility 的名/姓生成规则。
+       原规则只用到 7 个词库(Flower / ElfStyle / Nut / Iron + Ironlike / BodyPart / Nature + Mover / Last_Single),
+       其余 9 个词库(Color / Herb / Star / Weapon / Actor / Personality / Taker / Action / Bloom)
+       虽在 rulesFiles 里声明过, 却从未被任何 rulesStrings 引用, 属于"占了位、不干活"。
+       这里把它们接进规则, 使扩充后的整个词库都真正参与人名生成。
+       注意: DefInjected 对 rulesStrings 是整表替换, 因此下方必须列全原有 8 条, 再追加新增条目。
+       本 mod 的 Languages 目录 loadAfter RatkinRaceHSK, 故本文件胜出。 -->
+
+  <RatkinKingdomNameUtility.rulePack.rulesStrings>
+    <!-- ===== 原有 8 条(与 RatkinRaceHSK 中文版一致, 权重原样保留) ===== -->
+    <li>RK_FirstName->[RK_Noun_Prefix_Flower]</li>
+    <li>RK_FirstName->[RK_First_ElfStyle]</li>
+    <li>RK_LastName(p=3)->[RK_Noun_Prefix_Nut]</li>
+    <li>RK_LastName(p=2)->[RK_Noun_Prefix_Iron][RK_Noun_Postfix_Ironlike]</li>
+    <li>RK_LastName->皇家[RK_Noun_Postfix_BodyPart]</li>
+    <li>RK_LastName->旷野[RK_Noun_Postfix_BodyPart]</li>
+    <li>RK_LastName->[RK_Noun_Prefix_Nature][RK_Noun_Postfix_Mover]</li>
+    <li>RK_LastName->[RK_Last_Single]</li>
+
+    <!-- ===== 新增 11 条: 启用闲置词库 ===== -->
+    <!-- 名: 香草系 / 星象系 -->
+    <li>RK_FirstName->[RK_Noun_Prefix_Herb]</li>
+    <li>RK_FirstName->[RK_Noun_Prefix_Star]</li>
+    <!-- 姓: 颜色 + 部位(白尾/玄牙/银心) -->
+    <li>RK_LastName->[RK_Noun_Prefix_Color][RK_Noun_Postfix_BodyPart]</li>
+    <!-- 姓: 颜色 + 花部(白花朵/金花蕊) -->
+    <li>RK_LastName->[RK_Noun_Prefix_Color][RK_Noun_Postfix_Bloom]</li>
+    <!-- 姓: 香草 + 花部(薄荷花瓣/鼠尾草花蕊) -->
+    <li>RK_LastName->[RK_Noun_Prefix_Herb][RK_Noun_Postfix_Bloom]</li>
+    <!-- 姓: 金属 + 兵器(钢铁剑/秘银盾) -->
+    <li>RK_LastName->[RK_Noun_Prefix_Iron][RK_Noun_Postfix_Weapon]</li>
+    <!-- 姓: 动作 + 者(巡夜者/采药者/铸剑者) -->
+    <li>RK_LastName->[RK_Noun_Prefix_Action]者</li>
+    <!-- 姓: 身份 / 行者 / 传音者 / 志向 单独成姓 -->
+    <li>RK_LastName->[RK_Noun_Prefix_Actor]</li>
+    <li>RK_LastName->[RK_Noun_Postfix_Mover]</li>
+    <li>RK_LastName->[RK_Noun_Postfix_Taker]</li>
+    <li>RK_LastName->[RK_Noun_Prefix_Personality]</li>
+  </RatkinKingdomNameUtility.rulePack.rulesStrings>
+
+  <NamerFaction_RatkinExoticState.rulePack.rulesStrings>
     <li>r_name->[ofThing][land]</li>
     <li>land(p=3)->之乡</li>
     <li>land(p=2)->之源</li>

@@ -8,7 +8,12 @@
        石化链当日右移一格(RK_Petro_Refining 10→11),故入口基数取 12:
        Flower/ApparelT1/Turret=12(>RK_Petro_Refining 11), CombatT2/ApparelT2=13, CombatT3/ApparelT3=14,
        Mechtech=15(>BasicMechtech 12), ApparelT4=16(>Fabrication 8), CombatT4=19(>ChargedShot 18);
-       下游 CataphractArmor(24,39) 仍在 ApparelT4 右侧,不回刷告警。 -->
+       下游 CataphractArmor(24,39) 仍在 ApparelT4 右侧,不回刷告警。
+       2026-09-10: 石化链二次右移(RK_Petro_Refining 11→12, 见 ResearchDefs_RK_Petro.xml),
+       入口基数随之 12→13; 且 ResearchTreeSK 要求"父 X 严格小于子 X",故入口链整链再右移一格:
+       ApparelT1=13(=Flower/Turret), CombatT2/ApparelT2=14, CombatT3/ApparelT3=15,
+       其余 Mechtech=15 / ApparelT4=16 / CombatT4=19 不变。
+       本次改动由 _tmp/research_layout/{solve_layout,apply_plan1}.py 生成, 落地前过 verify_layout.py。 -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_Flower"]</xpath>
     <value>
@@ -59,7 +64,7 @@
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]/researchViewX</xpath>
-    <value><researchViewX>12</researchViewX></value>
+    <value><researchViewX>13</researchViewX></value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT1"]/researchViewY</xpath>
@@ -125,7 +130,7 @@
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT2"]/researchViewX</xpath>
-    <value><researchViewX>13</researchViewX></value>
+    <value><researchViewX>14</researchViewX></value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT2"]/researchViewY</xpath>
@@ -151,7 +156,7 @@
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT2"]/researchViewX</xpath>
-    <value><researchViewX>13</researchViewX></value>
+    <value><researchViewX>14</researchViewX></value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT2"]/researchViewY</xpath>
@@ -177,7 +182,7 @@
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT3"]/researchViewX</xpath>
-    <value><researchViewX>14</researchViewX></value>
+    <value><researchViewX>15</researchViewX></value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_CombatT3"]/researchViewY</xpath>
@@ -203,7 +208,7 @@
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT3"]/researchViewX</xpath>
-    <value><researchViewX>14</researchViewX></value>
+    <value><researchViewX>15</researchViewX></value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="Kurin_ApparelT3"]/researchViewY</xpath>

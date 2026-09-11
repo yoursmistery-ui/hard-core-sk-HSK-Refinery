@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- 蓝图书研读消息 (书籍化 v4, 2026-08-27) -->
+<!-- 蓝图书研读消息 (读书推进解锁 v5, 2026-09-10) -->
+<!-- v5 变更: 阅读改走原版 JobDefOf.Reading, 自写 JobDef/WorkGiver 已删, 故 RK_StudyReport
+     等 7 个工作类键与 RK_StudyOption/RK_StudyAlreadyRead 一并移除; 新增门槛提示键。 -->
+<!-- v5.4 新增: 「科技典籍」(普通书外观) 的读毕 / 解锁播报。 -->
+<!-- v6 新增: 「卷」读毕 / 全卷读毕播报 (v6 起进度按卷计, 数据来源 BlueprintUnlockTracker.readVolumes)。 -->
 <LanguageData>
-  <RK_StudyReport>研读 {0}</RK_StudyReport>
-  <RK_StudyGerund>研读中</RK_StudyGerund>
-  <RK_StudyJobDefLabel>研读蓝图书</RK_StudyJobDefLabel>
-  <RK_StudyJobReport>研读 {0}</RK_StudyJobReport>
-  <RK_StudyWorkLabel>研读蓝图书</RK_StudyWorkLabel>
-  <RK_StudyWorkVerb>研读</RK_StudyWorkVerb>
-  <RK_StudyWorkGerund>研读中</RK_StudyWorkGerund>
-  <RK_StudyReadMessage>已研读《{0}》(系列 {1}/{2})</RK_StudyReadMessage>
-  <RK_StudyUnlockMessage>科技已解锁: {0}(系列 {1}/{1} 集齐, 可开始研究)</RK_StudyUnlockMessage>
-  <RK_StudyOption>研读</RK_StudyOption>
-  <RK_StudyAlreadyRead>研读 (已研读过)</RK_StudyAlreadyRead>
+  <RK_StudyReadMessage>已读完《{0}》(该系列 {1}/{2} 本)</RK_StudyReadMessage>
+  <RK_StudyUnlockMessage>「{0}」解锁完成 ({1} 本全部读完)</RK_StudyUnlockMessage>
+  <!-- v5.5: 门控科技读满只「解锁研究权限」(不再直接完成研究), 用词与「直接完成」区分开 -->
+  <RK_StudyUnlockCanResearch>「{0}」已解锁研究权限 ({1} 本全部读完) —— 现在可以立项研究了</RK_StudyUnlockCanResearch>
+  <RK_ReadTooHard>需要智力 {0} 级 (当前 {1} 级)</RK_ReadTooHard>
+  <RK_TechBookReadMessage>已读完《{0}》—— 「{1}」的典籍知识已贯通</RK_TechBookReadMessage>
+  <RK_TechBookUnlockMessage>「{0}」解锁完成 (科技典籍已读毕)</RK_TechBookUnlockMessage>
+  <RK_TechBookUnlockCanResearch>「{0}」已解锁研究权限 (科技典籍已读毕) —— 现在可以立项研究了</RK_TechBookUnlockCanResearch>
+  <!-- v6: 按「卷」记账 -->
+  <RK_VolumeReadMessage>读毕《{0}》—— 「{1}」第 {2}/{3} 卷已解锁</RK_VolumeReadMessage>
+  <RK_VolumeUnlockMessage>「{0}」解锁完成 (全部 {1} 卷读毕)</RK_VolumeUnlockMessage>
+  <RK_VolumeUnlockCanResearch>「{0}」已解锁研究权限 (全部 {1} 卷读毕) —— 现在可以立项研究了</RK_VolumeUnlockCanResearch>
 </LanguageData>

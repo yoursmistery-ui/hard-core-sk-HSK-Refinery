@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ============================================================================
+     原版「科研蓝图」归入本 mod 的「科技蓝图书籍」分类下  (2026-09-10)
+     ============================================================================
+     需求: 把原版「科研蓝图」并入「科技蓝图书籍」中, 仅改变分类, 不改变效果。
+
+     【为什么改"分类自身的 parent", 而不是改"物品的 thingCategories"】
+       原版科研蓝图物品 = ThingDefGenerator_Techprints.ImpliedTechprintDefs() 在 C# 里
+       【动态生成】的 implied def (defName = "Techprint_" + 科技defName), 其
+       thingCategories 是硬编码的 ThingCategoryDefOf.Techprints —— 这些物品不存在于任何
+       XML 文件里, PatchOperation 够不着 (Patch 只操作 XML 文档, 看不到 implied def)。
+       → 唯一的纯 XML 通路 = 改「Techprints」这个 ThingCategoryDef 自己的 parent,
+         让整棵子树搬进「科技蓝图书籍」。
+
+     【改后分类树】
+       物品/Items › 书籍/Books › 科技蓝图书籍/RK_BlueprintBooks › 科研蓝图/Techprints
+                 › 科研蓝图(专业肢体)/科研蓝图(人工代谢)/… (11 项, 由科技自动生成)
+
+     【对本 mod 自有体系零影响】
+       · 143 本蓝图书的 thingCategories (RK_Schematic_Medieval / RK_Blueprint_Industrial /
+         RK_Blueprint_Spacer / RK_Blueprint_Ultra / RK_Blueprint_Archotech) 一律未动;
+       · 商人 / 任务奖励 / 科研门控 / 科研树角标 全部基于 BlueprintTargetExtension
+         (modExtension) 筛选, 与分类树无关 → 永远不会选中原版科研蓝图;
+       · 原版科研蓝图的 techprintCount / CompTechprint / 研究台应用流程 全部保持原样。
+
+     【影响面】终态共 11 项 techprintCount>0 的科技 (Royalty 植入体/仿生系, 前置均为 Bionics):
+       SpecializedLimbs/ArtificialMetabolism/CircadianInfluence/MolecularAnalysis/BrainWiring/
+       HealingFactors/VenomSynthesis/SkinHardening/NeuralComputation/CompactWeaponry/FleshShaping
+       —— 与本 mod 蓝图门控体系交集为 0。
+
+     【存在性门控】Techprints 分类或其 parent 字段不存在时整段跳过 (Operation 级 MayRequire
+       在 1.6 已失效, 统一用 xpath 存在性门控)。
+     ============================================================================ -->
+<Patch>
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingCategoryDef[defName="Techprints"]/parent</xpath>
+		<success>Always</success>
+		<match Class="PatchOperationReplace">
+			<xpath>/Defs/ThingCategoryDef[defName="Techprints"]/parent</xpath>
+			<value>
+				<parent>RK_BlueprintBooks</parent>
+			</value>
+		</match>
+	</Operation>
+</Patch>

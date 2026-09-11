@@ -89,3 +89,17 @@ GreatWar 早在 **2026-08-21 已精简并入宿主**，以下已存在：
 - **P2 新增 14 件**：枪 4(`RK_WR_WhiteRose/RK_WR_TalinumRevolver/RK_KB_Buche/RK_KB_Maipflanze`，子弹复用 Bullet_Fichte + 新增 2)+近战 2(`RK_Truncheon/RK_Grabenkeule`)入 RKGW；衣甲 8(WR/KB 各 4)入 Apparel 文件；`Patches/98_GW新增装备CE适配.xml` 做 4 枪 `MakeGunCECompatible`(303British·9mmPara·7.92Mauser)+8 衣 CE。`Patches/80` 追加 raceRestriction apparelList(8)+weaponList(6)。汉化 `RKGW_武器/服饰.xml` 追加。贴图 70 张入宿主。
 - **兵种取用**：新件 tag(RK_WR_Rifle/Pistol·RK_KB_LMG/SniperRifle·RK_RCG_Trench_WR/KB·RK_*_Officer/Soldier)已被现有 pawnkind 引用，无需改兵种。
 - 说明：与既有 GreatWar 兄弟件一致，这些为**阵营 NPC 装备**(非玩家可造，沿用同套 RK_*_Weapon 研究 token)。效果待进游戏实测。
+
+---
+
+## 8. 执行结果（2026-09-09 · 派系登场 + 商队生效补完）
+
+> 用户反馈"游戏里见不到两派系 + 商队适配不生效"，静态排查定性：
+
+- **登场不可见 = 机制性**：旧档世界生成时派系已定稿，**新派系只进新档**；两派系原 `requiredCountAtGameStart=0`(随机池 0.85 低概率)，旧档必然见不到，非 def 损坏。
+- **商队适配没生效 = 部署遗漏**：今日新写的 `62_商队种类修复`/`63_派系商队菜单`/`93_派系围攻资格` 三个补丁曾只落工作区、未同步部署（游戏根本没加载；Unified 18:38 快照亦无其终态）。其中 63 号正是给白蔷薇(服装商×2)/中央同盟(织物/百货侧重)配独立商队表的那份。
+- **改动**：宿主 `Defs/FactionDef/Ratkin_Factions.xml` 两派系 `requiredCountAtGameStart 0→1`(每新档各至少一座定居点必出)。
+- **后续归属变更(22:0x 用户拍板"全迁五份")**：13/18/62/63/93 五份袭击/商队/围攻补丁已**整体迁入 Ignorance is Bliss**(dame.ignorance,HSK 改造版统一托管"袭击+贸易门槛"):其 About 补 loadAfter(宿主/金鼠族/美狐/库林/安卓/天网/hskfixpack 等 8 项)+modDependencies(Core SK/RatkinRaceHSK/宿主),ModsConfig 位次 107→225(kurin 后、全部目标 mod 之后),find_cycle 无环 + check_order2 0 违规;HSK修复整合 侧双端已移除 5 份(归档 `_tmp/removed_袭击贸易门槛补丁_20260909/`)。63 号依赖的北境/军阀商队 def 仍留 HSK修复整合 Defs(双端在)。
+- 正↔反关系维持用户口径：反方 naturalEnemy 全敌对(含玩家/协约)、正方 0 中立可贸易，未硬调。
+- **待用户验证**：重启游戏(加载 Ignorance 位次 225 后的 5 份补丁) + **新开档**看两派系是否各带定居点登场、商队菜单是否对味。
+- 遗留：Ignorance Source 已放 RaidHelperWealthTech.cs/RaidTechBootstrap.cs(21:29)但 **RaidTechBootstrap.cs 为空、Assemblies 无 HskRaidTech.dll**——DLL 侧迁移未完成;袭击/财富挂钩现仍由 HSKFixPack.dll(含同源 RaidHelperWealthTech.cs)承载,单份无重复,是否继续迁 DLL 待用户拍板。

@@ -2,16 +2,15 @@
 <Defs> 
 	<PawnKindDef Name="RKBasePawnKind_Warlord" ParentName="RKBasePawnKind" Abstract="True">
 		<defaultFactionType>Rakinia_Warlord</defaultFactionType>
-		<!-- 2026-08-22: 军阀兵种显式指定鼠族异种人池(含鼠人/实验白鼠/废土鼠/田鼠),
-		     不依赖 RKBasePawnKind 继承,确保军阀部队生成鼠族异种人。 -->
+		<!-- 2026-09-09: 与派系池(RatkinFactionBadBase)对齐为常规鼠族变体小幅版 —— 弃废土鼠
+		     (污染鼠有专属派系 Rakinia_Waster),仓鼠0.14/田鼠0.08/雪鼠0.06;此池为
+		     useFactionXenotypes=false 路径的兜底,平时随 92号②a 走派系池。 -->
 		<xenotypeSet Inherit="False">
 			<xenotypeChances>
-				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.88</RK_XenoType_Ratkin>
-				<Ratkin_Squirrel MayRequire="Ludeon.RimWorld.Biotech">0.024</Ratkin_Squirrel>
-				<Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.016</Ratkin_Hamster>
-				<Ratkin_LabRat MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_LabRat>
-				<Ratkin_Waster MayRequire="Ludeon.RimWorld.Biotech">0.03</Ratkin_Waster>
-				<Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.02</Ratkin_Vole>
+				<RK_XenoType_Ratkin MayRequire="Ludeon.RimWorld.Biotech">0.72</RK_XenoType_Ratkin>
+				<Ratkin_Hamster MayRequire="Ludeon.RimWorld.Biotech">0.14</Ratkin_Hamster>
+				<Ratkin_Vole MayRequire="Ludeon.RimWorld.Biotech">0.08</Ratkin_Vole>
+				<OAGene_SnowRatkin>0.06</OAGene_SnowRatkin>
 			</xenotypeChances>
 		</xenotypeSet>
 	</PawnKindDef>	

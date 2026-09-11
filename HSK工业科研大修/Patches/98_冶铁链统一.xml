@@ -1,49 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 冶铁链统一（2026-08-30，用户拍板：删生铁块双轨，统一 生铁→熟铁→坩埚钢→锻造钢；炉渣走副产物闭环）
-     执行序：98 号在 Patches 根目录内是最大编号（95/96/97 之后），只删不改既有补丁写入的节点，
-     且引用的目标全部来自 Vile's Metallurgy 原始 def（非其它补丁 Add 的节点），故无需担心前后次序。
+<!-- 冶铁链（2026-08-30 立，2026-09-11 改弦）
+     2026-09-11 用户决定：**恢复 Vile 原生流程**，原"删生铁块双轨、统一单干道"的做法撤销
+     （见下方第一 / 二节的位置已被"已撤销"注释替代）。本文件现只负责：
+       四、生铁并入 CastBar 分类
+       五、炉渣作为副产物挂到三处 Vile 原生冶炼配方（高炉 / 块炼炉 / 精炼炉）
+       六、熟铁科技档 = Neolithic
+     执行序：98 号在 Patches 根目录内是最大编号（95/96/97 之后），只 Add 不改既有补丁写入的节点，
+     且引用的目标全部来自 Vile's Metallurgy / Vile's Materials Science 原始 def（非其它补丁 Add 的节点），
+     故无需担心前后次序。
      所有操作套 PatchOperationConditional 存在性门控（1.6 Operation 级 MayRequire 已失效）。 -->
 <Patch>
 
-  <!-- ===== 一、删除熟铁/锻钢旁路配方（4 条）=====
-       ※ 铸铁线两条入口均已还原，熟铁现在有生铁/铸铁两条路线，待用户精修流程后再定唯一入口。
-       锻钢唯一入口 = RK_Met_ForgeSteelFromCrucible（坩埚钢+助熔 @铁匠工坊，见 Recipes_RK_Metallurgy.xml）
-       ※ MakeCastIron（生铁x75→铸铁x100 @精炼炉）与 PuddleWroughtIronFromCastIron（铸铁→熟铁 @精炼炉）
-         保留：2026-09-02 用户要求暂时还原铸铁线并精修流程，Vile 原流程暂不动。 -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromPigIron"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Forge"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Forge"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Smithy"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Smithy"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath></match>
-  </Operation>
+  <!-- ===== 一 / 二、【已撤销 2026-09-11】恢复 Vile 原生冶铁流程 =====
+       用户 2026-09-11 决定：完整恢复 Vile's Metallurgy 的原有流程，此前"删生铁块双轨、统一单干道"
+       的做法推翻。原第 一 / 二 两节共 8 条 Operation（4 条 Remove RecipeDef + 4 条 Remove 建筑 recipes 悬空引用）
+       已整体移除，以下 4 条配方及其建筑挂载全部回到 Vile 原样：
+         · PuddleWroughtIronFromPigIron        （生铁 → 熟铁，搅炼炉）
+         · MakeWroughtIron_Forge               （锻造厂制熟铁）
+         · MakeForgeWeldedSteel_Smithy         （铁匠工坊锻焊钢）
+         · MakeForgeWeldedSteel_BlisterSteel_Finery（泡钢路线锻焊钢，精炼厂）
+       本 mod 自建的 RK_Met_ForgeSteelFromCrucible（坩埚钢→锻造钢 @铁匠工坊）**保留**，作为额外交路。
+       下方 四 / 五 / 六 三节保留不动：炉渣副产物仍挂在 Vile 原生配方上（见第五节）。 -->
 
-  <!-- ===== 二、清理上述配方在建筑 recipes 列表里的悬空引用 ===== -->
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="PuddleWroughtIronFromPigIron"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="MakeWroughtIron_Forge"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeWroughtIron_Forge"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_Smithy"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_Smithy"]</xpath></match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath>
-    <match Class="PatchOperationRemove"><xpath>/Defs/ThingDef/recipes/li[text()="MakeForgeWeldedSteel_BlisterSteel_Finery"]</xpath></match>
-  </Operation>
 
   <!-- ===== 三、铸铁保留在 CastBar 分类（2026-09-02 用户要求暂时还原铸铁配方，原"摘出 CastBar"操作已移除）
        注意：CastIron 这个 def 不能删 —— Recipes_Pipes / Recipes_CastTools(_Batch) 的
@@ -63,7 +41,15 @@
     </nomatch>
   </Operation>
 
-  <!-- ===== 五、炉渣作为多产物挂到三处冶炼配方（原生 products 直写格式）===== -->
+  <!-- ===== 五、炉渣作为多产物挂到冶炼配方（原生 products 直写格式）=====
+       2026-09-11 用户要求：**"中世纪的熔炼要有废物产出"** —— 原先只挂了 3 条，
+       漏掉中世纪/早期整整一段（块炼炉之后的精炼、锻焊、铸铁、搅炼、坩埚全都无渣），
+       本次补齐 5 条，形成完整的分档递减节奏：
+         粗炼（矿石→铁料）  块炼铁 8 / 高炉生铁 25 / 铸铁 12
+         精炼（生铁→熟铁钢）生铁→熟铁 10 / 锻打熟铁 10 / 搅炼熟铁 10 / 锻焊钢 8
+         坩埚（高级）       坩埚钢 5
+       ⚠ 均为 PatchOperationAdd 到既有 products 节点（Conditional 存在性门控），
+         不 Replace —— VMS 原产物必须原样保留，炉渣是"额外"产出。 -->
   <Operation Class="PatchOperationConditional">
     <xpath>/Defs/RecipeDef[defName="MakePigIron_Furnace"]/products</xpath>
     <match Class="PatchOperationAdd">
@@ -83,6 +69,48 @@
     <match Class="PatchOperationAdd">
       <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_PigIron_Finery"]/products</xpath>
       <value><RK_Met_Slag>10</RK_Met_Slag></value>
+    </match>
+  </Operation>
+
+  <!-- 2026-09-11 新增：补齐中世纪 / 早期的出渣
+       MakeWroughtIron_Finery           锻打熟铁（精炼炉，最早期的熟铁来源）
+       MakeForgeWeldedSteel_Finery      锻焊钢  （精炼炉，中世纪钢）
+       MakeCastIron                     铸铁    （铸造厂，生铁→铸铁）
+       PuddleWroughtIronFromCastIron    搅炼熟铁（铸造厂）
+       MakeCrucibleSteel                坩埚钢  （铸造厂，高级，渣最少） -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Finery"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeWroughtIron_Finery"]/products</xpath>
+      <value><RK_Met_Slag>10</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Finery"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeForgeWeldedSteel_Finery"]/products</xpath>
+      <value><RK_Met_Slag>8</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeCastIron"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeCastIron"]/products</xpath>
+      <value><RK_Met_Slag>12</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="PuddleWroughtIronFromCastIron"]/products</xpath>
+      <value><RK_Met_Slag>10</RK_Met_Slag></value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/RecipeDef[defName="MakeCrucibleSteel"]/products</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/RecipeDef[defName="MakeCrucibleSteel"]/products</xpath>
+      <value><RK_Met_Slag>5</RK_Met_Slag></value>
     </match>
   </Operation>
 

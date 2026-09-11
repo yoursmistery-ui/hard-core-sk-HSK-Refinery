@@ -64,4 +64,17 @@
 			</operations>
 		</match>
 	</Operation>
+	<!-- darkmiz.Kurin.FacialAnimation(2800338796)并入改写:补 SkinControllerComp 让新 SkinTypeDef 可渲染。
+	     门控/防重入与现 FADX 保持一致。 -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps/li[compClass="FacialAnimation.SkinControllerComp"]</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/AlienRace.ThingDef_AlienRace[defName="Kurin_Race"]/comps</xpath>
+			<value>
+				<li>
+					<compClass>FacialAnimation.SkinControllerComp</compClass>
+				</li>
+			</value>
+		</nomatch>
+	</Operation>
 </Patch>

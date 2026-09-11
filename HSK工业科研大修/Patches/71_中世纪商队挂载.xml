@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 71_中世纪商队挂载 (2026-09-09, 方案 docs/10_外政与任务大修/派系商队菜单整理方案.md P3)
+       本 mod 的 8 类中世纪商人(1.6/Defs/TraderKinds_RK_Medieval.xml)此前只建了 def、没有挂载(文件头预留位)；
+       这里把其中"适合地面商队"的几类挂到三家 Medieval 档派系，替掉它们原本借用的**部落(Neolithic)货单**——
+       中世纪王国卖部落货是"第一眼不对"的典型。
+       流浪学者(RK_Trader_WanderingScholar)不在此挂: 它的货单用了 BlueprintUnlockHSK 的自定义 StockGenerator 类，
+       蓝图渠道已由 67 号补丁经 OutlanderFactionBase 覆盖到出lander/鼠族系，不牵进中世纪派系。
+       门控: 三家都有原始自有 caravanTraderKinds 节点 → 直接 Replace 整块 + Inherit="False";
+             跨 mod 引用(Core_SK 牲畜商人)用 <li MayRequire>。 -->
+
+  <!-- ===== 反抗军之家: 据点商栈 + 杂货批发 + 甲匠 + 武器匠 + 牲畜 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="MedievalKingdom"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="MedievalKingdom"]/caravanTraderKinds</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li>RK_Trader_BulkGoods</li>
+          <li>RK_Trader_Armorsmith</li>
+          <li>RK_Trader_Weaponsmith</li>
+          <li>RK_Trader_MedievalHold</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== 家族联盟(诺巴尔夫妇的牧业王国): 偏农产/牲畜/艺术, 军械少 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="NorbalTribe"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="NorbalTribe"]/caravanTraderKinds</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li>RK_Trader_BulkGoods</li>
+          <li>RK_Trader_BulkGoods</li>
+          <li>RK_Trader_MedievalHold</li>
+          <li>RK_Trader_ArtPatron</li>
+          <li>RK_Trader_Armorsmith</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- ===== 主力兵(军事帝国残部): 武器匠列两次做军械侧重 ===== -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/FactionDef[defName="ImperialLegion"]/caravanTraderKinds</xpath>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/FactionDef[defName="ImperialLegion"]/caravanTraderKinds</xpath>
+      <value>
+        <caravanTraderKinds Inherit="False">
+          <li>RK_Trader_Weaponsmith</li>
+          <li>RK_Trader_Weaponsmith</li>
+          <li>RK_Trader_Armorsmith</li>
+          <li>RK_Trader_BulkGoods</li>
+          <li>RK_Trader_RuinScavenger</li>
+          <li MayRequire="skyarkhangel.HSK">Caravan_AnimalTrader</li>
+        </caravanTraderKinds>
+      </value>
+    </match>
+  </Operation>
+</Patch>

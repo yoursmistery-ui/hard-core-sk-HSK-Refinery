@@ -11,7 +11,7 @@
 | 收录 | 不收录 |
 |---|---|
 | 52 个完整 mod 文件夹(可直接放进 `Mods/`) | HSK 本体框架(`Core_SK`、`RatkinRaceHSK`、`CombatExtended`、`ResearchTreeSK` 等——需另装) |
-| 项目文档 `AGENTS.md`、`docs/` | 工作脚本 / 中间产物(`_tmp/`、`outputs/`) |
+| 项目文档 `AGENTS.md`、`.docs/` | 工作脚本 / 中间产物(`_tmp/`、`outputs/`) |
 | mod 内的 C# 源码(`Source/*.cs`)与编译好的 `Assemblies/*.dll` | 只读美术参考(`参考素材/`,约 3.4G) |
 | | 编译垃圾(`Source/obj`、`.vs`)、agent 内部目录(`.qoder`、`.workbuddy`) |
 
@@ -109,6 +109,6 @@
 
 - 排序交给 HSK Autosort;个别 mod(如"HSK修复整合")在 `About.xml` 里钉死了对 Core SK / ModIndicator 的 `loadAfter`,不要手改位次。
 - 所有改造**不考虑旧存档兼容**:升级后请开新档。
-- 更多机制、踩坑与逐项细则见仓库内 `AGENTS.md` 与 `docs/`(尤其它对 CE 适配、科研门禁、汉化、贴图铁律的说明)。
+- 更多机制、踩坑与逐项细则见仓库内 `AGENTS.md` 与 `.docs/`(尤其它对 CE 适配、科研门禁、汉化、贴图铁律的说明)。
 
 > B/C 类 mod 的版权与原始设计归属各自原作者,本仓库仅做本地适配与整合,不替代官方发布。

@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-  <!-- 三个研究节点是原 mod 自带；这里只补 HSK 研究台硬门槛和 ResearchTreeSK 扩展。 -->
+  <!-- 三个研究节点是原 mod 自带；这里只补 HSK 研究台硬门槛和 ResearchTreeSK 扩展。
+       2026-09-11 修正: 原写法把 LabTerminal 当研究台写进 requiredResearchBuilding 与
+       requiredResearchBuildings, 但 LabTerminal 的 thingClass 是 SK.Building_Lamp(终端设施,
+       并非 Building_ResearchBench)。Core_SK 的 Patch_ResearchProjectDef_CanBeResearchedAt
+       只在校验 CanBeResearchedAt(bench) 时把 requiredResearchBuildings 当"备选研究台"白名单,
+       bench 本身必须是研究台 → 三个节点永远找不到合法研究台 = 永不可研究。
+       现改为与 Core_SK 的 IndustrialBase(前工业档) 完全等价的写法:
+         requiredResearchBuilding   = SimpleResearchBench
+         requiredResearchBuildings  = [SimpleResearchBench, HiTechResearchBench]
+         requiredResearchFacilities = [LabTerminal]   (终端设施, 原版设施门槛)
+       techLevel 保持 Industrial, 与 SimpleResearchBench 档位一致。 -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundExperimentalWeapon"]</xpath>
     <value>
-      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
       <modExtensions Inherit="False">
         <li Class="SK.AdvancedResearchExtension">
           <requiredResearchBuildings>
-            <li>LabTerminal</li>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
           </requiredResearchBuildings>
         </li>
         <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
@@ -19,11 +33,15 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundAssaultWeapons"]</xpath>
     <value>
-      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
       <modExtensions Inherit="False">
         <li Class="SK.AdvancedResearchExtension">
           <requiredResearchBuildings>
-            <li>LabTerminal</li>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
           </requiredResearchBuildings>
         </li>
         <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />
@@ -34,11 +52,15 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundGuerrillaEquipments"]</xpath>
     <value>
-      <requiredResearchBuilding>LabTerminal</requiredResearchBuilding>
+      <requiredResearchBuilding>SimpleResearchBench</requiredResearchBuilding>
+      <requiredResearchFacilities>
+        <li>LabTerminal</li>
+      </requiredResearchFacilities>
       <modExtensions Inherit="False">
         <li Class="SK.AdvancedResearchExtension">
           <requiredResearchBuildings>
-            <li>LabTerminal</li>
+            <li>SimpleResearchBench</li>
+            <li>HiTechResearchBench</li>
           </requiredResearchBuildings>
         </li>
         <li Class="ResearchTreeSK.ResearchTreeSKModExtension" />

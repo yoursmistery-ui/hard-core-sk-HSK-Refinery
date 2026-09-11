@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
   <!-- 将原作三个研究节点从鼠族独立页签并入 HSK 武器科技树，
-       坐标 (11,32)、(12,32)、(15,32) 为当前全环境未占用格。 -->
+       坐标 (11,32)、(12,32)、(13,32) 为当前全环境未占用格
+       (2026-09-11 修正: 原 (15,32) 与本环境 PrecisionRifling 全局撞格,
+        ResearchTreeSK 的重复坐标检查不分页签, 撞格会两节点重叠显示)。 -->
+
+  <!-- 前置修复: 原前置 RK_Research_FunctionalApparel 在本环境已被 HSK 删除
+       (启动报 Could not resolve cross-reference: No Verse.ResearchProjectDef named
+        RK_Research_FunctionalApparel), 按鼠族HSK拓展 89 号既定映射改为
+       Ratkin_Apparel_C1(功能性服装, IndustrialBase 前工业档)。 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundGuerrillaEquipments"]/prerequisites/li[text()="RK_Research_FunctionalApparel"]</xpath>
+    <value>
+      <li>Ratkin_Apparel_C1</li>
+    </value>
+  </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundAssaultWeapons"]/tab</xpath>
     <value>
@@ -49,7 +62,7 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ResearchProjectDef[defName="RKU_UndergroundGuerrillaEquipments"]/researchViewX</xpath>
     <value>
-      <researchViewX>15</researchViewX>
+      <researchViewX>13</researchViewX>
     </value>
   </Operation>
   <Operation Class="PatchOperationReplace">

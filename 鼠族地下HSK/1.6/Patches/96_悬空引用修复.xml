@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 96_悬空引用修复 (2026-09-11)
+       启动报错清单里属于本 mod 的三类悬空引用, 逐条门控/改写为现存 def:
+         ① ThingDef RKU_MinerHelmet -> RK_Research_Metallurgy (配方前置, HSK 已删该节点)
+         ② ThingDef RKU_Hammer      -> Interact_Mace (本环境无此 SoundDef)
+         ③ TraderKindDef RKU_RadioShop / RKU_TradingPost / Caravan_RKU_Guerrilla
+            -> MealFine_Veg / MealFine_Meat / MealLavish_Veg / MealLavish_Meat
+               (Core_SK 的 SK_Patches_MealsRemover 已删除这四个合并前的餐食 def,
+                旧引用留下 null thingDef, 导致 StockGenerator_SingleDef.ConfigErrors
+                抛 NullReferenceException, 日志出现 "Exception in ConfigErrors() of
+                RKU_RadioShop / RKU_TradingPost")
+       HSK 现行等价节点/音效见下方注释。 -->
+
+  <!-- ① 矿工盔是钢制板盔, 归入鼠族功能性服装(前工业档), 与 89 号补丁的
+       RK_Research_FunctionalApparel -> Ratkin_Apparel_C1 映射同档。 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKU_MinerHelmet"]/recipeMaker/researchPrerequisite</xpath>
+    <value>
+      <researchPrerequisite>Ratkin_Apparel_C1</researchPrerequisite>
+    </value>
+  </Operation>
+
+  <!-- ② 原版近战武器通用交互音效。 -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="RKU_Hammer"]/soundInteract</xpath>
+    <value>
+      <soundInteract>InteractMelee</soundInteract>
+    </value>
+  </Operation>
+
+  <!-- ③ 删除已不存在餐食 def 的货架条目(生成量为 0 的死条目, 删后行为不变)。 -->
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_RadioShop"]/stockGenerators/li[thingDef="MealFine_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_RadioShop"]/stockGenerators/li[thingDef="MealFine_Meat"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_RadioShop"]/stockGenerators/li[thingDef="MealLavish_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_RadioShop"]/stockGenerators/li[thingDef="MealLavish_Meat"]</xpath>
+  </Operation>
+
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_TradingPost"]/stockGenerators/li[thingDef="MealFine_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_TradingPost"]/stockGenerators/li[thingDef="MealFine_Meat"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_TradingPost"]/stockGenerators/li[thingDef="MealLavish_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="RKU_TradingPost"]/stockGenerators/li[thingDef="MealLavish_Meat"]</xpath>
+  </Operation>
+
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RKU_Guerrilla"]/stockGenerators/li[thingDef="MealFine_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RKU_Guerrilla"]/stockGenerators/li[thingDef="MealFine_Meat"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RKU_Guerrilla"]/stockGenerators/li[thingDef="MealLavish_Veg"]</xpath>
+  </Operation>
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/TraderKindDef[defName="Caravan_RKU_Guerrilla"]/stockGenerators/li[thingDef="MealLavish_Meat"]</xpath>
+  </Operation>
+</Patch>
